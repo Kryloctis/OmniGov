@@ -1,21 +1,16 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
 {
     public partial class ucAllotmentReleaseMain : UserControl
     {
-
+        internal bool isEdit = false;
         internal int allotmentReleaseId = 0;
-        internal int fppId = 0;
         internal int fundId = 0;
         internal int allotmentClassId = 0;
 
@@ -24,79 +19,19 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
-
-        private void CheckedFund(int radFundId)
+        internal void CheckedFund(int radFundId)
         {
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radFundId) ? r.Checked = true : r.Checked = false);
             fundId = radFundId;
         }
 
-        private void CheckedAllotmentClass(int radAllotmentClassId)
+        internal void CheckedAllotmentClass(int radAllotmentClassId)
         {
             flowLayoutPanelAllotmentClass.Controls.OfType<RadioButton>().FirstOrDefault(r => (Convert.ToInt32(r.Tag) == radAllotmentClassId) ? r.Checked = true : r.Checked = false);
             allotmentClassId = radAllotmentClassId;
         }
 
-        internal void LoadSelected() 
-        {
-            try
-            {
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsById(allotmentReleaseId);
-                int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
-                string subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"].ToString();
-                int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
-                int allotmentClassId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["allotment_classes_id"]);
-                string aroNo = dtAllotmentRelease.Rows[0]["aro_no"].ToString();
-                var dateIssued = Convert.ToDateTime(dtAllotmentRelease.Rows[0]["date_issued"]);
-                string purpose = dtAllotmentRelease.Rows[0]["purpose"].ToString();
-
-                cmbxFPP.SelectedValue = fppId;
-                cmbxSubFPP.SelectedValue = string.IsNullOrEmpty(subFPPId) ? 0 : Convert.ToInt32(subFPPId);
-                CheckedFund(fundId);
-                CheckedAllotmentClass(allotmentClassId);
-                mskSeriesNo.Text = aroNo;
-                dtDateIssued.Value = dateIssued;
-                txtPurpose.Text = purpose;
-
-                dgAllotmentRelease.Rows.Clear();
-
-                panel1.Enabled = false;
-                dtDateIssued.Enabled = false;
-
-
-                foreach (DataRow row in dtAllotmentRelease.Rows) 
-                {
-                    short year = Convert.ToInt16(row["year"]);
-                    int budgetAppropriationId = Convert.ToInt32(row["budget_appropriations_id"]);
-                    string accountName = row["ledger_name"].ToString();
-                    string accountCode = row["account_code"].ToString();
-                    decimal amount = Convert.ToDecimal(row["amount"]);
-
-                    var records = new object[]
-                    {
-                        year,
-                        budgetAppropriationId,
-                        accountName,
-                        accountCode,
-                        amount
-                    };
-
-                    dgAllotmentRelease.Rows.Add(records);
-                }
-            }
-            catch (MySqlException Mysqlex)
-            {
-                Helper.MessageBoxError(Mysqlex.Message);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
-        }
-
-
-        //FPP COMBOBOX
-
+        #region FPP Combobox
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -125,7 +60,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     fppDict.Add(fppId, fppName);
                 }
 
-                cmbxFPP.DataSource = DataTableFPP().Rows.Count == 0? null : new BindingSource(fppDict, null);
+                cmbxFPP.DataSource = DataTableFPP().Rows.Count == 0 ? null : new BindingSource(fppDict, null);
                 cmbxFPP.DisplayMember = "value";
                 cmbxFPP.ValueMember = "key";
 
@@ -148,7 +83,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxFPP.Text)) 
+            if (string.IsNullOrEmpty(cmbxFPP.Text))
             {
                 LoadFPPCombobox();
                 cmbxSubFPP.Enabled = false;
@@ -158,7 +93,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 cmbxSubFPP.Enabled = false;
             }
-        }     
+        }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
@@ -174,10 +109,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LoadSubFPPCombobox();
         }
 
+        #endregion
 
-        //SUB FPP COMBOBOX
+        #region Sub FPP Combobox
 
-        private DataTable DataTableSubFPP() 
+        private DataTable DataTableSubFPP()
         {
             var dtSubFPP = new DataTable();
             var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
@@ -185,7 +121,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
                 dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
             else
-                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId , cmbxSubFPP.Text);
+                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 
             return dtSubFPP;
         }
@@ -238,13 +174,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (e.KeyCode == Keys.F1 && cmbxSubFPP.FindStringExact(cmbxSubFPP.Text) == -1 && !string.IsNullOrEmpty(cmbxSubFPP.Text))
             {
                 LoadSubFPP();
-                cmbxSubFPP.SelectedIndex =  cmbxSubFPP.Items.Count == 0 ?   -1 : 0;
+                cmbxSubFPP.SelectedIndex = cmbxSubFPP.Items.Count == 0 ? -1 : 0;
                 cmbxSubFPP.DroppedDown = true;
             }
         }
 
+        #endregion
 
-        internal void ClearErrors() 
+        internal void ClearErrors()
         {
             epARONo.SetError(mskYear, string.Empty);
             epFPP.SetError(cmbxFPP, string.Empty);
@@ -252,10 +189,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             epPurpose.SetError(txtPurpose, string.Empty);
         }
 
-
         internal void ResetForm()
         {
-            allotmentReleaseId = 0;
+            if (isEdit)
+            {
+                allotmentReleaseId = 0;
+                isEdit = false;
+            }
+
             cmbxFPP.Text = string.Empty;
             cmbxFPP.SelectedIndex = -1;
             panel1.Enabled = true;
@@ -264,10 +205,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dtDateIssued.Enabled = true;
             dgAllotmentRelease.Rows.Clear();
             txtPurpose.Text = string.Empty;
+            btnAutoGenerateSeriesNo.Enabled = true;
 
-            //FPP
             LoadFPPCombobox();
-
             LoadFunds();
             LoadAllotmentClasses();
             ClearErrors();
@@ -285,6 +225,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[4] = dgAllotmentRelease.Tag.ToString();
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void AutoGenerateSeriesNo()
+        {
+            try
+            {
+                mskSeriesNo.Text = Factory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void LoadFunds()
@@ -352,11 +304,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        internal void DisplayTotalAllotmentRelease() 
+        internal void DisplayTotalAllotmentRelease()
         {
             decimal totalAllotmentRelease = 0;
 
-            foreach (DataGridViewRow row in dgAllotmentRelease.Rows) 
+            foreach (DataGridViewRow row in dgAllotmentRelease.Rows)
             {
                 totalAllotmentRelease += Convert.ToDecimal(row.Cells["allotment_amount"].Value);
             }
@@ -368,7 +320,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                dgAllotmentRelease.Columns.Add("year","Year");
+                dgAllotmentRelease.Columns.Add("year", "Year");
                 dgAllotmentRelease.Columns.Add("budget_appropriation_id", "Budget Appropriations ID");
                 dgAllotmentRelease.Columns.Add("account_name", "Account Name");
                 dgAllotmentRelease.Columns.Add("account_code", "Account Code");
@@ -443,13 +395,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 cmbxFPP.SelectedIndex = -1;
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(cmbxFPP_SelectedValueChanged);
-             
+
                 LoadDatagridFormat();
 
                 cmbxSubFPP.Enabled = false;
                 btnRemove.Enabled = false;
                 btnEdit.Enabled = false;
 
+                AutoGenerateSeriesNo();
                 DisplayTotalAllotmentRelease();
             }
         }
@@ -499,10 +452,8 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-
-
         //VALIDATIONS BEFORE SHOWING ADD WINDOW
-        private string GetFormErrorsOnAdd() 
+        private string GetFormErrorsOnAdd()
         {
             var errorArray = new string[2];
 
@@ -516,7 +467,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                if (Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorFPPNameNotExist(epFPP,cmbxFPP) || ShowErrorOtherFPPNameNotExist(epSubFPP,cmbxSubFPP)) 
+                if (Helper.ShowErrorComboBoxEmpty(epFPP, cmbxFPP, "FPP") || ShowErrorFPPNameNotExist(epFPP, cmbxFPP) || ShowErrorOtherFPPNameNotExist(epSubFPP, cmbxSubFPP))
                 {
                     return true;
                 }
@@ -564,10 +515,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-
         //VALIDATIONS BEFORE SHOWING EDIT WINDOW 
 
-        private bool ShowAllotmentReleaseEdit() 
+        private bool ShowAllotmentReleaseEdit()
         {
             try
             {
@@ -613,18 +563,16 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ShowAllotmentReleaseEdit();
         }
 
+        #region Validations
 
-
-        //VALIDATIONS
-
-        internal bool ShowErrorAllotmentReleaseListEmpty() 
+        internal bool ShowErrorAllotmentReleaseListEmpty()
         {
             try
             {
-                if (dgAllotmentRelease.Rows.Count < 1) 
+                if (dgAllotmentRelease.Rows.Count < 1)
                 {
                     dgAllotmentRelease.Tag = "Allotment release list is empty.";
-                    return true;               
+                    return true;
                 }
             }
             catch (Exception ex)
@@ -665,7 +613,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
 
-
         private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
@@ -693,22 +640,21 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(epSubFPP, cmbxSubFPP);
         }
 
-
-
-        private bool AllotmentNotReleaseExist() 
+        private bool AllotmentNoReleaseExist()
         {
             try
             {
-                string allotmentReleaseNo = $"{mskSeriesNo.Text}-{mskYear.Text}";
+                string allotmentReleaseNo = mskSeriesNo.Text.Trim();
+                short dateIssued = (short)dtDateIssued.Value.Year;
                 bool allotmentReleaseNoExist;
 
                 if (allotmentReleaseId == 0)
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo);
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
                 else
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo);
+                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
 
 
-                if (allotmentReleaseNoExist) 
+                if (allotmentReleaseNoExist)
                 {
                     epARONo.SetError(mskYear, "ARO No. is already exist.");
                     return true;
@@ -740,12 +686,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-
-        private bool AllotmentReleaseValidation() 
+        private bool AllotmentReleaseValidation()
         {
             if (ShowErrorSeriesNo())
                 return true;
-            else if (AllotmentNotReleaseExist())
+            else if (AllotmentNoReleaseExist())
                 return true;
 
             return false;
@@ -781,5 +726,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dgAllotmentRelease.Tag = string.Empty;
         }
 
+        #endregion
+
+        private void btnAutoGenerateSeriesNo_Click(object sender, EventArgs e)
+        {
+            AutoGenerateSeriesNo();
+        }
     }
 }

@@ -115,56 +115,49 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsById(int Id)
         {
-            try
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
             {
-                var record = new Dictionary<string, string>();
+                new object[] { "@allotment_release_id", DbType.Int32, Id }
+            };
 
-                var parameters = new object[][]
-                {
-                    new object[] { "@allotment_release_id", DbType.Int32, Id }
-                };
+            string query = $"SELECT " +
+                $"allotment_release_id, " +
+                $"allotment_account_id, " +
+                $"aro_no, " +
+                $"purpose, " +
+                $"date_issued, " +
+                $"allotment_release_created_at, " +
+                $"allotment_release_updated_at, " +
+                $"budget_appropriations_id, " +
+                $"funds_id, " +
+                $"fund_code, " +
+                $"fund_name, " +
+                $"function_program_project_id, " +
+                $"fpp_code, " +
+                $"fpp_name, " +
+                $"is_special, " +
+                $"others_fpp_id, " +
+                $"others_fpp_code, " +
+                $"others_fpp_name, " +
+                $"allotment_classes_id, " +
+                $"allotment_code, " +
+                $"allotment_name, " +
+                $"general_ledger_accounts_id, " +
+                $"account_code, " +
+                $"ledger_name, " +
+                $"date_entry, " +
+                $"year, " +
+                $"continuing, " +
+                $"remarks, " +
+                $"amount " +
+                $"FROM {viewTableName} " +
+                $"WHERE " +
+                $"allotment_release_id = @allotment_release_id";
 
-                string query = $"SELECT " +
-                    $"allotment_release_id, " +
-                    $"allotment_account_id, " +
-                    $"aro_no, " +
-                    $"purpose, " +
-                    $"date_issued, " +
-                    $"allotment_release_created_at, " +
-                    $"allotment_release_updated_at, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"is_special, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"allotment_release_id = @allotment_release_id";
-
-                var dataTable = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public int CountRecords()
@@ -293,16 +286,17 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool AllotmentReleaseNoExist(string allotmentReleaseNo)
+        public bool AllotmentReleaseNoExist(string allotmentReleaseNo, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo },
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no";
+                string query = $"SELECT id FROM {tableName} WHERE aro_no = @aro_no AND YEAR(date_issued) = @year";
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -314,17 +308,18 @@ namespace ACC.Data
             return false;
         }
 
-        public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo)
+        public bool AllotmentReleaseNoExist(int Id, string allotmentReleaseNo, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id",   DbType.Int32, Id },
-                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo }
+                    new object[] { "@aro_no", DbType.String, allotmentReleaseNo },
+                    new object[] { "@year", DbType.Int16, year}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no";
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND aro_no = @aro_no AND YEAR(date_issued) = @year";
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
@@ -527,6 +522,34 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetViewRecordsBySearch(int fundId, int allotmentClassId, DateTime dateIssued, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId },
+                new object[] { "@allotment_classes_id", DbType.Int32, allotmentClassId },
+                new object[] { "@date_issued", DbType.Date, dateIssued},
+                new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND date_issued <= @date_issued AND (aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt)";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public decimal GetTotalAllotmentReleaseById(int allotmentReleaseId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@allotment_release_id", DbType.Int32, allotmentReleaseId }
+            };
+
+            string query = $"SELECT COALESCE(SUM(amount), 0) AS total_allotment_release FROM {viewTableName} WHERE allotment_release_id = @allotment_release_id";
+
+            return Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+        }
+
         #region BUDGET DASHBOARD METHODS
         //SUMMARY
         public decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
@@ -571,7 +594,7 @@ namespace ACC.Data
             return allotments;
         }
 
-        //DETAILED  
+        //DETAILED 
         public decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued)
         {
             var parameters = new object[][]
@@ -587,6 +610,13 @@ namespace ACC.Data
             decimal allotments = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
             return allotments;
         }
+
         #endregion
+
+        public string GetLeastAllotmentReleaseNumber()
+        {
+            string query = $"SELECT COALESCE(LPAD(MAX(aro_no)+1, 3, '0'),000) AS aro_no FROM {viewTableName}";
+            return _mySqlGenericCommands.ExecuteScalar(query);
+        }
     }
 }

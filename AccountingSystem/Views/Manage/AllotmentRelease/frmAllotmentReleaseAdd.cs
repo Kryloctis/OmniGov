@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -72,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             if (AddAllotmentRelease())
             {
                 _ucAllotmentReleaseMain.panel1.Enabled = false;
-                _ucAllotmentReleaseMain.dtDateIssued.Enabled = false; 
+                _ucAllotmentReleaseMain.dtDateIssued.Enabled = false;
                 uc.ResetForm();
             }
         }

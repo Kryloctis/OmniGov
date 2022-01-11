@@ -1622,6 +1622,31 @@ namespace AccountingSystem
 
         #endregion BUDGET APPROPRIATIONS
 
+        #region Allotment Release
+
+        internal static void SearchAllotmentReleaseDatagridView(DataTable dataTable, DataGridView dataGridView)
+        {
+            Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            string[] columns = new[] { "allotment_release_id", "full_aro_no", "date_issued", "purpose", "total_allotment_release", "continuing" };
+            var filteredColumnsDtAllotmentRelease = new DataView(dataTable).ToTable(false, columns);
+            dataGridView.DataSource = filteredColumnsDtAllotmentRelease;
+
+            dataGridView.Columns["allotment_release_id"].HeaderText = "Allotment Release ID";
+            dataGridView.Columns["allotment_release_id"].Visible = false;
+            dataGridView.Columns["full_aro_no"].HeaderText = "ARO No.";
+            dataGridView.Columns["full_aro_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["date_issued"].HeaderText = "Date Issued";
+            dataGridView.Columns["date_issued"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["purpose"].HeaderText = "Purpose";
+            dataGridView.Columns["total_allotment_release"].HeaderText = "Total Allotment Release";
+            dataGridView.Columns["total_allotment_release"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["continuing"].HeaderText = "Continuing";
+            dataGridView.Columns["continuing"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["continuing"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        }
+
+        #endregion
+
         #region DASHBOARD
 
         internal static void DashboardDetailedDatagridView(DataGridView dgvBudgetAppropriations, string fppID, int allotmentClassID, int fundId, DateTime dateAsOf)
