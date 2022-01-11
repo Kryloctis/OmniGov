@@ -115,56 +115,49 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsById(int Id)
         {
-            try
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
             {
-                var record = new Dictionary<string, string>();
+                new object[] { "@allotment_release_id", DbType.Int32, Id }
+            };
 
-                var parameters = new object[][]
-                {
-                    new object[] { "@allotment_release_id", DbType.Int32, Id }
-                };
+            string query = $"SELECT " +
+                $"allotment_release_id, " +
+                $"allotment_account_id, " +
+                $"aro_no, " +
+                $"purpose, " +
+                $"date_issued, " +
+                $"allotment_release_created_at, " +
+                $"allotment_release_updated_at, " +
+                $"budget_appropriations_id, " +
+                $"funds_id, " +
+                $"fund_code, " +
+                $"fund_name, " +
+                $"function_program_project_id, " +
+                $"fpp_code, " +
+                $"fpp_name, " +
+                $"is_special, " +
+                $"others_fpp_id, " +
+                $"others_fpp_code, " +
+                $"others_fpp_name, " +
+                $"allotment_classes_id, " +
+                $"allotment_code, " +
+                $"allotment_name, " +
+                $"general_ledger_accounts_id, " +
+                $"account_code, " +
+                $"ledger_name, " +
+                $"date_entry, " +
+                $"year, " +
+                $"continuing, " +
+                $"remarks, " +
+                $"amount " +
+                $"FROM {viewTableName} " +
+                $"WHERE " +
+                $"allotment_release_id = @allotment_release_id";
 
-                string query = $"SELECT " +
-                    $"allotment_release_id, " +
-                    $"allotment_account_id, " +
-                    $"aro_no, " +
-                    $"purpose, " +
-                    $"date_issued, " +
-                    $"allotment_release_created_at, " +
-                    $"allotment_release_updated_at, " +
-                    $"budget_appropriations_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"function_program_project_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"is_special, " +
-                    $"others_fpp_id, " +
-                    $"others_fpp_code, " +
-                    $"others_fpp_name, " +
-                    $"allotment_classes_id, " +
-                    $"allotment_code, " +
-                    $"allotment_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_name, " +
-                    $"date_entry, " +
-                    $"year, " +
-                    $"continuing, " +
-                    $"remarks, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE " +
-                    $"allotment_release_id = @allotment_release_id";
-
-                var dataTable = new DataTable();
-                return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public int CountRecords()

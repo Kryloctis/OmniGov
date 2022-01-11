@@ -120,11 +120,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             int allotmentReleaseId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_release_id"].Value);
 
             ucMain.allotmentReleaseId = allotmentReleaseId;
-            ucMain.LoadSelected();
+            _frmAllotmentReleaseMain.LoadSelected();
             ucMain.DisplayTotalAllotmentRelease();
             ucMain.ClearErrors();
-            _frmAllotmentReleaseMain.btnDelete.Enabled = true;
-            _frmAllotmentReleaseMain.btnSave.Text = "Update";
             Close();
         }
 
