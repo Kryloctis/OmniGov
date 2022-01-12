@@ -104,25 +104,23 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgreceipts.SelectedRows.Count == 0)
-                return;
-         
             try
             {
                 if (Helper.MessageBoxConfirmDelete(dgreceipts.SelectedRows.Count))
                 {
-                    var rcRepository = Factory.ReceiptsRepository();
-                    var rcModel = new List<ReceiptsModel>();
+                    var receiptsRepository = Factory.ReceiptsRepository();
+                    var receiptModel = new List<ReceiptsModel>();
+
                     foreach (DataGridViewRow row in dgreceipts.SelectedRows)
                     {
                         int id = int.Parse(row.Cells[0].Value.ToString());
 
-                        if (!rcRepository.ReceiptsIssued(id))
-                        {
-                            rcModel.Add(new ReceiptsModel() { Id = id });
-                        }
+                        if (!receiptsRepository.ReceiptsIssued(id))
+                            receiptModel.Add(new ReceiptsModel() { Id = id });
+                        
                     }
-                    _ = rcRepository.Delete(rcModel);
+                    _ = receiptsRepository.Delete(receiptModel);
+
                     LoadRecords();
                 }
             }
