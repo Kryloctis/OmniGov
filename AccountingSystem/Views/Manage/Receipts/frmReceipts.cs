@@ -74,10 +74,13 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
                 var rRepository = Factory.ReceiptsRepository();
+
+                
                 var rcRepository = Factory.ReceiptsIssuedRepository();
                 bool isconsumed = rRepository.ReceiptConsumed(id);                
                 bool issued = rRepository.AllowEdit(id);
-                btnEdit.Enabled = issued ? false:true;
+
+                btnEdit.Enabled = issued ? false : true;
                 btnDelete.Enabled = issued ? false : true;
 
                 SetToolStripStatusData();
