@@ -71,6 +71,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if(dgreceipts.SelectedRows.Count > 0)
             {
                 Helper.EnableDisableToolStripButtons(dgreceipts, btnEdit, btnDelete);
+
                 int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
                 var rRepository = Factory.ReceiptsRepository();
                 var rcRepository = Factory.ReceiptsIssuedRepository();
@@ -128,12 +129,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 Helper.MessageBoxError(ex.Message); 
             }
-        }
-
-
-        private void dgreceipts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnEdit.PerformClick();
         }
 
     }

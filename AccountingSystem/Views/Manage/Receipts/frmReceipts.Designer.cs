@@ -125,7 +125,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.dgreceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgreceipts.Size = new System.Drawing.Size(1039, 474);
             this.dgreceipts.TabIndex = 7;
-            this.dgreceipts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgreceipts_CellDoubleClick);
             this.dgreceipts.SelectionChanged += new System.EventHandler(this.dgreceipts_SelectionChanged);
             // 
             // statusStrip1
