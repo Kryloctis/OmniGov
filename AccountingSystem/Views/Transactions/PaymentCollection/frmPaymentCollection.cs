@@ -34,8 +34,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
+                string date = dtpdate.Value.ToString("yyyy-MM-dd");
+
                 var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments = pcRepository.GetRecords();
+                var dtpayments  = pcRepository.GetRecordsByDate(date);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
@@ -157,11 +159,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                string date = String.Format("{0:yyyy-MM-dd}", dtpdate.Value);
+                string date = dtpdate.Value.ToString("yyyy-MM-dd");
                 var dtpayments = Factory.PaymentCollectionRepository().GetRecordsByDate(date);
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                SetStatusStrip();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
