@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // btnRefresh
             // 
+            this.btnRefresh.Enabled = false;
             this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;

@@ -1,13 +1,8 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
@@ -32,6 +27,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var rcRepository = Factory.ReceiptsRepository();
                 var dtreceipts = rcRepository.GetRecords();
+                btnRefresh.Enabled = dtreceipts.Rows.Count != 0;
+
                 HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
 
                 SetToolStripStatusData();
@@ -78,6 +75,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void dgreceipts_SelectionChanged(object sender, EventArgs e)
         {
+
             if(dgreceipts.SelectedRows.Count > 0)
             {
                 Helper.EnableDisableToolStripButtons(dgreceipts, btnEdit, btnDelete);

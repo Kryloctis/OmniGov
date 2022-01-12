@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.dtpreceived.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpreceived.Name = "dtpreceived";
             this.dtpreceived.Size = new System.Drawing.Size(377, 23);
-            this.dtpreceived.TabIndex = 6;
+            this.dtpreceived.TabIndex = 4;
             // 
             // label4
             // 
@@ -109,8 +109,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtremarks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtremarks.Multiline = true;
             this.txtremarks.Name = "txtremarks";
-            this.txtremarks.Size = new System.Drawing.Size(377, 69);
-            this.txtremarks.TabIndex = 9;
+            this.txtremarks.Size = new System.Drawing.Size(377, 46);
+            this.txtremarks.TabIndex = 6;
             // 
             // label5
             // 
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtfrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtfrom.Name = "txtfrom";
             this.txtfrom.Size = new System.Drawing.Size(162, 23);
-            this.txtfrom.TabIndex = 12;
+            this.txtfrom.TabIndex = 2;
             this.txtfrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
             this.txtfrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
             this.txtfrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtto.Name = "txtto";
             this.txtto.Size = new System.Drawing.Size(166, 23);
-            this.txtto.TabIndex = 13;
+            this.txtto.TabIndex = 3;
             this.txtto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
             this.txtto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
             this.txtto.Validating += new System.ComponentModel.CancelEventHandler(this.txtto_Validating);
@@ -161,17 +161,17 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             // txtquantity
             // 
-            this.txtquantity.Location = new System.Drawing.Point(139, 110);
+            this.txtquantity.Location = new System.Drawing.Point(139, 113);
             this.txtquantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtquantity.Name = "txtquantity";
             this.txtquantity.ReadOnly = true;
             this.txtquantity.Size = new System.Drawing.Size(377, 23);
-            this.txtquantity.TabIndex = 14;
+            this.txtquantity.TabIndex = 5;
             this.txtquantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtquantity_KeyPress);
             this.txtquantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
             this.txtquantity.Validated += new System.EventHandler(this.txtquantity_Validated);
             // 
-            // ucForms
+            // ucReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -189,8 +189,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Controls.Add(this.cmbforms);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucForms";
-            this.Size = new System.Drawing.Size(540, 226);
+            this.Name = "ucReceipts";
+            this.Size = new System.Drawing.Size(540, 203);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
