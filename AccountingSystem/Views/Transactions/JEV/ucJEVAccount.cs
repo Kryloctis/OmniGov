@@ -289,15 +289,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-
-        private void txtObligationNo_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epObligationNo, txtObligationNo, "Obligation No.");
-        }
-
-        private void txtObligationNo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epObligationNo, txtObligationNo);
-        }
     }
 }
