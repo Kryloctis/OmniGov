@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal frmJEVList _frmJEVList;
         internal ucJEVDashboard _ucJEVDashboard;
         internal int createdById;
-        private Dictionary<string, string> userDict;
+        private Dictionary<string, dynamic> userDict;
 
         public frmJEV(frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
         {

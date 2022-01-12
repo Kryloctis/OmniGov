@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data;
-using ACC.Domain.Interfaces;
-using System.Windows.Forms;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.List
 {
@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             InitializeComponent();
         }
 
-      
+
 
         internal void LoadOffice()
         {
@@ -33,9 +33,9 @@ namespace AccountingSystem.Views.Manage.Users.List
                     break;
             }
 
-            cmbOffice.SelectedIndex = 0;
-
             cmbOffice.SelectedValueChanged += new EventHandler(CmbxOffice_SelectedValueChanged);
+
+            cmbOffice.SelectedIndex = 0;
         }
 
         internal void LoadRoles()
@@ -78,13 +78,14 @@ namespace AccountingSystem.Views.Manage.Users.List
         internal void ResetForm()
         {
             cmbRoles.SelectedIndex = -1;
+            txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
+            txtSuffix.Clear();
             txtMiddleInitial.Clear();
             txtUsername.Clear();
             txtPassword.Clear();
-         
-
+            txtConfirmPassword.Clear();
         }
 
         private void txtUsername_Validating(object sender, CancelEventArgs e)
@@ -202,7 +203,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
             if (userId != 0) return;
-            e.Cancel = textBoxIsEmpty(txtConfirmPassword,"Please confirm password");
+            e.Cancel = textBoxIsEmpty(txtConfirmPassword, "Please confirm password");
 
             if (!string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtConfirmPassword.Text))
             {

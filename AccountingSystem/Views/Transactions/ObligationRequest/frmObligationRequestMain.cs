@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     var obligationRequest = new object[]
                     {
                         item["budget_appropriations_id"],
-                        $"{item["ledger_name"]} ({remarks})",
+                        $"{item["ledger_name"]} {(string.IsNullOrEmpty(remarks)? string.Empty : $"({remarks})")}",
                         item["account_code"],
                         item["amount"]
                     };

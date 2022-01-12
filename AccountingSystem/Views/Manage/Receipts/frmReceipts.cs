@@ -27,11 +27,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var rcRepository = Factory.ReceiptsRepository();
                 var dtreceipts = rcRepository.GetRecords();
-                btnRefresh.Enabled = dtreceipts.Rows.Count != 0;
 
                 HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
-
-                SetToolStripStatusData();
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -45,21 +42,16 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            try
             {
-                try
-                {
-                    var rcRepository = Factory.ReceiptsRepository();
-                    var dtreceipts = rcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
-                    HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
+                var rcRepository = Factory.ReceiptsRepository();
+                var dtreceipts = rcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
+                HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
 
-                    SetToolStripStatusData();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             }
-            else
+            catch (Exception ex) 
             {
-                LoadRecords();
+                Helper.MessageBoxError(ex.Message); 
             }
         }
 
@@ -86,6 +78,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 bool issued = rRepository.AllowEdit(id);
                 btnEdit.Enabled = issued ? false:true;
                 btnDelete.Enabled = issued ? false : true;
+
+                SetToolStripStatusData();
             }
             else
             {
@@ -110,27 +104,31 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgreceipts.SelectedRows.Count > 0)
-            {                
-                try
+            if (dgreceipts.SelectedRows.Count == 0)
+                return;
+         
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(dgreceipts.SelectedRows.Count))
                 {
-                    if (Helper.MessageBoxConfirmDelete(dgreceipts.SelectedRows.Count))
+                    var rcRepository = Factory.ReceiptsRepository();
+                    var rcModel = new List<ReceiptsModel>();
+                    foreach (DataGridViewRow row in dgreceipts.SelectedRows)
                     {
-                        var rcRepository = Factory.ReceiptsRepository();
-                        var rcModel = new List<ReceiptsModel>();
-                        foreach (DataGridViewRow row in dgreceipts.SelectedRows)
+                        int id = int.Parse(row.Cells[0].Value.ToString());
+
+                        if (!rcRepository.ReceiptsIssued(id))
                         {
-                            int id = int.Parse(row.Cells[0].Value.ToString());
-                            if (!rcRepository.ReceiptsIssued(id))
-                            {
-                                rcModel.Add(new ReceiptsModel() { Id = id });
-                            }
+                            rcModel.Add(new ReceiptsModel() { Id = id });
                         }
-                        _ = rcRepository.Delete(rcModel);
-                        LoadRecords();
                     }
+                    _ = rcRepository.Delete(rcModel);
+                    LoadRecords();
                 }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message); 
             }
         }
 

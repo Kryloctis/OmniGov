@@ -15,6 +15,8 @@ namespace AccountingSystem
         public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.Columns.Clear();
+            dataGridView.Rows.Clear();
             dataGridView.ShowCellToolTips = false;
             dataGridView.Columns.Add("id", "ID");
             dataGridView.Columns.Add(new DataGridViewCheckBoxColumn() { HeaderText = "", Name = "is_referenced" });
@@ -396,14 +398,14 @@ namespace AccountingSystem
             datagrid.Columns[9].HeaderText = "Last Issued";
             datagrid.Columns[10].HeaderText = "Returned Quantity";
             datagrid.Columns[11].HeaderText = "Date Returned";
-            
+
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[3].Visible = false;
 
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[11].DefaultCellStyle.Format = "yyyy-MM-dd";
-            
+
             datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -1296,20 +1298,24 @@ namespace AccountingSystem
 
             //a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Firstname";
-            datagrid.Columns[3].HeaderText = "MI";
-            datagrid.Columns[4].HeaderText = "Lastname";
-            datagrid.Columns[5].HeaderText = "Username";
-            datagrid.Columns[6].Visible = false;
-            datagrid.Columns[7].Visible = false;
-            datagrid.Columns[8].Visible = false;
-            datagrid.Columns[9].Visible = false;
-            datagrid.Columns[10].HeaderText = "Office";
-            datagrid.Columns[11].HeaderText = "Role";
-            datagrid.Columns[12].Visible = false;
-            datagrid.Columns[13].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["roles_id"].Visible = false;
+            datagrid.Columns["prefix"].HeaderText = "Prefix";
+            datagrid.Columns["prefix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["first_name"].HeaderText = "Firstname";
+            datagrid.Columns["mid_initial"].HeaderText = "MI";
+            datagrid.Columns["last_name"].HeaderText = "Lastname";
+            datagrid.Columns["suffix"].HeaderText = "Suffix";
+            datagrid.Columns["suffix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["username"].HeaderText = "Username";
+            datagrid.Columns["password"].Visible = false;
+            datagrid.Columns["is_deleted"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["office"].HeaderText = "Office";
+            datagrid.Columns["role_name"].HeaderText = "Role";
+            datagrid.Columns["permission_name"].Visible = false;
+            datagrid.Columns["permission_office"].Visible = false;
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -2166,7 +2172,7 @@ namespace AccountingSystem
             datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.ShowCellToolTips = false;
             datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM, dd, yyyy";
+            datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;

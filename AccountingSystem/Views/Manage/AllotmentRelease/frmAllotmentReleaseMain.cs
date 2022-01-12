@@ -71,7 +71,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnDelete.Enabled = true;
                 btnSave.Text = "Update";
                 uc.isEdit = true;
-                uc.btnAutoGenerateSeriesNo.Enabled = false;
             }
             catch (Exception ex)
             {

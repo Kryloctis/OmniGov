@@ -41,5 +41,7 @@ namespace ACC.Domain.Interfaces
         bool SetObligationRequestStatus(int obligationRequestId, string status, string dissaprovalMessage = null);
 
         string GetObligationRequestStatus(int obligationRequestId);
+
+        string GetLeastAllotmentReleaseNumber();
     }
 }

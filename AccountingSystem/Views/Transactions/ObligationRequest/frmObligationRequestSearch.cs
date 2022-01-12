@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 bool isDisapproved = Convert.ToBoolean(row["is_disapproved"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 var status = ObligationRequestStatus(isApproved, isDisapproved, isCancelled);
-                var dateRequested = Convert.ToDateTime(row["date_requested"]).ToString("MMM. dd, yyyy");
+                var dateRequested = Convert.ToDateTime(row["date_requested"]).ToString("MMM dd, yyyy");
                 var createdAt = row["created_at"].ToString();
                 var createdById = row["created_by_id"].ToString();
                 var createdByFullName = row["created_by_full_name"].ToString();

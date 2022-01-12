@@ -35,6 +35,19 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 GetTotalObligations();
                 btnEdit.Enabled = false;
                 btnRemove.Enabled = false;
+                GenerateSeriesNo();
+            }
+        }
+
+        internal void GenerateSeriesNo()
+        {
+            try
+            {
+                mskTxtObligationNoSeries.Text = Factory.ObligationRequestRepository().GetLeastAllotmentReleaseNumber();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -75,6 +88,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             txtExplanation.Text = string.Empty;
             dgObligationRequests.Rows.Clear();
             txtTotalObligations.Text = "0.00";
+            GenerateSeriesNo();
         }
 
         internal void GetTotalObligations()

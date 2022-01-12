@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -25,36 +25,31 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
                     new object[] { "@id", DbType.Int32, Id},
-                };
+            };
 
-                string query = $"SELECT roles_id, first_name, mid_initial, last_name, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name FROM {viewTableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
-                    record.Add("first_name", reader.Rows[0]["first_name"].ToString());
-                    record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
-                    record.Add("last_name", reader.Rows[0]["last_name"].ToString());
-                    record.Add("username", reader.Rows[0]["username"].ToString());
-                    record.Add("password", reader.Rows[0]["password"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                    record.Add("office", reader.Rows[0]["office"].ToString());
-                    record.Add("role_name", reader.Rows[0]["role_name"].ToString());
-                    record.Add("permission_name", reader.Rows[0]["permission_name"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
+                record.Add("prefix", reader.Rows[0]["prefix"].ToString());
+                record.Add("first_name", reader.Rows[0]["first_name"].ToString());
+                record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
+                record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                record.Add("suffix", reader.Rows[0]["suffix"].ToString());
+                record.Add("username", reader.Rows[0]["username"].ToString());
+                record.Add("password", reader.Rows[0]["password"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                record.Add("office", reader.Rows[0]["office"].ToString());
+                record.Add("role_name", reader.Rows[0]["role_name"].ToString());
+                record.Add("permission_name", reader.Rows[0]["permission_name"].ToString());
             }
 
             return record;
@@ -79,9 +74,11 @@ namespace ACC.Data
                         return record;
 
                     record.Add("roles_id", reader.Rows[0]["roles_id"].ToString());
+                    record.Add("prefix", reader.Rows[0]["prefix"].ToString());
                     record.Add("first_name", reader.Rows[0]["first_name"].ToString());
                     record.Add("mid_initial", reader.Rows[0]["mid_initial"].ToString());
                     record.Add("last_name", reader.Rows[0]["last_name"].ToString());
+                    record.Add("suffix", reader.Rows[0]["suffix"].ToString());
                     record.Add("username", reader.Rows[0]["username"].ToString());
                     record.Add("password", reader.Rows[0]["password"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
@@ -101,7 +98,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE b.role_name <> 'System Administrator'";
+                string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id = b.id WHERE b.role_name <> 'System Administrator'";
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
             }
@@ -117,10 +114,10 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT {tableName4}.role_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.roles_id={tableName4}.id WHERE {tableName}.id='{id}'";
-                DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
-                if(dt.Rows.Count > 0)
+                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                if (dt.Rows.Count > 0)
                 {
-                    for(int i=0;i < dt.Rows.Count; i++)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         data = dt.Rows[i]["role_name"].ToString();
                     }
@@ -182,22 +179,22 @@ namespace ACC.Data
             try
             {
 
-            string query = $"SELECT " +
-                        $"id, " +
-                        $"roles_id, " +
-                        $"first_name, " +
-                        $"mid_initial, " +
-                        $"last_name, " +
-                        $"username, " +
-                        $"password, " +
-                        $"is_deleted, " +
-                        $"created_at, " +
-                        $"updated_at, " +
-                        $"office, " +
-                        $"role_name, " +
-                        $"permission_name, " +
-                        $"permission_office " +
-                        $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+                string query = $"SELECT " +
+                            $"id, " +
+                            $"roles_id, " +
+                            $"first_name, " +
+                            $"mid_initial, " +
+                            $"last_name, " +
+                            $"username, " +
+                            $"password, " +
+                            $"is_deleted, " +
+                            $"created_at, " +
+                            $"updated_at, " +
+                            $"office, " +
+                            $"role_name, " +
+                            $"permission_name, " +
+                            $"permission_office " +
+                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
 
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
@@ -232,8 +229,8 @@ namespace ACC.Data
                 };
 
                 var srchtxt = searchText;
-               
-                string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
+
+                string query = $"SELECT a.id, a.prefix, a.first_name, a.mid_initial, a.last_name, a.suffix, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtUsers, parameters);
@@ -250,16 +247,18 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
+                    new object[] { "@roles_id", DbType.Byte, entity.RoleId},
+                    new object[] { "@prefix", DbType.String, entity.Prefix},
                     new object[] { "@first_name", DbType.String  , entity.FirstName},
                     new object[] { "@mid_initial", DbType.String, entity.MidInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@suffix", DbType.String, entity.Suffix},
                     new object[] { "@username", DbType.String, entity.UserName},
                     new object[] { "@password", DbType.String, entity.Password},
 
                 };
 
-                string query = $"INSERT INTO {tableName} ( roles_id, first_name, mid_initial, last_name, username, password) VALUES (@roles_id, @first_name, @mid_initial, @last_name, @username, sha2(@password, 224))";
+                string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -270,51 +269,40 @@ namespace ACC.Data
 
         public bool Update(UsersModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
-                    new object[] { "@first_name", DbType.String  , entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@username", DbType.String, entity.UserName},
+                new object[] { "@id", DbType.Int16, entity.Id},
+                new object[] { "@roles_id", DbType.Byte, entity.RoleId},
+                new object[] { "@prefix", DbType.String, entity.Prefix},
+                new object[] { "@first_name", DbType.String, entity.FirstName},
+                new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                new object[] { "@last_name", DbType.String, entity.LastName},
+                new object[] { "@suffix", DbType.String, entity.Suffix},
+                new object[] { "@username", DbType.String, entity.UserName},
+            };
 
-                };
-
-                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateWithPassword(UsersModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@roles_id", DbType.Byte  , entity.RoleId},
-                    new object[] { "@first_name", DbType.String  , entity.FirstName},
-                    new object[] { "@mid_initial", DbType.String, entity.MidInitial},
-                    new object[] { "@last_name", DbType.String, entity.LastName},
-                    new object[] { "@username", DbType.String, entity.UserName},
-                    new object[] { "@password", DbType.String, entity.Password},
+                new object[] { "@id", DbType.Int16, entity.Id},
+                new object[] { "@roles_id", DbType.Byte, entity.RoleId},
+                new object[] { "@prefix", DbType.String, entity.Prefix},
+                new object[] { "@first_name", DbType.String  , entity.FirstName},
+                new object[] { "@mid_initial", DbType.String, entity.MidInitial},
+                new object[] { "@last_name", DbType.String, entity.LastName},
+                new object[] { "@suffix", DbType.String, entity.Suffix},
+                new object[] { "@username", DbType.String, entity.UserName},
+                new object[] { "@password", DbType.String, entity.Password},
 
-                };
+            };
 
-                string query = $"UPDATE {tableName} SET roles_id = @roles_id, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, username = @username, password = sha2(@password, 224) WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username, password = sha2(@password, 224) WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<UsersModel> entityList)
@@ -524,34 +512,29 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"roles_id, " +
-                    $"first_name, " +
-                    $"mid_initial, " +
-                    $"last_name, " +
-                    $"username, " +
-                    $"password, " +
-                    $"is_deleted, " +
-                    $"created_at, " +
-                    $"updated_at, " +
-                    $"office, " +
-                    $"role_name, " +
-                    $"permission_name, " +
-                    $"permission_office " +
-                    $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
+            string query = $"SELECT " +
+                $"id, " +
+                $"roles_id, " +
+                $"prefix, " +
+                $"first_name, " +
+                $"mid_initial, " +
+                $"last_name, " +
+                $"suffix, " +
+                $"username, " +
+                $"password, " +
+                $"is_deleted, " +
+                $"created_at, " +
+                $"updated_at, " +
+                $"office, " +
+                $"role_name, " +
+                $"permission_name, " +
+                $"permission_office " +
+                $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
 
 
-                var dataTable = new DataTable();
+            var dataTable = new DataTable();
 
-                return _dbGenericCommands.Fill(query, dataTable);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRecordsBySearch(string searchTxt)
@@ -567,9 +550,11 @@ namespace ACC.Data
                 string query = $"SELECT " +
                     $"id, " +
                     $"roles_id, " +
+                    $"prefix," +
                     $"first_name, " +
                     $"mid_initial, " +
                     $"last_name, " +
+                    $"suffix, " +
                     $"username, " +
                     $"password, " +
                     $"is_deleted, " +
@@ -584,7 +569,7 @@ namespace ACC.Data
 
                 var dataTable = new DataTable();
 
-                return _dbGenericCommands.FillBySearch(query, dataTable,parameters);
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {
@@ -594,8 +579,83 @@ namespace ACC.Data
 
         public string GetCollectorNameByUserId(int userId)
         {
-           string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
-           return _dbGenericCommands.ExecuteScalar(query);
+            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
+            return _dbGenericCommands.ExecuteScalar(query);
+        }
+
+        public DataTable GetViewRecordsByOffice(string office)
+        {
+            var parameters = new dynamic[][]
+            {
+                new dynamic[] { "@office", DbType.String, office}
+            };
+
+            string Filter()
+            {
+                if (office == "SysAdmin")
+                    return string.Empty;
+                else
+                    return "AND office = @office";
+            }
+
+
+            string query = $"SELECT " +
+                 $"id, " +
+                 $"roles_id, " +
+                 $"prefix," +
+                 $"first_name, " +
+                 $"mid_initial, " +
+                 $"last_name, " +
+                 $"suffix, " +
+                 $"username, " +
+                 $"password, " +
+                 $"is_deleted, " +
+                 $"created_at, " +
+                 $"updated_at, " +
+                 $"office, " +
+                 $"role_name, " +
+                 $"permission_name, " +
+                 $"permission_office " +
+                 $"FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} GROUP BY id";
+
+
+            var dataTable = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public Dictionary<string, dynamic> GetViewRecordById(int Id)
+        {
+            var record = new Dictionary<string, dynamic>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("roles_id", reader.Rows[0]["roles_id"]);
+                record.Add("prefix", reader.Rows[0]["prefix"].ToString());
+                record.Add("first_name", reader.Rows[0]["first_name"]);
+                record.Add("mid_initial", reader.Rows[0]["mid_initial"]);
+                record.Add("last_name", reader.Rows[0]["last_name"]);
+                record.Add("suffix", reader.Rows[0]["suffix"].ToString());
+                record.Add("username", reader.Rows[0]["username"]);
+                record.Add("password", reader.Rows[0]["password"]);
+                record.Add("created_at", reader.Rows[0]["created_at"]);
+                record.Add("updated_at", reader.Rows[0]["updated_at"]);
+                record.Add("office", reader.Rows[0]["office"]);
+                record.Add("role_name", reader.Rows[0]["role_name"]);
+                record.Add("permission_name", reader.Rows[0]["role_name"]);
+                record.Add("permission_office", reader.Rows[0]["permission_office"]);
+            }
+            return record;
         }
     }
 }

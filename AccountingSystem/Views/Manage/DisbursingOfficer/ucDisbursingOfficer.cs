@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if(UserId > 0)
+            if (UserId > 0)
             {
                 UserId = 0;
                 linkuser.Text = "+ Link User";
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     }
                 }
             }
-        
+
         }
 
         internal void LoadLink(int id)

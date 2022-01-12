@@ -1,8 +1,6 @@
 ﻿using ACC.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 namespace ACC.Domain.Interfaces
 {
     public interface IUsersRepository : IRepository<UsersModel>
@@ -37,5 +35,9 @@ namespace ACC.Domain.Interfaces
         string GetCollectorNameByUserId(int userId);
 
         string GetDisbursingByUserId(int id);
+
+        DataTable GetViewRecordsByOffice(string office);
+
+        Dictionary<string, dynamic> GetViewRecordById(int Id);
     }
 }

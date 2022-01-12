@@ -6,5 +6,7 @@ namespace ACC.Domain.Interfaces
     public interface IDocumentReferences : IRepository<DocumentReferencesModel>
     {
         DataTable GetViewRecords();
+
+        DataTable GetViewRecordsByOffice(string office);
     }
 }

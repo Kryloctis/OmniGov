@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 520);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 560);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(517, 30);
             this.flowLayoutPanel1.TabIndex = 1;
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.ucSignatories1.Location = new System.Drawing.Point(9, 9);
             this.ucSignatories1.Margin = new System.Windows.Forms.Padding(0);
             this.ucSignatories1.Name = "ucSignatories1";
-            this.ucSignatories1.Size = new System.Drawing.Size(499, 506);
+            this.ucSignatories1.Size = new System.Drawing.Size(499, 546);
             this.ucSignatories1.TabIndex = 2;
             // 
             // frmEditSignatories
@@ -86,11 +86,12 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(517, 550);
+            this.ClientSize = new System.Drawing.Size(517, 590);
             this.Controls.Add(this.ucSignatories1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditSignatories";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

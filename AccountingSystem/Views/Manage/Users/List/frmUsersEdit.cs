@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.List
@@ -36,9 +29,11 @@ namespace AccountingSystem.Views.Manage.Users.List
 
                 uc.cmbOffice.Text = dictRoles["office"];
                 uc.cmbRoles.SelectedValue = userData["roles_id"];
+                uc.txtPrefix.Text = userData["prefix"];
                 uc.txtFirstname.Text = userData["first_name"];
                 uc.txtMiddleInitial.Text = userData["mid_initial"];
                 uc.txtLastname.Text = userData["last_name"];
+                uc.txtSuffix.Text = userData["suffix"];
                 uc.txtUsername.Text = userData["username"];
 
             }
@@ -68,9 +63,11 @@ namespace AccountingSystem.Views.Manage.Users.List
                     Id = uc.userId,
                     UserName = uc.txtUsername.Text.Trim(),
                     Password = uc.txtPassword.Text.Trim(),
+                    Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstname.Text.Trim(),
                     MidInitial = uc.txtMiddleInitial.Text.Trim(),
                     LastName = uc.txtLastname.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
                     RoleId = (byte)uc.cmbRoles.SelectedValue,
 
                 };
@@ -106,7 +103,7 @@ namespace AccountingSystem.Views.Manage.Users.List
                 uc.txtPassword.Clear();
                 uc.txtConfirmPassword.Clear();
                 _frmUsers.LoadRecords();
-                
+
             }
         }
     }
