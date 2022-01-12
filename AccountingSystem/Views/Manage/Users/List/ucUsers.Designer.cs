@@ -57,6 +57,10 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbOffice = new System.Windows.Forms.ComboBox();
+            this.txtPrefix = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtSuffix = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.epRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).BeginInit();
@@ -73,25 +77,25 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 61);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 15);
+            this.label1.Size = new System.Drawing.Size(37, 15);
             this.label1.TabIndex = 5;
-            this.label1.Text = "First Name";
+            this.label1.Text = "Prefix";
             // 
             // txtFirstname
             // 
-            this.txtFirstname.Location = new System.Drawing.Point(119, 58);
+            this.txtFirstname.Location = new System.Drawing.Point(119, 85);
             this.txtFirstname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFirstname.MaxLength = 45;
             this.txtFirstname.Name = "txtFirstname";
             this.txtFirstname.Size = new System.Drawing.Size(350, 23);
-            this.txtFirstname.TabIndex = 2;
+            this.txtFirstname.TabIndex = 3;
             this.txtFirstname.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstname_Validating);
             this.txtFirstname.Validated += new System.EventHandler(this.txtFirstname_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 87);
+            this.label2.Location = new System.Drawing.Point(9, 114);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 15);
             this.label2.TabIndex = 7;
@@ -99,19 +103,19 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtMiddleInitial
             // 
-            this.txtMiddleInitial.Location = new System.Drawing.Point(119, 85);
+            this.txtMiddleInitial.Location = new System.Drawing.Point(119, 112);
             this.txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMiddleInitial.MaxLength = 3;
+            this.txtMiddleInitial.MaxLength = 1;
             this.txtMiddleInitial.Name = "txtMiddleInitial";
             this.txtMiddleInitial.Size = new System.Drawing.Size(350, 23);
-            this.txtMiddleInitial.TabIndex = 3;
+            this.txtMiddleInitial.TabIndex = 4;
             this.txtMiddleInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMiddleInitial_Validating);
             this.txtMiddleInitial.Validated += new System.EventHandler(this.txtMiddleInitial_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 114);
+            this.label3.Location = new System.Drawing.Point(9, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 9;
@@ -119,12 +123,12 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             // txtLastname
             // 
-            this.txtLastname.Location = new System.Drawing.Point(119, 112);
+            this.txtLastname.Location = new System.Drawing.Point(119, 139);
             this.txtLastname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLastname.MaxLength = 45;
             this.txtLastname.Name = "txtLastname";
             this.txtLastname.Size = new System.Drawing.Size(350, 23);
-            this.txtLastname.TabIndex = 4;
+            this.txtLastname.TabIndex = 5;
             this.txtLastname.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastname_Validating);
             this.txtLastname.Validated += new System.EventHandler(this.txtLastname_Validated);
             // 
@@ -180,7 +184,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             // 
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 147);
+            this.groupBox1.Location = new System.Drawing.Point(3, 201);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(498, 121);
@@ -217,7 +221,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.btnConfirmPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             this.btnConfirmPasswordVisibility.Name = "btnConfirmPasswordVisibility";
             this.btnConfirmPasswordVisibility.Size = new System.Drawing.Size(23, 23);
-            this.btnConfirmPasswordVisibility.TabIndex = 33;
+            this.btnConfirmPasswordVisibility.TabIndex = 10;
             this.btnConfirmPasswordVisibility.UseVisualStyleBackColor = true;
             this.btnConfirmPasswordVisibility.Click += new System.EventHandler(this.btnConfirmPasswordVisibility_Click);
             // 
@@ -233,7 +237,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.btnPasswordVisibility.Margin = new System.Windows.Forms.Padding(0);
             this.btnPasswordVisibility.Name = "btnPasswordVisibility";
             this.btnPasswordVisibility.Size = new System.Drawing.Size(23, 23);
-            this.btnPasswordVisibility.TabIndex = 32;
+            this.btnPasswordVisibility.TabIndex = 10;
             this.btnPasswordVisibility.UseVisualStyleBackColor = true;
             this.btnPasswordVisibility.Click += new System.EventHandler(this.btnPasswordVisibility_Click);
             // 
@@ -254,7 +258,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = '*';
             this.txtConfirmPassword.Size = new System.Drawing.Size(350, 23);
-            this.txtConfirmPassword.TabIndex = 30;
+            this.txtConfirmPassword.TabIndex = 9;
             this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
             this.txtConfirmPassword.Validated += new System.EventHandler(this.txtConfirmPassword_Validated);
             // 
@@ -275,7 +279,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(350, 23);
-            this.txtPassword.TabIndex = 27;
+            this.txtPassword.TabIndex = 8;
             this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
             this.txtPassword.Validated += new System.EventHandler(this.txtPassword_Validated);
             // 
@@ -295,7 +299,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtUsername.MaxLength = 45;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(350, 23);
-            this.txtUsername.TabIndex = 26;
+            this.txtUsername.TabIndex = 7;
             this.txtUsername.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsername_Validating);
             this.txtUsername.Validated += new System.EventHandler(this.txtUsername_Validated);
             // 
@@ -315,13 +319,51 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.cmbOffice.Location = new System.Drawing.Point(119, 3);
             this.cmbOffice.Name = "cmbOffice";
             this.cmbOffice.Size = new System.Drawing.Size(350, 23);
-            this.cmbOffice.TabIndex = 18;
+            this.cmbOffice.TabIndex = 0;
+            // 
+            // txtPrefix
+            // 
+            this.txtPrefix.Location = new System.Drawing.Point(119, 58);
+            this.txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPrefix.MaxLength = 45;
+            this.txtPrefix.Name = "txtPrefix";
+            this.txtPrefix.Size = new System.Drawing.Size(350, 23);
+            this.txtPrefix.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 88);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 15);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "First Name";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 169);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(37, 15);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Suffix";
+            // 
+            // txtSuffix
+            // 
+            this.txtSuffix.Location = new System.Drawing.Point(119, 166);
+            this.txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSuffix.MaxLength = 45;
+            this.txtSuffix.Name = "txtSuffix";
+            this.txtSuffix.Size = new System.Drawing.Size(350, 23);
+            this.txtSuffix.TabIndex = 6;
             // 
             // ucUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.txtSuffix);
+            this.Controls.Add(this.txtPrefix);
             this.Controls.Add(this.cmbOffice);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmbRoles);
@@ -331,11 +373,13 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.Controls.Add(this.txtLastname);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtMiddleInitial);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFirstname);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucUsers";
-            this.Size = new System.Drawing.Size(504, 271);
+            this.Size = new System.Drawing.Size(504, 325);
             this.Load += new System.EventHandler(this.ucUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
@@ -381,5 +425,9 @@ namespace AccountingSystem.Views.Manage.Users.List
         private System.Windows.Forms.Button btnPasswordVisibility;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.ComboBox cmbOffice;
+        internal System.Windows.Forms.TextBox txtPrefix;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.TextBox txtSuffix;
+        private System.Windows.Forms.Label label8;
     }
 }
