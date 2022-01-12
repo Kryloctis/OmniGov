@@ -375,7 +375,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox txtObno;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn obligation_no;
         private System.Windows.Forms.DataGridViewButtonColumn options;
         internal System.Windows.Forms.DataGridView dgObligationNoList;

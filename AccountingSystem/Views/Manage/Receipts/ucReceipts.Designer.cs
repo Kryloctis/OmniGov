@@ -139,6 +139,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtORFrom.Location = new System.Drawing.Point(139, 47);
             this.txtORFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtORFrom.Name = "txtORFrom";
+            this.txtORFrom.ReadOnly = true;
             this.txtORFrom.Size = new System.Drawing.Size(162, 23);
             this.txtORFrom.TabIndex = 2;
             this.txtORFrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);

@@ -107,6 +107,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 Helper.MessageBoxSuccess("Receipt has been updated.");
                 frmaf.LoadRecords();
+                this.Close();
             }
         }
     }

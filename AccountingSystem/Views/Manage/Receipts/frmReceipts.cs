@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void frmAccForms_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            SetToolStripStatusData();
         }
 
         internal void LoadRecords()
@@ -49,7 +50,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message); 
             }

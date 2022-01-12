@@ -6,12 +6,13 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceiptsAdd : Form
     {
-        private frmReceipts frmaf;
+        private readonly frmReceipts frmReceipts;
         private int UserId = 0;
-        public frmReceiptsAdd(frmReceipts _frmaf)
+
+        public frmReceiptsAdd(frmReceipts _frmReceipts)
         {
             InitializeComponent();
-            frmaf = _frmaf;
+            frmReceipts = _frmReceipts;
             UserId = Helper.UserId;
         }
 
@@ -50,7 +51,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                     if (serialNoFrom > serialNoTo)
                     {
-                        Helper.MessageBoxError("Invalid Receipt.");
+                        Helper.MessageBoxError("Invalid OR Number.");
                         return false;
                     }
                     else
@@ -76,7 +77,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
-                frmaf.LoadRecords();
+                frmReceipts.LoadRecords();
                 ucForms1.ResetForm();
             }
         }

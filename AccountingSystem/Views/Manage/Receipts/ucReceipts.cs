@@ -16,8 +16,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int Id = 0;
         internal int UserId = 0;
         internal int AccId = 0;
-        internal int startreceipt = 0;
-        internal int maxreceipt = 0;
+        internal int fromSerialNo = 0;
+        internal int toSerialNo = 0;
         internal bool isTicket = false;
         public ucReceipts()
         {
@@ -58,7 +58,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                 cmbAccountableForms.ValueMember = "id";
                 cmbAccountableForms.DisplayMember = "formdisplay";
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void cmbforms_Validating(object sender, CancelEventArgs e)
@@ -76,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (!isTicket)
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORFrom, "Receipt Number From!");
-                if (Convert.ToInt32(txtORFrom.Text.Trim()) <= maxreceipt || Convert.ToInt32(txtORFrom.Text.Trim()) <= 0)
+                if (Convert.ToInt32(txtORFrom.Text.Trim()) <= toSerialNo || Convert.ToInt32(txtORFrom.Text.Trim()) <= 0)
                 {
                     errorProvider.SetError(txtORFrom, "Invalid Receipt Number!");
                     e.Cancel = true;
@@ -134,9 +137,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtquantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
 
         private void txtfrom_KeyUp(object sender, KeyEventArgs e)
@@ -157,6 +158,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+
             if (item == null)
                 return;
 
@@ -167,9 +169,12 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtORTo.Enabled = false;
                 txtQuantity.ReadOnly = false;
 
-                txtORFrom.Text = string.Empty;
-                txtORTo.Text = string.Empty;
-                txtQuantity.Text = "0";
+                txtORFrom.Text = "0";
+                txtORTo.Text = "0";
+
+
+                txtQuantity.Text = string.Empty;
+
             }
             else
             {
@@ -178,10 +183,13 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtORTo.Enabled = true;
                 txtQuantity.ReadOnly = true;
 
-                var reporeceipt = Factory.ReceiptsRepository();
-                startreceipt = reporeceipt.RMIN(int.Parse(item[0].ToString()));
-                maxreceipt = reporeceipt.RMAX(int.Parse(item[0].ToString()));
-                txtORFrom.Text = (maxreceipt + 1).ToString();
+                var receiptsRepository = Factory.ReceiptsRepository();
+                var accountableFormId = int.Parse(item[0].ToString());
+
+                fromSerialNo = receiptsRepository.RMIN(accountableFormId);
+                toSerialNo = receiptsRepository.RMAX(accountableFormId);
+
+                txtORFrom.Text = (toSerialNo + 1).ToString();
 
                 int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
                 int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
