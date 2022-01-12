@@ -238,8 +238,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.txtObligationNo.Name = "txtObligationNo";
             this.txtObligationNo.Size = new System.Drawing.Size(466, 23);
             this.txtObligationNo.TabIndex = 0;
-            this.txtObligationNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtObligationNo_Validating);
-            this.txtObligationNo.Validated += new System.EventHandler(this.txtObligationNo_Validated);
             // 
             // label5
             // 
