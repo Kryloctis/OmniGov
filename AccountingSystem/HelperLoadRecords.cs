@@ -15,6 +15,8 @@ namespace AccountingSystem
         public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             Helper.DatagridFullRowSelectStyle(dataGridView, true);
+            dataGridView.Columns.Clear();
+            dataGridView.Rows.Clear();
             dataGridView.ShowCellToolTips = false;
             dataGridView.Columns.Add("id", "ID");
             dataGridView.Columns.Add(new DataGridViewCheckBoxColumn() { HeaderText = "", Name = "is_referenced" });

@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbxOfficeFilter = new System.Windows.Forms.ComboBox();
             this.dgReferences = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -67,29 +68,45 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(3, 211);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(493, 292);
-            this.groupBox1.TabIndex = 16;
+            this.groupBox1.Size = new System.Drawing.Size(493, 332);
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Document References";
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cmbxOfficeFilter);
             this.panel2.Controls.Add(this.dgReferences);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(3, 19);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 270);
+            this.panel2.Size = new System.Drawing.Size(487, 310);
             this.panel2.TabIndex = 0;
+            // 
+            // cmbxOfficeFilter
+            // 
+            this.cmbxOfficeFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxOfficeFilter.FormattingEnabled = true;
+            this.cmbxOfficeFilter.Items.AddRange(new object[] {
+            "All",
+            "Budget",
+            "Accounting",
+            "Treasury"});
+            this.cmbxOfficeFilter.Location = new System.Drawing.Point(279, 3);
+            this.cmbxOfficeFilter.Name = "cmbxOfficeFilter";
+            this.cmbxOfficeFilter.Size = new System.Drawing.Size(190, 23);
+            this.cmbxOfficeFilter.TabIndex = 7;
+            this.cmbxOfficeFilter.SelectionChangeCommitted += new System.EventHandler(this.cmbxOfficeFilter_SelectionChangeCommitted);
             // 
             // dgReferences
             // 
             this.dgReferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReferences.Location = new System.Drawing.Point(5, 3);
+            this.dgReferences.Location = new System.Drawing.Point(5, 32);
             this.dgReferences.Name = "dgReferences";
             this.dgReferences.RowTemplate.Height = 25;
-            this.dgReferences.Size = new System.Drawing.Size(464, 264);
-            this.dgReferences.TabIndex = 1;
+            this.dgReferences.Size = new System.Drawing.Size(464, 275);
+            this.dgReferences.TabIndex = 8;
             this.dgReferences.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgReferences_ColumnAdded);
             this.dgReferences.Validating += new System.ComponentModel.CancelEventHandler(this.dgReferences_Validating);
             this.dgReferences.Validated += new System.EventHandler(this.dgReferences_Validated);
@@ -101,7 +118,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(493, 202);
-            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Signatory Information";
             // 
@@ -188,7 +205,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtMiddleInitial.MaxLength = 1;
             this.txtMiddleInitial.Name = "txtMiddleInitial";
             this.txtMiddleInitial.Size = new System.Drawing.Size(382, 23);
-            this.txtMiddleInitial.TabIndex = 30;
+            this.txtMiddleInitial.TabIndex = 2;
             this.txtMiddleInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMiddleInitial_Validating);
             this.txtMiddleInitial.Validated += new System.EventHandler(this.txtMiddleInitial_Validated);
             // 
@@ -197,7 +214,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtTitle.Location = new System.Drawing.Point(87, 148);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(382, 23);
-            this.txtTitle.TabIndex = 33;
+            this.txtTitle.TabIndex = 5;
             this.txtTitle.Validating += new System.ComponentModel.CancelEventHandler(this.txtTitle_Validating);
             this.txtTitle.Validated += new System.EventHandler(this.txtTitle_Validated);
             // 
@@ -206,14 +223,14 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtSuffix.Location = new System.Drawing.Point(87, 119);
             this.txtSuffix.Name = "txtSuffix";
             this.txtSuffix.Size = new System.Drawing.Size(382, 23);
-            this.txtSuffix.TabIndex = 32;
+            this.txtSuffix.TabIndex = 4;
             // 
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(87, 90);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(382, 23);
-            this.txtLastName.TabIndex = 31;
+            this.txtLastName.TabIndex = 3;
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
             this.txtLastName.Validated += new System.EventHandler(this.txtLastName_Validated);
             // 
@@ -222,7 +239,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtPrefix.Location = new System.Drawing.Point(87, 3);
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(382, 23);
-            this.txtPrefix.TabIndex = 28;
+            this.txtPrefix.TabIndex = 0;
             this.txtPrefix.Validating += new System.ComponentModel.CancelEventHandler(this.txtPrefix_Validating);
             this.txtPrefix.Validated += new System.EventHandler(this.txtPrefix_Validated);
             // 
@@ -231,7 +248,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtFirstName.Location = new System.Drawing.Point(87, 32);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(382, 23);
-            this.txtFirstName.TabIndex = 29;
+            this.txtFirstName.TabIndex = 1;
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
             this.txtFirstName.Validated += new System.EventHandler(this.txtFirstName_Validated);
             // 
@@ -243,7 +260,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucSignatories";
-            this.Size = new System.Drawing.Size(499, 506);
+            this.Size = new System.Drawing.Size(499, 547);
             this.Load += new System.EventHandler(this.ucSignatories_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -275,5 +292,6 @@ namespace AccountingSystem.Views.Manage.Signatories
         internal System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.DataGridView dgReferences;
+        private System.Windows.Forms.ComboBox cmbxOfficeFilter;
     }
 }

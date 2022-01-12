@@ -44,6 +44,31 @@ namespace AccountingSystem.Views.Manage.Signatories
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        private void ValidatePermissions()
+        {
+            string office = Helper.LoggedInUserData()["office"];
+
+            switch (office)
+            {
+                case "Budget":
+                    cmbxOfficeFilter.Text = "Budget";
+                    cmbxOfficeFilter.Enabled = false;
+                    break;
+                case "Accounting":
+                    cmbxOfficeFilter.Text = "Accounting";
+                    cmbxOfficeFilter.Enabled = false;
+                    break;
+                case "Treasury":
+                    cmbxOfficeFilter.Text = "Treasury";
+                    cmbxOfficeFilter.Enabled = false;
+                    break;
+
+                default:
+                    cmbxOfficeFilter.Enabled = true;
+                    break;
+            }
+        }
+
         private void ValidateReferenced()
         {
             try
@@ -73,7 +98,8 @@ namespace AccountingSystem.Views.Manage.Signatories
         internal void LoadReferences()
         {
             HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
-            var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecords();
+            string office = cmbxOfficeFilter.Text.Trim();
+            var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
 
             foreach (DataRow row in dtViewDocumentReferences.Rows)
             {
@@ -177,6 +203,12 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void ucSignatories_Load(object sender, System.EventArgs e)
         {
+            if (!DesignMode)
+            {
+                cmbxOfficeFilter.SelectedIndex = 0;
+                ValidatePermissions();
+                LoadReferences();
+            }
         }
 
         private void dgReferences_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -192,6 +224,11 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void dgReferences_Validated(object sender, EventArgs e)
         {
             dgReferences.Tag = string.Empty;
+        }
+
+        private void cmbxOfficeFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadReferences();
         }
     }
 }
