@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 8, 9 };
+            byte[] columnIndexTimestamp = { 10, 11 };
             Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
         }
