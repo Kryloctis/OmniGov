@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -14,15 +7,15 @@ namespace AccountingSystem.Views.Manage.Users.List
 {
     public partial class frmUsersAdd : Form
     {
-        
+
         private frmUsers _frmUsers;
-       
+
         public frmUsersAdd(frmUsers frmUsers)
         {
             InitializeComponent();
             _frmUsers = frmUsers;
         }
-       
+
 
         private bool SaveData()
         {
@@ -41,9 +34,11 @@ namespace AccountingSystem.Views.Manage.Users.List
                 {
 
                     RoleId = ((byte)uc.cmbRoles.SelectedValue),
+                    Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstname.Text.Trim(),
                     MidInitial = uc.txtMiddleInitial.Text.Trim(),
                     LastName = uc.txtLastname.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
                     UserName = uc.txtUsername.Text.Trim(),
                     Password = uc.txtPassword.Text.Trim(),
 
@@ -63,7 +58,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void frmUsersAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-           
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)

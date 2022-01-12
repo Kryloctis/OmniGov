@@ -78,13 +78,14 @@ namespace AccountingSystem.Views.Manage.Users.List
         internal void ResetForm()
         {
             cmbRoles.SelectedIndex = -1;
+            txtPrefix.Clear();
             txtFirstname.Clear();
             txtLastname.Clear();
+            txtSuffix.Clear();
             txtMiddleInitial.Clear();
             txtUsername.Clear();
             txtPassword.Clear();
-
-
+            txtConfirmPassword.Clear();
         }
 
         private void txtUsername_Validating(object sender, CancelEventArgs e)
