@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -117,10 +117,10 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT {tableName4}.role_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.roles_id={tableName4}.id WHERE {tableName}.id='{id}'";
-                DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
-                if(dt.Rows.Count > 0)
+                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+                if (dt.Rows.Count > 0)
                 {
-                    for(int i=0;i < dt.Rows.Count; i++)
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         data = dt.Rows[i]["role_name"].ToString();
                     }
@@ -182,22 +182,22 @@ namespace ACC.Data
             try
             {
 
-            string query = $"SELECT " +
-                        $"id, " +
-                        $"roles_id, " +
-                        $"first_name, " +
-                        $"mid_initial, " +
-                        $"last_name, " +
-                        $"username, " +
-                        $"password, " +
-                        $"is_deleted, " +
-                        $"created_at, " +
-                        $"updated_at, " +
-                        $"office, " +
-                        $"role_name, " +
-                        $"permission_name, " +
-                        $"permission_office " +
-                        $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+                string query = $"SELECT " +
+                            $"id, " +
+                            $"roles_id, " +
+                            $"first_name, " +
+                            $"mid_initial, " +
+                            $"last_name, " +
+                            $"username, " +
+                            $"password, " +
+                            $"is_deleted, " +
+                            $"created_at, " +
+                            $"updated_at, " +
+                            $"office, " +
+                            $"role_name, " +
+                            $"permission_name, " +
+                            $"permission_office " +
+                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
 
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
@@ -232,7 +232,7 @@ namespace ACC.Data
                 };
 
                 var srchtxt = searchText;
-               
+
                 string query = $"SELECT a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at FROM {tableName} a INNER JOIN roles b on a.roles_id  = b.id WHERE (a.last_name LIKE @search_text OR a.first_name LIKE @search_text OR a.mid_initial LIKE @search_text OR b.role_name LIKE @search_text) AND b.role_name <> 'System Administrator'";
 
                 var dtUsers = new DataTable();
@@ -524,34 +524,27 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"roles_id, " +
-                    $"first_name, " +
-                    $"mid_initial, " +
-                    $"last_name, " +
-                    $"username, " +
-                    $"password, " +
-                    $"is_deleted, " +
-                    $"created_at, " +
-                    $"updated_at, " +
-                    $"office, " +
-                    $"role_name, " +
-                    $"permission_name, " +
-                    $"permission_office " +
-                    $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
+            string query = $"SELECT " +
+                $"id, " +
+                $"roles_id, " +
+                $"first_name, " +
+                $"mid_initial, " +
+                $"last_name, " +
+                $"username, " +
+                $"password, " +
+                $"is_deleted, " +
+                $"created_at, " +
+                $"updated_at, " +
+                $"office, " +
+                $"role_name, " +
+                $"permission_name, " +
+                $"permission_office " +
+                $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
 
 
-                var dataTable = new DataTable();
+            var dataTable = new DataTable();
 
-                return _dbGenericCommands.Fill(query, dataTable);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetViewRecordsBySearch(string searchTxt)
@@ -584,7 +577,7 @@ namespace ACC.Data
 
                 var dataTable = new DataTable();
 
-                return _dbGenericCommands.FillBySearch(query, dataTable,parameters);
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
             }
             catch (Exception)
             {
@@ -594,8 +587,79 @@ namespace ACC.Data
 
         public string GetCollectorNameByUserId(int userId)
         {
-           string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
-           return _dbGenericCommands.ExecuteScalar(query);
+            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
+            return _dbGenericCommands.ExecuteScalar(query);
+        }
+
+        public DataTable GetViewRecordsByOffice(string office)
+        {
+            var parameters = new dynamic[][]
+            {
+                new dynamic[] { "@office", DbType.String, office}
+            };
+
+            string Filter()
+            {
+                if (office == "SysAdmin")
+                    return string.Empty;
+                else
+                    return "AND office = @office";
+            }
+
+
+            string query = $"SELECT " +
+                 $"id, " +
+                 $"roles_id, " +
+                 $"first_name, " +
+                 $"mid_initial, " +
+                 $"last_name, " +
+                 $"username, " +
+                 $"password, " +
+                 $"is_deleted, " +
+                 $"created_at, " +
+                 $"updated_at, " +
+                 $"office, " +
+                 $"role_name, " +
+                 $"permission_name, " +
+                 $"permission_office " +
+                 $"FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} GROUP BY id";
+
+
+            var dataTable = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public Dictionary<string, dynamic> GetViewRecordById(int Id)
+        {
+            var record = new Dictionary<string, dynamic>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("roles_id", reader.Rows[0]["roles_id"]);
+                record.Add("first_name", reader.Rows[0]["first_name"]);
+                record.Add("mid_initial", reader.Rows[0]["mid_initial"]);
+                record.Add("last_name", reader.Rows[0]["last_name"]);
+                record.Add("username", reader.Rows[0]["username"]);
+                record.Add("password", reader.Rows[0]["password"]);
+                record.Add("created_at", reader.Rows[0]["created_at"]);
+                record.Add("updated_at", reader.Rows[0]["updated_at"]);
+                record.Add("office", reader.Rows[0]["office"]);
+                record.Add("role_name", reader.Rows[0]["role_name"]);
+                record.Add("permission_name", reader.Rows[0]["role_name"]);
+                record.Add("permission_office", reader.Rows[0]["permission_office"]);
+            }
+            return record;
         }
     }
 }
