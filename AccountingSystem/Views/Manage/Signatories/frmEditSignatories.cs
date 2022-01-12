@@ -88,6 +88,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         {
             uc.isEdit = true;
             LoadSelectedRecord();
+            uc.LoadReferences();
         }
     }
 }

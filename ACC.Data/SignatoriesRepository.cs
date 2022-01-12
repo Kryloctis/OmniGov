@@ -107,18 +107,11 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT id, CONCAT(prefix,'. ',first_name, ' ', middle_initial, '. ', last_name, ' ',suffix) AS name, title, created_at, updated_at FROM {tableName}";
+            string query = $"SELECT id, prefix, first_name, middle_initial, last_name, suffix, title, created_at, updated_at FROM {tableName}";
 
-                var dataTable = new DataTable();
+            var dataTable = new DataTable();
 
-                return mySqlGenericCommands.Fill(query, dataTable);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

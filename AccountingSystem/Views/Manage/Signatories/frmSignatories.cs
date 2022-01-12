@@ -14,13 +14,53 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.LoadFormIcon(this);
         }
 
-        internal void LoadSignatories()
+        private DataTable SignatoriesDatatable()
         {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("name");
+            dataTable.Columns.Add("title");
+            dataTable.Columns.Add("created_at");
+            dataTable.Columns.Add("updated_at");
+
             try
             {
                 var dtSignatories = Factory.SignatoriesRepository().GetRecords();
 
-                HelperLoadRecords.SignatoriesDatagridView(dtSignatories, dgSignatories);
+                foreach (DataRow row in dtSignatories.Rows)
+                {
+                    int signatoryId = Convert.ToInt32(row["id"]);
+                    string prefix = row["prefix"].ToString();
+                    string firstName = row["first_name"].ToString();
+                    char middleInitial = Convert.ToChar(row["middle_initial"]);
+                    string lastName = row["last_name"].ToString();
+                    string suffix = row["suffix"].ToString();
+                    string title = row["title"].ToString();
+                    string createdAt = row["created_at"].ToString();
+                    string updatedAt = row["updated_at"].ToString();
+                    string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName} {(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                    var item = new dynamic[] { signatoryId, signatoryName, title, createdAt, updatedAt };
+
+                    dataTable.Rows.Add(item);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+
+            return dataTable;
+        }
+
+        internal void LoadSignatories()
+        {
+            try
+            {
+
+
+                HelperLoadRecords.SignatoriesDatagridView(SignatoriesDatatable(), dgSignatories);
                 lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
                 Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
             }
