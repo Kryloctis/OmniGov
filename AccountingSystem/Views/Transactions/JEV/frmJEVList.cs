@@ -156,7 +156,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     var createdByName = $"{dictUserCreatedBy["first_name"]} {dictUserCreatedBy["mid_initial"]} {dictUserCreatedBy["last_name"]}";
                     string updatedAt = row["updated_at"].ToString();
                     string updatedById = row["updated_by"].ToString();
-                    //var dictUserUpdatedBy = Factory.UsersRepository().GetUserByID(Convert.ToByte(updatedById));
                     string updatedByName = string.Empty;
 
                     string status = GetJevStatus(isApproved, isDisapproved, isCancelled);

@@ -19,7 +19,6 @@ using AccountingSystem.Views.Reports.Cashbook;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
-using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
@@ -33,7 +32,7 @@ namespace AccountingSystem
 {
     public partial class MainForm : Form
     {
-        private Dictionary<string, string> userDict;
+        private Dictionary<string, dynamic> userDict;
         private LoginForm loginForm;
 
         public MainForm(LoginForm _loginForm)
@@ -60,7 +59,10 @@ namespace AccountingSystem
 
         private void LoadLoggedInUser()
         {
-            lblUserFullName.Text = $"Welcome: {userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            string prefix = userDict["prefix"];
+            string suffix = userDict["suffix"];
+
+            lblUserFullName.Text = $"Welcome: {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {userDict["first_name"]} {userDict["mid_initial"]}. {userDict["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
             lblUserRole.Text = userDict["role_name"];
         }
 

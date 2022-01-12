@@ -137,18 +137,18 @@ namespace AccountingSystem
             }
         }
 
-        internal static Dictionary<string, string> LoggedInUserData()
+        internal static Dictionary<string, dynamic> LoggedInUserData()
         {
             try
             {
-                return Factory.UsersRepository().GetRecordByID(UserId);
+                return Factory.UsersRepository().GetViewRecordById(UserId);
             }
             catch (Exception ex)
             {
                 MessageBoxError(ex.Message);
             }
 
-            return new Dictionary<string, string>();
+            return new Dictionary<string, dynamic>();
         }
 
 
@@ -254,7 +254,7 @@ namespace AccountingSystem
             return false;
         }
 
-        public static bool ShowErrorDateTimePickerRange(ErrorProvider ep, DateTime firstDate, DateTime secondDate, DateTimePicker dtp ,string fieldName = "Field") 
+        public static bool ShowErrorDateTimePickerRange(ErrorProvider ep, DateTime firstDate, DateTime secondDate, DateTimePicker dtp, string fieldName = "Field")
         {
             //bool isValidDate = Convert.ToBoolean(DateTime.Compare(firstDate, secondDate));
             bool isValidDate = firstDate <= secondDate;

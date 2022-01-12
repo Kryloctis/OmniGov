@@ -1298,20 +1298,24 @@ namespace AccountingSystem
 
             //a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Firstname";
-            datagrid.Columns[3].HeaderText = "MI";
-            datagrid.Columns[4].HeaderText = "Lastname";
-            datagrid.Columns[5].HeaderText = "Username";
-            datagrid.Columns[6].Visible = false;
-            datagrid.Columns[7].Visible = false;
-            datagrid.Columns[8].Visible = false;
-            datagrid.Columns[9].Visible = false;
-            datagrid.Columns[10].HeaderText = "Office";
-            datagrid.Columns[11].HeaderText = "Role";
-            datagrid.Columns[12].Visible = false;
-            datagrid.Columns[13].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["roles_id"].Visible = false;
+            datagrid.Columns["prefix"].HeaderText = "Prefix";
+            datagrid.Columns["prefix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["first_name"].HeaderText = "Firstname";
+            datagrid.Columns["mid_initial"].HeaderText = "MI";
+            datagrid.Columns["last_name"].HeaderText = "Lastname";
+            datagrid.Columns["suffix"].HeaderText = "Suffix";
+            datagrid.Columns["suffix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["username"].HeaderText = "Username";
+            datagrid.Columns["password"].Visible = false;
+            datagrid.Columns["is_deleted"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["office"].HeaderText = "Office";
+            datagrid.Columns["role_name"].HeaderText = "Role";
+            datagrid.Columns["permission_name"].Visible = false;
+            datagrid.Columns["permission_office"].Visible = false;
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

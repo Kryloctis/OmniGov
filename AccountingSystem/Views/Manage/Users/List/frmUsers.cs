@@ -18,7 +18,8 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 var usersRepository = Factory.UsersRepository();
-                var dtUsers = usersRepository.GetViewRecords();
+                string userOffice = Helper.LoggedInUserData()["office"];
+                var dtUsers = usersRepository.GetViewRecordsByOffice(userOffice);
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = usersRepository.CountRecords().ToString();
@@ -56,7 +57,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 8, 9 };
+            byte[] columnIndexTimestamp = { 10, 11 };
             Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
         }
