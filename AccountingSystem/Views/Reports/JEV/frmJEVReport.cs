@@ -136,7 +136,11 @@ namespace AccountingSystem.Views.Reports.JEV
                     ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
 
                     var preparedByData = Helper.LoggedInUserData();
-                    var preparedByFullName = $"{preparedByData["first_name"]} {preparedByData["mid_initial"]} {preparedByData["last_name"]}";
+                    string prefix = preparedByData["prefix"];
+                    string suffix = preparedByData["suffix"];
+
+                    var preparedByFullName = $"{(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {preparedByData["first_name"]} {preparedByData["mid_initial"]}. {preparedByData["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+
                     var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
 
