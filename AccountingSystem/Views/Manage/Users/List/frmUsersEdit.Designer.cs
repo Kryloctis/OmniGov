@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 278);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 332);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.ucUsers1.Location = new System.Drawing.Point(0, 7);
             this.ucUsers1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucUsers1.Name = "ucUsers1";
-            this.ucUsers1.Size = new System.Drawing.Size(504, 271);
+            this.ucUsers1.Size = new System.Drawing.Size(504, 325);
             this.ucUsers1.TabIndex = 5;
             // 
             // frmUsersEdit
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(505, 305);
+            this.ClientSize = new System.Drawing.Size(505, 359);
             this.Controls.Add(this.ucUsers1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
