@@ -98,7 +98,7 @@
     <None Update="Reports\consolidated-receipts.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Reports\dailycashposition.rdlc">
+    <None Update="Reports\daily-cash-position-report.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Reports\general-journal.rdlc">

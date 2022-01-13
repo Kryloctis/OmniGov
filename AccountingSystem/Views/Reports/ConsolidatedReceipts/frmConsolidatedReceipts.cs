@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
@@ -25,10 +20,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
         }
 
         private void frmConsolidatedReceipts_Load(object sender, EventArgs e)
@@ -65,12 +56,47 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 var lguDetails = Helper.LGUDetails();
                 var date = String.Format("{0:yyyy-MM-dd}", dtto.Value);
+
+                string certifiedCorrectSignatory = string.Empty;
+                string certifiedCorrectSignatoryTitle = string.Empty;
+                string treasurer = string.Empty;
+                string treasurerTitle = string.Empty;
+
+                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
+
+                var dictTreasurer = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
+
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+                ParseSignatory(dictTreasurer, ref treasurer, ref treasurerTitle);
+
                 var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                            new ReportParameter("paramTreasurer", "ENSIGN S. UBA"),
-                            new ReportParameter("paramLRCO", "FE F. HAMOY")
+                            new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                            new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                            new ReportParameter("paramTreasurer", treasurer),
+                            new ReportParameter("paramPreparedBySignatory", "Please put current user who's generating this report."),
+                            new ReportParameter("paramPreparedBySignatoryTitle", "Please put current user who's generating this report.")
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";
                 report.DataSources.Clear();
@@ -78,10 +104,17 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 report.SetParameters(parameters);
                 report.Refresh();
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
         }
