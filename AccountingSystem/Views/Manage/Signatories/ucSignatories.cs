@@ -124,16 +124,6 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         #region Validation
 
-        private void txtPrefix_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPrefix, "Prefix");
-        }
-
-        private void txtPrefix_Validated(object sender, System.EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtPrefix);
-        }
-
         private void txtFirstName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "First Name");

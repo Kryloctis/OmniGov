@@ -240,8 +240,6 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.txtPrefix.Name = "txtPrefix";
             this.txtPrefix.Size = new System.Drawing.Size(382, 23);
             this.txtPrefix.TabIndex = 0;
-            this.txtPrefix.Validating += new System.ComponentModel.CancelEventHandler(this.txtPrefix_Validating);
-            this.txtPrefix.Validated += new System.EventHandler(this.txtPrefix_Validated);
             // 
             // txtFirstName
             // 
