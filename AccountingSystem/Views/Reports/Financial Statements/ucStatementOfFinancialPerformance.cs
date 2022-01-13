@@ -73,7 +73,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 {
                     if (dictSignatory.Count > 0)
                     {
-                        signatory = dictSignatory["signatories_full_name"];
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
                         signatoryTitle = dictSignatory["signatories_title"];
                     }
                 }

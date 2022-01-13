@@ -1,18 +1,16 @@
 ﻿using Microsoft.Reporting.WinForms;
-using SpreadsheetLight;
 using System;
-using System.Data;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.GeneralCollection
 {
-    public partial class frmAbstractOfGeneralCollection : Form
+    public partial class frmReportOfGeneralCollection : Form
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
 
-        public frmAbstractOfGeneralCollection()
+        public frmReportOfGeneralCollection()
         {
             InitializeComponent();
             reportViewer.Dock = DockStyle.Fill;
@@ -22,7 +20,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
 
         private DataTable DataTableGC(string from, string to)
         {
-            
+
             var dtPC = new dsLFS.dtPCDataTable();
             var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from, to);
             DateTime date = DateTime.Now;
@@ -50,19 +48,46 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             return dtPC;
         }
 
-
         private void LoadReport(LocalReport report)
         {
             try
             {
+
+                Cursor = Cursors.WaitCursor;
+
                 string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
                 string to = String.Format("{0:yyyy-MM-dd}", dtto.Value);
 
                 var lguDetails = Helper.LGUDetails();
-                var signatory = "ENSIGN S. UBA";
-                var parameters = new[] {
+                var certifiedCorrectSignatory = string.Empty;
+                var certifiedCorrectSignatoryTitle = string.Empty;
+
+                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Report of General Collections ");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+
+                var parameters = new[]
+                    {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                            new ReportParameter("paramSignatory", signatory)
+                            new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                            new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
                 report.DataSources.Clear();
@@ -70,7 +95,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                 report.SetParameters(parameters);
                 report.Refresh();
 
-
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -86,7 +111,5 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
         }
-
-   
     }
 }

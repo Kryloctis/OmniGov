@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Reports.RCI
+namespace AccountingSystem.Views.Reports.GeneralCollection
 {
-    partial class frmRCIReport
+    partial class frmReportOfGeneralCollection
     {
         /// <summary>
         /// Required designer variable.
@@ -29,110 +29,100 @@ namespace AccountingSystem.Views.Reports.RCI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbBanks = new System.Windows.Forms.ComboBox();
+            this.dtto = new System.Windows.Forms.DateTimePicker();
             this.dtpMonth = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRetrieve = new System.Windows.Forms.Button();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 38);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Location = new System.Drawing.Point(12, 44);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(991, 524);
-            this.panel1.TabIndex = 12;
+            this.panel1.Size = new System.Drawing.Size(1039, 506);
+            this.panel1.TabIndex = 19;
             // 
             // panel2
             // 
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.cmbBanks);
+            this.panel2.Controls.Add(this.dtto);
             this.panel2.Controls.Add(this.dtpMonth);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.btnRetrieve);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(991, 38);
-            this.panel2.TabIndex = 13;
+            this.panel2.Size = new System.Drawing.Size(1063, 38);
+            this.panel2.TabIndex = 20;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Location = new System.Drawing.Point(318, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 15);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Bank Account:";
+            this.label2.Size = new System.Drawing.Size(22, 15);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "To:";
             // 
-            // cmbBanks
+            // dtto
             // 
-            this.cmbBanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBanks.FormattingEnabled = true;
-            this.cmbBanks.Location = new System.Drawing.Point(110, 12);
-            this.cmbBanks.Name = "cmbBanks";
-            this.cmbBanks.Size = new System.Drawing.Size(183, 23);
-            this.cmbBanks.TabIndex = 21;
-            this.cmbBanks.Validating += new System.ComponentModel.CancelEventHandler(this.cmbBanks_Validating);
-            this.cmbBanks.Validated += new System.EventHandler(this.cmbBanks_Validated);
+            this.dtto.Location = new System.Drawing.Point(351, 10);
+            this.dtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtto.Name = "dtto";
+            this.dtto.Size = new System.Drawing.Size(258, 23);
+            this.dtto.TabIndex = 26;
             // 
             // dtpMonth
             // 
-            this.dtpMonth.CustomFormat = "MMMM-yyyy";
-            this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonth.Location = new System.Drawing.Point(373, 12);
+            this.dtpMonth.CustomFormat = "";
+            this.dtpMonth.Location = new System.Drawing.Point(52, 12);
             this.dtpMonth.Name = "dtpMonth";
-            this.dtpMonth.Size = new System.Drawing.Size(154, 23);
-            this.dtpMonth.TabIndex = 20;
+            this.dtpMonth.Size = new System.Drawing.Size(258, 23);
+            this.dtpMonth.TabIndex = 25;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(324, 16);
+            this.label1.Location = new System.Drawing.Point(3, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 15);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Month";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "From:";
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(533, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(615, 10);
             this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(86, 23);
-            this.btnRetrieve.TabIndex = 18;
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 23;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // frmRCIReport
+            // frmAbstractOfGeneralCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 562);
+            this.ClientSize = new System.Drawing.Size(1063, 562);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmRCIReport";
+            this.MinimizeBox = false;
+            this.Name = "frmAbstractOfGeneralCollection";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report > Report of Checks Issued";
+            this.Text = "Reports > Report of General Collection";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmRCIReport_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,10 +132,9 @@ namespace AccountingSystem.Views.Reports.RCI
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbBanks;
+        private System.Windows.Forms.DateTimePicker dtto;
         private System.Windows.Forms.DateTimePicker dtpMonth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRetrieve;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

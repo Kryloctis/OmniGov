@@ -1,12 +1,8 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Domain.Interfaces;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCI
@@ -28,6 +24,15 @@ namespace AccountingSystem.Views.Reports.RCI
             LoadBanks();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[1];
+            errorArray[0] = errorProvider1.GetError(cmbBanks);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private void LoadBanks()
         {
             cmbBanks.DataSource = Factory.BanksRepository().GetRecords();
@@ -43,11 +48,11 @@ namespace AccountingSystem.Views.Reports.RCI
 
             var dtRCI = new dsLFS.dtRCIDataTable();
             var dt = Factory.RCIRepository().GetRecordsByAccountId(bankId, dateYearMonth);
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
-                foreach(DataRow item in dt.Rows)
+                foreach (DataRow item in dt.Rows)
                 {
-                    
+
                     DataRow row = dtRCI.NewRow();
                     row["account_no"] = item["account_no"];
                     row["bank_name"] = item["bank_name"];
@@ -69,20 +74,57 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void LoadReport(LocalReport report)
         {
-           
             try
             {
+                Cursor = Cursors.WaitCursor;
+
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
+
+                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Department Head", "Report of Check Issued");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                string departmentHeadSignatory = string.Empty;
+                string departmentHeadSignatoryTitle = string.Empty;
+                ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
+
+
+                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Administrative Officer", "Report of Check Issued");
+                string administrativeOfficerSignatory = string.Empty;
+                string administrativeOfficerSignatoryTitle = string.Empty;
+                ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
+
                 var lguDetails = Helper.LGUDetails();
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
                 var bankrepo = Factory.BanksRepository();
                 var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
-                var bankDetails = String.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
+                string bankDetails = string.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                    new ReportParameter("paramSignatory", signatory)
+                    new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
+                    new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
+                    new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
+                    new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
                 };
 
                 report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
@@ -90,7 +132,12 @@ namespace AccountingSystem.Views.Reports.RCI
 
                 report.DataSources.Add(new ReportDataSource("dtRCI", DataTableRCI()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
 
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -100,14 +147,17 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (cmbBanks.SelectedIndex == -1)
-                Helper.MessageBoxError("Please select Bank!");
-              
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+        }
+
+        private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBanks, "Bank Account");
+        }
+
+        private void cmbBanks_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbBanks);
         }
     }
 }

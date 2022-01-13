@@ -211,14 +211,18 @@ namespace ACC.Data
                     new object[] { "@documents_name", DbType.String, documentName }
                 };
 
-                string query = $"SELECT signatories_full_name, signatories_title FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
+                string query = $"SELECT signatories_prefix, signatories_first_name, signatories_middle_initial, signatories_last_name, signatories_suffix, signatories_title FROM {viewTableName} WHERE document_references_name = @document_references_name AND documents_name = @documents_name";
 
                 using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("signatories_full_name", reader.Rows[0]["signatories_full_name"].ToString());
+                    record.Add("signatories_prefix", reader.Rows[0]["signatories_prefix"].ToString());
+                    record.Add("signatories_first_name", reader.Rows[0]["signatories_first_name"].ToString());
+                    record.Add("signatories_middle_initial", reader.Rows[0]["signatories_middle_initial"].ToString());
+                    record.Add("signatories_last_name", reader.Rows[0]["signatories_last_name"].ToString());
+                    record.Add("signatories_suffix", reader.Rows[0]["signatories_suffix"].ToString());
                     record.Add("signatories_title", reader.Rows[0]["signatories_title"].ToString());
                 }
 

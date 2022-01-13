@@ -2088,7 +2088,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Acting Municipal Treasurer</Value>
+                      <Value>=Parameters!paramDepartmentHeadSignatoryTitle.Value</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -2170,7 +2170,8 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>ENSIGN S. UBA</Value>
+                      <Label>DepartmentHeadSignatory</Label>
+                      <Value>=UCase(Parameters!paramDepartmentHeadSignatory.Value)</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2254,7 +2255,8 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>ZOSIMO P. MONTEROLA</Value>
+                      <Label>AdministrativeOfficerSignatory</Label>
+                      <Value>=UCase(Parameters!paramAdministrativeOfficerSignatory.Value)</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -2267,7 +2269,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox113</rd:DefaultName>
-              <Top>0.2375in</Top>
+              <Top>0.22361in</Top>
               <Left>5.92773in</Left>
               <Height>0.71668in</Height>
               <Width>6.59449in</Width>
@@ -2296,7 +2298,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Administrative Officer II</Value>
+                      <Value>=Parameters!paramAdministrativeOfficerSignatoryTitle.Value</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>
@@ -2742,15 +2744,35 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramSignatory">
+    <ReportParameter Name="paramDepartmentHeadSignatory">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramAdministrativeOfficerSignatory">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDepartmentHeadSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramAdministrativeOfficerSignatoryTitle">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
+      <NumberOfRows>3</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2770,7 +2792,22 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramSignatory</ParameterName>
+          <ParameterName>paramDepartmentHeadSignatory</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramAdministrativeOfficerSignatory</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramDepartmentHeadSignatoryTitle</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramAdministrativeOfficerSignatoryTitle</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
