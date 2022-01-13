@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         private void frmAddSignatories_Load(object sender, EventArgs e)
         {
             uc.isEdit = false;
+            uc.LoadReferences();
         }
     }
 }

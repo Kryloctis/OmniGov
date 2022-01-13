@@ -191,14 +191,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(180, 22);
+            this.menuLogout.Size = new System.Drawing.Size(157, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -355,56 +355,56 @@ namespace AccountingSystem
             // menuSAAOB
             // 
             this.menuSAAOB.Name = "menuSAAOB";
-            this.menuSAAOB.Size = new System.Drawing.Size(233, 22);
+            this.menuSAAOB.Size = new System.Drawing.Size(228, 22);
             this.menuSAAOB.Text = "SAAOB";
             this.menuSAAOB.Click += new System.EventHandler(this.MenuSAAOB_Click);
             // 
             // menuSAAOBB
             // 
             this.menuSAAOBB.Name = "menuSAAOBB";
-            this.menuSAAOBB.Size = new System.Drawing.Size(233, 22);
+            this.menuSAAOBB.Size = new System.Drawing.Size(228, 22);
             this.menuSAAOBB.Text = "SAAOBB";
             this.menuSAAOBB.Click += new System.EventHandler(this.MenuSAAOBB_Click);
             // 
             // menuprintRCI
             // 
             this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(233, 22);
+            this.menuprintRCI.Size = new System.Drawing.Size(228, 22);
             this.menuprintRCI.Text = "RCI";
             this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
             // 
             // menuprintPC
             // 
             this.menuprintPC.Name = "menuprintPC";
-            this.menuprintPC.Size = new System.Drawing.Size(233, 22);
+            this.menuprintPC.Size = new System.Drawing.Size(228, 22);
             this.menuprintPC.Text = "RCD";
             this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
             // 
             // menuprintGC
             // 
             this.menuprintGC.Name = "menuprintGC";
-            this.menuprintGC.Size = new System.Drawing.Size(233, 22);
-            this.menuprintGC.Text = "Reports of General Collections";
+            this.menuprintGC.Size = new System.Drawing.Size(223, 22);
+            this.menuprintGC.Text = "Report of General Collection";
             this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
             // 
             // menuBankCashBook
             // 
             this.menuBankCashBook.Name = "menuBankCashBook";
-            this.menuBankCashBook.Size = new System.Drawing.Size(233, 22);
+            this.menuBankCashBook.Size = new System.Drawing.Size(228, 22);
             this.menuBankCashBook.Text = "Bank Cashbook";
             this.menuBankCashBook.Click += new System.EventHandler(this.menucashbook_Click);
             // 
             // menuReceiptsConsolidated
             // 
             this.menuReceiptsConsolidated.Name = "menuReceiptsConsolidated";
-            this.menuReceiptsConsolidated.Size = new System.Drawing.Size(233, 22);
+            this.menuReceiptsConsolidated.Size = new System.Drawing.Size(228, 22);
             this.menuReceiptsConsolidated.Text = "Consolidated Receipts";
             this.menuReceiptsConsolidated.Click += new System.EventHandler(this.menuReceiptsConsolidated_Click);
             // 
             // menuDailyCash
             // 
             this.menuDailyCash.Name = "menuDailyCash";
-            this.menuDailyCash.Size = new System.Drawing.Size(233, 22);
+            this.menuDailyCash.Size = new System.Drawing.Size(228, 22);
             this.menuDailyCash.Text = "Daily Cash Position Report";
             this.menuDailyCash.Click += new System.EventHandler(this.menuDailyCash_Click);
             // 

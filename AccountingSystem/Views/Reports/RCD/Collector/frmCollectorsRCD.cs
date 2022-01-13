@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.PaymentCollection
@@ -39,8 +34,31 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
-                string treasurer = "FE F. HAMOY";
+                string verificationSignatory = string.Empty;
+                string verificationSignatoryTitle = string.Empty;
+
+                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                ParseSignatory(dictVerification, ref verificationSignatory, ref verificationSignatoryTitle);
+
                 var totalCashAmount = 5000;
                 var totalChecksAmount = 0;
                 var totamAmount = 5000;
@@ -50,7 +68,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
                     new ReportParameter("paramAccountableOfficer", value:accountableOfficer),
-                    new ReportParameter("paramTreasurer", value:treasurer),
+                    new ReportParameter("paramVerificationSignatory", verificationSignatory),
                     new ReportParameter("paramSummaryDate", DateTime.Now.ToString()),
                     new ReportParameter("paramDate", DateTime.Now.ToString()),
                     new ReportParameter("paramTotalCash", value:totalCashAmount.ToString()),
@@ -68,6 +86,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
                 report.SetParameters(parameters);
                 report.Refresh();
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -101,6 +121,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             return dtFromDataSource;
         }
+
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
@@ -117,9 +138,10 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     dtFromDataSource.Rows.Add(row);
                 }
             }
-                
+
             return dtFromDataSource;
         }
+
         private DataTable CollectorsReports()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
@@ -166,7 +188,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             DataTable dtFromDataSource = new dsLFS.dtRCDDetailsDataTable();
             DataTable dt = Factory.CollectorReportRepository().GetRecordsByReportNumber(_reportNumber);
 
-            if (dt.Rows.Count != 0) 
+            if (dt.Rows.Count != 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
@@ -178,7 +200,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     dtFromDataSource.Rows.Add(row);
                 }
             }
-            
+
             return dtFromDataSource;
         }
 
