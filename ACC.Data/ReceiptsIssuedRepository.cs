@@ -313,19 +313,26 @@ namespace ACC.Data
             return false;
         }
 
-        public bool HasIssued(int id)
+        public bool HasIssued(int accountableFormId, int collectorId)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@receipts_id", DbType.Int32, id },
+                    new object[] { "@accountable_form_id", DbType.Int32, accountableFormId },
+                    new object[] { "@collecting_officer_id", DbType.Int32, collectorId },
                 };
 
-                string query = $"SELECT * FROM {tableReceiptsIssued} WHERE receipts_id=@receipts_id";
+                string query = $"SELECT * " +
+                               $"FROM {viewTableName} " +
+                               $"WHERE " +
+                               $"accountable_form_id = @accountable_form_id " +
+                               $"AND " +
+                               $"collecting_officer_id = @collecting_officer_id " +
+                               $"AND is_returned IS NULL"; 
+
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)
