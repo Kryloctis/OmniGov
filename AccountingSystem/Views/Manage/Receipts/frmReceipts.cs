@@ -30,9 +30,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var dtreceipts = rcRepository.GetRecords();
 
                 HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
-
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

@@ -8,12 +8,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     {
         private readonly frmReceiptsIssued _frmReceiptIssued;
         private readonly int _receiptId = 0;
+        private readonly ucReceiptsIssued uc;
+
         public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued, int receiptId)
         {
             InitializeComponent();
 
             _frmReceiptIssued = frmReceiptsIssued;
             _receiptId = receiptId;
+
+            uc = ucReceipts1;
         }
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
@@ -99,13 +103,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt Issued has been saved.");
-                _frmReceiptIssued.LoadRecords();
-                ucReceipts1.ResetForm();
+                uc.ResetForm();
+
                 if (_receiptId > 0)
                 {
                     this.Close();
                 }
             }
+        }
+
+        private void frmReceiptsIssuedAdd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _frmReceiptIssued.LoadRecords();
         }
     }
 }

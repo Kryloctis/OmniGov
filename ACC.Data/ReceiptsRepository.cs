@@ -114,7 +114,7 @@ namespace ACC.Data
                     $"quantity, " +
                     $"user officer " +
                     $"FROM {viewTableName} " +
-                    $"ORDER BY received_date DESC";
+                    $"ORDER BY accountable_forms_id DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
