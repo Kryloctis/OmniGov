@@ -2742,15 +2742,23 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramSignatory">
+    <ReportParameter Name="paramMunicipalTreasurerSignatory">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramAdministrativeOfficerSignatory">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
+      <NumberOfRows>3</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -2770,7 +2778,12 @@
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramSignatory</ParameterName>
+          <ParameterName>paramMunicipalTreasurerSignatory</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramAdministrativeOfficerSignatory</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

@@ -1,12 +1,7 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ACC.Domain.Interfaces;
+using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCI
@@ -28,6 +23,15 @@ namespace AccountingSystem.Views.Reports.RCI
             LoadBanks();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[1];
+            errorArray[0] = errorProvider1.GetError(cmbBanks);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private void LoadBanks()
         {
             cmbBanks.DataSource = Factory.BanksRepository().GetRecords();
@@ -43,11 +47,11 @@ namespace AccountingSystem.Views.Reports.RCI
 
             var dtRCI = new dsLFS.dtRCIDataTable();
             var dt = Factory.RCIRepository().GetRecordsByAccountId(bankId, dateYearMonth);
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
-                foreach(DataRow item in dt.Rows)
+                foreach (DataRow item in dt.Rows)
                 {
-                    
+
                     DataRow row = dtRCI.NewRow();
                     row["account_no"] = item["account_no"];
                     row["bank_name"] = item["bank_name"];
@@ -69,9 +73,14 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void LoadReport(LocalReport report)
         {
-           
             try
             {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return;
+                }
+
                 var lguDetails = Helper.LGUDetails();
                 var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
@@ -82,7 +91,8 @@ namespace AccountingSystem.Views.Reports.RCI
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                    new ReportParameter("paramSignatory", signatory)
+                    new ReportParameter("paramMunicipalTreasurerSignatory", signatory),
+                    new ReportParameter("paramAdministrativeOfficerSignatory", string.Empty)
                 };
 
                 report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
@@ -90,6 +100,10 @@ namespace AccountingSystem.Views.Reports.RCI
 
                 report.DataSources.Add(new ReportDataSource("dtRCI", DataTableRCI()));
                 report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
 
             }
             catch (Exception ex)
@@ -100,14 +114,17 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if (cmbBanks.SelectedIndex == -1)
-                Helper.MessageBoxError("Please select Bank!");
-              
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
+        }
+
+        private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBanks, "Bank");
+        }
+
+        private void cmbBanks_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbBanks);
         }
     }
 }
