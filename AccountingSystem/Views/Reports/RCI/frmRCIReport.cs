@@ -75,6 +75,8 @@ namespace AccountingSystem.Views.Reports.RCI
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 if (!ValidateChildren())
                 {
                     Helper.MessageBoxError(GetFormErrors());
@@ -105,6 +107,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
 
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -119,7 +122,7 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBanks, "Bank");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBanks, "Bank Account");
         }
 
         private void cmbBanks_Validated(object sender, EventArgs e)
