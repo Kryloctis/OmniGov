@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -83,18 +84,47 @@ namespace AccountingSystem.Views.Reports.RCI
                     return;
                 }
 
+                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Department Head", "Report of Check Issued");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                string departmentHeadSignatory = string.Empty;
+                string departmentHeadSignatoryTitle = string.Empty;
+                ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
+
+
+                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Administrative Officer", "Report of Check Issued");
+                string administrativeOfficerSignatory = string.Empty;
+                string administrativeOfficerSignatoryTitle = string.Empty;
+                ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
+
                 var lguDetails = Helper.LGUDetails();
-                var signatory = "MARY MAGDALYN T. REGANION, CPA";
 
                 var bankrepo = Factory.BanksRepository();
                 var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
-                var bankDetails = String.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
+                string bankDetails = string.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
-                    new ReportParameter("paramMunicipalTreasurerSignatory", signatory),
-                    new ReportParameter("paramAdministrativeOfficerSignatory", string.Empty)
+                    new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
+                    new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
+                    new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
+                    new ReportParameter("paramAdministrativeOfficerSignatoryTitle", administrativeOfficerSignatoryTitle)
                 };
 
                 report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
