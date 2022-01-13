@@ -253,7 +253,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorTextBox(epPayee, txtpayee);
         }
 
-        private void txtAmount_Validating(object sender, CancelEventArgs e)
+        internal void txtAmount_Validating(object sender, CancelEventArgs e)
         {
             if (!Helper.ShowErrorNumericUpDownEmpty(epORAmount, txtAmount, "Amount"))
             {
@@ -294,7 +294,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
       
-        private void txtCashTicketsAmount_Validating(object sender, CancelEventArgs e)
+        internal void txtCashTicketsAmount_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownZero(epCashTicketAmount, txtCashTicketsAmount, "Amount");
         }

@@ -23,9 +23,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
+            var errorArray = new string[3];
             errorArray[0] = epReportNo.GetError(txtReport);
-            errorArray[1] = epReportNo.GetError(cmbCollector);
+            errorArray[1] = epCollector.GetError(cmbCollector);
+            errorArray[2] = epPayments.GetError(dgPayments);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -33,16 +34,19 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void ucRCDCollector_Load(object sender, EventArgs e)
         {
-            ResetForm();
-            LoadFunds();
-            LoadCollectors();
+            if (!DesignMode)
+            {
+                ResetForm();
+                LoadFunds();
+                LoadCollectors();
 
-            cmbCollector.SelectedIndex = -1;
 
-            btnAdd.Enabled = false;
-            btnRemove.Enabled = false;
-            btnClear.Enabled = false;
+                btnAdd.Enabled = false;
+                btnRemove.Enabled = false;
+                btnClear.Enabled = false;
+            }
         }
+
         internal void ResetForm()
         {
             btnAdd.Enabled = false;
@@ -114,6 +118,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 cmbCollector.ValueMember = "id";
                 cmbCollector.SelectedValueChanged += new EventHandler(cmbcollector_SelectedValueChanged);
 
+                cmbCollector.SelectedIndex = -1;
                 collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
             }
             catch (Exception ex)
@@ -209,11 +214,34 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
 
         }
+
         private void txtReport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epReportNo, txtReport);
         }
-        #endregion
 
+        private void dgPayments_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorDatagridView(epPayments, dgPayments , "Payments.");
+        }
+
+        private void dgPayments_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDatagridView(epPayments, dgPayments);
+        }
+
+        private void cmbCollector_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollector, cmbCollector, "Collector.");
+        }
+
+        private void cmbCollector_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epCollector, cmbCollector);
+        }
     }
+
+    #endregion
+
+
 }

@@ -10,6 +10,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private readonly ReportViewer reportViewer = new();
         private readonly string _reportNumber;
+
         public frmCollectorsRCD(string reportNumber)
         {
             InitializeComponent();
@@ -126,7 +127,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
             DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
-            //DataTable dt = Factory.GeneralCollectionsRepository().GetRecordsByRCDNo(_reportNumber);
             if (dt.Rows.Count != 0)
             {
                 foreach (DataRow item in dt.Rows)

@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                CancelCashTicketFieldValidations(true);
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -108,23 +107,27 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             bool isFormCashTicket = uc.isCashTicket;
 
             if (isFormCashTicket)
+            {
+                CancelReceiptFieldValidations(true);
                 SaveCashTickets();
+            }
             else
+            {
+                CancelCashTicketFieldValidations(true);
                 SaveReceipts();
+            }
+            
         }
 
         private void SaveCashTickets()
         {
             try
             {
-
-                CancelReceiptFieldValidations(true);
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return;
                 }
-                CancelReceiptFieldValidations(false);
 
 
                 var paymentCollectionModel = new PaymentCollectionModel()
@@ -160,6 +163,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (cancelEvent)
             {
+                uc.txtAmount.Validating -= new CancelEventHandler(uc.txtAmount_Validating);
                 uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
                 uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
             }
@@ -174,6 +178,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (cancelEvent)
             {
+                uc.txtCashTicketsAmount.Validating -= new CancelEventHandler(uc.txtCashTicketsAmount_Validating);
                 uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
             }
             else

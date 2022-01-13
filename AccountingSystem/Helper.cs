@@ -247,7 +247,7 @@ namespace AccountingSystem
         {
             if (dgView.Rows.Count == 0)
             {
-                ep.SetError(dgView, $"{fieldName} is required");
+                ep.SetError(dgView, $"{ErrorMessageForEmpty(fieldName)}");
                 return true;
             }
 

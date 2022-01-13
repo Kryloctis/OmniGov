@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
@@ -44,20 +43,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucCollectorsRCD1
-            // 
-            this.ucCollectorsRCD1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
-            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
-            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
-            this.ucCollectorsRCD1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -182,7 +171,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(722, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -214,14 +203,24 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblShowMessage.Visible = false;
             this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
             // 
+            // ucCollectorsrcd1
+            // 
+            this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucCollectorsRCD1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 72);
+            this.ucCollectorsRCD1.Name = "ucCollectorsrcd1";
+            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 521);
+            this.ucCollectorsRCD1.TabIndex = 16;
+            // 
             // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(916, 593);
+            this.Controls.Add(this.ucCollectorsRCD1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucCollectorsRCD1);
             this.MinimizeBox = false;
             this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
@@ -239,8 +238,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         }
 
         #endregion
-
-        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
@@ -253,8 +250,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         internal System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
+        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
     }
 }

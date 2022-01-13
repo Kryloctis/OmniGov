@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
     public partial class frmCollectorsRCD : Form
     {
-        private readonly ucCollectorsRCD uc;
+        internal readonly ucCollectorsRCD uc;
         private List<CollectorReportPaymentModel> data;
 
         public frmCollectorsRCD()
@@ -39,28 +39,19 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (uc.dgPayments.Rows.Count == 0) 
-            {
-                Helper.MessageBoxError("Please load payment collections.");
-                return;
-            }
-
             if (uc.isSaveFunction)
             {
                 if (SaveData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
-                }
             }
+
             else
             {
                 if (UpdateData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
-                    uc.ResetForm();
-                }
             }
-            this.Close();
+
+            uc.ResetForm();
         }
 
         private bool UpdateData()
@@ -120,14 +111,20 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
             using (var scope = new TransactionScope())
             {
+
+                var reportCollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue);
+                var reportNo = uc.txtReport.Text.Trim();
+                var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
+                var reportFund = uc.fundId;
+
                 var collectorsReportModel = new CollectorReportModel()
                 {
-                    CollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue),
-                    ReportNo = uc.txtReport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtRCDDate.Value),
+                    CollectorId = reportCollectorId,
+                    ReportNo = reportNo,
+                    Date = reportDate,
                     IsApproved = 0,
                     IsDisapproved = 0,
-                    FundId = uc.fundId,
+                    FundId = reportFund,
                     Remarks = String.Empty
                 };
 
