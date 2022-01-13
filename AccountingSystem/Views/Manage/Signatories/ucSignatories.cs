@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             }
         }
 
-        private void ValidateReferenced()
+        internal void ValidateReferenced()
         {
             try
             {
@@ -197,7 +197,6 @@ namespace AccountingSystem.Views.Manage.Signatories
             {
                 cmbxOfficeFilter.SelectedIndex = 0;
                 ValidatePermissions();
-                LoadReferences();
             }
         }
 
