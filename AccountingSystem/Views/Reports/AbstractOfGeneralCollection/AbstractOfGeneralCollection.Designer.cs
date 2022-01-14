@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.GeneralCollection
 {
-    partial class frmReportOfGeneralCollection
+    partial class AbstractOfGeneralCollection
     {
         /// <summary>
         /// Required designer variable.
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
-            // frmAbstractOfGeneralCollection
+            // AbstractOfGeneralCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,10 +116,10 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             this.Controls.Add(this.panel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
-            this.Name = "frmAbstractOfGeneralCollection";
+            this.Name = "AbstractOfGeneralCollection";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Report of General Collection";
+            this.Text = "Reports > Abstract of General Collection Report";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

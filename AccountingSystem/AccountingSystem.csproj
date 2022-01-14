@@ -113,7 +113,7 @@
     <None Update="Reports\payment-collection.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Reports\payment-collection2.rdlc">
+    <None Update="Reports\abstract-of-general-collection.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Reports\post-trial-balance.rdlc">

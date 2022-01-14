@@ -641,7 +641,7 @@ namespace AccountingSystem
 
         private void menuprintGC_Click(object sender, EventArgs e)
         {
-            _ = new frmReportOfGeneralCollection().ShowDialog();
+            _ = new AbstractOfGeneralCollection().ShowDialog();
         }
 
         private void menuReturnReceipts_Click(object sender, EventArgs e)

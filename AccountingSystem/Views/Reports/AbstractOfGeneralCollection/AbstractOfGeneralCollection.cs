@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.GeneralCollection
 {
-    public partial class frmReportOfGeneralCollection : Form
+    public partial class AbstractOfGeneralCollection : Form
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
 
-        public frmReportOfGeneralCollection()
+        public AbstractOfGeneralCollection()
         {
             InitializeComponent();
             reportViewer.Dock = DockStyle.Fill;
@@ -52,7 +52,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
         {
             try
             {
-
                 Cursor = Cursors.WaitCursor;
 
                 string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
@@ -89,7 +88,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
                     };
-                report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\abstract-of-general-collection.rdlc";
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(from, to)));
                 report.SetParameters(parameters);
