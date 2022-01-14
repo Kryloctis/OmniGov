@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // dtRCDDate
             // 
-            this.dtRCDDate.Location = new System.Drawing.Point(568, 75);
+            this.dtRCDDate.Location = new System.Drawing.Point(569, 75);
             this.dtRCDDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtRCDDate.Name = "dtRCDDate";
             this.dtRCDDate.Size = new System.Drawing.Size(225, 23);
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // txtReport
             // 
-            this.txtReport.Location = new System.Drawing.Point(81, 75);
+            this.txtReport.Location = new System.Drawing.Point(82, 75);
             this.txtReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReport.MaxLength = 20;
             this.txtReport.Name = "txtReport";
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCollector.FormattingEnabled = true;
-            this.cmbCollector.Location = new System.Drawing.Point(338, 76);
+            this.cmbCollector.Location = new System.Drawing.Point(339, 76);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(171, 23);
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(529, 78);
+            this.label3.Location = new System.Drawing.Point(530, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
@@ -100,7 +100,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 78);
+            this.label2.Location = new System.Drawing.Point(15, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 15);
             this.label2.TabIndex = 18;
@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(271, 79);
+            this.label1.Location = new System.Drawing.Point(272, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 16;

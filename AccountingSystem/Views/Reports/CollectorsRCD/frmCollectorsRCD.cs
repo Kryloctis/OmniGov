@@ -323,7 +323,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 }
                 return;
             }
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

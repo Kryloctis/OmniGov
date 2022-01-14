@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCollectorsRCD));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
@@ -44,6 +45,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +62,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove,
             this.toolStripSeparator3,
             this.btnPrint,
+            this.btnCancelPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -203,14 +206,24 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblShowMessage.Visible = false;
             this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
             // 
-            // ucCollectorsrcd1
+            // ucCollectorsRCD1
             // 
             this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucCollectorsRCD1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 72);
-            this.ucCollectorsRCD1.Name = "ucCollectorsrcd1";
+            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 521);
             this.ucCollectorsRCD1.TabIndex = 16;
+            // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelPrint.Image")));
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(75, 47);
+            this.btnCancelPrint.Text = "Cancel Print";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // frmCollectorsRCD
             // 
@@ -253,5 +266,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         internal System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
         internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
+        private System.Windows.Forms.ToolStripButton btnCancelPrint;
     }
 }
