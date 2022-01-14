@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             try
             {
-
+                Cursor = Cursors.WaitCursor;
                 string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
                 string verificationSignatory = string.Empty;
                 string verificationSignatoryTitle = string.Empty;
@@ -86,6 +86,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
                 report.SetParameters(parameters);
                 report.Refresh();
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -119,6 +121,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             return dtFromDataSource;
         }
+
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
@@ -138,6 +141,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             return dtFromDataSource;
         }
+
         private DataTable CollectorsReports()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
