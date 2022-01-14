@@ -1,12 +1,7 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.DailyCashReport
@@ -25,17 +20,13 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
         private void btnretrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
-            reportViewer.RefreshReport();
         }
 
-        private DataTable DataTableCash(string fund,string date)
+        private DataTable DataTableCash(string fund, string date)
         {
             var dtcash = new dsLFS.dtCashreportDataTable();
             var dtdata = Factory.FundsRepository().GetRecordsPrintCashposition(date);
-            if(dtdata.Rows.Count > 0)
+            if (dtdata.Rows.Count > 0)
             {
                 var rows = dtdata.Select($"fund LIKE '%{fund}%'");
                 decimal beginning = 0;
@@ -71,7 +62,7 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                     DataRow row = dtcash.NewRow();
                     row["date"] = Convert.ToDateTime(date);
                     row["details"] = "Ending Balance";
-                    row["balance"] = beginning+end;
+                    row["balance"] = beginning + end;
                     dtcash.Rows.Add(row);
                 }
             }
@@ -82,24 +73,66 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
+
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                var dictCertifiedCorrectSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Daily Cash Position Report");
+                string certifiedCorrectSignatory = string.Empty;
+                string certifiedCorrectSignatoryTitle = string.Empty;
+                ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+
+                var dictNotedSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Noted", "Daily Cash Position Report");
+                string notedSignatory = string.Empty;
+                string notedSignatoryTitle = string.Empty;
+                ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);
+
+
                 string date = String.Format("{0:yyyy-MM-dd}", dtdate.Value);
                 var lguDetails = Helper.LGUDetails();
                 var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                             new ReportParameter("paramDate", String.Format("{0:MMMM dd, yyyy}", dtdate.Value)),
-                            new ReportParameter("paramMayor", "HON. DIONESIA B. LAGAS"),
+                            new ReportParameter("paramMayor", notedSignatory),
                             new ReportParameter("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
-                            new ReportParameter("paramSignatory", "ENSIGN S. UBA"),
-                            new ReportParameter("paramLiquidating", "FE F. HAMOY"),
-                            new ReportParameter("paramMayorSign", "DIONESIA B. LAGAS"),
+                            new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                            new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                            new ReportParameter("paramPreparedBySignatory", "Please put current user who's generating this report."),
+                            new ReportParameter("paramPreparedBySignatoryTitle", "Please put current user who's generating this report."),
+                            new ReportParameter("paramNotedSignatory", notedSignatory),
+                            new ReportParameter("paramNotedSignatoryTitle", notedSignatoryTitle)
                     };
-                report.ReportPath = $"{Application.StartupPath}Reports\\dailycashposition.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\daily-cash-position-report.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtCashreport", DataTableCash("General",date)));
+                report.DataSources.Add(new ReportDataSource("dtCashreport", DataTableCash("General", date)));
                 report.DataSources.Add(new ReportDataSource("dtCashreport1", DataTableCash("Special", date)));
                 report.DataSources.Add(new ReportDataSource("dtCashreport2", DataTableCash("Trust", date)));
                 report.SetParameters(parameters);
                 report.Refresh();
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+
+                Cursor = Cursors.Default;
 
             }
             catch (Exception ex)

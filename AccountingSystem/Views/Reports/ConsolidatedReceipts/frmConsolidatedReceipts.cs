@@ -95,8 +95,8 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                             new ReportParameter("paramTreasurer", treasurer),
-                            new ReportParameter("paramPreparedBySignatory", "sample"),
-                            new ReportParameter("paramPreparedBySignatoryTitle", "sample")
+                            new ReportParameter("paramPreparedBySignatory", "Please put current user who's generating this report."),
+                            new ReportParameter("paramPreparedBySignatoryTitle", "Please put current user who's generating this report.")
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";
                 report.DataSources.Clear();
