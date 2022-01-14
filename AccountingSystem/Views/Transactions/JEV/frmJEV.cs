@@ -383,6 +383,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 var userId = Helper.UserId;
+                message = "JEV has been saved.";
+
 
                 switch (uc.journalName)
                 {
@@ -404,12 +406,13 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "Authority to Debit Account Disbursement Journal":
                         return InsertADADisbursementsJournal(userId);
                 }
+
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            message = "JEV has been saved.";
+
 
             return false;
         }
