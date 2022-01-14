@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCollectorsRCD));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
@@ -38,6 +37,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
             this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
-            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +141,18 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
+            this.btnCancelPrint.Text = "Cancel";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -215,16 +226,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 521);
             this.ucCollectorsRCD1.TabIndex = 16;
             // 
-            // btnCancelPrint
-            // 
-            this.btnCancelPrint.Enabled = false;
-            this.btnCancelPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelPrint.Image")));
-            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelPrint.Name = "btnCancelPrint";
-            this.btnCancelPrint.Size = new System.Drawing.Size(75, 47);
-            this.btnCancelPrint.Text = "Cancel Print";
-            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
             // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -266,6 +267,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         internal System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
         internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
-        private System.Windows.Forms.ToolStripButton btnCancelPrint;
+        internal System.Windows.Forms.ToolStripButton btnCancelPrint;
     }
 }

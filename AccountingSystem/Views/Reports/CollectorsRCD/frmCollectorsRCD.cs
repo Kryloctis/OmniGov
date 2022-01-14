@@ -171,7 +171,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _ = new frmCollectorsRCDSearch(this, uc).ShowDialog();
         }
 
-
         internal void LoadSelectedValue(string reportNo)
         {
             try
@@ -192,7 +191,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
 
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex)
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
 
@@ -208,6 +210,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = false;
+                        btnCancelPrint.Enabled = false;
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
                         btnDelete.Enabled = true;
@@ -222,6 +225,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = true;
+                        btnCancelPrint.Enabled = true;
                         btnSave.Enabled = true;
                         uc.Enabled = false;
                         btnDelete.Enabled = false;
@@ -235,6 +239,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = false;
+                        btnCancelPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = true;
                         uc.Enabled = false;
@@ -366,10 +371,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void ResetLocalControls()
         {
             btnSave.Text = "Save";
+            btnSave.Enabled = true;
             btnDelete.Enabled = false;
             btnApprove.Enabled = false;
             btnDisapprove.Enabled = false;
             btnPrint.Enabled = false;
+            btnCancelPrint.Enabled = false;
 
             lblReportStatus.Text = "--";
             lblReportStatus.ForeColor = Color.Black;
@@ -382,5 +389,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             else
                 uc.ActionPerformIsSave(false);
         }
+
+        private void btnCancelPrint_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Do you want to cancel printing."))
+            {
+                ResetLocalControls();
+                uc.ResetForm();
+                uc.Enabled = true;
+            }
+        }
+
     }
 }

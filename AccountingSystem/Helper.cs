@@ -360,31 +360,17 @@ namespace AccountingSystem
             return false;
         }
 
-        public static bool MessageBoxConfirmRCDList()
+        public static bool MessageBoxConfirmCancel(string confirmMessage)
         {
-            string message = "Do you want to Generate Report of General Collection now?";
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                return true;
+            string message = confirmMessage;
 
-            return false;
-        }
-        public static bool MessageBoxConfirmGCDeposit()
-        {
-            string message = "Do you want to Deposit this record now?";
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 return true;
 
             return false;
         }
 
-        public static bool MessageBoxConfirmRCDApproved(bool isapproved)
-        {
-            string message = isapproved ? "Do you want to Disapproved this record now?" : "Do you want to Approved this record now?";
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                return true;
 
-            return false;
-        }
         #endregion
 
         #region HideEditDeleteButtons

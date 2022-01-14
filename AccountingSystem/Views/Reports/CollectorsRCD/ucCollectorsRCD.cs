@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             if (!DesignMode)
             {
-                ResetForm();
                 LoadFunds();
                 LoadCollectors();
 
@@ -61,6 +60,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
+
         }
 
         internal void LoadFunds()
@@ -238,6 +238,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private void cmbCollector_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epCollector, cmbCollector);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            ResetForm();
         }
     }
 

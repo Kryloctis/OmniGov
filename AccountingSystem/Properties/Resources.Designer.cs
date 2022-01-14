@@ -793,9 +793,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap printer_filled_forbidden_28px {
+        internal static System.Drawing.Bitmap printer_cancel {
             get {
-                object obj = ResourceManager.GetObject("printer_filled_forbidden_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer-cancel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
