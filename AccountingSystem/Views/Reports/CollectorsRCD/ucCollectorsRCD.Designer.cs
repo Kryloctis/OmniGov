@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.epReportNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgPayments = new System.Windows.Forms.DataGridView();
             this.groubBoxFund = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanelFunds = new System.Windows.Forms.FlowLayoutPanel();
             this.txtTotal = new System.Windows.Forms.TextBox();
@@ -46,17 +47,18 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.dgPayments = new System.Windows.Forms.DataGridView();
             this.epCollector = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPayments = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).BeginInit();
-            this.groubBoxFund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).BeginInit();
+            this.groubBoxFund.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.epCollector)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayments)).BeginInit();
             this.SuspendLayout();
             // 
             // dtRCDDate
             // 
-            this.dtRCDDate.Location = new System.Drawing.Point(559, 76);
+            this.dtRCDDate.Location = new System.Drawing.Point(569, 75);
             this.dtRCDDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtRCDDate.Name = "dtRCDDate";
             this.dtRCDDate.Size = new System.Drawing.Size(225, 23);
@@ -64,7 +66,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // txtReport
             // 
-            this.txtReport.Location = new System.Drawing.Point(79, 76);
+            this.txtReport.Location = new System.Drawing.Point(82, 75);
             this.txtReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReport.MaxLength = 20;
             this.txtReport.Name = "txtReport";
@@ -77,17 +79,19 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCollector.FormattingEnabled = true;
-            this.cmbCollector.Location = new System.Drawing.Point(333, 77);
+            this.cmbCollector.Location = new System.Drawing.Point(339, 76);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(171, 23);
             this.cmbCollector.TabIndex = 15;
             this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
+            this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollector_Validating);
+            this.cmbCollector.Validated += new System.EventHandler(this.cmbCollector_Validated);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(520, 79);
+            this.label3.Location = new System.Drawing.Point(530, 78);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
@@ -96,7 +100,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 79);
+            this.label2.Location = new System.Drawing.Point(15, 78);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 15);
             this.label2.TabIndex = 18;
@@ -105,26 +109,45 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(266, 80);
+            this.label1.Location = new System.Drawing.Point(272, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 16;
             this.label1.Text = "Collector";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // epReportNo
             // 
             this.epReportNo.ContainerControl = this;
+            // 
+            // dgPayments
+            // 
+            this.dgPayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.epPayments.SetIconAlignment(this.dgPayments, System.Windows.Forms.ErrorIconAlignment.TopRight);
+            this.dgPayments.Location = new System.Drawing.Point(19, 107);
+            this.dgPayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgPayments.Name = "dgPayments";
+            this.dgPayments.RowHeadersWidth = 51;
+            this.dgPayments.RowTemplate.Height = 29;
+            this.dgPayments.Size = new System.Drawing.Size(878, 370);
+            this.dgPayments.TabIndex = 21;
+            this.dgPayments.SelectionChanged += new System.EventHandler(this.dgPayments_SelectionChanged);
+            this.dgPayments.Validating += new System.ComponentModel.CancelEventHandler(this.dgPayments_Validating);
+            this.dgPayments.Validated += new System.EventHandler(this.dgPayments_Validated);
             // 
             // groubBoxFund
             // 
             this.groubBoxFund.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groubBoxFund.Controls.Add(this.flowLayoutPanelFunds);
-            this.groubBoxFund.Location = new System.Drawing.Point(3, 3);
+            this.groubBoxFund.Location = new System.Drawing.Point(16, 3);
             this.groubBoxFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groubBoxFund.Name = "groubBoxFund";
             this.groubBoxFund.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groubBoxFund.Size = new System.Drawing.Size(907, 59);
+            this.groubBoxFund.Size = new System.Drawing.Size(881, 59);
             this.groubBoxFund.TabIndex = 27;
             this.groubBoxFund.TabStop = false;
             this.groubBoxFund.Text = "Funds";
@@ -135,13 +158,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.flowLayoutPanelFunds.Location = new System.Drawing.Point(3, 18);
             this.flowLayoutPanelFunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanelFunds.Name = "flowLayoutPanelFunds";
-            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(901, 39);
+            this.flowLayoutPanelFunds.Size = new System.Drawing.Size(875, 39);
             this.flowLayoutPanelFunds.TabIndex = 0;
             // 
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTotal.Location = new System.Drawing.Point(49, 482);
+            this.txtTotal.Location = new System.Drawing.Point(54, 483);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -155,7 +178,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRemove.Location = new System.Drawing.Point(751, 482);
+            this.btnRemove.Location = new System.Drawing.Point(744, 483);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(74, 23);
@@ -170,7 +193,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnClear.Location = new System.Drawing.Point(830, 482);
+            this.btnClear.Location = new System.Drawing.Point(823, 483);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 23);
@@ -185,7 +208,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdd.Location = new System.Drawing.Point(675, 482);
+            this.btnAdd.Location = new System.Drawing.Point(668, 483);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(70, 23);
@@ -199,30 +222,19 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 486);
+            this.label4.Location = new System.Drawing.Point(14, 487);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 15);
             this.label4.TabIndex = 22;
             this.label4.Text = "Total";
             // 
-            // dgPayments
-            // 
-            this.dgPayments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgPayments.Location = new System.Drawing.Point(9, 107);
-            this.dgPayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgPayments.Name = "dgPayments";
-            this.dgPayments.RowHeadersWidth = 51;
-            this.dgPayments.RowTemplate.Height = 29;
-            this.dgPayments.Size = new System.Drawing.Size(895, 370);
-            this.dgPayments.TabIndex = 21;
-            this.dgPayments.SelectionChanged += new System.EventHandler(this.dgPayments_SelectionChanged);
-            // 
             // epCollector
             // 
             this.epCollector.ContainerControl = this;
+            // 
+            // epPayments
+            // 
+            this.epPayments.ContainerControl = this;
             // 
             // ucCollectorsRCD
             // 
@@ -246,9 +258,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.Size = new System.Drawing.Size(913, 510);
             this.Load += new System.EventHandler(this.ucRCDCollector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).EndInit();
-            this.groubBoxFund.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).EndInit();
+            this.groubBoxFund.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.epCollector)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,7 +278,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.ErrorProvider epReportNo;
         internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanelFunds;
         internal System.Windows.Forms.TextBox txtTotal;
-        internal System.Windows.Forms.Button btnDelete;
         internal System.Windows.Forms.Button btnClear;
         internal System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label4;
@@ -273,5 +285,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         internal System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.ErrorProvider epCollector;
         internal System.Windows.Forms.GroupBox groubBoxFund;
+        private System.Windows.Forms.ErrorProvider epPayments;
     }
 }

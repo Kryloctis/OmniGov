@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
     {
         bool IssuedExist(int coid, int id);
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
-        bool HasIssued(int id);
+        bool HasIssued(int accountableFormId, int collectorId);
         bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
         bool IssuedExist(ReceiptsIssuedModel entity);
         DataTable GetRecords(int id);

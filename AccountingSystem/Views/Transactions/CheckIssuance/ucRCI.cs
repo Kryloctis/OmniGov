@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.RCI.Find;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
@@ -156,10 +151,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             functionId = Id;
             cmbFPP.Text = value;
         }
-        private void btncharge_Click(object sender, EventArgs e)
-        {
-            _ = new frmFind(this, "banks").ShowDialog();
-        }
+
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtdvno, "disbursement no.");
@@ -266,10 +258,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtObno.Focus();
         }
 
-        private void cmbFPP_DoubleClick(object sender, EventArgs e)
-        {
-            _ = new frmFind(this,  "functions").ShowDialog();
-        }
 
         private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.GeneralCollection
 {
-    public partial class frmReportOfGeneralCollection : Form
+    public partial class AbstractOfGeneralCollection : Form
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
 
-        public frmReportOfGeneralCollection()
+        public AbstractOfGeneralCollection()
         {
             InitializeComponent();
             reportViewer.Dock = DockStyle.Fill;
@@ -18,31 +18,29 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
             Helper.LoadFormIcon(this);
         }
 
-        private DataTable DataTableGC(string from, string to)
+        private DataTable DataTableAbstractOfGeneralCollection(string from, string to)
         {
 
             var dtPC = new dsLFS.dtPCDataTable();
             var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from, to);
-            DateTime date = DateTime.Now;
 
-            if (dt.Rows.Count > 0)
+
+            foreach (DataRow item in dt.Rows)
             {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["rcdno"] = item["rcd_no"];
-                    row["reportno"] = item["report_no"];
-                    row["account_code"] = item["account_code"];
-                    row["subsidiary"] = item["subsidiary"];
-                    row["payee"] = item["payee"];
-                    row["acc_form_desc"] = item["accform"];
-                    row["ledger_name"] = item["ledger_name"];
-                    row["payment_date"] = item["payment_date"];
-                    row["receipt_no"] = item["receipt_no"];
-                    row["amount"] = item["amount"];
-                    row["collector"] = item["collector"];
-                }
+                DataRow row = dtPC.NewRow();
+                row["rcdid"] = item["id"];
+                row["rcdno"] = item["rcd_no"];
+                row["reportno"] = item["report_no"];
+                row["account_code"] = item["account_code"];
+                row["subsidiary"] = item["subsidiary"];
+                row["payee"] = item["payee"];
+                row["acc_form_desc"] = item["accform"];
+                row["ledger_name"] = item["ledger_name"];
+                row["payment_date"] = item["payment_date"];
+                row["receipt_no"] = item["receipt_no"];
+                row["amount"] = item["amount"];
+                row["collector"] = item["collector"];
+                dtPC.Rows.Add(row);
             }
 
             return dtPC;
@@ -52,7 +50,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
         {
             try
             {
-
                 Cursor = Cursors.WaitCursor;
 
                 string from = String.Format("{0:yyyy-MM-dd}", dtpMonth.Value);
@@ -89,9 +86,9 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
                     };
-                report.ReportPath = $"{Application.StartupPath}Reports\\payment-collection2.rdlc";
+                report.ReportPath = $"{Application.StartupPath}Reports\\abstract-of-general-collection.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtPC", DataTableGC(from, to)));
+                report.DataSources.Add(new ReportDataSource("dtPC", DataTableAbstractOfGeneralCollection(from, to)));
                 report.SetParameters(parameters);
                 report.Refresh();
 

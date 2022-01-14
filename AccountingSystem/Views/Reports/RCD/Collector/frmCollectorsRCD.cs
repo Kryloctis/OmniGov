@@ -10,6 +10,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
     {
         private readonly ReportViewer reportViewer = new();
         private readonly string _reportNumber;
+
         public frmCollectorsRCD(string reportNumber)
         {
             InitializeComponent();
@@ -59,10 +60,9 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
                 ParseSignatory(dictVerification, ref verificationSignatory, ref verificationSignatoryTitle);
 
-                var totalCashAmount = 5000;
-                var totalChecksAmount = 0;
-                var totamAmount = 5000;
                 var lguDetails = Helper.LGUDetails();
+                var totalChecksAmount = 0;
+
 
                 var parameters = new[]
                 {
@@ -71,9 +71,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     new ReportParameter("paramVerificationSignatory", verificationSignatory),
                     new ReportParameter("paramSummaryDate", DateTime.Now.ToString()),
                     new ReportParameter("paramDate", DateTime.Now.ToString()),
-                    new ReportParameter("paramTotalCash", value:totalCashAmount.ToString()),
-                    new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString()),
-                    new ReportParameter("paramTotal", value:totamAmount.ToString())
+                    new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString())
                 };
 
                 report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";
@@ -126,7 +124,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
             DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
-            //DataTable dt = Factory.GeneralCollectionsRepository().GetRecordsByRCDNo(_reportNumber);
             if (dt.Rows.Count != 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -147,17 +144,17 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
             DataTable dt = Factory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
 
-            if (dt.Rows.Count != 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtFromDataSource.NewRow();
-                    row["name_of_accountable_officer"] = item["collecting_officer"];
-                    row["report_no"] = item["report_no"];
-                    row["amount"] = item["amount"];
-                    dtFromDataSource.Rows.Add(row);
-                }
-            }
+            //if (dt.Rows.Count != 0)
+            //{
+            //    foreach (DataRow item in dt.Rows)
+            //    {
+            //        DataRow row = dtFromDataSource.NewRow();
+            //        row["name_of_accountable_officer"] = item["collecting_officer"];
+            //        row["report_no"] = item["report_no"];
+            //        row["amount"] = item["amount"];
+            //        dtFromDataSource.Rows.Add(row);
+            //    }
+            //}
 
             return dtFromDataSource;
         }

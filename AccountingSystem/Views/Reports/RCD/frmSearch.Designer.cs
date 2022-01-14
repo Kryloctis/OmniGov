@@ -151,17 +151,12 @@ namespace AccountingSystem.Views.Reports.RCD
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgrcd;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSelect;
-        private System.Windows.Forms.ComboBox cmbstatus;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbfunds;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dgRCDSearch;
     }
 }

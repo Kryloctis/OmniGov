@@ -8,12 +8,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     {
         private readonly frmReceiptsIssued _frmReceiptIssued;
         private readonly int _receiptId = 0;
+        private readonly ucReceiptsIssued uc;
+
         public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued, int receiptId)
         {
             InitializeComponent();
 
             _frmReceiptIssued = frmReceiptsIssued;
             _receiptId = receiptId;
+            uc = ucReceipts1;
         }
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
@@ -35,57 +38,59 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var uc = ucReceipts1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
+                var collectorId = Convert.ToInt32(uc.cmbcollector.SelectedValue);
+                var receiptId = Convert.ToInt32(uc.cmbreceipt.SelectedValue);
+                var dateIssued = uc.dtpissued.Value;
+                var issueFrom = Convert.ToInt32(uc.txtfrom.Text.Trim());
+                var issueTo = Convert.ToInt32(uc.txtto.Text.Trim());
+                var quantity = Convert.ToInt32(uc.txtquantity.Text.Trim());
+
+
                 var receiptIssuedModel = new ReceiptsIssuedModel()
                 {
-                   CollectorId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                   ReceiptId = Convert.ToInt32(uc.cmbreceipt.SelectedValue),
-                   Issued = uc.dtpissued.Value,
-                   IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
-                   IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),
-                   Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim())
-                   
+                   CollectorId = collectorId,
+                   ReceiptId = receiptId,
+                   Issued = dateIssued,
+                   IssuedFrom = issueFrom,
+                   IssuedTo = issueTo,
+                   Quantity = quantity
+
                 };
 
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
 
                 if (!uc.istickets)
                 {
-                    if (receiptIssuedRepository.IssuedExist(receiptIssuedModel))
-                    {
-                        Helper.MessageBoxError("Receipt already issued!");
-                        return false;
-                    }
+                    //if (receiptIssuedRepository.IssuedExist(receiptIssuedModel))
+                    //{
+                    //    Helper.MessageBoxError("Receipt already issued!");
+                    //    return false;
+                    //}
 
-                    if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
-                    {
-                        Helper.MessageBoxError("Invalid Receipt!");
-                        return false;
-                    }
+                    //if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                    //{
+                    //    Helper.MessageBoxError("Invalid Receipt!");
+                    //    return false;
+                    //}
 
-                    if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
-                    {
-                        Helper.MessageBoxError("Quantity Empty!");
-                        return false;
-                    }
+                    //if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    //{
+                    //    Helper.MessageBoxError("Quantity Empty!");
+                    //    return false;
+                    //}
 
                     return receiptIssuedRepository.Insert(receiptIssuedModel);
                 }
+
                 else
                 {
-
-                    if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
-                    {
-                        Helper.MessageBoxError("Quantity Empty!");
-                        return false;
-                    }
-                    else return receiptIssuedRepository.Insert(receiptIssuedModel);
+                    return receiptIssuedRepository.Insert(receiptIssuedModel);
                 }
                
 
@@ -99,13 +104,20 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt Issued has been saved.");
+                uc.ResetForm();
                 _frmReceiptIssued.LoadRecords();
-                ucReceipts1.ResetForm();
+
                 if (_receiptId > 0)
                 {
                     this.Close();
                 }
             }
         }
+
+        private void frmReceiptsIssuedAdd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _frmReceiptIssued.LoadRecords();
+        }
+
     }
 }

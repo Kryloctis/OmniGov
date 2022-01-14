@@ -36,14 +36,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dtpissued = new System.Windows.Forms.DateTimePicker();
             this.cmbcollector = new System.Windows.Forms.ComboBox();
             this.cmbreceipt = new System.Windows.Forms.ComboBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCollectingOfficer = new System.Windows.Forms.ErrorProvider(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtfrom = new System.Windows.Forms.TextBox();
             this.txtto = new System.Windows.Forms.TextBox();
             this.txtquantity = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epReceipt = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epTo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFrom = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epQuantity = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceipt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -107,9 +115,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cmbreceipt.Validating += new System.ComponentModel.CancelEventHandler(this.cmbreceipt_Validating);
             this.cmbreceipt.Validated += new System.EventHandler(this.cmbreceipt_Validated);
             // 
-            // errorProvider
+            // epCollectingOfficer
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epCollectingOfficer.ContainerControl = this;
             // 
             // label4
             // 
@@ -174,10 +182,27 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtquantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
             this.txtquantity.Validated += new System.EventHandler(this.txtquantity_Validated);
             // 
+            // epReceipt
+            // 
+            this.epReceipt.ContainerControl = this;
+            // 
+            // epTo
+            // 
+            this.epTo.ContainerControl = this;
+            // 
+            // epFrom
+            // 
+            this.epFrom.ContainerControl = this;
+            // 
+            // epQuantity
+            // 
+            this.epQuantity.ContainerControl = this;
+            // 
             // ucReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.txtquantity);
             this.Controls.Add(this.txtto);
             this.Controls.Add(this.txtfrom);
@@ -192,8 +217,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceiptsIssued";
-            this.Size = new System.Drawing.Size(522, 194);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.Size = new System.Drawing.Size(530, 194);
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceipt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,7 +233,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epCollectingOfficer;
         internal System.Windows.Forms.DateTimePicker dtpissued;
         internal System.Windows.Forms.ComboBox cmbcollector;
         internal System.Windows.Forms.ComboBox cmbreceipt;
@@ -214,5 +243,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal System.Windows.Forms.TextBox txtquantity;
         internal System.Windows.Forms.TextBox txtto;
         internal System.Windows.Forms.TextBox txtfrom;
+        private System.Windows.Forms.ErrorProvider epReceipt;
+        private System.Windows.Forms.ErrorProvider epTo;
+        private System.Windows.Forms.ErrorProvider epFrom;
+        private System.Windows.Forms.ErrorProvider epQuantity;
     }
 }

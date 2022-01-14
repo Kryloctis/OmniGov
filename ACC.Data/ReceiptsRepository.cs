@@ -108,13 +108,13 @@ namespace ACC.Data
                 string query = $"SELECT " +
                     $"id, " +
                     $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
-                    $"receiptsfrom, " +
-                    $"receiptsto, " +
+                    $"if(receiptsfrom = 0, null, receiptsfrom), " +
+                    $"if(receiptsto = 0, null, receiptsto), " +
                     $"received_date, " +
                     $"quantity, " +
                     $"user officer " +
                     $"FROM {viewTableName} " +
-                    $"ORDER BY received_date DESC";
+                    $"ORDER BY accountable_forms_id DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -278,7 +278,7 @@ namespace ACC.Data
             int value = 0;
             try
             {
-                string query = $"SELECT IFNULL(MAX(receiptsfrom),0) AS receiptno FROM {tableReceipts} WHERE accountable_forms_id = {accid}";
+                string query = $"SELECT IFNULL(MAX(receiptsfrom), 0) AS receiptno FROM {tableReceipts} WHERE accountable_forms_id = {accid}";
                 DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {

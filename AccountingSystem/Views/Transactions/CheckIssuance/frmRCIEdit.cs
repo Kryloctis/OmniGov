@@ -1,13 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
@@ -16,15 +9,12 @@ namespace AccountingSystem.Views.Transactions.RCI
     {
         private frmRCI _frmrci;
         private readonly ucRCI uc;
-        private int _rciId;
         
-
         public frmRCIEdit(frmRCI frmrci, int rciId)
         {
             InitializeComponent();
             _frmrci = frmrci;
             uc = ucrci1;
-
             uc.Id = rciId;
         }
 
