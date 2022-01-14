@@ -3069,7 +3069,9 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -3080,14 +3082,16 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
                 <Top>1.56424in</Top>
                 <Left>0.12501in</Left>
                 <Height>0.36458in</Height>
-                <Width>1.62088in</Width>
+                <Width>1.8813in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
@@ -3112,7 +3116,9 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                   <Paragraph>
                     <TextRuns>
@@ -3123,14 +3129,16 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
                 <Top>1.56424in</Top>
                 <Left>3.94804in</Left>
                 <Height>0.36458in</Height>
-                <Width>1.42297in</Width>
+                <Width>1.88118in</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
@@ -3190,7 +3198,9 @@
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
@@ -3255,14 +3265,17 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramTreasurer.Value</Value>
+                        <Label>verificationSignatory</Label>
+                        <Value>=UCase(Parameters!paramVerificationSignatory.Value)</Value>
                         <Style>
                           <FontSize>8pt</FontSize>
                           <FontWeight>Bold</FontWeight>
                         </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
@@ -6243,8 +6256,9 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramTreasurer">
+    <ReportParameter Name="paramVerificationSignatory">
       <DataType>String</DataType>
+      <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -6291,7 +6305,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramTreasurer</ParameterName>
+          <ParameterName>paramVerificationSignatory</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
