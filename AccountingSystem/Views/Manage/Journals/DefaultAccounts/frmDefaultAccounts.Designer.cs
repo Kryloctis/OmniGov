@@ -36,13 +36,13 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblAccountCounter = new System.Windows.Forms.Label();
             this.btnRemoveDefaultAccount = new System.Windows.Forms.Button();
             this.btnSetDefaultAccount = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgDefaultAccounts = new System.Windows.Forms.DataGridView();
             this.dgAccounts = new System.Windows.Forms.DataGridView();
-            this.lblAccountCounter = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblAccountCounter);
             this.panel1.Controls.Add(this.btnRemoveDefaultAccount);
             this.panel1.Controls.Add(this.btnSetDefaultAccount);
             this.panel1.Controls.Add(this.label2);
@@ -69,8 +70,17 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(1014, 360);
+            this.panel1.Size = new System.Drawing.Size(1014, 404);
             this.panel1.TabIndex = 1;
+            // 
+            // lblAccountCounter
+            // 
+            this.lblAccountCounter.Location = new System.Drawing.Point(883, 16);
+            this.lblAccountCounter.Name = "lblAccountCounter";
+            this.lblAccountCounter.Size = new System.Drawing.Size(127, 15);
+            this.lblAccountCounter.TabIndex = 24;
+            this.lblAccountCounter.Text = "0";
+            this.lblAccountCounter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnRemoveDefaultAccount
             // 
@@ -95,7 +105,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(551, 9);
+            this.label2.Location = new System.Drawing.Point(551, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 15);
             this.label2.TabIndex = 6;
@@ -104,7 +114,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 5);
+            this.label1.Location = new System.Drawing.Point(8, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 15);
             this.label1.TabIndex = 6;
@@ -131,7 +141,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgDefaultAccounts.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgDefaultAccounts.Location = new System.Drawing.Point(551, 26);
+            this.dgDefaultAccounts.Location = new System.Drawing.Point(551, 34);
             this.dgDefaultAccounts.Name = "dgDefaultAccounts";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -142,7 +152,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgDefaultAccounts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgDefaultAccounts.RowTemplate.Height = 25;
-            this.dgDefaultAccounts.Size = new System.Drawing.Size(459, 326);
+            this.dgDefaultAccounts.Size = new System.Drawing.Size(459, 362);
             this.dgDefaultAccounts.TabIndex = 5;
             this.dgDefaultAccounts.SelectionChanged += new System.EventHandler(this.dgDefaultAccounts_SelectionChanged);
             // 
@@ -167,7 +177,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgAccounts.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgAccounts.Location = new System.Drawing.Point(8, 23);
+            this.dgAccounts.Location = new System.Drawing.Point(8, 34);
             this.dgAccounts.Name = "dgAccounts";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -178,37 +188,27 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgAccounts.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgAccounts.RowTemplate.Height = 25;
-            this.dgAccounts.Size = new System.Drawing.Size(459, 329);
+            this.dgAccounts.Size = new System.Drawing.Size(459, 362);
             this.dgAccounts.TabIndex = 4;
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
             // 
-            // lblAccountCounter
-            // 
-            this.lblAccountCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAccountCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblAccountCounter.Location = new System.Drawing.Point(551, 9);
-            this.lblAccountCounter.Name = "lblAccountCounter";
-            this.lblAccountCounter.Size = new System.Drawing.Size(459, 15);
-            this.lblAccountCounter.TabIndex = 24;
-            this.lblAccountCounter.Text = "Maximum Number of Default Accounts: 0";
-            this.lblAccountCounter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 392);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 436);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1014, 30);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(936, 3);
+            this.btnCancel.Location = new System.Drawing.Point(904, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(107, 23);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -217,9 +217,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(855, 3);
+            this.btnSave.Location = new System.Drawing.Point(791, 3);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(107, 23);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -228,8 +228,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.lblAccountCounter);
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.lblJournalName);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -262,7 +261,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1014, 422);
+            this.ClientSize = new System.Drawing.Size(1014, 466);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -297,9 +296,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label lblAccountCounter;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblJournalName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblAccountCounter;
     }
 }

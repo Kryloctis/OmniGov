@@ -22,15 +22,50 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             switch (journalId)
             {
                 case 2:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 3:
-                    return 2;
+                    {
+                        int noOfmaxDefaultAccount = 2;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 4:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 5:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 6:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 default:
                     return 0;
             }
@@ -103,9 +138,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
             var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
             lblJournalName.Text = dtJournals["journal_name"].ToString();
-            lblAccountCounter.Text = $"Maximum Number of Default Accounts: {NumberOfDefaultAccounts()}";
             LoadAccounts();
             LoadDefaultAccounts();
+            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
         }
 
         private void EnableDisableButtons()
@@ -162,6 +197,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 dgAccounts.Rows.Remove(row);
             }
 
+            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
         }
 
         private void RemoveDefaultAccounts()
@@ -187,6 +223,8 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 });
                 dgDefaultAccounts.Rows.Remove(row);
             }
+
+            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
         }
 
         private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
