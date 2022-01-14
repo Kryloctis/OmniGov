@@ -113,10 +113,11 @@ namespace ACC.Data
                         var parameters = new object[][]
                         {
                             new object[] { "@journals_id",DbType.Int32, item.JournalId},
+                            new object[] { "@funds_id", DbType.Int32, item.fundId},
                             new object[] { "@general_ledger_accounts_id",DbType.Int32, item.AccountId }
                         };
 
-                        string query = $"INSERT INTO {tableName} (journals_id, general_ledger_accounts_id) VALUES (@journals_id, @general_ledger_accounts_id)";
+                        string query = $"INSERT INTO {tableName} (journals_id, funds_id, general_ledger_accounts_id) VALUES (@journals_id, @funds_id, @general_ledger_accounts_id)";
 
                         _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                     }
