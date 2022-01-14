@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,6 +16,18 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             InitializeComponent();
             btnRemoveDefaultAccount.Enabled = false;
             btnSetDefaultAccount.Enabled = false;
+        }
+
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                cmbxFunds.Tag.ToString()
+            };
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
         }
 
         private int NumberOfDefaultAccounts()
@@ -110,6 +123,19 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         }
 
+        private void LoadFunds()
+        {
+            try
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void LoadDefaultAccounts()
         {
             CreateDatagridViewColumns(dgDefaultAccounts);
@@ -134,13 +160,17 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-            Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
-            var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
-            lblJournalName.Text = dtJournals["journal_name"].ToString();
-            LoadAccounts();
-            LoadDefaultAccounts();
-            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
+            if (!DesignMode)
+            {
+                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+                Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
+                var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
+                lblJournalName.Text = dtJournals["journal_name"].ToString();
+                LoadFunds();
+                LoadAccounts();
+                LoadDefaultAccounts();
+                lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
+            }
         }
 
         private void EnableDisableButtons()
@@ -241,15 +271,24 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         {
             try
             {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return false;
+                }
+
+
                 var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
 
                 foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
                 {
                     int accountId = Convert.ToInt32(item.Cells["id"].Value);
+                    int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
 
                     var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
                     {
                         JournalId = journalId,
+                        fundId = fundId,
                         AccountId = accountId
                     };
 
@@ -272,6 +311,23 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             {
                 Helper.MessageBoxSuccess("Default Accounts has been saved.");
             }
+        }
+
+
+        private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFunds.Text))
+            {
+                cmbxFunds.Tag = Helper.ErrorMessage("Fund");
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
         }
     }
 }
