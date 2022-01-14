@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,20 +18,67 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             btnSetDefaultAccount.Enabled = false;
         }
 
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                cmbxFunds.Tag.ToString()
+            };
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private int NumberOfDefaultAccounts()
         {
             switch (journalId)
             {
                 case 2:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 3:
-                    return 2;
+                    {
+                        int noOfmaxDefaultAccount = 2;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 4:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 5:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 case 6:
-                    return 3;
+                    {
+                        int noOfmaxDefaultAccount = 3;
+                        int noOfExistedDefaultAccounts = dgDefaultAccounts.Rows.Count;
+
+                        int remaining = noOfmaxDefaultAccount - noOfExistedDefaultAccounts;
+
+                        return remaining;
+                    }
                 default:
                     return 0;
             }
@@ -75,6 +123,19 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         }
 
+        private void LoadFunds()
+        {
+            try
+            {
+                var dtFunds = Factory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void LoadDefaultAccounts()
         {
             CreateDatagridViewColumns(dgDefaultAccounts);
@@ -99,13 +160,17 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-            Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
-            var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
-            lblJournalName.Text = dtJournals["journal_name"].ToString();
-            lblAccountCounter.Text = $"Maximum Number of Default Accounts: {NumberOfDefaultAccounts()}";
-            LoadAccounts();
-            LoadDefaultAccounts();
+            if (!DesignMode)
+            {
+                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+                Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
+                var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
+                lblJournalName.Text = dtJournals["journal_name"].ToString();
+                LoadFunds();
+                LoadAccounts();
+                LoadDefaultAccounts();
+                lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
+            }
         }
 
         private void EnableDisableButtons()
@@ -162,6 +227,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 dgAccounts.Rows.Remove(row);
             }
 
+            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
         }
 
         private void RemoveDefaultAccounts()
@@ -187,6 +253,8 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 });
                 dgDefaultAccounts.Rows.Remove(row);
             }
+
+            lblAccountCounter.Text = NumberOfDefaultAccounts().ToString();
         }
 
         private void btnSetDefaultAccount_Click(object sender, System.EventArgs e)
@@ -203,15 +271,24 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         {
             try
             {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(GetFormErrors());
+                    return false;
+                }
+
+
                 var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
 
                 foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
                 {
                     int accountId = Convert.ToInt32(item.Cells["id"].Value);
+                    int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
 
                     var journalsDefaulAccountsModel = new JournalsDefaultAccountsModel()
                     {
                         JournalId = journalId,
+                        fundId = fundId,
                         AccountId = accountId
                     };
 
@@ -234,6 +311,23 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             {
                 Helper.MessageBoxSuccess("Default Accounts has been saved.");
             }
+        }
+
+
+        private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbxFunds.Text))
+            {
+                cmbxFunds.Tag = Helper.ErrorMessage("Fund");
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
         }
     }
 }
