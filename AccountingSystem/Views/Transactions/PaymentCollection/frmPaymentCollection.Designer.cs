@@ -44,6 +44,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmdCollector = new System.Windows.Forms.ComboBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
             this.statusStrip2.SuspendLayout();
@@ -62,7 +64,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(1060, 58);
+            this.toolStrip.Size = new System.Drawing.Size(1097, 58);
             this.toolStrip.TabIndex = 8;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -104,7 +106,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // btnrefresh
             // 
-            this.btnrefresh.Enabled = false;
             this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
             this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -117,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(522, 22);
+            this.txtsearch.Location = new System.Drawing.Point(559, 22);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(207, 23);
@@ -130,19 +131,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpayments.Location = new System.Drawing.Point(10, 60);
+            this.dgpayments.Location = new System.Drawing.Point(12, 60);
             this.dgpayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgpayments.Name = "dgpayments";
             this.dgpayments.RowHeadersWidth = 51;
             this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1038, 474);
+            this.dgpayments.Size = new System.Drawing.Size(1075, 474);
             this.dgpayments.TabIndex = 12;
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
             // 
             // dtpdate
             // 
             this.dtpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpdate.Location = new System.Drawing.Point(841, 22);
+            this.dtpdate.Location = new System.Drawing.Point(878, 22);
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
             this.dtpdate.Size = new System.Drawing.Size(207, 23);
@@ -154,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(477, 26);
+            this.label6.Location = new System.Drawing.Point(514, 26);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 15);
             this.label6.TabIndex = 13;
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblTotalAmount});
             this.statusStrip2.Location = new System.Drawing.Point(0, 540);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1060, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(1097, 22);
             this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 36;
             this.statusStrip2.Text = "statusStrip2";
@@ -206,18 +207,42 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(736, 26);
+            this.label1.Location = new System.Drawing.Point(773, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 15);
             this.label1.TabIndex = 13;
             this.label1.Text = "Date of Collection";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(200, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 15);
+            this.label7.TabIndex = 38;
+            this.label7.Text = "Collecting Officer";
+            // 
+            // cmdCollector
+            // 
+            this.cmdCollector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmdCollector.FormattingEnabled = true;
+            this.cmdCollector.Location = new System.Drawing.Point(306, 22);
+            this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmdCollector.Name = "cmdCollector";
+            this.cmdCollector.Size = new System.Drawing.Size(195, 23);
+            this.cmdCollector.TabIndex = 37;
+            this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
             // 
             // frmPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.ClientSize = new System.Drawing.Size(1097, 562);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cmdCollector);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -261,5 +286,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.ComboBox cmdCollector;
     }
 }

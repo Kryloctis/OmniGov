@@ -309,7 +309,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbFPP.Size = new System.Drawing.Size(492, 23);
             this.cmbFPP.TabIndex = 26;
             this.cmbFPP.SelectedValueChanged += new System.EventHandler(this.cmbFPP_SelectedValueChanged);
-
             this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating_1);
             this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);

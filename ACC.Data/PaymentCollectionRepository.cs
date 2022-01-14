@@ -68,6 +68,19 @@ namespace ACC.Data
             return record;
         }
 
+        public DataTable GetRecordsByCollectingOfficerId(int collectorId)
+        {
+            var parameter = new object[][] {
+                new object[] {"@collectorId", DbType.Int32, collectorId}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId";
+
+            var dt = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+
+        }
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
@@ -412,6 +425,6 @@ namespace ACC.Data
             }
         }
 
-    
+
     }
 }
