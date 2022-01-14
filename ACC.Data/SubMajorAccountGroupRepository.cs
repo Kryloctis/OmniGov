@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -37,7 +36,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-        
+
 
         public DataTable GetRecordsByMajorAccountId(short majorAccountId)
         {
@@ -65,21 +64,14 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsByMajorAccountId(short majorAccountId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Byte, majorAccountId},
-                };
+                new object[] { "@id", DbType.Byte, majorAccountId},
+            };
 
-                string query = $"SELECT sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE major_account_group_id =  @id";
+            string query = $"SELECT sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE major_account_group_id =  @id";
 
-                return _dbGenericCommands.ExecuteReader(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.ExecuteReader(query, parameters);
         }
 
         public bool IdExist(int id)

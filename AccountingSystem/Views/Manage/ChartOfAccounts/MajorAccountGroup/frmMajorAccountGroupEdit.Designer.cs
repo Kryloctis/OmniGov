@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.ucMajorAccountGroup1 = new AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +75,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // ucMajorAccountGroup1
+            // 
+            this.ucMajorAccountGroup1.Location = new System.Drawing.Point(12, 11);
+            this.ucMajorAccountGroup1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucMajorAccountGroup1.Name = "ucMajorAccountGroup1";
+            this.ucMajorAccountGroup1.Size = new System.Drawing.Size(456, 86);
+            this.ucMajorAccountGroup1.TabIndex = 6;
+            // 
             // frmMajorAccountGroupEdit
             // 
             this.AcceptButton = this.btnSave;
@@ -82,6 +91,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(465, 130);
+            this.Controls.Add(this.ucMajorAccountGroup1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -99,6 +109,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         #endregion
 
+        private Manage.ChartOfAccounts.MajorAccountGroup.UcMajorAccountGroup ucMajorAccountGroup1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

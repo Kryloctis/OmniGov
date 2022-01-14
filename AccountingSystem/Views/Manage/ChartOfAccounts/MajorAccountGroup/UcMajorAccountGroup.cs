@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Data;
-using ACC.Domain.Interfaces;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
@@ -84,6 +84,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-      
+
     }
 }

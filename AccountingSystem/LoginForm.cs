@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem
@@ -24,6 +18,7 @@ namespace AccountingSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             Image visibleImage = Properties.Resources.visible_16px;
             string username = txtUsername.Text;
             string password = txtPassword.Text;
@@ -45,9 +40,10 @@ namespace AccountingSystem
                 txtPassword.Clear();
                 btnVisibility.Image = visibleImage;
                 txtPassword.PasswordChar = '•';
+                Cursor = Cursors.Default;
                 return;
             }
-
+            Cursor = Cursors.Default;
             Helper.MessageBoxError("Incorrect username or password.");
         }
 

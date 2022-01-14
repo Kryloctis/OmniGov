@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -12,7 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "account_group";
-        
+
         public AccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -49,22 +48,15 @@ namespace ACC.Data
 
             return record;
         }
-       
+
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName}";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtJournals = new DataTable();
+            return _dbGenericCommands.Fill(query, dtJournals);
         }
-        
+
 
         public DataTable GetRecordsBySearch(string searchText)
         {
