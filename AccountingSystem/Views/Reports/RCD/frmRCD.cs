@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
@@ -112,11 +113,14 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             txtRCDNo.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
+            panelRCD.Enabled = true;
+
+            btnPrint.Enabled = false;
+            btnCancelPrint.Enabled = false;
 
             btnRemove.Enabled = false;
 
             dgListOfApprovedReport.Rows.Clear();
-            panelRCD.Enabled = true;
         }
 
         private bool SaveData()
@@ -124,9 +128,9 @@ namespace AccountingSystem.Views.Reports.RCD
 
             using (var scope = new TransactionScope())
             {
-                if (ValidateInputs())
+                if (!ValidateChildren())
                 {
-                    Helper.MessageBoxError("Please add collector's report and RCD number.");
+                    Helper.MessageBoxError(GetFormErrors());
                     return false;
                 }
 
@@ -166,12 +170,6 @@ namespace AccountingSystem.Views.Reports.RCD
             var rcdNo = txtRCDNo.Text;
             int generalCollectionId = Factory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
             return generalCollectionId;
-        }
-         
-        private bool ValidateInputs()
-        {
-            bool hasError = String.IsNullOrEmpty(txtRCDNo.Text) || dgListOfApprovedReport.Rows.Count == 0;
-            return hasError;
         }
 
         private void btnDeposit_Click(object sender, EventArgs e)
@@ -224,7 +222,48 @@ namespace AccountingSystem.Views.Reports.RCD
             lblRecordCount.Text = reportQuantity.ToString();
             lblTotalAmount.Text = totalCollections.ToString("N2");
         }
-     
+
+        private void btnCancelPrint_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Do you want to cancel printing."))
+            {
+                ResetForm();
+            }
+        }
+
+
+        #region Validations
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epRCDNo.GetError(txtRCDNo);
+            errorArray[1] = epDgCollectorRepor.GetError(dgListOfApprovedReport);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+       
+        private void txtRCDNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epRCDNo, txtRCDNo, "RCD No.");
+        }
+
+        private void txtRCDNo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epRCDNo, txtRCDNo);
+        }
+
+        private void dgListOfApprovedReport_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Approved.");
+        }
+        private void dgListOfApprovedReport_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport);
+        }
+
+
+        #endregion
 
     }
 }
