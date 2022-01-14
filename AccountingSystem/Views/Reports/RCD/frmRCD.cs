@@ -1,9 +1,7 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Reports.PaymentCollection;
 using AccountingSystem.Views.Reports.RCD.Liquidating;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 using System.Windows.Forms;
@@ -13,14 +11,10 @@ namespace AccountingSystem.Views.Reports.RCD
     public partial class frmRCD : Form
     {
         internal ushort collectorId;
-        internal int collectorsReportId;
         internal sbyte fundId;
-        internal string reportNo;
-        internal string rcdNo;
         internal string rcdId;
         internal short reportQuantity;
         internal DateTime date;
-        private List<GeneralCollectionsModel> data;
 
         public frmRCD()
         {

@@ -367,9 +367,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpdate;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button btnadd;
-        internal System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Panel panelRCD;
         private System.Windows.Forms.DataGridViewTextBoxColumn reportId;
         private System.Windows.Forms.DataGridViewTextBoxColumn collecting_officer;
@@ -377,12 +375,9 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         internal System.Windows.Forms.Button btnRemove;
         internal System.Windows.Forms.DataGridView dgListOfApprovedReport;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblQuantity;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
-        private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -34,23 +35,43 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         {
             try
             {
-                string accountableOfficer = "ARCHIE S. SALE";
-                string treasurer = "ENSIGN S. UBA";
-                var totalCashAmount = 5000;
-                var totalChecksAmount = 5000;
-                var totamAmount = 5000;
+                Cursor = Cursors.WaitCursor;
+                string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
+                string verificationSignatory = string.Empty;
+                string verificationSignatoryTitle = string.Empty;
+
+                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                {
+                    if (dictSignatory.Count > 0)
+                    {
+                        string prefix = dictSignatory["signatories_prefix"].ToString();
+                        string firstName = dictSignatory["signatories_first_name"].ToString();
+                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
+                        string lastName = dictSignatory["signatories_last_name"].ToString();
+                        string suffix = dictSignatory["signatories_suffix"].ToString();
+
+                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+                        signatory = signatoryName;
+                        signatoryTitle = dictSignatory["signatories_title"];
+                    }
+                }
+
+                ParseSignatory(dictVerification, ref verificationSignatory, ref verificationSignatoryTitle);
+
                 var lguDetails = Helper.LGUDetails();
+                var totalChecksAmount = 0;
+
 
                 var parameters = new[]
                 {
                     new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
                     new ReportParameter("paramAccountableOfficer", value:accountableOfficer),
-                    new ReportParameter("paramTreasurer", value:treasurer),
+                    new ReportParameter("paramVerificationSignatory", verificationSignatory),
                     new ReportParameter("paramSummaryDate", DateTime.Now.ToString()),
                     new ReportParameter("paramDate", DateTime.Now.ToString()),
-                    new ReportParameter("paramTotalCash", value:totalCashAmount.ToString()),
-                    new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString()),
-                    new ReportParameter("paramTotal", value:totamAmount.ToString())
+                    new ReportParameter("paramTotalCheck", value:totalChecksAmount.ToString())
                 };
 
                 report.ReportPath = $"{Application.StartupPath}Reports\\rcd.rdlc";

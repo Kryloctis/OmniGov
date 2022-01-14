@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI.Find
@@ -16,6 +9,7 @@ namespace AccountingSystem.Views.Transactions.RCI.Find
         internal string selectedValue = string.Empty;
         internal string table = string.Empty;
         private ucRCI frmrci;
+
         public frmFind(ucRCI ? rci, string ? find)
         {
             InitializeComponent();
