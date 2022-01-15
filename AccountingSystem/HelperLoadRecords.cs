@@ -1150,7 +1150,6 @@ namespace AccountingSystem
                 };
 
                 datagrid.Rows.Add(items);
-                Helper.DatagridDefaultStyle(datagrid, true);
                 datagrid.ClearSelection();
             }
 

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Windows.Forms;
-using ACC.Domain.Models;
-using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification;
-using AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject;
-using System.Data;
+using AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService;
 using AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject
 {
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
-        private void ShowOthersFPP() 
+        private void ShowOthersFPP()
         {
             int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
             var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
@@ -199,10 +199,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgFunctionalClassification);
-            Helper.DatagridDefaultStyle(dgFuntionalClassificationService);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalClassification, true);
+            Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationService, true);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
             LoadFunctionalClassificationServicesRecords();
-            Helper.DatagridDefaultStyle(dgFunctionalProgramProject);
+
 
             LoadSectorNameComboBox();
             LoadFunctionalClassificationServicesRecordsByGroup();
@@ -359,7 +361,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-     
+
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -426,7 +428,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 DeleteFunctionProgramProjectDGRecords();
         }
 
-        private void toolStripBtnOthers_Click(object sender, EventArgs e) 
+        private void toolStripBtnOthers_Click(object sender, EventArgs e)
         {
             ShowOthersFPP();
         }
@@ -449,7 +451,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 
-            if (dgFunctionalProgramProject.SelectedRows.Count == 1) 
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1)
                 btnSubFPP.Enabled = true;
             else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
                 btnSubFPP.Enabled = false;
@@ -474,7 +476,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-     
 
         private void btnLoadAll_Click(object sender, EventArgs e)
         {
@@ -486,16 +487,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFunctionalClassificationServicesRecordsByGroup();
         }
 
-		private void dgFuntionalClassificationService_SelectionChanged_1(object sender, EventArgs e)
-		{
+        private void dgFuntionalClassificationService_SelectionChanged_1(object sender, EventArgs e)
+        {
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgFuntionalClassificationService, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFuntionalClassificationService, btnEdit, btnDelete);
         }
-       
+
         private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             ShowOthersFPP();
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
