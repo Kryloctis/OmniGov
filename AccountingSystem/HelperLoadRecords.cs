@@ -1095,20 +1095,6 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
         }
 
-        internal static void FunctionProjectProgramDatagridView(DataTable dataTable, DataGridView datagrid)
-        {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["service_name"].Visible = false;
-            datagrid.Columns["fpp_code"].HeaderText = "Code";
-            datagrid.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            datagrid.Columns["fpp_name"].HeaderText = "Name";
-            datagrid.Columns["is_special"].Visible = false;
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            Helper.DatagridDefaultStyle(datagrid, true);
-        }
-
         internal static void frmFunctionProjectProgramDatagridView(DataTable dataTable, DataGridView datagrid)
         {
 
@@ -1162,7 +1148,6 @@ namespace AccountingSystem
                 };
 
                 datagrid.Rows.Add(items);
-                datagrid.ClearSelection();
             }
 
         }

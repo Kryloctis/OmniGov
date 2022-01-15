@@ -190,18 +190,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(8, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 15);
+            this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Load by Service Name";
+            this.label2.Text = "Service Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbServiceName
             // 
             this.cmbServiceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbServiceName.FormattingEnabled = true;
-            this.cmbServiceName.Location = new System.Drawing.Point(138, 9);
+            this.cmbServiceName.Location = new System.Drawing.Point(93, 9);
             this.cmbServiceName.Name = "cmbServiceName";
-            this.cmbServiceName.Size = new System.Drawing.Size(237, 23);
+            this.cmbServiceName.Size = new System.Drawing.Size(346, 23);
             this.cmbServiceName.TabIndex = 19;
             // 
             // dgFunctionalProgramProject
@@ -239,18 +239,18 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 15);
+            this.label1.Size = new System.Drawing.Size(75, 15);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Load by Sector Name";
+            this.label1.Text = "Sector Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cmbSectorName
             // 
             this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSectorName.FormattingEnabled = true;
-            this.cmbSectorName.Location = new System.Drawing.Point(134, 10);
+            this.cmbSectorName.Location = new System.Drawing.Point(89, 10);
             this.cmbSectorName.Name = "cmbSectorName";
-            this.cmbSectorName.Size = new System.Drawing.Size(237, 23);
+            this.cmbSectorName.Size = new System.Drawing.Size(330, 23);
             this.cmbSectorName.TabIndex = 16;
             this.cmbSectorName.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted_2);
             // 
