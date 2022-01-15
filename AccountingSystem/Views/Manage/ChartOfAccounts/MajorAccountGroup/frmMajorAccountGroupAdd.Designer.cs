@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             // 
             // ucMajorAccountGroup1
             // 
-            this.ucMajorAccountGroup1.Location = new System.Drawing.Point(10, 9);
+            this.ucMajorAccountGroup1.Location = new System.Drawing.Point(12, 11);
             this.ucMajorAccountGroup1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucMajorAccountGroup1.Name = "ucMajorAccountGroup1";
             this.ucMajorAccountGroup1.Size = new System.Drawing.Size(453, 83);
