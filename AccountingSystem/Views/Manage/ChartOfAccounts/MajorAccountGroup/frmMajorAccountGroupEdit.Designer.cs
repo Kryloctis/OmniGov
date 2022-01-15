@@ -99,7 +99,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
 
         #endregion
 
-        private UcMajorAccountGroup ucMajorAccountGroup1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
