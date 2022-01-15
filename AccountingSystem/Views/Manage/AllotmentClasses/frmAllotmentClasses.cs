@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
@@ -16,6 +10,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         public frmAllotmentClasses()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
         internal void LoadRecords()
         {
@@ -29,14 +24,14 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void frmAllotmentClasses_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgAllotmentClasses);
+            Helper.DatagridEditableRowStyle(dgAllotmentClasses, true);
+            dgAllotmentClasses.ShowCellToolTips = false;
             LoadRecords();
         }
-       
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentClassesAdd(this).ShowDialog();
@@ -47,6 +42,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             int allotmentId = int.Parse(dgAllotmentClasses.SelectedCells[0].Value.ToString());
             _ = new frmAllotmentClassesEdit(this, allotmentId).ShowDialog();
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowsCount = dgAllotmentClasses.SelectedRows.Count;
