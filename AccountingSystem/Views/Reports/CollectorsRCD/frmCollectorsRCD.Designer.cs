@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
@@ -38,26 +37,17 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ucCollectorsRCD1 = new AccountingSystem.Views.Reports.RCDCollector.ucCollectorsRCD();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ucCollectorsRCD1
-            // 
-            this.ucCollectorsRCD1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 75);
-            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
-            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 520);
-            this.ucCollectorsRCD1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -71,6 +61,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove,
             this.toolStripSeparator3,
             this.btnPrint,
+            this.btnCancelPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -150,6 +141,18 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
+            this.btnCancelPrint.Text = "Cancel";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -182,7 +185,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(722, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(841, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -214,14 +217,24 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.lblShowMessage.Visible = false;
             this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
             // 
+            // ucCollectorsRCD1
+            // 
+            this.ucCollectorsRCD1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucCollectorsRCD1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucCollectorsRCD1.Location = new System.Drawing.Point(0, 72);
+            this.ucCollectorsRCD1.Name = "ucCollectorsRCD1";
+            this.ucCollectorsRCD1.Size = new System.Drawing.Size(916, 521);
+            this.ucCollectorsRCD1.TabIndex = 16;
+            // 
             // frmCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(916, 593);
+            this.Controls.Add(this.ucCollectorsRCD1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucCollectorsRCD1);
             this.MinimizeBox = false;
             this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
@@ -239,8 +252,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         }
 
         #endregion
-
-        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
@@ -253,8 +264,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
         internal System.Windows.Forms.ToolStripStatusLabel lblShowMessage;
         internal System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
+        internal RCDCollector.ucCollectorsRCD ucCollectorsRCD1;
+        internal System.Windows.Forms.ToolStripButton btnCancelPrint;
     }
 }

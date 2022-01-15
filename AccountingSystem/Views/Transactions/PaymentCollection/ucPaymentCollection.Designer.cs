@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.cmdCollector = new System.Windows.Forms.ComboBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCollectingOfficer = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbAccountableForms = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
@@ -58,8 +58,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dtCashTicketDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.epFund = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAccountableForm = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPayee = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epSerialNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAbstractOfGeneralCollection = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epORAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCashTicketQuantity = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCashTicketAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epORDateOfCollection = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCashTicketDateOfCollection = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPaymentType.SuspendLayout();
@@ -67,6 +77,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFund)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSerialNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAbstractOfGeneralCollection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epORAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epORDateOfCollection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketDateOfCollection)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -172,6 +192,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtAmount.TabIndex = 7;
             this.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtAmount.ThousandsSeparator = true;
+            this.txtAmount.Validating += new System.ComponentModel.CancelEventHandler(this.txtAmount_Validating);
+            this.txtAmount.Validated += new System.EventHandler(this.txtAmount_Validated);
             // 
             // label7
             // 
@@ -195,9 +217,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmdCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
             this.cmdCollector.Validated += new System.EventHandler(this.cmbcollector_Validated);
             // 
-            // errorProvider
+            // epCollectingOfficer
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epCollectingOfficer.ContainerControl = this;
             // 
             // cmbAccountableForms
             // 
@@ -332,6 +354,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.txtCashTicketsAmount.Size = new System.Drawing.Size(371, 23);
             this.txtCashTicketsAmount.TabIndex = 13;
             this.txtCashTicketsAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCashTicketsAmount.Validating += new System.ComponentModel.CancelEventHandler(this.txtCashTicketsAmount_Validating);
+            this.txtCashTicketsAmount.Validated += new System.EventHandler(this.txtCashTicketsAmount_Validated);
             // 
             // txtCashTicketQuantity
             // 
@@ -387,10 +411,51 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label16.TabIndex = 9;
             this.label16.Text = "Cash Tickets Quantity";
             // 
+            // epFund
+            // 
+            this.epFund.ContainerControl = this;
+            // 
+            // epAccountableForm
+            // 
+            this.epAccountableForm.ContainerControl = this;
+            // 
+            // epPayee
+            // 
+            this.epPayee.ContainerControl = this;
+            // 
+            // epSerialNo
+            // 
+            this.epSerialNo.ContainerControl = this;
+            // 
+            // epAbstractOfGeneralCollection
+            // 
+            this.epAbstractOfGeneralCollection.ContainerControl = this;
+            // 
+            // epORAmount
+            // 
+            this.epORAmount.ContainerControl = this;
+            // 
+            // epCashTicketQuantity
+            // 
+            this.epCashTicketQuantity.ContainerControl = this;
+            // 
+            // epCashTicketAmount
+            // 
+            this.epCashTicketAmount.ContainerControl = this;
+            // 
+            // epORDateOfCollection
+            // 
+            this.epORDateOfCollection.ContainerControl = this;
+            // 
+            // epCashTicketDateOfCollection
+            // 
+            this.epCashTicketDateOfCollection.ContainerControl = this;
+            // 
             // ucPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -398,7 +463,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Size = new System.Drawing.Size(589, 309);
             this.Load += new System.EventHandler(this.ucPaymentCollection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -409,6 +474,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabCashTickets.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketsAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashTicketQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFund)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSerialNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAbstractOfGeneralCollection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epORAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epORDateOfCollection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCashTicketDateOfCollection)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -426,7 +501,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal System.Windows.Forms.TextBox txtreceipt;
         internal System.Windows.Forms.DateTimePicker dtDateOfCollection;
         internal System.Windows.Forms.NumericUpDown txtAmount;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epCollectingOfficer;
         internal System.Windows.Forms.ComboBox cmdCollector;
         internal System.Windows.Forms.ComboBox cmbAccountableForms;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -443,5 +518,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal System.Windows.Forms.NumericUpDown txtCashTicketQuantity;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.NumericUpDown txtCashTicketsAmount;
+        private System.Windows.Forms.ErrorProvider epFund;
+        private System.Windows.Forms.ErrorProvider epAccountableForm;
+        private System.Windows.Forms.ErrorProvider epPayee;
+        private System.Windows.Forms.ErrorProvider epSerialNo;
+        private System.Windows.Forms.ErrorProvider epAbstractOfGeneralCollection;
+        private System.Windows.Forms.ErrorProvider epORAmount;
+        private System.Windows.Forms.ErrorProvider epCashTicketQuantity;
+        private System.Windows.Forms.ErrorProvider epCashTicketAmount;
+        private System.Windows.Forms.ErrorProvider epORDateOfCollection;
+        private System.Windows.Forms.ErrorProvider epCashTicketDateOfCollection;
     }
 }

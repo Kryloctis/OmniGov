@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PaymentCollection
@@ -23,27 +17,63 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            LoadCollectors();
+        }
+
+        private void LoadCollectors()
+        {
+            try
+            {
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var dtCollectors = collectingOfficerRepository.GetRecords();
+
+                cmdCollector.DataSource = dtCollectors;
+                cmdCollector.DisplayMember = "fullname";
+                cmdCollector.ValueMember = "id";
+
+                cmdCollector.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentCollectionAdd(this).ShowDialog();
         }
+
         internal void LoadRecords()
         {
             try
             {
+                string date = dtpdate.Value.ToString("yyyy-MM-dd");
+
                 var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments = pcRepository.GetRecords();
+                var dtpayments  = pcRepository.GetRecordsByDate(date);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                SetStatusStrip();
             }
             catch (Exception ex) 
             {
                 Helper.MessageBoxError(ex.Message); 
             }
+        }
+
+        internal void SetStatusStrip()
+        {
+            decimal totalCollections = 0.0m;
+            int paymentQuantity;
+
+            foreach (DataGridViewRow row in dgpayments.Rows)
+                totalCollections += Convert.ToDecimal(row.Cells["amount"].Value);
+
+            paymentQuantity = (short)dgpayments.Rows.Count;
+            lblRecordCount.Text = paymentQuantity.ToString();
+            lblTotalAmount.Text = totalCollections.ToString("N2");
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -79,6 +109,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
                         }
                     }
+
+                    LoadRecords();
                 }
             }
             catch (Exception ex)
@@ -117,6 +149,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
 
                 var crRepository = Factory.CollectorReportRepository();
+
                 btnEdit.Enabled = crRepository.HasReported(id) ? false : true;
                 btnDelete.Enabled = crRepository.HasReported(id) ? false : true;
             }
@@ -125,13 +158,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
             }
-            
         }
 
         private void btnrefresh_Click(object sender, EventArgs e)
         {
             txtsearch.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
+            cmdCollector.SelectedIndex = -1;
             LoadRecords();
         }
 
@@ -139,14 +172,31 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                string date = String.Format("{0:yyyy-MM-dd}", dtpdate.Value);
-                var dtpayments = Factory.PaymentCollectionRepository().GetRecords(date);
+                string date = dtpdate.Value.ToString("yyyy-MM-dd");
+                var dtpayments = Factory.PaymentCollectionRepository().GetRecordsByDate(date);
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
-                lblRecordCount.Text = dgpayments.Rows.Count.ToString();
+                SetStatusStrip();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var paymentCollectionDt = paymentCollectionRepo.GetRecordsByCollectingOfficerId(collectorId);
+
+                HelperLoadRecords.PaymentDatagridView(paymentCollectionDt, dgpayments);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+ 
     }
 }

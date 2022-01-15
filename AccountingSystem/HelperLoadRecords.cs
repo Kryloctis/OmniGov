@@ -445,6 +445,18 @@ namespace AccountingSystem
             datagrid.Columns[5].HeaderText = "Quantity";
             datagrid.Columns[6].HeaderText = "User/Officer";
 
+            datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns[6].SortMode = DataGridViewColumnSortMode.NotSortable;
+
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

@@ -210,14 +210,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnSelectCollections;
         private System.Windows.Forms.TextBox txtCollectionsCount;
         private System.Windows.Forms.MonthCalendar dtto;
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.MonthCalendar dtfrom;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label lblCollectionsFrom;
         private System.Windows.Forms.Label lblCollectionsTo;
     }

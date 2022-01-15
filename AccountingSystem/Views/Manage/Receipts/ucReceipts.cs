@@ -16,9 +16,9 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int Id = 0;
         internal int UserId = 0;
         internal int AccId = 0;
-        internal int startreceipt = 0;
-        internal int maxreceipt = 0;
-        internal bool istickets = false;
+        internal int fromSerialNo = 0;
+        internal int toSerialNo = 0;
+        internal bool isTicket = false;
         public ucReceipts()
         {
             InitializeComponent();
@@ -26,11 +26,11 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
-            errorArray[0] = errorProvider.GetError(cmbforms);
-            errorArray[1] = errorProvider.GetError(txtfrom);
-            errorArray[2] = errorProvider.GetError(txtto);
-            errorArray[3] = errorProvider.GetError(dtpreceived);
-            errorArray[4] = errorProvider.GetError(txtquantity);
+            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
+            errorArray[1] = errorProvider.GetError(txtORFrom);
+            errorArray[2] = errorProvider.GetError(txtORTo);
+            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
+            errorArray[4] = errorProvider.GetError(txtQuantity);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -38,12 +38,12 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal void ResetForm()
         {
             AccId = 0;
-            cmbforms.SelectedIndex = -1;
-            txtfrom.Text = string.Empty;
-            txtto.Text = string.Empty;
-            dtpreceived.Value = DateTime.Now;
-            txtquantity.Text = string.Empty;
-            txtremarks.Text = string.Empty;
+            cmbAccountableForms.SelectedIndex = -1;
+            txtORFrom.Text = string.Empty;
+            txtORTo.Text = string.Empty;
+            dtpReceivedDate.Value = DateTime.Now;
+            txtQuantity.Text = string.Empty;
+            txtRemark.Text = string.Empty;
         }
 
         internal void LoadForms()
@@ -52,32 +52,36 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var formRepository = Factory.AccountableRepository();
                 var dtforms = formRepository.GetRecords();
+
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbforms.DataSource = dtforms;
-                cmbforms.ValueMember = "id";
-                cmbforms.DisplayMember = "formdisplay";
+                cmbAccountableForms.DataSource = dtforms;
+                cmbAccountableForms.ValueMember = "id";
+                cmbAccountableForms.DisplayMember = "formdisplay";
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void cmbforms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbforms, "Accountable Form!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form!");
         }
 
         private void cmbforms_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbforms);
+            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
         }
 
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
-            if (!istickets)
+            if (!isTicket)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtfrom, "Receipt Number From!");
-                if (Convert.ToInt32(txtfrom.Text.Trim()) <= maxreceipt || Convert.ToInt32(txtfrom.Text.Trim()) <= 0)
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORFrom, "Receipt Number From!");
+                if (Convert.ToInt32(txtORFrom.Text.Trim()) <= toSerialNo || Convert.ToInt32(txtORFrom.Text.Trim()) <= 0)
                 {
-                    errorProvider.SetError(txtfrom, "Invalid Receipt Number!");
+                    errorProvider.SetError(txtORFrom, "Invalid Receipt Number!");
                     e.Cancel = true;
                 }
             }
@@ -85,31 +89,31 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtfrom);
+            Helper.ClearErrorTextBox(errorProvider, txtORFrom);
         }
 
         private void txtto_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtto);
+            Helper.ClearErrorTextBox(errorProvider, txtORTo);
         }
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            if (!istickets)
+            if (!isTicket)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtto, "Receipt Number To!");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORTo, "Receipt Number To!");
             }
             
         }
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtquantity, "Quantity!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtQuantity, "Quantity!");
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtquantity);
+            Helper.ClearErrorTextBox(errorProvider, txtQuantity);
         }
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
@@ -133,82 +137,85 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtquantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
 
         private void txtfrom_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
-            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
+            int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
+            int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
             //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
-            txtquantity.Text = (((to - from) + 1) < 0 ? 0: ((to - from) + 1)).ToString();
+            txtQuantity.Text = (((to - from) + 1) < 0 ? 0: ((to - from) + 1)).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
-            int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-            txtquantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
+            int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
+            int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
+            txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
         }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbforms.SelectedIndex != -1)
+            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+
+            if (item == null)
+                return;
+
+            if (item[2].ToString().Contains("Tickets"))
             {
-                DataRowView item = cmbforms.SelectedItem as DataRowView;
-                if (item != null)
-                {
-                    if (item[2].ToString().Contains("Tickets"))
-                    {
-                        istickets = true;
-                        txtfrom.Enabled = false;
-                        txtto.Enabled = false;
-                        txtquantity.ReadOnly = false;
+                isTicket = true;
+                txtORFrom.Enabled = false;
+                txtORTo.Enabled = false;
+                txtQuantity.ReadOnly = false;
 
-                        txtfrom.Text = "0";
-                        txtto.Text = "0";
-                        txtquantity.Text = "0";
-                    }
-                    else
-                    {
-                        istickets = false;
-                        txtfrom.Enabled = true;
-                        txtto.Enabled = true;
-                        txtquantity.ReadOnly = true;
-                        var reporeceipt = Factory.ReceiptsRepository();
-                        startreceipt = reporeceipt.RMIN(int.Parse(item[0].ToString()));
-                        maxreceipt = reporeceipt.RMAX(int.Parse(item[0].ToString()));
-                        txtfrom.Text = (maxreceipt + 1).ToString();
+                txtORFrom.Text = "0";
+                txtORTo.Text = "0";
 
-                        int from = txtfrom.Text.Length > 0 ? Convert.ToInt32(txtfrom.Text.Trim()) : 0;
-                        int to = txtto.Text.Length > 0 ? Convert.ToInt32(txtto.Text.Trim()) : 0;
-                        txtquantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
-                    }
 
-                }
+                txtQuantity.Text = string.Empty;
+
+            }
+            else
+            {
+                isTicket = false;
+                txtORFrom.Enabled = true;
+                txtORTo.Enabled = true;
+                txtQuantity.ReadOnly = true;
+
+                var receiptsRepository = Factory.ReceiptsRepository();
+                var accountableFormId = int.Parse(item[0].ToString());
+
+                fromSerialNo = receiptsRepository.RMIN(accountableFormId);
+                toSerialNo = receiptsRepository.RMAX(accountableFormId);
+
+                txtORFrom.Text = (toSerialNo + 1).ToString();
+
+                int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
+                int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
+                txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
             }
         }
 
         private void txtfrom_TextChanged(object sender, EventArgs e)
         {
-            if (!istickets)
+            if (!isTicket)
             {
-                if (txtfrom.Text.Length > 0)
+                if (txtORFrom.Text.Length > 0)
                 {
-                    int num = int.Parse(txtfrom.Text.Trim());
+                    int num = int.Parse(txtORFrom.Text.Trim());
                     if (num > 1)
                     {
-                        txtfrom.Enabled = false;
+                        txtORFrom.Enabled = false;
                     }
                     else
                     {
-                        txtfrom.Enabled = true;
+                        txtORFrom.Enabled = true;
                     }
                 }
             }
             
         }
+
     }
 }

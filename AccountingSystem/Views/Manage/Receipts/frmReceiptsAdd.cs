@@ -1,24 +1,18 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceiptsAdd : Form
     {
-        private frmReceipts frmaf;
+        private readonly frmReceipts frmReceipts;
         private int UserId = 0;
-        public frmReceiptsAdd(frmReceipts _frmaf)
+
+        public frmReceiptsAdd(frmReceipts _frmReceipts)
         {
             InitializeComponent();
-            frmaf = _frmaf;
+            frmReceipts = _frmReceipts;
             UserId = Helper.UserId;
         }
 
@@ -39,25 +33,25 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
                 var receiptModel = new ReceiptsModel()
                 {
-                    AccId = int.Parse(uc.cmbforms.SelectedValue.ToString()),
-                    Rfrom = int.Parse(uc.txtfrom.Text.Trim()),
-                    Rto = int.Parse(uc.txtto.Text.Trim()),
-                    Rdate = uc.dtpreceived.Value,
-                    Quantity = int.Parse(uc.txtquantity.Text.Trim()),
-                    Remarks = uc.txtremarks.Text.Trim(),
+                    AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
+                    Rfrom = int.Parse(uc.txtORFrom.Text.Trim()),
+                    Rto = int.Parse(uc.txtORTo.Text.Trim()),
+                    Rdate = uc.dtpReceivedDate.Value,
+                    Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
+                    Remarks = uc.txtRemark.Text.Trim(),
                     UserId = UserId
                 };
 
                 var receiptRepository = Factory.ReceiptsRepository();
 
-                if (!uc.istickets)
+                if (!uc.isTicket)
                 {
-                    var serialNoFrom = int.Parse(uc.txtfrom.Text.Trim());
-                    var serialNoTo = int.Parse(uc.txtto.Text.Trim());
+                    var serialNoFrom = int.Parse(uc.txtORFrom.Text.Trim());
+                    var serialNoTo = int.Parse(uc.txtORTo.Text.Trim());
 
                     if (serialNoFrom > serialNoTo)
                     {
-                        Helper.MessageBoxError("Invalid Receipt.");
+                        Helper.MessageBoxError("Invalid OR Number.");
                         return false;
                     }
                     else
@@ -83,7 +77,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
-                frmaf.LoadRecords();
+                frmReceipts.LoadRecords();
                 ucForms1.ResetForm();
             }
         }

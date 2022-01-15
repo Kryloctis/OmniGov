@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
     public partial class frmCollectorsRCD : Form
     {
-        private readonly ucCollectorsRCD uc;
+        internal readonly ucCollectorsRCD uc;
         private List<CollectorReportPaymentModel> data;
 
         public frmCollectorsRCD()
@@ -39,28 +39,19 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (uc.dgPayments.Rows.Count == 0) 
-            {
-                Helper.MessageBoxError("Please load payment collections.");
-                return;
-            }
-
             if (uc.isSaveFunction)
             {
                 if (SaveData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
-                }
             }
+
             else
             {
                 if (UpdateData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
-                    uc.ResetForm();
-                }
             }
-            this.Close();
+
+            uc.ResetForm();
         }
 
         private bool UpdateData()
@@ -120,14 +111,20 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
             using (var scope = new TransactionScope())
             {
+
+                var reportCollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue);
+                var reportNo = uc.txtReport.Text.Trim();
+                var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
+                var reportFund = uc.fundId;
+
                 var collectorsReportModel = new CollectorReportModel()
                 {
-                    CollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue),
-                    ReportNo = uc.txtReport.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtRCDDate.Value),
+                    CollectorId = reportCollectorId,
+                    ReportNo = reportNo,
+                    Date = reportDate,
                     IsApproved = 0,
                     IsDisapproved = 0,
-                    FundId = uc.fundId,
+                    FundId = reportFund,
                     Remarks = String.Empty
                 };
 
@@ -174,7 +171,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _ = new frmCollectorsRCDSearch(this, uc).ShowDialog();
         }
 
-
         internal void LoadSelectedValue(string reportNo)
         {
             try
@@ -195,7 +191,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
 
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex)
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
 
@@ -211,6 +210,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = false;
+                        btnCancelPrint.Enabled = false;
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
                         btnDelete.Enabled = true;
@@ -225,6 +225,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = true;
+                        btnCancelPrint.Enabled = true;
                         btnSave.Enabled = true;
                         uc.Enabled = false;
                         btnDelete.Enabled = false;
@@ -238,6 +239,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
                         btnPrint.Enabled = false;
+                        btnCancelPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = true;
                         uc.Enabled = false;
@@ -326,7 +328,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 }
                 return;
             }
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -370,10 +371,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private void ResetLocalControls()
         {
             btnSave.Text = "Save";
+            btnSave.Enabled = true;
             btnDelete.Enabled = false;
             btnApprove.Enabled = false;
             btnDisapprove.Enabled = false;
             btnPrint.Enabled = false;
+            btnCancelPrint.Enabled = false;
 
             lblReportStatus.Text = "--";
             lblReportStatus.ForeColor = Color.Black;
@@ -386,5 +389,16 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             else
                 uc.ActionPerformIsSave(false);
         }
+
+        private void btnCancelPrint_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Do you want to cancel printing."))
+            {
+                ResetLocalControls();
+                uc.ResetForm();
+                uc.Enabled = true;
+            }
+        }
+
     }
 }

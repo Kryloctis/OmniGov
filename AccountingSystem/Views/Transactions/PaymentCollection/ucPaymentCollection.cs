@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int maxReceipt = 0;
         internal int receipt = 0;
 
-       
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue;
@@ -30,15 +29,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[8];
-            errorArray[0] = errorProvider.GetError(cmdCollector);
-            errorArray[1] = errorProvider.GetError(cmbFund);
-            errorArray[2] = errorProvider.GetError(cmbAccountableForms);
-            errorArray[3]= errorProvider.GetError(cmbAccount);
-            errorArray[4] = errorProvider.GetError(txtpayee);
-            errorArray[5] = errorProvider.GetError(txtreceipt);
-            errorArray[6] = errorProvider.GetError(dtDateOfCollection);
-            errorArray[7] = errorProvider.GetError(txtAmount);
+            var errorArray = new string[9];
+            errorArray[0] = epCollectingOfficer.GetError(cmdCollector);
+            errorArray[1] = epFund.GetError(cmbFund);
+            errorArray[2] = epAccountableForm.GetError(cmbAccountableForms);
+            errorArray[3] = epAbstractOfGeneralCollection.GetError(cmbAccount);
+            errorArray[4] = epPayee.GetError(txtpayee);
+            errorArray[5] = epSerialNo.GetError(txtreceipt);
+            errorArray[6] = epCashTicketQuantity.GetError(txtCashTicketQuantity);
+            errorArray[7] = epCashTicketAmount.GetError(txtCashTicketsAmount);
+            errorArray[8] = epORAmount.GetError(txtAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -71,8 +71,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccountableForms.DataSource = dtforms;
                 cmbAccountableForms.ValueMember = "id";
                 cmbAccountableForms.DisplayMember = "formdisplay";
+            } 
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadForms()
@@ -88,7 +91,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccountableForms.DisplayMember = "formdisplay";
                 cmbAccountableForms.SelectedValueChanged += cmbforms_SelectedValueChanged;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         internal void LoadFunds()
@@ -162,43 +168,43 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         #region Validations
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmdCollector, "Collecting Officer.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingOfficer, cmdCollector, "Collecting Officer.");
         }
 
         private void cmbcollector_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmdCollector);
+            Helper.ClearErrorComboBox(epCollectingOfficer, cmdCollector);
         }
 
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFund, "Funds.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbFund, "Funds.");
         }
 
         private void cmbfund_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbFund);
-        }
-
-        private void cmbAccountableForms_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
+            Helper.ClearErrorComboBox(epFund, cmbFund);
         }
 
         private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Forms!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForm, cmbAccountableForms, "Accountable Forms!");
+        }
+
+        private void cmbAccountableForms_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAccountableForm, cmbAccountableForms);
         }
 
         private void cmbAccount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccount, "Abstract of General Collection.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAbstractOfGeneralCollection, cmbAccount, "Abstract of General Collection.");
         }
 
         private void cmbAccount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbAccount);
+            Helper.ClearErrorComboBox(epAbstractOfGeneralCollection, cmbAccount);
         }
 
         #endregion
@@ -209,70 +215,94 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             DateTime todaysDate = DateTime.Now;
             DateTime dateOfCollection = dtDateOfCollection.Value;
-            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(epORDateOfCollection, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
         }
 
         private void dtDateOfCollection_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorDateTimePickerRange(errorProvider, dtDateOfCollection);
+            Helper.ClearErrorDateTimePickerRange(epORDateOfCollection, dtDateOfCollection);
         }
 
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreceipt, "Receipt No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtreceipt, "Receipt No.");
             if (!IsBetween(Convert.ToInt32(txtreceipt.Text.Trim())))
             {
-                errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
+                epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
             else if (Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
             {
-                errorProvider.SetError(txtreceipt, "Receipt No. invalid.");
+                epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
         }
 
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtreceipt);
+            Helper.ClearErrorTextBox(epSerialNo, txtreceipt);
         }
 
         internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtpayee, "Payee.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtpayee, "Payee.");
         }
+
         private void txtpayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtpayee);
+            Helper.ClearErrorTextBox(epPayee, txtpayee);
         }
+
+        internal void txtAmount_Validating(object sender, CancelEventArgs e)
+        {
+            if (!Helper.ShowErrorNumericUpDownEmpty(epORAmount, txtAmount, "Amount"))
+            {
+                e.Cancel = Helper.ShowErrorNumericUpDownZero(epORAmount, txtAmount, "Amount");
+            }
+        }
+
+        private void txtAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epORAmount, txtAmount);
+        }
+
 
         #endregion
 
-
         #region CashTicketValidation
-
-        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider, txtCashTicketQuantity, "Cash Ticket Quantity.");
-        }
-
-        private void txtCashTicketQuantity_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(errorProvider, txtCashTicketQuantity);
-        }
 
         private void dtCashTicketDateOfCollection_Validating(object sender, CancelEventArgs e)
         {
             DateTime todaysDate = DateTime.Now;
             DateTime dateOfCollection = dtCashTicketDateOfCollection.Value;
-            e.Cancel = Helper.ShowErrorDateTimePickerRange(errorProvider, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of Collection");
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(epCashTicketDateOfCollection, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of Collection");
         }
 
         private void dtCashTicketDateOfCollection_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorDateTimePickerRange(errorProvider, dtCashTicketDateOfCollection);
+            Helper.ClearErrorDateTimePickerRange(epCashTicketDateOfCollection, dtCashTicketDateOfCollection);
         }
-       
+
+        internal void txtCashTicketQuantity_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epCashTicketQuantity, txtCashTicketQuantity, "Cash Ticket Quantity.");
+        }
+
+        private void txtCashTicketQuantity_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epCashTicketQuantity, txtCashTicketQuantity);
+        }
+
+      
+        internal void txtCashTicketsAmount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epCashTicketAmount, txtCashTicketsAmount, "Amount");
+        }
+
+        private void txtCashTicketsAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epCashTicketAmount, txtCashTicketsAmount);
+        }
 
         #endregion
 
@@ -373,6 +403,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 
             }
         }
+
         private void cmbforms_SelectedValueChanged(object sender, EventArgs e)
         {
             int idOfSelectedAccountableForm = Convert.ToInt32(cmbAccountableForms.SelectedValue);
@@ -500,7 +531,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccount.DroppedDown = true;
             }
         }
-
 
     }
 }
