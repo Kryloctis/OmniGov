@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Funds
@@ -33,9 +27,10 @@ namespace AccountingSystem.Views.Manage.Funds
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void frmFunds_Load(object sender, EventArgs e)
         {
-           
+
             LoadRecords();
         }
 
@@ -51,7 +46,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
                 _ = new frmFundEdit(this, fundId).ShowDialog();
             }
-           
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -87,9 +82,8 @@ namespace AccountingSystem.Views.Manage.Funds
 
         }
 
-
-		private void dgFunds_SelectionChanged(object sender, EventArgs e)
-		{
+        private void dgFunds_SelectionChanged(object sender, EventArgs e)
+        {
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgFunds, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
@@ -97,7 +91,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            if (txtsearch.Text.Length > 0)
             {
                 try
                 {
@@ -113,16 +107,6 @@ namespace AccountingSystem.Views.Manage.Funds
             {
                 LoadRecords();
             }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
