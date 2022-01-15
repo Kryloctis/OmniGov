@@ -1,19 +1,19 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-   public class FundsRepository : IFundsRepository
+    public class FundsRepository : IFundsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "funds";
         private readonly string tableName2 = "payment_collections";
         private readonly string tableName3 = "bank_deposits";
- 
+
         public FundsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -53,17 +53,10 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName}";
 
-                var dtFunds = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunds);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtFunds = new DataTable();
+            return _dbGenericCommands.Fill(query, dtFunds);
         }
 
         public DataTable GetRecordsPrintCashposition(string date)

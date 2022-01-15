@@ -140,22 +140,15 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@searchText", DbType.String, $"%{searchText}%" },
-                };
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" },
+            };
 
-                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText";
 
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtGeneralLedgers = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
         public bool Insert(GeneralLedgerAccountsModal entity)
@@ -414,22 +407,15 @@ namespace ACC.Data
         //CHART OF ACCOUNTS
         public DataTable GetViewRecordsByAccountGroup(int accountGroupId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_group_id", DbType.Int32, accountGroupId}
-                };
+                new object[] { "@account_group_id", DbType.Int32, accountGroupId}
+            };
 
-                string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtJournals = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtJournals, parameters);
         }
 
         public DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText)

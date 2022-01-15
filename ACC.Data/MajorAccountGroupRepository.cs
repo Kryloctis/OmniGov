@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -13,7 +12,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
         private readonly string viewTableName = "view_major_account_group";
-        
+
 
         public MajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -22,19 +21,12 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName}";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtJournals = new DataTable();
+            return _dbGenericCommands.Fill(query, dtJournals);
         }
-       
+
         public DataTable GetViewRecords()
         {
             try
@@ -85,21 +77,14 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsByAccountGroupId(byte id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Byte, id},
-                };
+                new object[] { "@id", DbType.Byte, id},
+            };
 
-                string query = $"SELECT maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id =  @id";
+            string query = $"SELECT maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id =  @id";
 
-                return _dbGenericCommands.ExecuteReader(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.ExecuteReader(query, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
