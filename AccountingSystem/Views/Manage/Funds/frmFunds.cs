@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void frmFunds_Load(object sender, EventArgs e)
         {
-
+            Helper.DatagridFullRowSelectStyle(dgFunds, true);
             LoadRecords();
         }
 
