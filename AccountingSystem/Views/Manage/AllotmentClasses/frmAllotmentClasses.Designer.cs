@@ -51,6 +51,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -59,7 +60,8 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(697, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 2, 1, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 52);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -103,13 +105,13 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAllotmentClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentClasses.Location = new System.Drawing.Point(12, 52);
+            this.dgAllotmentClasses.Location = new System.Drawing.Point(12, 54);
             this.dgAllotmentClasses.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgAllotmentClasses.Name = "dgAllotmentClasses";
             this.dgAllotmentClasses.RowHeadersWidth = 51;
             this.dgAllotmentClasses.RowTemplate.Height = 29;
             this.dgAllotmentClasses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAllotmentClasses.Size = new System.Drawing.Size(673, 319);
+            this.dgAllotmentClasses.Size = new System.Drawing.Size(675, 323);
             this.dgAllotmentClasses.TabIndex = 3;
             this.dgAllotmentClasses.SelectionChanged += new System.EventHandler(this.dgAllotmentClasses_SelectionChanged_1);
             // 
@@ -124,10 +126,10 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(697, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(699, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -175,12 +177,17 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 395);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(699, 401);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgAllotmentClasses);
             this.Controls.Add(this.statusStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAllotmentClasses";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage Allotment Classes";
             this.Load += new System.EventHandler(this.frmAllotmentClasses_Load);

@@ -117,8 +117,8 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            this.toolStrip1.Size = new System.Drawing.Size(699, 58);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 2, 1, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 52);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -164,13 +164,13 @@ namespace AccountingSystem.Views.Manage.Funds
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFunds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFunds.Location = new System.Drawing.Point(9, 60);
+            this.dgFunds.Location = new System.Drawing.Point(12, 54);
             this.dgFunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgFunds.Name = "dgFunds";
             this.dgFunds.RowHeadersWidth = 51;
             this.dgFunds.RowTemplate.Height = 29;
             this.dgFunds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFunds.Size = new System.Drawing.Size(680, 317);
+            this.dgFunds.Size = new System.Drawing.Size(675, 323);
             this.dgFunds.TabIndex = 6;
             this.dgFunds.SelectionChanged += new System.EventHandler(this.dgFunds_SelectionChanged);
             // 
