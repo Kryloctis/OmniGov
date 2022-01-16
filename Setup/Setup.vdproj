@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_61CD559473A94725999B535FCAC2DFDF"
+        "MsmKey" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A70D62D9665C440784135134BE9657CF"
+        "MsmKey" = "8:_C659DB4FBE1745AB91549143DECB380B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -143,9 +143,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_61CD559473A94725999B535FCAC2DFDF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
             {
-            "SourcePath" = "8:Z:\\Projects\\Local Finance System Buug Files\\Local Finance System Setup Resources\\local_finance_setup-banner.bmp"
+            "SourcePath" = "8:D:\\Projects\\Local Finance System Buug Files\\Local Finance System Setup Resources\\local_finance_setup-banner.bmp"
             "TargetName" = "8:local_finance_setup-banner.bmp"
             "Tag" = "8:"
             "Folder" = "8:_B155F7AAC42643DCA3B16F113591448C"
@@ -163,9 +163,9 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A70D62D9665C440784135134BE9657CF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C659DB4FBE1745AB91549143DECB380B"
             {
-            "SourcePath" = "8:Z:\\Projects\\Local Finance System Buug Files\\Icons & Images\\accounting.ico"
+            "SourcePath" = "8:D:\\Projects\\Local Finance System Buug Files\\Icons & Images\\accounting.ico"
             "TargetName" = "8:accounting.ico"
             "Tag" = "8:"
             "Folder" = "8:_B155F7AAC42643DCA3B16F113591448C"
@@ -251,7 +251,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Local Finance System"
         "ProductCode" = "8:{931D3045-D111-4969-9E93-BEB0163CF802}"
-        "PackageCode" = "8:{F2F4B1D0-30D7-4A7E-833F-2CA9DA44A9F1}"
+        "PackageCode" = "8:{911C4C72-34B7-4FAC-867C-EF379C35CFB3}"
         "UpgradeCode" = "8:{E099AC00-68ED-4147-8469-37B40CD14F2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -268,7 +268,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_A70D62D9665C440784135134BE9657CF"
+        "ARPPRODUCTICON" = "8:_C659DB4FBE1745AB91549143DECB380B"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -371,7 +371,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_88157C960F4D49FB831CCA3D60E0D12E"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_925AD09F3F83495F951BC0E6239A2C21"
             {
             "Name" = "8:Local Finance System"
             "Arguments" = "8:"
@@ -382,7 +382,7 @@
             "Target" = "8:_5DA11BF595C84A04893A7FC163F1E0E9"
             "Folder" = "8:_798AADBD2B4745218D062652367FDB81"
             "WorkingFolder" = "8:_B155F7AAC42643DCA3B16F113591448C"
-            "Icon" = "8:_A70D62D9665C440784135134BE9657CF"
+            "Icon" = "8:_C659DB4FBE1745AB91549143DECB380B"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C1A31938BCC34381BF6FCF3BDD488B7B"
@@ -396,7 +396,7 @@
             "Target" = "8:_5DA11BF595C84A04893A7FC163F1E0E9"
             "Folder" = "8:_C61D0E1E61E248EFA706437734EC44E0"
             "WorkingFolder" = "8:_B155F7AAC42643DCA3B16F113591448C"
-            "Icon" = "8:_A70D62D9665C440784135134BE9657CF"
+            "Icon" = "8:_C659DB4FBE1745AB91549143DECB380B"
             "Feature" = "8:"
             }
         }
@@ -427,7 +427,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -472,7 +472,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -508,7 +508,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -557,7 +557,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -589,7 +589,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -634,7 +634,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -678,7 +678,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -727,7 +727,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -750,7 +750,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -782,7 +782,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_61CD559473A94725999B535FCAC2DFDF"
+                            "Value" = "8:_8FEF5C7EF2CB4330BC91DABAA95F80CB"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
