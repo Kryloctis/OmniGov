@@ -10,6 +10,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetDocumentRecordsBySignatoryId(int signatoryId);
 
+        DataTable GetRecordsByOffice(string office);
+
         Dictionary<string, string> GetSignatoryByReferenceAndDocumentName(string reference, string documentName);
 
         bool DeleteBySignatoryId(int signatoryId);
