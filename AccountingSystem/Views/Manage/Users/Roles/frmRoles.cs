@@ -2,12 +2,6 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.Roles
@@ -23,11 +17,11 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                var rolesRepository = Factory.RolesRepository();
-                var dtRoles = rolesRepository.GetRecords();
+                var dictUserLoggedIn = Helper.LoggedInUserData();
+                var dtRoles = Factory.RolesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
                 HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
 
-                lblRecordCount.Text = rolesRepository.CountRecords().ToString();
+                lblRecordCount.Text = dgRoles.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
