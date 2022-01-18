@@ -11,6 +11,7 @@ namespace AccountingSystem.Views.Reports.Journals
         private readonly ReportViewer reportViewer;
         internal string fundName;
         internal string journalName;
+        internal int fundId;
         internal DateTime date;
 
         public frmCashDisbursementsJournalReport()
@@ -91,7 +92,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 byte journalId = 4;
 
-                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId);
+                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId);
 
                 string defaultAccountCode(int rowNo)
                 {

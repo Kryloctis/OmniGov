@@ -36,27 +36,30 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblAccountCounter = new System.Windows.Forms.Label();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.btnRemoveDefaultAccount = new System.Windows.Forms.Button();
             this.btnSetDefaultAccount = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgDefaultAccounts = new System.Windows.Forms.DataGridView();
             this.dgAccounts = new System.Windows.Forms.DataGridView();
+            this.lblMaxAccounts = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblJournalName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDefaultAccounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.lblAccountCounter);
+            this.panel1.Controls.Add(this.cmbxFunds);
             this.panel1.Controls.Add(this.btnRemoveDefaultAccount);
             this.panel1.Controls.Add(this.btnSetDefaultAccount);
             this.panel1.Controls.Add(this.label2);
@@ -65,20 +68,23 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.panel1.Controls.Add(this.dgAccounts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 33);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(925, 437);
+            this.panel1.Size = new System.Drawing.Size(925, 463);
             this.panel1.TabIndex = 1;
             // 
-            // lblAccountCounter
+            // cmbxFunds
             // 
-            this.lblAccountCounter.Location = new System.Drawing.Point(434, 269);
-            this.lblAccountCounter.Name = "lblAccountCounter";
-            this.lblAccountCounter.Size = new System.Drawing.Size(57, 15);
-            this.lblAccountCounter.TabIndex = 24;
-            this.lblAccountCounter.Text = "0";
-            this.lblAccountCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(739, 8);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(178, 23);
+            this.cmbxFunds.TabIndex = 24;
+            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
+            this.cmbxFunds.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFunds_Validating);
+            this.cmbxFunds.Validated += new System.EventHandler(this.cmbxFunds_Validated);
             // 
             // btnRemoveDefaultAccount
             // 
@@ -151,7 +157,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgDefaultAccounts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgDefaultAccounts.RowTemplate.Height = 25;
-            this.dgDefaultAccounts.Size = new System.Drawing.Size(420, 392);
+            this.dgDefaultAccounts.Size = new System.Drawing.Size(420, 418);
             this.dgDefaultAccounts.TabIndex = 5;
             this.dgDefaultAccounts.SelectionChanged += new System.EventHandler(this.dgDefaultAccounts_SelectionChanged);
             // 
@@ -187,19 +193,27 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgAccounts.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgAccounts.RowTemplate.Height = 25;
-            this.dgAccounts.Size = new System.Drawing.Size(420, 392);
+            this.dgAccounts.Size = new System.Drawing.Size(420, 418);
             this.dgAccounts.TabIndex = 4;
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
+            // 
+            // lblMaxAccounts
+            // 
+            this.lblMaxAccounts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMaxAccounts.Location = new System.Drawing.Point(810, 9);
+            this.lblMaxAccounts.Name = "lblMaxAccounts";
+            this.lblMaxAccounts.Size = new System.Drawing.Size(107, 15);
+            this.lblMaxAccounts.TabIndex = 24;
+            this.lblMaxAccounts.Text = "Max: --";
+            this.lblMaxAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Controls.Add(this.btnSave);
-            this.panel2.Controls.Add(this.lblJournalName);
-            this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 437);
+            this.panel2.Location = new System.Drawing.Point(0, 496);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(925, 30);
@@ -229,7 +243,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // 
             // lblJournalName
             // 
-            this.lblJournalName.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblJournalName.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblJournalName.Location = new System.Drawing.Point(62, 9);
             this.lblJournalName.Name = "lblJournalName";
             this.lblJournalName.Size = new System.Drawing.Size(346, 15);
@@ -238,12 +252,24 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(8, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 15);
+            this.label3.Size = new System.Drawing.Size(48, 15);
             this.label3.TabIndex = 6;
             this.label3.Text = "Journal:";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.lblMaxAccounts);
+            this.panel3.Controls.Add(this.lblJournalName);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(925, 33);
+            this.panel3.TabIndex = 4;
             // 
             // frmDefaultAccounts
             // 
@@ -252,8 +278,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(925, 467);
+            this.ClientSize = new System.Drawing.Size(925, 526);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
@@ -268,7 +295,8 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             ((System.ComponentModel.ISupportInitialize)(this.dgDefaultAccounts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgAccounts)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -285,8 +313,11 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblJournalName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblAccountCounter;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblMaxAccounts;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxFunds;
     }
 }
