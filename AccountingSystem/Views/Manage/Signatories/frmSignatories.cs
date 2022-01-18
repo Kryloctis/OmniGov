@@ -25,19 +25,20 @@ namespace AccountingSystem.Views.Manage.Signatories
 
             try
             {
-                var dtSignatories = Factory.SignatoriesRepository().GetRecords();
+                var dictUserLoggedIn = Helper.LoggedInUserData();
+                var dtSignatories = Factory.SignatoriesHasReferencesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
 
                 foreach (DataRow row in dtSignatories.Rows)
                 {
-                    int signatoryId = Convert.ToInt32(row["id"]);
-                    string prefix = row["prefix"].ToString();
-                    string firstName = row["first_name"].ToString();
-                    char middleInitial = Convert.ToChar(row["middle_initial"]);
-                    string lastName = row["last_name"].ToString();
-                    string suffix = row["suffix"].ToString();
-                    string title = row["title"].ToString();
-                    string createdAt = row["created_at"].ToString();
-                    string updatedAt = row["updated_at"].ToString();
+                    int signatoryId = Convert.ToInt32(row["signatories_id"]);
+                    string prefix = row["signatories_prefix"].ToString();
+                    string firstName = row["signatories_first_name"].ToString();
+                    char middleInitial = Convert.ToChar(row["signatories_middle_initial"]);
+                    string lastName = row["signatories_last_name"].ToString();
+                    string suffix = row["signatories_suffix"].ToString();
+                    string title = row["signatories_title"].ToString();
+                    string createdAt = row["signatories_created_at"].ToString();
+                    string updatedAt = row["signatories_updated_at"].ToString();
                     string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName} {(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
 
                     var item = new dynamic[] { signatoryId, signatoryName, title, createdAt, updatedAt };
@@ -48,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
 
             return dataTable;
@@ -58,8 +59,6 @@ namespace AccountingSystem.Views.Manage.Signatories
         {
             try
             {
-
-
                 HelperLoadRecords.SignatoriesDatagridView(SignatoriesDatatable(), dgSignatories);
                 lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
                 Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);

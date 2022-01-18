@@ -233,5 +233,25 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetRecordsByOffice(string office)
+        {
+            var parameters = new dynamic[][]
+            {
+                new dynamic[] { "@office", DbType.String, $"%{office}%"}
+            };
+
+            string Filter()
+            {
+                if (office == "SysAdmin")
+                    return string.Empty;
+                else
+                    return "WHERE office LIKE @office";
+            }
+
+            string query = $"SELECT * FROM {viewTableName} {Filter()} GROUP BY signatories_id";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
     }
 }
