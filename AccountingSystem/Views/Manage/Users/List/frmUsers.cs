@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Users.List
@@ -11,35 +12,27 @@ namespace AccountingSystem.Views.Manage.Users.List
         public frmUsers()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
         }
 
         internal void LoadRecords()
         {
             try
             {
-                var usersRepository = Factory.UsersRepository();
+                string searchkey = txtSearch.Text.Trim();
                 string userOffice = Helper.LoggedInUserData()["office"];
-                var dtUsers = usersRepository.GetViewRecordsByOffice(userOffice);
-                HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
+                var dtUsers = new DataTable();
 
-                lblRecordCount.Text = usersRepository.CountRecords().ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
+                if (string.IsNullOrEmpty(searchkey))
+                    dtUsers = Factory.UsersRepository().GetViewRecordsByOffice(userOffice);
+                else
+                    dtUsers = Factory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
 
-        internal void LoadDataBySearch()
-        {
-
-            try
-            {
-                string searchkey = Convert.ToString(txtSearch.Text);
-                var dtUsers = Factory.UsersRepository().GetViewRecordsBySearch(searchkey);
                 HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
 
                 lblRecordCount.Text = dgUsers.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -49,8 +42,6 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void frmUsers_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgUsers, true);
             LoadRecords();
         }
@@ -107,7 +98,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadDataBySearch();
+            LoadRecords();
         }
     }
 }
