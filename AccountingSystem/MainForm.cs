@@ -208,6 +208,8 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Visible = false;
+            if (!Helper.HasPermission("Manage Returned Receipts"))
+                menuReturnReceipts.Visible = false;
         }
 
         private void ValidateAccountingControlPermissions()
