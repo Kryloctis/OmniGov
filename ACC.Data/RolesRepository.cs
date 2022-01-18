@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -12,7 +12,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
-        
+
 
         public RolesRepository(
             IDbGenericCommands dbGenericCommands,
@@ -76,10 +76,18 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@office", DbType.String, office}
+                    new object[] { "@office", DbType.String, $"%{office}%"}
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE role_name <> 'System Administrator' AND office = @office";
+                string Filter()
+                {
+                    if (office == "SysAdmin")
+                        return string.Empty;
+                    else
+                        return "AND office LIKE @office";
+                }
+
+                string query = $"SELECT * FROM {tableName} WHERE office <> 'SysAdmin' {Filter()}";
 
                 var dtRoles = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtRoles, parameters);
