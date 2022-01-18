@@ -896,7 +896,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Parameters!paramDefaultAccountCodeCollectionsDebit.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -904,7 +904,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox123</rd:DefaultName>
@@ -1527,7 +1529,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Parameters!paramDefaultAccountCodeDepositsCredit.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1637,6 +1639,13 @@
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
                                         <FilterValue DataType="Float">0</FilterValue>
+                                      </FilterValues>
+                                    </Filter>
+                                    <Filter>
+                                      <FilterExpression>=CInt(Fields!collections_debit_account_id.Value)</FilterExpression>
+                                      <Operator>Equal</Operator>
+                                      <FilterValues>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIdCollectionsDebit.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -2912,6 +2921,13 @@
                                         <FilterValue DataType="Float">0</FilterValue>
                                       </FilterValues>
                                     </Filter>
+                                    <Filter>
+                                      <FilterExpression>=CInt(Fields!deposit_credit_account_id.Value)</FilterExpression>
+                                      <Operator>Equal</Operator>
+                                      <FilterValues>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIdDepositsCredit.Value)</FilterValue>
+                                      </FilterValues>
+                                    </Filter>
                                   </Filters>
                                 </Group>
                               </TablixMember>
@@ -2940,7 +2956,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!collections_debit_amount.Value, "CashReceiptsJournal")</Value>
+                                  <Value>=Sum(CDec(IIF(Fields!collections_debit_account_id.Value = Parameters!paramDefaultAccountIdCollectionsDebit.Value, Fields!collections_debit_amount.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -3580,7 +3596,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!deposit_credit_amount.Value, "CashReceiptsJournal")</Value>
+                                  <Value>=Sum(CDec(IIF(Fields!deposit_credit_account_id.Value = Parameters!paramDefaultAccountIdDepositsCredit.Value, Fields!deposit_credit_amount.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -4188,7 +4204,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>3.14611in</Height>
+        <Height>2.896in</Height>
         <Style />
       </Body>
       <Width>12.35419in</Width>
@@ -4479,11 +4495,35 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramDefaultAccountCodeCollectionsDebit">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccountCodeDepositsCredit">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccountIdCollectionsDebit">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccountIdDepositsCredit">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -4539,6 +4579,26 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramDefaultAccountCodeCollectionsDebit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramDefaultAccountCodeDepositsCredit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramDefaultAccountIdCollectionsDebit</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramDefaultAccountIdDepositsCredit</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
