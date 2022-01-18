@@ -317,7 +317,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblMaxAccounts;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox cmbxFunds;
     }
 }
