@@ -8,9 +8,9 @@ namespace ACC.Domain.Interfaces
     {
         bool Insert(List<JournalsDefaultAccountsModel> entityList);
 
-        bool Delete(JournalsDefaultAccountsModel entity);
+        bool DeleteByFundId(List<JournalsDefaultAccountsModel> entityList);
 
-        DataTable GetViewRecordsByJournalId(int journalId);
+        DataTable GetViewRecordsByJournalId(int journalId, int fundId);
 
         bool GeneralLedgerAccountExist(int journalId, int generalLedgerAccountId);
     }

@@ -52,9 +52,26 @@ namespace ACC.Data
             }
         }
 
-        public bool Delete(JournalsDefaultAccountsModel entity)
+        public bool DeleteByFundId(List<JournalsDefaultAccountsModel> entityList)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var item in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@journals_id", DbType.Int32, item.JournalId},
+                        new object[] { "@funds_id", DbType.Int32, item.fundId}
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id";
+
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            };
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -67,22 +84,16 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsByJournalId(int journalId)
+        public DataTable GetViewRecordsByJournalId(int journalId, int fundId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@journals_id", DbType.Int32, journalId}
-                };
-                string query = $"SELECT id, journals_id, general_ledger_accounts_id, account_code, general_ledger_accounts_code, general_ledger_accounts_name FROM  {viewTableName} WHERE journals_id = @journals_id";
-                var dataTable = new DataTable();
-                return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                new object[] { "@journals_id", DbType.Int32, journalId},
+                new object[] { "@funds_id", DbType.Int32, fundId}
+            };
+            string query = $"SELECT * FROM  {viewTableName} WHERE journals_id = @journals_id AND funds_id = @funds_id";
+            var dataTable = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -102,33 +113,26 @@ namespace ACC.Data
 
         public bool Insert(List<JournalsDefaultAccountsModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+
+                DeleteByFundId(entityList);
+                foreach (var item in entityList)
                 {
-
-                    Delete(entityList);
-                    foreach (var item in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@journals_id",DbType.Int32, item.JournalId},
-                            new object[] { "@funds_id", DbType.Int32, item.fundId},
-                            new object[] { "@general_ledger_accounts_id",DbType.Int32, item.AccountId }
-                        };
+                        new object[] { "@journals_id",DbType.Int32, item.JournalId},
+                        new object[] { "@funds_id", DbType.Int32, item.fundId},
+                        new object[] { "@general_ledger_accounts_id",DbType.Int32, item.AccountId }
+                    };
 
-                        string query = $"INSERT INTO {tableName} (journals_id, funds_id, general_ledger_accounts_id) VALUES (@journals_id, @funds_id, @general_ledger_accounts_id)";
+                    string query = $"INSERT INTO {tableName} (journals_id, funds_id, general_ledger_accounts_id) VALUES (@journals_id, @funds_id, @general_ledger_accounts_id)";
 
-                        _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-                    scope.Complete();
-                    return true;
-                };
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+                scope.Complete();
+                return true;
+            };
         }
 
         public bool Update(JournalsDefaultAccountsModel entity)

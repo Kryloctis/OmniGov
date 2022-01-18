@@ -1,12 +1,5 @@
 ﻿using AccountingSystem.Views.Reports.Journals;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.AccountingDashboard
@@ -37,13 +30,13 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             LoadCounters();
         }
 
-        private void LoadFunds() 
+        private void LoadFunds()
         {
             var dtFunds = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
-        private void LoadCounters() 
+        private void LoadCounters()
         {
             string fundName = cmbxFunds.Text.Trim();
             int month = dateTimePicker1.Value.Month;
@@ -65,7 +58,9 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkADAdisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmADAdisburementJournalReport = new frmADADisbursementsJournalReport();
+            frmADAdisburementJournalReport.fundId = fundId;
             frmADAdisburementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmADAdisburementJournalReport.journalName = "Authority to Debit Account Disbursement Journal";
             frmADAdisburementJournalReport.date = dateTimePicker1.Value;
@@ -74,25 +69,31 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkCashDisbursementJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCashDisbursementJournalReport = new frmCashDisbursementsJournalReport();
             frmCashDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmCashDisbursementJournalReport.journalName = "Cash Disbursements Journal";
+            frmCashDisbursementJournalReport.fundId = fundId;
             frmCashDisbursementJournalReport.date = dateTimePicker1.Value;
             frmCashDisbursementJournalReport.ShowDialog();
         }
 
         private void lnkCashReceiptJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCashReceiptsJournalReport = new frmCashReceiptsJournalReport();
             frmCashReceiptsJournalReport.fundName = cmbxFunds.Text.Trim();
             frmCashReceiptsJournalReport.journalName = "Cash Receipts Journal";
+            frmCashReceiptsJournalReport.fundId = fundId;
             frmCashReceiptsJournalReport.date = dateTimePicker1.Value;
             frmCashReceiptsJournalReport.ShowDialog();
         }
 
         private void lnkCheckDisbursementsJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCheckDisbursementJournalReport = new frmCheckDisbursementsJournalReport();
+            frmCheckDisbursementJournalReport.fundId = fundId;
             frmCheckDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmCheckDisbursementJournalReport.journalName = "Check Disbursements Journal";
             frmCheckDisbursementJournalReport.date = dateTimePicker1.Value;
@@ -110,7 +111,9 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void lnkProcurementReceivedJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmProcurementsReceivedJournalReport = new frmProcurementsReceivedJournalReport();
+            frmProcurementsReceivedJournalReport.fundId = fundId;
             frmProcurementsReceivedJournalReport.fundName = cmbxFunds.Text.Trim();
             frmProcurementsReceivedJournalReport.journalName = "Procurement Received Journal";
             frmProcurementsReceivedJournalReport.date = dateTimePicker1.Value;

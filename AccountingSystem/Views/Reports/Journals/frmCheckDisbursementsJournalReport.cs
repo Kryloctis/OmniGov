@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class frmCheckDisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
+        internal int fundId;
         internal string fundName;
         internal string journalName;
         internal DateTime date;
@@ -94,7 +95,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 byte journalId = 5;
 
-                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId);
+                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId);
 
 
                 string defaultAccountCode(int rowNo)
