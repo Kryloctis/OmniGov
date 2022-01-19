@@ -163,11 +163,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassificationService);
             this.tabControlFunctionProgramProject.Controls.Add(this.tabFunctionalClassification);
             this.tabControlFunctionProgramProject.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlFunctionProgramProject.ItemSize = new System.Drawing.Size(200, 30);
+            this.tabControlFunctionProgramProject.ItemSize = new System.Drawing.Size(104, 20);
             this.tabControlFunctionProgramProject.Location = new System.Drawing.Point(0, 55);
             this.tabControlFunctionProgramProject.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlFunctionProgramProject.Name = "tabControlFunctionProgramProject";
-            this.tabControlFunctionProgramProject.Padding = new System.Drawing.Point(20, 3);
+            this.tabControlFunctionProgramProject.Padding = new System.Drawing.Point(10, 3);
             this.tabControlFunctionProgramProject.SelectedIndex = 0;
             this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(859, 421);
             this.tabControlFunctionProgramProject.TabIndex = 8;
@@ -178,10 +178,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Controls.Add(this.label2);
             this.tabFunctionProgramProject.Controls.Add(this.cmbServiceName);
             this.tabFunctionProgramProject.Controls.Add(this.dgFunctionalProgramProject);
-            this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 34);
+            this.tabFunctionProgramProject.Location = new System.Drawing.Point(4, 24);
             this.tabFunctionProgramProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionProgramProject.Name = "tabFunctionProgramProject";
-            this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 383);
+            this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 393);
             this.tabFunctionProgramProject.TabIndex = 1;
             this.tabFunctionProgramProject.Text = "Function, Program and Project";
             // 
@@ -215,7 +215,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalProgramProject.Name = "dgFunctionalProgramProject";
             this.dgFunctionalProgramProject.RowHeadersWidth = 51;
             this.dgFunctionalProgramProject.RowTemplate.Height = 29;
-            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(835, 344);
+            this.dgFunctionalProgramProject.Size = new System.Drawing.Size(835, 354);
             this.dgFunctionalProgramProject.TabIndex = 5;
             this.dgFunctionalProgramProject.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgFunctionalProgramProject_RowHeaderMouseDoubleClick);
             this.dgFunctionalProgramProject.SelectionChanged += new System.EventHandler(this.dgFunctionalProgramProject_SelectionChanged);
@@ -226,11 +226,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionalClassificationService.Controls.Add(this.cmbSectorName);
             this.tabFunctionalClassificationService.Controls.Add(this.dgFuntionalClassificationService);
             this.tabFunctionalClassificationService.Controls.Add(this.btnLoadAllFsc);
-            this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 34);
+            this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 24);
             this.tabFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassificationService.Name = "tabFunctionalClassificationService";
             this.tabFunctionalClassificationService.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(851, 383);
+            this.tabFunctionalClassificationService.Size = new System.Drawing.Size(851, 393);
             this.tabFunctionalClassificationService.TabIndex = 0;
             this.tabFunctionalClassificationService.Text = "Functional Classification Service";
             // 
@@ -264,7 +264,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFuntionalClassificationService.Name = "dgFuntionalClassificationService";
             this.dgFuntionalClassificationService.RowHeadersWidth = 51;
             this.dgFuntionalClassificationService.RowTemplate.Height = 25;
-            this.dgFuntionalClassificationService.Size = new System.Drawing.Size(837, 339);
+            this.dgFuntionalClassificationService.Size = new System.Drawing.Size(837, 349);
             this.dgFuntionalClassificationService.TabIndex = 17;
             this.dgFuntionalClassificationService.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationService_SelectionChanged_1);
             // 

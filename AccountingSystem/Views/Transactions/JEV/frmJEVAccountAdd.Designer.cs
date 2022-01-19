@@ -93,9 +93,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-
-        private ucJEVAccount ucjevAccount1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnOK;
+        internal ucJEVAccount ucjevAccount1;
     }
 }

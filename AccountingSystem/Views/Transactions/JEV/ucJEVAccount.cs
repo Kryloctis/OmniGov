@@ -11,13 +11,13 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class ucJEVAccount : UserControl
     {
         internal byte fundId;
+        internal string journalName;
 
         public ucJEVAccount()
         {
             InitializeComponent();
             cmbAccount.DropDownHeight = 200;
         }
-
 
         internal string GetFormErrors()
         {
