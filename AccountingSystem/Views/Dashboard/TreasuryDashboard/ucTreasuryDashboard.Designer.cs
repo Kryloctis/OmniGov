@@ -83,11 +83,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnIssueReceipt
             // 
+            this.btnIssueReceipt.AutoSize = true;
             this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_filled_20px;
             this.btnIssueReceipt.Location = new System.Drawing.Point(0, 0);
             this.btnIssueReceipt.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnIssueReceipt.Name = "btnIssueReceipt";
-            this.btnIssueReceipt.Size = new System.Drawing.Size(133, 30);
+            this.btnIssueReceipt.Size = new System.Drawing.Size(110, 30);
             this.btnIssueReceipt.TabIndex = 0;
             this.btnIssueReceipt.Text = "Issue Receipts";
             this.btnIssueReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -97,11 +98,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnPaymentCollection
             // 
+            this.btnPaymentCollection.AutoSize = true;
             this.btnPaymentCollection.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_20px;
-            this.btnPaymentCollection.Location = new System.Drawing.Point(136, 0);
+            this.btnPaymentCollection.Location = new System.Drawing.Point(113, 0);
             this.btnPaymentCollection.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnPaymentCollection.Name = "btnPaymentCollection";
-            this.btnPaymentCollection.Size = new System.Drawing.Size(167, 30);
+            this.btnPaymentCollection.Size = new System.Drawing.Size(146, 30);
             this.btnPaymentCollection.TabIndex = 0;
             this.btnPaymentCollection.Text = "Payment Collections";
             this.btnPaymentCollection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -111,11 +113,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnIssueCheck
             // 
+            this.btnIssueCheck.AutoSize = true;
             this.btnIssueCheck.Image = global::AccountingSystem.Properties.Resources.check_20px;
-            this.btnIssueCheck.Location = new System.Drawing.Point(306, 0);
+            this.btnIssueCheck.Location = new System.Drawing.Point(262, 0);
             this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnIssueCheck.Name = "btnIssueCheck";
-            this.btnIssueCheck.Size = new System.Drawing.Size(146, 30);
+            this.btnIssueCheck.Size = new System.Drawing.Size(118, 30);
             this.btnIssueCheck.TabIndex = 0;
             this.btnIssueCheck.Text = "Check Issuance";
             this.btnIssueCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -125,11 +128,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnBankDeposit
             // 
+            this.btnBankDeposit.AutoSize = true;
             this.btnBankDeposit.Image = global::AccountingSystem.Properties.Resources.bank_deposit_filled_20px;
-            this.btnBankDeposit.Location = new System.Drawing.Point(455, 0);
+            this.btnBankDeposit.Location = new System.Drawing.Point(383, 0);
             this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnBankDeposit.Name = "btnBankDeposit";
-            this.btnBankDeposit.Size = new System.Drawing.Size(137, 30);
+            this.btnBankDeposit.Size = new System.Drawing.Size(106, 30);
             this.btnBankDeposit.TabIndex = 0;
             this.btnBankDeposit.Text = "Bank Deposit";
             this.btnBankDeposit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -139,11 +143,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnReportOfCollections
             // 
+            this.btnReportOfCollections.AutoSize = true;
             this.btnReportOfCollections.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_document_text_20px;
-            this.btnReportOfCollections.Location = new System.Drawing.Point(595, 0);
+            this.btnReportOfCollections.Location = new System.Drawing.Point(492, 0);
             this.btnReportOfCollections.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnReportOfCollections.Name = "btnReportOfCollections";
-            this.btnReportOfCollections.Size = new System.Drawing.Size(177, 30);
+            this.btnReportOfCollections.Size = new System.Drawing.Size(148, 30);
             this.btnReportOfCollections.TabIndex = 0;
             this.btnReportOfCollections.Text = "Report of Collections";
             this.btnReportOfCollections.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -153,11 +158,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // btnRCD
             // 
+            this.btnRCD.AutoSize = true;
             this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_document_text_20px;
-            this.btnRCD.Location = new System.Drawing.Point(775, 0);
+            this.btnRCD.Location = new System.Drawing.Point(643, 0);
             this.btnRCD.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnRCD.Name = "btnRCD";
-            this.btnRCD.Size = new System.Drawing.Size(246, 30);
+            this.btnRCD.Size = new System.Drawing.Size(219, 30);
             this.btnRCD.TabIndex = 0;
             this.btnRCD.Text = "Reports of Collection and Deposits";
             this.btnRCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -175,6 +181,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.Size = new System.Drawing.Size(1074, 391);
             this.Load += new System.EventHandler(this.ucTreasuryDashboard_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

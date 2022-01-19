@@ -381,7 +381,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            _ = new frmJEVAccountAdd(this).ShowDialog();
+            var frmJevAccountAdd = new frmJEVAccountAdd(this);
+            frmJevAccountAdd.ucjevAccount1.journalName = journalName;
+            frmJevAccountAdd.ShowDialog();
         }
 
         private void dtpDateEntry_ValueChanged(object sender, EventArgs e)
@@ -522,7 +524,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnEditAccount_Click(object sender, EventArgs e)
         {
-            _ = new frmJEVAccountEdit(this).ShowDialog();
+            var frmJevAccountEdit = new frmJEVAccountEdit(this);
+            frmJevAccountEdit.ucjevAccount1.journalName = journalName;
+            frmJevAccountEdit.ShowDialog(); ;
         }
 
         private void dgAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -552,6 +556,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
-
     }
 }
