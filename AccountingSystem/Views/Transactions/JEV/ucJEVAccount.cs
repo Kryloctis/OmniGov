@@ -35,7 +35,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal void ResetForm()
         {
             nudAmount.Value = 0;
-
         }
 
         internal void LoadSubsidiary()
@@ -76,21 +75,21 @@ namespace AccountingSystem.Views.Transactions.JEV
             ShowSubsidiaryLedger();
         }
 
+        private void ValidatePermissions()
+        {
+            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                btnSubsidiaryLedger.Visible = false;
+        }
+
         private void ucJEVAccount_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                // validate if it has permission
-                if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
-                    btnSubsidiaryLedger.Visible = false;
-
-                //ACCOUNTS
+                ValidatePermissions();
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
                 cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
-
 
         //FPP
         private DataTable DataTableFPP()
@@ -226,7 +225,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //VALIDATIONS
+        #region Validations
 
         private bool FPPNameNotExist()
         {
@@ -276,18 +275,15 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-
-            if (nudAmount.Value < 1)
-            {
-                epAmount.SetError(nudAmount, "Plase enter a non-zero amount.");
-                ;
-            }
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
+
+        #endregion
     }
 }
