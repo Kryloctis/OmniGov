@@ -154,6 +154,10 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramDefaultAccountIDFirst", defaultAccountIDFirst.ToString()),
                     new ReportParameter("paramDefaultAccountIDSecond", defaultAccountIDSecond.ToString()),
                     new ReportParameter("paramDefaultAccountIDThird", defaultAccountIDThird.ToString()),
+                    new ReportParameter("paramDefaultAccountCodeCollectionsDebit", "1-01-01-010"),
+                    new ReportParameter("paramDefaultAccountIdCollectionsDebit","1"),
+                    new ReportParameter("paramDefaultAccountCodeDepositsCredit", "1-01-01-010"),
+                    new ReportParameter("paramDefaultAccountIdDepositsCredit", "1"),
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\cash-receipts-journal.rdlc";
