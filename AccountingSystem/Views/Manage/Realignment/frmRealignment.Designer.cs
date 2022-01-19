@@ -261,7 +261,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal System.Windows.Forms.TextBox txtTotalRealignmentAppropriation;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.DataGridView dgRealignment;
-        internal System.Windows.Forms.Button btnSelect;
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
     }
