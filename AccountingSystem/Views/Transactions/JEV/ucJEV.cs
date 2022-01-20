@@ -183,6 +183,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             ClearErrors();
         }
 
+        #region Set Fields
+
         private void SetGeneralJournalFields()
         {
             lblCheckORPaidDate.Visible = false;
@@ -205,6 +207,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             cmbCollectingDisbursingOfficer.Enabled = false;
             cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
+            dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
         private void SetProcurementReceivedJournalFields()
@@ -228,6 +231,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             cmbCollectingDisbursingOfficer.Enabled = false;
             cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
+            dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
         private void SetCashDisbursementsJournalFields()
@@ -251,6 +255,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblCollectingDisbursingOfficer.Text = "Disbursing Officer";
             lblCollectingDisbursingOfficer.Visible = true;
             cmbCollectingDisbursingOfficer.Enabled = true;
+            dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
         private void SetCashReceiptsJournalFields()
@@ -274,6 +279,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblCollectingDisbursingOfficer.Text = "Collecting Officer";
             lblCollectingDisbursingOfficer.Visible = true;
             cmbCollectingDisbursingOfficer.Enabled = true;
+            dgAccounts.Columns["IsDeposit"].Visible = true;
 
             dgAccounts.Rows.Clear();
         }
@@ -299,6 +305,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             cmbCollectingDisbursingOfficer.Enabled = false;
             cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
+            dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
         private void SetCheckDisbursementsJournalFields()
@@ -323,7 +330,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             cmbCollectingDisbursingOfficer.Enabled = false;
             cmbCollectingDisbursingOfficer.DataSource = null;
             cmbCollectingDisbursingOfficer.Text = string.Empty;
+            dgAccounts.Columns["IsDeposit"].Visible = false;
         }
+
+        #endregion
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
         {
@@ -382,7 +392,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
             var frmJevAccountAdd = new frmJEVAccountAdd(this);
-            frmJevAccountAdd.ucjevAccount1.journalName = journalName;
+            frmJevAccountAdd.ucJEVAccount.journalName = journalName;
             frmJevAccountAdd.ShowDialog();
         }
 
@@ -525,8 +535,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void btnEditAccount_Click(object sender, EventArgs e)
         {
             var frmJevAccountEdit = new frmJEVAccountEdit(this);
-            frmJevAccountEdit.ucjevAccount1.journalName = journalName;
-            frmJevAccountEdit.ShowDialog(); ;
+            frmJevAccountEdit.ucJEVAccount.journalName = journalName;
+            frmJevAccountEdit.ShowDialog();
         }
 
         private void dgAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -555,6 +565,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
+        }
+
+        private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+            if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
+            {
+                e.Value = (bool)e.Value ? "Deposit" : "Collection";
+                e.FormattingApplied = true;
+            }
         }
     }
 }

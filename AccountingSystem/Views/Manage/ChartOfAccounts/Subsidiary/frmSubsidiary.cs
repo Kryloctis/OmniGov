@@ -27,9 +27,16 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void LoadSelectedGeneralLedger()
         {
-            var data = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-            txtCode.Text = data["ledger_code"];
-            txtAccount.Text = data["ledger_name"];
+            try
+            {
+                var data = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+                txtCode.Text = data["ledger_code"];
+                txtAccount.Text = data["ledger_name"];
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void LoadSubsidiaryRecordsByFundAndGeneralLedger()

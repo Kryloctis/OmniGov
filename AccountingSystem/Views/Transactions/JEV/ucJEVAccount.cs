@@ -16,14 +16,14 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
-            cmbAccount.DropDownHeight = 200;
+            cmbxAccount.DropDownHeight = 200;
         }
 
         internal string GetFormErrors()
         {
             var errorArray = new string[4];
             errorArray[0] = epFPP.GetError(cmbFPP);
-            errorArray[1] = epAccount.GetError(cmbAccount);
+            errorArray[1] = epAccount.GetError(cmbxAccount);
             errorArray[2] = epAmount.GetError(nudAmount);
             errorArray[3] = epObligationNo.GetError(txtObligationNo);
 
@@ -35,14 +35,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal void ResetForm()
         {
             nudAmount.Value = 0;
-
         }
 
         internal void LoadSubsidiary()
         {
             try
             {
-                ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
+                ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
                 DataTable dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
 
                 HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiary, cmbSubsidiary, "sub_name", "id");
@@ -56,13 +55,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                if (cmbAccount.SelectedIndex == -1)
+                if (cmbxAccount.SelectedIndex == -1)
                 {
                     Helper.MessageBoxError("Select an account.");
                     return;
                 }
 
-                ushort accountId = Convert.ToUInt16(cmbAccount.SelectedValue);
+                ushort accountId = Convert.ToUInt16(cmbxAccount.SelectedValue);
                 _ = new frmSubsidiary(null, fundId, accountId, 2021).ShowDialog();
             }
             catch (Exception ex)
@@ -76,21 +75,22 @@ namespace AccountingSystem.Views.Transactions.JEV
             ShowSubsidiaryLedger();
         }
 
+        private void ValidatePermissions()
+        {
+            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+                btnSubsidiaryLedger.Visible = false;
+        }
+
         private void ucJEVAccount_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                // validate if it has permission
-                if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
-                    btnSubsidiaryLedger.Visible = false;
-
-                //ACCOUNTS
+                ValidatePermissions();
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                Set_Default_Account_Of_CashReceiptsJournal();
             }
         }
-
 
         //FPP
         private DataTable DataTableFPP()
@@ -147,7 +147,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
+            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
             {
                 LoadFPP();
                 cmbFPP.DroppedDown = true;
@@ -157,25 +157,32 @@ namespace AccountingSystem.Views.Transactions.JEV
         //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
+                return Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+            else
+                return Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
+        }
 
-            if (string.IsNullOrEmpty(cmbAccount.Text))
+        private void Set_Default_Account_Of_CashReceiptsJournal()
+        {
+            if (((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked)) && journalName == "Cash Receipts Journal")
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                cmbxAccount.SelectedIndex = 0;
+                cmbxAccount.Enabled = false;
+                epAccount.SetError(cmbxAccount, string.Empty);
             }
             else
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.Enabled = true;
             }
-
-            return dtAccounts;
         }
 
-        private void LoadAccounts()
+        internal void LoadAccounts()
         {
             try
             {
-                cmbAccount.SelectedValueChanged -= new EventHandler(cmxbAccount_SelectedValueChanged);
+                cmbxAccount.SelectedValueChanged -= new EventHandler(cmxbAccount_SelectedValueChanged);
 
                 if (DatatableAccounts().Rows.Count == 0) return;
 
@@ -188,10 +195,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     accountDict.Add(accountId, accountName);
                 }
 
-                cmbAccount.DataSource = new BindingSource(accountDict, null);
-                cmbAccount.DisplayMember = "value";
-                cmbAccount.ValueMember = "key";
-                cmbAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
+                cmbxAccount.DataSource = new BindingSource(accountDict, null);
+                cmbxAccount.DisplayMember = "value";
+                cmbxAccount.ValueMember = "key";
+                cmbxAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception ex)
@@ -203,12 +210,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbAccount.Text))
+            if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                cmbAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
                 LoadAccounts();
-                cmbAccount.SelectedIndex = -1;
-                cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxAccount.SelectedIndex = -1;
+                Set_Default_Account_Of_CashReceiptsJournal();
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
         }
 
@@ -217,16 +225,36 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadSubsidiary();
         }
 
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        private void cmbxAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            if (e.KeyCode == Keys.F1 && !string.IsNullOrEmpty(cmbxAccount.Text) && cmbxAccount.Focused)
             {
                 LoadAccounts();
-                cmbAccount.DroppedDown = true;
+                cmbxAccount.DroppedDown = true;
             }
         }
 
-        //VALIDATIONS
+        private void radDebit_CheckedChanged(object sender, EventArgs e)
+        {
+            Set_Default_Account_Of_CashReceiptsJournal();
+        }
+
+        private void radCredit_CheckedChanged(object sender, EventArgs e)
+        {
+            Set_Default_Account_Of_CashReceiptsJournal();
+        }
+
+        private void radCollections_CheckedChanged(object sender, EventArgs e)
+        {
+            Set_Default_Account_Of_CashReceiptsJournal();
+        }
+
+        private void radDeposits_CheckedChanged(object sender, EventArgs e)
+        {
+            Set_Default_Account_Of_CashReceiptsJournal();
+        }
+
+        #region Validations
 
         private bool FPPNameNotExist()
         {
@@ -251,43 +279,40 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorComboBox(epFPP, cmbFPP);
         }
 
-        private void cmbAccount_Validating(object sender, CancelEventArgs e)
+        private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbAccount, "account");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "account");
 
-            if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
+            if (!string.IsNullOrWhiteSpace(cmbxAccount.Text))
             {
-                int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+                int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
                 var idExist = Factory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
 
                 if (!idExist)
                 {
-                    epAccount.SetError(cmbAccount, "Account does not exist.");
+                    epAccount.SetError(cmbxAccount, "Account does not exist.");
                     e.Cancel = true;
                 }
             }
         }
 
-        private void cmbAccount_Validated(object sender, EventArgs e)
+        private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epAccount, cmbAccount);
+            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-
-            if (nudAmount.Value < 1)
-            {
-                epAmount.SetError(nudAmount, "Plase enter a non-zero amount.");
-                ;
-            }
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
+
+        #endregion
     }
 }
