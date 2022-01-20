@@ -382,7 +382,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
             var frmJevAccountAdd = new frmJEVAccountAdd(this);
-            frmJevAccountAdd.ucjevAccount1.journalName = journalName;
+            frmJevAccountAdd.ucJEVAccount.journalName = journalName;
             frmJevAccountAdd.ShowDialog();
         }
 
@@ -525,8 +525,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void btnEditAccount_Click(object sender, EventArgs e)
         {
             var frmJevAccountEdit = new frmJEVAccountEdit(this);
-            frmJevAccountEdit.ucjevAccount1.journalName = journalName;
-            frmJevAccountEdit.ShowDialog(); ;
+            frmJevAccountEdit.ucJEVAccount.journalName = journalName;
+            frmJevAccountEdit.ShowDialog();
         }
 
         private void dgAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

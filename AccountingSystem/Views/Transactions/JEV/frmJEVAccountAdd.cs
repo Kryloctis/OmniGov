@@ -7,43 +7,51 @@ namespace AccountingSystem.Views.Transactions.JEV
     public partial class frmJEVAccountAdd : Form
     {
         private readonly ucJEV ucJEV;
+        internal readonly ucJEVAccount ucJEVAccount;
 
-        public frmJEVAccountAdd(ucJEV ucJEV)
+        public frmJEVAccountAdd(ucJEV _ucJEV)
         {
             InitializeComponent();
-            this.ucJEV = ucJEV;
-            this.ucjevAccount1.fundId = ucJEV.fundId;
+            ucJEV = _ucJEV;
+            ucJEVAccount = ucjevAccount1;
+            ucJEVAccount.fundId = ucJEV.fundId;
         }
 
-        private void AddAccount()
+        private bool AddAccount()
         {
-            var uc = ucjevAccount1;
-
-            string fppId = string.IsNullOrWhiteSpace(uc.cmbFPP.Text) ? string.Empty : uc.cmbFPP.SelectedValue.ToString();
-            string fppName = uc.cmbFPP.Text;
-            string generalLedgerId = uc.cmbxAccount.SelectedValue.ToString();
-            string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
-            string subsidiaryName = uc.cmbSubsidiary.Text;
-            string obligationNo = uc.txtObligationNo.Text.Trim();
-            string amount = uc.nudAmount.Value.ToString("N2");
-            bool isDebit = uc.radDebit.Checked;
-            bool? isDeposit;
-
-            if (uc.radDeposits.Checked)
-                isDeposit = true;
-            else if (uc.radCollections.Checked)
-                isDeposit = false;
-            else
-                isDeposit = null;
-
-            Dictionary<string, string> generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
-
-            object[] accountRow;
-            if (isDebit)
+            try
             {
-                // for debit row
-                accountRow = new object[]
+                if (!ucJEVAccount.ValidateChildren())
                 {
+                    Helper.MessageBoxError(ucJEVAccount.GetFormErrors());
+                    return false;
+                }
+
+                string fppId = string.IsNullOrWhiteSpace(ucJEVAccount.cmbFPP.Text) ? string.Empty : ucJEVAccount.cmbFPP.SelectedValue.ToString();
+                string fppName = ucJEVAccount.cmbFPP.Text;
+                string generalLedgerId = ucJEVAccount.cmbxAccount.SelectedValue.ToString();
+                string subsidiaryId = !string.IsNullOrWhiteSpace(ucJEVAccount.cmbSubsidiary.Text) ? ucJEVAccount.cmbSubsidiary.SelectedValue.ToString() : null;
+                string subsidiaryName = ucJEVAccount.cmbSubsidiary.Text;
+                string obligationNo = ucJEVAccount.txtObligationNo.Text.Trim();
+                string amount = ucJEVAccount.nudAmount.Value.ToString("N2");
+                bool isDebit = ucJEVAccount.radDebit.Checked;
+                bool? isDeposit;
+
+                if (ucJEVAccount.radDeposits.Checked)
+                    isDeposit = true;
+                else if (ucJEVAccount.radCollections.Checked)
+                    isDeposit = false;
+                else
+                    isDeposit = null;
+
+                Dictionary<string, string> generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
+
+                object[] accountRow;
+                if (isDebit)
+                {
+                    // for debit row
+                    accountRow = new object[]
+                    {
                     fppId,
                     generalLedgerId,
                     subsidiaryId,
@@ -56,66 +64,67 @@ namespace AccountingSystem.Views.Transactions.JEV
                     obligationNo,
                     amount,
                     "",
-                };
-            }
-            else
-            {
-                // for credit row
-                accountRow = new object[]
+                    };
+                }
+                else
                 {
+                    // for credit row
+                    accountRow = new object[]
+                    {
                     fppId,
                     generalLedgerId,
                     subsidiaryId,
                     isDebit,
                     isDeposit,
                     fppName,
-                    $"     {generalLedgerDict["ledger_name"]}",
+                    $"      {generalLedgerDict["ledger_name"]}",
                     generalLedgerDict["account_code"],
                     subsidiaryName,
                     obligationNo,
                     "",
                     amount,
-                };
-            }
+                    };
+                }
 
-            ucJEV.dgAccounts.Rows.Add(accountRow);
-            ucJEV.SumDebitCredit();
+                ucJEV.dgAccounts.Rows.Add(accountRow);
+                ucJEV.SumDebitCredit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private void frmJEVAccountAdd_Load(object sender, EventArgs e)
         {
-            var uc = ucjevAccount1;
-            uc.LoadFPP();
-            uc.cmbFPP.SelectedIndex = -1;
-            uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
-            uc.cmbxAccount.SelectedIndex = -1;
+            ucJEVAccount.LoadFPP();
+            ucJEVAccount.cmbFPP.SelectedIndex = -1;
+            ucJEVAccount.cmbFPP.TextChanged += new EventHandler(ucJEVAccount.cmbxFPP_TextChanged);
+            ucJEVAccount.cmbxAccount.SelectedIndex = -1;
+            ShowHideRadioButtons();
+        }
 
-
+        private void ShowHideRadioButtons()
+        {
             if (ucJEV.journalName == "Cash Receipts Journal")
             {
-                uc.pnlCollectionsDeposits.Visible = true;
-                uc.radCollections.Checked = true;
+                ucJEVAccount.pnlCollectionsDeposits.Visible = true;
+                ucJEVAccount.radCollections.Checked = true;
             }
             else
             {
-                uc.pnlCollectionsDeposits.Visible = false;
-                uc.radDeposits.Checked = false;
-                uc.radCollections.Checked = false;
+                ucJEVAccount.pnlCollectionsDeposits.Visible = false;
+                ucJEVAccount.radDeposits.Checked = false;
+                ucJEVAccount.radCollections.Checked = false;
             }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            var uc = ucjevAccount1;
-            // show error kung naa
-            if (!uc.ValidateChildren())
-            {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return;
-            }
-
-            AddAccount();
-            uc.ResetForm();
+            if (AddAccount())
+                ucJEVAccount.ResetForm();
         }
     }
 }

@@ -157,23 +157,15 @@ namespace AccountingSystem.Views.Transactions.JEV
         //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
         {
-            DataTable dtAccounts;
-
             if (string.IsNullOrEmpty(cmbxAccount.Text))
-            {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-            }
+                return Factory.GeneralLedgerAccountsRepository().GetViewRecords();
             else
-            {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
-            }
-
-            return dtAccounts;
+                return Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
         }
 
         private void Set_Default_Account_Of_CashReceiptsJournal()
         {
-            if ((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked) && journalName == "Cash Receipts Journal")
+            if (((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked)) && journalName == "Cash Receipts Journal")
             {
                 cmbxAccount.SelectedIndex = 0;
                 cmbxAccount.Enabled = false;
@@ -186,7 +178,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void LoadAccounts()
+        internal void LoadAccounts()
         {
             try
             {

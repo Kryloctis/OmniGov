@@ -35,10 +35,17 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         internal void LoadSelectedGeneralLedger()
         {
-            var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            try
+            {
+                var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
-            txtAccountCode.Text = generalLedgerAccount["account_code"];
-            txtAccountName.Text = generalLedgerAccount["ledger_name"];
+                txtAccountCode.Text = generalLedgerAccount["account_code"];
+                txtAccountName.Text = generalLedgerAccount["ledger_name"];
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void LoadSelectedSubsidiaryAccount()
