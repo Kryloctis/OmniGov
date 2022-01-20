@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjevAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucjevAccount1.Location = new System.Drawing.Point(12, 12);
             this.ucjevAccount1.Name = "ucjevAccount1";
-            this.ucjevAccount1.Size = new System.Drawing.Size(588, 175);
+            this.ucjevAccount1.Size = new System.Drawing.Size(589, 175);
             this.ucjevAccount1.TabIndex = 0;
             // 
             // flowLayoutPanel1

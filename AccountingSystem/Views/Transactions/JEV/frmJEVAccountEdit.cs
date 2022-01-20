@@ -33,20 +33,20 @@ namespace AccountingSystem.Views.Transactions.JEV
             var uc = ucjevAccount1;
             if (isDebit)
             {
-                uc.radioDebit.Checked = true;
+                uc.radDebit.Checked = true;
                 return;
             }
 
-            uc.radioCredit.Checked = true;
+            uc.radCredit.Checked = true;
         }
 
         private void CheckedCollectionsDeposits(bool? isDeposit)
         {
             var uc = ucjevAccount1;
             if (!Convert.ToBoolean(isDeposit))
-               uc.radioCollections.Checked = true;
+               uc.radCollections.Checked = true;
             else
-                uc.radioDeposits.Checked = true;
+                uc.radDeposits.Checked = true;
         }
 
         private void LoadSelectedGeneralLedgerAccount(ushort accountId, string accountCode, string accountName)
@@ -55,9 +55,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             var concatAccountName = $"{accountCode} - {accountName}";
             accountDict.Add(accountId, concatAccountName);
 
-            ucJEVAccount.cmbAccount.DataSource = new BindingSource(accountDict, null);
-            ucJEVAccount.cmbAccount.DisplayMember = "value";
-            ucJEVAccount.cmbAccount.ValueMember = "key";
+            ucJEVAccount.cmbxAccount.DataSource = new BindingSource(accountDict, null);
+            ucJEVAccount.cmbxAccount.DisplayMember = "value";
+            ucJEVAccount.cmbxAccount.ValueMember = "key";
         }
 
         private void LoadSelectedRecord()
@@ -95,17 +95,17 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 string fppId = string.IsNullOrWhiteSpace(uc.cmbFPP.Text) ? string.Empty : uc.cmbFPP.SelectedValue.ToString();
                 string fppName = uc.cmbFPP.Text;
-                ushort generalLedgerId = Convert.ToUInt16(uc.cmbAccount.SelectedValue);
+                ushort generalLedgerId = Convert.ToUInt16(uc.cmbxAccount.SelectedValue);
                 string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
                 string subsidiaryName = uc.cmbSubsidiary.Text;
                 string obligationNo = uc.txtObligationNo.Text;
                 string amount = uc.nudAmount.Value.ToString("N2");
-                bool isDebit = uc.radioDebit.Checked;
+                bool isDebit = uc.radDebit.Checked;
                 bool? isDeposit;
 
-                if (uc.radioDeposits.Checked)
+                if (uc.radDeposits.Checked)
                     isDeposit = true;
-                else if (uc.radioCollections.Checked)
+                else if (uc.radCollections.Checked)
                     isDeposit = false;
                 else
                     isDeposit = null;
@@ -151,8 +151,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (ucJEV.journalName != "Cash Receipts Journal")
             {
                 ucJEVAccount.pnlCollectionsDeposits.Visible = false;
-                ucJEVAccount.radioDeposits.Checked = false;
-                ucJEVAccount.radioCollections.Checked = false;
+                ucJEVAccount.radDeposits.Checked = false;
+                ucJEVAccount.radCollections.Checked = false;
             }
         }
 

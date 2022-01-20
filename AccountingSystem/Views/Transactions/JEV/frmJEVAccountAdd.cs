@@ -21,17 +21,17 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             string fppId = string.IsNullOrWhiteSpace(uc.cmbFPP.Text) ? string.Empty : uc.cmbFPP.SelectedValue.ToString();
             string fppName = uc.cmbFPP.Text;
-            string generalLedgerId = uc.cmbAccount.SelectedValue.ToString();
+            string generalLedgerId = uc.cmbxAccount.SelectedValue.ToString();
             string subsidiaryId = !string.IsNullOrWhiteSpace(uc.cmbSubsidiary.Text) ? uc.cmbSubsidiary.SelectedValue.ToString() : null;
             string subsidiaryName = uc.cmbSubsidiary.Text;
             string obligationNo = uc.txtObligationNo.Text.Trim();
             string amount = uc.nudAmount.Value.ToString("N2");
-            bool isDebit = uc.radioDebit.Checked;
+            bool isDebit = uc.radDebit.Checked;
             bool? isDeposit;
 
-            if (uc.radioDeposits.Checked)
+            if (uc.radDeposits.Checked)
                 isDeposit = true;
-            else if (uc.radioCollections.Checked)
+            else if (uc.radCollections.Checked)
                 isDeposit = false;
             else
                 isDeposit = null;
@@ -88,19 +88,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             uc.LoadFPP();
             uc.cmbFPP.SelectedIndex = -1;
             uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
-            uc.cmbAccount.SelectedIndex = -1;
+            uc.cmbxAccount.SelectedIndex = -1;
 
 
             if (ucJEV.journalName == "Cash Receipts Journal")
             {
                 uc.pnlCollectionsDeposits.Visible = true;
-                uc.radioCollections.Checked = true;
+                uc.radCollections.Checked = true;
             }
             else
             {
                 uc.pnlCollectionsDeposits.Visible = false;
-                uc.radioDeposits.Checked = false;
-                uc.radioCollections.Checked = false;
+                uc.radDeposits.Checked = false;
+                uc.radCollections.Checked = false;
             }
         }
 

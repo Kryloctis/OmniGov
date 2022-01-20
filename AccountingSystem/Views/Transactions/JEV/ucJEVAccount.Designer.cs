@@ -34,13 +34,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label1 = new System.Windows.Forms.Label();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbAccount = new System.Windows.Forms.ComboBox();
-            this.radioDebit = new System.Windows.Forms.RadioButton();
+            this.cmbxAccount = new System.Windows.Forms.ComboBox();
+            this.radDebit = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioCredit = new System.Windows.Forms.RadioButton();
+            this.radCredit = new System.Windows.Forms.RadioButton();
             this.pnlCollectionsDeposits = new System.Windows.Forms.Panel();
-            this.radioDeposits = new System.Windows.Forms.RadioButton();
-            this.radioCollections = new System.Windows.Forms.RadioButton();
+            this.radDeposits = new System.Windows.Forms.RadioButton();
+            this.radCollections = new System.Windows.Forms.RadioButton();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSubsidiary = new System.Windows.Forms.ComboBox();
@@ -90,80 +90,81 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.label2.TabIndex = 2;
             this.label2.Text = "Account";
             // 
-            // cmbAccount
+            // cmbxAccount
             // 
-            this.cmbAccount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbAccount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(92, 58);
-            this.cmbAccount.Name = "cmbAccount";
-            this.cmbAccount.Size = new System.Drawing.Size(466, 23);
-            this.cmbAccount.TabIndex = 2;
-            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
-            this.cmbAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbAccount_Validating);
-            this.cmbAccount.Validated += new System.EventHandler(this.cmbAccount_Validated);
+            this.cmbxAccount.Location = new System.Drawing.Point(92, 58);
+            this.cmbxAccount.Name = "cmbxAccount";
+            this.cmbxAccount.Size = new System.Drawing.Size(466, 23);
+            this.cmbxAccount.TabIndex = 2;
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
+            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
+            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
-            // radioDebit
+            // radDebit
             // 
-            this.radioDebit.AutoSize = true;
-            this.radioDebit.Checked = true;
-            this.radioDebit.Location = new System.Drawing.Point(3, 3);
-            this.radioDebit.Name = "radioDebit";
-            this.radioDebit.Size = new System.Drawing.Size(53, 19);
-            this.radioDebit.TabIndex = 4;
-            this.radioDebit.TabStop = true;
-            this.radioDebit.Text = "Debit";
-            this.radioDebit.UseVisualStyleBackColor = true;
+            this.radDebit.AutoSize = true;
+            this.radDebit.Checked = true;
+            this.radDebit.Location = new System.Drawing.Point(3, 3);
+            this.radDebit.Name = "radDebit";
+            this.radDebit.Size = new System.Drawing.Size(53, 19);
+            this.radDebit.TabIndex = 4;
+            this.radDebit.TabStop = true;
+            this.radDebit.Text = "Debit";
+            this.radDebit.UseVisualStyleBackColor = true;
+            this.radDebit.CheckedChanged += new System.EventHandler(this.radDebit_CheckedChanged);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioCredit);
-            this.panel1.Controls.Add(this.radioDebit);
+            this.panel1.Controls.Add(this.radCredit);
+            this.panel1.Controls.Add(this.radDebit);
             this.panel1.Location = new System.Drawing.Point(92, 116);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(143, 27);
             this.panel1.TabIndex = 5;
             // 
-            // radioCredit
+            // radCredit
             // 
-            this.radioCredit.AutoSize = true;
-            this.radioCredit.Location = new System.Drawing.Point(62, 3);
-            this.radioCredit.Name = "radioCredit";
-            this.radioCredit.Size = new System.Drawing.Size(57, 19);
-            this.radioCredit.TabIndex = 5;
-            this.radioCredit.Text = "Credit";
-            this.radioCredit.UseVisualStyleBackColor = true;
+            this.radCredit.AutoSize = true;
+            this.radCredit.Location = new System.Drawing.Point(62, 3);
+            this.radCredit.Name = "radCredit";
+            this.radCredit.Size = new System.Drawing.Size(57, 19);
+            this.radCredit.TabIndex = 5;
+            this.radCredit.Text = "Credit";
+            this.radCredit.UseVisualStyleBackColor = true;
+            this.radCredit.CheckedChanged += new System.EventHandler(this.radCredit_CheckedChanged);
             // 
             // pnlCollectionsDeposits
             // 
-            this.pnlCollectionsDeposits.Controls.Add(this.radioDeposits);
-            this.pnlCollectionsDeposits.Controls.Add(this.radioCollections);
+            this.pnlCollectionsDeposits.Controls.Add(this.radDeposits);
+            this.pnlCollectionsDeposits.Controls.Add(this.radCollections);
             this.pnlCollectionsDeposits.Location = new System.Drawing.Point(360, 116);
             this.pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
             this.pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
             this.pnlCollectionsDeposits.TabIndex = 6;
             // 
-            // radioDeposits
+            // radDeposits
             // 
-            this.radioDeposits.AutoSize = true;
-            this.radioDeposits.Location = new System.Drawing.Point(93, 3);
-            this.radioDeposits.Name = "radioDeposits";
-            this.radioDeposits.Size = new System.Drawing.Size(70, 19);
-            this.radioDeposits.TabIndex = 7;
-            this.radioDeposits.Text = "Deposits";
-            this.radioDeposits.UseVisualStyleBackColor = true;
+            this.radDeposits.AutoSize = true;
+            this.radDeposits.Location = new System.Drawing.Point(93, 3);
+            this.radDeposits.Name = "radDeposits";
+            this.radDeposits.Size = new System.Drawing.Size(70, 19);
+            this.radDeposits.TabIndex = 7;
+            this.radDeposits.Text = "Deposits";
+            this.radDeposits.UseVisualStyleBackColor = true;
+            this.radDeposits.CheckedChanged += new System.EventHandler(this.radDeposits_CheckedChanged);
             // 
-            // radioCollections
+            // radCollections
             // 
-            this.radioCollections.AutoSize = true;
-            this.radioCollections.Checked = true;
-            this.radioCollections.Location = new System.Drawing.Point(3, 3);
-            this.radioCollections.Name = "radioCollections";
-            this.radioCollections.Size = new System.Drawing.Size(84, 19);
-            this.radioCollections.TabIndex = 6;
-            this.radioCollections.TabStop = true;
-            this.radioCollections.Text = "Collections";
-            this.radioCollections.UseVisualStyleBackColor = true;
+            this.radCollections.AutoSize = true;
+            this.radCollections.Checked = true;
+            this.radCollections.Location = new System.Drawing.Point(3, 3);
+            this.radCollections.Name = "radCollections";
+            this.radCollections.Size = new System.Drawing.Size(84, 19);
+            this.radCollections.TabIndex = 6;
+            this.radCollections.TabStop = true;
+            this.radCollections.Text = "Collections";
+            this.radCollections.UseVisualStyleBackColor = true;
+            this.radCollections.CheckedChanged += new System.EventHandler(this.radCollections_CheckedChanged);
             // 
             // nudAmount
             // 
@@ -270,7 +271,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.pnlCollectionsDeposits);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cmbAccount);
+            this.Controls.Add(this.cmbxAccount);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.label5);
@@ -299,11 +300,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         internal System.Windows.Forms.ComboBox cmbFPP;
-        internal System.Windows.Forms.ComboBox cmbAccount;
-        internal System.Windows.Forms.RadioButton radioDebit;
-        internal System.Windows.Forms.RadioButton radioCredit;
-        internal System.Windows.Forms.RadioButton radioDeposits;
-        internal System.Windows.Forms.RadioButton radioCollections;
+        internal System.Windows.Forms.ComboBox cmbxAccount;
+        internal System.Windows.Forms.RadioButton radDebit;
+        internal System.Windows.Forms.RadioButton radCredit;
+        internal System.Windows.Forms.RadioButton radDeposits;
+        internal System.Windows.Forms.RadioButton radCollections;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.ComboBox cmbSubsidiary;
         private System.Windows.Forms.Label label4;
