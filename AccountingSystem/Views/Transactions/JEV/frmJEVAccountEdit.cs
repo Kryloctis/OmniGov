@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var uc = ucjevAccount1;
             if (!Convert.ToBoolean(isDeposit))
-               uc.radCollections.Checked = true;
+                uc.radCollections.Checked = true;
             else
                 uc.radDeposits.Checked = true;
         }
