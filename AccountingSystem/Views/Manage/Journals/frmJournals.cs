@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Journals.DefaultAccounts;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,6 +13,16 @@ namespace AccountingSystem.Views.Manage.Journals
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+        }
+
+        private void UserVerification()
+        {
+            var dictLoggedInUser = Helper.LoggedInUserData();
+            if (dictLoggedInUser["role_name"] != "System Administrator")
+            {
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = false;
+            }
         }
 
         internal void LoadRecords()
@@ -27,8 +38,7 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void frmJournals_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-
+            UserVerification();
             Helper.DatagridFullRowSelectStyle(dgJournals, true);
             LoadRecords();
         }
@@ -41,6 +51,7 @@ namespace AccountingSystem.Views.Manage.Journals
             int journalId = Convert.ToInt32(dgJournals.CurrentRow.Cells["id"].Value);
             if (journalId == 1) btnDefaultAccounts.Enabled = false;
             else btnDefaultAccounts.Enabled = true;
+            UserVerification();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -76,6 +87,16 @@ namespace AccountingSystem.Views.Manage.Journals
                     }
                 }
             }
+            catch (MySqlException ex)
+            {
+                switch (ex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot delete record. Journal was referenced.");
+                        break;
+                }
+            }
+
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);

@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Journals
@@ -17,6 +11,13 @@ namespace AccountingSystem.Views.Manage.Journals
         public ucJournals()
         {
             InitializeComponent();
+        }
+
+        private void UserVerification()
+        {
+            var dictLoggedInUser = Helper.LoggedInUserData();
+            if (dictLoggedInUser["role_name"] != "System Administrator")
+                txtName.Enabled = false;
         }
 
         internal string GetFormErrors()
@@ -61,7 +62,10 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void ucJournals_Load(object sender, EventArgs e)
         {
-
+            if (!DesignMode)
+            {
+                UserVerification();
+            }
         }
     }
 }
