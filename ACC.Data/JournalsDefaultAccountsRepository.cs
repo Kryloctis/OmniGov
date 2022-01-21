@@ -162,5 +162,29 @@ namespace ACC.Data
             }
             return false;
         }
+
+        public bool GeneralLedgerAccountExist(int journalId, int generalLedgerAccountId, int fundId)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@journals_id",DbType.Int32, journalId},
+                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
+                    new object[] { "@funds_id", DbType.Int32, fundId}
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE journals_id = @journals_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id";
+                string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }

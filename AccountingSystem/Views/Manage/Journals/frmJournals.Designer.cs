@@ -55,18 +55,19 @@ namespace AccountingSystem.Views.Manage.Journals
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgJournals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgJournals.Location = new System.Drawing.Point(10, 52);
+            this.dgJournals.Location = new System.Drawing.Point(10, 57);
             this.dgJournals.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgJournals.Name = "dgJournals";
             this.dgJournals.RowHeadersWidth = 51;
             this.dgJournals.RowTemplate.Height = 29;
             this.dgJournals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgJournals.Size = new System.Drawing.Size(676, 321);
+            this.dgJournals.Size = new System.Drawing.Size(676, 316);
             this.dgJournals.TabIndex = 0;
             this.dgJournals.SelectionChanged += new System.EventHandler(this.dgJournals_SelectionChanged);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -76,14 +77,13 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnDefaultAccounts});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(699, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 1, 3);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 55);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Enabled = false;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -91,7 +91,6 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnAdd.Size = new System.Drawing.Size(42, 47);
             this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnAdd.Visible = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
@@ -107,7 +106,6 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // btnDelete
             // 
-            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -115,7 +113,6 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnDefaultAccounts
@@ -145,6 +142,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
             this.statusStrip1.Size = new System.Drawing.Size(699, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
