@@ -52,18 +52,18 @@ namespace AccountingSystem.Views.Transactions.JEV
                     // for debit row
                     accountRow = new object[]
                     {
-                    fppId,
-                    generalLedgerId,
-                    subsidiaryId,
-                    isDebit,
-                    isDeposit,
-                    fppName,
-                    generalLedgerDict["ledger_name"],
-                    generalLedgerDict["account_code"],
-                    subsidiaryName,
-                    obligationNo,
-                    amount,
-                    "",
+                        fppId,
+                        generalLedgerId,
+                        subsidiaryId,
+                        isDebit,
+                        fppName,
+                        generalLedgerDict["ledger_name"],
+                        generalLedgerDict["account_code"],
+                        subsidiaryName,
+                        obligationNo,
+                        amount,
+                        "",
+                        isDeposit
                     };
                 }
                 else
@@ -71,18 +71,18 @@ namespace AccountingSystem.Views.Transactions.JEV
                     // for credit row
                     accountRow = new object[]
                     {
-                    fppId,
-                    generalLedgerId,
-                    subsidiaryId,
-                    isDebit,
-                    isDeposit,
-                    fppName,
-                    $"      {generalLedgerDict["ledger_name"]}",
-                    generalLedgerDict["account_code"],
-                    subsidiaryName,
-                    obligationNo,
-                    "",
-                    amount,
+                        fppId,
+                        generalLedgerId,
+                        subsidiaryId,
+                        isDebit,
+                        fppName,
+                        $"      {generalLedgerDict["ledger_name"]}",
+                        generalLedgerDict["account_code"],
+                        subsidiaryName,
+                        obligationNo,
+                        "",
+                        amount,
+                        isDeposit
                     };
                 }
 

@@ -846,7 +846,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                         generalLedgerId,
                         subsidiaryId,
                         isDebit,
-                        isDeposit,
                         fppName,
                         generalLedgerName,
                         accountCode,
@@ -854,6 +853,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         obligationNo,
                         amount.ToString("N2"),
                         "",
+                        isDeposit
                     };
 
                     uc.dgAccounts.Rows.Add(accountRow);
@@ -867,14 +867,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                         generalLedgerId,
                         subsidiaryId,
                         isDebit,
-                        isDeposit,
                         fppName,
                         $"     {generalLedgerName}",
                         accountCode,
                         subsidiaryName,
                         obligationNo,
                         "",
-                        amount.ToString("N2")
+                        amount.ToString("N2"),
+                        isDeposit
                     };
 
                     uc.dgAccounts.Rows.Add(accountRow);

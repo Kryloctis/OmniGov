@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1006, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(1106, 50);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjev1.AutoSize = true;
             this.ucjev1.Location = new System.Drawing.Point(14, 75);
             this.ucjev1.Name = "ucjev1";
-            this.ucjev1.Size = new System.Drawing.Size(992, 551);
+            this.ucjev1.Size = new System.Drawing.Size(1092, 551);
             this.ucjev1.TabIndex = 11;
             // 
             // statusStrip1
@@ -176,7 +176,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1006, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1106, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 14;
             this.statusStrip1.Text = "statusStrip1";
@@ -184,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(931, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1031, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -233,7 +233,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblCreatedBy});
             this.statusStrip2.Location = new System.Drawing.Point(0, 632);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1006, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(1106, 22);
             this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 15;
             this.statusStrip2.Text = "statusStrip2";
@@ -241,7 +241,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(897, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(997, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -262,7 +262,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1006, 654);
+            this.ClientSize = new System.Drawing.Size(1106, 654);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ucjev1);
