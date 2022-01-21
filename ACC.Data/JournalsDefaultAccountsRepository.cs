@@ -84,14 +84,15 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsByJournalId(int journalId, int fundId)
+        public DataTable GetViewRecordsByJournalId(int journalId, int fundId, bool isDebit)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journals_id", DbType.Int32, journalId},
-                new object[] { "@funds_id", DbType.Int32, fundId}
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@is_debit", DbType.Boolean, isDebit}
             };
-            string query = $"SELECT * FROM  {viewTableName} WHERE journals_id = @journals_id AND funds_id = @funds_id";
+            string query = $"SELECT * FROM  {viewTableName} WHERE journals_id = @journals_id AND funds_id = @funds_id AND is_debit = @is_debit";
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -123,10 +124,11 @@ namespace ACC.Data
                     {
                         new object[] { "@journals_id",DbType.Int32, item.JournalId},
                         new object[] { "@funds_id", DbType.Int32, item.fundId},
-                        new object[] { "@general_ledger_accounts_id",DbType.Int32, item.AccountId }
+                        new object[] { "@general_ledger_accounts_id",DbType.Int32, item.AccountId },
+                        new object[] { "@is_debit", DbType.Boolean, item.IsDebit}
                     };
 
-                    string query = $"INSERT INTO {tableName} (journals_id, funds_id, general_ledger_accounts_id) VALUES (@journals_id, @funds_id, @general_ledger_accounts_id)";
+                    string query = $"INSERT INTO {tableName} (journals_id, funds_id, general_ledger_accounts_id, is_debit) VALUES (@journals_id, @funds_id, @general_ledger_accounts_id, @is_debit)";
 
                     _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
@@ -163,7 +165,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool GeneralLedgerAccountExist(int journalId, int generalLedgerAccountId, int fundId)
+        public bool GeneralLedgerAccountExist(int journalId, int generalLedgerAccountId, int fundId, bool isDebit)
         {
             try
             {
@@ -171,10 +173,11 @@ namespace ACC.Data
                 {
                     new object[] { "@journals_id",DbType.Int32, journalId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerAccountId},
-                    new object[] { "@funds_id", DbType.Int32, fundId}
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@is_debit", DbType.Boolean, isDebit}
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE journals_id = @journals_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id";
+                string query = $"SELECT id FROM {tableName} WHERE journals_id = @journals_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id AND is_debit = @is_debit";
                 string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

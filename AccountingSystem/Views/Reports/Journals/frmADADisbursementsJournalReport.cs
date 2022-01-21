@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 byte journalId = 6;
 
-                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId);
+                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
 
                 string defaultAccountCode(int rowNo)
                 {

@@ -6,5 +6,7 @@
         public int JournalId { get; set; }
         public int fundId { get; set; }
         public int AccountId { get; set; }
+
+        public bool IsDebit { get; set; }
     }
 }

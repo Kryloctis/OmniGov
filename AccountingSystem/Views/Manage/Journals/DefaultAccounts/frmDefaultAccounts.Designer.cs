@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.radCredit.TabStop = true;
             this.radCredit.Text = "Credit";
             this.radCredit.UseVisualStyleBackColor = true;
+            this.radCredit.CheckedChanged += new System.EventHandler(this.radCredit_CheckedChanged);
             // 
             // radDebit
             // 
@@ -113,6 +114,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             this.radDebit.TabStop = true;
             this.radDebit.Text = "Debit";
             this.radDebit.UseVisualStyleBackColor = true;
+            this.radDebit.CheckedChanged += new System.EventHandler(this.radDebit_CheckedChanged);
             // 
             // txtAccounts
             // 
