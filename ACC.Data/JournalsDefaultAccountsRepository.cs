@@ -52,7 +52,7 @@ namespace ACC.Data
             }
         }
 
-        public bool DeleteByFundId(List<JournalsDefaultAccountsModel> entityList)
+        public bool DeleteByFundAndIsDebit(List<JournalsDefaultAccountsModel> entityList)
         {
             using (var scope = new TransactionScope())
             {
@@ -61,10 +61,11 @@ namespace ACC.Data
                     var parameters = new object[][]
                     {
                         new object[] { "@journals_id", DbType.Int32, item.JournalId},
-                        new object[] { "@funds_id", DbType.Int32, item.fundId}
+                        new object[] { "@funds_id", DbType.Int32, item.fundId},
+                        new object[] { "@is_debit", DbType.Boolean, item.IsDebit}
                     };
 
-                    string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id";
+                    string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id AND is_debit = @is_debit";
 
                     _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
                 }
@@ -117,7 +118,7 @@ namespace ACC.Data
             using (var scope = new TransactionScope())
             {
 
-                DeleteByFundId(entityList);
+                DeleteByFundAndIsDebit(entityList);
                 foreach (var item in entityList)
                 {
                     var parameters = new object[][]
