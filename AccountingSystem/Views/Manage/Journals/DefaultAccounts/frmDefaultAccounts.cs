@@ -89,9 +89,10 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void LoadAccounts()
         {
+            string searchKey = txtAccounts.Text.Trim();
             CreateDatagridViewColumns(dgAccounts);
 
-            var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+            var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
 
             foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
             {
@@ -150,7 +151,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
                 var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
                 lblJournalName.Text = dtJournals["journal_name"].ToString();
-                LoadAccounts();
                 LoadFunds();
                 LoadDefaultAccounts();
                 lblMaxAccounts.Text = $"Max: {GetMaxNumberOfDefaultAccounts()}";
@@ -312,6 +312,12 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadDefaultAccounts();
+        }
+
+        private void txtAccounts_TextChanged(object sender, EventArgs e)
+        {
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
         }
     }
 }
