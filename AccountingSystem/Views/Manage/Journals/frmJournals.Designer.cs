@@ -29,13 +29,13 @@ namespace AccountingSystem.Views.Manage.Journals
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJournals));
             this.dgJournals = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnDefaultAccounts = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
+            this.toolStripSeparator1,
             this.btnDefaultAccounts});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -84,7 +85,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -95,7 +96,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -106,7 +107,7 @@ namespace AccountingSystem.Views.Manage.Journals
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -126,6 +127,11 @@ namespace AccountingSystem.Views.Manage.Journals
             this.btnDefaultAccounts.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.btnDefaultAccounts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDefaultAccounts.Click += new System.EventHandler(this.btnDefaultAccounts_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // statusStrip1
             // 
@@ -229,5 +235,6 @@ namespace AccountingSystem.Views.Manage.Journals
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.ToolStripButton btnDefaultAccounts;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
