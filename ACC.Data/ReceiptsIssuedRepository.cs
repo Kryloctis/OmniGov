@@ -225,29 +225,31 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT {tableReceiptsIssued}.id," +
-                    $"CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector," +
-                    $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
-                    $"{tableReceiptsIssued}.issuefrom," +
-                    $"{tableReceiptsIssued}.issueto," +
-                    $"{tableReceiptsIssued}.date_issued," +
-                    $"{tableReceiptsIssued}.quantity," +
-                    $"{tableReceiptsIssued}.last_issued," +
-                    $"IF(IFNULL({tableReceiptsIssued}.is_returned,0)>0,'YES','NO') AS returned," +
-                    $"{tableReceiptsIssued}.returned_date," +
-                    $"CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) AS officer " +
-                    $"FROM {tableReceiptsIssued} LEFT JOIN {tableReceipts} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id " +
-                    $"LEFT JOIN {tableUsers} ON {tableReceipts}.users_id={tableUsers}.id " +
-                    $"LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id " +
-                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
-                    $"WHERE {tableReceipts}.receiptsfrom LIKE '%{searchText}%' " +
-                    $"OR {tableReceipts}.receiptsto LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableUsers}.last_name,', ',{tableUsers}.first_name,' ',{tableUsers}.mid_initial) LIKE '%{searchText}%' " +
-                    $"OR CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) LIKE '%{searchText}%' ORDER BY {tableReceiptsIssued}.date_issued DESC";
+
+                var parameter = new object[][] { 
+                    new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
+                };
+
+                string query = $"SELECT  " +
+                               $"id, " +
+                               $"collecting_officer, " +
+                               $"accountable_forms, " +
+                               $"issuefrom, " +
+                               $"issueto,  " +
+                               $"date_issued,  " +
+                               $"quantity,  " +
+                               $"last_issued,  " +
+                               $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
+                               $"returned_date,  " +
+                               $"user  " +
+                               $"FROM {viewTableName} " +
+                               $"WHERE " +
+                               $"collecting_officer LIKE @searchKey OR " +
+                               $"accountable_forms LIKE @searchKey " +
+                               $"ORDER BY date_issued DESC ";
 
                 var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
+                return _dbGenericCommands.FillBySearch(query, dtri, parameter);
             }
             catch (Exception)
             {
