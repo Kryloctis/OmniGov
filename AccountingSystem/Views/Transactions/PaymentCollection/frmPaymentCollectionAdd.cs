@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     ucPaymentCollection1.cmdCollector.Enabled = false;
                 }
             }
-           
+
         }
 
         private bool SaveData()
@@ -69,37 +69,49 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
                 if (insertSuccess)
-                {
-                    var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                    var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
-
-                    var receiptIssuedCount = dtReceiptIssued.Rows.Count;
-
-                    if (receiptIssuedCount > 0)
-                    {
-                        int rid = 0;
-                        for (int i = 0; i < receiptIssuedCount; i++)
-                        {
-                            rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
-                        }
-                        var rcModel = new ReceiptsIssuedModel()
-                        {
-                            Id = rid,
-                            Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
-                        };
-                        return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
-                    }
-                }
+                    return UpdateReceiptsCount();
                 else
-                {
                     return false;
-                }
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxWarning(ex.Message);
             }
             return false;
+        }
+
+        private bool UpdateReceiptsCount()
+        {
+            try
+            {
+                var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
+
+                var receiptIssuedCount = dtReceiptIssued.Rows.Count;
+
+                if (receiptIssuedCount > 0)
+                {
+                    int rid = 0;
+                    for (int i = 0; i < receiptIssuedCount; i++)
+                    {
+                        rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
+                    }
+                    var rcModel = new ReceiptsIssuedModel()
+                    {
+                        Id = rid,
+                        Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                    };
+                    return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
