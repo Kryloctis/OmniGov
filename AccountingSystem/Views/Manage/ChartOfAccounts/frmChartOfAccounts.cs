@@ -26,6 +26,16 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 BtnSubsidiary.Visible = false;
         }
 
+        private void UserVerfication()
+        {
+            if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
+            {
+                btnAdd.Enabled = false;
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+            }
+        }
+
         internal void LoadAccountGroup()
         {
             try
@@ -375,10 +385,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             Helper.ShowRecordTimestamp(dataGrid, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dataGrid, btnEdit, btnDelete);
 
-            // this is temporary
-            btnAdd.Enabled = false;
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
+            UserVerfication();
         }
 
         private void EnableDisableSubsidiaryButton()
