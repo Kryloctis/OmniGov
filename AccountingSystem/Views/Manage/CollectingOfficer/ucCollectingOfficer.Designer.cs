@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 14);
+            this.label2.Location = new System.Drawing.Point(12, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 15);
             this.label2.TabIndex = 7;
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // txtFname
             // 
-            this.txtFname.Location = new System.Drawing.Point(101, 11);
+            this.txtFname.Location = new System.Drawing.Point(99, 32);
             this.txtFname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFname.MaxLength = 45;
             this.txtFname.Name = "txtFname";
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 43);
+            this.label1.Location = new System.Drawing.Point(12, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 15);
             this.label1.TabIndex = 9;
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // txtMI
             // 
-            this.txtMI.Location = new System.Drawing.Point(101, 37);
+            this.txtMI.Location = new System.Drawing.Point(99, 66);
             this.txtMI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMI.MaxLength = 3;
             this.txtMI.Name = "txtMI";
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 66);
+            this.label3.Location = new System.Drawing.Point(12, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 11;
@@ -100,7 +100,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // txtLname
             // 
-            this.txtLname.Location = new System.Drawing.Point(101, 63);
+            this.txtLname.Location = new System.Drawing.Point(99, 100);
             this.txtLname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLname.MaxLength = 45;
             this.txtLname.Name = "txtLname";
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 92);
+            this.label4.Location = new System.Drawing.Point(12, 137);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 15);
             this.label4.TabIndex = 13;
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // txtJobtitle
             // 
-            this.txtJobtitle.Location = new System.Drawing.Point(101, 89);
+            this.txtJobtitle.Location = new System.Drawing.Point(99, 134);
             this.txtJobtitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtJobtitle.MaxLength = 99;
             this.txtJobtitle.Name = "txtJobtitle";
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.linkuser.AutoSize = true;
             this.linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkuser.Location = new System.Drawing.Point(12, 124);
+            this.linkuser.Location = new System.Drawing.Point(12, 9);
             this.linkuser.Name = "linkuser";
             this.linkuser.Size = new System.Drawing.Size(66, 15);
             this.linkuser.TabIndex = 14;
@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFname);
             this.Name = "ucCollectingOfficer";
-            this.Size = new System.Drawing.Size(449, 147);
+            this.Size = new System.Drawing.Size(449, 176);
             this.Load += new System.EventHandler(this.ucCollectingOfficer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epFname)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epMI)).EndInit();

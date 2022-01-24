@@ -52,10 +52,10 @@ namespace AccountingSystem.Views.Manage.LinkUser
             if(dgvusers.SelectedRows.Count > 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
-                Username = dgvusers.CurrentRow.Cells[5].Value.ToString();
-                lname = dgvusers.CurrentRow.Cells[4].Value.ToString();
-                fname = dgvusers.CurrentRow.Cells[2].Value.ToString();
-                mname = dgvusers.CurrentRow.Cells[3].Value.ToString();
+                Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
+                fname = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
+                mname = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                lname = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
             }
         }
 
