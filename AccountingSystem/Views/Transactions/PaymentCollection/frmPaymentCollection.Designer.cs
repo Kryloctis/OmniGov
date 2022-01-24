@@ -44,8 +44,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmdCollector = new System.Windows.Forms.ComboBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
             this.statusStrip2.SuspendLayout();
@@ -213,36 +211,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label1.TabIndex = 13;
             this.label1.Text = "Date of Collection";
             // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(200, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 15);
-            this.label7.TabIndex = 38;
-            this.label7.Text = "Collecting Officer";
-            // 
-            // cmdCollector
-            // 
-            this.cmdCollector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmdCollector.FormattingEnabled = true;
-            this.cmdCollector.Location = new System.Drawing.Point(306, 22);
-            this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmdCollector.Name = "cmdCollector";
-            this.cmdCollector.Size = new System.Drawing.Size(195, 23);
-            this.cmdCollector.TabIndex = 37;
-            this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
-            // 
             // frmPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1097, 562);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.cmdCollector);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -286,7 +260,5 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label7;
-        internal System.Windows.Forms.ComboBox cmdCollector;
     }
 }
