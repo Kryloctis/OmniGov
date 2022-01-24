@@ -179,22 +179,24 @@ namespace ACC.Data
             try
             {
 
-                string query = $"SELECT " +
-                            $"id, " +
-                            $"roles_id, " +
-                            $"first_name, " +
-                            $"mid_initial, " +
-                            $"last_name, " +
-                            $"username, " +
-                            $"password, " +
-                            $"is_deleted, " +
-                            $"created_at, " +
-                            $"updated_at, " +
-                            $"office, " +
-                            $"role_name, " +
-                            $"permission_name, " +
-                            $"permission_office " +
-                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+                string query =  $"SELECT " +
+                                $"id, " +
+                                $"roles_id, " +
+                                $"prefix, " +
+                                $"first_name, " +
+                                $"mid_initial, " +
+                                $"last_name, " +
+                                $"suffix, " +
+                                $"username, " +
+                                $"password, " +
+                                $"is_deleted, " +
+                                $"created_at, " +
+                                $"updated_at, " +
+                                $"office, " +
+                                $"role_name, " +
+                                $"permission_name, " +
+                                $"permission_office " +
+                                $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
 
                 var dtUsers = new DataTable();
                 return _dbGenericCommands.Fill(query, dtUsers);
