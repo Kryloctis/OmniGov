@@ -208,9 +208,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 _frmPaymentCollection.LoadRecords();
                 uc.ResetForm();
 
+
                 uc.cmbcollector_SelectedIndexChanged(this, EventArgs.Empty);
                 uc.cmbforms_SelectedIndexChanged(this, EventArgs.Empty);
                 uc.cmbforms_SelectedValueChanged(this, EventArgs.Empty);
+
             }
         }
 
