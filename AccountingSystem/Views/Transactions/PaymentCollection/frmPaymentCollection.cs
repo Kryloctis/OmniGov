@@ -137,6 +137,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 LoadRecords();
             }
+
+            SetStatusStrip();
+
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -188,6 +191,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
                 var paymentCollectionDt = paymentCollectionRepo.GetRecordsByCollectingOfficerId(collectorId);
+
+                SetStatusStrip();
 
                 HelperLoadRecords.PaymentDatagridView(paymentCollectionDt, dgpayments);
             }
