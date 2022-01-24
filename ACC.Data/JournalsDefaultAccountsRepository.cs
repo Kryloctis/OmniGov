@@ -52,27 +52,18 @@ namespace ACC.Data
             }
         }
 
-        public bool DeleteByFundAndIsDebit(List<JournalsDefaultAccountsModel> entityList)
+        public bool DeleteByJournalIdAndFundAndIsDebit(int journalId, int fundId, bool isDebit)
         {
-            using (var scope = new TransactionScope())
+            var parameters = new dynamic[][]
             {
-                foreach (var item in entityList)
-                {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@journals_id", DbType.Int32, item.JournalId},
-                        new object[] { "@funds_id", DbType.Int32, item.fundId},
-                        new object[] { "@is_debit", DbType.Boolean, item.IsDebit}
-                    };
-
-                    string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id AND is_debit = @is_debit";
-
-                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-                }
-
-                scope.Complete();
-                return true;
+                new dynamic[] { "@journals_id", DbType.Int32, journalId},
+                new dynamic[] { "@funds_id", DbType.Int32, fundId},
+                new dynamic[] { "@is_debit", DbType.Boolean, isDebit}
             };
+
+
+            string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id AND is_debit = @is_debit";
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -113,12 +104,13 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(List<JournalsDefaultAccountsModel> entityList)
+        public bool Insert(int journalId, int fundId, bool isDebit, List<JournalsDefaultAccountsModel> entityList)
         {
             using (var scope = new TransactionScope())
             {
 
-                DeleteByFundAndIsDebit(entityList);
+                DeleteByJournalIdAndFundAndIsDebit(journalId, fundId, isDebit);
+
                 foreach (var item in entityList)
                 {
                     var parameters = new object[][]
