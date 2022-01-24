@@ -207,10 +207,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 _frmPaymentCollection.LoadRecords();
                 uc.ResetForm();
-
-                uc.cmbcollector_SelectedIndexChanged(this, EventArgs.Empty);
-                uc.cmbforms_SelectedIndexChanged(this, EventArgs.Empty);
-                uc.cmbforms_SelectedValueChanged(this, EventArgs.Empty);
             }
         }
 
