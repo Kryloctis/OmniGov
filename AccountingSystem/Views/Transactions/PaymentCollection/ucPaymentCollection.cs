@@ -48,12 +48,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             fundId = 0;
             accId = 0;
-            generalLedgerId = 0;
-            cmbAccountableForms.SelectedIndex = -1;
-            cmbAccount.SelectedIndex = -1;
+            //generalLedgerId = 0;
+            //cmbAccountableForms.SelectedIndex = -1;
+            //cmbAccount.SelectedIndex = -1;
 
-            txtpayee.Clear();
             txtreceipt.Clear();
+            txtpayee.Clear();
             dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
             minReceipt = 0;
@@ -229,6 +229,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtreceipt, "Receipt No.");
+
             if (!IsBetween(Convert.ToInt32(txtreceipt.Text.Trim())))
             {
                 epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
@@ -310,7 +311,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         #endregion
 
 
-        private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
+        internal void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbAccountableForms.SelectedIndex != -1)
             {
@@ -402,8 +403,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         }
                     }
                 }
-                
-                
             }
         }
 
@@ -433,6 +432,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             else
             {
+
+                DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 cmbAccountableForms.Enabled = false;
                 txtpayee.Enabled = false;
                 //txtreceipt.Enabled = false;
