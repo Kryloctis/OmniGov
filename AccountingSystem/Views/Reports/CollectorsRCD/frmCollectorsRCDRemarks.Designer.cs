@@ -61,22 +61,23 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             // btnSaveMessage
             // 
-            this.btnSaveMessage.Location = new System.Drawing.Point(354, 3);
+            this.btnSaveMessage.Location = new System.Drawing.Point(291, 3);
             this.btnSaveMessage.Name = "btnSaveMessage";
-            this.btnSaveMessage.Size = new System.Drawing.Size(133, 23);
+            this.btnSaveMessage.Size = new System.Drawing.Size(196, 23);
             this.btnSaveMessage.TabIndex = 0;
-            this.btnSaveMessage.Text = "Save Message";
+            this.btnSaveMessage.Text = "Save message and disapprove";
             this.btnSaveMessage.UseVisualStyleBackColor = true;
             this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(215, 3);
+            this.btnAccept.Location = new System.Drawing.Point(152, 3);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(133, 23);
             this.btnAccept.TabIndex = 0;
             this.btnAccept.Text = "Accept && Edit";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Visible = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // txtRemarks
