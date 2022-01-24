@@ -315,7 +315,7 @@
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>Equal</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -407,7 +407,7 @@
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>Equal</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -499,14 +499,14 @@
                                       <FilterExpression>=(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -598,14 +598,14 @@
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -697,21 +697,14 @@
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
-                                      </FilterValues>
-                                    </Filter>
-                                    <Filter>
-                                      <FilterExpression>=CInt(Fields!account_id_debit.Value)</FilterExpression>
-                                      <Operator>NotEqual</Operator>
-                                      <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdDebit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -803,7 +796,7 @@
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>Equal</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -895,7 +888,7 @@
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>Equal</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -987,14 +980,14 @@
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -1086,14 +1079,14 @@
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -1185,14 +1178,14 @@
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDFirst.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit1.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                     <Filter>
                                       <FilterExpression>=CInt(Fields!account_id_credit.Value)</FilterExpression>
                                       <Operator>NotEqual</Operator>
                                       <FilterValues>
-                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccountIDSecond.Value)</FilterValue>
+                                        <FilterValue DataType="Integer">=CInt(Parameters!paramDefaultAccIdCredit2.Value)</FilterValue>
                                       </FilterValues>
                                     </Filter>
                                   </Filters>
@@ -1223,7 +1216,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccountIDFirst.Value, Fields!debit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccIdDebit1.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1260,7 +1253,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccountIDSecond.Value, Fields!debit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value = Parameters!paramDefaultAccIdDebit2.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1369,7 +1362,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDFirst.Value AND Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccountIDSecond.Value, Fields!debit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccIdDebit1.Value AND Fields!account_id_debit.Value &lt;&gt; Parameters!paramDefaultAccIdDebit2.Value, Fields!debit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1406,7 +1399,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccountIDFirst.Value, Fields!credit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccIdCredit1.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1443,7 +1436,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccountIDSecond.Value, Fields!credit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value = Parameters!paramDefaultAccIdCredit2.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1552,7 +1545,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDFirst.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccountIDSecond.Value, Fields!credit.Value, 0)))</Value>
+                                  <Value>=SUM(CDec(IIF(Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccIdCredit1.Value AND Fields!account_id_credit.Value &lt;&gt; Parameters!paramDefaultAccIdCredit2.Value, Fields!credit.Value, 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1679,14 +1672,14 @@
                           <TablixHeader>
                             <Size>0.47743cm</Size>
                             <CellContents>
-                              <Textbox Name="Textbox34">
+                              <Textbox Name="Textbox2">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Parameters!paramDefaultAccountCodeFirst.Value</Value>
+                                        <Value>=Parameters!paramDefaultAccCodeDebit1.Value</Value>
                                         <Style>
                                           <FontFamily>Calibri</FontFamily>
                                           <FontSize>8pt</FontSize>
@@ -1699,7 +1692,7 @@
                                     </Style>
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>Textbox34</rd:DefaultName>
+                                <rd:DefaultName>Textbox2</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>None</Style>
@@ -1785,14 +1778,14 @@
                           <TablixHeader>
                             <Size>0.47743cm</Size>
                             <CellContents>
-                              <Textbox Name="Textbox35">
+                              <Textbox Name="Textbox3">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Parameters!paramDefaultAccountCodeSecond.Value</Value>
+                                        <Value>=Parameters!paramDefaultAccCodeDebit2.Value</Value>
                                         <Style>
                                           <FontFamily>Calibri</FontFamily>
                                           <FontSize>8pt</FontSize>
@@ -1805,7 +1798,7 @@
                                     </Style>
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>Textbox35</rd:DefaultName>
+                                <rd:DefaultName>Textbox3</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>None</Style>
@@ -2098,14 +2091,14 @@
                           <TablixHeader>
                             <Size>0.47743cm</Size>
                             <CellContents>
-                              <Textbox Name="Textbox36">
+                              <Textbox Name="Textbox5">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Parameters!paramDefaultAccountCodeFirst.Value</Value>
+                                        <Value>=Parameters!paramDefaultAccCodeCredit1.Value</Value>
                                         <Style>
                                           <FontFamily>Calibri</FontFamily>
                                           <FontSize>8pt</FontSize>
@@ -2118,7 +2111,7 @@
                                     </Style>
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>Textbox36</rd:DefaultName>
+                                <rd:DefaultName>Textbox5</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>None</Style>
@@ -2211,7 +2204,7 @@
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Parameters!paramDefaultAccountCodeSecond.Value</Value>
+                                        <Value>=Parameters!paramDefaultAccCodeCredit2.Value</Value>
                                         <Style>
                                           <FontFamily>Calibri</FontFamily>
                                           <FontSize>8pt</FontSize>
@@ -3035,25 +3028,25 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDefaultAccountCodeFirst">
+    <ReportParameter Name="paramDefaultAccCodeDebit1">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDefaultAccountCodeSecond">
+    <ReportParameter Name="paramDefaultAccCodeDebit2">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDefaultAccountIDFirst">
+    <ReportParameter Name="paramDefaultAccIdDebit1">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDefaultAccountIDSecond">
+    <ReportParameter Name="paramDefaultAccIdDebit2">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -3065,11 +3058,33 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="paramDefaultAccCodeCredit1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccCodeCredit2">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccIdCredit1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="paramDefaultAccIdCredit2">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -3094,27 +3109,47 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramDefaultAccountCodeFirst</ParameterName>
+          <ParameterName>paramDefaultAccCodeDebit1</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramDefaultAccountCodeSecond</ParameterName>
+          <ParameterName>paramDefaultAccCodeDebit2</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>1</RowIndex>
-          <ParameterName>paramDefaultAccountIDFirst</ParameterName>
+          <ParameterName>paramDefaultAccIdDebit1</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>2</RowIndex>
-          <ParameterName>paramDefaultAccountIDSecond</ParameterName>
+          <ParameterName>paramDefaultAccIdDebit2</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>paramCertifiedCorrectSignatoryTitle</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramDefaultAccCodeCredit1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>paramDefaultAccCodeCredit2</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramDefaultAccIdCredit1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>paramDefaultAccIdCredit2</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

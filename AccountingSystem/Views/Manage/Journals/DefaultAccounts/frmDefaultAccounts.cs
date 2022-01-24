@@ -102,8 +102,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     string accountCode = row["account_code"].ToString();
                     string generalLedgerAccountName = row["ledger_name"].ToString();
                     int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                    bool isDebit = radDebit.Checked;
 
-                    if (Factory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId)) continue;
+                    if (Factory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
 
                     dgAccounts.Rows.Add(new object[]
                     {
@@ -127,7 +128,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 CreateDatagridViewColumns(dgDefaultAccounts);
 
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                var dtDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId);
+                bool isDebit = radDebit.Checked;
+
+                var dtDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
 
                 foreach (DataRow row in dtDefaultAccounts.Rows)
                 {
@@ -251,6 +254,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
                 var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+                bool isDebit = radDebit.Checked;
 
                 foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
                 {
@@ -259,7 +263,8 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     {
                         JournalId = journalId,
                         fundId = fundId,
-                        AccountId = accountId
+                        AccountId = accountId,
+                        IsDebit = isDebit
                     };
 
                     journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
@@ -310,6 +315,24 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
         private void txtAccounts_TextChanged(object sender, EventArgs e)
         {
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
+        }
+
+        private void radDebit_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDefaultAccounts();
+            if (txtAccounts.Text.Length > 3)
+                LoadAccounts();
+            else
+                dgAccounts.Rows.Clear();
+        }
+
+        private void radCredit_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadDefaultAccounts();
             if (txtAccounts.Text.Length > 3)
                 LoadAccounts();
             else
