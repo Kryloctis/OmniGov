@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
 {
-    public partial class frmlinkuser : Form
+    public partial class frmLinkUser : Form
     {
         internal int UserId = 0;
         internal string Username = string.Empty;
@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
         internal string fname = string.Empty;
         internal string mname = string.Empty;
         internal string table = string.Empty;
-        public frmlinkuser()
+        public frmLinkUser()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgvusers, true);

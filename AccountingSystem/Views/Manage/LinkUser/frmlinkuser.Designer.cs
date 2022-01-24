@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.LinkUser
 {
-    partial class frmlinkuser
+    partial class frmLinkUser
     {
         /// <summary>
         /// Required designer variable.

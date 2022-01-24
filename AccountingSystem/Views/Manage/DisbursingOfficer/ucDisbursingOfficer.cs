@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             }
             else
             {
-                frmlinkuser fuser = new frmlinkuser();
+                frmLinkUser fuser = new frmLinkUser();
                 fuser.table = "disburser";
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {
