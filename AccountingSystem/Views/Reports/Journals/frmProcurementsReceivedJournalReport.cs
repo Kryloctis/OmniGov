@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Reports.Journals
         internal string fundName;
         internal string journalName;
         internal DateTime date;
+        private byte journalId = 3;
 
         public frmProcurementsReceivedJournalReport()
         {
@@ -60,6 +61,87 @@ namespace AccountingSystem.Views.Reports.Journals
             return dtProcurementsReceivedJournal;
         }
 
+
+        private Dictionary<string, string> GetDefaultAccount()
+        {
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("defaultAccIdDebit1", "0");
+            dictionary.Add("defaultAccIdDebit2", "0");
+            dictionary.Add("defaultAccCodeDebit1", string.Empty);
+            dictionary.Add("defaultAccCodeDebit2", string.Empty);
+            dictionary.Add("defaultAccIdCredit1", "0");
+            dictionary.Add("defaultAccIdCredit2", "0");
+            dictionary.Add("defaultAccCodeCredit1", string.Empty);
+            dictionary.Add("defaultAccCodeCredit2", string.Empty);
+
+            try
+            {
+                DataTable dtCreditDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+
+                DataTable dtDebitDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+
+
+                //Debit default Accounts
+
+                dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
+                dictionary["defaultAccIdDebit2"] = ParseDebitAccountIds(1).ToString();
+
+                int ParseDebitAccountIds(int row)
+                {
+                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                        return 0;
+
+                    return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
+                }
+
+
+                dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
+                dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
+
+                string ParseDebitAccountCodes(int row)
+                {
+                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                        return string.Empty;
+
+                    return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
+                }
+
+
+                //Credit default Accounts
+
+                dictionary["defaultAccIdCredit1"] = ParseCreditAccountIds(0).ToString();
+                dictionary["defaultAccIdCredit2"] = ParseCreditAccountIds(1).ToString();
+
+                int ParseCreditAccountIds(int row)
+                {
+                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                        return 0;
+
+                    return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
+                }
+
+
+                dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
+                dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
+
+                string ParseCreditAccountCodes(int row)
+                {
+                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                        return string.Empty;
+
+                    return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+
+            return dictionary;
+        }
+
+
         private void LoadReport(LocalReport report)
         {
             try
@@ -89,31 +171,6 @@ namespace AccountingSystem.Views.Reports.Journals
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                byte journalId = 3;
-
-                DataTable defaultAccountsDataTable = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
-
-                string defaultAccountCode(int rowNo)
-                {
-                    if (defaultAccountsDataTable.Rows.Count - 1 < rowNo || defaultAccountsDataTable.Rows.Count == 0)
-                        return string.Empty;
-
-                    return defaultAccountsDataTable.Rows[rowNo]["account_code"].ToString();
-                }
-
-                int defaultAccountId(int rowNo)
-                {
-                    if (defaultAccountsDataTable.Rows.Count - 1 < rowNo || defaultAccountsDataTable.Rows.Count == 0)
-                        return 0;
-
-                    return Convert.ToInt32(defaultAccountsDataTable.Rows[rowNo]["general_ledger_accounts_id"]);
-                }
-
-                string defaultAccountCodeFirst = defaultAccountCode(0);
-                string defaultAccountCodeSecond = defaultAccountCode(1);
-
-                int defaultAccountIDFirst = defaultAccountId(0);
-                int defaultAccountIDSecond = defaultAccountId(1);
 
                 var parameters = new[] {
                     new ReportParameter("paramMonth", date.ToString()),
@@ -121,10 +178,14 @@ namespace AccountingSystem.Views.Reports.Journals
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramDefaultAccountCodeFirst", defaultAccountCodeFirst),
-                    new ReportParameter("paramDefaultAccountCodeSecond", defaultAccountCodeSecond),
-                    new ReportParameter("paramDefaultAccountIDFirst", defaultAccountIDFirst.ToString()),
-                    new ReportParameter("paramDefaultAccountIDSecond", defaultAccountIDSecond.ToString()),
+                    new ReportParameter("paramDefaultAccCodeDebit1", GetDefaultAccount()["defaultAccCodeDebit1"]),
+                    new ReportParameter("paramDefaultAccCodeDebit2", GetDefaultAccount()["defaultAccCodeDebit2"]),
+                    new ReportParameter("paramDefaultAccIdDebit1", GetDefaultAccount()["defaultAccIdDebit1"]),
+                    new ReportParameter("paramDefaultAccIdDebit2", GetDefaultAccount()["defaultAccIdDebit2"]),
+                    new ReportParameter("paramDefaultAccCodeCredit1", GetDefaultAccount()["defaultAccCodeCredit1"]),
+                    new ReportParameter("paramDefaultAccCodeCredit2", GetDefaultAccount()["defaultAccCodeCredit2"]),
+                    new ReportParameter("paramDefaultAccIdCredit1", GetDefaultAccount()["defaultAccIdCredit1"]),
+                    new ReportParameter("paramDefaultAccIdCredit2", GetDefaultAccount()["defaultAccIdCredit2"]),
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
