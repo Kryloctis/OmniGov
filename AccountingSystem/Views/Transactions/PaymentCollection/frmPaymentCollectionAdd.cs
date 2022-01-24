@@ -206,6 +206,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 _frmPaymentCollection.LoadRecords();
+                uc.LoadForms(Convert.ToInt32(uc.cmdCollector.SelectedIndex));
                 uc.ResetForm();
             }
         }

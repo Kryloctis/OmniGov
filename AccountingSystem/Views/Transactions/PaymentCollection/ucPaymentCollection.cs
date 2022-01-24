@@ -144,7 +144,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmdCollector.ValueMember = "id";
                 cmdCollector.DisplayMember = "fullname";
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message);
+            }
         }    
 
         internal bool IsBetween(int num)
@@ -404,7 +407,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        private void cmbforms_SelectedValueChanged(object sender, EventArgs e)
+        internal void cmbforms_SelectedValueChanged(object sender, EventArgs e)
         {
             int idOfSelectedAccountableForm = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
@@ -414,8 +417,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             txtCashTicketQuantity_TextChanged(sender, e);
         }
-      
-        private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+
+        internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cmdCollector.SelectedIndex != -1)
             {

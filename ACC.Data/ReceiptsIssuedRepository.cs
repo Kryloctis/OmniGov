@@ -210,7 +210,8 @@ namespace ACC.Data
                                 $"ON r.accountable_forms_id = af.id " +
                                 $"INNER JOIN receipts_issued ri " +
                                 $"ON ri.receipts_id = r.id " +
-                                $"WHERE ri.collecting_officers_id = @collectingOfficerId";
+                                $"WHERE ri.collecting_officers_id = @collectingOfficerId AND " +
+                                $"ri.issueto <> ri.last_issued";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtri, parameter);
