@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             var quantity = (from DataGridViewRow row in dgreceipts.Rows
                           where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
-                          select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString("N2");
+                          select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
             lblRecordCount.Text = dgreceipts.Rows.Count.ToString();
             lblQuantity.Text = quantity;
