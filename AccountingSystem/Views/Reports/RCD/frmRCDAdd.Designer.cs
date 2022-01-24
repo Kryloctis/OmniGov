@@ -55,16 +55,16 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSelect);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 422);
+            this.panel2.Location = new System.Drawing.Point(0, 441);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 28);
+            this.panel2.Size = new System.Drawing.Size(998, 28);
             this.panel2.TabIndex = 10;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(715, 3);
+            this.btnCancel.Location = new System.Drawing.Point(913, 3);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnOkay
             // 
             this.btnOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOkay.Location = new System.Drawing.Point(627, 3);
+            this.btnOkay.Location = new System.Drawing.Point(825, 3);
             this.btnOkay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOkay.Name = "btnOkay";
             this.btnOkay.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(1328, -69);
+            this.btnClose.Location = new System.Drawing.Point(1526, -69);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelect.Location = new System.Drawing.Point(1240, -69);
+            this.btnSelect.Location = new System.Drawing.Point(1438, -69);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dgCollectorsReport.Name = "dgCollectorsReport";
             this.dgCollectorsReport.RowHeadersWidth = 51;
             this.dgCollectorsReport.RowTemplate.Height = 29;
-            this.dgCollectorsReport.Size = new System.Drawing.Size(776, 382);
+            this.dgCollectorsReport.Size = new System.Drawing.Size(974, 401);
             this.dgCollectorsReport.TabIndex = 19;
             this.dgCollectorsReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCollectorsReport_CellContentClick);
             this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 33);
+            this.panel1.Size = new System.Drawing.Size(998, 33);
             this.panel1.TabIndex = 20;
             // 
             // label1
@@ -158,17 +158,17 @@ namespace AccountingSystem.Views.Reports.RCD
             this.cmbCollector.FormattingEnabled = true;
             this.cmbCollector.Items.AddRange(new object[] {
             "All"});
-            this.cmbCollector.Location = new System.Drawing.Point(73, 5);
+            this.cmbCollector.Location = new System.Drawing.Point(70, 5);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
-            this.cmbCollector.Size = new System.Drawing.Size(217, 23);
+            this.cmbCollector.Size = new System.Drawing.Size(209, 23);
             this.cmbCollector.TabIndex = 9;
             this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbCollector_SelectedValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(303, 5);
+            this.label2.Location = new System.Drawing.Point(285, 5);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(4);
             this.label2.Size = new System.Drawing.Size(47, 23);
@@ -179,16 +179,16 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfunds.FormattingEnabled = true;
-            this.cmbfunds.Location = new System.Drawing.Point(356, 5);
+            this.cmbfunds.Location = new System.Drawing.Point(335, 5);
             this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfunds.Name = "cmbfunds";
-            this.cmbfunds.Size = new System.Drawing.Size(173, 23);
+            this.cmbfunds.Size = new System.Drawing.Size(124, 23);
             this.cmbfunds.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(527, 5);
+            this.label3.Location = new System.Drawing.Point(463, 5);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(4);
             this.label3.Size = new System.Drawing.Size(50, 23);
@@ -197,7 +197,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // txtsearch
             // 
-            this.txtsearch.Location = new System.Drawing.Point(583, 5);
+            this.txtsearch.Location = new System.Drawing.Point(518, 5);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(203, 23);
@@ -209,7 +209,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(998, 469);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgCollectorsReport);
             this.Controls.Add(this.panel2);
