@@ -17,6 +17,7 @@ namespace ACC.Domain.Models
         public int IssuedTo { get; set; }
         public int Last_issued { get; set; }
         public int Quantity { get; set; }
+        public int IssuedByUserId { get; set; }
        
     }
 }
