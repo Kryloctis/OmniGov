@@ -354,10 +354,13 @@ namespace ACC.Data
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@issueto", DbType.Int32, entity.IssuedTo},
-                    new object[] { "@quantity", DbType.Int32, entity.Quantity}
+                    new object[] { "@quantity", DbType.Int32, entity.Quantity},
+                    new object[] { "@issuedBy", DbType.Int32, entity.IssuedByUserId}
                 };
 
-                string query = $"INSERT INTO {tableReceiptsIssued} (receipts_id,collecting_officers_id,date_issued,issuefrom,issueto,quantity) VALUES (@receipts_id,@collecting_officers_id,@date_issued,@issuefrom,@issueto,@quantity)";
+                string query = $"INSERT INTO {tableReceiptsIssued} " +
+                               $"(receipts_id, collecting_officers_id, date_issued, issuefrom, issueto, quantity, issued_by) VALUES" +
+                              $"(@receipts_id, @collecting_officers_id, @date_issued, @issuefrom, @issueto, @quantity, @issuedBy)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
