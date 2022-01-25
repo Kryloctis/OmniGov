@@ -254,7 +254,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
 
                 var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                bool isDebit = radDebit.Checked;
+                bool isDebit = radDebit.Checked ? true : false;
 
                 foreach (DataGridViewRow item in dgDefaultAccounts.Rows)
                 {
@@ -270,11 +270,11 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
                 }
 
-                return Factory.JournalsDefaultAccountsRepository().Insert(journalsDefaulAccountsModelList);
+                return Factory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
 
             return false;
@@ -285,6 +285,10 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             if (Save())
             {
                 Helper.MessageBoxSuccess("Default Accounts has been saved.");
+                if (txtAccounts.Text.Length > 3)
+                    LoadAccounts();
+                else
+                    dgAccounts.Rows.Clear();
             }
         }
 

@@ -6,9 +6,9 @@ namespace ACC.Domain.Interfaces
 {
     public interface IJournalsDefaultAccountsRepository : IRepository<JournalsDefaultAccountsModel>
     {
-        bool Insert(List<JournalsDefaultAccountsModel> entityList);
+        bool Insert(int journalId, int fundId, bool isDebit, List<JournalsDefaultAccountsModel> entityList);
 
-        bool DeleteByFundAndIsDebit(List<JournalsDefaultAccountsModel> entityList);
+        bool DeleteByJournalIdAndFundAndIsDebit(int journalId, int fundId, bool isDebit);
 
         DataTable GetViewRecordsByJournalId(int journalId, int fundId, bool isDebit);
 
