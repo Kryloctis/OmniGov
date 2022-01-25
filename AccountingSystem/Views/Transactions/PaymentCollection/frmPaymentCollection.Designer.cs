@@ -120,10 +120,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtsearch.Location = new System.Drawing.Point(675, 22);
+            this.txtsearch.Location = new System.Drawing.Point(617, 22);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(185, 22);
+            this.txtsearch.Size = new System.Drawing.Size(235, 22);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -158,7 +158,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(627, 25);
+            this.label6.Location = new System.Drawing.Point(569, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 13;
@@ -221,7 +221,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(289, 25);
+            this.label7.Location = new System.Drawing.Point(216, 25);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(97, 13);
             this.label7.TabIndex = 38;
@@ -233,19 +233,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmdCollector.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmdCollector.FormattingEnabled = true;
-            this.cmdCollector.Location = new System.Drawing.Point(395, 22);
+            this.cmdCollector.Location = new System.Drawing.Point(322, 22);
             this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdCollector.Name = "cmdCollector";
-            this.cmdCollector.Size = new System.Drawing.Size(220, 21);
+            this.cmdCollector.Size = new System.Drawing.Size(233, 21);
             this.cmdCollector.TabIndex = 37;
+            this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(272, 2);
+            this.groupBox1.Location = new System.Drawing.Point(192, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(917, 56);
+            this.groupBox1.Size = new System.Drawing.Size(997, 56);
             this.groupBox1.TabIndex = 39;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter Records ";

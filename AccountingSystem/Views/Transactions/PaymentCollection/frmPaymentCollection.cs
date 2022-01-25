@@ -34,13 +34,38 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         var data = colRepository.GetRecordByUserID(Helper.UserId);
                         cmdCollector.SelectedValue = data["id"];
                         cmdCollector.Enabled = false;
+
+                    }
+                    else 
+                    {
+                        cmdCollector.SelectedIndex = -1;
                     }
                 }
+
             }
             catch (Exception)
             {
 
                 throw;
+            }
+        }
+
+        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
+
+                var pcRepository = Factory.PaymentCollectionRepository();
+                var dtpayments = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
+
+                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+
+                SetStatusStrip();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -205,6 +230,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
- 
+      
     }
 }
