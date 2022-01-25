@@ -66,18 +66,20 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnAddDeductions
             // 
-            this.btnAddDeductions.Location = new System.Drawing.Point(362, 309);
+            this.btnAddDeductions.Image = global::AccountingSystem.Properties.Resources.others;
+            this.btnAddDeductions.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAddDeductions.Location = new System.Drawing.Point(395, 309);
             this.btnAddDeductions.Name = "btnAddDeductions";
             this.btnAddDeductions.Size = new System.Drawing.Size(25, 23);
             this.btnAddDeductions.TabIndex = 53;
-            this.btnAddDeductions.Text = "...";
             this.btnAddDeductions.UseVisualStyleBackColor = true;
             this.btnAddDeductions.Click += new System.EventHandler(this.btnAddDeductions_Click);
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(135, 309);
+            this.numericUpDown1.Location = new System.Drawing.Point(133, 309);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1316134911,
@@ -85,7 +87,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(223, 23);
+            this.numericUpDown1.Size = new System.Drawing.Size(254, 23);
             this.numericUpDown1.TabIndex = 52;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -104,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtObno.Location = new System.Drawing.Point(133, 12);
             this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtObno.Name = "txtObno";
-            this.txtObno.Size = new System.Drawing.Size(223, 23);
+            this.txtObno.Size = new System.Drawing.Size(254, 23);
             this.txtObno.TabIndex = 32;
             // 
             // cmbFPP
@@ -128,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(135, 337);
+            this.txtamount.Location = new System.Drawing.Point(133, 337);
             this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtamount.Maximum = new decimal(new int[] {
             1316134911,
@@ -225,11 +227,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnAddObligation
             // 
-            this.btnAddObligation.Location = new System.Drawing.Point(362, 12);
+            this.btnAddObligation.Image = global::AccountingSystem.Properties.Resources.others;
+            this.btnAddObligation.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAddObligation.Location = new System.Drawing.Point(395, 12);
             this.btnAddObligation.Name = "btnAddObligation";
             this.btnAddObligation.Size = new System.Drawing.Size(25, 23);
             this.btnAddObligation.TabIndex = 35;
-            this.btnAddObligation.Text = "...";
             this.btnAddObligation.UseVisualStyleBackColor = true;
             this.btnAddObligation.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -326,7 +329,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(418, 370);
+            this.Size = new System.Drawing.Size(427, 370);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
