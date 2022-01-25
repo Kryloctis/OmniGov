@@ -50,20 +50,22 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.cmbbank = new System.Windows.Forms.ComboBox();
             this.txtObno = new System.Windows.Forms.ComboBox();
-            this.dgObligationNoList = new System.Windows.Forms.DataGridView();
-            this.obligation_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.options = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnAdd = new System.Windows.Forms.Button();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgObligationNoList)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 78);
+            this.label1.Location = new System.Drawing.Point(16, 107);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 0;
@@ -72,7 +74,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 48);
+            this.label2.Location = new System.Drawing.Point(16, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 3;
@@ -81,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 137);
+            this.label3.Location = new System.Drawing.Point(16, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 15);
             this.label3.TabIndex = 4;
@@ -90,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 108);
+            this.label4.Location = new System.Drawing.Point(16, 137);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 15);
             this.label4.TabIndex = 9;
@@ -99,7 +101,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 169);
+            this.label5.Location = new System.Drawing.Point(16, 198);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 10;
@@ -107,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtcheckno
             // 
-            this.txtcheckno.Location = new System.Drawing.Point(142, 105);
+            this.txtcheckno.Location = new System.Drawing.Point(137, 134);
             this.txtcheckno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtcheckno.MaxLength = 15;
             this.txtcheckno.Name = "txtcheckno";
@@ -118,10 +120,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // dtcheckdate
             // 
-            this.dtcheckdate.Location = new System.Drawing.Point(142, 165);
+            this.dtcheckdate.Location = new System.Drawing.Point(137, 194);
             this.dtcheckdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtcheckdate.Name = "dtcheckdate";
-            this.dtcheckdate.Size = new System.Drawing.Size(492, 23);
+            this.dtcheckdate.Size = new System.Drawing.Size(254, 23);
             this.dtcheckdate.TabIndex = 5;
             this.dtcheckdate.Validating += new System.ComponentModel.CancelEventHandler(this.dtcheckdate_Validating);
             this.dtcheckdate.Validated += new System.EventHandler(this.dtcheckdate_Validated);
@@ -129,7 +131,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(316, 18);
+            this.label6.Location = new System.Drawing.Point(16, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 13;
@@ -138,7 +140,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 18);
+            this.label7.Location = new System.Drawing.Point(16, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 15);
             this.label7.TabIndex = 14;
@@ -146,11 +148,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtdvno
             // 
-            this.txtdvno.Location = new System.Drawing.Point(142, 14);
+            this.txtdvno.Location = new System.Drawing.Point(137, 43);
             this.txtdvno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtdvno.MaxLength = 20;
             this.txtdvno.Name = "txtdvno";
-            this.txtdvno.Size = new System.Drawing.Size(162, 23);
+            this.txtdvno.Size = new System.Drawing.Size(254, 23);
             this.txtdvno.TabIndex = 1;
             this.txtdvno.Validating += new System.ComponentModel.CancelEventHandler(this.txtdvno_Validating);
             this.txtdvno.Validated += new System.EventHandler(this.txtdvno_Validated);
@@ -158,7 +160,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 198);
+            this.label8.Location = new System.Drawing.Point(16, 227);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 15);
             this.label8.TabIndex = 17;
@@ -167,7 +169,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 227);
+            this.label9.Location = new System.Drawing.Point(16, 256);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(107, 15);
             this.label9.TabIndex = 18;
@@ -175,23 +177,23 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtpayee
             // 
-            this.txtpayee.Location = new System.Drawing.Point(142, 195);
+            this.txtpayee.Location = new System.Drawing.Point(137, 224);
             this.txtpayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtpayee.MaxLength = 150;
             this.txtpayee.Name = "txtpayee";
-            this.txtpayee.Size = new System.Drawing.Size(492, 23);
+            this.txtpayee.Size = new System.Drawing.Size(254, 23);
             this.txtpayee.TabIndex = 7;
             this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
             this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
             // 
             // txtnature
             // 
-            this.txtnature.Location = new System.Drawing.Point(142, 224);
+            this.txtnature.Location = new System.Drawing.Point(137, 253);
             this.txtnature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnature.MaxLength = 150;
             this.txtnature.Multiline = true;
             this.txtnature.Name = "txtnature";
-            this.txtnature.Size = new System.Drawing.Size(492, 67);
+            this.txtnature.Size = new System.Drawing.Size(254, 67);
             this.txtnature.TabIndex = 8;
             this.txtnature.Validating += new System.ComponentModel.CancelEventHandler(this.txtnature_Validating);
             this.txtnature.Validated += new System.EventHandler(this.txtnature_Validated);
@@ -199,11 +201,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 300);
+            this.label12.Location = new System.Drawing.Point(16, 361);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(51, 15);
+            this.label12.Size = new System.Drawing.Size(73, 15);
             this.label12.TabIndex = 25;
-            this.label12.Text = "Amount";
+            this.label12.Text = "Net Amount";
             // 
             // errorProvider
             // 
@@ -212,7 +214,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txtamount
             // 
             this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(142, 298);
+            this.txtamount.Location = new System.Drawing.Point(137, 359);
             this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtamount.Maximum = new decimal(new int[] {
             1316134911,
@@ -220,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             0,
             0});
             this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(492, 23);
+            this.txtamount.Size = new System.Drawing.Size(254, 23);
             this.txtamount.TabIndex = 9;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -228,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfund.FormattingEnabled = true;
-            this.cmbfund.Location = new System.Drawing.Point(142, 45);
+            this.cmbfund.Location = new System.Drawing.Point(137, 73);
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
             this.cmbfund.Size = new System.Drawing.Size(254, 23);
@@ -240,7 +242,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             this.cmbbank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbank.FormattingEnabled = true;
-            this.cmbbank.Location = new System.Drawing.Point(142, 75);
+            this.cmbbank.Location = new System.Drawing.Point(137, 104);
             this.cmbbank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbbank.Name = "cmbbank";
             this.cmbbank.Size = new System.Drawing.Size(254, 23);
@@ -251,103 +253,117 @@ namespace AccountingSystem.Views.Transactions.RCI
             // txtObno
             // 
             this.txtObno.FormattingEnabled = true;
-            this.txtObno.Location = new System.Drawing.Point(407, 14);
+            this.txtObno.Location = new System.Drawing.Point(137, 14);
             this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtObno.Name = "txtObno";
-            this.txtObno.Size = new System.Drawing.Size(146, 23);
+            this.txtObno.Size = new System.Drawing.Size(223, 23);
             this.txtObno.TabIndex = 1;
             this.txtObno.TextChanged += new System.EventHandler(this.txtObno_TextChanged);
             // 
-            // dgObligationNoList
-            // 
-            this.dgObligationNoList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgObligationNoList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgObligationNoList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.obligation_no,
-            this.options});
-            this.dgObligationNoList.Location = new System.Drawing.Point(407, 45);
-            this.dgObligationNoList.MultiSelect = false;
-            this.dgObligationNoList.Name = "dgObligationNoList";
-            this.dgObligationNoList.RowTemplate.Height = 25;
-            this.dgObligationNoList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgObligationNoList.Size = new System.Drawing.Size(227, 83);
-            this.dgObligationNoList.TabIndex = 3;
-            this.dgObligationNoList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgObligationNoList_CellContentClick);
-            // 
-            // obligation_no
-            // 
-            this.obligation_no.HeaderText = "Obligation No.";
-            this.obligation_no.Name = "obligation_no";
-            this.obligation_no.Width = 140;
-            // 
-            // options
-            // 
-            this.options.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.options.FillWeight = 50F;
-            this.options.HeaderText = "";
-            this.options.Name = "options";
-            this.options.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.options.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // btnAdd
             // 
-            this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(559, 14);
+            this.btnAdd.Location = new System.Drawing.Point(366, 14);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(25, 23);
             this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "...";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // cmbFPP
             // 
             this.cmbFPP.FormattingEnabled = true;
-            this.cmbFPP.Location = new System.Drawing.Point(142, 134);
+            this.cmbFPP.Location = new System.Drawing.Point(137, 163);
             this.cmbFPP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFPP.Name = "cmbFPP";
-            this.cmbFPP.Size = new System.Drawing.Size(492, 23);
+            this.cmbFPP.Size = new System.Drawing.Size(254, 23);
             this.cmbFPP.TabIndex = 26;
             this.cmbFPP.SelectedValueChanged += new System.EventHandler(this.cmbFPP_SelectedValueChanged);
             this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbFPP_KeyDown);
             this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating_1);
             this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.txtObno);
+            this.groupBox2.Controls.Add(this.cmbFPP);
+            this.groupBox2.Controls.Add(this.txtdvno);
+            this.groupBox2.Controls.Add(this.txtamount);
+            this.groupBox2.Controls.Add(this.txtnature);
+            this.groupBox2.Controls.Add(this.cmbbank);
+            this.groupBox2.Controls.Add(this.txtpayee);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.dtcheckdate);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtcheckno);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.cmbfund);
+            this.groupBox2.Controls.Add(this.btnAdd);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(413, 388);
+            this.groupBox2.TabIndex = 28;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(366, 327);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Location = new System.Drawing.Point(137, 327);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(223, 23);
+            this.numericUpDown1.TabIndex = 29;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 329);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(95, 15);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Total Deductions";
+            // 
             // ucRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cmbFPP);
-            this.Controls.Add(this.dgObligationNoList);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtObno);
-            this.Controls.Add(this.cmbbank);
-            this.Controls.Add(this.cmbfund);
-            this.Controls.Add(this.txtamount);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.txtnature);
-            this.Controls.Add(this.txtpayee);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtdvno);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.dtcheckdate);
-            this.Controls.Add(this.txtcheckno);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(663, 329);
+            this.Size = new System.Drawing.Size(422, 395);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgObligationNoList)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -374,9 +390,10 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox txtObno;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn obligation_no;
-        private System.Windows.Forms.DataGridViewButtonColumn options;
-        internal System.Windows.Forms.DataGridView dgObligationNoList;
         internal System.Windows.Forms.ComboBox cmbFPP;
+        private System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
     }
 }
