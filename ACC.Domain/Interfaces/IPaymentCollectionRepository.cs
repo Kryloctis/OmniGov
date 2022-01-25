@@ -14,12 +14,14 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByLedger(int Id, string month);
         DataTable GetRecordByLedger(int Id, int fid, string from,string to);
         DataTable GetRecordsByCollectingOfficerId(int collectorId);
+        DataTable GetRecordsByUserId(int userId);
+        DataTable GetRecordByLedger(object[] parameter);
+        DataTable GetRecordsByDate(string date);
+
         decimal SumRecords();
         decimal SumRecords(int Id, string month);
         decimal SumRecords(int Id,int fid,string from,string to);
         decimal SumRecords(int Id, int fid, string from, string to, string ids);
-        DataTable GetRecordByLedger(object[] parameter);
-        DataTable GetRecordsByDate(string date);
         bool ReceiptExist(string receipt, int formid);
     }
 }

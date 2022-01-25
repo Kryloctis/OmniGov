@@ -425,6 +425,17 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordsByUserId(int userId)
+        {
+            var parameter = new object[][] {
+                new object[] {"@userId", DbType.Int32, userId }
+            };
 
+            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @userId";
+
+            var dt = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+        }
     }
 }

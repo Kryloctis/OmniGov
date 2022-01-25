@@ -17,6 +17,47 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            LoadCollectors();
+            LoadCurrentCollector();
+        }
+
+        private void LoadCurrentCollector()
+        {
+            try
+            {
+                if (cmdCollector.Items.Count > 0)
+                {
+                    var uRepository = Factory.UsersRepository();
+                    if (uRepository.LinkedCollector(Helper.UserId))
+                    {
+                        var colRepository = Factory.CollectingOfficerRepository();
+                        var data = colRepository.GetRecordByUserID(Helper.UserId);
+                        cmdCollector.SelectedValue = data["id"];
+                        cmdCollector.Enabled = false;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        internal void LoadCollectors()
+        {
+            try
+            {
+                var collectorRepository = Factory.CollectingOfficerRepository();
+                var dtCollector = collectorRepository.GetRecords();
+                cmdCollector.DataSource = dtCollector;
+                cmdCollector.ValueMember = "id";
+                cmdCollector.DisplayMember = "fullname";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -29,9 +70,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = dtpdate.Value.ToString("yyyy-MM-dd");
+                byte userId = Helper.UserId;
 
                 var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments  = pcRepository.GetRecordsByDate(date);
+                var dtpayments  = pcRepository.GetRecordsByUserId(userId);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
