@@ -768,6 +768,16 @@ namespace AccountingSystem
         #endregion
 
         #region RCI
+
+        internal static void RCIObligationDatagridview(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].HeaderText = "Obligation No. ";
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1291,7 +1301,6 @@ namespace AccountingSystem
 
         internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-
             //a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;

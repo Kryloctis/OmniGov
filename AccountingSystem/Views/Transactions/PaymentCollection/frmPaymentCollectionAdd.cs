@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     ReceiptNo = uc.txtreceipt.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
-                    CreatedBy = uc.userid,
+                    CreatedBy = Helper.UserId,
                 };
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
@@ -151,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value),
                     PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
-                    CreatedBy = uc.userid,
+                    CreatedBy = Helper.UserId,
                 };
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();

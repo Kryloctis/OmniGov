@@ -17,6 +17,72 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            LoadCollectors();
+            LoadCurrentCollector();
+        }
+
+        private void LoadCurrentCollector()
+        {
+            try
+            {
+                if (cmdCollector.Items.Count > 0)
+                {
+                    var uRepository = Factory.UsersRepository();
+                    if (uRepository.LinkedCollector(Helper.UserId))
+                    {
+                        var colRepository = Factory.CollectingOfficerRepository();
+                        var data = colRepository.GetRecordByUserID(Helper.UserId);
+                        cmdCollector.SelectedValue = data["id"];
+                        cmdCollector.Enabled = false;
+
+                    }
+                    else 
+                    {
+                        cmdCollector.SelectedIndex = -1;
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
+
+                var pcRepository = Factory.PaymentCollectionRepository();
+                var dtpayments = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
+
+                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+
+                SetStatusStrip();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        internal void LoadCollectors()
+        {
+            try
+            {
+                var collectorRepository = Factory.CollectingOfficerRepository();
+                var dtCollector = collectorRepository.GetRecords();
+                cmdCollector.DataSource = dtCollector;
+                cmdCollector.ValueMember = "id";
+                cmdCollector.DisplayMember = "fullname";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -29,9 +95,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = dtpdate.Value.ToString("yyyy-MM-dd");
+                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
 
                 var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments  = pcRepository.GetRecordsByDate(date);
+                var dtpayments  = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
@@ -163,6 +230,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
- 
+      
     }
 }
