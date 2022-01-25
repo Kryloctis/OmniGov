@@ -768,6 +768,16 @@ namespace AccountingSystem
         #endregion
 
         #region RCI
+
+        internal static void RCIObligationDatagridview(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].HeaderText = "Obligation No. ";
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;

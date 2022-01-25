@@ -34,10 +34,10 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.txtObno = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgObligation = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -51,17 +51,16 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.groupBox1.Size = new System.Drawing.Size(370, 67);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnAdd
             // 
-            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(300, 38);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(64, 23);
             this.btnAdd.TabIndex = 19;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtObno
             // 
@@ -85,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dgObligation);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(4, 73);
             this.groupBox2.Name = "groupBox2";
@@ -94,14 +93,14 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List";
             // 
-            // dataGridView1
+            // dgObligation
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 21);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(351, 176);
-            this.dataGridView1.TabIndex = 0;
+            this.dgObligation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgObligation.Location = new System.Drawing.Point(10, 21);
+            this.dgObligation.Name = "dgObligation";
+            this.dgObligation.RowTemplate.Height = 25;
+            this.dgObligation.Size = new System.Drawing.Size(354, 176);
+            this.dgObligation.TabIndex = 0;
             // 
             // frmObligations
             // 
@@ -119,10 +118,11 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obligations No/s";
+            this.Load += new System.EventHandler(this.frmObligations_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,6 +134,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         internal System.Windows.Forms.ComboBox txtObno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgObligation;
     }
 }
