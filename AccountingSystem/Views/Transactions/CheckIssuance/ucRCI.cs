@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
@@ -247,6 +248,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            _ = new frmObligations().ShowDialog();
             //var obligationNo = txtObno.Text.Trim();
 
             //if (String.IsNullOrEmpty(obligationNo))
@@ -270,7 +272,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void txtObno_TextChanged(object sender, EventArgs e)
         {
-            btnAdd.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
+            btnAddObligation.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
 
         private void cmbFPP_KeyDown(object sender, KeyEventArgs e)

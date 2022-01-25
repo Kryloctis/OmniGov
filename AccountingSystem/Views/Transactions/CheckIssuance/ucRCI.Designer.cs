@@ -50,10 +50,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund = new System.Windows.Forms.ComboBox();
             this.cmbbank = new System.Windows.Forms.ComboBox();
             this.txtObno = new System.Windows.Forms.ComboBox();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddObligation = new System.Windows.Forms.Button();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddDeductions = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -260,15 +260,15 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtObno.TabIndex = 1;
             this.txtObno.TextChanged += new System.EventHandler(this.txtObno_TextChanged);
             // 
-            // btnAdd
+            // btnAddObligation
             // 
-            this.btnAdd.Location = new System.Drawing.Point(366, 14);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(25, 23);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "...";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddObligation.Location = new System.Drawing.Point(366, 14);
+            this.btnAddObligation.Name = "btnAddObligation";
+            this.btnAddObligation.Size = new System.Drawing.Size(25, 23);
+            this.btnAddObligation.TabIndex = 2;
+            this.btnAddObligation.Text = "...";
+            this.btnAddObligation.UseVisualStyleBackColor = true;
+            this.btnAddObligation.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // cmbFPP
             // 
@@ -285,7 +285,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnAddDeductions);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.txtObno);
@@ -301,7 +301,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.groupBox2.Controls.Add(this.txtcheckno);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.cmbfund);
-            this.groupBox2.Controls.Add(this.btnAdd);
+            this.groupBox2.Controls.Add(this.btnAddObligation);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label1);
@@ -316,14 +316,14 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // button1
+            // btnAddDeductions
             // 
-            this.button1.Location = new System.Drawing.Point(366, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 23);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddDeductions.Location = new System.Drawing.Point(366, 327);
+            this.btnAddDeductions.Name = "btnAddDeductions";
+            this.btnAddDeductions.Size = new System.Drawing.Size(25, 23);
+            this.btnAddDeductions.TabIndex = 29;
+            this.btnAddDeductions.Text = "...";
+            this.btnAddDeductions.UseVisualStyleBackColor = true;
             // 
             // numericUpDown1
             // 
@@ -389,11 +389,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal System.Windows.Forms.ComboBox cmbbank;
         internal System.Windows.Forms.ComboBox cmbfund;
         internal System.Windows.Forms.ComboBox txtObno;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddObligation;
         internal System.Windows.Forms.ComboBox cmbFPP;
         private System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddDeductions;
     }
 }
