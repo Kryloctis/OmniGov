@@ -1,13 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Manage.LinkUser;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.CollectingOfficer
@@ -133,7 +127,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             }
             else
             {
-                frmlinkuser fuser = new();
+                frmLinkUser fuser = new();
                 fuser.table = "collector";
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {

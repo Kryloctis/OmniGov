@@ -253,7 +253,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             }
         }
 
-        private bool SetRCDStatus(byte status, string reportNo)
+        internal bool SetRCDStatus(byte status, string reportNo)
         {
             try
             {
@@ -310,24 +310,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
-
             string reportNo = uc.txtReport.Text;
             if (String.IsNullOrEmpty(reportNo)) return;
 
-
-            if (MessageBox.Show("Are you sure you want to disapproved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (SetRCDStatus(2, reportNo))
-                {
-                    Helper.MessageBoxSuccess("Collector's Report has been disapproved.");
-                    if (MessageBox.Show("Do you want to add disapproval message?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        _ = new frmCollectorsRCDRemarks(this).ShowDialog();
-                    }
-                    CheckRCDStatus(reportNo);
-                }
-                return;
-            }
+            _ = new frmCollectorsRCDRemarks(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

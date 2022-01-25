@@ -50,16 +50,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var issueFrom = Convert.ToInt32(uc.txtfrom.Text.Trim());
                 var issueTo = Convert.ToInt32(uc.txtto.Text.Trim());
                 var quantity = Convert.ToInt32(uc.txtquantity.Text.Trim());
-
+                var userId = Helper.UserId;
 
                 var receiptIssuedModel = new ReceiptsIssuedModel()
                 {
-                   CollectorId = collectorId,
-                   ReceiptId = receiptId,
-                   Issued = dateIssued,
-                   IssuedFrom = issueFrom,
-                   IssuedTo = issueTo,
-                   Quantity = quantity
+                    CollectorId = collectorId,
+                    ReceiptId = receiptId,
+                    Issued = dateIssued,
+                    IssuedFrom = issueFrom,
+                    IssuedTo = issueTo,
+                    Quantity = quantity,
+                    IssuedByUserId = userId
 
                 };
 

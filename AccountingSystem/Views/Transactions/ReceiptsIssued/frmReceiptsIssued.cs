@@ -134,5 +134,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
+        private void dgissue_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

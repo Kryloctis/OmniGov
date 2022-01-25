@@ -30,15 +30,21 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSaveMessage_Click(object sender, EventArgs e)
         {
-            if (SetRemarks())
+            if (MessageBox.Show("Are you sure you want to disapproved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
-
                 string reportNo = _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Text;
                 _frmCollectorsRCD.CheckRCDStatus(reportNo);
 
-                this.Close();
+                if (_frmCollectorsRCD.SetRCDStatus(2, reportNo))
+                {
+                    Helper.MessageBoxSuccess("Collector's Report has been disapproved.");
+                    SetRemarks();
+                    _frmCollectorsRCD.CheckRCDStatus(reportNo);
+                    this.Close();
+                }
+             
             }
+           
         }
 
         private bool SetRemarks()

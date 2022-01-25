@@ -643,7 +643,9 @@ namespace ACC.Data
                     new object[] {"@fundId", DbType.Byte, fundId }
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND " +
+                string query = $"SELECT * FROM {viewTableName} " +
+                    $"WHERE {statusQuery} " +
+                    $"fund_id = @fundId AND " +
                     $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch)";
 
                 var dtCollectorReport = new DataTable();
@@ -686,8 +688,10 @@ namespace ACC.Data
                     new object[] {"@collectingOfficerId", DbType.Byte, collectingOfficerId }
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId AND collecting_officers_id = @collectingOfficerId AND " +
-                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch)";
+                string query = $"SELECT * FROM {viewTableName} " +
+                    $"WHERE {statusQuery} fund_id = @fundId AND collecting_officers_id = @collectingOfficerId AND " +
+                    $"(collecting_officer LIKE @keySearch OR report_no LIKE @keySearch OR fund_name LIKE @keySearch) AND " +
+                    $"is_approved = 1";
 
                 var dtCollectorReport = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);

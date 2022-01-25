@@ -17,26 +17,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
             LoadRecords();
-            LoadCollectors();
-        }
-
-        private void LoadCollectors()
-        {
-            try
-            {
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var dtCollectors = collectingOfficerRepository.GetRecords();
-
-                cmdCollector.DataSource = dtCollectors;
-                cmdCollector.DisplayMember = "fullname";
-                cmdCollector.ValueMember = "id";
-
-                cmdCollector.SelectedIndex = -1;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -137,6 +117,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 LoadRecords();
             }
+
+            SetStatusStrip();
+
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -164,7 +147,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             txtsearch.Text = string.Empty;
             dtpdate.Value = DateTime.Now;
-            cmdCollector.SelectedIndex = -1;
             LoadRecords();
         }
 
@@ -179,22 +161,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 SetStatusStrip();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
-                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
-                var paymentCollectionDt = paymentCollectionRepo.GetRecordsByCollectingOfficerId(collectorId);
-
-                HelperLoadRecords.PaymentDatagridView(paymentCollectionDt, dgpayments);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
  

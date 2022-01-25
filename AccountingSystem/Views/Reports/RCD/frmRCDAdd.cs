@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 short collectorId = (short)Convert.ToInt32(cmbCollector.SelectedValue);
-                string status = cmbCollector.Text.ToLower();
+                string status = "approved";
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
 

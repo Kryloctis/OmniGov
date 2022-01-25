@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
 {
-    public partial class frmlinkuser : Form
+    public partial class frmLinkUser : Form
     {
         internal int UserId = 0;
         internal string Username = string.Empty;
@@ -18,7 +11,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
         internal string fname = string.Empty;
         internal string mname = string.Empty;
         internal string table = string.Empty;
-        public frmlinkuser()
+        public frmLinkUser()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgvusers, true);
@@ -59,10 +52,10 @@ namespace AccountingSystem.Views.Manage.LinkUser
             if(dgvusers.SelectedRows.Count > 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
-                Username = dgvusers.CurrentRow.Cells[5].Value.ToString();
-                lname = dgvusers.CurrentRow.Cells[4].Value.ToString();
-                fname = dgvusers.CurrentRow.Cells[2].Value.ToString();
-                mname = dgvusers.CurrentRow.Cells[3].Value.ToString();
+                Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
+                fname = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
+                mname = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                lname = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
             }
         }
 
