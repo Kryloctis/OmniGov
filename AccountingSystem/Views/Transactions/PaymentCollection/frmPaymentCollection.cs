@@ -95,10 +95,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = dtpdate.Value.ToString("yyyy-MM-dd");
-                byte userId = Helper.UserId;
+                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
 
                 var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments  = pcRepository.GetRecordsByUserId(userId);
+                var dtpayments  = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
