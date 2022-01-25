@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Transactions.JEV;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard
@@ -23,10 +24,31 @@ namespace AccountingSystem.Views.Dashboard
             }
         }
 
+        private DataTable DatatableJournals()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("journal_name");
+
+            try
+            {
+                var dtJournals = Factory.JournalsRepository().GetRecords();
+                dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
+                DataRow dr = dataTable.NewRow();
+                dr["id"] = "0";
+                dr["journal_name"] = "All";
+                dataTable.Rows.InsertAt(dr, 0);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return dataTable;
+        }
+
         private void LoadJournals()
         {
-            var dtJournals = Factory.JournalsRepository().GetRecords();
-            HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournals, "id", "journal_name");
+            HelperLoadRecords.ComboboxJournals(DatatableJournals(), cmbxJournals, "id", "journal_name");
         }
 
         private void LoadMonths()
@@ -43,11 +65,11 @@ namespace AccountingSystem.Views.Dashboard
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = Factory.JEVRepository().JevCounterByStatus(string.Empty, journalName, month, year);
-            var approvedJEVCount = Factory.JEVRepository().JevCounterByStatus("approved", journalName, month, year);
-            var pendingJEVCount = Factory.JEVRepository().JevCounterByStatus("pending", journalName, month, year);
-            var disapprovedJEVCOunt = Factory.JEVRepository().JevCounterByStatus("disapproved", journalName, month, year);
-            var cancelledJEVCount = Factory.JEVRepository().JevCounterByStatus("cancelled", journalName, month, year);
+            var jevCount = Factory.JEVRepository().GetJEVCount(string.Empty, journalName, month, year);
+            var approvedJEVCount = Factory.JEVRepository().GetJEVCount("approved", journalName, month, year);
+            var pendingJEVCount = Factory.JEVRepository().GetJEVCount("pending", journalName, month, year);
+            var disapprovedJEVCOunt = Factory.JEVRepository().GetJEVCount("disapproved", journalName, month, year);
+            var cancelledJEVCount = Factory.JEVRepository().GetJEVCount("cancelled", journalName, month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();

@@ -2164,20 +2164,21 @@ namespace AccountingSystem
             datagrid.Columns.Add("updated_at", "Updated At");
             datagrid.Columns.Add("updated_by_id", "Updated By ID");
             datagrid.Columns.Add("updated_by_name", "Updated By");
+            datagrid.Columns.Add("journal_name", "Journal");
             datagrid.Columns.Add("status", "Status");
 
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
-            datagrid.Columns["full_jev_no"].Width = 120;
+            datagrid.Columns["full_jev_no"].Width = 60;
             datagrid.Columns["ref_no"].Width = 60;
-            datagrid.Columns["date_entry"].Width = 120;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["created_by_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["created_by_name"].Width = 50;
             datagrid.ShowCellToolTips = false;
-            datagrid.Columns["payee"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["payee"].Width = 100;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
+            datagrid.Columns["date_entry"].Width = 60;
             datagrid.Columns["jev_no"].Visible = false;
             datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
@@ -2185,8 +2186,9 @@ namespace AccountingSystem
             datagrid.Columns["created_by_id"].Visible = false;
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
-            datagrid.Columns["explanation"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["explanation"].Width = 100;
             datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
+            datagrid.Columns["journal_name"].Width = 200;
 
         }
 

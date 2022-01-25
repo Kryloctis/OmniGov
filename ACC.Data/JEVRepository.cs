@@ -807,7 +807,7 @@ namespace ACC.Data
             return false;
         }
 
-        public int JevCounterByStatus(string status, string journalName, short month, short year)
+        public int GetJEVCount(string status, string journalName, short month, short year)
         {
             try
             {
@@ -817,6 +817,8 @@ namespace ACC.Data
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
                 };
+
+                string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
 
                 string statusQuery;
 
@@ -843,27 +845,7 @@ namespace ACC.Data
                         break;
                 }
 
-                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} journal_name = @journal_name AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
-
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public int TotalJEV(short month, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@month", DbType.Int16, month},
-                    new object[] { "@year", DbType.Int16, year}
-                };
-
-                string query = $"SELECT COUNT(*) FROM {tableName} WHERE MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -954,70 +936,43 @@ namespace ACC.Data
             }
         }
 
-        public DataTable FilterRecords(string jevStatus, string searchTxt, string journal, short month, short year)
+        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, short month, short year)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@journal_name", DbType.String, journal},
-                    new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
-                    new object[] { "@month", DbType.Int16, month},
-                    new object[] { "@year", DbType.Int16, year}
-                };
+                new object[] { "@journal_name", DbType.String, journalName},
+                new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
+                new object[] { "@month", DbType.Int16, month},
+                new object[] { "@year", DbType.Int16, year}
+            };
 
-                string jevStatusQuery = string.Empty;
-                switch (jevStatus)
-                {
-                    case "pending":
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                        break;
-                    case "approved":
-                        jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
-                        break;
-                    case "disapproved":
-                        jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
-                        break;
-                    case "cancelled":
-                        jevStatusQuery = $"is_cancelled = 1 AND ";
-                        break;
-                    default:
-                        jevStatusQuery = string.Empty;
-                        break;
 
-                }
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"funds_id, " +
-                    $"journals_id, " +
-                    $"jev_no, " +
-                    $"full_jev_no, " +
-                    $"date_entry, " +
-                    $"ref_no, " +
-                    $"payee, " +
-                    $"explanation, " +
-                    $"fund_code ," +
-                    $"is_approved, " +
-                    $"is_disapproved, " +
-                    $"is_cancelled," +
-                    $"created_at, " +
-                    $"created_by, " +
-                    $"updated_at, " +
-                    $"updated_by " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE {jevStatusQuery} " +
-                    $"journal_name = @journal_name " +
-                    $"AND MONTH(date_entry) <= @month " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
+            string jevStatusQuery;
 
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
+            switch (jevStatus)
             {
-                throw;
+                case "pending":
+                    jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
+                    break;
+                case "approved":
+                    jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
+                    break;
+                case "disapproved":
+                    jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
+                    break;
+                case "cancelled":
+                    jevStatusQuery = $"is_cancelled = 1 AND ";
+                    break;
+                default:
+                    jevStatusQuery = string.Empty;
+                    break;
+
             }
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+
+            var dtGeneralLedgers = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
         //SFPs
@@ -1163,5 +1118,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+
     }
 }

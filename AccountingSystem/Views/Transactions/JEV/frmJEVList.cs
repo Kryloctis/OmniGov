@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             if (!DesignMode)
             {
-                Helper.DatagridFullRowSelectStyle(dgJEV);
+                Helper.DatagridFullRowSelectStyle(dgJEV, true);
                 LoadJournals();
                 LoadMonths();
                 LoadJEVList();
@@ -34,10 +34,31 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
+        private DataTable DatatableJournals()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("journal_name");
+
+            try
+            {
+                var dtJournals = Factory.JournalsRepository().GetRecords();
+                dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
+                DataRow dr = dataTable.NewRow();
+                dr["id"] = "0";
+                dr["journal_name"] = "All";
+                dataTable.Rows.InsertAt(dr, 0);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return dataTable;
+        }
+
         private void LoadJournals()
         {
-            var dtJournals = Factory.JournalsRepository().GetRecords();
-            HelperLoadRecords.ComboboxJournals(dtJournals, cmbxJournals, "id", "journal_name");
+            HelperLoadRecords.ComboboxJournals(DatatableJournals(), cmbxJournals, "id", "journal_name");
             if (_journalName != string.Empty)
             {
                 int index = cmbxJournals.FindString(_journalName);
@@ -129,39 +150,36 @@ namespace AccountingSystem.Views.Transactions.JEV
                 short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
                 short year = Convert.ToInt16(nudYear.Value);
 
-                var dtJEV = Factory.JEVRepository().FilterRecords(jevStatus, searchTxt, journalName, month, year);
+                var dataTable = Factory.JEVRepository().GetViewRecords_By_Status_JournalName_Search_Month_Year(jevStatus, searchTxt, journalName, month, year);
 
-
-                foreach (DataRow row in dtJEV.Rows)
+                foreach (DataRow row in dataTable.Rows)
                 {
                     byte isApproved = Convert.ToByte(row["is_approved"]);
                     byte isDisapproved = Convert.ToByte(row["is_disapproved"]);
                     byte isCancelled = Convert.ToByte(row["is_cancelled"]);
 
+                    int rowId = Convert.ToInt32(row["id"]);
+                    int rowFundId = Convert.ToInt32(row["funds_id"]);
+                    int rowJournalsId = Convert.ToInt32(row["journals_id"]);
+                    string rowJournalName = row["journal_name"].ToString();
+                    string rowJevNo = row["jev_no"].ToString();
+                    string rowFullJEVNo = row["full_jev_no"].ToString();
+                    DateTime rowDateEntry = Convert.ToDateTime(row["date_entry"].ToString());
+                    string rowRefNo = row["ref_no"].ToString();
+                    string rowPayee = row["payee"].ToString();
+                    string rowExplanation = row["explanation"].ToString();
+                    string rowPayeeFundCode = row["fund_code"].ToString();
+                    string rowCreatedAt = row["created_at"].ToString();
+                    string rowCreatedById = row["created_by"].ToString();
+                    var dictUserCreatedBy = Factory.UsersRepository().GetUserByID(Convert.ToByte(rowCreatedById));
+                    var rowCreatedByName = $"{dictUserCreatedBy["first_name"]} {dictUserCreatedBy["mid_initial"]} {dictUserCreatedBy["last_name"]}";
+                    string rowUpdatedAt = row["updated_at"].ToString();
+                    string rowUpdatedById = row["updated_by"].ToString();
+                    string rowUpdatedByName = string.Empty;
 
+                    string rowStatus = GetJevStatus(isApproved, isDisapproved, isCancelled);
 
-                    int id = Convert.ToInt32(row["id"]);
-                    int fundId = Convert.ToInt32(row["funds_id"]);
-                    int journalsId = Convert.ToInt32(row["journals_id"]);
-                    string jevNo = row["jev_no"].ToString();
-                    string fullJEVNo = row["full_jev_no"].ToString();
-                    DateTime dateEntry = Convert.ToDateTime(row["date_entry"].ToString());
-                    string refNo = row["ref_no"].ToString();
-                    string payee = row["payee"].ToString();
-                    string explanation = row["explanation"].ToString();
-                    string fundCode = row["fund_code"].ToString();
-                    string createdAt = row["created_at"].ToString();
-                    string createdById = row["created_by"].ToString();
-                    var dictUserCreatedBy = Factory.UsersRepository().GetUserByID(Convert.ToByte(createdById));
-                    var createdByName = $"{dictUserCreatedBy["first_name"]} {dictUserCreatedBy["mid_initial"]} {dictUserCreatedBy["last_name"]}";
-                    string updatedAt = row["updated_at"].ToString();
-                    string updatedById = row["updated_by"].ToString();
-                    string updatedByName = string.Empty;
-
-                    string status = GetJevStatus(isApproved, isDisapproved, isCancelled);
-
-                    dgJEV.Rows.Add(new object[] { id, fundId, journalsId, jevNo, fullJEVNo, dateEntry, refNo, payee, explanation, fundCode, createdAt, createdById, createdByName, updatedAt, updatedById, updatedByName, status });
-
+                    dgJEV.Rows.Add(new object[] { rowId, rowFundId, rowJournalsId, rowJevNo, rowFullJEVNo, rowDateEntry, rowRefNo, rowPayee, rowExplanation, rowPayeeFundCode, rowCreatedAt, rowCreatedById, rowCreatedByName, rowUpdatedAt, rowUpdatedById, rowUpdatedByName, rowJournalName, rowStatus });
                 }
 
                 LoadStatusColors();
@@ -171,7 +189,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
