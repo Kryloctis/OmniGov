@@ -324,6 +324,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAddDeductions.TabIndex = 29;
             this.btnAddDeductions.Text = "...";
             this.btnAddDeductions.UseVisualStyleBackColor = true;
+            this.btnAddDeductions.Click += new System.EventHandler(this.btnAddDeductions_Click);
             // 
             // numericUpDown1
             // 

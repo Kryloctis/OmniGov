@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 
 namespace AccountingSystem.Views.Transactions.RCI
@@ -303,6 +304,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddDeductions_Click(object sender, EventArgs e)
+        {
+            _ = new frmDeductions().ShowDialog();
         }
     }
 }
