@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epObligations = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnAddDeductions = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,14 +55,34 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epDVNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFund = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epBank = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCheckNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFpp = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCheckDate = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPayee = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epNatureOfPayment = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epTotalDeductions = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epNetAmount = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epObligations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFund)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBank)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCheckNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFpp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCheckDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epNatureOfPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTotalDeductions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epNetAmount)).BeginInit();
             this.SuspendLayout();
             // 
-            // errorProvider
+            // epObligations
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epObligations.ContainerControl = this;
             // 
             // btnAddDeductions
             // 
@@ -299,6 +319,46 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label5.TabIndex = 45;
             this.label5.Text = "Check Date";
             // 
+            // epDVNo
+            // 
+            this.epDVNo.ContainerControl = this;
+            // 
+            // epFund
+            // 
+            this.epFund.ContainerControl = this;
+            // 
+            // epBank
+            // 
+            this.epBank.ContainerControl = this;
+            // 
+            // epCheckNo
+            // 
+            this.epCheckNo.ContainerControl = this;
+            // 
+            // epFpp
+            // 
+            this.epFpp.ContainerControl = this;
+            // 
+            // epCheckDate
+            // 
+            this.epCheckDate.ContainerControl = this;
+            // 
+            // epPayee
+            // 
+            this.epPayee.ContainerControl = this;
+            // 
+            // epNatureOfPayment
+            // 
+            this.epNatureOfPayment.ContainerControl = this;
+            // 
+            // epTotalDeductions
+            // 
+            this.epTotalDeductions.ContainerControl = this;
+            // 
+            // epNetAmount
+            // 
+            this.epNetAmount.ContainerControl = this;
+            // 
             // ucRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -331,16 +391,26 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Name = "ucRCI";
             this.Size = new System.Drawing.Size(427, 370);
             this.Load += new System.EventHandler(this.ucRCI_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epObligations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFund)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBank)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCheckNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFpp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCheckDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPayee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epNatureOfPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTotalDeductions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epNetAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epObligations;
         private System.Windows.Forms.Button btnAddDeductions;
         internal System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label10;
@@ -365,5 +435,15 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ErrorProvider epDVNo;
+        private System.Windows.Forms.ErrorProvider epFund;
+        private System.Windows.Forms.ErrorProvider epBank;
+        private System.Windows.Forms.ErrorProvider epCheckNo;
+        private System.Windows.Forms.ErrorProvider epFpp;
+        private System.Windows.Forms.ErrorProvider epCheckDate;
+        private System.Windows.Forms.ErrorProvider epPayee;
+        private System.Windows.Forms.ErrorProvider epNatureOfPayment;
+        private System.Windows.Forms.ErrorProvider epTotalDeductions;
+        private System.Windows.Forms.ErrorProvider epNetAmount;
     }
 }
