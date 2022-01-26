@@ -492,11 +492,6 @@ namespace ACC.Data
 
                 return record;
             }
-            catch (MysqlException)
-            {
-                throw;
-            }
-
             catch (Exception)
             {
                 throw;
@@ -541,11 +536,6 @@ namespace ACC.Data
 
                 return record;
             }
-            catch (MysqlException)
-            {
-                throw;
-            }
-
             catch (Exception)
             {
                 throw;
