@@ -64,7 +64,7 @@ namespace ACC.Domain.Interfaces
         string GetRemarks(int jevId);
 
 
-        DataTable FilterRecords(string jevStatus, string searchTxt, string journal, short month, short year);
+        DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, short month, short year);
 
         string GetJevStatus(int jevId);
 
