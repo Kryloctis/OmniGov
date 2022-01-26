@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        {
+        {   
             _ = new frmRCIAdd(this).ShowDialog();
         }
 

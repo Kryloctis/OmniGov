@@ -23,15 +23,15 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var rciObligationsRepo = Factory.RCIObligationsRepository();
-                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
+                //var rciObligationsRepo = Factory.RCIObligationsRepository();
+                //var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
 
 
 
-                foreach (DataRow item in dtRCIObligations.Rows)
-                {
-                    uc.dgObligationNoList.Rows.Add(item[0].ToString(), "Remove");
-                }
+                //foreach (DataRow item in dtRCIObligations.Rows)
+                //{
+                //    uc.dgObligationNoList.Rows.Add(item[0].ToString(), "Remove");
+                //}
 
             }
             catch (Exception)
@@ -96,20 +96,20 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void UpdateRCIObligation()
         {
-            var rciObligationRepo = Factory.RCIObligationsRepository();
-            var deleteSuccess = rciObligationRepo.DeleteRecordsByRCIId(uc.Id);
+            //var rciObligationRepo = Factory.RCIObligationsRepository();
+            //var deleteSuccess = rciObligationRepo.DeleteRecordsByRCIId(uc.Id);
 
-            if (deleteSuccess)
-            {
-                short rcid = (short)uc.Id;
-                string obligationNo = String.Empty;
+            //if (deleteSuccess)
+            //{
+            //    short rcid = (short)uc.Id;
+            //    string obligationNo = String.Empty;
 
-                foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
-                {
-                    obligationNo = item.Cells["obligation_no"].Value.ToString();
-                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
-                }
-            }
+            //    foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
+            //    {
+            //        obligationNo = item.Cells["obligation_no"].Value.ToString();
+            //        Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+            //    }
+            //}
         }
 
         private bool SaveData()

@@ -320,9 +320,8 @@ namespace ACC.Data
                     new object[] { "@searchText", DbType.String, $"%{searchText}%" }
                 }; 
 
-                string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText OR collecting_officer LIKE @searchText";
+                string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
-                
                
                 var dtpc = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
@@ -425,6 +424,17 @@ namespace ACC.Data
             }
         }
 
+        public DataTable GetRecordsByUserId(int userId)
+        {
+            var parameter = new object[][] {
+                new object[] {"@userId", DbType.Int32, userId }
+            };
 
+            string query = $"SELECT * FROM {viewTableName} WHERE created_by = @userId";
+
+            var dt = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+        }
     }
 }

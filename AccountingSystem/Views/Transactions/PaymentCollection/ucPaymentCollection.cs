@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
@@ -126,10 +126,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         generalLedgerId = Id;
                         cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
                     }
-                    
-
                 }
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

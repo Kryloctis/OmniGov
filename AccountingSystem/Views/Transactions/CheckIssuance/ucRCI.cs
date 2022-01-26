@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
+using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
@@ -17,7 +19,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         public ucRCI()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgObligationNoList,  true);
         }
 
         private void ucRCI_Load(object sender, EventArgs e)
@@ -248,30 +249,31 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var obligationNo = txtObno.Text.Trim();
+            _ = new frmObligations().ShowDialog();
+            //var obligationNo = txtObno.Text.Trim();
 
-            if (String.IsNullOrEmpty(obligationNo))
-                return;
+            //if (String.IsNullOrEmpty(obligationNo))
+            //    return;
 
-            dgObligationNoList.Rows.Add(obligationNo, "Remove");
-            txtObno.Text = String.Empty;
-            txtObno.Focus();
+            //dgObligationNoList.Rows.Add(obligationNo, "Remove");
+            //txtObno.Text = String.Empty;
+            //txtObno.Focus();
         }
 
 
         private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-                int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
-                dgObligationNoList.Rows.RemoveAt(rowIndex);
-            }
+            //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            //{
+            //    int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
+            //    dgObligationNoList.Rows.RemoveAt(rowIndex);
+            //}
         }
 
         private void txtObno_TextChanged(object sender, EventArgs e)
         {
-            btnAdd.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
+            btnAddObligation.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
 
         private void cmbFPP_KeyDown(object sender, KeyEventArgs e)
@@ -297,6 +299,16 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal void cmbFPP_SelectedValueChanged(object sender, EventArgs e)
         {
             functionId = Convert.ToInt32(cmbFPP.SelectedValue);
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddDeductions_Click(object sender, EventArgs e)
+        {
+            _ = new frmDeductions().ShowDialog();
         }
     }
 }

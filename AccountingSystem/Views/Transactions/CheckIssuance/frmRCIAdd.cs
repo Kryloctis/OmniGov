@@ -80,15 +80,15 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
-                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
-                string obligationNo = String.Empty;
+                //string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                //short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
+                //string obligationNo = String.Empty;
 
-                foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
-                {
-                    obligationNo = item.Cells["obligation_no"].Value.ToString();
-                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
-                }
+                //foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
+                //{
+                //    obligationNo = item.Cells["obligation_no"].Value.ToString();
+                //    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                //}
             }
             catch (Exception)
             {
