@@ -14,9 +14,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
     public partial class frmDeductions : Form
     {
 
-        DataTable dtObligations = new();
+        DataTable dtDeductions = new();
 
-        
 
         public frmDeductions()
         {
@@ -29,10 +28,15 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             CreateDatagridColumn();
         }
 
-        private void CreateDatagridColumn() 
+        private void btnRemove_Click(object sender, EventArgs e)
         {
-            dtObligations.Columns.Add("Description");
-            dtObligations.Columns.Add("Amount");
+            foreach (DataGridViewRow row in dgDeductions.SelectedRows)
+                dgDeductions.Rows.Remove(row);
+        }
+        private void dgDeductions_SelectionChanged(object sender, EventArgs e)
+        {
+            bool hasRowSelected = Convert.ToBoolean(dgDeductions.Rows.Count != 0);
+            btnRemove.Enabled = hasRowSelected;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -42,6 +46,28 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
                 Helper.MessageBoxError(GetFormErrors());
                 return;
             }
+
+            AddToList();
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
+            txtDescription.Text = String.Empty;
+            nudAmount.Value = 0;
+            txtDescription.Focus();
+        }
+
+        private void AddToList()
+        {
+            dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value);
+            HelperLoadRecords.RCIDeductionsDatagridview(dtDeductions, dgDeductions);
+        }
+
+        private void CreateDatagridColumn()
+        {
+            dtDeductions.Columns.Add("Description");
+            dtDeductions.Columns.Add("Amount");
         }
 
         #region Validations
@@ -74,7 +100,9 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
+
         #endregion
 
+  
     }
 }
