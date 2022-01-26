@@ -34,9 +34,9 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.txtObno = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.dgObligation = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             // 
             // btnAdd
             // 
+            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(300, 38);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(64, 23);
@@ -70,6 +71,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.txtObno.Name = "txtObno";
             this.txtObno.Size = new System.Drawing.Size(267, 21);
             this.txtObno.TabIndex = 18;
+            this.txtObno.TextChanged += new System.EventHandler(this.txtObno_TextChanged);
             // 
             // label6
             // 
@@ -84,30 +86,44 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dgObligation);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(4, 73);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(370, 205);
+            this.groupBox2.Size = new System.Drawing.Size(370, 213);
             this.groupBox2.TabIndex = 33;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List";
             // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Enabled = false;
+            this.btnRemove.Location = new System.Drawing.Point(303, 255);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(64, 23);
+            this.btnRemove.TabIndex = 20;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
             // dgObligation
             // 
             this.dgObligation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgObligation.Location = new System.Drawing.Point(10, 21);
+            this.dgObligation.Location = new System.Drawing.Point(12, 93);
             this.dgObligation.Name = "dgObligation";
             this.dgObligation.RowTemplate.Height = 25;
-            this.dgObligation.Size = new System.Drawing.Size(354, 176);
+            this.dgObligation.Size = new System.Drawing.Size(354, 157);
             this.dgObligation.TabIndex = 0;
+            this.dgObligation.SelectionChanged += new System.EventHandler(this.dgObligation_SelectionChanged);
             // 
             // frmObligations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(380, 282);
+            this.ClientSize = new System.Drawing.Size(380, 294);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.dgObligation);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -121,7 +137,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.Load += new System.EventHandler(this.frmObligations_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).EndInit();
             this.ResumeLayout(false);
 
@@ -135,5 +150,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgObligation;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
