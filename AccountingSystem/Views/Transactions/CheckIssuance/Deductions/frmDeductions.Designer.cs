@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,10 +38,14 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgDeductions = new System.Windows.Forms.DataGridView();
+            this.epDescription = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDeductions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -60,7 +65,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             // btnAdd
             // 
-            this.btnAdd.Enabled = false;
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAdd.Location = new System.Drawing.Point(281, 89);
             this.btnAdd.Name = "btnAdd";
@@ -68,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.btnAdd.TabIndex = 19;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label1
             // 
@@ -94,6 +99,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.nudAmount.Size = new System.Drawing.Size(260, 22);
             this.nudAmount.TabIndex = 30;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label6
             // 
@@ -104,7 +111,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 21;
             this.label6.Text = "Description ";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // txtDescription
             // 
@@ -116,6 +122,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(260, 37);
             this.txtDescription.TabIndex = 31;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // groupBox2
             // 
@@ -139,6 +147,14 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.dgDeductions.Size = new System.Drawing.Size(351, 121);
             this.dgDeductions.TabIndex = 0;
             // 
+            // epDescription
+            // 
+            this.epDescription.ContainerControl = this;
+            // 
+            // epAmount
+            // 
+            this.epAmount.ContainerControl = this;
+            // 
             // frmDeductions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -156,11 +172,14 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Deductions";
+            this.Load += new System.EventHandler(this.frmDeductions_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgDeductions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,5 +195,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgDeductions;
+        private System.Windows.Forms.ErrorProvider epDescription;
+        private System.Windows.Forms.ErrorProvider epAmount;
     }
 }
