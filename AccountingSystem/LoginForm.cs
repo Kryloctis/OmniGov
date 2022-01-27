@@ -18,33 +18,40 @@ namespace AccountingSystem
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            Image visibleImage = Properties.Resources.visible_16px;
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            try
             {
-                Helper.MessageBoxError("Please enter both username and password.");
-                return;
-            }
+                Cursor = Cursors.WaitCursor;
+                Image visibleImage = Properties.Resources.visible_16px;
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
 
-            var userId = Factory.UsersRepository().ValidateLogin(username, password);
+                if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                {
+                    Helper.MessageBoxError("Please enter both username and password.");
+                    return;
+                }
 
-            if (userId != 0)
-            {
-                Helper.UserId = userId;
-                var mainForm = new MainForm(this);
-                mainForm.Show();
-                Hide();
-                txtPassword.Clear();
-                btnVisibility.Image = visibleImage;
-                txtPassword.PasswordChar = '•';
+                var userId = Factory.UsersRepository().ValidateLogin(username, password);
+
+                if (userId != 0)
+                {
+                    Helper.UserId = userId;
+                    var mainForm = new MainForm(this);
+                    mainForm.Show();
+                    Hide();
+                    txtPassword.Clear();
+                    btnVisibility.Image = visibleImage;
+                    txtPassword.PasswordChar = '•';
+                    Cursor = Cursors.Default;
+                    return;
+                }
                 Cursor = Cursors.Default;
-                return;
+                Helper.MessageBoxError("Incorrect username or password.");
             }
-            Cursor = Cursors.Default;
-            Helper.MessageBoxError("Incorrect username or password.");
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnVisibility_Click(object sender, EventArgs e)
