@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     Id = uc.Id,
                     BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
-                    FundsId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),

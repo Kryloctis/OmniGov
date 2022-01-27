@@ -32,9 +32,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.components = new System.ComponentModel.Container();
             this.epObligations = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnAddDeductions = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtObno = new System.Windows.Forms.ComboBox();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.txtdvno = new System.Windows.Forms.TextBox();
             this.txtamount = new System.Windows.Forms.NumericUpDown();
@@ -66,7 +64,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.epTotalDeductions = new System.Windows.Forms.ErrorProvider(this.components);
             this.epNetAmount = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.epObligations)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFund)).BeginInit();
@@ -86,30 +83,17 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnAddDeductions
             // 
+            this.btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.btnAddDeductions.Image = global::AccountingSystem.Properties.Resources.others;
-            this.btnAddDeductions.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAddDeductions.Location = new System.Drawing.Point(362, 309);
+            this.btnAddDeductions.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnAddDeductions.Location = new System.Drawing.Point(133, 309);
             this.btnAddDeductions.Name = "btnAddDeductions";
-            this.btnAddDeductions.Size = new System.Drawing.Size(25, 23);
-            this.btnAddDeductions.TabIndex = 53;
+            this.btnAddDeductions.Size = new System.Drawing.Size(254, 23);
+            this.btnAddDeductions.TabIndex = 9;
+            this.btnAddDeductions.Text = "Click to add deductions.";
+            this.btnAddDeductions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddDeductions.UseVisualStyleBackColor = true;
             this.btnAddDeductions.Click += new System.EventHandler(this.btnAddDeductions_Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(133, 309);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(223, 23);
-            this.numericUpDown1.TabIndex = 52;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
             // 
@@ -120,15 +104,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label10.TabIndex = 54;
             this.label10.Text = "Total Deductions";
             // 
-            // txtObno
-            // 
-            this.txtObno.FormattingEnabled = true;
-            this.txtObno.Location = new System.Drawing.Point(133, 12);
-            this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtObno.Name = "txtObno";
-            this.txtObno.Size = new System.Drawing.Size(223, 23);
-            this.txtObno.TabIndex = 32;
-            // 
             // cmbFPP
             // 
             this.cmbFPP.FormattingEnabled = true;
@@ -136,7 +111,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbFPP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(254, 23);
-            this.cmbFPP.TabIndex = 51;
+            this.cmbFPP.TabIndex = 5;
             // 
             // txtdvno
             // 
@@ -145,7 +120,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtdvno.MaxLength = 20;
             this.txtdvno.Name = "txtdvno";
             this.txtdvno.Size = new System.Drawing.Size(254, 23);
-            this.txtdvno.TabIndex = 33;
+            this.txtdvno.TabIndex = 1;
             // 
             // txtamount
             // 
@@ -159,7 +134,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             0});
             this.txtamount.Name = "txtamount";
             this.txtamount.Size = new System.Drawing.Size(254, 23);
-            this.txtamount.TabIndex = 43;
+            this.txtamount.TabIndex = 10;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtnature
@@ -170,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtnature.Multiline = true;
             this.txtnature.Name = "txtnature";
             this.txtnature.Size = new System.Drawing.Size(254, 67);
-            this.txtnature.TabIndex = 42;
+            this.txtnature.TabIndex = 8;
             // 
             // cmbbank
             // 
@@ -180,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbbank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbbank.Name = "cmbbank";
             this.cmbbank.Size = new System.Drawing.Size(254, 23);
-            this.cmbbank.TabIndex = 34;
+            this.cmbbank.TabIndex = 3;
             // 
             // txtpayee
             // 
@@ -189,7 +164,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtpayee.MaxLength = 150;
             this.txtpayee.Name = "txtpayee";
             this.txtpayee.Size = new System.Drawing.Size(254, 23);
-            this.txtpayee.TabIndex = 41;
+            this.txtpayee.TabIndex = 7;
             // 
             // label6
             // 
@@ -206,7 +181,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.dtcheckdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtcheckdate.Name = "dtcheckdate";
             this.dtcheckdate.Size = new System.Drawing.Size(254, 23);
-            this.dtcheckdate.TabIndex = 40;
+            this.dtcheckdate.TabIndex = 6;
             // 
             // label7
             // 
@@ -224,7 +199,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtcheckno.MaxLength = 15;
             this.txtcheckno.Name = "txtcheckno";
             this.txtcheckno.Size = new System.Drawing.Size(254, 23);
-            this.txtcheckno.TabIndex = 38;
+            this.txtcheckno.TabIndex = 4;
             // 
             // label12
             // 
@@ -243,16 +218,19 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfund.Name = "cmbfund";
             this.cmbfund.Size = new System.Drawing.Size(254, 23);
-            this.cmbfund.TabIndex = 36;
+            this.cmbfund.TabIndex = 2;
             // 
             // btnAddObligation
             // 
+            this.btnAddObligation.Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.btnAddObligation.Image = global::AccountingSystem.Properties.Resources.others;
-            this.btnAddObligation.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAddObligation.Location = new System.Drawing.Point(362, 12);
+            this.btnAddObligation.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnAddObligation.Location = new System.Drawing.Point(133, 12);
             this.btnAddObligation.Name = "btnAddObligation";
-            this.btnAddObligation.Size = new System.Drawing.Size(25, 23);
-            this.btnAddObligation.TabIndex = 35;
+            this.btnAddObligation.Size = new System.Drawing.Size(254, 23);
+            this.btnAddObligation.TabIndex = 0;
+            this.btnAddObligation.Text = "Click to add obligation no.";
+            this.btnAddObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddObligation.UseVisualStyleBackColor = true;
             this.btnAddObligation.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -364,9 +342,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnAddDeductions);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.txtObno);
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.txtdvno);
             this.Controls.Add(this.txtamount);
@@ -392,7 +368,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Size = new System.Drawing.Size(413, 370);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epObligations)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFund)).EndInit();
@@ -412,9 +387,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         #endregion
         private System.Windows.Forms.ErrorProvider epObligations;
         private System.Windows.Forms.Button btnAddDeductions;
-        internal System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label10;
-        internal System.Windows.Forms.ComboBox txtObno;
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.TextBox txtdvno;
         internal System.Windows.Forms.NumericUpDown txtamount;

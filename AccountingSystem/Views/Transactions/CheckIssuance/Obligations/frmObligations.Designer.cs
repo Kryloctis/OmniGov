@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnRemove = new System.Windows.Forms.Button();
             this.dgObligation = new System.Windows.Forms.DataGridView();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).BeginInit();
             this.SuspendLayout();
@@ -116,12 +117,27 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.dgObligation.TabIndex = 0;
             this.dgObligation.SelectionChanged += new System.EventHandler(this.dgObligation_SelectionChanged);
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfirm.Location = new System.Drawing.Point(11, 254);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(64, 23);
+            this.btnConfirm.TabIndex = 22;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // frmObligations
             // 
+            this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(380, 294);
+            this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.dgObligation);
             this.Controls.Add(this.groupBox2);
@@ -151,5 +167,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgObligation;
         private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnConfirm;
     }
 }

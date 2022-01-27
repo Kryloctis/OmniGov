@@ -16,6 +16,9 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal int fundsId = 0;
         internal int functionId = 0;
 
+
+        internal DataTable dtObligations = new();
+
         public ucRCI()
         {
             InitializeComponent();
@@ -31,6 +34,8 @@ namespace AccountingSystem.Views.Transactions.RCI
                 cmbFPP.SelectedValueChanged -= new EventHandler(cmbFPP_SelectedValueChanged);
                 LoadFPP();
                 cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
+
+                dtObligations.Columns.Add("obligation_no");
             }
         }
         internal void LoadFPP()
@@ -75,17 +80,16 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[12];
-            errorArray[0] = epObligations.GetError(txtObno);
-            errorArray[1] = epObligations.GetError(txtdvno);
-            errorArray[2] = epObligations.GetError(cmbfund);
-            errorArray[3] = epObligations.GetError(cmbFPP);
-            errorArray[4] = epObligations.GetError(cmbbank);
-            errorArray[5] = epObligations.GetError(txtcheckno);
-            errorArray[6] = epObligations.GetError(dtcheckdate);
-            errorArray[7] = epObligations.GetError(txtpayee);
-            errorArray[8] = epObligations.GetError(txtnature);
-            errorArray[9] = epObligations.GetError(txtamount);
+            var errorArray = new string[11];
+            errorArray[0] = epObligations.GetError(txtdvno);
+            errorArray[1] = epObligations.GetError(cmbfund);
+            errorArray[2] = epObligations.GetError(cmbFPP);
+            errorArray[3] = epObligations.GetError(cmbbank);
+            errorArray[4] = epObligations.GetError(txtcheckno);
+            errorArray[5] = epObligations.GetError(dtcheckdate);
+            errorArray[6] = epObligations.GetError(txtpayee);
+            errorArray[7] = epObligations.GetError(txtnature);
+            errorArray[8] = epObligations.GetError(txtamount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -249,7 +253,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmObligations().ShowDialog();
+            _ = new frmObligations(this).ShowDialog();
             //var obligationNo = txtObno.Text.Trim();
 
             //if (String.IsNullOrEmpty(obligationNo))
@@ -260,7 +264,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             //txtObno.Focus();
         }
 
-
         private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
@@ -269,11 +272,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             //    int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
             //    dgObligationNoList.Rows.RemoveAt(rowIndex);
             //}
-        }
-
-        private void txtObno_TextChanged(object sender, EventArgs e)
-        {
-            btnAddObligation.Enabled = !string.IsNullOrEmpty(txtObno.Text.Trim());
         }
 
         private void cmbFPP_KeyDown(object sender, KeyEventArgs e)

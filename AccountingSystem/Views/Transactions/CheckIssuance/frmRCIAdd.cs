@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
@@ -44,12 +37,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 var rciModel = new RCIModel()
                 {
+                    DvNo = uc.txtdvno.Text.Trim(),
+                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
-                    FundsId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
                     CheckNo = uc.txtcheckno.Text.Trim(),
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
                     Amount = Convert.ToDecimal(uc.txtamount.Value)
@@ -71,12 +64,34 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 Helper.MessageBoxSuccess("RCI has been saved.");
                 SaveDVObligations();
+                SaveDeductions();
+
                 _frmrci.LoadRecords();
                 ucrci1.ResetForm();
             }
         }
 
         internal void SaveDVObligations()
+        {
+            try
+            {
+                //string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                //short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
+                //string obligationNo = String.Empty;
+
+                //foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
+                //{
+                //    obligationNo = item.Cells["obligation_no"].Value.ToString();
+                //    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                //}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal void SaveDeductions()
         {
             try
             {

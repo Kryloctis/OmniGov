@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Transactions.RCI;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -6,12 +7,17 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 {
     public partial class frmObligations : Form
     {
+        private readonly ucRCI _uc;
+
         DataTable dtObligations = new();
 
-        public frmObligations()
+
+        public frmObligations(ucRCI uc)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgObligation);
+
+            _uc = uc;
         }
 
         private void frmObligations_Load(object sender, EventArgs e)
@@ -46,7 +52,20 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         private void dgObligation_SelectionChanged(object sender, EventArgs e)
         {
             bool hasRowSelected = Convert.ToBoolean(dgObligation.Rows.Count != 0);
-            btnRemove.Enabled = hasRowSelected; 
+
+            btnRemove.Enabled = hasRowSelected;
+            btnConfirm.Enabled = hasRowSelected;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            _uc.dtObligations.Rows.Clear();
+
+            if (dtObligations.Rows.Count != 0)
+            {
+                foreach (DataRow dr in dtObligations.Rows)
+                    _uc.dtObligations.Rows.Add(dr.ItemArray);
+            }
         }
     }
 }
