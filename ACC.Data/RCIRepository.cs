@@ -111,7 +111,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@banks_id", DbType.Int16, entity.BankId},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundsId},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
                     new object[] { "@check_date", DbType.Date, entity.CheckDate},
                     new object[] { "@check_no", DbType.String, entity.CheckNo},
@@ -152,7 +152,7 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@banks_id", DbType.Int16, entity.BankId},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundsId},
+                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
                     new object[] { "@check_date", DbType.Date, entity.CheckDate},
                     new object[] { "@check_no", DbType.String, entity.CheckNo},

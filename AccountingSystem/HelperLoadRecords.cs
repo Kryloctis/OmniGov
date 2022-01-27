@@ -778,6 +778,20 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static void RCIDeductionsDatagridview(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].HeaderText = "Description";
+            datagrid.Columns[1].HeaderText = "Amount";
+
+            datagrid.Columns[1].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
         internal static void RCIDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;

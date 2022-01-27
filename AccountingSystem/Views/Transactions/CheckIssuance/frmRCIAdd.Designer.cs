@@ -46,12 +46,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(430, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(415, 27);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(345, 2);
+            this.btnCancel.Location = new System.Drawing.Point(330, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(257, 2);
+            this.btnSave.Location = new System.Drawing.Point(242, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -77,10 +77,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // ucrci1
             // 
+            this.ucrci1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucrci1.Location = new System.Drawing.Point(0, 0);
             this.ucrci1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucrci1.Name = "ucrci1";
-            this.ucrci1.Size = new System.Drawing.Size(431, 366);
+            this.ucrci1.Size = new System.Drawing.Size(415, 371);
             this.ucrci1.TabIndex = 5;
             // 
             // frmRCIAdd
@@ -89,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(430, 398);
+            this.ClientSize = new System.Drawing.Size(415, 398);
             this.Controls.Add(this.ucrci1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
