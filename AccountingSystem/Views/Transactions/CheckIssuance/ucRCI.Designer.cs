@@ -389,7 +389,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRCI";
-            this.Size = new System.Drawing.Size(419, 370);
+            this.Size = new System.Drawing.Size(413, 370);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epObligations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
