@@ -575,7 +575,7 @@ namespace ACC.Data
 
         public string GetLeastAllotmentReleaseNumber()
         {
-            string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),0000) AS obligation_no FROM {viewTableName}";
+            string query = $"SELECT COALESCE(LPAD(MAX(obligation_no)+1, 4, '0'),'0001') AS obligation_no FROM {viewTableName}";
             return _mySqlGenericCommands.ExecuteScalar(query);
         }
     }
