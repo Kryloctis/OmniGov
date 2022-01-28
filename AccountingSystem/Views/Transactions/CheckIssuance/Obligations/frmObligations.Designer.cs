@@ -121,6 +121,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             // btnConfirm
             // 
             this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConfirm.Enabled = false;
             this.btnConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConfirm.Location = new System.Drawing.Point(11, 254);
             this.btnConfirm.Name = "btnConfirm";

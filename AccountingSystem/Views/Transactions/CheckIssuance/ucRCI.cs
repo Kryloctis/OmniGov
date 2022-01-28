@@ -17,6 +17,9 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal int functionId = 0;
 
 
+        internal short obligationNumberCount = 0;
+        internal decimal totalDeduction;
+
         internal DataTable dtObligations = new();
 
         public ucRCI()
@@ -77,6 +80,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             return dtFPP;
         }
+
+
 
         internal void ResetForm()
         {
@@ -175,24 +180,50 @@ namespace AccountingSystem.Views.Transactions.RCI
             _ = new frmDeductions(this).ShowDialog();
         }
 
+        internal void SetObligationLabel()
+        {
+            obligationNumberCount = (short)dtObligations.Rows.Count;
+            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s added.";
+        }
 
 
         #region Validations
         internal string GetFormErrors()
         {
-            var errorArray = new string[9];
-            errorArray[0] = epDVNo.GetError(txtdvno);
-            errorArray[1] = epFund.GetError(cmbfund);
-            errorArray[2] = epFpp.GetError(cmbFPP);
-            errorArray[3] = epBank.GetError(cmbbank);
-            errorArray[4] = epCheckNo.GetError(txtcheckno);
-            errorArray[5] = epCheckDate.GetError(dtcheckdate);
-            errorArray[6] = epPayee.GetError(txtpayee);
-            errorArray[7] = epNatureOfPayment.GetError(txtnature);
-            errorArray[8] = epNetAmount.GetError(nudNetAmount);
+            var errorArray = new string[10];
+            errorArray[0] = epObligations.GetError(btnAddObligation);
+            errorArray[1] = epDVNo.GetError(txtdvno);
+            errorArray[2] = epFund.GetError(cmbfund);
+            errorArray[3] = epFpp.GetError(cmbFPP);
+            errorArray[4] = epBank.GetError(cmbbank);
+            errorArray[5] = epCheckNo.GetError(txtcheckno);
+            errorArray[6] = epCheckDate.GetError(dtcheckdate);
+            errorArray[7] = epPayee.GetError(txtpayee);
+            errorArray[8] = epNatureOfPayment.GetError(txtnature);
+            errorArray[9] = epNetAmount.GetError(nudNetAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
+        }
+
+        private void btnAddObligation_Validating(object sender, CancelEventArgs e)
+        {
+            obligationNumberCount = (short)dtObligations.Rows.Count;
+            if (obligationNumberCount == 0)
+            {
+                epObligations.SetError(btnAddObligation, "Please enter an obligation number.");
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+
+        }
+
+        private void btnAddObligation_Validated(object sender, EventArgs e)
+        {
+            epObligations.SetError(btnAddObligation, string.Empty);
         }
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
@@ -280,6 +311,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             Helper.ClearErrorNumericUpDown(epNetAmount, nudNetAmount);
         }
+
 
 
         #endregion

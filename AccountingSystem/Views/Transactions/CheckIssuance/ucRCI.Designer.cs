@@ -249,6 +249,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAddObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddObligation.UseVisualStyleBackColor = true;
             this.btnAddObligation.Click += new System.EventHandler(this.btnAddObligation_Click);
+            this.btnAddObligation.Validating += new System.ComponentModel.CancelEventHandler(this.btnAddObligation_Validating);
+            this.btnAddObligation.Validated += new System.EventHandler(this.btnAddObligation_Validated);
             // 
             // label2
             // 

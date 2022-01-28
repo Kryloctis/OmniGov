@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Helper.MessageBoxConfirmCancel(""))
+            if (Helper.MessageBoxConfirmCancel("Confirm obligations that has been set?"))
             {
                 _uc.dtObligations.Rows.Clear();
 
@@ -69,6 +69,9 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
                         _uc.dtObligations.Rows.Add(dr.ItemArray);
                 }
 
+                Helper.MessageBoxSuccess("Obligation successfully added.");
+
+                _uc.SetObligationLabel();
                 this.Close();
             }
             
