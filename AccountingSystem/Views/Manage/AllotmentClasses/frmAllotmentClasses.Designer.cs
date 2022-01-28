@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(458, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(489, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -189,6 +189,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.MinimizeBox = false;
             this.Name = "frmAllotmentClasses";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage Allotment Classes";
             this.Load += new System.EventHandler(this.frmAllotmentClasses_Load);
