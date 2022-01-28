@@ -196,7 +196,11 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal void SetDeductionLabel()
         {
+            foreach (DataRow row in dtDeductions.Rows)
+                totalDeduction += Convert.ToDecimal(row[1].ToString());
+
             btnAddDeductions.Text = $"({totalDeduction:N2}) total deductions.";
+            totalDeduction = 0;
         }
 
         #region Validations

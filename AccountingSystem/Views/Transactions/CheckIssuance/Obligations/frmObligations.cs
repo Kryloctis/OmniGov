@@ -2,14 +2,12 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
-
 namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
+
 {
     public partial class frmObligations : Form
     {
         private readonly ucRCI _uc;
-
-        DataTable dtObligations = new();
 
 
         public frmObligations(ucRCI uc)
@@ -39,13 +37,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            bool hasRowSelected = Convert.ToBoolean(dgObligation.Rows.Count != 0);
-            
-            if (hasRowSelected)
-            {
-                foreach (DataGridViewRow row in dgObligation.SelectedRows)
-                    dgObligation.Rows.Remove(row);
-            }
+            foreach (DataGridViewRow row in dgObligation.SelectedRows)
+                dgObligation.Rows.Remove(row);
         }
 
         private void dgObligation_SelectionChanged(object sender, EventArgs e)

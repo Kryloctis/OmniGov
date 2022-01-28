@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void frmDeductions_Load(object sender, EventArgs e)
         {
-            CreateDatagridColumn();
+            HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -59,16 +59,11 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void AddToList()
         {
-            dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value.ToString("N2"));
-            HelperLoadRecords.RCIDeductionsDatagridview(dtDeductions, dgDeductions);
+            _uc.dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value.ToString("N2"));
+            HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
-        private void CreateDatagridColumn()
-        {
-            dtDeductions.Columns.Add("Description");
-            dtDeductions.Columns.Add("Amount");
-
-        }
+  
 
         #region Validations
 
@@ -108,22 +103,11 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
             {
-                _uc.dtDeductions.Rows.Clear();
-
-                if (dtDeductions.Rows.Count != 0)
-                {
-                    foreach (DataRow dr in dtDeductions.Rows)
-                    {
-                        _uc.totalDeduction += Convert.ToDecimal(Convert.ToDecimal(dr.ItemArray[1]));
-                        _uc.dtDeductions.Rows.Add(dr.ItemArray[0], Convert.ToDecimal(dr.ItemArray[1]));
-                    }
-                }
-
-                Helper.MessageBoxSuccess("Deduction/s successfully added.");
-
                 _uc.SetDeductionLabel();
+
                 this.Close();
             }
+
         }
     }
 }

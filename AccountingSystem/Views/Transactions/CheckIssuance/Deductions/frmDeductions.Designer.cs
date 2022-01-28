@@ -227,10 +227,10 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         internal System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgDeductions;
         private System.Windows.Forms.ErrorProvider epDescription;
         private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.Button btnRemoveDeductions;
         private System.Windows.Forms.Button btnConfirmDeductions;
+        internal System.Windows.Forms.DataGridView dgDeductions;
     }
 }

@@ -7,21 +7,39 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RCIDeductionsRepository : IRCIDeductions
+    public class RCIDeductionsRepository : IRCIDeductionsRepository
     {
+
+        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly string tableName = "rci_deductions";
+
+        public RCIDeductionsRepository(IDbGenericCommands dbGenericCommands)
+        {
+            _dbGenericCommands = dbGenericCommands;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<RCIObligationsModel> entityList)
+        public bool Delete(List<RCIDeductionsModel> entityList)
         {
             throw new NotImplementedException();
         }
 
         public DataTable GetDeductionsByRCIId(int rciId)
         {
-            throw new NotImplementedException();
+           
+            var parameter = new object[][] {
+                new object[] {"@rciId", DbType.Int32, rciId}
+            };
+
+            string query = $"SELECT description, amount FROM {tableName} WHERE rci_id = @rciId";
+            var dtRCIDeduction = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dtRCIDeduction, parameter);
+
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -44,12 +62,12 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RCIObligationsModel entity)
+        public bool Insert(RCIDeductionsModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(RCIObligationsModel entity)
+        public bool Update(RCIDeductionsModel entity)
         {
             throw new NotImplementedException();
         }

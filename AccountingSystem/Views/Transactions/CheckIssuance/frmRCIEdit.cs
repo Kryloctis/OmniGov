@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using System.Data;
 
@@ -44,15 +45,15 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                frmObligations frmObligations = new(uc);
+                frmDeductions frmDeductions = new(uc);
 
-                var rciObligationsRepo = Factory.RCIObligationsRepository();
-                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
+                var rciDeductionRepo = Factory.RCIDeductionsRepository();
+                var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(uc.Id);
 
-                foreach (DataRow row in dtRCIObligations.Rows)
-                    uc.dtObligations.Rows.Add(row[0].ToString());
+                foreach (DataRow row in dtRCIDeductions.Rows)
+                    uc.dtDeductions.Rows.Add(row[0].ToString(), row[1].ToString());
 
-                HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
+                HelperLoadRecords.RCIDeductionsDatagridview(uc.dtDeductions, frmDeductions.dgDeductions);
             }
             catch (Exception)
             {
@@ -103,7 +104,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
 
-
         private void frmRCIEdit_Load(object sender, EventArgs e)
         {
             uc.LoadFunds();
@@ -112,6 +112,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             LoadSelectedValue();
             LoadRCIObligations();
             LoadRCIDeductions();
+
+            uc.SetObligationLabel();
+            uc.SetDeductionLabel();
         }
 
 

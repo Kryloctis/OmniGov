@@ -101,15 +101,16 @@ namespace AccountingSystem.Views.Transactions.RCI
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
 
                 string deductionDescription = String.Empty; 
-                decimal totalDeduction = 0;
+                decimal deductionAmount = 0;
 
 
                 foreach (DataRow row in uc.dtDeductions.Rows)
                 {
                     deductionDescription = row[0].ToString();
-                    totalDeduction = Convert.ToDecimal(row[1].ToString());
+                    deductionAmount = Convert.ToDecimal(row[1].ToString());
+                    uc.totalDeduction += deductionAmount;
 
-                    Factory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, totalDeduction);
+                    Factory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, deductionAmount);
                 } 
             }
             catch (Exception)

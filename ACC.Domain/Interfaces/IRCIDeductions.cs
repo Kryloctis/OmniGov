@@ -6,7 +6,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRCIDeductions : IRepository<RCIObligationsModel>
+    public interface IRCIDeductionsRepository : IRepository<RCIDeductionsModel>
     {
         DataTable GetDeductionsByRCIId(int rciId);
     }
