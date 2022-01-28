@@ -93,13 +93,13 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                     }
                 }
 
-                var dictCertifiedCorrectSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Daily Cash Position Report");
+                var dictCertifiedCorrectSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Daily Cash Position Report");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
 
-                var dictNotedSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Noted", "Daily Cash Position Report");
+                var dictNotedSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Noted", "Daily Cash Position Report");
                 string notedSignatory = string.Empty;
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);

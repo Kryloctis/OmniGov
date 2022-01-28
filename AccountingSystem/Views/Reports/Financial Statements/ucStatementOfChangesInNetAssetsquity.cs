@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Statement of Changes in Assets/Equity");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Statement of Changes in Assets/Equity");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

@@ -198,7 +198,7 @@ namespace ACC.Data
             }
         }
 
-        public Dictionary<string, string> GetSignatoryByReferenceAndDocumentName(string reference, string documentName)
+        public Dictionary<string, string> GetSignatoryBy_Reference_DocumentName(string reference, string documentName)
         {
             try
             {

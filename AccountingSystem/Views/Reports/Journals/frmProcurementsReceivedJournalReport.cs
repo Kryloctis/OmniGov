@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Reports.Journals
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Procurement Received Journal");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

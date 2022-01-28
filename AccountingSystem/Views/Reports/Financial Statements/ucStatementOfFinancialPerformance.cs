@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Statement of Financial Performance");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Statement of Financial Performance");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
