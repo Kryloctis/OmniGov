@@ -386,7 +386,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadFunds();
                 LoadAllotmentClasses();
                 mskYear.Text = dtDateIssued.Value.Year.ToString();
-                Helper.DatagridDefaultStyle(dgAllotmentRelease, true);
+                Helper.DatagridFullRowSelectStyle(dgAllotmentRelease, true);
 
 
                 //FPP

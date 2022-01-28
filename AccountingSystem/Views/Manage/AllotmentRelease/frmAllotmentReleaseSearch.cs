@@ -151,5 +151,10 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LoadAllotmentRelease();
 
         }
+
+        private void dtDateIssued_ValueChanged(object sender, EventArgs e)
+        {
+            LoadAllotmentRelease();
+        }
     }
 }
