@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             {
                 Cursor = Cursors.WaitCursor;
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "SAAOB");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "SAAOB");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

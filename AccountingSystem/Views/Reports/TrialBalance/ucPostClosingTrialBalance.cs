@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Post Trial Balance");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Post Trial Balance");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Reports.JEV
             try
             {
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Journal Entry Voucher");
+                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
 
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatory_title)
                 {

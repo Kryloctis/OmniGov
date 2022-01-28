@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     return;
                 }
 
-                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Department Head", "Report of Check Issued");
+                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
 
 
-                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Administrative Officer", "Report of Check Issued");
+                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
                 string administrativeOfficerSignatory = string.Empty;
                 string administrativeOfficerSignatoryTitle = string.Empty;
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
