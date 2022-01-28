@@ -110,7 +110,7 @@ namespace AccountingSystem
             this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
             this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
             this.tabPageSCNAE = new System.Windows.Forms.TabPage();
-            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
+            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
             this.tabPageSCF = new System.Windows.Forms.TabPage();
             this.tabPageSCBAA = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -1442,7 +1442,7 @@ namespace AccountingSystem
         private System.Windows.Forms.TabPage tabPageSFPerformance;
         private Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance ucStatementOfFinancialPerformance1;
         private System.Windows.Forms.TabPage tabPageSCNAE;
-        private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity ucStatementOfChangesInNetAssetsquity1;
+        private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsquity1;
         private System.Windows.Forms.TabPage tabPageSCF;
         private System.Windows.Forms.TabPage tabPageSCBAA;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;

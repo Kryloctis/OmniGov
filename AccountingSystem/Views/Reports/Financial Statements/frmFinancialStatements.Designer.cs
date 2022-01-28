@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
             this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
             this.tabPageSCNAE = new System.Windows.Forms.TabPage();
-            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsquity();
+            this.ucStatementOfChangesInNetAssetsquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
             this.tabPageSCF = new System.Windows.Forms.TabPage();
             this.tabPageSCBAA = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -270,6 +270,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         private System.Windows.Forms.RadioButton radSCF;
         private System.Windows.Forms.RadioButton radSCNAE;
         private System.Windows.Forms.RadioButton radSCBAA;
-        private ucStatementOfChangesInNetAssetsquity ucStatementOfChangesInNetAssetsquity1;
+        private ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsquity1;
     }
 }
