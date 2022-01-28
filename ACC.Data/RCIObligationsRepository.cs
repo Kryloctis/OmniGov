@@ -52,31 +52,24 @@ namespace ACC.Data
 
         public bool DeleteRecordsByRCIId(int rcidId)
         {
-            try
+           
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+
+                var parameters = new object[][]
                 {
-                    //_obligationAccountRepository.DeleteByObligationRequestId(obligationRequestId);
-
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Int32, rcidId }
-                    };
-
-                    string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
-
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-
-
-                    scope.Complete();
-                    return true;
+                    new object[] { "@id", DbType.Int32, rcidId }
                 };
-            }
-            catch (Exception)
-            {
-                throw;
-            }
 
+                string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
+
+                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                scope.Complete();
+                return true;
+            };
+           
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

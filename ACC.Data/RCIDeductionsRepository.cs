@@ -28,6 +28,26 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool DeleteRecordsByRCIId(int rcidId)
+        {
+            using (var scope = new TransactionScope())
+            {
+
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, rcidId }
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE rci_id = @id";
+
+                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                scope.Complete();
+                return true;
+            };
+        }
+
         public DataTable GetDeductionsByRCIId(int rciId)
         {
            

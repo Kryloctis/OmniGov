@@ -152,6 +152,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obligations No/s";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmObligations_FormClosing);
             this.Load += new System.EventHandler(this.frmObligations_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

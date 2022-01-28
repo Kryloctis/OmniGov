@@ -120,27 +120,42 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void UpdateRCIObligation()
         {
-            //var rciObligationRepo = Factory.RCIObligationsRepository();
-            //var deleteSuccess = rciObligationRepo.DeleteRecordsByRCIId(uc.Id);
+            var deleteResult = Factory.RCIObligationsRepository().DeleteRecordsByRCIId(uc.Id);
+       
+            if (deleteResult)
+            {
+                short rcid = (short)uc.Id;
+                string obligationNo = String.Empty;
 
-            //if (deleteSuccess)
-            //{
-            //    short rcid = (short)uc.Id;
-            //    string obligationNo = String.Empty;
-
-            //    foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
-            //    {
-            //        obligationNo = item.Cells["obligation_no"].Value.ToString();
-            //        Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
-            //    }
-            //}
+                foreach (DataRow row in uc.dtObligations.Rows)
+                {
+                    obligationNo = row[0].ToString();
+                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                }
+            }
         }
 
-        private bool SaveData()
+        private void UpdateRCIDeductions()
+        {
+            var deleteResult = Factory.RCIDeductionsRepository().DeleteRecordsByRCIId(uc.Id);
+
+            if (deleteResult)
+            {
+                short rcid = (short)uc.Id;
+                foreach (DataRow row in uc.dtDeductions.Rows)
+                {
+                    string description = row[0].ToString();
+                    decimal amount = Convert.ToDecimal(row[1].ToString());
+                    Factory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
+                }
+            }
+        }
+
+
+        private bool UpdateData()
         {
             try
             {
-                var uc = ucrci1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -173,14 +188,16 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (UpdateData())
             {
                 UpdateRCIObligation();
+                UpdateRCIDeductions();
                 Helper.MessageBoxSuccess("Account has been updated.");
                 _frmRCI.LoadRecords();
                 this.Close();
             }
         }
 
+  
     }
 }

@@ -57,5 +57,10 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
                 this.Close();
             }
         }
+
+        private void frmObligations_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _uc.SetObligationLabel();
+        }
     }
 }

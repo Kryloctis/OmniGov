@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface IRCIDeductionsRepository : IRepository<RCIDeductionsModel>
     {
         DataTable GetDeductionsByRCIId(int rciId);
+
+        bool DeleteRecordsByRCIId(int rcidId);
     }
 }
