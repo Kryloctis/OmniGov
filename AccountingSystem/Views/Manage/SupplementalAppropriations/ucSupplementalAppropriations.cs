@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations
@@ -21,7 +15,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             InitializeComponent();
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             nudAmount.Value = 0;
             txtRemarks.Text = string.Empty;
@@ -37,11 +31,11 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private bool AmountIsZero() 
+        private bool AmountIsZero()
         {
             try
             {
-                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text)) 
+                if (nudAmount.Value == 0 && !string.IsNullOrEmpty(nudAmount.Text))
                 {
                     epAmount.SetError(nudAmount, "Valuable amount is required.");
                     return true;
@@ -78,12 +72,27 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.ClearErrorTextBox(epRemarks, txtRemarks);
         }
 
-        private void ucSupplementalAppropriations_Load(object sender, EventArgs e)
+        private void SetDateEntryFilters()
         {
-            if (!DesignMode) 
+            try
             {
                 dtDateEntry.MinDate = dateEntry;
+
+                var dictBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                bool isContinuing = Convert.ToBoolean(Convert.ToByte(dictBudgetAppropriations["continuing"]));
+
+                if (!isContinuing)
+                    dtDateEntry.MaxDate = dtDateEntry.MaxDate = new DateTime(dateEntry.Year, 12, DateTime.DaysInMonth(dateEntry.Year, 12));
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void ucSupplementalAppropriations_Load(object sender, EventArgs e)
+        {
+            SetDateEntryFilters();
         }
     }
 }
