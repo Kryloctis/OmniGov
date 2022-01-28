@@ -59,10 +59,7 @@ namespace AccountingSystem
 
         private void LoadLoggedInUser()
         {
-            string prefix = userDict["prefix"];
-            string suffix = userDict["suffix"];
-
-            lblUserFullName.Text = $"Welcome: {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {userDict["first_name"]} {userDict["mid_initial"]}. {userDict["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+            lblUserFullName.Text = $"Welcome: {userDict["user_full_name"]}";
             lblUserRole.Text = userDict["role_name"];
         }
 

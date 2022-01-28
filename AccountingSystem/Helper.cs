@@ -14,7 +14,8 @@ namespace AccountingSystem
             form.Icon = Properties.Resources.accounting;
         }
 
-        // apply the default styling of the datagridview
+        #region DataGrid Default Styles
+
         public static void DatagridDefaultStyle(DataGridView dgv, Boolean Fill = false)
         {
             dgv.AllowUserToAddRows = false;
@@ -104,6 +105,8 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        #endregion
+
         public static Dictionary<string, string> LGUDetails()
         {
             var lguDict = new Dictionary<string, string>
@@ -113,7 +116,6 @@ namespace AccountingSystem
 
             return lguDict;
         }
-
 
         public static Color StatusColor(string status)
         {
@@ -137,18 +139,52 @@ namespace AccountingSystem
             }
         }
 
-        internal static Dictionary<string, dynamic> LoggedInUserData()
+        public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
+            var dictUser = new Dictionary<string, dynamic>();
             try
             {
-                return Factory.UsersRepository().GetViewRecordById(UserId);
+                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
+
+                string prefix = dictUser["prefix"];
+                string suffix = dictUser["suffix"];
+
+
+                string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+                dictUser.Add("user_full_name", userFullName);
+
+                return dictUser;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return dictUser;
+        }
+
+        internal static Dictionary<string, dynamic> LoggedInUserData()
+        {
+            var dictUser = new Dictionary<string, dynamic>();
+            try
+            {
+
+                dictUser = Factory.UsersRepository().GetViewRecordById(UserId);
+                string prefix = dictUser["prefix"];
+                string suffix = dictUser["suffix"];
+
+
+                string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+                dictUser.Add("user_full_name", userFullName);
+
+                return dictUser;
+
             }
             catch (Exception ex)
             {
                 MessageBoxError(ex.Message);
             }
 
-            return new Dictionary<string, dynamic>();
+            return dictUser;
         }
 
 
