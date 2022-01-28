@@ -107,30 +107,19 @@ namespace AccountingSystem.Views.Reports.JEV
             }
         }
 
+        private void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatory_title)
+        {
+            if (dictSignatory.Count > 0)
+            {
+                signatoryName = dictSignatory["signatories_full_name"];
+                signatory_title = dictSignatory["signatories_title"];
+            }
+        }
+
         private void LoadReport(LocalReport report)
         {
             try
             {
-
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Journal Entry Voucher");
-
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatory_title)
-                {
-                    if (dictSignatory.Count > 0)
-                    {
-                        string prefix = dictSignatory["signatories_prefix"].ToString();
-                        string firstName = dictSignatory["signatories_first_name"].ToString();
-                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                        string lastName = dictSignatory["signatories_last_name"].ToString();
-                        string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                        signatory = signatoryName;
-                        signatory_title = dictSignatory["signatories_title"];
-                    }
-                }
-
                 if (_jevId != 0)
                 {
                     Cursor.Current = Cursors.WaitCursor;
@@ -141,6 +130,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     var CertifiedBySignatory = string.Empty;
                     var CertifiedBysignatoryTitle = string.Empty;
 
+                    var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
                     ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
 
                     var preparedByData = Helper.LoggedInUserData();

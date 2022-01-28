@@ -408,7 +408,7 @@ namespace ACC.Data
                    $"allotment_class_id = @allotment_class_id " +
                    $"AND date_entry <= @date_entry " +
                    $"AND year = @year AND funds_id = @funds_id " +
-                   $"GROUP BY general_ledger_accounts_id";
+                   $"GROUP BY id";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);

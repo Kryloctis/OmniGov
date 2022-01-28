@@ -67,10 +67,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 53);
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 63);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 430);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 420);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             // 
@@ -253,8 +253,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnRealignment});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1201, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1201, 60);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 

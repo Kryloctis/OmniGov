@@ -114,6 +114,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(121, 23);
             this.dtDateIssued.TabIndex = 10;
+            this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             // 
             // cmbxAllotmentClasses
             // 

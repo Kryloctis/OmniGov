@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 string verificationSignatory = string.Empty;
                 string verificationSignatoryTitle = string.Empty;
 
-                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

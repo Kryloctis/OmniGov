@@ -12,7 +12,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByOffice(string office);
 
-        Dictionary<string, string> GetSignatoryByReferenceAndDocumentName(string reference, string documentName);
+        Dictionary<string, string> GetSignatoryBy_Reference_DocumentName(string reference, string documentName);
 
         bool DeleteBySignatoryId(int signatoryId);
 

@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dgObligationRequests.Columns["obligation_amount"].DefaultCellStyle.Format = "N2";
 
             dgObligationRequests.Columns["budget_appropriation_id"].Visible = false;
-            Helper.DatagridDefaultStyle(dgObligationRequests, true);
+            Helper.DatagridFullRowSelectStyle(dgObligationRequests, true);
         }
 
         internal void EnableDisableComponents(bool enableComponents)

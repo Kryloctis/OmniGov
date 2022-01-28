@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
 
-                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryByReferenceAndDocumentName("Certified Correct", "Report of General Collections ");
+                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Report of General Collections ");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

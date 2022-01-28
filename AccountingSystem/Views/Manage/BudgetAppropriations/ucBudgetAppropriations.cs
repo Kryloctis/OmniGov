@@ -303,6 +303,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
                 txtYear.Text = year.ToString();
                 dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+                dtDateEntry.MinDate = new DateTime(year, 1, 1);
+
 
                 LoadOthersFPPByFPPIdCombobox();
                 LoadAccounts();

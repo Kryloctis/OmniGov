@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    partial class ucStatementOfChangesInNetAssetsquity
+    partial class ucStatementOfChangesInNetAssetsEquity
     {
         /// <summary> 
         /// Required designer variable.
