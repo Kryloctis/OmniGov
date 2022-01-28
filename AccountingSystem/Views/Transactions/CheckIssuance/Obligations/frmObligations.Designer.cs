@@ -30,20 +30,20 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddObligations = new System.Windows.Forms.Button();
             this.txtObno = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnRemoveObligations = new System.Windows.Forms.Button();
             this.dgObligation = new System.Windows.Forms.DataGridView();
-            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnConfirmObligation = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgObligation)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnAdd);
+            this.groupBox1.Controls.Add(this.btnAddObligations);
             this.groupBox1.Controls.Add(this.txtObno);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -53,22 +53,23 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // btnAdd
+            // btnAddObligations
             // 
-            this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(300, 38);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(64, 23);
-            this.btnAdd.TabIndex = 19;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddObligations.Enabled = false;
+            this.btnAddObligations.Location = new System.Drawing.Point(300, 38);
+            this.btnAddObligations.Name = "btnAddObligations";
+            this.btnAddObligations.Size = new System.Drawing.Size(64, 23);
+            this.btnAddObligations.TabIndex = 19;
+            this.btnAddObligations.Text = "Add";
+            this.btnAddObligations.UseVisualStyleBackColor = true;
+            this.btnAddObligations.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtObno
             // 
             this.txtObno.FormattingEnabled = true;
             this.txtObno.Location = new System.Drawing.Point(97, 13);
             this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtObno.MaxLength = 15;
             this.txtObno.Name = "txtObno";
             this.txtObno.Size = new System.Drawing.Size(267, 21);
             this.txtObno.TabIndex = 18;
@@ -95,17 +96,17 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List";
             // 
-            // btnRemove
+            // btnRemoveObligations
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Enabled = false;
-            this.btnRemove.Location = new System.Drawing.Point(303, 255);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(64, 23);
-            this.btnRemove.TabIndex = 20;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemoveObligations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveObligations.Enabled = false;
+            this.btnRemoveObligations.Location = new System.Drawing.Point(303, 255);
+            this.btnRemoveObligations.Name = "btnRemoveObligations";
+            this.btnRemoveObligations.Size = new System.Drawing.Size(64, 23);
+            this.btnRemoveObligations.TabIndex = 20;
+            this.btnRemoveObligations.Text = "Remove";
+            this.btnRemoveObligations.UseVisualStyleBackColor = true;
+            this.btnRemoveObligations.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // dgObligation
             // 
@@ -117,28 +118,29 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.dgObligation.TabIndex = 0;
             this.dgObligation.SelectionChanged += new System.EventHandler(this.dgObligation_SelectionChanged);
             // 
-            // btnConfirm
+            // btnConfirmObligation
             // 
-            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConfirm.Location = new System.Drawing.Point(11, 254);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(64, 23);
-            this.btnConfirm.TabIndex = 22;
-            this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            this.btnConfirm.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnConfirmObligation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConfirmObligation.Enabled = false;
+            this.btnConfirmObligation.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfirmObligation.Location = new System.Drawing.Point(11, 254);
+            this.btnConfirmObligation.Name = "btnConfirmObligation";
+            this.btnConfirmObligation.Size = new System.Drawing.Size(64, 23);
+            this.btnConfirmObligation.TabIndex = 22;
+            this.btnConfirmObligation.Text = "Confirm";
+            this.btnConfirmObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConfirmObligation.UseVisualStyleBackColor = true;
+            this.btnConfirmObligation.Click += new System.EventHandler(this.btnConfirmObligation_Click);
             // 
             // frmObligations
             // 
-            this.AcceptButton = this.btnAdd;
+            this.AcceptButton = this.btnAddObligations;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(380, 294);
-            this.Controls.Add(this.btnConfirm);
-            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnConfirmObligation);
+            this.Controls.Add(this.btnRemoveObligations);
             this.Controls.Add(this.dgObligation);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -150,6 +152,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Obligations No/s";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmObligations_FormClosing);
             this.Load += new System.EventHandler(this.frmObligations_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -161,12 +164,12 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddObligations;
         internal System.Windows.Forms.ComboBox txtObno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgObligation;
-        private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button btnRemoveObligations;
+        private System.Windows.Forms.Button btnConfirmObligation;
+        internal System.Windows.Forms.DataGridView dgObligation;
     }
 }

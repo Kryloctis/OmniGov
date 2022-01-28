@@ -72,9 +72,9 @@ namespace AccountingSystem.Views.Manage.Receipts
                 {
                     Id = uc.Id,
                     AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
-                    Rfrom = int.Parse(uc.txtORFrom.Text.Trim()),
-                    Rto = int.Parse(uc.txtORTo.Text.Trim()),
-                    Rdate = uc.dtpReceivedDate.Value,
+                    SerialNoFrom = int.Parse(uc.txtORFrom.Text.Trim()),
+                    SerialNoTo = int.Parse(uc.txtORTo.Text.Trim()),
+                    ReceiptDate = uc.dtpReceivedDate.Value,
                     Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
                     Remarks = uc.txtRemark.Text.Trim(),
                     UserId = UserId

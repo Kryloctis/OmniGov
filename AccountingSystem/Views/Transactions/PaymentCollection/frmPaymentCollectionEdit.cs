@@ -154,9 +154,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var uc = ucPaymentCollection1;
 
             if (uc.isCashTicket)
+            {
+                uc.CancelReceiptFieldValidations(true);
                 UpdateCashTickets();
+            }
+
             else
+            {
+                uc.CancelCashTicketFieldValidations(true);
                 UpdateReceipts();
+            }
         }
 
         private void UpdateCashTickets()

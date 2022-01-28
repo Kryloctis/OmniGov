@@ -14,18 +14,19 @@ namespace AccountingSystem.Views.Manage.Receipts
             InitializeComponent();
             frmReceipts = _frmReceipts;
             UserId = Helper.UserId;
+
         }
 
         private void frmAccFormsAdd_Load(object sender, EventArgs e)
         {
-            ucForms1.LoadForms();
+            ucReceipts.LoadForms();
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucForms1;
+                var uc = ucReceipts;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -34,35 +35,16 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var receiptModel = new ReceiptsModel()
                 {
                     AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
-                    Rfrom = int.Parse(uc.txtORFrom.Text.Trim()),
-                    Rto = int.Parse(uc.txtORTo.Text.Trim()),
-                    Rdate = uc.dtpReceivedDate.Value,
+                    SerialNoFrom = int.Parse(uc.txtORFrom.Text.Trim()),
+                    SerialNoTo = int.Parse(uc.txtORTo.Text.Trim()),
+                    ReceiptDate = uc.dtpReceivedDate.Value,
                     Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
                     Remarks = uc.txtRemark.Text.Trim(),
                     UserId = UserId
                 };
 
                 var receiptRepository = Factory.ReceiptsRepository();
-
-                if (!uc.isTicket)
-                {
-                    var serialNoFrom = int.Parse(uc.txtORFrom.Text.Trim());
-                    var serialNoTo = int.Parse(uc.txtORTo.Text.Trim());
-
-                    if (serialNoFrom > serialNoTo)
-                    {
-                        Helper.MessageBoxError("Invalid OR Number.");
-                        return false;
-                    }
-                    else
-                    {
-                        return receiptRepository.Insert(receiptModel);
-                    }
-                }
-                else
-                {
-                    return receiptRepository.Insert(receiptModel);
-                }
+                return receiptRepository.Insert(receiptModel);
             }
             catch (Exception ex)
             {
@@ -78,10 +60,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
                 frmReceipts.LoadRecords();
-                ucForms1.ResetForm();
+                ucReceipts.ResetForm();
             }
         }
 
-     
+
     }
 }

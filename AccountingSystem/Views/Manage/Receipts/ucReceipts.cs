@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
@@ -19,22 +14,12 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int fromSerialNo = 0;
         internal int toSerialNo = 0;
         internal bool isTicket = false;
+
         public ucReceipts()
         {
             InitializeComponent();
         }
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[5];
-            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
-            errorArray[1] = errorProvider.GetError(txtORFrom);
-            errorArray[2] = errorProvider.GetError(txtORTo);
-            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
-            errorArray[4] = errorProvider.GetError(txtQuantity);
 
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
         internal void ResetForm()
         {
             AccId = 0;
@@ -64,6 +49,23 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
+
+
+        #region Validations
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[5];
+            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
+            errorArray[1] = errorProvider.GetError(txtORFrom);
+            errorArray[2] = errorProvider.GetError(txtORTo);
+            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
+            errorArray[4] = errorProvider.GetError(txtQuantity);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private void cmbforms_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form!");
@@ -73,6 +75,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
         }
+
 
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
@@ -92,18 +95,22 @@ namespace AccountingSystem.Views.Manage.Receipts
             Helper.ClearErrorTextBox(errorProvider, txtORFrom);
         }
 
-        private void txtto_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider, txtORTo);
-        }
-
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
             if (!isTicket)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORTo, "Receipt Number To!");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORTo, "Receipt Number To.");
+
+                if (Convert.ToInt32(txtORTo.Text.Trim()) <= Convert.ToInt32(txtORFrom.Text.Trim()))
+                {
+                    errorProvider.SetError(txtORTo, "Invalid Receipt Number.");
+                    e.Cancel = true;
+                }
             }
-            
+        }
+        private void txtto_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider, txtORTo);
         }
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
@@ -115,6 +122,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             Helper.ClearErrorTextBox(errorProvider, txtQuantity);
         }
+        #endregion
+
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -216,6 +225,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
             
         }
+
+
 
     }
 }

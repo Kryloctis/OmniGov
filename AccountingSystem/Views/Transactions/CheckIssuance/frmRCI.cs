@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
@@ -24,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {   
             _ = new frmRCIAdd(this).ShowDialog();
         }
-
+        
         private void frmRCI_Load(object sender, EventArgs e)
         {
             LoadRecords();
@@ -40,16 +34,16 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 lblRecordCount.Text = rciRepository.CountRecords().ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgRCI.Rows.Count > 0 && dgRCI.SelectedRows.Count > 0)
-            {
-                int rciId = int.Parse(dgRCI.SelectedCells[0].Value.ToString());
-                _ = new frmRCIEdit(this, rciId).ShowDialog();
-            }
+            int rciId = int.Parse(dgRCI.SelectedCells[0].Value.ToString());
+            _ = new frmRCIEdit(this, rciId).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

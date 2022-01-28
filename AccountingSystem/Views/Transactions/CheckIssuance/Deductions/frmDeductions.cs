@@ -1,31 +1,29 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.RCI;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 {
     public partial class frmDeductions : Form
     {
-
+        private readonly ucRCI _uc;
         DataTable dtDeductions = new();
 
 
-        public frmDeductions()
+        public frmDeductions(ucRCI uc)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgDeductions);
+
+            _uc = uc;
         }
 
         private void frmDeductions_Load(object sender, EventArgs e)
         {
-            CreateDatagridColumn();
+            HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -36,7 +34,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         private void dgDeductions_SelectionChanged(object sender, EventArgs e)
         {
             bool hasRowSelected = Convert.ToBoolean(dgDeductions.Rows.Count != 0);
-            btnRemove.Enabled = hasRowSelected;
+            btnRemoveDeductions.Enabled = hasRowSelected;
+            btnConfirmDeductions.Enabled = hasRowSelected;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -60,15 +59,11 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void AddToList()
         {
-            dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value);
-            HelperLoadRecords.RCIDeductionsDatagridview(dtDeductions, dgDeductions);
+            _uc.dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value.ToString("N2"));
+            HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
-        private void CreateDatagridColumn()
-        {
-            dtDeductions.Columns.Add("Description");
-            dtDeductions.Columns.Add("Amount");
-        }
+  
 
         #region Validations
 
@@ -101,8 +96,18 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
+
         #endregion
 
-  
+        private void btnConfirmDeductions_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
+            {
+                _uc.SetDeductionLabel();
+
+                this.Close();
+            }
+
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // ucPaymentCollection1
             // 
+            this.ucPaymentCollection1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucPaymentCollection1.Location = new System.Drawing.Point(0, -2);
             this.ucPaymentCollection1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucPaymentCollection1.Name = "ucPaymentCollection1";
@@ -85,6 +86,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // frmPaymentCollectionEdit
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;

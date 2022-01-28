@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label10 = new System.Windows.Forms.Label();
             this.cmbFPP = new System.Windows.Forms.ComboBox();
             this.txtdvno = new System.Windows.Forms.TextBox();
-            this.txtamount = new System.Windows.Forms.NumericUpDown();
+            this.nudNetAmount = new System.Windows.Forms.NumericUpDown();
             this.txtnature = new System.Windows.Forms.TextBox();
             this.cmbbank = new System.Windows.Forms.ComboBox();
             this.txtpayee = new System.Windows.Forms.TextBox();
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.epTotalDeductions = new System.Windows.Forms.ErrorProvider(this.components);
             this.epNetAmount = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.epObligations)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNetAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFund)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epBank)).BeginInit();
@@ -112,6 +112,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(254, 23);
             this.cmbFPP.TabIndex = 5;
+            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
+            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
             // txtdvno
             // 
@@ -121,21 +123,26 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtdvno.Name = "txtdvno";
             this.txtdvno.Size = new System.Drawing.Size(254, 23);
             this.txtdvno.TabIndex = 1;
+            this.txtdvno.Validating += new System.ComponentModel.CancelEventHandler(this.txtdvno_Validating);
+            this.txtdvno.Validated += new System.EventHandler(this.txtdvno_Validated);
             // 
-            // txtamount
+            // nudNetAmount
             // 
-            this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(133, 337);
-            this.txtamount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtamount.Maximum = new decimal(new int[] {
+            this.nudNetAmount.DecimalPlaces = 2;
+            this.nudNetAmount.Location = new System.Drawing.Point(133, 337);
+            this.nudNetAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudNetAmount.Maximum = new decimal(new int[] {
             1316134911,
             2328,
             0,
             0});
-            this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(254, 23);
-            this.txtamount.TabIndex = 10;
-            this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudNetAmount.Name = "nudNetAmount";
+            this.nudNetAmount.Size = new System.Drawing.Size(254, 23);
+            this.nudNetAmount.TabIndex = 10;
+            this.nudNetAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudNetAmount.ThousandsSeparator = true;
+            this.nudNetAmount.Validating += new System.ComponentModel.CancelEventHandler(this.txtamount_Validating);
+            this.nudNetAmount.Validated += new System.EventHandler(this.txtamount_Validated);
             // 
             // txtnature
             // 
@@ -146,6 +153,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtnature.Name = "txtnature";
             this.txtnature.Size = new System.Drawing.Size(254, 67);
             this.txtnature.TabIndex = 8;
+            this.txtnature.Validating += new System.ComponentModel.CancelEventHandler(this.txtnature_Validating);
+            this.txtnature.Validated += new System.EventHandler(this.txtnature_Validated);
             // 
             // cmbbank
             // 
@@ -156,6 +165,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbbank.Name = "cmbbank";
             this.cmbbank.Size = new System.Drawing.Size(254, 23);
             this.cmbbank.TabIndex = 3;
+            this.cmbbank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbank_Validating);
+            this.cmbbank.Validated += new System.EventHandler(this.cmbbank_Validated);
             // 
             // txtpayee
             // 
@@ -165,6 +176,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtpayee.Name = "txtpayee";
             this.txtpayee.Size = new System.Drawing.Size(254, 23);
             this.txtpayee.TabIndex = 7;
+            this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
+            this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
             // 
             // label6
             // 
@@ -200,6 +213,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.txtcheckno.Name = "txtcheckno";
             this.txtcheckno.Size = new System.Drawing.Size(254, 23);
             this.txtcheckno.TabIndex = 4;
+            this.txtcheckno.Validating += new System.ComponentModel.CancelEventHandler(this.txtcheckno_Validating);
+            this.txtcheckno.Validated += new System.EventHandler(this.txtcheckno_Validated);
             // 
             // label12
             // 
@@ -219,6 +234,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbfund.Name = "cmbfund";
             this.cmbfund.Size = new System.Drawing.Size(254, 23);
             this.cmbfund.TabIndex = 2;
+            this.cmbfund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfund_Validating);
+            this.cmbfund.Validated += new System.EventHandler(this.cmbfund_Validated);
             // 
             // btnAddObligation
             // 
@@ -232,7 +249,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAddObligation.Text = "Click to add obligation no.";
             this.btnAddObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddObligation.UseVisualStyleBackColor = true;
-            this.btnAddObligation.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddObligation.Click += new System.EventHandler(this.btnAddObligation_Click);
+            this.btnAddObligation.Validating += new System.ComponentModel.CancelEventHandler(this.btnAddObligation_Validating);
+            this.btnAddObligation.Validated += new System.EventHandler(this.btnAddObligation_Validated);
             // 
             // label2
             // 
@@ -345,7 +364,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cmbFPP);
             this.Controls.Add(this.txtdvno);
-            this.Controls.Add(this.txtamount);
+            this.Controls.Add(this.nudNetAmount);
             this.Controls.Add(this.txtnature);
             this.Controls.Add(this.cmbbank);
             this.Controls.Add(this.txtpayee);
@@ -368,7 +387,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Size = new System.Drawing.Size(413, 370);
             this.Load += new System.EventHandler(this.ucRCI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epObligations)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNetAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epDVNo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epFund)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epBank)).EndInit();
@@ -390,7 +409,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.Label label10;
         internal System.Windows.Forms.ComboBox cmbFPP;
         internal System.Windows.Forms.TextBox txtdvno;
-        internal System.Windows.Forms.NumericUpDown txtamount;
+        internal System.Windows.Forms.NumericUpDown nudNetAmount;
         internal System.Windows.Forms.TextBox txtnature;
         internal System.Windows.Forms.ComboBox cmbbank;
         internal System.Windows.Forms.TextBox txtpayee;

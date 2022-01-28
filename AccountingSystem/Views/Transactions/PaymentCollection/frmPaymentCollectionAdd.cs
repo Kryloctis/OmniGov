@@ -120,12 +120,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             if (isFormCashTicket)
             {
-                CancelReceiptFieldValidations(true);
+                uc.CancelReceiptFieldValidations(true);
                 SaveCashTickets();
             }
             else
             {
-                CancelCashTicketFieldValidations(true);
+                uc.CancelCashTicketFieldValidations(true);
                 SaveReceipts();
             }
             
@@ -171,34 +171,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        private void CancelReceiptFieldValidations(bool cancelEvent)
-        {
-            if (cancelEvent)
-            {
-                uc.txtAmount.Validating -= new CancelEventHandler(uc.txtAmount_Validating);
-                uc.txtreceipt.Validating -= new CancelEventHandler(uc.txtreceipt_Validating);
-                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
-            }
-            else
-            {
-                uc.txtreceipt.Validating += new CancelEventHandler(uc.txtreceipt_Validating);
-                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
-            }
-        }
 
-        private void CancelCashTicketFieldValidations(bool cancelEvent) 
-        {
-            if (cancelEvent)
-            {
-                uc.txtCashTicketsAmount.Validating -= new CancelEventHandler(uc.txtCashTicketsAmount_Validating);
-                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-            }
-            else
-            {
-                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
-            }
-        }
 
         private void SaveReceipts()
         {

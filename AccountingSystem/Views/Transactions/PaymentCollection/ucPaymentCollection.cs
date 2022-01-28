@@ -533,5 +533,35 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
+
+        internal void CancelReceiptFieldValidations(bool cancelEvent)
+        {
+            if (cancelEvent)
+            {
+               txtAmount.Validating -= new CancelEventHandler(txtAmount_Validating);
+               txtreceipt.Validating -= new CancelEventHandler(txtreceipt_Validating);
+               txtpayee.Validating -= new CancelEventHandler(txtpayee_Validating);
+            }
+            else
+            {
+                txtreceipt.Validating += new CancelEventHandler(txtreceipt_Validating);
+                txtpayee.Validating += new CancelEventHandler(txtpayee_Validating);
+            }
+        }
+
+        internal void CancelCashTicketFieldValidations(bool cancelEvent)
+        {
+            if (cancelEvent)
+            {
+                txtCashTicketsAmount.Validating -= new CancelEventHandler(txtCashTicketsAmount_Validating);
+                txtCashTicketQuantity.Validating -= new CancelEventHandler(txtCashTicketQuantity_Validating);
+            }
+            else
+            {
+                txtCashTicketQuantity.Validating += new CancelEventHandler(txtCashTicketQuantity_Validating);
+                txtpayee.Validating += new CancelEventHandler(txtpayee_Validating);
+            }
+        }
+
     }
 }
