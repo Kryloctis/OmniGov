@@ -40,6 +40,26 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
         }
 
+        private void LoadRCIDeductions()
+        {
+            try
+            {
+                frmObligations frmObligations = new(uc);
+
+                var rciObligationsRepo = Factory.RCIObligationsRepository();
+                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
+
+                foreach (DataRow row in dtRCIObligations.Rows)
+                    uc.dtObligations.Rows.Add(row[0].ToString());
+
+                HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private void LoadSelectedValue()
         {
             try
@@ -91,6 +111,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             LoadSelectedValue();
             LoadRCIObligations();
+            LoadRCIDeductions();
         }
 
 
