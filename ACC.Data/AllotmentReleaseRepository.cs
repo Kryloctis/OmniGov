@@ -532,7 +532,7 @@ namespace ACC.Data
                 new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND date_issued <= @date_issued AND (aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt)";
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND allotment_classes_id = @allotment_classes_id AND date_issued <= @date_issued AND (aro_no LIKE @searchTxt OR purpose LIKE  @searchTxt) GROUP BY allotment_release_id";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -615,7 +615,7 @@ namespace ACC.Data
 
         public string GetLeastAllotmentReleaseNumber()
         {
-            string query = $"SELECT COALESCE(LPAD(MAX(aro_no)+1, 3, '0'),'000') AS aro_no FROM {viewTableName}";
+            string query = $"SELECT COALESCE(LPAD(MAX(aro_no)+1, 3, '0'),'001') AS aro_no FROM {viewTableName}";
             return _mySqlGenericCommands.ExecuteScalar(query);
         }
     }
