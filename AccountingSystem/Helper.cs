@@ -157,7 +157,7 @@ namespace AccountingSystem
 
 
 
-                dictSignatoriesReferencedDocument.Add("signatory_full_name", signatoryName);
+                dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
             }
             catch (Exception ex)
             {
