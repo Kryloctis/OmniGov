@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
 
         internal short obligationNumberCount = 0;
-        internal decimal totalDeduction;
+        internal decimal totalDeduction = 0;
 
         internal DataTable dtObligations = new();
         internal DataTable dtDeductions = new();
@@ -98,6 +98,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             txtpayee.Clear();
             txtnature.Clear();
             nudNetAmount.Value = Convert.ToDecimal("0.00");
+
+            dtObligations.Rows.Clear();
+            dtDeductions.Rows.Clear();
+
+            btnAddObligation.Text = "Click to add obligation no.";
+            btnAddDeductions.Text = "Click to add deductions.";
         }
 
         internal void LoadFunds()
@@ -271,11 +277,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void cmbFPP_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epFpp, cmbFPP, "fpp.");
-            if (functionId <= 0)
-            {
-                epObligations.SetError(cmbFPP, "Please select fpp.");
-                e.Cancel = true;
-            }
         }
 
         private void cmbFPP_Validated(object sender, EventArgs e)
