@@ -378,9 +378,9 @@ namespace ACC.Data
                 {
                     new object[] { "@users_id", DbType.Int32, entity.UserId},
                     new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
-                    new object[] { "@receiptsfrom", DbType.Int32, entity.Rfrom},
-                    new object[] { "@receiptsto", DbType.Int32, entity.Rto},
-                    new object[] { "@received_date", DbType.Date, entity.Rdate},
+                    new object[] { "@receiptsfrom", DbType.Int32, entity.SerialNoFrom},
+                    new object[] { "@receiptsto", DbType.Int32, entity.SerialNoTo},
+                    new object[] { "@received_date", DbType.Date, entity.ReceiptDate},
                     new object[] { "@quantity", DbType.Int32, entity.Quantity},
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
@@ -418,9 +418,9 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, entity.Id},
                     new object[] { "@users_id", DbType.Int32, entity.UserId},
                     new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
-                    new object[] { "@receiptsfrom", DbType.Int32, entity.Rfrom},
-                    new object[] { "@receiptsto", DbType.Int32, entity.Rto},
-                    new object[] { "@received_date", DbType.Date, entity.Rdate},
+                    new object[] { "@receiptsfrom", DbType.Int32, entity.SerialNoFrom},
+                    new object[] { "@receiptsto", DbType.Int32, entity.SerialNoTo},
+                    new object[] { "@received_date", DbType.Date, entity.ReceiptDate},
                     new object[] { "@quantity", DbType.Int32, entity.Quantity},
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
