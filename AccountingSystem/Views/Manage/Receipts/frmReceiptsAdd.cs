@@ -43,26 +43,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var receiptRepository = Factory.ReceiptsRepository();
-
-                if (!uc.isTicket)
-                {
-                    var serialNoFrom = int.Parse(uc.txtORFrom.Text.Trim());
-                    var serialNoTo = int.Parse(uc.txtORTo.Text.Trim());
-
-                    if (serialNoFrom > serialNoTo)
-                    {
-                        Helper.MessageBoxError("Invalid OR Number.");
-                        return false;
-                    }
-                    else
-                    {
-                        return receiptRepository.Insert(receiptModel);
-                    }
-                }
-                else
-                {
-                    return receiptRepository.Insert(receiptModel);
-                }
+                return receiptRepository.Insert(receiptModel);
             }
             catch (Exception ex)
             {
@@ -82,6 +63,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
-     
+
     }
 }
