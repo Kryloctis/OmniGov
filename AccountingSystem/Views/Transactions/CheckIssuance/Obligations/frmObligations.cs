@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         private void txtObno_TextChanged(object sender, EventArgs e)
         {
             bool isTextBoxEmpty = !String.IsNullOrEmpty(txtObno.Text.Trim());
-            btnAdd.Enabled = isTextBoxEmpty;
+            btnAddObligations.Enabled = isTextBoxEmpty;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -53,8 +53,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         {
             bool hasRowSelected = Convert.ToBoolean(dgObligation.Rows.Count != 0);
 
-            btnRemove.Enabled = hasRowSelected;
-            btnConfirm.Enabled = hasRowSelected;
+            btnRemoveObligations.Enabled = hasRowSelected;
+            btnConfirmObligation.Enabled = hasRowSelected;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -74,7 +74,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
                 _uc.SetObligationLabel();
                 this.Close();
             }
-            
         }
     }
 }

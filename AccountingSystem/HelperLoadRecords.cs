@@ -785,7 +785,7 @@ namespace AccountingSystem
             datagrid.Columns[0].HeaderText = "Description";
             datagrid.Columns[1].HeaderText = "Amount";
 
-            datagrid.Columns[1].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[1].DefaultCellStyle.Format = "D2";
             datagrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 

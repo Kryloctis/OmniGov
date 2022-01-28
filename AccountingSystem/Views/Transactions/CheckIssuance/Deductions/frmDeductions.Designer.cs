@@ -31,17 +31,17 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnAddDeductions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnConfirmDeductions = new System.Windows.Forms.Button();
             this.dgDeductions = new System.Windows.Forms.DataGridView();
             this.epDescription = new System.Windows.Forms.ErrorProvider(this.components);
             this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRemoveDeductions = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnAdd);
+            this.groupBox1.Controls.Add(this.btnAddDeductions);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.nudAmount);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -65,16 +65,16 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Details ";
             // 
-            // btnAdd
+            // btnAddDeductions
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAdd.Location = new System.Drawing.Point(282, 88);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(59, 23);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddDeductions.Location = new System.Drawing.Point(282, 88);
+            this.btnAddDeductions.Name = "btnAddDeductions";
+            this.btnAddDeductions.Size = new System.Drawing.Size(59, 23);
+            this.btnAddDeductions.TabIndex = 2;
+            this.btnAddDeductions.Text = "Add";
+            this.btnAddDeductions.UseVisualStyleBackColor = true;
+            this.btnAddDeductions.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label1
             // 
@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.nudAmount.Size = new System.Drawing.Size(260, 22);
             this.nudAmount.TabIndex = 1;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudAmount.ThousandsSeparator = true;
             this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
             this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
@@ -131,7 +132,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnConfirmDeductions);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(7, 128);
             this.groupBox2.Name = "groupBox2";
@@ -139,6 +140,19 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             this.groupBox2.TabIndex = 32;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List";
+            // 
+            // btnConfirmDeductions
+            // 
+            this.btnConfirmDeductions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfirmDeductions.Enabled = false;
+            this.btnConfirmDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnConfirmDeductions.Location = new System.Drawing.Point(8, 141);
+            this.btnConfirmDeductions.Name = "btnConfirmDeductions";
+            this.btnConfirmDeductions.Size = new System.Drawing.Size(59, 23);
+            this.btnConfirmDeductions.TabIndex = 4;
+            this.btnConfirmDeductions.Text = "Confirm";
+            this.btnConfirmDeductions.UseVisualStyleBackColor = true;
+            this.btnConfirmDeductions.Click += new System.EventHandler(this.btnConfirmDeductions_Click);
             // 
             // dgDeductions
             // 
@@ -158,37 +172,26 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             this.epAmount.ContainerControl = this;
             // 
-            // btnRemove
+            // btnRemoveDeductions
             // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Enabled = false;
-            this.btnRemove.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnRemove.Location = new System.Drawing.Point(309, 269);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(59, 23);
-            this.btnRemove.TabIndex = 3;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(241, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Remove";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRemoveDeductions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveDeductions.Enabled = false;
+            this.btnRemoveDeductions.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnRemoveDeductions.Location = new System.Drawing.Point(309, 269);
+            this.btnRemoveDeductions.Name = "btnRemoveDeductions";
+            this.btnRemoveDeductions.Size = new System.Drawing.Size(59, 23);
+            this.btnRemoveDeductions.TabIndex = 3;
+            this.btnRemoveDeductions.Text = "Remove";
+            this.btnRemoveDeductions.UseVisualStyleBackColor = true;
+            this.btnRemoveDeductions.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // frmDeductions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(386, 309);
-            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnRemoveDeductions);
             this.Controls.Add(this.dgDeductions);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtDescription);
@@ -218,7 +221,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddDeductions;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.NumericUpDown nudAmount;
         internal System.Windows.Forms.TextBox txtDescription;
@@ -227,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         private System.Windows.Forms.DataGridView dgDeductions;
         private System.Windows.Forms.ErrorProvider epDescription;
         private System.Windows.Forms.ErrorProvider epAmount;
-        private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRemoveDeductions;
+        private System.Windows.Forms.Button btnConfirmDeductions;
     }
 }

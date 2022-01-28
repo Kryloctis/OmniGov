@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal decimal totalDeduction;
 
         internal DataTable dtObligations = new();
+        internal DataTable dtDeductions = new();
 
         public ucRCI()
         {
@@ -39,6 +40,9 @@ namespace AccountingSystem.Views.Transactions.RCI
                 cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
 
                 dtObligations.Columns.Add("obligation_no");
+
+                dtDeductions.Columns.Add("description");
+                dtDeductions.Columns.Add("amount");
             }
         }
 
@@ -69,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -80,8 +85,6 @@ namespace AccountingSystem.Views.Transactions.RCI
 
             return dtFPP;
         }
-
-
 
         internal void ResetForm()
         {
@@ -153,7 +156,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             cmbFPP.Text = value;
         }
 
-       
         internal void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbFPP.Text))
@@ -186,6 +188,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             btnAddObligation.Text = $"({obligationNumberCount}) obligation/s added.";
         }
 
+        internal void SetDeductionLabel()
+        {
+            btnAddDeductions.Text = $"({totalDeduction:N2}) total deductions.";
+        }
 
         #region Validations
         internal string GetFormErrors()
@@ -213,10 +219,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 epObligations.SetError(btnAddObligation, "Please enter an obligation number.");
                 e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
             }
 
         }

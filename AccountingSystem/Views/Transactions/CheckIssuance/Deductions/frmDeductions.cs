@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 {
     public partial class frmDeductions : Form
     {
-
+        private readonly ucRCI _uc;
         DataTable dtDeductions = new();
 
 
@@ -17,6 +17,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgDeductions);
+
+            _uc = uc;
         }
 
         private void frmDeductions_Load(object sender, EventArgs e)
@@ -32,7 +34,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         private void dgDeductions_SelectionChanged(object sender, EventArgs e)
         {
             bool hasRowSelected = Convert.ToBoolean(dgDeductions.Rows.Count != 0);
-            btnRemove.Enabled = hasRowSelected;
+            btnRemoveDeductions.Enabled = hasRowSelected;
+            btnConfirmDeductions.Enabled = hasRowSelected;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -56,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
         private void AddToList()
         {
-            dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value);
+            dtDeductions.Rows.Add(txtDescription.Text.Trim(), nudAmount.Value.ToString("N2"));
             HelperLoadRecords.RCIDeductionsDatagridview(dtDeductions, dgDeductions);
         }
 
@@ -64,6 +67,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             dtDeductions.Columns.Add("Description");
             dtDeductions.Columns.Add("Amount");
+
         }
 
         #region Validations
@@ -97,8 +101,29 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
+
         #endregion
 
-  
+        private void btnConfirmDeductions_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmCancel("Confirm deduction/s that has been set?"))
+            {
+                _uc.dtDeductions.Rows.Clear();
+
+                if (dtDeductions.Rows.Count != 0)
+                {
+                    foreach (DataRow dr in dtDeductions.Rows)
+                    {
+                        _uc.totalDeduction += Convert.ToDecimal(Convert.ToDecimal(dr.ItemArray[1]));
+                        _uc.dtDeductions.Rows.Add(dr.ItemArray[0], Convert.ToDecimal(dr.ItemArray[1]));
+                    }
+                }
+
+                Helper.MessageBoxSuccess("Deduction/s successfully added.");
+
+                _uc.SetDeductionLabel();
+                this.Close();
+            }
+        }
     }
 }
