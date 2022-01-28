@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
+﻿using System.Data;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -10,9 +7,8 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordsByAccountId(int Id,string month);
         DataTable GetRecords(int id);
-
         bool SaveRCIDVObligations(short rciId, string obligationNo);
-
+        bool SaveRCIDeductions(short rciId, string description, decimal amount);
         string GetRecentRCIId();
 
     }

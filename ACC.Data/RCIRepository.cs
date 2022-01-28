@@ -19,6 +19,7 @@ namespace ACC.Data
         private readonly string tblFCS = "functional_classification_services";
         private readonly string tblFC = "functional_classifications";
         private readonly string tableRCIObligations = "rci_obligations";
+        private readonly string tableRCIDeductions = "rci_deductions";
 
 
         private readonly string viewTableName = "view_rci";
@@ -311,27 +312,40 @@ namespace ACC.Data
 
         public bool SaveRCIDVObligations(short rciId, string obligationNo)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@rciId", DbType.Int16, rciId},
-                    new object[] { "@obligationNo", DbType.String, obligationNo},
-                };
+                new object[] { "@rciId", DbType.Int16, rciId},
+                new object[] { "@obligationNo", DbType.String, obligationNo},
+            };
 
-                string query = $"INSERT INTO {tableRCIObligations} " +
-                                $"(rci_id, obligation_no) " +
-                                $"VALUES(" +
-                                $"@rciId, " +
-                                $"@obligationNo)";
+            string query = $"INSERT INTO {tableRCIObligations} " +
+                            $"(rci_id, obligation_no) " +
+                            $"VALUES(" +
+                            $"@rciId, " +
+                            $"@obligationNo)";
 
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
+
+        public bool SaveRCIDeductions(short rciId, string description, decimal amount)
+        {
+            var parameters = new object[][]
+            {
+                        new object[] { "@rciId", DbType.Int16, rciId},
+                        new object[] { "@obligationNo", DbType.String, description},
+                        new object[] { "@deductionAmount", DbType.Decimal, amount},
+            };
+
+            string query = $"INSERT INTO {tableRCIDeductions} " +
+                            $"(rci_id, description, amount) " +
+                            $"VALUES(" +
+                            $"@rciId, " +
+                            $"@obligationNo, " +
+                            $"@deductionAmount)";
+
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
 
         public string GetRecentRCIId()
         {
@@ -346,5 +360,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+       
     }
 }

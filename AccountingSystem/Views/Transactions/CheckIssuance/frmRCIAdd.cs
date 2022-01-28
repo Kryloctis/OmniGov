@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
@@ -75,15 +76,16 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                //string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
-                //short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
-                //string obligationNo = String.Empty;
+                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
 
-                //foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
-                //{
-                //    obligationNo = item.Cells["obligation_no"].Value.ToString();
-                //    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
-                //}
+                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
+                string obligationNo = String.Empty;
+                
+                foreach (DataRow row in uc.dtObligations.Rows)
+                {
+                    obligationNo = row["obligation_no"].ToString();
+                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                }
             }
             catch (Exception)
             {
@@ -95,15 +97,20 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                //string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
-                //short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
-                //string obligationNo = String.Empty;
+                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
 
-                //foreach (DataGridViewRow item in uc.dgObligationNoList.Rows)
-                //{
-                //    obligationNo = item.Cells["obligation_no"].Value.ToString();
-                //    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
-                //}
+                string deductionDescription = String.Empty; 
+                decimal totalDeduction = 0;
+
+
+                foreach (DataRow row in uc.dtDeductions.Rows)
+                {
+                    deductionDescription = row[0].ToString();
+                    totalDeduction = Convert.ToDecimal(row[1].ToString());
+
+                    Factory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, totalDeduction);
+                } 
             }
             catch (Exception)
             {

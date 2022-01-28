@@ -140,6 +140,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.nudNetAmount.Size = new System.Drawing.Size(254, 23);
             this.nudNetAmount.TabIndex = 10;
             this.nudNetAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudNetAmount.ThousandsSeparator = true;
             this.nudNetAmount.Validating += new System.ComponentModel.CancelEventHandler(this.txtamount_Validating);
             this.nudNetAmount.Validated += new System.EventHandler(this.txtamount_Validated);
             // 
