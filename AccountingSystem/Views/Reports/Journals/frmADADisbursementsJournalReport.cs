@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Reports.Journals
         {
             if (dictSignatory.Count > 0)
             {
-                signatoryName = dictSignatory["signatory_full_name"];
+                signatoryName = dictSignatory["signatories_full_name"];
                 signatoryTitle = dictSignatory["signatories_title"];
             }
         }

@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Reports.Journals
             return dtProcurementsReceivedJournal;
         }
 
-
         private Dictionary<string, string> GetDefaultAccount()
         {
             var dictionary = new Dictionary<string, string>();
@@ -141,27 +140,18 @@ namespace AccountingSystem.Views.Reports.Journals
             return dictionary;
         }
 
-
         private void LoadReport(LocalReport report)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
+                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
+                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
                     {
-                        string prefix = dictSignatory["signatories_prefix"].ToString();
-                        string firstName = dictSignatory["signatories_first_name"].ToString();
-                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                        string lastName = dictSignatory["signatories_last_name"].ToString();
-                        string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                        signatory = signatoryName;
+                        signatoryName = dictSignatory["signatories_full_name"];
                         signatoryTitle = dictSignatory["signatories_title"];
                     }
                 }
@@ -170,7 +160,6 @@ namespace AccountingSystem.Views.Reports.Journals
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-
 
                 var parameters = new[] {
                     new ReportParameter("paramMonth", date.ToString()),
