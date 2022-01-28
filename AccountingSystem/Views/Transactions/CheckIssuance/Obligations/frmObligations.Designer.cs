@@ -130,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.btnConfirmObligation.Text = "Confirm";
             this.btnConfirmObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConfirmObligation.UseVisualStyleBackColor = true;
-            this.btnConfirmObligation.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnConfirmObligation.Click += new System.EventHandler(this.btnConfirmObligation_Click);
             // 
             // frmObligations
             // 
@@ -167,8 +167,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         internal System.Windows.Forms.ComboBox txtObno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgObligation;
         private System.Windows.Forms.Button btnRemoveObligations;
         private System.Windows.Forms.Button btnConfirmObligation;
+        internal System.Windows.Forms.DataGridView dgObligation;
     }
 }

@@ -820,13 +820,10 @@ namespace AccountingSystem
             datagrid.Columns[16].HeaderText = "Created at";
             datagrid.Columns[17].HeaderText = "Updated at";
 
-
-
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[12].Visible = false;
-            datagrid.Columns[11].Visible = false;
             datagrid.Columns[16].Visible = false;
             datagrid.Columns[17].Visible = false;
 

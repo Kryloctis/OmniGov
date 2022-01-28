@@ -16,19 +16,18 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgObligation);
-
             _uc = uc;
         }
 
         private void frmObligations_Load(object sender, EventArgs e)
         {
-            dtObligations.Columns.Add("Öbligation No.");
+            HelperLoadRecords.RCIObligationDatagridview(_uc.dtObligations, dgObligation);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            dtObligations.Rows.Add(txtObno.Text.Trim());
-            HelperLoadRecords.RCIObligationDatagridview(dtObligations, dgObligation);
+            _uc.dtObligations.Rows.Add(txtObno.Text.Trim());
+            HelperLoadRecords.RCIObligationDatagridview(_uc.dtObligations, dgObligation);
             txtObno.Text = string.Empty;
         }
 
@@ -57,20 +56,10 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             btnConfirmObligation.Enabled = hasRowSelected;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnConfirmObligation_Click(object sender, EventArgs e)
         {
             if (Helper.MessageBoxConfirmCancel("Confirm obligations that has been set?"))
             {
-                _uc.dtObligations.Rows.Clear();
-
-                if (dtObligations.Rows.Count != 0)
-                {
-                    foreach (DataRow dr in dtObligations.Rows)
-                        _uc.dtObligations.Rows.Add(dr.ItemArray);
-                }
-
-                Helper.MessageBoxSuccess("Obligation successfully added.");
-
                 _uc.SetObligationLabel();
                 this.Close();
             }

@@ -1,19 +1,20 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Data;
 using System.Windows.Forms;
+using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using System.Data;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
     public partial class frmRCIEdit : Form
     {
-        private frmRCI _frmrci;
+        private readonly frmRCI _frmRCI;
         private readonly ucRCI uc;
-        
-        public frmRCIEdit(frmRCI frmrci, int rciId)
+
+        public frmRCIEdit(frmRCI frmRCI, int rciId)
         {
             InitializeComponent();
-            _frmrci = frmrci;
+            _frmRCI = frmRCI;
             uc = ucrci1;
             uc.Id = rciId;
         }
@@ -23,16 +24,15 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                //var rciObligationsRepo = Factory.RCIObligationsRepository();
-                //var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
+                frmObligations frmObligations = new(uc);
 
+                var rciObligationsRepo = Factory.RCIObligationsRepository();
+                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
 
+                foreach (DataRow row in dtRCIObligations.Rows)
+                    uc.dtObligations.Rows.Add(row[0].ToString());
 
-                //foreach (DataRow item in dtRCIObligations.Rows)
-                //{
-                //    uc.dgObligationNoList.Rows.Add(item[0].ToString(), "Remove");
-                //}
-
+                HelperLoadRecords.RCIObligationDatagridview(uc.dtObligations, frmObligations.dgObligation);
             }
             catch (Exception)
             {
@@ -57,12 +57,12 @@ namespace AccountingSystem.Views.Transactions.RCI
                 uc.txtnature.Text = rcidata["nature_of_payment"];
                 uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
 
-                
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadSelectedRecord(ucRCI uc,string table,int Id)
+        private void LoadSelectedRecord(ucRCI uc, string table, int Id)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 UpdateRCIObligation();
                 Helper.MessageBoxSuccess("Account has been updated.");
-                _frmrci.LoadRecords();
+                _frmRCI.LoadRecords();
                 this.Close();
             }
         }
