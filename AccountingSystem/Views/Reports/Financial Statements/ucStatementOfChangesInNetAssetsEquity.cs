@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
-    public partial class ucStatementOfChangesInNetAssetsquity : UserControl
+    public partial class ucStatementOfChangesInNetAssetsEquity : UserControl
     {
         private readonly ReportViewer reportViewer;
 
-        public ucStatementOfChangesInNetAssetsquity()
+        public ucStatementOfChangesInNetAssetsEquity()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -64,6 +64,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return dtStatementOfChangesInNetAssetsEquity;
         }
 
+        private void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatoryTitle)
+        {
+            if (dictSignatory.Count > 0)
+            {
+                signatoryName = dictSignatory["signatories_full_name"];
+                signatoryTitle = dictSignatory["signatories_title"];
+            }
+        }
+
         private void LoadReport(LocalReport report)
         {
             try
@@ -71,23 +80,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 Cursor.Current = Cursors.WaitCursor;
 
                 var dictSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Statement of Changes in Assets/Equity");
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
-                {
-                    if (dictSignatory.Count > 0)
-                    {
-                        string prefix = dictSignatory["signatories_prefix"].ToString();
-                        string firstName = dictSignatory["signatories_first_name"].ToString();
-                        char middleInitial = Convert.ToChar(dictSignatory["signatories_middle_initial"]);
-                        string lastName = dictSignatory["signatories_last_name"].ToString();
-                        string suffix = dictSignatory["signatories_suffix"].ToString();
-
-                        string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
-
-                        signatory = signatoryName;
-                        signatoryTitle = dictSignatory["signatories_title"];
-                    }
-                }
-
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
