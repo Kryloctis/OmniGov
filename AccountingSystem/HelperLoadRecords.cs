@@ -810,11 +810,15 @@ namespace AccountingSystem
             datagrid.Columns[11].HeaderText = "Obligation No.";
             datagrid.Columns[12].HeaderText = "FPP Id";
             datagrid.Columns[13].HeaderText = "Functional Code";
-            datagrid.Columns[14].HeaderText = "Amount";
+            datagrid.Columns[14].HeaderText = "Deductions";
             datagrid.Columns[14].DefaultCellStyle.Format = "N2";
             datagrid.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[15].HeaderText = "Created at";
-            datagrid.Columns[16].HeaderText = "Updated at";
+
+            datagrid.Columns[15].HeaderText = "Net Amount";
+            datagrid.Columns[15].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[15].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[16].HeaderText = "Created at";
+            datagrid.Columns[17].HeaderText = "Updated at";
 
 
 
@@ -823,10 +827,8 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[12].Visible = false;
             datagrid.Columns[11].Visible = false;
-            datagrid.Columns[15].Visible = false;
             datagrid.Columns[16].Visible = false;
-
-
+            datagrid.Columns[17].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

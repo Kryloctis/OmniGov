@@ -18,8 +18,6 @@ namespace ACC.Data
         private readonly string tblFPP = "function_program_project";
         private readonly string tblFCS = "functional_classification_services";
         private readonly string tblFC = "functional_classifications";
-
-
         private readonly string tableRCIObligations = "rci_obligations";
 
 

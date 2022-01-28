@@ -34,7 +34,10 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 lblRecordCount.Text = rciRepository.CountRecords().ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
