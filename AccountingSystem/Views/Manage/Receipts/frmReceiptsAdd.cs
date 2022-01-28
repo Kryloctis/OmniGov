@@ -14,18 +14,19 @@ namespace AccountingSystem.Views.Manage.Receipts
             InitializeComponent();
             frmReceipts = _frmReceipts;
             UserId = Helper.UserId;
+
         }
 
         private void frmAccFormsAdd_Load(object sender, EventArgs e)
         {
-            ucForms1.LoadForms();
+            ucReceipts.LoadForms();
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucForms1;
+                var uc = ucReceipts;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -59,7 +60,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
                 frmReceipts.LoadRecords();
-                ucForms1.ResetForm();
+                ucReceipts.ResetForm();
             }
         }
 
