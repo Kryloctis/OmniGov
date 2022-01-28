@@ -1,12 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.RCI;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
@@ -17,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         DataTable dtDeductions = new();
 
 
-        public frmDeductions()
+        public frmDeductions(ucRCI uc)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgDeductions);

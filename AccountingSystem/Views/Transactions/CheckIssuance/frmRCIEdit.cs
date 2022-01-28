@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 uc.dtcheckdate.Value = Convert.ToDateTime(rcidata["check_date"]);
                 uc.txtpayee.Text = rcidata["payee"];
                 uc.txtnature.Text = rcidata["nature_of_payment"];
-                uc.txtamount.Value = Convert.ToDecimal(rcidata["amount"]);
+                uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
 
                 
             }
@@ -134,7 +134,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     DvNo = uc.txtdvno.Text.Trim(),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value)
+                    Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
                 };
 
                 var rcirepository = Factory.RCIRepository();

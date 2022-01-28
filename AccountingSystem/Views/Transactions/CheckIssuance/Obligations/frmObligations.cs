@@ -59,13 +59,19 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            _uc.dtObligations.Rows.Clear();
-
-            if (dtObligations.Rows.Count != 0)
+            if (Helper.MessageBoxConfirmCancel(""))
             {
-                foreach (DataRow dr in dtObligations.Rows)
-                    _uc.dtObligations.Rows.Add(dr.ItemArray);
+                _uc.dtObligations.Rows.Clear();
+
+                if (dtObligations.Rows.Count != 0)
+                {
+                    foreach (DataRow dr in dtObligations.Rows)
+                        _uc.dtObligations.Rows.Add(dr.ItemArray);
+                }
+
+                this.Close();
             }
+            
         }
     }
 }

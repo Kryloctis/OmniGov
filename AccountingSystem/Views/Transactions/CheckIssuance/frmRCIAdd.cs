@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
                     Payee = uc.txtpayee.Text.Trim(),
                     NaturePayment = uc.txtnature.Text.Trim(),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value)
+                    Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
                 };
 
                 var rcirepository = Factory.RCIRepository();

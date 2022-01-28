@@ -69,6 +69,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
             this.txtObno.FormattingEnabled = true;
             this.txtObno.Location = new System.Drawing.Point(97, 13);
             this.txtObno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtObno.MaxLength = 15;
             this.txtObno.Name = "txtObno";
             this.txtObno.Size = new System.Drawing.Size(267, 21);
             this.txtObno.TabIndex = 18;

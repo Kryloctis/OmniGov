@@ -1,11 +1,11 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
+using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
-using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 dtObligations.Columns.Add("obligation_no");
             }
         }
+
         internal void LoadFPP()
         {
             try
@@ -65,7 +66,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -78,35 +78,20 @@ namespace AccountingSystem.Views.Transactions.RCI
             return dtFPP;
         }
 
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[11];
-            errorArray[0] = epObligations.GetError(txtdvno);
-            errorArray[1] = epObligations.GetError(cmbfund);
-            errorArray[2] = epObligations.GetError(cmbFPP);
-            errorArray[3] = epObligations.GetError(cmbbank);
-            errorArray[4] = epObligations.GetError(txtcheckno);
-            errorArray[5] = epObligations.GetError(dtcheckdate);
-            errorArray[6] = epObligations.GetError(txtpayee);
-            errorArray[7] = epObligations.GetError(txtnature);
-            errorArray[8] = epObligations.GetError(txtamount);
-
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
         internal void ResetForm()
         {
             txtdvno.Clear();
-            bankId=fundsId=functionId=0;
-            cmbbank.SelectedIndex = -1;
-            cmbFPP.SelectedIndex = -1;
             cmbfund.SelectedIndex = -1;
+            bankId =fundsId=functionId=0;
+            cmbbank.SelectedIndex = -1;
             txtcheckno.Clear();
+            cmbFPP.SelectedIndex = -1;
             dtcheckdate.Value = DateTime.Now;
             txtpayee.Clear();
             txtnature.Clear();
-            txtamount.Value = Convert.ToDecimal("0.00");
+            nudNetAmount.Value = Convert.ToDecimal("0.00");
         }
+
         internal void LoadFunds()
         {
             try
@@ -120,6 +105,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         internal void LoadBanks()
         {
             try
@@ -133,7 +119,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-        internal void setSelectedValue(int Id, string table)
+
+        internal void SetSelectedValue(int Id, string table)
         {
             try
             {
@@ -149,140 +136,19 @@ namespace AccountingSystem.Views.Transactions.RCI
                 }
 
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
-        public void loadSelectedFunction(int Id,string value)
+
+        public void LoadSelectedFunction(int Id,string value)
         {
             functionId = Id;
             cmbFPP.Text = value;
         }
 
-        private void txtdvno_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epObligations, txtdvno, "disbursement no.");
-        }
-
-        private void cmbFPP_Validating_1(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epObligations, cmbFPP, "fpp.");
-            if (functionId <= 0)
-            {
-                epObligations.SetError(cmbFPP, "Please select fpp.");
-                e.Cancel = true;
-            }
-        }
-
-        private void cmbFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epObligations, cmbFPP);
-        }
-
-
-        private void txtcheckno_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epObligations, txtcheckno, "check no.!");
-        }
-
-        private void dtcheckdate_Validating(object sender, CancelEventArgs e)
-        {
-            
-        }
-
-        private void txtpayee_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epObligations, txtpayee, "payee.!");
-        }
-
-        private void txtnature_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epObligations, txtnature, "nature of payment.!");
-        }
-
-
-
-        private void txtdvno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epObligations, txtdvno);
-        }
-
-     
-
-        private void txtcheckno_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epObligations, txtcheckno);
-        }
-
-        private void dtcheckdate_Validated(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtpayee_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epObligations, txtpayee);
-        }
-
-        private void txtnature_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epObligations, txtnature);
-        }
-
-        private void txttrust_Validated(object sender, EventArgs e)
-        {
-
-        }
-        private void cmbfund_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epObligations, cmbfund);
-        }
-
-        private void cmbfund_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epObligations, cmbfund, "Fund.");
-        }
-
-        private void cmbbank_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epObligations, cmbbank);
-        }
-
-        private void cmbbank_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epObligations, cmbbank, "Bank!");
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmObligations(this).ShowDialog();
-            //var obligationNo = txtObno.Text.Trim();
-
-            //if (String.IsNullOrEmpty(obligationNo))
-            //    return;
-
-            //dgObligationNoList.Rows.Add(obligationNo, "Remove");
-            //txtObno.Text = String.Empty;
-            //txtObno.Focus();
-        }
-
-        private void dgObligationNoList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-            //if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            //{
-            //    int rowIndex = dgObligationNoList.CurrentCell.RowIndex;
-            //    dgObligationNoList.Rows.RemoveAt(rowIndex);
-            //}
-        }
-
-        private void cmbFPP_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbFPP.Text) && cmbFPP.Focused)
-            {
-                LoadFPP();
-                cmbFPP.DroppedDown = true;
-            }
-        }
-
+       
         internal void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbFPP.Text))
@@ -299,14 +165,125 @@ namespace AccountingSystem.Views.Transactions.RCI
             functionId = Convert.ToInt32(cmbFPP.SelectedValue);
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private void btnAddObligation_Click(object sender, EventArgs e)
         {
-
+            _ = new frmObligations(this).ShowDialog();
         }
 
         private void btnAddDeductions_Click(object sender, EventArgs e)
         {
-            _ = new frmDeductions().ShowDialog();
+            _ = new frmDeductions(this).ShowDialog();
         }
+
+
+
+        #region Validations
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[9];
+            errorArray[0] = epDVNo.GetError(txtdvno);
+            errorArray[1] = epFund.GetError(cmbfund);
+            errorArray[2] = epFpp.GetError(cmbFPP);
+            errorArray[3] = epBank.GetError(cmbbank);
+            errorArray[4] = epCheckNo.GetError(txtcheckno);
+            errorArray[5] = epCheckDate.GetError(dtcheckdate);
+            errorArray[6] = epPayee.GetError(txtpayee);
+            errorArray[7] = epNatureOfPayment.GetError(txtnature);
+            errorArray[8] = epNetAmount.GetError(nudNetAmount);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        private void txtdvno_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epDVNo, txtdvno, "Disbursement No.");
+        }
+
+        private void txtdvno_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epDVNo, txtdvno);
+        }
+
+        private void cmbfund_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbfund, "Fund.");
+        }
+
+        private void cmbfund_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFund, cmbfund);
+        }
+
+        private void cmbbank_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbbank, "Bank.");
+        }
+
+        private void cmbbank_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epBank, cmbbank);
+        }
+
+        private void txtcheckno_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCheckNo, txtcheckno, "Check No.");
+        }
+
+        private void txtcheckno_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epCheckNo, txtcheckno);
+        }
+
+        private void cmbFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFpp, cmbFPP, "fpp.");
+            if (functionId <= 0)
+            {
+                epObligations.SetError(cmbFPP, "Please select fpp.");
+                e.Cancel = true;
+            }
+        }
+
+        private void cmbFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFpp, cmbFPP);
+        }
+
+        private void txtpayee_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtpayee, "Payee");
+        }
+
+        private void txtpayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epPayee, txtpayee);
+        }
+
+
+        private void txtnature_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtnature, "Nature of Payment");
+        }
+
+        private void txtnature_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epNatureOfPayment, txtnature);
+        }
+
+        private void txtamount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epNetAmount, nudNetAmount, "Net Amount.");
+        }
+
+        private void txtamount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epNetAmount, nudNetAmount);
+        }
+
+
+        #endregion
+
+
     }
 }
