@@ -9,6 +9,7 @@
     <Product>Local Finance System</Product>
     <PackageId>Local Finance System</PackageId>
     <Authors>Perzeus Corporation</Authors>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
