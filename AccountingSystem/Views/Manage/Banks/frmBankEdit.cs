@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
@@ -15,7 +8,9 @@ namespace AccountingSystem.Views.Manage.Banks
     {
 
         private frmBanks _frmbanks;
-        public frmBankEdit(frmBanks frmbanks,int bankId)
+        private readonly ucBanks uc;
+
+        public frmBankEdit(frmBanks frmbanks, int bankId)
         {
             InitializeComponent();
             _frmbanks = frmbanks;
@@ -25,7 +20,6 @@ namespace AccountingSystem.Views.Manage.Banks
         { 
             try
             {
-                var uc = ucBanks1;
                 var banksRepository = Factory.BanksRepository();
                 var bankData = banksRepository.GetRecordByID(uc.bankId);
                 uc.txtacode.Text = bankData["account_no"];
@@ -44,7 +38,6 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var uc = ucBanks1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -84,11 +77,6 @@ namespace AccountingSystem.Views.Manage.Banks
                 Helper.MessageBoxSuccess("Account has been updated.");
                 _frmbanks.LoadRecords();
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }
