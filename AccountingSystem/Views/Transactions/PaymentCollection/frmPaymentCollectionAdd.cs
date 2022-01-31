@@ -84,9 +84,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
+                var collectorId = uc.cmdCollector.SelectedValue.ToString();
+                var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
                 var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
 
+                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
                 if (receiptIssuedCount > 0)
@@ -96,6 +98,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
                     }
+
+
                     var rcModel = new ReceiptsIssuedModel()
                     {
                         Id = rid,

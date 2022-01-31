@@ -121,7 +121,28 @@ namespace ACC.Data
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
                 };
                 
-                string query = $"INSERT INTO {tablePaymentCollections} (funds_id, collecting_officers_id,accountable_forms_id,general_ledger_accounts_id,payee,receipt_no, quantity, payment_date, amount, created_by) VALUES (@funds_id,@collecting_officers_id,@accountable_forms_id,@general_ledger_accounts_id,@payee,@receipt_no, @quantity, @payment_date,@amount,@created_by)";
+                string query = $"INSERT INTO {tablePaymentCollections} " +
+                    $"(funds_id, " +
+                    $"collecting_officers_id, " +
+                    $"accountable_forms_id, " +
+                    $"general_ledger_accounts_id, " +
+                    $"payee, " +
+                    $"receipt_no,  " +
+                    $"quantity, " +
+                    $"payment_date, " +
+                    $"amount, " +
+                    $"created_by) " +
+                    $"VALUES " +
+                    $"(@funds_id, " +
+                    $"@collecting_officers_id, " +
+                    $"@accountable_forms_id, " +
+                    $"@general_ledger_accounts_id, " +
+                    $"@payee, " +
+                    $"@receipt_no, " +
+                    $"@quantity, " +
+                    $"@payment_date, " +
+                    $"@amount, " +
+                    $"@created_by)";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }

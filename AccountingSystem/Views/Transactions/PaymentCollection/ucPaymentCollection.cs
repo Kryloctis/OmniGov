@@ -65,8 +65,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var formRepository = Factory.ReceiptsIssuedRepository();
-                var dtforms = formRepository.GetRecordsReceipts(collectorsId.ToString());
+                var accountableFormRepo = Factory.ReceiptsIssuedRepository();
+                var dtforms = accountableFormRepo.GetRecordsReceipts(collectorsId.ToString());
+
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
                 cmbAccountableForms.DataSource = dtforms;
                 cmbAccountableForms.ValueMember = "id";
@@ -237,6 +238,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
                 e.Cancel = true;
             }
+
         }
 
         private void txtreceipt_Validated(object sender, EventArgs e)
@@ -416,7 +418,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmdCollector.SelectedIndex != -1)
+            if (cmdCollector.SelectedIndex != -1)
             {
                 DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 cmbAccountableForms.Enabled = true;
