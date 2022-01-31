@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 79);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 69);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -64,7 +64,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             // btnSave
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(242, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
@@ -72,6 +71,8 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
             // 
@@ -80,7 +81,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.ucAllotmentClasses1.Location = new System.Drawing.Point(12, 11);
             this.ucAllotmentClasses1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAllotmentClasses1.Name = "ucAllotmentClasses1";
-            this.ucAllotmentClasses1.Size = new System.Drawing.Size(400, 66);
+            this.ucAllotmentClasses1.Size = new System.Drawing.Size(400, 54);
             this.ucAllotmentClasses1.TabIndex = 4;
             // 
             // frmAllotmentClassesAdd
@@ -90,7 +91,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(415, 106);
+            this.ClientSize = new System.Drawing.Size(415, 96);
             this.Controls.Add(this.ucAllotmentClasses1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
