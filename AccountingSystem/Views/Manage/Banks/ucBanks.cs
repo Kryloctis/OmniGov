@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Banks
     public partial class ucBanks : UserControl
     {
         internal int bankId = 0;
+
         public ucBanks()
         {
             InitializeComponent();
@@ -23,15 +24,6 @@ namespace AccountingSystem.Views.Manage.Banks
         {
 
         }
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[2];
-            errorArray[0] = errorProvider.GetError(txtacode);
-            errorArray[1] = errorProvider.GetError(txtbankname);
-
-            IError _errors = Factory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
         internal void ResetForm()
         {
             txtacode.Clear();
@@ -39,9 +31,20 @@ namespace AccountingSystem.Views.Manage.Banks
             txtacode.Focus();
         }
 
+        #region Validations
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[2];
+            errorArray[0] = epAccountNumber.GetError(txtacode);
+            errorArray[1] = epBankName.GetError(txtbankname);
+
+            IError _errors = Factory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         private void txtacode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtacode, "account no!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epAccountNumber, txtacode, "account no.");
             var banksrepository = Factory.BanksRepository();
             string accountno = txtacode.Text.Trim();
             bool accountNoexist;
@@ -52,25 +55,34 @@ namespace AccountingSystem.Views.Manage.Banks
                 accountNoexist = banksrepository.CodeExist(accountno, bankId);
             if (accountNoexist)
             {
-                errorProvider.SetError(txtacode, "Account Number already exist in your records!");
+                epAccountNumber.SetError(txtacode, "Account Number already exist in your records!");
                 e.Cancel = true;
             }
         }
 
         private void txtacode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtacode);
+            Helper.ClearErrorTextBox(epAccountNumber, txtacode);
         }
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtbankname, "bank name!");
-            
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epBankName, txtbankname, "bank name.");
+
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtbankname);
+            Helper.ClearErrorTextBox(epBankName, txtbankname);
         }
+
+        #endregion
+
+
+        
+
+
+
+
     }
 }

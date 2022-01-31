@@ -7,14 +7,16 @@ namespace AccountingSystem.Views.Manage.Banks
     public partial class frmBankEdit : Form
     {
 
-        private frmBanks _frmbanks;
+        private readonly frmBanks _frmbanks;
         private readonly ucBanks uc;
 
         public frmBankEdit(frmBanks frmbanks, int bankId)
         {
             InitializeComponent();
+
             _frmbanks = frmbanks;
-            ucBanks1.bankId = bankId;
+            uc = ucBanks1;
+            uc.bankId = bankId;
         }
         private void LoadSelectedRecord()
         { 
