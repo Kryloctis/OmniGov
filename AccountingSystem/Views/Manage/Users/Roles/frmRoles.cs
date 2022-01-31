@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 switch (mysqlEx.Number)
                 {
                     case 1451:
-                        Helper.MessageBoxError("Cannot delete role because it is referenced to another record.");
+                        Helper.MessageBoxError("Can't delete role, The role was referenced to a user.");
                         break;
                 }
             }
