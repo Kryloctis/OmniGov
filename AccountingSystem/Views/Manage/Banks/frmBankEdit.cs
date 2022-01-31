@@ -26,11 +26,13 @@ namespace AccountingSystem.Views.Manage.Banks
                 var bankData = banksRepository.GetRecordByID(uc.bankId);
                 uc.txtacode.Text = bankData["account_no"];
                 uc.txtbankname.Text = bankData["bank_name"];
-
-
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
+
         private void frmBankEdit_Load(object sender, EventArgs e)
         {            
             LoadSelectedRecord();
@@ -51,19 +53,10 @@ namespace AccountingSystem.Views.Manage.Banks
                     Id = uc.bankId,
                     AccountNo = uc.txtacode.Text.Trim(),
                     BankName = uc.txtbankname.Text.Trim()
-
                 };
-
                 var banksrepository = Factory.BanksRepository();
-                if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
-                {
-                    return banksrepository.Update(banksModel);
-                }
-                else
-                {
-                    Helper.ErrorMessage("Account Number already exists!");
-                    uc.txtacode.Focus();
-                }
+                return banksrepository.Update(banksModel);
+              
             }
             catch (Exception ex)
             {
@@ -78,6 +71,7 @@ namespace AccountingSystem.Views.Manage.Banks
             {
                 Helper.MessageBoxSuccess("Account has been updated.");
                 _frmbanks.LoadRecords();
+                uc.ResetForm();
             }
         }
     }

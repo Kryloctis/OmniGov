@@ -43,11 +43,8 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dgBanks.Rows.Count > 0 && dgBanks.SelectedRows.Count > 0)
-            {
-                int bankId = int.Parse(dgBanks.SelectedCells[0].Value.ToString());
-                _ = new frmBankEdit(this, bankId).ShowDialog();
-            }
+            int bankId = int.Parse(dgBanks.SelectedCells[0].Value.ToString());
+            _ = new frmBankEdit(this, bankId).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

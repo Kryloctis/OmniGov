@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Manage.Banks
         private void txtacode_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epAccountNumber, txtacode, "account no.");
+
             var banksrepository = Factory.BanksRepository();
             string accountno = txtacode.Text.Trim();
             bool accountNoexist;
