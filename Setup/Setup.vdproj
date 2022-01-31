@@ -251,7 +251,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Local Finance System"
         "ProductCode" = "8:{931D3045-D111-4969-9E93-BEB0163CF802}"
-        "PackageCode" = "8:{911C4C72-34B7-4FAC-867C-EF379C35CFB3}"
+        "PackageCode" = "8:{7F24E0FD-D2F3-4F23-B2CE-168A633D8834}"
         "UpgradeCode" = "8:{E099AC00-68ED-4147-8469-37B40CD14F2B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -810,7 +810,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5DA11BF595C84A04893A7FC163F1E0E9"
             {
-            "SourcePath" = "8:..\\AccountingSystem\\obj\\Debug\\net5.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\AccountingSystem\\obj\\x86\\Release\\net5.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B155F7AAC42643DCA3B16F113591448C"
