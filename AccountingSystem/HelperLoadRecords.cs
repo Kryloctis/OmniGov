@@ -1314,17 +1314,15 @@ namespace AccountingSystem
 
         internal static void UsersDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            //a.id, a.first_name, a.mid_initial, a.last_name, a.username, b.role_name, a.created_at, a.updated_at
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["roles_id"].Visible = false;
-            datagrid.Columns["prefix"].HeaderText = "Prefix";
-            datagrid.Columns["prefix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            datagrid.Columns["first_name"].HeaderText = "Firstname";
-            datagrid.Columns["mid_initial"].HeaderText = "MI";
-            datagrid.Columns["last_name"].HeaderText = "Lastname";
-            datagrid.Columns["suffix"].HeaderText = "Suffix";
-            datagrid.Columns["suffix"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["prefix"].Visible = false;
+            datagrid.Columns["first_name"].Visible = false;
+            datagrid.Columns["mid_initial"].Visible = false;
+            datagrid.Columns["last_name"].Visible = false;
+            datagrid.Columns["suffix"].Visible = false;
+            datagrid.Columns["user_full_name"].HeaderText = "Name";
             datagrid.Columns["username"].HeaderText = "Username";
             datagrid.Columns["password"].Visible = false;
             datagrid.Columns["is_deleted"].Visible = false;
@@ -1334,7 +1332,6 @@ namespace AccountingSystem
             datagrid.Columns["role_name"].HeaderText = "Role";
             datagrid.Columns["permission_name"].Visible = false;
             datagrid.Columns["permission_office"].Visible = false;
-
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

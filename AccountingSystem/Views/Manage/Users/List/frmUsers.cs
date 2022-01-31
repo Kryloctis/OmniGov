@@ -15,21 +15,34 @@ namespace AccountingSystem.Views.Manage.Users.List
             Helper.LoadFormIcon(this);
         }
 
+        private DataTable UsersDataTable()
+        {
+            string searchkey = txtSearch.Text.Trim();
+            string userOffice = Helper.LoggedInUserData()["office"];
+            var dataTable = new DataTable();
+
+            if (string.IsNullOrEmpty(searchkey))
+                dataTable = Factory.UsersRepository().GetViewRecordsByOffice(userOffice);
+            else
+                dataTable = Factory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
+
+            dataTable.Columns.Add("user_full_name").SetOrdinal(7);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int userId = Convert.ToInt32(row["id"]);
+                var dictUser = Helper.GetUserDataById(userId);
+                row["user_full_name"] = dictUser["user_full_name"];
+            }
+
+            return dataTable;
+        }
+
         internal void LoadRecords()
         {
             try
             {
-                string searchkey = txtSearch.Text.Trim();
-                string userOffice = Helper.LoggedInUserData()["office"];
-                var dtUsers = new DataTable();
-
-                if (string.IsNullOrEmpty(searchkey))
-                    dtUsers = Factory.UsersRepository().GetViewRecordsByOffice(userOffice);
-                else
-                    dtUsers = Factory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
-
-                HelperLoadRecords.UsersDatagridView(dtUsers, dgUsers);
-
+                HelperLoadRecords.UsersDatagridView(UsersDataTable(), dgUsers);
                 lblRecordCount.Text = dgUsers.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -48,7 +61,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void dgUsers_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 10, 11 };
+            byte[] columnIndexTimestamp = { 11, 12 };
             Helper.ShowRecordTimestamp(dgUsers, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgUsers, btnEdit, btnDelete);
         }
