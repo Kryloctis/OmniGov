@@ -165,41 +165,25 @@ namespace AccountingSystem
         #endregion
 
         #region General Ledger Accounts
-        internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
+        internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            try
-            {
-                _ = dataTable.Columns.Add("Debit", typeof(decimal));
-                _ = dataTable.Columns.Add("Credit", typeof(decimal));
-
-                foreach (DataRow item in dataTable.Rows)
-                {
-                    ushort generalLedgerId = (ushort)item["general_ledger_accounts_id"];
-
-                    var beginningBalanceRepository = Factory.BeginningBalancesRepository();
-                    decimal debit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 1);
-                    decimal credit = beginningBalanceRepository.GetSumBalances(fundsId, generalLedgerId, year, 0);
-
-                    item["Debit"] = debit > credit ? debit - credit : 0;
-                    item["Credit"] = credit > debit ? credit - debit : 0;
-                }
-
-                datagrid.DataSource = dataTable;
-                datagrid.Columns[0].Visible = false;
-                datagrid.Columns[1].HeaderText = "Code";
-                datagrid.Columns[2].HeaderText = "Name";
-                datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                datagrid.Columns[3].Visible = false;
-                datagrid.Columns[4].Visible = false;
-                datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-                datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                datagrid.Columns["Credit"].DefaultCellStyle.Format = "N2";
-                datagrid.Columns["Credit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            datagrid.DataSource = dataTable;
+            datagrid.Columns["general_ledger_accounts_id"].Visible = false;
+            datagrid.Columns["account_code"].HeaderText = "Code";
+            datagrid.Columns["account_code"].Width = 70;
+            datagrid.Columns["account_code"].MinimumWidth = 70;
+            datagrid.Columns["ledger_name"].HeaderText = "Name";
+            datagrid.Columns["ledger_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["Debit"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["Debit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["Debit"].Width = 100;
+            datagrid.Columns["Debit"].MinimumWidth = 100;
+            datagrid.Columns["Credit"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["Credit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["Credit"].Width = 100;
+            datagrid.Columns["Credit"].MinimumWidth = 100;
         }
 
         internal static string ValidateDebitOrCreditType(Dictionary<string, string> beginningBalanceDict, string debitCreditType)

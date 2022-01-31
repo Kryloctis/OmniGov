@@ -511,5 +511,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ComboBox cmbxGenLedgAccountGroup;
+        internal System.Windows.Forms.ComboBox cmbxMajorAccGroup;
     }
 }

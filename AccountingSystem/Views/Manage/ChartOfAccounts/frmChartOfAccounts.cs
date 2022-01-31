@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         public frmChartOfAccounts()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
 
             // validate if it has permission
             if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
@@ -80,24 +81,43 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
+        private DataTable GeneralLedgersDataTable()
+        {
+            var dataTable = new DataTable();
+            fundId = Convert.ToByte(cmbFund.SelectedValue);
+            year = Convert.ToInt16(cmbYear.Text);
+            int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
+
+            if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
+                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId(accountGroupId);
+            else
+                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, txtSearch.Text.Trim());
+
+            dataTable.Columns.Add("Debit", typeof(decimal));
+            dataTable.Columns.Add("Credit", typeof(decimal));
+
+            foreach (DataRow item in dataTable.Rows)
+            {
+                ushort generalLedgerId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
+                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                decimal debit = beginningBalanceRepository.GetSumBalances(fundId, generalLedgerId, year, 1);
+                decimal credit = beginningBalanceRepository.GetSumBalances(fundId, generalLedgerId, year, 0);
+
+                item["Debit"] = debit > credit ? debit - credit : 0;
+                item["Credit"] = credit > debit ? credit - debit : 0;
+            }
+
+            return dataTable;
+        }
+
         internal void LoadGeneralLedgers()
         {
             try
             {
-                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()) && !DesignMode)
+                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    var dtGeneralLedgers = new DataTable();
-                    int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
-
-                    if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
-                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroup(accountGroupId);
-                    else
-                        dtGeneralLedgers = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(txtSearch.Text.Trim());
-
-                    fundId = Convert.ToByte(cmbFund.SelectedValue);
-                    year = Convert.ToInt16(cmbYear.Text);
-                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(dtGeneralLedgers, dgGeneralLedgerAccounts, fundId, year);
+                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(), dgGeneralLedgerAccounts);
                     lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
                     Cursor.Current = Cursors.Default;
                 }
@@ -220,8 +240,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts, true);
+            Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
             Helper.DatagridFullRowSelectStyle(dgAccountGroup);
             Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
             Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
@@ -230,7 +249,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             LoadMajorAccountGroupComboBox();
             LoadFunds();
             LoadYear();
-            LoadGeneralLedgers();
+            UserVerfication();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -353,7 +372,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-                LoadGeneralLedgers();
                 DisableEditDeleteButtons();
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
