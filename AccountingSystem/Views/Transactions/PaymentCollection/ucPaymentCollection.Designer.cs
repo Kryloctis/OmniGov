@@ -36,8 +36,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtpayee = new System.Windows.Forms.TextBox();
-            this.txtreceipt = new System.Windows.Forms.TextBox();
+            this.txtPayee = new System.Windows.Forms.TextBox();
+            this.txtReceiptNumber = new System.Windows.Forms.TextBox();
             this.dtDateOfCollection = new System.Windows.Forms.DateTimePicker();
             this.txtAmount = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -143,28 +143,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.TabIndex = 5;
             this.label6.Text = "Amount";
             // 
-            // txtpayee
+            // txtPayee
             // 
-            this.txtpayee.Location = new System.Drawing.Point(174, 76);
-            this.txtpayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtpayee.MaxLength = 200;
-            this.txtpayee.Name = "txtpayee";
-            this.txtpayee.Size = new System.Drawing.Size(370, 23);
-            this.txtpayee.TabIndex = 6;
-            this.txtpayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
-            this.txtpayee.Validated += new System.EventHandler(this.txtpayee_Validated);
+            this.txtPayee.Location = new System.Drawing.Point(174, 76);
+            this.txtPayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPayee.MaxLength = 200;
+            this.txtPayee.Name = "txtPayee";
+            this.txtPayee.Size = new System.Drawing.Size(370, 23);
+            this.txtPayee.TabIndex = 6;
+            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtpayee_Validating);
+            this.txtPayee.Validated += new System.EventHandler(this.txtpayee_Validated);
             // 
-            // txtreceipt
+            // txtReceiptNumber
             // 
-            this.txtreceipt.Location = new System.Drawing.Point(174, 45);
-            this.txtreceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtreceipt.MaxLength = 20;
-            this.txtreceipt.Name = "txtreceipt";
-            this.txtreceipt.Size = new System.Drawing.Size(370, 23);
-            this.txtreceipt.TabIndex = 5;
-            this.txtreceipt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtreceipt_KeyPress);
-            this.txtreceipt.Validating += new System.ComponentModel.CancelEventHandler(this.txtreceipt_Validating);
-            this.txtreceipt.Validated += new System.EventHandler(this.txtreceipt_Validated);
+            this.txtReceiptNumber.Location = new System.Drawing.Point(174, 45);
+            this.txtReceiptNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReceiptNumber.MaxLength = 20;
+            this.txtReceiptNumber.Name = "txtReceiptNumber";
+            this.txtReceiptNumber.Size = new System.Drawing.Size(370, 23);
+            this.txtReceiptNumber.TabIndex = 5;
+            this.txtReceiptNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtreceipt_KeyPress);
+            this.txtReceiptNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtreceipt_Validating);
+            this.txtReceiptNumber.Validated += new System.EventHandler(this.txtreceipt_Validated);
             // 
             // dtDateOfCollection
             // 
@@ -315,10 +315,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.tabNonCashTickets.Controls.Add(this.label3);
             this.tabNonCashTickets.Controls.Add(this.dtDateOfCollection);
             this.tabNonCashTickets.Controls.Add(this.txtAmount);
-            this.tabNonCashTickets.Controls.Add(this.txtreceipt);
+            this.tabNonCashTickets.Controls.Add(this.txtReceiptNumber);
             this.tabNonCashTickets.Controls.Add(this.label6);
             this.tabNonCashTickets.Controls.Add(this.label4);
-            this.tabNonCashTickets.Controls.Add(this.txtpayee);
+            this.tabNonCashTickets.Controls.Add(this.txtPayee);
             this.tabNonCashTickets.Controls.Add(this.label5);
             this.tabNonCashTickets.Location = new System.Drawing.Point(4, 5);
             this.tabNonCashTickets.Name = "tabNonCashTickets";
@@ -497,8 +497,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        internal System.Windows.Forms.TextBox txtpayee;
-        internal System.Windows.Forms.TextBox txtreceipt;
+        internal System.Windows.Forms.TextBox txtPayee;
+        internal System.Windows.Forms.TextBox txtReceiptNumber;
         internal System.Windows.Forms.DateTimePicker dtDateOfCollection;
         internal System.Windows.Forms.NumericUpDown txtAmount;
         private System.Windows.Forms.ErrorProvider epCollectingOfficer;

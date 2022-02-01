@@ -11,12 +11,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     {
         internal int Id = 0;
         internal int fundId = 0;
-        internal int accId = 0;
+        internal int accountableFormId = 0;
         internal int generalLedgerId = 0;
-        internal int userid = 0;
-        internal int minReceipt = 0;
-        internal int maxReceipt = 0;
-        internal int receipt = 0;
+        internal int userId = 0;
+        internal int receiptNumberFrom = 0;
+        internal int receiptNumberTo = 0;
+        internal int receiptNumber = 0;
 
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
@@ -34,8 +34,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[1] = epFund.GetError(cmbFund);
             errorArray[2] = epAccountableForm.GetError(cmbAccountableForms);
             errorArray[3] = epAbstractOfGeneralCollection.GetError(cmbAccount);
-            errorArray[4] = epPayee.GetError(txtpayee);
-            errorArray[5] = epSerialNo.GetError(txtreceipt);
+            errorArray[4] = epPayee.GetError(txtPayee);
+            errorArray[5] = epSerialNo.GetError(txtReceiptNumber);
             errorArray[6] = epCashTicketQuantity.GetError(txtCashTicketQuantity);
             errorArray[7] = epCashTicketAmount.GetError(txtCashTicketsAmount);
             errorArray[8] = epORAmount.GetError(txtAmount);
@@ -47,18 +47,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal void ResetForm()
         {
             fundId = 0;
-            accId = 0;
+            accountableFormId = 0;
             //generalLedgerId = 0;
             //cmbAccountableForms.SelectedIndex = -1;
             //cmbAccount.SelectedIndex = -1;
 
-            txtreceipt.Clear();
-            txtpayee.Clear();
+            txtReceiptNumber.Clear();
+            txtPayee.Clear();
             dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
-            minReceipt = 0;
-            maxReceipt = 0;
-            receipt = 0;
+            receiptNumberFrom = 0;
+            receiptNumberTo = 0;
+            receiptNumber = 0;
         }
 
         internal void LoadForms(int collectorsId)
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal bool IsBetween(int num)
         {
-            return (num >= minReceipt) && (num <= maxReceipt);
+            return (num >= receiptNumberFrom) && (num <= receiptNumberTo);
         }
 
         private void ucPaymentCollection_Load(object sender, EventArgs e)
@@ -226,16 +226,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtreceipt, "Receipt No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtReceiptNumber, "Receipt No.");
 
-            if (!IsBetween(Convert.ToInt32(txtreceipt.Text.Trim())))
+            if (!IsBetween(Convert.ToInt32(txtReceiptNumber.Text.Trim())))
             {
-                epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
+                epSerialNo.SetError(txtReceiptNumber, "Receipt No. invalid.");
                 e.Cancel = true;
             }
-            else if (Convert.ToInt32(txtreceipt.Text.Trim()) <= 0)
+            else if (Convert.ToInt32(txtReceiptNumber.Text.Trim()) <= 0)
             {
-                epSerialNo.SetError(txtreceipt, "Receipt No. invalid.");
+                epSerialNo.SetError(txtReceiptNumber, "Receipt No. invalid.");
                 e.Cancel = true;
             }
 
@@ -243,17 +243,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void txtreceipt_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epSerialNo, txtreceipt);
+            Helper.ClearErrorTextBox(epSerialNo, txtReceiptNumber);
         }
 
         internal void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtpayee, "Payee.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee.");
         }
 
         private void txtpayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtpayee);
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
         }
 
         internal void txtAmount_Validating(object sender, CancelEventArgs e)
@@ -331,34 +331,34 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                 for (int i = 0; i < dtrc.Rows.Count; i++)
                                 {
                                     receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    maxReceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    minReceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                    receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                    receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
                                     receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
 
                                 }
                                 if (receiptto.Equals(receiptlast))
-                                    txtreceipt.Text = "0";
+                                    txtReceiptNumber.Text = "0";
                                 else
                                 {
-                                    if (receiptlast < minReceipt)
-                                        txtreceipt.Text = minReceipt.ToString();
-                                    else if (receiptlast.Equals(minReceipt))
-                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                    if (receiptlast < receiptNumberFrom)
+                                        txtReceiptNumber.Text = receiptNumberFrom.ToString();
+                                    else if (receiptlast.Equals(receiptNumberFrom))
+                                        txtReceiptNumber.Text = (receiptlast + 1).ToString();
                                     else
-                                        txtreceipt.Text = (receiptlast + 1).ToString();
+                                        txtReceiptNumber.Text = (receiptlast + 1).ToString();
                                 }
 
                             }
                             else
                             {
-                                txtreceipt.Text = "0";
+                                txtReceiptNumber.Text = "0";
                             }
                         }
                         catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
                     }
                     else
                     {
-                        if (accId != Convert.ToInt32(cmbAccountableForms.SelectedValue))
+                        if (accountableFormId != Convert.ToInt32(cmbAccountableForms.SelectedValue))
                         {
                             try
                             {
@@ -372,33 +372,33 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                     {
 
                                         receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        maxReceipt = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        minReceipt = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                        receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
+                                        receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
                                         receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
                                     }
                                     if (receiptto.Equals(receiptlast))
-                                        txtreceipt.Text = "0";
+                                        txtReceiptNumber.Text = "0";
                                     else
                                     {
-                                        if (receiptlast < minReceipt)
-                                            txtreceipt.Text = minReceipt.ToString();
-                                        else if (receiptlast.Equals(minReceipt))
-                                            txtreceipt.Text = (receiptlast + 1).ToString();
+                                        if (receiptlast < receiptNumberFrom)
+                                            txtReceiptNumber.Text = receiptNumberFrom.ToString();
+                                        else if (receiptlast.Equals(receiptNumberFrom))
+                                            txtReceiptNumber.Text = (receiptlast + 1).ToString();
                                         else
-                                            txtreceipt.Text = (receiptlast + 1).ToString();
+                                            txtReceiptNumber.Text = (receiptlast + 1).ToString();
                                     }
 
                                 }
                                 else
                                 {
-                                    txtreceipt.Text = "0";
+                                    txtReceiptNumber.Text = "0";
                                 }
                             }
                             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
                         }
                         else
                         {
-                            txtreceipt.Text = receipt.ToString();
+                            txtReceiptNumber.Text = receiptNumber.ToString();
                         }
                     }
                 }
@@ -422,7 +422,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 cmbAccountableForms.Enabled = true;
-                txtpayee.Enabled = true;
+                txtPayee.Enabled = true;
                 //txtreceipt.Enabled = true;
                 dtDateOfCollection.Enabled = true;
                 txtAmount.Enabled = true;
@@ -434,7 +434,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 cmbAccountableForms.Enabled = false;
-                txtpayee.Enabled = false;
+                txtPayee.Enabled = false;
                 //txtreceipt.Enabled = false;
                 dtDateOfCollection.Enabled = false;
                 txtAmount.Enabled = false;
@@ -541,13 +541,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if (cancelEvent)
             {
                txtAmount.Validating -= new CancelEventHandler(txtAmount_Validating);
-               txtreceipt.Validating -= new CancelEventHandler(txtreceipt_Validating);
-               txtpayee.Validating -= new CancelEventHandler(txtpayee_Validating);
+               txtReceiptNumber.Validating -= new CancelEventHandler(txtreceipt_Validating);
+               txtPayee.Validating -= new CancelEventHandler(txtpayee_Validating);
             }
             else
             {
-                txtreceipt.Validating += new CancelEventHandler(txtreceipt_Validating);
-                txtpayee.Validating += new CancelEventHandler(txtpayee_Validating);
+                txtReceiptNumber.Validating += new CancelEventHandler(txtreceipt_Validating);
+                txtPayee.Validating += new CancelEventHandler(txtpayee_Validating);
             }
         }
 
@@ -561,7 +561,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             else
             {
                 txtCashTicketQuantity.Validating += new CancelEventHandler(txtCashTicketQuantity_Validating);
-                txtpayee.Validating += new CancelEventHandler(txtpayee_Validating);
+                txtPayee.Validating += new CancelEventHandler(txtpayee_Validating);
             }
         }
 
