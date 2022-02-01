@@ -286,6 +286,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgSubMajorAccount.RowTemplate.Height = 29;
             this.dgSubMajorAccount.Size = new System.Drawing.Size(1109, 424);
             this.dgSubMajorAccount.TabIndex = 0;
+            this.dgSubMajorAccount.SelectionChanged += new System.EventHandler(this.dgSubMajorAccount_SelectionChanged);
             // 
             // tabMajorAccount
             // 
@@ -511,6 +512,5 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ComboBox cmbxGenLedgAccountGroup;
-        internal System.Windows.Forms.ComboBox cmbxMajorAccGroup;
     }
 }
