@@ -42,16 +42,22 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             if (uc.isSaveFunction)
             {
                 if (SaveData())
+                {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
+                    uc.ResetForm();
+                }
+
             }
 
             else
             {
                 if (UpdateData())
+                {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
+                    uc.ResetForm();
+                }
             }
 
-            uc.ResetForm();
         }
 
         private bool UpdateData()

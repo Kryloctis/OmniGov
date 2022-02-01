@@ -72,13 +72,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal void ResetForm()
         {
-            btnAdd.Enabled = false;
-            btnRemove.Enabled = false;
             btnClear.Enabled = false;
 
             txtTotal.Text = "0.00";
 
-            cmbCollector.SelectedIndex = -1;
             txtReport.Text = string.Empty;
             dtRCDDate.Value = DateTime.Now;
 
