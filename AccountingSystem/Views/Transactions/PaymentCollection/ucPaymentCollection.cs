@@ -48,10 +48,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             fundId = 0;
             accountableFormId = 0;
-            //generalLedgerId = 0;
-            //cmbAccountableForms.SelectedIndex = -1;
-            //cmbAccount.SelectedIndex = -1;
-
             txtReceiptNumber.Clear();
             txtPayee.Clear();
             dtDateOfCollection.Value = DateTime.Now;
@@ -148,7 +144,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }    
 
-        internal bool IsBetween(int num)
+        internal bool IsReceiptNumberBetweenFromAndTo(int num)
         {
             return (num >= receiptNumberFrom) && (num <= receiptNumberTo);
         }
@@ -228,17 +224,38 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtReceiptNumber, "Receipt No.");
 
-            if (!IsBetween(Convert.ToInt32(txtReceiptNumber.Text.Trim())))
+
+            var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
+
+            if (!IsReceiptNumberBetweenFromAndTo(receiptNumber) || receiptNumber <= 0)
             {
-                epSerialNo.SetError(txtReceiptNumber, "Receipt No. invalid.");
-                e.Cancel = true;
-            }
-            else if (Convert.ToInt32(txtReceiptNumber.Text.Trim()) <= 0)
-            {
-                epSerialNo.SetError(txtReceiptNumber, "Receipt No. invalid.");
+                epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
                 e.Cancel = true;
             }
 
+            if (ReceiptNumberHasCollection())
+            {
+                epSerialNo.SetError(txtReceiptNumber, "Receipt number already recorded.");
+                e.Cancel = true;
+            }
+        }
+
+        private bool ReceiptNumberHasCollection()
+        {
+            try
+            {
+                string receiptNumber = txtReceiptNumber.Text.Trim();
+                int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue) ;
+
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var isReceiptRecorded = paymentCollectionRepo.ReceiptExist(receiptNumber, accountableFormId);
+
+                return isReceiptRecorded;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void txtreceipt_Validated(object sender, EventArgs e)
