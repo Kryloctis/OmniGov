@@ -107,7 +107,7 @@ namespace ACC.Data
                     new object[] { "@users_id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT id,first_name, mid_initial, last_name, job_title, created_at, updated_at,users_id FROM {tableName} WHERE users_id = @users_id";
+                string query = $"SELECT id, first_name, mid_initial, last_name, job_title, created_at, updated_at,users_id FROM {tableName} WHERE users_id = @users_id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {

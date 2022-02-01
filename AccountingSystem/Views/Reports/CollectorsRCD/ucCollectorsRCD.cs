@@ -38,11 +38,35 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 LoadFunds();
                 LoadCollectors();
+                LoadCurrentCollector();
+            }
+        }
+        private void LoadCurrentCollector()
+        {
+            try
+            {
+                if (cmbCollector.Items.Count > 0)
+                {
+                    var uRepository = Factory.UsersRepository();
+                    if (uRepository.LinkedCollector(Helper.UserId))
+                    {
+                        var colRepository = Factory.CollectingOfficerRepository();
+                        var data = colRepository.GetRecordByUserID(Helper.UserId);
+                        cmbCollector.SelectedValue = data["id"];
+                        cmbCollector.Enabled = false;
+                        btnAdd.Enabled = true;
+                    }
+                    else
+                    {
+                        cmbCollector.SelectedIndex = -1;
+                    }
+                }
 
+            }
+            catch (Exception)
+            {
 
-                btnAdd.Enabled = false;
-                btnRemove.Enabled = false;
-                btnClear.Enabled = false;
+                throw;
             }
         }
 
@@ -153,11 +177,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
 
 
-            if (cmbCollector.SelectedIndex == -1) 
+            if (cmbCollector.SelectedIndex == -1)
                 btnAdd.Enabled = false;
             else
                 btnAdd.Enabled = true;
-
         }
 
         private void btndelete_Click(object sender, EventArgs e)
