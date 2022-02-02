@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChartOfAccounts));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -420,7 +419,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // BtnSubsidiary
             // 
-            this.BtnSubsidiary.Image = ((System.Drawing.Image)(resources.GetObject("BtnSubsidiary.Image")));
+            this.BtnSubsidiary.Image = global::AccountingSystem.Properties.Resources.subject_writing_filled_28px;
             this.BtnSubsidiary.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BtnSubsidiary.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BtnSubsidiary.Name = "BtnSubsidiary";
@@ -431,7 +430,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // BtnSetBalance
             // 
-            this.BtnSetBalance.Image = ((System.Drawing.Image)(resources.GetObject("BtnSetBalance.Image")));
+            this.BtnSetBalance.Image = global::AccountingSystem.Properties.Resources.tool_notebook_filled_money_coins_filled_28px;
             this.BtnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BtnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BtnSetBalance.Name = "BtnSetBalance";

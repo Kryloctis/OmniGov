@@ -388,6 +388,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 DisplayRecordCount(dgGeneralLedgerAccounts);
                 DisableEditDeleteButtons();
                 SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
+                dgGeneralLedgerAccounts_SelectionChanged(dgGeneralLedgerAccounts, null);
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {

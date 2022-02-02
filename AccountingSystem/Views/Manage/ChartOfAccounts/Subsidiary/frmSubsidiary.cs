@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private void frmSubsidiary_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-            Helper.DatagridDefaultStyle(dgSubsidiary);
+            Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
             LoadSelectedGeneralLedger();
             LoadSubsidiaryRecordsByFundAndGeneralLedger();
             var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
@@ -66,9 +66,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             btnSetBalance.Enabled = false;
+            EnableDisableButtons();
         }
 
-        private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
+        private void EnableDisableButtons()
         {
             Helper.EnableDisableToolStripButtons(dgSubsidiary, btnEdit, btnDelete);
 
@@ -79,6 +80,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             }
 
             btnSetBalance.Enabled = false;
+        }
+
+        private void dgSubsidiary_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButtons();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -137,21 +143,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void BtnSetBalance_Click(object sender, EventArgs e)
         {
-            if (dgSubsidiary.SelectedRows.Count == 1)
+            try
             {
-                int rowIndex = dgSubsidiary.CurrentCell.RowIndex;
-                ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.Rows[rowIndex].Cells["id"].Value);
 
-
-                var subsidiaryLedgerBalanceExist = Factory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
-
-                if (subsidiaryLedgerBalanceExist)
+                if (dgSubsidiary.SelectedRows.Count == 1)
                 {
-                    _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
-                    return;
-                }
+                    ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-                _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                    var subsidiaryLedgerBalanceExist = Factory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
+
+                    if (subsidiaryLedgerBalanceExist)
+                    {
+                        _ = new frmBeginningBalanceEdit(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                        return;
+                    }
+
+                    _ = new frmBeginningBalanceAdd(_frmChartOfAccounts, this, fundId, generalLedgerId, year, subsidiaryLedgerId).ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

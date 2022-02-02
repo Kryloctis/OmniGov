@@ -923,6 +923,46 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap subject_writing_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("subject_writing_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subject_writing_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("subject_writing_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subject_writing_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("subject_writing_filled_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subject_writing_filled_28px {
+            get {
+                object obj = ResourceManager.GetObject("subject_writing_filled_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap supplemental_28px {
             get {
                 object obj = ResourceManager.GetObject("supplemental_28px", resourceCulture);
@@ -996,6 +1036,46 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap symbol_refresh_28px {
             get {
                 object obj = ResourceManager.GetObject("symbol_refresh_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_notebook_filled_money_coins_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("tool_notebook_filled_money_coins_filled_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_notebook_filled_money_coins_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("tool_notebook_filled_money_coins_filled_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_notebook_filled_money_coins_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("tool_notebook_filled_money_coins_filled_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_notebook_filled_money_coins_filled_28px {
+            get {
+                object obj = ResourceManager.GetObject("tool_notebook_filled_money_coins_filled_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

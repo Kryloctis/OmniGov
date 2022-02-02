@@ -29,9 +29,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSubsidiary));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtYear = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtFund = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAccount = new System.Windows.Forms.TextBox();
@@ -43,10 +46,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSetBalance = new System.Windows.Forms.ToolStripButton();
             this.dgSubsidiary = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtFund = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtYear = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -85,6 +84,40 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(667, 112);
             this.panel1.TabIndex = 0;
+            // 
+            // txtYear
+            // 
+            this.txtYear.Location = new System.Drawing.Point(62, 86);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.ReadOnly = true;
+            this.txtYear.Size = new System.Drawing.Size(602, 23);
+            this.txtYear.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 89);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Year";
+            // 
+            // txtFund
+            // 
+            this.txtFund.Location = new System.Drawing.Point(62, 57);
+            this.txtFund.Name = "txtFund";
+            this.txtFund.ReadOnly = true;
+            this.txtFund.Size = new System.Drawing.Size(602, 23);
+            this.txtFund.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 15);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Fund";
             // 
             // txtCode
             // 
@@ -144,7 +177,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -155,7 +188,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -166,7 +199,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -182,7 +215,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnSetBalance
             // 
-            this.btnSetBalance.Image = ((System.Drawing.Image)(resources.GetObject("btnSetBalance.Image")));
+            this.btnSetBalance.Image = global::AccountingSystem.Properties.Resources.tool_notebook_filled_money_coins_filled_28px;
             this.btnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSetBalance.Name = "btnSetBalance";
@@ -205,40 +238,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.dgSubsidiary.Size = new System.Drawing.Size(673, 302);
             this.dgSubsidiary.TabIndex = 8;
             this.dgSubsidiary.SelectionChanged += new System.EventHandler(this.dgSubsidiary_SelectionChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Fund";
-            // 
-            // txtFund
-            // 
-            this.txtFund.Location = new System.Drawing.Point(62, 57);
-            this.txtFund.Name = "txtFund";
-            this.txtFund.ReadOnly = true;
-            this.txtFund.Size = new System.Drawing.Size(602, 23);
-            this.txtFund.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 89);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Year";
-            // 
-            // txtYear
-            // 
-            this.txtYear.Location = new System.Drawing.Point(62, 86);
-            this.txtYear.Name = "txtYear";
-            this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(602, 23);
-            this.txtYear.TabIndex = 6;
             // 
             // frmSubsidiary
             // 
