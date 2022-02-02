@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Amortization
@@ -20,7 +14,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             Helper.DatagridFullRowSelectStyle(dgAmortization, true);
         }
 
-        internal void LoadAmortizationRecords() 
+        internal void LoadAmortizationRecords()
         {
             try
             {
@@ -61,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             if (!DesignMode)
             {
                 LoadAmortizationRecords();
-             
+                EnableDisableButons();
             }
         }
 
@@ -73,14 +67,19 @@ namespace AccountingSystem.Views.Manage.Amortization
             }
         }
 
-        private void dgAmortization_SelectionChanged(object sender, EventArgs e)
+        private void EnableDisableButons()
         {
+            Helper.EnableDisableToolStripButtons(dgAmortization, btnEdit, btnDelete);
+
             if (dgAmortization.SelectedRows.Count == 1)
                 btnAmortizationSched.Enabled = true;
             else
                 btnAmortizationSched.Enabled = false;
+        }
 
-            Helper.EnableDisableToolStripButtons(dgAmortization, btnEdit, btnDelete);
+        private void dgAmortization_SelectionChanged(object sender, EventArgs e)
+        {
+            EnableDisableButons();
         }
 
         private bool DeleteAmortizationRecords()
