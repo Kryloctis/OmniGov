@@ -801,31 +801,34 @@ namespace AccountingSystem
             datagrid.Columns[2].HeaderText = "Account No.";
             datagrid.Columns[3].HeaderText = "Bank Name";
             datagrid.Columns[4].HeaderText = "Fund Id";
-            datagrid.Columns[5].HeaderText = "Fund";
-            datagrid.Columns[6].HeaderText = "Check Date";
-            datagrid.Columns[7].HeaderText = "Check No.";
-            datagrid.Columns[8].HeaderText = "DV No.";
-            datagrid.Columns[9].HeaderText = "Payee";
-            datagrid.Columns[10].HeaderText = "Nature of Payment";
-            datagrid.Columns[11].HeaderText = "Obligation No.";
-            datagrid.Columns[12].HeaderText = "FPP Id";
-            datagrid.Columns[13].HeaderText = "Functional Code";
-            datagrid.Columns[14].HeaderText = "Deductions";
-            datagrid.Columns[14].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[14].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-            datagrid.Columns[15].HeaderText = "Net Amount";
+            datagrid.Columns[5].HeaderText = "Fund Code";
+            datagrid.Columns[6].HeaderText = "Fund";
+            datagrid.Columns[7].HeaderText = "Check Date";
+            datagrid.Columns[8].HeaderText = "Check No.";
+            datagrid.Columns[9].HeaderText = "DV No.";
+            datagrid.Columns[10].HeaderText = "Payee";
+            datagrid.Columns[11].HeaderText = "Nature of Payment";
+            datagrid.Columns[12].HeaderText = "Obligation No.";
+            datagrid.Columns[13].HeaderText = "FPP Id";
+            datagrid.Columns[14].HeaderText = "FPP Code";
+            datagrid.Columns[15].HeaderText = "Deductions"; 
             datagrid.Columns[15].DefaultCellStyle.Format = "N2";
             datagrid.Columns[15].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[16].HeaderText = "Created at";
-            datagrid.Columns[17].HeaderText = "Updated at";
+
+            datagrid.Columns[16].HeaderText = "Net Amount";
+            datagrid.Columns[16].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[16].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[17].HeaderText = "Created at";
+            datagrid.Columns[18].HeaderText = "Updated at";
 
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[4].Visible = false;
-            datagrid.Columns[12].Visible = false;
+            datagrid.Columns[5].Visible = false;
+            datagrid.Columns[13].Visible = false;
             datagrid.Columns[16].Visible = false;
             datagrid.Columns[17].Visible = false;
+            datagrid.Columns[18].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
