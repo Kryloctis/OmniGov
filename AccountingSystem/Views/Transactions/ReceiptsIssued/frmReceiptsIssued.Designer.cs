@@ -36,14 +36,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnReturn = new System.Windows.Forms.ToolStripButton();
             this.btnRefresh = new System.Windows.Forms.ToolStripButton();
-            this.dgissue = new System.Windows.Forms.DataGridView();
+            this.dgReceiptIssued = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgissue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,22 +130,21 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // dgissue
+            // dgReceiptIssued
             // 
-            this.dgissue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgReceiptIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgissue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgissue.Location = new System.Drawing.Point(10, 60);
-            this.dgissue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgissue.Name = "dgissue";
-            this.dgissue.RowHeadersWidth = 51;
-            this.dgissue.RowTemplate.Height = 29;
-            this.dgissue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgissue.Size = new System.Drawing.Size(1039, 474);
-            this.dgissue.TabIndex = 8;
-            this.dgissue.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgissue_CellContentClick);
-            this.dgissue.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
+            this.dgReceiptIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgReceiptIssued.Location = new System.Drawing.Point(10, 60);
+            this.dgReceiptIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgReceiptIssued.Name = "dgReceiptIssued";
+            this.dgReceiptIssued.RowHeadersWidth = 51;
+            this.dgReceiptIssued.RowTemplate.Height = 29;
+            this.dgReceiptIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgReceiptIssued.Size = new System.Drawing.Size(1039, 474);
+            this.dgReceiptIssued.TabIndex = 8;
+            this.dgReceiptIssued.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
             // 
             // statusStrip1
             // 
@@ -201,7 +200,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.dgissue);
+            this.Controls.Add(this.dgReceiptIssued);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -215,7 +214,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Load += new System.EventHandler(this.frmReceipts_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgissue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -231,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnReturn;
         private System.Windows.Forms.ToolStripButton btnRefresh;
-        private System.Windows.Forms.DataGridView dgissue;
+        private System.Windows.Forms.DataGridView dgReceiptIssued;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;

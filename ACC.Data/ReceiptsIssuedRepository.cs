@@ -103,7 +103,7 @@ namespace ACC.Data
         }
         public DataTable GetRecords()
         {
-            string query = $"SELECT  " +
+            string query =  $"SELECT  " +
                             $"id, " +
                             $"collecting_officer, " +
                             $"accountable_forms, " +
@@ -193,38 +193,30 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
+            var parameter = new object[][] { 
+                new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
+            };
 
-                var parameter = new object[][] { 
-                    new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
-                };
+            string query = $"SELECT  " +
+                            $"id, " +
+                            $"collecting_officer, " +
+                            $"accountable_forms, " +
+                            $"issuefrom, " +
+                            $"issueto,  " +
+                            $"date_issued,  " +
+                            $"quantity,  " +
+                            $"last_issued,  " +
+                            $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
+                            $"returned_date,  " +
+                            $"user  " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE " +
+                            $"collecting_officer LIKE @searchKey OR " +
+                            $"accountable_forms LIKE @searchKey " +
+                            $"ORDER BY date_issued DESC ";
 
-                string query = $"SELECT  " +
-                               $"id, " +
-                               $"collecting_officer, " +
-                               $"accountable_forms, " +
-                               $"issuefrom, " +
-                               $"issueto,  " +
-                               $"date_issued,  " +
-                               $"quantity,  " +
-                               $"last_issued,  " +
-                               $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
-                               $"returned_date,  " +
-                               $"user  " +
-                               $"FROM {viewTableName} " +
-                               $"WHERE " +
-                               $"collecting_officer LIKE @searchKey OR " +
-                               $"accountable_forms LIKE @searchKey " +
-                               $"ORDER BY date_issued DESC ";
-
-                var dtri = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtri, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtri = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtri, parameter);
         }
 
         public bool IdExist(int id)

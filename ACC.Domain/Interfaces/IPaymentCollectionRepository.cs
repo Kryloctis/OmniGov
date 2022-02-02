@@ -23,5 +23,6 @@ namespace ACC.Domain.Interfaces
         decimal SumRecords(int Id,int fid,string from,string to);
         decimal SumRecords(int Id, int fid, string from, string to, string ids);
         bool ReceiptExist(string receipt, int formid);
+        bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
     }
 }
