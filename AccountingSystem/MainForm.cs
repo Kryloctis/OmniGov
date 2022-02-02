@@ -492,7 +492,7 @@ namespace AccountingSystem
 
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmRCD().ShowDialog();
+            _ = new frmSearch(new frmRCD()).ShowDialog();
         }
 
 
