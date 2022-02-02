@@ -82,6 +82,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 var dtFund = Factory.FundsRepository().GetRecordByID(fundId);
                 txtFunName.Text = dtFund["fund_name"];
                 txtYear.Text = year.ToString();
+                dtpDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+                dtpDateEntry.MinDate = new DateTime(year, 1, 1);
             }
         }
     }

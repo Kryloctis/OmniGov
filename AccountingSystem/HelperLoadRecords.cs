@@ -52,7 +52,7 @@ namespace AccountingSystem
         #region Year
         internal static void YearComboBox(ComboBox comboBox)
         {
-            _ = comboBox.Items.Add("2021");
+            _ = comboBox.Items.Add("2022");
             comboBox.SelectedIndex = 0;
         }
         #endregion
