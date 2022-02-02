@@ -85,24 +85,19 @@ namespace ACC.Data
                 throw;
             }
         }
-        public DataTable GetRecordsByAccountId(int bankId,string month)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@bankId", DbType.Int32, bankId},
-                    new object[] { "@month", DbType.String, month},
-                };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bankId AND MONTH(check_date) = @month";
-                return _dbGenericCommands.ExecuteReader(query, parameters);
-            }
-            catch (Exception)
+        public DataTable GetRecordsByBankIdAndMonth(int bankId,string month)
+        {
+           var parameters = new object[][]
             {
-                throw;
-            }
+                new object[] { "@bankId", DbType.Int32, bankId},
+                new object[] { "@month", DbType.String, month},
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bankId AND MONTH(check_date) = @month";
+            return _dbGenericCommands.ExecuteReader(query, parameters);
         }
+
         public bool Insert(RCIModel entity)
         {
             try
