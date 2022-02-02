@@ -104,8 +104,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if(dgreceipts.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
-                _ = new frmReceiptsEdit(this, id).ShowDialog();                
+                int receiptId = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
+                _ = new frmReceiptsEdit(this, receiptId).ShowDialog();                
             }
         }
 

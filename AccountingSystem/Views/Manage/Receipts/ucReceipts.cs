@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class ucReceipts : UserControl
     {
-        internal int Id = 0;
+        internal int receiptId = 0;
         internal int UserId = 0;
         internal int AccId = 0;
         internal int fromSerialNo = 0;
@@ -24,8 +24,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             AccId = 0;
             cmbAccountableForms.SelectedIndex = -1;
-            txtORFrom.Text = string.Empty;
-            txtORTo.Text = string.Empty;
+            txtReceiptNumberFrom.Text = string.Empty;
+            txtReceiptNumberTo.Text = string.Empty;
             dtpReceivedDate.Value = DateTime.Now;
             txtQuantity.Text = string.Empty;
             txtRemark.Text = string.Empty;
@@ -56,11 +56,11 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
-            errorArray[0] = errorProvider.GetError(cmbAccountableForms);
-            errorArray[1] = errorProvider.GetError(txtORFrom);
-            errorArray[2] = errorProvider.GetError(txtORTo);
-            errorArray[3] = errorProvider.GetError(dtpReceivedDate);
-            errorArray[4] = errorProvider.GetError(txtQuantity);
+            errorArray[0] = epAccountableForms.GetError(cmbAccountableForms);
+            errorArray[1] = epReceiptNumberFrom.GetError(txtReceiptNumberFrom);
+            errorArray[2] = epReceiptNumberTo.GetError(txtReceiptNumberTo);
+            errorArray[3] = epReceivedDate.GetError(dtpReceivedDate);
+            errorArray[4] = epQuantity.GetError(txtQuantity);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -68,23 +68,24 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void cmbforms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbAccountableForms, "Accountable Form!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForms, cmbAccountableForms, "Accountable Form!");
         }
 
         private void cmbforms_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbAccountableForms);
+            Helper.ClearErrorComboBox(epAccountableForms, cmbAccountableForms);
         }
 
 
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTicket)
+            if (isTicket == false)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORFrom, "Receipt Number From!");
-                if (Convert.ToInt32(txtORFrom.Text.Trim()) <= toSerialNo || Convert.ToInt32(txtORFrom.Text.Trim()) <= 0)
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
+
+                if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= toSerialNo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
                 {
-                    errorProvider.SetError(txtORFrom, "Invalid Receipt Number!");
+                    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Number!");
                     e.Cancel = true;
                 }
             }
@@ -92,35 +93,46 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtORFrom);
+            Helper.ClearErrorTextBox(epReceiptNumberFrom, txtReceiptNumberFrom);
         }
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTicket)
+            if (isTicket == false)
             {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtORTo, "Receipt Number To.");
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberTo, txtReceiptNumberTo, "Receipt Number To.");
 
-                if (Convert.ToInt32(txtORTo.Text.Trim()) <= Convert.ToInt32(txtORFrom.Text.Trim()))
+                if (String.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) == true)
+                    return;
+
+                if (Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) <= Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()))
                 {
-                    errorProvider.SetError(txtORTo, "Invalid Receipt Number.");
+                    epReceiptNumberTo.SetError(txtReceiptNumberTo, "Invalid Receipt Number.");
                     e.Cancel = true;
                 }
             }
         }
+
         private void txtto_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtORTo);
+            Helper.ClearErrorTextBox(epReceiptNumberTo, txtReceiptNumberTo);
         }
 
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtQuantity, "Quantity!");
+            bool isEmpty = Helper.ShowErrorTextBoxEmpty(epQuantity, txtQuantity, "Quantity.");
+            bool isZero = txtQuantity.Text.Trim().Equals("0");
+
+            if (isEmpty || isZero)
+            {
+                epQuantity.SetError(txtQuantity, "Please enter a valid quantity.");
+                e.Cancel = true;
+            }
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtQuantity);
+            Helper.ClearErrorTextBox(epQuantity, txtQuantity);
         }
         #endregion
 
@@ -128,10 +140,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-               
-            }
         }
 
         private void txtto_KeyPress(object sender, KeyPressEventArgs e)
@@ -151,16 +160,16 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
-            int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
+            int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
+            int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
             //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
             txtQuantity.Text = (((to - from) + 1) < 0 ? 0: ((to - from) + 1)).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
-            int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
+            int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
+            int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
             txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
         }
 
@@ -174,12 +183,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (item[2].ToString().Contains("Tickets"))
             {
                 isTicket = true;
-                txtORFrom.Enabled = false;
-                txtORTo.Enabled = false;
+                txtReceiptNumberFrom.Enabled = false;
+                txtReceiptNumberTo.Enabled = false;
                 txtQuantity.ReadOnly = false;
 
-                txtORFrom.Text = "0";
-                txtORTo.Text = "0";
+                txtReceiptNumberFrom.Text = "0";
+                txtReceiptNumberTo.Text = "0";
 
 
                 txtQuantity.Text = string.Empty;
@@ -188,8 +197,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             else
             {
                 isTicket = false;
-                txtORFrom.Enabled = true;
-                txtORTo.Enabled = true;
+                txtReceiptNumberFrom.Enabled = true;
+                txtReceiptNumberTo.Enabled = true;
                 txtQuantity.ReadOnly = true;
 
                 var receiptsRepository = Factory.ReceiptsRepository();
@@ -198,10 +207,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                 fromSerialNo = receiptsRepository.RMIN(accountableFormId);
                 toSerialNo = receiptsRepository.RMAX(accountableFormId);
 
-                txtORFrom.Text = (toSerialNo + 1).ToString();
+                txtReceiptNumberFrom.Text = (toSerialNo + 1).ToString();
 
-                int from = txtORFrom.Text.Length > 0 ? Convert.ToInt32(txtORFrom.Text.Trim()) : 0;
-                int to = txtORTo.Text.Length > 0 ? Convert.ToInt32(txtORTo.Text.Trim()) : 0;
+                int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
+                int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
                 txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
             }
         }
@@ -210,16 +219,16 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if (!isTicket)
             {
-                if (txtORFrom.Text.Length > 0)
+                if (txtReceiptNumberFrom.Text.Length > 0)
                 {
-                    int num = int.Parse(txtORFrom.Text.Trim());
+                    int num = int.Parse(txtReceiptNumberFrom.Text.Trim());
                     if (num > 1)
                     {
-                        txtORFrom.Enabled = false;
+                        txtReceiptNumberFrom.Enabled = false;
                     }
                     else
                     {
-                        txtORFrom.Enabled = true;
+                        txtReceiptNumberFrom.Enabled = true;
                     }
                 }
             }

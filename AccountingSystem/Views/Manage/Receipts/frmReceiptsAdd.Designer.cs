@@ -75,13 +75,13 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucForms1
+            // ucReceipts
             // 
             this.ucReceipts.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ucReceipts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucReceipts.Location = new System.Drawing.Point(0, 0);
             this.ucReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucReceipts.Name = "ucForms1";
+            this.ucReceipts.Name = "ucReceipts";
             this.ucReceipts.Size = new System.Drawing.Size(541, 206);
             this.ucReceipts.TabIndex = 5;
             // 
@@ -90,6 +90,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(541, 233);
             this.Controls.Add(this.ucReceipts);

@@ -1,31 +1,28 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class frmReceiptsEdit : Form
     {
-        private frmReceipts frmaf;
-        private int UserId = 0;
-        public frmReceiptsEdit(frmReceipts _frmaf,int id)
+        private readonly frmReceipts _frmReceipts;
+        private readonly ucReceipts uc;
+
+        private int userId = 0;
+        public frmReceiptsEdit(frmReceipts frmReceipts, int receiptId)
         {
             InitializeComponent();
-            frmaf = _frmaf;
-            ucForms1.Id = id;
-            UserId = Helper.UserId;
+            _frmReceipts = frmReceipts;
+            userId = Helper.UserId;
+
+            uc = ucReceipts1;
+            uc.receiptId = receiptId;
         }
 
         private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
-            ucForms1.LoadForms();
+            uc.LoadForms();
             LoadSelectedValue();
             
         }
@@ -34,20 +31,19 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                var uc = ucForms1;
                 var rcRepository = Factory.ReceiptsRepository();
-                var rcdata = rcRepository.GetRecordByID(uc.Id);
+                var rcdata = rcRepository.GetRecordByID(uc.receiptId);
                 uc.cmbAccountableForms.SelectedValue = rcdata["accountable_forms_id"];
-                uc.txtORFrom.Text = rcdata["receiptsfrom"];
-                uc.txtORTo.Text = rcdata["receiptsto"];
+                uc.txtReceiptNumberFrom.Text = rcdata["receiptsfrom"];
+                uc.txtReceiptNumberTo.Text = rcdata["receiptsto"];
                 uc.dtpReceivedDate.Value = Convert.ToDateTime(rcdata["received_date"]);
                 uc.txtQuantity.Text = rcdata["quantity"];
                 uc.txtRemark.Text = rcdata["remarks"];
-                if (rcRepository.ReceiptsIssued(uc.Id))
+                if (rcRepository.ReceiptsIssued(uc.receiptId))
                 {
                     uc.cmbAccountableForms.Enabled = false;
-                    uc.txtORFrom.Enabled = false;
-                    uc.txtORTo.Enabled = false;
+                    uc.txtReceiptNumberFrom.Enabled = false;
+                    uc.txtReceiptNumberTo.Enabled = false;
                 }
                 uc.cmbAccountableForms.Enabled = false;
             }
@@ -61,7 +57,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                var uc = ucForms1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -70,21 +65,21 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 var rModel = new ReceiptsModel()
                 {
-                    Id = uc.Id,
+                    Id = uc.receiptId,
                     AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
-                    SerialNoFrom = int.Parse(uc.txtORFrom.Text.Trim()),
-                    SerialNoTo = int.Parse(uc.txtORTo.Text.Trim()),
+                    SerialNoFrom = int.Parse(uc.txtReceiptNumberFrom.Text.Trim()),
+                    SerialNoTo = int.Parse(uc.txtReceiptNumberTo.Text.Trim()),
                     ReceiptDate = uc.dtpReceivedDate.Value,
                     Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
                     Remarks = uc.txtRemark.Text.Trim(),
-                    UserId = UserId
+                    UserId = userId
 
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
                 if (!uc.isTicket)
                 {
-                    if (int.Parse(uc.txtORFrom.Text.Trim()) > int.Parse(uc.txtORTo.Text.Trim()))
+                    if (int.Parse(uc.txtReceiptNumberFrom.Text.Trim()) > int.Parse(uc.txtReceiptNumberTo.Text.Trim()))
                     {
                         Helper.MessageBoxError("Invalid Receipt!");
                         return false;
@@ -106,7 +101,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Receipt has been updated.");
-                frmaf.LoadRecords();
+                _frmReceipts.LoadRecords();
                 this.Close();
             }
         }
