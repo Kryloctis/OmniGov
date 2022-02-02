@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PaymentCollection
@@ -20,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             InitializeComponent();
             _frmPaymentCollection = frmpc;
-            ucPaymentCollection1.userid = Helper.UserId;
+            ucPaymentCollection1.userId = Helper.UserId;
             uc = ucPaymentCollection1;
         }
 
@@ -58,8 +51,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
                     Quantity = 1,
-                    Payee = uc.txtpayee.Text.Trim(),
-                    ReceiptNo = uc.txtreceipt.Text.Trim(),
+                    Payee = uc.txtPayee.Text.Trim(),
+                    ReceiptNo = uc.txtReceiptNumber.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     CreatedBy = Helper.UserId,
@@ -84,9 +77,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
+                var collectorId = uc.cmdCollector.SelectedValue.ToString();
+                var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
                 var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
 
+                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
                 if (receiptIssuedCount > 0)
@@ -96,10 +91,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
                     }
+
+
                     var rcModel = new ReceiptsIssuedModel()
                     {
                         Id = rid,
-                        Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                        Last_issued = Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
                     };
                     return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
                 }

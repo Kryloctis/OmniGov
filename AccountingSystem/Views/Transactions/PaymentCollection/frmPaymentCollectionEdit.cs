@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             _frmPaymentCollection = frmPaymentCollection;
             
             ucPaymentCollection1.Id = Id;
-            ucPaymentCollection1.userid = Helper.UserId;
+            ucPaymentCollection1.userId = Helper.UserId;
         }
 
         private void frmPaymentCollectionEdit_Load(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 uc.cmbFund.SelectedValue = paymentCollectionDict["funds_id"];
                 uc.cmbAccountableForms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
                 uc.SetSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
-                uc.accId = Convert.ToInt32(paymentCollectionDict["accountable_forms_id"]);
+                uc.accountableFormId = Convert.ToInt32(paymentCollectionDict["accountable_forms_id"]);
 
                 bool isCashTickets = String.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
 
@@ -56,12 +56,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (!isCashTickets)
                 {
                     uc.SwitchFields(); 
-                    uc.txtpayee.Text = paymentCollectionDict["payee"];
-                    uc.txtreceipt.Text = paymentCollectionDict["receipt_no"];
+                    uc.txtPayee.Text = paymentCollectionDict["payee"];
+                    uc.txtReceiptNumber.Text = paymentCollectionDict["receipt_no"];
                     uc.dtDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];
-                    uc.receipt = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
+                    uc.receiptNumber = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
                     uc.cmdCollector.Enabled = false;
                 }
                 else
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var uc = ucPaymentCollection1;
 
                 uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+                uc.txtPayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
                 if (!uc.ValidateChildren())
                 {
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
 
-                uc.txtpayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
+                uc.txtPayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
 
                 var pcModel = new PaymentCollectionModel()
                 {
@@ -100,15 +100,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
-                    Payee = uc.txtpayee.Text.Trim(),
-                    ReceiptNo = uc.txtreceipt.Text.Trim(),
+                    Payee = uc.txtPayee.Text.Trim(),
+                    ReceiptNo = uc.txtReceiptNumber.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
-                    UpdatedBy =uc.userid,
+                    UpdatedBy =uc.userId,
                 };
 
                 var pcrepository = Factory.PaymentCollectionRepository();
-                if (!receipt.Equals(uc.txtreceipt.Text.Trim()))
+                if (!receipt.Equals(uc.txtReceiptNumber.Text.Trim()))
                 {
                     if (pcrepository.Update(pcModel))
                     {
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                             var rcModel = new ReceiptsIssuedModel()
                             {
                                 Id = rid,
-                                Last_issued = Convert.ToInt32(uc.txtreceipt.Text.Trim())
+                                Last_issued = Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
                             };
                             return riRepository.UpdateCurrentIssued(rcModel);
                         }
@@ -172,7 +172,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var uc = ucPaymentCollection1;
 
-                uc.txtpayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
+                uc.txtPayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
 
                 if (!uc.ValidateChildren())
                 {
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value),
                     PaymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
-                    CreatedBy = uc.userid,
+                    CreatedBy = uc.userId,
                 };
 
 

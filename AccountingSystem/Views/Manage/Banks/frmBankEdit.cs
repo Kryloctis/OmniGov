@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
@@ -14,27 +7,32 @@ namespace AccountingSystem.Views.Manage.Banks
     public partial class frmBankEdit : Form
     {
 
-        private frmBanks _frmbanks;
-        public frmBankEdit(frmBanks frmbanks,int bankId)
+        private readonly frmBanks _frmbanks;
+        private readonly ucBanks uc;
+
+        public frmBankEdit(frmBanks frmbanks, int bankId)
         {
             InitializeComponent();
+
             _frmbanks = frmbanks;
-            ucBanks1.bankId = bankId;
+            uc = ucBanks1;
+            uc.bankId = bankId;
         }
         private void LoadSelectedRecord()
         { 
             try
             {
-                var uc = ucBanks1;
                 var banksRepository = Factory.BanksRepository();
                 var bankData = banksRepository.GetRecordByID(uc.bankId);
                 uc.txtacode.Text = bankData["account_no"];
                 uc.txtbankname.Text = bankData["bank_name"];
-
-
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
+
         private void frmBankEdit_Load(object sender, EventArgs e)
         {            
             LoadSelectedRecord();
@@ -44,7 +42,6 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var uc = ucBanks1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -56,19 +53,10 @@ namespace AccountingSystem.Views.Manage.Banks
                     Id = uc.bankId,
                     AccountNo = uc.txtacode.Text.Trim(),
                     BankName = uc.txtbankname.Text.Trim()
-
                 };
-
                 var banksrepository = Factory.BanksRepository();
-                if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
-                {
-                    return banksrepository.Update(banksModel);
-                }
-                else
-                {
-                    Helper.ErrorMessage("Account Number already exists!");
-                    uc.txtacode.Focus();
-                }
+                return banksrepository.Update(banksModel);
+              
             }
             catch (Exception ex)
             {
@@ -83,12 +71,8 @@ namespace AccountingSystem.Views.Manage.Banks
             {
                 Helper.MessageBoxSuccess("Account has been updated.");
                 _frmbanks.LoadRecords();
+                uc.ResetForm();
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

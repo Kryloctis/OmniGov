@@ -177,6 +177,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemove.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemove.Enabled = false;
             this.btnRemove.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnRemove.Location = new System.Drawing.Point(744, 483);
             this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -192,6 +193,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClear.Enabled = false;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnClear.Location = new System.Drawing.Point(823, 483);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -207,6 +209,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.Enabled = false;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnAdd.Location = new System.Drawing.Point(668, 483);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

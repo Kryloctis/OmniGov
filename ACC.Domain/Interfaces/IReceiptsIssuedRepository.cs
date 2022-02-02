@@ -15,7 +15,7 @@ namespace ACC.Domain.Interfaces
         bool IssuedExist(ReceiptsIssuedModel entity);
         DataTable GetRecords(int id);
         DataTable GetRecords(string coid, string formid);
-        DataTable GetRecordsReceipts(string id);
+        DataTable GetRecordsReceipts(string collectorId);
         DataTable GetAccountabilityForAccountableForms();
 
         DataTable GetReturnedReceipts();

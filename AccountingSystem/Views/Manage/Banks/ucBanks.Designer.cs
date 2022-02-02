@@ -34,8 +34,10 @@ namespace AccountingSystem.Views.Manage.Banks
             this.label2 = new System.Windows.Forms.Label();
             this.txtacode = new System.Windows.Forms.TextBox();
             this.txtbankname = new System.Windows.Forms.TextBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epAccountNumber = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epBankName = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBankName)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -78,9 +80,13 @@ namespace AccountingSystem.Views.Manage.Banks
             this.txtbankname.Validating += new System.ComponentModel.CancelEventHandler(this.txtbankname_Validating);
             this.txtbankname.Validated += new System.EventHandler(this.txtbankname_Validated);
             // 
-            // errorProvider
+            // epAccountNumber
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epAccountNumber.ContainerControl = this;
+            // 
+            // epBankName
+            // 
+            this.epBankName.ContainerControl = this;
             // 
             // ucBanks
             // 
@@ -94,7 +100,8 @@ namespace AccountingSystem.Views.Manage.Banks
             this.Name = "ucBanks";
             this.Size = new System.Drawing.Size(438, 62);
             this.Load += new System.EventHandler(this.ucBanks_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBankName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,8 +111,9 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epAccountNumber;
         internal System.Windows.Forms.TextBox txtacode;
         internal System.Windows.Forms.TextBox txtbankname;
+        private System.Windows.Forms.ErrorProvider epBankName;
     }
 }

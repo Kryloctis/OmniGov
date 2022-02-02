@@ -168,34 +168,27 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsReceipts(string id)
+        public DataTable GetRecordsReceipts(string collectorId)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[]{"@collectingOfficerId", DbType.String, id }
-                };
+            var parameter = new object[][] {
+                new object[]{"@collectingOfficerId", DbType.String, collectorId }
+            };
 
-                string query = $"SELECT " +
-                                $"af.id, " +
-                                $"af.acc_form_no, " +
-                                $"af.acc_form_desc, " +
-                                $"ri.quantity " +
-                                $"FROM accountable_forms af " +
-                                $"INNER JOIN receipts r " +
-                                $"ON r.accountable_forms_id = af.id " +
-                                $"INNER JOIN receipts_issued ri " +
-                                $"ON ri.receipts_id = r.id " +
-                                $"WHERE ri.collecting_officers_id = @collectingOfficerId AND " +
-                                $"ri.issueto <> ri.last_issued";
+            string query =  $"SELECT " +
+                            $"af.id, " +
+                            $"af.acc_form_no, " +
+                            $"af.acc_form_desc, " +
+                            $"ri.quantity " +
+                            $"FROM accountable_forms af " +
+                            $"INNER JOIN receipts r " +
+                            $"ON r.accountable_forms_id = af.id " +
+                            $"INNER JOIN receipts_issued ri " +
+                            $"ON ri.receipts_id = r.id " +
+                            $"WHERE ri.collecting_officers_id = @collectingOfficerId";
 
-                var dtri = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtri, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            var dtri = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtri, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -419,7 +412,7 @@ namespace ACC.Data
                     new object[] { "@last_issued", DbType.Int32, entity.Last_issued}
                 };
 
-                string query = $"UPDATE {tableReceiptsIssued} SET last_issued=@last_issued WHERE id = @id";
+                string query = $"UPDATE {tableReceiptsIssued} SET last_issued = @last_issued WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

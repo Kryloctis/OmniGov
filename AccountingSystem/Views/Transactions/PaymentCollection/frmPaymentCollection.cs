@@ -136,10 +136,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedRowCount = dgpayments.SelectedRows.Count;
             try
             {
+                int selectedRowCount = dgpayments.SelectedRows.Count;
                 var confirmDelete = Helper.MessageBoxConfirmDelete(selectedRowCount);
+
                 if (confirmDelete)
                 {
                     var paymentCollectionModelList = new List<PaymentCollectionModel>();
@@ -152,12 +153,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         var pcRepository = Factory.PaymentCollectionRepository();
                         if (pcRepository.Delete(paymentCollectionModelList))
                         {
-                            dgpayments.Rows.RemoveAt(dgpayments.CurrentRow.Index);
+                            LoadRecords();
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
                         }
                     }
-
-                    LoadRecords();
                 }
             }
             catch (Exception ex)
