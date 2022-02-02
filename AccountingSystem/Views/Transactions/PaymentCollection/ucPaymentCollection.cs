@@ -21,8 +21,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue;
-
-        internal bool isSave;
+        internal bool isSave = false;
 
         public ucPaymentCollection()
         {

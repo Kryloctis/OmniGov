@@ -351,22 +351,15 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-                }; 
+            var parameter = new object[][] {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+            }; 
 
-                string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
+            string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
                
-                var dtpc = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtpc = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
 
         public DataTable GetRecordByLedger(string month)

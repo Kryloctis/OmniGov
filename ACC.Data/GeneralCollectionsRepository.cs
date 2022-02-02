@@ -16,19 +16,14 @@ namespace ACC.Data
         private readonly string tableGeneralCollectionsPayment = "general_collections_payment";
         private readonly string tableCollectorReportPayments = "collector_report_payments";
         private readonly string tablePaymentCollections = "payment_collections";
-        private readonly string tableGeneralCollectionsDeposits = "general_collections_deposits";
-        private readonly string tableBankDeposits = "bank_deposits";
         private readonly string tableCollectingOfficers = "collecting_officers";
         private readonly string tableAccountableForms = "accountable_forms";
-        private readonly string tableGeneralLedgerAccounts = "general_ledger_accounts";
         private readonly string tableAccountGroup = "account_group";
         private readonly string tableMajorAccountGroup = "major_account_group";
         private readonly string tableSubMajorAccountGroup = "sub_major_account_group";
         private readonly string tableSubsidiaryLedgerAccounts = "subsidiary_ledger_accounts";
         private readonly string tableCollectorReport = "collector_report";
         private readonly string tableName10 = "general_collections_deposits";
-        private readonly string tableName17 = "banks";
-        private readonly string tableFunds = "funds";
         private readonly string tableReceipts = "receipts";
         private readonly string tableReceiptsIssued = "receipts_issued";
 

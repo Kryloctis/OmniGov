@@ -11,8 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "rci_obligations";
-        private readonly string tableName2 = "rci";
-        private readonly string tableName3 = "obligation_request";
+
         public RCIObligationsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;

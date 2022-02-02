@@ -12,8 +12,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableReceiptsIssued = "receipts_issued";
-        private readonly string tableUsers = "users";
-        private readonly string tableCollectingOfficers = "collecting_officers";
         private readonly string tableAccountableForms = "accountable_forms";
         private readonly string tableReceipts = "receipts";
 

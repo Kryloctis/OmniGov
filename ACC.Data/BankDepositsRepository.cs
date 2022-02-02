@@ -14,7 +14,6 @@ namespace ACC.Data
         private readonly string tableName = "bank_deposits";
         private readonly string tableName2 = "banks";
         private readonly string tableName3 = "users";
-        private readonly string tableName4 = "funds";
 
         public BankDepositsRepository(IDbGenericCommands dbGenericCommands)
         {

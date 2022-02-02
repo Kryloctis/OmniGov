@@ -12,7 +12,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "collecting_officers";
-        private readonly string tableName2 = "receipts";
         private readonly string tableName3 = "receipts_issued";
 
         public CollectingOfficerRepository(IDbGenericCommands dbGenericCommands)
