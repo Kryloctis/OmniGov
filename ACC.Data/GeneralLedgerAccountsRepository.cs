@@ -419,7 +419,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, sub_maj_acc_group_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText)";
 
             var dtGeneralLedgers = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
