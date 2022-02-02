@@ -14,9 +14,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 {
     public partial class frmChartOfAccounts : Form
     {
-        private byte fundId;
-        private short year;
-
         public frmChartOfAccounts()
         {
             InitializeComponent();
@@ -85,9 +82,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private DataTable GeneralLedgersDataTable()
         {
-            var dataTable = new DataTable();
-            fundId = Convert.ToByte(cmbFund.SelectedValue);
-            year = Convert.ToInt16(cmbYear.Text);
+            DataTable dataTable;
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            short year = Convert.ToInt16(cmbYear.Text);
             int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
 
             if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
@@ -326,6 +323,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void ShowSubsidiaryForm()
         {
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            short year = Convert.ToInt16(cmbYear.Text);
+
             if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
             {
                 ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
@@ -340,27 +340,37 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void BtnSetBalance_Click(object sender, EventArgs e)
         {
-            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
+            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            short year = Convert.ToInt16(cmbYear.Text);
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+
+            try
             {
-                ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-                year = Convert.ToInt16(cmbYear.Text);
-
-                bool hasSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
-                if (hasSubsidiary)
+                if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
                 {
-                    ShowSubsidiaryForm();
-                    return;
+
+
+                    bool hasSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
+                    if (hasSubsidiary)
+                    {
+                        ShowSubsidiaryForm();
+                        return;
+                    }
+
+                    var generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+                    if (generalLedgerBalanceExist)
+                    {
+                        _ = new frmBeginningBalanceEdit(this, null, fundId, generalLedgerId, year).ShowDialog();
+                        return;
+                    }
+
+                    _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
                 }
-
-                var generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
-
-                if (generalLedgerBalanceExist)
-                {
-                    _ = new frmBeginningBalanceEdit(this, null, fundId, generalLedgerId, year).ShowDialog();
-                    return;
-                }
-
-                _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -374,7 +384,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-                byte[] columnIndexTimestamp = { 3, 4 };              
+                byte[] columnIndexTimestamp = { 3, 4 };
                 DisplayRecordCount(dgGeneralLedgerAccounts);
                 DisableEditDeleteButtons();
                 SetActionControls(dgGeneralLedgerAccounts, columnIndexTimestamp);
