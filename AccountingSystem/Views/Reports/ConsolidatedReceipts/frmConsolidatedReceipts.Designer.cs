@@ -38,17 +38,18 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 19);
+            this.label2.Location = new System.Drawing.Point(10, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 20);
+            this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 28;
-            this.label2.Text = "Ending Date :";
+            this.label2.Text = "Ending Date ";
             // 
             // dtto
             // 
-            this.dtto.Location = new System.Drawing.Point(116, 14);
+            this.dtto.Location = new System.Drawing.Point(102, 10);
+            this.dtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtto.Name = "dtto";
-            this.dtto.Size = new System.Drawing.Size(294, 27);
+            this.dtto.Size = new System.Drawing.Size(258, 23);
             this.dtto.TabIndex = 27;
             // 
             // panel1
@@ -56,18 +57,16 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(10, 52);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Location = new System.Drawing.Point(9, 39);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1179, 822);
+            this.panel1.Size = new System.Drawing.Size(1032, 616);
             this.panel1.TabIndex = 26;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(416, 13);
-            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRetrieve.Location = new System.Drawing.Point(364, 10);
             this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(86, 31);
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 23;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
@@ -75,18 +74,18 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // 
             // frmConsolidatedReceipts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1201, 887);
+            this.ClientSize = new System.Drawing.Size(1051, 562);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtto);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRetrieve);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmConsolidatedReceipts";
             this.ShowInTaskbar = false;
             this.Text = "Reports > Consolidated Report of Accountability for Accountable Forms";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmConsolidatedReceipts_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
