@@ -74,7 +74,7 @@ namespace ACC.Data
                 new object[] {"@collectorId", DbType.Int32, collectorId}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId ORDER BY receipt_no ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId ORDER BY accountable_form_id";
 
             var dt = new DataTable();
 
