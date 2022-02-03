@@ -3865,9 +3865,7 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnobligation_no;
             
-            private global::System.Data.DataColumn columntrust_liabilities;
-            
-            private global::System.Data.DataColumn columnbir_vat_nonvat;
+            private global::System.Data.DataColumn columntotal_deductions;
             
             private global::System.Data.DataColumn columnamount;
             
@@ -3980,17 +3978,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn trust_liabilitiesColumn {
+            public global::System.Data.DataColumn total_deductionsColumn {
                 get {
-                    return this.columntrust_liabilities;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn bir_vat_nonvatColumn {
-                get {
-                    return this.columnbir_vat_nonvat;
+                    return this.columntotal_deductions;
                 }
             }
             
@@ -4047,7 +4037,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string dv_no, string obligation_no, decimal trust_liabilities, decimal bir_vat_nonvat, decimal amount, string fpp_code) {
+            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string dv_no, string obligation_no, decimal total_deductions, decimal amount, string fpp_code) {
                 dtRCIRow rowdtRCIRow = ((dtRCIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_no,
@@ -4059,8 +4049,7 @@ namespace AccountingSystem {
                         nature_of_payment,
                         dv_no,
                         obligation_no,
-                        trust_liabilities,
-                        bir_vat_nonvat,
+                        total_deductions,
                         amount,
                         fpp_code};
                 rowdtRCIRow.ItemArray = columnValuesArray;
@@ -4094,8 +4083,7 @@ namespace AccountingSystem {
                 this.columnnature_of_payment = base.Columns["nature_of_payment"];
                 this.columndv_no = base.Columns["dv_no"];
                 this.columnobligation_no = base.Columns["obligation_no"];
-                this.columntrust_liabilities = base.Columns["trust_liabilities"];
-                this.columnbir_vat_nonvat = base.Columns["bir_vat_nonvat"];
+                this.columntotal_deductions = base.Columns["total_deductions"];
                 this.columnamount = base.Columns["amount"];
                 this.columnfpp_code = base.Columns["fpp_code"];
             }
@@ -4121,10 +4109,8 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columndv_no);
                 this.columnobligation_no = new global::System.Data.DataColumn("obligation_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnobligation_no);
-                this.columntrust_liabilities = new global::System.Data.DataColumn("trust_liabilities", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntrust_liabilities);
-                this.columnbir_vat_nonvat = new global::System.Data.DataColumn("bir_vat_nonvat", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbir_vat_nonvat);
+                this.columntotal_deductions = new global::System.Data.DataColumn("total_deductions", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_deductions);
                 this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnamount);
                 this.columnfpp_code = new global::System.Data.DataColumn("fpp_code", typeof(string), null, global::System.Data.MappingType.Element);
@@ -13896,33 +13882,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal trust_liabilities {
+            public decimal total_deductions {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRCI.trust_liabilitiesColumn]));
+                        return ((decimal)(this[this.tabledtRCI.total_deductionsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'trust_liabilities\' in table \'dtRCI\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_deductions\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRCI.trust_liabilitiesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal bir_vat_nonvat {
-                get {
-                    try {
-                        return ((decimal)(this[this.tabledtRCI.bir_vat_nonvatColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'bir_vat_nonvat\' in table \'dtRCI\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtRCI.bir_vat_nonvatColumn] = value;
+                    this[this.tabledtRCI.total_deductionsColumn] = value;
                 }
             }
             
@@ -14068,26 +14038,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istrust_liabilitiesNull() {
-                return this.IsNull(this.tabledtRCI.trust_liabilitiesColumn);
+            public bool Istotal_deductionsNull() {
+                return this.IsNull(this.tabledtRCI.total_deductionsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settrust_liabilitiesNull() {
-                this[this.tabledtRCI.trust_liabilitiesColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbir_vat_nonvatNull() {
-                return this.IsNull(this.tabledtRCI.bir_vat_nonvatColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbir_vat_nonvatNull() {
-                this[this.tabledtRCI.bir_vat_nonvatColumn] = global::System.Convert.DBNull;
+            public void Settotal_deductionsNull() {
+                this[this.tabledtRCI.total_deductionsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

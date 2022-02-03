@@ -12,12 +12,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_collections_payment";
-        private readonly string tableName2 = "general_collections";
-        private readonly string tableName3 = "collector_report_payments";
-        private readonly string tableName4 = "payment_collections";
-
-
-
         private readonly string viewTableName = "view_general_collections_payment";
 
 

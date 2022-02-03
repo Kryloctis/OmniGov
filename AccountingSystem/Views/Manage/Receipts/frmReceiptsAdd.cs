@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var receiptModel = new ReceiptsModel()
                 {
                     AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
-                    SerialNoFrom = int.Parse(uc.txtORFrom.Text.Trim()),
-                    SerialNoTo = int.Parse(uc.txtORTo.Text.Trim()),
+                    SerialNoFrom = int.Parse(uc.txtReceiptNumberFrom.Text.Trim()),
+                    SerialNoTo = int.Parse(uc.txtReceiptNumberTo.Text.Trim()),
                     ReceiptDate = uc.dtpReceivedDate.Value,
                     Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
                     Remarks = uc.txtRemark.Text.Trim(),

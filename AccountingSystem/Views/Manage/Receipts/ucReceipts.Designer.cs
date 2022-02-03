@@ -39,11 +39,19 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtRemark = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtORFrom = new System.Windows.Forms.TextBox();
-            this.txtORTo = new System.Windows.Forms.TextBox();
+            this.epAccountableForms = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtReceiptNumberFrom = new System.Windows.Forms.TextBox();
+            this.txtReceiptNumberTo = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epReceiptNumberTo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epQuantity = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epReceiptNumberFrom = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epReceivedDate = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForms)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceivedDate)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -130,35 +138,35 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.label6.TabIndex = 11;
             this.label6.Text = "Remarks ";
             // 
-            // errorProvider
+            // epAccountableForms
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epAccountableForms.ContainerControl = this;
             // 
-            // txtORFrom
+            // txtReceiptNumberFrom
             // 
-            this.txtORFrom.Location = new System.Drawing.Point(139, 47);
-            this.txtORFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtORFrom.Name = "txtORFrom";
-            this.txtORFrom.ReadOnly = true;
-            this.txtORFrom.Size = new System.Drawing.Size(162, 23);
-            this.txtORFrom.TabIndex = 2;
-            this.txtORFrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
-            this.txtORFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
-            this.txtORFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
-            this.txtORFrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);
-            this.txtORFrom.Validated += new System.EventHandler(this.txtfrom_Validated);
+            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(139, 47);
+            this.txtReceiptNumberFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
+            this.txtReceiptNumberFrom.ReadOnly = true;
+            this.txtReceiptNumberFrom.Size = new System.Drawing.Size(162, 23);
+            this.txtReceiptNumberFrom.TabIndex = 2;
+            this.txtReceiptNumberFrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
+            this.txtReceiptNumberFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
+            this.txtReceiptNumberFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
+            this.txtReceiptNumberFrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);
+            this.txtReceiptNumberFrom.Validated += new System.EventHandler(this.txtfrom_Validated);
             // 
-            // txtORTo
+            // txtReceiptNumberTo
             // 
-            this.txtORTo.Location = new System.Drawing.Point(350, 47);
-            this.txtORTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtORTo.Name = "txtORTo";
-            this.txtORTo.Size = new System.Drawing.Size(166, 23);
-            this.txtORTo.TabIndex = 3;
-            this.txtORTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
-            this.txtORTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
-            this.txtORTo.Validating += new System.ComponentModel.CancelEventHandler(this.txtto_Validating);
-            this.txtORTo.Validated += new System.EventHandler(this.txtto_Validated);
+            this.txtReceiptNumberTo.Location = new System.Drawing.Point(350, 47);
+            this.txtReceiptNumberTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReceiptNumberTo.Name = "txtReceiptNumberTo";
+            this.txtReceiptNumberTo.Size = new System.Drawing.Size(166, 23);
+            this.txtReceiptNumberTo.TabIndex = 3;
+            this.txtReceiptNumberTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtto_KeyPress);
+            this.txtReceiptNumberTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtto_KeyUp);
+            this.txtReceiptNumberTo.Validating += new System.ComponentModel.CancelEventHandler(this.txtto_Validating);
+            this.txtReceiptNumberTo.Validated += new System.EventHandler(this.txtto_Validated);
             // 
             // txtQuantity
             // 
@@ -172,14 +180,30 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
             this.txtQuantity.Validated += new System.EventHandler(this.txtquantity_Validated);
             // 
+            // epReceiptNumberTo
+            // 
+            this.epReceiptNumberTo.ContainerControl = this;
+            // 
+            // epQuantity
+            // 
+            this.epQuantity.ContainerControl = this;
+            // 
+            // epReceiptNumberFrom
+            // 
+            this.epReceiptNumberFrom.ContainerControl = this;
+            // 
+            // epReceivedDate
+            // 
+            this.epReceivedDate.ContainerControl = this;
+            // 
             // ucReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.txtQuantity);
-            this.Controls.Add(this.txtORTo);
-            this.Controls.Add(this.txtORFrom);
+            this.Controls.Add(this.txtReceiptNumberTo);
+            this.Controls.Add(this.txtReceiptNumberFrom);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtRemark);
@@ -192,7 +216,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceipts";
             this.Size = new System.Drawing.Size(540, 203);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epAccountableForms)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epReceivedDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,12 +234,16 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epAccountableForms;
         internal System.Windows.Forms.ComboBox cmbAccountableForms;
         internal System.Windows.Forms.DateTimePicker dtpReceivedDate;
         internal System.Windows.Forms.TextBox txtRemark;
         internal System.Windows.Forms.TextBox txtQuantity;
-        internal System.Windows.Forms.TextBox txtORTo;
-        internal System.Windows.Forms.TextBox txtORFrom;
+        internal System.Windows.Forms.TextBox txtReceiptNumberTo;
+        internal System.Windows.Forms.TextBox txtReceiptNumberFrom;
+        private System.Windows.Forms.ErrorProvider epReceiptNumberTo;
+        private System.Windows.Forms.ErrorProvider epQuantity;
+        private System.Windows.Forms.ErrorProvider epReceiptNumberFrom;
+        private System.Windows.Forms.ErrorProvider epReceivedDate;
     }
 }

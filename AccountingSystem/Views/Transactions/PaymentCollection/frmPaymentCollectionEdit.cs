@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             InitializeComponent();
             _frmPaymentCollection = frmPaymentCollection;
             
-            ucPaymentCollection1.Id = Id;
+            ucPaymentCollection1.paymentCollectionId = Id;
             ucPaymentCollection1.userId = Helper.UserId;
         }
 
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var uc = ucPaymentCollection1;
                 var paymentCollectionRepository = Factory.PaymentCollectionRepository();
-                var paymentCollectionDict = paymentCollectionRepository.GetRecordByID(uc.Id);
+                var paymentCollectionDict = paymentCollectionRepository.GetRecordByID(uc.paymentCollectionId);
 
 
 
@@ -80,22 +80,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var uc = ucPaymentCollection1;
 
-                uc.txtCashTicketQuantity.Validating -= new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-                uc.txtPayee.Validating -= new CancelEventHandler(uc.txtpayee_Validating);
-
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                uc.txtCashTicketQuantity.Validating += new CancelEventHandler(uc.txtCashTicketQuantity_Validating);
-
-                uc.txtPayee.Validating += new CancelEventHandler(uc.txtpayee_Validating);
-
                 var pcModel = new PaymentCollectionModel()
                 {
-                    Id = uc.Id,
+                    Id = uc.paymentCollectionId,
                     CollectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),

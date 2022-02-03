@@ -45,9 +45,9 @@ namespace AccountingSystem.Views.Reports.RCI
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 38);
+            this.panel1.Location = new System.Drawing.Point(0, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(991, 524);
+            this.panel1.Size = new System.Drawing.Size(991, 533);
             this.panel1.TabIndex = 12;
             // 
             // panel2
@@ -61,26 +61,26 @@ namespace AccountingSystem.Views.Reports.RCI
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(991, 38);
+            this.panel2.Size = new System.Drawing.Size(991, 29);
             this.panel2.TabIndex = 13;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Location = new System.Drawing.Point(12, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 15);
             this.label2.TabIndex = 22;
-            this.label2.Text = "Bank Account:";
+            this.label2.Text = "Bank Account ";
             // 
             // cmbBanks
             // 
             this.cmbBanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBanks.FormattingEnabled = true;
-            this.cmbBanks.Location = new System.Drawing.Point(110, 12);
+            this.cmbBanks.Location = new System.Drawing.Point(110, 3);
             this.cmbBanks.Name = "cmbBanks";
             this.cmbBanks.Size = new System.Drawing.Size(183, 23);
-            this.cmbBanks.TabIndex = 21;
+            this.cmbBanks.TabIndex = 0;
             this.cmbBanks.Validating += new System.ComponentModel.CancelEventHandler(this.cmbBanks_Validating);
             this.cmbBanks.Validated += new System.EventHandler(this.cmbBanks_Validated);
             // 
@@ -88,15 +88,15 @@ namespace AccountingSystem.Views.Reports.RCI
             // 
             this.dtpMonth.CustomFormat = "MMMM-yyyy";
             this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonth.Location = new System.Drawing.Point(373, 12);
+            this.dtpMonth.Location = new System.Drawing.Point(373, 3);
             this.dtpMonth.Name = "dtpMonth";
             this.dtpMonth.Size = new System.Drawing.Size(154, 23);
-            this.dtpMonth.TabIndex = 20;
+            this.dtpMonth.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(324, 16);
+            this.label1.Location = new System.Drawing.Point(324, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 19;
@@ -104,10 +104,10 @@ namespace AccountingSystem.Views.Reports.RCI
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(533, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(533, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(86, 23);
-            this.btnRetrieve.TabIndex = 18;
+            this.btnRetrieve.TabIndex = 2;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);

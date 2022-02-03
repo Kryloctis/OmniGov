@@ -8,23 +8,19 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 {
     public partial class frmConsolidatedReceipts : Form
     {
-        private readonly ReportViewer reportViewer = new ReportViewer();
+        private readonly ReportViewer reportViewer = new();
         public frmConsolidatedReceipts()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
-            Helper.LoadFormIcon(this);
         }
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadReport(reportViewer.LocalReport);
-        }
-
-        private void frmConsolidatedReceipts_Load(object sender, EventArgs e)
-        {
-
         }
 
         private DataTable DataTableReceipts(string date)

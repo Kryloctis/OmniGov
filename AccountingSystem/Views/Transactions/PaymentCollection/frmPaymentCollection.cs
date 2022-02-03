@@ -172,8 +172,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 try
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtpayments = Factory.PaymentCollectionRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
+                    var paymentCollectionRepo = Factory.PaymentCollectionRepository(); 
+                    var dtPayments = paymentCollectionRepo.GetRecordsBySearch(searchkey);
+
+                    HelperLoadRecords.PaymentDatagridView(dtPayments, dgpayments);
 
                     lblRecordCount.Text = dgpayments.Rows.Count.ToString();
                 }

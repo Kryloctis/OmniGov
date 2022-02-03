@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -17,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgissue, true );
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true );
         }
        
         private void frmReceipts_Load(object sender, EventArgs e)
@@ -32,9 +26,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                 var receiptIssuedDt = receiptIssuedRepository.GetRecords();
 
-                HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgissue);
+                HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
 
-                lblRecordCount.Text = dgissue.Rows.Count.ToString();
+                lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }   
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -48,11 +42,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                     var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(txtsearch.Text.Trim());
 
-                    HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgissue);
+                    HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
 
-                    lblRecordCount.Text = dgissue.Rows.Count.ToString();
+                    lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
                 }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                catch (Exception ex) 
+                { 
+                    Helper.MessageBoxError(ex.Message); 
+                }
             }
             else
             {
@@ -66,16 +63,50 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceiptsIssuedAdd(this, 0).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {              
+            if (Helper.MessageBoxConfirmDelete(dgReceiptIssued.SelectedRows.Count))
+            {
+                try
+                {
+                    var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                    var receiptModel = new List<ReceiptsIssuedModel>();
+
+                    foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)
+                    {
+                        int receiptIssuedId = int.Parse(row.Cells[0].Value.ToString());
+                        if (row.Cells[7].Value.ToString().Equals(string.Empty))
+                        {
+                            receiptModel.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
+                        }                                                 
+                    }
+                    _ = receiptIssuedRepo.Delete(receiptModel);
+                    LoadRecords();
+                }
+                catch (Exception ex) { 
+                    Helper.MessageBoxError(ex.Message); 
+                }
+            }
+        }
+
+        
+
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgissue.SelectedRows.Count > 0)
+            if (dgReceiptIssued.SelectedRows.Count > 0)
             {
-                Helper.EnableDisableToolStripButtons(dgissue, btnEdit, btnDelete);
-                int id = int.Parse(dgissue.CurrentRow.Cells[0].Value.ToString());
+                Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
+                int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                btnEdit.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
-                btnDelete.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
-                btnReturn.Enabled = dgissue.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+                btnEdit.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+                btnDelete.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+                btnReturn.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
             }
             else
             {
@@ -85,58 +116,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceiptsIssuedAdd(this, 0).ShowDialog();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if(dgissue.SelectedRows.Count > 0)
-            {                
-                if (Helper.MessageBoxConfirmDelete(dgissue.SelectedRows.Count))
-                {
-                    try
-                    {
-                        var riRepository = Factory.ReceiptsIssuedRepository();
-                        var riModel = new List<ReceiptsIssuedModel>();
-                        foreach (DataGridViewRow row in dgissue.SelectedRows)
-                        {
-                            int id = int.Parse(row.Cells[0].Value.ToString());
-                            if (row.Cells[7].Value.ToString().Equals(string.Empty))
-                            {
-                                riModel.Add(new ReceiptsIssuedModel() { Id = id });
-                            }                                                 
-                        }
-                        _ = riRepository.Delete(riModel);
-                        LoadRecords();
-                    }
-                    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-                }
-            }
-        }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgissue.SelectedRows.Count > 0)
+            if (dgReceiptIssued.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgissue.CurrentRow.Cells[0].Value.ToString());
+                int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
                 _ = new frmReceiptsIssuedEdit(this, id).ShowDialog();
             }
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            if(dgissue.SelectedRows.Count > 0)
+            if(dgReceiptIssued.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgissue.CurrentRow.Cells[0].Value.ToString());
+                int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
                 _ = new frmReturnReceipts(this, id).ShowDialog();
             }
-        }
-
-        private void dgissue_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

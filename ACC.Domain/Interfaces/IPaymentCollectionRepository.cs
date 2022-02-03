@@ -10,7 +10,6 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetRecordByLedger(string month);
         DataTable GetRecordByExcel(string month);
-        DataTable GetRecordsBySearch(string searchText);
         DataTable GetRecordByLedger(int Id, string month);
         DataTable GetRecordByLedger(int Id, int fid, string from,string to);
         DataTable GetRecordsByCollectingOfficerId(int collectorId);
@@ -23,5 +22,6 @@ namespace ACC.Domain.Interfaces
         decimal SumRecords(int Id,int fid,string from,string to);
         decimal SumRecords(int Id, int fid, string from, string to, string ids);
         bool ReceiptExist(string receipt, int formid);
+        bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
     }
 }

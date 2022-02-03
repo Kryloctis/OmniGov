@@ -14,7 +14,6 @@ namespace ACC.Data
         private readonly string tableName = "realignment_from";
         private readonly string tableName2 = "realignment_to";
         private readonly string viewTableName1 = "view_realignment_from";
-        private readonly string viewTableName2 = "view_realignment_to";
         private readonly string viewTableName = "view_realignment";
 
 

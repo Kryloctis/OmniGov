@@ -312,45 +312,54 @@ namespace ACC.Data
 
         public bool ReceiptExist(string receipt,int formid)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@receipt_no", DbType.String, receipt },
-                    new object[] { "@accountable_forms_id", DbType.String, formid },
-                };
-
-                string query = $"SELECT id FROM {tablePaymentCollections} WHERE receipt_no=@receipt_no AND accountable_forms_id=@accountable_forms_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@receipt_no", DbType.String, receipt },
+                new object[] { "@accountable_forms_id", DbType.String, formid },
             };
+
+            string query = $"SELECT id FROM {tablePaymentCollections} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+            
+
+            return false;
+        }
+
+        public bool ReceiptExist(int paymentCollectionId, string receipt, int formid)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@payment_collection_id", DbType.Int64, paymentCollectionId },
+                new object[] { "@receipt_no", DbType.String, receipt },
+                new object[] { "@accountable_forms_id", DbType.String, formid },
+            };
+
+            string query = $"SELECT id FROM {tablePaymentCollections} " +
+                           $"WHERE id <> @payment_collection_id AND " +
+                           $"receipt_no = @receipt_no AND " +
+                           $"accountable_forms_id = @accountable_forms_id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+
 
             return false;
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-                }; 
+            var parameter = new object[][] {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+            }; 
 
-                string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
+            string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
                
-                var dtpc = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtpc = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
 
         public DataTable GetRecordByLedger(string month)
@@ -457,5 +466,7 @@ namespace ACC.Data
 
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
         }
+
+
     }
 }

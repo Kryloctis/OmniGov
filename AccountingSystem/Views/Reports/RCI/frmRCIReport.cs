@@ -10,6 +10,8 @@ namespace AccountingSystem.Views.Reports.RCI
     public partial class frmRCIReport : Form
     {
         private readonly ReportViewer reportViewer;
+        private string fundName = "General Fund";
+
         public frmRCIReport()
         {
             InitializeComponent();
@@ -47,7 +49,7 @@ namespace AccountingSystem.Views.Reports.RCI
 
 
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = Factory.RCIRepository().GetRecordsByAccountId(bankId, dateYearMonth);
+            var dt = Factory.RCIRepository().GetRecordsByBankIdAndMonth(bankId, dateYearMonth);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -58,11 +60,12 @@ namespace AccountingSystem.Views.Reports.RCI
                     row["bank_name"] = item["bank_name"];
                     row["check_no"] = item["check_no"];
                     row["check_date"] = item["check_date"];
-                    row["fund_code"] = "100";
+                    row["fund_code"] = item["fund_code"];
                     row["payee"] = item["payee"];
                     row["nature_of_payment"] = item["nature_of_payment"];
                     row["dv_no"] = item["dv_no"];
                     row["obligation_no"] = item["obligation_no"];
+                    row["total_deductions"] = item["total_deductions"];
                     row["amount"] = item["amount"];
                     row["fpp_code"] = item["fpp_code"];
                     dtRCI.Rows.Add(row);
@@ -116,8 +119,12 @@ namespace AccountingSystem.Views.Reports.RCI
 
                 var bankrepo = Factory.BanksRepository();
                 var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
+                var fund = fundName;
+
+
                 string bankDetails = string.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
                 var parameters = new[] {
+                    new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
                     new ReportParameter("paramMonth", dtpMonth.Value.ToString()),

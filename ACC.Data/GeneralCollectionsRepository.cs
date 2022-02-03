@@ -16,19 +16,14 @@ namespace ACC.Data
         private readonly string tableGeneralCollectionsPayment = "general_collections_payment";
         private readonly string tableCollectorReportPayments = "collector_report_payments";
         private readonly string tablePaymentCollections = "payment_collections";
-        private readonly string tableGeneralCollectionsDeposits = "general_collections_deposits";
-        private readonly string tableBankDeposits = "bank_deposits";
         private readonly string tableCollectingOfficers = "collecting_officers";
         private readonly string tableAccountableForms = "accountable_forms";
-        private readonly string tableGeneralLedgerAccounts = "general_ledger_accounts";
         private readonly string tableAccountGroup = "account_group";
         private readonly string tableMajorAccountGroup = "major_account_group";
         private readonly string tableSubMajorAccountGroup = "sub_major_account_group";
         private readonly string tableSubsidiaryLedgerAccounts = "subsidiary_ledger_accounts";
         private readonly string tableCollectorReport = "collector_report";
         private readonly string tableName10 = "general_collections_deposits";
-        private readonly string tableName17 = "banks";
-        private readonly string tableFunds = "funds";
         private readonly string tableReceipts = "receipts";
         private readonly string tableReceiptsIssued = "receipts_issued";
 
@@ -395,7 +390,12 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceiptsIssued}.issuefrom,{tableReceiptsIssued}.issueto,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no DESC LIMIT 1) AS ito,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS officers FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id WHERE {tableAccountableForms}.id IN (SELECT accountable_forms_id FROM {tablePaymentCollections} WHERE payment_date <= CAST('{to}' AS DATE))";
+                string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form, " +
+                    $"{tableReceipts}.receiptsfrom, " +
+                    $"{tableReceipts}.receiptsto, " +
+                    $"{tableReceiptsIssued}.issuefrom, " +
+                    $"{tableReceiptsIssued}.issueto, " +
+                    $"(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no DESC LIMIT 1) AS ito,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS officers FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id WHERE {tableAccountableForms}.id IN (SELECT accountable_forms_id FROM {tablePaymentCollections} WHERE payment_date <= CAST('{to}' AS DATE))";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);

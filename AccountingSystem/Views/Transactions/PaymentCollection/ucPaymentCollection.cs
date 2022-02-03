@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class ucPaymentCollection : UserControl
     {
-        internal int Id = 0;
+        internal int paymentCollectionId = 0;
         internal int fundId = 0;
         internal int accountableFormId = 0;
         internal int generalLedgerId = 0;
@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal bool isCashTicket;
         internal int cashTicketFaceValue = 0;
         internal decimal accountableFormFaceValue;
+        internal bool isSave = false;
 
         public ucPaymentCollection()
         {
@@ -246,9 +247,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 string receiptNumber = txtReceiptNumber.Text.Trim();
                 int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue) ;
+                var paymentCollectionId = this.paymentCollectionId;
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
-                var isReceiptRecorded = paymentCollectionRepo.ReceiptExist(receiptNumber, accountableFormId);
+
+
+                bool isReceiptRecorded;
+
+                if (isSave)
+                    isReceiptRecorded = paymentCollectionRepo.ReceiptExist(receiptNumber, accountableFormId);
+                else
+                    isReceiptRecorded = paymentCollectionRepo.ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
+                
 
                 return isReceiptRecorded;
             }
@@ -335,7 +345,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 DataRowView collector = cmdCollector.SelectedItem as DataRowView;
                 if (forms != null && collector != null)
                 {
-                    if (Id <= 0)
+                    if (paymentCollectionId <= 0)
                     {
                         try
                         {
