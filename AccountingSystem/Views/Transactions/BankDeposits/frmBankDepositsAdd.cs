@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     public partial class frmBankDepositsAdd : Form
     {
         private frmBankDeposits _frmBankDeposits;
-        private ucBD uc;
+        private ucBankDeposits uc;
         public int Gcid = 0;
         public decimal Gcamount = 0;
         internal string _referenceNumber;

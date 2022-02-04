@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucBankDeposit1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBD();
+            this.ucBankDeposit1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBankDeposits();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -38,10 +38,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // ucBankDeposit1
             // 
-            this.ucBankDeposit1.Location = new System.Drawing.Point(12, 11);
+            this.ucBankDeposit1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBankDeposit1.Location = new System.Drawing.Point(0, 0);
             this.ucBankDeposit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucBankDeposit1.Name = "ucBankDeposit1";
-            this.ucBankDeposit1.Size = new System.Drawing.Size(447, 137);
+            this.ucBankDeposit1.Size = new System.Drawing.Size(453, 190);
             this.ucBankDeposit1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,16 +51,16 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 157);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 163);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(459, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(453, 27);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(374, 2);
+            this.btnCancel.Location = new System.Drawing.Point(368, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -71,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(286, 2);
+            this.btnSave.Location = new System.Drawing.Point(280, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -90,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(459, 184);
+            this.ClientSize = new System.Drawing.Size(453, 190);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucBankDeposit1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -109,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         #endregion
 
-        private ucBD ucBankDeposit1;
+        private ucBankDeposits ucBankDeposit1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

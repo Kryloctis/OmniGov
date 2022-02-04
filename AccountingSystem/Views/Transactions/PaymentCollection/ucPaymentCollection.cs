@@ -152,14 +152,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void ucPaymentCollection_Load(object sender, EventArgs e)
         {
-            LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
-            LoadCollectors();
-            LoadFunds();
+            if (!DesignMode)
+            {
+                LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
+                LoadCollectors();
+                LoadFunds();
 
-            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
-            LoadAccounts();
-            cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
-            cmbAccount.SelectedIndex = -1;
+                cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+                LoadAccounts();
+                cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
+                cmbAccount.SelectedIndex = -1;
+            }
         }
 
 

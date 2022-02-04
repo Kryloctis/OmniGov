@@ -5,16 +5,18 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
 {
-    public partial class ucBD : UserControl
+    public partial class ucBankDeposits : UserControl
     {
         internal int Id = 0;
         internal int bankId = 0;
         internal int fundId = 0;
         internal int userid = 0;
-        public ucBD()
+
+        public ucBankDeposits()
         {
             InitializeComponent();
         }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
@@ -29,8 +31,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         }
         private void ucBD_Load(object sender, EventArgs e)
         {
-            LoadBanks();
-            LoadFunds();
+            if (!DesignMode)
+            {
+                LoadBanks();
+                LoadFunds();
+            }
         }
 
         internal void ResetForm()
@@ -69,10 +74,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         } 
+
         private void txtreference_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReferenceNumber, "Reference!");
         }
+
         private void txtreference_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider, txtReferenceNumber);
