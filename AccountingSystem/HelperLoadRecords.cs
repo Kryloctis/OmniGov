@@ -422,8 +422,8 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Receipt (Form)";
-            datagrid.Columns[2].HeaderText = "Series No. From";
-            datagrid.Columns[3].HeaderText = "Series No. To";
+            datagrid.Columns[2].HeaderText = "Receipt No. From";
+            datagrid.Columns[3].HeaderText = "Receipt No. To";
             datagrid.Columns[4].HeaderText = "Received Date";
             datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[5].HeaderText = "Quantity";
