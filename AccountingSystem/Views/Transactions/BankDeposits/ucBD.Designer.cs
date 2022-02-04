@@ -33,24 +33,24 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.txtreference = new System.Windows.Forms.TextBox();
-            this.dtdate = new System.Windows.Forms.DateTimePicker();
+            this.txtReferenceNumber = new System.Windows.Forms.TextBox();
+            this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtamount = new System.Windows.Forms.NumericUpDown();
-            this.cmbbanks = new System.Windows.Forms.ComboBox();
+            this.nudAmount = new System.Windows.Forms.NumericUpDown();
+            this.cmbBank = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbfunds = new System.Windows.Forms.ComboBox();
+            this.cmbFund = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
+            this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 20);
+            this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bank";
             // 
@@ -61,112 +61,118 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 75);
+            this.label2.Location = new System.Drawing.Point(3, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 20);
+            this.label2.Size = new System.Drawing.Size(59, 15);
             this.label2.TabIndex = 20;
             this.label2.Text = "Reference";
             // 
-            // txtreference
+            // txtReferenceNumber
             // 
-            this.txtreference.Location = new System.Drawing.Point(85, 71);
-            this.txtreference.MaxLength = 99;
-            this.txtreference.Name = "txtreference";
-            this.txtreference.Size = new System.Drawing.Size(399, 27);
-            this.txtreference.TabIndex = 2;
-            this.txtreference.Validating += new System.ComponentModel.CancelEventHandler(this.txtreference_Validating);
-            this.txtreference.Validated += new System.EventHandler(this.txtreference_Validated);
+            this.txtReferenceNumber.Location = new System.Drawing.Point(74, 53);
+            this.txtReferenceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtReferenceNumber.MaxLength = 99;
+            this.txtReferenceNumber.Name = "txtReferenceNumber";
+            this.txtReferenceNumber.Size = new System.Drawing.Size(350, 23);
+            this.txtReferenceNumber.TabIndex = 2;
+            this.txtReferenceNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtreference_Validating);
+            this.txtReferenceNumber.Validated += new System.EventHandler(this.txtreference_Validated);
             // 
-            // dtdate
+            // dtDate
             // 
-            this.dtdate.Location = new System.Drawing.Point(85, 107);
-            this.dtdate.Name = "dtdate";
-            this.dtdate.Size = new System.Drawing.Size(399, 27);
-            this.dtdate.TabIndex = 3;
+            this.dtDate.Location = new System.Drawing.Point(74, 80);
+            this.dtDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(350, 23);
+            this.dtDate.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 113);
+            this.label3.Location = new System.Drawing.Point(3, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 20);
+            this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 23;
             this.label3.Text = "Date";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 145);
+            this.label4.Location = new System.Drawing.Point(3, 109);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 20);
+            this.label4.Size = new System.Drawing.Size(51, 15);
             this.label4.TabIndex = 24;
             this.label4.Text = "Amount";
             // 
-            // txtamount
+            // nudAmount
             // 
-            this.txtamount.DecimalPlaces = 2;
-            this.txtamount.Location = new System.Drawing.Point(85, 143);
-            this.txtamount.Maximum = new decimal(new int[] {
+            this.nudAmount.DecimalPlaces = 2;
+            this.nudAmount.Location = new System.Drawing.Point(74, 107);
+            this.nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudAmount.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
-            this.txtamount.Name = "txtamount";
-            this.txtamount.Size = new System.Drawing.Size(400, 27);
-            this.txtamount.TabIndex = 4;
-            this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtamount.ThousandsSeparator = true;
+            this.nudAmount.Name = "nudAmount";
+            this.nudAmount.Size = new System.Drawing.Size(350, 23);
+            this.nudAmount.TabIndex = 4;
+            this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudAmount.ThousandsSeparator = true;
             // 
-            // cmbbanks
+            // cmbBank
             // 
-            this.cmbbanks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbbanks.FormattingEnabled = true;
-            this.cmbbanks.Location = new System.Drawing.Point(85, 3);
-            this.cmbbanks.Name = "cmbbanks";
-            this.cmbbanks.Size = new System.Drawing.Size(399, 28);
-            this.cmbbanks.TabIndex = 1;
-            this.cmbbanks.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
-            this.cmbbanks.Validated += new System.EventHandler(this.cmbbanks_Validated);
+            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBank.FormattingEnabled = true;
+            this.cmbBank.Location = new System.Drawing.Point(74, 2);
+            this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbBank.Name = "cmbBank";
+            this.cmbBank.Size = new System.Drawing.Size(350, 23);
+            this.cmbBank.TabIndex = 1;
+            this.cmbBank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
+            this.cmbBank.Validated += new System.EventHandler(this.cmbbanks_Validated);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 40);
+            this.label5.Location = new System.Drawing.Point(3, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 20);
+            this.label5.Size = new System.Drawing.Size(34, 15);
             this.label5.TabIndex = 25;
             this.label5.Text = "Fund";
             // 
-            // cmbfunds
+            // cmbFund
             // 
-            this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbfunds.FormattingEnabled = true;
-            this.cmbfunds.Location = new System.Drawing.Point(85, 37);
-            this.cmbfunds.Name = "cmbfunds";
-            this.cmbfunds.Size = new System.Drawing.Size(399, 28);
-            this.cmbfunds.TabIndex = 26;
-            this.cmbfunds.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfunds_Validating);
-            this.cmbfunds.Validated += new System.EventHandler(this.cmbfunds_Validated);
+            this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFund.FormattingEnabled = true;
+            this.cmbFund.Location = new System.Drawing.Point(74, 28);
+            this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbFund.Name = "cmbFund";
+            this.cmbFund.Size = new System.Drawing.Size(350, 23);
+            this.cmbFund.TabIndex = 26;
+            this.cmbFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfunds_Validating);
+            this.cmbFund.Validated += new System.EventHandler(this.cmbfunds_Validated);
             // 
             // ucBD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cmbfunds);
+            this.Controls.Add(this.cmbFund);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmbbanks);
-            this.Controls.Add(this.txtamount);
+            this.Controls.Add(this.cmbBank);
+            this.Controls.Add(this.nudAmount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dtdate);
-            this.Controls.Add(this.txtreference);
+            this.Controls.Add(this.dtDate);
+            this.Controls.Add(this.txtReferenceNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucBD";
-            this.Size = new System.Drawing.Size(512, 182);
+            this.Size = new System.Drawing.Size(448, 136);
             this.Load += new System.EventHandler(this.ucBD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,14 +182,14 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        internal System.Windows.Forms.NumericUpDown txtamount;
+        internal System.Windows.Forms.NumericUpDown nudAmount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.DateTimePicker dtdate;
-        internal System.Windows.Forms.TextBox txtreference;
+        internal System.Windows.Forms.DateTimePicker dtDate;
+        internal System.Windows.Forms.TextBox txtReferenceNumber;
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ComboBox cmbbanks;
-        internal System.Windows.Forms.ComboBox cmbfunds;
+        internal System.Windows.Forms.ComboBox cmbBank;
+        internal System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.Label label5;
     }
 }

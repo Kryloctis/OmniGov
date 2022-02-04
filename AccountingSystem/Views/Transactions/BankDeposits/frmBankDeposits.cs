@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmBankDepositsAdd(this).ShowDialog();
+            _ = new frmBankDepositsAdd(this, string.Empty).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

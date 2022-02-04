@@ -11,28 +11,26 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             InitializeComponent();
             _frmbd = frmbd;
-            ucbd1.Id = Id;
-            ucbd1.userid = Helper.UserId;
+            ucBankDeposit1.Id = Id;
+            ucBankDeposit1.userid = Helper.UserId;
         }
 
         private void frmBankDepositsEdit_Load(object sender, EventArgs e)
         {
-            ucbd1.LoadBanks();
-            ucbd1.LoadFunds();
             LoadSelectedValue();
         }
         private void LoadSelectedValue()
         {
             try
             {
-                var uc = ucbd1;
+                var uc = ucBankDeposit1;
                 var bdRepository = Factory.BankDepositsRepository();
                 var bdData = bdRepository.GetRecordByID(uc.Id);
-                uc.cmbbanks.SelectedValue = bdData["banks_id"];
-                uc.cmbfunds.SelectedValue = bdData["funds_id"];
-                uc.txtreference.Text = bdData["reference"];
-                uc.dtdate.Value = Convert.ToDateTime(bdData["date"]);
-                uc.txtamount.Value = Convert.ToDecimal(bdData["amount"]);
+                uc.cmbBank.SelectedValue = bdData["banks_id"];
+                uc.cmbFund.SelectedValue = bdData["funds_id"];
+                uc.txtReferenceNumber.Text = bdData["reference"];
+                uc.dtDate.Value = Convert.ToDateTime(bdData["date"]);
+                uc.nudAmount.Value = Convert.ToDecimal(bdData["amount"]);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -40,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                var uc = ucbd1;
+                var uc = ucBankDeposit1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -50,11 +48,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bdModel = new BankDepositsModel()
                 {
                     Id = uc.Id,
-                    bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
-                    fundId = Convert.ToInt16(uc.cmbfunds.SelectedValue),
-                    Reference = uc.txtreference.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value),
+                    bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
+                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),
+                    Reference = uc.txtReferenceNumber.Text.Trim(),
+                    Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.nudAmount.Value),
                     UpdatedBy = uc.userid,
                 };
 

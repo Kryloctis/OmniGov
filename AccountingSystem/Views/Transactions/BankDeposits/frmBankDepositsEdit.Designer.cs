@@ -29,20 +29,20 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucbd1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBD();
+            this.ucBankDeposit1 = new AccountingSystem.Views.Transactions.BankDeposits.ucBD();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucbd1
+            // ucBankDeposit1
             // 
-            this.ucbd1.Location = new System.Drawing.Point(12, 11);
-            this.ucbd1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucbd1.Name = "ucbd1";
-            this.ucbd1.Size = new System.Drawing.Size(445, 138);
-            this.ucbd1.TabIndex = 0;
+            this.ucBankDeposit1.Location = new System.Drawing.Point(12, 11);
+            this.ucBankDeposit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucBankDeposit1.Name = "ucBankDeposit1";
+            this.ucBankDeposit1.Size = new System.Drawing.Size(445, 138);
+            this.ucBankDeposit1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(459, 181);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucbd1);
+            this.Controls.Add(this.ucBankDeposit1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         #endregion
 
-        private ucBD ucbd1;
+        private ucBD ucBankDeposit1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

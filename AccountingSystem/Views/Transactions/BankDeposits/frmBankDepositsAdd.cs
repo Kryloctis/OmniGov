@@ -6,32 +6,37 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class frmBankDepositsAdd : Form
     {
-        private frmBankDeposits _frmbd;
+        private frmBankDeposits _frmBankDeposits;
+        private ucBD uc;
         public int Gcid = 0;
         public decimal Gcamount = 0;
-        public frmBankDepositsAdd(frmBankDeposits frmbd)
-        { 
+        internal string _referenceNumber;
+
+        public frmBankDepositsAdd(frmBankDeposits frmBankDeposits, string referenceNumber)
+        {
             InitializeComponent();
-            _frmbd = frmbd;
-            ucbd1.userid = Helper.UserId;
+            _frmBankDeposits = frmBankDeposits;
+            _referenceNumber = referenceNumber;
+
+            uc = ucBankDeposit1;
+            uc.userid = Helper.UserId;
         }
 
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
-            ucbd1.LoadBanks();
-            ucbd1.LoadFunds();
             if (Gcid > 0)
             {
-                ucbd1.txtamount.Value = Gcamount;
-                ucbd1.txtamount.Enabled = false;
+                uc.nudAmount.Value = Gcamount;
+                uc.nudAmount.Enabled = false;
             }
+
+            uc.txtReferenceNumber.Text = _referenceNumber;
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucbd1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -39,11 +44,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 }
                 var bdModel = new BankDepositsModel()
                 {
-                    bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
-                    fundId = Convert.ToInt16(uc.cmbfunds.SelectedValue),                     
-                    Reference = uc.txtreference.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value),
+                    bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
+                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),                     
+                    Reference = uc.txtReferenceNumber.Text.Trim(),
+                    Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.nudAmount.Value),
                     CreatedBy = uc.userid,
                 };
 
@@ -94,8 +99,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 else
                 {
                     Helper.MessageBoxSuccess("Bank Deposit has been saved.");
-                    _frmbd.LoadRecords();
-                    ucbd1.ResetForm();
+                    _frmBankDeposits.LoadRecords();
+                    ucBankDeposit1.ResetForm();
                 }
                 
             }

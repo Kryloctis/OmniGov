@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
@@ -24,27 +18,28 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         internal string GetFormErrors()
         {
             var errorArray = new string[5];
-            errorArray[0] = errorProvider.GetError(cmbbanks);
-            errorArray[1] = errorProvider.GetError(cmbfunds);
-            errorArray[2] = errorProvider.GetError(txtreference);
-            errorArray[3] = errorProvider.GetError(dtdate);
-            errorArray[4] = errorProvider.GetError(txtamount);
+            errorArray[0] = errorProvider.GetError(cmbBank);
+            errorArray[1] = errorProvider.GetError(cmbFund);
+            errorArray[2] = errorProvider.GetError(txtReferenceNumber);
+            errorArray[3] = errorProvider.GetError(dtDate);
+            errorArray[4] = errorProvider.GetError(nudAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         private void ucBD_Load(object sender, EventArgs e)
         {
-
+            LoadBanks();
+            LoadFunds();
         }
 
         internal void ResetForm()
         {
-            cmbbanks.SelectedIndex = -1;
-            cmbfunds.SelectedIndex = -1;
-            txtreference.Clear();
-            dtdate.Value = DateTime.Now;
-            txtamount.Value = Convert.ToDecimal("0.00");
+            cmbBank.SelectedIndex = -1;
+            cmbFund.SelectedIndex = -1;
+            txtReferenceNumber.Clear();
+            dtDate.Value = DateTime.Now;
+            nudAmount.Value = Convert.ToDecimal("0.00");
         }
 
         internal void LoadBanks()
@@ -54,9 +49,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bankRepository = Factory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
                 dtBank.Columns.Add("bankdetails", typeof(string), "bank_name +'-'+account_no");
-                cmbbanks.DataSource = dtBank;
-                cmbbanks.ValueMember = "id";
-                cmbbanks.DisplayMember = "bankdetails";
+                cmbBank.DataSource = dtBank;
+                cmbBank.ValueMember = "id";
+                cmbBank.DisplayMember = "bankdetails";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -68,39 +63,39 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var fundsRepository = Factory.FundsRepository();
                 var dtfunds = fundsRepository.GetRecords();
                 dtfunds.Columns.Add("funddetails", typeof(string), "fund_code +'-'+fund_name");
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "funddetails";
+                cmbFund.DataSource = dtfunds;
+                cmbFund.ValueMember = "id";
+                cmbFund.DisplayMember = "funddetails";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         } 
         private void txtreference_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtreference, "Reference!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtReferenceNumber, "Reference!");
         }
         private void txtreference_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtreference);
+            Helper.ClearErrorTextBox(errorProvider, txtReferenceNumber);
         }
 
         private void cmbbanks_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbbanks, "Banks!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbBank, "Banks!");
         }
 
         private void cmbbanks_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbbanks);
+            Helper.ClearErrorComboBox(errorProvider, cmbBank);
         }
 
         private void cmbfunds_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbfunds, "Fund!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider, cmbFund, "Fund!");
         }
 
         private void cmbfunds_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider, cmbfunds);
+            Helper.ClearErrorComboBox(errorProvider, cmbFund);
         }
     }
 }
