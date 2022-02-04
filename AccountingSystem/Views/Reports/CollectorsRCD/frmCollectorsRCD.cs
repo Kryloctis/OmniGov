@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-
             uc = ucCollectorsRCD1;
         }
 
@@ -74,7 +73,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     IsApproved = 0,
                     IsDisapproved = 0,
                     FundId = uc.fundId,
-                    Remarks = String.Empty
+                    Remarks = string.Empty
                 };
 
                 bool rcdDetailsUpdateSuccess = Factory.CollectorReportRepository().Update(collectorsReportModel);
@@ -202,7 +201,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 Helper.MessageBoxError(ex.Message); 
             }
         }
-
 
         internal void CheckRCDStatus(string reportNo)
         {

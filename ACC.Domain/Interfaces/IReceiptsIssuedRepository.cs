@@ -16,7 +16,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecords(int id);
         DataTable GetRecords(string coid, string formid);
         DataTable GetRecordsReceipts(string collectorId);
-        DataTable GetAccountabilityForAccountableForms();
+        DataTable GetAccountabilityForAccountableForms(string reportNumber);
 
         DataTable GetReturnedReceipts();
 

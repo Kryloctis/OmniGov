@@ -411,33 +411,34 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetAccountabilityForAccountableForms()
+        public DataTable GetAccountabilityForAccountableForms(string collectingOfficerId)
         {
-            try
-            {
-                string query =  $"SELECT " +
-                                $"accountable_forms, " +
-                                $"(MAX(issueto) - MIN(issuefrom) + 1) quantity, " +
-                                $"MIN(issuefrom) serial_no_from, " +
-                                $"MAX(issueto) serial_no_to, " +
-                                $"((issueto - issuefrom) + 1) issue_quantity, " +
-                                $"issuefrom, " +
-                                $"issueto, " +
-                                $"(issueto - last_issued) ending_balance_quantity, " +
-                                $"(last_issued + 1) ending_balance_serial_from, " +
-                                $"(issueto) ending_balance_serial_to " +
-                                $"FROM {viewTableName} " +
-                                $"GROUP BY collecting_officer_id ";
+            var parameter = new object[][] {
+                new object[]{"@collecting_officer_id", DbType.String, collectingOfficerId}
+            };
 
-                var dt = new DataTable();
-                return _dbGenericCommands.Fill(query, dt);
-            }
-            catch (Exception)
-            {
+            string query =  $"SELECT " +
+                            $"accountable_forms, " +
+                            $"(MAX(issueto) - MIN(issuefrom) + 1) quantity, " +
+                            $"MIN(issuefrom) serial_no_from, " +
+                            $"MAX(issueto) serial_no_to, " +
+                            $"((issueto - issuefrom) + 1) issue_quantity, " +
+                            $"issuefrom, " +
+                            $"issueto, " +
+                            $"(issueto - last_issued) ending_balance_quantity, " +
+                            $"(last_issued + 1) ending_balance_serial_from, " +
+                            $"(issueto) ending_balance_serial_to " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE " +
+                            $"collecting_officer_id = @collecting_officer_id " +
+                            $"GROUP BY collecting_officer_id ";
 
-                throw;
-            }
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+           
         }
+
+
 
         public DataTable GetReturnedReceipts()
         {

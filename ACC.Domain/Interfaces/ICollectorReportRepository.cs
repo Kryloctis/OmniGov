@@ -33,6 +33,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByReportNumber(string reportNumber);
         DataTable GetCollectorsReportByReportNo(string reportNumber);
 
+        string GetCollectorIdByReportNumber(string reportNumber);
+
         string GetRCDStatus(string reportNo);
 
         bool SetRCDStatus(byte status, string reportNo);

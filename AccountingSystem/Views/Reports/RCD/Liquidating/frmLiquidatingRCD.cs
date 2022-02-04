@@ -94,26 +94,26 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable AccountabilityForAccountableForms()
         {
             DataTable dtFromDataSource = new dsLFS.dtAccountabilityForAccountableFormsDataTable();
-            DataTable dt = Factory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms();
+            //DataTable dt = Factory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms();
 
-            if (dt.Rows.Count != 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtFromDataSource.NewRow();
-                    row["accountable_form"] = item["accountable_forms"];
-                    row["beginning_bal_quantity"] = item["quantity"];
-                    row["beginning_bal_serial_from"] = item["serial_no_from"];
-                    row["beginning_bal_serial_to"] = item["serial_no_to"];
-                    row["issue_quantity"] = item["issue_quantity"];
-                    row["issue_serial_from"] = item["issuefrom"];
-                    row["issue_serial_to"] = item["issueto"];
-                    row["ending_bal_quantity"] = item["ending_balance_quantity"];
-                    row["ending_bal_serial_from"] = item["ending_balance_serial_from"];
-                    row["ending_bal_serial_to"] = item["ending_balance_serial_to"];
-                    dtFromDataSource.Rows.Add(row);
-                }
-            }
+            //if (dt.Rows.Count != 0)
+            //{
+            //    foreach (DataRow item in dt.Rows)
+            //    {
+            //        DataRow row = dtFromDataSource.NewRow();
+            //        row["accountable_form"] = item["accountable_forms"];
+            //        row["beginning_bal_quantity"] = item["quantity"];
+            //        row["beginning_bal_serial_from"] = item["serial_no_from"];
+            //        row["beginning_bal_serial_to"] = item["serial_no_to"];
+            //        row["issue_quantity"] = item["issue_quantity"];
+            //        row["issue_serial_from"] = item["issuefrom"];
+            //        row["issue_serial_to"] = item["issueto"];
+            //        row["ending_bal_quantity"] = item["ending_balance_quantity"];
+            //        row["ending_bal_serial_from"] = item["ending_balance_serial_from"];
+            //        row["ending_bal_serial_to"] = item["ending_balance_serial_to"];
+            //        dtFromDataSource.Rows.Add(row);
+            //    }
+            //}
 
             return dtFromDataSource;
         }

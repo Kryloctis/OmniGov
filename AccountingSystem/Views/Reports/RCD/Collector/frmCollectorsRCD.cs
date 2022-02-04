@@ -96,7 +96,9 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable AccountabilityForAccountableForms()
         {
             DataTable dtFromDataSource = new dsLFS.dtAccountabilityForAccountableFormsDataTable();
-            DataTable dt = Factory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms();
+            string collectorId = GetCollectorIdByReportNumber(_reportNumber);
+
+            DataTable dt = Factory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
 
             if (dt.Rows.Count != 0)
             {
@@ -118,6 +120,20 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             }
 
             return dtFromDataSource;
+        }
+
+        private string GetCollectorIdByReportNumber(string reportNumber)
+        {
+            try
+            {
+                var collectorReportRepo = Factory.CollectorReportRepository();
+                return collectorReportRepo.GetCollectorIdByReportNumber(reportNumber);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private DataTable RemittanceAndDeposits()
