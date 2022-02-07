@@ -482,6 +482,28 @@ namespace ACC.Data
         }
 
 
+        public bool ReportNumberExist(int reportId, string reporNo)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@report_id", DbType.String, reportId },
+                    new object[] { "@report_no", DbType.String, reporNo }
+                };
+
+                string query = $"SELECT report_no FROM {tableName} WHERE report_no = @report_no AND id <> @report_id";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
         public bool ReportNumberExist(string reporNo)
         {
             try
@@ -503,6 +525,7 @@ namespace ACC.Data
 
             return false;
         }
+
 
         public bool CodeExist(string id)
         {

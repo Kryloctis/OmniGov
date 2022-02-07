@@ -43,6 +43,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
+                    CheckRCDStatus(uc.txtReport.Text.Trim());
+                    ResetLocalControls();
                     uc.ResetForm();
                 }
 
@@ -53,6 +55,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
+                    CheckRCDStatus(uc.txtReport.Text.Trim());
+                    ResetLocalControls();
                     uc.ResetForm();
                 }
             }

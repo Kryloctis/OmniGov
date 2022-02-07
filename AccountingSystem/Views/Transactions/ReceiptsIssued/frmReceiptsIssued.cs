@@ -105,9 +105,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
                 int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                btnEdit.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
-                btnDelete.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
-                btnReturn.Enabled = dgReceiptIssued.CurrentRow.Cells[7].Value.ToString().Equals("YES") ? false : true;
+
+                btnEdit.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
+                btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
+                btnReturn.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
             }
             else
             {

@@ -15,6 +15,7 @@ namespace ACC.Domain.Interfaces
         bool HasGenerated(int paymentCollectionsId);
 
         bool ReportNumberExist(string reporNo);
+        bool ReportNumberExist(int reportId, string reporNo);
 
         DataTable GetSummary(int cid, int fid, int year);
         int InsertId(CollectorReportModel entity);

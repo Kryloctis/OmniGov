@@ -336,7 +336,7 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Receipt No. From";
             datagrid.Columns[4].HeaderText = "Receipt No. To";
             datagrid.Columns[5].HeaderText = "Date Issued";
-            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
+            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd"; 
             datagrid.Columns[6].HeaderText = "Quantity";
             datagrid.Columns[7].HeaderText = "Last Issued No.";
             datagrid.Columns[8].HeaderText = "Returned";
@@ -352,12 +352,14 @@ namespace AccountingSystem
             datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+
+            datagrid.Columns[2].Width = 300;
 
             float fontSize = 9f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);

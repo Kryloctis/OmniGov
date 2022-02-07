@@ -65,7 +65,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -81,7 +80,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
             dgPayments.Rows.Clear();
             dgPayments.Refresh();
-
         }
 
         internal void LoadFunds()
@@ -212,24 +210,24 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         #region Validation
         private void txtReport_Validating(object sender, CancelEventArgs e)
         {
-
             string reportNo = txtReport.Text.Trim();
+            bool reportNoExist;
 
-            if (String.IsNullOrEmpty(reportNo))
-            {
+            if (string.IsNullOrEmpty(reportNo))
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
-                return;
-            }
 
-            var reportNoExist = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+            if (isSaveFunction == true)
+                reportNoExist  = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+            else
+                reportNoExist  = Factory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
-            if (reportNoExist)
+            if (reportNoExist == true)
             {
                 epReportNo.SetError(txtReport, "Report number already existed.");
                 e.Cancel = true;
             }
             else
-            {
+            { 
                 e.Cancel = false;
             }
 

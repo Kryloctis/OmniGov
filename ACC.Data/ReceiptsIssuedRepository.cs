@@ -144,8 +144,8 @@ namespace ACC.Data
             {
                 string query = $"SELECT {tableName}.id," +
                     $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
-                    $"{tableName}.issuefrom," +
-                    $"{tableName}.issueto," +
+                    $"{tableName}.receipt_issued_from," +
+                    $"{tableName}.receipt_issued_to," +
                     $"{tableName}.date_issued," +
                     $"{tableName}.quantity," +
                     $"{tableName}.last_issued," +
@@ -153,7 +153,7 @@ namespace ACC.Data
                     $"{tableName}.returned_date " +
                     $"FROM {tableReceipts} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableReceipts}.id " +
                     $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
-                    $"WHERE {tableName}.collecting_officers_id='{coid}' AND {tableReceipts}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.issueto={tableName}.last_issued,true,false)=false";
+                    $"WHERE {tableName}.collecting_officers_id='{coid}' AND {tableReceipts}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.receipt_issued_to={tableName}.last_issued,true,false)=false";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -171,16 +171,16 @@ namespace ACC.Data
             };
 
             string query =  $"SELECT " +
-                            $"af.id, " +
-                            $"af.acc_form_no, " +
-                            $"af.acc_form_desc, " +
-                            $"ri.quantity " +
-                            $"FROM accountable_forms af " +
-                            $"INNER JOIN receipts r " +
-                            $"ON r.accountable_forms_id = af.id " +
-                            $"INNER JOIN receipts_issued ri " +
-                            $"ON ri.receipts_id = r.id " +
-                            $"WHERE ri.collecting_officers_id = @collectingOfficerId";
+                            $"accountable_forms.id, " +
+                            $"accountable_forms.acc_form_no, " +
+                            $"accountable_forms.acc_form_desc, " +
+                            $"receipts_issued.quantity " +
+                            $"FROM accountable_forms AS accountable_forms " +
+                            $"INNER JOIN receipts AS receipts " +
+                            $"ON receipts.accountable_forms_id = accountable_forms.id " +
+                            $"INNER JOIN receipts_issued AS receipts_issued " +
+                            $"ON receipts_issued.receipts_id = receipts.id " +
+                            $"WHERE receipts_issued.collecting_officers_id = @collectingOfficerId";
 
 
             var dtri = new DataTable();
