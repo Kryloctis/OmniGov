@@ -65,35 +65,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
 
-                if (!uc.isTickets)
-                {
-                    //if (receiptIssuedRepository.IssuedExist(receiptIssuedModel))
-                    //{
-                    //    Helper.MessageBoxError("Receipt already issued!");
-                    //    return false;
-                    //}
-
-                    //if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
-                    //{
-                    //    Helper.MessageBoxError("Invalid Receipt!");
-                    //    return false;
-                    //}
-
-                    //if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
-                    //{
-                    //    Helper.MessageBoxError("Quantity Empty!");
-                    //    return false;
-                    //}
-
+                if (uc.isTickets == false)
                     return receiptIssuedRepository.Insert(receiptIssuedModel);
-                }
-
                 else
-                {
                     return receiptIssuedRepository.Insert(receiptIssuedModel);
-                }
-               
-
+            
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;

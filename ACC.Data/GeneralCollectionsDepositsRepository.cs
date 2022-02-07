@@ -11,7 +11,7 @@ namespace ACC.Data
     class GeneralCollectionsDepositsRepository:IGeneralCollectionsDepositsRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "general_collections_deeposits";
+        private readonly string tableName = "general_collections_deposits";
         private readonly string viewTableName = "view_general_collections_deposits";
 
 
@@ -149,11 +149,12 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
-                    new object[] { "@bank_deposits_id", DbType.Int16, entity.Bdid},
+                    new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionId},
+                    new object[] { "@bank_deposits_id", DbType.Int16, entity.BankDepositId},
                 };
 
-                string query = $"INSERT INTO {tableName} (general_collections_id,bank_deposits_id) VALUES (@general_collections_id,@bank_deposits_id)";
+                string query = $"INSERT INTO {tableName} (general_collections_id, bank_deposits_id) " +
+                    $"VALUES (@general_collections_id, @bank_deposits_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -169,8 +170,8 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@general_collections_id", DbType.Int16, entity.Gcid},
-                    new object[] { "@bank_deposits_id", DbType.Int16, entity.Bdid},
+                    new object[] { "@general_collections_id", DbType.Int16, entity.GeneralCollectionId},
+                    new object[] { "@bank_deposits_id", DbType.Int16, entity.BankDepositId},
                 };
 
                 string query = $"UPDATE {tableName} SET general_collections_id=@general_collections_id,bank_deposits_id=@bank_deposits_id WHERE id=@id";

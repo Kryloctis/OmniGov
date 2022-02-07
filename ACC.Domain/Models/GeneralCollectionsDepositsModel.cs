@@ -7,7 +7,7 @@ namespace ACC.Domain.Models
     public class GeneralCollectionsDepositsModel
     {
         public int Id { get; set; }
-        public int Gcid { get; set; }
-        public int Bdid { get; set; }
+        public int GeneralCollectionId { get; set; }
+        public int BankDepositId { get; set; }
     }
 }

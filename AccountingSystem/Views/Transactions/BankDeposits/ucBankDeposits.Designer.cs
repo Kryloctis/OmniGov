@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 12);
+            this.label1.Location = new System.Drawing.Point(17, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 0;
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 74);
+            this.label2.Location = new System.Drawing.Point(17, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 15);
             this.label2.TabIndex = 20;
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // txtReferenceNumber
             // 
-            this.txtReferenceNumber.Location = new System.Drawing.Point(97, 72);
+            this.txtReferenceNumber.Location = new System.Drawing.Point(88, 72);
             this.txtReferenceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReferenceNumber.MaxLength = 99;
             this.txtReferenceNumber.Name = "txtReferenceNumber";
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // dtDate
             // 
-            this.dtDate.Location = new System.Drawing.Point(97, 103);
+            this.dtDate.Location = new System.Drawing.Point(88, 103);
             this.dtDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(350, 23);
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 105);
+            this.label3.Location = new System.Drawing.Point(17, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 23;
@@ -104,7 +104,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 136);
+            this.label4.Location = new System.Drawing.Point(17, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 15);
             this.label4.TabIndex = 24;
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // nudAmount
             // 
             this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(97, 134);
+            this.nudAmount.Location = new System.Drawing.Point(88, 134);
             this.nudAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudAmount.Maximum = new decimal(new int[] {
             999999999,
@@ -132,7 +132,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBank.FormattingEnabled = true;
-            this.cmbBank.Location = new System.Drawing.Point(97, 10);
+            this.cmbBank.Location = new System.Drawing.Point(88, 10);
             this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbBank.Name = "cmbBank";
             this.cmbBank.Size = new System.Drawing.Size(350, 23);
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 43);
+            this.label5.Location = new System.Drawing.Point(17, 43);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 15);
             this.label5.TabIndex = 25;
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(97, 41);
+            this.cmbFund.Location = new System.Drawing.Point(88, 41);
             this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFund.Name = "cmbFund";
             this.cmbFund.Size = new System.Drawing.Size(350, 23);
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucBankDeposits";
-            this.Size = new System.Drawing.Size(479, 168);
+            this.Size = new System.Drawing.Size(466, 168);
             this.Load += new System.EventHandler(this.ucBD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epBank)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();

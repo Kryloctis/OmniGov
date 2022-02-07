@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     public partial class frmBankDepositsEdit : Form
     {
         private frmBankDeposits _frmbd;
-        public frmBankDepositsEdit(frmBankDeposits frmbd,int Id)
+        public frmBankDepositsEdit(frmBankDeposits frmbd, int Id)
         {
             InitializeComponent();
             _frmbd = frmbd;

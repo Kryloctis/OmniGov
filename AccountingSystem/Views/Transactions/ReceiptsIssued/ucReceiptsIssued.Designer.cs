@@ -189,6 +189,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.nudReceiptIssuedFrom.TabIndex = 12;
             this.nudReceiptIssuedFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudReceiptIssuedFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.nudReceiptIssuedFrom.Validating += new System.ComponentModel.CancelEventHandler(this.nudReceiptIssuedFrom_Validating);
+            this.nudReceiptIssuedFrom.Validated += new System.EventHandler(this.nudReceiptIssuedFrom_Validated);
             // 
             // nudReceiptIssuedTo
             // 
@@ -204,6 +206,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.nudReceiptIssuedTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudReceiptIssuedTo.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudReceiptIssuedTo.ValueChanged += new System.EventHandler(this.nudReceiptIssuedTo_ValueChanged);
+            this.nudReceiptIssuedTo.Validating += new System.ComponentModel.CancelEventHandler(this.nudReceiptIssuedTo_Validating);
+            this.nudReceiptIssuedTo.Validated += new System.EventHandler(this.nudReceiptIssuedTo_Validated);
             // 
             // ucReceiptsIssued
             // 

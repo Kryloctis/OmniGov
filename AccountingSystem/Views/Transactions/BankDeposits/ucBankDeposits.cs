@@ -35,8 +35,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 LoadBanks();
                 LoadFunds();
 
-                cmbBank.SelectedIndex = -1;
-                cmbFund.SelectedIndex = -1;
             }
         }
 
@@ -59,6 +57,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbBank.DataSource = dtBank;
                 cmbBank.ValueMember = "id";
                 cmbBank.DisplayMember = "bankdetails";
+
+                cmbBank.SelectedIndex = -1;
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -73,6 +74,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbFund.DataSource = dtfunds;
                 cmbFund.ValueMember = "id";
                 cmbFund.DisplayMember = "funddetails";
+
+                cmbFund.SelectedIndex = -1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

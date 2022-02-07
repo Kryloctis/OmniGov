@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
-            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo("RCD-002");
+            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {

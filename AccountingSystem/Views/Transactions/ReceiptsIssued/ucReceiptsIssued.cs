@@ -119,42 +119,30 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorComboBox(epReceipt, cmbReceipt);
         }
 
-        private void txtfrom_Validating(object sender, CancelEventArgs e)
+        private void nudReceiptIssuedFrom_Validating(object sender, CancelEventArgs e)
         {
             if (!isTickets)
             {
                 if (string.IsNullOrEmpty(nudReceiptIssuedFrom.Text.Trim()))
                     e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epFrom, nudReceiptIssuedFrom, "Receipt No. From.");
-
-                //if (int.Parse(txtfrom.Text.Trim()) < startingreceipt)
-                //{
-                //    errorProvider.SetError(txtfrom, "Invalid Receipt No.");
-                //    e.Cancel = true;
-                //}
             }
         }
 
-        private void txtfrom_Validated(object sender, EventArgs e)
+        private void nudReceiptIssuedFrom_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epFrom, nudReceiptIssuedFrom);
         }
 
-        private void txtto_Validating(object sender, CancelEventArgs e)
+        private void nudReceiptIssuedTo_Validating(object sender, CancelEventArgs e)
         {
             if (!isTickets)
             {
                 if (string.IsNullOrEmpty(nudReceiptIssuedTo.Text.Trim()))
                     e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epTo, nudReceiptIssuedTo, "Receipt No. To.");
-
-                //if (int.Parse(txtto.Text.Trim()) > maxreceipt)
-                //{
-                //    errorProvider.SetError(txtto, "Invalid Receipt No.");
-                //    e.Cancel = true;
-                //}
             }
         }
 
-        private void txtto_Validated(object sender, EventArgs e)
+        private void nudReceiptIssuedTo_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epTo, nudReceiptIssuedTo);
         }
@@ -213,7 +201,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

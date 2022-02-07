@@ -38,11 +38,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // 
             // ucBankDeposit1
             // 
+            this.ucBankDeposit1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBankDeposit1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucBankDeposit1.Location = new System.Drawing.Point(0, 0);
             this.ucBankDeposit1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucBankDeposit1.Name = "ucBankDeposit1";
-            this.ucBankDeposit1.Size = new System.Drawing.Size(480, 196);
+            this.ucBankDeposit1.Size = new System.Drawing.Size(463, 196);
             this.ucBankDeposit1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -55,12 +56,12 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(480, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(463, 27);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(395, 2);
+            this.btnCancel.Location = new System.Drawing.Point(378, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -72,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(307, 2);
+            this.btnSave.Location = new System.Drawing.Point(290, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -91,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(480, 196);
+            this.ClientSize = new System.Drawing.Size(463, 196);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucBankDeposit1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

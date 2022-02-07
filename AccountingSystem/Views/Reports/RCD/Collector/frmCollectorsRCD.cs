@@ -159,19 +159,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
             DataTable dt = Factory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
-
-            //if (dt.Rows.Count != 0)
-            //{
-            //    foreach (DataRow item in dt.Rows)
-            //    {
-            //        DataRow row = dtFromDataSource.NewRow();
-            //        row["name_of_accountable_officer"] = item["collecting_officer"];
-            //        row["report_no"] = item["report_no"];
-            //        row["amount"] = item["amount"];
-            //        dtFromDataSource.Rows.Add(row);
-            //    }
-            //}
-
             return dtFromDataSource;
         }
 
@@ -217,92 +204,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             return dtFromDataSource;
         }
 
-        private DataTable DataTableForms(int id)
-        {
-            var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(Convert.ToInt32(_reportNumber));
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["accforms"] = String.Format("{0} - {1}", item["acc_form_no"], item["acc_form_desc"]);
-                    row["orfrom"] = item["orfrom"];
-                    row["orto"] = item["orto"];
-                    row["amount"] = item["total"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-            return dtPC;
-        }
-
-        private DataTable DataTableCollections(int rcdNo)
-        {
-            var dtPC = new dsLFS.dtRCDCollectionsDataTable();
-            var dt = Factory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-002");
-
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    row["rcdid"] = item["id"];
-                    row["collectorname"] = item["collecting_officer"];
-                    row["reportno"] = item["report_no"];
-                    row["amount"] = item["amount"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableDeposits(int id)
-        {
-            var dtPC = new dsLFS.dtRemittanceDepositsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(2);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtPC.NewRow();
-                    //row["rcdid"] = item["id"];
-                    row["bankname"] = String.Format("{0} - {1}", item["bank_name"], item["account_no"]);
-                    row["reference"] = item["reference"];
-                    row["amount"] = item["amount"];
-                    dtPC.Rows.Add(row);
-                }
-            }
-
-            return dtPC;
-        }
-
-        private DataTable DataTableReceipts(int id)
-        {
-
-            var dtRC = new dsLFS.dtReceiptsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByReceipts(id);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtRC.NewRow();
-                    row["form"] = item["form"];
-                    row["receiptfrom"] = item["receipt_number_from"];
-                    row["receiptto"] = item["receipt_number_to"];
-                    row["issuefrom"] = item["receipt_issued_from"];
-                    row["issueto"] = item["receipt_issued_to"];
-                    row["usedfrom"] = item["ifrom"];
-                    row["usedto"] = item["ito"];
-                    dtRC.Rows.Add(row);
-
-
-                }
-            }
-
-            return dtRC;
-        }
 
 
     }

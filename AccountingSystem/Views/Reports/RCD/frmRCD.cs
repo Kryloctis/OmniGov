@@ -176,12 +176,10 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnDeposit_Click(object sender, EventArgs e)
         {
             string referenceNumber = txtRCDNo.Text.Trim();
-            _ = new frmBankDepositsAdd(new frmBankDeposits(), referenceNumber).ShowDialog();
-        }
+            decimal amount = Convert.ToDecimal(lblTotalAmount.Text);
+            int rcdId = int.Parse(this.rcdId);
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            ResetForm();
+            _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

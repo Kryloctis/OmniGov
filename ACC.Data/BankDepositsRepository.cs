@@ -109,7 +109,9 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int16, entity.fundId},
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by,funds_id) VALUES (@banks_id,@reference,@date,@amount,@created_by,@funds_id)";
+                string query = $"INSERT INTO {tableName} " +
+                               $"(banks_id, reference, date, amount, created_by, funds_id) " +
+                               $"VALUES (@banks_id, @reference, @date, @amount, @created_by, @funds_id)";
                 return _dbGenericCommands.ExecuteNonQueryId(query, parameters);
             }
             catch (Exception)
