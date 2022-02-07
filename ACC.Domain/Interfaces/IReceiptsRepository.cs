@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IReceiptsRepository:IRepository<ReceiptsModel>
+    public interface IReceiptsRepository : IRepository<ReceiptsModel>
     {
         bool ReceiptExist(int accid, int from, int to);
         bool ReceiptConsumed(int id);
@@ -17,5 +17,7 @@ namespace ACC.Domain.Interfaces
         int RMAX(int accid);
         int RMIN(int accid);
         bool AllowEdit(int id);
+
+        DataTable GetReceipts();
     }
 }

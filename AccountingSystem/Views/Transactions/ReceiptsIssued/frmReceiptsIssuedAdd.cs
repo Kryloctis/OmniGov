@@ -23,13 +23,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             if(_receiptId > 0)
             {
-                ucReceipts1.LoadCollectors(_receiptId);
-                ucReceipts1.cmbreceipt.SelectedValue = _receiptId;
-                ucReceipts1.cmbreceipt.Enabled = false;
+                uc.LoadCollectors(_receiptId);
+                uc.cmbReceipt.SelectedValue = _receiptId;
+                uc.cmbReceipt.Enabled = false;
             }
             else
             {
-                ucReceipts1.LoadCollectors();
+                uc.LoadCollectors();
             }
         }
 
@@ -44,12 +44,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     return false;
                 }
 
-                var collectorId = Convert.ToInt32(uc.cmbcollector.SelectedValue);
-                var receiptId = Convert.ToInt32(uc.cmbreceipt.SelectedValue);
-                var dateIssued = uc.dtpissued.Value;
-                var issueFrom = Convert.ToInt32(uc.txtfrom.Text.Trim());
-                var issueTo = Convert.ToInt32(uc.txtto.Text.Trim());
-                var quantity = Convert.ToInt32(uc.txtquantity.Text.Trim());
+                var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+                var receiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
+                var dateIssued = uc.dtpIssued.Value;
+                var issueFrom = Convert.ToInt32(uc.nudReceiptIssuedFrom.Text.Trim());
+                var issueTo = Convert.ToInt32(uc.nudReceiptIssuedTo.Text.Trim());
+                var quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim());
                 var userId = Helper.UserId;
 
                 var receiptIssuedModel = new ReceiptsIssuedModel()
@@ -61,12 +61,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     IssuedTo = issueTo,
                     Quantity = quantity,
                     IssuedByUserId = userId
-
                 };
 
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
 
-                if (!uc.istickets)
+                if (!uc.isTickets)
                 {
                     //if (receiptIssuedRepository.IssuedExist(receiptIssuedModel))
                     //{

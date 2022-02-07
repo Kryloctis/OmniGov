@@ -333,8 +333,8 @@ namespace AccountingSystem
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Collector";
             datagrid.Columns[2].HeaderText = "Receipt (Form)";
-            datagrid.Columns[3].HeaderText = "Series No. From";
-            datagrid.Columns[4].HeaderText = "Series No. To";
+            datagrid.Columns[3].HeaderText = "Receipt No. From";
+            datagrid.Columns[4].HeaderText = "Receipt No. To";
             datagrid.Columns[5].HeaderText = "Date Issued";
             datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[6].HeaderText = "Quantity";

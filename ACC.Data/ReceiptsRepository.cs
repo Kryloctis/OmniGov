@@ -106,6 +106,23 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtri);
         }
 
+        public DataTable GetReceipts()
+        {
+            string query = $"SELECT " +
+                           $"id, " +
+                           $"CONCAT(acc_form_no, ' - ', acc_form_desc, ' (' , receipt_number_from , '-' , receipt_number_to , ')') receipt, " +
+                           $"receipt_number_from, " +
+                           $"receipt_number_to, " +
+                           $"received_date, " +
+                           $"quantity, " +
+                           $"user officer " +
+                           $"FROM {viewTableName} " +
+                           $"ORDER BY accountable_forms_id";
+
+            var dtri = new DataTable();
+            return _dbGenericCommands.Fill(query, dtri);
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameter = new object[][] {
@@ -293,7 +310,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT IFNULL(last_issued,issueto) AS issuelast,issueto,is_returned FROM {tableReceiptsIssued} WHERE receipts_id='{id}' AND issueto<>IFNULL(last_issued,0) ORDER BY issuelast DESC";
+                string query = $"SELECT IFNULL(last_issued, receipt_issued_to) AS last_issued, receipt_issued_to, is_returned FROM {tableReceiptsIssued} WHERE receipts_id='{id}' AND receipt_issued_to <> IFNULL(last_issued,0) ORDER BY last_issued DESC";
 
                 var dtri = new DataTable();
                 return _dbGenericCommands.Fill(query, dtri);
@@ -405,6 +422,6 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        
+ 
     }
 }

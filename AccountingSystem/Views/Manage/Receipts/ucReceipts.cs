@@ -83,11 +83,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
 
-                if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) >= receiptNumberTo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
-                {
-                    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Number.");
-                    e.Cancel = true;
-                }
+                //if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) >= receiptNumberTo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
+                //{
+                //    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Numbersds");
+                //    e.Cancel = true;
+                //}
             }
         }
 
@@ -235,7 +235,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             
         }
 
-
-
+        private void ucReceipts_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                
+            }   
+        }
     }
 }

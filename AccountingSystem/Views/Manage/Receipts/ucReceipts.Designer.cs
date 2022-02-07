@@ -216,6 +216,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceipts";
             this.Size = new System.Drawing.Size(540, 203);
+            this.Load += new System.EventHandler(this.ucReceipts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epAccountableForms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReceiptNumberTo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epQuantity)).EndInit();

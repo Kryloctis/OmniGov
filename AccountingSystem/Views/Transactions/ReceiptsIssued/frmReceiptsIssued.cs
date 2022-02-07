@@ -30,7 +30,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }   
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -94,8 +97,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
             }
         }
-
-        
 
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
