@@ -375,7 +375,8 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form,{tableReceipts}.receiptsfrom,{tableReceipts}.receiptsto,{tableReceiptsIssued}.issuefrom,{tableReceiptsIssued}.issueto,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.issuefrom-1 AND {tableReceiptsIssued}.issueto+1 ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.issuefrom-1 AND {tableReceiptsIssued}.issueto+1 ORDER BY receipt_no DESC LIMIT 1) AS ito FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id WHERE {tableAccountableForms}.id IN (SELECT {tablePaymentCollections}.accountable_forms_id FROM {tablePaymentCollections} LEFT JOIN {tableCollectorReportPayments} ON {tablePaymentCollections}.id={tableCollectorReportPayments}.payment_collections_id LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReportPayments}.collector_report_id WHERE {tableGeneralCollectionsPayment}.general_collections_id='{Id}' AND {tablePaymentCollections}.receipt_no BETWEEN {tableReceiptsIssued}.issuefrom-1 AND {tableReceiptsIssued}.issueto+1)";
+
+                string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form,{tableReceipts}.receipt_number_from,{tableReceipts}.receipt_number_to,{tableReceiptsIssued}.receipt_issued_from,{tableReceiptsIssued}.receipt_issued_to,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1 ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1 ORDER BY receipt_no DESC LIMIT 1) AS ito FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id WHERE {tableAccountableForms}.id IN (SELECT {tablePaymentCollections}.accountable_forms_id FROM {tablePaymentCollections} LEFT JOIN {tableCollectorReportPayments} ON {tablePaymentCollections}.id={tableCollectorReportPayments}.payment_collections_id LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReportPayments}.collector_report_id WHERE {tableGeneralCollectionsPayment}.general_collections_id='{Id}' AND {tablePaymentCollections}.receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1)";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);
@@ -390,11 +391,14 @@ namespace ACC.Data
         {
             try
             {
+
+            
+
                 string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form, " +
-                    $"{tableReceipts}.receiptsfrom, " +
-                    $"{tableReceipts}.receiptsto, " +
-                    $"{tableReceiptsIssued}.issuefrom, " +
-                    $"{tableReceiptsIssued}.issueto, " +
+                    $"{tableReceipts}.receipt_number_from, " +
+                    $"{tableReceipts}.receipt_number_to, " +
+                    $"{tableReceiptsIssued}.receipt_issued_from, " +
+                    $"{tableReceiptsIssued}.receipt_issued_to, " +
                     $"(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND collecting_officers_id={tableCollectingOfficers}.id AND payment_date <= CAST('{to}' AS DATE) ORDER BY receipt_no DESC LIMIT 1) AS ito,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS officers FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id LEFT JOIN {tableCollectingOfficers} ON {tableReceiptsIssued}.collecting_officers_id={tableCollectingOfficers}.id WHERE {tableAccountableForms}.id IN (SELECT accountable_forms_id FROM {tablePaymentCollections} WHERE payment_date <= CAST('{to}' AS DATE))";
 
                 var dtpc = new DataTable();

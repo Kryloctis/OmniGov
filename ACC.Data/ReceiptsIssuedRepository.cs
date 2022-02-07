@@ -422,18 +422,17 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[]{"@collecting_officer_id", DbType.String, collectingOfficerId}
             };
-
             string query =  $"SELECT " +
                             $"accountable_forms, " +
-                            $"(MAX(issueto) - MIN(issuefrom) + 1) quantity, " +
-                            $"MIN(issuefrom) serial_no_from, " +
-                            $"MAX(issueto) serial_no_to, " +
-                            $"((issueto - issuefrom) + 1) issue_quantity, " +
-                            $"issuefrom, " +
-                            $"issueto, " +
-                            $"(issueto - last_issued) ending_balance_quantity, " +
+                            $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
+                            $"MIN(receipt_issued_from) receipt_issued_from, " +
+                            $"MAX(receipt_issued_to) receipt_issued_to, " +
+                            $"((receipt_issued_to - receipt_issued_from) + 1) issue_quantity, " +
+                            $"receipt_issued_from, " +
+                            $"receipt_issued_to, " +
+                            $"(receipt_issued_to - last_issued) ending_balance_quantity, " +
                             $"(last_issued + 1) ending_balance_serial_from, " +
-                            $"(issueto) ending_balance_serial_to " +
+                            $"(receipt_issued_to) ending_balance_serial_to " +
                             $"FROM {viewTableName} " +
                             $"WHERE " +
                             $"collecting_officer_id = @collecting_officer_id " +

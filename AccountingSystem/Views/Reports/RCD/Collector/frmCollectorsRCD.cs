@@ -107,11 +107,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     DataRow row = dtFromDataSource.NewRow();
                     row["accountable_form"] = item["accountable_forms"];
                     row["beginning_bal_quantity"] = item["quantity"];
-                    row["beginning_bal_serial_from"] = item["serial_no_from"];
-                    row["beginning_bal_serial_to"] = item["serial_no_to"];
+                    row["beginning_bal_serial_from"] = item["receipt_issued_from"];
+                    row["beginning_bal_serial_to"] = item["receipt_issued_to"];
                     row["issue_quantity"] = item["issue_quantity"];
-                    row["issue_serial_from"] = item["issuefrom"];
-                    row["issue_serial_to"] = item["issueto"];
+                    row["issue_serial_from"] = item["receipt_issued_from"];
+                    row["issue_serial_to"] = item["receipt_issued_to"];
                     row["ending_bal_quantity"] = item["ending_balance_quantity"];
                     row["ending_bal_serial_from"] = item["ending_balance_serial_from"];
                     row["ending_bal_serial_to"] = item["ending_balance_serial_to"];
@@ -186,8 +186,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     DataRow row = dtFromDataSource.NewRow();
                     row["type_of_form"] = item["accountable_forms"];
-                    row["serial_no_from"] = item["serial_no_from"];
-                    row["serial_no_to"] = item["serial_no_to"];
+                    row["serial_no_from"] = item["report_number_from"];
+                    row["serial_no_to"] = item["report_number_to"];
                     row["amount"] = item["amount"];
                     dtFromDataSource.Rows.Add(row);
                 }
@@ -289,13 +289,15 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     DataRow row = dtRC.NewRow();
                     row["form"] = item["form"];
-                    row["receiptfrom"] = item["receiptsfrom"];
-                    row["receiptto"] = item["receiptsto"];
-                    row["issuefrom"] = item["issuefrom"];
-                    row["issueto"] = item["issueto"];
+                    row["receiptfrom"] = item["receipt_number_from"];
+                    row["receiptto"] = item["receipt_number_to"];
+                    row["issuefrom"] = item["receipt_issued_from"];
+                    row["issueto"] = item["receipt_issued_to"];
                     row["usedfrom"] = item["ifrom"];
                     row["usedto"] = item["ito"];
                     dtRC.Rows.Add(row);
+
+
                 }
             }
 

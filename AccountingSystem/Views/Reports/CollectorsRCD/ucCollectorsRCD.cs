@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                         cmbCollector.SelectedIndex = -1;
                     }
                 }
-
             }
             catch (Exception)
             {
