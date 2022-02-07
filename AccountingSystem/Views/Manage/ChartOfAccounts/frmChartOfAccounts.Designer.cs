@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
             this.cmbxGenLedgAccountGroup = new System.Windows.Forms.ComboBox();
-            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.btnRetrieveAll = new System.Windows.Forms.Button();
             this.cmbYear = new System.Windows.Forms.ComboBox();
             this.cmbFund = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // tabGeneralLedgers
             // 
             this.tabGeneralLedgers.Controls.Add(this.cmbxGenLedgAccountGroup);
-            this.tabGeneralLedgers.Controls.Add(this.btnRetrieve);
+            this.tabGeneralLedgers.Controls.Add(this.btnRetrieveAll);
             this.tabGeneralLedgers.Controls.Add(this.cmbYear);
             this.tabGeneralLedgers.Controls.Add(this.cmbFund);
             this.tabGeneralLedgers.Controls.Add(this.txtSearch);
@@ -193,23 +193,23 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.cmbxGenLedgAccountGroup.Size = new System.Drawing.Size(177, 23);
             this.cmbxGenLedgAccountGroup.TabIndex = 10;
             // 
-            // btnRetrieve
+            // btnRetrieveAll
             // 
-            this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRetrieve.Location = new System.Drawing.Point(1037, 6);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
-            this.btnRetrieve.TabIndex = 9;
-            this.btnRetrieve.Text = "&Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
-            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            this.btnRetrieveAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRetrieveAll.Location = new System.Drawing.Point(1026, 6);
+            this.btnRetrieveAll.Name = "btnRetrieveAll";
+            this.btnRetrieveAll.Size = new System.Drawing.Size(86, 23);
+            this.btnRetrieveAll.TabIndex = 9;
+            this.btnRetrieveAll.Text = "&Retrieve All";
+            this.btnRetrieveAll.UseVisualStyleBackColor = true;
+            this.btnRetrieveAll.Click += new System.EventHandler(this.btnRetrieveAll_Click);
             // 
             // cmbYear
             // 
             this.cmbYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(938, 6);
+            this.cmbYear.Location = new System.Drawing.Point(927, 6);
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(93, 23);
             this.cmbYear.TabIndex = 8;
@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.cmbFund.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(782, 6);
+            this.cmbFund.Location = new System.Drawing.Point(771, 6);
             this.cmbFund.Name = "cmbFund";
             this.cmbFund.Size = new System.Drawing.Size(150, 23);
             this.cmbFund.TabIndex = 7;
@@ -509,7 +509,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripButton BtnSetBalance;
         private System.Windows.Forms.ComboBox cmbFund;
         private System.Windows.Forms.ComboBox cmbYear;
-        private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ComboBox cmbxGenLedgAccountGroup;
+        private System.Windows.Forms.Button btnRetrieveAll;
     }
 }
