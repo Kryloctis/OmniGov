@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
@@ -80,17 +81,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
-        private DataTable GeneralLedgersDataTable()
+        private DataTable GeneralLedgersDataTable(int limitSize)
         {
             DataTable dataTable;
             byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
             int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
+            string searchText = txtSearch.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
-                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId(accountGroupId);
-            else
-                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, txtSearch.Text.Trim());
+            if (limitSize > 0)
+                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
+                    else
+                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
 
             dataTable.Columns.Add("Debit", typeof(decimal));
             dataTable.Columns.Add("Credit", typeof(decimal));
@@ -109,18 +111,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             return dataTable;
         }
 
-        internal void LoadGeneralLedgers()
+        internal void LoadGeneralLedgers(int limitSize)
         {
             try
-            {
-                if (txtSearch.Text.Length > 3 || string.IsNullOrWhiteSpace(txtSearch.Text.Trim()))
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(), dgGeneralLedgerAccounts);
-                    lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
-                    Cursor.Current = Cursors.Default;
-                    DisplayRecordCount(dgGeneralLedgerAccounts);
-                }
+            {       
+                Cursor.Current = Cursors.WaitCursor;
+                HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(limitSize), dgGeneralLedgerAccounts);
+                lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
+                Cursor.Current = Cursors.Default;
+                DisplayRecordCount(dgGeneralLedgerAccounts);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -486,12 +485,20 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadGeneralLedgers();
+            if (txtSearch.TextLength > 2)
+                LoadGeneralLedgers(0);
+
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                var dataTable = (DataTable)dgGeneralLedgerAccounts.DataSource;
+                dataTable.Rows.Clear();
+            }
         }
 
-        private void btnRetrieve_Click(object sender, EventArgs e)
+        private void btnRetrieveAll_Click(object sender, EventArgs e)
         {
-            LoadGeneralLedgers();
+            txtSearch.Clear();
+            LoadGeneralLedgers(0);
         }
 
         private void dgSubMajorAccount_SelectionChanged(object sender, EventArgs e)

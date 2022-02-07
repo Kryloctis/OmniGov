@@ -425,6 +425,21 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
+        public DataTable GetViewRecordsBy_AccountGroupId_Search_Limited(int accountGroupId, string searchText, int limit)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@account_group_id", DbType.Int32, accountGroupId},
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" },
+                new object[] { "@limit", DbType.Int32, limit}
+            };
+
+            string query = $"SELECT general_ledger_accounts_id, account_code, ledger_name, created_at, updated_at FROM {viewTableName} WHERE account_group_id = @account_group_id AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText OR ledger_name LIKE @searchText) LIMIT @limit";
+
+            var dtGeneralLedgers = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
+        }
+
         public DataTable GetGeneralLedgerAccountsIncomeRecords(string searchText)
         {
             try
@@ -459,5 +474,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
+    
     }
 }

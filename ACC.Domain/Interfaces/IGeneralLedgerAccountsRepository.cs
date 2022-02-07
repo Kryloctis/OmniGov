@@ -31,5 +31,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
 
         DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText);
+
+        DataTable GetViewRecordsBy_AccountGroupId_Search_Limited(int accountGroupId, string searchText, int limit);
     }
 }

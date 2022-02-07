@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                 Helper.MessageBoxSuccess("Balance has been saved.");
 
                 if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers();
+                if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
                 Close();
             }
         }
@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                 {
                     Helper.MessageBoxSuccess($"Balance has been deleted.");
                     if (_frmSubsidiary != null) _frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
-                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers();
+                    if (_frmChartOfAccounts != null) _frmChartOfAccounts.LoadGeneralLedgers(30);
                 }
                 Close();
             }
