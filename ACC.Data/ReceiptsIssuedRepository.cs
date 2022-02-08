@@ -98,6 +98,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public DataTable GetRecords()
         {
             string query =  $"SELECT  " +
@@ -120,22 +121,6 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtri);
         }
 
-        public DataTable GetRecordsByCollectorId(int collectorId)
-        {
-            var parameter = new object[][] {
-                new object[]{"@collecting_officer_id", DbType.String, collectorId }
-            };
-
-            string query = $"SELECT * FROM {tableReceipts} " +
-                $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
-                $"WHERE ({tableReceipts}.receipt_number_to <> IFNULL((SELECT SUM(IF(IFNULL(ri.last_issued,0)>0,ri.receipt_issued_to-ri.last_issued,0)) FROM {tableName} ri WHERE ri.receipts_id={tableReceipts}.id),0) OR {tableReceipts}.quantity<>IFNULL((SELECT SUM(ri.quantity) FROM {tableName} ri LEFT JOIN {tableReceipts} r ON ri.receipts_id=r.id LEFT JOIN {tableAccountableForms} af ON r.accountable_forms_id=af.id WHERE r.id=receipts.id),0))" +
-                $"AND {tableReceipts}.id NOT IN (SELECT {tableName}.receipts_id FROM {tableName} WHERE {tableName}.collecting_officers_id='{collectorId}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0)";
-
-            //string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND is_returned = false ";
-            var dtReceiptsIssued = new DataTable();
-
-            return _dbGenericCommands.FillBySearch(query, dtReceiptsIssued, parameter);
-        }
 
         public DataTable GetRecords(string coid, string formid)
         {
@@ -237,88 +222,6 @@ namespace ACC.Data
             return false;
         }
 
-        public bool IssuedExist(ReceiptsIssuedModel entity)
-        {
-            try
-            {
-              
-                var parameters = new object[][]
-                {
-                    new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId },
-                    new object[] { "@issuefrom", DbType.Int32, entity.IssuedFrom },
-                    new object[] { "@issueto", DbType.Int32, entity.IssuedTo }
-                };
-
-               string query = $"SELECT id FROM {tableName} WHERE receipts_id=@receipts_id AND issuefrom=@issuefrom AND issueto=@issueto AND IF(IFNULL(is_returned,0)<1,false,true)=false";
-
-
-
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool IssuedExist(int coid, int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@collecting_officers_id", DbType.Int32, coid },
-                    new object[] { "@receipts_id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT * FROM {tableName} WHERE {tableName}.collecting_officers_id = @collecting_officers_id AND {tableName}.receipts_id=@receipts_id AND IF(IFNULL({tableName}.is_returned,0)<1,false,true)=true";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool HasIssued(int accountableFormId, int collectorId)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@accountable_form_id", DbType.Int32, accountableFormId },
-                    new object[] { "@collecting_officer_id", DbType.Int32, collectorId },
-                };
-
-                string query = $"SELECT * " +
-                               $"FROM {viewTableName} " +
-                               $"WHERE " +
-                               $"accountable_form_id = @accountable_form_id " +
-                               $"AND " +
-                               $"collecting_officer_id = @collecting_officer_id " +
-                               $"AND is_returned IS NULL"; 
-
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
         public bool Insert(ReceiptsIssuedModel entity)
         {
             try
@@ -379,41 +282,27 @@ namespace ACC.Data
 
         public bool UpdateReturnedReceipt(ReceiptsIssuedModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@is_returned", DbType.Int32, entity.Is_returned},
-                    new object[] { "@returned_date", DbType.Date, entity.Returned_date}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@is_returned", DbType.Int32, entity.Is_returned},
+                new object[] { "@returned_date", DbType.Date, entity.Returned_date}
+            };
 
-                string query = $"UPDATE {tableName} SET is_returned=@is_returned,returned_date=@returned_date WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET is_returned=@is_returned,returned_date=@returned_date WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool UpdateCurrentIssued(ReceiptsIssuedModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, entity.Id},
-                    new object[] { "@last_issued", DbType.Int32, entity.Last_issued}
-                };
+                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@last_issued", DbType.Int32, entity.Last_issued}
+            };
 
-                string query = $"UPDATE {tableName} SET last_issued = @last_issued WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET last_issued = @last_issued WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public DataTable GetAccountabilityForAccountableForms(string collectingOfficerId)
@@ -441,8 +330,6 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
            
         }
-
-
 
         public DataTable GetReturnedReceipts()
         {
