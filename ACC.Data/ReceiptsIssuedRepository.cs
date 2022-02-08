@@ -122,30 +122,32 @@ namespace ACC.Data
         }
 
 
-        public DataTable GetRecords(string coid, string formid)
+        public DataTable GetIssuedReceiptByCollectorIdAndAccountableFormId(string collectorId, string accountableFormId)
         {
-            try
-            {
-                string query = $"SELECT {tableName}.id," +
-                    $"CONCAT({tableAccountableForms}.acc_form_no,' - ',{tableAccountableForms}.acc_form_desc) AS receipt," +
-                    $"{tableName}.receipt_issued_from," +
-                    $"{tableName}.receipt_issued_to," +
-                    $"{tableName}.date_issued," +
-                    $"{tableName}.quantity," +
-                    $"{tableName}.last_issued," +
-                    $"IF(IFNULL({tableName}.is_returned,0)>0,'YES','NO') AS returned," +
-                    $"{tableName}.returned_date " +
-                    $"FROM {tableReceipts} LEFT JOIN {tableName} ON {tableName}.receipts_id={tableReceipts}.id " +
-                    $"LEFT JOIN {tableAccountableForms} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id " +
-                    $"WHERE {tableName}.collecting_officers_id='{coid}' AND {tableReceipts}.accountable_forms_id='{formid}' AND IF(IFNULL({tableName}.is_returned,0)>0,1,0)=0 AND IF({tableName}.receipt_issued_to={tableName}.last_issued,true,false)=false";
+            var parameter = new object[][] {
+                new object[]{"@collecting_officer_id", DbType.String, collectorId },
+                new object[]{"@accountable_form_id", DbType.String, accountableFormId }
+            };
 
-                var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT " +
+                           $"id, " +
+                           $"accountable_forms, " +
+                           $"receipt_issued_from, " +
+                           $"receipt_issued_to, " +
+                           $"date_issued, " +
+                           $"quantity, " +
+                           $"last_issued, " +
+                           $"IF(is_returned > 0, 'YES', 'NO') AS returned, " +
+                           $"returned_date " +
+                           $"FROM view_receipts_issued " +
+                           $"WHERE " +
+                           $"collecting_officer_id = @collecting_officer_id AND " +
+                           $"accountable_form_id = @accountable_form_id AND " +
+                           $"IF(is_returned > 0, 1, 0) = 0  AND " +
+                           $"IF(receipt_issued_to = last_issued, true, false) = false";
+
+            var dtReceiptIssued = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
         public DataTable GetRecordsReceipts(string collectorId)
