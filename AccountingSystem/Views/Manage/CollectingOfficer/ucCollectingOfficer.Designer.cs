@@ -31,21 +31,21 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtFname = new System.Windows.Forms.TextBox();
+            this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMI = new System.Windows.Forms.TextBox();
+            this.txtMiddleInitial = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtLname = new System.Windows.Forms.TextBox();
+            this.txtLastName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtJobtitle = new System.Windows.Forms.TextBox();
-            this.epFname = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epMI = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epLname = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFirstName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epMiddleInitial = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epLastName = new System.Windows.Forms.ErrorProvider(this.components);
             this.epJobtitle = new System.Windows.Forms.ErrorProvider(this.components);
             this.linkuser = new System.Windows.Forms.LinkLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.epFname)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLname)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJobtitle)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,16 +58,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.label2.TabIndex = 7;
             this.label2.Text = "First Name";
             // 
-            // txtFname
+            // txtFirstName
             // 
-            this.txtFname.Location = new System.Drawing.Point(99, 32);
-            this.txtFname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtFname.MaxLength = 45;
-            this.txtFname.Name = "txtFname";
-            this.txtFname.Size = new System.Drawing.Size(324, 23);
-            this.txtFname.TabIndex = 6;
-            this.txtFname.Validating += new System.ComponentModel.CancelEventHandler(this.txtFname_Validating);
-            this.txtFname.Validated += new System.EventHandler(this.txtFname_Validated);
+            this.txtFirstName.Location = new System.Drawing.Point(99, 32);
+            this.txtFirstName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtFirstName.MaxLength = 45;
+            this.txtFirstName.Name = "txtFirstName";
+            this.txtFirstName.Size = new System.Drawing.Size(324, 23);
+            this.txtFirstName.TabIndex = 6;
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFname_Validating);
+            this.txtFirstName.Validated += new System.EventHandler(this.txtFname_Validated);
             // 
             // label1
             // 
@@ -78,16 +78,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.label1.TabIndex = 9;
             this.label1.Text = "Middle Initial";
             // 
-            // txtMI
+            // txtMiddleInitial
             // 
-            this.txtMI.Location = new System.Drawing.Point(99, 66);
-            this.txtMI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtMI.MaxLength = 3;
-            this.txtMI.Name = "txtMI";
-            this.txtMI.Size = new System.Drawing.Size(324, 23);
-            this.txtMI.TabIndex = 8;
-            this.txtMI.Validating += new System.ComponentModel.CancelEventHandler(this.txtMI_Validating);
-            this.txtMI.Validated += new System.EventHandler(this.txtMI_Validated);
+            this.txtMiddleInitial.Location = new System.Drawing.Point(99, 66);
+            this.txtMiddleInitial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtMiddleInitial.MaxLength = 3;
+            this.txtMiddleInitial.Name = "txtMiddleInitial";
+            this.txtMiddleInitial.Size = new System.Drawing.Size(324, 23);
+            this.txtMiddleInitial.TabIndex = 8;
+            this.txtMiddleInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMI_Validating);
+            this.txtMiddleInitial.Validated += new System.EventHandler(this.txtMI_Validated);
             // 
             // label3
             // 
@@ -98,16 +98,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.label3.TabIndex = 11;
             this.label3.Text = "Last Name";
             // 
-            // txtLname
+            // txtLastName
             // 
-            this.txtLname.Location = new System.Drawing.Point(99, 100);
-            this.txtLname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtLname.MaxLength = 45;
-            this.txtLname.Name = "txtLname";
-            this.txtLname.Size = new System.Drawing.Size(324, 23);
-            this.txtLname.TabIndex = 10;
-            this.txtLname.Validating += new System.ComponentModel.CancelEventHandler(this.txtLname_Validating);
-            this.txtLname.Validated += new System.EventHandler(this.txtLname_Validated);
+            this.txtLastName.Location = new System.Drawing.Point(99, 100);
+            this.txtLastName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtLastName.MaxLength = 45;
+            this.txtLastName.Name = "txtLastName";
+            this.txtLastName.Size = new System.Drawing.Size(324, 23);
+            this.txtLastName.TabIndex = 10;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLname_Validating);
+            this.txtLastName.Validated += new System.EventHandler(this.txtLname_Validated);
             // 
             // label4
             // 
@@ -128,17 +128,17 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.txtJobtitle.TabIndex = 12;
             this.txtJobtitle.Text = "Collecting Officer";
             // 
-            // epFname
+            // epFirstName
             // 
-            this.epFname.ContainerControl = this;
+            this.epFirstName.ContainerControl = this;
             // 
-            // epMI
+            // epMiddleInitial
             // 
-            this.epMI.ContainerControl = this;
+            this.epMiddleInitial.ContainerControl = this;
             // 
-            // epLname
+            // epLastName
             // 
-            this.epLname.ContainerControl = this;
+            this.epLastName.ContainerControl = this;
             // 
             // epJobtitle
             // 
@@ -164,17 +164,17 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtJobtitle);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtLname);
+            this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtMI);
+            this.Controls.Add(this.txtMiddleInitial);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtFname);
+            this.Controls.Add(this.txtFirstName);
             this.Name = "ucCollectingOfficer";
             this.Size = new System.Drawing.Size(449, 176);
             this.Load += new System.EventHandler(this.ucCollectingOfficer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epFname)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLname)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epMiddleInitial)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epJobtitle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -184,16 +184,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         #endregion
 
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.TextBox txtFname;
+        internal System.Windows.Forms.TextBox txtFirstName;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox txtMI;
+        internal System.Windows.Forms.TextBox txtMiddleInitial;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox txtLname;
+        internal System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtJobtitle;
-        private System.Windows.Forms.ErrorProvider epFname;
-        private System.Windows.Forms.ErrorProvider epMI;
-        private System.Windows.Forms.ErrorProvider epLname;
+        private System.Windows.Forms.ErrorProvider epFirstName;
+        private System.Windows.Forms.ErrorProvider epMiddleInitial;
+        private System.Windows.Forms.ErrorProvider epLastName;
         private System.Windows.Forms.ErrorProvider epJobtitle;
         internal System.Windows.Forms.LinkLabel linkuser;
     }

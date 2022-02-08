@@ -36,9 +36,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 // proceed to insert
                 var model = new CollectingOfficerModel()
                 {
-                    FirstName = uc.txtFname.Text.Trim(),
-                    MiddleInitial = uc.txtMI.Text.Trim(),
-                    LastName = uc.txtLname.Text.Trim(),
+                    FirstName = uc.txtFirstName.Text.Trim(),
+                    MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
+                    LastName = uc.txtLastName.Text.Trim(),
                     JobTitle = uc.txtJobtitle.Text.Trim(),
                     UserId = uc.UserId
                 };

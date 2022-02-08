@@ -49,7 +49,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 int OfficerId = int.Parse(dgCollectingOfficer.SelectedCells[0].Value.ToString());
                 _ = new frmCollectingOfficerEdit(this, OfficerId).ShowDialog();
             }
-         
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

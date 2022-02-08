@@ -17,32 +17,31 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         internal string GetFormErrors()
         {
             var errorArray = new string[4];
-            errorArray[0] = epFname.GetError(txtFname);
-            errorArray[1] = epMI.GetError(txtMI);
-            errorArray[2] = epLname.GetError(txtLname);
+            errorArray[0] = epFirstName.GetError(txtFirstName);
+            errorArray[1] = epMiddleInitial.GetError(txtMiddleInitial);
+            errorArray[2] = epLastName.GetError(txtLastName);
             errorArray[3] = epJobtitle.GetError(txtJobtitle);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
-
         internal void ResetForm()
         {
-            txtFname.Clear();
-            txtMI.Clear();
-            txtLname.Clear();
+            txtFirstName.Clear();
+            txtMiddleInitial.Clear();
+            txtLastName.Clear();
             txtJobtitle.Clear();
         }
 
         private void txtFname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFname, txtFname, "first name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstName, "first name");
 
             var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-            string fName = txtFname.Text.Trim();
-            string midInitial = txtMI.Text.Trim();
-            string lname = txtLname.Text.Trim();
+            string fName = txtFirstName.Text.Trim();
+            string midInitial = txtMiddleInitial.Text.Trim();
+            string lname = txtLastName.Text.Trim();
             bool fullNameExist;
 
            
@@ -51,29 +50,29 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             if (fullNameExist)
             {
-                epFname.SetError(txtFname, "Validation");              
+                epFirstName.SetError(txtFirstName, "Validation");              
                 e.Cancel = true;
             }
         }
 
         private void txtFname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epFname, txtFname);
+            Helper.ClearErrorTextBox(epFirstName, txtFirstName);
         }
 
         private void txtMI_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epMI, txtMI);
+            Helper.ClearErrorTextBox(epMiddleInitial, txtMiddleInitial);
         }
 
         private void txtMI_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epMI, txtMI, "middle initial");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epMiddleInitial, txtMiddleInitial, "middle initial");
 
             var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-            string fName = txtFname.Text.Trim();
-            string midInitial = txtMI.Text.Trim();
-            string lname = txtLname.Text.Trim();
+            string fName = txtFirstName.Text.Trim();
+            string midInitial = txtMiddleInitial.Text.Trim();
+            string lname = txtLastName.Text.Trim();
             bool fullNameExist;
 
 
@@ -82,35 +81,33 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             if (fullNameExist)
             {
-                epMI.SetError(txtMI, "Officer's Fullname");
+                epMiddleInitial.SetError(txtMiddleInitial, "Officer's Fullname");
                 e.Cancel = true;
             }
         }
 
         private void txtLname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLname, txtLname, "last name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastName, "last name");
 
-            var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-            string fName = txtFname.Text.Trim();
-            string midInitial = txtMI.Text.Trim();
-            string lname = txtLname.Text.Trim();
+            string firstName = txtFirstName.Text.Trim();
+            string middleInitial = txtMiddleInitial.Text.Trim();
+            string lastName = txtLastName.Text.Trim();
             bool fullNameExist;
 
-
-            fullNameExist = collectingOfficerRepository.FullNameExist(fName, midInitial, lname, OfficerId); // add form
-
+            var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+            fullNameExist = collectingOfficerRepository.FullNameExist(firstName, middleInitial, lastName, OfficerId); 
 
             if (fullNameExist)
             {
-                epLname.SetError(txtLname, "Fullname Details already exist in your records. ");
+                epLastName.SetError(txtLastName, "Fullname Details already exist in your records. ");
                 e.Cancel = true;
             }
         }
 
         private void txtLname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epLname, txtLname);
+            Helper.ClearErrorTextBox(epLastName, txtLastName);
         }
 
         private void ucCollectingOfficer_Load(object sender, EventArgs e)
@@ -129,19 +126,19 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 frmLinkUser fuser = new();
                 fuser.table = "collector";
+
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {
                     UserId = fuser.UserId;
-                    linkuser.Text = String.Format("@{0}", fuser.Username);
-                    if(txtLname.Text == string.Empty && txtFname.Text == string.Empty && txtMI.Text == string.Empty)
+                    linkuser.Text = string.Format("@{0}", fuser.Username);
+                    if(txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMiddleInitial.Text == string.Empty)
                     {
-                        txtLname.Text = fuser.lname;
-                        txtFname.Text = fuser.fname;
-                        txtMI.Text = fuser.mname;
+                        txtLastName.Text = fuser.lname;
+                        txtFirstName.Text = fuser.fname;
+                        txtMiddleInitial.Text = fuser.mname;
                     }
                 }
             }
-
         }
 
 

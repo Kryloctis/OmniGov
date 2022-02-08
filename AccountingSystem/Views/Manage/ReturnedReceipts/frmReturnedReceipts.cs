@@ -15,14 +15,11 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 {
     public partial class frmReturnedReceipts : Form
     {
-
-        
         public frmReturnedReceipts()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgReturnedReceipts, true);
             Helper.LoadFormIcon(this);
-
         }
 
         private void frmReturnedReceipts_Load(object sender, EventArgs e)
