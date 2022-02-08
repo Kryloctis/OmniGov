@@ -129,7 +129,7 @@ namespace ACC.Data
                 new object[]{"@searchText", DbType.String, $"%{searchText}%"},
             };
 
-            string query =    $"SELECT " +
+            string query =      $"SELECT " +
                                 $"id, " +
                                 $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
                                 $"receipt_number_from, " +
@@ -213,31 +213,6 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ReceiptExist(int accid,int from,int to)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@accountable_forms_id", DbType.Int32, accid },
-                    new object[] { "@receipt_issued_from", DbType.Int32, from },
-                    new object[] { "@receipt_issued_to", DbType.Int32, to }
-                };
-
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id = @accountable_forms_id AND ((receipt_issued_from BETWEEN @receipt_issued_from AND @receipt_issued_to) OR (receipt_issued_to BETWEEN @receipt_issued_from AND @receipt_issued_to))";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
         public int RMAX(int accid)
         {
             int value = 0;
@@ -306,57 +281,6 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable NextReceipt(int id)
-        {
-            try
-            {
-                string query = $"SELECT IFNULL(last_issued, receipt_issued_to) AS last_issued, receipt_issued_to, is_returned FROM {tableReceiptsIssued} WHERE receipts_id='{id}' AND receipt_issued_to <> IFNULL(last_issued,0) ORDER BY last_issued DESC";
-
-                var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
-        }
-        public DataTable NextTicket(int id)
-        {
-            try
-            {
-                string query = $"SELECT IFNULL(SUM({tableReceiptsIssued}.quantity), 0) AS issuelast, {tableName}.quantity FROM " +
-                    $"{tableReceiptsIssued} LEFT JOIN {tableName} ON {tableReceiptsIssued}.receipts_id={tableName}.id " +
-                    $"WHERE {tableReceiptsIssued}.receipts_id='{id}'";
-
-                var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-
-        public DataTable FirstReceipt(int id)
-        {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE id='{id}'";
-
-                var dtri = new DataTable();
-                return _dbGenericCommands.Fill(query, dtri);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-
-
-
         public bool Insert(ReceiptsModel entity)
         {
             try
@@ -419,6 +343,7 @@ namespace ACC.Data
                             $"quantity = @quantity, " +
                             $"remarks = @remarks " +
                             $"WHERE id = @id";
+
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 

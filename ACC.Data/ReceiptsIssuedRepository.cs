@@ -17,7 +17,6 @@ namespace ACC.Data
         private readonly string tableReceipts = "receipts";
 
 
-
         public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;

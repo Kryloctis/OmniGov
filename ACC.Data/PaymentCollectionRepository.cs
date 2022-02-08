@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using AccountingSystem;
 
 namespace ACC.Data
 {
@@ -14,8 +12,6 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-
-
         public PaymentCollectionRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
