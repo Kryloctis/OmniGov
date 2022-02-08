@@ -77,7 +77,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnAccept.TabIndex = 0;
             this.btnAccept.Text = "Accept && Edit";
             this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Visible = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // txtRemarks

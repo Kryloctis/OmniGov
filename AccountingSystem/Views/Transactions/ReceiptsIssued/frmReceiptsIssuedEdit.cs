@@ -35,15 +35,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var uc = ucReceipts1;
                 var riRepository = Factory.ReceiptsIssuedRepository();
                 var riData = riRepository.GetRecordByID(uc.Id);
-                uc.cmbcollector.SelectedValue = riData["collecting_officers_id"];
-                uc.cmbreceipt.SelectedValue = riData["receipts_id"];
-                uc.dtpissued.Value = Convert.ToDateTime(riData["date_issued"]);
-                uc.txtfrom.Text = riData["issuefrom"];
-                uc.txtto.Text = riData["issueto"];
-                uc.txtquantity.Text = riData["quantity"];
+                uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
+                uc.cmbReceipt.SelectedValue = riData["receipts_id"];
+                uc.dtpIssued.Value = Convert.ToDateTime(riData["date_issued"]);
+                uc.nudReceiptIssuedFrom.Text = riData["issuefrom"];
+                uc.nudReceiptIssuedTo.Text = riData["issueto"];
+                uc.txtReceiptQuantity.Text = riData["quantity"];
 
-                uc.txtfrom.ReadOnly = true;
-                uc.txtto.ReadOnly = true;
+                uc.nudReceiptIssuedFrom.ReadOnly = true;
+                uc.nudReceiptIssuedTo.ReadOnly = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -61,23 +61,23 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var riModel = new ReceiptsIssuedModel()
                 {
                     Id = uc.Id,
-                    CollectorId = Convert.ToInt32(uc.cmbcollector.SelectedValue),
-                    ReceiptId = Convert.ToInt32(uc.cmbreceipt.SelectedValue),
-                    Issued = uc.dtpissued.Value,
-                    IssuedFrom = Convert.ToInt32(uc.txtfrom.Text.Trim()),
-                    IssuedTo = Convert.ToInt32(uc.txtto.Text.Trim()),
-                    Quantity = Convert.ToInt32(uc.txtquantity.Text.Trim())
+                    CollectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue),
+                    ReceiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue),
+                    Issued = uc.dtpIssued.Value,
+                    IssuedFrom = Convert.ToInt32(uc.nudReceiptIssuedFrom.Text.Trim()),
+                    IssuedTo = Convert.ToInt32(uc.nudReceiptIssuedTo.Text.Trim()),
+                    Quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim())
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                if (!uc.istickets)
+                if (!uc.isTickets)
                 {
-                    if (Convert.ToInt32(uc.txtfrom.Text.Trim()) > Convert.ToInt32(uc.txtto.Text.Trim()))
+                    if (Convert.ToInt32(uc.nudReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.nudReceiptIssuedTo.Text.Trim()))
                     {
                         Helper.MessageBoxError("Invalid Receipt!");
                         return false;
                     }
-                    else if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    else if (int.Parse(uc.txtReceiptQuantity.Text.Trim()) <= 0)
                     {
                         Helper.MessageBoxError("Quantity Empty!");
                         return false;
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
                 else
                 {
-                    if (int.Parse(uc.txtquantity.Text.Trim()) <= 0)
+                    if (int.Parse(uc.txtReceiptQuantity.Text.Trim()) <= 0)
                     {
                         Helper.MessageBoxError("Quantity Empty!");
                         return false;

@@ -382,7 +382,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         internal System.Windows.Forms.ToolStripButton btnPrint;
         internal System.Windows.Forms.ToolStripButton btnSearch;
-        private System.Windows.Forms.ToolStripButton btnDeposit;
         internal System.Windows.Forms.TextBox txtRCDNo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpdate;
@@ -403,5 +402,6 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.ToolStripButton btnCancelPrint;
         private System.Windows.Forms.ErrorProvider epRCDNo;
         private System.Windows.Forms.ErrorProvider epDgCollectorRepor;
+        internal System.Windows.Forms.ToolStripButton btnDeposit;
     }
 }

@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             0});
             this.txtamount.Name = "txtamount";
             this.txtamount.Size = new System.Drawing.Size(81, 23);
-            this.txtamount.TabIndex = 2;
+            this.txtamount.TabIndex = 1;
             this.txtamount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnsave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(69, 22);
-            this.btnsave.TabIndex = 5;
+            this.btnsave.TabIndex = 2;
             this.btnsave.Text = "Add";
             this.btnsave.UseVisualStyleBackColor = true;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.dtdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtdate.Name = "dtdate";
             this.dtdate.Size = new System.Drawing.Size(215, 23);
-            this.dtdate.TabIndex = 4;
+            this.dtdate.TabIndex = 0;
             // 
             // statusStrip1
             // 

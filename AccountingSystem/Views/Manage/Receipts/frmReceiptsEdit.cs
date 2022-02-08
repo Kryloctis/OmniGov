@@ -33,9 +33,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var rcRepository = Factory.ReceiptsRepository();
                 var rcdata = rcRepository.GetRecordByID(uc.receiptId);
+
                 uc.cmbAccountableForms.SelectedValue = rcdata["accountable_forms_id"];
-                uc.txtReceiptNumberFrom.Text = rcdata["receiptsfrom"];
-                uc.txtReceiptNumberTo.Text = rcdata["receiptsto"];
+                uc.txtReceiptNumberFrom.Text = rcdata["receipt_number_from"];
+                uc.txtReceiptNumberTo.Text = rcdata["receipt_number_to"];
                 uc.dtpReceivedDate.Value = Convert.ToDateTime(rcdata["received_date"]);
                 uc.txtQuantity.Text = rcdata["quantity"];
                 uc.txtRemark.Text = rcdata["remarks"];
@@ -77,16 +78,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (!uc.isTicket)
-                {
-                    if (int.Parse(uc.txtReceiptNumberFrom.Text.Trim()) > int.Parse(uc.txtReceiptNumberTo.Text.Trim()))
-                    {
-                        Helper.MessageBoxError("Invalid Receipt!");
-                        return false;
-                    }
-                    else return rcRepository.Update(rModel);
-                }
-                else return rcRepository.Update(rModel);
+                if (uc.isTicket == false)
+                    return rcRepository.Update(rModel);
+                else 
+                    return rcRepository.Update(rModel);
 
             }
             catch (Exception ex)

@@ -13,13 +13,14 @@ namespace ACC.Domain.Interfaces
         bool HasIssued(int accountableFormId, int collectorId);
         bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
         bool IssuedExist(ReceiptsIssuedModel entity);
-        DataTable GetRecords(int id);
+        bool ReceiptAvailability(int receiptId, int receiptQuantity);
+        DataTable GetRecordsByCollectorId(int collectorId);
         DataTable GetRecords(string coid, string formid);
         DataTable GetRecordsReceipts(string collectorId);
-        DataTable GetAccountabilityForAccountableForms();
-
+        DataTable GetAccountabilityForAccountableForms(string reportNumber);
         DataTable GetReturnedReceipts();
-
         DataTable GetReturnedReceiptsBySearch(string searchKey);
+        int GetReceiptNumberFromByReceiptId(int receiptId);
+
     }
 }

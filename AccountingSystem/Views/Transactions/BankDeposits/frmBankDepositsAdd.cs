@@ -6,72 +6,86 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 {
     public partial class frmBankDepositsAdd : Form
     {
-        private frmBankDeposits _frmbd;
-        public int Gcid = 0;
-        public decimal Gcamount = 0;
-        public frmBankDepositsAdd(frmBankDeposits frmbd)
-        { 
+        private frmBankDeposits _frmBankDeposits;
+        private ucBankDeposits uc;
+        public int generalCollectionId = 0;
+        public decimal generalCollectionAmount = 0;
+        internal string _referenceNumber;
+        internal decimal _amount;
+
+        public frmBankDepositsAdd(frmBankDeposits frmBankDeposits, int rcdId, string referenceNumber, decimal amount)
+        {
             InitializeComponent();
-            _frmbd = frmbd;
-            ucbd1.userid = Helper.UserId;
+            generalCollectionId = rcdId;
+            _frmBankDeposits = frmBankDeposits;
+            _referenceNumber = referenceNumber;
+            _amount = amount;
+
+
+            uc = ucBankDeposit1;
+            uc.userid = Helper.UserId;
         }
 
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
-            ucbd1.LoadBanks();
-            ucbd1.LoadFunds();
-            if (Gcid > 0)
+            if (generalCollectionId > 0)
             {
-                ucbd1.txtamount.Value = Gcamount;
-                ucbd1.txtamount.Enabled = false;
+                uc.nudAmount.Value = generalCollectionAmount;
+                uc.nudAmount.Enabled = false;
             }
+
+            uc.txtReferenceNumber.Text = _referenceNumber;
+            uc.nudAmount.Value = _amount;
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucbd1;
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                var bdModel = new BankDepositsModel()
+
+                var bankDepositModel = new BankDepositsModel()
                 {
-                    bankId = Convert.ToInt16(uc.cmbbanks.SelectedValue),
-                    fundId = Convert.ToInt16(uc.cmbfunds.SelectedValue),                     
-                    Reference = uc.txtreference.Text.Trim(),
-                    Date = Convert.ToDateTime(uc.dtdate.Text.Trim()),
-                    Amount = Convert.ToDecimal(uc.txtamount.Value),
+                    bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
+                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),                     
+                    Reference = uc.txtReferenceNumber.Text.Trim(),
+                    Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
+                    Amount = Convert.ToDecimal(uc.nudAmount.Value),
                     CreatedBy = uc.userid,
                 };
 
-                var bdrepository = Factory.BankDepositsRepository();
-                if (Gcid > 0)
+                var bankDepositRepo = Factory.BankDepositsRepository();
+
+                if (generalCollectionId > 0)
                 {
-                    int insertId = bdrepository.Deposits(bdModel);
-                    if (insertId > 0)
+                    int insertId = bankDepositRepo.Deposits(bankDepositModel);
+
+                if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
+                {
+                    var generalCollectionDepositsRepo = Factory.GeneralCollectionsDepositsRepository();
+                    var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
                     {
-                        var gcdRepository = Factory.GeneralCollectionsDepositsRepository();
-                        var gcdModel = new GeneralCollectionsDepositsModel()
-                        {
-                            Bdid = insertId,
-                            Gcid = Gcid
-                        };
-                        if (!gcdRepository.IdExist(Gcid))
-                        {
-                            return gcdRepository.Insert(gcdModel);
-                        }
-                        else
-                        {
-                            Helper.MessageBoxSuccess("General Collection has already been deposited!");
-                        }
+                        BankDepositId = insertId,
+                        GeneralCollectionId = generalCollectionId
+                    };
+
+                    if (!generalCollectionDepositsRepo.IdExist(generalCollectionId))
+                    {
+                        return generalCollectionDepositsRepo.Insert(generalCollectionDepositModel);
+                    }
+                    else
+                    {
+                        Helper.MessageBoxSuccess("General Collection has already been deposited!");
+                    }
                     }
                 }
                 else
                 {
-                    return bdrepository.Insert(bdModel);
+                    return bankDepositRepo.Insert(bankDepositModel);
                 }
             }
             catch (Exception ex)
@@ -85,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             if (SaveData())
             {
-                if(Gcid > 0)
+                if(generalCollectionId > 0)
                 {
                     Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
                     this.DialogResult = DialogResult.OK;
@@ -94,8 +108,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 else
                 {
                     Helper.MessageBoxSuccess("Bank Deposit has been saved.");
-                    _frmbd.LoadRecords();
-                    ucbd1.ResetForm();
+                    _frmBankDeposits.LoadRecords();
+                    ucBankDeposit1.ResetForm();
                 }
                 
             }

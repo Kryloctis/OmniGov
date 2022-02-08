@@ -13,22 +13,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             InitializeComponent();
             _frmPaymentCollection = frmpc;
-            ucPaymentCollection1.userId = Helper.UserId;
             uc = ucPaymentCollection1;
+            uc.userId = Helper.UserId;
         }
 
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
-
-            if(ucPaymentCollection1.cmdCollector.Items.Count > 0)
+            if(uc.cmdCollector.Items.Count > 0)
             {
                 var uRepository = Factory.UsersRepository();
                 if (uRepository.LinkedCollector(Helper.UserId))
                 {
                     var colRepository = Factory.CollectingOfficerRepository();
                     var data = colRepository.GetRecordByUserID(Helper.UserId);
-                    ucPaymentCollection1.cmdCollector.SelectedValue = data["id"];
-                    ucPaymentCollection1.cmdCollector.Enabled = false;
+                    uc.cmdCollector.SelectedValue = data["id"];
+                    uc.cmdCollector.Enabled = false;
                 }
             }
 

@@ -47,11 +47,11 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
                 var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
-                string reportId = String.Empty;
-                string collectingOfficer = String.Empty;
-                string reportNo = String.Empty;
-                string reportNoChecker = String.Empty;
-                string amount = String.Empty;
+                string reportId = string.Empty;
+                string collectingOfficer = string.Empty;
+                string reportNo = string.Empty;
+                string reportNoChecker = string.Empty;
+                string amount = string.Empty;
 
 
                 foreach (DataRow row in dtRCD.Rows)
@@ -115,6 +115,7 @@ namespace AccountingSystem.Views.Reports.RCD
             dtpdate.Value = DateTime.Now;
             panelRCD.Enabled = true;
 
+            btnDeposit.Enabled = false;
             btnPrint.Enabled = false;
             btnCancelPrint.Enabled = false;
 
@@ -174,12 +175,11 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnDeposit_Click(object sender, EventArgs e)
         {
-            _ = new frmBankDepositsAdd(new frmBankDeposits()).ShowDialog();
-        }
+            string referenceNumber = txtRCDNo.Text.Trim();
+            decimal amount = Convert.ToDecimal(lblTotalAmount.Text);
+            int rcdId = int.Parse(this.rcdId);
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            ResetForm();
+            _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

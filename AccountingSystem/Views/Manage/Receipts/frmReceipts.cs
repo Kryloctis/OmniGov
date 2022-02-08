@@ -13,13 +13,12 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgreceipts, true);
+            Helper.DatagridFullRowSelectStyle(dgReceipts, true);
         }
 
         private void frmAccForms_Load(object sender, EventArgs e)
         {
             LoadRecords();
-            SetToolStripStatusData();
         }
 
         internal void LoadRecords()
@@ -29,7 +28,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rcRepository = Factory.ReceiptsRepository();
                 var dtreceipts = rcRepository.GetRecords();
 
-                HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
+                HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgReceipts);
             }
             catch (Exception ex) 
             { 
@@ -49,7 +48,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var rcRepository = Factory.ReceiptsRepository();
                 var dtreceipts = rcRepository.GetRecordsBySearch(txtsearch.Text.Trim());
-                HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgreceipts);
+                HelperLoadRecords.ReceiptsDatagridView(dtreceipts, dgReceipts);
 
             }
             catch (Exception ex)
@@ -60,22 +59,22 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void SetToolStripStatusData()
         {
-            var quantity = (from DataGridViewRow row in dgreceipts.Rows
+            var quantity = (from DataGridViewRow row in dgReceipts.Rows
                           where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
                           select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
-            lblRecordCount.Text = dgreceipts.Rows.Count.ToString();
+            lblRecordCount.Text = dgReceipts.Rows.Count.ToString();
             lblQuantity.Text = quantity;
         }
 
         private void dgreceipts_SelectionChanged(object sender, EventArgs e)
         {
 
-            if(dgreceipts.SelectedRows.Count > 0)
+            if(dgReceipts.SelectedRows.Count > 0)
             {
-                Helper.EnableDisableToolStripButtons(dgreceipts, btnEdit, btnDelete);
+                Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
 
-                int id = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
+                int id = int.Parse(dgReceipts.CurrentRow.Cells[0].Value.ToString());
                 var rRepository = Factory.ReceiptsRepository();
 
                 
@@ -83,8 +82,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 bool isconsumed = rRepository.ReceiptConsumed(id);                
                 bool issued = rRepository.AllowEdit(id);
 
-                btnEdit.Enabled = issued ? false : true;
-                btnDelete.Enabled = issued ? false : true;
+                //btnEdit.Enabled = issued ? false : true;
+                //btnDelete.Enabled = issued ? false : true;
 
                 SetToolStripStatusData();
             }
@@ -102,9 +101,9 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if(dgreceipts.SelectedRows.Count > 0)
+            if(dgReceipts.SelectedRows.Count > 0)
             {
-                int receiptId = int.Parse(dgreceipts.CurrentRow.Cells[0].Value.ToString());
+                int receiptId = int.Parse(dgReceipts.CurrentRow.Cells[0].Value.ToString());
                 _ = new frmReceiptsEdit(this, receiptId).ShowDialog();                
             }
         }
@@ -113,12 +112,12 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                if (Helper.MessageBoxConfirmDelete(dgreceipts.SelectedRows.Count))
+                if (Helper.MessageBoxConfirmDelete(dgReceipts.SelectedRows.Count))
                 {
                     var receiptsRepository = Factory.ReceiptsRepository();
                     var receiptModel = new List<ReceiptsModel>();
 
-                    foreach (DataGridViewRow row in dgreceipts.SelectedRows)
+                    foreach (DataGridViewRow row in dgReceipts.SelectedRows)
                     {
                         int id = int.Parse(row.Cells[0].Value.ToString());
 

@@ -152,14 +152,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void ucPaymentCollection_Load(object sender, EventArgs e)
         {
-            LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
-            LoadCollectors();
-            LoadFunds();
+            if (!DesignMode)
+            {
+                LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
+                LoadCollectors();
+                LoadFunds();
 
-            cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
-            LoadAccounts();
-            cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
-            cmbAccount.SelectedIndex = -1;
+                cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
+                LoadAccounts();
+                cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
+                cmbAccount.SelectedIndex = -1;
+            }
         }
 
 
@@ -350,16 +353,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         try
                         {
                             var rcRepository = Factory.ReceiptsIssuedRepository();
-                            var dtrc = rcRepository.GetRecords(collector[0].ToString(), forms[0].ToString());
+                            var collectorId = collector[0].ToString();
+                            var accountableFormId = forms[0].ToString();
+
+                            var dtrc = rcRepository.GetRecords(collectorId, accountableFormId);
                             if (dtrc.Rows.Count > 0)
                             {
                                 int receiptto = 0;
                                 int receiptlast = 0;
                                 for (int i = 0; i < dtrc.Rows.Count; i++)
                                 {
-                                    receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                    receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                    receiptto = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_to"]);
+                                    receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_to"]);
+                                    receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_from"]);
                                     receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
 
                                 }
@@ -398,9 +404,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                                     for (int i = 0; i < dtrc.Rows.Count; i++)
                                     {
 
-                                        receiptto = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["issueto"]);
-                                        receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["issuefrom"]);
+                                        receiptto = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_to"]);
+                                        receiptNumberTo = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_to"]);
+                                        receiptNumberFrom = Convert.ToInt32(dtrc.Rows[i]["receipt_issued_from"]);
                                         receiptlast = dtrc.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtrc.Rows[i]["last_issued"]);
                                     }
                                     if (receiptto.Equals(receiptlast))

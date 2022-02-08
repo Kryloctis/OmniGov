@@ -15,6 +15,7 @@ namespace ACC.Domain.Interfaces
         bool HasGenerated(int paymentCollectionsId);
 
         bool ReportNumberExist(string reporNo);
+        bool ReportNumberExist(int reportId, string reporNo);
 
         DataTable GetSummary(int cid, int fid, int year);
         int InsertId(CollectorReportModel entity);
@@ -32,6 +33,8 @@ namespace ACC.Domain.Interfaces
         DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo);
         DataTable GetRecordsByReportNumber(string reportNumber);
         DataTable GetCollectorsReportByReportNo(string reportNumber);
+
+        string GetCollectorIdByReportNumber(string reportNumber);
 
         string GetRCDStatus(string reportNo);
 

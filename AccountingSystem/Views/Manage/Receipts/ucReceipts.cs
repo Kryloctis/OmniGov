@@ -11,8 +11,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int receiptId = 0;
         internal int UserId = 0;
         internal int AccId = 0;
-        internal int fromSerialNo = 0;
-        internal int toSerialNo = 0;
+        internal int receiptNumberFrom = 0;
+        internal int receiptNumberTo = 0;
         internal bool isTicket = false;
 
         public ucReceipts()
@@ -83,11 +83,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
 
-                if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= toSerialNo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
-                {
-                    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Number!");
-                    e.Cancel = true;
-                }
+                //if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) >= receiptNumberTo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
+                //{
+                //    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Numbersds");
+                //    e.Cancel = true;
+                //}
             }
         }
 
@@ -204,10 +204,10 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var receiptsRepository = Factory.ReceiptsRepository();
                 var accountableFormId = int.Parse(item[0].ToString());
 
-                fromSerialNo = receiptsRepository.RMIN(accountableFormId);
-                toSerialNo = receiptsRepository.RMAX(accountableFormId);
+                receiptNumberFrom = receiptsRepository.RMIN(accountableFormId);
+                receiptNumberTo = receiptsRepository.RMAX(accountableFormId);
 
-                txtReceiptNumberFrom.Text = (toSerialNo + 1).ToString();
+                txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
 
                 int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
                 int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
@@ -235,7 +235,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             
         }
 
-
-
+        private void ucReceipts_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                
+            }   
+        }
     }
 }
