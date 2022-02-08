@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     if (pcrepository.Update(pcModel))
                     {
                         var riRepository = Factory.ReceiptsIssuedRepository();
-                        var dtri = riRepository.GetRecords(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
+                        var dtri = riRepository.GetIssuedReceiptByCollectorIdAndAccountableFormId(uc.cmdCollector.SelectedValue.ToString(), uc.cmbAccountableForms.SelectedValue.ToString());
                         if (dtri.Rows.Count > 0)
                         {
                             int rid = 0;

@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
                 var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
 
-                var dtReceiptIssued = receiptsIssuedRepo.GetRecords(collectorId, accountableFormId);
+                var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
                 if (receiptIssuedCount > 0)

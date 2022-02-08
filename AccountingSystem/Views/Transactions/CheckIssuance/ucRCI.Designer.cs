@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.btnAddDeductions.Image = global::AccountingSystem.Properties.Resources.others;
             this.btnAddDeductions.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.btnAddDeductions.Location = new System.Drawing.Point(133, 309);
+            this.btnAddDeductions.Location = new System.Drawing.Point(133, 308);
             this.btnAddDeductions.Name = "btnAddDeductions";
             this.btnAddDeductions.Size = new System.Drawing.Size(254, 23);
             this.btnAddDeductions.TabIndex = 9;
@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // nudNetAmount
             // 
             this.nudNetAmount.DecimalPlaces = 2;
-            this.nudNetAmount.Location = new System.Drawing.Point(133, 337);
+            this.nudNetAmount.Location = new System.Drawing.Point(133, 336);
             this.nudNetAmount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudNetAmount.Maximum = new decimal(new int[] {
             1316134911,
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 14);
+            this.label6.Location = new System.Drawing.Point(14, 14);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 46;
@@ -199,7 +199,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 43);
+            this.label7.Location = new System.Drawing.Point(14, 43);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 15);
             this.label7.TabIndex = 47;
@@ -256,7 +256,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 72);
+            this.label2.Location = new System.Drawing.Point(14, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
             this.label2.TabIndex = 37;
@@ -265,7 +265,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 246);
+            this.label9.Location = new System.Drawing.Point(14, 246);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(107, 15);
             this.label9.TabIndex = 49;
@@ -274,7 +274,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 101);
+            this.label1.Location = new System.Drawing.Point(14, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 31;
@@ -283,7 +283,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 217);
+            this.label8.Location = new System.Drawing.Point(14, 217);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(38, 15);
             this.label8.TabIndex = 48;
@@ -292,7 +292,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 159);
+            this.label3.Location = new System.Drawing.Point(14, 159);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 15);
             this.label3.TabIndex = 39;
@@ -301,7 +301,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 130);
+            this.label4.Location = new System.Drawing.Point(14, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 15);
             this.label4.TabIndex = 44;
@@ -310,7 +310,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 188);
+            this.label5.Location = new System.Drawing.Point(14, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 45;

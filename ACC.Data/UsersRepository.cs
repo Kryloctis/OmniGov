@@ -187,6 +187,7 @@ namespace ACC.Data
                                 $"mid_initial, " +
                                 $"last_name, " +
                                 $"suffix, " +
+                                $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
                                 $"username, " +
                                 $"password, " +
                                 $"is_deleted, " +

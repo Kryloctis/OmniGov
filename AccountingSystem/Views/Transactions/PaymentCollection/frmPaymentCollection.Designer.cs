@@ -34,9 +34,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnrefresh = new System.Windows.Forms.ToolStripButton();
-            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgpayments = new System.Windows.Forms.DataGridView();
-            this.dtpdate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,7 +46,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmdCollector = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
             this.statusStrip2.SuspendLayout();
@@ -116,16 +115,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnrefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
-            // txtsearch
+            // txtSearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtsearch.Location = new System.Drawing.Point(617, 22);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(235, 22);
-            this.txtsearch.TabIndex = 11;
-            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtSearch.Location = new System.Drawing.Point(951, 20);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(235, 22);
+            this.txtSearch.TabIndex = 11;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // dgpayments
             // 
@@ -142,15 +141,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dgpayments.TabIndex = 12;
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
             // 
-            // dtpdate
+            // dtpDate
             // 
-            this.dtpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpdate.Location = new System.Drawing.Point(978, 21);
-            this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpdate.Name = "dtpdate";
-            this.dtpdate.Size = new System.Drawing.Size(191, 23);
-            this.dtpdate.TabIndex = 12;
-            this.dtpdate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
+            this.dtpDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpDate.Location = new System.Drawing.Point(333, 17);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(205, 23);
+            this.dtpDate.TabIndex = 12;
+            this.dtpDate.ValueChanged += new System.EventHandler(this.dtpdate_ValueChanged);
             // 
             // label6
             // 
@@ -158,7 +157,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(569, 25);
+            this.label6.Location = new System.Drawing.Point(903, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 13;
@@ -210,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(869, 26);
+            this.label1.Location = new System.Drawing.Point(224, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 15);
             this.label1.TabIndex = 13;
@@ -221,7 +220,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(216, 25);
+            this.label7.Location = new System.Drawing.Point(551, 23);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(97, 13);
             this.label7.TabIndex = 38;
@@ -233,23 +232,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmdCollector.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmdCollector.FormattingEnabled = true;
-            this.cmdCollector.Location = new System.Drawing.Point(322, 22);
+            this.cmdCollector.Location = new System.Drawing.Point(657, 20);
             this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmdCollector.Name = "cmdCollector";
             this.cmdCollector.Size = new System.Drawing.Size(233, 21);
             this.cmdCollector.TabIndex = 37;
             this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(192, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(997, 56);
-            this.groupBox1.TabIndex = 39;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter Records ";
             // 
             // frmPaymentCollection
             // 
@@ -257,13 +245,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1199, 562);
-            this.Controls.Add(this.txtsearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dtpdate);
+            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmdCollector);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.dgpayments);
             this.Controls.Add(this.toolStrip);
@@ -292,10 +279,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridView dgpayments;
         private System.Windows.Forms.ToolStripButton btnrefresh;
-        private System.Windows.Forms.DateTimePicker dtpdate;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
@@ -305,6 +292,5 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.ComboBox cmdCollector;
-        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

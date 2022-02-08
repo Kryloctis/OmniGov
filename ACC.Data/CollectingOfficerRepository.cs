@@ -273,28 +273,24 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool FullNameExist(string firstname, string middleinitial, string lastname, int id)
+        public bool FullNameExist(string firstName, string middleInitial, string lastName, int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, id },
-                    new object[] { "@first_name", DbType.String, firstname },
-                    new object[] { "@mid_initial", DbType.String, middleinitial },
-                    new object[] { "@last_name", DbType.String, lastname },
-                };
-
-                string query = $"SELECT * FROM {tableName} WHERE id <> @id AND first_name = @first_name AND mid_initial = @mid_initial AND last_name = @last_name";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int16, id },
+                new object[] { "@first_name", DbType.String, firstName },
+                new object[] { "@middle_initial", DbType.String, middleInitial },
+                new object[] { "@last_name", DbType.String, lastName },
             };
+
+            string query = $"SELECT * FROM {tableName} " +
+                           $"WHERE id <> @id AND " +
+                           $"first_name = @first_name AND mid_initial = @middle_initial AND last_name = @last_name";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
 
             return false;
         }

@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgRCI);
+            Helper.DatagridFullRowSelectStyle(dgRCI, true);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

@@ -1,13 +1,4 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 
@@ -15,14 +6,11 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 {
     public partial class frmReturnedReceipts : Form
     {
-
-        
         public frmReturnedReceipts()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgReturnedReceipts, true);
             Helper.LoadFormIcon(this);
-
         }
 
         private void frmReturnedReceipts_Load(object sender, EventArgs e)
@@ -51,7 +39,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         {
             try
             {
-                var searchKey = txtsearch.Text.Trim();
+                var searchKey = txtSearch.Text.Trim();
 
                 var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);

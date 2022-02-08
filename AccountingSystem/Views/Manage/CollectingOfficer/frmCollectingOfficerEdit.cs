@@ -29,9 +29,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var uc = ucCollectingOfficer1;
                 var repository = Factory.CollectingOfficerRepository();
                 var data = repository.GetRecordByID(uc.OfficerId);
-                uc.txtFname.Text = data["first_name"];
-                uc.txtMI.Text = data["mid_initial"];
-                uc.txtLname.Text = data["last_name"];
+                uc.txtFirstName.Text = data["first_name"];
+                uc.txtMiddleInitial.Text = data["mid_initial"];
+                uc.txtLastName.Text = data["last_name"];
                 uc.txtJobtitle.Text = data["job_title"];
                 uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);                
                 uc.LoadLink(uc.UserId);
@@ -60,9 +60,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var collectingmodel = new CollectingOfficerModel()
                 {
                     Id = uc.OfficerId,
-                    FirstName = uc.txtFname.Text.Trim(),
-                    MiddleInitial = uc.txtMI.Text.Trim(),
-                    LastName = uc.txtLname.Text.Trim(),
+                    FirstName = uc.txtFirstName.Text.Trim(),
+                    MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
+                    LastName = uc.txtLastName.Text.Trim(),
                     JobTitle = uc.txtJobtitle.Text.Trim(),
                     UserId = uc.UserId
                 };

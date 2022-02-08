@@ -1212,7 +1212,6 @@ namespace AccountingSystem
             datagrid.Columns[3].Visible = false;
             datagrid.Columns[4].Visible = false;
 
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 

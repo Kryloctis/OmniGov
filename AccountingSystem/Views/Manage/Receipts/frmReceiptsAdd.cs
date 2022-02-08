@@ -14,7 +14,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             InitializeComponent();
             frmReceipts = _frmReceipts;
             UserId = Helper.UserId;
-
         }
 
         private void frmAccFormsAdd_Load(object sender, EventArgs e)
