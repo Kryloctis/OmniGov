@@ -24,7 +24,8 @@ namespace AccountingSystem
             dataGridView.Columns.Add("document_name", "Documents");
 
             dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["is_referenced"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_referenced"].Width = 30;
+            dataGridView.Columns["is_referenced"].MinimumWidth = 30;
             dataGridView.ReadOnly = false;
             dataGridView.MultiSelect = false;
             dataGridView.Columns["document_reference_name"].ReadOnly = true;
@@ -37,8 +38,7 @@ namespace AccountingSystem
         #region Signatories
 
         internal static void SignatoriesDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            Helper.DatagridFullRowSelectStyle(dataGridView, true);
+        {          
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["name"].HeaderText = "Name";

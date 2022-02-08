@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.Name = "frmAmortizationSchedule";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Amortization Schedule";
+            this.Text = "Manage > Amortization > Amortization Schedule";
             this.Load += new System.EventHandler(this.frmAmortizationSchedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgAmortizationSched)).EndInit();
             this.toolStrip1.ResumeLayout(false);
