@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             this.Name = "frmAmortization";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Amortization";
+            this.Text = "Manage > Amortization";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAmortization_Load);
             this.toolStrip1.ResumeLayout(false);

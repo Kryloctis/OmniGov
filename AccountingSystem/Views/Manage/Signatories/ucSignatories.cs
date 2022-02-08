@@ -82,8 +82,10 @@ namespace AccountingSystem.Views.Manage.Signatories
                     if (!isEdit ? isReferenced : isReferencedBySignatoryId)
                     {
                         row.ReadOnly = true;
-                        row.DefaultCellStyle.BackColor = Color.DarkGray;
-                        row.DefaultCellStyle.SelectionBackColor = Color.DarkGray;
+                        row.DefaultCellStyle.BackColor = Color.LightGray;
+                        row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
+                        row.DefaultCellStyle.ForeColor =  Color.Gray;
+                        row.DefaultCellStyle.SelectionForeColor = Color.Gray;
                     }
                 }
             }
@@ -98,6 +100,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         internal void LoadReferences()
         {
             HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
+            dgReferences.RowHeadersVisible = false;
             string office = cmbxOfficeFilter.Text.Trim();
             var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
 

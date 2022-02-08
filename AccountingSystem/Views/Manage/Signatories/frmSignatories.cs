@@ -62,6 +62,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 HelperLoadRecords.SignatoriesDatagridView(SignatoriesDatatable(), dgSignatories);
                 lblRecordCount.Text = dgSignatories.Rows.Count.ToString();
                 Helper.ShowRecordTimestamp(dgSignatories, new byte[] { 3, 4 }, lblCreatedAt, lblUpdatedAt);
+                dgSignatories.CurrentCell = dgSignatories.FirstDisplayedCell;
             }
             catch (Exception ex)
             {
@@ -111,8 +112,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.EnableDisableToolStripButtons(dgSignatories, btnEdit, btnDelete);
         }
 
-
-        private void dtSignatories_SelectionChanged(object sender, System.EventArgs e)
+        private void dgSignatories_SelectionChanged(object sender, System.EventArgs e)
         {
             EnableDisableButtons();
             LoadReferencedDocuments();
@@ -120,8 +120,9 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void frmSignatories_Load(object sender, System.EventArgs e)
         {
-            EnableDisableButtons();
+            Helper.DatagridFullRowSelectStyle(dgSignatories, true);
             LoadSignatories();
+            EnableDisableButtons();          
         }
 
         private void DeleteRealignment()
