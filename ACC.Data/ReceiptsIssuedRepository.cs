@@ -454,11 +454,11 @@ namespace ACC.Data
                            $"collecting_officer_id, " +
                            $"collecting_officer, " +
                            $"date_issued, " +
-                           $"issuefrom, " +
-                           $"issueto, " +
+                           $"receipt_issued_from, " +
+                           $"receipt_issued_to, " +
                            $"quantity, " +
                            $"last_issued, " +
-                           $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
+                           $"IF(is_returned = 1, (receipt_issued_to - last_issued), null) AS returned_quantity, " +
                            $"returned_date " +
                            $"FROM " +
                            $"{viewTableName} " +
@@ -481,11 +481,11 @@ namespace ACC.Data
                   $"collecting_officer_id, " +
                   $"collecting_officer, " +
                   $"date_issued, " +
-                  $"issuefrom, " +
-                  $"issueto, " +
+                  $"receipt_issued_from, " +
+                  $"receipt_issued_to, " +
                   $"quantity, " +
                   $"last_issued, " +
-                  $"IF(is_returned = 1, (issueto - last_issued), null) AS returned_quantity, " +
+                  $"IF(is_returned = 1, (receipt_issued_to - last_issued), null) AS returned_quantity, " +
                   $"returned_date " +
                   $"FROM " +
                   $"{viewTableName} " +
