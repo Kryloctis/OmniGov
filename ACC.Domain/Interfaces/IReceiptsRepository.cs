@@ -11,5 +11,7 @@ namespace ACC.Domain.Interfaces
         int RMIN(int accid);
         bool AllowEdit(int id);
         DataTable GetReceipts();
+        int GetReceiptNumberFromByReceiptId(int receiptId);
+
     }
 }

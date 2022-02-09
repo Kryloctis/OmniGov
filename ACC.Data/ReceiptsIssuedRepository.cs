@@ -105,8 +105,8 @@ namespace ACC.Data
                             $"id, " +
                             $"collecting_officer, " +
                             $"accountable_forms, " +
-                            $"receipt_issued_from, " +
-                            $"receipt_issued_to,  " +
+                            $"LPAD(receipt_issued_from, 7, 0) AS receipt_issued_from, " +
+                            $"LPAD(receipt_issued_to, 7, 0) AS receipt_issued_to ,  " +
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +
@@ -386,16 +386,16 @@ namespace ACC.Data
 
         }
 
-        public int GetReceiptNumberFromByReceiptId(int receiptId)
+        public int GetReceiptIssuedQuantityByReceiptId(int receiptId)
         {
             var parameter = new object[][] {
                 new object[]{ "@receipt_id", DbType.Int32, receiptId}
             };
 
             string query = $"SELECT " +
-                           $"COALESCE(MAX(receipt_issued_to), 0) AS receipt_issued_from " +
+                           $"COALESCE(SUM(quantity), 0) AS receipt_issued_from " +
                            $"FROM {tableName} " +
-                           $"WHERE receipts_id = @receipt_id";
+                           $"WHERE receipts_id = @receipt_id ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }

@@ -347,6 +347,18 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
- 
+        public int GetReceiptNumberFromByReceiptId(int receiptId)
+        {
+            var parameter = new object[][] {
+                new object[]{ "@receipt_id", DbType.Int32, receiptId}
+            };
+
+            string query = $"SELECT " +
+                           $"receipt_number_from " +
+                           $"FROM {tableName} " +
+                           $"WHERE id = @receipt_id";
+
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+        }
     }
 }

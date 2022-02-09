@@ -209,14 +209,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var receiptNumberFrom = receiptIssuedRepo.GetReceiptNumberFromByReceiptId(receiptId);
-                receiptNumberFrom += 1; 
-                nudReceiptIssuedFrom.Text = receiptNumberFrom.ToString();
+                var receiptRepo = Factory.ReceiptsRepository();
+                var receiptNumberFrom = receiptRepo.GetReceiptNumberFromByReceiptId(receiptId);
+
+                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();   
+                var receiptIssuedQuantity = receiptIssuedRepo.GetReceiptIssuedQuantityByReceiptId(receiptId);
+
+                var receiptNumber = (receiptNumberFrom + receiptIssuedQuantity);
+                nudReceiptIssuedFrom.Text = receiptNumber.ToString().PadLeft(7, '0');
             }
             catch (Exception)
             {
-
+                 
                 throw;
             }
         }
@@ -226,11 +230,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isTickets = true;
             nudReceiptIssuedFrom.Enabled = false;
             nudReceiptIssuedTo.Enabled = false;
-            //txtReceiptQuantity.ReadOnly = false;
 
             nudReceiptIssuedFrom.Text = "0";
             nudReceiptIssuedTo.Text = "0";
-            //txtReceiptQuantity.Text = NextTicket(receiptId);
         }
 
         private void SetFieldsForNonCashTickets()
@@ -238,8 +240,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isTickets = false;
             nudReceiptIssuedFrom.Enabled = true;
             nudReceiptIssuedTo.Enabled = true;
-            //txtReceiptQuantity.ReadOnly = true;
-            //txtReceiptIssuedFrom.Text = NextReceipt(int.Parse(item[0].ToString()));
         }
 
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
@@ -278,6 +278,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (quantity >= 1)
                 txtReceiptQuantity.Text = Math.Floor(quantity).ToString();
         }
-
     }
 }
