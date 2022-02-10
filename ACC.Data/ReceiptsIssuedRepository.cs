@@ -338,8 +338,8 @@ namespace ACC.Data
                            $"collecting_officer_id, " +
                            $"collecting_officer, " +
                            $"date_issued, " +
-                           $"LPAD(receipt_issued_from, 7, 0) AS receipt_issued_from, " +
-                           $"LPAD(receipt_issued_to, 7, 0) AS receipt_issued_to, " +
+                           $"IF(receipt_issued_from = 0 AND receipt_issued_from = 0, NULL, LPAD(receipt_issued_from, 7, 0)) AS receipt_issued_from, " +
+                           $"IF(receipt_issued_to = 0 AND receipt_issued_to = 0, NULL, LPAD(receipt_issued_to, 7, 0)) AS receipt_issued_to, " +
                            $"quantity, " +
                            $"last_issued, " +
                            $"IF(is_returned = 1, (receipt_issued_to - last_issued), null) AS returned_quantity, " +
