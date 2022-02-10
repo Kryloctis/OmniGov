@@ -184,8 +184,8 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtReceiptNumberFrom.Enabled = false;
                 txtReceiptNumberTo.Enabled = false;
                 txtQuantity.ReadOnly = false;
-                txtReceiptNumberFrom.Text = "0";
-                txtReceiptNumberTo.Text = "0";
+                txtReceiptNumberFrom.ResetText();
+                txtReceiptNumberTo.ResetText();
                 txtQuantity.Text = string.Empty;
             }
             else

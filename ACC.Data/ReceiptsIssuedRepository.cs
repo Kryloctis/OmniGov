@@ -101,8 +101,8 @@ namespace ACC.Data
                             $"id, " +
                             $"collecting_officer, " +
                             $"accountable_forms, " +
-                            $"LPAD(receipt_issued_from, 7, 0) AS receipt_issued_from, " +
-                            $"LPAD(receipt_issued_to, 7, 0) AS receipt_issued_to ,  " +
+                            $"IF(receipt_issued_from = 0 AND receipt_issued_from = 0, NULL, LPAD(receipt_issued_from, 7, 0)) AS receipt_number_from, " +
+                            $"IF(receipt_issued_to = 0 AND receipt_issued_to = 0, NULL, LPAD(receipt_issued_to, 7, 0)) AS receipt_number_to, " +
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +

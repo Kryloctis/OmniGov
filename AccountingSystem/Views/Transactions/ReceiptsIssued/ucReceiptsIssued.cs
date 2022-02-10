@@ -195,23 +195,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             var receiptId = int.Parse(item[0].ToString());
             var receiptQuantity = int.Parse(item[5].ToString());
 
-            if (CheckReceiptsAvailability(receiptId, receiptQuantity))
+            if (item["receipt"].ToString().Contains("Tickets"))
             {
-                if (item["receipt"].ToString().Contains("Tickets"))
-                {
-                    SetFieldsForCashTickets();
-                }
-
-                else
+                SetFieldsForCashTickets();
+            }
+            else
+            {
+                if (CheckReceiptsAvailability(receiptId, receiptQuantity))
                 {
                     SetFieldsForNonCashTickets();
                     SetReceiptNumberFrom(receiptId);
                 }
-            }
-            else
-            {
-                nudReceiptIssuedFrom.ResetText();
-                nudReceiptIssuedTo.ResetText();
+                else
+                {
+                    nudReceiptIssuedFrom.ResetText();
+                    nudReceiptIssuedTo.ResetText();
+                }
             }
         }
 
@@ -252,6 +251,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void SetFieldsForCashTickets()
         {
+            txtReceiptQuantity.ReadOnly  = false;
             isTickets = true;
             nudReceiptIssuedFrom.Enabled = false;
             nudReceiptIssuedTo.Enabled = false;
@@ -262,6 +262,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isTickets = false;
             nudReceiptIssuedFrom.Enabled = true;
             nudReceiptIssuedTo.Enabled = true;
+
+            txtReceiptQuantity.ReadOnly = true;
         }
 
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
@@ -273,7 +275,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 {
                     var collectorId = int.Parse(item[0].ToString());
                 }
-
             }
         }
 
