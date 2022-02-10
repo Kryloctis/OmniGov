@@ -213,7 +213,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.Controls.Add(this.nudReceiptIssuedTo);
             this.Controls.Add(this.nudReceiptIssuedFrom);
             this.Controls.Add(this.txtReceiptQuantity);

@@ -136,7 +136,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         }
         #endregion
 
-
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -148,7 +147,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
-
             }
         }
 
@@ -186,13 +184,9 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtReceiptNumberFrom.Enabled = false;
                 txtReceiptNumberTo.Enabled = false;
                 txtQuantity.ReadOnly = false;
-
                 txtReceiptNumberFrom.Text = "0";
                 txtReceiptNumberTo.Text = "0";
-
-
                 txtQuantity.Text = string.Empty;
-
             }
             else
             {
@@ -204,35 +198,14 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var receiptsRepository = Factory.ReceiptsRepository();
                 var accountableFormId = int.Parse(item[0].ToString());
 
-                receiptNumberFrom = receiptsRepository.RMIN(accountableFormId);
-                receiptNumberTo = receiptsRepository.RMAX(accountableFormId);
+                receiptNumberFrom = receiptsRepository.GetMinReceiptNumberByAccountableFormId(accountableFormId);
+                receiptNumberTo = receiptsRepository.GetMaxReceiptNumberByAccountableFormId(accountableFormId);
 
-                txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
-
-                int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
-                int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
-                txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
+                if (receiptNumberFrom != 0 && receiptNumberTo != 0)
+                    txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
+                else
+                    txtReceiptNumberFrom.Text = string.Empty;
             }
-        }
-
-        private void txtfrom_TextChanged(object sender, EventArgs e)
-        {
-            if (!isTicket)
-            {
-                if (txtReceiptNumberFrom.Text.Length > 0)
-                {
-                    int num = int.Parse(txtReceiptNumberFrom.Text.Trim());
-                    if (num > 1)
-                    {
-                        txtReceiptNumberFrom.Enabled = false;
-                    }
-                    else
-                    {
-                        txtReceiptNumberFrom.Enabled = true;
-                    }
-                }
-            }
-            
         }
 
         private void ucReceipts_Load(object sender, EventArgs e)
@@ -242,5 +215,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                 
             }   
         }
+
     }
 }

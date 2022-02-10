@@ -13,10 +13,6 @@ namespace ACC.Data
         private readonly string tableName = "receipts_issued";
         private readonly string viewTableName = "view_receipts_issued";
 
-        private readonly string tableAccountableForms = "accountable_forms";
-        private readonly string tableReceipts = "receipts";
-
-
         public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -326,7 +322,7 @@ namespace ACC.Data
                             $"FROM {viewTableName} " +
                             $"WHERE " +
                             $"collecting_officer_id = @collecting_officer_id " +
-                            $"GROUP BY collecting_officer_id ";
+                            $"GROUP BY collecting_officer_id";
 
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
@@ -342,8 +338,8 @@ namespace ACC.Data
                            $"collecting_officer_id, " +
                            $"collecting_officer, " +
                            $"date_issued, " +
-                           $"receipt_issued_from, " +
-                           $"receipt_issued_to, " +
+                           $"LPAD(receipt_issued_from, 7, 0) AS receipt_issued_from, " +
+                           $"LPAD(receipt_issued_to, 7, 0) AS receipt_issued_to, " +
                            $"quantity, " +
                            $"last_issued, " +
                            $"IF(is_returned = 1, (receipt_issued_to - last_issued), null) AS returned_quantity, " +

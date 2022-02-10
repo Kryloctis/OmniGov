@@ -147,10 +147,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.txtReceiptNumberFrom.Location = new System.Drawing.Point(139, 47);
             this.txtReceiptNumberFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
-            this.txtReceiptNumberFrom.ReadOnly = true;
             this.txtReceiptNumberFrom.Size = new System.Drawing.Size(162, 23);
             this.txtReceiptNumberFrom.TabIndex = 2;
-            this.txtReceiptNumberFrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
             this.txtReceiptNumberFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtfrom_KeyPress);
             this.txtReceiptNumberFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtfrom_KeyUp);
             this.txtReceiptNumberFrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtfrom_Validating);
