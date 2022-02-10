@@ -12,17 +12,7 @@ namespace ACC.Data
     public class PaymentCollectionRepository:IPaymentCollectionRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tablePaymentCollections = "payment_collections";
-        private readonly string tableCollectionOfficers = "collecting_officers";
-        private readonly string tableAccountableForms = "accountable_forms";
-        private readonly string tableGeneralLedgerAccounts = "general_ledger_accounts";
-        private readonly string tableUsers = "users";
-        private readonly string tableAccountaGroup = "account_group";
-        private readonly string tableMajorAccountGroup = "major_account_group";
-        private readonly string tableSubMajorAccountGroup = "sub_major_account_group";
-        private readonly string tableSubsidiaryLedgerAccounts = "subsidiary_ledger_accounts";
-        private readonly string tableCollectorReportPayments = "collector_report_payments";
-        private readonly string tableFunds = "funds";
+        private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
 
 
@@ -42,7 +32,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tablePaymentCollections} WHERE id = @id";
+                string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -73,14 +63,29 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[] {"@collectorId", DbType.Int32, collectorId}
             };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE collecting_officer_id = @collectorId ORDER BY accountable_form_id";
+             
+            string query =  $"SELECT " +
+                            $"id, " +
+                            $"funds_id, " +
+                            $"fund_name, " +
+                            $"accountable_form_id, " +
+                            $"accountable_forms, " +
+                            $"account_code, " +
+                            $"general_ledger_accounts_id, " +
+                            $"ledger_name, " +
+                            $"payee, " +
+                            $"receipt_no, " +
+                            $"quantity, " +
+                            $"payment_date, " +
+                            $"amount " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE collecting_officer_id = @collectorId " +
+                            $"ORDER BY accountable_form_id";
 
             var dt = new DataTable();
-
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
-
         }
+
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
@@ -97,6 +102,40 @@ namespace ACC.Data
             };
 
             string query  = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
+
+            var dtPaymentCollection = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
+        }
+
+        public DataTable GetRecordsByFilter(string date, int collectorId, string searchKey)
+        {
+            var parameter = new object[][]
+            {
+                new object[]{ "@date", DbType.DateTime2, date},
+                new object[]{ "@collectorId", DbType.Int32, collectorId },
+                new object[]{ "@searchKey", DbType.String, $"%{searchKey}%" }
+            };
+
+            string query =  $"SELECT " +
+                            $"id, " +
+                            $"funds_id, " +
+                            $"fund_name, " +
+                            $"accountable_form_id, " +
+                            $"accountable_forms, " +
+                            $"account_code, " +
+                            $"general_ledger_accounts_id, " +
+                            $"ledger_name, " +
+                            $"payee, " +
+                            $"receipt_no, " +
+                            $"quantity, " +
+                            $"payment_date, " +
+                            $"amount " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE " +
+                            $"payment_date = @date AND " +
+                            $"collecting_officer_id = @collectorId AND " +
+                            $"accountable_forms LIKE @searchKey " +
+                            $"ORDER BY accountable_form_id";
 
             var dtPaymentCollection = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
@@ -121,28 +160,28 @@ namespace ACC.Data
                     new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
                 };
                 
-                string query = $"INSERT INTO {tablePaymentCollections} " +
-                    $"(funds_id, " +
-                    $"collecting_officers_id, " +
-                    $"accountable_forms_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"payee, " +
-                    $"receipt_no,  " +
-                    $"quantity, " +
-                    $"payment_date, " +
-                    $"amount, " +
-                    $"created_by) " +
-                    $"VALUES " +
-                    $"(@funds_id, " +
-                    $"@collecting_officers_id, " +
-                    $"@accountable_forms_id, " +
-                    $"@general_ledger_accounts_id, " +
-                    $"@payee, " +
-                    $"@receipt_no, " +
-                    $"@quantity, " +
-                    $"@payment_date, " +
-                    $"@amount, " +
-                    $"@created_by)";
+                string query =  $"INSERT INTO {tableName} " +
+                                $"(funds_id, " +
+                                $"collecting_officers_id, " +
+                                $"accountable_forms_id, " +
+                                $"general_ledger_accounts_id, " +
+                                $"payee, " +
+                                $"receipt_no,  " +
+                                $"quantity, " +
+                                $"payment_date, " +
+                                $"amount, " +
+                                $"created_by) " +
+                                $"VALUES " +
+                                $"(@funds_id, " +
+                                $"@collecting_officers_id, " +
+                                $"@accountable_forms_id, " +
+                                $"@general_ledger_accounts_id, " +
+                                $"@payee, " +
+                                $"@receipt_no, " +
+                                $"@quantity, " +
+                                $"@payment_date, " +
+                                $"@amount, " +
+                                $"@created_by)";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
@@ -173,11 +212,11 @@ namespace ACC.Data
                 string query = string.Empty;
                 if (entity.SlaId > 0)
                 {
-                    query = $"UPDATE {tablePaymentCollections} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=@subsidiary_ledger_accounts_id,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                    query = $"UPDATE {tableName} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=@subsidiary_ledger_accounts_id,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
                 }
                 else
                 {
-                    query = $"UPDATE {tablePaymentCollections} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=NULL,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
+                    query = $"UPDATE {tableName} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=NULL,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
                 }                    
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
@@ -199,7 +238,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int16, entity.Id},
                         };
 
-                        string query = $"DELETE FROM {tablePaymentCollections} WHERE id = @id";
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -217,7 +256,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tablePaymentCollections}";
+                string query = $"SELECT COUNT(*) FROM {tableName}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -227,86 +266,19 @@ namespace ACC.Data
             }
         }
 
-        public decimal SumRecords()
-        {
-            try
-            {
-                string query = $"SELECT SUM(amount) FROM {tablePaymentCollections}";
-
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal SumRecords(int Id,string month)
-        {
-            try
-            {
-                string query = $"SELECT SUM(amount) FROM {tablePaymentCollections} WHERE collecting_officers_id='{Id}' AND DATE_FORMAT(payment_date,'%M-%Y')='{month}'";
-
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal SumRecords(int Id,int fid, string from,string to)
-        {
-            try
-            {
-                string query = $"SELECT SUM(amount) FROM {tablePaymentCollections} WHERE collecting_officers_id='{Id}' AND {tablePaymentCollections}.funds_id='{fid}' AND (payment_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE))";
-
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal SumRecords(int Id,int fid, string from, string to,string ids)
-        {
-            try
-            {
-                string query = $"SELECT SUM(amount) FROM {tablePaymentCollections} WHERE collecting_officers_id='{Id}' AND {tablePaymentCollections}.funds_id='{fid}' AND (payment_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE)) AND id NOT IN ({ids})";
-
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, id },
-                };
-
-                string query = $"SELECT id FROM {tablePaymentCollections} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int16, id },
             };
 
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+         
             return false;
         }
 
@@ -318,12 +290,12 @@ namespace ACC.Data
                 new object[] { "@accountable_forms_id", DbType.String, formid },
             };
 
-            string query = $"SELECT id FROM {tablePaymentCollections} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
+            string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-            if (!string.IsNullOrEmpty(queryResult)) return true;
+            if (!string.IsNullOrEmpty(queryResult)) 
+                return true;
             
-
             return false;
         }
 
@@ -336,15 +308,15 @@ namespace ACC.Data
                 new object[] { "@accountable_forms_id", DbType.String, formid },
             };
 
-            string query = $"SELECT id FROM {tablePaymentCollections} " +
+            string query = $"SELECT id FROM {tableName} " +
                            $"WHERE id <> @payment_collection_id AND " +
                            $"receipt_no = @receipt_no AND " +
                            $"accountable_forms_id = @accountable_forms_id";
 
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
 
             return false;
         }
@@ -362,50 +334,6 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
 
-        public DataTable GetRecordByLedger(string month)
-        {
-            try
-            {
-                string query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE DATE_FORMAT({tablePaymentCollections}.payment_date,'%M-%Y')='{month}' ORDER BY {tablePaymentCollections}.id DESC";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRecordByLedger(int Id,string month)
-        {
-            try
-            {
-                string query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tableCollectionOfficers}.id='{Id}' AND DATE_FORMAT({tablePaymentCollections}.payment_date,'%M-%Y')='{month}'";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRecordByLedger(int Id,int fid, string from,string to)
-        {
-            try
-            {
-                string query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tableCollectionOfficers}.id='{Id}' AND {tableFunds}.id={fid} AND ({tablePaymentCollections}.payment_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE)) AND {tablePaymentCollections}.id NOT IN (SELECT payment_collections_id FROM {tableCollectorReportPayments})";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public DataTable GetRecordByLedger(object[] parameter)
         {
@@ -439,20 +367,6 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
         }
 
-        public DataTable GetRecordByExcel(string month)
-        {
-            try
-            {
-                string query = $"SELECT {tablePaymentCollections}.id,CONCAT({tableFunds}.fund_code,' - ',{tableFunds}.fund_name) AS fund,CONCAT({tableAccountaGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectionOfficers}.last_name,', ',{tableCollectionOfficers}.first_name,' ',{tableCollectionOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tablePaymentCollections} LEFT JOIN {tableCollectionOfficers} ON {tableCollectionOfficers}.id={tablePaymentCollections}.collecting_officers_id LEFT JOIN {tableAccountableForms} ON {tableAccountableForms}.id={tablePaymentCollections}.accountable_forms_id LEFT JOIN {tableGeneralLedgerAccounts} ON {tableGeneralLedgerAccounts}.id={tablePaymentCollections}.general_ledger_accounts_id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableSubMajorAccountGroup} ON {tableGeneralLedgerAccounts}.sub_major_account_group_id={tableSubMajorAccountGroup}.id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountaGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountaGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableFunds} ON {tablePaymentCollections}.funds_id={tableFunds}.id WHERE {tableAccountaGroup}.id='4' AND DATE_FORMAT({tablePaymentCollections}.payment_date,'%M-%Y')='{month}' ORDER BY {tablePaymentCollections}.id DESC";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public DataTable GetRecordsByUserId(int userId)
         {

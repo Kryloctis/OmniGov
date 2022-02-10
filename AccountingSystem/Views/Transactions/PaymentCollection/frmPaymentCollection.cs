@@ -41,31 +41,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         cmdCollector.SelectedIndex = -1;
                     }
                 }
-
             }
             catch (Exception)
             {
 
                 throw;
-            }
-        }
-
-        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
-
-                var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
-
-                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
-
-                SetStatusStrip();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -94,11 +74,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                string date = dtpdate.Value.ToString("yyyy-MM-dd");
+                string date = dtpDate.Value.ToString("yyyy-MM-dd");
                 int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
+                string searchKey = txtSearch.Text.Trim();
 
-                var pcRepository = Factory.PaymentCollectionRepository();
-                var dtpayments  = pcRepository.GetRecordsByCollectingOfficerId(collectorId);
+                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var dtpayments  = paymentCollectionRepo.GetRecordsByFilter(date, collectorId, searchKey);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 
@@ -150,8 +131,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         int pcId = Convert.ToInt32(row.Cells[0].Value.ToString());
                         paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = pcId });
 
-                        var pcRepository = Factory.PaymentCollectionRepository();
-                        if (pcRepository.Delete(paymentCollectionModelList))
+                        var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                        if (paymentCollectionRepo.Delete(paymentCollectionModelList))
                         {
                             LoadRecords();
                             lblRecordCount.Text = dgpayments.Rows.Count.ToString();
@@ -165,29 +146,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
+        private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void dtpdate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var paymentCollectionRepo = Factory.PaymentCollectionRepository(); 
-                    var dtPayments = paymentCollectionRepo.GetRecordsBySearch(searchkey);
-
-                    HelperLoadRecords.PaymentDatagridView(dtPayments, dgpayments);
-
-                    lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
-            {
+            if (txtSearch.Text.Length > 3 || txtSearch.Text.Length == 0)
                 LoadRecords();
-            }
-
-            SetStatusStrip();
-
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -213,24 +185,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnrefresh_Click(object sender, EventArgs e)
         {
-            txtsearch.Text = string.Empty;
-            dtpdate.Value = DateTime.Now;
-            LoadRecords();
+            txtSearch.Text = string.Empty;
+            dtpDate.Value = DateTime.Now;
         }
 
-        private void dtpdate_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string date = dtpdate.Value.ToString("yyyy-MM-dd");
-                var dtpayments = Factory.PaymentCollectionRepository().GetRecordsByDate(date);
-                HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
-
-                SetStatusStrip();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-      
     }
 }
