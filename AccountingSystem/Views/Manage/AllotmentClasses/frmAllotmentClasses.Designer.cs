@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage Allotment Classes";
+            this.Text = "Manage > Allotment Classes";
             this.Load += new System.EventHandler(this.frmAllotmentClasses_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
