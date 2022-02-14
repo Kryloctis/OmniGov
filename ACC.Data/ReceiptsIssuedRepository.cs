@@ -13,10 +13,6 @@ namespace ACC.Data
         private readonly string tableName = "receipts_issued";
         private readonly string viewTableName = "view_receipts_issued";
 
-        private readonly string tableAccountableForms = "accountable_forms";
-        private readonly string tableReceipts = "receipts";
-
-
         public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -105,8 +101,8 @@ namespace ACC.Data
                             $"id, " +
                             $"collecting_officer, " +
                             $"accountable_forms, " +
-                            $"receipt_issued_from, " +
-                            $"receipt_issued_to,  " +
+                            $"IF(receipt_issued_from = 0 AND receipt_issued_from = 0, NULL, LPAD(receipt_issued_from, 7, 0)) AS receipt_number_from, " +
+                            $"IF(receipt_issued_to = 0 AND receipt_issued_to = 0, NULL, LPAD(receipt_issued_to, 7, 0)) AS receipt_number_to, " +
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +
@@ -326,7 +322,7 @@ namespace ACC.Data
                             $"FROM {viewTableName} " +
                             $"WHERE " +
                             $"collecting_officer_id = @collecting_officer_id " +
-                            $"GROUP BY collecting_officer_id ";
+                            $"GROUP BY collecting_officer_id";
 
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
@@ -342,8 +338,8 @@ namespace ACC.Data
                            $"collecting_officer_id, " +
                            $"collecting_officer, " +
                            $"date_issued, " +
-                           $"receipt_issued_from, " +
-                           $"receipt_issued_to, " +
+                           $"IF(receipt_issued_from = 0 AND receipt_issued_from = 0, NULL, LPAD(receipt_issued_from, 7, 0)) AS receipt_issued_from, " +
+                           $"IF(receipt_issued_to = 0 AND receipt_issued_to = 0, NULL, LPAD(receipt_issued_to, 7, 0)) AS receipt_issued_to, " +
                            $"quantity, " +
                            $"last_issued, " +
                            $"IF(is_returned = 1, (receipt_issued_to - last_issued), null) AS returned_quantity, " +
@@ -386,16 +382,16 @@ namespace ACC.Data
 
         }
 
-        public int GetReceiptNumberFromByReceiptId(int receiptId)
+        public int GetReceiptIssuedQuantityByReceiptId(int receiptId)
         {
             var parameter = new object[][] {
                 new object[]{ "@receipt_id", DbType.Int32, receiptId}
             };
 
             string query = $"SELECT " +
-                           $"COALESCE(MAX(receipt_issued_to), 0) AS receipt_issued_from " +
+                           $"COALESCE(SUM(quantity), 0) AS receipt_issued_from " +
                            $"FROM {tableName} " +
-                           $"WHERE receipts_id = @receipt_id";
+                           $"WHERE receipts_id = @receipt_id ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }

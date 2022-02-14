@@ -131,8 +131,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             if(dgReceiptIssued.SelectedRows.Count > 0)
             {
-                int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
-                _ = new frmReturnReceipts(this, id).ShowDialog();
+                int id = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
+                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[3].Value.ToString()) ? 0 : dgReceiptIssued.CurrentRow.Cells[3].Value.ToString());
+
+                int receiptNumberTo = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[4].Value.ToString()) ? 0 : dgReceiptIssued.CurrentRow.Cells[3].Value.ToString());
+
+               
+                _ = new frmReturnReceipts(this, id, receiptNumberFrom, receiptNumberTo).ShowDialog();
             }
         }
     }

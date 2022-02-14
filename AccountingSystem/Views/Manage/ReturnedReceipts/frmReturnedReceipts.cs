@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             {
                 var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
-
+               
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
                 lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
 

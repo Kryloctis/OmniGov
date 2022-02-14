@@ -94,8 +94,8 @@ namespace ACC.Data
             string query  = $"SELECT " +
                             $"id, " +
                             $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
-                            $"if(receipt_number_from = 0, null, receipt_number_from), " +
-                            $"if(receipt_number_to = 0, null, receipt_number_to), " +
+                            $"IF(receipt_number_from = 0 AND receipt_number_to = 0, NULL, LPAD(receipt_number_from, 7, 0)) AS receipt_number_from, " +
+                            $"IF(receipt_number_from = 0 AND receipt_number_to = 0, NULL, LPAD(receipt_number_from, 7, 0)) AS receipt_number_to, " +
                             $"received_date, " +
                             $"quantity, " +
                             $"user officer " +
@@ -213,49 +213,38 @@ namespace ACC.Data
             return false;
         }
 
-        public int RMAX(int accid)
+        public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
         {
-            int value = 0;
-            try
-            {               
-                string query = $"SELECT IFNULL(MAX(receipt_number_to),0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
-                DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
-                if(dt.Rows.Count > 0)
-                {
-                    for(int i=0;i < dt.Rows.Count; i++)
-                    {
-                        value = int.Parse(dt.Rows[i]["receiptno"].ToString());
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            };
+            int value = 0;          
 
+            string query = $"SELECT IFNULL(MAX(receipt_number_to), 0) AS receiptno " +
+                           $"FROM {tableName} " +
+                           $"WHERE accountable_forms_id = {accountableFormId}";
+
+            DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
+            if(dt.Rows.Count > 0)
+            {
+                for(int i=0;i < dt.Rows.Count; i++)
+                    value = int.Parse(dt.Rows[i]["receiptno"].ToString());
+            }
+         
             return value;
         }
 
-        public int RMIN(int accid)
+        public int GetMinReceiptNumberByAccountableFormId(int accountableFormId)
         {
             int value = 0;
-            try
+           
+            string query  = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno " +
+                            $"FROM {tableName} " +
+                            $"WHERE accountable_forms_id = {accountableFormId}";
+            DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+            if (dt.Rows.Count > 0)
             {
-                string query = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno FROM {tableName} WHERE accountable_forms_id = {accid}";
-                DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
-                if (dt.Rows.Count > 0)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        value = int.Parse(dt.Rows[i]["receiptno"].ToString());
-                    }
-                }
+                for (int i = 0; i < dt.Rows.Count; i++)
+                    value = int.Parse(dt.Rows[i]["receiptno"].ToString());
             }
-            catch (Exception)
-            {
-                throw;
-            };
-
+            
             return value;
         }
 
@@ -266,7 +255,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, id },
             };
 
-            string query = $"SELECT * FROM {tableName} " +
+            string query =  $"SELECT * FROM {tableName} " +
                             $"WHERE " +
                             $"id = @id AND receipt_number_to = (SELECT SUM(IF(IFNULL(last_issued,0) > 0, " +
                             $"receipt_issued_to - last_issued,0)) " +
@@ -347,6 +336,38 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
- 
+        public int GetReceiptNumberFromByReceiptId(int receiptId)
+        {
+            var parameter = new object[][] {
+                new object[]{ "@receipt_id", DbType.Int32, receiptId}
+            };
+
+            string query = $"SELECT " +
+                           $"receipt_number_from " +
+                           $"FROM {tableName} " +
+                           $"WHERE id = @receipt_id";
+
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+        }
+
+        public bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@receipt_number_from", DbType.Int32, receiptNumberFrom },
+                new object[] { "@receipt_number_to", DbType.Int32, receiptNumberTo },
+                new object[] { "@receipt_id", DbType.Int32, receiptId }
+            };
+            string query = $"SELECT id " +
+                           $"FROM {tableName} " +
+                           $"WHERE receipt_number_from <= @receipt_number_from AND receipt_number_to >= @receipt_number_to AND id = @receipt_id";
+
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (string.IsNullOrEmpty(queryResult)) 
+                return false;
+
+            return true;
+        }
     }
 }

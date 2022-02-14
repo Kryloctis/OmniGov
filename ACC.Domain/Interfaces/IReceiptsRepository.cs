@@ -7,9 +7,12 @@ namespace ACC.Domain.Interfaces
     {
         bool ReceiptConsumed(int id);
         bool ReceiptsIssued(int id);
-        int RMAX(int accid);
-        int RMIN(int accid);
+        int GetMaxReceiptNumberByAccountableFormId(int accountableFormId);
+        int GetMinReceiptNumberByAccountableFormId(int accountableFormId);
         bool AllowEdit(int id);
         DataTable GetReceipts();
+        int GetReceiptNumberFromByReceiptId(int receiptId);
+        bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo);
+
     }
 }

@@ -70,9 +70,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
             }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -128,6 +128,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
+
         private void nudReceiptIssuedFrom_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epFrom, nudReceiptIssuedFrom);
@@ -139,6 +140,29 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 if (string.IsNullOrEmpty(nudReceiptIssuedTo.Text.Trim()))
                     e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epTo, nudReceiptIssuedTo, "Receipt No. To.");
+
+                if (IsReceiptBetweenFromAndTo() == false)
+                {
+                    epTo.SetError(nudReceiptIssuedTo, "Invalid receipt number to.");
+                    e.Cancel = true;
+                }
+            }
+        }
+        private bool IsReceiptBetweenFromAndTo()
+        {
+            try
+            {
+                var receiptsRepo = Factory.ReceiptsRepository();
+                var receiptNumberFrom = Convert.ToInt32(nudReceiptIssuedFrom.Value);
+                var receiptNumberTo = Convert.ToInt32(nudReceiptIssuedTo.Value);
+                var receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
+
+                return receiptsRepo.IsReceiptBetweenFromAndTo(receiptId, receiptNumberFrom, receiptNumberTo);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -163,6 +187,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
         {
+
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
             if (item == null)
                 return;
@@ -170,23 +195,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             var receiptId = int.Parse(item[0].ToString());
             var receiptQuantity = int.Parse(item[5].ToString());
 
-            if (CheckReceiptsAvailability(receiptId, receiptQuantity))
+            if (item["receipt"].ToString().Contains("Tickets"))
             {
-                if (item["receipt"].ToString().Contains("Tickets"))
-                {
-                    SetFieldsForCashTickets();
-                }
-
-                else
+                SetFieldsForCashTickets();
+            }
+            else
+            {
+                if (CheckReceiptsAvailability(receiptId, receiptQuantity))
                 {
                     SetFieldsForNonCashTickets();
                     SetReceiptNumberFrom(receiptId);
                 }
-            }
-            else
-            {
-                nudReceiptIssuedFrom.ResetText();
-                nudReceiptIssuedTo.ResetText();
+                else
+                {
+                    nudReceiptIssuedFrom.ResetText();
+                    nudReceiptIssuedTo.ResetText();
+                }
             }
         }
 
@@ -194,7 +218,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptsIssuedRepo  = Factory.ReceiptsIssuedRepository();
+                var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
                 var receiptsAvailable = receiptsIssuedRepo.ReceiptAvailability(receiptId, receiptQuantity);
 
                 return receiptsAvailable;
@@ -209,10 +233,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
+                var receiptRepo = Factory.ReceiptsRepository();
+                var receiptNumberFrom = receiptRepo.GetReceiptNumberFromByReceiptId(receiptId);
+
                 var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var receiptNumberFrom = receiptIssuedRepo.GetReceiptNumberFromByReceiptId(receiptId);
-                receiptNumberFrom += 1; 
-                nudReceiptIssuedFrom.Text = receiptNumberFrom.ToString();
+                var receiptIssuedQuantity = receiptIssuedRepo.GetReceiptIssuedQuantityByReceiptId(receiptId);
+
+                var receiptNumber = (receiptNumberFrom + receiptIssuedQuantity);
+                nudReceiptIssuedFrom.Text = receiptNumber.ToString().PadLeft(7, '0');
             }
             catch (Exception)
             {
@@ -223,14 +251,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void SetFieldsForCashTickets()
         {
+            txtReceiptQuantity.ReadOnly  = false;
             isTickets = true;
             nudReceiptIssuedFrom.Enabled = false;
             nudReceiptIssuedTo.Enabled = false;
-            //txtReceiptQuantity.ReadOnly = false;
-
-            nudReceiptIssuedFrom.Text = "0";
-            nudReceiptIssuedTo.Text = "0";
-            //txtReceiptQuantity.Text = NextTicket(receiptId);
         }
 
         private void SetFieldsForNonCashTickets()
@@ -238,20 +262,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isTickets = false;
             nudReceiptIssuedFrom.Enabled = true;
             nudReceiptIssuedTo.Enabled = true;
-            //txtReceiptQuantity.ReadOnly = true;
-            //txtReceiptIssuedFrom.Text = NextReceipt(int.Parse(item[0].ToString()));
+
+            txtReceiptQuantity.ReadOnly = true;
         }
 
         private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbCollector.SelectedIndex != -1)
+            if (cmbCollector.SelectedIndex != -1)
             {
                 DataRowView item = cmbCollector.SelectedItem as DataRowView;
-                if(item != null)
+                if (item != null)
                 {
                     var collectorId = int.Parse(item[0].ToString());
                 }
-             
             }
         }
 
@@ -272,8 +295,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void ComputeReceiptIssueQuantity()
         {
             var receiptNumberFrom = nudReceiptIssuedFrom.Value;
-            var receiptNumberTo   = nudReceiptIssuedTo.Value;
-            var quantity          = (receiptNumberTo - receiptNumberFrom) + 1;
+            var receiptNumberTo = nudReceiptIssuedTo.Value;
+            var quantity = (receiptNumberTo - receiptNumberFrom) + 1;
 
             if (quantity >= 1)
                 txtReceiptQuantity.Text = Math.Floor(quantity).ToString();

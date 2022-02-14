@@ -15,12 +15,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class frmReturnReceipts : Form
     {
         private frmReceiptsIssued frmr;
-        private int Rid = 0;
-        public frmReturnReceipts(frmReceiptsIssued _frmr,int id)
+        private int receiptId = 0;
+        public frmReturnReceipts(frmReceiptsIssued _frmr, int id, int receiptNumberFrom, int receiptNumberTo)
         {
             InitializeComponent();
             frmr = _frmr;
-            Rid = id;
+
+            receiptId = id;
+            txtReceiptNumberFrom.Text = receiptNumberFrom.ToString();
+            txtReceiptNumberTo.Text = receiptNumberTo.ToString();
+
         }
 
         private bool SaveData()
@@ -30,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var riRepository = Factory.ReceiptsIssuedRepository();
                 var riModel = new ReceiptsIssuedModel()
                 {
-                    Id = Rid,
+                    Id = receiptId,
                     Is_returned = 1,
                     Returned_date = dtpreturn.Value
                 };
