@@ -439,4 +439,28 @@
   <data name="tool_notebook_filled_money_coins_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-notebook-filled-money-coins-filled@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="document_data_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_2_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data_2@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_2_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data_2@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_2_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data_2@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_data_2_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-data_2@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
