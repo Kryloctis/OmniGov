@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.txtReceiptNumberFrom.Location = new System.Drawing.Point(139, 39);
             this.txtReceiptNumberFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReceiptNumberFrom.MaxLength = 6;
+            this.txtReceiptNumberFrom.MaxLength = 8;
             this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
             this.txtReceiptNumberFrom.Size = new System.Drawing.Size(162, 23);
             this.txtReceiptNumberFrom.TabIndex = 2;
@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // 
             this.txtReceiptNumberTo.Location = new System.Drawing.Point(350, 39);
             this.txtReceiptNumberTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtReceiptNumberTo.MaxLength = 6;
+            this.txtReceiptNumberTo.MaxLength = 8;
             this.txtReceiptNumberTo.Name = "txtReceiptNumberTo";
             this.txtReceiptNumberTo.Size = new System.Drawing.Size(166, 23);
             this.txtReceiptNumberTo.TabIndex = 3;

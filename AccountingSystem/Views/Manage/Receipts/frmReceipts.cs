@@ -69,7 +69,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void dgreceipts_SelectionChanged(object sender, EventArgs e)
         {
-
             if(dgReceipts.SelectedRows.Count > 0)
             {
                 Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);

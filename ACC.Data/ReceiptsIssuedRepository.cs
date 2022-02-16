@@ -106,7 +106,7 @@ namespace ACC.Data
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +
-                            $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
+                            $"IF(IFNULL(is_returned,0) > 0, 'Yes', 'No') AS returned,  " +
                             $"returned_date,  " +
                             $"issued_by  " +
                             $"FROM {viewTableName} " +
@@ -162,7 +162,8 @@ namespace ACC.Data
                             $"ON receipts.accountable_forms_id = accountable_forms.id " +
                             $"INNER JOIN receipts_issued AS receipts_issued " +
                             $"ON receipts_issued.receipts_id = receipts.id " +
-                            $"WHERE receipts_issued.collecting_officers_id = @collectingOfficerId";
+                            $"WHERE receipts_issued.collecting_officers_id = @collectingOfficerId " +
+                            $"AND receipts_issued.is_returned = false";
 
 
             var dtri = new DataTable();
@@ -311,14 +312,14 @@ namespace ACC.Data
             string query =  $"SELECT " +
                             $"accountable_forms, " +
                             $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
-                            $"MIN(receipt_issued_from) receipt_issued_from, " +
-                            $"MAX(receipt_issued_to) receipt_issued_to, " +
+                            $"LPAD(MIN(receipt_issued_from), 7, 0) receipt_issued_from, " +
+                            $"LPAD(MAX(receipt_issued_to), 7, 0)  receipt_issued_to, " +
                             $"((receipt_issued_to - receipt_issued_from) + 1) issue_quantity, " +
-                            $"receipt_issued_from, " +
-                            $"receipt_issued_to, " +
+                            $"LPAD(receipt_issued_from, 7, 0) , " +
+                            $"LPAD(receipt_issued_to, 7, 0) , " +
                             $"(receipt_issued_to - last_issued) ending_balance_quantity, " +
-                            $"(last_issued + 1) ending_balance_serial_from, " +
-                            $"(receipt_issued_to) ending_balance_serial_to " +
+                            $"LPAD((last_issued + 1), 7, 0) ending_balance_serial_from, " +
+                            $"LPAD(receipt_issued_to, 7, 0) ending_balance_serial_to " +
                             $"FROM {viewTableName} " +
                             $"WHERE " +
                             $"collecting_officer_id = @collecting_officer_id " +

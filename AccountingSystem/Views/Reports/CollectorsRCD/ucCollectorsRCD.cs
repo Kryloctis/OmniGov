@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCDCollector
 {
+
     public partial class ucCollectorsRCD : UserControl
     {
         internal ushort reportId;

@@ -148,9 +148,9 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnReportOfCollections.Location = new System.Drawing.Point(492, 0);
             this.btnReportOfCollections.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnReportOfCollections.Name = "btnReportOfCollections";
-            this.btnReportOfCollections.Size = new System.Drawing.Size(148, 30);
+            this.btnReportOfCollections.Size = new System.Drawing.Size(119, 30);
             this.btnReportOfCollections.TabIndex = 0;
-            this.btnReportOfCollections.Text = "Report of Collections";
+            this.btnReportOfCollections.Text = "Collector\'s RCD";
             this.btnReportOfCollections.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnReportOfCollections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReportOfCollections.UseVisualStyleBackColor = true;
@@ -160,12 +160,12 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             this.btnRCD.AutoSize = true;
             this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_document_text_20px;
-            this.btnRCD.Location = new System.Drawing.Point(643, 0);
+            this.btnRCD.Location = new System.Drawing.Point(614, 0);
             this.btnRCD.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnRCD.Name = "btnRCD";
-            this.btnRCD.Size = new System.Drawing.Size(219, 30);
+            this.btnRCD.Size = new System.Drawing.Size(134, 30);
             this.btnRCD.TabIndex = 0;
-            this.btnRCD.Text = "Reports of Collection and Deposits";
+            this.btnRCD.Text = "Liquidator\'s RCD";
             this.btnRCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRCD.UseVisualStyleBackColor = true;

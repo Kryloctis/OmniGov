@@ -18,6 +18,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByDeposits(int Id);
         DataTable GetRecordByGC(string from, string to);
         DataTable GetRecordByReceipts(int Id); 
+        DataTable GetRecordsByFund(string fund); 
         DataTable GetRecordByReceiptsConsolidated(string to);
 
         DataTable GetRecordsByRCDNo(string rcdNo);

@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 206);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 178);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -75,14 +75,14 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucForms1
+            // ucReceipts1
             // 
             this.ucReceipts1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ucReceipts1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucReceipts1.Location = new System.Drawing.Point(0, 0);
             this.ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucReceipts1.Name = "ucForms1";
-            this.ucReceipts1.Size = new System.Drawing.Size(541, 206);
+            this.ucReceipts1.Name = "ucReceipts1";
+            this.ucReceipts1.Size = new System.Drawing.Size(541, 178);
             this.ucReceipts1.TabIndex = 5;
             // 
             // frmReceiptsEdit
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(541, 233);
+            this.ClientSize = new System.Drawing.Size(541, 205);
             this.Controls.Add(this.ucReceipts1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

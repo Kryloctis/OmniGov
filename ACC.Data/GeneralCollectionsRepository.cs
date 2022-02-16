@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -26,6 +25,7 @@ namespace ACC.Data
         private readonly string tableName10 = "general_collections_deposits";
         private readonly string tableReceipts = "receipts";
         private readonly string tableReceiptsIssued = "receipts_issued";
+        private readonly string tableGeneralLedgerAccounts = "general_ledger_accounts";
 
         private readonly string viewTableName = "view_general_collections";
 
@@ -288,8 +288,9 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM view_abstract_of_general_collection";
+                //string query = $"SELECT * FROM view_abstract_of_general_collection";
 
+                string query = $"SELECT {tableGeneralCollections}.id,{tableGeneralCollections}.rcd_no,{tableCollectorReport}.report_no,CONCAT({tableAccountGroup}.account_group_code,'-',{tableMajorAccountGroup}.maj_acc_group_code,'-',{tableSubMajorAccountGroup}.sub_maj_acc_group_code,'-',{tableGeneralLedgerAccounts}.ledger_code) AS account_code,CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS accform,{tableGeneralLedgerAccounts}.ledger_name,CONCAT({tableSubsidiaryLedgerAccounts}.sub_code,'-',{tableSubsidiaryLedgerAccounts}.sub_name) AS subsidiary,{tablePaymentCollections}.payee,{tablePaymentCollections}.receipt_no,{tablePaymentCollections}.payment_date,{tablePaymentCollections}.amount,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector,{tablePaymentCollections}.created_at,{tablePaymentCollections}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby,CONCAT(u3.last_name,', ',u3.first_name,' ',u3.mid_initial) AS officer FROM {tableGeneralCollections} LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollectionsPayment}.general_collections_id={tableGeneralCollections}.id LEFT JOIN {tableCollectorReportPayments} ON {tableCollectorReportPayments}.collector_report_id={tableGeneralCollectionsPayment}.collector_report_id LEFT JOIN {tablePaymentCollections} ON {tablePaymentCollections}.id={tableCollectorReportPayments}.payment_collections_id LEFT JOIN {tableCollectorReport} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReport}.id LEFT JOIN {tableAccountableForms} ON {tablePaymentCollections}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableGeneralLedgerAccounts} ON {tablePaymentCollections}.general_ledger_accounts_id={tableGeneralLedgerAccounts}.id LEFT JOIN {tableUsers} u1 ON u1.id={tablePaymentCollections}.created_by LEFT JOIN {tableUsers} u2 ON u2.id={tablePaymentCollections}.updated_by LEFT JOIN {tableUsers} u3 ON u3.id={tableGeneralCollections}.users_id LEFT JOIN {tableSubMajorAccountGroup} ON {tableSubMajorAccountGroup}.id={tableGeneralLedgerAccounts}.sub_major_account_group_id LEFT JOIN {tableMajorAccountGroup} ON {tableSubMajorAccountGroup}.major_account_group_id={tableMajorAccountGroup}.id LEFT JOIN {tableAccountGroup} ON {tableMajorAccountGroup}.account_group_id={tableAccountGroup}.id LEFT JOIN {tableSubsidiaryLedgerAccounts} ON {tablePaymentCollections}.subsidiary_ledger_accounts_id={tableSubsidiaryLedgerAccounts}.id LEFT JOIN {tableCollectingOfficers} ON {tableCollectingOfficers}.id={tablePaymentCollections}.collecting_officers_id WHERE ({tableGeneralCollections}.rcd_date BETWEEN CAST('{from}' AS DATE) AND CAST('{to}' AS DATE))";
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);
             }
@@ -391,9 +392,6 @@ namespace ACC.Data
         {
             try
             {
-
-            
-
                 string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form, " +
                     $"{tableReceipts}.receipt_number_from, " +
                     $"{tableReceipts}.receipt_number_to, " +
@@ -411,39 +409,38 @@ namespace ACC.Data
         }
 
         public int GetGeneralCollectionId(string rcdNo)
-        {           
-            try
-            {
-                var parameter = new object[][] {
-                    new object[] {"@rcdNo", DbType.String, rcdNo}
-                };
-                string query = $"SELECT id FROM {tableGeneralCollections} WHERE rcd_no=@rcdNo";
+        {       
+            var parameter = new object[][] {
+                new object[] {"@rcdNo", DbType.String, rcdNo}
+            };
+            string query = $"SELECT id FROM {tableGeneralCollections} WHERE rcd_no=@rcdNo";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public DataTable GetRecordsByRCDNo(string rcdNo)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[]{ "@rcdNo", DbType.String, rcdNo},
-                };
+            var parameter = new object[][] {
+                new object[]{ "@rcdNo", DbType.String, rcdNo},
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
+            string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
 
-                var dtRCD = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtRCD = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
+           
+        }
+
+        public DataTable GetRecordsByFund(string fund)
+        {
+            var parameter = new object[][] {
+                new object[]{"@fund", DbType.String, fund }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE fund_name = @fund";
+            var dtpc = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
     }
 }
