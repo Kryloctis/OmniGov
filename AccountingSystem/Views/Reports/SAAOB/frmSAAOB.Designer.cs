@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.chkbxSpecialFPP);
             this.panel1.Controls.Add(this.dtAsOf);
             this.panel1.Controls.Add(this.cmbxFund);
@@ -65,13 +65,13 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(915, 47);
+            this.panel1.Size = new System.Drawing.Size(915, 41);
             this.panel1.TabIndex = 0;
             // 
             // chkbxSpecialFPP
             // 
             this.chkbxSpecialFPP.AutoSize = true;
-            this.chkbxSpecialFPP.Location = new System.Drawing.Point(596, 14);
+            this.chkbxSpecialFPP.Location = new System.Drawing.Point(566, 14);
             this.chkbxSpecialFPP.Name = "chkbxSpecialFPP";
             this.chkbxSpecialFPP.Size = new System.Drawing.Size(116, 19);
             this.chkbxSpecialFPP.TabIndex = 7;
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // dtAsOf
             // 
-            this.dtAsOf.Location = new System.Drawing.Point(362, 11);
+            this.dtAsOf.Location = new System.Drawing.Point(331, 11);
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(211, 23);
             this.dtAsOf.TabIndex = 6;
@@ -89,14 +89,14 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             this.cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFund.FormattingEnabled = true;
-            this.cmbxFund.Location = new System.Drawing.Point(81, 12);
+            this.cmbxFund.Location = new System.Drawing.Point(50, 12);
             this.cmbxFund.Name = "cmbxFund";
             this.cmbxFund.Size = new System.Drawing.Size(218, 23);
             this.cmbxFund.TabIndex = 5;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(735, 12);
+            this.btnRetrieve.Location = new System.Drawing.Point(811, 11);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(322, 15);
+            this.label2.Location = new System.Drawing.Point(291, 15);
             this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(10, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 15);
             this.label1.TabIndex = 0;
@@ -127,9 +127,9 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 82);
+            this.panel2.Location = new System.Drawing.Point(0, 64);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(915, 603);
+            this.panel2.Size = new System.Drawing.Size(915, 621);
             this.panel2.TabIndex = 1;
             // 
             // epYear
@@ -142,6 +142,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // panelConfig
             // 
+            this.panelConfig.BackColor = System.Drawing.Color.White;
             this.panelConfig.Controls.Add(this.radBtn5);
             this.panelConfig.Controls.Add(this.radBtn4);
             this.panelConfig.Controls.Add(this.radBtn3);
@@ -149,16 +150,16 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.panelConfig.Controls.Add(this.radBtn1);
             this.panelConfig.Controls.Add(this.label3);
             this.panelConfig.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelConfig.Location = new System.Drawing.Point(0, 47);
+            this.panelConfig.Location = new System.Drawing.Point(0, 41);
             this.panelConfig.Name = "panelConfig";
-            this.panelConfig.Size = new System.Drawing.Size(915, 35);
+            this.panelConfig.Size = new System.Drawing.Size(915, 23);
             this.panelConfig.TabIndex = 2;
             // 
             // radBtn5
             // 
             this.radBtn5.AutoSize = true;
             this.radBtn5.Checked = true;
-            this.radBtn5.Location = new System.Drawing.Point(229, 8);
+            this.radBtn5.Location = new System.Drawing.Point(227, 3);
             this.radBtn5.Name = "radBtn5";
             this.radBtn5.Size = new System.Drawing.Size(31, 19);
             this.radBtn5.TabIndex = 18;
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // radBtn4
             // 
             this.radBtn4.AutoSize = true;
-            this.radBtn4.Location = new System.Drawing.Point(192, 8);
+            this.radBtn4.Location = new System.Drawing.Point(190, 3);
             this.radBtn4.Name = "radBtn4";
             this.radBtn4.Size = new System.Drawing.Size(31, 19);
             this.radBtn4.TabIndex = 18;
@@ -181,7 +182,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // radBtn3
             // 
             this.radBtn3.AutoSize = true;
-            this.radBtn3.Location = new System.Drawing.Point(155, 8);
+            this.radBtn3.Location = new System.Drawing.Point(153, 3);
             this.radBtn3.Name = "radBtn3";
             this.radBtn3.Size = new System.Drawing.Size(31, 19);
             this.radBtn3.TabIndex = 18;
@@ -192,7 +193,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // radBtn2
             // 
             this.radBtn2.AutoSize = true;
-            this.radBtn2.Location = new System.Drawing.Point(118, 8);
+            this.radBtn2.Location = new System.Drawing.Point(116, 3);
             this.radBtn2.Name = "radBtn2";
             this.radBtn2.Size = new System.Drawing.Size(31, 19);
             this.radBtn2.TabIndex = 18;
@@ -203,7 +204,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // radBtn1
             // 
             this.radBtn1.AutoSize = true;
-            this.radBtn1.Location = new System.Drawing.Point(81, 8);
+            this.radBtn1.Location = new System.Drawing.Point(79, 3);
             this.radBtn1.Name = "radBtn1";
             this.radBtn1.Size = new System.Drawing.Size(31, 19);
             this.radBtn1.TabIndex = 18;
@@ -214,7 +215,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 10);
+            this.label3.Location = new System.Drawing.Point(10, 4);
             this.label3.Margin = new System.Windows.Forms.Padding(10, 7, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);

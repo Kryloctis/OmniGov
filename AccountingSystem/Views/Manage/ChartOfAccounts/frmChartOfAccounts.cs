@@ -8,7 +8,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts
@@ -24,6 +23,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
                 BtnSubsidiary.Visible = false;
 
+            btnAdd.Enabled = false;
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             BtnSetBalance.Enabled = false;
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
             if (limitSize > 0)
                 dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
-                    else
+            else
                 dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
 
             dataTable.Columns.Add("Debit", typeof(decimal));
@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         internal void LoadGeneralLedgers(int limitSize)
         {
             try
-            {       
+            {
                 Cursor.Current = Cursors.WaitCursor;
                 HelperLoadRecords.GeneralLedgerAccountsWithBalancesDatagridView(GeneralLedgersDataTable(limitSize), dgGeneralLedgerAccounts);
                 lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();

@@ -98,10 +98,10 @@ namespace AccountingSystem
                 menuDailyCash.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                menuSAAOB.Visible = false;
+                btnSAAOB.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                menuSAAOBB.Visible = false;
+                btnSAAOBB.Visible = false;
         }
 
         private void ValidateTransactionPermissions()
@@ -197,10 +197,10 @@ namespace AccountingSystem
                 menuDailyCash.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                menuSAAOB.Visible = false;
+                btnSAAOB.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                menuSAAOBB.Visible = false;
+                btnSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Manage Amortization"))
                 amortiaztionToolStripMenuItem.Visible = false;
@@ -522,12 +522,12 @@ namespace AccountingSystem
 
         private void MenuSAAOB_Click(object sender, EventArgs e)
         {
-            _ = new frmSAAOB().ShowDialog();
+
         }
 
         private void MenuSAAOBB_Click(object sender, EventArgs e)
         {
-            _ = new frmSAAOBB().ShowDialog();
+
         }
 
         #endregion
@@ -648,6 +648,16 @@ namespace AccountingSystem
         private void menuReturnReceipts_Click(object sender, EventArgs e)
         {
             _ = new frmReturnedReceipts().ShowDialog();
+        }
+
+        private void btnSAAOB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOB().ShowDialog();
+        }
+
+        private void btnSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
         }
     }
 }
