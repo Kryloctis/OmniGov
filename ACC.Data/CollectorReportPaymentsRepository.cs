@@ -309,7 +309,7 @@ namespace ACC.Data
                     $"general_ledger_accounts_id, " +
                     $"ledger_name, " +
                     $"payee, " +
-                    $"receipt_no, " +
+                    $"LPAD(receipt_no, 7, 0) AS receipt_no, " +
                     $"quantity, " +
                     $"payment_date, " +
                     $"amount " +
@@ -335,8 +335,8 @@ namespace ACC.Data
 
                 string query =  $"SELECT " +
                                 $"accountable_forms,  " +
-                                $"MIN(receipt_no) report_number_from, " +
-                                $"MAX(receipt_no) report_number_to, " +
+                                $"LPAD(MIN(receipt_no), 7, 0) report_number_from, " +
+                                $"LPAD(MAX(receipt_no), 7, 0) report_number_to, " +
                                 $"SUM(amount) amount " +
                                 $"FROM {viewTableName} " +
                                 $"WHERE report_no = @reportNo " +
