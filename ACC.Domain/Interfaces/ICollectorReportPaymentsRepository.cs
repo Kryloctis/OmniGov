@@ -9,15 +9,8 @@ namespace ACC.Domain.Interfaces
     public interface ICollectorReportPaymentsRepository : IRepository<CollectorReportPaymentModel>
     {
         bool Delete(CollectorReportPaymentModel entity);
-        DataTable GetRecordByLedger(string Id);
-        DataTable GetRecords(int id);
-        DataTable GetRecords(string reportno);
         DataTable GetRecordsByReportNo(string reportNo);
         DataTable GetCollectorsReportByReportNo(string reportNo);
-
-
-        decimal SumRecords(string reportno);
-        decimal SumRecords(int id);
         bool Append(List<CollectorReportPaymentModel> entityList);
     }
 }

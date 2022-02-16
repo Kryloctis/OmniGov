@@ -229,11 +229,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
 
-            if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
-            {
-                epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
-                e.Cancel = true;
-            }
+            //if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
+            //{
+            //    epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
+            //    e.Cancel = true;
+            //}
 
             if (ReceiptNumberHasCollection())
             {
@@ -259,7 +259,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     isReceiptRecorded = paymentCollectionRepo.ReceiptExist(receiptNumber, accountableFormId);
                 else
                     isReceiptRecorded = paymentCollectionRepo.ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
-                
 
                 return isReceiptRecorded;
             }

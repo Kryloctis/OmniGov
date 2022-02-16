@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -12,17 +11,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "collector_report_payments";
-        private readonly string tableName2 = "collector_report";
-        private readonly string tableName3 = "payment_collections";
-        private readonly string tableName4 = "collecting_officers";
-        private readonly string tableName5 = "accountable_forms";
-        private readonly string tableName6 = "general_ledger_accounts";
-        private readonly string tableName7 = "users";
-        private readonly string tableName8 = "account_group";
-        private readonly string tableName9 = "major_account_group";
-        private readonly string tableName10 = "sub_major_account_group";
-        private readonly string tableName11 = "subsidiary_ledger_accounts";
-
         private readonly string viewTableName = "view_collector_report_payments";
 
         public CollectorReportPaymentsRepository(IDbGenericCommands dbGenericCommands)
@@ -59,40 +47,11 @@ namespace ACC.Data
 
             return record;
         }
+
         public DataTable GetRecords()
         {
             throw new NotImplementedException();
         }
-        public DataTable GetRecords(int id)
-        {
-            try
-            {
-                string query = $"SELECT {tableName}.id,{tableName3}.id AS pid,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName3}.collecting_officers_id={tableName4}.id LEFT JOIN {tableName5} ON {tableName3}.accountable_forms_id={tableName5}.id LEFT JOIN {tableName6} ON {tableName3}.general_ledger_accounts_id={tableName6}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id = {tableName8}.id WHERE {tableName2}.id='{id}' ORDER BY {tableName}.id ASC";
-
-                var dtcrp = new DataTable();
-                return _dbGenericCommands.Fill(query, dtcrp);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRecords(string reportno)
-        {
-            try
-            {
-                string query = $"SELECT {tableName}.id,{tableName3}.id AS pid,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id LEFT JOIN {tableName4} ON {tableName3}.collecting_officers_id={tableName4}.id LEFT JOIN {tableName5} ON {tableName3}.accountable_forms_id={tableName5}.id LEFT JOIN {tableName6} ON {tableName3}.general_ledger_accounts_id={tableName6}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id = {tableName8}.id WHERE {tableName2}.report_no='{reportno}' ORDER BY {tableName}.id ASC";
-
-                var dtcrp = new DataTable();
-                return _dbGenericCommands.Fill(query, dtcrp);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
 
         public bool Append(List<CollectorReportPaymentModel> entityList)
         {
@@ -181,50 +140,7 @@ namespace ACC.Data
                 throw;
             }
         }
-
-        public decimal SumRecords(string reportno)
-        {
-            try
-            {
-                string query = $"SELECT SUM({tableName3}.amount) FROM {tableName2} LEFT JOIN {tableName} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id WHERE {tableName2}.report_no='{reportno}'";
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result):decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal SumRecords(int id)
-        {
-            try
-            {
-                string query = $"SELECT SUM({tableName3}.amount) FROM {tableName2} LEFT JOIN {tableName} ON {tableName}.collector_report_id={tableName2}.id LEFT JOIN {tableName3} ON {tableName}.payment_collections_id={tableName3}.id WHERE {tableName2}.id='{id}'";
-                string result = _dbGenericCommands.ExecuteScalar(query);
-                return !string.IsNullOrEmpty(result) ? decimal.Parse(result) : decimal.Parse("0.00");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetRecordByLedger(string Id)
-        {
-            try
-            {
-                string query = $"SELECT {tableName}.id,{tableName2}.report_no,{tableName2}.date,CONCAT({tableName8}.account_group_code,'-',{tableName9}.maj_acc_group_code,'-',{tableName10}.sub_maj_acc_group_code,'-',{tableName6}.ledger_code) AS account_code,CONCAT({tableName5}.acc_form_no,'-',{tableName5}.acc_form_desc) AS accform,{tableName6}.ledger_name,CONCAT({tableName11}.sub_code,'-',{tableName11}.sub_name) AS subsidiary,{tableName3}.payee,{tableName3}.receipt_no,{tableName3}.payment_date,{tableName3}.amount,CONCAT({tableName4}.last_name,', ',{tableName4}.first_name,' ',{tableName4}.mid_initial) AS collector,{tableName3}.created_at,{tableName3}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName2}.id={tableName}.collector_report_id LEFT JOIN {tableName3} ON {tableName3}.id={tableName}.payment_collections_id LEFT JOIN {tableName5} ON {tableName5}.id={tableName3}.accountable_forms_id LEFT JOIN {tableName6} ON {tableName6}.id={tableName3}.general_ledger_accounts_id LEFT JOIN {tableName7} u1 ON u1.id={tableName3}.created_by LEFT JOIN {tableName7} u2 ON u2.id={tableName3}.updated_by LEFT JOIN {tableName10} ON {tableName6}.sub_major_account_group_id={tableName10}.id LEFT JOIN {tableName9} ON {tableName10}.major_account_group_id={tableName9}.id LEFT JOIN {tableName8} ON {tableName9}.account_group_id={tableName8}.id LEFT JOIN {tableName11} ON {tableName3}.subsidiary_ledger_accounts_id={tableName11}.id LEFT JOIN {tableName4} ON {tableName4}.id={tableName3}.collecting_officers_id WHERE {tableName2}.id IN ({Id})";
-
-                var dtpc = new DataTable();
-                return _dbGenericCommands.Fill(query, dtpc);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
+     
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -293,62 +209,49 @@ namespace ACC.Data
 
         public DataTable GetRecordsByReportNo(string reportNo)
         {
-            try
-            {
-                var parameter = new object[][] { 
-                    new object[]{"@reportNo", DbType.String, reportNo},
-                };
+            var parameter = new object[][] { 
+                new object[]{"@reportNo", DbType.String, reportNo},
+            };
 
-                string query = $"SELECT  " +
-                    $"payment_collections_id, " +
-                    $"funds_id, " +
-                    $"fund_name, " +
-                    $"accountable_form_id, " +
-                    $"account_code, " +
-                    $"accountable_forms, " +
-                    $"general_ledger_accounts_id, " +
-                    $"ledger_name, " +
-                    $"payee, " +
-                    $"LPAD(receipt_no, 7, 0) AS receipt_no, " +
-                    $"quantity, " +
-                    $"payment_date, " +
-                    $"amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE report_no = @reportNo";
+            string query = $"SELECT  " +
+                $"payment_collections_id, " +
+                $"funds_id, " +
+                $"fund_name, " +
+                $"accountable_form_id, " +
+                $"account_code, " +
+                $"accountable_forms, " +
+                $"general_ledger_accounts_id, " +
+                $"ledger_name, " +
+                $"payee, " +
+                $"LPAD(receipt_no, 7, 0) AS receipt_no, " +
+                $"quantity, " +
+                $"payment_date, " +
+                $"amount " +
+                $"FROM {viewTableName} " +
+                $"WHERE report_no = @reportNo";
 
-                var dtpc = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtpc = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
 
         public DataTable GetCollectorsReportByReportNo(string reportNo)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[]{"@reportNo", DbType.String, reportNo},
-                };
+            var parameter = new object[][] {
+                new object[]{"@reportNo", DbType.String, reportNo},
+            };
 
-                string query =  $"SELECT " +
-                                $"accountable_forms,  " +
-                                $"LPAD(MIN(receipt_no), 7, 0) report_number_from, " +
-                                $"LPAD(MAX(receipt_no), 7, 0) report_number_to, " +
-                                $"SUM(amount) amount " +
-                                $"FROM {viewTableName} " +
-                                $"WHERE report_no = @reportNo " +
-                                $"GROUP BY accountable_form_id ";
+            string query =  $"SELECT " +
+                            $"accountable_forms,  " +
+                            $"LPAD(MIN(receipt_no), 7, 0) report_number_from, " +
+                            $"LPAD(MAX(receipt_no), 7, 0) report_number_to, " +
+                            $"SUM(amount) amount " +
+                            $"FROM {viewTableName} " +
+                            $"WHERE report_no = @reportNo " +
+                            $"GROUP BY accountable_form_id ";
 
-                var dtpc = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtpc = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
+
     }
 }

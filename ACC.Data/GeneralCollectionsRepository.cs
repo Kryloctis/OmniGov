@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -391,9 +390,6 @@ namespace ACC.Data
         {
             try
             {
-
-            
-
                 string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form, " +
                     $"{tableReceipts}.receipt_number_from, " +
                     $"{tableReceipts}.receipt_number_to, " +
@@ -411,39 +407,38 @@ namespace ACC.Data
         }
 
         public int GetGeneralCollectionId(string rcdNo)
-        {           
-            try
-            {
-                var parameter = new object[][] {
-                    new object[] {"@rcdNo", DbType.String, rcdNo}
-                };
-                string query = $"SELECT id FROM {tableGeneralCollections} WHERE rcd_no=@rcdNo";
+        {       
+            var parameter = new object[][] {
+                new object[] {"@rcdNo", DbType.String, rcdNo}
+            };
+            string query = $"SELECT id FROM {tableGeneralCollections} WHERE rcd_no=@rcdNo";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public DataTable GetRecordsByRCDNo(string rcdNo)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[]{ "@rcdNo", DbType.String, rcdNo},
-                };
+            var parameter = new object[][] {
+                new object[]{ "@rcdNo", DbType.String, rcdNo},
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
+            string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
 
-                var dtRCD = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtRCD = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
+           
+        }
+
+        public DataTable GetRecordsByFund(string fund)
+        {
+            var parameter = new object[][] {
+                new object[]{"@fund", DbType.String, fund }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE fund_name = @fund";
+            var dtpc = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
     }
 }

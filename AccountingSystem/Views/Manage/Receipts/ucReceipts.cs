@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             int from = Convert.ToInt32(txtReceiptNumberFrom.Text.Trim());
             int to = Convert.ToInt32(txtReceiptNumberTo.Text.Trim());
 
-            txtQuantity.Text = (to - from).ToString();
+            txtQuantity.Text = ((to - from) + 1).ToString();
         }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)

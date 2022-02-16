@@ -120,6 +120,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.cmbfunds.Name = "cmbfunds";
             this.cmbfunds.Size = new System.Drawing.Size(173, 23);
             this.cmbfunds.TabIndex = 18;
+            this.cmbfunds.SelectionChangeCommitted += new System.EventHandler(this.cmbfunds_SelectionChangeCommitted);
             // 
             // frmSearch
             // 
@@ -134,7 +135,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgRCDSearch);
             this.Controls.Add(this.txtsearch);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow; 
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

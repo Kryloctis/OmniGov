@@ -587,5 +587,13 @@ namespace AccountingSystem
                 tpage.Focus();
             }
         }
+
+        public string FormatReceiptNumber(string receiptNumber)
+        {
+            if (string.IsNullOrEmpty(receiptNumber) == false)
+                return receiptNumber.PadLeft(7, '0');
+
+            return string.Empty;
+        }
     }
 }

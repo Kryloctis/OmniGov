@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
@@ -114,6 +107,23 @@ namespace AccountingSystem.Views.Reports.RCD
             else
             {
                 btnSelect.Enabled = false;
+            }
+        }
+
+        private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                var fund = Convert.ToInt32(cmbfunds.SelectedValue);
+
+                var rcdRepository = Factory.GeneralCollectionsRepository();
+                var dtRCD = rcdRepository.GetRecordsByFund(fund.ToString());
+
+                HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }
