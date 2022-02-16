@@ -121,6 +121,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
 
+            if (!Helper.HasPermission("Transaction Collector RCD"))
+                ucTreasuryDashboard1.btnReportOfCollections.Enabled = false;
         }
 
         private void ValidateManagePermissions()
