@@ -55,29 +55,14 @@ namespace ACC.Data
 
         public DataTable GetCollectionsDepositsByRCDNo(string rcdNo)
         {
-            try
-            {
-                try
-                {
-                    var parameter = new object[][] {
-                    new object[]{"@rcdNo", DbType.String, rcdNo }
-                };
+            var parameter = new object[][] {
+                new object[]{"@rcdNo", DbType.String, rcdNo }
+            };
 
-                    string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
-                    var dtRCD = new DataTable();
+            string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
+            var dtRCD = new DataTable();
 
-                    return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

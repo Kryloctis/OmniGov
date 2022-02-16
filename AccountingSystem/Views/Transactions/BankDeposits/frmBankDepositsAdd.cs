@@ -29,10 +29,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private void frmBankDepositsAdd_Load(object sender, EventArgs e)
         {
             if (generalCollectionId > 0)
-            {
                 uc.nudAmount.Value = generalCollectionAmount;
-                uc.nudAmount.Enabled = false;
-            }
 
             uc.txtReferenceNumber.Text = _referenceNumber;
             uc.nudAmount.Value = _amount;

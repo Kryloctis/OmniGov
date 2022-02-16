@@ -81,7 +81,6 @@ namespace AccountingSystem.Views.Reports.RCD
             _frmRCD.txtRCDNo.Text = rcdNo;
             _frmRCD.rcdId = rcdId;
 
-
             _frmRCD.btnDeposit.Enabled = true;
             _frmRCD.btnPrint.Enabled = true;
             _frmRCD.btnCancelPrint.Enabled = true;

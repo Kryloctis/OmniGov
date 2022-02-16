@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 reportNo = rcdData["report_no"];
                 date = Convert.ToDateTime(rcdData["date"]);
 
-                
+
 
                 var colectorRepository = Factory.CollectorReportRepository();
                 var dtrcd = new DataTable();
@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 if (!rcdSaveSuccess) return false;
 
                 var generalCollectionsId = GetGeneralCollectionsId();
-                
+
 
                 foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
                 {
@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                     Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
                 }
-               
+
                 scope.Complete();
                 return true;
             }
@@ -242,7 +242,7 @@ namespace AccountingSystem.Views.Reports.RCD
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
-       
+
         private void txtRCDNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epRCDNo, txtRCDNo, "RCD No.");
