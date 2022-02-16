@@ -47,7 +47,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     ResetLocalControls();
                     uc.ResetForm();
                 }
-
             }
 
             else

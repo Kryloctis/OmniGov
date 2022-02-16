@@ -131,7 +131,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             // btnPrint
             // 
-            this.btnPrint.Enabled = false;
             this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
             this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
