@@ -158,17 +158,24 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtfrom_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
-            int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
-            //txtquantity.Text = from.Equals(1) ? ((from + to) - from).ToString() : from == to ? "1" : (to - from).ToString();
-            txtQuantity.Text = (((to - from) + 1) < 0 ? 0: ((to - from) + 1)).ToString();
+            if (string.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) || string.IsNullOrEmpty(txtReceiptNumberFrom.Text.Trim()))
+                return;
+
+            int from = Convert.ToInt32(txtReceiptNumberFrom.Text.Trim());
+            int to = Convert.ToInt32(txtReceiptNumberTo.Text.Trim());
+
+            txtQuantity.Text = (to - from).ToString();
         }
 
         private void txtto_KeyUp(object sender, KeyEventArgs e)
         {
-            int from = txtReceiptNumberFrom.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) : 0;
-            int to = txtReceiptNumberTo.Text.Length > 0 ? Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) : 0;
-            txtQuantity.Text = (((to - from) + 1) < 0 ? 0 : ((to - from) + 1)).ToString();
+            if (string.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) || string.IsNullOrEmpty(txtReceiptNumberFrom.Text.Trim()))
+                return;
+
+            int from = Convert.ToInt32(txtReceiptNumberFrom.Text.Trim());
+            int to = Convert.ToInt32(txtReceiptNumberTo.Text.Trim());
+
+            txtQuantity.Text = (to - from).ToString();
         }
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
