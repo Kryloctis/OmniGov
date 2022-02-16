@@ -109,7 +109,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // btnReturn
             // 
-            this.btnReturn.Enabled = false;
             this.btnReturn.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_signed_undo_2_28px;
             this.btnReturn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnReturn.ImageTransparentColor = System.Drawing.Color.Magenta;

@@ -296,7 +296,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             var receiptNumberFrom = nudReceiptIssuedFrom.Value;
             var receiptNumberTo = nudReceiptIssuedTo.Value;
-            var quantity = (receiptNumberTo - receiptNumberFrom) + 1;
+            var quantity = (receiptNumberTo - receiptNumberFrom);
 
             if (quantity >= 1)
                 txtReceiptQuantity.Text = Math.Floor(quantity).ToString();

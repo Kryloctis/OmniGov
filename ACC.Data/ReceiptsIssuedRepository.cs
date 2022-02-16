@@ -106,7 +106,7 @@ namespace ACC.Data
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +
-                            $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
+                            $"IF(IFNULL(is_returned,0) > 0, 'Yes', 'No') AS returned,  " +
                             $"returned_date,  " +
                             $"issued_by  " +
                             $"FROM {viewTableName} " +

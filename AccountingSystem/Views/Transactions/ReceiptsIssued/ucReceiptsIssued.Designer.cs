@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 15);
+            this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 15);
             this.label1.TabIndex = 0;
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 53);
+            this.label2.Location = new System.Drawing.Point(12, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 15);
             this.label2.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 167);
+            this.label3.Location = new System.Drawing.Point(12, 128);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 15);
             this.label3.TabIndex = 2;
@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dtpIssued
             // 
-            this.dtpIssued.Location = new System.Drawing.Point(130, 161);
+            this.dtpIssued.Location = new System.Drawing.Point(130, 122);
             this.dtpIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpIssued.Name = "dtpIssued";
             this.dtpIssued.Size = new System.Drawing.Size(372, 23);
@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.cmbReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReceipt.FormattingEnabled = true;
-            this.cmbReceipt.Location = new System.Drawing.Point(130, 50);
+            this.cmbReceipt.Location = new System.Drawing.Point(130, 39);
             this.cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbReceipt.Name = "cmbReceipt";
             this.cmbReceipt.Size = new System.Drawing.Size(372, 23);
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 88);
+            this.label4.Location = new System.Drawing.Point(12, 69);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 6;
@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 126);
+            this.label5.Location = new System.Drawing.Point(12, 98);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 15);
             this.label5.TabIndex = 7;
@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(312, 88);
+            this.label6.Location = new System.Drawing.Point(316, 69);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(19, 15);
             this.label6.TabIndex = 8;
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // txtReceiptQuantity
             // 
-            this.txtReceiptQuantity.Location = new System.Drawing.Point(130, 123);
+            this.txtReceiptQuantity.Location = new System.Drawing.Point(130, 95);
             this.txtReceiptQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReceiptQuantity.Name = "txtReceiptQuantity";
             this.txtReceiptQuantity.ReadOnly = true;
@@ -177,7 +177,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // nudReceiptIssuedFrom
             // 
-            this.nudReceiptIssuedFrom.Location = new System.Drawing.Point(130, 85);
+            this.nudReceiptIssuedFrom.Location = new System.Drawing.Point(130, 67);
             this.nudReceiptIssuedFrom.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // nudReceiptIssuedTo
             // 
-            this.nudReceiptIssuedTo.Location = new System.Drawing.Point(341, 85);
+            this.nudReceiptIssuedTo.Location = new System.Drawing.Point(341, 67);
             this.nudReceiptIssuedTo.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -228,7 +228,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceiptsIssued";
-            this.Size = new System.Drawing.Size(530, 194);
+            this.Size = new System.Drawing.Size(530, 154);
             this.Load += new System.EventHandler(this.ucReceiptsIssued_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReceipt)).EndInit();
