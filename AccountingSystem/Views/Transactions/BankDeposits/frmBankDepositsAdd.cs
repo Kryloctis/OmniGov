@@ -64,23 +64,23 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 {
                     int insertId = bankDepositRepo.Deposits(bankDepositModel);
 
-                if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
-                {
-                    var generalCollectionDepositsRepo = Factory.GeneralCollectionsDepositsRepository();
-                    var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
+                    if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
                     {
-                        BankDepositId = insertId,
-                        GeneralCollectionId = generalCollectionId
-                    };
+                        var generalCollectionDepositsRepo = Factory.GeneralCollectionsDepositsRepository();
+                        var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
+                        {
+                            BankDepositId = insertId,
+                            GeneralCollectionId = generalCollectionId
+                        };
 
-                    if (!generalCollectionDepositsRepo.IdExist(generalCollectionId))
-                    {
-                        return generalCollectionDepositsRepo.Insert(generalCollectionDepositModel);
-                    }
-                    else
-                    {
-                        Helper.MessageBoxSuccess("General Collection has already been deposited!");
-                    }
+                        if (!generalCollectionDepositsRepo.IdExist(generalCollectionId))
+                        {
+                            return generalCollectionDepositsRepo.Insert(generalCollectionDepositModel);
+                        }
+                        else
+                        {
+                            Helper.MessageBoxSuccess("General Collection has already been deposited!");
+                        }
                     }
                 }
                 else

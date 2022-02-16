@@ -2540,7 +2540,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!reference.Value</Value>
+                                      <Value />
                                       <Style>
                                         <FontFamily>calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2593,7 +2593,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!bankname.Value</Value>
+                                      <Value />
                                       <Style>
                                         <FontFamily>calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2648,7 +2648,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!amount.Value</Value>
+                                      <Value />
                                       <Style>
                                         <FontFamily>calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -2773,7 +2773,9 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Sum(Fields!amount.Value, "dtCollections")</Value>
+                        <Value>=IIf(Sum(Fields!amount.Value, "dtCollections") = 0, 
+Sum(Fields!amount.Value, "dtCollectorsReports"), 
+Sum(Fields!amount.Value, "dtCollections"))</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -2913,7 +2915,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=(Sum(Fields!amount.Value, "dtCollections")) + (Parameters!paramTotalCheck.Value)</Value>
+                        <Value>=((Sum(Fields!amount.Value, "dtCollections")) + Sum(Fields!amount.Value, "dtCollectorsReports")) + (Parameters!paramTotalCheck.Value)</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>
                           <FontSize>9pt</FontSize>
@@ -2969,6 +2971,43 @@
                     <Style>None</Style>
                   </Border>
                   <BackgroundColor>LightGrey</BackgroundColor>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Textbox Name="Textbox51">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Sum(Fields!amount.Value, "dtRemittanceDeposits")</Value>
+                        <Style>
+                          <FontFamily>calibri</FontFamily>
+                          <FontSize>9pt</FontSize>
+                          <Format>n2</Format>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox20</rd:DefaultName>
+                <Top>1.80382in</Top>
+                <Left>1.8621in</Left>
+                <Height>0.20833in</Height>
+                <Width>1.51151in</Width>
+                <ZIndex>13</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <BottomBorder>
+                    <Style>Solid</Style>
+                  </BottomBorder>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
