@@ -165,16 +165,19 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void Set_Default_Account_Of_CashReceiptsJournal()
         {
-            if (((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked)) && journalName == "Cash Receipts Journal")
+            if (journalName == "Cash Receipts Journal")
             {
-                cmbxAccount.SelectedIndex = 0;
-                cmbxAccount.Enabled = false;
-                epAccount.SetError(cmbxAccount, string.Empty);
-            }
-            else
-            {
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.Enabled = true;
+                if (((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked)))
+                {
+                    cmbxAccount.SelectedIndex = 0;
+                    cmbxAccount.Enabled = false;
+                    epAccount.SetError(cmbxAccount, string.Empty);
+                }
+                else
+                {
+                    cmbxAccount.SelectedIndex = -1;
+                    cmbxAccount.Enabled = true;
+                }
             }
         }
 
