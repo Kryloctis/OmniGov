@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -58,7 +59,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(742, 58);
+            this.toolStrip.Size = new System.Drawing.Size(794, 58);
             this.toolStrip.TabIndex = 7;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -116,10 +117,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4});
-            this.statusStrip.Location = new System.Drawing.Point(0, 320);
+            this.statusStrip.Location = new System.Drawing.Point(0, 375);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip.Size = new System.Drawing.Size(742, 22);
+            this.statusStrip.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -138,7 +140,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(716, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // dgAccform
@@ -153,7 +155,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.dgAccform.RowHeadersWidth = 51;
             this.dgAccform.RowTemplate.Height = 29;
             this.dgAccform.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAccform.Size = new System.Drawing.Size(714, 247);
+            this.dgAccform.Size = new System.Drawing.Size(766, 302);
             this.dgAccform.TabIndex = 9;
             this.dgAccform.SelectionChanged += new System.EventHandler(this.dgAccform_SelectionChanged);
             // 
@@ -161,17 +163,18 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(476, 28);
+            this.txtsearch.Location = new System.Drawing.Point(558, 28);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(254, 23);
+            this.txtsearch.Size = new System.Drawing.Size(222, 23);
             this.txtsearch.TabIndex = 10;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(428, 31);
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Location = new System.Drawing.Point(510, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 15);
             this.label6.TabIndex = 37;
@@ -181,16 +184,20 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 342);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(794, 397);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgAccform);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAccountable";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Accountable Form";
             this.Load += new System.EventHandler(this.frmAccountable_Load);

@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgAccform, true);
         }
+
         internal void LoadRecords()
         {
             try
@@ -30,7 +31,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
                 lblRecordCount.Text = accRepository.CountRecords().ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message);
+            }
         }
         private void frmAccountable_Load(object sender, EventArgs e)
         {
@@ -123,6 +127,5 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 LoadRecords();
             }
         }
-
     }
 }

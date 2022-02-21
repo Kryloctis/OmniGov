@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                         foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                         {
                             int OfficerID = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            if (!repository.ReceiptsAssigned(OfficerID))
+                            if (!repository.CollectingOfficerHasReceiptAssigned(OfficerID))
                             {
                                 modelList.Add(new CollectingOfficerModel() { Id = OfficerID });
                             }                            
@@ -83,13 +83,18 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
-            var corepository = Factory.CollectingOfficerRepository();
+            if (dgCollectingOfficer.SelectedRows.Count == 0)
+                return;
+
+
             int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
+
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
-            btnDelete.Enabled = corepository.ReceiptsAssigned(id) ? false : true;
 
+            var collectingOfficerRepo = Factory.CollectingOfficerRepository();
+            btnDelete.Enabled = collectingOfficerRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)

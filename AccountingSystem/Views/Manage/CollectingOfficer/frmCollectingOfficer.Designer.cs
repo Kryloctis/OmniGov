@@ -54,6 +54,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -64,7 +65,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(699, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(794, 50);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -126,7 +127,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.dgCollectingOfficer.RowHeadersWidth = 51;
             this.dgCollectingOfficer.RowTemplate.Height = 29;
             this.dgCollectingOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCollectingOfficer.Size = new System.Drawing.Size(680, 325);
+            this.dgCollectingOfficer.Size = new System.Drawing.Size(775, 323);
             this.dgCollectingOfficer.TabIndex = 7;
             this.dgCollectingOfficer.SelectionChanged += new System.EventHandler(this.dgCollectingOfficer_SelectionChanged);
             // 
@@ -141,10 +142,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 379);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 377);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(699, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.Stretch = false;
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -163,7 +166,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(489, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -192,7 +195,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(435, 24);
+            this.txtsearch.Location = new System.Drawing.Point(530, 24);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(254, 23);
             this.txtsearch.TabIndex = 11;
@@ -201,7 +204,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(387, 27);
+            this.label6.Location = new System.Drawing.Point(482, 27);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 15);
             this.label6.TabIndex = 38;
@@ -211,13 +214,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 401);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(794, 399);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgCollectingOfficer);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(715, 438);
             this.Name = "frmCollectingOfficer";
             this.ShowInTaskbar = false;

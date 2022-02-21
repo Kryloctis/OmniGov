@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucAccountable";
-            this.Size = new System.Drawing.Size(468, 60);
+            this.Size = new System.Drawing.Size(468, 53);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

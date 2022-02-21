@@ -198,7 +198,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ReceiptsAssigned(int id)
+        public bool CollectingOfficerHasReceiptAssigned(int id)
         {
             try
             {
@@ -210,7 +210,6 @@ namespace ACC.Data
                 string query = $"SELECT id FROM {tableName3} WHERE collecting_officers_id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-                // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
             }
             catch (Exception)

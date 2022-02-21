@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 84);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 74);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -76,10 +76,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // ucAccountable1
             // 
-            this.ucAccountable1.Location = new System.Drawing.Point(12, 11);
+            this.ucAccountable1.Location = new System.Drawing.Point(9, 11);
             this.ucAccountable1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucAccountable1.Name = "ucAccountable1";
-            this.ucAccountable1.Size = new System.Drawing.Size(471, 64);
+            this.ucAccountable1.Size = new System.Drawing.Size(471, 54);
             this.ucAccountable1.TabIndex = 6;
             // 
             // frmAccountableEdit
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(483, 111);
+            this.ClientSize = new System.Drawing.Size(483, 101);
             this.Controls.Add(this.ucAccountable1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
