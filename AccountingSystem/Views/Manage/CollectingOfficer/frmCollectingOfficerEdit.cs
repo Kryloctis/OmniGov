@@ -48,28 +48,26 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 var uc = ucCollectingOfficer1;
 
-
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                // proceed to update
                 var collectingmodel = new CollectingOfficerModel()
                 {
                     Id = uc.OfficerId,
+                    Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
                     LastName = uc.txtLastName.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
                     JobTitle = uc.txtJobtitle.Text.Trim(),
                     UserId = uc.UserId
                 };
 
                 var collectingrepository = Factory.CollectingOfficerRepository();
                 return collectingrepository.Update(collectingmodel);
-
 
             }
             catch (Exception ex)

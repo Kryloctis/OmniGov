@@ -227,14 +227,19 @@ namespace ACC.Data
                
                 var parameters = new object[][]
                 {
+                    new object[] { "@prefix", DbType.String, entity.Prefix},
                     new object[] { "@first_name", DbType.String, entity.FirstName},
                     new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@suffix", DbType.String, entity.Suffix},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
                     new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
                 };
 
-                string query = $"INSERT INTO {tableName} (first_name,mid_initial,last_name,job_title,users_id) VALUES (@first_name,@mid_initial,@last_name,@job_title,@users_id)";
+                string query  = $"INSERT INTO {tableName} " +
+                                $"(prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) " +
+                                $"VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
+
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -245,26 +250,21 @@ namespace ACC.Data
 
         public bool Update(CollectingOfficerModel entity)
         {
-          
-            try
-            {
                 var parameters = new object[][]
                 {
-                     new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@id", DbType.Int16, entity.Id},
+                    new object[] { "@prefix", DbType.String, entity.Prefix},
                     new object[] { "@first_name", DbType.String, entity.FirstName},
                     new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
                     new object[] { "@last_name", DbType.String, entity.LastName},
+                    new object[] { "@suffix", DbType.String, entity.Suffix},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
                     new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value : entity.UserId }
                 };
 
-                string query = $"UPDATE {tableName} SET first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, job_title = @job_title,users_id=@users_id WHERE id = @id";
+                string query = $"UPDATE {tableName} " +
+                $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =                @job_title,users_id=@users_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         public bool FullnameExist(string code)

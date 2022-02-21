@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -26,8 +20,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 var repository = Factory.CollectingOfficerRepository();
                 var dt = repository.GetRecords();
-                HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
 
+                HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
                 lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
