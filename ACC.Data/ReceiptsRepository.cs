@@ -95,7 +95,7 @@ namespace ACC.Data
                             $"id, " +
                             $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
                             $"IF(receipt_number_from = 0 AND receipt_number_to = 0, NULL, LPAD(receipt_number_from, 7, 0)) AS receipt_number_from, " +
-                            $"IF(receipt_number_from = 0 AND receipt_number_to = 0, NULL, LPAD(receipt_number_from, 7, 0)) AS receipt_number_to, " +
+                            $"IF(receipt_number_from = 0 AND receipt_number_to = 0, NULL, LPAD(receipt_number_to, 7, 0)) AS receipt_number_to, " +
                             $"received_date, " +
                             $"quantity, " +
                             $"user officer " +

@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 178);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 176);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.ucReceipts1.Location = new System.Drawing.Point(0, 0);
             this.ucReceipts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucReceipts1.Name = "ucReceipts1";
-            this.ucReceipts1.Size = new System.Drawing.Size(541, 178);
+            this.ucReceipts1.Size = new System.Drawing.Size(541, 176);
             this.ucReceipts1.TabIndex = 5;
             // 
             // frmReceiptsEdit
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(541, 205);
+            this.ClientSize = new System.Drawing.Size(541, 203);
             this.Controls.Add(this.ucReceipts1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -100,6 +100,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmReceiptsEdit";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Receipts Edit";
             this.Load += new System.EventHandler(this.frmAccFromEdit_Load);
