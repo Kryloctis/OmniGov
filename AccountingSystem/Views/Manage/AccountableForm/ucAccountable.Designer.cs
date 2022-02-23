@@ -34,8 +34,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.label2 = new System.Windows.Forms.Label();
             this.txtformno = new System.Windows.Forms.TextBox();
             this.txtformdesc = new System.Windows.Forms.TextBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.epFormNo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epFormDescription = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epFormNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFormDescription)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -78,9 +80,13 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.txtformdesc.Validating += new System.ComponentModel.CancelEventHandler(this.txtformdesc_Validating);
             this.txtformdesc.Validated += new System.EventHandler(this.txtformdesc_Validated);
             // 
-            // errorProvider
+            // epFormNo
             // 
-            this.errorProvider.ContainerControl = this;
+            this.epFormNo.ContainerControl = this;
+            // 
+            // epFormDescription
+            // 
+            this.epFormDescription.ContainerControl = this;
             // 
             // ucAccountable
             // 
@@ -93,7 +99,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucAccountable";
             this.Size = new System.Drawing.Size(468, 53);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFormNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epFormDescription)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,8 +110,9 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider epFormNo;
         internal System.Windows.Forms.TextBox txtformno;
         internal System.Windows.Forms.TextBox txtformdesc;
+        private System.Windows.Forms.ErrorProvider epFormDescription;
     }
 }
