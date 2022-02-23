@@ -197,7 +197,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Name = "frmCollectorsRCDLoad";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Load Collections";
+            this.Text = "Add Collections";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
