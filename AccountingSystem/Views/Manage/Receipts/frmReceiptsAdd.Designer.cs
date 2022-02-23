@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.Name = "frmReceiptsAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Receipts Add";
+            this.Text = "Add Receipts";
             this.Load += new System.EventHandler(this.frmAccFormsAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

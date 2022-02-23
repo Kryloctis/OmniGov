@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.txtformno.Location = new System.Drawing.Point(73, 1);
             this.txtformno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtformno.MaxLength = 4;
+            this.txtformno.MaxLength = 10;
             this.txtformno.Name = "txtformno";
             this.txtformno.Size = new System.Drawing.Size(370, 23);
             this.txtformno.TabIndex = 0;
