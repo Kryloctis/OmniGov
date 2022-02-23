@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSelect.Size = new System.Drawing.Size(82, 22);
             this.btnSelect.TabIndex = 4;
-            this.btnSelect.Text = "Select";
+            this.btnSelect.Text = "Ok";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
