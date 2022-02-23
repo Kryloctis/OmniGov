@@ -194,7 +194,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Name = "frmCollectorsRCDSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search";
+            this.Text = "Search Collector\'s Report of Collections and Deposits (RCD)";
             this.Load += new System.EventHandler(this.frmCollectorsRCDSearch_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
