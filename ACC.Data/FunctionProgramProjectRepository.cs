@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -13,6 +12,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "function_program_project";
         private readonly string tableName2 = "functional_classification_services";
+        private readonly string viewTableName = "view_function_program_project";
 
 
         public FunctionProgramProjectRepository(IDbGenericCommands dbGenericCommands)
@@ -56,25 +56,14 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT t1.id, t2.service_name, t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                 $" ON t2.id = t1.functional_classification_services_id";
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
             {
-                var srchtxt = searchText;               
+                var srchtxt = searchText;
                 string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                 $" ON t2.id = t1.functional_classification_services_id  WHERE t1.fpp_code  LIKE'%" + srchtxt + "%' OR t1.fpp_name  LIKE'%" + srchtxt + "%'  OR t2.service_name  LIKE'%" + srchtxt + "%'";
 
@@ -112,7 +101,7 @@ namespace ACC.Data
         {
             try
             {
-                var Id = id;               
+                var Id = id;
                 string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                 $" ON t2.id = t1.functional_classification_services_id  WHERE t1.functional_classification_services_id  ='" + Id + "'";
 
@@ -330,6 +319,11 @@ namespace ACC.Data
             return false;
         }
 
-      
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.Fill(query, dataTable);
+        }
     }
 }

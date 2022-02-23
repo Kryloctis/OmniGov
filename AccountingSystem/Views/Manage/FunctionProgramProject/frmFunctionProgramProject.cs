@@ -105,7 +105,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             {
                 txtSearch.Clear();
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecords();
+                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecords();
                 HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
 
                 lblRecordCount.Text = Factory.FunctionProgramProjectRepository()

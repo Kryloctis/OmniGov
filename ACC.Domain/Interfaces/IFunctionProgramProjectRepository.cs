@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Models;
 using System.Data;
-using System.Text;
-using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
     public interface IFunctionProgramProjectRepository : IRepository<FunctionProgramProjectModel>
     {
         DataTable GetViewRecordsByServiceNameId(byte id);
+        DataTable GetViewRecords();
         DataTable GetRecordsByCodeName(string searchTxt);
         bool CodeExist(string code);
         bool CodeExist(string code, int id);
