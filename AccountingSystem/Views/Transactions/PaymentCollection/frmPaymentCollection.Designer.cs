@@ -260,7 +260,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Name = "frmPaymentCollection";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Payment Collections";
+            this.Text = "Payment Collections";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPaymentCollection_Load);
             this.toolStrip.ResumeLayout(false);
