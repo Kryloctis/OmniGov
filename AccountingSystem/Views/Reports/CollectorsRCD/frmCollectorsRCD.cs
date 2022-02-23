@@ -33,6 +33,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
+
+                tsApproveSeparator.Visible = false;
+                tsDisapproveSeparator.Visible = false;
             }
         }
 
@@ -216,7 +219,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         lblReportStatus.Text = "PENDING";
                         lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
-                        btnPrint.Enabled = false;
+                        btnPrint.Enabled = true;
                         btnCancelPrint.Enabled = false;
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
