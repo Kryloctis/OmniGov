@@ -47,8 +47,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
                     CheckRCDStatus(uc.txtReport.Text.Trim());
-                    ResetLocalControls();
-                    uc.ResetForm();
                 }
             }
 
@@ -220,12 +218,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
                         btnPrint.Enabled = true;
-                        btnCancelPrint.Enabled = false;
+                        btnCancelPrint.Enabled = true;
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
                         btnDelete.Enabled = true;
                         uc.Enabled = true;
-                        //btnSave.Enabled = true;
+                        btnSave.Text = "Update";
+                        btnSave.Enabled = true;
                         break;
                     case "approved":
                         //APPROVED

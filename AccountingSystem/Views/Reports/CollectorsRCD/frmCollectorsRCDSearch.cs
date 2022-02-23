@@ -85,8 +85,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
-            _frmCollectorsRCD.btnSave.Enabled = false;
-
+            
             _uc.TotalCollections();
             this.Close();
         }

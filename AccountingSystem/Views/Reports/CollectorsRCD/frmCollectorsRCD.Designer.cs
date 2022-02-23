@@ -55,13 +55,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
+            this.btnCancelPrint,
             this.btnDelete,
             this.tsApproveSeparator,
             this.btnApprove,
             this.btnDisapprove,
             this.tsDisapproveSeparator,
             this.btnPrint,
-            this.btnCancelPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
