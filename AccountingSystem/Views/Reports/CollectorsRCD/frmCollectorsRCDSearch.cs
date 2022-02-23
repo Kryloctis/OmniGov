@@ -18,6 +18,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
             _frmCollectorsRCD = frmCollectorsRCD;
             _uc = uc;
+
+            cmbstatus.SelectedIndex = 1;
         }
 
         private void LoadFunds()
@@ -38,14 +40,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
-            cmbstatus.SelectedIndex = 1;
-
             cmbfunds.SelectedValueChanged -= new EventHandler(cmbfunds_SelectedValueChanged);
             LoadFunds();
             cmbfunds.SelectedValueChanged += new EventHandler(cmbfunds_SelectedValueChanged);
             LoadRecords();
-
-
         }
 
 
@@ -88,7 +86,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
             _frmCollectorsRCD.btnSave.Enabled = false;
-            _frmCollectorsRCD.btnDelete.Enabled = false;
 
             _uc.TotalCollections();
             this.Close();
