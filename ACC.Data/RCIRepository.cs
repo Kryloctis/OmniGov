@@ -75,7 +75,9 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT * FROM {viewTableName}";
+                string query = $"SELECT " +
+                               $"* " +
+                               $"FROM {viewTableName}";
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
