@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 
@@ -14,6 +15,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgCollectingOfficer, true);
         }
+
         internal void LoadRecords()
         {
             try
@@ -24,8 +26,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
                 lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
+
         private void frmCollectingOfficer_Load(object sender, EventArgs e)
         {           
             LoadRecords();

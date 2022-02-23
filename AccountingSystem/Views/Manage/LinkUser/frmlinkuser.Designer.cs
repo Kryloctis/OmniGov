@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
             this.dgvusers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvusers_CellDoubleClick);
             this.dgvusers.SelectionChanged += new System.EventHandler(this.dgvusers_SelectionChanged);
             // 
-            // frmlinkuser
+            // frmLinkUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -57,7 +57,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
             this.Controls.Add(this.dgvusers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "frmlinkuser";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmLinkUser";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Link User";

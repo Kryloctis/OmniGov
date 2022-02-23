@@ -10,10 +10,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
     {
         internal int OfficerId = 0;
         internal int UserId = 0;
+
         public ucCollectingOfficer()
         {
             InitializeComponent();
         }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[4];
@@ -28,9 +30,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         internal void ResetForm()
         {
+            txtPrefix.Clear();
             txtFirstName.Clear();
             txtMiddleInitial.Clear();
             txtLastName.Clear();
+            txtSuffix.Clear();
             txtJobtitle.Clear();
         }
 
@@ -133,9 +137,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     linkuser.Text = string.Format("@{0}", fuser.Username);
                     if(txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMiddleInitial.Text == string.Empty)
                     {
+                        txtPrefix.Text = fuser.prefix;
                         txtLastName.Text = fuser.lname;
                         txtFirstName.Text = fuser.fname;
                         txtMiddleInitial.Text = fuser.mname;
+                        txtSuffix.Text = fuser.suffix;
                     }
                 }
             }

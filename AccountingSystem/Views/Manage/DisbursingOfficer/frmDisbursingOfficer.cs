@@ -84,5 +84,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             Helper.ShowRecordTimestamp(dgDisbursingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgDisbursingOfficer, btnEdit, btnDelete);
         }
+
     }
 }

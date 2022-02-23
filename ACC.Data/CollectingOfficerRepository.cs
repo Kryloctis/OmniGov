@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
@@ -71,20 +70,22 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT first_name, mid_initial, last_name, job_title, created_at, updated_at,users_id FROM {tableName} WHERE id = @id";
+                string query = $"SELECT prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("first_name", reader.Rows[0][0].ToString());
-                    record.Add("mid_initial", reader.Rows[0][1].ToString());
-                    record.Add("last_name", reader.Rows[0][2].ToString());
-                    record.Add("job_title", reader.Rows[0][3].ToString());
-                    record.Add("created_at", reader.Rows[0][4].ToString());
-                    record.Add("updated_at", reader.Rows[0][5].ToString());
-                    record.Add("users_id", reader.Rows[0][6].ToString());
+                    record.Add("prefix", reader.Rows[0][0].ToString());
+                    record.Add("first_name", reader.Rows[0][1].ToString());
+                    record.Add("mid_initial", reader.Rows[0][2].ToString());
+                    record.Add("last_name", reader.Rows[0][3].ToString());
+                    record.Add("suffix", reader.Rows[0][4].ToString());
+                    record.Add("job_title", reader.Rows[0][5].ToString());
+                    record.Add("created_at", reader.Rows[0][6].ToString());
+                    record.Add("updated_at", reader.Rows[0][7].ToString());
+                    record.Add("users_id", reader.Rows[0][8].ToString());
                 }
             }
             catch (Exception)
@@ -134,7 +135,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT id, CONCAT(first_name, ' ', mid_initial, ' ', last_name) as fullname, job_title, created_at, updated_at FROM {tableName}";
+                string query = $"SELECT id, CONCAT(first_name, ' ', mid_initial, ' ', last_name, ' ') as fullname, job_title, created_at, updated_at FROM {tableName}";
 
                 var dtFunds = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunds);
