@@ -357,7 +357,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Name = "frmRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports of Collections and Deposits (RCD)";
+            this.Text = "Liquidator\'s Report of Collections and Deposits (RCD)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCD_Load);
             this.toolStrip1.ResumeLayout(false);
