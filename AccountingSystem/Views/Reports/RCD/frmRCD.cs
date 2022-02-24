@@ -276,7 +276,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgListOfApprovedReport_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Approved.");
+            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Report.");
         }
         private void dgListOfApprovedReport_Validated(object sender, EventArgs e)
         {
