@@ -53,10 +53,10 @@ namespace AccountingSystem.Views.Reports.RCD
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.epRCDNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epDgCollectorRepor = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgListOfApprovedReport)).BeginInit();
             this.panelRCD.SuspendLayout();
@@ -283,6 +283,8 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRCD.BackColor = System.Drawing.Color.White;
+            this.panelRCD.Controls.Add(this.txtTotal);
+            this.panelRCD.Controls.Add(this.label4);
             this.panelRCD.Controls.Add(this.btnRemove);
             this.panelRCD.Controls.Add(this.btnadd);
             this.panelRCD.Controls.Add(this.label2);
@@ -300,9 +302,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.statusStrip2.BackColor = System.Drawing.Color.White;
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.lblRecordCount,
-            this.toolStripStatusLabel3,
-            this.lblTotalAmount});
+            this.lblRecordCount});
             this.statusStrip2.Location = new System.Drawing.Point(0, 576);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(916, 22);
@@ -318,23 +318,10 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(14, 17);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(88, 17);
-            this.toolStripStatusLabel3.Text = "Total Amount : ";
-            // 
-            // lblTotalAmount
-            // 
-            this.lblTotalAmount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(24, 17);
-            this.lblTotalAmount.Text = "0.0";
             // 
             // epRCDNo
             // 
@@ -343,6 +330,28 @@ namespace AccountingSystem.Views.Reports.RCD
             // epDgCollectorRepor
             // 
             this.epDgCollectorRepor.ContainerControl = this;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotal.Location = new System.Drawing.Point(55, 487);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(229, 23);
+            this.txtTotal.TabIndex = 30;
+            this.txtTotal.Text = "0.00";
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 491);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 15);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Total";
             // 
             // frmRCD
             // 
@@ -395,13 +404,13 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.Button btnRemove;
         internal System.Windows.Forms.DataGridView dgListOfApprovedReport;
         private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         internal System.Windows.Forms.ToolStripButton btnCancelPrint;
         private System.Windows.Forms.ErrorProvider epRCDNo;
         private System.Windows.Forms.ErrorProvider epDgCollectorRepor;
         internal System.Windows.Forms.ToolStripButton btnDeposit;
+        internal System.Windows.Forms.TextBox txtTotal;
+        private System.Windows.Forms.Label label4;
     }
 }

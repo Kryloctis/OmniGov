@@ -176,7 +176,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnDeposit_Click(object sender, EventArgs e)
         {
             string referenceNumber = txtRCDNo.Text.Trim();
-            decimal amount = Convert.ToDecimal(lblTotalAmount.Text);
+            decimal amount = Convert.ToDecimal(txtTotal.Text);
             int rcdId = int.Parse(this.rcdId);
 
             _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
@@ -220,7 +220,10 @@ namespace AccountingSystem.Views.Reports.RCD
 
             reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
             lblRecordCount.Text = reportQuantity.ToString();
-            lblTotalAmount.Text = totalCollections.ToString("N2");
+            txtTotal.Text = totalCollections.ToString("N2");
+
+
+            
         }
 
         private void btnCancelPrint_Click(object sender, EventArgs e)
