@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         public frmFunctionProgramProject()
         {
             InitializeComponent();
-            txtSearch.TextChanged += new System.EventHandler(txtSearch_TextChanged);
+            Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgFunctionalClassification, true);
             Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationService, true);
             Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
@@ -226,8 +226,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-            Helper.LoadFormIcon(this);
             LoadFunctionalClassificationServicesRecords();
 
 

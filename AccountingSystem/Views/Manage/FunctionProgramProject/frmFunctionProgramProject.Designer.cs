@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tabControlFunctionProgramProject = new System.Windows.Forms.TabControl();
             this.tabFunctionProgramProject = new System.Windows.Forms.TabPage();
+            this.chckbxSpecial = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbServiceName = new System.Windows.Forms.ComboBox();
             this.dgFunctionalProgramProject = new System.Windows.Forms.DataGridView();
@@ -57,7 +58,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.chckbxSpecial = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControlFunctionProgramProject.SuspendLayout();
             this.tabFunctionProgramProject.SuspendLayout();
@@ -148,6 +148,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(219, 50);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // toolStripLabel1
             // 
@@ -186,6 +187,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.Size = new System.Drawing.Size(851, 393);
             this.tabFunctionProgramProject.TabIndex = 1;
             this.tabFunctionProgramProject.Text = "Function, Program and Project";
+            // 
+            // chckbxSpecial
+            // 
+            this.chckbxSpecial.AutoSize = true;
+            this.chckbxSpecial.Location = new System.Drawing.Point(780, 11);
+            this.chckbxSpecial.Name = "chckbxSpecial";
+            this.chckbxSpecial.Size = new System.Drawing.Size(63, 19);
+            this.chckbxSpecial.TabIndex = 20;
+            this.chckbxSpecial.Text = "Special";
+            this.chckbxSpecial.UseVisualStyleBackColor = true;
+            this.chckbxSpecial.CheckedChanged += new System.EventHandler(this.chckbxSpecial_CheckedChanged);
             // 
             // label2
             // 
@@ -362,17 +374,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // chckbxSpecial
-            // 
-            this.chckbxSpecial.AutoSize = true;
-            this.chckbxSpecial.Location = new System.Drawing.Point(780, 11);
-            this.chckbxSpecial.Name = "chckbxSpecial";
-            this.chckbxSpecial.Size = new System.Drawing.Size(63, 19);
-            this.chckbxSpecial.TabIndex = 20;
-            this.chckbxSpecial.Text = "Special";
-            this.chckbxSpecial.UseVisualStyleBackColor = true;
-            this.chckbxSpecial.CheckedChanged += new System.EventHandler(this.chckbxSpecial_CheckedChanged);
             // 
             // frmFunctionProgramProject
             // 
