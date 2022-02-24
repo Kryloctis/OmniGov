@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(82, 22);
             this.btnSelect.TabIndex = 1;
-            this.btnSelect.Text = "Select";
+            this.btnSelect.Text = "Ok";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
