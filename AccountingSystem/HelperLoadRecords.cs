@@ -38,7 +38,7 @@ namespace AccountingSystem
         #region Signatories
 
         internal static void SignatoriesDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {          
+        {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["name"].HeaderText = "Name";
@@ -336,7 +336,7 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Receipt No. From";
             datagrid.Columns[4].HeaderText = "Receipt No. To";
             datagrid.Columns[5].HeaderText = "Date Issued";
-            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd"; 
+            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[6].HeaderText = "Quantity";
             datagrid.Columns[7].HeaderText = "Last Issued No.";
             datagrid.Columns[8].HeaderText = "Returned";
@@ -797,7 +797,7 @@ namespace AccountingSystem
             datagrid.Columns[12].HeaderText = "Obligation No.";
             datagrid.Columns[13].HeaderText = "FPP Id";
             datagrid.Columns[14].HeaderText = "FPP Code";
-            datagrid.Columns[15].HeaderText = "Deductions"; 
+            datagrid.Columns[15].HeaderText = "Deductions";
             datagrid.Columns[15].DefaultCellStyle.Format = "N2";
             datagrid.Columns[15].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
@@ -1107,61 +1107,30 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
         }
 
-        internal static void frmFunctionProjectProgramDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void FunctionProjectProgramDatagridView(DataGridView datagrid)
         {
+            var isSpecial = new DataGridViewImageColumn();
+            isSpecial.Name = "is_special";
+            isSpecial.HeaderText = "Special";
 
-            //Clearing Datagrid View  Rows & Columns before Loading new one
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-
-            Image continuingIcon = Properties.Resources.ok14px;
-
-            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
-
-            imgColumn.HeaderText = "Special";
-            imgColumn.Name = "is_special";
-
-
-            datagrid.Columns.Add("id", "FPP ID");
-            datagrid.Columns.Add("service_name", "Service Name");
+            datagrid.Columns.Add("id", "Id");
             datagrid.Columns.Add("fpp_code", "Code");
             datagrid.Columns.Add("fpp_name", "Name");
-            datagrid.Columns.Add(imgColumn);
-            datagrid.Columns.Add("created_at", "Created at");
-            datagrid.Columns.Add("updated_at", "Updated at");
-
+            datagrid.Columns.Add("functional_classification_services_id", "functional_classification_services_id");
+            datagrid.Columns.Add("service_name", "Service Name");
+            datagrid.Columns.Add(isSpecial);
+            datagrid.Columns.Add("created_at", "Created At");
+            datagrid.Columns.Add("updated_at", "Updated At");
 
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["fpp_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["functional_classification_services_id"].Visible = false;
+            datagrid.Columns["service_name"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
 
-            datagrid.Columns["is_special"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["fpp_code"].Width = 40;
+            datagrid.Columns["is_special"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["is_special"].DefaultCellStyle.NullValue = null;
-
-            foreach (DataRow item in dataTable.Rows)
-            {
-                int fppId = Convert.ToInt32(item["id"]);
-                string serviceName = item["service_name"].ToString();
-                string fppCode = item["fpp_code"].ToString();
-                string fppName = item["fpp_name"].ToString();
-                byte isSpecial = Convert.ToByte(item["is_special"]);
-
-                var items = new object[]
-                {
-                    fppId,
-                    serviceName,
-                    fppCode,
-                    fppName,
-                    isSpecial == 0? null :  continuingIcon,
-                    item["created_at"],
-                    item["updated_at"]
-                };
-
-                datagrid.Rows.Add(items);
-            }
-
         }
 
         internal static void SectorNameComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)

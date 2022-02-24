@@ -11,7 +11,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "function_program_project";
-        private readonly string tableName2 = "functional_classification_services";
         private readonly string viewTableName = "view_function_program_project";
 
 
@@ -61,19 +60,7 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var srchtxt = searchText;
-                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                $" ON t2.id = t1.functional_classification_services_id  WHERE t1.fpp_code  LIKE'%" + srchtxt + "%' OR t1.fpp_name  LIKE'%" + srchtxt + "%'  OR t2.service_name  LIKE'%" + srchtxt + "%'";
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public DataTable GetRecordsByCodeName(string searchTxt)
@@ -90,24 +77,6 @@ namespace ACC.Data
                 var dtFPP = new DataTable();
 
                 return _dbGenericCommands.FillBySearch(query, dtFPP, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetViewRecordsByServiceNameId(byte id)
-        {
-            try
-            {
-                var Id = id;
-                string query = $"SELECT t1.id, t2.service_name,t1.fpp_code, t1.fpp_name, t1.is_special, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                $" ON t2.id = t1.functional_classification_services_id  WHERE t1.functional_classification_services_id  ='" + Id + "'";
-
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
             }
             catch (Exception)
             {
@@ -185,7 +154,6 @@ namespace ACC.Data
             }
         }
 
-
         public int CountRecords()
         {
             try
@@ -199,7 +167,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool IdExist(int id)
         {
@@ -246,7 +213,6 @@ namespace ACC.Data
 
             return false;
         }
-
 
         public bool CodeExist(string code, int id)
         {
@@ -321,9 +287,36 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            string query = $"SELECT * FROM {viewTableName}";
+            string query = $"SELECT * FROM {viewTableName} ORDER BY fpp_name";
             var dataTable = new DataTable();
             return _dbGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable GetViewRecordsByService_And_Search_And_IsSpecial(int serviceId, string searchText, bool isSpecial)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@functional_classification_services_id", DbType.Int32, serviceId },
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+                new object[] { "@is_special", DbType.Boolean, isSpecial}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE functional_classification_services_id = @functional_classification_services_id AND (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewRecordsBySearch_And_IsSpecial(string searchText, bool isSpecial)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+                new object[] { "@is_special", DbType.Boolean, isSpecial}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (fpp_code LIKE @searchText OR fpp_name LIKE @searchText) AND is_special = @is_special ORDER BY fpp_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

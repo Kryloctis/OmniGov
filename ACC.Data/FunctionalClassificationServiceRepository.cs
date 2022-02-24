@@ -1,15 +1,14 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 
 namespace ACC.Data
 {
-    public class FunctionalClassificationServiceRepository :IFunctionalClassificationServiceRepository
+    public class FunctionalClassificationServiceRepository : IFunctionalClassificationServiceRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classification_services";
@@ -51,13 +50,13 @@ namespace ACC.Data
 
             return record;
         }
-           
+
         public DataTable GetRecords()
         {
             try
             {
-                  string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                   $" ON t2.id = t1.functional_classifications_id";
+                string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
+                 $" ON t2.id = t1.functional_classifications_id";
 
                 var dtFunctionalClassificationService = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunctionalClassificationService);
@@ -74,7 +73,7 @@ namespace ACC.Data
         {
             try
             {
-                var srchtxt = searchText;               
+                var srchtxt = searchText;
                 string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                     $" ON t2.id = t1.functional_classifications_id WHERE t1.service_name  LIKE'%" + srchtxt + "%' OR t2.sector_name LIKE'%" + srchtxt + "%'";
 
@@ -91,7 +90,7 @@ namespace ACC.Data
         {
             try
             {
-                var Id = id;               
+                var Id = id;
                 //string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  ='" + Id + "'";
                 string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
                    $" ON t2.id = t1.functional_classifications_id WHERE t1.functional_classifications_id  ='" + Id + "'";
@@ -188,7 +187,7 @@ namespace ACC.Data
             }
         }
 
-      
+
 
         public bool IdExist(int id)
         {
@@ -307,6 +306,6 @@ namespace ACC.Data
             return false;
         }
 
-		
-	}
+
+    }
 }

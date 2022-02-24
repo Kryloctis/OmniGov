@@ -57,6 +57,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chckbxSpecial = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabControlFunctionProgramProject.SuspendLayout();
             this.tabFunctionProgramProject.SuspendLayout();
@@ -175,6 +176,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // tabFunctionProgramProject
             // 
+            this.tabFunctionProgramProject.Controls.Add(this.chckbxSpecial);
             this.tabFunctionProgramProject.Controls.Add(this.label2);
             this.tabFunctionProgramProject.Controls.Add(this.cmbServiceName);
             this.tabFunctionProgramProject.Controls.Add(this.dgFunctionalProgramProject);
@@ -282,10 +284,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // tabFunctionalClassification
             // 
             this.tabFunctionalClassification.Controls.Add(this.dgFunctionalClassification);
-            this.tabFunctionalClassification.Location = new System.Drawing.Point(4, 34);
+            this.tabFunctionalClassification.Location = new System.Drawing.Point(4, 24);
             this.tabFunctionalClassification.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassification.Name = "tabFunctionalClassification";
-            this.tabFunctionalClassification.Size = new System.Drawing.Size(851, 383);
+            this.tabFunctionalClassification.Size = new System.Drawing.Size(851, 393);
             this.tabFunctionalClassification.TabIndex = 2;
             this.tabFunctionalClassification.Text = "Functional Classifications";
             // 
@@ -298,7 +300,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalClassification.Name = "dgFunctionalClassification";
             this.dgFunctionalClassification.RowHeadersWidth = 51;
             this.dgFunctionalClassification.RowTemplate.Height = 29;
-            this.dgFunctionalClassification.Size = new System.Drawing.Size(851, 383);
+            this.dgFunctionalClassification.Size = new System.Drawing.Size(851, 393);
             this.dgFunctionalClassification.TabIndex = 5;
             this.dgFunctionalClassification.SelectionChanged += new System.EventHandler(this.dgFunctionalClassification_SelectionChanged);
             // 
@@ -360,6 +362,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // chckbxSpecial
+            // 
+            this.chckbxSpecial.AutoSize = true;
+            this.chckbxSpecial.Location = new System.Drawing.Point(780, 11);
+            this.chckbxSpecial.Name = "chckbxSpecial";
+            this.chckbxSpecial.Size = new System.Drawing.Size(63, 19);
+            this.chckbxSpecial.TabIndex = 20;
+            this.chckbxSpecial.Text = "Special";
+            this.chckbxSpecial.UseVisualStyleBackColor = true;
+            this.chckbxSpecial.CheckedChanged += new System.EventHandler(this.chckbxSpecial_CheckedChanged);
             // 
             // frmFunctionProgramProject
             // 
@@ -424,5 +437,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSubFPP;
         internal System.Windows.Forms.ComboBox cmbServiceName;
+        private System.Windows.Forms.CheckBox chckbxSpecial;
     }
 }

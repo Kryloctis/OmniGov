@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject
@@ -17,6 +18,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             InitializeComponent();
             txtSearch.TextChanged += new System.EventHandler(txtSearch_TextChanged);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalClassification, true);
+            Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationService, true);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
+            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
+            HelperLoadRecords.FunctionProjectProgramDatagridView(dgFunctionalProgramProject);
         }
 
         private void dgFunctionalClassification_SelectedIndexChanged(object sender, EventArgs e)
@@ -39,14 +45,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 toolStripSeparator1.Visible = true;
                 btnSubFPP.Visible = true;
             }
-        }
-
-        private void ShowOthersFPP()
-        {
-            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
-            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
-            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
-            frmOthersFunctionProgramProject.ShowDialog();
         }
 
         internal void LoadFunctionalClassificationRecords()
@@ -95,54 +93,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
-
-
-        //Function Program Project
-        internal void LoadFunctionProgramProjectRecords()
-        {
-            try
-            {
-                txtSearch.Clear();
-                byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecords();
-                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
-
-                lblRecordCount.Text = Factory.FunctionProgramProjectRepository()
-                                             .CountRecords()
-                                             .ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadFunctionProgramProjectRecordsByGroup()
-        {
-            try
-            {
-                txtSearch.Clear();
-                byte id = Convert.ToByte(cmbServiceName.SelectedValue);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetViewRecordsByServiceNameId(id);
-                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
-
-                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadFunctionProgramProjectRecordsBySearch()
-        {
-
-            try
-            {
-                string searchkey = Convert.ToString(txtSearch.Text);
-                var dtfunctionProgramProjectRepository = Factory.FunctionProgramProjectRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.frmFunctionProjectProgramDatagridView(dtfunctionProgramProjectRepository, dgFunctionalProgramProject);
-
-                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        }
+        #region FPP
 
         public void LoadServiceNameComboBox()
         {
@@ -176,14 +127,66 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
+        private DataTable FPPDatatable(string searchText, int serviceId, bool isSpecial)
+        {
+            DataTable fppDataTable;
+
+            if (serviceId == 0)
+                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
+            else
+                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
+
+
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("fpp_code");
+            dataTable.Columns.Add("fpp_name");
+            dataTable.Columns.Add("functional_classification_services_id");
+            dataTable.Columns.Add("service_name");
+            dataTable.Columns.Add("is_special");
+            dataTable.Columns.Add("created_at");
+            dataTable.Columns.Add("updated_at");
+
+            foreach (DataRow row in fppDataTable.Rows)
+            {
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowFPPCode = row["fpp_code"].ToString();
+                string rowFPPName = row["fpp_name"].ToString();
+                int rowFunctionalClassificationServicesId = Convert.ToInt32(row["functional_classification_services_id"]);
+                string rowServiceName = row["service_name"].ToString();
+                bool rowIsSpecial = Convert.ToBoolean(row["is_special"]);
+                var rowCreatedAt = row["created_at"];
+                var rowUpdatedAt = row["updated_at"];
+
+                dataTable.Rows.Add(rowId, rowFPPCode, rowFPPName, rowFunctionalClassificationServicesId, rowServiceName, rowIsSpecial, rowCreatedAt, rowUpdatedAt);
+            }
+
+            return dataTable;
+        }
+
         internal void LoadFPP()
         {
-            if (Convert.ToInt32(cmbServiceName.SelectedValue) == 0)
+            try
             {
-                LoadFunctionProgramProjectRecords();
+                dgFunctionalProgramProject.Rows.Clear();
+                Image continuingIcon = Properties.Resources.ok14px;
+                string searchText = txtSearch.Text.Trim();
+                int serviceId = Convert.ToInt32(cmbServiceName.SelectedValue);
+                bool isSpecial = chckbxSpecial.Checked;
+
+                foreach (DataRow row in FPPDatatable(searchText, serviceId, isSpecial).Rows)
+                {
+                    bool rowIsSpecial = Convert.ToBoolean(row["is_special"]);
+
+                    Image rowIsSpecialImage = rowIsSpecial ? continuingIcon : null;
+
+                    dgFunctionalProgramProject.Rows.Add(row["id"], row["fpp_code"], row["fpp_name"], row["functional_classification_services_id"], row["service_name"], rowIsSpecialImage, row["created_at"], row["updated_at"]);
+                }
             }
-            else
-                LoadFunctionProgramProjectRecordsByGroup();
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void CmbServiceName_SelectedValueChanged(object sender, EventArgs e)
@@ -191,18 +194,40 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFPP();
         }
 
-        //Function Program Project
+        private void dgFunctionalProgramProject_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 6, 7 };
+            Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
 
+            if (dgFunctionalProgramProject.SelectedRows.Count == 1)
+                btnSubFPP.Enabled = true;
+            else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
+                btnSubFPP.Enabled = false;
+            else
+                btnSubFPP.Enabled = false;
+        }
+
+        private void chckbxSpecial_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadFPP();
+        }
+
+        #endregion
+
+        private void ShowOthersFPP()
+        {
+            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
+            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
+            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProject.ShowDialog();
+        }
 
 
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgFunctionalClassification, true);
-            Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationService, true);
-            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
-            Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
             LoadFunctionalClassificationServicesRecords();
 
 
@@ -361,8 +386,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
@@ -374,7 +397,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 LoadFunctionalClassificationServicesRecordsBySearch();
             }
             else
-                LoadFunctionProgramProjectRecordsBySearch();
+                LoadFPP();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -445,20 +468,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         }
 
-        private void dgFunctionalProgramProject_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 5, 6 };
-            Helper.ShowRecordTimestamp(dgFunctionalProgramProject, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFunctionalProgramProject, btnEdit, btnDelete);
-
-            if (dgFunctionalProgramProject.SelectedRows.Count == 1)
-                btnSubFPP.Enabled = true;
-            else if (dgFunctionalProgramProject.SelectedRows.Count < 1)
-                btnSubFPP.Enabled = false;
-            else
-                btnSubFPP.Enabled = false;
-        }
-
         public void LoadSectorNameComboBox()
         {
             try
@@ -475,7 +484,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
 
         }
-
 
         private void btnLoadAll_Click(object sender, EventArgs e)
         {
