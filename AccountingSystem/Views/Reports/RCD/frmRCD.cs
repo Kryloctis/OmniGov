@@ -37,8 +37,25 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCD_Load(object sender, EventArgs e)
         {
             btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
+            LoadFunds();
         }
 
+        private void LoadFunds()
+        {
+            try
+            {
+                var fundrepo = Factory.FundsRepository();
+                var dtfunds = fundrepo.GetRecords();
+
+                cmbfunds.DataSource = dtfunds;
+                cmbfunds.ValueMember = "id";
+                cmbfunds.DisplayMember = "fund_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         internal void LoadSelectedRCD(string rcdNo)
         {
@@ -139,6 +156,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     RcdNo = txtRCDNo.Text,
                     Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    FundId = Convert.ToInt32(cmbfunds.SelectedValue),
                     Userid = Helper.UserId
                 };
 

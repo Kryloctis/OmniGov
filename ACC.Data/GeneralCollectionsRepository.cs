@@ -119,10 +119,11 @@ namespace ACC.Data
                 {
                     new object[] { "@rcd_no", DbType.String, entity.RcdNo},
                     new object[] { "@rcd_date", DbType.Date, entity.Rcddate},
+                    new object[] { "@fund_id", DbType.Int32, entity.FundId},
                     new object[] { "@users_id", DbType.Int16, entity.Userid},
                 };
 
-                string query = $"INSERT INTO {tableGeneralCollections} (rcd_no, rcd_date, users_id) VALUES (@rcd_no,@rcd_date,@users_id)";
+                string query = $"INSERT INTO {tableGeneralCollections} (rcd_no, rcd_date, funds_id, users_id) VALUES (@rcd_no, @rcd_date, @fund_id, @users_id)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -140,9 +141,10 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@rcd_no", DbType.String, entity.RcdNo},
                     new object[] { "@rcd_date", DbType.Date, entity.Rcddate},
+                    new object[] { "@fund_id", DbType.Int32, entity.FundId},
                 };
 
-                string query = $"UPDATE {tableGeneralCollections} SET rcd_no=@rcd_no,rcd_date=@rcd_date WHERE id=@id";
+                string query = $"UPDATE {tableGeneralCollections} SET rcd_no = @rcd_no, rcd_date = @rcd_date, fund_id = @fund_id WHERE id=@id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -236,15 +238,16 @@ namespace ACC.Data
             return false;
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
+        public DataTable GetRecordsBySearch(int fund_id, string searchText)
         {
             try
             {
                 var parameter = new object[][] { 
+                    new object[]{"@fund_id", DbType.String, fund_id },
                     new object[]{"@searchKey", DbType.String, $"%{ searchText }%" }
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no LIKE @searchKey";
+                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no LIKE @searchKey AND fund_id = @fund_id";
                 var dtpc = new DataTable();
 
                 return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
@@ -431,16 +434,34 @@ namespace ACC.Data
            
         }
 
-        public DataTable GetRecordsByFund(string fund)
+        public DataTable GetRecordsByFundId(int fundId)
         {
             var parameter = new object[][] {
-                new object[]{"@fund", DbType.String, fund }
+                new object[]{"@fund_id", DbType.Int32, fundId }
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE fund_name = @fund";
+            string query = $"SELECT * FROM {viewTableName} WHERE fund_id = @fund_id";
             var dtpc = new DataTable();
 
             return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
+        }
+
+        public DataTable GetRecordsByFundIdAndSearchKey(int fundId, string searchKey)
+        {
+            var parameter = new object[][] {
+                new object[]{"@fund_id", DbType.String, fundId },
+                new object[]{"@searchKey", DbType.String, $"%{ searchKey }%" }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rcd_no LIKE @searchKey AND fund_id = @fund_id";
+            var dtpc = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
         }
     }
 }
