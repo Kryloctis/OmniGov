@@ -32,12 +32,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.txtRCDNo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpdate = new System.Windows.Forms.DateTimePicker();
@@ -97,6 +97,18 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
+            this.btnCancelPrint.Text = "Cancel";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
@@ -151,18 +163,6 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnCancelPrint
-            // 
-            this.btnCancelPrint.Enabled = false;
-            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelPrint.Name = "btnCancelPrint";
-            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
-            this.btnCancelPrint.Text = "Cancel";
-            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
-            // 
             // txtRCDNo
             // 
             this.txtRCDNo.Location = new System.Drawing.Point(70, 12);
@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.txtRCDNo.MaxLength = 20;
             this.txtRCDNo.Name = "txtRCDNo";
             this.txtRCDNo.Size = new System.Drawing.Size(137, 23);
-            this.txtRCDNo.TabIndex = 19;
+            this.txtRCDNo.TabIndex = 0;
             this.txtRCDNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtRCDNo_Validating);
             this.txtRCDNo.Validated += new System.EventHandler(this.txtRCDNo_Validated);
             // 
@@ -189,7 +189,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
             this.dtpdate.Size = new System.Drawing.Size(211, 23);
-            this.dtpdate.TabIndex = 21;
+            this.dtpdate.TabIndex = 2;
             // 
             // label1
             // 
@@ -319,7 +319,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbfunds.Name = "cmbfunds";
             this.cmbfunds.Size = new System.Drawing.Size(173, 23);
-            this.cmbfunds.TabIndex = 31;
+            this.cmbfunds.TabIndex = 1;
             // 
             // txtTotal
             // 
