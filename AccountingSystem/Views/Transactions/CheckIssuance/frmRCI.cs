@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-           Helper.DatagridFullRowSelectStyle(dgRCI, false);
+            Helper.DatagridFullRowSelectStyle(dgRCI, false);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
                     var dtRCI = Factory.RCIRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.BanksDatagridView(dtRCI, dgRCI);
+                    HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
 
                     lblRecordCount.Text = dgRCI.Rows.Count.ToString();
                 }

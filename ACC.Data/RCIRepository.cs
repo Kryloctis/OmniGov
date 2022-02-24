@@ -253,10 +253,14 @@ namespace ACC.Data
             try
             {
                 var parameter = new object[][] {
-                    new object[] { "@searchTxt", DbType.String, $"%{searchText}%"}
+                    new object[] { "@searchText", DbType.String, $"%{searchText}%"}
                 };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE payee LIKE @searchTxt";
+                string query = $"SELECT * FROM {viewTableName} " +
+                               $"WHERE payee LIKE @searchText " +
+                               $"OR bank_name LIKE @searchText " + 
+                               $"OR account_no LIKE @searchText " +
+                               $"OR obligation_no LIKE @searchText";
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
