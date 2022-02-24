@@ -109,6 +109,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // btnReturn
             // 
+            this.btnReturn.Enabled = false;
             this.btnReturn.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_signed_undo_2_28px;
             this.btnReturn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnReturn.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -208,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Issued Receipts";
+            this.Text = "Issued Receipts";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmReceipts_Load);
             this.toolStrip1.ResumeLayout(false);

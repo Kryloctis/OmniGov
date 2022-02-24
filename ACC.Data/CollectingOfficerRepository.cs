@@ -146,7 +146,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int rid)
+        public DataTable GetRecordsByReceiptId(int rid)
         {
             try
             {

@@ -258,6 +258,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmbAccount.DropDownHeight = 200;
             this.cmbAccount.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmbAccount.FormattingEnabled = true;
+            this.cmbAccount.IntegralHeight = false;
             this.cmbAccount.Location = new System.Drawing.Point(181, 114);
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(450, 21);

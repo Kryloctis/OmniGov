@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
-            if(_receiptId > 0)
+            if(_receiptId != 0)
             {
                 uc.LoadCollectors(_receiptId);
                 uc.cmbReceipt.SelectedValue = _receiptId;
