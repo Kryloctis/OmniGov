@@ -25,27 +25,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             HelperLoadRecords.FunctionProjectProgramDatagridView(dgFunctionalProgramProject);
         }
 
-        private void dgFunctionalClassification_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
-            {
-                LoadFunctionalClassificationRecords();
-                toolStripSeparator1.Visible = false;
-                btnSubFPP.Visible = false;
-            }
-            else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
-            {
-                LoadFunctionalClassificationServicesRecords();
-                toolStripSeparator1.Visible = false;
-                btnSubFPP.Visible = false;
-            }
-            else
-            {
-                LoadFPP();
-                toolStripSeparator1.Visible = true;
-                btnSubFPP.Visible = true;
-            }
-        }
 
         internal void LoadFunctionalClassificationRecords()
         {
@@ -182,6 +161,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                     dgFunctionalProgramProject.Rows.Add(row["id"], row["fpp_code"], row["fpp_name"], row["functional_classification_services_id"], row["service_name"], rowIsSpecialImage, row["created_at"], row["updated_at"]);
                 }
+
+                lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -461,11 +442,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
         }
 
-        private void dgFuntionalClassificationService_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
-
         public void LoadSectorNameComboBox()
         {
             try
@@ -505,9 +481,26 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             ShowOthersFPP();
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
         {
-
+            if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
+            {
+                LoadFunctionalClassificationRecords();
+                toolStripSeparator1.Visible = false;
+                btnSubFPP.Visible = false;
+            }
+            else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
+            {
+                LoadFunctionalClassificationServicesRecords();
+                toolStripSeparator1.Visible = false;
+                btnSubFPP.Visible = false;
+            }
+            else
+            {
+                LoadFPP();
+                toolStripSeparator1.Visible = true;
+                btnSubFPP.Visible = true;
+            }
         }
     }
 }

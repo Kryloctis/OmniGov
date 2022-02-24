@@ -88,7 +88,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.toolStrip1.Size = new System.Drawing.Size(859, 55);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnAdd
             // 
@@ -173,7 +172,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabControlFunctionProgramProject.SelectedIndex = 0;
             this.tabControlFunctionProgramProject.Size = new System.Drawing.Size(859, 421);
             this.tabControlFunctionProgramProject.TabIndex = 8;
-            this.tabControlFunctionProgramProject.SelectedIndexChanged += new System.EventHandler(this.dgFunctionalClassification_SelectedIndexChanged);
+            this.tabControlFunctionProgramProject.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlFunctionProgramProject_Selected);
             // 
             // tabFunctionProgramProject
             // 
@@ -428,13 +427,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgFunctionalClassification;
         private System.Windows.Forms.DataGridView dgFunctionalProgramProject;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button btnLoadAllFsc;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.ToolStripTextBox txtSearch;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-		private System.Windows.Forms.ComboBox cmbSectorName;
-		private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnLoadAllFsc;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ComboBox cmbSectorName;
+        private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSubFPP;
         internal System.Windows.Forms.ComboBox cmbServiceName;
