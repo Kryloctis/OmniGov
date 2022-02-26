@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                         var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
                         _ = functionalClassificationRepository.Delete(functionalClassificationModelList);
                         LoadFunctionalClassificationRecords();
-                        LoadSectorNameComboBox();
+                        LoadSectorComboBox();
                     }
                 }
             }
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         #region Function Classification Services
 
-        public void LoadSectorNameComboBox()
+        public void LoadSectorComboBox()
         {
             try
             {
@@ -128,55 +128,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFunctionClassificationServices();
         }
 
-        //internal void LoadFunctionalClassificationServicesRecordsByGroup()
-        //{
-
-        //    try
-        //    {
-        //        txtSearch.Clear();
-        //        byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-        //        var dtfunctionProgramProjectServiceRepository = Factory.FunctionalClassificationServiceRepository().GetViewRecordsByClassificationId(id);
-        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionProgramProjectServiceRepository, dgFuntionalClassificationServices);
-
-        //        lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
-        //    }
-        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        //}
-
-        //internal void LoadFunctionalClassificationServicesRecords()
-        //{
-        //    try
-        //    {
-        //        txtSearch.Clear();
-        //        var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecords();
-        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationServices);
-
-        //        lblRecordCount.Text = Factory.FunctionalClassificationServiceRepository()
-        //                                     .CountRecords()
-        //                                     .ToString();
-        //    }
-        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        //}
-
-        //internal void LoadFunctionalClassificationServicesRecordsBySearch()
-        //{
-
-        //    try
-        //    {
-        //        string searchkey = Convert.ToString(txtSearch.Text);
-        //        var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecordsBySearch(searchkey);
-        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationServices);
-
-        //        lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
-        //    }
-        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        //}
-
         private void dgFuntionalClassificationServices_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = { 5, 6 };
             Helper.ShowRecordTimestamp(dgFuntionalClassificationServices, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFuntionalClassificationServices, btnEdit, btnDelete);
         }
@@ -199,6 +153,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             int sectorId = Convert.ToInt32(cmbxSector.SelectedValue);
 
             HelperLoadRecords.FunctionalClassificationServiceDatagridView(FunctionClassificationServicesDataTable(searchText, sectorId), dgFuntionalClassificationServices);
+
+            lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
         }
 
         private void DeleteFunctionalClassificationServiceRecords()
@@ -425,7 +381,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
-            LoadSectorNameComboBox();
+            LoadSectorComboBox();
             LoadServiceNameComboBox();
 
             LoadFPP();

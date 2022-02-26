@@ -814,7 +814,7 @@ namespace AccountingSystem
             datagrid.Columns[8].Width = 100;
             datagrid.Columns[9].Width = 150;
             datagrid.Columns[10].Width = 250;
-            datagrid.Columns[11].Width = 250;   
+            datagrid.Columns[11].Width = 250;
             datagrid.Columns[12].Width = 250;
 
 
@@ -1111,8 +1111,8 @@ namespace AccountingSystem
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["service_name"].HeaderText = "Name";
             datagrid.Columns["functional_classifications_id"].Visible = false;
-            datagrid.Columns["sector_code"].Visible = false;
-            datagrid.Columns["sector_name"].Visible = false;
+            datagrid.Columns["functional_classifications_sector_code"].Visible = false;
+            datagrid.Columns["functional_classifications_sector_name"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
         }
