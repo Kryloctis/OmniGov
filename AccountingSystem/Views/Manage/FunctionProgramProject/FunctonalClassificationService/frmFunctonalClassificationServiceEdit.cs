@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
@@ -14,7 +8,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
     public partial class frmFunctonalClassificationServiceEdit : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
-        public string AllotmentName;     
+        public string AllotmentName;
         public frmFunctonalClassificationServiceEdit(frmFunctionProgramProject frmFunctionProgramProject, byte serviceID)
         {
             InitializeComponent();
@@ -53,10 +47,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 // proceed to insert
                 var functionalClassificationServiceModel = new FunctionalClassificationServiceModel()
                 {
-                    Id = ucFunctonalClassificationServices1.serviceID,                   
+                    Id = ucFunctonalClassificationServices1.serviceID,
                     functionalClassificationId = byte.Parse(uc.cmbSectorName.SelectedValue.ToString()),
                     ServiceName = uc.txtName.Text.Trim(),
-                  //  MajorAccountGroupName = uc.txtName.Text.Trim()
+                    //  MajorAccountGroupName = uc.txtName.Text.Trim()
                 };
 
                 return Factory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
@@ -78,9 +72,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Functional Classification Services has been saved.");
-                _frmFunctionProgramProject.LoadFunctionalClassificationServicesRecords();
+                _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
-               
+
             }
         }
     }

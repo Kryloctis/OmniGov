@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgFunctionalClassification, true);
-            Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationService, true);
+            Helper.DatagridFullRowSelectStyle(dgFuntionalClassificationServices, true);
             Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
             Helper.DatagridFullRowSelectStyle(dgFunctionalProgramProject, true);
             HelperLoadRecords.FunctionProjectProgramDatagridView(dgFunctionalProgramProject);
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             {
                 txtSearch.Clear();
                 var dtFunctionalClassification = Factory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.FuntionalClassificationDatagridView(dtFunctionalClassification, dgFunctionalClassification);
+                HelperLoadRecords.FunctionalClassificationDatagridView(dtFunctionalClassification, dgFunctionalClassification);
 
                 lblRecordCount.Text = Factory.FunctionalClassificationRepository()
                                              .CountRecords()
@@ -41,38 +41,208 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal void LoadFunctionalClassificationServicesRecordsByGroup()
+
+        #region Function Classifications
+
+        private void DeleteFunctionalClassificationRecords()
         {
+            int selectedRowsCount = dgFunctionalClassification.SelectedRows.Count;
 
             try
             {
-                txtSearch.Clear();
-                byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                var dtfunctionProgramProjectServiceRepository = Factory.FunctionalClassificationServiceRepository().GetViewRecordsByClassificationId(id);
-                HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionProgramProjectServiceRepository, dgFuntionalClassificationService);
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var functionalClassificationModelList = new List<FunctionalClassificationModel>();
+                        foreach (DataGridViewRow row in dgFunctionalClassification.SelectedRows)
+                        {
+                            int functionalClassificationId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            functionalClassificationModelList.Add(new FunctionalClassificationModel() { Id = functionalClassificationId });
+                        }
 
-                lblRecordCount.Text = dgFuntionalClassificationService.Rows.Count.ToString();
+                        var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+                        _ = functionalClassificationRepository.Delete(functionalClassificationModelList);
+                        LoadFunctionalClassificationRecords();
+                        LoadSectorNameComboBox();
+                    }
+                }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
+            catch (MySqlException Mysqlex)
+            {
+                switch (Mysqlex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
-        internal void LoadFunctionalClassificationServicesRecords()
+
+        #endregion
+
+        #region Function Classification Services
+
+        public void LoadSectorNameComboBox()
         {
             try
             {
-                txtSearch.Clear();
-                var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecords();
-                HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationService);
+                DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
 
-                lblRecordCount.Text = Factory.FunctionalClassificationServiceRepository()
-                                             .CountRecords()
-                                             .ToString();
+
+                var dataTable = new DataTable();
+
+                dataTable.Columns.Add("id");
+                dataTable.Columns.Add("sector_name");
+
+                dataTable.Rows.Add(0, "All");
+
+                foreach (DataRow item in dtSectorName.Rows)
+                {
+                    var items = new object[]
+                    {
+                       item["id"],
+                       item["sector_name"]
+                    };
+
+                    dataTable.Rows.Add(items);
+                };
+
+
+                HelperLoadRecords.SectorNameComboBox(dataTable, cmbxSector, "sector_name", "id");
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
         }
 
-        #region FPP
+        private void cmbSectorName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadFunctionClassificationServices();
+        }
+
+        //internal void LoadFunctionalClassificationServicesRecordsByGroup()
+        //{
+
+        //    try
+        //    {
+        //        txtSearch.Clear();
+        //        byte id = Convert.ToByte(cmbSectorName.SelectedValue);
+        //        var dtfunctionProgramProjectServiceRepository = Factory.FunctionalClassificationServiceRepository().GetViewRecordsByClassificationId(id);
+        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionProgramProjectServiceRepository, dgFuntionalClassificationServices);
+
+        //        lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
+        //    }
+        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        //}
+
+        //internal void LoadFunctionalClassificationServicesRecords()
+        //{
+        //    try
+        //    {
+        //        txtSearch.Clear();
+        //        var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecords();
+        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationServices);
+
+        //        lblRecordCount.Text = Factory.FunctionalClassificationServiceRepository()
+        //                                     .CountRecords()
+        //                                     .ToString();
+        //    }
+        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        //}
+
+        //internal void LoadFunctionalClassificationServicesRecordsBySearch()
+        //{
+
+        //    try
+        //    {
+        //        string searchkey = Convert.ToString(txtSearch.Text);
+        //        var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecordsBySearch(searchkey);
+        //        HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationServices);
+
+        //        lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
+        //    }
+        //    catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        //}
+
+        private void dgFuntionalClassificationServices_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgFuntionalClassificationServices, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFuntionalClassificationServices, btnEdit, btnDelete);
+        }
+
+        private DataTable FunctionClassificationServicesDataTable(string searchText, int sectorId)
+        {
+            DataTable functionClassificationServicesDataTable;
+
+            if (sectorId == 0)
+                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch(searchText);
+            else
+                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch_And_Sector(searchText, sectorId);
+
+            return functionClassificationServicesDataTable;
+        }
+
+        internal void LoadFunctionClassificationServices()
+        {
+            string searchText = txtSearch.Text.Trim();
+            int sectorId = Convert.ToInt32(cmbxSector.SelectedValue);
+
+            HelperLoadRecords.FunctionalClassificationServiceDatagridView(FunctionClassificationServicesDataTable(searchText, sectorId), dgFuntionalClassificationServices);
+        }
+
+        private void DeleteFunctionalClassificationServiceRecords()
+        {
+            int selectedRowsCount = dgFuntionalClassificationServices.SelectedRows.Count;
+
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var functionalClassificationServiceModelList = new List<FunctionalClassificationServiceModel>();
+                        foreach (DataGridViewRow row in dgFuntionalClassificationServices.SelectedRows)
+                        {
+                            int serviceId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            functionalClassificationServiceModelList.Add(new FunctionalClassificationServiceModel() { Id = serviceId });
+                        }
+
+                        var functionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository();
+                        _ = functionalClassificationServiceRepository.Delete(functionalClassificationServiceModelList);
+                        LoadFunctionClassificationServices();
+                        LoadServiceNameComboBox();
+                    }
+                }
+            }
+            catch (MySqlException Mysqlex)
+            {
+                switch (Mysqlex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Function Program Project
 
         public void LoadServiceNameComboBox()
         {
@@ -194,110 +364,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFPP();
         }
 
-        #endregion
-
-        private void ShowOthersFPP()
-        {
-            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
-            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
-            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
-            frmOthersFunctionProgramProject.ShowDialog();
-        }
-
-
-        private void frmFunctionProgramProject_Load(object sender, EventArgs e)
-        {
-            LoadFunctionalClassificationServicesRecords();
-
-
-            LoadSectorNameComboBox();
-            LoadFunctionalClassificationServicesRecordsByGroup();
-            LoadServiceNameComboBox();
-
-            LoadFPP();
-            LoadFunctionalClassificationRecords();
-
-        }
-
-        private void DeleteFunctionalClassificationRecords()
-        {
-            int selectedRowsCount = dgFunctionalClassification.SelectedRows.Count;
-
-            try
-            {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var functionalClassificationModelList = new List<FunctionalClassificationModel>();
-                        foreach (DataGridViewRow row in dgFunctionalClassification.SelectedRows)
-                        {
-                            int functionalClassificationId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            functionalClassificationModelList.Add(new FunctionalClassificationModel() { Id = functionalClassificationId });
-                        }
-
-                        var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
-                        _ = functionalClassificationRepository.Delete(functionalClassificationModelList);
-                        LoadFunctionalClassificationRecords();
-                        LoadSectorNameComboBox();
-                    }
-                }
-            }
-            catch (MySqlException Mysqlex)
-            {
-                switch (Mysqlex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void DeleteFunctionalClassificationServiceRecords()
-        {
-            int selectedRowsCount = dgFuntionalClassificationService.SelectedRows.Count;
-
-            try
-            {
-                if (selectedRowsCount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
-                    {
-                        var functionalClassificationServiceModelList = new List<FunctionalClassificationServiceModel>();
-                        foreach (DataGridViewRow row in dgFuntionalClassificationService.SelectedRows)
-                        {
-                            int serviceId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            functionalClassificationServiceModelList.Add(new FunctionalClassificationServiceModel() { Id = serviceId });
-                        }
-
-                        var functionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository();
-                        _ = functionalClassificationServiceRepository.Delete(functionalClassificationServiceModelList);
-                        LoadFunctionalClassificationServicesRecords();
-                        LoadServiceNameComboBox();
-                    }
-                }
-            }
-            catch (MySqlException Mysqlex)
-            {
-                switch (Mysqlex.Number)
-                {
-                    case 1451:
-                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void DeleteFunctionProgramProjectDGRecords()
+        private void DeleteFunctionProgramProjectRecords()
         {
             int selectedRowsCount = dgFunctionalProgramProject.SelectedRows.Count;
 
@@ -335,6 +402,39 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
+        #endregion
+
+
+        private void ShowOthersFPP()
+        {
+            int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
+            var frmOthersFunctionProgramProject = new frmOthersFunctionProgramProject();
+            frmOthersFunctionProgramProject.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProject.ShowDialog();
+        }
+
+        private void toolStripBtnOthers_Click(object sender, EventArgs e)
+        {
+            ShowOthersFPP();
+        }
+
+        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ShowOthersFPP();
+        }
+
+        private void frmFunctionProgramProject_Load(object sender, EventArgs e)
+        {
+            LoadSectorNameComboBox();
+            LoadServiceNameComboBox();
+
+            LoadFPP();
+            LoadFunctionClassificationServices();
+            LoadFunctionalClassificationRecords();
+
+        }
+
+
         internal void LoadFunctionalClassificationRecordsBySearch()
         {
 
@@ -342,24 +442,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             {
                 string searchkey = Convert.ToString(txtSearch.Text);
                 var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.FuntionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
+                HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
 
                 lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
-        }
-
-        internal void LoadFunctionalClassificationServicesRecordsBySearch()
-        {
-
-            try
-            {
-                string searchkey = Convert.ToString(txtSearch.Text);
-                var dtfunctionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.FuntionalClassificationServiceDatagridView(dtfunctionalClassificationServiceRepository, dgFuntionalClassificationService);
-
-                lblRecordCount.Text = dgFuntionalClassificationService.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
@@ -373,7 +458,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
-                LoadFunctionalClassificationServicesRecordsBySearch();
+                LoadFunctionClassificationServices();
             }
             else
                 LoadFPP();
@@ -406,7 +491,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
-                byte functionalClassificationServiceId = byte.Parse(dgFuntionalClassificationService.SelectedCells[0].Value.ToString());
+                byte functionalClassificationServiceId = byte.Parse(dgFuntionalClassificationServices.SelectedCells[0].Value.ToString());
                 _ = new frmFunctonalClassificationServiceEdit(this, functionalClassificationServiceId).ShowDialog();
             }
             else
@@ -427,12 +512,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 DeleteFunctionalClassificationServiceRecords();
             }
             else
-                DeleteFunctionProgramProjectDGRecords();
-        }
-
-        private void toolStripBtnOthers_Click(object sender, EventArgs e)
-        {
-            ShowOthersFPP();
+                DeleteFunctionProgramProjectRecords();
         }
 
         private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
@@ -440,45 +520,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgFunctionalClassification, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
-        }
-
-        public void LoadSectorNameComboBox()
-        {
-            try
-            {
-                DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
-                //  byte id = Convert.ToByte(cmbSectorName.SelectedValue);
-                // txtCode.Text = Convert.ToString(id);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-
-        }
-
-        private void btnLoadAll_Click(object sender, EventArgs e)
-        {
-            LoadFunctionalClassificationServicesRecords();
-        }
-
-        private void cmbSectorName_SelectionChangeCommitted_2(object sender, EventArgs e)
-        {
-            LoadFunctionalClassificationServicesRecordsByGroup();
-        }
-
-        private void dgFuntionalClassificationService_SelectionChanged_1(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgFuntionalClassificationService, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFuntionalClassificationService, btnEdit, btnDelete);
-        }
-
-        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            ShowOthersFPP();
         }
 
         private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
@@ -491,7 +532,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
-                LoadFunctionalClassificationServicesRecords();
+                LoadFunctionClassificationServices();
                 toolStripSeparator1.Visible = false;
                 btnSubFPP.Visible = false;
             }

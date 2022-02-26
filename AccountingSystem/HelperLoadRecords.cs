@@ -1084,7 +1084,8 @@ namespace AccountingSystem
         #endregion
 
         #region Function/Program/Project
-        internal static void FuntionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
+
+        internal static void FunctionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
@@ -1095,16 +1096,16 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
         }
 
-        internal static void FuntionalClassificationServiceDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void FunctionalClassificationServiceDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Sector Name";
-            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[2].HeaderText = "Service Name";
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["service_name"].HeaderText = "Name";
+            datagrid.Columns["functional_classifications_id"].Visible = false;
+            datagrid.Columns["sector_code"].Visible = false;
+            datagrid.Columns["sector_name"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void FunctionProjectProgramDatagridView(DataGridView datagrid)

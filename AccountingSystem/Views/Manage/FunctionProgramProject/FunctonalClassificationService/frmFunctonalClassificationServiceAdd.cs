@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
@@ -13,15 +13,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             InitializeComponent();
             _frmFunctionProgramProject = frmFunctionProgramProject;
         }
-        
 
-       
+
+
 
 
         private void frmFunctonalClassificationServiceAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-           ucFunctonalClassificationServices1.LoadSectorNameComboBox();           
+            ucFunctonalClassificationServices1.LoadSectorNameComboBox();
         }
 
         private bool SaveData()
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             {
                 Helper.MessageBoxSuccess("Functional Classification Service has been saved.");
                 ucFunctonalClassificationServices1.ResetForm();
-                _frmFunctionProgramProject.LoadFunctionalClassificationServicesRecords();
+                _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
             }
         }

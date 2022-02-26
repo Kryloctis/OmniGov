@@ -45,9 +45,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.dgFunctionalProgramProject = new System.Windows.Forms.DataGridView();
             this.tabFunctionalClassificationService = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbSectorName = new System.Windows.Forms.ComboBox();
-            this.dgFuntionalClassificationService = new System.Windows.Forms.DataGridView();
-            this.btnLoadAllFsc = new System.Windows.Forms.Button();
+            this.cmbxSector = new System.Windows.Forms.ComboBox();
+            this.dgFuntionalClassificationServices = new System.Windows.Forms.DataGridView();
             this.tabFunctionalClassification = new System.Windows.Forms.TabPage();
             this.dgFunctionalClassification = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -63,7 +62,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.tabFunctionProgramProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFunctionalProgramProject)).BeginInit();
             this.tabFunctionalClassificationService.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationService)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationServices)).BeginInit();
             this.tabFunctionalClassification.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFunctionalClassification)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -236,9 +235,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // tabFunctionalClassificationService
             // 
             this.tabFunctionalClassificationService.Controls.Add(this.label1);
-            this.tabFunctionalClassificationService.Controls.Add(this.cmbSectorName);
-            this.tabFunctionalClassificationService.Controls.Add(this.dgFuntionalClassificationService);
-            this.tabFunctionalClassificationService.Controls.Add(this.btnLoadAllFsc);
+            this.tabFunctionalClassificationService.Controls.Add(this.cmbxSector);
+            this.tabFunctionalClassificationService.Controls.Add(this.dgFuntionalClassificationServices);
             this.tabFunctionalClassificationService.Location = new System.Drawing.Point(4, 24);
             this.tabFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabFunctionalClassificationService.Name = "tabFunctionalClassificationService";
@@ -257,40 +255,29 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             this.label1.Text = "Sector Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // cmbSectorName
+            // cmbxSector
             // 
-            this.cmbSectorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSectorName.FormattingEnabled = true;
-            this.cmbSectorName.Location = new System.Drawing.Point(89, 10);
-            this.cmbSectorName.Name = "cmbSectorName";
-            this.cmbSectorName.Size = new System.Drawing.Size(330, 23);
-            this.cmbSectorName.TabIndex = 16;
-            this.cmbSectorName.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted_2);
+            this.cmbxSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxSector.FormattingEnabled = true;
+            this.cmbxSector.Location = new System.Drawing.Point(89, 10);
+            this.cmbxSector.Name = "cmbxSector";
+            this.cmbxSector.Size = new System.Drawing.Size(330, 23);
+            this.cmbxSector.TabIndex = 16;
+            this.cmbxSector.SelectionChangeCommitted += new System.EventHandler(this.cmbSectorName_SelectionChangeCommitted);
             // 
-            // dgFuntionalClassificationService
+            // dgFuntionalClassificationServices
             // 
-            this.dgFuntionalClassificationService.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgFuntionalClassificationServices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgFuntionalClassificationService.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFuntionalClassificationService.Location = new System.Drawing.Point(8, 39);
-            this.dgFuntionalClassificationService.Name = "dgFuntionalClassificationService";
-            this.dgFuntionalClassificationService.RowHeadersWidth = 51;
-            this.dgFuntionalClassificationService.RowTemplate.Height = 25;
-            this.dgFuntionalClassificationService.Size = new System.Drawing.Size(837, 349);
-            this.dgFuntionalClassificationService.TabIndex = 17;
-            this.dgFuntionalClassificationService.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationService_SelectionChanged_1);
-            // 
-            // btnLoadAllFsc
-            // 
-            this.btnLoadAllFsc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadAllFsc.Location = new System.Drawing.Point(770, 11);
-            this.btnLoadAllFsc.Name = "btnLoadAllFsc";
-            this.btnLoadAllFsc.Size = new System.Drawing.Size(75, 22);
-            this.btnLoadAllFsc.TabIndex = 15;
-            this.btnLoadAllFsc.Text = "Load All";
-            this.btnLoadAllFsc.UseVisualStyleBackColor = true;
-            this.btnLoadAllFsc.Click += new System.EventHandler(this.btnLoadAll_Click);
+            this.dgFuntionalClassificationServices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFuntionalClassificationServices.Location = new System.Drawing.Point(8, 39);
+            this.dgFuntionalClassificationServices.Name = "dgFuntionalClassificationServices";
+            this.dgFuntionalClassificationServices.RowHeadersWidth = 51;
+            this.dgFuntionalClassificationServices.RowTemplate.Height = 25;
+            this.dgFuntionalClassificationServices.Size = new System.Drawing.Size(837, 349);
+            this.dgFuntionalClassificationServices.TabIndex = 17;
+            this.dgFuntionalClassificationServices.SelectionChanged += new System.EventHandler(this.dgFuntionalClassificationServices_SelectionChanged);
             // 
             // tabFunctionalClassification
             // 
@@ -397,7 +384,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             ((System.ComponentModel.ISupportInitialize)(this.dgFunctionalProgramProject)).EndInit();
             this.tabFunctionalClassificationService.ResumeLayout(false);
             this.tabFunctionalClassificationService.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationService)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFuntionalClassificationServices)).EndInit();
             this.tabFunctionalClassification.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgFunctionalClassification)).EndInit();
             this.statusStrip1.ResumeLayout(false);
@@ -432,8 +419,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ComboBox cmbSectorName;
-        private System.Windows.Forms.DataGridView dgFuntionalClassificationService;
+        private System.Windows.Forms.ComboBox cmbxSector;
+        private System.Windows.Forms.DataGridView dgFuntionalClassificationServices;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSubFPP;
         internal System.Windows.Forms.ComboBox cmbServiceName;

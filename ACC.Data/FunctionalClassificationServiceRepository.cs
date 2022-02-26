@@ -13,6 +13,7 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classification_services";
         private readonly string tableName2 = "functional_classifications";
+        private readonly string viewTableName = "view_function_classification_services";
 
         public FunctionalClassificationServiceRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -66,8 +67,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -144,7 +143,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool Delete(List<FunctionalClassificationServiceModel> entityList)
         {
             try
@@ -171,7 +169,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public int CountRecords()
         {
@@ -306,6 +303,36 @@ namespace ACC.Data
             return false;
         }
 
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.Fill(query, dataTable);
+        }
 
+        public DataTable GetViewRecordsBySearch_And_Sector(string searchText, int sectorId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+                new object[] { "@functional_classifications_id", DbType.Int32, sectorId }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (service_name LIKE @searchText OR sector_code LIKE @searchText OR sector_name LIKE @searchText) AND functional_classifications_id = @functional_classifications_id ORDER BY service_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+           };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (service_name LIKE @searchText OR sector_code LIKE @searchText OR sector_name LIKE @searchText) ORDER BY service_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
     }
 }
