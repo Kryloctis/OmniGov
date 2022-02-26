@@ -37,8 +37,25 @@ namespace AccountingSystem.Views.Reports.RCD
         private void frmRCD_Load(object sender, EventArgs e)
         {
             btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
+            LoadFunds();
         }
 
+        private void LoadFunds()
+        {
+            try
+            {
+                var fundrepo = Factory.FundsRepository();
+                var dtfunds = fundrepo.GetRecords();
+
+                cmbfunds.DataSource = dtfunds;
+                cmbfunds.ValueMember = "id";
+                cmbfunds.DisplayMember = "fund_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
 
         internal void LoadSelectedRCD(string rcdNo)
         {
@@ -139,6 +156,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 {
                     RcdNo = txtRCDNo.Text,
                     Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    FundId = Convert.ToInt32(cmbfunds.SelectedValue),
                     Userid = Helper.UserId
                 };
 
@@ -176,7 +194,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnDeposit_Click(object sender, EventArgs e)
         {
             string referenceNumber = txtRCDNo.Text.Trim();
-            decimal amount = Convert.ToDecimal(lblTotalAmount.Text);
+            decimal amount = Convert.ToDecimal(txtTotal.Text);
             int rcdId = int.Parse(this.rcdId);
 
             _ = new frmBankDepositsAdd(new frmBankDeposits(), rcdId, referenceNumber, amount).ShowDialog();
@@ -220,7 +238,10 @@ namespace AccountingSystem.Views.Reports.RCD
 
             reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
             lblRecordCount.Text = reportQuantity.ToString();
-            lblTotalAmount.Text = totalCollections.ToString("N2");
+            txtTotal.Text = totalCollections.ToString("N2");
+
+
+            
         }
 
         private void btnCancelPrint_Click(object sender, EventArgs e)
@@ -255,7 +276,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgListOfApprovedReport_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Approved.");
+            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Report.");
         }
         private void dgListOfApprovedReport_Validated(object sender, EventArgs e)
         {

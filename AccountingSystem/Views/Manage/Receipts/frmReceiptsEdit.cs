@@ -34,9 +34,11 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rcRepository = Factory.ReceiptsRepository();
                 var rcdata = rcRepository.GetRecordByID(uc.receiptId);
 
+                var formatedReceiptNumberFrom = 
+
                 uc.cmbAccountableForms.SelectedValue = rcdata["accountable_forms_id"];
-                uc.txtReceiptNumberFrom.Text = rcdata["receipt_number_from"];
-                uc.txtReceiptNumberTo.Text = rcdata["receipt_number_to"];
+                uc.txtReceiptNumberFrom.Text = Convert.ToInt32(rcdata["receipt_number_from"]).ToString("0000000");
+                uc.txtReceiptNumberTo.Text = Convert.ToInt32(rcdata["receipt_number_to"]).ToString("0000000");
                 uc.dtpReceivedDate.Value = Convert.ToDateTime(rcdata["received_date"]);
                 uc.txtQuantity.Text = rcdata["quantity"];
                 uc.txtRemark.Text = rcdata["remarks"];

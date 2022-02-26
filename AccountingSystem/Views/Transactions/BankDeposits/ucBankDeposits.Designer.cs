@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.txtReferenceNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReferenceNumber.MaxLength = 99;
             this.txtReferenceNumber.Name = "txtReferenceNumber";
-            this.txtReferenceNumber.Size = new System.Drawing.Size(350, 23);
+            this.txtReferenceNumber.Size = new System.Drawing.Size(390, 23);
             this.txtReferenceNumber.TabIndex = 2;
             this.txtReferenceNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtreference_Validating);
             this.txtReferenceNumber.Validated += new System.EventHandler(this.txtreference_Validated);
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.dtDate.Location = new System.Drawing.Point(88, 103);
             this.dtDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtDate.Name = "dtDate";
-            this.dtDate.Size = new System.Drawing.Size(350, 23);
+            this.dtDate.Size = new System.Drawing.Size(390, 23);
             this.dtDate.TabIndex = 3;
             // 
             // label3
@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             0,
             0});
             this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(350, 23);
+            this.nudAmount.Size = new System.Drawing.Size(390, 23);
             this.nudAmount.TabIndex = 4;
             this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudAmount.ThousandsSeparator = true;
@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.cmbBank.Location = new System.Drawing.Point(88, 10);
             this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(350, 23);
+            this.cmbBank.Size = new System.Drawing.Size(390, 23);
             this.cmbBank.TabIndex = 1;
             this.cmbBank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbbanks_Validating);
             this.cmbBank.Validated += new System.EventHandler(this.cmbbanks_Validated);
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.cmbFund.Location = new System.Drawing.Point(88, 41);
             this.cmbFund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFund.Name = "cmbFund";
-            this.cmbFund.Size = new System.Drawing.Size(350, 23);
+            this.cmbFund.Size = new System.Drawing.Size(390, 23);
             this.cmbFund.TabIndex = 26;
             this.cmbFund.Validating += new System.ComponentModel.CancelEventHandler(this.cmbfunds_Validating);
             this.cmbFund.Validated += new System.EventHandler(this.cmbfunds_Validated);
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucBankDeposits";
-            this.Size = new System.Drawing.Size(466, 168);
+            this.Size = new System.Drawing.Size(503, 168);
             this.Load += new System.EventHandler(this.ucBD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epBank)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();

@@ -29,9 +29,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var uc = ucCollectingOfficer1;
                 var repository = Factory.CollectingOfficerRepository();
                 var data = repository.GetRecordByID(uc.OfficerId);
+
+                uc.txtPrefix.Text = data["prefix"];
                 uc.txtFirstName.Text = data["first_name"];
                 uc.txtMiddleInitial.Text = data["mid_initial"];
                 uc.txtLastName.Text = data["last_name"];
+                uc.txtSuffix.Text = data["suffix"];
                 uc.txtJobtitle.Text = data["job_title"];
                 uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);                
                 uc.LoadLink(uc.UserId);
@@ -48,28 +51,26 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 var uc = ucCollectingOfficer1;
 
-
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                // proceed to update
                 var collectingmodel = new CollectingOfficerModel()
                 {
                     Id = uc.OfficerId,
+                    Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
                     LastName = uc.txtLastName.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
                     JobTitle = uc.txtJobtitle.Text.Trim(),
                     UserId = uc.UserId
                 };
 
                 var collectingrepository = Factory.CollectingOfficerRepository();
                 return collectingrepository.Update(collectingmodel);
-
 
             }
             catch (Exception ex)

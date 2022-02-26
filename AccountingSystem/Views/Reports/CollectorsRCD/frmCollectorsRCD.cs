@@ -33,6 +33,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
+
+                tsApproveSeparator.Visible = false;
+                tsDisapproveSeparator.Visible = false;
             }
         }
 
@@ -44,8 +47,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
                     CheckRCDStatus(uc.txtReport.Text.Trim());
-                    ResetLocalControls();
-                    uc.ResetForm();
                 }
             }
 
@@ -216,13 +217,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         lblReportStatus.Text = "PENDING";
                         lblReportStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         lblShowMessage.Visible = false;
-                        btnPrint.Enabled = false;
-                        btnCancelPrint.Enabled = false;
+                        btnPrint.Enabled = true;
+                        btnCancelPrint.Enabled = true;
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
                         btnDelete.Enabled = true;
                         uc.Enabled = true;
-                        //btnSave.Enabled = true;
+                        btnSave.Text = "Update";
+                        btnSave.Enabled = true;
                         break;
                     case "approved":
                         //APPROVED

@@ -60,10 +60,12 @@ namespace AccountingSystem.Views.Manage.Banks
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip.Location = new System.Drawing.Point(0, 375);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip.Size = new System.Drawing.Size(735, 22);
+            this.statusStrip.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip.SizingGrip = false;
+            this.statusStrip.Stretch = false;
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -82,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(525, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -119,7 +121,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(735, 58);
+            this.toolStrip.Size = new System.Drawing.Size(794, 58);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -171,7 +173,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.dgBanks.RowHeadersWidth = 51;
             this.dgBanks.RowTemplate.Height = 29;
             this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBanks.Size = new System.Drawing.Size(714, 311);
+            this.dgBanks.Size = new System.Drawing.Size(773, 313);
             this.dgBanks.TabIndex = 8;
             this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
@@ -179,7 +181,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(470, 33);
+            this.txtsearch.Location = new System.Drawing.Point(529, 33);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(254, 23);
@@ -190,7 +192,7 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(422, 36);
+            this.label1.Location = new System.Drawing.Point(481, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 12;
@@ -200,16 +202,20 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 395);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(794, 397);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgBanks);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmBanks";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Banks";
             this.Load += new System.EventHandler(this.frmBanks_Load);

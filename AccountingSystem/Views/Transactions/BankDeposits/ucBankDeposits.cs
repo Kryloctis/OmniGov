@@ -34,14 +34,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 LoadBanks();
                 LoadFunds();
-
             }
         }
 
         internal void ResetForm()
         {
-            cmbBank.SelectedIndex = -1;
-            cmbFund.SelectedIndex = -1;
             txtReferenceNumber.Clear();
             dtDate.Value = DateTime.Now;
             nudAmount.Value = Convert.ToDecimal("0.00");
@@ -57,11 +54,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbBank.DataSource = dtBank;
                 cmbBank.ValueMember = "id";
                 cmbBank.DisplayMember = "bankdetails";
-
-                cmbBank.SelectedIndex = -1;
-
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         internal void LoadFunds()
@@ -74,8 +71,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbFund.DataSource = dtfunds;
                 cmbFund.ValueMember = "id";
                 cmbFund.DisplayMember = "funddetails";
-
-                cmbFund.SelectedIndex = -1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

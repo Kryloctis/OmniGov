@@ -176,7 +176,6 @@ namespace AccountingSystem
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
 
-
                 string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
                 dictUser.Add("user_full_name", userFullName);
 

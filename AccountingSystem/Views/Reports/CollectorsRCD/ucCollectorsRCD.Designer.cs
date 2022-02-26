@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.dtRCDDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtRCDDate.Name = "dtRCDDate";
             this.dtRCDDate.Size = new System.Drawing.Size(225, 23);
-            this.dtRCDDate.TabIndex = 19;
+            this.dtRCDDate.TabIndex = 2;
             // 
             // txtReport
             // 
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.txtReport.MaxLength = 20;
             this.txtReport.Name = "txtReport";
             this.txtReport.Size = new System.Drawing.Size(171, 23);
-            this.txtReport.TabIndex = 17;
+            this.txtReport.TabIndex = 0;
             this.txtReport.Validating += new System.ComponentModel.CancelEventHandler(this.txtReport_Validating);
             this.txtReport.Validated += new System.EventHandler(this.txtReport_Validated);
             // 
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(171, 23);
-            this.cmbCollector.TabIndex = 15;
+            this.cmbCollector.TabIndex = 1;
             this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
             this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollector_Validating);
             this.cmbCollector.Validated += new System.EventHandler(this.cmbCollector_Validated);

@@ -222,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.Name = "frmRCI";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Issue Check";
+            this.Text = "Issue Check";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCI_Load);
             this.toolStrip.ResumeLayout(false);

@@ -32,9 +32,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             {
                 var disbursingOfficerDict = Factory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
 
+                uc.txtPrefix.Text = disbursingOfficerDict["prefix"];
                 uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
                 uc.txtMidInitial.Text = disbursingOfficerDict["mid_initial"];
                 uc.txtLastName.Text = disbursingOfficerDict["last_name"];
+                uc.txtSuffix.Text = disbursingOfficerDict["suffix"];
                 uc.txtJobTitle.Text = disbursingOfficerDict["job_title"];
                 uc.UserId = disbursingOfficerDict["users_id"] == string.Empty ? 0 : Convert.ToInt16(disbursingOfficerDict["users_id"]);
                 uc.LoadLink(uc.UserId);
@@ -89,6 +91,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 Helper.MessageBoxSuccess("Disbursing officer has been saved.");
                 frmDisbursingOfficer.LoadRecords();
             }
+        }
+
+        private void ucDisbursingOfficer1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

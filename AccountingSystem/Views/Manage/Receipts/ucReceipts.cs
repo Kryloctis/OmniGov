@@ -145,9 +145,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtto_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
 
         private void txtquantity_KeyPress(object sender, KeyPressEventArgs e)
@@ -201,17 +199,18 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtReceiptNumberFrom.Enabled = true;
                 txtReceiptNumberTo.Enabled = true;
                 txtQuantity.ReadOnly = true;
+                txtQuantity.Text = string.Empty;
 
-                var receiptsRepository = Factory.ReceiptsRepository();
-                var accountableFormId = int.Parse(item[0].ToString());
+                //var receiptsRepository = Factory.ReceiptsRepository();
+                //var accountableFormId = int.Parse(item[0].ToString());
 
-                receiptNumberFrom = receiptsRepository.GetMinReceiptNumberByAccountableFormId(accountableFormId);
-                receiptNumberTo = receiptsRepository.GetMaxReceiptNumberByAccountableFormId(accountableFormId);
+                //receiptNumberFrom = receiptsRepository.GetMinReceiptNumberByAccountableFormId(accountableFormId);
+                //receiptNumberTo = receiptsRepository.GetMaxReceiptNumberByAccountableFormId(accountableFormId);
 
-                if (receiptNumberFrom != 0 && receiptNumberTo != 0)
-                    txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
-                else
-                    txtReceiptNumberFrom.Text = string.Empty;
+                //if (receiptNumberFrom != 0 && receiptNumberTo != 0)
+                //    txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
+                //else
+                //    txtReceiptNumberFrom.Text = string.Empty;
             }
         }
 

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ACC.Domain.Interfaces;
 
@@ -21,8 +15,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = errorProvider.GetError(txtformno);
-            errorArray[1] = errorProvider.GetError(txtformdesc);
+            errorArray[0] = epFormNo.GetError(txtformno);
+            errorArray[1] = epFormDescription.GetError(txtformdesc);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -36,35 +30,38 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void txtformno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtformno, "Form No.!");
-            var banksrepository = Factory.AccountableRepository();
-            string formno = txtformno.Text.Trim();
-            bool formNoexist;
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFormNo, txtformno, "Form No.");
+
+            var accountableFormRepository = Factory.AccountableRepository();
+            string formNumber = txtformno.Text.Trim();
+
+            bool formNumberExist;
 
             if (accId == 0)
-                formNoexist = banksrepository.CodeExist(formno);
+                formNumberExist = accountableFormRepository.CodeExist(formNumber);
             else
-                formNoexist = banksrepository.CodeExist(formno, accId);
-            if (formNoexist)
+                formNumberExist = accountableFormRepository.CodeExist(formNumber, accId);
+
+            if (formNumberExist)
             {
-                errorProvider.SetError(txtformno, "Accountable Form Number already exist in your records!");
+                epFormNo.SetError(txtformno, "Accountable Form Number already exist in your records.");
                 e.Cancel = true;
             }
         }
 
         private void txtformno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtformno);
+            Helper.ClearErrorTextBox(epFormNo, txtformno);
         }
 
         private void txtformdesc_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider, txtformdesc, "Form Description!");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFormDescription, txtformdesc, "Form Description.");
         }
 
         private void txtformdesc_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider, txtformdesc);
+            Helper.ClearErrorTextBox(epFormDescription, txtformdesc);
         }
     }
 }

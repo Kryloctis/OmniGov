@@ -32,12 +32,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeposit = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.txtRCDNo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpdate = new System.Windows.Forms.DateTimePicker();
@@ -50,11 +50,13 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.panelRCD = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbfunds = new System.Windows.Forms.ComboBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.epRCDNo = new System.Windows.Forms.ErrorProvider(this.components);
             this.epDgCollectorRepor = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolStrip1.SuspendLayout();
@@ -71,12 +73,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
+            this.btnCancelPrint,
             this.btnDelete,
             this.toolStripSeparator2,
             this.btnDeposit,
             this.btnPrint,
-            this.btnSearch,
-            this.btnCancelPrint});
+            this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(916, 50);
@@ -94,6 +96,18 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
+            this.btnCancelPrint.Text = "Cancel";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
             // 
             // btnDelete
             // 
@@ -149,33 +163,21 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // btnCancelPrint
-            // 
-            this.btnCancelPrint.Enabled = false;
-            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelPrint.Name = "btnCancelPrint";
-            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
-            this.btnCancelPrint.Text = "Cancel";
-            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
-            // 
             // txtRCDNo
             // 
-            this.txtRCDNo.Location = new System.Drawing.Point(74, 15);
+            this.txtRCDNo.Location = new System.Drawing.Point(70, 12);
             this.txtRCDNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRCDNo.MaxLength = 20;
             this.txtRCDNo.Name = "txtRCDNo";
             this.txtRCDNo.Size = new System.Drawing.Size(137, 23);
-            this.txtRCDNo.TabIndex = 19;
+            this.txtRCDNo.TabIndex = 0;
             this.txtRCDNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtRCDNo_Validating);
             this.txtRCDNo.Validated += new System.EventHandler(this.txtRCDNo_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 18);
+            this.label2.Location = new System.Drawing.Point(15, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 20;
@@ -183,16 +185,16 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // dtpdate
             // 
-            this.dtpdate.Location = new System.Drawing.Point(269, 15);
+            this.dtpdate.Location = new System.Drawing.Point(509, 12);
             this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpdate.Name = "dtpdate";
             this.dtpdate.Size = new System.Drawing.Size(211, 23);
-            this.dtpdate.TabIndex = 21;
+            this.dtpdate.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(235, 18);
+            this.label1.Location = new System.Drawing.Point(475, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 15);
             this.label1.TabIndex = 20;
@@ -210,12 +212,12 @@ namespace AccountingSystem.Views.Reports.RCD
             this.report_no,
             this.amount});
             this.epDgCollectorRepor.SetIconAlignment(this.dgListOfApprovedReport, System.Windows.Forms.ErrorIconAlignment.TopRight);
-            this.dgListOfApprovedReport.Location = new System.Drawing.Point(17, 46);
+            this.dgListOfApprovedReport.Location = new System.Drawing.Point(17, 42);
             this.dgListOfApprovedReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgListOfApprovedReport.Name = "dgListOfApprovedReport";
             this.dgListOfApprovedReport.RowHeadersWidth = 51;
             this.dgListOfApprovedReport.RowTemplate.Height = 29;
-            this.dgListOfApprovedReport.Size = new System.Drawing.Size(880, 433);
+            this.dgListOfApprovedReport.Size = new System.Drawing.Size(880, 437);
             this.dgListOfApprovedReport.TabIndex = 22;
             this.dgListOfApprovedReport.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgListOfApprovedReport_RowsAdded);
             this.dgListOfApprovedReport.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgListOfApprovedReport_RowsRemoved);
@@ -283,6 +285,10 @@ namespace AccountingSystem.Views.Reports.RCD
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelRCD.BackColor = System.Drawing.Color.White;
+            this.panelRCD.Controls.Add(this.label3);
+            this.panelRCD.Controls.Add(this.cmbfunds);
+            this.panelRCD.Controls.Add(this.txtTotal);
+            this.panelRCD.Controls.Add(this.label4);
             this.panelRCD.Controls.Add(this.btnRemove);
             this.panelRCD.Controls.Add(this.btnadd);
             this.panelRCD.Controls.Add(this.label2);
@@ -295,14 +301,54 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panelRCD.Size = new System.Drawing.Size(916, 520);
             this.panelRCD.TabIndex = 34;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(227, 12);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(4);
+            this.label3.Size = new System.Drawing.Size(47, 23);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Funds";
+            // 
+            // cmbfunds
+            // 
+            this.cmbfunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfunds.FormattingEnabled = true;
+            this.cmbfunds.Location = new System.Drawing.Point(280, 12);
+            this.cmbfunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbfunds.Name = "cmbfunds";
+            this.cmbfunds.Size = new System.Drawing.Size(173, 23);
+            this.cmbfunds.TabIndex = 1;
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotal.Location = new System.Drawing.Point(55, 487);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(229, 23);
+            this.txtTotal.TabIndex = 30;
+            this.txtTotal.Text = "0.00";
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 491);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 15);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Total";
+            // 
             // statusStrip2
             // 
             this.statusStrip2.BackColor = System.Drawing.Color.White;
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.lblRecordCount,
-            this.toolStripStatusLabel3,
-            this.lblTotalAmount});
+            this.lblRecordCount});
             this.statusStrip2.Location = new System.Drawing.Point(0, 576);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(916, 22);
@@ -318,23 +364,10 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(14, 17);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(88, 17);
-            this.toolStripStatusLabel3.Text = "Total Amount : ";
-            // 
-            // lblTotalAmount
-            // 
-            this.lblTotalAmount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(24, 17);
-            this.lblTotalAmount.Text = "0.0";
             // 
             // epRCDNo
             // 
@@ -357,7 +390,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Name = "frmRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports of Collections and Deposits (RCD)";
+            this.Text = "Liquidator\'s Report of Collections and Deposits (RCD)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCD_Load);
             this.toolStrip1.ResumeLayout(false);
@@ -395,13 +428,15 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.Button btnRemove;
         internal System.Windows.Forms.DataGridView dgListOfApprovedReport;
         private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         internal System.Windows.Forms.ToolStripButton btnCancelPrint;
         private System.Windows.Forms.ErrorProvider epRCDNo;
         private System.Windows.Forms.ErrorProvider epDgCollectorRepor;
         internal System.Windows.Forms.ToolStripButton btnDeposit;
+        internal System.Windows.Forms.TextBox txtTotal;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbfunds;
     }
 }

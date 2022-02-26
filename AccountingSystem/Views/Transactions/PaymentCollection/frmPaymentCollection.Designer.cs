@@ -41,11 +41,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblTotalAmount = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmdCollector = new System.Windows.Forms.ComboBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgpayments)).BeginInit();
             this.statusStrip2.SuspendLayout();
@@ -137,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.dgpayments.Name = "dgpayments";
             this.dgpayments.RowHeadersWidth = 51;
             this.dgpayments.RowTemplate.Height = 29;
-            this.dgpayments.Size = new System.Drawing.Size(1177, 471);
+            this.dgpayments.Size = new System.Drawing.Size(1177, 440);
             this.dgpayments.TabIndex = 12;
             this.dgpayments.SelectionChanged += new System.EventHandler(this.dgpayments_SelectionChanged);
             // 
@@ -168,9 +168,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.statusStrip2.BackColor = System.Drawing.Color.White;
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel6,
-            this.lblRecordCount,
-            this.toolStripStatusLabel8,
-            this.lblTotalAmount});
+            this.lblRecordCount});
             this.statusStrip2.Location = new System.Drawing.Point(0, 540);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(1199, 22);
@@ -186,23 +184,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // lblRecordCount
             // 
-            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRecordCount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(14, 17);
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel8
-            // 
-            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
-            this.toolStripStatusLabel8.Size = new System.Drawing.Size(88, 17);
-            this.toolStripStatusLabel8.Text = "Total Amount : ";
-            // 
-            // lblTotalAmount
-            // 
-            this.lblTotalAmount.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(24, 17);
-            this.lblTotalAmount.Text = "0.0";
             // 
             // label1
             // 
@@ -239,12 +224,36 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.cmdCollector.TabIndex = 37;
             this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
             // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtTotal.Location = new System.Drawing.Point(51, 508);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
+            this.txtTotal.Size = new System.Drawing.Size(229, 23);
+            this.txtTotal.TabIndex = 40;
+            this.txtTotal.Text = "0.00";
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 512);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 15);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Total";
+            // 
             // frmPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1199, 562);
+            this.Controls.Add(this.txtTotal);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
@@ -260,7 +269,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Name = "frmPaymentCollection";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Payment Collections";
+            this.Text = "Payment Collections";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmPaymentCollection_Load);
             this.toolStrip.ResumeLayout(false);
@@ -287,10 +296,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
-        private System.Windows.Forms.ToolStripStatusLabel lblTotalAmount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         internal System.Windows.Forms.ComboBox cmdCollector;
+        internal System.Windows.Forms.TextBox txtTotal;
+        private System.Windows.Forms.Label label4;
     }
 }

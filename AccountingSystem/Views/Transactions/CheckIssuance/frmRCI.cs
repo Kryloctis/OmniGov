@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgRCI, true);
+            Helper.DatagridFullRowSelectStyle(dgRCI, false);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
                     var dtRCI = Factory.RCIRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.BanksDatagridView(dtRCI, dgRCI);
+                    HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
 
                     lblRecordCount.Text = dgRCI.Rows.Count.ToString();
                 }
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void dgRCI_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 11, 12 };
+            byte[] columnIndexTimestamp = { 17, 18 };
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }

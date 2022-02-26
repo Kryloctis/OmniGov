@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.dgfacevalue.Name = "dgfacevalue";
             this.dgfacevalue.RowHeadersWidth = 51;
             this.dgfacevalue.RowTemplate.Height = 29;
-            this.dgfacevalue.Size = new System.Drawing.Size(491, 158);
+            this.dgfacevalue.Size = new System.Drawing.Size(491, 118);
             this.dgfacevalue.TabIndex = 0;
             this.dgfacevalue.SelectionChanged += new System.EventHandler(this.dgfacevalue_SelectionChanged);
             // 
@@ -191,9 +191,11 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 265);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 225);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(511, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.Stretch = false;
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -247,7 +249,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 287);
+            this.ClientSize = new System.Drawing.Size(511, 247);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtdate);
@@ -264,7 +266,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Face Values";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFaceValue_FormClosing);
             this.Load += new System.EventHandler(this.frmFaceValue_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgfacevalue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtamount)).EndInit();

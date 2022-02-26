@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
     {       
         bool FullNameExist(string firstname, string middleinitial, string lastname, int id);
         Dictionary<string, string> GetRecordByUserID(int Id);
-        DataTable GetRecords(int rid);
-        bool ReceiptsAssigned(int id);
+        DataTable GetRecordsByReceiptId(int rid);
+        bool CollectingOfficerHasReceiptAssigned(int id);
     }
 }

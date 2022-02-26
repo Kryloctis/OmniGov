@@ -32,10 +32,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsApproveSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsDisapproveSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
@@ -55,13 +55,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnSave,
+            this.btnCancelPrint,
             this.btnDelete,
-            this.toolStripSeparator2,
+            this.tsApproveSeparator,
             this.btnApprove,
             this.btnDisapprove,
-            this.toolStripSeparator3,
+            this.tsDisapproveSeparator,
             this.btnPrint,
-            this.btnCancelPrint,
             this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -94,10 +94,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // toolStripSeparator2
+            // tsApproveSeparator
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
+            this.tsApproveSeparator.Name = "tsApproveSeparator";
+            this.tsApproveSeparator.Size = new System.Drawing.Size(6, 50);
             // 
             // btnApprove
             // 
@@ -124,13 +124,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
             // 
-            // toolStripSeparator3
+            // tsDisapproveSeparator
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
+            this.tsDisapproveSeparator.Name = "tsDisapproveSeparator";
+            this.tsDisapproveSeparator.Size = new System.Drawing.Size(6, 50);
             // 
             // btnPrint
             // 
+            this.btnPrint.Enabled = false;
             this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
             this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -238,7 +239,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Name = "frmCollectorsRCD";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Collector\'s Report of Collections ";
+            this.Text = "Collector\'s Report of Collections and Deposits (RCD)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.CollectorsRCD_Load);
             this.toolStrip1.ResumeLayout(false);
@@ -254,10 +255,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         internal System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.ToolStripButton btnSave;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator tsApproveSeparator;
         internal System.Windows.Forms.ToolStripButton btnApprove;
         internal System.Windows.Forms.ToolStripButton btnDisapprove;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator tsDisapproveSeparator;
         internal System.Windows.Forms.ToolStripButton btnPrint;
         internal System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.StatusStrip statusStrip1;

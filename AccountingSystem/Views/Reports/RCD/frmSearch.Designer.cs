@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(82, 22);
             this.btnSelect.TabIndex = 1;
-            this.btnSelect.Text = "Select";
+            this.btnSelect.Text = "Ok";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
@@ -135,14 +135,14 @@ namespace AccountingSystem.Views.Reports.RCD
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgRCDSearch);
             this.Controls.Add(this.txtsearch);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow; 
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search Report of Collections and Deposits (RCD)";
+            this.Text = "Search Liquidator\'s Report of Collections and Deposits (RCD)";
             this.Load += new System.EventHandler(this.frmSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgRCDSearch)).EndInit();
             this.ResumeLayout(false);

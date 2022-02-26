@@ -9,8 +9,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     public partial class ucReceiptsIssued : UserControl
     {
         internal int Id = 0;
-        internal int CoId = 0;
-        internal int RId = 0;
+        internal int CollectingOfficerId = 0;
+        internal int ReceiptId = 0;
         internal int startingreceipt = 0;
         internal int maxreceipt = 0;
         internal int maxtickets = 0;
@@ -36,10 +36,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void ResetForm()
         {
-            CoId = 0;
-            RId = 0;
-            cmbCollector.SelectedIndex = -1;
-            cmbReceipt.SelectedIndex = -1;
+            CollectingOfficerId = 0;
+            ReceiptId = 0;
             nudReceiptIssuedFrom.Text = string.Empty;
             nudReceiptIssuedTo.Text = string.Empty;
             txtReceiptQuantity.Text = string.Empty;
@@ -55,17 +53,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 cmbCollector.DataSource = dtCollector;
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
-                cmbCollector.SelectedIndex = -1;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
-        internal void LoadCollectors(int rid)
+        internal void LoadCollectors(int receiptId)
         {
             try
             {
                 var collectorRepository = Factory.CollectingOfficerRepository();
-                var dtCollector = collectorRepository.GetRecords(rid);
+                var dtCollector = collectorRepository.GetRecordsByReceiptId(receiptId);
                 cmbCollector.DataSource = dtCollector;
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
@@ -86,7 +86,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 cmbReceipt.DataSource = receiptsDt;
                 cmbReceipt.ValueMember = "id";
                 cmbReceipt.DisplayMember = "receipt";
-                cmbReceipt.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
