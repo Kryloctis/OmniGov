@@ -109,7 +109,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         internal void SetSelectedValue(int Id, string table)
         {
            
@@ -228,17 +227,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtReceiptNumber, "Receipt No.");
 
             var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
-
-            //if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
-            //{
-            //    epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
-            //    e.Cancel = true;
-            //}
-
+            
             if (ReceiptNumberHasCollection())
             {
                 epSerialNo.SetError(txtReceiptNumber, "Receipt number already recorded.");
                 e.Cancel = true;
+                return;
+            }
+
+            if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
+            {
+                epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
+                e.Cancel = true;
+                return;
             }
         }
 

@@ -36,9 +36,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 // proceed to insert
                 var disbursingOfficerModel = new DisbursingOfficerModel()
                 {
+                    Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstName.Text.Trim(),
                     MiddleInitial = uc.txtMidInitial.Text.Trim(),
                     LastName = uc.txtLastName.Text.Trim(),
+                    Suffix = uc.txtSuffix.Text.Trim(),
                     JobTitle = uc.txtJobTitle.Text.Trim(),
                     UserId = uc.UserId
                 };

@@ -92,9 +92,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     linkuser.Text = String.Format("@{0}", fuser.Username);
                     if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
                     {
+                        txtPrefix.Text = fuser.prefix;
                         txtLastName.Text = fuser.lname;
                         txtFirstName.Text = fuser.fname;
                         txtMidInitial.Text = fuser.mname;
+                        txtSuffix.Text = fuser.suffix;
                     }
                 }
             }

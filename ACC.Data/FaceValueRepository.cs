@@ -104,19 +104,15 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int id)
+        public DataTable GetRecordsByAccountableFormId(int accountableFormId)
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id={id} ORDER BY id DESC";
+            var parameter = new object[][] { 
+                new object[] {"@accountableFormId", DbType.Int32, accountableFormId}
+            };
+            string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountableFormId ORDER BY id DESC";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtBanks = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBanks, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

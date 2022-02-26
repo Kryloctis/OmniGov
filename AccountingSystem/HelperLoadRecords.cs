@@ -807,16 +807,25 @@ namespace AccountingSystem
             datagrid.Columns[17].HeaderText = "Created at";
             datagrid.Columns[18].HeaderText = "Updated at";
 
+            datagrid.Columns[2].Width = 150;
+            datagrid.Columns[3].Width = 250;
+            datagrid.Columns[6].Width = 100;
+            datagrid.Columns[7].Width = 100;
+            datagrid.Columns[8].Width = 100;
+            datagrid.Columns[9].Width = 150;
+            datagrid.Columns[10].Width = 250;
+            datagrid.Columns[11].Width = 250;   
+            datagrid.Columns[12].Width = 250;
+
+
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[5].Visible = false;
             datagrid.Columns[13].Visible = false;
-            datagrid.Columns[16].Visible = false;
             datagrid.Columns[17].Visible = false;
             datagrid.Columns[18].Visible = false;
 
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         #endregion
 

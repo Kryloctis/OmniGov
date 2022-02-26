@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             InitializeComponent();
             _frmRCI = frmRCI;
-            uc = ucrci1;
+            uc = ucrci2;
             uc.Id = rciId;
         }
 

@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgAccform, true);
         }
+
         internal void LoadRecords()
         {
             try
@@ -30,7 +31,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
                 lblRecordCount.Text = accRepository.CountRecords().ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            { 
+                Helper.MessageBoxError(ex.Message);
+            }
         }
         private void frmAccountable_Load(object sender, EventArgs e)
         {
@@ -46,8 +50,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             if (dgAccform.Rows.Count > 0 && dgAccform.SelectedRows.Count > 0)
             {
-                int accId = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
-                _ = new frmAccountableEdit(this, accId).ShowDialog();
+                int accountableFormId = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
+                _ = new frmAccountableEdit(this, accountableFormId).ShowDialog();
             }
         }
 
@@ -101,28 +105,23 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void dgAccform_SelectionChanged(object sender, EventArgs e)
         {
-           // byte[] columnIndexTimestamp = { 3, 4 };
-           // Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgAccform, btnEdit, btnDelete);
-            if(dgAccform.SelectedRows.Count > 0)
-            {
+            int selectedRowCount = dgAccform.SelectedRows.Count;
+
+            if (selectedRowCount > 0 && selectedRowCount == 1) 
                 btnFace.Enabled = true;
-            }
             else
-            {
                 btnFace.Enabled = false;
-            }
         }
 
         private void btnFace_Click(object sender, EventArgs e)
         {
             if (dgAccform.Rows.Count > 0 && dgAccform.SelectedRows.Count > 0)
             {
-                int Id = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
-                _ = new frmFaceValue(Id).ShowDialog();
+                int accountableFormId = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
+                _ = new frmFaceValue(accountableFormId).ShowDialog();
                 LoadRecords();
             }
         }
-
     }
 }

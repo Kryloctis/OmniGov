@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             paymentQuantity = (short)dgpayments.Rows.Count;
             lblRecordCount.Text = paymentQuantity.ToString();
-            lblTotalAmount.Text = totalCollections.ToString("N2");
+            txtTotal.Text = totalCollections.ToString("N2");
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -167,8 +167,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if(dgpayments.SelectedRows.Count > 0)
             {
                 int id = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
-                byte[] columnIndexData = { 11, 12, 13, 14 };
-                //Helper.ShowRecordTimestamp(dgpayments, columnIndexData, lblCreatedAt, lblUpdatedAt, lblCreatedBy, lblUpdatedBy);
                 Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
 
                 var crRepository = Factory.CollectorReportRepository();

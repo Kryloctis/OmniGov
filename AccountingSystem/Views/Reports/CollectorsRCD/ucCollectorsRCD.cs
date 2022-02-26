@@ -214,7 +214,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             bool reportNoExist;
 
             if (string.IsNullOrEmpty(reportNo))
+            {
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
+                return;
+            }
+            
 
             if (isSaveFunction == true)
                 reportNoExist  = Factory.CollectorReportRepository().ReportNumberExist(reportNo);

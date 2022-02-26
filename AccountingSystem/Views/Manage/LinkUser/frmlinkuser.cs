@@ -7,9 +7,11 @@ namespace AccountingSystem.Views.Manage.LinkUser
     {
         internal int UserId = 0;
         internal string Username = string.Empty;
+        internal string prefix = string.Empty;
         internal string lname = string.Empty;
         internal string fname = string.Empty;
         internal string mname = string.Empty;
+        internal string suffix = string.Empty;
         internal string table = string.Empty;
         public frmLinkUser()
         {
@@ -53,9 +55,11 @@ namespace AccountingSystem.Views.Manage.LinkUser
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
                 Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
+                prefix = dgvusers.CurrentRow.Cells["prefix"].Value.ToString();
                 fname = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
                 mname = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
                 lname = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
+                suffix = dgvusers.CurrentRow.Cells["suffix"].Value.ToString();
             }
         }
 

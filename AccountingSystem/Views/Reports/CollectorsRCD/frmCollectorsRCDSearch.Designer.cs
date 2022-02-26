@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSelect.Size = new System.Drawing.Size(82, 22);
             this.btnSelect.TabIndex = 4;
-            this.btnSelect.Text = "Select";
+            this.btnSelect.Text = "Ok";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
@@ -184,6 +184,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(814, 395);
             this.Controls.Add(this.dgCollectorsReport);
             this.Controls.Add(this.panel2);
@@ -194,7 +195,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.Name = "frmCollectorsRCDSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search";
+            this.Text = "Search Collector\'s Report of Collections and Deposits (RCD)";
             this.Load += new System.EventHandler(this.frmCollectorsRCDSearch_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
