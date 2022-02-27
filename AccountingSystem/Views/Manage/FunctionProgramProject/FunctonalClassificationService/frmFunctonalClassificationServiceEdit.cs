@@ -9,9 +9,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
         public string AllotmentName;
+        internal ucFunctonalClassificationServices uc;
+
         public frmFunctonalClassificationServiceEdit(frmFunctionProgramProject frmFunctionProgramProject, byte serviceID)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            uc = ucFunctonalClassificationServices1;
             _frmFunctionProgramProject = frmFunctionProgramProject;
             ucFunctonalClassificationServices1.serviceID = serviceID;
 
@@ -21,13 +25,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             try
             {
-                var uc = ucFunctonalClassificationServices1;
                 var functionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository();
                 Dictionary<string, string> data = functionalClassificationServiceRepository.GetRecordByID(uc.serviceID);
 
                 uc.cmbSectorName.SelectedValue = data["functional_classifications_id"];
                 uc.txtName.Text = data["service_name"];
-                uc.txtCode.Text = data["functional_classifications_id"];
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -36,8 +38,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             try
             {
-                var uc = ucFunctonalClassificationServices1;
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
@@ -45,12 +45,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 }
 
                 // proceed to insert
+                int functionClassificationId = Convert.ToInt32(uc.cmbSectorName.SelectedValue);
+                string serviceName = uc.txtName.Text.Trim();
+
                 var functionalClassificationServiceModel = new FunctionalClassificationServiceModel()
                 {
-                    Id = ucFunctonalClassificationServices1.serviceID,
-                    functionalClassificationId = byte.Parse(uc.cmbSectorName.SelectedValue.ToString()),
-                    ServiceName = uc.txtName.Text.Trim(),
-                    //  MajorAccountGroupName = uc.txtName.Text.Trim()
+                    Id = uc.serviceID,
+                    functionalClassificationId = functionClassificationId,
+                    ServiceName = serviceName,
                 };
 
                 return Factory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
@@ -62,8 +64,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void frmFunctonalClassificationServiceEdit_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            ucFunctonalClassificationServices1.LoadSectorNameComboBox();
             LoadSelectedRecord();
         }
 
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Functional Classification Services has been saved.");
+                Helper.MessageBoxSuccess("Functional Classification Services has been updated.");
                 _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
 

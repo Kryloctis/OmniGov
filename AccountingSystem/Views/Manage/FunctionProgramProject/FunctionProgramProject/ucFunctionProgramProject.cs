@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Data;
-using ACC.Domain.Interfaces;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
@@ -32,36 +32,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             txtName.Clear();
         }
 
-        private bool FunctionClassificationServiceNameNotExist() 
-        {
-            try
-            {
-                string functionClassificationServiceName = cmbFunctionalClassificationService.Text;
-                bool functionClassificationServiceNameExist = Factory.FunctionalClassificationServiceRepository().NameExist(functionClassificationServiceName);
-
-
-                if (!functionClassificationServiceNameExist)
-                {
-                    epServiceName.SetError(cmbFunctionalClassificationService, "Functional Classification Name you selected doesn't exist on your record.");
-                    return true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
         private void cmbFunctionalClassificationService_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbFunctionalClassificationService.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epServiceName, cmbFunctionalClassificationService, "Functional Classification Service");
-            else
-                e.Cancel = FunctionClassificationServiceNameNotExist();
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epServiceName, cmbFunctionalClassificationService, "Functional Classification Service");
         }
-
 
         private void cmbFunctionalClassificationService_Validated(object sender, EventArgs e)
         {
@@ -79,11 +53,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         }
 
         public void LoadServiceNameComboBox()
-        {           
+        {
 
             try
             {
-                DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetRecords();
+                DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetViewRecords();
                 HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
                 byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }

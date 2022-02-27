@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             HelperLoadRecords.FunctionProjectProgramDatagridView(dgFunctionalProgramProject);
         }
 
+        #region Function Classifications
 
         internal void LoadFunctionalClassificationRecords()
         {
@@ -41,8 +42,20 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        internal void LoadFunctionalClassificationRecordsBySearch()
+        {
 
-        #region Function Classifications
+            try
+            {
+                string searchkey = Convert.ToString(txtSearch.Text);
+                var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
+                HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
+
+                lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+        }
 
         private void DeleteFunctionalClassificationRecords()
         {
@@ -83,6 +96,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
+        private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgFunctionalClassification, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
+        }
 
         #endregion
 
@@ -149,12 +168,19 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         internal void LoadFunctionClassificationServices()
         {
-            string searchText = txtSearch.Text.Trim();
-            int sectorId = Convert.ToInt32(cmbxSector.SelectedValue);
+            try
+            {
+                string searchText = txtSearch.Text.Trim();
+                int sectorId = Convert.ToInt32(cmbxSector.SelectedValue);
 
-            HelperLoadRecords.FunctionalClassificationServiceDatagridView(FunctionClassificationServicesDataTable(searchText, sectorId), dgFuntionalClassificationServices);
+                HelperLoadRecords.FunctionalClassificationServiceDatagridView(FunctionClassificationServicesDataTable(searchText, sectorId), dgFuntionalClassificationServices);
 
-            lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
+                lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void DeleteFunctionalClassificationServiceRecords()
@@ -212,7 +238,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                 dtServiceName.Rows.Add(0, "All");
 
-                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetRecords().Rows)
+                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
                 {
                     var items = new object[]
                     {
@@ -315,6 +341,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 btnSubFPP.Enabled = false;
         }
 
+        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ShowOthersFPP();
+        }
+
         private void chckbxSpecial_CheckedChanged(object sender, EventArgs e)
         {
             LoadFPP();
@@ -360,7 +391,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         #endregion
 
-
         private void ShowOthersFPP()
         {
             int functionProgramProjectID = Convert.ToInt32(dgFunctionalProgramProject.SelectedCells[0].Value);
@@ -374,11 +404,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             ShowOthersFPP();
         }
 
-        private void dgFunctionalProgramProject_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            ShowOthersFPP();
-        }
-
         private void frmFunctionProgramProject_Load(object sender, EventArgs e)
         {
             LoadSectorComboBox();
@@ -387,22 +412,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFPP();
             LoadFunctionClassificationServices();
             LoadFunctionalClassificationRecords();
-
-        }
-
-
-        internal void LoadFunctionalClassificationRecordsBySearch()
-        {
-
-            try
-            {
-                string searchkey = Convert.ToString(txtSearch.Text);
-                var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
-                HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
-
-                lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
         }
 
@@ -469,13 +478,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else
                 DeleteFunctionProgramProjectRecords();
-        }
-
-        private void dgFunctionalClassification_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgFunctionalClassification, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
         }
 
         private void tabControlFunctionProgramProject_Selected(object sender, TabControlEventArgs e)
