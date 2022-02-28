@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.DatagridFullRowSelectStyle(dgRCI, false);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)                                                                                          
         {   
             _ = new frmRCIAdd(this).ShowDialog();
         }

@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgvusers, true);
+            dgvusers.MultiSelect = false;
         }
 
         private void frmlinkuser_Load(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgvusers.SelectedRows.Count > 0)
+            if(dgvusers.SelectedRows.Count != 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
                 Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
