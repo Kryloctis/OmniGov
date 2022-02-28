@@ -1,19 +1,18 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 
 namespace ACC.Data
 {
-    public class FunctionalClassificationServiceRepository :IFunctionalClassificationServiceRepository
+    public class FunctionalClassificationServiceRepository : IFunctionalClassificationServiceRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classification_services";
-        private readonly string tableName2 = "functional_classifications";
+        private readonly string viewTableName = "view_function_classification_services";
 
         public FunctionalClassificationServiceRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -51,59 +50,15 @@ namespace ACC.Data
 
             return record;
         }
-           
+
         public DataTable GetRecords()
         {
-            try
-            {
-                  string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                   $" ON t2.id = t1.functional_classifications_id";
-
-                var dtFunctionalClassificationService = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionalClassificationService);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
-
-
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var srchtxt = searchText;               
-                string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                    $" ON t2.id = t1.functional_classifications_id WHERE t1.service_name  LIKE'%" + srchtxt + "%' OR t2.sector_name LIKE'%" + srchtxt + "%'";
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public DataTable GetViewRecordsByClassificationId(byte id)
-        {
-            try
-            {
-                var Id = id;               
-                //string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  ='" + Id + "'";
-                string query = $"SELECT t1.id, t2.sector_name, t1.service_name, t1.created_at, t1.updated_at FROM {tableName2} t2 INNER JOIN {tableName} t1 " +
-                   $" ON t2.id = t1.functional_classifications_id WHERE t1.functional_classifications_id  ='" + Id + "'";
-
-
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Insert(FunctionalClassificationServiceModel entity)
@@ -145,7 +100,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool Delete(List<FunctionalClassificationServiceModel> entityList)
         {
             try
@@ -173,7 +127,6 @@ namespace ACC.Data
             }
         }
 
-
         public int CountRecords()
         {
             try
@@ -188,8 +141,6 @@ namespace ACC.Data
             }
         }
 
-      
-
         public bool IdExist(int id)
         {
             try
@@ -200,53 +151,6 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool CodeExist(string code)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@functional_classifications_id", DbType.String, code },
-                };
-
-                string query = $"SELECT functional_classifications_id FROM {tableName} WHERE functional_classifications_id = @functional_classifications_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
-        public bool CodeExist(string code, int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, id },
-                    new object[] { "@functional_classifications_id", DbType.String, code },
-                };
-
-                string query = $"SELECT functional_classifications_id FROM {tableName} WHERE id <> @id AND functional_classifications_id = @functional_classifications_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -307,6 +211,36 @@ namespace ACC.Data
             return false;
         }
 
-		
-	}
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName} ORDER BY service_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable GetViewRecordsBySearch_And_Sector(string searchText, int sectorId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+                new object[] { "@functional_classifications_id", DbType.Int32, sectorId }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (service_name LIKE @searchText OR functional_classifications_sector_code LIKE @searchText OR functional_classifications_sector_name LIKE @searchText) AND functional_classifications_id = @functional_classifications_id ORDER BY service_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"},
+           };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE (service_name LIKE @searchText OR functional_classifications_sector_code LIKE @searchText OR functional_classifications_sector_name LIKE @searchText) ORDER BY service_name";
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+    }
 }

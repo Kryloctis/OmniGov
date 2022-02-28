@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             txtdvno.Clear();
             cmbfund.SelectedIndex = -1;
-            bankId =fundsId=functionId=0;
+            bankId = fundsId = functionId = 0;
             cmbbank.SelectedIndex = -1;
             txtcheckno.Clear();
             cmbFPP.SelectedIndex = -1;
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-               if(!string.IsNullOrEmpty(table) || Id > 0)
+                if (!string.IsNullOrEmpty(table) || Id > 0)
                 {
                     if (table.Equals("functions"))
                     {
@@ -150,13 +150,13 @@ namespace AccountingSystem.Views.Transactions.RCI
                 }
 
             }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        public void LoadSelectedFunction(int Id,string value)
+        public void LoadSelectedFunction(int Id, string value)
         {
             functionId = Id;
             cmbFPP.Text = value;

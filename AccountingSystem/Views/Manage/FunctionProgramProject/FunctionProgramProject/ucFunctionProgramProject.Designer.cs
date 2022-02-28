@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(97, 63);
+            this.txtName.Location = new System.Drawing.Point(91, 59);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(324, 23);
@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(97, 34);
+            this.txtCode.Location = new System.Drawing.Point(91, 30);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(324, 23);
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             this.cmbFunctionalClassificationService.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFunctionalClassificationService.FormattingEnabled = true;
-            this.cmbFunctionalClassificationService.Location = new System.Drawing.Point(97, 6);
+            this.cmbFunctionalClassificationService.Location = new System.Drawing.Point(91, 2);
             this.cmbFunctionalClassificationService.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbFunctionalClassificationService.Name = "cmbFunctionalClassificationService";
             this.cmbFunctionalClassificationService.Size = new System.Drawing.Size(324, 23);
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 66);
+            this.label3.Location = new System.Drawing.Point(3, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 15);
             this.label3.TabIndex = 8;
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 37);
+            this.label2.Location = new System.Drawing.Point(3, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 15);
             this.label2.TabIndex = 7;
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(3, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 15);
             this.label1.TabIndex = 6;
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // chckboxSpecial
             // 
             this.chckboxSpecial.AutoSize = true;
-            this.chckboxSpecial.Location = new System.Drawing.Point(97, 92);
+            this.chckboxSpecial.Location = new System.Drawing.Point(91, 88);
             this.chckboxSpecial.Name = "chckboxSpecial";
             this.chckboxSpecial.Size = new System.Drawing.Size(63, 19);
             this.chckboxSpecial.TabIndex = 14;
@@ -131,6 +131,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.chckboxSpecial);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtCode);
@@ -139,7 +140,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucFunctionProgramProject";
-            this.Size = new System.Drawing.Size(445, 116);
+            this.Size = new System.Drawing.Size(436, 110);
             this.Load += new System.EventHandler(this.ucFunctionProgramProject_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epServiceName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();

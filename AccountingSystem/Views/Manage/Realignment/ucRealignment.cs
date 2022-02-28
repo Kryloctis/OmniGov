@@ -1,9 +1,7 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Realignment
@@ -121,7 +119,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
@@ -222,7 +220,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void SetAmountFields()
         {
             decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
-           
+
             nudAmount.Maximum = appropriationBalance;
             nudAmount.Value = appropriationBalance;
         }
@@ -374,91 +372,89 @@ namespace AccountingSystem.Views.Manage.Realignment
         #endregion
 
         #region Validations
-            private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
+        private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAllotmentClass, cmbAllotmentClass, "allotment class");
+
+            if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
+                e.Cancel = false;
+        }
+
+        private void cmbAllotmentClass_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAllotmentClass, cmbAllotmentClass);
+        }
+
+        private void txtRemarks_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epRemarks, txtRemarks, "Remark");
+        }
+
+        private void txtRemarks_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epRemarks, txtRemarks);
+        }
+
+        private void cmbFPP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
+
+            if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
+                e.Cancel = false;
+        }
+
+        private void cmbFPP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epFPP, cmbFPP);
+        }
+
+        private void cmbAccount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbAccount, "accounts");
+
+            if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
+                e.Cancel = false;
+        }
+
+        private void cmbAccount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epAccount, cmbAccount);
+        }
+
+        private void nudAmount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+
+
+            decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
+            decimal realignmentAmount = nudAmount.Value;
+            decimal remainingBalance = appropriationBalance - realignmentAmount;
+
+            bool isBudgetNotEnough = remainingBalance < 0;
+
+
+            if (isBudgetNotEnough)
             {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAllotmentClass, cmbAllotmentClass, "allotment class");
-
-                if (!string.IsNullOrWhiteSpace(cmbAllotmentClass.Text))
-                    e.Cancel = false;
+                epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
+                e.Cancel = true;
             }
+        }
 
-            private void cmbAllotmentClass_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorComboBox(epAllotmentClass, cmbAllotmentClass);
-            }
+        private void nudAmount_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
 
-            private void txtRemarks_Validating(object sender, CancelEventArgs e)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epRemarks, txtRemarks, "Remark");
-            }
+        private void dgBudgetRealignment_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorDatagridView(epDgAccount, dgBudgetRealignment, "Account Realignment");
+        }
 
-            private void txtRemarks_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorTextBox(epRemarks, txtRemarks);
-            }
-
-            private void cmbFPP_Validating(object sender, CancelEventArgs e)
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epFPP, cmbFPP, "FPP");
-
-                if (!string.IsNullOrWhiteSpace(cmbFPP.Text))
-                    e.Cancel = false;
-            }
-
-            private void cmbFPP_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorComboBox(epFPP, cmbFPP);
-            }
-   
-             private void cmbAccount_Validating(object sender, CancelEventArgs e)
-            {
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbAccount, "accounts");
-
-                if (!string.IsNullOrWhiteSpace(cmbAccount.Text))
-                    e.Cancel = false;
-            }
-
-            private void cmbAccount_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorComboBox(epAccount, cmbAccount);
-            }
-
-            private void nudAmount_Validating(object sender, CancelEventArgs e)
-            {
-                e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-
-      
-                decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
-                decimal realignmentAmount = nudAmount.Value;
-                decimal remainingBalance = appropriationBalance - realignmentAmount;
-
-                bool isBudgetNotEnough = remainingBalance < 0;
-
-
-                if (isBudgetNotEnough)
-                {
-                    epAmount.SetError(nudAmount, "insufficient budget appropriation to realign.");
-                    e.Cancel = true;
-                }
-            }
-
-            private void nudAmount_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
-            }
-
-            private void dgBudgetRealignment_Validating(object sender, CancelEventArgs e)
-            {
-                e.Cancel = Helper.ShowErrorDatagridView(epDgAccount, dgBudgetRealignment, "Account Realignment");
-            }
-
-            private void dgBudgetRealignment_Validated(object sender, EventArgs e)
-            {
-                Helper.ClearErrorDatagridView(epDgAccount, dgBudgetRealignment);
-            }
+        private void dgBudgetRealignment_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorDatagridView(epDgAccount, dgBudgetRealignment);
+        }
 
         #endregion
-
-
     }
 }

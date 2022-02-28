@@ -1,7 +1,7 @@
 ﻿
-namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
+namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    partial class frmFunctionProgramProjectAdd
+    partial class frmFunctionalClassificationServiceEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunctionProgramProject1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject.ucFunctionProgramProject();
+            this.ucFunctonalClassificationServices1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctionalClassificationServices();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,16 +42,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 124);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 75);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(449, 27);
-            this.flowLayoutPanel1.TabIndex = 6;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(454, 26);
+            this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(364, 2);
+            this.btnCancel.Location = new System.Drawing.Point(369, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -63,42 +63,44 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(276, 2);
+            this.btnSave.Location = new System.Drawing.Point(281, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucFunctionProgramProject1
+            // ucFunctonalClassificationServices1
             // 
-            this.ucFunctionProgramProject1.AutoSize = true;
-            this.ucFunctionProgramProject1.Location = new System.Drawing.Point(12, 12);
-            this.ucFunctionProgramProject1.Name = "ucFunctionProgramProject1";
-            this.ucFunctionProgramProject1.Size = new System.Drawing.Size(432, 110);
-            this.ucFunctionProgramProject1.TabIndex = 7;
+            this.ucFunctonalClassificationServices1.AutoSize = true;
+            this.ucFunctonalClassificationServices1.Location = new System.Drawing.Point(12, 12);
+            this.ucFunctonalClassificationServices1.Name = "ucFunctonalClassificationServices1";
+            this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(439, 51);
+            this.ucFunctonalClassificationServices1.TabIndex = 6;
             // 
-            // frmFunctionProgramProjectAdd
+            // frmFunctonalClassificationServiceEdit
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(449, 151);
-            this.Controls.Add(this.ucFunctionProgramProject1);
+            this.ClientSize = new System.Drawing.Size(454, 101);
+            this.Controls.Add(this.ucFunctonalClassificationServices1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmFunctionProgramProjectAdd";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "frmFunctonalClassificationServiceEdit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Function Program Project";
-            this.Load += new System.EventHandler(this.frmFunctionProgramProjectAdd_Load);
+            this.Text = "Edit Functonal Classification Service";
+            this.Load += new System.EventHandler(this.frmFunctonalClassificationServiceEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,6 +112,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucFunctionProgramProject ucFunctionProgramProject1;
+        private ucFunctionalClassificationServices ucFunctonalClassificationServices1;
     }
 }

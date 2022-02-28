@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
