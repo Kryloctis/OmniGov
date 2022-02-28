@@ -1112,7 +1112,7 @@ namespace AccountingSystem
             datagrid.Columns["service_name"].HeaderText = "Name";
             datagrid.Columns["functional_classifications_id"].Visible = false;
             datagrid.Columns["functional_classifications_sector_code"].Visible = false;
-            datagrid.Columns["functional_classifications_sector_name"].Visible = false;
+            datagrid.Columns["functional_classifications_sector_name"].HeaderText = "Sector";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
         }
