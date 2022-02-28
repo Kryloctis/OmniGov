@@ -57,10 +57,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                ucFunctionProgramProject1.ResetForm();
-                int serviceId = Convert.ToInt32(uc.cmbFunctionalClassificationService.SelectedValue);
-                _frmFunctionProgramProject.cmbServiceName.SelectedValue = serviceId;
                 _frmFunctionProgramProject.LoadFPP();
+                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
+                ucFunctionProgramProject1.ResetForm();
             }
         }
     }

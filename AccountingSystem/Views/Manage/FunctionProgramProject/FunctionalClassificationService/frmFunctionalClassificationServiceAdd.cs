@@ -52,9 +52,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Functional Classification Service has been saved.");
-                uc.ResetForm();
-                _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
+                _frmFunctionProgramProject.LoadFunctionClassificationServices();
+                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFuntionalClassificationServices, "service_name", uc.txtName.Text);
+                uc.ResetForm();
+
             }
         }
     }

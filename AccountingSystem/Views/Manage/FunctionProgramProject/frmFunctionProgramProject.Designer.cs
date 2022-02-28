@@ -337,7 +337,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(598, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(629, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -415,17 +415,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgFunctionalClassification;
-        private System.Windows.Forms.DataGridView dgFunctionalProgramProject;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoadAllFsc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ComboBox cmbxSector;
-        private System.Windows.Forms.DataGridView dgFuntionalClassificationServices;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnSubFPP;
         internal System.Windows.Forms.ComboBox cmbServiceName;
-        private System.Windows.Forms.CheckBox chckbxSpecial;
+        internal System.Windows.Forms.CheckBox chckbxSpecial;
+        internal System.Windows.Forms.DataGridView dgFunctionalProgramProject;
+        internal System.Windows.Forms.DataGridView dgFuntionalClassificationServices;
     }
 }

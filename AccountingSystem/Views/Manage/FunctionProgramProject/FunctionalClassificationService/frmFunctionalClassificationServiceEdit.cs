@@ -72,9 +72,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Functional Classification Services has been updated.");
-                _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 _frmFunctionProgramProject.LoadServiceNameComboBox();
-
+                _frmFunctionProgramProject.LoadFunctionClassificationServices();
+                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFuntionalClassificationServices, "service_name", uc.txtName.Text);
+                Close();
             }
         }
     }

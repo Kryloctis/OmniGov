@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
@@ -35,7 +29,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                 uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
                 uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
                 uc.txtName.Text = dicfunctionProgramProject["fpp_name"];
-                uc.chckboxSpecial.Checked = Convert.ToByte(dicfunctionProgramProject["is_special"]) == 0? false : true;
+                uc.chckboxSpecial.Checked = Convert.ToByte(dicfunctionProgramProject["is_special"]) == 0 ? false : true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -80,10 +74,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             if (UpdateData())
             {
                 Helper.MessageBoxSuccess("Function Program Project has been saved.");
-                Close();
+                bool isSpecial = uc.chckboxSpecial.Checked;
+                _frmFunctionProgramProject.chckbxSpecial.Checked = isSpecial;
                 _frmFunctionProgramProject.LoadFPP();
+                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalProgramProject, "fpp_code", uc.txtCode.Text);
+                Close();
             }
         }
-
     }
 }
