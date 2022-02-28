@@ -137,6 +137,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     linkuser.Text = string.Format("@{0}", fuser.Username);
                     if(txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMiddleInitial.Text == string.Empty)
                     {
+                        txtPrefix.ReadOnly = true;
+                        txtLastName.ReadOnly = true;
+                        txtFirstName.ReadOnly = true;
+                        txtMiddleInitial.ReadOnly = true;
+                        txtSuffix.ReadOnly = true;
+
                         txtPrefix.Text = fuser.prefix;
                         txtLastName.Text = fuser.lname;
                         txtFirstName.Text = fuser.fname;
