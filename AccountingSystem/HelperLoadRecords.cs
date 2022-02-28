@@ -1127,14 +1127,13 @@ namespace AccountingSystem
             datagrid.Columns.Add("fpp_code", "Code");
             datagrid.Columns.Add("fpp_name", "Name");
             datagrid.Columns.Add("functional_classification_services_id", "functional_classification_services_id");
-            datagrid.Columns.Add("service_name", "Service Name");
+            datagrid.Columns.Add("service_name", "Service");
             datagrid.Columns.Add(isSpecial);
             datagrid.Columns.Add("created_at", "Created At");
             datagrid.Columns.Add("updated_at", "Updated At");
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["functional_classification_services_id"].Visible = false;
-            datagrid.Columns["service_name"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
 
