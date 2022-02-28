@@ -23,6 +23,13 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 var repository = Factory.CollectingOfficerRepository();
                 var dt = repository.GetRecords();
 
+                foreach (DataRow row in dt.Rows)
+                {
+                    int userId = Convert.ToInt32(row["users_id"]);
+                    var dictUser = Helper.GetUserDataById(userId);
+                    row["fullname"] = dictUser["user_full_name"];
+                }
+
                 HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
                 lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
             }

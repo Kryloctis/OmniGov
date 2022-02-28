@@ -35,7 +35,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             txtMiddleInitial.Clear();
             txtLastName.Clear();
             txtSuffix.Clear();
-            txtJobtitle.Clear();
+            txtJobtitle.Text = "Collecting Officer";
+            UserId = 0;
+            linkuser.Text = "+ Link User";
         }
 
         private void txtFname_Validating(object sender, CancelEventArgs e)
@@ -119,7 +121,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         }
 
-        private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        internal void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (UserId > 0)
             {
@@ -137,6 +139,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     linkuser.Text = string.Format("@{0}", fuser.Username);
                     if(txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMiddleInitial.Text == string.Empty)
                     {
+
+                        SetReadOnlyConrol(true);
                         txtPrefix.Text = fuser.prefix;
                         txtLastName.Text = fuser.lname;
                         txtFirstName.Text = fuser.fname;
@@ -170,6 +174,15 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        internal void SetReadOnlyConrol(bool reaonly)
+        {
+            txtPrefix.ReadOnly = reaonly;
+            txtLastName.ReadOnly = reaonly;
+            txtFirstName.ReadOnly = reaonly;
+            txtMiddleInitial.ReadOnly = reaonly;
+            txtSuffix.ReadOnly = reaonly;
         }
     }
 }

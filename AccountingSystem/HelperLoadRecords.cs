@@ -1224,6 +1224,7 @@ namespace AccountingSystem
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns[3].Visible = false;
             datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
         }
 
         internal static void CollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -1254,6 +1255,7 @@ namespace AccountingSystem
             datagrid.Columns[2].HeaderText = "Job Title";
             datagrid.Columns[3].Visible = false;
             datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

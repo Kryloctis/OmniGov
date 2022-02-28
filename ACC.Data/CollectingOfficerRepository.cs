@@ -135,7 +135,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT id, CONCAT(first_name, ' ', mid_initial, ' ', last_name, ' ') as fullname, job_title, created_at, updated_at FROM {tableName}";
+                string query = $"SELECT id, CONCAT(first_name, ' ', mid_initial, ' ', last_name, ' ') as fullname, job_title, created_at, updated_at, users_id FROM {tableName}";
 
                 var dtFunds = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunds);
@@ -165,7 +165,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname,job_title, created_at, updated_at FROM {tableName} WHERE CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) LIKE '%{searchText}%' OR job_title LIKE '%{searchText}%'";
+                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title, created_at, updated_at, users_id FROM {tableName} WHERE CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) LIKE '%{searchText}%' OR job_title LIKE '%{searchText}%'";
 
                 var dtFunds = new DataTable();
                 return _dbGenericCommands.Fill(query, dtFunds);

@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -24,6 +25,14 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             try
             {
                 var dtDisbursingOfficers = Factory.DisbursingOfficerRepository().GetRecords();
+
+                foreach (DataRow row in dtDisbursingOfficers.Rows)
+                {
+                    int userId = Convert.ToInt32(row["users_id"]);
+                    var dictUser = Helper.GetUserDataById(userId);
+                    row["fullname"] = dictUser["user_full_name"];
+                }
+
                 HelperLoadRecords.DisbursingOfficerDatagridView(dtDisbursingOfficers, dgDisbursingOfficer);
             }
             catch (Exception ex)

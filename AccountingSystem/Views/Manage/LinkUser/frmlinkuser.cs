@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
@@ -17,6 +18,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgvusers, true);
+            dgvusers.MultiSelect = false;
         }
 
         private void frmlinkuser_Load(object sender, EventArgs e)
@@ -33,6 +35,15 @@ namespace AccountingSystem.Views.Manage.LinkUser
                     if(table.Equals("collector")){
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
+
+
+                        foreach (DataRow row in dtusers.Rows)
+                        {
+                            int userId = Convert.ToInt32(row["id"]);
+                            var dictUser = Helper.GetUserDataById(userId);
+                            row["user_full_name"] = dictUser["user_full_name"];
+                        }
+
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }
 
@@ -40,18 +51,29 @@ namespace AccountingSystem.Views.Manage.LinkUser
                     {
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksDisbursingOfficers();
+
+
+                        foreach (DataRow row in dtusers.Rows)
+                        {
+                            int userId = Convert.ToInt32(row["id"]);
+                            var dictUser = Helper.GetUserDataById(userId);
+                            row["user_full_name"] = dictUser["user_full_name"];
+                        }
+
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }
 
                 }
-                 
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            catch (Exception ex) 
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
         }
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgvusers.SelectedRows.Count > 0)
+            if(dgvusers.SelectedRows.Count != 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
                 Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
