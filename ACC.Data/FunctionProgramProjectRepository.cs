@@ -238,16 +238,17 @@ namespace ACC.Data
             return false;
         }
 
-        public bool NameExist(string name)
+        public bool NameExist(string name, int serviceId)
         {
             try
             {
                 var parameters = new object[][]
                 {
+                    new object[] { "@functional_classification_services_id", DbType.Int32, serviceId},
                     new object[] { "@fpp_name", DbType.String, name },
                 };
 
-                string query = $"SELECT fpp_name FROM {tableName} WHERE fpp_name = @fpp_name";
+                string query = $"SELECT fpp_name FROM {tableName} WHERE fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -261,17 +262,18 @@ namespace ACC.Data
             return false;
         }
 
-        public bool NameExist(string name, int id)
+        public bool NameExist(string name, int serviceId, int id)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, id },
+                    new object[] { "@functional_classification_services_id", DbType.Int32, serviceId},
                     new object[] { "@fpp_name", DbType.String, name },
                 };
 
-                string query = $"SELECT fpp_name FROM {tableName} WHERE id <> @id AND fpp_name = @fpp_name";
+                string query = $"SELECT fpp_name FROM {tableName} WHERE id <> @id AND fpp_name = @fpp_name AND functional_classification_services_id = @functional_classification_services_id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

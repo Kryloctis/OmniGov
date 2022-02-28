@@ -105,22 +105,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             return false;
         }
 
-        private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
+        private bool NameValidated(ErrorProvider errorProvider)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
+                int serviceId = Convert.ToInt32(cmbFunctionalClassificationService.SelectedValue);
+                string fppName = txtName.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(fppName))
                 {
-                    errorProvider.SetError(textBox, Helper.ErrorMessage("Name"));
+                    errorProvider.SetError(txtName, Helper.ErrorMessage("Name"));
                     return false;
                 }
 
-                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim()) :
-                                              Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim(), FppID);
+                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) :
+                                              Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, FppID);
 
                 if (nameExist)
                 {
-                    errorProvider.SetError(textBox, "Name already exist.");
+                    errorProvider.SetError(txtName, "Name already exist.");
                     return false;
                 }
 
@@ -145,7 +148,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !NameValidated(epName, txtName);
+            e.Cancel = !NameValidated(epName);
         }
 
         private void txtName_Validated(object sender, EventArgs e)
