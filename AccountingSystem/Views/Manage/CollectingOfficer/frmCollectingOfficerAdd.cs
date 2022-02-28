@@ -15,34 +15,35 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
     public partial class frmCollectingOfficerAdd : Form
     {
         private frmCollectingOfficer _frmCollectingOfficer;
+        private ucCollectingOfficer _uc;
         public frmCollectingOfficerAdd(frmCollectingOfficer frmCollectingOfficer)
         {
             InitializeComponent();
             _frmCollectingOfficer = frmCollectingOfficer;
+            _uc = ucCollectingOfficer1;
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucCollectingOfficer1;
                 // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
+                if (!_uc.ValidateChildren())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
+                    Helper.MessageBoxError(_uc.GetFormErrors());
                     return false;
                 }
 
                 // proceed to insert
                 var model = new CollectingOfficerModel()
                 {
-                    Prefix = uc.txtPrefix.Text.Trim(),
-                    FirstName = uc.txtFirstName.Text.Trim(),
-                    MiddleInitial = uc.txtMiddleInitial.Text.Trim(),
-                    LastName = uc.txtLastName.Text.Trim(),
-                    Suffix = uc.txtSuffix.Text.Trim(),
-                    JobTitle = uc.txtJobtitle.Text.Trim(),
-                    UserId = uc.UserId
+                    Prefix = _uc.txtPrefix.Text.Trim(),
+                    FirstName = _uc.txtFirstName.Text.Trim(),
+                    MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
+                    LastName = _uc.txtLastName.Text.Trim(),
+                    Suffix = _uc.txtSuffix.Text.Trim(),
+                    JobTitle = _uc.txtJobtitle.Text.Trim(),
+                    UserId = _uc.UserId
                 };
 
                 var repository = Factory.CollectingOfficerRepository();
@@ -62,7 +63,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 Helper.MessageBoxSuccess("Collecting Officer has been saved.");
                 _frmCollectingOfficer.LoadRecords();
-                ucCollectingOfficer1.ResetForm();
+                _uc.ResetForm();
+                _uc.SetReadOnlyConrol(false);
             }
         }
 
