@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 

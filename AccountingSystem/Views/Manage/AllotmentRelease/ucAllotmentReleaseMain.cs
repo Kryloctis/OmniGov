@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             DataTable dtFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
 

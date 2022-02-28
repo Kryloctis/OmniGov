@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             if (!DesignMode)
             {
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
-               
+
                 LoadBudgetDashboardComboboxes();
                 LoadBudgetDashboardContents();
             }
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 

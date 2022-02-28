@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             {
                 Helper.MessageBoxSuccess("Functional Classification has been saved.");
                 _frmFunctionProgramProject.LoadFunctionalClassificationRecords();
-                _frmFunctionProgramProject.LoadSectorNameComboBox();
+                _frmFunctionProgramProject.LoadSectorComboBox();
                
             }
         }

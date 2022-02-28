@@ -1,6 +1,4 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.AllotmentRelease;
-using AccountingSystem.Views.Manage.Augmentation;
 using AccountingSystem.Views.Manage.Realignment;
 using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
@@ -8,12 +6,7 @@ using BudgetSystem.Views.Manage.BudgetAppropriations;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq; 
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BudgetAppropriations
@@ -28,7 +21,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Value = DateTime.Now.Year;
         }
 
-        private void ShowRecordTimeStamp() 
+        private void ShowRecordTimeStamp()
         {
 
             int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
@@ -81,7 +74,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 lblUpdatedAt.Text = string.Empty;
                 Cursor.Current = Cursors.Default;
             }
-          
+
         }
 
         public void LoadComboboxes()
@@ -150,7 +143,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         }
 
-        private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e) 
+        private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e)
         {
             if (Convert.ToInt32(cmbxFPP.SelectedValue) != 0)
             {
@@ -159,7 +152,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        private void cmbxFundType_SelectedValueChanged(object sender, EventArgs e) 
+        private void cmbxFundType_SelectedValueChanged(object sender, EventArgs e)
         {
             if (Convert.ToInt32(cmbxFPP.SelectedValue) != 0)
             {
@@ -168,7 +161,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e) 
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd(this);
             var ucBudgetAppropriationsAdd = frmBudgetAppropriationsAdd.ucBudgetAppropriations1;
@@ -177,7 +170,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             ucBudgetAppropriationsAdd.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             ucBudgetAppropriationsAdd.allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
             ucBudgetAppropriationsAdd.year = Convert.ToInt16(nudYear.Value);
-            
+
             frmBudgetAppropriationsAdd.ShowDialog();
         }
 
@@ -191,7 +184,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int fundId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["funds_id"].Value);
             int fppId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["fpp_id"].Value);
             short year = Convert.ToInt16(dgBudgetAppropriations.Rows[rowIndex].Cells["year"].Value);
-            int? othersFPPId = dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value == null? null: Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
+            int? othersFPPId = dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value == null ? null : Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
             int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_class_id"].Value);
             int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_id"].Value);
             decimal totalAllotmentRelease = Convert.ToDecimal(dgBudgetAppropriations.Rows[rowIndex].Cells["totalAllotmentRelease"].Value);
@@ -213,7 +206,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             ShowBudgetAppropriationsEdit();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e) 
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRows = 0;
 
@@ -285,12 +278,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
 
         //FPP
-        private DataTable DataTableFPP() 
+        private DataTable DataTableFPP()
         {
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecords();
+                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
@@ -351,7 +344,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             {
                 LoadFPP();
                 cmbxFPP.DroppedDown = true;
-            } 
+            }
         }
 
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
@@ -374,7 +367,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             var budgetAppropriationId = dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value.ToString();
             var budgetAppropriationAmount = dgBudgetAppropriations.Rows[rowIndex].Cells["amount"].Value.ToString();
             var budgetAppropriationAccount = dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_name"].Value.ToString();
-          
+
             var frmRealignment = new frmRealignment
             {
                 budgetAppropriationId = budgetAppropriationId,
