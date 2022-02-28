@@ -46,6 +46,24 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             }
         }
 
+        private bool ServicesNameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                errorProvider.SetError(textBox, Helper.ErrorMessage("Service Name"));
+                return false;
+            }
+
+            if (Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()))
+            {
+                errorProvider.SetError(textBox, "Service Name Already Exist.");
+                return false;
+            }
+
+            return true;
+        }
+
+
         private void cmbSectorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epSectorName, cmbSectorName, "sector name");
@@ -58,7 +76,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
+            e.Cancel = !ServicesNameValidated(epName, txtName);
         }
 
         private void txtName_Validated(object sender, EventArgs e)
