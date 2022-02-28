@@ -42,16 +42,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             Helper.ClearErrorComboBox(epServiceName, cmbFunctionalClassificationService);
         }
 
-        private void txtCode_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epCode, txtCode);
-        }
-
-        private void txtCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
-        }
-
         public void LoadServiceNameComboBox()
         {
 
@@ -67,17 +57,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             }
 
         }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epName, txtName);
-        }
-
-        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
-        }
-
 
         private void ucFunctionProgramProject_Load(object sender, EventArgs e)
         {
@@ -95,6 +74,86 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
+        #region Validations
+
+        private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
+                {
+                    errorProvider.SetError(textBox, Helper.ErrorMessage("Code"));
+                    return false;
+                }
+
+                bool codeExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) :
+                                              Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), FppID);
+
+                if (codeExist)
+                {
+                    errorProvider.SetError(textBox, "Code already exist.");
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
+                {
+                    errorProvider.SetError(textBox, Helper.ErrorMessage("Name"));
+                    return false;
+                }
+
+                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim()) :
+                                              Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim(), FppID);
+
+                if (nameExist)
+                {
+                    errorProvider.SetError(textBox, "Name already exist.");
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void txtCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !CodeValidated(epCode, txtCode);
+        }
+
+        private void txtCode_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epCode, txtCode);
+        }
+
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !NameValidated(epName, txtName);
+        }
+
+        private void txtName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epName, txtName);
+        }
+
+        #endregion
 
     }
 }

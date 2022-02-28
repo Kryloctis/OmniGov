@@ -6,10 +6,10 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    public partial class ucFunctonalClassificationServices : UserControl
+    public partial class ucFunctionalClassificationServices : UserControl
     {
         internal byte serviceID = 0;
-        public ucFunctonalClassificationServices()
+        public ucFunctionalClassificationServices()
         {
             InitializeComponent();
         }
@@ -46,23 +46,48 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             }
         }
 
-        private bool ServicesNameValidated(ErrorProvider errorProvider, TextBox textBox)
+        private void cmbSectorName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                errorProvider.SetError(textBox, Helper.ErrorMessage("Service Name"));
-                return false;
-            }
 
-            if (Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()))
-            {
-                errorProvider.SetError(textBox, "Service Name Already Exist.");
-                return false;
-            }
 
-            return true;
         }
 
+        private void ucFunctonalClassificationServices_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadSectorNameComboBox();
+            }
+        }
+
+        #region  Validations
+
+        private bool ServicesNameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
+                {
+                    errorProvider.SetError(textBox, Helper.ErrorMessage("Service Name"));
+                    return false;
+                }
+
+                bool nameExist = serviceID == 0 ? Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
+                                                  Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
+                if (nameExist)
+                {
+                    errorProvider.SetError(textBox, "Service Name already exist.");
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
 
         private void cmbSectorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -84,18 +109,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-        private void cmbSectorName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void ucFunctonalClassificationServices_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadSectorNameComboBox();
-            }
-        }
+        #endregion
     }
 }

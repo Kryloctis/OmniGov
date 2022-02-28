@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    public partial class frmFunctonalClassificationServiceAdd : Form
+    public partial class frmFunctionalClassificationServiceAdd : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
 
-        private ucFunctonalClassificationServices uc;
+        private ucFunctionalClassificationServices uc;
 
-        public frmFunctonalClassificationServiceAdd(frmFunctionProgramProject frmFunctionProgramProject)
+        public frmFunctionalClassificationServiceAdd(frmFunctionProgramProject frmFunctionProgramProject)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

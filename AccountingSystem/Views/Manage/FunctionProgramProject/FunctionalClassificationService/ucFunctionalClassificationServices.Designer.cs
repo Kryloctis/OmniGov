@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    partial class ucFunctonalClassificationServices
+    partial class ucFunctionalClassificationServices
     {
         /// <summary> 
         /// Required designer variable.

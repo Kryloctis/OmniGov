@@ -323,6 +323,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(10, 3, 0, 2);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
             this.toolStripStatusLabel1.Text = "Records:";
@@ -336,7 +337,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(649, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(598, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -352,6 +353,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // toolStripStatusLabel3
             // 
+            this.toolStripStatusLabel3.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
             this.toolStripStatusLabel3.Text = "Updated at:";

@@ -197,10 +197,10 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@functional_classification_services_id", DbType.String, code },
+                    new object[] { "@fpp_code", DbType.String, code },
                 };
 
-                string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE functional_classification_services_id = @functional_classification_services_id";
+                string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE fpp_code = @fpp_code";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -221,10 +221,10 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, id },
-                    new object[] { "@functional_classification_services_id", DbType.String, code },
+                    new object[] { "@fpp_code", DbType.String, code },
                 };
 
-                string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE id <> @id AND functional_classification_services_id = @functional_classification_services_id";
+                string query = $"SELECT functional_classification_services_id FROM {tableName} WHERE id <> @id AND fpp_code = @fpp_code";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true

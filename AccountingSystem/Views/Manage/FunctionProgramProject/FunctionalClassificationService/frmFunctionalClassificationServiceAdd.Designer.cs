@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
-    partial class frmFunctonalClassificationServiceEdit
+    partial class frmFunctionalClassificationServiceAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucFunctonalClassificationServices1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctonalClassificationServices();
+            this.ucFunctonalClassificationServices1 = new AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService.ucFunctionalClassificationServices();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,10 +80,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.ucFunctonalClassificationServices1.AutoSize = true;
             this.ucFunctonalClassificationServices1.Location = new System.Drawing.Point(12, 12);
             this.ucFunctonalClassificationServices1.Name = "ucFunctonalClassificationServices1";
-            this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(439, 51);
+            this.ucFunctonalClassificationServices1.Size = new System.Drawing.Size(441, 51);
             this.ucFunctonalClassificationServices1.TabIndex = 6;
             // 
-            // frmFunctonalClassificationServiceEdit
+            // frmFunctonalClassificationServiceAdd
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -96,11 +96,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmFunctonalClassificationServiceEdit";
+            this.Name = "frmFunctonalClassificationServiceAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Functonal Classification Service";
-            this.Load += new System.EventHandler(this.frmFunctonalClassificationServiceEdit_Load);
+            this.Text = "Add Functonal Classification Service";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -112,6 +111,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucFunctonalClassificationServices ucFunctonalClassificationServices1;
+        private ucFunctionalClassificationServices ucFunctonalClassificationServices1;
     }
 }

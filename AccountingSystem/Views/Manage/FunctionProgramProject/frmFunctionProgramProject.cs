@@ -175,6 +175,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                 HelperLoadRecords.FunctionalClassificationServiceDatagridView(FunctionClassificationServicesDataTable(searchText, sectorId), dgFuntionalClassificationServices);
 
+                dgFuntionalClassificationServices.CurrentCell = dgFuntionalClassificationServices.FirstDisplayedCell;
                 lblRecordCount.Text = dgFuntionalClassificationServices.Rows.Count.ToString();
             }
             catch (Exception ex)
@@ -314,6 +315,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                     dgFunctionalProgramProject.Rows.Add(row["id"], row["fpp_code"], row["fpp_name"], row["functional_classification_services_id"], row["service_name"], rowIsSpecialImage, row["created_at"], row["updated_at"]);
                 }
 
+                dgFunctionalProgramProject.CurrentCell = dgFunctionalProgramProject.FirstDisplayedCell;
                 lblRecordCount.Text = dgFunctionalProgramProject.Rows.Count.ToString();
             }
             catch (Exception ex)
@@ -437,7 +439,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
-                _ = new frmFunctonalClassificationServiceAdd(this).ShowDialog();
+                _ = new frmFunctionalClassificationServiceAdd(this).ShowDialog();
             }
             else
                 _ = new frmFunctionProgramProjectAdd(this).ShowDialog();
@@ -457,7 +459,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
                 byte functionalClassificationServiceId = byte.Parse(dgFuntionalClassificationServices.SelectedCells[0].Value.ToString());
-                _ = new frmFunctonalClassificationServiceEdit(this, functionalClassificationServiceId).ShowDialog();
+                _ = new frmFunctionalClassificationServiceEdit(this, functionalClassificationServiceId).ShowDialog();
             }
             else
             {

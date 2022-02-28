@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramProject
 {
@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             _frmFunctionProgramProject = frmFunctionProgramProject;
             uc = ucFunctionProgramProject1;
         }
-     
+
         private void frmFunctionProgramProjectAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                     functionalClassificationServiceId = functionalClassificationServiceId,
                     FppName = uc.txtName.Text.Trim(),
                     FppCode = uc.txtCode.Text.Trim(),
-                    IsSpecial = uc.chckboxSpecial.Checked? true : false
+                    IsSpecial = uc.chckboxSpecial.Checked ? true : false
                 };
 
                 var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();

@@ -42,16 +42,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 123);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 124);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(465, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(449, 27);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(380, 2);
+            this.btnCancel.Location = new System.Drawing.Point(364, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(292, 2);
+            this.btnSave.Location = new System.Drawing.Point(276, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -77,9 +77,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // ucFunctionProgramProject1
             // 
-            this.ucFunctionProgramProject1.Location = new System.Drawing.Point(8, 4);
+            this.ucFunctionProgramProject1.AutoSize = true;
+            this.ucFunctionProgramProject1.Location = new System.Drawing.Point(12, 12);
             this.ucFunctionProgramProject1.Name = "ucFunctionProgramProject1";
-            this.ucFunctionProgramProject1.Size = new System.Drawing.Size(445, 117);
+            this.ucFunctionProgramProject1.Size = new System.Drawing.Size(432, 110);
             this.ucFunctionProgramProject1.TabIndex = 7;
             // 
             // frmFunctionProgramProjectAdd
@@ -89,7 +90,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(465, 150);
+            this.ClientSize = new System.Drawing.Size(449, 151);
             this.Controls.Add(this.ucFunctionProgramProject1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -100,6 +101,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             this.Load += new System.EventHandler(this.frmFunctionProgramProjectAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
