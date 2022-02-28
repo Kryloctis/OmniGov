@@ -130,7 +130,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title,  created_at, updated_at FROM {tableName}";
+                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title,  created_at, updated_at, users_id FROM {tableName}";
 
                 return _dbGenericCommands.Fill(query, new DataTable());
             }
