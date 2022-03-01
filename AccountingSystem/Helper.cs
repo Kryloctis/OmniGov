@@ -560,10 +560,10 @@ namespace AccountingSystem
             return false;
         }
 
-        public string FormatReceiptNumber(string receiptNumber)
+        public static string FormatReceiptNumber(string receiptNumber)
         {
             if (string.IsNullOrEmpty(receiptNumber) == false)
-                return receiptNumber.PadLeft(7, '0');
+                return receiptNumber.PadLeft(8, '0');
 
             return string.Empty;
         }

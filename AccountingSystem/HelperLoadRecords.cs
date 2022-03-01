@@ -421,35 +421,43 @@ namespace AccountingSystem
         #region Receipts
         internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Receipt (Form)";
-            datagrid.Columns[2].HeaderText = "Receipt No. From";
-            datagrid.Columns[3].HeaderText = "Receipt No. To";
-            datagrid.Columns[4].HeaderText = "Received Date";
-            datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[5].HeaderText = "Quantity";
-            datagrid.Columns[6].HeaderText = "User/Officer";
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
 
-            datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("receipt", "Receipt (Form)");
+            datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
+            datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
+            datagrid.Columns.Add("quantity", "Quantity");
+            datagrid.Columns.Add("received_date", "Received Date");
+            datagrid.Columns.Add("officer", "User/Officer");
 
-            datagrid.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[6].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["receipt_number_to"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["receipt_number_from"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["id"],
+                    row["receipt"],
+                    Helper.FormatReceiptNumber(row["receipt_number_from"].ToString()),
+                    Helper.FormatReceiptNumber(row["receipt_number_to"].ToString()),
+                    row["quantity"],
+                    row["received_date"],
+                    row["officer"]
+                });
+            }
 
             float fontSize = 9f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
         #endregion
