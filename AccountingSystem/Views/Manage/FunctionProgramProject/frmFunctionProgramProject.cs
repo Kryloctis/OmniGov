@@ -241,10 +241,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                 foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
                 {
+                    string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
+
                     var items = new object[]
                     {
                        item["id"],
-                       item["service_name"]
+                       serviceName
                     };
 
                     dtServiceName.Rows.Add(items);
