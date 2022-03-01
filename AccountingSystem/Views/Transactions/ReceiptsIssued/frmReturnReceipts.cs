@@ -22,8 +22,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             frmr = _frmr;
 
             receiptId = id;
-            txtReceiptNumberFrom.Text = receiptNumberFrom.ToString();
-            txtReceiptNumberTo.Text = receiptNumberTo.ToString();
+            txtReceiptNumberFrom.Text = receiptNumberFrom.ToString("D8");
+            txtReceiptNumberTo.Text = receiptNumberTo.ToString("D8");
 
         }
 

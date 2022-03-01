@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if(dgReceiptIssued.SelectedRows.Count > 0)
             {
                 int id = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
-                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString()) ? dgReceiptIssued.CurrentRow.Cells[3].Value.ToString() : dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
+                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString()) ? dgReceiptIssued.CurrentRow.Cells[3].Value.ToString() : (dgReceiptIssued.CurrentRow.Cells[7].Value).ToString()) + 1;
 
                 int receiptNumberTo = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[4].Value.ToString()) ? 0 : dgReceiptIssued.CurrentRow.Cells[4].Value.ToString());
 
