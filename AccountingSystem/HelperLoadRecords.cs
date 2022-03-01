@@ -960,7 +960,6 @@ namespace AccountingSystem
             datagrid.Columns["payment_date"].Width = 120;
             datagrid.Columns["payment_date"].MinimumWidth = 120;
 
-
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["amount"].Width = 80;
             datagrid.Columns["amount"].MinimumWidth = 80;
@@ -968,24 +967,26 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-            foreach (DataRow drPaymentCollection in dataTable.Rows)
+            datagrid.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            foreach (DataRow row in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
+                var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
 
                 datagrid.Rows.Add(new object[]
                 {
-                    drPaymentCollection["id"],
-                    drPaymentCollection["funds_id"],
-                    drPaymentCollection["fund_name"],
-                    drPaymentCollection["accountable_form_id"],
-                    drPaymentCollection["accountable_forms"],
-                    drPaymentCollection["general_ledger_accounts_id"],
+                    row["id"],
+                    row["funds_id"],
+                    row["fund_name"],
+                    row["accountable_form_id"],
+                    row["accountable_forms"],
+                    row["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
-                    drPaymentCollection["payee"],
-                    drPaymentCollection["receipt_no"],
-                    drPaymentCollection["quantity"],
-                    drPaymentCollection["payment_date"],
-                    drPaymentCollection["amount"]
+                    row["payee"],
+                    Helper.FormatReceiptNumber(row["receipt_no"].ToString()),
+                    row["quantity"],
+                    row["payment_date"],
+                    row["amount"]
                 });
             }
 
