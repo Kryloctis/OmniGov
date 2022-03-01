@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -26,8 +27,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                 var receiptIssuedDt = receiptIssuedRepository.GetRecords();
 
+                foreach (DataRow row in receiptIssuedDt.Rows)
+                {
+                    row["receipt_issued_from"] = Helper.FormatReceiptNumber(row["receipt_issued_from"].ToString());
+                }
+                
+                
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
-
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }   
             catch (Exception ex)

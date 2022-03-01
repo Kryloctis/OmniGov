@@ -330,6 +330,7 @@ namespace AccountingSystem
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
+
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Collector";
             datagrid.Columns[2].HeaderText = "Receipt (Form)";
@@ -344,8 +345,12 @@ namespace AccountingSystem
             datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[10].HeaderText = "User/Officer";
 
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[3].DefaultCellStyle.Format = "D8";
+            datagrid.Columns[4].DefaultCellStyle.Format = "D8";
+            datagrid.Columns[7].DefaultCellStyle.Format = "D8";
+
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -358,8 +363,8 @@ namespace AccountingSystem
             datagrid.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-
             datagrid.Columns[2].Width = 300;
+
 
             float fontSize = 9f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
