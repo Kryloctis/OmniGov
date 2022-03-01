@@ -224,7 +224,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void txtreceipt_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epSerialNo, txtReceiptNumber, "Receipt No.");
+            if (Helper.ShowErrorTextBoxEmpty(epSerialNo, txtReceiptNumber, "Receipt No."))
+            {
+                e.Cancel = true;
+                return;
+            }
 
             var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
             
@@ -342,7 +346,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (cmbAccountableForms.SelectedIndex == -1)
                 return;
-
             CreatePaymentCollection();
         }
 
@@ -392,11 +395,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     else
                     {
                         if (lastIssued < receiptNumberFrom)
-                            txtReceiptNumber.Text = receiptNumberFrom.ToString();
+                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
                         else if (lastIssued.Equals(receiptNumberFrom))
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString();
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
                         else
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString();
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
                     }
                 }
                 else
@@ -441,11 +444,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         else
                         {
                             if (receiptlast < receiptNumberFrom)
-                                txtReceiptNumber.Text = receiptNumberFrom.ToString();
+                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
                             else if (receiptlast.Equals(receiptNumberFrom))
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString();
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
                             else
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString();
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
                         }
 
                     }
@@ -458,18 +461,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             else
             {
-                txtReceiptNumber.Text = receiptNumber.ToString();
+                txtReceiptNumber.Text = receiptNumber.ToString("D8");
             }
         }
 
         internal void cmbforms_SelectedValueChanged(object sender, EventArgs e)
         {
             int idOfSelectedAccountableForm = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-
             accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
-
             SwitchFields();
-
             txtCashTicketQuantity_TextChanged(sender, e);
         }
 
