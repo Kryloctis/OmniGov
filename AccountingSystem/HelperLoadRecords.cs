@@ -1165,7 +1165,7 @@ namespace AccountingSystem
             comboBox1.DataSource = dataTable;
             comboBox1.DisplayMember = displayMember1;
             comboBox1.ValueMember = valueMember1;
-            comboBox1.DropDownHeight = 300;
+            comboBox1.DropDownHeight = 200;
 
             if (comboBox1.DropDownStyle == ComboBoxStyle.DropDown)
             {

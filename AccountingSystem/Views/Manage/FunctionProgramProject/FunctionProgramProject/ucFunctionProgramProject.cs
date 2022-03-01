@@ -44,18 +44,32 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         public void LoadServiceNameComboBox()
         {
-
             try
             {
-                DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetViewRecords();
+                DataTable dtServiceName = new DataTable();
+
+                dtServiceName.Columns.Add("id");
+                dtServiceName.Columns.Add("service_name");
+
+                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+                {
+                    string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
+
+                    var items = new object[]
+                    {
+                       item["id"],
+                       serviceName
+                    };
+
+                    dtServiceName.Rows.Add(items);
+                };
+
                 HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
-                byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void ucFunctionProgramProject_Load(object sender, EventArgs e)
