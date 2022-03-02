@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Manage.LinkUser
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
 
-
                         foreach (DataRow row in dtusers.Rows)
                         {
                             int userId = Convert.ToInt32(row["id"]);
@@ -59,6 +58,14 @@ namespace AccountingSystem.Views.Manage.LinkUser
                             var dictUser = Helper.GetUserDataById(userId);
                             row["user_full_name"] = dictUser["user_full_name"];
                         }
+
+                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
+                    }
+
+                    if (table.Equals("JO"))
+                    {
+                        var userRepository = Factory.UsersRepository();
+                        var dtusers = userRepository.GetLinksJOCollectingOfficers();
 
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }

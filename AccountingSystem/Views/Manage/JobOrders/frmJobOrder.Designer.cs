@@ -30,40 +30,36 @@ namespace AccountingSystem.Views.Manage.JobOrders
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJobOrder));
-            this.dgCollectingOfficer = new System.Windows.Forms.DataGridView();
+            this.dgJobOrders = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgJobOrders)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgCollectingOfficer
+            // dgJobOrders
             // 
-            this.dgCollectingOfficer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgJobOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgCollectingOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCollectingOfficer.Location = new System.Drawing.Point(12, 52);
-            this.dgCollectingOfficer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgCollectingOfficer.Name = "dgCollectingOfficer";
-            this.dgCollectingOfficer.RowHeadersWidth = 51;
-            this.dgCollectingOfficer.RowTemplate.Height = 29;
-            this.dgCollectingOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCollectingOfficer.Size = new System.Drawing.Size(609, 248);
-            this.dgCollectingOfficer.TabIndex = 8;
+            this.dgJobOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgJobOrders.Location = new System.Drawing.Point(12, 52);
+            this.dgJobOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgJobOrders.Name = "dgJobOrders";
+            this.dgJobOrders.RowHeadersWidth = 51;
+            this.dgJobOrders.RowTemplate.Height = 29;
+            this.dgJobOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgJobOrders.Size = new System.Drawing.Size(609, 248);
+            this.dgJobOrders.TabIndex = 8;
             // 
             // statusStrip1
             // 
@@ -71,11 +67,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblRecordCount,
-            this.toolStripStatusLabel4,
-            this.toolStripStatusLabel2,
-            this.lblCreatedAt,
-            this.toolStripStatusLabel3,
-            this.lblUpdatedAt});
+            this.toolStripStatusLabel4});
             this.statusStrip1.Location = new System.Drawing.Point(0, 302);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -100,30 +92,8 @@ namespace AccountingSystem.Views.Manage.JobOrders
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(423, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(555, 17);
             this.toolStripStatusLabel4.Spring = true;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel2.Text = "Created at:";
-            // 
-            // lblCreatedAt
-            // 
-            this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel3.Text = "Updated at:";
-            // 
-            // lblUpdatedAt
-            // 
-            this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStrip1
             // 
@@ -202,8 +172,8 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.dgCollectingOfficer);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.dgJobOrders);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmJobOrder";
@@ -211,7 +181,8 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Collecting Officer > Job Orders";
-            ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).EndInit();
+            this.Load += new System.EventHandler(this.frmJobOrder_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgJobOrders)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -223,15 +194,11 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgCollectingOfficer;
+        private System.Windows.Forms.DataGridView dgJobOrders;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
