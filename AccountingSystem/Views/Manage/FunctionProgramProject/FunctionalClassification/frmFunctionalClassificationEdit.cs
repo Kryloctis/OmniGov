@@ -7,19 +7,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
     public partial class frmFunctionalClassificationEdit : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
+        ucFunctionalClassification uc;
+
         public frmFunctionalClassificationEdit(frmFunctionProgramProject frmFunctionProgramProject, byte functionalClassificationId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmFunctionProgramProject = frmFunctionProgramProject;
-            ucFunctionalClassification1.functionalClassificationId = functionalClassificationId;
-
-
+            uc = ucFunctionalClassification1;
+            uc.functionalClassificationId = functionalClassificationId;
         }
+
         private void LoadSelectedRecord()
         {
             try
             {
-                var uc = ucFunctionalClassification1;
                 var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
                 var functionalClassificationData = functionalClassificationRepository.GetRecordByID(uc.functionalClassificationId);
 
@@ -34,22 +36,16 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             }
         }
 
-
         private bool SaveData()
         {
             try
             {
-                var uc = ucFunctionalClassification1;
-
-
-                // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-                // proceed to update
                 var functionalClassificationModel = new FunctionalClassificationModel()
                 {
                     Id = uc.functionalClassificationId,
@@ -59,7 +55,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
                 var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
                 return functionalClassificationRepository.Update(functionalClassificationModel);
-
 
             }
             catch (Exception ex)
@@ -72,8 +67,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
         private void frmFunctionalClassificationEdit_Load(object sender, EventArgs e)
         {
-            this.Visible = true;
-            Helper.LoadFormIcon(this);
             LoadSelectedRecord();
         }
 
@@ -84,7 +77,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
                 Helper.MessageBoxSuccess("Functional Classification has been saved.");
                 _frmFunctionProgramProject.LoadFunctionalClassifications();
                 _frmFunctionProgramProject.LoadSectorComboBox();
-
+                Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFunctionalClassification, "sector_code", uc.txtCode.Text);
+                Close();
             }
         }
     }

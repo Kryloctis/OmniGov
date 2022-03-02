@@ -1097,12 +1097,12 @@ namespace AccountingSystem
         internal static void FunctionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Sector Name";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["sector_code"].HeaderText = "Code";
+            datagrid.Columns["sector_name"].HeaderText = "Sector Name";
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void FunctionalClassificationServiceDatagridView(DataTable dataTable, DataGridView datagrid)

@@ -100,7 +100,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Functional Classification";
-            this.Load += new System.EventHandler(this.frmFunctionalClassificationAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
