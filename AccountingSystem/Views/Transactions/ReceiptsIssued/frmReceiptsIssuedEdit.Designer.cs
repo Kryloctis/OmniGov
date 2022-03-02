@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Name = "frmReceiptsIssuedEdit";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Issued Receipt Edit";
+            this.Text = "Edit Issued Receipt";
             this.Load += new System.EventHandler(this.frmReceiptsEdit_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

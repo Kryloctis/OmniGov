@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -26,8 +27,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                 var receiptIssuedDt = receiptIssuedRepository.GetRecords();
 
+                foreach (DataRow row in receiptIssuedDt.Rows)
+                {
+                    row["receipt_issued_from"] = Helper.FormatReceiptNumber(row["receipt_issued_from"].ToString());
+                }
+                
+                
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
-
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
             }   
             catch (Exception ex)
@@ -129,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if(dgReceiptIssued.SelectedRows.Count > 0)
             {
                 int id = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
-                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString()) ? dgReceiptIssued.CurrentRow.Cells[3].Value.ToString() : dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
+                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString()) ? dgReceiptIssued.CurrentRow.Cells[3].Value.ToString() : (dgReceiptIssued.CurrentRow.Cells[7].Value).ToString()) + 1;
 
                 int receiptNumberTo = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[4].Value.ToString()) ? 0 : dgReceiptIssued.CurrentRow.Cells[4].Value.ToString());
 

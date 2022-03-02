@@ -14,23 +14,23 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     public partial class frmPaymentCollectionEdit : Form
     {
         private readonly frmPaymentCollection _frmPaymentCollection;
+        private readonly ucPaymentCollection _uc; 
         private string receipt = string.Empty;
 
         public frmPaymentCollectionEdit(frmPaymentCollection frmPaymentCollection, int Id)
         {
             InitializeComponent();
             _frmPaymentCollection = frmPaymentCollection;
-            
-            ucPaymentCollection1.paymentCollectionId = Id;
-            ucPaymentCollection1.userId = Helper.UserId;
+            _uc = ucPaymentCollection1;
+            _uc.paymentCollectionId = Id;
+            _uc.userId = Helper.UserId;
         }
 
         private void frmPaymentCollectionEdit_Load(object sender, EventArgs e)
         {
-            ucPaymentCollection1.LoadForms();
-            ucPaymentCollection1.LoadCollectors();
-            ucPaymentCollection1.LoadFunds();
-
+            _uc.LoadForms();
+            _uc.LoadCollectors();
+            _uc.LoadFunds();
             LoadSelectedValue();
         }
 
@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     uc.SwitchFields(); 
                     uc.txtPayee.Text = paymentCollectionDict["payee"];
-                    uc.txtReceiptNumber.Text = paymentCollectionDict["receipt_no"];
+                    uc.txtReceiptNumber.Text = Helper.FormatReceiptNumber(paymentCollectionDict["receipt_no"]);
                     uc.dtDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];

@@ -330,6 +330,7 @@ namespace AccountingSystem
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
+
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].HeaderText = "Collector";
             datagrid.Columns[2].HeaderText = "Receipt (Form)";
@@ -344,8 +345,12 @@ namespace AccountingSystem
             datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
             datagrid.Columns[10].HeaderText = "User/Officer";
 
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns[3].DefaultCellStyle.Format = "D8";
+            datagrid.Columns[4].DefaultCellStyle.Format = "D8";
+            datagrid.Columns[7].DefaultCellStyle.Format = "D8";
+
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -358,8 +363,8 @@ namespace AccountingSystem
             datagrid.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-
             datagrid.Columns[2].Width = 300;
+
 
             float fontSize = 9f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
@@ -421,35 +426,43 @@ namespace AccountingSystem
         #region Receipts
         internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Receipt (Form)";
-            datagrid.Columns[2].HeaderText = "Receipt No. From";
-            datagrid.Columns[3].HeaderText = "Receipt No. To";
-            datagrid.Columns[4].HeaderText = "Received Date";
-            datagrid.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[5].HeaderText = "Quantity";
-            datagrid.Columns[6].HeaderText = "User/Officer";
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
 
-            datagrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("receipt", "Receipt (Form)");
+            datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
+            datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
+            datagrid.Columns.Add("quantity", "Quantity");
+            datagrid.Columns.Add("received_date", "Received Date");
+            datagrid.Columns.Add("officer", "User/Officer");
 
-            datagrid.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
-            datagrid.Columns[6].SortMode = DataGridViewColumnSortMode.NotSortable;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["receipt_number_to"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["receipt_number_from"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            datagrid.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["id"],
+                    row["receipt"],
+                    Helper.FormatReceiptNumber(row["receipt_number_from"].ToString()),
+                    Helper.FormatReceiptNumber(row["receipt_number_to"].ToString()),
+                    row["quantity"],
+                    row["received_date"],
+                    row["officer"]
+                });
+            }
 
             float fontSize = 9f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
         #endregion
@@ -952,7 +965,6 @@ namespace AccountingSystem
             datagrid.Columns["payment_date"].Width = 120;
             datagrid.Columns["payment_date"].MinimumWidth = 120;
 
-
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["amount"].Width = 80;
             datagrid.Columns["amount"].MinimumWidth = 80;
@@ -960,24 +972,26 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
 
-            foreach (DataRow drPaymentCollection in dataTable.Rows)
+            datagrid.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            foreach (DataRow row in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
+                var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
 
                 datagrid.Rows.Add(new object[]
                 {
-                    drPaymentCollection["id"],
-                    drPaymentCollection["funds_id"],
-                    drPaymentCollection["fund_name"],
-                    drPaymentCollection["accountable_form_id"],
-                    drPaymentCollection["accountable_forms"],
-                    drPaymentCollection["general_ledger_accounts_id"],
+                    row["id"],
+                    row["funds_id"],
+                    row["fund_name"],
+                    row["accountable_form_id"],
+                    row["accountable_forms"],
+                    row["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
-                    drPaymentCollection["payee"],
-                    drPaymentCollection["receipt_no"],
-                    drPaymentCollection["quantity"],
-                    drPaymentCollection["payment_date"],
-                    drPaymentCollection["amount"]
+                    row["payee"],
+                    Helper.FormatReceiptNumber(row["receipt_no"].ToString()),
+                    row["quantity"],
+                    row["payment_date"],
+                    row["amount"]
                 });
             }
 
