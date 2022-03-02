@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.txtJobtitle.Name = "txtJobtitle";
             this.txtJobtitle.Size = new System.Drawing.Size(324, 23);
             this.txtJobtitle.TabIndex = 23;
-            this.txtJobtitle.Text = "Collecting Officer";
+            this.txtJobtitle.Text = "Collecting Officer (JO)";
             // 
             // label3
             // 
@@ -184,6 +184,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.Controls.Add(this.txtFirstName);
             this.Name = "ucJobOrder";
             this.Size = new System.Drawing.Size(449, 203);
+            this.Load += new System.EventHandler(this.ucJobOrder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

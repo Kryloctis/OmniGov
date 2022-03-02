@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
     public partial class frmJobOrder : Form
     {
 
-        private readonly int collectingOfficerId;
+        internal readonly int collectingOfficerId;
 
         public frmJobOrder(int collectingOfficerId)
         {
@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmJobOrderAdd().ShowDialog();
+            _ = new frmJobOrderAdd(this).ShowDialog();
         }
 
         private void frmJobOrder_Load(object sender, EventArgs e)

@@ -74,10 +74,11 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucJobOrder1
             // 
-            this.ucJobOrder1.Location = new System.Drawing.Point(-1, 1);
+            this.ucJobOrder1.Location = new System.Drawing.Point(0, 0);
             this.ucJobOrder1.Name = "ucJobOrder1";
             this.ucJobOrder1.Size = new System.Drawing.Size(449, 203);
             this.ucJobOrder1.TabIndex = 5;
