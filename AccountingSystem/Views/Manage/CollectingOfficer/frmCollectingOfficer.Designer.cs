@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.btnJobOrder = new System.Windows.Forms.ToolStripButton();
             this.dgCollectingOfficer = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -61,7 +62,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnRefresh});
+            this.toolStripSeparator1,
+            this.btnJobOrder});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -104,15 +106,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnRefresh
+            // btnJobOrder
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
-            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(50, 47);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnJobOrder.Enabled = false;
+            this.btnJobOrder.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_28px;
+            this.btnJobOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnJobOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnJobOrder.Name = "btnJobOrder";
+            this.btnJobOrder.Size = new System.Drawing.Size(32, 47);
+            this.btnJobOrder.Text = "J.O";
+            this.btnJobOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // dgCollectingOfficer
             // 
@@ -209,6 +212,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.label6.TabIndex = 38;
             this.label6.Text = "Search";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // frmCollectingOfficer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -254,8 +262,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.ToolStripButton btnJobOrder;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

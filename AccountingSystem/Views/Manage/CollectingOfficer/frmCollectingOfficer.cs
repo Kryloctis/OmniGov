@@ -90,9 +90,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgCollectingOfficer.SelectedRows.Count == 0)
+            int selectedRowCount = dgCollectingOfficer.SelectedRows.Count;
+            if (selectedRowCount == 0)
                 return;
-
 
             int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
@@ -101,7 +101,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
             var collectingOfficerRepo = Factory.CollectingOfficerRepository();
+
             btnDelete.Enabled = collectingOfficerRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
+            btnJobOrder.Enabled = selectedRowCount == 1;
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
