@@ -124,5 +124,7 @@ namespace AccountingSystem
         public static IDocumentReferences DocumentReferencesRepository() => new DocumentReferencesRepository(new MySqlGenericCommands());
 
         public static IDocuments DocumentsRepository() => new DocumentsRepository(new MySqlGenericCommands());
+
+        public static IJobOrder JobOrderRepository() => new JobOrderRepository(new MySqlGenericCommands());
     }
 }
