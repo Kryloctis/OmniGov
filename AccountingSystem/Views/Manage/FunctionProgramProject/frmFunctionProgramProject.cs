@@ -27,22 +27,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         #region Function Classifications
 
-        internal void LoadFunctionalClassificationRecords()
-        {
-            try
-            {
-                txtSearch.Clear();
-                var dtFunctionalClassification = Factory.FunctionalClassificationRepository().GetRecords();
-                HelperLoadRecords.FunctionalClassificationDatagridView(dtFunctionalClassification, dgFunctionalClassification);
-
-                lblRecordCount.Text = Factory.FunctionalClassificationRepository()
-                                             .CountRecords()
-                                             .ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadFunctionalClassificationRecordsBySearch()
+        internal void LoadFunctionalClassifications()
         {
 
             try
@@ -51,6 +36,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
                 HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
 
+                dgFunctionalClassification.CurrentCell = dgFunctionalClassification.FirstDisplayedCell;
                 lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -76,7 +62,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                         var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
                         _ = functionalClassificationRepository.Delete(functionalClassificationModelList);
-                        LoadFunctionalClassificationRecords();
+                        LoadFunctionalClassifications();
                         LoadSectorComboBox();
                     }
                 }
@@ -415,7 +401,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
             LoadFPP();
             LoadFunctionClassificationServices();
-            LoadFunctionalClassificationRecords();
+            LoadFunctionalClassifications();
 
         }
 
@@ -423,7 +409,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
             {
-                LoadFunctionalClassificationRecordsBySearch();
+                LoadFunctionalClassifications();
             }
             else if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassificationService"])
             {
@@ -488,7 +474,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             if (tabControlFunctionProgramProject.SelectedTab == tabControlFunctionProgramProject.TabPages["tabFunctionalClassification"])
             {
-                LoadFunctionalClassificationRecords();
+                LoadFunctionalClassifications();
                 toolStripSeparator1.Visible = false;
                 btnSubFPP.Visible = false;
             }

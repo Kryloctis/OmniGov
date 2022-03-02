@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Functional Classification has been saved.");
-                _frmFunctionProgramProject.LoadFunctionalClassificationRecords();
+                _frmFunctionProgramProject.LoadFunctionalClassifications();
                 _frmFunctionProgramProject.LoadSectorComboBox();
                 ucFunctionalClassification1.ResetForm();
             }
