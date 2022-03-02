@@ -107,14 +107,17 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // 
             // epServiceName
             // 
+            this.epServiceName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epServiceName.ContainerControl = this;
             // 
             // epName
             // 
+            this.epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epName.ContainerControl = this;
             // 
             // epCode
             // 
+            this.epCode.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epCode.ContainerControl = this;
             // 
             // chckboxSpecial
