@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Manage.JobOrders
         {
             InitializeComponent();
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmJobOrderAdd().ShowDialog();
+        }
     }
 }

@@ -151,6 +151,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.btnAdd.Size = new System.Drawing.Size(33, 47);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
