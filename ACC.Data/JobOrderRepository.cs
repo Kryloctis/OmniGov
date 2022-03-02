@@ -8,6 +8,7 @@ namespace ACC.Data
     public class JobOrderRepository : IJobOrder
     {
         private MySqlGenericCommands mySqlGenericCommands;
+        private string tableName = "job_orders";
 
         public JobOrderRepository(MySqlGenericCommands mySqlGenericCommands)
         {
@@ -47,6 +48,21 @@ namespace ACC.Data
         public bool Insert(JobOrderModel entity)
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool IsUserJobOrder(int userId)
+        {
+            var parameter = new object[][] { 
+                new object[]{"@users_id", DbType.Int32, userId}
+            };
+
+            string query = $"SELECT users_id FROM {tableName} WHERE users_id = @users_id";
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameter);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
         }
 
         public bool Update(JobOrderModel entity)
