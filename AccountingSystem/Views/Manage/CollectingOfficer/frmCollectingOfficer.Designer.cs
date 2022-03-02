@@ -113,7 +113,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnRefresh.Size = new System.Drawing.Size(50, 47);
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgCollectingOfficer
             // 
