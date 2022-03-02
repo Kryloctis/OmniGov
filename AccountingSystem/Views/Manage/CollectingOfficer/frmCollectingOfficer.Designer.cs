@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnJobOrder = new System.Windows.Forms.ToolStripButton();
             this.dgCollectingOfficer = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -46,7 +47,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -106,6 +106,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
             // btnJobOrder
             // 
             this.btnJobOrder.Enabled = false;
@@ -116,6 +121,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnJobOrder.Size = new System.Drawing.Size(32, 47);
             this.btnJobOrder.Text = "J.O";
             this.btnJobOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnJobOrder.Click += new System.EventHandler(this.btnJobOrder_Click);
             // 
             // dgCollectingOfficer
             // 
@@ -211,11 +217,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.label6.Size = new System.Drawing.Size(42, 15);
             this.label6.TabIndex = 38;
             this.label6.Text = "Search";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
             // frmCollectingOfficer
             // 

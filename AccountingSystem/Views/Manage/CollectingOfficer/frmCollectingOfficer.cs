@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -127,6 +128,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 LoadRecords();
             }
+        }
+
+        private void btnJobOrder_Click(object sender, EventArgs e)
+        {
+            _ = new frmJobOrder().ShowDialog();
         }
     }
 }
