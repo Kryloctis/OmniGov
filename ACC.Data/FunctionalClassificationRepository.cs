@@ -1,14 +1,13 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class FunctionalClassificationRepository :IFunctionalClassificationRepository
+    public class FunctionalClassificationRepository : IFunctionalClassificationRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classifications";
@@ -50,7 +49,6 @@ namespace ACC.Data
             return record;
         }
 
-
         public DataTable GetRecords()
         {
             try
@@ -65,30 +63,19 @@ namespace ACC.Data
                 throw;
             }
         }
-      
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var srchtxt = searchText;
-                // var parameters = new object[][]
-                //{
-                //     new object[] { "@id", DbType.Int32, id},
-                //};
+                new object[] { "@searchText", DbType.String, $"%{searchText}%"}
+            };
 
-                // string query = $"SELECT * FROM {tableName} WHERE functional_classifications_id  = @id";
-                string query = $"SELECT * FROM {tableName} WHERE sector_name  LIKE'%" + srchtxt + "%' OR sector_code LIKE'%" + srchtxt + "%' ";
+            string query = $"SELECT * FROM {tableName} WHERE sector_name  LIKE @searchText OR sector_code LIKE @searchText ORDER BY sector_name";
 
-                var dtFunctionProjectProgram = new DataTable();
-                return _dbGenericCommands.Fill(query, dtFunctionProjectProgram);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtFunctionProjectProgram = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtFunctionProjectProgram, parameters);
         }
-
 
         public bool Insert(FunctionalClassificationModel entity)
         {

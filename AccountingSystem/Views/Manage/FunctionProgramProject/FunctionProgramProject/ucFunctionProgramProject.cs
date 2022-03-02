@@ -44,18 +44,32 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         public void LoadServiceNameComboBox()
         {
-
             try
             {
-                DataTable dtServiceName = Factory.FunctionalClassificationServiceRepository().GetViewRecords();
+                DataTable dtServiceName = new DataTable();
+
+                dtServiceName.Columns.Add("id");
+                dtServiceName.Columns.Add("service_name");
+
+                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+                {
+                    string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
+
+                    var items = new object[]
+                    {
+                       item["id"],
+                       serviceName
+                    };
+
+                    dtServiceName.Rows.Add(items);
+                };
+
                 HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
-                byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void ucFunctionProgramProject_Load(object sender, EventArgs e)
@@ -105,22 +119,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             return false;
         }
 
-        private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
+        private bool NameValidated(ErrorProvider errorProvider)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
+                int serviceId = Convert.ToInt32(cmbFunctionalClassificationService.SelectedValue);
+                string fppName = txtName.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(fppName))
                 {
-                    errorProvider.SetError(textBox, Helper.ErrorMessage("Name"));
+                    errorProvider.SetError(txtName, Helper.ErrorMessage("Name"));
                     return false;
                 }
 
-                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim()) :
-                                              Factory.FunctionProgramProjectRepository().NameExist(textBox.Text.Trim(), FppID);
+                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) :
+                                              Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, FppID);
 
                 if (nameExist)
                 {
-                    errorProvider.SetError(textBox, "Name already exist.");
+                    errorProvider.SetError(txtName, "Name already exist.");
                     return false;
                 }
 
@@ -145,7 +162,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
         private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !NameValidated(epName, txtName);
+            e.Cancel = !NameValidated(epName);
         }
 
         private void txtName_Validated(object sender, EventArgs e)

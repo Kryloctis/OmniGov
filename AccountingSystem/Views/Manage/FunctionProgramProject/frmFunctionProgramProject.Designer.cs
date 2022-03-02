@@ -414,7 +414,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.DataGridView dgFunctionalClassification;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoadAllFsc;
         private System.Windows.Forms.Label label2;
@@ -427,5 +426,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         internal System.Windows.Forms.CheckBox chckbxSpecial;
         internal System.Windows.Forms.DataGridView dgFunctionalProgramProject;
         internal System.Windows.Forms.DataGridView dgFuntionalClassificationServices;
+        internal System.Windows.Forms.DataGridView dgFunctionalClassification;
     }
 }

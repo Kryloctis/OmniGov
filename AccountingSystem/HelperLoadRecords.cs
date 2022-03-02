@@ -1097,12 +1097,12 @@ namespace AccountingSystem
         internal static void FunctionalClassificationDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Sector Name";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["sector_code"].HeaderText = "Code";
+            datagrid.Columns["sector_name"].HeaderText = "Sector Name";
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void FunctionalClassificationServiceDatagridView(DataTable dataTable, DataGridView datagrid)
@@ -1112,7 +1112,7 @@ namespace AccountingSystem
             datagrid.Columns["service_name"].HeaderText = "Name";
             datagrid.Columns["functional_classifications_id"].Visible = false;
             datagrid.Columns["functional_classifications_sector_code"].Visible = false;
-            datagrid.Columns["functional_classifications_sector_name"].Visible = false;
+            datagrid.Columns["functional_classifications_sector_name"].HeaderText = "Sector";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
         }
@@ -1127,14 +1127,13 @@ namespace AccountingSystem
             datagrid.Columns.Add("fpp_code", "Code");
             datagrid.Columns.Add("fpp_name", "Name");
             datagrid.Columns.Add("functional_classification_services_id", "functional_classification_services_id");
-            datagrid.Columns.Add("service_name", "Service Name");
+            datagrid.Columns.Add("service_name", "Service");
             datagrid.Columns.Add(isSpecial);
             datagrid.Columns.Add("created_at", "Created At");
             datagrid.Columns.Add("updated_at", "Updated At");
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["functional_classification_services_id"].Visible = false;
-            datagrid.Columns["service_name"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
 
@@ -1166,7 +1165,7 @@ namespace AccountingSystem
             comboBox1.DataSource = dataTable;
             comboBox1.DisplayMember = displayMember1;
             comboBox1.ValueMember = valueMember1;
-            comboBox1.DropDownHeight = 300;
+            comboBox1.DropDownHeight = 200;
 
             if (comboBox1.DropDownStyle == ComboBoxStyle.DropDown)
             {

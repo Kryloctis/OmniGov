@@ -83,13 +83,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             // 
             // epName
             // 
+            this.epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epName.ContainerControl = this;
             // 
             // epSectorName
             // 
+            this.epSectorName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epSectorName.ContainerControl = this;
             // 
-            // ucFunctonalClassificationServices
+            // ucFunctionalClassificationServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +100,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtName);
-            this.Name = "ucFunctonalClassificationServices";
+            this.Name = "ucFunctionalClassificationServices";
             this.Size = new System.Drawing.Size(439, 51);
             this.Load += new System.EventHandler(this.ucFunctonalClassificationServices_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();

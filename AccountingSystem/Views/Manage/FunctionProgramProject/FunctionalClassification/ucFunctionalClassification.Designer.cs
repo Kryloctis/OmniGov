@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 13);
+            this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 15);
             this.label1.TabIndex = 5;
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(47, 11);
+            this.txtCode.Location = new System.Drawing.Point(46, 2);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 39);
+            this.label2.Location = new System.Drawing.Point(3, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 7;
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(47, 36);
+            this.txtName.Location = new System.Drawing.Point(46, 27);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(324, 23);
@@ -81,22 +81,25 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             // 
             // epCode
             // 
+            this.epCode.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epCode.ContainerControl = this;
             // 
             // epName
             // 
+            this.epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epName.ContainerControl = this;
             // 
             // ucFunctionalClassification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCode);
             this.Name = "ucFunctionalClassification";
-            this.Size = new System.Drawing.Size(393, 69);
+            this.Size = new System.Drawing.Size(391, 52);
             ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
             this.ResumeLayout(false);
