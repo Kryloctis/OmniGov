@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
@@ -33,7 +34,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
             {
                 if (!string.IsNullOrEmpty(userType))
                 {
-                    if(userType.Equals("collector")){
+                    if (userType.Equals("collector")) {
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
 
@@ -72,9 +73,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 

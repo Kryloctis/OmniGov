@@ -1,5 +1,7 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
+using System.Data.SqlClient;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -50,12 +52,19 @@ namespace AccountingSystem.Views.Manage.JobOrders
                     return false;
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (ex.Number == 2601)
+                {
+                    Helper.MessageBoxError("Record already added.");
+                    return false;
+                }
+                else
+                {
+                    Helper.MessageBoxError(ex.Message);
+                    return false;
+                }
             }
-
-            return false;
         }
 
 
@@ -101,10 +110,23 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
                 return collectingOfficerHasJORepo.Insert(collectingOfficerHasJOModel);
             }
-            catch (Exception)
+            catch (MySqlException ex)
             {
-                throw;
+                switch (ex.Number)
+                {
+                    case 1062:
+                        Helper.MessageBoxError($"Selected record already added.");
+                        break;
+                }
+                return false;
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+                return false;
+            }
+
+            
         }
     }
 }
