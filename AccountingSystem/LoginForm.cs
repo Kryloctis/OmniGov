@@ -43,7 +43,6 @@ namespace AccountingSystem
                     btnVisibility.Image = visibleImage;
                     txtPassword.PasswordChar = '•';
                     Cursor = Cursors.Default;
-
                     return;
                 }
                 
