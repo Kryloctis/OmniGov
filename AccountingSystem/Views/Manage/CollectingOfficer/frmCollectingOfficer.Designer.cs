@@ -41,6 +41,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblJOCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsJOCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -146,6 +149,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4,
+            this.toolStripStatusLabel5,
+            this.lblJOCount,
+            this.tsJOCount,
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
@@ -174,8 +180,26 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
-            this.toolStripStatusLabel4.Spring = true;
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(69, 17);
+            this.toolStripStatusLabel5.Text = "Job Orders: ";
+            // 
+            // lblJOCount
+            // 
+            this.lblJOCount.Name = "lblJOCount";
+            this.lblJOCount.Size = new System.Drawing.Size(13, 17);
+            this.lblJOCount.Text = "0";
+            // 
+            // tsJOCount
+            // 
+            this.tsJOCount.Name = "tsJOCount";
+            this.tsJOCount.Size = new System.Drawing.Size(492, 17);
+            this.tsJOCount.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
@@ -258,8 +282,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
@@ -267,5 +289,10 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel lblJOCount;
+        private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
     }
 }

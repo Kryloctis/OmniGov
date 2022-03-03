@@ -194,7 +194,9 @@ namespace ACC.Data
                             $"role_name, " +
                             $"permission_name, " +
                             $"permission_office " +
-                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' " +
+                            $"AND id NOT IN (SELECT users_id FROM job_orders) " +
+                            $"GROUP BY id";
 
             var dtUsers = new DataTable();
             return _dbGenericCommands.Fill(query, dtUsers);

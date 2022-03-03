@@ -49,7 +49,7 @@ namespace ACC.Data
                            $"CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname, " +
                            $"job_orders_job_title " +
                            $"FROM {viewTableName} " +
-                           $"WHERE collecting_officers_id = @collecting_officers_id";
+                           $"WHERE collecting_officers_id = @collecting_officers_id AND job_orders_is_deleted = 0";
 
             var dt = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dt, parameter);

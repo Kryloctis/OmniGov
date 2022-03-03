@@ -98,6 +98,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
 
+
+            lblJOCount.Text = Factory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
+
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 

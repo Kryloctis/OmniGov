@@ -10,5 +10,7 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByUserID(int Id);
         DataTable GetRecordsByReceiptId(int rid);
         bool CollectingOfficerHasReceiptAssigned(int id);
+
+        int CollectingOfficerJOCount(int collectingOfficerId);
     }
 }
