@@ -91,10 +91,15 @@ namespace AccountingSystem.Views.Manage.JobOrders
             {
                 var regularCollectingOfficerId = _frmJobOrder.collectingOfficerId;
                 var JOCollectingOfficerId = Factory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
 
-                var jobOrderRepo = Factory.JobOrderRepository();
+                var collectingOfficerHasJOModel = new CollectingOfficerHasJobOrdersModel()
+                {
+                    CollectingOfficerId = regularCollectingOfficerId,
+                    JobOrdersId = JOCollectingOfficerId
+                };
 
-                return jobOrderRepo.AssignJOToRegular(regularCollectingOfficerId, JOCollectingOfficerId);
+                return collectingOfficerHasJORepo.Insert(collectingOfficerHasJOModel);
             }
             catch (Exception)
             {

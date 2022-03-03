@@ -37,10 +37,10 @@ namespace AccountingSystem.Views.Manage.JobOrders
         {
             try
             {
-                var jobOrderRepo = Factory.JobOrderRepository();
-                var dt = jobOrderRepo.GetViewRecordsByCollectingOfficerId(collectingOfficerId);
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerHasJODT = collectingOfficerHasJORepo.GetJobOrdersByCollectingOfficerId(collectingOfficerId);
 
-                HelperLoadRecords.JobOrdersDatagridView(dt, dgJobOrders);
+                HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODT, dgJobOrders);
                 lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
             }
             catch (Exception ex)
@@ -57,10 +57,10 @@ namespace AccountingSystem.Views.Manage.JobOrders
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
-            var jobOrderRepo  = Factory.JobOrderRepository();
-            var jobOrderDt    = jobOrderRepo.GetViewRecordsByCollectingOfficerIdAndBySearchKey(collectingOfficerId, searchText);
+            var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+            var collectingOfficerHasJODt = collectingOfficerHasJORepo.GetRecordsBySearch(collectingOfficerId, searchText);
 
-            HelperLoadRecords.JobOrdersDatagridView(jobOrderDt, dgJobOrders);
+            HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
             lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
         }
     }
