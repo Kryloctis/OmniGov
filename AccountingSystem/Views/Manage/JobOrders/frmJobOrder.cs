@@ -47,5 +47,10 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
+        private void dgJobOrders_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
+        }
     }
 }

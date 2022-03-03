@@ -52,7 +52,6 @@ namespace AccountingSystem.Views.Manage.LinkUser
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksDisbursingOfficers();
 
-
                         foreach (DataRow row in dtusers.Rows)
                         {
                             int userId = Convert.ToInt32(row["id"]);

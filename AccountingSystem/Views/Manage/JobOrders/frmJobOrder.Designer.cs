@@ -60,6 +60,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.dgJobOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgJobOrders.Size = new System.Drawing.Size(609, 248);
             this.dgJobOrders.TabIndex = 8;
+            this.dgJobOrders.SelectionChanged += new System.EventHandler(this.dgJobOrders_SelectionChanged);
             // 
             // statusStrip1
             // 
