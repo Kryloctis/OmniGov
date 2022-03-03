@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <Company>Perzeus Corporation</Company>
     <Product>Local Finance System</Product>
     <PackageId>Local Finance System</PackageId>
