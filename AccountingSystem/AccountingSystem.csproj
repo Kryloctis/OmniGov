@@ -10,6 +10,14 @@
     <PackageId>Local Finance System</PackageId>
     <Authors>Perzeus Corporation</Authors>
     <Platforms>AnyCPU;x64;x86</Platforms>
+    <ApplicationIcon>Resources\accounting.ico</ApplicationIcon>
+    <PackageIcon>accounting.ico</PackageIcon>
+    <PackageIconUrl />
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Perzeus Corporation</Copyright>
+    <StartupObject>AccountingSystem.Program</StartupObject>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>Local Finance System Key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +27,10 @@
     <EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
     <None Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
+    <None Include="Resources\accounting.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
