@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgJobOrders)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -156,13 +156,14 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.label6.TabIndex = 40;
             this.label6.Text = "Search";
             // 
-            // txtsearch
+            // txtSearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(407, 24);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(214, 23);
-            this.txtsearch.TabIndex = 39;
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(407, 24);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(214, 23);
+            this.txtSearch.TabIndex = 39;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmJobOrder
             // 
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(633, 324);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtsearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgJobOrders);
@@ -205,6 +206,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

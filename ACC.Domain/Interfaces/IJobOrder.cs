@@ -13,6 +13,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByCollectingOfficerId(int collectingOfficerId);
 
+        DataTable GetViewRecordsByCollectingOfficerIdAndBySearchKey(int collectingOfficerId, string searchKey);
+
 
     }
 }

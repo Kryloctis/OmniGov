@@ -132,5 +132,27 @@ namespace ACC.Data
 
             return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
+
+        public DataTable GetViewRecordsByCollectingOfficerIdAndBySearchKey(int collectingOfficerId, string searchKey)
+        {
+            var parameter = new object[][] {
+                new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerId},
+                new object[]{"@search_key", DbType.String, $"%{searchKey}%" }
+            };
+
+            string query = $"SELECT " +
+               $"job_orders_id, " +
+               $"CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname, " +
+               $"job_orders_job_title " +
+               $"FROM {viewTableName} " +
+               $"WHERE " +
+               $"collecting_officers_id = @collecting_officers_id " +
+               $"AND" +
+               $"(job_orders_first_name LIKE @search_key OR  job_orders_last_name LIKE  @search_key) ";
+
+
+            var dt = new DataTable();
+            return mySqlGenericCommands.FillBySearch(query, dt, parameter);
+        }
     }
 }

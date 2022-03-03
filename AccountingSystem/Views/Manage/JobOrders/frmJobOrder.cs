@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
         internal readonly int collectingOfficerId;
 
+
         public frmJobOrder(int collectingOfficerId)
         {
             InitializeComponent();
@@ -51,6 +52,16 @@ namespace AccountingSystem.Views.Manage.JobOrders
         private void dgJobOrders_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtSearch.Text.Trim();
+            var jobOrderRepo  = Factory.JobOrderRepository();
+            var jobOrderDt    = jobOrderRepo.GetViewRecordsByCollectingOfficerIdAndBySearchKey(collectingOfficerId, searchText);
+
+            HelperLoadRecords.JobOrdersDatagridView(jobOrderDt, dgJobOrders);
+            lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
         }
     }
 }
