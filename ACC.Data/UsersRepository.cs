@@ -195,7 +195,8 @@ namespace ACC.Data
                             $"permission_name, " +
                             $"permission_office " +
                             $"FROM {viewTableName} WHERE role_name LIKE '%collect%' " +
-                            $"AND id NOT IN (SELECT users_id FROM job_orders) " +
+                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
+                            $"AND id NOT IN (SELECT users_id FROM collecting_officers)" +
                             $"GROUP BY id";
 
             var dtUsers = new DataTable();
