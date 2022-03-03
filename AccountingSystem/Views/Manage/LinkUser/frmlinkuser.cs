@@ -100,6 +100,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
             }
         }
 
-       
+        private void dgvusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

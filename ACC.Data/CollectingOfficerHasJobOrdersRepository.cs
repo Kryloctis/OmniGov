@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -24,7 +25,23 @@ namespace ACC.Data
 
         public bool Delete(List<CollectingOfficerHasJobOrdersModel> entityList)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, entity.JobOrdersId},
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE collecting_officers_id = @collecting_officers_id AND job_orders_id = @job_orders_id";
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public DataTable GetJobOrdersByCollectingOfficerId(int collectingOfficerId)

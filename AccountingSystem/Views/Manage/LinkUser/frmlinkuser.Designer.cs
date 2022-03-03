@@ -44,8 +44,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
             this.dgvusers.Name = "dgvusers";
             this.dgvusers.RowHeadersWidth = 51;
             this.dgvusers.RowTemplate.Height = 29;
-            this.dgvusers.Size = new System.Drawing.Size(660, 278);
+            this.dgvusers.Size = new System.Drawing.Size(660, 369);
             this.dgvusers.TabIndex = 0;
+            this.dgvusers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvusers_CellContentClick);
             this.dgvusers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvusers_CellDoubleClick);
             this.dgvusers.SelectionChanged += new System.EventHandler(this.dgvusers_SelectionChanged);
             // 
@@ -53,7 +54,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 296);
+            this.ClientSize = new System.Drawing.Size(681, 387);
             this.Controls.Add(this.dgvusers);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

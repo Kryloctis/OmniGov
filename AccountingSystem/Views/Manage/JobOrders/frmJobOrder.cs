@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.JobOrders
 {
@@ -62,6 +63,36 @@ namespace AccountingSystem.Views.Manage.JobOrders
 
             HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
             lblRecordCount.Text = dgJobOrders.Rows.Count.ToString();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgJobOrders.SelectedRows.Count;
+            try
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var collectingOfficerHasJOModel = new List<CollectingOfficerHasJobOrdersModel>();
+
+                    foreach (DataGridViewRow row in dgJobOrders.SelectedRows)
+                    {
+                        int jobOrderId = Convert.ToInt32(row.Cells[0].Value.ToString());
+
+                        collectingOfficerHasJOModel.Add(new CollectingOfficerHasJobOrdersModel() { 
+                            CollectingOfficerId = collectingOfficerId,
+                            JobOrdersId = jobOrderId
+                        });
+                    }
+
+                    var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                    _ = collectingOfficerHasJORepo.Delete(collectingOfficerHasJOModel);
+                    LoadRecords();
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }
