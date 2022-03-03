@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
 
-            if (nudAmount.Value < 1)
+            if (nudAmount.Value == 0)
             {
                 epAmount.SetError(nudAmount, "Please enter a non-zero balance.");
                 e.Cancel = true;
