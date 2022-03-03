@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -23,7 +24,22 @@ namespace ACC.Data
 
         public bool Delete(List<JobOrderModel> entityList)
         {
-            throw new System.NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
+
+                    string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id";
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -93,7 +109,7 @@ namespace ACC.Data
                 new object[] {"@users_id", DbType.Int32, userId},
             };
 
-            string query = $"SELECT id FROM {tableName} WHERE users_id = @users_id";
+            string query = $"SELECT id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0 LIMIT 1";
 
             return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }

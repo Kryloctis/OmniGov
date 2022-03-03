@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Transactions;
 using System.Windows.Forms;
 using ACC.Domain.Models;
 
@@ -72,21 +67,30 @@ namespace AccountingSystem.Views.Manage.JobOrders
             {
                 if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                 {
+                    var jobOrderModel = new List<JobOrderModel>();
                     var collectingOfficerHasJOModel = new List<CollectingOfficerHasJobOrdersModel>();
 
                     foreach (DataGridViewRow row in dgJobOrders.SelectedRows)
                     {
                         int jobOrderId = Convert.ToInt32(row.Cells[0].Value.ToString());
 
-                        collectingOfficerHasJOModel.Add(new CollectingOfficerHasJobOrdersModel() { 
+                        collectingOfficerHasJOModel.Add(new CollectingOfficerHasJobOrdersModel()
+                        {
                             CollectingOfficerId = collectingOfficerId,
                             JobOrdersId = jobOrderId
                         });
+
+                        jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId }); 
                     }
 
                     var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
-                    _ = collectingOfficerHasJORepo.Delete(collectingOfficerHasJOModel);
-                    LoadRecords();
+
+                    var jobOrderRepo = Factory.JobOrderRepository();
+
+                    if (collectingOfficerHasJORepo.Delete(collectingOfficerHasJOModel) == true && jobOrderRepo.Delete(jobOrderModel) == true)
+                    {
+                        LoadRecords();
+                    }
                 }
             }
             catch (Exception ex)
@@ -94,5 +98,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
     }
 }

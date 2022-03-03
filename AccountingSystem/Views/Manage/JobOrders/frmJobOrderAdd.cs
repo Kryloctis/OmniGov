@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
                     //    return false;
                     //}
 
-                    if (InsertJobOrder() == true && AssignJOTORegularCollector())
+                    if (InsertJobOrder() == true && AssignJOTORegularCollector() == true)
                     {
                         scope.Complete();
                         return true;

@@ -226,7 +226,7 @@ namespace ACC.Data
                             $"FROM view_users " +
                             $"WHERE role_name LIKE '%collect%' " +
                             $"AND id NOT IN (SELECT users_id FROM collecting_officers) " +
-                            //$"AND id NOT IN  (SELECT users_id FROM job_orders) " +
+                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
                             $"GROUP BY id";
 
             var dtUsers = new DataTable();
