@@ -122,13 +122,14 @@ namespace AccountingSystem
         internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Code";
-            datagrid.Columns[2].HeaderText = "Name";
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].HeaderText = "Account Group";
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
+            datagrid.Columns["maj_acc_group_id"].Visible = false;
+            datagrid.Columns["maj_acc_group_code"].HeaderText = "Code";
+            datagrid.Columns["maj_acc_group_code"].Width = 100;
+            datagrid.Columns["maj_acc_group_name"].HeaderText = "Name";
+            datagrid.Columns["maj_acc_group_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["account_group_name"].HeaderText = "Account Group";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void MajorAccountGroupComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -146,7 +147,10 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
+
+            comboBox.DropDownHeight = 200;
         }
+
         #endregion
 
         #region Sub Major Account Group
