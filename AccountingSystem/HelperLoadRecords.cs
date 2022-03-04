@@ -1356,9 +1356,17 @@ namespace AccountingSystem
 
         #endregion Others FPP
 
-        #region BUDGET APPROPRIATIONS
+        #region Budget Appropriations
 
-        internal static void BudgetAppropriationsAllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void BudgetApproprationsFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DropDownHeight = 200;
+        }
+
+        internal static void BudgetAppropriationsAllotmentClassCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;

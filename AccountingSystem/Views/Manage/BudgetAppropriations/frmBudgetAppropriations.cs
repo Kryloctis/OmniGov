@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             try
             {
                 var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-                HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
+                HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
 
                 var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
@@ -276,10 +276,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
-
-        //FPP
         private DataTable DataTableFPP()
         {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("fpp_code_name");
+
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
@@ -287,32 +289,22 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
-            return dtFPP;
+            foreach (DataRow item in dtFPP.Rows)
+            {
+                int fppId = Convert.ToInt32(item["id"]);
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                dataTable.Rows.Add(fppId, fppName);
+            }
+
+            return dataTable;
         }
 
         internal void LoadFPP()
         {
             try
             {
-                cmbxFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
-
-                if (DataTableFPP().Rows.Count == 0) return;
-
-                var fppDict = new Dictionary<int, string>();
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    int fppId = Convert.ToInt32(item["id"]);
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbxFPP.DataSource = new BindingSource(fppDict, null);
-                cmbxFPP.DisplayMember = "value";
-                cmbxFPP.ValueMember = "key";
-                cmbxFPP.DropDownHeight = 400;
-
+                HelperLoadRecords.BudgetApproprationsFPPCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
                 LoadBudgetAppropriationRecords();
             }
             catch (Exception ex)
@@ -334,8 +326,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadBudgetAppropriationRecords();
-            EnableDisableButtonsLocal(dgBudgetAppropriations);
+            if (cmbxFPP.SelectedIndex > -1)
+            {
+                LoadBudgetAppropriationRecords();
+                EnableDisableButtonsLocal(dgBudgetAppropriations);
+            }
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
