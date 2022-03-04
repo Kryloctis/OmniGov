@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
@@ -9,11 +10,12 @@ namespace AccountingSystem.Views.Manage.LinkUser
         internal int UserId = 0;
         internal string Username = string.Empty;
         internal string prefix = string.Empty;
-        internal string lname = string.Empty;
-        internal string fname = string.Empty;
-        internal string mname = string.Empty;
+        internal string lastName = string.Empty;
+        internal string firstName = string.Empty;
+        internal string middleInitial = string.Empty;
         internal string suffix = string.Empty;
-        internal string table = string.Empty;
+        internal string userType = string.Empty;
+
         public frmLinkUser()
         {
             InitializeComponent();
@@ -30,12 +32,11 @@ namespace AccountingSystem.Views.Manage.LinkUser
         {
             try
             {
-                if (!string.IsNullOrEmpty(table))
+                if (!string.IsNullOrEmpty(userType))
                 {
-                    if(table.Equals("collector")){
+                    if (userType.Equals("collector")) {
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
-
 
                         foreach (DataRow row in dtusers.Rows)
                         {
@@ -47,11 +48,10 @@ namespace AccountingSystem.Views.Manage.LinkUser
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }
 
-                    if (table.Equals("disburser"))
+                    if (userType.Equals("disburser"))
                     {
                         var userRepository = Factory.UsersRepository();
                         var dtusers = userRepository.GetLinksDisbursingOfficers();
-
 
                         foreach (DataRow row in dtusers.Rows)
                         {
@@ -59,15 +59,23 @@ namespace AccountingSystem.Views.Manage.LinkUser
                             var dictUser = Helper.GetUserDataById(userId);
                             row["user_full_name"] = dictUser["user_full_name"];
                         }
+
+                        HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
+                    }
+
+                    if (userType.Equals("JO"))
+                    {
+                        var userRepository = Factory.UsersRepository();
+                        var dtusers = userRepository.GetLinksJOCollectingOfficers();
 
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }
 
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -78,9 +86,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
                 Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
                 prefix = dgvusers.CurrentRow.Cells["prefix"].Value.ToString();
-                fname = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
-                mname = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
-                lname = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
+                firstName = dgvusers.CurrentRow.Cells["first_name"].Value.ToString();
+                middleInitial = dgvusers.CurrentRow.Cells["mid_initial"].Value.ToString();
+                lastName = dgvusers.CurrentRow.Cells["last_name"].Value.ToString();
                 suffix = dgvusers.CurrentRow.Cells["suffix"].Value.ToString();
             }
         }
@@ -93,6 +101,9 @@ namespace AccountingSystem.Views.Manage.LinkUser
             }
         }
 
-       
+        private void dgvusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.JobOrders;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -90,18 +91,23 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgCollectingOfficer.SelectedRows.Count == 0)
+            int selectedRowCount = dgCollectingOfficer.SelectedRows.Count;
+            if (selectedRowCount == 0)
                 return;
-
 
             int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
+
+
+            lblJOCount.Text = Factory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
 
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
             var collectingOfficerRepo = Factory.CollectingOfficerRepository();
+
             btnDelete.Enabled = collectingOfficerRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
+            btnJobOrder.Enabled = selectedRowCount == 1;
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -125,6 +131,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 LoadRecords();
             }
+        }
+
+        private void btnJobOrder_Click(object sender, EventArgs e)
+        {
+            var collectingOfficerId = Convert.ToInt32(dgCollectingOfficer.CurrentRow.Cells[0].Value);
+            _ = new frmJobOrder(collectingOfficerId).ShowDialog();
         }
     }
 }

@@ -20,6 +20,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetLinksDisbursingOfficers();
 
+        DataTable GetLinksJOCollectingOfficers();
+
         DataTable GetViewRecordsBySearch(string office, string searchTxt);
 
         DataTable GetViewRecords();

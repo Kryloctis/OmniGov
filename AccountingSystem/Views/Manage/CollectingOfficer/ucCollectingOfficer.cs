@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             else
             {
                 frmLinkUser fuser = new();
-                fuser.table = "collector";
+                fuser.userType = "collector";
 
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {
@@ -142,9 +142,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
                         SetReadOnlyConrol(true);
                         txtPrefix.Text = fuser.prefix;
-                        txtLastName.Text = fuser.lname;
-                        txtFirstName.Text = fuser.fname;
-                        txtMiddleInitial.Text = fuser.mname;
+                        txtLastName.Text = fuser.lastName;
+                        txtFirstName.Text = fuser.firstName;
+                        txtMiddleInitial.Text = fuser.middleInitial;
                         txtSuffix.Text = fuser.suffix;
                     }
                 }

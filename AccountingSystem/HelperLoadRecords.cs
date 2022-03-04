@@ -1258,6 +1258,19 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region JobOrders
+        internal static void JobOrdersDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Full Name";
+            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns[2].HeaderText = "Job Title";
+            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+        #endregion
+
         #region Disbursing Officer
 
         internal static void DisbursingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)

@@ -34,12 +34,16 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnJobOrder = new System.Windows.Forms.ToolStripButton();
             this.dgCollectingOfficer = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblJOCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsJOCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -61,7 +65,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.btnRefresh});
+            this.toolStripSeparator1,
+            this.btnJobOrder});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -104,15 +109,22 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnRefresh
+            // toolStripSeparator1
             // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
-            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(50, 47);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnJobOrder
+            // 
+            this.btnJobOrder.Enabled = false;
+            this.btnJobOrder.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_28px;
+            this.btnJobOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnJobOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnJobOrder.Name = "btnJobOrder";
+            this.btnJobOrder.Size = new System.Drawing.Size(32, 47);
+            this.btnJobOrder.Text = "J.O";
+            this.btnJobOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnJobOrder.Click += new System.EventHandler(this.btnJobOrder_Click);
             // 
             // dgCollectingOfficer
             // 
@@ -137,6 +149,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4,
+            this.toolStripStatusLabel5,
+            this.lblJOCount,
+            this.tsJOCount,
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
@@ -165,8 +180,26 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
-            this.toolStripStatusLabel4.Spring = true;
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(69, 17);
+            this.toolStripStatusLabel5.Text = "Job Orders: ";
+            // 
+            // lblJOCount
+            // 
+            this.lblJOCount.Name = "lblJOCount";
+            this.lblJOCount.Size = new System.Drawing.Size(13, 17);
+            this.lblJOCount.Text = "0";
+            // 
+            // tsJOCount
+            // 
+            this.tsJOCount.Name = "tsJOCount";
+            this.tsJOCount.Size = new System.Drawing.Size(492, 17);
+            this.tsJOCount.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
@@ -249,13 +282,17 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
+        private System.Windows.Forms.ToolStripButton btnJobOrder;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel lblJOCount;
+        private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
     }
 }

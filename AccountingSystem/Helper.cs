@@ -580,5 +580,18 @@ namespace AccountingSystem
                 }
             }
         }
+
+        public static bool IsJobOrder(int userId)
+        {
+            try
+            {
+                var jobOrderRepo = Factory.JobOrderRepository();
+                return jobOrderRepo.IsUserJobOrder(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
