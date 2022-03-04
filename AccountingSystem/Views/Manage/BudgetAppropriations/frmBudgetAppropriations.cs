@@ -42,39 +42,38 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
-        internal void LoadBudgetAppropriationRecords()
+        int rowCount()
         {
-            if (!DesignMode)
+            int recordCount = 0;
+
+            foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
             {
-                Cursor.Current = Cursors.WaitCursor;
-                dgBudgetAppropriations.SelectionChanged -= new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
-
-                int recordCount = 0;
-                int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
-                int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                short year = Convert.ToInt16(nudYear.Value);
-
-                HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
-
-                dgBudgetAppropriations.SelectionChanged += new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
-                EnableDisableButtonsLocal(dgBudgetAppropriations);
-
-                foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
+                if (item.Cells["id"].Value != null)
                 {
-                    if (item.Cells["id"].Value != null)
-                    {
-                        recordCount += 1;
-                    }
+                    recordCount += 1;
                 }
-
-                lblRecords.Text = recordCount.ToString();
-                lblDateEntry.Text = string.Empty;
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
-                Cursor.Current = Cursors.Default;
             }
 
+            return recordCount;
+        }
+
+        internal void LoadBudgetAppropriationRecords()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            short year = Convert.ToInt16(nudYear.Value);
+
+            HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
+
+            lblRecords.Text = rowCount().ToString();
+            lblDateEntry.Text = string.Empty;
+            lblCreatedAt.Text = string.Empty;
+            lblUpdatedAt.Text = string.Empty;
+            dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
+            Cursor.Current = Cursors.Default;
         }
 
         public void LoadComboboxes()
@@ -276,6 +275,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
+        #region FPP
+
         private DataTable DataTableFPP()
         {
             var dataTable = new DataTable();
@@ -341,6 +342,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DroppedDown = true;
             }
         }
+
+        #endregion
 
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
         {

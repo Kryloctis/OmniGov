@@ -1454,7 +1454,6 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns.Add("year", "Year");
                 dgvBudgetAppropriations.Columns.Add(imgColumn);
                 dgvBudgetAppropriations.Columns.Add(imgRealignedColumn);
-                dgvBudgetAppropriations.Columns.Add("remarks", "Remarks");
                 dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
                 dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
 
@@ -1601,7 +1600,7 @@ namespace AccountingSystem
                         rowOthersFPPId,
                         rowAllotmentClassId,
                         rowAccountId,
-                        $"    {rowAccountName}",
+                        $"    {rowAccountName} [ {remarks} ]",
                         rowAccountCode,
                         rowDateEntry,
                         totalAppropriationAmount,
@@ -1610,7 +1609,6 @@ namespace AccountingSystem
                         rowYear,
                         rowContinuing == 1? continuingIcon : null,
                         rowRealignment == 1? continuingIcon : null,
-                        remarks,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });
                 }
@@ -1637,9 +1635,6 @@ namespace AccountingSystem
                 }
 
                 txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
-
-                dgvBudgetAppropriations.ClearSelection();
-
             }
             catch (Exception ex)
             {
