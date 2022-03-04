@@ -1,0 +1,118 @@
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Transactions;
+
+namespace ACC.Data
+{
+    public class JobOrderRepository : IJobOrder
+    {
+        private MySqlGenericCommands mySqlGenericCommands;
+        private string tableName = "job_orders";
+
+        public JobOrderRepository(MySqlGenericCommands mySqlGenericCommands)
+        {
+            this.mySqlGenericCommands = mySqlGenericCommands;
+        }
+
+        public int CountRecords()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Delete(List<JobOrderModel> entityList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, entity.Id},
+                    };
+
+                    string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id";
+                    _ = mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool Insert(JobOrderModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@prefix", DbType.String, entity.Prefix},
+                new object[] { "@first_name", DbType.String, entity.FirstName},
+                new object[] { "@mid_initial", DbType.String, entity.MiddleInitial},
+                new object[] { "@last_name", DbType.String, entity.LastName},
+                new object[] { "@suffix", DbType.String, entity.Suffix},
+                new object[] { "@job_title", DbType.String, entity.JobTitle},
+                new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
+            };
+
+            string query =  $"INSERT INTO " +
+                            $"{tableName} (users_id, prefix, first_name, mid_initial, last_name, suffix, job_title)" +
+                            $"VALUES (@users_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title)";
+
+            return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool IsUserJobOrder(int userId)
+        {
+            var parameter = new object[][] { 
+                new object[]{"@users_id", DbType.Int32, userId}
+            };
+
+            string query = $"SELECT users_id FROM {tableName} WHERE users_id = @users_id";
+            string queryResult = mySqlGenericCommands.ExecuteScalar(query, parameter);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
+            return false;
+        }
+
+        public bool Update(JobOrderModel entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetJobOrderIdByUserId(int userId)
+        {
+            var parameter = new object[][]
+            {
+                new object[] {"@users_id", DbType.Int32, userId},
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0 LIMIT 1";
+
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
+        }
+
+    }
+}

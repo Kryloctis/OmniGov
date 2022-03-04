@@ -294,5 +294,18 @@ namespace ACC.Data
 
             return false;
         }
+
+        public int CollectingOfficerJOCount(int collectingOfficerId)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@collecting_officers_id", DbType.Int32, collectingOfficerId },
+            };
+
+            string query = $"SELECT COUNT(collecting_officers_id) FROM collecting_officers_has_job_orders " +
+                           $"WHERE collecting_officers_id = @collecting_officers_id";
+
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+        }
     }
 }

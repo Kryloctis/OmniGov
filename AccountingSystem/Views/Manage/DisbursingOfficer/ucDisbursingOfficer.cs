@@ -85,7 +85,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             else
             {
                 frmLinkUser fuser = new frmLinkUser();
-                fuser.table = "disburser";
+                fuser.userType = "disburser";
                 if (fuser.ShowDialog() == DialogResult.OK)
                 {
                     UserId = fuser.UserId;
@@ -93,9 +93,9 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     if (txtLastName.Text == string.Empty && txtFirstName.Text == string.Empty && txtMidInitial.Text == string.Empty)
                     {
                         txtPrefix.Text = fuser.prefix;
-                        txtLastName.Text = fuser.lname;
-                        txtFirstName.Text = fuser.fname;
-                        txtMidInitial.Text = fuser.mname;
+                        txtLastName.Text = fuser.lastName;
+                        txtFirstName.Text = fuser.firstName;
+                        txtMidInitial.Text = fuser.middleInitial;
                         txtSuffix.Text = fuser.suffix;
                     }
                 }

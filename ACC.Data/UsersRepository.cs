@@ -194,7 +194,41 @@ namespace ACC.Data
                             $"role_name, " +
                             $"permission_name, " +
                             $"permission_office " +
-                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' GROUP BY id";
+                            $"FROM {viewTableName} WHERE role_name LIKE '%collect%' " +
+                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
+                            $"AND id NOT IN (SELECT users_id FROM collecting_officers)" +
+                            $"GROUP BY id";
+
+            var dtUsers = new DataTable();
+            return _dbGenericCommands.Fill(query, dtUsers);
+        }
+
+
+        public DataTable GetLinksJOCollectingOfficers()
+        {
+            string query =  $"SELECT " +
+                            $"id, " +
+                            $"roles_id, " +
+                            $"prefix, " +
+                            $"first_name, " +
+                            $"mid_initial, " +
+                            $"last_name, " +
+                            $"suffix, " +
+                            $"CONCAT(first_name, ' ', mid_initial , ' ', last_name) AS user_full_name, " +
+                            $"username, " +
+                            $"password, " +
+                            $"is_deleted, " +
+                            $"created_at, " +
+                            $"updated_at, " +
+                            $"office, " +
+                            $"role_name, " +
+                            $"permission_name, " +
+                            $"permission_office " +
+                            $"FROM view_users " +
+                            $"WHERE role_name LIKE '%collect%' " +
+                            $"AND id NOT IN (SELECT users_id FROM collecting_officers) " +
+                            $"AND id NOT IN (SELECT users_id FROM job_orders WHERE is_deleted = 0) " +
+                            $"GROUP BY id";
 
             var dtUsers = new DataTable();
             return _dbGenericCommands.Fill(query, dtUsers);
@@ -631,5 +665,6 @@ namespace ACC.Data
             }
             return record;
         }
+
     }
 }
