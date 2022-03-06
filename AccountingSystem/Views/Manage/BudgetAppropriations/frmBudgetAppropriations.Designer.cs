@@ -55,6 +55,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnRealignment = new System.Windows.Forms.ToolStripButton();
+            this.btnAugmentation = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -63,8 +64,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // dgBudgetAppropriations
             // 
-            this.dgBudgetAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dgBudgetAppropriations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 63);
@@ -251,7 +252,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnDelete,
             this.toolStripSeparator1,
             this.btnSupplementalAppropriations,
-            this.btnRealignment});
+            this.btnRealignment,
+            this.btnAugmentation});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
@@ -319,6 +321,16 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnRealignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRealignment.Click += new System.EventHandler(this.btnRealignment_Click);
             // 
+            // btnAugmentation
+            // 
+            this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_arrow_up_2_28px;
+            this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAugmentation.Name = "btnAugmentation";
+            this.btnAugmentation.Size = new System.Drawing.Size(88, 47);
+            this.btnAugmentation.Text = "Augmentation";
+            this.btnAugmentation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
             // frmBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -380,5 +392,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
         private System.Windows.Forms.ToolStripButton btnRealignment;
+        private System.Windows.Forms.ToolStripButton btnAugmentation;
     }
 }

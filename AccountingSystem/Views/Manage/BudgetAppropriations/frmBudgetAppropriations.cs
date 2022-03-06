@@ -21,24 +21,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Value = DateTime.Now.Year;
         }
 
-        private void ShowRecordTimeStamp()
+        private void ShowRecordTimeStamp(DataGridView dataGridView)
         {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                int rowIndex = dataGridView.CurrentCell.RowIndex;
 
-            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+                var dateEntry = dataGridView.Rows[rowIndex].Cells["date_entry"].Value.ToString();
+                var createdAt = dataGridView.Rows[rowIndex].Cells["created_at"].Value.ToString();
+                var updatedAt = dataGridView.Rows[rowIndex].Cells["updated_at"].Value.ToString();
 
-            var dateEntry = dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value;
-            var createdAt = dgBudgetAppropriations.Rows[rowIndex].Cells["created_at"].Value;
-            var updatedAt = dgBudgetAppropriations.Rows[rowIndex].Cells["updated_at"].Value;
-
-            lblDateEntry.Text = createdAt == null ? null : dateEntry.ToString();
-            lblCreatedAt.Text = createdAt == null ? null : createdAt.ToString();
-            lblUpdatedAt.Text = updatedAt == null ? null : updatedAt.ToString();
-
+                lblDateEntry.Text = dateEntry;
+                lblCreatedAt.Text = createdAt;
+                lblUpdatedAt.Text = updatedAt;
+            }
         }
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            ShowRecordTimeStamp();
+            ShowRecordTimeStamp(dgBudgetAppropriations);
             EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
@@ -73,6 +74,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             lblCreatedAt.Text = string.Empty;
             lblUpdatedAt.Text = string.Empty;
             dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
+            ShowRecordTimeStamp(dgBudgetAppropriations);
             Cursor.Current = Cursors.Default;
         }
 
@@ -116,6 +118,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
                 btnRealignment.Enabled = true;
+                btnAugmentation.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -125,6 +128,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
                 btnRealignment.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
             else
             {
@@ -133,6 +137,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
                 btnRealignment.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
