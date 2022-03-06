@@ -573,7 +573,7 @@ namespace AccountingSystem
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
                 // 0 is the column index
-                if (row.Cells[columnName].Value.ToString().Equals(value))
+                if (row.Cells[columnName].Value.ToString().Contains(value))
                 {
                     dataGridView.CurrentCell = row.Cells[columnName];
                     break;

@@ -3,13 +3,6 @@ using AccountingSystem;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BudgetSystem.Views.Manage.BudgetAppropriations
@@ -26,12 +19,12 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             uc = ucBudgetAppropriations1;
         }
 
-        private void LoadSelected() 
+        private void LoadSelected()
         {
             try
             {
                 int ucBudgetAppropriationId = uc.budgetAppropriationId;
-           
+
                 var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
 
                 int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
@@ -48,7 +41,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 uc.fundId = fundId;
                 uc.fppId = fppId;
 
-                if (othersFPPId == null) 
+                if (othersFPPId == null)
                     uc.cmbxOthersFPP.SelectedIndex = -1;
                 else
                     uc.cmbxOthersFPP.SelectedValue = othersFPPId;
@@ -68,14 +61,14 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
                 int? othersFPPId;
 
                 //Check Validation
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -104,7 +97,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
                 return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -118,7 +111,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData()) 
+            if (SaveData())
             {
                 //Initialze data references
                 int allotmentClassID = uc.allotmentClassId;
@@ -129,6 +122,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
 
                 Helper.MessageBoxSuccess("Budget Appropriation update has been saved.");
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+                Helper.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, "general_ledger_accounts_name", uc.cmbxAccount.Text.ToString());
                 Close();
             }
         }

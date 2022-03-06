@@ -1598,7 +1598,7 @@ namespace AccountingSystem
                         rowOthersFPPId,
                         rowAllotmentClassId,
                         rowAccountId,
-                        $"   {rowAccountCode} - {rowAccountName} [ {remarks} ]",
+                        $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks)? string.Empty : $" [{remarks}]")}",
                         rowDateEntry,
                         totalAppropriationAmount,
                         totalAllotmentRelease,
