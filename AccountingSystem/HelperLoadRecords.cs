@@ -404,7 +404,7 @@ namespace AccountingSystem
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
         #endregion
 
@@ -453,7 +453,7 @@ namespace AccountingSystem
             datagrid.Columns[10].Width = 100;
             datagrid.Columns[11].Width = 100;
 
-            float fontSize = 8f;
+            float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -497,7 +497,7 @@ namespace AccountingSystem
                 });
             }
 
-            float fontSize = 9f;
+            float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
         }

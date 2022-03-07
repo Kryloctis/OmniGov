@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            if(txtsearch.Text.Length > 3)
             {
                 try
                 {
