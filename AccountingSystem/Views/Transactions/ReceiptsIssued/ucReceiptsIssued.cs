@@ -16,6 +16,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int maxtickets = 0;
         internal bool isTickets = false;
 
+        internal bool isCollectorJO;
+
         public ucReceiptsIssued()
         {
             InitializeComponent();
@@ -53,9 +55,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var dtCollector = new DataTable();
 
                 if (cbCollector.Checked)
+                {
                     dtCollector = collectorHasJORepo.GetRecords();
+                    isCollectorJO = true;
+                }
                 else
+                {
                     dtCollector = collectorRepository.GetRecords();
+                    isCollectorJO = false;
+                }
 
                 cmbCollector.DataSource = dtCollector;
 
