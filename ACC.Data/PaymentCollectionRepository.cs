@@ -144,7 +144,8 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
+                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                    new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
@@ -159,6 +160,7 @@ namespace ACC.Data
                 string query =  $"INSERT INTO {tableName} " +
                                 $"(funds_id, " +
                                 $"collecting_officers_id, " +
+                                $"job_orders_id, " +
                                 $"accountable_forms_id, " +
                                 $"general_ledger_accounts_id, " +
                                 $"payee, " +
