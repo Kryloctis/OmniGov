@@ -42,6 +42,7 @@ namespace AccountingSystem
 
         public static void DatagridFullRowSelectStyle(DataGridView dgv, Boolean Fill = false)
         {
+            dgv.RowHeadersVisible = false;
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
@@ -566,7 +567,7 @@ namespace AccountingSystem
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
                 // 0 is the column index
-                if (row.Cells[columnName].Value.ToString().Equals(value))
+                if (row.Cells[columnName].Value.ToString().Contains(value))
                 {
                     dataGridView.CurrentCell = row.Cells[columnName];
                     break;

@@ -21,60 +21,61 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Value = DateTime.Now.Year;
         }
 
-        private void ShowRecordTimeStamp()
+        private void ShowRecordTimeStamp(DataGridView dataGridView)
         {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                int rowIndex = dataGridView.CurrentCell.RowIndex;
 
-            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
+                var dateEntry = dataGridView.Rows[rowIndex].Cells["date_entry"].Value.ToString();
+                var createdAt = dataGridView.Rows[rowIndex].Cells["created_at"].Value.ToString();
+                var updatedAt = dataGridView.Rows[rowIndex].Cells["updated_at"].Value.ToString();
 
-            var dateEntry = dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value;
-            var createdAt = dgBudgetAppropriations.Rows[rowIndex].Cells["created_at"].Value;
-            var updatedAt = dgBudgetAppropriations.Rows[rowIndex].Cells["updated_at"].Value;
-
-            lblDateEntry.Text = createdAt == null ? null : dateEntry.ToString();
-            lblCreatedAt.Text = createdAt == null ? null : createdAt.ToString();
-            lblUpdatedAt.Text = updatedAt == null ? null : updatedAt.ToString();
-
+                lblDateEntry.Text = dateEntry;
+                lblCreatedAt.Text = createdAt;
+                lblUpdatedAt.Text = updatedAt;
+            }
         }
 
         private void dgBudgetAppropriations_SelectionChanged(object sender, EventArgs e)
         {
-            ShowRecordTimeStamp();
+            ShowRecordTimeStamp(dgBudgetAppropriations);
             EnableDisableButtonsLocal(dgBudgetAppropriations);
+        }
+
+        int rowCount()
+        {
+            int recordCount = 0;
+
+            foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
+            {
+                if (item.Cells["id"].Value != null)
+                {
+                    recordCount += 1;
+                }
+            }
+
+            return recordCount;
         }
 
         internal void LoadBudgetAppropriationRecords()
         {
-            if (!DesignMode)
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                dgBudgetAppropriations.SelectionChanged -= new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
+            Cursor.Current = Cursors.WaitCursor;
+            int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            short year = Convert.ToInt16(nudYear.Value);
 
-                int recordCount = 0;
-                int fppID = Convert.ToInt32(cmbxFPP.SelectedValue);
-                int allotmentClassID = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-                int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-                short year = Convert.ToInt16(nudYear.Value);
+            HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
+            EnableDisableButtonsLocal(dgBudgetAppropriations);
 
-                HelperLoadRecords.BudgetAppropriationsDatagridView(dgBudgetAppropriations, fppID, allotmentClassID, fundId, year, txtTotal);
-
-                dgBudgetAppropriations.SelectionChanged += new System.EventHandler(dgBudgetAppropriations_SelectionChanged);
-                EnableDisableButtonsLocal(dgBudgetAppropriations);
-
-                foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
-                {
-                    if (item.Cells["id"].Value != null)
-                    {
-                        recordCount += 1;
-                    }
-                }
-
-                lblRecords.Text = recordCount.ToString();
-                lblDateEntry.Text = string.Empty;
-                lblCreatedAt.Text = string.Empty;
-                lblUpdatedAt.Text = string.Empty;
-                Cursor.Current = Cursors.Default;
-            }
-
+            lblRecords.Text = rowCount().ToString();
+            lblDateEntry.Text = string.Empty;
+            lblCreatedAt.Text = string.Empty;
+            lblUpdatedAt.Text = string.Empty;
+            dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
+            ShowRecordTimeStamp(dgBudgetAppropriations);
+            Cursor.Current = Cursors.Default;
         }
 
         public void LoadComboboxes()
@@ -82,7 +83,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             try
             {
                 var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-                HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
+                HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
 
                 var dtFunds = Factory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
@@ -117,6 +118,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
                 btnRealignment.Enabled = true;
+                btnAugmentation.Enabled = true;
 
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
@@ -126,6 +128,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
                 btnRealignment.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
             else
             {
@@ -134,6 +137,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = false;
                 btnRealignment.Enabled = false;
+                btnAugmentation.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -187,7 +191,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             int? othersFPPId = dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value == null ? null : Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["others_fpp_id"].Value);
             int allotmentClassesId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_class_id"].Value);
             int genLedgerAccId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["general_ledger_accounts_id"].Value);
-            decimal totalAllotmentRelease = Convert.ToDecimal(dgBudgetAppropriations.Rows[rowIndex].Cells["totalAllotmentRelease"].Value);
+            decimal totalAllotmentRelease = Convert.ToDecimal(dgBudgetAppropriations.Rows[rowIndex].Cells["allotment_released"].Value);
 
             uc.budgetAppropriationId = budgetAppId;
             uc.fundId = fundId;
@@ -276,10 +280,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
+        #region FPP
 
-        //FPP
         private DataTable DataTableFPP()
         {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id");
+            dataTable.Columns.Add("fpp_code_name");
+
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
@@ -287,32 +295,22 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             else
                 dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
-            return dtFPP;
+            foreach (DataRow item in dtFPP.Rows)
+            {
+                int fppId = Convert.ToInt32(item["id"]);
+                string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
+
+                dataTable.Rows.Add(fppId, fppName);
+            }
+
+            return dataTable;
         }
 
         internal void LoadFPP()
         {
             try
             {
-                cmbxFPP.DroppedDown = false;
-                Cursor.Current = Cursors.Default;
-
-                if (DataTableFPP().Rows.Count == 0) return;
-
-                var fppDict = new Dictionary<int, string>();
-                foreach (DataRow item in DataTableFPP().Rows)
-                {
-                    int fppId = Convert.ToInt32(item["id"]);
-                    string fppName = $"{item["fpp_code"]} - {item["fpp_name"]}";
-
-                    fppDict.Add(fppId, fppName);
-                }
-
-                cmbxFPP.DataSource = new BindingSource(fppDict, null);
-                cmbxFPP.DisplayMember = "value";
-                cmbxFPP.ValueMember = "key";
-                cmbxFPP.DropDownHeight = 400;
-
+                HelperLoadRecords.BudgetApproprationsFPPCombobox(DataTableFPP(), cmbxFPP, "fpp_code_name", "id");
                 LoadBudgetAppropriationRecords();
             }
             catch (Exception ex)
@@ -334,8 +332,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void CmbxFPP_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadBudgetAppropriationRecords();
-            EnableDisableButtonsLocal(dgBudgetAppropriations);
+            if (cmbxFPP.SelectedIndex > -1)
+            {
+                LoadBudgetAppropriationRecords();
+                EnableDisableButtonsLocal(dgBudgetAppropriations);
+            }
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
@@ -346,6 +347,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 cmbxFPP.DroppedDown = true;
             }
         }
+
+        #endregion
 
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
         {
@@ -377,6 +380,29 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             };
 
             frmRealignment.ShowDialog();
+        }
+
+
+        private void Select_Deleselect_AllRows(DataGridView dataGridView)
+        {
+            if (dataGridView.SelectedRows.Count == dataGridView.Rows.Count)
+            {
+                dataGridView.ClearSelection();
+                lnkSelection.Text = "Select All";
+                return;
+            }
+
+            dataGridView.SelectAll();
+            lnkSelection.Text = "Deselect All";
+        }
+
+        private void lnkSelection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (dgBudgetAppropriations.Rows.Count > 0)
+            {
+                Select_Deleselect_AllRows(dgBudgetAppropriations);
+                return;
+            }
         }
     }
 }

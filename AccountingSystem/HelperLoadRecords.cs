@@ -1401,9 +1401,17 @@ namespace AccountingSystem
 
         #endregion Others FPP
 
-        #region BUDGET APPROPRIATIONS
+        #region Budget Appropriations
 
-        internal static void BudgetAppropriationsAllotmentCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        internal static void BudgetApproprationsFPPCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+            comboBox.DropDownHeight = 200;
+        }
+
+        internal static void BudgetAppropriationsAllotmentClassCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
@@ -1440,236 +1448,222 @@ namespace AccountingSystem
 
         internal static void BudgetAppropriationsDatagridView(DataGridView dgvBudgetAppropriations, int fppID, int allotmentClassID, int fundId, short year, TextBox txtTotalAppropriation)
         {
-            try
+            #region Datagrid Format
+            //Image Column
+            Image continuingIcon = Properties.Resources.ok14px;
+            Image realignmentIcon = Properties.Resources.ok14px;
+
+            DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
+            DataGridViewImageColumn imgRealignedColumn = new DataGridViewImageColumn();
+
+            imgColumn.HeaderText = "Continuing";
+            imgColumn.Name = "continuing";
+
+            imgRealignedColumn.HeaderText = "Realigned";
+            imgRealignedColumn.Name = "realigned";
+
+
+            //Clearing Datagrid View  Rows & Columns before Loading new one
+            dgvBudgetAppropriations.Rows.Clear();
+            dgvBudgetAppropriations.Columns.Clear();
+
+            //Set up new Columns to Datagrid View
+            dgvBudgetAppropriations.Columns.Add("id", "Budget Appropriation ID");
+            dgvBudgetAppropriations.Columns.Add("funds_id", "Fund ID");
+            dgvBudgetAppropriations.Columns.Add("fpp_id", "FPP ID");
+            dgvBudgetAppropriations.Columns.Add("others_fpp_id", "Others FPP ID");
+            dgvBudgetAppropriations.Columns.Add("allotment_class_id", "Allotment Classes ID");
+            dgvBudgetAppropriations.Columns.Add("general_ledger_accounts_id", "Gen. Ledger Acc. ID");
+            dgvBudgetAppropriations.Columns.Add("object_of_expenditures", "Object of Expenditures");
+            dgvBudgetAppropriations.Columns.Add("date_entry", "Date Entry");
+            dgvBudgetAppropriations.Columns.Add("amount", "Appropriation");
+            dgvBudgetAppropriations.Columns.Add("allotment_released", "Allotment Released");
+            dgvBudgetAppropriations.Columns.Add("obligations", "Obligations");
+            dgvBudgetAppropriations.Columns.Add("unobligated_balance", "Unobligated Balance");
+            dgvBudgetAppropriations.Columns.Add("year", "Year");
+            dgvBudgetAppropriations.Columns.Add(imgColumn);
+            dgvBudgetAppropriations.Columns.Add(imgRealignedColumn);
+            dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
+            dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
+
+            //Column's Visibility
+            dgvBudgetAppropriations.Columns["id"].Visible = false;
+            dgvBudgetAppropriations.Columns["funds_id"].Visible = false;
+            dgvBudgetAppropriations.Columns["fpp_id"].Visible = false;
+            dgvBudgetAppropriations.Columns["year"].Visible = false;
+            dgvBudgetAppropriations.Columns["others_fpp_id"].Visible = false;
+            dgvBudgetAppropriations.Columns["allotment_class_id"].Visible = false;
+            dgvBudgetAppropriations.Columns["general_ledger_accounts_id"].Visible = false;
+            dgvBudgetAppropriations.Columns["date_entry"].Visible = false;
+            dgvBudgetAppropriations.Columns["created_at"].Visible = false;
+            dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
+
+            //Column's Format
+            int amountColumWidth = 140;
+            dgvBudgetAppropriations.Columns["object_of_expenditures"].Width = 400;
+
+            dgvBudgetAppropriations.Columns["amount"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["amount"].Width = amountColumWidth;
+            dgvBudgetAppropriations.Columns["amount"].MinimumWidth = amountColumWidth;
+            dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Format = "N2";
+            dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            dgvBudgetAppropriations.Columns["allotment_released"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["allotment_released"].Width = amountColumWidth;
+            dgvBudgetAppropriations.Columns["allotment_released"].MinimumWidth = amountColumWidth;
+            dgvBudgetAppropriations.Columns["allotment_released"].DefaultCellStyle.Format = "N2";
+            dgvBudgetAppropriations.Columns["allotment_released"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            dgvBudgetAppropriations.Columns["obligations"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["obligations"].Width = amountColumWidth;
+            dgvBudgetAppropriations.Columns["obligations"].MinimumWidth = amountColumWidth;
+            dgvBudgetAppropriations.Columns["obligations"].DefaultCellStyle.Format = "N2";
+            dgvBudgetAppropriations.Columns["obligations"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            dgvBudgetAppropriations.Columns["unobligated_balance"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["unobligated_balance"].Width = amountColumWidth;
+            dgvBudgetAppropriations.Columns["unobligated_balance"].MinimumWidth = amountColumWidth;
+            dgvBudgetAppropriations.Columns["unobligated_balance"].DefaultCellStyle.Format = "N2";
+            dgvBudgetAppropriations.Columns["unobligated_balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            dgvBudgetAppropriations.Columns["continuing"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
+            dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBudgetAppropriations.Columns["continuing"].Width = 80;
+            dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
+
+            dgvBudgetAppropriations.Columns["realigned"].Resizable = DataGridViewTriState.False;
+            dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.NullValue = null;
+            dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvBudgetAppropriations.Columns["realigned"].Width = 80;
+            dgvBudgetAppropriations.Columns["realigned"].MinimumWidth = 80;
+            #endregion
+
+            //Initialize Repository Method
+            var budgetAppropriationsModel = new BudgetAppropriationsModel()
             {
-                #region Datagrid Format
-                //Image Column
-                dgvBudgetAppropriations.ShowCellToolTips = false;
-                Image continuingIcon = Properties.Resources.ok14px;
-                Image realignmentIcon = Properties.Resources.ok14px;
+                FunctionProgramProjectId = fppID,
+                AllotmentClassesId = allotmentClassID,
+                FundsId = fundId,
+                Year = year
+            };
 
-                DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
-                DataGridViewImageColumn imgRealignedColumn = new DataGridViewImageColumn();
+            budgetAppropriationsModel.OthersFPPId = null;
 
-                imgColumn.HeaderText = "Continuing";
-                imgColumn.Name = "continuing";
-
-                imgRealignedColumn.HeaderText = "Realigned";
-                imgRealignedColumn.Name = "realigned";
+            var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
 
-                //Clearing Datagrid View  Rows & Columns before Loading new one
-                dgvBudgetAppropriations.Rows.Clear();
-                dgvBudgetAppropriations.Columns.Clear();
-
-                //Set up new Columns to Datagrid View
-                dgvBudgetAppropriations.Columns.Add("id", "Budget Appropriation ID");
-                dgvBudgetAppropriations.Columns.Add("funds_id", "Fund ID");
-                dgvBudgetAppropriations.Columns.Add("fpp_id", "FPP ID");
-                dgvBudgetAppropriations.Columns.Add("others_fpp_id", "Others FPP ID");
-                dgvBudgetAppropriations.Columns.Add("allotment_class_id", "Allotment Classes ID");
-                dgvBudgetAppropriations.Columns.Add("general_ledger_accounts_id", "Gen. Ledger Acc. ID");
-                dgvBudgetAppropriations.Columns.Add("general_ledger_accounts_name", "Object of Expenditures");
-                dgvBudgetAppropriations.Columns.Add("account_code", "Account Code");
-                dgvBudgetAppropriations.Columns.Add("date_entry", "Date Entry");
-                dgvBudgetAppropriations.Columns.Add("amount", "Appropriation");
-                dgvBudgetAppropriations.Columns.Add("totalAllotmentRelease", "Total Allotment Release");
-                dgvBudgetAppropriations.Columns.Add("appropriationBalance", "Appropriation Balance");
-                dgvBudgetAppropriations.Columns.Add("year", "Year");
-                dgvBudgetAppropriations.Columns.Add(imgColumn);
-                dgvBudgetAppropriations.Columns.Add(imgRealignedColumn);
-                dgvBudgetAppropriations.Columns.Add("remarks", "Remarks");
-                dgvBudgetAppropriations.Columns.Add("created_at", "Created at");
-                dgvBudgetAppropriations.Columns.Add("updated_at", "Updated at");
-
-                //Column's Visibility
-                dgvBudgetAppropriations.Columns["id"].Visible = false;
-                dgvBudgetAppropriations.Columns["funds_id"].Visible = false;
-                dgvBudgetAppropriations.Columns["fpp_id"].Visible = false;
-                dgvBudgetAppropriations.Columns["year"].Visible = false;
-                dgvBudgetAppropriations.Columns["others_fpp_id"].Visible = false;
-                dgvBudgetAppropriations.Columns["allotment_class_id"].Visible = false;
-                dgvBudgetAppropriations.Columns["general_ledger_accounts_id"].Visible = false;
-                dgvBudgetAppropriations.Columns["date_entry"].Visible = false;
-                dgvBudgetAppropriations.Columns["created_at"].Visible = false;
-                dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
-
-                //Column's Format
-                int amountColumWidth = 145;
-                dgvBudgetAppropriations.Columns["general_ledger_accounts_name"].Width = 300;
-
-                dgvBudgetAppropriations.Columns["account_code"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["account_code"].Width = 100;
-                dgvBudgetAppropriations.Columns["account_code"].MinimumWidth = 100;
+            //Load by loop All Budget Appropriations Records without Others FPP 
+            foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
+            {
+                FieldData(dgvBudgetAppropriations, continuingIcon, realignmentIcon, drGetViewRecordsByIds);
+            }
 
 
-                dgvBudgetAppropriations.Columns["amount"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["amount"].Width = amountColumWidth;
-                dgvBudgetAppropriations.Columns["amount"].MinimumWidth = amountColumWidth;
-                dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            //Initialize Repository Method for others fpp records
+            var dtGetRecordsOthersFPP = Factory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, year);
+
+            //Load by loop All Budget Appropriations Records with Others FPP 
+            foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
+            {
+                string othersFPPName = drGetRecordsOthersFPP["others_fpp_name"].ToString();
+                int othersFPPID = Convert.ToInt32(drGetRecordsOthersFPP["others_fpp_id"]);
+
+                //Set Header for Others FPP 
+                dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, null, othersFPPName });
 
 
+                budgetAppropriationsModel.OthersFPPId = othersFPPID;
+                DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
-                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].Width = amountColumWidth;
-                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].MinimumWidth = amountColumWidth;
-                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns["totalAllotmentRelease"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-                dgvBudgetAppropriations.Columns["appropriationBalance"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["appropriationBalance"].Width = amountColumWidth;
-                dgvBudgetAppropriations.Columns["appropriationBalance"].MinimumWidth = amountColumWidth;
-                dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Format = "N2";
-                dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
-
-                dgvBudgetAppropriations.Columns["continuing"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
-                dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvBudgetAppropriations.Columns["continuing"].Width = 80;
-                dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
-
-                dgvBudgetAppropriations.Columns["realigned"].Resizable = DataGridViewTriState.False;
-                dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.NullValue = null;
-                dgvBudgetAppropriations.Columns["realigned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvBudgetAppropriations.Columns["realigned"].Width = 80;
-                dgvBudgetAppropriations.Columns["realigned"].MinimumWidth = 80;
-                #endregion
-
-                //Initialize Repository Method
-                var budgetAppropriationsModel = new BudgetAppropriationsModel()
-                {
-                    FunctionProgramProjectId = fppID,
-                    AllotmentClassesId = allotmentClassID,
-                    FundsId = fundId,
-                    Year = year
-                };
-
-                budgetAppropriationsModel.OthersFPPId = null;
-
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
-
-
-                //Load by loop All Budget Appropriations Records without Others FPP 
-                foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
+                foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                 {
                     FieldData(dgvBudgetAppropriations, continuingIcon, realignmentIcon, drGetViewRecordsByIds);
                 }
+            }
+
+            static void FieldData(DataGridView dgvBudgetAppropriations, Image continuingIcon, Image realignmentIcon, DataRow drGetViewRecordsByIds)
+            {
+                int rowId = Convert.ToInt32(drGetViewRecordsByIds["id"]);
+                int rowFundId = Convert.ToInt32(drGetViewRecordsByIds["funds_id"]);
+                int rowFPPId = Convert.ToInt32(drGetViewRecordsByIds["fpp_id"]);
+                int? rowOthersFPPId = string.IsNullOrWhiteSpace(drGetViewRecordsByIds["others_fpp_id"].ToString()) ? null : Convert.ToInt32(drGetViewRecordsByIds["others_fpp_id"]);
+                int rowAllotmentClassId = Convert.ToInt32(drGetViewRecordsByIds["allotment_class_id"]);
+                int rowAccountId = Convert.ToInt32(drGetViewRecordsByIds["general_ledger_accounts_id"]);
+                string rowAccountName = drGetViewRecordsByIds["general_ledger_accounts_name"].ToString();
+                string rowAccountCode = drGetViewRecordsByIds["account_code"].ToString();
+                DateTime rowDateEntry = Convert.ToDateTime(drGetViewRecordsByIds["date_entry"]);
+                decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
+                short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
+                byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
+                byte rowRealignment = Convert.ToByte(Factory.BudgetRealignmentRepository().BudgetHasRealignment(rowId));
+                string remarks = drGetViewRecordsByIds["remarks"].ToString();
+
+                //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
+                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
+                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
 
 
-                //Initialize Repository Method for others fpp records
-                var dtGetRecordsOthersFPP = Factory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, year);
+                //GET TOTAL ALLOTMENT RELEASE
+                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
+                decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
-                //Load by loop All Budget Appropriations Records with Others FPP 
-                foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
-                {
-                    string othersFPPName = drGetRecordsOthersFPP["others_fpp_name"].ToString();
-                    int othersFPPID = Convert.ToInt32(drGetRecordsOthersFPP["others_fpp_id"]);
+                //GET TOTAL REALIGNMENT
+                var totalRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
 
-                    //Set Header for Others FPP 
-                    dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, null, othersFPPName });
+                var totalRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
 
+                //GET TOTAL APPROPRIATION
+                decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + totalRealignmentTo) - totalRealignmentFrom;
 
-                    budgetAppropriationsModel.OthersFPPId = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
+                //GET TOTAL OBLIGATIONS
+                var totalObligations = Factory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
+                var unobligatedBalance = totalAppropriationAmount - totalObligations;
 
-                    foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
-                    {
-                        FieldData(dgvBudgetAppropriations, continuingIcon, realignmentIcon, drGetViewRecordsByIds);
-                    }
-                }
-
-                static void FieldData(DataGridView dgvBudgetAppropriations, Image continuingIcon, Image realignmentIcon, DataRow drGetViewRecordsByIds)
-                {
-                    int rowId = Convert.ToInt32(drGetViewRecordsByIds["id"]);
-                    int rowFundId = Convert.ToInt32(drGetViewRecordsByIds["funds_id"]);
-                    int rowFPPId = Convert.ToInt32(drGetViewRecordsByIds["fpp_id"]);
-                    int? rowOthersFPPId = string.IsNullOrWhiteSpace(drGetViewRecordsByIds["others_fpp_id"].ToString()) ? null : Convert.ToInt32(drGetViewRecordsByIds["others_fpp_id"]);
-                    int rowAllotmentClassId = Convert.ToInt32(drGetViewRecordsByIds["allotment_class_id"]);
-                    int rowAccountId = Convert.ToInt32(drGetViewRecordsByIds["general_ledger_accounts_id"]);
-                    string rowAccountName = drGetViewRecordsByIds["general_ledger_accounts_name"].ToString();
-                    string rowAccountCode = drGetViewRecordsByIds["account_code"].ToString();
-                    DateTime rowDateEntry = Convert.ToDateTime(drGetViewRecordsByIds["date_entry"]);
-                    decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
-                    short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
-                    byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
-                    byte rowRealignment = Convert.ToByte(Factory.BudgetRealignmentRepository().BudgetHasRealignment(rowId));
-                    string remarks = drGetViewRecordsByIds["remarks"].ToString();
-
-                    //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                    var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
-                    decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
-
-
-                    //GET TOTAL ALLOTMENT RELEASE
-                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
-                    decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
-
-
-                    //GET TOTAL REALIGNMENT
-                    var totalRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
-
-                    var totalRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
-
-                    //GET TOTAL APPROPRIATION
-                    decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + totalRealignmentTo) - totalRealignmentFrom;
-
-                    decimal appropriationBalance = (totalSupplementalAppropriation + rowAppropriationAmount - totalAllotmentRelease + totalRealignmentTo) - totalRealignmentFrom;
-
-
-                    dgvBudgetAppropriations.Rows.Add(new object[] {
+                dgvBudgetAppropriations.Rows.Add(new object[] {
                         rowId,
                         rowFundId,
                         rowFPPId,
                         rowOthersFPPId,
                         rowAllotmentClassId,
                         rowAccountId,
-                        $"    {rowAccountName}",
-                        rowAccountCode,
+                        $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks)? string.Empty : $" → {remarks}")}",
                         rowDateEntry,
                         totalAppropriationAmount,
                         totalAllotmentRelease,
-                        appropriationBalance,
+                        totalObligations,
+                        unobligatedBalance,
                         rowYear,
                         rowContinuing == 1? continuingIcon : null,
                         rowRealignment == 1? continuingIcon : null,
-                        remarks,
                         drGetViewRecordsByIds["created_at"],
                         drGetViewRecordsByIds["updated_at"] });
-                }
-
-
-                //Change Font style for the header of Others FPP
-                foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
-                {
-                    if (row.Cells["fpp_id"].Value == null)
-                    {
-                        Color backgroundColor = Color.White;
-
-                        row.DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
-                        row.DefaultCellStyle.BackColor = backgroundColor;
-                        row.HeaderCell.Style.BackColor = backgroundColor;
-                    }
-                }
-
-                //Show Total Values
-                decimal totalAppropriation = 0;
-                for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
-                {
-                    totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells["amount"].Value);
-                }
-
-                txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
-
-                dgvBudgetAppropriations.ClearSelection();
-
             }
-            catch (Exception ex)
+
+
+            //Change Font style for the header of Others FPP
+            foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
             {
-                Helper.MessageBoxError(ex.Message);
+                if (row.Cells["fpp_id"].Value == null)
+                {
+                    Color backgroundColor = Color.White;
+
+                    row.DefaultCellStyle.Font = new Font(DataGridView.DefaultFont, FontStyle.Bold);
+                    row.DefaultCellStyle.BackColor = backgroundColor;
+                    row.HeaderCell.Style.BackColor = backgroundColor;
+                }
             }
 
+            //Show Total Values
+            decimal totalAppropriation = 0;
+            for (int i = 0; i < dgvBudgetAppropriations.Rows.Count; i++)
+            {
+                totalAppropriation += Convert.ToDecimal(dgvBudgetAppropriations.Rows[i].Cells["amount"].Value);
+            }
+
+            txtTotalAppropriation.Text = totalAppropriation.ToString("N2");
         }
 
         #endregion BUDGET APPROPRIATIONS

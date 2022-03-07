@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         private void LoadAllotmentClasses()
         {
             var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-            HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(dtAllotmentClasses, cmbxAllotmentClasses, "allotment_code", "id");
+            HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClasses, "allotment_code", "id");
         }
 
         private DataTable DataTableFPP()

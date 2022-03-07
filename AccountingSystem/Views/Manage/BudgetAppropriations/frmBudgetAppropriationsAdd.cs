@@ -2,20 +2,13 @@
 using AccountingSystem;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsAdd : Form
     {
-        
+
         private frmBudgetAppropriations _frmBudgetAppropriations;
         private ucBudgetAppropriations uc;
 
@@ -53,7 +46,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -63,8 +56,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void btnSave_Click(object sender, EventArgs e)
         {
             //If Save data is successful
-            if (SaveData()) 
+            if (SaveData())
             {
+                string generalLedgerAccountName = uc.cmbxAccount.Text;
+                string remarks = uc.txtRemarks.Text;
+                string objectOfExpenditures = $" {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
                 int allotmentClassID = uc.allotmentClassId;
                 int fundID = uc.fundId;
 
@@ -77,8 +73,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 Helper.MessageBoxSuccess("Budget Appropriation has been saved.");
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
+
+                Helper.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, "object_of_expenditures", objectOfExpenditures);
             }
         }
-
     }
 }

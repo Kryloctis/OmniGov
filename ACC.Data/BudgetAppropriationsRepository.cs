@@ -656,7 +656,7 @@ namespace ACC.Data
                 $"AND allotment_class_id = @allotment_class_id " +
                 $"AND others_fpp_id <=> @others_fpp_id " +
                 $"AND funds_id = @funds_id " +
-                $"AND year = @year";
+                $"AND year = @year ORDER BY general_ledger_accounts_code";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
