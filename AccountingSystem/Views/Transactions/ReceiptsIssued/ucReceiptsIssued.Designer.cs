@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.epQuantity = new System.Windows.Forms.ErrorProvider(this.components);
             this.nudReceiptIssuedFrom = new System.Windows.Forms.NumericUpDown();
             this.nudReceiptIssuedTo = new System.Windows.Forms.NumericUpDown();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbCollector = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReceipt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epTo)).BeginInit();
@@ -219,22 +219,23 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.nudReceiptIssuedTo.Validating += new System.ComponentModel.CancelEventHandler(this.nudReceiptIssuedTo_Validating);
             this.nudReceiptIssuedTo.Validated += new System.EventHandler(this.nudReceiptIssuedTo_Validated);
             // 
-            // checkBox1
+            // cbCollector
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(452, 8);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(85, 19);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "Job Orders ";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbCollector.AutoSize = true;
+            this.cbCollector.Location = new System.Drawing.Point(452, 8);
+            this.cbCollector.Name = "cbCollector";
+            this.cbCollector.Size = new System.Drawing.Size(85, 19);
+            this.cbCollector.TabIndex = 14;
+            this.cbCollector.Text = "Job Orders ";
+            this.cbCollector.UseVisualStyleBackColor = true;
+            this.cbCollector.CheckedChanged += new System.EventHandler(this.cbCollector_CheckedChanged);
             // 
             // ucReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbCollector);
             this.Controls.Add(this.nudReceiptIssuedTo);
             this.Controls.Add(this.nudReceiptIssuedFrom);
             this.Controls.Add(this.txtReceiptQuantity);
@@ -282,6 +283,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ErrorProvider epQuantity;
         internal System.Windows.Forms.NumericUpDown nudReceiptIssuedFrom;
         internal System.Windows.Forms.NumericUpDown nudReceiptIssuedTo;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbCollector;
     }
 }

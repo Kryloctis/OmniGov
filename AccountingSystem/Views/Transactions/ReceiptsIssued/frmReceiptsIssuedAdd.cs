@@ -82,11 +82,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 Helper.MessageBoxSuccess("Receipt Issued has been saved.");
                 uc.ResetForm();
                 _frmReceiptIssued.LoadRecords();
-
-                if (_receiptId > 0)
-                {
-                    this.Close();
-                }
             }
         }
 

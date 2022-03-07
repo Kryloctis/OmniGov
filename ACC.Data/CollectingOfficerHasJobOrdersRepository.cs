@@ -68,7 +68,14 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            string query = $"SELECT " +
+                           $"job_orders_id, " +
+                           $"CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname " +
+                           $"FROM {viewTableName} " +
+                           $"WHERE job_orders_is_deleted = 0";
+
+            var dt = new DataTable();
+            return mySqlGenericCommands.Fill(query, dt);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
