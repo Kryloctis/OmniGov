@@ -333,44 +333,78 @@ namespace AccountingSystem
         #region ReceiptsIssued
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-            datagrid.DataSource = dataTable;
-
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Collector";
-            datagrid.Columns[2].HeaderText = "Receipt (Form)";
-            datagrid.Columns[3].HeaderText = "Receipt No. From";
-            datagrid.Columns[4].HeaderText = "Receipt No. To";
-            datagrid.Columns[5].HeaderText = "Date Issued";
-            datagrid.Columns[5].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[6].HeaderText = "Quantity";
-            datagrid.Columns[7].HeaderText = "Last Issued No.";
-            datagrid.Columns[8].HeaderText = "Returned";
-            datagrid.Columns[9].HeaderText = "Returned Date";
-            datagrid.Columns[9].DefaultCellStyle.Format = "yyyy-MM-dd";
-            datagrid.Columns[10].HeaderText = "User/Officer";
-
-            datagrid.Columns[3].DefaultCellStyle.Format = "D8";
-            datagrid.Columns[4].DefaultCellStyle.Format = "D8";
-            datagrid.Columns[7].DefaultCellStyle.Format = "D8";
-
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            datagrid.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            datagrid.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            datagrid.Columns[2].Width = 300;
 
 
-            float fontSize = 9f;
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
+            datagrid.Columns.Add("accountable_form", "Accountable Form");
+            datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
+            datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
+            datagrid.Columns.Add("date_issued", "Date Issued");
+            datagrid.Columns.Add("quantity", "Quantity");
+            datagrid.Columns.Add("last_issued", "Last Issued No.");
+            datagrid.Columns.Add("returned", "Returned");
+            datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.Columns.Add("issued_by", "User/Officer");
+
+
+            datagrid.Columns["id"].Visible = false;
+
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["last_issued"].DefaultCellStyle.Format = "D8";
+
+
+            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+            
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["date_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["returned_date"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+   
+
+            datagrid.Columns["collecting_officer"].Width = 150;
+            datagrid.Columns["quantity"].Width = 80;
+            datagrid.Columns["accountable_form"].Width = 300;
+            datagrid.Columns["issued_by"].Width = 150;
+
+            string collectingOfficer;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
+                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
+                else
+                    collectingOfficer = $"{row["job_orders_first_name"]} {row["collecting_officers_mid_initial"]}. {row["job_orders_last_name"]}";
+
+
+                datagrid.Rows.Add(new object[]
+                {
+                    row["id"],
+                    collectingOfficer,
+                    row["accountable_forms"],
+                    row["receipt_issued_from"],
+                    row["receipt_issued_to"],
+                    row["date_issued"],
+                    row["quantity"],
+                    row["last_issued"],
+                    row["returned"],
+                    row["returned_date"],
+                    row["issued_by"]
+                });
+            }
+
+            datagrid.ClearSelection();
+
+            float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
