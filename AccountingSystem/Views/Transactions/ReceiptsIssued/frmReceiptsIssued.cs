@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            if(txtsearch.Text.Length > 3)
             {
                 try
                 {
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
               
                 btnEdit.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
-                btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes");
+                btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes") && dgReceiptIssued.SelectedRows.Count == 1;
             }
             else
             {

@@ -381,7 +381,7 @@ namespace AccountingSystem
                 if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
                     collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
                 else
-                    collectingOfficer = $"{row["job_orders_first_name"]} {row["collecting_officers_mid_initial"]}. {row["job_orders_last_name"]}";
+                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
 
 
                 datagrid.Rows.Add(new object[]
@@ -404,7 +404,7 @@ namespace AccountingSystem
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
         #endregion
 
@@ -453,7 +453,7 @@ namespace AccountingSystem
             datagrid.Columns[10].Width = 100;
             datagrid.Columns[11].Width = 100;
 
-            float fontSize = 8f;
+            float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -497,7 +497,7 @@ namespace AccountingSystem
                 });
             }
 
-            float fontSize = 9f;
+            float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
         }
