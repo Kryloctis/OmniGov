@@ -44,6 +44,17 @@ namespace ACC.Data
             }
         }
 
+        public int GetCollectingOfficerIDByJobOrderId(int collectingOfficerId)
+        {
+            var parameter = new object[][] {
+                new object[] { "@job_orders_id", DbType.Int32, collectingOfficerId }
+            };
+
+            string query = $"SELECT collecting_officers_id FROM {tableName} WHERE job_orders_id = @job_orders_id LIMIT 1";
+
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
+        }
+
         public DataTable GetJobOrdersByCollectingOfficerId(int collectingOfficerId)
         {
             var parameter = new object[][] {
@@ -69,7 +80,7 @@ namespace ACC.Data
         public DataTable GetRecords()
         {
             string query = $"SELECT " +
-                           $"job_orders_id, " +
+                           $"job_orders_id AS Id, " +
                            $"CONCAT(job_orders_first_name, ' ', job_orders_mid_initial, ' ', job_orders_last_name) as fullname " +
                            $"FROM {viewTableName} " +
                            $"WHERE job_orders_is_deleted = 0";

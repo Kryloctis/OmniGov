@@ -240,6 +240,7 @@ namespace ACC.Data
                 {
                     new object[] { "@receipts_id", DbType.Int32, entity.ReceiptId},
                     new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectorId},
+                    new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
                     new object[] { "@date_issued", DbType.Date, entity.Issued},
                     new object[] { "@receipt_issued_from", DbType.Int32, entity.IssuedFrom},
                     new object[] { "@receipt_issued_to", DbType.Int32, entity.IssuedTo},
@@ -248,10 +249,11 @@ namespace ACC.Data
                 };
 
                 string query = $"INSERT INTO {tableName} " +
-                               $"(receipts_id, collecting_officers_id, date_issued, receipt_issued_from, receipt_issued_to, quantity, issued_by) " +
+                               $"(receipts_id, collecting_officers_id, job_orders_id,  date_issued, receipt_issued_from, receipt_issued_to, quantity, issued_by) " +
                                $"VALUES( " +
                                $"@receipts_id, " +
                                $"@collecting_officers_id, " +
+                               $"@job_orders_id, " +
                                $"@date_issued, " +
                                $"@receipt_issued_from, " +
                                $"@receipt_issued_to, " +
