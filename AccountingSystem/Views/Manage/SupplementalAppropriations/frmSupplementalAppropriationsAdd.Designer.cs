@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
-    partial class frmSupplementalAppropriationsEdit
+    partial class frmSupplementalAppropriationsAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 108);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 29);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // button2
             // 
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // frmEditSupplementalAppropriations
+            // frmSupplementalAppropriationsAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,10 +78,10 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmEditSupplementalAppropriations";
+            this.Name = "frmSupplementalAppropriationsAdd";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Supplemental";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Add Supplemental";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

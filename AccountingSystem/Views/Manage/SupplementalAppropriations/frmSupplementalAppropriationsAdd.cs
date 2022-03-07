@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
-    public partial class frmSupplementalAppropriationsEdit : Form
+    public partial class frmSupplementalAppropriationsAdd : Form
     {
-        public frmSupplementalAppropriationsEdit()
+        public frmSupplementalAppropriationsAdd()
         {
             InitializeComponent();
         }

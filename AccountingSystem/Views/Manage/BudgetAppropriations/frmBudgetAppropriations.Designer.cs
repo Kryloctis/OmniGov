@@ -56,7 +56,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnRealignment = new System.Windows.Forms.ToolStripButton();
             this.btnAugmentation = new System.Windows.Forms.ToolStripButton();
-            this.lnkSelection = new System.Windows.Forms.LinkLabel();
+            this.lnkSelectAll = new System.Windows.Forms.LinkLabel();
+            this.lnkClearSelection = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -337,23 +338,35 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnAugmentation.Text = "Augmentation";
             this.btnAugmentation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // lnkSelection
+            // lnkSelectAll
             // 
-            this.lnkSelection.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lnkSelection.BackColor = System.Drawing.Color.Transparent;
-            this.lnkSelection.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkSelection.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkSelection.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkSelection.Location = new System.Drawing.Point(1103, 60);
-            this.lnkSelection.Name = "lnkSelection";
-            this.lnkSelection.Size = new System.Drawing.Size(86, 21);
-            this.lnkSelection.TabIndex = 11;
-            this.lnkSelection.TabStop = true;
-            this.lnkSelection.Text = "Select All";
-            this.lnkSelection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lnkSelection.UseCompatibleTextRendering = true;
-            this.lnkSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelection_LinkClicked);
+            this.lnkSelectAll.ActiveLinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkSelectAll.AutoSize = true;
+            this.lnkSelectAll.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkSelectAll.LinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkSelectAll.Location = new System.Drawing.Point(1038, 66);
+            this.lnkSelectAll.Name = "lnkSelectAll";
+            this.lnkSelectAll.Size = new System.Drawing.Size(55, 15);
+            this.lnkSelectAll.TabIndex = 11;
+            this.lnkSelectAll.TabStop = true;
+            this.lnkSelectAll.Text = "Select All";
+            this.lnkSelectAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelectAll_LinkClicked);
+            // 
+            // lnkClearSelection
+            // 
+            this.lnkClearSelection.ActiveLinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkClearSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkClearSelection.AutoSize = true;
+            this.lnkClearSelection.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkClearSelection.LinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkClearSelection.Location = new System.Drawing.Point(1104, 66);
+            this.lnkClearSelection.Name = "lnkClearSelection";
+            this.lnkClearSelection.Size = new System.Drawing.Size(85, 15);
+            this.lnkClearSelection.TabIndex = 11;
+            this.lnkClearSelection.TabStop = true;
+            this.lnkClearSelection.Text = "Clear Selection";
+            this.lnkClearSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkClearSelection_LinkClicked);
             // 
             // frmBudgetAppropriations
             // 
@@ -361,7 +374,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1201, 540);
-            this.Controls.Add(this.lnkSelection);
+            this.Controls.Add(this.lnkClearSelection);
+            this.Controls.Add(this.lnkSelectAll);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbxFPP);
             this.Controls.Add(this.nudYear);
@@ -418,6 +432,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
         private System.Windows.Forms.ToolStripButton btnRealignment;
         private System.Windows.Forms.ToolStripButton btnAugmentation;
-        private System.Windows.Forms.LinkLabel lnkSelection;
+        private System.Windows.Forms.LinkLabel lnkSelectAll;
+        private System.Windows.Forms.LinkLabel lnkClearSelection;
     }
 }
