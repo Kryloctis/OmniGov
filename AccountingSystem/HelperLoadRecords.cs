@@ -1418,7 +1418,6 @@ namespace AccountingSystem
         {
             #region Datagrid Format
             //Image Column
-            dgvBudgetAppropriations.ShowCellToolTips = false;
             Image continuingIcon = Properties.Resources.ok14px;
             Image realignmentIcon = Properties.Resources.ok14px;
 
@@ -1443,7 +1442,7 @@ namespace AccountingSystem
             dgvBudgetAppropriations.Columns.Add("others_fpp_id", "Others FPP ID");
             dgvBudgetAppropriations.Columns.Add("allotment_class_id", "Allotment Classes ID");
             dgvBudgetAppropriations.Columns.Add("general_ledger_accounts_id", "Gen. Ledger Acc. ID");
-            dgvBudgetAppropriations.Columns.Add("general_ledger_accounts_name", "Object of Expenditures");
+            dgvBudgetAppropriations.Columns.Add("object_of_expenditures", "Object of Expenditures");
             dgvBudgetAppropriations.Columns.Add("date_entry", "Date Entry");
             dgvBudgetAppropriations.Columns.Add("amount", "Appropriation");
             dgvBudgetAppropriations.Columns.Add("allotment_released", "Allotment Released");
@@ -1468,8 +1467,8 @@ namespace AccountingSystem
             dgvBudgetAppropriations.Columns["updated_at"].Visible = false;
 
             //Column's Format
-            int amountColumWidth = 145;
-            dgvBudgetAppropriations.Columns["general_ledger_accounts_name"].Width = 300;
+            int amountColumWidth = 140;
+            dgvBudgetAppropriations.Columns["object_of_expenditures"].Width = 400;
 
             dgvBudgetAppropriations.Columns["amount"].Resizable = DataGridViewTriState.False;
             dgvBudgetAppropriations.Columns["amount"].Width = amountColumWidth;
@@ -1598,7 +1597,7 @@ namespace AccountingSystem
                         rowOthersFPPId,
                         rowAllotmentClassId,
                         rowAccountId,
-                        $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks)? string.Empty : $" [{remarks}]")}",
+                        $"   {rowAccountCode} - {rowAccountName}{(string.IsNullOrEmpty(remarks)? string.Empty : $" → {remarks}")}",
                         rowDateEntry,
                         totalAppropriationAmount,
                         totalAllotmentRelease,
