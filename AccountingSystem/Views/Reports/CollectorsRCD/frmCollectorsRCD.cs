@@ -121,7 +121,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             using (var scope = new TransactionScope())
             {
 
-                var reportCollectorId = Convert.ToInt16(uc.cmbCollector.SelectedValue);
+                var reportCollectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 var reportNo = uc.txtReport.Text.Trim();
                 var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
                 var reportFund = uc.fundId;
@@ -136,6 +136,15 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     FundId = reportFund,
                     Remarks = String.Empty
                 };
+
+                var regularCollectingOfficerId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(reportCollectorId);
+                var isCollectorAJO = Convert.ToBoolean(Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(reportCollectorId));
+
+                if (isCollectorAJO == true)
+                {
+                    collectorsReportModel.CollectorId = regularCollectingOfficerId;
+                    collectorsReportModel.JobOrderId = reportCollectorId;  
+                }
 
                 bool rcdDetailsSaveSuccess = Factory.CollectorReportRepository().Insert(collectorsReportModel);
 
