@@ -9,7 +9,7 @@ namespace ACC.Domain.Models
 
         public int Id { get; set; }
         public int CollectorId { get; set; }
-        public int JobOrderId { get; set; }
+        public int? JobOrderId { get; set; }
         public int Is_returned { get; set; }
         public DateTime Returned_date { get; set; }
         public DateTime Issued { get; set; }
