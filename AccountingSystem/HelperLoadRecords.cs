@@ -457,8 +457,8 @@ namespace AccountingSystem
                 {
                     row["id"],
                     row["receipt"],
-                    Helper.FormatReceiptNumber(row["receipt_number_from"].ToString()),
-                    Helper.FormatReceiptNumber(row["receipt_number_to"].ToString()),
+                    row["receipt_number_from"].ToString(),
+                    row["receipt_number_to"].ToString(),
                     row["quantity"],
                     row["received_date"],
                     row["officer"]
@@ -992,7 +992,7 @@ namespace AccountingSystem
                     row["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
                     row["payee"],
-                    Helper.FormatReceiptNumber(row["receipt_no"].ToString()),
+                    row["receipt_no"].ToString(),
                     row["quantity"],
                     row["payment_date"],
                     row["amount"]
