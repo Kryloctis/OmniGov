@@ -42,6 +42,7 @@ namespace AccountingSystem
 
         public static void DatagridFullRowSelectStyle(DataGridView dgv, Boolean Fill = false)
         {
+            dgv.RowHeadersVisible = false;
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;

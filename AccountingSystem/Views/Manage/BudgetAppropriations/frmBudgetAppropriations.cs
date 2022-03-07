@@ -381,5 +381,28 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             frmRealignment.ShowDialog();
         }
+
+
+        private void Select_Deleselect_AllRows(DataGridView dataGridView)
+        {
+            if (dataGridView.SelectedRows.Count == dataGridView.Rows.Count)
+            {
+                dataGridView.ClearSelection();
+                lnkSelection.Text = "Select All";
+                return;
+            }
+
+            dataGridView.SelectAll();
+            lnkSelection.Text = "Deselect All";
+        }
+
+        private void lnkSelection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (dgBudgetAppropriations.Rows.Count > 0)
+            {
+                Select_Deleselect_AllRows(dgBudgetAppropriations);
+                return;
+            }
+        }
     }
 }
