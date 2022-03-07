@@ -99,7 +99,18 @@ namespace ACC.Data
         {
             string query =  $"SELECT  " +
                             $"id, " +
-                            $"collecting_officer, " +
+                            $"collecting_officer_id, " +
+                            $"collecting_officers_prefix, " +
+                            $"collecting_officers_first_name, " +
+                            $"collecting_officers_mid_initial, " +
+                            $"collecting_officers_last_name, " +
+                            $"collecting_officers_suffix, " +
+                            $"job_orders_id, " +
+                            $"job_orders_prefix, " +
+                            $"job_orders_first_name, " +
+                            $"job_orders_mid_initial, " +
+                            $"job_orders_last_name, " +
+                            $"job_orders_suffix, " +
                             $"accountable_forms, " +
                             $"receipt_issued_from, " +
                             $"receipt_issued_to, " +
