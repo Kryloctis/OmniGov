@@ -560,13 +560,6 @@ namespace AccountingSystem
             return false;
         }
 
-        public static string FormatReceiptNumber(string receiptNumber)
-        {
-            if (string.IsNullOrEmpty(receiptNumber) == false)
-                return receiptNumber.PadLeft(8, '0');
-
-            return string.Empty;
-        }
 
         public static void DatagridViewRecordFinder(DataGridView dataGridView, string columnName, string value)
         {

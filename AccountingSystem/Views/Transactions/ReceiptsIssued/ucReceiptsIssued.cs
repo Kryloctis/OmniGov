@@ -16,6 +16,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int maxtickets = 0;
         internal bool isTickets = false;
 
+        internal bool isCollectorJO;
+
         public ucReceiptsIssued()
         {
             InitializeComponent();
@@ -49,8 +51,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 var collectorRepository = Factory.CollectingOfficerRepository();
-                var dtCollector = collectorRepository.GetRecords();
+                var collectorHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var dtCollector = new DataTable();
+
+                if (cbCollector.Checked)
+                {
+                    dtCollector = collectorHasJORepo.GetRecords();
+                    isCollectorJO = true;
+                }
+                else
+                {
+                    dtCollector = collectorRepository.GetRecords();
+                    isCollectorJO = false;
+                }
+
                 cmbCollector.DataSource = dtCollector;
+
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
             }
@@ -301,5 +317,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 txtReceiptQuantity.Text = Math.Floor(quantity).ToString();
         }
 
+        private void cbCollector_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
     }
 }

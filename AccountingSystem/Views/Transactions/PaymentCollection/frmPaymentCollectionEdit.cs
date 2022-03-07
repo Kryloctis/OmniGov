@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     uc.SwitchFields(); 
                     uc.txtPayee.Text = paymentCollectionDict["payee"];
-                    uc.txtReceiptNumber.Text = Helper.FormatReceiptNumber(paymentCollectionDict["receipt_no"]);
+                    uc.txtReceiptNumber.Text = paymentCollectionDict["receipt_no"];
                     uc.dtDateOfCollection.Value = Convert.ToDateTime(paymentCollectionDict["payment_date"]);
                     uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receipt = paymentCollectionDict["receipt_no"];

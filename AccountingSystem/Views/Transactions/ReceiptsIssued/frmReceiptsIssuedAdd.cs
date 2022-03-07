@@ -63,12 +63,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     IssuedByUserId = userId
                 };
 
-                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                if (uc.isCollectorJO == true) 
+                {
+                    receiptIssuedModel.JobOrderId = collectorId;
+                    receiptIssuedModel.CollectorId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);   
+                }
 
-                if (uc.isTickets == false)
-                    return receiptIssuedRepository.Insert(receiptIssuedModel);
-                else
-                    return receiptIssuedRepository.Insert(receiptIssuedModel);
+                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                return receiptIssuedRepository.Insert(receiptIssuedModel);
             
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -82,11 +84,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 Helper.MessageBoxSuccess("Receipt Issued has been saved.");
                 uc.ResetForm();
                 _frmReceiptIssued.LoadRecords();
-
-                if (_receiptId > 0)
-                {
-                    this.Close();
-                }
             }
         }
 
