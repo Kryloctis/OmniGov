@@ -8,6 +8,7 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int CollectorId { get; set; }
+        public int? JobOrderId { get; set; }
         public string ReportNo { get; set; }
         public DateTime Date { get; set; }
         public sbyte IsApproved { get; set; }
