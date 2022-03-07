@@ -369,8 +369,6 @@ namespace AccountingSystem
             datagrid.Columns["returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["returned_date"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-   
-
             datagrid.Columns["collecting_officer"].Width = 150;
             datagrid.Columns["quantity"].Width = 80;
             datagrid.Columns["accountable_form"].Width = 300;
