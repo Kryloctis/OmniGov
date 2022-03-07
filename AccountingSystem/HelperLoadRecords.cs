@@ -381,7 +381,7 @@ namespace AccountingSystem
                 if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
                     collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
                 else
-                    collectingOfficer = $"{row["job_orders_first_name"]} {row["collecting_officers_mid_initial"]}. {row["job_orders_last_name"]}";
+                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
 
 
                 datagrid.Rows.Add(new object[]
