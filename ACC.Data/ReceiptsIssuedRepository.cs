@@ -189,19 +189,33 @@ namespace ACC.Data
 
             string query = $"SELECT  " +
                             $"id, " +
-                            $"collecting_officer, " +
+                            $"collecting_officer_id, " +
+                            $"collecting_officers_prefix, " +
+                            $"collecting_officers_first_name, " +
+                            $"collecting_officers_mid_initial, " +
+                            $"collecting_officers_last_name, " +
+                            $"collecting_officers_suffix, " +
+                            $"job_orders_id, " +
+                            $"job_orders_prefix, " +
+                            $"job_orders_first_name, " +
+                            $"job_orders_mid_initial, " +
+                            $"job_orders_last_name, " +
+                            $"job_orders_suffix, " +
                             $"accountable_forms, " +
-                            $"issuefrom, " +
-                            $"issueto,  " +
+                            $"receipt_issued_from, " +
+                            $"receipt_issued_to,  " +
                             $"date_issued,  " +
                             $"quantity,  " +
                             $"last_issued,  " +
                             $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
                             $"returned_date,  " +
-                            $"user  " +
+                            $"issued_by  " +
                             $"FROM {viewTableName} " +
                             $"WHERE " +
-                            $"collecting_officer LIKE @searchKey OR " +
+                            $"collecting_officers_last_name LIKE @searchKey OR " +
+                            $"collecting_officers_first_name LIKE @searchKey OR " +
+                            $"job_orders_first_name LIKE @searchKey OR " +
+                            $"job_orders_last_name LIKE @searchKey OR " +
                             $"accountable_forms LIKE @searchKey " +
                             $"ORDER BY date_issued DESC ";
 
