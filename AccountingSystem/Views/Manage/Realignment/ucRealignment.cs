@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void LoadAllotmentClasses()
         {
             var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-            HelperLoadRecords.BudgetAppropriationsAllotmentCombobox(dtAllotmentClasses, cmbAllotmentClass, "allotment_code", "id");
+            HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbAllotmentClass, "allotment_code", "id");
         }
 
         internal void LoadFPP(bool isSearch)

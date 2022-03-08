@@ -55,6 +55,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSupplementalAppropriations = new System.Windows.Forms.ToolStripButton();
             this.btnRealignment = new System.Windows.Forms.ToolStripButton();
+            this.btnAugmentation = new System.Windows.Forms.ToolStripButton();
+            this.lnkSelection = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -67,12 +69,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBudgetAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 63);
+            this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 84);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 420);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 399);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
+            this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
             // 
             // cmbxFPP
             // 
@@ -87,6 +90,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudYear.BackColor = System.Drawing.Color.White;
             this.nudYear.Location = new System.Drawing.Point(1043, 12);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
@@ -134,12 +138,16 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.Location = new System.Drawing.Point(1057, 489);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.txtTotal.BackColor = System.Drawing.Color.White;
+            this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTotal.Location = new System.Drawing.Point(1057, 490);
+            this.txtTotal.MaxLength = 999999;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(132, 23);
             this.txtTotal.TabIndex = 4;
+            this.txtTotal.Text = "0.00";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotal.WordWrap = false;
             // 
@@ -250,7 +258,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnDelete,
             this.toolStripSeparator1,
             this.btnSupplementalAppropriations,
-            this.btnRealignment});
+            this.btnRealignment,
+            this.btnAugmentation});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
@@ -318,12 +327,41 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.btnRealignment.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRealignment.Click += new System.EventHandler(this.btnRealignment_Click);
             // 
+            // btnAugmentation
+            // 
+            this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_arrow_up_2_28px;
+            this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAugmentation.Name = "btnAugmentation";
+            this.btnAugmentation.Size = new System.Drawing.Size(88, 47);
+            this.btnAugmentation.Text = "Augmentation";
+            this.btnAugmentation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // lnkSelection
+            // 
+            this.lnkSelection.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkSelection.BackColor = System.Drawing.Color.Transparent;
+            this.lnkSelection.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkSelection.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkSelection.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkSelection.Location = new System.Drawing.Point(1103, 60);
+            this.lnkSelection.Name = "lnkSelection";
+            this.lnkSelection.Size = new System.Drawing.Size(86, 21);
+            this.lnkSelection.TabIndex = 11;
+            this.lnkSelection.TabStop = true;
+            this.lnkSelection.Text = "Select All";
+            this.lnkSelection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lnkSelection.UseCompatibleTextRendering = true;
+            this.lnkSelection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelection_LinkClicked);
+            // 
             // frmBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1201, 540);
+            this.Controls.Add(this.lnkSelection);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbxFPP);
             this.Controls.Add(this.nudYear);
@@ -379,5 +417,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSupplementalAppropriations;
         private System.Windows.Forms.ToolStripButton btnRealignment;
+        private System.Windows.Forms.ToolStripButton btnAugmentation;
+        private System.Windows.Forms.LinkLabel lnkSelection;
     }
 }

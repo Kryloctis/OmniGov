@@ -463,4 +463,19 @@
   <data name="document_data_2_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-data_2@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="give_money_2_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\give-money-2@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_arrow_up_2_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-arrow-up-2@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_arrow_up_2_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-arrow-up-2@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_arrow_up_2_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-arrow-up-2@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_arrow_up_2_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-arrow-up-2@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
