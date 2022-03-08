@@ -748,29 +748,44 @@ namespace AccountingSystem
             datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
 
 
-            foreach (DataRow drCollectionReport in dataTable.Rows)
+            foreach (DataRow row in dataTable.Rows)
             {
-                var status = Convert.ToInt16(drCollectionReport["is_approved"].ToString()) == 1 ? " Approved" :
-                             Convert.ToInt16(drCollectionReport["is_disapproved"].ToString()) == 1 ? " Disapproved" : " Pending";
+                var status = Convert.ToInt16(row["is_approved"].ToString()) == 1 ? " Approved" :
+                             Convert.ToInt16(row["is_disapproved"].ToString()) == 1 ? " Disapproved" : " Pending";
 
+                string collectingOfficerId;
+                string collectingOfficer;
+                if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
+                {
+                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
+                    collectingOfficerId = row["collecting_officers_id"].ToString();
+                }
+
+                else
+                {
+                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
+                    collectingOfficerId = row["job_orders_id"].ToString();
+                }
+                
 
                 datagrid.Rows.Add(new object[]
                 {
-                    drCollectionReport["id"],
-                    drCollectionReport["report_no"],
-                    drCollectionReport["collecting_officers_id"],
-                    drCollectionReport["collecting_officer"],
-                    drCollectionReport["fund_id"],
-                    drCollectionReport["fund_name"],
-                    drCollectionReport["date"],
-                    drCollectionReport["is_approved"],
-                    drCollectionReport["is_disapproved"],
-                    drCollectionReport["amount"],
+                    row["id"],
+                    row["report_no"],
+                    collectingOfficerId,
+                    collectingOfficer,
+                    row["fund_id"],
+                    row["fund_name"],
+                    row["date"],
+                    row["is_approved"],
+                    row["is_disapproved"],
+                    row["amount"],
                     status
                 });
             }
 
-            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
+            float fontSize = 8.5f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
