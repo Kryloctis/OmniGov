@@ -52,7 +52,10 @@ namespace ACC.Data
 
             string query = $"SELECT collecting_officers_id FROM {tableName} WHERE job_orders_id = @job_orders_id LIMIT 1";
 
-            return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
+            if (!string.IsNullOrEmpty(mySqlGenericCommands.ExecuteScalar(query, parameter)))
+                return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
+
+            return 0;
         }
 
         public DataTable GetJobOrdersByCollectingOfficerId(int collectingOfficerId)

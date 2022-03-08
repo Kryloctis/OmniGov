@@ -260,27 +260,32 @@ namespace ACC.Data
 
         public bool Insert(CollectorReportModel entity)
         {
-            try
-            {
                 var parameters = new object[][]
-                {
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectorId},
-                    new object[] { "@report_no", DbType.String, entity.ReportNo},
-                    new object[] { "@date", DbType.Date, entity.Date},
-                    new object[] { "@is_approved", DbType.Int16, entity.IsApproved},
-                    new object[] { "@is_disapproved", DbType.Int16, entity.IsDisapproved},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@remarks", DbType.String, entity.Remarks}
-                };
-
-                string query = $"INSERT INTO {tableName} VALUES (null, @collecting_officers_id, @report_no, @date, @is_approved, @is_disapproved, @funds_id, @remarks)";
-
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
             {
-                throw;
-            }
+                new object[] {"@collecting_officers_id", DbType.Int32, entity.CollectorId},
+                new object[] {"@job_orders_id", DbType.Int32, entity.JobOrderId},
+                new object[] {"@report_no", DbType.String, entity.ReportNo},
+                new object[] {"@date", DbType.Date, entity.Date},
+                new object[] {"@is_approved", DbType.Int16, entity.IsApproved},
+                new object[] {"@is_disapproved", DbType.Int16, entity.IsDisapproved},
+                new object[] {"@funds_id", DbType.Int16, entity.FundId},
+                new object[] {"@remarks", DbType.String, entity.Remarks}
+            };
+
+            string query = $"INSERT INTO {tableName} " +
+                           $"(collecting_officers_id, job_orders_id, funds_id, report_no, date, is_approved, is_disapproved, remarks) " +
+                           $"VALUES (" +
+                           $"@collecting_officers_id, " +
+                           $"@job_orders_id, " +
+                           $"@funds_id, " +
+                           $"@report_no, " +
+                           $"@date, " +
+                           $"@is_approved, " +
+                           $"@is_disapproved, " +
+                           $"@remarks)";
+
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+           
         }
 
         public int InsertId(CollectorReportModel entity)
@@ -625,12 +630,12 @@ namespace ACC.Data
         {
 
             var parameter = new object[][] {
-                new object[] {"@collectorId", DbType.Int16, collectorId},
-                new object[] { "@collectorReportNumber", DbType.String, collectorReportNumber}
+                new object[] {"@collectorId", DbType.Int32, collectorId},
+                new object[] {"@collectorReportNumber", DbType.String, collectorReportNumber}
             };
 
             string query = $"SELECT id FROM {tableName} " +
-                $"WHERE collecting_officers_id = @collectorId AND report_no = @collectorReportNumber ";
+                $"WHERE (collecting_officers_id = @collectorId AND ISNULL(job_orders_id)) OR job_orders_id = @collectorId AND report_no = @collectorReportNumber ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
 

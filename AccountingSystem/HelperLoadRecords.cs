@@ -1007,7 +1007,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
+            datagrid.Columns["receipt_no"].DefaultCellStyle.Format = "D8";
             datagrid.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             foreach (DataRow row in dataTable.Rows)
@@ -1024,7 +1024,7 @@ namespace AccountingSystem
                     row["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
                     row["payee"],
-                    row["receipt_no"].ToString(),
+                    row["receipt_no"],
                     row["quantity"],
                     row["payment_date"],
                     row["amount"]
