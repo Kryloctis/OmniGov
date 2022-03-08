@@ -50,9 +50,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             foreach (DataGridViewRow item in dgBudgetAppropriations.Rows)
             {
                 if (item.Cells["id"].Value != null)
-                {
                     recordCount += 1;
-                }
             }
 
             return recordCount;
@@ -119,7 +117,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnSupplementalAppropriations.Enabled = true;
                 btnRealignment.Enabled = true;
                 btnAugmentation.Enabled = true;
-
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
@@ -135,7 +132,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
-                btnSupplementalAppropriations.Enabled = false;
+                btnSupplementalAppropriations.Enabled = true;
                 btnRealignment.Enabled = false;
                 btnAugmentation.Enabled = false;
             }
@@ -350,17 +347,27 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         #endregion
 
+
+        private void ShowSupplementalAppropriations()
+        {
+            var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
+            var supplementalAppropriationsMainUserControl = frmSupplementalAppropriationsMain.ucSupplementalAppropriations1;
+            var year = nudYear.Value;
+            string fundName = cmbxFunds.Text;
+            string FPPName = cmbxFPP.Text;
+            string allotmentClassName = cmbxAllotmentClass.Text;
+
+            supplementalAppropriationsMainUserControl.txtYear.Text = year.ToString();
+            supplementalAppropriationsMainUserControl.txtFund.Text = fundName;
+            supplementalAppropriationsMainUserControl.txtFPP.Text = FPPName;
+            supplementalAppropriationsMainUserControl.txtAllotmentClass.Text = allotmentClassName;
+            supplementalAppropriationsMainUserControl.dtpDateEntry.MinDate = new DateTime((int)year, 1, 1);
+            frmSupplementalAppropriationsMain.ShowDialog();
+        }
+
         private void btnSupplementalAppropriations_Click(object sender, EventArgs e)
         {
-            int rowIndex = dgBudgetAppropriations.CurrentCell.RowIndex;
-            int budgetAppropriationsId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
-            DateTime dateEntry = Convert.ToDateTime(dgBudgetAppropriations.Rows[rowIndex].Cells["date_entry"].Value);
-
-            var frmSupplementalAppropriations = new frmSupplementalAppropriations(this);
-
-            frmSupplementalAppropriations.budgetAppropriationsId = budgetAppropriationsId;
-            frmSupplementalAppropriations.dateEntry = dateEntry;
-            frmSupplementalAppropriations.ShowDialog();
+            ShowSupplementalAppropriations();
         }
 
         private void btnRealignment_Click(object sender, EventArgs e)
@@ -383,26 +390,14 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         }
 
 
-        private void Select_Deleselect_AllRows(DataGridView dataGridView)
+        private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == dataGridView.Rows.Count)
-            {
-                dataGridView.ClearSelection();
-                lnkSelection.Text = "Select All";
-                return;
-            }
-
-            dataGridView.SelectAll();
-            lnkSelection.Text = "Deselect All";
+            dgBudgetAppropriations.SelectAll();
         }
 
-        private void lnkSelection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lnkClearSelection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (dgBudgetAppropriations.Rows.Count > 0)
-            {
-                Select_Deleselect_AllRows(dgBudgetAppropriations);
-                return;
-            }
+            dgBudgetAppropriations.ClearSelection();
         }
     }
 }

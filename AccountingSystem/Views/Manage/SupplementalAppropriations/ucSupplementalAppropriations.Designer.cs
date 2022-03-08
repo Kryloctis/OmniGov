@@ -30,116 +30,104 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtDateEntry = new System.Windows.Forms.DateTimePicker();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.dtpDateEntry = new System.Windows.Forms.DateTimePicker();
+            this.nudAmount = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epRemarks = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epRemarks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 14);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Date Entry";
-            // 
-            // dtDateEntry
-            // 
-            this.dtDateEntry.Location = new System.Drawing.Point(67, 8);
-            this.dtDateEntry.Name = "dtDateEntry";
-            this.dtDateEntry.Size = new System.Drawing.Size(310, 23);
-            this.dtDateEntry.TabIndex = 1;
-            // 
-            // nudAmount
-            // 
-            this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(67, 37);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            1410065407,
-            2,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(310, 23);
-            this.nudAmount.TabIndex = 2;
-            this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
-            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 39);
+            this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 15);
+            this.label1.Size = new System.Drawing.Size(58, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Amount";
+            this.label1.Text = "DateEntry";
+            // 
+            // dtpDateEntry
+            // 
+            this.dtpDateEntry.Location = new System.Drawing.Point(67, 3);
+            this.dtpDateEntry.Name = "dtpDateEntry";
+            this.dtpDateEntry.Size = new System.Drawing.Size(330, 23);
+            this.dtpDateEntry.TabIndex = 1;
+            // 
+            // nudAmount
+            // 
+            this.nudAmount.DecimalPlaces = 2;
+            this.nudAmount.Location = new System.Drawing.Point(67, 32);
+            this.nudAmount.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.nudAmount.Name = "nudAmount";
+            this.nudAmount.Size = new System.Drawing.Size(330, 23);
+            this.nudAmount.TabIndex = 2;
+            this.nudAmount.ThousandsSeparator = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Amount";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 69);
+            this.label3.Location = new System.Drawing.Point(3, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 15);
-            this.label3.TabIndex = 3;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Remarks";
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(67, 66);
+            this.txtRemarks.Location = new System.Drawing.Point(67, 61);
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(310, 23);
-            this.txtRemarks.TabIndex = 4;
-            this.txtRemarks.Validating += new System.ComponentModel.CancelEventHandler(this.txtRemarks_Validating);
-            this.txtRemarks.Validated += new System.EventHandler(this.txtRemarks_Validated);
+            this.txtRemarks.Size = new System.Drawing.Size(330, 23);
+            this.txtRemarks.TabIndex = 3;
             // 
-            // epAmount
+            // errorProvider1
             // 
-            this.epAmount.ContainerControl = this;
-            // 
-            // epRemarks
-            // 
-            this.epRemarks.ContainerControl = this;
+            this.errorProvider1.ContainerControl = this;
             // 
             // ucSupplementalAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.AutoSize = true;
             this.Controls.Add(this.txtRemarks);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.nudAmount);
-            this.Controls.Add(this.dtDateEntry);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dtpDateEntry);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Name = "ucSupplementalAppropriations";
-            this.Size = new System.Drawing.Size(399, 97);
-            this.Load += new System.EventHandler(this.ucSupplementalAppropriations_Load);
+            this.Size = new System.Drawing.Size(416, 87);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epRemarks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
+
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtRemarks;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.DateTimePicker dtpDateEntry;
         internal System.Windows.Forms.NumericUpDown nudAmount;
-        internal System.Windows.Forms.ErrorProvider epAmount;
-        internal System.Windows.Forms.ErrorProvider epRemarks;
-        internal System.Windows.Forms.DateTimePicker dtDateEntry;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
