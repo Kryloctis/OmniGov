@@ -8,6 +8,10 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         internal int supplementalAppropriationId;
         internal int budgetAppropriationId;
         internal DateTime dateEntry;
+        internal int fppId;
+        internal int fundId;
+        internal int allotmentClassId;
+        internal int year;
 
         public ucSupplementalAppropriationsMain()
         {

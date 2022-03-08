@@ -352,16 +352,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
             var supplementalAppropriationsMainUserControl = frmSupplementalAppropriationsMain.ucSupplementalAppropriations1;
-            var year = nudYear.Value;
-            string fundName = cmbxFunds.Text;
-            string FPPName = cmbxFPP.Text;
-            string allotmentClassName = cmbxAllotmentClass.Text;
 
-            supplementalAppropriationsMainUserControl.txtYear.Text = year.ToString();
-            supplementalAppropriationsMainUserControl.txtFund.Text = fundName;
-            supplementalAppropriationsMainUserControl.txtFPP.Text = FPPName;
-            supplementalAppropriationsMainUserControl.txtAllotmentClass.Text = allotmentClassName;
-            supplementalAppropriationsMainUserControl.dtpDateEntry.MinDate = new DateTime((int)year, 1, 1);
+            supplementalAppropriationsMainUserControl.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            supplementalAppropriationsMainUserControl.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            supplementalAppropriationsMainUserControl.allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            supplementalAppropriationsMainUserControl.year = Convert.ToInt16(nudYear.Value);
+
             frmSupplementalAppropriationsMain.ShowDialog();
         }
 

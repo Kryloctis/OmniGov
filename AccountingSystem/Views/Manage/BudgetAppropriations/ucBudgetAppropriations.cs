@@ -34,7 +34,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void LoadOthersFPPByFPPIdCombobox()
+        internal void LoadSubFPPByFPPIdCombobox(int fppId)
         {
             HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
@@ -289,27 +289,33 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
         }
 
-
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
+            try
             {
-                var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
-                var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+                if (!DesignMode)
+                {
+                    var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                    var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
+                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
-                txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
-                txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
-                txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
-                txtYear.Text = year.ToString();
-                dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
-                dtDateEntry.MinDate = new DateTime(year, 1, 1);
+                    txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
+                    txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
+                    txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
+                    txtYear.Text = year.ToString();
+                    dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+                    dtDateEntry.MinDate = new DateTime(year, 1, 1);
 
 
-                LoadOthersFPPByFPPIdCombobox();
-                LoadAccounts();
-                cmbxAccount.SelectedIndex = -1;
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                    LoadSubFPPByFPPIdCombobox(fppId);
+                    LoadAccounts();
+                    cmbxAccount.SelectedIndex = -1;
+                    cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }
