@@ -132,9 +132,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var collectorRepository = Factory.CollectingOfficerRepository();
-                var dtCollector = collectorRepository.GetRecords();
-                cmdCollector.DataSource = dtCollector;
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+
+                DataTable dtCollectors = new();
+                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
+                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
+
+                dtRegularCollectors.Merge(dtJOCollectors);
+                dtCollectors = dtRegularCollectors;
+
+                cmdCollector.DataSource = dtCollectors;
                 cmdCollector.ValueMember = "id";
                 cmdCollector.DisplayMember = "fullname";
             }

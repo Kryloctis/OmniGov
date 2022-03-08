@@ -136,7 +136,7 @@ namespace ACC.Data
                 new object[]{"@accountable_form_id", DbType.String, accountableFormId }
             };
 
-            string query = $"SELECT " +
+            string query = $"SELECT " +  
                            $"id, " +
                            $"accountable_forms, " +
                            $"receipt_issued_from, " +
@@ -148,7 +148,8 @@ namespace ACC.Data
                            $"returned_date " +
                            $"FROM view_receipts_issued " +
                            $"WHERE " +
-                           $"collecting_officer_id = @collecting_officer_id AND " +
+                           $"(collecting_officer_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id) " +
+                           $"AND " +
                            $"accountable_form_id = @accountable_form_id AND " +
                            $"IF(is_returned > 0, 1, 0) = 0  AND " +
                            $"IF(receipt_issued_to = last_issued, true, false) = false";
@@ -173,7 +174,8 @@ namespace ACC.Data
                             $"ON receipts.accountable_forms_id = accountable_forms.id " +
                             $"INNER JOIN receipts_issued AS receipts_issued " +
                             $"ON receipts_issued.receipts_id = receipts.id " +
-                            $"WHERE receipts_issued.collecting_officers_id = @collectingOfficerId " +
+                            $"WHERE (receipts_issued.collecting_officers_id = @collectingOfficerId AND ISNULL(receipts_issued.job_orders_id)) " +
+                            $"OR receipts_issued.job_orders_id = @collectingOfficerId " +
                             $"AND receipts_issued.is_returned = false";
 
 

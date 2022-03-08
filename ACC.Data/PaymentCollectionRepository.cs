@@ -129,8 +129,9 @@ namespace ACC.Data
                             $"FROM {viewTableName} " +
                             $"WHERE " +
                             $"payment_date = @date AND " +
-                            $"collecting_officer_id = @collectorId AND " +
-                            $"accountable_forms LIKE @searchKey " +
+                            $"(collecting_officer_id = @collectorId AND ISNULL(job_orders_id)) OR " +
+                            $"job_orders_id = @collectorId AND " +
+                            $"(receipt_no LIKE @searchKey OR accountable_forms LIKE @searchKey OR payee LIKE @searchKey) " +
                             $"ORDER BY accountable_form_id";
 
             var dtPaymentCollection = new DataTable();
@@ -144,7 +145,8 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
+                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                    new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
                     new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
                     new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
@@ -159,6 +161,7 @@ namespace ACC.Data
                 string query =  $"INSERT INTO {tableName} " +
                                 $"(funds_id, " +
                                 $"collecting_officers_id, " +
+                                $"job_orders_id, " +
                                 $"accountable_forms_id, " +
                                 $"general_ledger_accounts_id, " +
                                 $"payee, " +
@@ -170,6 +173,7 @@ namespace ACC.Data
                                 $"VALUES " +
                                 $"(@funds_id, " +
                                 $"@collecting_officers_id, " +
+                                $"@job_orders_id, " +
                                 $"@accountable_forms_id, " +
                                 $"@general_ledger_accounts_id, " +
                                 $"@payee, " +
@@ -356,8 +360,9 @@ namespace ACC.Data
                             $"payment_date, " +
                             $"amount " +
                             $"FROM {viewTableName} " +
-                            $"WHERE collecting_officer_id = @collectorId AND payment_date " +
-                            $"BETWEEN @collectionDateFrom AND @collectionDateTo ";
+                            $"WHERE (collecting_officer_id = @collectorId AND ISNULL(job_orders_id)) OR job_orders_id = @collectorId " +
+                            $"AND " +
+                            $"payment_date BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
             var dtPaymentCollection = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);

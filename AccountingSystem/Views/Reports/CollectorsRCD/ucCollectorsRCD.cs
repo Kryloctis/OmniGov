@@ -130,7 +130,14 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 cmbCollector.SelectedValueChanged -= new EventHandler(cmbcollector_SelectedValueChanged);
                 var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var dtCollectors = collectingOfficerRepository.GetRecords();
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+
+                DataTable dtCollectors = new();
+                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
+                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
+
+                dtRegularCollectors.Merge(dtJOCollectors);
+                dtCollectors = dtRegularCollectors;
 
                 cmbCollector.DataSource = dtCollectors;
                 cmbCollector.DisplayMember = "fullname";
