@@ -30,10 +30,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgSupplementalAppropriations = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTotalSupplemental = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,43 +54,35 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lnkSelectAll = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSupplementalAppropriations)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // dataGridView1
+            // dgSupplementalAppropriations
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 263);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(463, 233);
-            this.dataGridView1.TabIndex = 5;
+            this.dgSupplementalAppropriations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSupplementalAppropriations.Location = new System.Drawing.Point(3, 18);
+            this.dgSupplementalAppropriations.Name = "dgSupplementalAppropriations";
+            this.dgSupplementalAppropriations.RowTemplate.Height = 25;
+            this.dgSupplementalAppropriations.Size = new System.Drawing.Size(452, 220);
+            this.dgSupplementalAppropriations.TabIndex = 5;
+            this.dgSupplementalAppropriations.SelectionChanged += new System.EventHandler(this.dgSupplementalAppropriations_SelectionChanged);
+            this.dgSupplementalAppropriations.Validating += new System.ComponentModel.CancelEventHandler(this.dgSupplementalAppropriations_Validating);
+            this.dgSupplementalAppropriations.Validated += new System.EventHandler(this.dgSupplementalAppropriations_Validated);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 504);
+            this.label1.Location = new System.Drawing.Point(3, 248);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 15);
             this.label1.TabIndex = 36;
@@ -103,7 +93,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.txtTotalSupplemental.BackColor = System.Drawing.SystemColors.Control;
             this.txtTotalSupplemental.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalSupplemental.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtTotalSupplemental.Location = new System.Drawing.Point(41, 502);
+            this.txtTotalSupplemental.Location = new System.Drawing.Point(41, 244);
             this.txtTotalSupplemental.Name = "txtTotalSupplemental";
             this.txtTotalSupplemental.Size = new System.Drawing.Size(151, 23);
             this.txtTotalSupplemental.TabIndex = 37;
@@ -245,6 +235,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(368, 23);
             this.cmbxAccount.TabIndex = 60;
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
+            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
+            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
             // 
             // cmbxSubFPP
             // 
@@ -253,10 +246,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.cmbxSubFPP.Name = "cmbxSubFPP";
             this.cmbxSubFPP.Size = new System.Drawing.Size(368, 23);
             this.cmbxSubFPP.TabIndex = 59;
+            this.cmbxSubFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxSubFPP_Validating);
+            this.cmbxSubFPP.Validated += new System.EventHandler(this.cmbxSubFPP_Validated);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(230, 502);
+            this.btnAdd.Location = new System.Drawing.Point(220, 244);
             this.btnAdd.MinimumSize = new System.Drawing.Size(75, 23);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
@@ -267,7 +262,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(311, 502);
+            this.btnEdit.Location = new System.Drawing.Point(301, 244);
             this.btnEdit.MinimumSize = new System.Drawing.Size(75, 23);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
@@ -278,13 +273,55 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(392, 502);
+            this.btnDelete.Location = new System.Drawing.Point(380, 244);
             this.btnDelete.MinimumSize = new System.Drawing.Size(75, 23);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 68;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.Location = new System.Drawing.Point(3, 263);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(464, 297);
+            this.groupBox1.TabIndex = 69;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Supplemental Appropriations";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lnkSelectAll);
+            this.panel1.Controls.Add(this.dgSupplementalAppropriations);
+            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.btnEdit);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.txtTotalSupplemental);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.panel1.Location = new System.Drawing.Point(3, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(458, 275);
+            this.panel1.TabIndex = 0;
+            // 
+            // lnkSelectAll
+            // 
+            this.lnkSelectAll.ActiveLinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkSelectAll.AutoSize = true;
+            this.lnkSelectAll.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkSelectAll.LinkColor = System.Drawing.SystemColors.Highlight;
+            this.lnkSelectAll.Location = new System.Drawing.Point(400, 0);
+            this.lnkSelectAll.Name = "lnkSelectAll";
+            this.lnkSelectAll.Size = new System.Drawing.Size(55, 15);
+            this.lnkSelectAll.TabIndex = 69;
+            this.lnkSelectAll.TabStop = true;
+            this.lnkSelectAll.Text = "Select All";
+            this.lnkSelectAll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkSelectAll_LinkClicked);
             // 
             // ucSupplementalAppropriationsMain
             // 
@@ -292,9 +329,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.txtYear);
@@ -312,13 +347,14 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.label12);
             this.Controls.Add(this.cmbxAccount);
             this.Controls.Add(this.cmbxSubFPP);
-            this.Controls.Add(this.txtTotalSupplemental);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Name = "ucSupplementalAppropriationsMain";
-            this.Size = new System.Drawing.Size(485, 528);
+            this.Size = new System.Drawing.Size(485, 563);
+            this.Load += new System.EventHandler(this.ucSupplementalAppropriationsMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSupplementalAppropriations)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,7 +371,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         internal System.Windows.Forms.DateTimePicker dtpDateEntry;
         internal System.Windows.Forms.ComboBox cmbxAccount;
         internal System.Windows.Forms.ComboBox cmbxSubFPP;
-        internal System.Windows.Forms.DataGridView dataGridView1;
+        internal System.Windows.Forms.DataGridView dgSupplementalAppropriations;
         internal System.Windows.Forms.TextBox txtTotalSupplemental;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label9;
@@ -349,5 +385,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         internal System.Windows.Forms.Button btnDelete;
         internal System.Windows.Forms.Button btnEdit;
         internal System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.LinkLabel lnkSelectAll;
     }
 }

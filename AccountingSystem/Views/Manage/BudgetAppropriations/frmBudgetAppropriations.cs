@@ -351,12 +351,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void ShowSupplementalAppropriations()
         {
             var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
-            var supplementalAppropriationsMainUserControl = frmSupplementalAppropriationsMain.ucSupplementalAppropriations1;
+            var supplementalAppropriationsMainUserControl = frmSupplementalAppropriationsMain.ucSupplementalAppropriationsMain1;
 
-            supplementalAppropriationsMainUserControl.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
-            supplementalAppropriationsMainUserControl.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            supplementalAppropriationsMainUserControl.allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
-            supplementalAppropriationsMainUserControl.year = Convert.ToInt16(nudYear.Value);
+            if (dgBudgetAppropriations.SelectedRows.Count == 1)
+            {
+                int rowIndex = dgBudgetAppropriations.CurrentRow.Index;
+                int budgetAppropriationId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
+                supplementalAppropriationsMainUserControl.budgetAppropriationId = budgetAppropriationId;
+            }
+
+
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int year = Convert.ToInt16(nudYear.Value);
+
+            supplementalAppropriationsMainUserControl.fppId = fppId;
+            supplementalAppropriationsMainUserControl.fundId = fundId;
+            supplementalAppropriationsMainUserControl.allotmentClassId = allotmentClassId;
+            supplementalAppropriationsMainUserControl.year = year;
 
             frmSupplementalAppropriationsMain.ShowDialog();
         }

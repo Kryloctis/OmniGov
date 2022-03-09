@@ -42,8 +42,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             cmbxOthersFPP.Enabled = true;
         }
 
+        #region VALIDATIONS
 
-        //SUB FPP VALIDATION
+        #region Sub FPP Validation
 
         private bool ShowErrorOthersFPPNameExist(ErrorProvider ep, ComboBox comboBox, string fieldText)
         {
@@ -72,8 +73,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
         }
 
+        #endregion
 
-        //ACCOUNT VALIDATION
+        #region Account Validation
 
         private bool ShowErrorLedgerNameNotExist()
         {
@@ -170,9 +172,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
         }
 
+        #endregion
 
-
-        //AMOUNT VALIDATION
+        #region Amount Validation
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
@@ -210,9 +212,12 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
+        #endregion
 
+        #endregion VALIDATIONS
 
-        //ACCOUNT COMBOBOX
+        #region General Ledgers Accounts
+
         private DataTable DatatableAccounts()
         {
             var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
@@ -288,6 +293,8 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 cmbxAccount.DroppedDown = true;
             }
         }
+
+        #endregion
 
         private void ucBudgetAppropriations_Load(object sender, EventArgs e)
         {

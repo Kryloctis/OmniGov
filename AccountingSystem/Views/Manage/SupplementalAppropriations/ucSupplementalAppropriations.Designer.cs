@@ -70,6 +70,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.nudAmount.Size = new System.Drawing.Size(330, 23);
             this.nudAmount.TabIndex = 2;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label2
             // 
@@ -113,6 +115,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.label1);
             this.Name = "ucSupplementalAppropriations";
             this.Size = new System.Drawing.Size(416, 87);
+            this.Load += new System.EventHandler(this.ucSupplementalAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
