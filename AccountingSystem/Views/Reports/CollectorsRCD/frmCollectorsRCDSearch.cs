@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         internal string reportNo;
         private readonly frmCollectorsRCD _frmCollectorsRCD;
-        private readonly ucCollectorsRCD _uc;
+        private readonly ucCollectorsRCD uc;
 
         public frmCollectorsRCDSearch(frmCollectorsRCD frmCollectorsRCD, ucCollectorsRCD uc)
         {
@@ -17,7 +17,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
             Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
             _frmCollectorsRCD = frmCollectorsRCD;
-            _uc = uc;
+            this.uc = uc;
 
             cmbstatus.SelectedIndex = 1;
         }
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
             
-            _uc.TotalCollections();
+            uc.TotalCollections();
             this.Close();
         }
 

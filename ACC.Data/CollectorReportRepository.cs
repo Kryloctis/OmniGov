@@ -268,8 +268,12 @@ namespace ACC.Data
                 new object[] {"@collectorReportNumber", DbType.String, collectorReportNumber}
             };
 
-            string query = $"SELECT id FROM {tableName} " +
-                $"WHERE (collecting_officers_id = @collectorId AND ISNULL(job_orders_id)) OR job_orders_id = @collectorId AND report_no = @collectorReportNumber ";
+            string query = $"SELECT id " +
+                           $"FROM {tableName} " +
+                           $"WHERE " +
+                           $"(collecting_officers_id = @collectorId AND ISNULL(job_orders_id)) OR " +
+                           $"job_orders_id = @collectorId AND " +
+                           $"report_no = @collectorReportNumber ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
 
