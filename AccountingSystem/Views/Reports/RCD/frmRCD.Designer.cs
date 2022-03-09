@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.txtRCDNo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpdate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dgListOfApprovedReport = new System.Windows.Forms.DataGridView();
             this.reportId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -183,13 +183,13 @@ namespace AccountingSystem.Views.Reports.RCD
             this.label2.TabIndex = 20;
             this.label2.Text = "RCD No.";
             // 
-            // dtpdate
+            // dtpDate
             // 
-            this.dtpdate.Location = new System.Drawing.Point(509, 12);
-            this.dtpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpdate.Name = "dtpdate";
-            this.dtpdate.Size = new System.Drawing.Size(211, 23);
-            this.dtpdate.TabIndex = 2;
+            this.dtpDate.Location = new System.Drawing.Point(509, 12);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(211, 23);
+            this.dtpDate.TabIndex = 2;
             // 
             // label1
             // 
@@ -294,7 +294,7 @@ namespace AccountingSystem.Views.Reports.RCD
             this.panelRCD.Controls.Add(this.label2);
             this.panelRCD.Controls.Add(this.label1);
             this.panelRCD.Controls.Add(this.txtRCDNo);
-            this.panelRCD.Controls.Add(this.dtpdate);
+            this.panelRCD.Controls.Add(this.dtpDate);
             this.panelRCD.Controls.Add(this.dgListOfApprovedReport);
             this.panelRCD.Location = new System.Drawing.Point(0, 53);
             this.panelRCD.Name = "panelRCD";
@@ -417,7 +417,6 @@ namespace AccountingSystem.Views.Reports.RCD
         internal System.Windows.Forms.ToolStripButton btnSearch;
         internal System.Windows.Forms.TextBox txtRCDNo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpdate;
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Button btnadd;
         internal System.Windows.Forms.Panel panelRCD;
@@ -438,5 +437,6 @@ namespace AccountingSystem.Views.Reports.RCD
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbfunds;
+        internal System.Windows.Forms.DateTimePicker dtpDate;
     }
 }

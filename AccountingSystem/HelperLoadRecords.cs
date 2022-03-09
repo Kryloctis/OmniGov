@@ -652,7 +652,7 @@ namespace AccountingSystem
                 {
                     drRCD["id"],
                     drRCD["rcd_no"],
-                    drRCD["date"],
+                    drRCD["rcd_date"],
                     drRCD["report_no"],
                     drRCD["users_id"],
                     drRCD["user"],

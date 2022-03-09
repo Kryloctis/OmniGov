@@ -130,7 +130,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void ResetForm()
         {
             txtRCDNo.Text = string.Empty;
-            dtpdate.Value = DateTime.Now;
+            dtpDate.Value = DateTime.Now;
             panelRCD.Enabled = true;
 
             btnDeposit.Enabled = false;
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionModel = new GeneralCollectionsModel()
                 {
                     RcdNo = txtRCDNo.Text,
-                    Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    Rcddate = Convert.ToDateTime(dtpDate.Value),
                     FundId = Convert.ToInt32(cmbfunds.SelectedValue),
                     Userid = Helper.UserId
                 };
