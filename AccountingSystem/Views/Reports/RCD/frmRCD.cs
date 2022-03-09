@@ -72,10 +72,10 @@ namespace AccountingSystem.Views.Reports.RCD
                 foreach (DataRow row in dtRCD.Rows)
                 {
                     reportId = row["collectors_report_id"].ToString();
-                    collectingOfficer = row["collecting_officers_first_name"].ToString();
+                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]} ";
 
                     if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
-                        collectingOfficer = row["job_orders_first_name"].ToString();
+                        collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]} ";
 
                     reportNo = row["report_no"].ToString();
                     amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
