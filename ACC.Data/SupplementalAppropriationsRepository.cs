@@ -24,6 +24,21 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool Insert(List<SupplementalAppropriationsModel> supplementalAppropriationsModelList)
+        {
+            using (var scope = new TransactionScope())
+            {
+
+                foreach (SupplementalAppropriationsModel supplementalAppropriationsModel in supplementalAppropriationsModelList)
+                {
+                    _ = Insert(supplementalAppropriationsModel);
+                }
+
+                scope.Complete();
+                return true;
+            };
+        }
+
         public bool Delete(List<SupplementalAppropriationsModel> entityList)
         {
             try
@@ -48,6 +63,23 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public bool DeleteByBudgerAppropriationId(int budgetAppropriationId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -162,7 +194,7 @@ namespace ACC.Data
                 new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
             };
 
-            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
 
             var dtSupplementalApprorpriation = new DataTable();
 
@@ -184,8 +216,6 @@ namespace ACC.Data
                 $"date_entry, " +
                 $"amount, " +
                 $"remarks, " +
-                $"created_at, " +
-                $"updated_at " +
                 $"FROM {tableName} " +
                 $"WHERE " +
                 $"budget_appropriations_id = @budget_appropriations_id " +
@@ -266,7 +296,7 @@ namespace ACC.Data
             }
         }
 
-        #endregion    
+        #endregion
     }
 
 }

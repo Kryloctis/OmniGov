@@ -168,7 +168,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             frmSupplementalAppropriationAdd.ShowDialog();
         }
 
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
@@ -199,7 +198,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             frmSupplementalAppropriationEdit.ShowDialog();
         }
 
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowCount = dgSupplementalAppropriations.SelectedRows.Count;
@@ -215,13 +213,36 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
+        private void dgSupplementalAppropriations_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            SetEnableDisableDetailFields(false);
+        }
+
+        private void dgSupplementalAppropriations_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            int rowCount = dgSupplementalAppropriations.RowCount;
+
+            if (rowCount == 0)
+                SetEnableDisableDetailFields(true);
+        }
+
         #endregion
 
-        private void SetEnableDisableDetailFields(bool isEnabled)
+        internal void SetEnableDisableDetailFields(bool isEnabled)
         {
             dtpDateEntry.Enabled = isEnabled;
-            cmbxSubFPP.Enabled = isEnabled;
-            cmbxAccount.Enabled = isEnabled;
+
+            if (budgetAppropriationId == 0)
+            {
+                cmbxAccount.Enabled = true;
+                cmbxSubFPP.Enabled = true;
+            }
+            else
+            {
+                cmbxAccount.Enabled = false;
+                cmbxSubFPP.Enabled = false;
+            }
+
             txtRemarks.ReadOnly = !isEnabled;
             chckbxContinuing.Enabled = isEnabled;
         }

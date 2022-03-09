@@ -55,7 +55,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //If Save data is successful
             if (SaveData())
             {
                 string generalLedgerAccountName = uc.cmbxAccount.Text;

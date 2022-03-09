@@ -75,6 +75,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.dgSupplementalAppropriations.RowTemplate.Height = 25;
             this.dgSupplementalAppropriations.Size = new System.Drawing.Size(452, 220);
             this.dgSupplementalAppropriations.TabIndex = 5;
+            this.dgSupplementalAppropriations.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgSupplementalAppropriations_RowsAdded);
+            this.dgSupplementalAppropriations.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgSupplementalAppropriations_RowsRemoved);
             this.dgSupplementalAppropriations.SelectionChanged += new System.EventHandler(this.dgSupplementalAppropriations_SelectionChanged);
             this.dgSupplementalAppropriations.Validating += new System.ComponentModel.CancelEventHandler(this.dgSupplementalAppropriations_Validating);
             this.dgSupplementalAppropriations.Validated += new System.EventHandler(this.dgSupplementalAppropriations_Validated);
