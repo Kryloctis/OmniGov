@@ -146,20 +146,6 @@ namespace ACC.Data
             return false;
         }
 
-        public bool CollectingOfficerHasReceiptAssigned(int id)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, id },
-            };
-
-            string query = $"SELECT id FROM {tableName3} WHERE collecting_officers_id = @id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-          
-            return false;
-        }
 
         public bool Insert(CollectingOfficerModel entity)
         { 

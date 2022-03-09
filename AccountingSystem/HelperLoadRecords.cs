@@ -473,6 +473,9 @@ namespace AccountingSystem
             datagrid.Columns.Add("received_date", "Received Date");
             datagrid.Columns.Add("officer", "User/Officer");
 
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D8";
+
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
             datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -483,14 +486,17 @@ namespace AccountingSystem
             datagrid.Columns["receipt_number_from"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             datagrid.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
+            datagrid.Columns["receipt"].Width = 500;
+            datagrid.Columns["received_date"].Width = 150;
+
             foreach (DataRow row in dataTable.Rows)
             {
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
                     row["receipt"],
-                    row["receipt_number_from"].ToString(),
-                    row["receipt_number_to"].ToString(),
+                    row["receipt_number_from"],
+                    row["receipt_number_to"],
                     row["quantity"],
                     row["received_date"],
                     row["officer"]

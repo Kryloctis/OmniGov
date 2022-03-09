@@ -48,6 +48,10 @@ namespace AccountingSystem.Views.Manage.JobOrders
         private void dgJobOrders_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
+
+            int id = int.Parse(dgJobOrders.CurrentRow.Cells[0].Value.ToString());
+            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+            btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)

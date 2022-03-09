@@ -15,7 +15,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal int maxreceipt = 0;
         internal int maxtickets = 0;
         internal bool isTickets = false;
-
         internal bool isCollectorJO;
 
         public ucReceiptsIssued()
@@ -202,7 +201,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
             if (item == null)
                 return;
@@ -211,9 +209,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             var receiptQuantity = int.Parse(item[5].ToString());
 
             if (item["receipt"].ToString().Contains("Tickets"))
-            {
                 SetFieldsForCashTickets();
-            }
             else
             {
                 if (CheckReceiptsAvailability(receiptId, receiptQuantity))
