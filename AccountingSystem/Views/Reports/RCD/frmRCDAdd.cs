@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCD
@@ -38,17 +32,23 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
+
                 var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
 
-                DataTable dtCollectors = collectingOfficerRepository.GetRecords();
-                DataView dv = dtCollectors.DefaultView;
+                DataTable dtCollectors = new();
+                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
+                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
 
+                dtRegularCollectors.Merge(dtJOCollectors);
+                dtRegularCollectors.Rows.Add(0, "All");
+
+                dtCollectors = dtRegularCollectors;
                 cmbCollector.DataSource = dtCollectors;
                 cmbCollector.DisplayMember = "fullname";
                 cmbCollector.ValueMember = "id";
-                dtCollectors.Rows.Add(0, "All");
 
-                dv.Sort = "id asc";
+                dtCollectors.DefaultView.Sort = "id ASC";
 
                 cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
             }
@@ -70,12 +70,13 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 var colectorRepository = Factory.CollectorReportRepository();
 
-                var dtrcd = new DataTable();
 
+                var dtrcd = new DataTable();
                 if (cmbCollector.Text == "All")
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
                 else
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
+
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
             }
@@ -109,11 +110,11 @@ namespace AccountingSystem.Views.Reports.RCD
         private void btnOkay_Click(object sender, EventArgs e)
         {
 
-            string reportId = String.Empty;
-            string collectingOfficer = String.Empty;
-            string reportNo = String.Empty;
-            string reportNoChecker = String.Empty;
-            decimal amount = 0.0m;
+            string reportId;
+            string collectingOfficer;
+            string reportNo;
+            string reportNoChecker;
+            decimal amount;
 
 
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)

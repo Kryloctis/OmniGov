@@ -64,20 +64,21 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
                 var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
-                string reportId = string.Empty;
-                string collectingOfficer = string.Empty;
-                string reportNo = string.Empty;
-                string reportNoChecker = string.Empty;
-                string amount = string.Empty;
-
+                string reportId;
+                string collectingOfficer;
+                string reportNo;
+                string amount;
 
                 foreach (DataRow row in dtRCD.Rows)
                 {
                     reportId = row["collectors_report_id"].ToString();
-                    collectingOfficer = row["collecting_officer"].ToString();
+                    collectingOfficer = row["collecting_officers_first_name"].ToString();
+
+                    if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
+                        collectingOfficer = row["job_orders_first_name"].ToString();
+
                     reportNo = row["report_no"].ToString();
                     amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
-
 
                     object[] reportRow = new object[]
                     {
