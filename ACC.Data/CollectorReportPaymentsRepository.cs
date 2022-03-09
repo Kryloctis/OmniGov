@@ -242,8 +242,8 @@ namespace ACC.Data
 
             string query =  $"SELECT " +
                             $"accountable_forms,  " +
-                            $"LPAD(MIN(receipt_no), 7, 0) report_number_from, " +
-                            $"LPAD(MAX(receipt_no), 7, 0) report_number_to, " +
+                            $"MIN(receipt_no)report_number_from, " +
+                            $"MAX(receipt_no)report_number_to, " +
                             $"SUM(amount) amount " +
                             $"FROM {viewTableName} " +
                             $"WHERE report_no = @reportNo " +
