@@ -107,8 +107,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // cmbReceipt
             // 
+            this.cmbReceipt.DropDownHeight = 400;
             this.cmbReceipt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbReceipt.FormattingEnabled = true;
+            this.cmbReceipt.IntegralHeight = false;
             this.cmbReceipt.Location = new System.Drawing.Point(127, 59);
             this.cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbReceipt.Name = "cmbReceipt";

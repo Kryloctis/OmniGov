@@ -98,9 +98,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptsRepo = Factory.ReceiptsRepository();
                 var receiptsDt = receiptsRepo.GetReceipts();
 
+                foreach (DataRow row in receiptsDt.Rows)
+                {
+                    string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D8");
+                    string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D8");
+                        
+                    row["acc_form_no"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}  ({receiptNumberFrom} - {receiptNumberTo}) ";
+                }
+                   
                 cmbReceipt.DataSource = receiptsDt;
                 cmbReceipt.ValueMember = "id";
-                cmbReceipt.DisplayMember = "receipt";
+                cmbReceipt.DisplayMember = "acc_form_no";
             }
             catch (Exception ex)
             {
@@ -202,37 +210,32 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
         {
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
-            if (item == null)
-                return;
+            if (item == null) return;
 
-            var receiptId = int.Parse(item[0].ToString());
-            var receiptQuantity = int.Parse(item[5].ToString());
-
-            if (item["receipt"].ToString().Contains("Tickets"))
+            if (item["acc_form_no"].ToString().Contains("Tickets"))
                 SetFieldsForCashTickets();
             else
+                SetFieldsForNonCashTickets();
+
+            var receiptId = int.Parse(item["id"].ToString());
+            var receiptQuantity = int.Parse(item["quantity"].ToString());
+
+            if (ReceiptQuantityAvailable(receiptId, receiptQuantity))
             {
-                if (CheckReceiptsAvailability(receiptId, receiptQuantity))
-                {
-                    SetFieldsForNonCashTickets();
-                    SetReceiptNumberFrom(receiptId);
-                }
-                else
-                {
-                    nudReceiptIssuedFrom.ResetText();
-                    nudReceiptIssuedTo.ResetText();
-                }
+                SetReceiptNumberFrom(receiptId);
+                return;
             }
+
+            nudReceiptIssuedFrom.ResetText();
+            nudReceiptIssuedTo.ResetText();
         }
 
-        private bool CheckReceiptsAvailability(int receiptId, int receiptQuantity)
+        private bool ReceiptQuantityAvailable(int receiptId, int receiptQuantity)
         {
             try
             {
                 var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var receiptsAvailable = receiptsIssuedRepo.ReceiptAvailability(receiptId, receiptQuantity);
-
-                return receiptsAvailable;
+                return receiptsIssuedRepo.ReceiptAvailabilityByQuantity(receiptId, receiptQuantity); ;
             }
             catch (Exception)
             {
@@ -251,11 +254,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptIssuedQuantity = receiptIssuedRepo.GetReceiptIssuedQuantityByReceiptId(receiptId);
 
                 var receiptNumber = (receiptNumberFrom + receiptIssuedQuantity);
-                nudReceiptIssuedFrom.Text = receiptNumber.ToString().PadLeft(7, '0');
+                nudReceiptIssuedFrom.Text = receiptNumber.ToString("D8");
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -264,6 +266,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             txtReceiptQuantity.ReadOnly  = false;
             isTickets = true;
+
+            nudReceiptIssuedFrom.ResetText();
+            nudReceiptIssuedTo.ResetText();
+
             nudReceiptIssuedFrom.Enabled = false;
             nudReceiptIssuedTo.Enabled = false;
         }

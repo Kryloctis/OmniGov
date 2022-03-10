@@ -100,10 +100,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
+            Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
+
             if (dgReceiptIssued.SelectedRows.Count > 0)
             {
-                Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
-              
                 btnEdit.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes") && dgReceiptIssued.SelectedRows.Count == 1;
@@ -112,12 +112,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
+                btnReturn.Enabled = false;
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgReceiptIssued.SelectedRows.Count > 0)
+            if (dgReceiptIssued.SelectedRows.Count != 0)
             {
                 int id = int.Parse(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
                 _ = new frmReceiptsIssuedEdit(this, id).ShowDialog();

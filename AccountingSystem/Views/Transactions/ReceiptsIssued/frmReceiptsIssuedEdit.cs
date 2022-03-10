@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var uc = ucReceipts1;
                 var riRepository = Factory.ReceiptsIssuedRepository();
                 var riData = riRepository.GetRecordByID(uc.Id);
+
                 uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
                 uc.cmbReceipt.SelectedValue = riData["receipts_id"];
                 uc.dtpIssued.Value = Convert.ToDateTime(riData["date_issued"]);
