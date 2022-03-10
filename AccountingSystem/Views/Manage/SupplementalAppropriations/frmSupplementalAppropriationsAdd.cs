@@ -6,13 +6,13 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
     public partial class frmSupplementalAppropriationsAdd : Form
     {
         ucSupplementalAppropriations uc;
-        ucSupplementalAppropriationsMain _ucSupplementalAppropriationsMain;
+        frmSupplementalAppropriationsMain _FrmSupplementalAppropriationsMain;
 
-        public frmSupplementalAppropriationsAdd(ucSupplementalAppropriationsMain ucSupplementalAppropriationsMain)
+        public frmSupplementalAppropriationsAdd(frmSupplementalAppropriationsMain frmSupplementalAppropriationsMain)
         {
             InitializeComponent();
             uc = ucSupplementalAppropriations1;
-            _ucSupplementalAppropriationsMain = ucSupplementalAppropriationsMain;
+            _FrmSupplementalAppropriationsMain = frmSupplementalAppropriationsMain;
         }
 
         private bool AddSupplemental()
@@ -29,8 +29,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
             var row = new object[] { dateEntry, amount, remarks };
 
-            _ucSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows.Add(row);
-            _ucSupplementalAppropriationsMain.GetTotalSupplementalAmount();
+            _FrmSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows.Add(row);
+            _FrmSupplementalAppropriationsMain.GetTotalSupplementalAmount();
 
             return true;
         }

@@ -1602,8 +1602,7 @@ namespace AccountingSystem
                 string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                 //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
-                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(rowId);
 
 
                 //GET TOTAL ALLOTMENT RELEASE

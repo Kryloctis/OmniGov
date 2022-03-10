@@ -180,8 +180,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
-                decimal totalSupplementalApprorpriationAmount = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("SUM(amount)", string.Empty));
+                decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
 
                 decimal appropriationAmount = nudAmount.Value;
 

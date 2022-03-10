@@ -6,13 +6,13 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
     public partial class frmSupplementalAppropriationsEdit : Form
     {
         ucSupplementalAppropriations uc;
-        ucSupplementalAppropriationsMain _ucSupplementalAppropriationsMain;
+        frmSupplementalAppropriationsMain _FrmSupplementalAppropriationsMain;
         internal int rowIndex;
 
-        public frmSupplementalAppropriationsEdit(ucSupplementalAppropriationsMain ucSupplementalAppropriationsMain)
+        public frmSupplementalAppropriationsEdit(frmSupplementalAppropriationsMain frmSupplementalAppropriationsMain)
         {
             InitializeComponent();
-            _ucSupplementalAppropriationsMain = ucSupplementalAppropriationsMain;
+            _FrmSupplementalAppropriationsMain = frmSupplementalAppropriationsMain;
             uc = ucSupplementalAppropriations1;
         }
 
@@ -26,9 +26,10 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     decimal amount = uc.nudAmount.Value;
                     string remarks = uc.txtRemarks.Text.Trim();
 
-                    _ucSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["date_entry"].Value = dateEntry;
-                    _ucSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["amount"].Value = amount;
-                    _ucSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["remarks"].Value = remarks;
+                    _FrmSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["date_entry"].Value = dateEntry;
+                    _FrmSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["amount"].Value = amount;
+                    _FrmSupplementalAppropriationsMain.dgSupplementalAppropriations.Rows[rowIndex].Cells["remarks"].Value = remarks;
+                    _FrmSupplementalAppropriationsMain.GetTotalSupplementalAmount();
                     return true;
                 }
 

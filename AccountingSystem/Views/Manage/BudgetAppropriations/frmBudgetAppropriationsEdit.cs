@@ -118,15 +118,16 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 int fundID = uc.fundId;
 
                 string generalLedgerAccountName = uc.cmbxAccount.Text;
+                string subFPP = uc.cmbxOthersFPP.Text;
                 string remarks = uc.txtRemarks.Text;
-                string objectOfExpenditures = $" {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
+                string objectOfExpenditures = $"   {generalLedgerAccountName}{(string.IsNullOrEmpty(remarks) ? string.Empty : $" → {remarks}")}";
 
                 _frmBudgetAppropriations.cmbxAllotmentClass.SelectedValue = allotmentClassID;
                 _frmBudgetAppropriations.cmbxFunds.SelectedValue = fundID;
 
                 Helper.MessageBoxSuccess("Budget Appropriation has been updated.");
                 _frmBudgetAppropriations.LoadBudgetAppropriationRecords();
-                Helper.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, "object_of_expenditures", objectOfExpenditures);
+                _frmBudgetAppropriations.DatagridViewRecordFinder(_frmBudgetAppropriations.dgBudgetAppropriations, objectOfExpenditures, subFPP);
                 Close();
             }
         }

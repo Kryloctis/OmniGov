@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.nudAmount.DecimalPlaces = 2;
             this.nudAmount.Location = new System.Drawing.Point(67, 32);
             this.nudAmount.Maximum = new decimal(new int[] {
-            999999,
+            999999999,
             0,
             0,
             0});
@@ -94,6 +94,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // txtRemarks
             // 
             this.txtRemarks.Location = new System.Drawing.Point(67, 61);
+            this.txtRemarks.MaxLength = 999999;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(330, 23);
             this.txtRemarks.TabIndex = 3;
