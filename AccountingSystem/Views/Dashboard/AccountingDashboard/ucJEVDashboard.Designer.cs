@@ -33,32 +33,42 @@ namespace AccountingSystem.Views.Dashboard
             this.btnRefreshCounter = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlPendingJEV = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lnkPending = new System.Windows.Forms.LinkLabel();
             this.lblPendingJEVCounter = new System.Windows.Forms.Label();
             this.pnlApprovedJEV = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lnkApproved = new System.Windows.Forms.LinkLabel();
             this.lblApprovedJEVCounter = new System.Windows.Forms.Label();
             this.pnlJEV = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lnkJEV = new System.Windows.Forms.LinkLabel();
             this.lblJEVCounter = new System.Windows.Forms.Label();
             this.pnlDisapproved = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.linkDisapproved = new System.Windows.Forms.LinkLabel();
             this.lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
             this.pnlCancelled = new System.Windows.Forms.Panel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.lnkCancelled = new System.Windows.Forms.LinkLabel();
             this.lblCancelledJEVCounter = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAddJEV = new System.Windows.Forms.Button();
             this.cmbxJournals = new System.Windows.Forms.ComboBox();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.cbMonth = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlPendingJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.pnlApprovedJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.pnlJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlDisapproved.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlCancelled.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
@@ -103,8 +113,9 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlPendingJEV
             // 
-            this.pnlPendingJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(153)))));
+            this.pnlPendingJEV.BackColor = System.Drawing.Color.White;
             this.pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlPendingJEV.Controls.Add(this.pictureBox3);
             this.pnlPendingJEV.Controls.Add(this.lnkPending);
             this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -113,6 +124,16 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlPendingJEV.Name = "pnlPendingJEV";
             this.pnlPendingJEV.Size = new System.Drawing.Size(192, 116);
             this.pnlPendingJEV.TabIndex = 29;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(153)))));
+            this.pictureBox3.Location = new System.Drawing.Point(180, 104);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox3.TabIndex = 18;
+            this.pictureBox3.TabStop = false;
             // 
             // lnkPending
             // 
@@ -147,8 +168,9 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlApprovedJEV
             // 
-            this.pnlApprovedJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(228)))), ((int)(((byte)(197)))));
+            this.pnlApprovedJEV.BackColor = System.Drawing.Color.White;
             this.pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlApprovedJEV.Controls.Add(this.pictureBox2);
             this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
             this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,6 +179,16 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlApprovedJEV.Name = "pnlApprovedJEV";
             this.pnlApprovedJEV.Size = new System.Drawing.Size(192, 116);
             this.pnlApprovedJEV.TabIndex = 28;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(228)))), ((int)(((byte)(197)))));
+            this.pictureBox2.Location = new System.Drawing.Point(180, 104);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox2.TabIndex = 17;
+            this.pictureBox2.TabStop = false;
             // 
             // lnkApproved
             // 
@@ -191,8 +223,9 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlJEV
             // 
-            this.pnlJEV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(240)))), ((int)(((byte)(234)))));
+            this.pnlJEV.BackColor = System.Drawing.Color.White;
             this.pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlJEV.Controls.Add(this.pictureBox1);
             this.pnlJEV.Controls.Add(this.lnkJEV);
             this.pnlJEV.Controls.Add(this.lblJEVCounter);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -201,6 +234,16 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlJEV.Name = "pnlJEV";
             this.pnlJEV.Size = new System.Drawing.Size(192, 116);
             this.pnlJEV.TabIndex = 26;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.pictureBox1.Location = new System.Drawing.Point(180, 104);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
             // 
             // lnkJEV
             // 
@@ -235,8 +278,9 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlDisapproved
             // 
-            this.pnlDisapproved.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.pnlDisapproved.BackColor = System.Drawing.Color.White;
             this.pnlDisapproved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDisapproved.Controls.Add(this.pictureBox4);
             this.pnlDisapproved.Controls.Add(this.linkDisapproved);
             this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
             this.pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -245,6 +289,16 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlDisapproved.Name = "pnlDisapproved";
             this.pnlDisapproved.Size = new System.Drawing.Size(192, 116);
             this.pnlDisapproved.TabIndex = 22;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.pictureBox4.Location = new System.Drawing.Point(180, 104);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox4.TabIndex = 18;
+            this.pictureBox4.TabStop = false;
             // 
             // linkDisapproved
             // 
@@ -279,8 +333,9 @@ namespace AccountingSystem.Views.Dashboard
             // 
             // pnlCancelled
             // 
-            this.pnlCancelled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            this.pnlCancelled.BackColor = System.Drawing.Color.White;
             this.pnlCancelled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCancelled.Controls.Add(this.pictureBox5);
             this.pnlCancelled.Controls.Add(this.lnkCancelled);
             this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
             this.pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -289,6 +344,16 @@ namespace AccountingSystem.Views.Dashboard
             this.pnlCancelled.Name = "pnlCancelled";
             this.pnlCancelled.Size = new System.Drawing.Size(193, 116);
             this.pnlCancelled.TabIndex = 23;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            this.pictureBox5.Location = new System.Drawing.Point(181, 104);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(10, 10);
+            this.pictureBox5.TabIndex = 18;
+            this.pictureBox5.TabStop = false;
             // 
             // lnkCancelled
             // 
@@ -358,6 +423,15 @@ namespace AccountingSystem.Views.Dashboard
             this.cmbxJournals.TabIndex = 30;
             this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
             // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(406, 3);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(141, 23);
+            this.cmbxFunds.TabIndex = 32;
+            // 
             // cbMonth
             // 
             this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -393,15 +467,6 @@ namespace AccountingSystem.Views.Dashboard
             0});
             this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
             // 
-            // cmbxFunds
-            // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(406, 3);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(141, 23);
-            this.cmbxFunds.TabIndex = 32;
-            // 
             // ucJEVDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -416,10 +481,15 @@ namespace AccountingSystem.Views.Dashboard
             this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlPendingJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.pnlApprovedJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.pnlJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlDisapproved.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlCancelled.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
@@ -450,5 +520,10 @@ namespace AccountingSystem.Views.Dashboard
         internal System.Windows.Forms.LinkLabel lnkApproved;
         internal System.Windows.Forms.LinkLabel lnkJEV;
         internal System.Windows.Forms.ComboBox cmbxFunds;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }
