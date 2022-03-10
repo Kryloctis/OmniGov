@@ -214,7 +214,6 @@ namespace AccountingSystem
             return dictUser;
         }
 
-
         #region ErrorProviders on Controls
 
         private static string GetFirstLetter(string word)
@@ -561,15 +560,15 @@ namespace AccountingSystem
             return false;
         }
 
-
         public static void DatagridViewRecordFinder(DataGridView dataGridView, string columnName, string value)
         {
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
                 // 0 is the column index
-                if (row.Cells[columnName].Value.ToString().Contains(value))
+                if (row.Cells[columnName].Value.ToString().StartsWith(value) && row.Cells[columnName].Value.ToString().EndsWith(value))
                 {
                     dataGridView.CurrentCell = row.Cells[columnName];
+                    row.Selected = true;
                     break;
                 }
             }

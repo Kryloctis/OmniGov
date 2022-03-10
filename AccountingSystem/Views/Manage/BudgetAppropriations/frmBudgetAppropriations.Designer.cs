@@ -319,6 +319,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnRealignment
             // 
+            this.btnRealignment.Enabled = false;
             this.btnRealignment.Image = global::AccountingSystem.Properties.Resources.modify_object_align_vertical_center_28px;
             this.btnRealignment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRealignment.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -330,6 +331,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnAugmentation
             // 
+            this.btnAugmentation.Enabled = false;
             this.btnAugmentation.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_arrow_up_2_28px;
             this.btnAugmentation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAugmentation.ImageTransparentColor = System.Drawing.Color.Magenta;

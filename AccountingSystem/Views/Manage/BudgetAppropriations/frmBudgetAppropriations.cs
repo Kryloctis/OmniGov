@@ -13,7 +13,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 {
     public partial class frmBudgetAppropriations : Form
     {
-
         public frmBudgetAppropriations()
         {
             InitializeComponent();
@@ -21,9 +20,24 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Value = DateTime.Now.Year;
         }
 
+        internal void DatagridViewRecordFinder(DataGridView dataGridView, string objectOfExpendituresValue, string subFPPValue)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                bool isFound = row.Cells["object_of_expenditures"].Value.ToString().StartsWith(objectOfExpendituresValue) && row.Cells["object_of_expenditures"].Value.ToString().EndsWith(objectOfExpendituresValue);
+
+                if (isFound)
+                {
+                    dataGridView.CurrentCell = row.Cells["object_of_expenditures"];
+                    row.Selected = true;
+                    break;
+                }
+            }
+        }
+
         private void ShowRecordTimeStamp(DataGridView dataGridView)
         {
-            if (dataGridView.SelectedRows.Count == 1)
+            if (dataGridView.SelectedRows.Count == 1 && dataGridView.CurrentRow.Cells["fpp_id"].Value != null)
             {
                 int rowIndex = dataGridView.CurrentCell.RowIndex;
 
@@ -115,8 +129,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = true;
-                btnRealignment.Enabled = true;
-                btnAugmentation.Enabled = true;
             }
             else if (SelectedRows > 1 && dgv.SelectedCells[0].Value != null)
             {
@@ -124,8 +136,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
                 btnSupplementalAppropriations.Enabled = false;
-                btnRealignment.Enabled = false;
-                btnAugmentation.Enabled = false;
             }
             else
             {
@@ -133,8 +143,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnDelete.Enabled = false;
                 btnDelete.Text = "Delete";
                 btnSupplementalAppropriations.Enabled = true;
-                btnRealignment.Enabled = false;
-                btnAugmentation.Enabled = false;
             }
 
             if (cmbxFPP.SelectedIndex == -1 || cmbxAllotmentClass.SelectedIndex == -1 || cmbxFunds.SelectedIndex == -1)
@@ -351,17 +359,25 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         private void ShowSupplementalAppropriations()
         {
             var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
-            var supplementalAppropriationsMainUserControl = frmSupplementalAppropriationsMain.ucSupplementalAppropriations1;
-            var year = nudYear.Value;
-            string fundName = cmbxFunds.Text;
-            string FPPName = cmbxFPP.Text;
-            string allotmentClassName = cmbxAllotmentClass.Text;
 
-            supplementalAppropriationsMainUserControl.txtYear.Text = year.ToString();
-            supplementalAppropriationsMainUserControl.txtFund.Text = fundName;
-            supplementalAppropriationsMainUserControl.txtFPP.Text = FPPName;
-            supplementalAppropriationsMainUserControl.txtAllotmentClass.Text = allotmentClassName;
-            supplementalAppropriationsMainUserControl.dtpDateEntry.MinDate = new DateTime((int)year, 1, 1);
+            if (dgBudgetAppropriations.SelectedRows.Count == 1)
+            {
+                int rowIndex = dgBudgetAppropriations.CurrentRow.Index;
+                int budgetAppropriationId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
+                frmSupplementalAppropriationsMain.budgetAppropriationId = budgetAppropriationId;
+            }
+
+
+            int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
+            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int allotmentClassId = Convert.ToInt32(cmbxAllotmentClass.SelectedValue);
+            int year = Convert.ToInt16(nudYear.Value);
+
+            frmSupplementalAppropriationsMain.fppId = fppId;
+            frmSupplementalAppropriationsMain.fundId = fundId;
+            frmSupplementalAppropriationsMain.allotmentClassId = allotmentClassId;
+            frmSupplementalAppropriationsMain.year = year;
+
             frmSupplementalAppropriationsMain.ShowDialog();
         }
 

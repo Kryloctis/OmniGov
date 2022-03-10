@@ -24,6 +24,22 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool Insert(List<SupplementalAppropriationsModel> supplementalAppropriationsModelList, int budgetAppropriationId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                _ = DeleteByBudgerAppropriationId(budgetAppropriationId);
+
+                foreach (SupplementalAppropriationsModel supplementalAppropriationsModel in supplementalAppropriationsModelList)
+                {
+                    _ = Insert(supplementalAppropriationsModel);
+                }
+
+                scope.Complete();
+                return true;
+            };
+        }
+
         public bool Delete(List<SupplementalAppropriationsModel> entityList)
         {
             try
@@ -48,6 +64,23 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public bool DeleteByBudgerAppropriationId(int budgetAppropriationId)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId}
+                };
+
+                string query = $"DELETE FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+                _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -117,12 +150,12 @@ namespace ACC.Data
             try
             {
                 var parameters = new object[][]
-              {
+                {
                     new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationID},
                     new object[] { "@date_entry", DbType.Date, entity.date_entry.Date},
                     new object[] { "@amount", DbType.Decimal, entity.amount},
                     new object[] { "@remarks", DbType.String, entity.remarks},
-              };
+                };
 
                 string query = $"INSERT INTO {tableName} (budget_appropriations_id, date_entry, amount, remarks) VALUES (@budget_appropriations_id, @date_entry, @amount, @remarks)";
                 return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
@@ -162,14 +195,13 @@ namespace ACC.Data
                 new object[] { "@budget_appropriations_id",DbType.Int32, budgetAppropriationsId }
             };
 
-            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks, created_at, updated_at FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+            string query = $"SELECT id, budget_appropriations_id, date_entry, amount, remarks FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
 
             var dtSupplementalApprorpriation = new DataTable();
 
             return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
-        //SAAOB and SAAOBB
         public DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry)
         {
             var parameters = new object[][]
@@ -184,8 +216,6 @@ namespace ACC.Data
                 $"date_entry, " +
                 $"amount, " +
                 $"remarks, " +
-                $"created_at, " +
-                $"updated_at " +
                 $"FROM {tableName} " +
                 $"WHERE " +
                 $"budget_appropriations_id = @budget_appropriations_id " +
@@ -196,11 +226,6 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
-        //DASHBOARD
-
-        #region BUDGET DASHBOARD
-
-        //SUMMARY
         public decimal GetSumSupplementalAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
         {
             var parameters = new object[][]
@@ -242,7 +267,6 @@ namespace ACC.Data
             return supplementalAppropriations;
         }
 
-        //DETAILED
         public decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry)
         {
             try
@@ -266,7 +290,16 @@ namespace ACC.Data
             }
         }
 
-        #endregion    
+        public decimal GetSumSupplementalAppropriationsByBudgetAppropriationsId(int budgetAppropriationId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
+            };
+            string query = $"SELECT COALESCE(SUM(amount),0) AS amount FROM {tableName} WHERE budget_appropriations_id = @budget_appropriations_id";
+            decimal supplementalAmount = Convert.ToDecimal(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+            return supplementalAmount;
+        }
     }
 
 }

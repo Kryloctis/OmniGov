@@ -360,7 +360,7 @@ namespace AccountingSystem
 
             datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
             datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-            
+
             datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["date_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -1623,8 +1623,7 @@ namespace AccountingSystem
                 string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                 //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(rowId);
-                decimal totalSupplementalAppropriation = Convert.ToDecimal(dtSupplementalAppropriation.Rows.Count == 0 ? 0 : dtSupplementalAppropriation.Compute("Sum(amount)", string.Empty));
+                decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(rowId);
 
 
                 //GET TOTAL ALLOTMENT RELEASE
@@ -1964,62 +1963,30 @@ namespace AccountingSystem
 
         #region Supplemental Appropriations
 
-        internal static void SupplementalDatagridView(DataTable dataTable, DataGridView dgv)
+        internal static void SupplementalDatagridView(DataGridView dgv)
         {
             try
             {
-                Helper.DatagridDefaultStyle(dgv, true);
-
-                //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgv.Rows.Clear();
                 dgv.Columns.Clear();
 
-                //Set up new Columns to Datagrid View
-                dgv.Columns.Add("id", "id");
-                dgv.Columns.Add("budget_appropriations_id", "Budget Appropriation ID");
                 dgv.Columns.Add("date_entry", "Date Entry");
                 dgv.Columns.Add("amount", "Amount");
                 dgv.Columns.Add("remarks", "Remarks");
                 dgv.Columns.Add("created_at", "Created at");
                 dgv.Columns.Add("updated_at", "Updated at");
 
-                //Set up Column Format
-                dgv.Columns["id"].Visible = false;
                 dgv.Columns["created_at"].Visible = false;
                 dgv.Columns["updated_at"].Visible = false;
-                dgv.Columns["budget_appropriations_id"].Visible = false;
-                dgv.Columns["date_entry"].Visible = false;
+
+                #region Format
                 dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
+                dgv.Columns["date_entry"].DefaultCellStyle.Format = "MMM. dd, yyyy";
+                #endregion
 
-                dgv.Columns["id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["budget_appropriations_id"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["date_entry"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["remarks"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["created_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgv.Columns["updated_at"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                //Load by loop All Budget Appropriations Records with Others FPP 
-                foreach (DataRow drAllotmentRelease in dataTable.Rows)
-                {
-                    dgv.Rows.Add(new object[] {
-                            drAllotmentRelease["id"],
-                            drAllotmentRelease["budget_appropriations_id"],
-                            drAllotmentRelease["date_entry"],
-                            drAllotmentRelease["amount"],
-                            drAllotmentRelease["remarks"],
-                            drAllotmentRelease["created_at"],
-                            drAllotmentRelease["updated_at"] });
-                }
-
-                dgv.ClearSelection();
-                Helper.DatagridFullRowSelectStyle(dgv, true);
                 dgv.ShowCellToolTips = false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         #endregion Supplemental Appropriations

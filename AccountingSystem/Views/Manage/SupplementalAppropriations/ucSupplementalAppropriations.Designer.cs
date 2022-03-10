@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.nudAmount.DecimalPlaces = 2;
             this.nudAmount.Location = new System.Drawing.Point(67, 32);
             this.nudAmount.Maximum = new decimal(new int[] {
-            999999,
+            999999999,
             0,
             0,
             0});
@@ -70,6 +70,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.nudAmount.Size = new System.Drawing.Size(330, 23);
             this.nudAmount.TabIndex = 2;
             this.nudAmount.ThousandsSeparator = true;
+            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
+            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
             // 
             // label2
             // 
@@ -92,6 +94,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             // txtRemarks
             // 
             this.txtRemarks.Location = new System.Drawing.Point(67, 61);
+            this.txtRemarks.MaxLength = 999999;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(330, 23);
             this.txtRemarks.TabIndex = 3;
@@ -113,6 +116,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             this.Controls.Add(this.label1);
             this.Name = "ucSupplementalAppropriations";
             this.Size = new System.Drawing.Size(416, 87);
+            this.Load += new System.EventHandler(this.ucSupplementalAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

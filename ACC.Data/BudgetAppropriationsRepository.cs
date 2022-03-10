@@ -11,12 +11,20 @@ namespace ACC.Data
     public class BudgetAppropriationsRepository : IBudgetAppropriationsRepository
     {
         private MySqlGenericCommands mySqlGenericCommands;
+        private ISupplementalAppropriationsRepository _ISupplementalAppropriationsRepository;
         private readonly string tableName = "budget_appropriations";
         private readonly string viewTableName = "view_budget_appropriations";
 
-        public BudgetAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands)
+        public BudgetAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands, ISupplementalAppropriationsRepository iSupplementalAppropriationsRepository)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
+            _ISupplementalAppropriationsRepository = iSupplementalAppropriationsRepository;
+        }
+
+        public int GetLastInsertedID()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return int.Parse(mySqlGenericCommands.ExecuteScalar(query));
         }
 
         public bool Insert(BudgetAppropriationsModel entity)
@@ -67,6 +75,28 @@ namespace ACC.Data
                 throw;
             }
 
+        }
+
+        public bool Insert(BudgetAppropriationsModel budgetAppropriationsModel, List<SupplementalAppropriationsModel> supplementalAppropriationsModelList)
+        {
+            using (var scope = new TransactionScope())
+            {
+
+                _ = Insert(budgetAppropriationsModel);
+
+                int lastInsertedBudgetApppropriationId = GetLastInsertedID();
+
+                _ISupplementalAppropriationsRepository.DeleteByBudgerAppropriationId(lastInsertedBudgetApppropriationId);
+
+                foreach (SupplementalAppropriationsModel supplementalAppropriationsModel in supplementalAppropriationsModelList)
+                {
+                    supplementalAppropriationsModel.BudgetAppropriationID = lastInsertedBudgetApppropriationId;
+                    _ = _ISupplementalAppropriationsRepository.Insert(supplementalAppropriationsModel);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool Update(BudgetAppropriationsModel entity)

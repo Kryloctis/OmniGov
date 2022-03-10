@@ -218,8 +218,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // dgFunctionalProgramProject
             // 
-            this.dgFunctionalProgramProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgFunctionalProgramProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFunctionalProgramProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFunctionalProgramProject.Location = new System.Drawing.Point(8, 37);
@@ -267,8 +267,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             // 
             // dgFuntionalClassificationServices
             // 
-            this.dgFuntionalClassificationServices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgFuntionalClassificationServices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFuntionalClassificationServices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgFuntionalClassificationServices.Location = new System.Drawing.Point(8, 39);
@@ -415,7 +415,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnLoadAllFsc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;

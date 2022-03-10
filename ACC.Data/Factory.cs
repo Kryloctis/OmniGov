@@ -68,7 +68,7 @@ namespace AccountingSystem
 
 
         //A part of Budget System
-        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(new MySqlGenericCommands());
+        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(mySqlGenericCommands, SupplementalAppropriationsRepository());
 
         public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(new MySqlGenericCommands(), AllotmentAccountRepository());
 
