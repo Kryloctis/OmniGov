@@ -981,7 +981,7 @@ namespace ACC.Data
                     break;
 
             }
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
 
             var dtGeneralLedgers = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
