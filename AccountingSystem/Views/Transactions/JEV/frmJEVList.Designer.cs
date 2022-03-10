@@ -343,7 +343,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgJEV;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.Button btnSearch;
@@ -364,5 +363,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.DataGridView dgJEV;
     }
 }
