@@ -18,9 +18,25 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal short year;
         internal decimal totalAllotmentRelease;
 
+
         public ucBudgetAppropriations()
         {
             InitializeComponent();
+        }
+
+        private void SetAppropriationInfoToolTip()
+        {
+
+            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
+
+            if (totalSupplementalApprorpriationAmount == 0)
+                return;
+
+            toolTip1.ToolTipTitle = "Info.";
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            toolTip1.ShowAlways = true;
+            string message = $"This Object Expenditure have the following: \n ● Supplemental Appropriation: {totalSupplementalApprorpriationAmount.ToString("N2")}";
+            toolTip1.SetToolTip(nudAmount, message);
         }
 
         internal string GetFormErrors()
@@ -320,6 +336,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                     LoadSubFPPByFPPIdCombobox(fppId);
                     LoadAccounts();
+                    SetAppropriationInfoToolTip();
                     cmbxAccount.SelectedIndex = -1;
                     cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
                 }
