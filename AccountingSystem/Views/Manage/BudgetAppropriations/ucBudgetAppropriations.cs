@@ -18,9 +18,25 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal short year;
         internal decimal totalAllotmentRelease;
 
+
         public ucBudgetAppropriations()
         {
             InitializeComponent();
+        }
+
+        private void SetAppropriationInfoToolTip()
+        {
+
+            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
+
+            if (totalSupplementalApprorpriationAmount == 0)
+                return;
+
+            toolTip1.ToolTipTitle = "Info.";
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            toolTip1.ShowAlways = true;
+            string message = $"This Object Expenditure have the following: \n ● Supplemental Appropriation: {totalSupplementalApprorpriationAmount.ToString("N2")}";
+            toolTip1.SetToolTip(nudAmount, message);
         }
 
         internal string GetFormErrors()
@@ -178,6 +194,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
+            AmountValidation(e);
+        }
+
+        private void AmountValidation(CancelEventArgs e)
+        {
             try
             {
                 decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
@@ -188,7 +209,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (string.IsNullOrEmpty(nudAmount.Text))
                     e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-                else if (nudAmount.Value == 0)
+                else if (totalAppropriationAmount == 0)
                 {
                     epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
                     e.Cancel = true;
@@ -315,6 +336,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                     LoadSubFPPByFPPIdCombobox(fppId);
                     LoadAccounts();
+                    SetAppropriationInfoToolTip();
                     cmbxAccount.SelectedIndex = -1;
                     cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
                 }

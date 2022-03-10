@@ -52,6 +52,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.txtYear = new System.Windows.Forms.TextBox();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epOthersFunctionProgramProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
@@ -143,14 +144,17 @@ namespace BudgetSystem.Views.BudgetAppropriations
             // 
             // epOthersFunctionProgramProject
             // 
+            this.epOthersFunctionProgramProject.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epOthersFunctionProgramProject.ContainerControl = this;
             // 
             // epAmount
             // 
+            this.epAmount.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epAmount.ContainerControl = this;
             // 
             // epGeneralLedgerAcc
             // 
+            this.epGeneralLedgerAcc.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.epGeneralLedgerAcc.ContainerControl = this;
             // 
             // dtDateEntry
@@ -245,6 +249,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
             this.label9.TabIndex = 14;
             this.label9.Text = "Remarks";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 0;
+            this.toolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.UseAnimation = false;
+            // 
             // ucBudgetAppropriations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -304,5 +315,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Label label9;
         internal System.Windows.Forms.TextBox txtRemarks;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
