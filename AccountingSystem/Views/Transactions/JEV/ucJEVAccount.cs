@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
-            cmbxAccount.DropDownHeight = 200;
         }
 
         internal string GetFormErrors()
@@ -94,7 +93,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //FPP
+
+        #region FPP
+
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -128,6 +129,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbFPP.DataSource = new BindingSource(fppDict, null);
                 cmbFPP.DisplayMember = "value";
                 cmbFPP.ValueMember = "key";
+                cmbFPP.DropDownHeight = 200;
             }
             catch (Exception ex)
             {
@@ -156,7 +158,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //ACCOUNT COMBOBOX
+        #endregion
+
+        #region General Ledger Accounts
+
         private DataTable DatatableAccounts()
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
@@ -203,6 +208,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbxAccount.DataSource = new BindingSource(accountDict, null);
                 cmbxAccount.DisplayMember = "value";
                 cmbxAccount.ValueMember = "key";
+                cmbxAccount.DropDownHeight = 200;
                 cmbxAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
                 Cursor.Current = Cursors.Default;
             }
@@ -238,6 +244,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbxAccount.DroppedDown = true;
             }
         }
+
+        #endregion
 
         private void radDebit_CheckedChanged(object sender, EventArgs e)
         {
