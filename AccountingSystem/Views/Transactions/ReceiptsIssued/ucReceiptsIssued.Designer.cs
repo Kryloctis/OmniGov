@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cmbCollector.Location = new System.Drawing.Point(127, 31);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
-            this.cmbCollector.Size = new System.Drawing.Size(400, 23);
+            this.cmbCollector.Size = new System.Drawing.Size(456, 23);
             this.cmbCollector.TabIndex = 4;
             this.cmbCollector.SelectedIndexChanged += new System.EventHandler(this.cmbcollector_SelectedIndexChanged);
             this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cmbReceipt.Location = new System.Drawing.Point(127, 59);
             this.cmbReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbReceipt.Name = "cmbReceipt";
-            this.cmbReceipt.Size = new System.Drawing.Size(400, 23);
+            this.cmbReceipt.Size = new System.Drawing.Size(456, 23);
             this.cmbReceipt.TabIndex = 5;
             this.cmbReceipt.SelectionChangeCommitted += new System.EventHandler(this.cmbReceipt_SelectionChangeCommitted);
             this.cmbReceipt.Validating += new System.ComponentModel.CancelEventHandler(this.cmbreceipt_Validating);
@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtReceiptQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReceiptQuantity.Name = "txtReceiptQuantity";
             this.txtReceiptQuantity.ReadOnly = true;
-            this.txtReceiptQuantity.Size = new System.Drawing.Size(400, 23);
+            this.txtReceiptQuantity.Size = new System.Drawing.Size(456, 23);
             this.txtReceiptQuantity.TabIndex = 11;
             this.txtReceiptQuantity.Validating += new System.ComponentModel.CancelEventHandler(this.txtquantity_Validating);
             this.txtReceiptQuantity.Validated += new System.EventHandler(this.txtquantity_Validated);
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             0,
             0});
             this.nudReceiptIssuedFrom.Name = "nudReceiptIssuedFrom";
-            this.nudReceiptIssuedFrom.Size = new System.Drawing.Size(400, 23);
+            this.nudReceiptIssuedFrom.Size = new System.Drawing.Size(456, 23);
             this.nudReceiptIssuedFrom.TabIndex = 12;
             this.nudReceiptIssuedFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudReceiptIssuedFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
@@ -211,7 +211,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             0,
             0});
             this.nudReceiptIssuedTo.Name = "nudReceiptIssuedTo";
-            this.nudReceiptIssuedTo.Size = new System.Drawing.Size(400, 23);
+            this.nudReceiptIssuedTo.Size = new System.Drawing.Size(456, 23);
             this.nudReceiptIssuedTo.TabIndex = 13;
             this.nudReceiptIssuedTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudReceiptIssuedTo.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
@@ -222,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // cbCollector
             // 
             this.cbCollector.AutoSize = true;
-            this.cbCollector.Location = new System.Drawing.Point(452, 8);
+            this.cbCollector.Location = new System.Drawing.Point(504, 8);
             this.cbCollector.Name = "cbCollector";
             this.cbCollector.Size = new System.Drawing.Size(85, 19);
             this.cbCollector.TabIndex = 14;
@@ -250,7 +250,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucReceiptsIssued";
-            this.Size = new System.Drawing.Size(558, 176);
+            this.Size = new System.Drawing.Size(610, 176);
             this.Load += new System.EventHandler(this.ucReceiptsIssued_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.epReceipt)).EndInit();

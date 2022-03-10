@@ -233,21 +233,26 @@ namespace ACC.Data
 
         public DataTable GetRecordsByRCDNO(string RCDNo)
         {
-            try
-            {
-                var parameter = new object[][] {
-                    new object[]{"@rcdNo", DbType.String, RCDNo}
-                };
+            var parameter = new object[][] {
+                new object[]{"@rcd_no", DbType.String, RCDNo}
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE rcd_no = @rcdNo";
-                var dtRCD = new DataTable();
+            string query = $"SELECT " +
+                           $"collectors_report_id, " +
+                           $"collecting_officers_id, " +
+                           $"collecting_officers_first_name, " +
+                           $"collecting_officers_mid_initial, " +
+                           $"collecting_officers_last_name, " +
+                           $"job_orders_id, " +
+                           $"job_orders_first_name, " +
+                           $"job_orders_mid_initial, " +
+                           $"job_orders_last_name, " +
+                           $"report_no, " +
+                           $"amount " +
+                           $"FROM {viewTableName} WHERE rcd_no = @rcd_no";
 
-                return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

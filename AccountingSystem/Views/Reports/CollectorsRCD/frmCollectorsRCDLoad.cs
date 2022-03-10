@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private DataTable dtPaymentCollection;
 
         public frmCollectorsRCDLoad(byte fundId, ushort collectorId, ucCollectorsRCD uc)
-        {
+        { 
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             HelperLoadRecords.PaymentCollectionReportDatagrid(dtPaymentCollection, _uc.dgPayments);
             _uc.TotalCollections();
-            this.Close();
+            Close();
         }
 
         private void dtfrom_DateChanged(object sender, DateRangeEventArgs e)
@@ -92,6 +92,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             lblCollectionsTo.Text = dtto.SelectionRange.Start.ToShortDateString();
         }
-
     }
 }

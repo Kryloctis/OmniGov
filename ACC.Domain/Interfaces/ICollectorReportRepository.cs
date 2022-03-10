@@ -11,22 +11,14 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, string> GetRecordByID(string reportNo);
 
         bool Delete(CollectorReportModel entity);
-        bool CodeExist(string id);
-        bool HasGenerated(int paymentCollectionsId);
 
         bool ReportNumberExist(string reporNo);
         bool ReportNumberExist(int reportId, string reporNo);
-
-        DataTable GetSummary(int cid, int fid, int year);
-        int InsertId(CollectorReportModel entity);
         bool HasReported(int id);
-        bool Approved(CollectorReportModel entity);
-        bool Cancel(int id);
 
-        int GetReportId(int collectorId, string collectorReporrtNumber);
-        DataTable GetRecords(int approved, string status, int fid, string date);
-        bool Remarks(CollectorReportModel entity);
-        DataTable GetRecords(string id);
+        bool HasGenerated(int paymentCollectionsId);
+
+        int GetReportId(int collectorId, string collectorReportNumber);
         DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId);
         DataTable FilterRecords(string status, byte fundId, string keySearch);
 

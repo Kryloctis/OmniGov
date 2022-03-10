@@ -145,8 +145,13 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
             {
                 foreach (DataRow item in dt.Rows)
                 {
+                    string collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
+
+                    if (!string.IsNullOrEmpty(item["job_orders_id"].ToString()))
+                        collectingOfficer = $"{item["job_orders_first_name"]} {item["job_orders_mid_initial"]}. {item["job_orders_last_name"]}";
+
                     DataRow row = dtFromDataSource.NewRow();
-                    row["name_of_accountable_officer"] = item["collecting_officer"];
+                    row["name_of_accountable_officer"] = collectingOfficer;
                     row["report_no"] = item["report_no"];
                     row["amount"] = item["amount"];
                     dtFromDataSource.Rows.Add(row);

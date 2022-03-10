@@ -68,15 +68,15 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 {
                     if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                     {
+                        var issuedReceiptRepo = Factory.ReceiptsIssuedRepository();
+
                         var repository = Factory.CollectingOfficerRepository();
                         var modelList = new List<CollectingOfficerModel>();
                         foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                         {
                             int OfficerID = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            if (!repository.CollectingOfficerHasReceiptAssigned(OfficerID))
-                            {
+                            if (!issuedReceiptRepo.CollectingOfficerHasReceiptAssigned(OfficerID))
                                 modelList.Add(new CollectingOfficerModel() { Id = OfficerID });
-                            }                            
                         }
                         _ = repository.Delete(modelList);
                         LoadRecords();
@@ -104,9 +104,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
-            var collectingOfficerRepo = Factory.CollectingOfficerRepository();
+            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
 
-            btnDelete.Enabled = collectingOfficerRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
+            btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
             btnJobOrder.Enabled = selectedRowCount == 1;
         }
 

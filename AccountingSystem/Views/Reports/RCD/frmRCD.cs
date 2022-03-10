@@ -64,20 +64,21 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
                 var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
-                string reportId = string.Empty;
-                string collectingOfficer = string.Empty;
-                string reportNo = string.Empty;
-                string reportNoChecker = string.Empty;
-                string amount = string.Empty;
-
+                string reportId;
+                string collectingOfficer;
+                string reportNo;
+                string amount;
 
                 foreach (DataRow row in dtRCD.Rows)
                 {
                     reportId = row["collectors_report_id"].ToString();
-                    collectingOfficer = row["collecting_officer"].ToString();
+                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]} ";
+
+                    if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
+                        collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]} ";
+
                     reportNo = row["report_no"].ToString();
                     amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
-
 
                     object[] reportRow = new object[]
                     {
@@ -129,7 +130,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private void ResetForm()
         {
             txtRCDNo.Text = string.Empty;
-            dtpdate.Value = DateTime.Now;
+            dtpDate.Value = DateTime.Now;
             panelRCD.Enabled = true;
 
             btnDeposit.Enabled = false;
@@ -155,7 +156,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 var generalCollectionModel = new GeneralCollectionsModel()
                 {
                     RcdNo = txtRCDNo.Text,
-                    Rcddate = Convert.ToDateTime(dtpdate.Value),
+                    Rcddate = Convert.ToDateTime(dtpDate.Value),
                     FundId = Convert.ToInt32(cmbfunds.SelectedValue),
                     Userid = Helper.UserId
                 };

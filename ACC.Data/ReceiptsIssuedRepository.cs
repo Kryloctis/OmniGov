@@ -444,5 +444,19 @@ namespace ACC.Data
                 return false;
         }
 
+        public bool CollectingOfficerHasReceiptAssigned(int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@collecting_officer_id", DbType.Int32, id },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE collecting_officers_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            return false;
+        }
     }
 }

@@ -158,7 +158,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable CollectorsReports()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
-            DataTable dt = Factory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
+            //DataTable dt = Factory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
             return dtFromDataSource;
         }
 
@@ -173,8 +173,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     DataRow row = dtFromDataSource.NewRow();
                     row["type_of_form"] = item["accountable_forms"];
-                    row["serial_no_from"] = item["report_number_from"];
-                    row["serial_no_to"] = item["report_number_to"];
+                    row["serial_no_from"] = Convert.ToInt32(item["report_number_from"]).ToString("D8");
+                    row["serial_no_to"] = Convert.ToInt32(item["report_number_to"]).ToString("D8");
                     row["amount"] = item["amount"];
                     dtFromDataSource.Rows.Add(row);
                 }
@@ -192,10 +192,15 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             {
                 foreach (DataRow item in dt.Rows)
                 {
+                    string collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
+
+                    if (!string.IsNullOrEmpty(item["job_orders_id"].ToString()))
+                        collectingOfficer = $"{item["job_orders_first_name"]} {item["job_orders_mid_initial"]}. {item["job_orders_last_name"]} / {collectingOfficer}";
+                   
                     DataRow row = dtFromDataSource.NewRow();
                     row["report_no"] = item["report_no"];
                     row["date"] = item["date"];
-                    row["officer"] = item["collecting_officer"];
+                    row["officer"] = collectingOfficer;
                     row["fund"] = item["fund_name"];
                     dtFromDataSource.Rows.Add(row);
                 }
@@ -203,7 +208,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             return dtFromDataSource;
         }
-
 
 
     }
