@@ -1623,7 +1623,7 @@ namespace AccountingSystem
                 string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                 //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(rowId);
+                decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
 
 
                 //GET TOTAL ALLOTMENT RELEASE
@@ -1888,7 +1888,7 @@ namespace AccountingSystem
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                     //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                    decimal supplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriations(rowId, dateAsOf);
+                    decimal supplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(rowId, dateAsOf);
 
                     //GET TOTAL ALLOTMENT RELEASE
                     decimal allotments = Factory.AllotmentReleaseRepository().GetSumAllotments(rowId, dateAsOf);

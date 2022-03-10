@@ -27,7 +27,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void SetAppropriationInfoToolTip()
         {
 
-            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
+            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
 
             if (totalSupplementalApprorpriationAmount == 0)
                 return;
@@ -201,7 +201,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
+                decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
 
                 decimal appropriationAmount = nudAmount.Value;
 
