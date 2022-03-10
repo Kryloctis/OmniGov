@@ -74,14 +74,15 @@ namespace AccountingSystem.Views.Dashboard
         internal void LoadJEVCounter()
         {
             string journalName = cmbxJournals.Text.Trim();
+            string fundName = cmbxFunds.Text.Trim();
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = Factory.JEVRepository().GetJEVCount(string.Empty, journalName, month, year);
-            var approvedJEVCount = Factory.JEVRepository().GetJEVCount("approved", journalName, month, year);
-            var pendingJEVCount = Factory.JEVRepository().GetJEVCount("pending", journalName, month, year);
-            var disapprovedJEVCOunt = Factory.JEVRepository().GetJEVCount("disapproved", journalName, month, year);
-            var cancelledJEVCount = Factory.JEVRepository().GetJEVCount("cancelled", journalName, month, year);
+            var jevCount = Factory.JEVRepository().GetJEVCount(string.Empty, journalName, fundName, month, year);
+            var approvedJEVCount = Factory.JEVRepository().GetJEVCount("approved", journalName, fundName, month, year);
+            var pendingJEVCount = Factory.JEVRepository().GetJEVCount("pending", journalName, fundName, month, year);
+            var disapprovedJEVCOunt = Factory.JEVRepository().GetJEVCount("disapproved", journalName, fundName, month, year);
+            var cancelledJEVCount = Factory.JEVRepository().GetJEVCount("cancelled", journalName, fundName, month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();
@@ -170,6 +171,11 @@ namespace AccountingSystem.Views.Dashboard
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadJEVCounter();
+        }
+
+        private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadJEVCounter();
         }

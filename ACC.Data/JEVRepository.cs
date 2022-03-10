@@ -815,18 +815,20 @@ namespace ACC.Data
         #endregion
 
 
-        public int GetJEVCount(string status, string journalName, short month, short year)
+        public int GetJEVCount(string status, string journalName, string fundName, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@journal_name", DbType.String, journalName },
+                    new object[] { "@fund_name", DbType.String, fundName},
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
                 };
 
                 string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
+                string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
 
                 string statusQuery;
 
@@ -853,7 +855,7 @@ namespace ACC.Data
                         break;
                 }
 
-                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -1128,7 +1130,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
     }
 }
