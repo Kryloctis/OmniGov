@@ -641,44 +641,19 @@ namespace ACC.Data
             }
         }
 
-        public string GetLastJevNoSeries()
+        public string GetLastJevNoSeries(int fundId)
         {
-            try
+            var parameters = new object[][]
             {
-                string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName}";
-                return _dbGenericCommands.ExecuteScalar(query);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool JevNumberExist(string jevNo, int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@funds_id", DbType.Int32, fundId}
             };
 
-            return false;
+            string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
+            return _dbGenericCommands.ExecuteScalar(query, parameters);
         }
 
-        public Dictionary<string, string> GetViewRecordByJEV(string jevNo)
+
+        public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
         {
             var record = new Dictionary<string, string>();
 
@@ -686,7 +661,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_no", DbType.String, jevNo},
+                    new object[] { "@id", DbType.Int32, jevId},
                 };
 
                 string query = $"SELECT id, " +
@@ -712,7 +687,7 @@ namespace ACC.Data
                     $"updated_by, " +
                     $"updated_by_name " +
                     $"FROM {viewTableName} " +
-                    $"WHERE jev_no = @jev_no";
+                    $"WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -783,17 +758,21 @@ namespace ACC.Data
             };
         }
 
-        public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
+
+        #region  Validations 
+
+        public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                    new object[] { "@jev_date_of_entry", DbType.Int16, jevEntryDate },
+                    new object [] { "@jev_no", DbType.String, jevNo },
+                    new object [] { "@funds_id", DbType.Int32, fundId},
+                    new object [] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND YEAR(date_entry) = @jev_date_of_entry";
+                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -807,18 +786,49 @@ namespace ACC.Data
             return false;
         }
 
-        public int GetJEVCount(string status, string journalName, short month, short year)
+        public bool JevNumberExistBy_JevId_JevNo_FundId_Year(int id, string jevNo, int fundId, int year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@jev_no", DbType.String, jevNo },
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        #endregion
+
+
+        public int GetJEVCount(string status, string journalName, string fundName, short month, short year)
         {
             try
             {
                 var parameters = new object[][]
                 {
                     new object[] { "@journal_name", DbType.String, journalName },
+                    new object[] { "@fund_name", DbType.String, fundName},
                     new object[] { "@month", DbType.Int16, month},
                     new object[] { "@year", DbType.Int16, year}
                 };
 
                 string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
+                string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
 
                 string statusQuery;
 
@@ -845,7 +855,7 @@ namespace ACC.Data
                         break;
                 }
 
-                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
+                string query = $"SELECT COUNT(*) FROM {viewTableName} WHERE {statusQuery} {journalQuery} {fundQuery} MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
             }
@@ -936,11 +946,12 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, short month, short year)
+        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journal_name", DbType.String, journalName},
+                new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                 new object[] { "@month", DbType.Int16, month},
                 new object[] { "@year", DbType.Int16, year}
@@ -948,6 +959,7 @@ namespace ACC.Data
 
 
             string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
+            string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
             string jevStatusQuery;
 
             switch (jevStatus)
@@ -969,7 +981,7 @@ namespace ACC.Data
                     break;
 
             }
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
 
             var dtGeneralLedgers = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
@@ -1118,7 +1130,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
     }
 }

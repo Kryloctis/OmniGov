@@ -16,16 +16,17 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEVAccount()
         {
             InitializeComponent();
-            cmbxAccount.DropDownHeight = 200;
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epFPP.GetError(cmbFPP);
-            errorArray[1] = epAccount.GetError(cmbxAccount);
-            errorArray[2] = epAmount.GetError(nudAmount);
-            errorArray[3] = epObligationNo.GetError(txtObligationNo);
+            var errorArray = new string[]
+            {
+                epFPP.GetError(cmbFPP),
+                epAccount.GetError(cmbxAccount),
+                epAmount.GetError(nudAmount),
+                epObligationNo.GetError(txtObligationNo)
+            };
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -92,7 +93,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //FPP
+
+        #region FPP
+
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -126,6 +129,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbFPP.DataSource = new BindingSource(fppDict, null);
                 cmbFPP.DisplayMember = "value";
                 cmbFPP.ValueMember = "key";
+                cmbFPP.DropDownHeight = 200;
             }
             catch (Exception ex)
             {
@@ -154,7 +158,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        //ACCOUNT COMBOBOX
+        #endregion
+
+        #region General Ledger Accounts
+
         private DataTable DatatableAccounts()
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
@@ -201,6 +208,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbxAccount.DataSource = new BindingSource(accountDict, null);
                 cmbxAccount.DisplayMember = "value";
                 cmbxAccount.ValueMember = "key";
+                cmbxAccount.DropDownHeight = 200;
                 cmbxAccount.SelectedValueChanged += new EventHandler(cmxbAccount_SelectedValueChanged);
                 Cursor.Current = Cursors.Default;
             }
@@ -236,6 +244,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbxAccount.DroppedDown = true;
             }
         }
+
+        #endregion
 
         private void radDebit_CheckedChanged(object sender, EventArgs e)
         {

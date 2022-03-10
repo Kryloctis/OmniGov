@@ -34,12 +34,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (_frmJEVList != null)
             {
-                LoadSelectedJEV(uc.jevNo);
+                LoadSelectedJEV(uc.jevId);
                 GetJevStatus(uc.jevId);
             }
             else
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
-
 
             uc.SumDebitCredit();
             PermissionVerification();
@@ -954,14 +953,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        internal void LoadSelectedJEV(string jevNo)
+        internal void LoadSelectedJEV(int jevId)
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 Enabled = true;
-                uc.txtJEVNo.Text = jevNo;
-
-                Dictionary<string, string> jevDict = Factory.JEVRepository().GetViewRecordByJEV(jevNo);
+                Dictionary<string, string> jevDict = Factory.JEVRepository().GetViewRecordByJEVId(jevId);
 
                 LoadCheckDisbursementsDataIfExist(uc.jevId);
                 LoadCashReceiptsDataIfExist(uc.jevId);
@@ -1001,11 +999,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                 GetJevStatus(uc.jevId);
 
                 btnSave.Text = "&Update";
+
+                Cursor = Cursors.Default;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

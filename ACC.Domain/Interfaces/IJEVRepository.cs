@@ -35,19 +35,23 @@ namespace ACC.Domain.Interfaces
 
         int GetLastInsertedID();
 
-        string GetLastJevNoSeries();
+        string GetLastJevNoSeries(int fundId);
 
-        Dictionary<string, string> GetViewRecordByJEV(string jevNo);
+        Dictionary<string, string> GetViewRecordByJEVId(int jevId);
 
         DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
-        bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
+        #region  Validations
 
-        bool JevNumberExist(string jevNo, int jevId);
+        bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year);
+
+        bool JevNumberExistBy_JevId_JevNo_FundId_Year(int jevId, string jevNo, int fundId, int year);
+
+        #endregion
 
         int JevCounterByJournal(string fundName, int month, int year, string journalName);
 
-        int GetJEVCount(string status, string journalName, short month, short year);
+        int GetJEVCount(string status, string journalName, string fundName, short month, short year);
 
         int TotalApproveJEV(short month, short year);
 
@@ -64,7 +68,7 @@ namespace ACC.Domain.Interfaces
         string GetRemarks(int jevId);
 
 
-        DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, short month, short year);
+        DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year);
 
         string GetJevStatus(int jevId);
 

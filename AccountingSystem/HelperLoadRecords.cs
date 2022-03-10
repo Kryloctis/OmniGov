@@ -772,7 +772,7 @@ namespace AccountingSystem
                     collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
                     collectingOfficerId = row["job_orders_id"].ToString();
                 }
-                
+
 
                 datagrid.Rows.Add(new object[]
                 {
@@ -2172,46 +2172,55 @@ namespace AccountingSystem
         {
             datagrid.Columns.Clear();
             datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("funds_id", "Funds ID");
-            datagrid.Columns.Add("journals_id", "Journals ID");
+            datagrid.Columns.Add("date_entry", "Date Entry");
             datagrid.Columns.Add("jev_no", "JEV No.");
             datagrid.Columns.Add("full_jev_no", "JEV No.");
-            datagrid.Columns.Add("date_entry", "Date Entry");
+            datagrid.Columns.Add("funds_id", "Funds ID");
+            datagrid.Columns.Add("fund_name", "Fund");
+            datagrid.Columns.Add("journals_id", "Journals ID");
+            datagrid.Columns.Add("journal_name", "Journal");
             datagrid.Columns.Add("ref_no", "Ref No.");
             datagrid.Columns.Add("payee", "Payee");
             datagrid.Columns.Add("explanation", "Explanation");
-            datagrid.Columns.Add("fund_code", "Fund Code");
             datagrid.Columns.Add("created_at", "Created At");
             datagrid.Columns.Add("created_by_id", "Created By ID");
             datagrid.Columns.Add("created_by_name", "Created By");
             datagrid.Columns.Add("updated_at", "Updated At");
             datagrid.Columns.Add("updated_by_id", "Updated By ID");
             datagrid.Columns.Add("updated_by_name", "Updated By");
-            datagrid.Columns.Add("journal_name", "Journal");
             datagrid.Columns.Add("status", "Status");
 
+
+            #region Datagrid Column Formats
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
             datagrid.Columns["full_jev_no"].Width = 60;
+            datagrid.Columns["full_jev_no"].MinimumWidth = 60;
+            datagrid.Columns["full_jev_no"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["ref_no"].Width = 60;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
+            datagrid.Columns["status"].Width = 40;
+            datagrid.Columns["status"].MinimumWidth = 40;
+            datagrid.Columns["status"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["created_by_name"].Width = 50;
-            datagrid.ShowCellToolTips = false;
             datagrid.Columns["payee"].Width = 100;
             datagrid.Columns["date_entry"].DefaultCellStyle.Format = "MMMM dd, yyyy";
             datagrid.Columns["date_entry"].Width = 60;
+            datagrid.Columns["date_entry"].MinimumWidth = 60;
+            datagrid.Columns["date_entry"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["jev_no"].Visible = false;
-            datagrid.Columns["fund_code"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["created_by_id"].Visible = false;
             datagrid.Columns["updated_by_id"].Visible = false;
             datagrid.Columns["updated_by_name"].Visible = false;
             datagrid.Columns["explanation"].Width = 100;
-            datagrid.Columns["status"].SortMode = DataGridViewColumnSortMode.Automatic;
             datagrid.Columns["journal_name"].Width = 200;
+
+            #endregion
 
         }
 
