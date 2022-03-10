@@ -53,11 +53,9 @@ namespace AccountingSystem.Views.Dashboard
             DataRow dr = dtFunds.NewRow();
             dr["id"] = 0;
             dr["fund_name"] = "All";
-
             dtFunds.Rows.InsertAt(dr, 0);
-            cmbxFunds.DataSource = dtFunds;
-            cmbxFunds.DisplayMember = "fund_name";
-            cmbxFunds.ValueMember = "id";
+
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
         private void LoadJournals()
@@ -100,9 +98,10 @@ namespace AccountingSystem.Views.Dashboard
         private void LoadJEVList(string jevStatus)
         {
             string journalName = cmbxJournals.Text.Trim();
+            string fundName = cmbxFunds.Text.Trim();
             byte month = Convert.ToByte(cbMonth.SelectedIndex);
-            int year = (int)nudYear.Value;
-            var _frmJEVList = new frmJEVList(journalName, month, year, this);
+            short year = (short)nudYear.Value;
+            var _frmJEVList = new frmJEVList(journalName, fundName, month, year, this);
 
             switch (jevStatus)
             {

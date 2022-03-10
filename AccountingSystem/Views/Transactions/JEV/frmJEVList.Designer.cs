@@ -31,6 +31,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             this.dgJEV = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.cmbxJournals = new System.Windows.Forms.ComboBox();
             this.cmbxJevStatus = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
@@ -57,20 +58,24 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // dgJEV
             // 
+            this.dgJEV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgJEV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgJEV.Location = new System.Drawing.Point(10, 33);
             this.dgJEV.Margin = new System.Windows.Forms.Padding(1);
             this.dgJEV.Name = "dgJEV";
             this.dgJEV.RowTemplate.Height = 25;
-            this.dgJEV.Size = new System.Drawing.Size(1083, 410);
+            this.dgJEV.Size = new System.Drawing.Size(1207, 463);
             this.dgJEV.TabIndex = 6;
+            this.dgJEV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgJEV_CellDoubleClick);
             this.dgJEV.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgJEV_ColumnAdded);
-            this.dgJEV.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgJEV_RowHeaderMouseDoubleClick);
             this.dgJEV.SelectionChanged += new System.EventHandler(this.dgJEV_SelectionChanged);
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.cmbxFunds);
             this.panel1.Controls.Add(this.cmbxJournals);
             this.panel1.Controls.Add(this.cmbxJevStatus);
             this.panel1.Controls.Add(this.nudYear);
@@ -80,14 +85,25 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1103, 30);
+            this.panel1.Size = new System.Drawing.Size(1227, 29);
             this.panel1.TabIndex = 7;
+            // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.Enabled = false;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(440, 3);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(141, 23);
+            this.cmbxFunds.TabIndex = 30;
+            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
             // 
             // cmbxJournals
             // 
             this.cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxJournals.FormattingEnabled = true;
-            this.cmbxJournals.Location = new System.Drawing.Point(10, 4);
+            this.cmbxJournals.Location = new System.Drawing.Point(168, 3);
             this.cmbxJournals.Name = "cmbxJournals";
             this.cmbxJournals.Size = new System.Drawing.Size(266, 23);
             this.cmbxJournals.TabIndex = 29;
@@ -103,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             "Approved",
             "Disapproved",
             "Cancelled"});
-            this.cmbxJevStatus.Location = new System.Drawing.Point(282, 3);
+            this.cmbxJevStatus.Location = new System.Drawing.Point(10, 3);
             this.cmbxJevStatus.Name = "cmbxJevStatus";
             this.cmbxJevStatus.Size = new System.Drawing.Size(152, 23);
             this.cmbxJevStatus.TabIndex = 28;
@@ -111,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(600, 3);
+            this.nudYear.Location = new System.Drawing.Point(747, 3);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -137,7 +153,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonth.FormattingEnabled = true;
-            this.cbMonth.Location = new System.Drawing.Point(440, 3);
+            this.cbMonth.Location = new System.Drawing.Point(587, 3);
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(154, 23);
             this.cbMonth.TabIndex = 26;
@@ -146,7 +162,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(1018, 3);
+            this.btnSearch.Location = new System.Drawing.Point(1141, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 23;
@@ -157,9 +173,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(724, 3);
+            this.txtSearch.Location = new System.Drawing.Point(884, 3);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(288, 23);
+            this.txtSearch.Size = new System.Drawing.Size(253, 23);
             this.txtSearch.TabIndex = 22;
             // 
             // panel2
@@ -176,10 +192,10 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSelect);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 447);
+            this.panel2.Location = new System.Drawing.Point(0, 497);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1103, 28);
+            this.panel2.Size = new System.Drawing.Size(1227, 28);
             this.panel2.TabIndex = 8;
             // 
             // panel6
@@ -274,7 +290,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(1011, 2);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(1135, 2);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -285,7 +302,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(923, 2);
+            this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelect.Location = new System.Drawing.Point(1047, 2);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -301,18 +319,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(1103, 475);
+            this.ClientSize = new System.Drawing.Size(1227, 525);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dgJEV);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(946, 449);
+            this.MinimumSize = new System.Drawing.Size(1243, 564);
             this.Name = "frmJEVList";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "List of JEVs";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmJEVList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgJEV)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -346,5 +363,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbxFunds;
     }
 }

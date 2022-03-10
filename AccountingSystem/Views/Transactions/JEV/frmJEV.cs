@@ -958,6 +958,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 Enabled = true;
                 uc.txtJEVNo.Text = jevNo;
 
@@ -1001,6 +1003,8 @@ namespace AccountingSystem.Views.Transactions.JEV
                 GetJevStatus(uc.jevId);
 
                 btnSave.Text = "&Update";
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {

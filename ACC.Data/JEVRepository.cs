@@ -944,11 +944,12 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, short month, short year)
+        public DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year)
         {
             var parameters = new object[][]
             {
                 new object[] { "@journal_name", DbType.String, journalName},
+                new object[] { "@fund_name", DbType.String, fundName},
                 new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%"},
                 new object[] { "@month", DbType.Int16, month},
                 new object[] { "@year", DbType.Int16, year}
@@ -956,6 +957,7 @@ namespace ACC.Data
 
 
             string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
+            string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
             string jevStatusQuery;
 
             switch (jevStatus)
@@ -977,7 +979,7 @@ namespace ACC.Data
                     break;
 
             }
-            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
+            string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (jev_no LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
 
             var dtGeneralLedgers = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
