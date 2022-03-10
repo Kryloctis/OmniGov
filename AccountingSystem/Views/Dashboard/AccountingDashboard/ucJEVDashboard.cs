@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Dashboard
                 LoadMonths();
                 LoadJournals();
                 LoadJEVCounter();
+                LoadFunds();
                 nudYear.Value = DateTime.Now.Year;
             }
         }
@@ -44,6 +45,19 @@ namespace AccountingSystem.Views.Dashboard
                 Helper.MessageBoxError(ex.Message);
             }
             return dataTable;
+        }
+
+        internal void LoadFunds()
+        {
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            DataRow dr = dtFunds.NewRow();
+            dr["id"] = 0;
+            dr["fund_name"] = "All";
+
+            dtFunds.Rows.InsertAt(dr, 0);
+            cmbxFunds.DataSource = dtFunds;
+            cmbxFunds.DisplayMember = "fund_name";
+            cmbxFunds.ValueMember = "id";
         }
 
         private void LoadJournals()
