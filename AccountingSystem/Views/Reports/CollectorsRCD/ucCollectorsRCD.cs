@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RCDCollector
 {
-
     public partial class ucCollectorsRCD : UserControl
     {
         internal ushort reportId;
         internal byte fundId;
         internal ushort collectorId;
+        internal ushort jobOrderId;
         internal bool isSaveFunction = true;
 
         public ucCollectorsRCD()
@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 LoadCurrentCollector();
             }
         }
+
         private void LoadCurrentCollector()
         {
             try

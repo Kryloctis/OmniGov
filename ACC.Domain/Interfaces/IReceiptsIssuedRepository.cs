@@ -14,5 +14,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetReturnedReceipts();
         DataTable GetReturnedReceiptsBySearch(string searchKey);
         int GetReceiptIssuedQuantityByReceiptId(int receiptId);
+        bool CollectingOfficerHasReceiptAssigned(int id);
     }
 }

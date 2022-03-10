@@ -173,6 +173,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.dgCollectorsReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgCollectorsReport.Location = new System.Drawing.Point(3, 37);
             this.dgCollectorsReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgCollectorsReport.MultiSelect = false;
             this.dgCollectorsReport.Name = "dgCollectorsReport";
             this.dgCollectorsReport.RowHeadersWidth = 51;
             this.dgCollectorsReport.RowTemplate.Height = 29;

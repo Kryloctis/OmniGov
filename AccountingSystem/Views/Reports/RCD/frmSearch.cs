@@ -11,6 +11,7 @@ namespace AccountingSystem.Views.Reports.RCD
         internal string reportNo;
         internal string rcdNo;
         internal string rcdId;
+        internal string rcdDate;
 
         private readonly frmRCD _frmRCD;
 
@@ -81,6 +82,7 @@ namespace AccountingSystem.Views.Reports.RCD
             _frmRCD.dgListOfApprovedReport.Rows.Clear();
             _frmRCD.txtRCDNo.Text = rcdNo;
             _frmRCD.rcdId = rcdId;
+            _frmRCD.dtpDate.Value = Convert.ToDateTime(rcdDate);
 
             _frmRCD.btnDeposit.Enabled = true;
             _frmRCD.btnPrint.Enabled = true;
@@ -98,16 +100,15 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 foreach (DataGridViewRow row in dgRCDSearch.SelectedRows)
                 {
-                    rcdId = row.Cells[0].Value.ToString();
-                    rcdNo = row.Cells[1].Value.ToString();
-                    reportNo = row.Cells[3].Value.ToString();
+                    rcdId = row.Cells["id"].Value.ToString();
+                    rcdNo = row.Cells["rcd_no"].Value.ToString();
+                    reportNo = row.Cells["report_no"].Value.ToString();
+                    rcdDate = row.Cells["date"].Value.ToString();
                 }
                 btnSelect.Enabled = true;
             }
             else
-            {
                 btnSelect.Enabled = false;
-            }
         }
 
         private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)

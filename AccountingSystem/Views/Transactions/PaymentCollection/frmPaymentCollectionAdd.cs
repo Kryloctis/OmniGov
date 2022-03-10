@@ -148,6 +148,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     return;
                 }
 
+                var collectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue);
 
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
@@ -160,6 +161,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text),
                     CreatedBy = Helper.UserId,
                 };
+
+                var regularCollectingOfficerId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
+
+                var isCollectorAJO = Convert.ToBoolean(regularCollectingOfficerId);
+
+                if (isCollectorAJO)
+                {
+                    paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
+                    paymentCollectionModel.JobOrderId = collectingOfficerId;
+                }
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
                 bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
