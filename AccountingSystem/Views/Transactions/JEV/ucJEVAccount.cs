@@ -21,11 +21,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epFPP.GetError(cmbFPP);
-            errorArray[1] = epAccount.GetError(cmbxAccount);
-            errorArray[2] = epAmount.GetError(nudAmount);
-            errorArray[3] = epObligationNo.GetError(txtObligationNo);
+            var errorArray = new string[]
+            {
+                epFPP.GetError(cmbFPP),
+                epAccount.GetError(cmbxAccount),
+                epAmount.GetError(nudAmount),
+                epObligationNo.GetError(txtObligationNo)
+            };
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();

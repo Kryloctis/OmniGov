@@ -35,15 +35,19 @@ namespace ACC.Domain.Interfaces
 
         int GetLastInsertedID();
 
-        string GetLastJevNoSeries();
+        string GetLastJevNoSeries(int fundId);
 
         Dictionary<string, string> GetViewRecordByJEV(string jevNo);
 
         DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
-        bool JevNumberAndYearExist(string jevNo, int jevEntryDate);
+        #region  Validations
 
-        bool JevNumberExist(string jevNo, int jevId);
+        bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year);
+
+        bool JevNumberExistBy_JevId_JevNo_FundId_Year(int jevId, string jevNo, int fundId, int year);
+
+        #endregion
 
         int JevCounterByJournal(string fundName, int month, int year, string journalName);
 

@@ -641,42 +641,17 @@ namespace ACC.Data
             }
         }
 
-        public string GetLastJevNoSeries()
+        public string GetLastJevNoSeries(int fundId)
         {
-            try
+            var parameters = new object[][]
             {
-                string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName}";
-                return _dbGenericCommands.ExecuteScalar(query);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool JevNumberExist(string jevNo, int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@funds_id", DbType.Int32, fundId}
             };
 
-            return false;
+            string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
+            return _dbGenericCommands.ExecuteScalar(query, parameters);
         }
+
 
         public Dictionary<string, string> GetViewRecordByJEV(string jevNo)
         {
@@ -783,17 +758,21 @@ namespace ACC.Data
             };
         }
 
-        public bool JevNumberAndYearExist(string jevNo, int jevEntryDate)
+
+        #region  Validations 
+
+        public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
         {
             try
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_no", DbType.String, jevNo },
-                    new object[] { "@jev_date_of_entry", DbType.Int16, jevEntryDate },
+                    new object [] { "@jev_no", DbType.String, jevNo },
+                    new object [] { "@funds_id", DbType.Int32, fundId},
+                    new object [] { "@year", DbType.Int16, year},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND YEAR(date_entry) = @jev_date_of_entry";
+                string query = $"SELECT * FROM {tableName} WHERE jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -806,6 +785,35 @@ namespace ACC.Data
 
             return false;
         }
+
+        public bool JevNumberExistBy_JevId_JevNo_FundId_Year(int id, string jevNo, int fundId, int year)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, id },
+                    new object[] { "@jev_no", DbType.String, jevNo },
+                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@year", DbType.Int16, year}
+                };
+
+                string query = $"SELECT id FROM {tableName} WHERE id <> @id AND jev_no = @jev_no AND funds_id = @funds_id AND YEAR(date_entry) = @year";
+                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        #endregion
+
 
         public int GetJEVCount(string status, string journalName, short month, short year)
         {
