@@ -410,26 +410,35 @@ namespace ACC.Data
             return false;
         }
 
-        public bool LinkedCollector(int id)
+        public bool LinkedJobOrder(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@users_id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT id FROM {tableName2} WHERE users_id = @users_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+               new object[] { "@users_id", DbType.Int32, id },
             };
 
+            string query = $"SELECT id FROM job_orders WHERE users_id = @users_id AND is_deleted = 0";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            return false;
+        }
+
+        public bool LinkedCollector(int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@users_id", DbType.Int32, id },
+            };
+
+            string query = $"SELECT id FROM {tableName2} WHERE users_id = @users_id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+           
             return false;
         }
 
@@ -665,6 +674,7 @@ namespace ACC.Data
             }
             return record;
         }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -7,5 +8,8 @@ namespace ACC.Domain.Interfaces
     {
         bool IsUserJobOrder(int userId);
         int GetJobOrderIdByUserId(int userId);
+
+        Dictionary<string, string> GetRecordByUserID(int Id);
+        
     }
 }

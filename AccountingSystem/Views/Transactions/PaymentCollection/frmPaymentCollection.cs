@@ -29,15 +29,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (cmdCollector.Items.Count > 0)
                 {
                     var uRepository = Factory.UsersRepository();
-                    if (uRepository.LinkedCollector(Helper.UserId))
+                    if (uRepository.LinkedCollector(Helper.UserId) || uRepository.LinkedJobOrder(Helper.UserId))
                     {
-                        var colRepository = Factory.CollectingOfficerRepository();
-                        var data = colRepository.GetRecordByUserID(Helper.UserId);
-                        cmdCollector.SelectedValue = data["id"];
-                        cmdCollector.Enabled = false;
+                       
+                        Dictionary<string, string> collectorDict = new();
 
+                        if (Helper.IsJobOrder(Helper.UserId))
+                        {
+                            var jobOrderRepo = Factory.JobOrderRepository();
+                            collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
+                            cmdCollector.SelectedValue = collectorDict["id"];
+                        }
+                        else
+                        {
+                            var colRepository = Factory.CollectingOfficerRepository();
+                            collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
+                            cmdCollector.SelectedValue = collectorDict["id"];
+                        }
+
+                        cmdCollector.Enabled = false;
                     }
-                    else 
+
+                    else
                     {
                         cmdCollector.SelectedIndex = -1;
                     }
@@ -45,7 +58,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -195,6 +207,5 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtSearch.Text = string.Empty;
             dtpDate.Value = DateTime.Now;
         }
-
     }
 }

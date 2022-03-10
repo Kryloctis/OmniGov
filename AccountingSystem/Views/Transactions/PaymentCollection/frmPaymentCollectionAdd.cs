@@ -135,7 +135,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 uc.CancelCashTicketFieldValidations(true);
                 SaveReceipts();
             }
-            
+
+            uc.txtPayee.Focus();
         }
 
         private void SaveCashTickets()

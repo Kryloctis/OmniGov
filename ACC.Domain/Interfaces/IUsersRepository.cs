@@ -25,7 +25,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsBySearch(string office, string searchTxt);
 
         DataTable GetViewRecords();
-
+        bool LinkedJobOrder(int id);
         bool LinkedCollector(int id);
 
         bool LinkedDisburser(int id);

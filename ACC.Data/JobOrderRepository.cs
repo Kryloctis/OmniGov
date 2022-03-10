@@ -114,5 +114,35 @@ namespace ACC.Data
             return int.Parse(mySqlGenericCommands.ExecuteScalar(query, parameter));
         }
 
+        public Dictionary<string, string> GetRecordByUserID(int Id)
+        {
+            var record = new Dictionary<string, string>();
+
+
+            var parameters = new object[][]
+            {
+                new object[] { "@users_id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT id, first_name, mid_initial, last_name, job_title, created_at, updated_at, users_id FROM {tableName} WHERE users_id = @users_id AND is_deleted = 0";
+
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+                record.Add("id", reader.Rows[0][0].ToString());
+                record.Add("first_name", reader.Rows[0][1].ToString());
+                record.Add("mid_initial", reader.Rows[0][2].ToString());
+                record.Add("last_name", reader.Rows[0][3].ToString());
+                record.Add("job_title", reader.Rows[0][4].ToString());
+                record.Add("created_at", reader.Rows[0][5].ToString());
+                record.Add("updated_at", reader.Rows[0][6].ToString());
+                record.Add("users_id", reader.Rows[0][7].ToString());
+            }
+
+
+            return record;
+
+        }
     }
 }
