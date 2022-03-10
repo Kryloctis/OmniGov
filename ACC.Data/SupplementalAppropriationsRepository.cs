@@ -215,7 +215,7 @@ namespace ACC.Data
                 $"budget_appropriations_id, " +
                 $"date_entry, " +
                 $"amount, " +
-                $"remarks, " +
+                $"remarks " +
                 $"FROM {tableName} " +
                 $"WHERE " +
                 $"budget_appropriations_id = @budget_appropriations_id " +
@@ -226,7 +226,7 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dtSupplementalApprorpriation, parameters);
         }
 
-        public decimal GetSumSupplementalAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
+        public decimal GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing)
         {
             var parameters = new object[][]
             {
@@ -267,7 +267,7 @@ namespace ACC.Data
             return supplementalAppropriations;
         }
 
-        public decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry)
+        public decimal GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(int budgetAppropriationId, DateTime dateEntry)
         {
             try
             {
@@ -290,7 +290,7 @@ namespace ACC.Data
             }
         }
 
-        public decimal GetSumSupplementalAppropriationsByBudgetAppropriationsId(int budgetAppropriationId)
+        public decimal GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(int budgetAppropriationId)
         {
             var parameters = new object[][]
             {

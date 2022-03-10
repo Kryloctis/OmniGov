@@ -15,11 +15,11 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByBudgetAppropriationIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
 
-        decimal GetSumSupplementalAppropriationsByBudgetAppropriationsId(int budgetAppropriationId);
+        decimal GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(int budgetAppropriationId);
 
-        decimal GetSumSupplementalAppropriations(int budgetAppropriationId, DateTime dateEntry);
+        decimal GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(int budgetAppropriationId, DateTime dateEntry);
 
-        decimal GetSumSupplementalAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
+        decimal GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotmentClassId, Byte isContinuing);
 
     }
 }

@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             {
                 decimal appropriations = Factory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
-                decimal supplementalAppropriations = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+                decimal supplementalAppropriations = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
                 decimal totalAppropriations = appropriations + supplementalAppropriations;
 
