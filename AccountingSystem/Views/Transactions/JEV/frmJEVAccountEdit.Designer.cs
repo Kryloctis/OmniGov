@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjevAccount1 = new AccountingSystem.Views.Transactions.JEV.ucJEVAccount();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,12 +42,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.ucjevAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucjevAccount1.Location = new System.Drawing.Point(12, 12);
             this.ucjevAccount1.Name = "ucjevAccount1";
-            this.ucjevAccount1.Size = new System.Drawing.Size(588, 175);
+            this.ucjevAccount1.Size = new System.Drawing.Size(589, 175);
             this.ucjevAccount1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnOK);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 192);
@@ -60,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             this.btnOK.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(522, 2);
+            this.btnOK.Location = new System.Drawing.Point(441, 2);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOK.Name = "btnOK";
             this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -71,11 +73,22 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(529, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
             // frmJEVAccountEdit
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(607, 219);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucjevAccount1);
@@ -97,5 +110,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnOK;
         internal ucJEVAccount ucjevAccount1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

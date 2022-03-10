@@ -318,7 +318,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1227, 525);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dgJEV);
