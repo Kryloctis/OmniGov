@@ -326,7 +326,5 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             LoadSelectedJEV();
         }
-
-
     }
 }

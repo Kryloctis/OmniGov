@@ -653,7 +653,7 @@ namespace ACC.Data
         }
 
 
-        public Dictionary<string, string> GetViewRecordByJEV(string jevNo)
+        public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
         {
             var record = new Dictionary<string, string>();
 
@@ -661,7 +661,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@jev_no", DbType.String, jevNo},
+                    new object[] { "@id", DbType.Int32, jevId},
                 };
 
                 string query = $"SELECT id, " +
@@ -687,7 +687,7 @@ namespace ACC.Data
                     $"updated_by, " +
                     $"updated_by_name " +
                     $"FROM {viewTableName} " +
-                    $"WHERE jev_no = @jev_no";
+                    $"WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -1130,6 +1130,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
     }
 }
