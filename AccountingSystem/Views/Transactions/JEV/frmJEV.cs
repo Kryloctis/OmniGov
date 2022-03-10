@@ -548,6 +548,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void BtnSave_Click(object sender, EventArgs e)
         {
             string message = string.Empty;
+            string fullJevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text}";
 
             if (SaveData(ref message))
             {
@@ -565,6 +566,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     PermissionVerification();
                     _frmJEVList.LoadJEVList();
                     _ucJEVDashboard.LoadJEVCounter();
+                    Helper.DatagridViewRecordFinder(_frmJEVList.dgJEV, "full_jev_no", fullJevNo);
                 }
             }
 
