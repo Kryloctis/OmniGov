@@ -178,6 +178,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
+            AmountValidation(e);
+        }
+
+        private void AmountValidation(CancelEventArgs e)
+        {
             try
             {
                 decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsByBudgetAppropriationsId(budgetAppropriationId);
@@ -188,7 +193,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
                 if (string.IsNullOrEmpty(nudAmount.Text))
                     e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-                else if (nudAmount.Value == 0)
+                else if (totalAppropriationAmount == 0)
                 {
                     epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
                     e.Cancel = true;
