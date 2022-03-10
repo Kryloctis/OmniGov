@@ -7,7 +7,7 @@ namespace ACC.Domain.Interfaces
     {
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
         bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
-        bool ReceiptAvailability(int receiptId, int receiptQuantity);
+        bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
         DataTable GetIssuedReceiptByCollectorIdAndAccountableFormId(string coid, string formid);
         DataTable GetRecordsReceipts(string collectorId);
         DataTable GetAccountabilityForAccountableForms(string reportNumber);

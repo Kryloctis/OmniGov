@@ -426,7 +426,7 @@ namespace ACC.Data
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
-        public bool ReceiptAvailability(int receiptId, int receiptQuantity)
+        public bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity)
         {
             var parameters = new object[][] {
                 new object[]{ "@receipt_id", DbType.Int32, receiptId},
