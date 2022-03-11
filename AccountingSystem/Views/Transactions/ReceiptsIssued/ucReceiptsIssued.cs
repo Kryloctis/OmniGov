@@ -8,12 +8,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class ucReceiptsIssued : UserControl
     {
-        internal int Id = 0;
-        internal int CollectingOfficerId = 0;
-        internal int ReceiptId = 0;
-        internal int startingreceipt = 0;
-        internal int maxreceipt = 0;
-        internal int maxtickets = 0;
+        internal int Id;
+        internal int collectingOfficerId;
+        internal int receiptId;
         internal bool isTickets = false;
         internal bool isCollectorJO;
 
@@ -27,8 +24,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             var errorArray = new string[5];
             errorArray[0] = epCollectingOfficer.GetError(cmbCollector);
             errorArray[1] = epReceipt.GetError(cmbReceipt);
-            errorArray[2] = epFrom.GetError(nudReceiptIssuedFrom);
-            errorArray[3] = epTo.GetError(nudReceiptIssuedTo);
+            errorArray[2] = epFrom.GetError(txtReceiptIssuedFrom);
+            errorArray[3] = epTo.GetError(txtReceiptIssuedTo);
             errorArray[4] = epQuantity.GetError(txtReceiptQuantity);
 
             IError _errors = Factory.CreateErrors(errorArray);
@@ -37,10 +34,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void ResetForm()
         {
-            CollectingOfficerId = 0;
-            ReceiptId = 0;
-            nudReceiptIssuedFrom.Text = string.Empty;
-            nudReceiptIssuedTo.Text = string.Empty;
+            collectingOfficerId = 0;
+            receiptId = 0;
+            txtReceiptIssuedFrom.Text = "0";
+            txtReceiptIssuedTo.Text = "0";
             txtReceiptQuantity.Text = string.Empty;
             dtpIssued.Value = DateTime.Now;
         }
@@ -141,58 +138,24 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorComboBox(epReceipt, cmbReceipt);
         }
 
-        private void nudReceiptIssuedFrom_Validating(object sender, CancelEventArgs e)
-        {
-            if (!isTickets)
-            {
-                if (string.IsNullOrEmpty(nudReceiptIssuedFrom.Text.Trim()))
-                    e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epFrom, nudReceiptIssuedFrom, "Receipt No. From.");
-            }
-        }
-
-
-        private void nudReceiptIssuedFrom_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(epFrom, nudReceiptIssuedFrom);
-        }
-
-        private void nudReceiptIssuedTo_Validating(object sender, CancelEventArgs e)
-        {
-            if (!isTickets)
-            {
-                if (string.IsNullOrEmpty(nudReceiptIssuedTo.Text.Trim()))
-                    e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epTo, nudReceiptIssuedTo, "Receipt No. To.");
-
-                if (IsReceiptBetweenFromAndTo() == false)
-                {
-                    epTo.SetError(nudReceiptIssuedTo, "Invalid receipt number to.");
-                    e.Cancel = true;
-                }
-            }
-        }
         private bool IsReceiptBetweenFromAndTo()
         {
             try
             {
                 var receiptsRepo = Factory.ReceiptsRepository();
-                var receiptNumberFrom = Convert.ToInt32(nudReceiptIssuedFrom.Value);
-                var receiptNumberTo = Convert.ToInt32(nudReceiptIssuedTo.Value);
+                var receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
+                var receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
                 var receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
 
                 return receiptsRepo.IsReceiptBetweenFromAndTo(receiptId, receiptNumberFrom, receiptNumberTo);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        private void nudReceiptIssuedTo_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorNumericUpDown(epTo, nudReceiptIssuedTo);
-        }
-
+    
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(txtReceiptQuantity.Text.Trim()))
@@ -217,6 +180,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             else
                 SetFieldsForNonCashTickets();
 
+
             var receiptId = int.Parse(item["id"].ToString());
             var receiptQuantity = int.Parse(item["quantity"].ToString());
 
@@ -225,9 +189,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 SetReceiptNumberFrom(receiptId);
                 return;
             }
-
-            nudReceiptIssuedFrom.ResetText();
-            nudReceiptIssuedTo.ResetText();
         }
 
         private bool ReceiptQuantityAvailable(int receiptId, int receiptQuantity)
@@ -254,7 +215,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var receiptIssuedQuantity = receiptIssuedRepo.GetReceiptIssuedQuantityByReceiptId(receiptId);
 
                 var receiptNumber = (receiptNumberFrom + receiptIssuedQuantity);
-                nudReceiptIssuedFrom.Text = receiptNumber.ToString("D8");
+                txtReceiptIssuedFrom.Text = receiptNumber.ToString("D8");
             }
             catch (Exception)
             {
@@ -267,18 +228,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptQuantity.ReadOnly  = false;
             isTickets = true;
 
-            nudReceiptIssuedFrom.ResetText();
-            nudReceiptIssuedTo.ResetText();
+            txtReceiptIssuedFrom.ResetText();
+            txtReceiptIssuedTo.ResetText();
 
-            nudReceiptIssuedFrom.Enabled = false;
-            nudReceiptIssuedTo.Enabled = false;
+            txtReceiptIssuedFrom.Enabled = false;
+            txtReceiptIssuedTo.Enabled = false;
         }
 
         private void SetFieldsForNonCashTickets()
         {
             isTickets = false;
-            nudReceiptIssuedFrom.Enabled = true;
-            nudReceiptIssuedTo.Enabled = true;
+            txtReceiptIssuedFrom.Enabled = true;
+            txtReceiptIssuedTo.Enabled = true;
 
             txtReceiptQuantity.ReadOnly = true;
         }
@@ -304,24 +265,82 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void nudReceiptIssuedTo_ValueChanged(object sender, EventArgs e)
-        {
-            ComputeReceiptIssueQuantity();
-        }
-
         private void ComputeReceiptIssueQuantity()
         {
-            var receiptNumberFrom = nudReceiptIssuedFrom.Value;
-            var receiptNumberTo = nudReceiptIssuedTo.Value;
+            var receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
+            var receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
             var quantity = (receiptNumberTo - receiptNumberFrom) + 1;
 
+
             if (quantity >= 1)
-                txtReceiptQuantity.Text = Math.Floor(quantity).ToString();
+                txtReceiptQuantity.Text = quantity.ToString();
         }
 
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {
             LoadCollectors();
+        }
+
+        private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
+        {
+            if (!isTickets)
+            {
+                if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
+                {
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(epFrom, txtReceiptIssuedFrom, "Receipt No. From.");
+                    return;
+                }
+            }
+        }
+
+        private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
+        {
+            if (!isTickets)
+            {
+                if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
+                {
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(epTo, txtReceiptIssuedTo, "Receipt No. To.");
+                    return;
+                }
+                
+                if (IsReceiptBetweenFromAndTo() == false)
+                {
+                    epTo.SetError(txtReceiptIssuedTo, "Invalid receipt number to.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void txtReceiptNumberFrom_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epFrom, txtReceiptIssuedFrom);
+        }
+
+        private void txtReceiptNumberTo_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epTo, txtReceiptIssuedTo);
+        }
+
+        private void txtReceiptIssuedFrom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtReceiptIssuedTo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void txtReceiptIssuedFrom_TextChanged(object sender, EventArgs e)
+        {
+            ComputeReceiptIssueQuantity();
+        }
+
+        private void txtReceiptIssuedTo_TextChanged(object sender, EventArgs e)
+        {
+            ComputeReceiptIssueQuantity();
         }
     }
 }

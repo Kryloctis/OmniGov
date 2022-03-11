@@ -39,12 +39,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
                 uc.cmbReceipt.SelectedValue = riData["receipts_id"];
                 uc.dtpIssued.Value = Convert.ToDateTime(riData["date_issued"]);
-                uc.nudReceiptIssuedFrom.Text = riData["issuefrom"];
-                uc.nudReceiptIssuedTo.Text = riData["issueto"];
+                uc.txtReceiptIssuedFrom.Text = riData["issuefrom"];
+                uc.txtReceiptIssuedTo.Text = riData["issueto"];
                 uc.txtReceiptQuantity.Text = riData["quantity"];
 
-                uc.nudReceiptIssuedFrom.ReadOnly = true;
-                uc.nudReceiptIssuedTo.ReadOnly = true;
+                uc.txtReceiptIssuedFrom.ReadOnly = true;
+                uc.txtReceiptIssuedTo.ReadOnly = true;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -65,15 +65,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     CollectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue),
                     ReceiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue),
                     Issued = uc.dtpIssued.Value,
-                    IssuedFrom = Convert.ToInt32(uc.nudReceiptIssuedFrom.Text.Trim()),
-                    IssuedTo = Convert.ToInt32(uc.nudReceiptIssuedTo.Text.Trim()),
+                    IssuedFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()),
+                    IssuedTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()),
                     Quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim())
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
                 if (!uc.isTickets)
                 {
-                    if (Convert.ToInt32(uc.nudReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.nudReceiptIssuedTo.Text.Trim()))
+                    if (Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()))
                     {
                         Helper.MessageBoxError("Invalid Receipt!");
                         return false;
