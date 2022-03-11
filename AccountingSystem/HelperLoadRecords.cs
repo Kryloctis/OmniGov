@@ -2172,9 +2172,9 @@ namespace AccountingSystem
         {
             datagrid.Columns.Clear();
             datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("date_entry", "Date Entry");
             datagrid.Columns.Add("jev_no", "JEV No.");
             datagrid.Columns.Add("full_jev_no", "JEV No.");
+            datagrid.Columns.Add("date_entry", "Date Entry");
             datagrid.Columns.Add("funds_id", "Funds ID");
             datagrid.Columns.Add("fund_name", "Fund");
             datagrid.Columns.Add("journals_id", "Journals ID");
