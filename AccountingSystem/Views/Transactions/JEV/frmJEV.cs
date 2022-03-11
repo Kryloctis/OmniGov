@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             uc.SumDebitCredit();
             PermissionVerification();
+            uc.SetJevReadOnly();
         }
 
         private void PermissionVerification()
@@ -58,7 +59,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         if (Helper.HasPermission("Transaction Edit Approved JEV") && jevStatus == "approved")
                         {
                             btnSave.Enabled = true;
-                            ucjev1.Enabled = true;
+                            uc.isReadOnly = false;
                         }
                     }
                 }
@@ -79,7 +80,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
-                    ucjev1.Enabled = false;
+                    uc.isReadOnly = true;
                 }
 
 
@@ -87,7 +88,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
-                    ucjev1.Enabled = false;
+                    uc.isReadOnly = true;
                 }
 
                 if (createdById != Helper.UserId)
@@ -575,7 +576,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void TransferJournalToNewJournal()
         {
             var userId = Helper.UserId;
-            var uc = ucjev1;
 
             switch (uc.journalId)
             {
@@ -668,7 +668,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDisapprove.Enabled = true;
                         btnCancelJEV.Enabled = true;
                         btnDelete.Enabled = true;
-                        ucjev1.Enabled = true;
+                        uc.isReadOnly = false;
                         btnSave.Enabled = true;
                         break;
                     case "approved":
@@ -680,7 +680,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnCancelJEV.Enabled = true;
                         btnPrint.Enabled = true;
                         btnSave.Enabled = true;
-                        ucjev1.Enabled = false;
+                        uc.isReadOnly = true;
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
@@ -694,7 +694,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = false;
-                        ucjev1.Enabled = false;
+                        uc.isReadOnly = true;
                         break;
                     case "cancelled":
                         //CANCELLED
@@ -707,7 +707,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = false;
-                        ucjev1.Enabled = false;
+                        uc.isReadOnly = true;
                         break;
                 }
             }
@@ -975,6 +975,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
                 uc.txtRefNo.Text = jevDict["ref_no"];
                 uc.txtPayee.Text = jevDict["payee"];
+                uc.txtJEVNo.Text = jevDict["jev_no"];
 
                 uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                 uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
