@@ -403,11 +403,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     else
                     {
                         if (lastIssued < receiptNumberFrom)
-                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
+                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
                         else if (lastIssued.Equals(receiptNumberFrom))
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
                         else
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
                     }
                 }
                 else
@@ -452,11 +452,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         else
                         {
                             if (receiptlast < receiptNumberFrom)
-                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
+                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
                             else if (receiptlast.Equals(receiptNumberFrom))
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
                             else
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
                         }
 
                     }
@@ -469,7 +469,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             else
             {
-                txtReceiptNumber.Text = receiptNumber.ToString("D8");
+                txtReceiptNumber.Text = receiptNumber.ToString("D7");
             }
         }
 

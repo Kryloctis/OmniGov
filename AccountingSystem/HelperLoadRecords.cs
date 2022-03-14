@@ -353,9 +353,9 @@ namespace AccountingSystem
 
             datagrid.Columns["id"].Visible = false;
 
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D8";
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D8";
-            datagrid.Columns["last_issued"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["last_issued"].DefaultCellStyle.Format = "D7";
 
 
             datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
@@ -473,8 +473,8 @@ namespace AccountingSystem
             datagrid.Columns.Add("received_date", "Received Date");
             datagrid.Columns.Add("officer", "User/Officer");
 
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D8";
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["received_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
@@ -1028,7 +1028,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns["receipt_no"].DefaultCellStyle.Format = "D8";
+            datagrid.Columns["receipt_no"].DefaultCellStyle.Format = "D7";
             datagrid.Columns["receipt_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             foreach (DataRow row in dataTable.Rows)
