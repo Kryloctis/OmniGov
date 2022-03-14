@@ -223,7 +223,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.dgAccounts.Size = new System.Drawing.Size(1071, 173);
             this.dgAccounts.TabIndex = 37;
             this.dgAccounts.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgAccounts_CellFormatting);
-            this.dgAccounts.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAccounts_RowHeaderMouseDoubleClick);
             this.dgAccounts.SelectionChanged += new System.EventHandler(this.dgAccounts_SelectionChanged);
             // 
             // txtExplanation

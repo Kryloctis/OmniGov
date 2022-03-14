@@ -16,11 +16,38 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
+        internal bool isReadOnly;
 
         public ucJEV()
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgAccounts);
+        }
+
+        internal void SetJevReadOnly()
+        {
+            foreach (MaskedTextBox maskedTextBox in Controls.OfType<MaskedTextBox>())
+            {
+                maskedTextBox.ReadOnly = isReadOnly;
+            }
+
+            foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
+            {
+                dateTimePicker.Enabled = !isReadOnly;
+            }
+
+            foreach (Button button in Controls.OfType<Button>())
+            {
+                button.Enabled = !isReadOnly;
+            }
+
+            foreach (TextBox textBox in Controls.OfType<TextBox>())
+            {
+                textBox.ReadOnly = isReadOnly;
+            }
+
+            groupFunds.Enabled = !isReadOnly;
+            groupJournals.Enabled = !isReadOnly;
         }
 
         internal string GetFormErrors()
@@ -440,6 +467,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
+            btnAddAccount.Enabled = !isReadOnly;
+            btnEditAccount.Enabled = !isReadOnly;
+            btnRemoveAccount.Enabled = !isReadOnly;
         }
 
 
@@ -496,11 +526,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             var frmJevAccountEdit = new frmJEVAccountEdit(this);
             frmJevAccountEdit.ucJEVAccount.journalName = journalName;
             frmJevAccountEdit.ShowDialog();
-        }
-
-        private void dgAccounts_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            _ = new frmJEVAccountEdit(this).ShowDialog();
         }
 
         internal void ClearErrors()
