@@ -1052,6 +1052,9 @@ namespace AccountingSystem
                 });
             }
 
+            float fontSize = 8.5f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
 
