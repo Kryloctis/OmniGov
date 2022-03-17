@@ -110,7 +110,8 @@ namespace ACC.Data
         {
             string query = $"SELECT " +
                            $"id, " +
-                           $"CONCAT(acc_form_no, ' - ', acc_form_desc, ' (' , receipt_number_from , '-' , receipt_number_to , ')') receipt, " +
+                           $"acc_form_no, " +
+                           $"acc_form_desc," +
                            $"receipt_number_from, " +
                            $"receipt_number_to, " +
                            $"received_date, " +

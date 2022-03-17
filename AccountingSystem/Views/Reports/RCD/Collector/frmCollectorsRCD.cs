@@ -173,8 +173,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 {
                     DataRow row = dtFromDataSource.NewRow();
                     row["type_of_form"] = item["accountable_forms"];
-                    row["serial_no_from"] = Convert.ToInt32(item["report_number_from"]).ToString("D8");
-                    row["serial_no_to"] = Convert.ToInt32(item["report_number_to"]).ToString("D8");
+                    row["serial_no_from"] = Convert.ToInt32(item["report_number_from"]).ToString("D7");
+                    row["serial_no_to"] = Convert.ToInt32(item["report_number_to"]).ToString("D7");
                     row["amount"] = item["amount"];
                     dtFromDataSource.Rows.Add(row);
                 }

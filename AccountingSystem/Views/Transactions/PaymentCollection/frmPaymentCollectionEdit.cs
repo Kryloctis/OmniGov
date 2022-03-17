@@ -31,6 +31,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             _uc.LoadForms();
             _uc.LoadCollectors();
             _uc.LoadFunds();
+            _uc.LoadCurrentCollector();
             LoadSelectedValue();
         }
 

@@ -320,6 +320,7 @@ namespace AccountingSystem
             this.menuReturnReceipts.Name = "menuReturnReceipts";
             this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
             this.menuReturnReceipts.Text = "Returned Receipts";
+            this.menuReturnReceipts.Visible = false;
             this.menuReturnReceipts.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
             // amortiaztionToolStripMenuItem

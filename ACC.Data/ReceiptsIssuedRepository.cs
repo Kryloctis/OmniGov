@@ -421,12 +421,12 @@ namespace ACC.Data
             string query = $"SELECT " +
                            $"COALESCE(SUM(quantity), 0) AS receipt_issued_from " +
                            $"FROM {tableName} " +
-                           $"WHERE receipts_id = @receipt_id ";
+                           $"WHERE receipts_id = @receipt_id AND is_returned = 0";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
-        public bool ReceiptAvailability(int receiptId, int receiptQuantity)
+        public bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity)
         {
             var parameters = new object[][] {
                 new object[]{ "@receipt_id", DbType.Int32, receiptId},

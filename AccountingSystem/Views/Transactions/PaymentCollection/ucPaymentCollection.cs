@@ -150,7 +150,47 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             { 
                 Helper.MessageBoxError(ex.Message);
             }
-        }    
+        }
+
+        internal void LoadCurrentCollector()
+        {
+            try
+            {
+                if (cmdCollector.Items.Count > 0)
+                {
+                    var uRepository = Factory.UsersRepository();
+                    if (uRepository.LinkedCollector(Helper.UserId) || uRepository.LinkedJobOrder(Helper.UserId))
+                    {
+
+                        Dictionary<string, string> collectorDict = new();
+
+                        if (Helper.IsJobOrder(Helper.UserId))
+                        {
+                            var jobOrderRepo = Factory.JobOrderRepository();
+                            collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
+                            cmdCollector.SelectedValue = collectorDict["id"];
+                        }
+                        else
+                        {
+                            var colRepository = Factory.CollectingOfficerRepository();
+                            collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
+                            cmdCollector.SelectedValue = collectorDict["id"];
+                        }
+
+                        cmdCollector.Enabled = false;
+                    }
+
+                    else
+                    {
+                        cmdCollector.SelectedIndex = -1;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         internal bool IsReceiptNumberBetweenFromAndTo(int receiptNumber)
         {
@@ -169,6 +209,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 LoadAccounts();
                 cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
                 cmbAccount.SelectedIndex = -1;
+
+                LoadCurrentCollector();
             }
         }
 
@@ -403,11 +445,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     else
                     {
                         if (lastIssued < receiptNumberFrom)
-                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
+                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
                         else if (lastIssued.Equals(receiptNumberFrom))
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
                         else
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D8");
+                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
                     }
                 }
                 else
@@ -452,11 +494,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         else
                         {
                             if (receiptlast < receiptNumberFrom)
-                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D8");
+                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
                             else if (receiptlast.Equals(receiptNumberFrom))
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
                             else
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D8");
+                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
                         }
 
                     }
@@ -469,7 +511,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
             else
             {
-                txtReceiptNumber.Text = receiptNumber.ToString("D8");
+                txtReceiptNumber.Text = receiptNumber.ToString("D7");
             }
         }
 

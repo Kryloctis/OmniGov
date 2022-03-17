@@ -200,17 +200,6 @@ namespace AccountingSystem.Views.Manage.Receipts
                 txtReceiptNumberTo.Enabled = true;
                 txtQuantity.ReadOnly = true;
                 txtQuantity.Text = string.Empty;
-
-                //var receiptsRepository = Factory.ReceiptsRepository();
-                //var accountableFormId = int.Parse(item[0].ToString());
-
-                //receiptNumberFrom = receiptsRepository.GetMinReceiptNumberByAccountableFormId(accountableFormId);
-                //receiptNumberTo = receiptsRepository.GetMaxReceiptNumberByAccountableFormId(accountableFormId);
-
-                //if (receiptNumberFrom != 0 && receiptNumberTo != 0)
-                //    txtReceiptNumberFrom.Text = (receiptNumberTo + 1).ToString();
-                //else
-                //    txtReceiptNumberFrom.Text = string.Empty;
             }
         }
 
