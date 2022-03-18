@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 cmbAccountableForms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
-                var formRepository = Factory.AccountableRepository();
+                var formRepository = Factory.AccountableFormsRepository();
                 var dtforms = formRepository.GetRecords();
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
                 cmbAccountableForms.DataSource = dtforms;

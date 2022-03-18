@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             // cmbAccountableForms
             // 
             this.cmbAccountableForms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAccountableForms.DropDownWidth = 400;
             this.cmbAccountableForms.FormattingEnabled = true;
             this.cmbAccountableForms.Location = new System.Drawing.Point(139, 12);
             this.cmbAccountableForms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

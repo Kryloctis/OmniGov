@@ -8,12 +8,12 @@ namespace AccountingSystem.Views.Manage.Receipts
 {
     public partial class ucReceipts : UserControl
     {
-        internal int receiptId = 0;
-        internal int UserId = 0;
-        internal int AccId = 0;
-        internal int receiptNumberFrom = 0;
-        internal int receiptNumberTo = 0;
-        internal bool isTicket = false;
+        internal int receiptId;
+        internal int userId;
+        internal int accountableFormId;
+        internal int receiptNumberFrom;
+        internal int receiptNumberTo;
+        internal bool isTicket;
 
         public ucReceipts()
         {
@@ -22,20 +22,20 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void ResetForm()
         {
-            AccId = 0;
+            accountableFormId = 0;
             cmbAccountableForms.SelectedIndex = -1;
-            txtReceiptNumberFrom.Text = string.Empty;
-            txtReceiptNumberTo.Text = string.Empty;
-            dtpReceivedDate.Value = DateTime.Now;
-            txtQuantity.Text = string.Empty;
-            txtRemark.Text = string.Empty;
+            txtReceiptNumberFrom.Clear();
+            txtReceiptNumberTo.Clear();
+            dtpReceivedDate.Value = DateTime.Today;
+            txtQuantity.Clear();
+            txtRemark.Clear();
         }
 
         internal void LoadForms()
         {
             try
             {
-                var formRepository = Factory.AccountableRepository();
+                var formRepository = Factory.AccountableFormsRepository();
                 var dtforms = formRepository.GetRecords();
 
                 dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");

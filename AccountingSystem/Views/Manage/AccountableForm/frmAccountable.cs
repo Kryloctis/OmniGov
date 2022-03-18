@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             try
             {
-                var accRepository = Factory.AccountableRepository();
+                var accRepository = Factory.AccountableFormsRepository();
                 var dtAcc = accRepository.GetRecords();
                 HelperLoadRecords.AccFormDatagridView(dtAcc, dgAccform);
 
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                             accModelList.Add(new AccountableModel() { Id = accId });
                         }
 
-                        var accRepository = Factory.AccountableRepository();
+                        var accRepository = Factory.AccountableFormsRepository();
                         _ = accRepository.Delete(accModelList);
                         LoadRecords();
                     }
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 try
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtAcc = Factory.AccountableRepository().GetRecordsBySearch(searchkey);
+                    var dtAcc = Factory.AccountableFormsRepository().GetRecordsBySearch(searchkey);
                     HelperLoadRecords.AccFormDatagridView(dtAcc, dgAccform);
 
                     lblRecordCount.Text = dgAccform.Rows.Count.ToString();
