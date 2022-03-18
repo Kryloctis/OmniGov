@@ -509,6 +509,23 @@ namespace AccountingSystem
         }
         #endregion
 
+        internal static void AccountableFormsCombobox(ComboBox combobbox, DataTable dataTable)
+        {
+            try
+            {
+                var dtAccountableFormRepo = Factory.AccountableFormsRepository().GetRecords();
+                dtAccountableFormRepo.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+
+                combobbox.DataSource = dtAccountableFormRepo;
+                combobbox.ValueMember = "id";
+                combobbox.DisplayMember = "formdisplay";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         #region Funds
 
         internal static void FundsDatagridView(DataTable dataTable, DataGridView datagrid)

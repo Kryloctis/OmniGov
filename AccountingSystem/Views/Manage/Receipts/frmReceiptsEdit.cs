@@ -8,8 +8,8 @@ namespace AccountingSystem.Views.Manage.Receipts
     {
         private readonly frmReceipts _frmReceipts;
         private readonly ucReceipts uc;
+        private int userId;
 
-        private int userId = 0;
         public frmReceiptsEdit(frmReceipts frmReceipts, int receiptId)
         {
             InitializeComponent();
@@ -22,9 +22,8 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
-            uc.LoadForms();
+            uc.LoadAccountableForms();
             LoadSelectedValue();
-            
         }
 
         private void LoadSelectedValue()

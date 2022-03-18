@@ -31,25 +31,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtRemark.Clear();
         }
 
-        internal void LoadForms()
+        internal void LoadAccountableForms()
         {
-            try
-            {
-                var formRepository = Factory.AccountableFormsRepository();
-                var dtforms = formRepository.GetRecords();
-
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbAccountableForms.DataSource = dtforms;
-                cmbAccountableForms.ValueMember = "id";
-                cmbAccountableForms.DisplayMember = "formdisplay";
-            }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
-            }
+            var dtAccountableFormRepo = Factory.AccountableFormsRepository().GetRecords();
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dtAccountableFormRepo);
         }
-
-
 
         #region Validations
 

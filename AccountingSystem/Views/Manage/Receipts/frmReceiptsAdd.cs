@@ -7,18 +7,21 @@ namespace AccountingSystem.Views.Manage.Receipts
     public partial class frmReceiptsAdd : Form
     {
         private readonly frmReceipts frmReceipts;
-        private int UserId = 0;
+        private readonly int userId;
+        private static ucReceipts uc;
 
         public frmReceiptsAdd(frmReceipts _frmReceipts)
         {
             InitializeComponent();
+
             frmReceipts = _frmReceipts;
-            UserId = Helper.UserId;
+            userId = Helper.UserId;
+            uc = ucReceipts;
         }
 
         private void frmAccFormsAdd_Load(object sender, EventArgs e)
         {
-            ucReceipts.LoadForms();
+            uc.LoadAccountableForms();
         }
 
         private bool SaveData()
@@ -51,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var receiptDate = uc.dtpReceivedDate.Value;
                 var quantity = Convert.ToInt32(uc.txtQuantity.Text.Trim());
                 var remark = uc.txtRemark.Text.Trim();
-                var userId = UserId;
+                var userId = this.userId;
 
 
                 var receiptModel = new ReceiptsModel()
