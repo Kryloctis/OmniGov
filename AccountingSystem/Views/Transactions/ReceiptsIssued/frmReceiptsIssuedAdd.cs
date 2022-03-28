@@ -69,6 +69,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     receiptIssuedModel.CollectorId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);   
                 }
 
+
+
                 var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                 return receiptIssuedRepository.Insert(receiptIssuedModel);
             
