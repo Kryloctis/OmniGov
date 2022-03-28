@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             frmr = _frmr;
-            ucReceipts1.Id = id;
+            ucReceipts1.receiptIssuedId = id;
         }
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 var uc = ucReceipts1;
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                var riData = riRepository.GetRecordByID(uc.Id);
+                var riData = riRepository.GetRecordByID(uc.receiptIssuedId);
 
                 uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
                 uc.cmbReceipt.SelectedValue = riData["receipts_id"];
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
                 var riModel = new ReceiptsIssuedModel()
                 {
-                    Id = uc.Id,
+                    Id = uc.receiptIssuedId,
                     CollectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue),
                     ReceiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue),
                     Issued = uc.dtpIssued.Value,
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 };
 
                 var riRepository = Factory.ReceiptsIssuedRepository();
-                if (!uc.isTickets)
+                if (!uc.isCashTickets)
                 {
                     if (Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()))
                     {

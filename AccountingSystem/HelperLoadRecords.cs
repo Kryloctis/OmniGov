@@ -491,12 +491,15 @@ namespace AccountingSystem
 
             foreach (DataRow row in dataTable.Rows)
             {
+                var serialNumberFrom = Convert.ToInt32(row["receipt_number_from"]) == 0 ? "" : row["receipt_number_from"];
+                var serialNumberTo = Convert.ToInt32(row["receipt_number_to"]) == 0 ? "" : row["receipt_number_to"];
+
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
                     row["receipt"],
-                    row["receipt_number_from"],
-                    row["receipt_number_to"],
+                    serialNumberFrom,
+                    serialNumberTo,
                     row["quantity"],
                     row["received_date"],
                     row["officer"]
@@ -514,11 +517,11 @@ namespace AccountingSystem
             try
             {
                 var dtAccountableFormRepo = Factory.AccountableFormsRepository().GetRecords();
-                dtAccountableFormRepo.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
+                dtAccountableFormRepo.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
 
                 combobbox.DataSource = dtAccountableFormRepo;
                 combobbox.ValueMember = "id";
-                combobbox.DisplayMember = "formdisplay";
+                combobbox.DisplayMember = "accountableForm";
             }
             catch (Exception ex)
             {

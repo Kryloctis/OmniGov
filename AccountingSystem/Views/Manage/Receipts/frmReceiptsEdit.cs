@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rModel = new ReceiptsModel()
                 {
                     Id = uc.receiptId,
-                    AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
+                    AccountableFormId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
                     SerialNoFrom = int.Parse(uc.txtReceiptNumberFrom.Text.Trim()),
                     SerialNoTo = int.Parse(uc.txtReceiptNumberTo.Text.Trim()),
                     ReceiptDate = uc.dtpReceivedDate.Value,
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (uc.isTicket == false)
+                if (uc.isCashTicket == false)
                     return rcRepository.Update(rModel);
                 else 
                     return rcRepository.Update(rModel);

@@ -13,6 +13,6 @@ namespace ACC.Domain.Models
         public int Quantity { get; set; }
         public string Remarks { get; set; }
         public int UserId { get; set; }
-        public int AccId { get; set; }
+        public int AccountableFormId { get; set; }
     }
 }

@@ -8,10 +8,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class ucReceiptsIssued : UserControl
     {
-        internal int Id;
-        internal int collectingOfficerId;
+        internal int receiptIssuedId;
         internal int receiptId;
-        internal bool isTickets = false;
+        internal int collectingOfficerId;
+        internal bool isCashTickets;
         internal bool isCollectorJO;
 
         internal string receiptNumberFrom;
@@ -37,17 +37,22 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void ResetForm()
         {
-
             radioStubQuantity.Checked = false;
             radioCustomQuantity.Checked = false;
-
-            collectingOfficerId = 0;
-            receiptId = 0;
             txtReceiptIssuedFrom.Text = "0";
             txtReceiptIssuedTo.Text = "0";
-            txtReceiptQuantity.Text = string.Empty;
-            dtpIssued.Value = DateTime.Now;
+            txtReceiptQuantity.Clear();
+            dtpIssued.Value = DateTime.Today;
 
+            receiptIssuedId = 0;
+            receiptId = 0;
+            receiptIssuedId = 0;
+            collectingOfficerId = 0;
+            isCashTickets = false;
+            isCollectorJO = false;
+
+            receiptNumberFrom = "0";
+            receiptNumberTo = "0";
         }
 
         internal void LoadCollectors()
@@ -198,7 +203,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 return;
             }
         }
-         
+        
         private bool ReceiptQuantityAvailable(int receiptId, int receiptQuantity)
         {
             try
@@ -245,7 +250,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void SetFieldsForCashTickets()
         {
             txtReceiptQuantity.ReadOnly  = false;
-            isTickets = true;
+            isCashTickets = true;
 
             txtReceiptIssuedFrom.ResetText();
             txtReceiptIssuedTo.ResetText();
@@ -256,7 +261,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void SetFieldsForNonCashTickets()
         {
-            isTickets = false;
+            isCashTickets = false;
             txtReceiptIssuedFrom.Enabled = true;
             txtReceiptIssuedTo.Enabled = true;
 
@@ -303,7 +308,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTickets)
+            if (!isCashTickets)
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
                 {
@@ -315,7 +320,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTickets)
+            if (!isCashTickets)
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
                 {

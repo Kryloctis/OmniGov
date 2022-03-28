@@ -11,6 +11,7 @@ namespace ACC.Data
     public class BanksRepository : IBanksRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
+
         private readonly string tableName = "banks";
 
         public BanksRepository(IDbGenericCommands dbGenericCommands)
@@ -188,25 +189,18 @@ namespace ACC.Data
 
         public bool CodeExist(string accountCode, int bankId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, bankId },
-                    new object[] { "@account_no", DbType.String, accountCode },
-                };
-
-                string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int16, bankId },
+                new object[] { "@account_no", DbType.String, accountCode },
             };
 
+            string query = $"SELECT account_no FROM {tableName} WHERE id <> @id AND account_no = @account_no";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+         
             return false;
         }
         public DataTable GetRecordsBySearch(string searchText)

@@ -9,11 +9,8 @@ namespace AccountingSystem.Views.Manage.Receipts
     public partial class ucReceipts : UserControl
     {
         internal int receiptId;
-        internal int userId;
         internal int accountableFormId;
-        internal int receiptNumberFrom;
-        internal int receiptNumberTo;
-        internal bool isTicket;
+        internal bool isCashTicket;
 
         public ucReceipts()
         {
@@ -22,8 +19,10 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void ResetForm()
         {
+            receiptId = 0;
             accountableFormId = 0;
-            cmbAccountableForms.SelectedIndex = -1;
+            isCashTicket = false;
+
             txtReceiptNumberFrom.Clear();
             txtReceiptNumberTo.Clear();
             dtpReceivedDate.Value = DateTime.Today;
@@ -54,7 +53,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void cmbforms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForms, cmbAccountableForms, "Accountable Form!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForms, cmbAccountableForms, "Accountable Form.");
         }
 
         private void cmbforms_Validated(object sender, EventArgs e)
@@ -62,19 +61,10 @@ namespace AccountingSystem.Views.Manage.Receipts
             Helper.ClearErrorComboBox(epAccountableForms, cmbAccountableForms);
         }
 
-
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
-            if (isTicket == false)
-            {
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
-
-                //if (Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) >= receiptNumberTo || Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()) <= 0)
-                //{
-                //    epReceiptNumberFrom.SetError(txtReceiptNumberFrom, "Invalid Receipt Numbersds");
-                //    e.Cancel = true;
-                //}
-            }
+            if (!isCashTicket)
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");            
         }
 
         private void txtfrom_Validated(object sender, EventArgs e)
@@ -84,19 +74,8 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void txtto_Validating(object sender, CancelEventArgs e)
         {
-            if (isTicket == false)
-            {
+            if (!isCashTicket)
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberTo, txtReceiptNumberTo, "Receipt Number To.");
-
-                if (String.IsNullOrEmpty(txtReceiptNumberTo.Text.Trim()) == true)
-                    return;
-
-                if (Convert.ToInt32(txtReceiptNumberTo.Text.Trim()) <= Convert.ToInt32(txtReceiptNumberFrom.Text.Trim()))
-                {
-                    epReceiptNumberTo.SetError(txtReceiptNumberTo, "Invalid Receipt Number.");
-                    e.Cancel = true;
-                }
-            }
         }
 
         private void txtto_Validated(object sender, EventArgs e)
@@ -107,9 +86,9 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
             bool isEmpty = Helper.ShowErrorTextBoxEmpty(epQuantity, txtQuantity, "Quantity.");
-            bool isZero = txtQuantity.Text.Trim().Equals("0");
+            bool isZeroOrLess = Convert.ToInt32(string.IsNullOrEmpty(txtQuantity.Text.Trim()) ? 0 : txtQuantity.Text) <= 0;
 
-            if (isEmpty || isZero)
+            if (isEmpty || isZeroOrLess)
             {
                 epQuantity.SetError(txtQuantity, "Please enter a valid quantity.");
                 e.Cancel = true;
@@ -171,7 +150,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
             if (item[2].ToString().Contains("Tickets"))
             {
-                isTicket = true;
+                isCashTicket = true;
                 txtReceiptNumberFrom.Enabled = false;
                 txtReceiptNumberTo.Enabled = false;
                 txtQuantity.ReadOnly = false;
@@ -181,7 +160,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
             else
             {
-                isTicket = false;
+                isCashTicket = false;
                 txtReceiptNumberFrom.Enabled = true;
                 txtReceiptNumberTo.Enabled = true;
                 txtQuantity.ReadOnly = true;
@@ -193,7 +172,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if (!DesignMode)
             {
-                
+                LoadAccountableForms();
             }   
         }
 

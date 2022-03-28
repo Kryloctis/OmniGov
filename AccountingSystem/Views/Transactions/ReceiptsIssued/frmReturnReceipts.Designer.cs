@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 70);
+            this.label1.Location = new System.Drawing.Point(10, 71);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 15);
             this.label1.TabIndex = 7;
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dtpreturn
             // 
-            this.dtpreturn.Location = new System.Drawing.Point(148, 66);
+            this.dtpreturn.Location = new System.Drawing.Point(149, 68);
             this.dtpreturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpreturn.Name = "dtpreturn";
             this.dtpreturn.Size = new System.Drawing.Size(285, 23);
@@ -102,30 +102,32 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 15);
+            this.label2.Size = new System.Drawing.Size(100, 15);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Receipt Number To";
+            this.label2.Text = "Serial Number To ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 15);
+            this.label3.Size = new System.Drawing.Size(113, 15);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Receipt Number From ";
+            this.label3.Text = "Serial Number From";
             // 
             // txtReceiptNumberFrom
             // 
-            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(148, 9);
+            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(149, 9);
             this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
+            this.txtReceiptNumberFrom.ReadOnly = true;
             this.txtReceiptNumberFrom.Size = new System.Drawing.Size(284, 23);
             this.txtReceiptNumberFrom.TabIndex = 11;
             // 
             // txtReceiptNumberTo
             // 
-            this.txtReceiptNumberTo.Location = new System.Drawing.Point(148, 38);
+            this.txtReceiptNumberTo.Location = new System.Drawing.Point(149, 38);
             this.txtReceiptNumberTo.Name = "txtReceiptNumberTo";
+            this.txtReceiptNumberTo.ReadOnly = true;
             this.txtReceiptNumberTo.Size = new System.Drawing.Size(284, 23);
             this.txtReceiptNumberTo.TabIndex = 11;
             // 
@@ -151,7 +153,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Return Receipt";
-            this.Load += new System.EventHandler(this.frmReturn_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

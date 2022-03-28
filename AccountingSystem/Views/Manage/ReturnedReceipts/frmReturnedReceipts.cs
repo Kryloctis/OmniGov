@@ -51,6 +51,6 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             {
                 Helper.MessageBoxError(ex.Message); 
             }
-}
+        }
     }
 }

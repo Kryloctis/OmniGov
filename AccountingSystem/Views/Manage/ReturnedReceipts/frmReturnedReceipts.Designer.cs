@@ -38,6 +38,8 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dtpreturn = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -104,7 +106,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(573, 17);
+            this.label1.Location = new System.Drawing.Point(576, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 15);
             this.label1.TabIndex = 13;
@@ -120,12 +122,33 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.txtSearch.TabIndex = 12;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
+            // dtpreturn
+            // 
+            this.dtpreturn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpreturn.Location = new System.Drawing.Point(366, 15);
+            this.dtpreturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpreturn.Name = "dtpreturn";
+            this.dtpreturn.Size = new System.Drawing.Size(201, 23);
+            this.dtpreturn.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(278, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Date Returned";
+            // 
             // frmReturnedReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(838, 421);
+            this.Controls.Add(this.dtpreturn);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.statusStrip1);
@@ -157,5 +180,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.DateTimePicker dtpreturn;
+        private System.Windows.Forms.Label label2;
     }
 }
