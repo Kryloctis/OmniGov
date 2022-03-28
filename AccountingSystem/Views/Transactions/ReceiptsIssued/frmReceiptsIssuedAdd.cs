@@ -47,8 +47,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 var receiptId = Convert.ToInt32(uc.cmbReceipt.SelectedValue);
                 var dateIssued = uc.dtpIssued.Value;
-                var issueFrom = Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim());
-                var issueTo = Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim());
+                var issueFrom = string.IsNullOrEmpty(uc.txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim());
+                var issueTo = string.IsNullOrEmpty(uc.txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim());
                 var quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim());
                 var userId = Helper.UserId;
 
@@ -76,6 +76,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {

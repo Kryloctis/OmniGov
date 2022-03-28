@@ -333,8 +333,6 @@ namespace AccountingSystem
         #region ReceiptsIssued
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-
-
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -383,14 +381,16 @@ namespace AccountingSystem
                 else
                     collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
 
+                var issuedSerialNumberFrom = row["receipt_issued_from"].ToString().Equals("0") ? "" : row["receipt_issued_from"];
+                var issuedSerialNumberTo = row["receipt_issued_to"].ToString().ToString().Equals("0") ? "" : row["receipt_issued_to"];
 
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
                     collectingOfficer,
                     row["accountable_forms"],
-                    row["receipt_issued_from"],
-                    row["receipt_issued_to"],
+                    issuedSerialNumberFrom,
+                    issuedSerialNumberTo,
                     row["date_issued"],
                     row["quantity"],
                     row["last_issued"],

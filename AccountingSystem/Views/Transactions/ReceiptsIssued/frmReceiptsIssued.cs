@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true );
         }
-       
+
         private void frmReceipts_Load(object sender, EventArgs e)
         {
             LoadRecords();
