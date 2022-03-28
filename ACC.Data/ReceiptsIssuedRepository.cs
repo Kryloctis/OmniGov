@@ -419,7 +419,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT " +
-                           $"COALESCE(SUM(quantity), 0) AS receipt_issued_from " +
+                           $"COALESCE(SUM(quantity), 0) AS total_issued " +
                            $"FROM {tableName} " +
                            $"WHERE receipts_id = @receipt_id AND is_returned = 0";
 
