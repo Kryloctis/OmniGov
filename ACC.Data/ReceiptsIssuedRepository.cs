@@ -158,7 +158,7 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
-        public DataTable GetRecordsReceipts(string collectorId)
+        public DataTable GetIssuedReceiptByCollectorId(string collectorId)
         {
             var parameter = new object[][] {
                 new object[]{"@collectingOfficerId", DbType.String, collectorId }
