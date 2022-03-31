@@ -9,19 +9,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class ucPaymentCollection : UserControl
     {
-        internal int paymentCollectionId = 0;
-        internal int fundId = 0;
-        internal int accountableFormId = 0;
-        internal int generalLedgerId = 0;
-        internal int userId = 0;
-        internal int receiptNumberFrom = 0;
-        internal int receiptNumberTo = 0;
-        internal int receiptNumber = 0;
+        internal int paymentCollectionId;
+        internal int accountableFormId;
+        internal int fundId;
+        internal int generalLedgerId;
+        internal int userId;
+        internal int receiptNumberFrom;
+        internal int receiptNumberTo;
+        internal int receiptNumber;
 
         internal bool isCashTicket;
-        internal int cashTicketFaceValue = 0;
+        internal int cashTicketFaceValue;
         internal decimal accountableFormFaceValue;
-        internal bool isSave = false;
+        internal bool isSave;
 
         public ucPaymentCollection()
         {
@@ -56,6 +56,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             receiptNumberFrom = 0;
             receiptNumberTo = 0;
             receiptNumber = 0;
+
+            isCashTicket = false;
+            cashTicketFaceValue = 0;
+            accountableFormFaceValue = 0.0m;
+            isSave = false;
         }
 
         internal void LoadForms(int collectorsId)
