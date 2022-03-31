@@ -36,6 +36,7 @@ namespace ACC.Data
                         return record;
                     record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                     record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
+                    record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
                     record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
                     record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
@@ -209,15 +210,18 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
                 };
-                string query = string.Empty;
-                if (entity.SlaId > 0)
-                {
-                    query = $"UPDATE {tableName} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=@subsidiary_ledger_accounts_id,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
-                }
-                else
-                {
-                    query = $"UPDATE {tableName} SET funds_id=@funds_id,collecting_officers_id=@collecting_officers_id,accountable_forms_id=@accountable_forms_id,general_ledger_accounts_id=@general_ledger_accounts_id,subsidiary_ledger_accounts_id=NULL,payee=@payee,receipt_no=@receipt_no,payment_date=@payment_date,amount=@amount,updated_by=@updated_by WHERE id = @id";
-                }                    
+                 
+                string query =  $"UPDATE {tableName} " +
+                                $"SET " +
+                                $"funds_id = @funds_id, " +
+                                $"general_ledger_accounts_id = @general_ledger_accounts_id, " +
+                                $"payee = @payee, " +
+                                $"receipt_no = @receipt_no, " +
+                                $"payment_date = @payment_date, " +
+                                $"amount = @amount, " +
+                                $"updated_by = @updated_by " +
+                                $"WHERE id = @id";
+                            
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

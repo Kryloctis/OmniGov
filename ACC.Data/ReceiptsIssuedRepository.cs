@@ -111,7 +111,7 @@ namespace ACC.Data
                             $"job_orders_mid_initial, " +
                             $"job_orders_last_name, " +
                             $"job_orders_suffix, " +
-                            $"accountable_forms, " +
+                            $"CONCAT(acc_form_no, ' ' , acc_form_desc) AS accountable_forms, " +
                             $"receipt_issued_from, " +
                             $"receipt_issued_to, " +
                             $"date_issued,  " +
@@ -138,7 +138,7 @@ namespace ACC.Data
 
             string query = $"SELECT " +  
                            $"id, " +
-                           $"accountable_forms, " +
+                           $"CONCAT(acc_form_no, ' ' , acc_form_desc) AS accountable_forms, " +
                            $"receipt_issued_from, " +
                            $"receipt_issued_to, " +
                            $"date_issued, " +
@@ -158,25 +158,22 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
-        public DataTable GetIssuedReceiptByCollectorId(string collectorId)
+        public DataTable GetIssuedReceiptByCollectorId(int collectorId)
         {
             var parameter = new object[][] {
-                new object[]{"@collectingOfficerId", DbType.String, collectorId }
+                new object[]{"@collectingOfficerId", DbType.Int32, collectorId }
             };
 
-            string query =  $"SELECT " +
-                            $"accountable_forms.id, " +
-                            $"accountable_forms.acc_form_no, " +
-                            $"accountable_forms.acc_form_desc, " +
-                            $"receipts_issued.quantity " +
-                            $"FROM accountable_forms AS accountable_forms " +
-                            $"INNER JOIN receipts AS receipts " +
-                            $"ON receipts.accountable_forms_id = accountable_forms.id " +
-                            $"INNER JOIN receipts_issued AS receipts_issued " +
-                            $"ON receipts_issued.receipts_id = receipts.id " +
-                            $"WHERE (receipts_issued.collecting_officers_id = @collectingOfficerId AND ISNULL(receipts_issued.job_orders_id)) " +
-                            $"OR receipts_issued.job_orders_id = @collectingOfficerId " +
-                            $"AND receipts_issued.is_returned = false";
+            string query = $"SELECT " +
+                           $"accountable_form_id, " +
+                           $"acc_form_no, " +
+                           $"acc_form_desc,  " +
+                           $"quantity " +
+                           $"FROM " +
+                           $"{viewTableName} " +
+                           $"WHERE " +
+                           $"collecting_officer_id = @collectingOfficerId AND ISNULL(job_orders_id) " +
+                           $"OR job_orders_id = @collectingOfficerId AND is_returned = false";
 
 
             var dtri = new DataTable();

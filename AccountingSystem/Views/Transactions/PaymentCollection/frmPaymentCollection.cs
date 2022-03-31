@@ -19,41 +19,36 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             LoadRecords();
             LoadCollectors();
-            LoadCurrentCollector();
+            LoadCollectorLoggedIn();
         }
 
-        private void LoadCurrentCollector()
+        private void LoadCollectorLoggedIn()
         {
             try
             {
-                if (cmdCollector.Items.Count > 0)
+                if (cmdCollector.Items.Count == 0) return;
+
+                
+                var usersRepo = Factory.UsersRepository();
+                if (usersRepo.LinkedCollector(Helper.UserId) || usersRepo.LinkedJobOrder(Helper.UserId))
                 {
-                    var uRepository = Factory.UsersRepository();
-                    if (uRepository.LinkedCollector(Helper.UserId) || uRepository.LinkedJobOrder(Helper.UserId))
+                    Dictionary<string, string> collectorDict = new();
+
+                    if (Helper.IsJobOrder(Helper.UserId))
                     {
-                       
-                        Dictionary<string, string> collectorDict = new();
-
-                        if (Helper.IsJobOrder(Helper.UserId))
-                        {
-                            var jobOrderRepo = Factory.JobOrderRepository();
-                            collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                            cmdCollector.SelectedValue = collectorDict["id"];
-                        }
-                        else
-                        {
-                            var colRepository = Factory.CollectingOfficerRepository();
-                            collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                            cmdCollector.SelectedValue = collectorDict["id"];
-                        }
-
-                        cmdCollector.Enabled = false;
+                        var jobOrderRepo = Factory.JobOrderRepository();
+                        collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
+                        cmdCollector.SelectedValue = collectorDict["id"];
                     }
-
                     else
                     {
-                        cmdCollector.SelectedIndex = -1;
+                        var colRepository = Factory.CollectingOfficerRepository();
+                        collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
+                        cmdCollector.SelectedValue = collectorDict["id"];
                     }
+
+                    cmdCollector.Enabled = false;
+                    return;
                 }
             }
             catch (Exception)
@@ -127,13 +122,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgpayments.SelectedRows.Count != 0) 
-            {
-                var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
-                int paymentCollectionId = int.Parse(dgRowIndex);
+            if (dgpayments.SelectedRows.Count == 0) return;
+            
+            var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
+            int paymentCollectionId = int.Parse(dgRowIndex);
 
-                _ = new frmPaymentCollectionEdit(this, paymentCollectionId).ShowDialog();
-            }
+            _ = new frmPaymentCollectionEdit(this, paymentCollectionId).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -141,24 +135,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 int selectedRowCount = dgpayments.SelectedRows.Count;
-                var confirmDelete = Helper.MessageBoxConfirmDelete(selectedRowCount);
-
-                if (confirmDelete)
+               
+                if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                 {
                     var paymentCollectionModelList = new List<PaymentCollectionModel>();
 
                     foreach (DataGridViewRow row in dgpayments.SelectedRows)
                     {
-                        int pcId = Convert.ToInt32(row.Cells[0].Value.ToString());
-                        paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = pcId });
-
-                        var paymentCollectionRepo = Factory.PaymentCollectionRepository();
-                        if (paymentCollectionRepo.Delete(paymentCollectionModelList))
-                        {
-                            LoadRecords();
-                            lblRecordCount.Text = dgpayments.Rows.Count.ToString();
-                        }
+                        int paymentCollectionId = Convert.ToInt32(row.Cells[0].Value.ToString());
+                        paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = paymentCollectionId });
+                        var paymentCollectionRepo = Factory.PaymentCollectionRepository().Delete(paymentCollectionModelList);
                     }
+                    
+                    LoadRecords();
                 }
             }
             catch (Exception ex)
@@ -185,27 +174,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgpayments.SelectedRows.Count > 0)
-            {
-                int id = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
-                Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
+            Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
 
-                var crRepository = Factory.CollectorReportRepository();
+            //int paymentCollectionId = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
+            //btnEdit.Enabled = !Factory.CollectorReportRepository().HasReported(paymentCollectionId);
+            //btnDelete.Enabled = !Factory.CollectorReportRepository().HasReported(paymentCollectionId);
 
-                btnEdit.Enabled = crRepository.HasReported(id) ? false : true;
-                btnDelete.Enabled = crRepository.HasReported(id) ? false : true;
-            }
-            else
-            {
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
-            }
         }
 
-        private void btnrefresh_Click(object sender, EventArgs e)
-        {
-            txtSearch.Text = string.Empty;
-            dtpDate.Value = DateTime.Now;
-        }
     }
 }

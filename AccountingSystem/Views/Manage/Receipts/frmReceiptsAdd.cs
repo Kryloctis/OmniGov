@@ -21,8 +21,8 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private bool SaveData()
         {
-            //try
-            //{
+            try
+            {
 
                 if (!uc.ValidateChildren())
                 {
@@ -51,11 +51,11 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 var receiptRepository = Factory.ReceiptsRepository();
                 return receiptRepository.Insert(receiptModel);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Helper.MessageBoxError(ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
 
             return false;
         }
