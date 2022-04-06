@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epFormNo, txtformno, "Form No.");
 
-            var accountableFormRepository = Factory.AccountableRepository();
+            var accountableFormRepository = Factory.AccountableFormsRepository();
             string formNumber = txtformno.Text.Trim();
 
             bool formNumberExist;

@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
                 };
 
-                var accrepository = Factory.AccountableRepository();
+                var accrepository = Factory.AccountableFormsRepository();
                 return accrepository.Insert(accModel);
             }
             catch (Exception ex)

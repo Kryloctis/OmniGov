@@ -35,7 +35,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnReturn = new System.Windows.Forms.ToolStripButton();
-            this.btnRefresh = new System.Windows.Forms.ToolStripButton();
             this.dgReceiptIssued = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -57,8 +56,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.btnEdit,
             this.btnDelete,
             this.toolStripSeparator1,
-            this.btnReturn,
-            this.btnRefresh});
+            this.btnReturn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -118,17 +116,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.btnReturn.Text = "Return Receipt";
             this.btnReturn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
-            this.btnRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(50, 47);
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgReceiptIssued
             // 
@@ -229,7 +216,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnReturn;
-        private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.DataGridView dgReceiptIssued;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;

@@ -8,14 +8,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class ucReceiptsIssued : UserControl
     {
-        internal int Id;
-        internal int collectingOfficerId;
+        internal int receiptIssuedId;
         internal int receiptId;
-        internal bool isTickets = false;
+        internal int collectingOfficerId;
+        internal bool isCashTickets;
         internal bool isCollectorJO;
-
         internal string receiptNumberFrom;
         internal string receiptNumberTo;
+        internal int receiptQuantity;
 
         public ucReceiptsIssued()
         {
@@ -38,16 +38,25 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         internal void ResetForm()
         {
 
+            receiptIssuedId = 0;
+            receiptId = 0;
+            receiptIssuedId = 0;
+            collectingOfficerId = 0;
+            isCashTickets = false;
+            isCollectorJO = false;
+
+            receiptNumberFrom = "0";
+            receiptNumberTo = "0";
+
             radioStubQuantity.Checked = false;
             radioCustomQuantity.Checked = false;
-
-            collectingOfficerId = 0;
-            receiptId = 0;
             txtReceiptIssuedFrom.Text = "0";
             txtReceiptIssuedTo.Text = "0";
-            txtReceiptQuantity.Text = string.Empty;
-            dtpIssued.Value = DateTime.Now;
+            txtReceiptQuantity.Clear();
+            dtpIssued.Value = DateTime.Today;
 
+            LoadCollectors();
+            LoadReceipts();
         }
 
         internal void LoadCollectors()
@@ -100,15 +109,31 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
+                int TotalIssuedCashTicket(int id)
+                {
+                    return Factory.ReceiptsIssuedRepository().GetReceiptIssuedQuantityByReceiptId(id);
+                }
+
                 var receiptsRepo = Factory.ReceiptsRepository();
                 var receiptsDt = receiptsRepo.GetReceipts();
 
                 foreach (DataRow row in receiptsDt.Rows)
                 {
+                    var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                    var accountableFormId = Convert.ToInt32(row["id"]);
+                    var accountableFormQuantity = Convert.ToInt32(row["quantity"]);
                     string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
                     string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
-                        
-                    row["acc_form_no"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}  ({receiptNumberFrom} - {receiptNumberTo}) ";
+
+
+                    if (row["acc_form_desc"].ToString().Contains("Tickets"))
+                        row["acc_form_no"] = $"{accountableForm} {accountableFormQuantity - TotalIssuedCashTicket(accountableFormId)}) ";
+                    else
+                        row["acc_form_no"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
+
+                    var quantityRemaining = (accountableFormQuantity - TotalIssuedCashTicket(accountableFormId));
+                    if (quantityRemaining == 0 || quantityRemaining < 0)
+                        row.Delete();
                 }
 
                 cmbReceipt.DataSource = receiptsDt;
@@ -163,11 +188,21 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-    
         private void txtquantity_Validating(object sender, CancelEventArgs e)
         {
+            if (receiptQuantity < Convert.ToInt32(txtReceiptQuantity.Text.Trim()))
+            {
+                epQuantity.SetError(txtReceiptQuantity, "Quantity");
+                e.Cancel = true;
+            }
+
+
             if (string.IsNullOrEmpty(txtReceiptQuantity.Text.Trim()))
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epQuantity, txtReceiptQuantity, "Quantity.");
+            {
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epQuantity, txtReceiptQuantity, "Not enough quantity.");
+                e.Cancel = true;
+            }
+           
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
@@ -183,22 +218,29 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             DataRowView item = cmbReceipt.SelectedItem as DataRowView;
             if (item == null) return;
 
+            receiptQuantity = (int)item["quantity"];
+
             if (item["acc_form_no"].ToString().Contains("Tickets"))
+            {
                 SetFieldsForCashTickets();
+            }
             else
+            {
                 SetFieldsForNonCashTickets();
 
-            var receiptId = int.Parse(item["id"].ToString());
-            var receiptQuantity = int.Parse(item["quantity"].ToString());
+                var receiptId = int.Parse(item["id"].ToString());
+                var receiptQuantity = int.Parse(item["quantity"].ToString());
 
-            if (ReceiptQuantityAvailable(receiptId, receiptQuantity)) 
-            {
-                SetReceiptNumberFrom(receiptId, item);
-              
-                return;
+                if (ReceiptQuantityAvailable(receiptId, receiptQuantity))
+                {
+                    SetReceiptNumberFrom(receiptId, item);
+                    return;
+                }
             }
+
+
         }
-         
+        
         private bool ReceiptQuantityAvailable(int receiptId, int receiptQuantity)
         {
             try
@@ -229,50 +271,27 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        private void SetReceiptNumberTo(DataRowView item)
-        {
-            try
-            {
-                receiptNumberTo = item["receipt_number_to"].ToString();
-                txtReceiptIssuedTo.Text = (Convert.ToInt32(receiptNumberTo) + 49).ToString("D7");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         private void SetFieldsForCashTickets()
         {
             txtReceiptQuantity.ReadOnly  = false;
-            isTickets = true;
-
+            isCashTickets = true;
             txtReceiptIssuedFrom.ResetText();
             txtReceiptIssuedTo.ResetText();
-
             txtReceiptIssuedFrom.Enabled = false;
             txtReceiptIssuedTo.Enabled = false;
+            radioStubQuantity.Enabled = false;
+            radioCustomQuantity.Enabled = false;
         }
 
         private void SetFieldsForNonCashTickets()
         {
-            isTickets = false;
+            isCashTickets = false;
             txtReceiptIssuedFrom.Enabled = true;
             txtReceiptIssuedTo.Enabled = true;
-
             txtReceiptQuantity.ReadOnly = true;
-        }
+            radioStubQuantity.Enabled = true;
+            radioCustomQuantity.Enabled = true;
 
-        private void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbCollector.SelectedIndex != -1)
-            {
-                DataRowView item = cmbCollector.SelectedItem as DataRowView;
-                if (item != null)
-                {
-                    var collectorId = int.Parse(item[0].ToString());
-                }
-            }
         }
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
@@ -287,10 +306,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void ComputeReceiptIssueQuantity()
         {
-            var receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
-            var receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
+            var receiptNumberFrom = string.IsNullOrEmpty(txtReceiptIssuedFrom.Text) ? 0 : Convert.ToInt32(txtReceiptIssuedFrom.Text);
+            var receiptNumberTo = string.IsNullOrEmpty(txtReceiptIssuedTo.Text) ? 0 : Convert.ToInt32(txtReceiptIssuedTo.Text);
             var quantity = (receiptNumberTo - receiptNumberFrom) + 1;
-
 
             if (quantity >= 1)
                 txtReceiptQuantity.Text = quantity.ToString();
@@ -303,7 +321,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTickets)
+            if (!isCashTickets)
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
                 {
@@ -315,7 +333,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtReceiptNumberTo_Validating(object sender, CancelEventArgs e)
         {
-            if (!isTickets)
+            if (!isCashTickets)
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
                 {
@@ -377,6 +395,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             txtReceiptIssuedFrom.Focus();
         }
-
     }
 }

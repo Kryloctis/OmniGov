@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnrefresh = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgpayments = new System.Windows.Forms.DataGridView();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
@@ -59,8 +58,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete,
-            this.btnrefresh});
+            this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
@@ -103,17 +101,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnrefresh
-            // 
-            this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
-            this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnrefresh.Name = "btnrefresh";
-            this.btnrefresh.Size = new System.Drawing.Size(50, 47);
-            this.btnrefresh.Text = "Refresh";
-            this.btnrefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
             // txtSearch
             // 
@@ -290,7 +277,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridView dgpayments;
-        private System.Windows.Forms.ToolStripButton btnrefresh;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.StatusStrip statusStrip2;

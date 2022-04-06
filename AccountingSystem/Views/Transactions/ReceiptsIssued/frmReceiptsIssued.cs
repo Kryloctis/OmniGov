@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true );
         }
-       
+
         private void frmReceipts_Load(object sender, EventArgs e)
         {
             LoadRecords();
@@ -58,13 +58,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 LoadRecords();
             }
         }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtsearch.Text = string.Empty;
-            LoadRecords();
-        }
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -126,16 +119,19 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            if(dgReceiptIssued.SelectedRows.Count > 0)
-            {
-                int id = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells[0].Value.ToString());
-                int receiptNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString()) ? dgReceiptIssued.CurrentRow.Cells[3].Value.ToString() : (dgReceiptIssued.CurrentRow.Cells[7].Value).ToString()) + 1;
+            if (dgReceiptIssued.SelectedRows.Count == 0)
+                return;
+            
+            int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
+            var lastIssued = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
 
-                int receiptNumberTo = Convert.ToInt32(string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[4].Value.ToString()) ? 0 : dgReceiptIssued.CurrentRow.Cells[4].Value.ToString());
+            int issuedSerialNoFrom = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_from"].Value);
+            int issuedSerialNoTo = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_to"].Value);
 
-               
-                _ = new frmReturnReceipts(this, id, receiptNumberFrom, receiptNumberTo).ShowDialog();
-            }
+            int returnSerialNoFrom = string.IsNullOrEmpty(lastIssued.ToString()) ? issuedSerialNoFrom : lastIssued + 1;
+            int returnSerialNoTo = issuedSerialNoTo;
+
+            _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }
     }
 }

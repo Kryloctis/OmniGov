@@ -7,13 +7,13 @@ using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class AccountableRepository:IAccountableRepository
+    public class AccountableFormsRepository:IAccountableRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
         private readonly string viewTableName = "view_accountable_forms";
 
-        public AccountableRepository(IDbGenericCommands dbGenericCommands)
+        public AccountableFormsRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

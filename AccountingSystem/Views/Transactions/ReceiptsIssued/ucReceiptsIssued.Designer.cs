@@ -105,7 +105,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(445, 23);
             this.cmbCollector.TabIndex = 0;
-            this.cmbCollector.SelectedIndexChanged += new System.EventHandler(this.cmbcollector_SelectedIndexChanged);
             this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbcollector_Validating);
             this.cmbCollector.Validated += new System.EventHandler(this.cmbcollector_Validated);
             // 

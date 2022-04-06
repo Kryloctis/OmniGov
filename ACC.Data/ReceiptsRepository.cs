@@ -189,31 +189,6 @@ namespace ACC.Data
             return false;
         }
 
-        public bool AllowEdit(int id)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT {tableName}.id " +
-                               $"FROM {tableName} LEFT JOIN {tableReceiptsIssued} ON {tableName}.id={tableReceiptsIssued}.receipts_id " +
-                               $"WHERE ({tableReceiptsIssued}.receipt_issued_from AND {tableReceiptsIssued}.receipt_issued_to BETWEEN {tableName}.receipt_number_from AND {tableName}.receipt_number_to) AND {tableName}.id=@id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            };
-
-            return false;
-        }
-
         public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
         {
             int value = 0;          
@@ -249,16 +224,17 @@ namespace ACC.Data
             return value;
         }
 
-        public bool ReceiptConsumed(int id)
+        public bool ReceiptConsumed(int receiptId)
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, id },
+                new object[] { "@receipt_id", DbType.Int32, receiptId },
             };
 
-            string query =  $"SELECT * FROM {tableName} " +
+            string query =  $"SELECT id " +
+                            $"FROM {tableName} " +
                             $"WHERE " +
-                            $"id = @id AND receipt_number_to = (SELECT SUM(IF(IFNULL(last_issued,0) > 0, " +
+                            $"id = @id AND receipt_number_to = (SELECT SUM(IF(IFNULL(last_issued, 0) > 0, " +
                             $"receipt_issued_to - last_issued,0)) " +
                             $"FROM {tableReceiptsIssued} " +
                             $"WHERE receipts_id = id AND IF(IFNULL(is_returned, true), false, true) = false)";
@@ -278,7 +254,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@users_id", DbType.Int32, entity.UserId},
-                    new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
+                    new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                     new object[] { "@receipt_number_from", DbType.Int32, entity.SerialNoFrom},
                     new object[] { "@receipt_number_to", DbType.Int32, entity.SerialNoTo},
                     new object[] { "@received_date", DbType.Date, entity.ReceiptDate},
@@ -316,7 +292,7 @@ namespace ACC.Data
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@users_id", DbType.Int32, entity.UserId},
-                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccId},
+                new object[] { "@accountable_forms_id", DbType.Int32, entity.AccountableFormId},
                 new object[] { "@receipt_number_from", DbType.Int32, entity.SerialNoFrom},
                 new object[] { "@receipt_number_to", DbType.Int32, entity.SerialNoTo},
                 new object[] { "@received_date", DbType.Date, entity.ReceiptDate},

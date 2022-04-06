@@ -1,44 +1,37 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 {
     public partial class frmReturnReceipts : Form
     {
-        private frmReceiptsIssued frmr;
-        private int receiptId = 0;
-        public frmReturnReceipts(frmReceiptsIssued _frmr, int id, int receiptNumberFrom, int receiptNumberTo)
+        private readonly frmReceiptsIssued _frmReceiptsIssued;
+        private readonly int issuanceId;
+
+        public frmReturnReceipts(frmReceiptsIssued frmReceiptsIssued, int issuanceId, int returnSerialNumberFrom, int returnSerialNumberTo)
         {
             InitializeComponent();
-            frmr = _frmr;
+            _frmReceiptsIssued = frmReceiptsIssued;
 
-            receiptId = id;
-            txtReceiptNumberFrom.Text = receiptNumberFrom.ToString("D8");
-            txtReceiptNumberTo.Text = receiptNumberTo.ToString("D8");
-
+            this.issuanceId = issuanceId;
+            txtReceiptNumberFrom.Text = returnSerialNumberFrom.ToString("D8");
+            txtReceiptNumberTo.Text = returnSerialNumberTo.ToString("D8");
         }
 
         private bool SaveData()
         {
             try
             {
-                var riRepository = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
                 var riModel = new ReceiptsIssuedModel()
                 {
-                    Id = receiptId,
+                    Id = issuanceId,
                     Is_returned = 1,
                     Returned_date = dtpreturn.Value
                 };
-                return riRepository.UpdateReturnedReceipt(riModel);
+
+                return receiptIssuedRepository.UpdateReturnedReceipt(riModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
@@ -48,15 +41,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Receipt returned saved!");
-                frmr.LoadRecords();
-                this.Close();
+                Helper.MessageBoxSuccess("Receipt successfully returned.");
+                _frmReceiptsIssued.LoadRecords();
+                Close();
             }
         }
 
-        private void frmReturn_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

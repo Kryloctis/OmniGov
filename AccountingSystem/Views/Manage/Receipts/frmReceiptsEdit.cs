@@ -8,8 +8,8 @@ namespace AccountingSystem.Views.Manage.Receipts
     {
         private readonly frmReceipts _frmReceipts;
         private readonly ucReceipts uc;
+        private int userId;
 
-        private int userId = 0;
         public frmReceiptsEdit(frmReceipts frmReceipts, int receiptId)
         {
             InitializeComponent();
@@ -22,9 +22,8 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void frmAccFromEdit_Load(object sender, EventArgs e)
         {
-            uc.LoadForms();
+            uc.LoadAccountableForms();
             LoadSelectedValue();
-            
         }
 
         private void LoadSelectedValue()
@@ -69,7 +68,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rModel = new ReceiptsModel()
                 {
                     Id = uc.receiptId,
-                    AccId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
+                    AccountableFormId = int.Parse(uc.cmbAccountableForms.SelectedValue.ToString()),
                     SerialNoFrom = int.Parse(uc.txtReceiptNumberFrom.Text.Trim()),
                     SerialNoTo = int.Parse(uc.txtReceiptNumberTo.Text.Trim()),
                     ReceiptDate = uc.dtpReceivedDate.Value,
@@ -80,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 };
 
                 var rcRepository = Factory.ReceiptsRepository();
-                if (uc.isTicket == false)
+                if (uc.isCashTicket == false)
                     return rcRepository.Update(rModel);
                 else 
                     return rcRepository.Update(rModel);

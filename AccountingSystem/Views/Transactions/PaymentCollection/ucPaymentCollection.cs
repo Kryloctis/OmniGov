@@ -9,19 +9,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class ucPaymentCollection : UserControl
     {
-        internal int paymentCollectionId = 0;
-        internal int fundId = 0;
-        internal int accountableFormId = 0;
-        internal int generalLedgerId = 0;
-        internal int userId = 0;
-        internal int receiptNumberFrom = 0;
-        internal int receiptNumberTo = 0;
-        internal int receiptNumber = 0;
+        internal int paymentCollectionId;
+        internal int accountableFormId;
+        internal int fundId;
+        internal int generalLedgerId;
+        internal int userId;
+        internal int serialNumberFrom;
+        internal int serialNumberTo;
+        internal int serialNumber;
 
         internal bool isCashTicket;
-        internal int cashTicketFaceValue = 0;
+        internal int cashTicketFaceValue;
         internal decimal accountableFormFaceValue;
-        internal bool isSave = false;
+        internal bool isSave;
 
         public ucPaymentCollection()
         {
@@ -53,79 +53,61 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtPayee.Clear();
             dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
-            receiptNumberFrom = 0;
-            receiptNumberTo = 0;
-            receiptNumber = 0;
+            serialNumberFrom = 0;
+            serialNumberTo = 0;
+            serialNumber = 0;
+
+            isCashTicket = false;
+            cashTicketFaceValue = 0;
+            accountableFormFaceValue = 0.0m;
+            isSave = false;
         }
 
-        internal void LoadForms(int collectorsId)
+        internal void LoadAccountableFormsByCollectorId(int collectorsId)
         {
             try
             {
                 var accountableFormRepo = Factory.ReceiptsIssuedRepository();
-                var dtforms = accountableFormRepo.GetRecordsReceipts(collectorsId.ToString());
+                var dtAccountableForms = accountableFormRepo.GetIssuedReceiptByCollectorId(collectorsId);
 
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
-                cmbAccountableForms.DataSource = dtforms;
-                cmbAccountableForms.ValueMember = "id";
-                cmbAccountableForms.DisplayMember = "formdisplay";
-            } 
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
+                dtAccountableForms.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
+                cmbAccountableForms.DataSource = dtAccountableForms;
+                cmbAccountableForms.ValueMember = "accountable_form_id";
+                cmbAccountableForms.DisplayMember = "accountableForm";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void LoadForms()
+        internal void LoadAccountableForms()
         {
-            try
-            {
-                cmbAccountableForms.SelectedValueChanged -= cmbforms_SelectedValueChanged;
-                var formRepository = Factory.AccountableRepository();
-                var dtforms = formRepository.GetRecords();
-                dtforms.Columns.Add("formdisplay", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-                cmbAccountableForms.DataSource = dtforms;
-                cmbAccountableForms.ValueMember = "id";
-                cmbAccountableForms.DisplayMember = "formdisplay";
-                cmbAccountableForms.SelectedValueChanged += cmbforms_SelectedValueChanged;
-            }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
-            }
+            var accountableFormsDt = Factory.AccountableFormsRepository().GetRecords();
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, accountableFormsDt);
+
+
+            
         }
 
         internal void LoadFunds()
         {
-            try
-            {
-                var fundRepository = Factory.FundsRepository();
-                var dtFund = fundRepository.GetRecords();
-                dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
-                cmbFund.DataSource = dtFund;
-                cmbFund.ValueMember = "id";
-                cmbFund.DisplayMember = "funddisplay";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var fundDt = Factory.FundsRepository().GetRecords();
+            HelperLoadRecords.FundsComboBox(fundDt, cmbFund, "fund_name", "id");
         }
 
         internal void SetSelectedValue(int Id, string table)
         {
-           
-            try
+            if (!string.IsNullOrEmpty(table) || Id > 0)
             {
-                if (!string.IsNullOrEmpty(table) || Id > 0)
+                if (table.Equals("ledger"))
                 {
-                    if (table.Equals("ledger"))
-                    {
-                        var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
-                        var ledgerData = ledgerRepository.GetRecordByID(Id);
-                        generalLedgerId = Id;
-                        cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
-                    }
+                    var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
+                    var ledgerData = ledgerRepository.GetRecordByID(Id);
+                    generalLedgerId = Id;
+                    cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
                 }
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadCollectors()
@@ -146,72 +128,73 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmdCollector.ValueMember = "id";
                 cmdCollector.DisplayMember = "fullname";
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void LoadCurrentCollector()
+        internal void LoadLoggedInCollector()
         {
-            try
+            if (cmdCollector.Items.Count == 0) return;
+
+            var userRepo = Factory.UsersRepository();
+            if (userRepo.LinkedCollector(Helper.UserId) || userRepo.LinkedJobOrder(Helper.UserId))
             {
-                if (cmdCollector.Items.Count > 0)
+                Dictionary<string, string> collectorDict = new();
+
+                if (Helper.IsJobOrder(Helper.UserId))
                 {
-                    var uRepository = Factory.UsersRepository();
-                    if (uRepository.LinkedCollector(Helper.UserId) || uRepository.LinkedJobOrder(Helper.UserId))
-                    {
-
-                        Dictionary<string, string> collectorDict = new();
-
-                        if (Helper.IsJobOrder(Helper.UserId))
-                        {
-                            var jobOrderRepo = Factory.JobOrderRepository();
-                            collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                            cmdCollector.SelectedValue = collectorDict["id"];
-                        }
-                        else
-                        {
-                            var colRepository = Factory.CollectingOfficerRepository();
-                            collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                            cmdCollector.SelectedValue = collectorDict["id"];
-                        }
-
-                        cmdCollector.Enabled = false;
-                    }
-
-                    else
-                    {
-                        cmdCollector.SelectedIndex = -1;
-                    }
+                    var jobOrderRepo = Factory.JobOrderRepository();
+                    collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
+                    cmdCollector.SelectedValue = collectorDict["id"];
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+                else
+                {
+                    var colRepository = Factory.CollectingOfficerRepository();
+                    collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
+                    cmdCollector.SelectedValue = collectorDict["id"];
+                }
+
+                cmdCollector.Enabled = false;
             }
         }
 
         internal bool IsReceiptNumberBetweenFromAndTo(int receiptNumber)
         {
-            return (receiptNumber >= receiptNumberFrom) && (receiptNumber <= receiptNumberTo);
+            return (receiptNumber >= serialNumberFrom) && (receiptNumber <= serialNumberTo);
         }
 
         private void ucPaymentCollection_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadForms(Convert.ToInt32(cmdCollector.SelectedValue));
+                LoadAccountableFormsByCollectorId(Convert.ToInt32(cmdCollector.SelectedValue));
                 LoadCollectors();
                 LoadFunds();
 
                 cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
                 LoadAccounts();
                 cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
-                cmbAccount.SelectedIndex = -1;
 
-                LoadCurrentCollector();
+                cmbAccount.SelectedIndex = -1;
+                cmbFund.SelectedIndex = -1;
+                LoadLoggedInCollector();
+                GetAccountableFormSerialNumberRange();
             }
+        }
+
+        internal void GetAccountableFormSerialNumberRange()
+        {
+            if (cmdCollector.SelectedIndex == -1 || cmbAccountableForms.SelectedIndex == -1) return;
+           
+            var collectingOfficerId = Convert.ToInt32(cmdCollector.SelectedValue).ToString();
+            var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
+
+            var dtReceiptIssued = Factory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
+
+            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
         }
 
 
@@ -281,7 +264,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
 
             var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
-            
+
             if (ReceiptNumberHasCollection())
             {
                 epSerialNo.SetError(txtReceiptNumber, "Receipt number already recorded.");
@@ -302,7 +285,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string receiptNumber = txtReceiptNumber.Text.Trim();
-                int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue) ;
+                int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
                 var paymentCollectionId = this.paymentCollectionId;
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
@@ -378,7 +361,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorNumericUpDown(epCashTicketQuantity, txtCashTicketQuantity);
         }
 
-      
+
         internal void txtCashTicketsAmount_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownZero(epCashTicketAmount, txtCashTicketsAmount, "Amount");
@@ -391,162 +374,108 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         #endregion
 
-
         internal void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbAccountableForms.SelectedIndex == -1)
                 return;
+
             CreatePaymentCollection();
         }
 
         private void CreatePaymentCollection()
         {
-            DataRowView forms = cmbAccountableForms.SelectedItem as DataRowView;
-            DataRowView collector = cmdCollector.SelectedItem as DataRowView;
+            DataRowView accountableFormDRV = cmbAccountableForms.SelectedItem as DataRowView;
+            DataRowView collectingOfficerDRV = cmdCollector.SelectedItem as DataRowView;
 
-            if (forms == null && collector == null)
+
+            if (accountableFormDRV == null || collectingOfficerDRV == null)
                 return;
 
-            if (paymentCollectionId <= 0)    //ADD
-                InsertPaymentCollection(forms, collector);
-            else 
-                EditPaymentCollection(forms, collector);
-        }
-
-        private void InsertPaymentCollection(DataRowView forms, DataRowView collector)
-        {
-            try
-            {
-                var collectorId = collector[0].ToString();
-                var accountableFormId = forms[0].ToString();
-
-                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
-                var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
-
-                var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
-
-
-                if (dtReceiptIssuedRowCount > 0) //IF RECORD FOUND ROW COUNT IS NOT ZERO
-                {
-                    int receiptNumberTo = 0;
-                    int lastIssued = 0;
-
-                    for (int i = 0; i < dtReceiptIssuedRowCount; i++)
-                    {
-                        receiptNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_to"]);
-                        this.receiptNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_to"]);
-                        receiptNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_from"]);
-                        lastIssued = dtReceiptIssued.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[i]["last_issued"]);
-                    }
-
-                    if (receiptNumberTo.Equals(lastIssued))
-                        txtReceiptNumber.Text = "0";
-
-                    else
-                    {
-                        if (lastIssued < receiptNumberFrom)
-                            txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
-                        else if (lastIssued.Equals(receiptNumberFrom))
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
-                        else
-                            txtReceiptNumber.Text = (lastIssued + 1).ToString("D7");
-                    }
-                }
-                else
-                {
-                    txtReceiptNumber.Text = "0";
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private void EditPaymentCollection(DataRowView forms, DataRowView collector)
-        {
-            if (accountableFormId != Convert.ToInt32(cmbAccountableForms.SelectedValue))
-            {
-                try
-                {
-                    var collectorId = collector[0].ToString();
-                    var accountableFormId = forms[0].ToString();
-
-                    var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
-                    var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(accountableFormId, accountableFormId);
-
-                    var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
-
-                    if (dtReceiptIssuedRowCount > 0)
-                    {
-                        int receiptto = 0;
-                        int receiptlast = 0;
-                        for (int i = 0; i < dtReceiptIssuedRowCount; i++)
-                        {
-                            receiptto = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_to"]);
-                            receiptNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_to"]);
-                            receiptNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[i]["receipt_issued_from"]);
-                            receiptlast = dtReceiptIssued.Rows[i]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[i]["last_issued"]);
-                        }
-                        if (receiptto.Equals(receiptlast))
-                            txtReceiptNumber.Text = "0";
-                        else
-                        {
-                            if (receiptlast < receiptNumberFrom)
-                                txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
-                            else if (receiptlast.Equals(receiptNumberFrom))
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
-                            else
-                                txtReceiptNumber.Text = (receiptlast + 1).ToString("D7");
-                        }
-
-                    }
-                    else
-                    {
-                        txtReceiptNumber.Text = "0";
-                    }
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
+            if (paymentCollectionId == 0)    //accountableForm
+                InsertPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
             else
+                EditPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
+        }
+
+        private void SetCollectionsData(DataTable dtReceiptIssued)
+        {
+            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+
+            var lastIssuedSerialNumber = dtReceiptIssued.Rows[0]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[0]["last_issued"]);
+
+            if (lastIssuedSerialNumber == 0)
+                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
+            else if (lastIssuedSerialNumber.Equals(serialNumberTo))
+                txtReceiptNumber.Text = string.Empty;
+            else
+                txtReceiptNumber.Text = (lastIssuedSerialNumber + 1).ToString("D7");
+        }
+
+        private void EnableDisableNonCashTicketsFields(bool enable)
+        {
+            if (!enable)
             {
-                txtReceiptNumber.Text = receiptNumber.ToString("D7");
+                dtDateOfCollection.Value = DateTime.Now;
+                txtReceiptNumber.Clear();
+                txtPayee.Clear();
+                txtAmount.Value = Convert.ToDecimal("0.00");
             }
+
+            dtDateOfCollection.Enabled = enable;
+            txtReceiptNumber.Enabled = enable;
+            txtPayee.Enabled = enable;
+            txtAmount.Enabled = enable;
+        }
+
+        private void InsertPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
+        {
+            var collectorId = collectingOfficerDRV[0].ToString();
+            var accountableFormId = accountableFormDRV[0].ToString();
+
+            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
+            var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
+
+            if (dtReceiptIssuedRowCount == 0)   //if all receipt has been used.
+            {
+                Helper.MessageBoxSuccess("All Receipts has been recorded");
+                EnableDisableNonCashTicketsFields(false);
+                return;
+            }
+
+            EnableDisableNonCashTicketsFields(true);
+            SetCollectionsData(dtReceiptIssued);
+        }
+
+        private void EditPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
+        {
+         
         }
 
         internal void cmbforms_SelectedValueChanged(object sender, EventArgs e)
         {
-            int idOfSelectedAccountableForm = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(idOfSelectedAccountableForm);
+            if (cmbAccountableForms.SelectedIndex != -1) return;
+           
+            GetAccountableFormFaceValue();
             SwitchFields();
             txtCashTicketQuantity_TextChanged(sender, e);
         }
 
+        private void GetAccountableFormFaceValue()
+        {
+            int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
+        }
+
         internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmdCollector.SelectedIndex != -1)
-            {
-                DataRowView collector = cmdCollector.SelectedItem as DataRowView;
-                cmbAccountableForms.Enabled = true;
-                txtPayee.Enabled = true;
-                //txtreceipt.Enabled = true;
-                dtDateOfCollection.Enabled = true;
-                txtAmount.Enabled = true;
-                cmbAccount.Enabled = true;
-                LoadForms(int.Parse(collector[0].ToString()));
-            }
-            else
-            {
+            if (cmdCollector.SelectedIndex == -1) return;
+            
+            DataRowView collector = cmdCollector.SelectedItem as DataRowView;
+            var collectorId = int.Parse(collector[0].ToString());
 
-                DataRowView collector = cmdCollector.SelectedItem as DataRowView;
-                cmbAccountableForms.Enabled = false;
-                txtPayee.Enabled = false;
-                //txtreceipt.Enabled = false;
-                dtDateOfCollection.Enabled = false;
-                txtAmount.Enabled = false;
-                cmbAccount.Enabled = false;
-            }
+            LoadAccountableFormsByCollectorId(collectorId);
         }
 
         private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
@@ -584,7 +513,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
                     string accountName = $"{item["account_code"]} - {item["ledger_name"]}";
-
                     accountDict.Add(accountId, accountName);
                 }
 
@@ -641,8 +569,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbAccount.DroppedDown = true;
             }
         }
-
-
+        
         internal void CancelReceiptFieldValidations(bool cancelEvent)
         {
             if (cancelEvent)

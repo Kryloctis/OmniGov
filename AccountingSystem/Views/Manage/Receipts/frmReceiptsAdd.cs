@@ -7,58 +7,42 @@ namespace AccountingSystem.Views.Manage.Receipts
     public partial class frmReceiptsAdd : Form
     {
         private readonly frmReceipts frmReceipts;
-        private int UserId = 0;
+        private readonly int userId;
+        private static ucReceipts uc;
 
         public frmReceiptsAdd(frmReceipts _frmReceipts)
         {
             InitializeComponent();
-            frmReceipts = _frmReceipts;
-            UserId = Helper.UserId;
-        }
 
-        private void frmAccFormsAdd_Load(object sender, EventArgs e)
-        {
-            ucReceipts.LoadForms();
+            frmReceipts = _frmReceipts;
+            userId = Helper.UserId;
+            uc = ucReceipts;
         }
 
         private bool SaveData()
         {
             try
             {
-                var uc = ucReceipts;
+
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
 
-
-                int receiptNumberFrom;
-                int receiptNumberTo;
-
-                if (string.IsNullOrEmpty(uc.txtReceiptNumberFrom.Text) || string.IsNullOrEmpty(uc.txtReceiptNumberTo.Text))
-                {
-                    receiptNumberFrom = 0;
-                    receiptNumberTo = 0;
-                }
-                else
-                {
-                    receiptNumberFrom = Convert.ToInt32(uc.txtReceiptNumberFrom.Text.Trim());
-                    receiptNumberTo = Convert.ToInt32(uc.txtReceiptNumberTo.Text.Trim());
-                }
-
+                var serialNumberFrom = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberFrom.Text.Trim()) ? 0 : uc.txtReceiptNumberFrom.Text);
+                var serialNumberTo = Convert.ToInt32(string.IsNullOrEmpty(uc.txtReceiptNumberTo.Text.Trim()) ? 0 : uc.txtReceiptNumberTo.Text);
                 var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue.ToString());
                 var receiptDate = uc.dtpReceivedDate.Value;
                 var quantity = Convert.ToInt32(uc.txtQuantity.Text.Trim());
                 var remark = uc.txtRemark.Text.Trim();
-                var userId = UserId;
-
+                var userId = this.userId;
 
                 var receiptModel = new ReceiptsModel()
                 {
-                    AccId = accountableFormId,
-                    SerialNoFrom = receiptNumberFrom,
-                    SerialNoTo = receiptNumberTo,
+                    AccountableFormId = accountableFormId,
+                    SerialNoFrom = serialNumberFrom,
+                    SerialNoTo = serialNumberTo,
                     ReceiptDate = receiptDate,
                     Quantity = quantity,
                     Remarks = remark,
@@ -82,7 +66,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 Helper.MessageBoxSuccess("Receipt has been saved.");
                 frmReceipts.LoadRecords();
-                ucReceipts.ResetForm();
+                uc.ResetForm();
             }
         }
 
