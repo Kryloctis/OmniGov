@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.cmdCollector = new System.Windows.Forms.ComboBox();
+            this.cmbCollector = new System.Windows.Forms.ComboBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
@@ -198,18 +198,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label7.TabIndex = 38;
             this.label7.Text = "Collecting Officer";
             // 
-            // cmdCollector
+            // cmbCollector
             // 
-            this.cmdCollector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmdCollector.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cmdCollector.FormattingEnabled = true;
-            this.cmdCollector.Location = new System.Drawing.Point(657, 20);
-            this.cmdCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmdCollector.Name = "cmdCollector";
-            this.cmdCollector.Size = new System.Drawing.Size(233, 21);
-            this.cmdCollector.TabIndex = 37;
-            this.cmdCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
+            this.cmbCollector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollector.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cmbCollector.FormattingEnabled = true;
+            this.cmbCollector.Location = new System.Drawing.Point(657, 20);
+            this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbCollector.Name = "cmbCollector";
+            this.cmbCollector.Size = new System.Drawing.Size(233, 21);
+            this.cmbCollector.TabIndex = 37;
+            this.cmbCollector.SelectionChangeCommitted += new System.EventHandler(this.cmdCollector_SelectionChangeCommitted);
             // 
             // txtTotal
             // 
@@ -246,7 +246,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cmdCollector);
+            this.Controls.Add(this.cmbCollector);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.dgpayments);
             this.Controls.Add(this.toolStrip);
@@ -284,7 +284,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
-        internal System.Windows.Forms.ComboBox cmdCollector;
+        internal System.Windows.Forms.ComboBox cmbCollector;
         internal System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label4;
     }

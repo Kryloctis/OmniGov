@@ -33,7 +33,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnLoad = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelectCollections = new System.Windows.Forms.Button();
             this.txtCollectionsCount = new System.Windows.Forms.TextBox();
             this.dtfrom = new System.Windows.Forms.MonthCalendar();
@@ -78,7 +77,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSelectCollections);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 218);
@@ -88,29 +86,17 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.flowLayoutPanel1.Size = new System.Drawing.Size(476, 27);
             this.flowLayoutPanel1.TabIndex = 38;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(389, 2);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(84, 22);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
             // btnSelectCollections
             // 
             this.btnSelectCollections.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSelectCollections.Enabled = false;
-            this.btnSelectCollections.Location = new System.Drawing.Point(299, 2);
+            this.btnSelectCollections.Location = new System.Drawing.Point(389, 2);
             this.btnSelectCollections.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelectCollections.Name = "btnSelectCollections";
             this.btnSelectCollections.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSelectCollections.Size = new System.Drawing.Size(84, 22);
             this.btnSelectCollections.TabIndex = 1;
-            this.btnSelectCollections.Text = "Load";
+            this.btnSelectCollections.Text = "Ok";
             this.btnSelectCollections.UseVisualStyleBackColor = true;
             this.btnSelectCollections.Click += new System.EventHandler(this.btnSelectCollections_Click);
             // 
@@ -179,7 +165,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(476, 245);
             this.Controls.Add(this.lblCollectionsTo);
             this.Controls.Add(this.lblCollectionsFrom);

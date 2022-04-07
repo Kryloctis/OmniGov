@@ -62,7 +62,7 @@ namespace AccountingSystem {
         
         private dtJournalVoucherDataTable tabledtJournalVoucher;
         
-        private dtReceiptsConsolidatedDataTable tabledtReceiptsConsolidated;
+        private dtConsolidatedReceiptsDataTable tabledtConsolidatedReceipts;
         
         private dtTrialBalanceDataTable tabledtTrialBalance;
         
@@ -165,8 +165,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtJournalVoucher"] != null)) {
                     base.Tables.Add(new dtJournalVoucherDataTable(ds.Tables["dtJournalVoucher"]));
                 }
-                if ((ds.Tables["dtReceiptsConsolidated"] != null)) {
-                    base.Tables.Add(new dtReceiptsConsolidatedDataTable(ds.Tables["dtReceiptsConsolidated"]));
+                if ((ds.Tables["dtConsolidatedReceipts"] != null)) {
+                    base.Tables.Add(new dtConsolidatedReceiptsDataTable(ds.Tables["dtConsolidatedReceipts"]));
                 }
                 if ((ds.Tables["dtTrialBalance"] != null)) {
                     base.Tables.Add(new dtTrialBalanceDataTable(ds.Tables["dtTrialBalance"]));
@@ -404,9 +404,9 @@ namespace AccountingSystem {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtReceiptsConsolidatedDataTable dtReceiptsConsolidated {
+        public dtConsolidatedReceiptsDataTable dtConsolidatedReceipts {
             get {
-                return this.tabledtReceiptsConsolidated;
+                return this.tabledtConsolidatedReceipts;
             }
         }
         
@@ -614,8 +614,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtJournalVoucher"] != null)) {
                     base.Tables.Add(new dtJournalVoucherDataTable(ds.Tables["dtJournalVoucher"]));
                 }
-                if ((ds.Tables["dtReceiptsConsolidated"] != null)) {
-                    base.Tables.Add(new dtReceiptsConsolidatedDataTable(ds.Tables["dtReceiptsConsolidated"]));
+                if ((ds.Tables["dtConsolidatedReceipts"] != null)) {
+                    base.Tables.Add(new dtConsolidatedReceiptsDataTable(ds.Tables["dtConsolidatedReceipts"]));
                 }
                 if ((ds.Tables["dtTrialBalance"] != null)) {
                     base.Tables.Add(new dtTrialBalanceDataTable(ds.Tables["dtTrialBalance"]));
@@ -788,10 +788,10 @@ namespace AccountingSystem {
                     this.tabledtJournalVoucher.InitVars();
                 }
             }
-            this.tabledtReceiptsConsolidated = ((dtReceiptsConsolidatedDataTable)(base.Tables["dtReceiptsConsolidated"]));
+            this.tabledtConsolidatedReceipts = ((dtConsolidatedReceiptsDataTable)(base.Tables["dtConsolidatedReceipts"]));
             if ((initTable == true)) {
-                if ((this.tabledtReceiptsConsolidated != null)) {
-                    this.tabledtReceiptsConsolidated.InitVars();
+                if ((this.tabledtConsolidatedReceipts != null)) {
+                    this.tabledtConsolidatedReceipts.InitVars();
                 }
             }
             this.tabledtTrialBalance = ((dtTrialBalanceDataTable)(base.Tables["dtTrialBalance"]));
@@ -890,8 +890,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtReceipts);
             this.tabledtJournalVoucher = new dtJournalVoucherDataTable();
             base.Tables.Add(this.tabledtJournalVoucher);
-            this.tabledtReceiptsConsolidated = new dtReceiptsConsolidatedDataTable();
-            base.Tables.Add(this.tabledtReceiptsConsolidated);
+            this.tabledtConsolidatedReceipts = new dtConsolidatedReceiptsDataTable();
+            base.Tables.Add(this.tabledtConsolidatedReceipts);
             this.tabledtTrialBalance = new dtTrialBalanceDataTable();
             base.Tables.Add(this.tabledtTrialBalance);
             this.tabledtCashreport = new dtCashreportDataTable();
@@ -1026,7 +1026,7 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtReceiptsConsolidated() {
+        private bool ShouldSerializedtConsolidatedReceipts() {
             return false;
         }
         
@@ -1191,7 +1191,7 @@ namespace AccountingSystem {
         public delegate void dtJournalVoucherRowChangeEventHandler(object sender, dtJournalVoucherRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void dtReceiptsConsolidatedRowChangeEventHandler(object sender, dtReceiptsConsolidatedRowChangeEvent e);
+        public delegate void dtConsolidatedReceiptsRowChangeEventHandler(object sender, dtConsolidatedReceiptsRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtTrialBalanceRowChangeEventHandler(object sender, dtTrialBalanceRowChangeEvent e);
@@ -8379,7 +8379,7 @@ namespace AccountingSystem {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtReceiptsConsolidatedDataTable : global::System.Data.TypedTableBase<dtReceiptsConsolidatedRow> {
+        public partial class dtConsolidatedReceiptsDataTable : global::System.Data.TypedTableBase<dtConsolidatedReceiptsRow> {
             
             private global::System.Data.DataColumn columnform;
             
@@ -8399,8 +8399,8 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedDataTable() {
-                this.TableName = "dtReceiptsConsolidated";
+            public dtConsolidatedReceiptsDataTable() {
+                this.TableName = "dtConsolidatedReceipts";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -8408,7 +8408,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtReceiptsConsolidatedDataTable(global::System.Data.DataTable table) {
+            internal dtConsolidatedReceiptsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -8425,7 +8425,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtReceiptsConsolidatedDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtConsolidatedReceiptsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -8505,34 +8505,34 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedRow this[int index] {
+            public dtConsolidatedReceiptsRow this[int index] {
                 get {
-                    return ((dtReceiptsConsolidatedRow)(this.Rows[index]));
+                    return ((dtConsolidatedReceiptsRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtReceiptsConsolidatedRowChangeEventHandler dtReceiptsConsolidatedRowChanging;
+            public event dtConsolidatedReceiptsRowChangeEventHandler dtConsolidatedReceiptsRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtReceiptsConsolidatedRowChangeEventHandler dtReceiptsConsolidatedRowChanged;
+            public event dtConsolidatedReceiptsRowChangeEventHandler dtConsolidatedReceiptsRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtReceiptsConsolidatedRowChangeEventHandler dtReceiptsConsolidatedRowDeleting;
+            public event dtConsolidatedReceiptsRowChangeEventHandler dtConsolidatedReceiptsRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtReceiptsConsolidatedRowChangeEventHandler dtReceiptsConsolidatedRowDeleted;
+            public event dtConsolidatedReceiptsRowChangeEventHandler dtConsolidatedReceiptsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtReceiptsConsolidatedRow(dtReceiptsConsolidatedRow row) {
+            public void AdddtConsolidatedReceiptsRow(dtConsolidatedReceiptsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedRow AdddtReceiptsConsolidatedRow(string form, int receiptfrom, int receiptto, int issuefrom, int issueto, int usedfrom, int usedto, string officers) {
-                dtReceiptsConsolidatedRow rowdtReceiptsConsolidatedRow = ((dtReceiptsConsolidatedRow)(this.NewRow()));
+            public dtConsolidatedReceiptsRow AdddtConsolidatedReceiptsRow(string form, int receiptfrom, int receiptto, int issuefrom, int issueto, int usedfrom, int usedto, string officers) {
+                dtConsolidatedReceiptsRow rowdtConsolidatedReceiptsRow = ((dtConsolidatedReceiptsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         form,
                         receiptfrom,
@@ -8542,15 +8542,15 @@ namespace AccountingSystem {
                         usedfrom,
                         usedto,
                         officers};
-                rowdtReceiptsConsolidatedRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtReceiptsConsolidatedRow);
-                return rowdtReceiptsConsolidatedRow;
+                rowdtConsolidatedReceiptsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtConsolidatedReceiptsRow);
+                return rowdtConsolidatedReceiptsRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtReceiptsConsolidatedDataTable cln = ((dtReceiptsConsolidatedDataTable)(base.Clone()));
+                dtConsolidatedReceiptsDataTable cln = ((dtConsolidatedReceiptsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -8558,7 +8558,7 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtReceiptsConsolidatedDataTable();
+                return new dtConsolidatedReceiptsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8597,28 +8597,28 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedRow NewdtReceiptsConsolidatedRow() {
-                return ((dtReceiptsConsolidatedRow)(this.NewRow()));
+            public dtConsolidatedReceiptsRow NewdtConsolidatedReceiptsRow() {
+                return ((dtConsolidatedReceiptsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtReceiptsConsolidatedRow(builder);
+                return new dtConsolidatedReceiptsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtReceiptsConsolidatedRow);
+                return typeof(dtConsolidatedReceiptsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtReceiptsConsolidatedRowChanged != null)) {
-                    this.dtReceiptsConsolidatedRowChanged(this, new dtReceiptsConsolidatedRowChangeEvent(((dtReceiptsConsolidatedRow)(e.Row)), e.Action));
+                if ((this.dtConsolidatedReceiptsRowChanged != null)) {
+                    this.dtConsolidatedReceiptsRowChanged(this, new dtConsolidatedReceiptsRowChangeEvent(((dtConsolidatedReceiptsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8626,8 +8626,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtReceiptsConsolidatedRowChanging != null)) {
-                    this.dtReceiptsConsolidatedRowChanging(this, new dtReceiptsConsolidatedRowChangeEvent(((dtReceiptsConsolidatedRow)(e.Row)), e.Action));
+                if ((this.dtConsolidatedReceiptsRowChanging != null)) {
+                    this.dtConsolidatedReceiptsRowChanging(this, new dtConsolidatedReceiptsRowChangeEvent(((dtConsolidatedReceiptsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8635,8 +8635,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtReceiptsConsolidatedRowDeleted != null)) {
-                    this.dtReceiptsConsolidatedRowDeleted(this, new dtReceiptsConsolidatedRowChangeEvent(((dtReceiptsConsolidatedRow)(e.Row)), e.Action));
+                if ((this.dtConsolidatedReceiptsRowDeleted != null)) {
+                    this.dtConsolidatedReceiptsRowDeleted(this, new dtConsolidatedReceiptsRowChangeEvent(((dtConsolidatedReceiptsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -8644,14 +8644,14 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtReceiptsConsolidatedRowDeleting != null)) {
-                    this.dtReceiptsConsolidatedRowDeleting(this, new dtReceiptsConsolidatedRowChangeEvent(((dtReceiptsConsolidatedRow)(e.Row)), e.Action));
+                if ((this.dtConsolidatedReceiptsRowDeleting != null)) {
+                    this.dtConsolidatedReceiptsRowDeleting(this, new dtConsolidatedReceiptsRowChangeEvent(((dtConsolidatedReceiptsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtReceiptsConsolidatedRow(dtReceiptsConsolidatedRow row) {
+            public void RemovedtConsolidatedReceiptsRow(dtConsolidatedReceiptsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -8678,7 +8678,7 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtReceiptsConsolidatedDataTable";
+                attribute2.FixedValue = "dtConsolidatedReceiptsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -17274,15 +17274,15 @@ namespace AccountingSystem {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtReceiptsConsolidatedRow : global::System.Data.DataRow {
+        public partial class dtConsolidatedReceiptsRow : global::System.Data.DataRow {
             
-            private dtReceiptsConsolidatedDataTable tabledtReceiptsConsolidated;
+            private dtConsolidatedReceiptsDataTable tabledtConsolidatedReceipts;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtReceiptsConsolidatedRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtConsolidatedReceiptsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtReceiptsConsolidated = ((dtReceiptsConsolidatedDataTable)(this.Table));
+                this.tabledtConsolidatedReceipts = ((dtConsolidatedReceiptsDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17290,14 +17290,14 @@ namespace AccountingSystem {
             public string form {
                 get {
                     try {
-                        return ((string)(this[this.tabledtReceiptsConsolidated.formColumn]));
+                        return ((string)(this[this.tabledtConsolidatedReceipts.formColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'form\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'form\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.formColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.formColumn] = value;
                 }
             }
             
@@ -17306,14 +17306,14 @@ namespace AccountingSystem {
             public int receiptfrom {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.receiptfromColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.receiptfromColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'receiptfrom\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'receiptfrom\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.receiptfromColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.receiptfromColumn] = value;
                 }
             }
             
@@ -17322,14 +17322,14 @@ namespace AccountingSystem {
             public int receiptto {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.receipttoColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.receipttoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'receiptto\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'receiptto\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.receipttoColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.receipttoColumn] = value;
                 }
             }
             
@@ -17338,14 +17338,14 @@ namespace AccountingSystem {
             public int issuefrom {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.issuefromColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.issuefromColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'issuefrom\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'issuefrom\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.issuefromColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.issuefromColumn] = value;
                 }
             }
             
@@ -17354,14 +17354,14 @@ namespace AccountingSystem {
             public int issueto {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.issuetoColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.issuetoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'issueto\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'issueto\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.issuetoColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.issuetoColumn] = value;
                 }
             }
             
@@ -17370,14 +17370,14 @@ namespace AccountingSystem {
             public int usedfrom {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.usedfromColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.usedfromColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'usedfrom\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'usedfrom\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.usedfromColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.usedfromColumn] = value;
                 }
             }
             
@@ -17386,14 +17386,14 @@ namespace AccountingSystem {
             public int usedto {
                 get {
                     try {
-                        return ((int)(this[this.tabledtReceiptsConsolidated.usedtoColumn]));
+                        return ((int)(this[this.tabledtConsolidatedReceipts.usedtoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'usedto\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'usedto\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.usedtoColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.usedtoColumn] = value;
                 }
             }
             
@@ -17402,111 +17402,111 @@ namespace AccountingSystem {
             public string officers {
                 get {
                     try {
-                        return ((string)(this[this.tabledtReceiptsConsolidated.officersColumn]));
+                        return ((string)(this[this.tabledtConsolidatedReceipts.officersColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'officers\' in table \'dtReceiptsConsolidated\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'officers\' in table \'dtConsolidatedReceipts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtReceiptsConsolidated.officersColumn] = value;
+                    this[this.tabledtConsolidatedReceipts.officersColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsformNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.formColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.formColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetformNull() {
-                this[this.tabledtReceiptsConsolidated.formColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.formColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsreceiptfromNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.receiptfromColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.receiptfromColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetreceiptfromNull() {
-                this[this.tabledtReceiptsConsolidated.receiptfromColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.receiptfromColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsreceipttoNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.receipttoColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.receipttoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetreceipttoNull() {
-                this[this.tabledtReceiptsConsolidated.receipttoColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.receipttoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsissuefromNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.issuefromColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.issuefromColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetissuefromNull() {
-                this[this.tabledtReceiptsConsolidated.issuefromColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.issuefromColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsissuetoNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.issuetoColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.issuetoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetissuetoNull() {
-                this[this.tabledtReceiptsConsolidated.issuetoColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.issuetoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsusedfromNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.usedfromColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.usedfromColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetusedfromNull() {
-                this[this.tabledtReceiptsConsolidated.usedfromColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.usedfromColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsusedtoNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.usedtoColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.usedtoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetusedtoNull() {
-                this[this.tabledtReceiptsConsolidated.usedtoColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.usedtoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsofficersNull() {
-                return this.IsNull(this.tabledtReceiptsConsolidated.officersColumn);
+                return this.IsNull(this.tabledtConsolidatedReceipts.officersColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetofficersNull() {
-                this[this.tabledtReceiptsConsolidated.officersColumn] = global::System.Convert.DBNull;
+                this[this.tabledtConsolidatedReceipts.officersColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -20406,22 +20406,22 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtReceiptsConsolidatedRowChangeEvent : global::System.EventArgs {
+        public class dtConsolidatedReceiptsRowChangeEvent : global::System.EventArgs {
             
-            private dtReceiptsConsolidatedRow eventRow;
+            private dtConsolidatedReceiptsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedRowChangeEvent(dtReceiptsConsolidatedRow row, global::System.Data.DataRowAction action) {
+            public dtConsolidatedReceiptsRowChangeEvent(dtConsolidatedReceiptsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtReceiptsConsolidatedRow Row {
+            public dtConsolidatedReceiptsRow Row {
                 get {
                     return this.eventRow;
                 }

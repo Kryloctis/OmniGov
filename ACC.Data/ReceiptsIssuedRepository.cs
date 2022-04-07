@@ -336,7 +336,9 @@ namespace ACC.Data
                 new object[]{"@collecting_officer_id", DbType.String, collectingOfficerId}
             };
             string query =  $"SELECT " +
-                            $"accountable_forms, " +
+                            $"accountable_form_id, " +
+                            $"acc_form_no, " +
+                            $"acc_form_desc, " +
                             $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
                             $"LPAD(MIN(receipt_issued_from), 7, 0) receipt_issued_from, " +
                             $"LPAD(MAX(receipt_issued_to), 7, 0)  receipt_issued_to, " +

@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                if (cmdCollector.Items.Count == 0) return;
+                if (cmbCollector.Items.Count == 0) return;
 
                 
                 var usersRepo = Factory.UsersRepository();
@@ -38,16 +38,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         var jobOrderRepo = Factory.JobOrderRepository();
                         collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                        cmdCollector.SelectedValue = collectorDict["id"];
+                        cmbCollector.SelectedValue = collectorDict["id"];
                     }
                     else
                     {
                         var colRepository = Factory.CollectingOfficerRepository();
                         collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                        cmdCollector.SelectedValue = collectorDict["id"];
+                        cmbCollector.SelectedValue = collectorDict["id"];
                     }
 
-                    cmdCollector.Enabled = false;
+                    cmbCollector.Enabled = false;
                     return;
                 }
             }
@@ -71,9 +71,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 dtRegularCollectors.Merge(dtJOCollectors);
                 dtCollectors = dtRegularCollectors;
 
-                cmdCollector.DataSource = dtCollectors;
-                cmdCollector.ValueMember = "id";
-                cmdCollector.DisplayMember = "fullname";
+                cmbCollector.DataSource = dtCollectors;
+                cmbCollector.ValueMember = "id";
+                cmbCollector.DisplayMember = "fullname";
             }
             catch (Exception ex)
             {
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = dtpDate.Value.ToString("yyyy-MM-dd");
-                int collectorId = Convert.ToInt32(cmdCollector.SelectedValue);
+                int collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
 
                 var paymentCollectionRepo = Factory.PaymentCollectionRepository();
