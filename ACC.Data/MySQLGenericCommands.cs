@@ -11,12 +11,9 @@ namespace ACC.Data
         private readonly string connectionString;
 
     
-        public MySqlGenericCommands(bool useConnectionStringFromRPT)
+        public MySqlGenericCommands(string connectionName)
         {
-            if (useConnectionStringFromRPT)
-                connectionString = ConfigurationManager.ConnectionStrings["RealPropertyTaxInstance"].ConnectionString;
-            else
-                connectionString = ConfigurationManager.ConnectionStrings["LocalFinanceInstance"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)

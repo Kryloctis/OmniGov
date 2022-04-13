@@ -1,11 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
+using System.Transactions;
+using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    class RealPropertiesRepository
+    public class RealPropertiesRepository : IRealPropertiesRepository
     {
+        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly string tableName = "real_properties";
+        private const string viewLandProperties = "view_land_properties";
+        private const string viewBuildingProperties = "view_building_properties";
+        private readonly string viewMachineryProperties = "view_machinery_properties";
 
+        private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
+
+        public RealPropertiesRepository(IDbGenericCommands dbGenericCommands)
+        {
+            _dbGenericCommands = dbGenericCommands;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<RealPropertiesModel> entityList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(RealPropertiesModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(RealPropertiesModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetViewLandRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
+            };
+
+            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = 'L' OR complete_arp_no LIKE @searchText OR owner_name LIKE @searchText LIMIT 30";
+
+            var dataTable = new DataTable();
+
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetViewBuildingRecordsBySearch(string searchText)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] {"@searchText", DbType.String, $"%{searchText}%" }
+                };
+
+                string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = 'B' OR complete_arp_no LIKE @searchText OR owner_name LIKE @searchText LIMIT 30";
+
+                var dataTable = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public DataTable GetViewPropertiesByPropertyKindAndSearch(string propertyKind, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                    new object[] {"@property_kind", DbType.String, propertyKind },
+                    new object[] {"@searchText", DbType.String, $"%{searchText}%" }
+            };
+
+            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind OR (complete_arp_no LIKE @searchText AND owner_name LIKE @searchText ) LIMIT 30";
+
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
     }
 }

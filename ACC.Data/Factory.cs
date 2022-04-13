@@ -6,9 +6,10 @@ namespace AccountingSystem
 {
     public static class Factory
     {
-        private static MySqlGenericCommands mySqlGenericCommands = new MySqlGenericCommands(false);
+        private static MySqlGenericCommands mySqlGenericCommandsLFS = new MySqlGenericCommands("LocalFinanceInstance");
+        private static MySqlGenericCommands mySqlGenericCommandsRPT = new MySqlGenericCommands("RealPropertyTaxInstance");
         public static byte UserId = 2;
-        public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommands,
+        public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
                                                                           CashReceiptsJournalRepository(),
@@ -16,119 +17,119 @@ namespace AccountingSystem
                                                                           CashDisbursementsJournalRepository(),
                                                                           GeneralJournalRepository());
 
-        public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommands);
+        public static IJEVAccountsRepository JEVAccountsRepository() => new JEVAccountsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralJournalRepository GeneralJournalRepository() => new GeneralJournalRepository(mySqlGenericCommands);
+        public static IGeneralJournalRepository GeneralJournalRepository() => new GeneralJournalRepository(mySqlGenericCommandsLFS);
 
-        public static ICashDisbursementsJournalRepository CashDisbursementsJournalRepository() => new CashDisbursementsJournalRepository(mySqlGenericCommands);
+        public static ICashDisbursementsJournalRepository CashDisbursementsJournalRepository() => new CashDisbursementsJournalRepository(mySqlGenericCommandsLFS);
 
-        public static ICheckDisbursementsJournalRepository CheckDisbursementsJournalRepository() => new CheckDisbursementsJournalRepository(mySqlGenericCommands);
+        public static ICheckDisbursementsJournalRepository CheckDisbursementsJournalRepository() => new CheckDisbursementsJournalRepository(mySqlGenericCommandsLFS);
 
-        public static ICashReceiptsJournalRepository CashReceiptsJournalRepository() => new CashReceiptsJournalRepository(mySqlGenericCommands);
+        public static ICashReceiptsJournalRepository CashReceiptsJournalRepository() => new CashReceiptsJournalRepository(mySqlGenericCommandsLFS);
 
-        public static IADADisbursementsJournalRepository ADADisbursementsJournalRepository() => new ADADisbursementsJournalRepository(mySqlGenericCommands);
+        public static IADADisbursementsJournalRepository ADADisbursementsJournalRepository() => new ADADisbursementsJournalRepository(mySqlGenericCommandsLFS);
 
-        public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => new SubsidiaryLedgerAccountsRepository(new MySqlGenericCommands(false));
+        public static ISubsidiaryLedgerAccountsRepository SubsidiaryLedgerAccountsRepository() => new SubsidiaryLedgerAccountsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralLedgerAccountsRepository GeneralLedgerAccountsRepository() => new GeneralLedgerAccountsRepository(new MySqlGenericCommands(false));
+        public static IGeneralLedgerAccountsRepository GeneralLedgerAccountsRepository() => new GeneralLedgerAccountsRepository(mySqlGenericCommandsLFS);
 
-        public static ISubMajorAccountGroupRepository SubMajorAccountGroupRepository() => new SubMajorAccountGroupRepository(new MySqlGenericCommands(false));
+        public static ISubMajorAccountGroupRepository SubMajorAccountGroupRepository() => new SubMajorAccountGroupRepository(mySqlGenericCommandsLFS);
 
-        public static IMajorAccountGroupRepository MajorAccountGroupRepository() => new MajorAccountGroupRepository(new MySqlGenericCommands(false));
+        public static IMajorAccountGroupRepository MajorAccountGroupRepository() => new MajorAccountGroupRepository(mySqlGenericCommandsLFS);
 
-        public static IAccountGroupRepository AccountGroupRepository() => new AccountGroupRepository(new MySqlGenericCommands(false));
+        public static IAccountGroupRepository AccountGroupRepository() => new AccountGroupRepository(mySqlGenericCommandsLFS);
 
-        public static IBeginningBalancesRepository BeginningBalancesRepository() => new BeginningBalancesRepository(new MySqlGenericCommands(false));
+        public static IBeginningBalancesRepository BeginningBalancesRepository() => new BeginningBalancesRepository(mySqlGenericCommandsLFS);
 
-        public static IJournalsRepository JournalsRepository() => new JournalsRepository(new MySqlGenericCommands(false));
+        public static IJournalsRepository JournalsRepository() => new JournalsRepository(mySqlGenericCommandsLFS);
 
-        public static IFundsRepository FundsRepository() => new FundsRepository(new MySqlGenericCommands(false));
+        public static IFundsRepository FundsRepository() => new FundsRepository(mySqlGenericCommandsLFS);
 
-        public static IAllotmentClassesRepository AllotmentClassesRepository() => new AllotmentClassesRepository(new MySqlGenericCommands(false));
+        public static IAllotmentClassesRepository AllotmentClassesRepository() => new AllotmentClassesRepository(mySqlGenericCommandsLFS);
 
-        public static IFunctionalClassificationRepository FunctionalClassificationRepository() => new FunctionalClassificationRepository(new MySqlGenericCommands(false));
+        public static IFunctionalClassificationRepository FunctionalClassificationRepository() => new FunctionalClassificationRepository(mySqlGenericCommandsLFS);
 
-        public static IFunctionalClassificationServiceRepository FunctionalClassificationServiceRepository() => new FunctionalClassificationServiceRepository(new MySqlGenericCommands(false));
+        public static IFunctionalClassificationServiceRepository FunctionalClassificationServiceRepository() => new FunctionalClassificationServiceRepository(mySqlGenericCommandsLFS);
 
-        public static IFunctionProgramProjectRepository FunctionProgramProjectRepository() => new FunctionProgramProjectRepository(new MySqlGenericCommands(false));
+        public static IFunctionProgramProjectRepository FunctionProgramProjectRepository() => new FunctionProgramProjectRepository(mySqlGenericCommandsLFS);
 
-        public static IDisbursingOfficerRepository DisbursingOfficerRepository() => new DisbursingOfficerRepository(new MySqlGenericCommands(false));
+        public static IDisbursingOfficerRepository DisbursingOfficerRepository() => new DisbursingOfficerRepository(mySqlGenericCommandsLFS);
 
-        public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(new MySqlGenericCommands(false));
+        public static ICollectingOfficerRepository CollectingOfficerRepository() => new CollectingOfficerRepository(mySqlGenericCommandsLFS);
 
-        public static IRoleHasPermissionsRepository RoleHasPermissionsRepository() => new RoleHasPermissionsRepository(mySqlGenericCommands);
+        public static IRoleHasPermissionsRepository RoleHasPermissionsRepository() => new RoleHasPermissionsRepository(mySqlGenericCommandsLFS);
 
-        public static IRolesRepository RolesRepository() => new RolesRepository(mySqlGenericCommands, RoleHasPermissionsRepository());
+        public static IRolesRepository RolesRepository() => new RolesRepository(mySqlGenericCommandsLFS, RoleHasPermissionsRepository());
 
-        public static IUsersRepository UsersRepository() => new UsersRepository(new MySqlGenericCommands(false));
+        public static IUsersRepository UsersRepository() => new UsersRepository(mySqlGenericCommandsLFS);
 
-        public static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(new MySqlGenericCommands(false));
+        public static IPermissionsRepository PermissionsRepository() => new PermissionsRepository(mySqlGenericCommandsLFS);
 
-        public static ISubFPPRepository SubFPPRepository() => new SubFPPRepository(new MySqlGenericCommands(false));
+        public static ISubFPPRepository SubFPPRepository() => new SubFPPRepository(mySqlGenericCommandsLFS);
 
 
         //A part of Budget System
-        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(mySqlGenericCommands, SupplementalAppropriationsRepository());
+        public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(mySqlGenericCommandsLFS, SupplementalAppropriationsRepository());
 
-        public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(new MySqlGenericCommands(false), AllotmentAccountRepository());
+        public static IAllotmentReleaseRepository AllotmentReleaseRepository() => new AllotmentReleaseRepository(mySqlGenericCommandsLFS, AllotmentAccountRepository());
 
-        public static IAllotmentAccountRepository AllotmentAccountRepository() => new AllotmentAccountRepository(new MySqlGenericCommands(false));
+        public static IAllotmentAccountRepository AllotmentAccountRepository() => new AllotmentAccountRepository(mySqlGenericCommandsLFS);
 
-        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(new MySqlGenericCommands(false));
+        public static ISupplementalAppropriationsRepository SupplementalAppropriationsRepository() => new SupplementalAppropriationsRepository(mySqlGenericCommandsLFS);
 
-        public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(new MySqlGenericCommands(false), ObligationAccountRepository());
+        public static IObligationRequestRepository ObligationRequestRepository() => new ObligationRequestRepository(mySqlGenericCommandsLFS, ObligationAccountRepository());
 
-        public static IObligationAccountRepository ObligationAccountRepository() => new ObligationAccountRepository(new MySqlGenericCommands(false));
+        public static IObligationAccountRepository ObligationAccountRepository() => new ObligationAccountRepository(mySqlGenericCommandsLFS);
 
         public static IError CreateErrors(Array errors) => new Error(errors);
 
-        public static IBanksRepository BanksRepository() => new BanksRepository(new MySqlGenericCommands(false));
+        public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
-        public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(new MySqlGenericCommands(false));
+        public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
-        public static IRCIDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(new MySqlGenericCommands(false));
+        public static IRCIDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(mySqlGenericCommandsLFS);
 
-        public static IRCIRepository RCIRepository() => new RCIRepository(new MySqlGenericCommands(false));
+        public static IRCIRepository RCIRepository() => new RCIRepository(mySqlGenericCommandsLFS);
 
-        public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(new MySqlGenericCommands(false));
+        public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionRepository PaymentCollectionRepository() => new PaymentCollectionRepository(new MySqlGenericCommands(false));
+        public static IPaymentCollectionRepository PaymentCollectionRepository() => new PaymentCollectionRepository(mySqlGenericCommandsLFS);
 
-        public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(new MySqlGenericCommands(false));
+        public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 
-        public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(new MySqlGenericCommands(false));
+        public static ICollectorReportRepository CollectorReportRepository() => new CollectorReportRepository(mySqlGenericCommandsLFS);
 
-        public static ICollectorReportPaymentsRepository CollectorReportPaymentsRepository() => new CollectorReportPaymentsRepository(new MySqlGenericCommands(false));
+        public static ICollectorReportPaymentsRepository CollectorReportPaymentsRepository() => new CollectorReportPaymentsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralCollectionsRepository GeneralCollectionsRepository() => new GeneralCollectionsRepository(new MySqlGenericCommands(false));
+        public static IGeneralCollectionsRepository GeneralCollectionsRepository() => new GeneralCollectionsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralCollectionsPaymentsRepository GeneralCollectionsPaymentsRepository() => new GeneralCollectionsPaymentsRepository(new MySqlGenericCommands(false));
+        public static IGeneralCollectionsPaymentsRepository GeneralCollectionsPaymentsRepository() => new GeneralCollectionsPaymentsRepository(mySqlGenericCommandsLFS);
 
-        public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(new MySqlGenericCommands(false));
+        public static IGeneralCollectionsDepositsRepository GeneralCollectionsDepositsRepository() => new GeneralCollectionsDepositsRepository(mySqlGenericCommandsLFS);
 
-        public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(new MySqlGenericCommands(false));
+        public static IReceiptsRepository ReceiptsRepository() => new ReceiptsRepository(mySqlGenericCommandsLFS);
 
-        public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(new MySqlGenericCommands(false));
+        public static IReceiptsIssuedRepository ReceiptsIssuedRepository() => new ReceiptsIssuedRepository(mySqlGenericCommandsLFS);
 
-        public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(new MySqlGenericCommands(false));
+        public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(mySqlGenericCommandsLFS);
 
-        public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(new MySqlGenericCommands(false));
-        public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(new MySqlGenericCommands(false));
-        public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(new MySqlGenericCommands(false));
-        public static IFaceValueRepository FaceValueRepository() => new FaceValueRepository(new MySqlGenericCommands(false));
+        public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(mySqlGenericCommandsLFS);
+        public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(mySqlGenericCommandsLFS);
+        public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(mySqlGenericCommandsLFS);
+        public static IFaceValueRepository FaceValueRepository() => new FaceValueRepository(mySqlGenericCommandsLFS);
 
-        public static ISignatories SignatoriesRepository() => new SignatoriesRepository(new MySqlGenericCommands(false), SignatoriesHasReferencesRepository());
+        public static ISignatories SignatoriesRepository() => new SignatoriesRepository(mySqlGenericCommandsLFS, SignatoriesHasReferencesRepository());
 
-        public static ISignatoriesHasReferences SignatoriesHasReferencesRepository() => new SignatoriesHasReferencesRepository(new MySqlGenericCommands(false));
+        public static ISignatoriesHasReferences SignatoriesHasReferencesRepository() => new SignatoriesHasReferencesRepository(mySqlGenericCommandsLFS);
 
-        public static IDocumentReferences DocumentReferencesRepository() => new DocumentReferencesRepository(new MySqlGenericCommands(false));
+        public static IDocumentReferences DocumentReferencesRepository() => new DocumentReferencesRepository(mySqlGenericCommandsLFS);
 
-        public static IDocuments DocumentsRepository() => new DocumentsRepository(new MySqlGenericCommands(false));
+        public static IDocuments DocumentsRepository() => new DocumentsRepository(mySqlGenericCommandsLFS);
 
-        public static IJobOrder JobOrderRepository() => new JobOrderRepository(new MySqlGenericCommands(false));
+        public static IJobOrder JobOrderRepository() => new JobOrderRepository(mySqlGenericCommandsLFS);
 
-        public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => new CollectingOfficerHasJobOrdersRepository(new MySqlGenericCommands(false));
+        public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => new CollectingOfficerHasJobOrdersRepository(mySqlGenericCommandsLFS);
 
-        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(new MySqlGenericCommands(true));
+        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsRPT);
     }
 }
