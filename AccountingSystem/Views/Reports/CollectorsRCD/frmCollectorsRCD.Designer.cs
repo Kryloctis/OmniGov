@@ -31,13 +31,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.tsApproveSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
             this.tsDisapproveSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelPrint = new System.Windows.Forms.ToolStripButton();
             this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -81,6 +81,18 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             this.btnSave.TextChanged += new System.EventHandler(this.btnSave_TextChanged);
+            // 
+            // btnCancelPrint
+            // 
+            this.btnCancelPrint.Enabled = false;
+            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCancelPrint.Name = "btnCancelPrint";
+            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
+            this.btnCancelPrint.Text = "Cancel";
+            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
             // 
             // btnDelete
             // 
@@ -140,18 +152,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnCancelPrint
-            // 
-            this.btnCancelPrint.Enabled = false;
-            this.btnCancelPrint.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancelPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelPrint.Name = "btnCancelPrint";
-            this.btnCancelPrint.Size = new System.Drawing.Size(47, 47);
-            this.btnCancelPrint.Text = "Cancel";
-            this.btnCancelPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelPrint.Click += new System.EventHandler(this.btnCancelPrint_Click);
             // 
             // btnSearch
             // 

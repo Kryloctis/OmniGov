@@ -366,7 +366,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 if (MessageBox.Show("Are you sure you want to delete report of collection?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    ushort reportId = uc.reportId;
+                    int reportId = uc.reportId;
                     string reportNo = uc.txtReport.Text.Trim();
 
                     var collectorReportPaymentModel = new CollectorReportPaymentModel() {CollectorsReportId = reportId };
@@ -419,6 +419,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 uc.Enabled = true;
             }
         }
-
     }
 }

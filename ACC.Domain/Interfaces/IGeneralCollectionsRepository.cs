@@ -21,7 +21,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByFundId(int fundId); 
         DataTable GetRecordsByFundIdAndSearchKey(int fundId, string searchKey); 
 
-        DataTable GetRecordByReceiptsConsolidated(string to);
+        DataTable GetRecordsOfConsolidatedReceiptsByEndingDate(string to);
 
         DataTable GetRecordsByRCDNo(string rcdNo);
         int GetGeneralCollectionId(string rcdNo);

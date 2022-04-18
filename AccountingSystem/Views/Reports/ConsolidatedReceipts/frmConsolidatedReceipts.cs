@@ -23,29 +23,29 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             LoadReport(reportViewer.LocalReport);
         }
 
-        private DataTable DataTableReceipts(string date)
+        private DataTable DataTableConsilatedReceipts(string date)
         {
 
-            var dtRC = new dsLFS.dtReceiptsConsolidatedDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByReceiptsConsolidated(date);
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtRC.NewRow();
-                    row["form"] = item["form"];
-                    row["receiptfrom"] = item["receiptsfrom"];
-                    row["receiptto"] = item["receiptsto"];
-                    row["issuefrom"] = item["issuefrom"];
-                    row["issueto"] = item["issueto"];
-                    row["usedfrom"] = item["ifrom"];
-                    row["usedto"] = item["ito"];
-                    row["officers"] = item["officers"];
-                    dtRC.Rows.Add(row);
-                }
-            }
+            var dtConsolidatedReceipts = new dsLFS.dtConsolidatedReceiptsDataTable();
+            var dtConsolidatedReceiptsFromDB = Factory.GeneralCollectionsRepository().GetRecordsOfConsolidatedReceiptsByEndingDate(date);
 
-            return dtRC;
+            if (dtConsolidatedReceiptsFromDB.Rows.Count == 0) return dtConsolidatedReceipts;
+        
+            foreach (DataRow item in dtConsolidatedReceiptsFromDB.Rows)
+            {
+                DataRow row = dtConsolidatedReceipts.NewRow();
+                row["form"] = item["form"].ToString();
+                row["receiptfrom"] = Convert.ToInt32(item["receipt_number_from"]);
+                row["receiptto"] = Convert.ToInt32(item["receipt_number_to"]);
+                row["issuefrom"] = string.IsNullOrEmpty(item["receipt_issued_from"].ToString()) ? 0 : Convert.ToInt32(item["receipt_issued_from"]);
+                row["issueto"] = string.IsNullOrEmpty(item["receipt_issued_to"].ToString()) ? 0 :  Convert.ToInt32(item["receipt_issued_to"].ToString());
+                row["usedfrom"] = string.IsNullOrEmpty(item["ifrom"].ToString()) ? 0 : Convert.ToInt32(item["ifrom"].ToString());
+                row["usedto"] = string.IsNullOrEmpty(item["ito"].ToString()) ? 0 : Convert.ToInt32(item["ito"].ToString());
+                row["officers"] = item["officers"].ToString();
+                dtConsolidatedReceipts.Rows.Add(row);
+            }
+           
+            return dtConsolidatedReceipts;
         }
 
         private void LoadReport(LocalReport report)
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 Cursor = Cursors.WaitCursor;
 
                 var lguDetails = Helper.LGUDetails();
-                var date = String.Format("{0:yyyy-MM-dd}", dtto.Value);
+                var date = string.Format("{0:yyyy-MM-dd}", dtto.Value);
 
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";
                 report.DataSources.Clear();
-                report.DataSources.Add(new ReportDataSource("dtReceiptsConsolidated", DataTableReceipts(date)));
+                report.DataSources.Add(new ReportDataSource("dtConsolidatedReceipts", DataTableConsilatedReceipts(date)));
 
                 report.SetParameters(parameters);
                 report.Refresh();

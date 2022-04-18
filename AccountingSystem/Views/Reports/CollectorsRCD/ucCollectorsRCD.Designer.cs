@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.cmbCollector.Name = "cmbCollector";
             this.cmbCollector.Size = new System.Drawing.Size(171, 23);
             this.cmbCollector.TabIndex = 1;
-            this.cmbCollector.SelectedValueChanged += new System.EventHandler(this.cmbcollector_SelectedValueChanged);
+            this.cmbCollector.SelectionChangeCommitted += new System.EventHandler(this.cmbCollector_SelectionChangeCommitted);
             this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollector_Validating);
             this.cmbCollector.Validated += new System.EventHandler(this.cmbCollector_Validated);
             // 
@@ -209,7 +209,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.Enabled = false;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnAdd.Location = new System.Drawing.Point(668, 483);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

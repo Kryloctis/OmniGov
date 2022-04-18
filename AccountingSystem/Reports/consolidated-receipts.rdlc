@@ -11,7 +11,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dtReceiptsConsolidated">
+    <DataSet Name="dtConsolidatedReceipts">
       <Query>
         <DataSourceName>dsLFS</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -52,8 +52,8 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\user\Desktop\My Files\lgu suite\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
-        <rd:TableName>dtReceiptsConsolidated</rd:TableName>
+        <rd:SchemaPath>C:\Users\Home\Desktop\LFS\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:TableName>dtConsolidatedReceipts</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -2386,7 +2386,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>dtReceiptsConsolidated</DataSetName>
+            <DataSetName>dtConsolidatedReceipts</DataSetName>
             <Top>0.3175cm</Top>
             <Left>0.0375in</Left>
             <Height>1.25in</Height>

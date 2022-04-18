@@ -37,7 +37,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.label3 = new System.Windows.Forms.Label();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.dgCollectorsReport = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
@@ -131,7 +130,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel2.Controls.Add(this.btnClose);
             this.panel2.Controls.Add(this.btnSelect);
             this.panel2.Location = new System.Drawing.Point(0, 367);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
@@ -139,23 +137,11 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.panel2.Size = new System.Drawing.Size(814, 28);
             this.panel2.TabIndex = 9;
             // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(728, 3);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnClose.Size = new System.Drawing.Size(82, 22);
-            this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelect.Enabled = false;
-            this.btnSelect.Location = new System.Drawing.Point(640, 3);
+            this.btnSelect.Location = new System.Drawing.Point(729, 3);
             this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -185,7 +171,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(814, 395);
             this.Controls.Add(this.dgCollectorsReport);
             this.Controls.Add(this.panel2);
