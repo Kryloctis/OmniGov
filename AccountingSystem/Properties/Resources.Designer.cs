@@ -173,6 +173,26 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap building_1_filled_browse_large_1x {
+            get {
+                object obj = ResourceManager.GetObject("building_1_filled_browse_large_1x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap building_1_filled_browse_small_1x {
+            get {
+                object obj = ResourceManager.GetObject("building_1_filled_browse_small_1x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap check_16px {
             get {
                 object obj = ResourceManager.GetObject("check_16px", resourceCulture);

@@ -10,9 +10,10 @@ namespace ACC.Data
     {
         private readonly string connectionString;
 
-        public MySqlGenericCommands()
+    
+        public MySqlGenericCommands(string connectionName)
         {
-            connectionString = ConfigurationManager.ConnectionStrings["LocalFinanceInstance"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }
 
         private void AddDbParameter(MySqlCommand command, object[] param)

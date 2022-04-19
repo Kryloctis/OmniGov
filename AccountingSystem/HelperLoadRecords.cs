@@ -919,6 +919,67 @@ namespace AccountingSystem
         }
         #endregion
 
+        #region Real Property Tax View
+        public static void PropertiesDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("property_kind", "Property Kind");
+            datagrid.Columns.Add("complete_arp_no", "Complete ARP No.");
+            datagrid.Columns.Add("pin", "PIN");
+            datagrid.Columns.Add("owner_name", "Owner Name");
+            datagrid.Columns.Add("owner_address", "Owner Address");
+            datagrid.Columns.Add("market_value", "Market Value");
+            datagrid.Columns.Add("assessed_value", "Assessment Value");
+
+            datagrid.Columns["property_kind"].Width = 80;
+            datagrid.Columns["property_kind"].MinimumWidth = 80;
+
+            datagrid.Columns["complete_arp_no"].Width = 80;
+            datagrid.Columns["complete_arp_no"].MinimumWidth = 80;
+
+            datagrid.Columns["pin"].Width = 80;
+            datagrid.Columns["pin"].MinimumWidth = 80;
+
+            datagrid.Columns["owner_address"].Width = 200;
+            datagrid.Columns["owner_address"].MinimumWidth = 200;
+
+            datagrid.Columns["market_value"].Width = 120;
+            datagrid.Columns["market_value"].MinimumWidth = 120;
+            datagrid.Columns["market_value"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["market_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["assessed_value"].Width = 120;
+            datagrid.Columns["assessed_value"].MinimumWidth = 120;
+            datagrid.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["property_kind"],
+                    row["complete_arp_no"],
+                    row["pin"],
+                    row["owner_name"],
+                    row["owner_address"],
+                    row["market_value"],
+                    row["assessed_value"]
+                });
+            }
+
+            float fontSize = 8.5f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+
+            datagrid.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
+        }
+       
+
+        #endregion
+
         internal static void CollectionDataGridColumns(DataGridView datagrid)
         {
 

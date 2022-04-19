@@ -49,5 +49,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
             _ = new Reports.CollectorsRCD.frmCollectorsRCD().ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          _ = new frmSearchProperties().ShowDialog();
+        }
     }
 }
