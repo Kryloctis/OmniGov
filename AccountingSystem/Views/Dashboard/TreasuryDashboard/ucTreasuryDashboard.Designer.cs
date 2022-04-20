@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnBankDeposit = new System.Windows.Forms.Button();
             this.btnReportOfCollections = new System.Windows.Forms.Button();
             this.btnRCD = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +75,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.flowLayoutPanel1.Controls.Add(this.btnBankDeposit);
             this.flowLayoutPanel1.Controls.Add(this.btnReportOfCollections);
             this.flowLayoutPanel1.Controls.Add(this.btnRCD);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -171,6 +173,21 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnRCD.UseVisualStyleBackColor = true;
             this.btnRCD.Click += new System.EventHandler(this.btnGenerateRCD_Click);
             // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.Image = global::AccountingSystem.Properties.Resources.building_1_filled_browse_small_1x;
+            this.button1.Location = new System.Drawing.Point(751, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 30);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Real Property";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ucTreasuryDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -197,5 +214,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.Button btnBankDeposit;
         internal System.Windows.Forms.Button btnReportOfCollections;
         internal System.Windows.Forms.Button btnRCD;
+        internal System.Windows.Forms.Button button1;
     }
 }
