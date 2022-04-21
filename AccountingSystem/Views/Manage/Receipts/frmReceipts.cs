@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void frmAccForms_Load(object sender, EventArgs e)
         {
             LoadRecords();
+            SetToolStripStatusData();
         }
 
         internal void LoadRecords()
@@ -27,18 +28,11 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var dtReceipts = Factory.ReceiptsRepository().GetRecords();
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
-                SetToolStripStatusData();
             }
             catch (Exception ex) 
             { 
                 Helper.MessageBoxError(ex.Message); 
             }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            txtSearch.Clear();
-            LoadRecords();
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -70,7 +64,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
 
             int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells[0].Value);
-            bool hasIssueance = Factory.ReceiptsRepository().ReceiptsIssued(receiptId);
+            bool hasIssueance = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
             
             btnDelete.Enabled = !hasIssueance;
         }
@@ -95,10 +89,12 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 foreach (DataGridViewRow row in dgReceipts.SelectedRows)
                 {
-                    int id = int.Parse(row.Cells[0].Value.ToString());
+                    int receiptId = int.Parse(row.Cells[0].Value.ToString());
 
-                    if (!receiptsRepository.ReceiptsIssued(id))
-                        receiptModel.Add(new ReceiptsModel() { Id = id });
+                    var receiptIsUsed = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
+
+                    if (!receiptIsUsed)
+                        receiptModel.Add(new ReceiptsModel() { Id = receiptId });
                         
                 }
                 _ = receiptsRepository.Delete(receiptModel);
