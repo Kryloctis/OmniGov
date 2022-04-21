@@ -12,7 +12,6 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "receipts";
         private readonly string viewTableName = "view_receipts";
-        private readonly string tableReceiptsIssued = "receipts_issued";
 
         public ReceiptsRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -93,7 +92,8 @@ namespace ACC.Data
         {
             string query  = $"SELECT " +
                             $"id, " +
-                            $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
+                            $"accountable_forms_id, " +
+                            $"accountable_forms, " +
                             $"receipt_number_from, " +
                             $"receipt_number_to, " +
                             $"received_date, " +
@@ -106,23 +106,6 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtri);
         }
 
-        public DataTable GetReceipts()
-        {
-            string query = $"SELECT " +
-                           $"id, " +
-                           $"acc_form_no, " +
-                           $"acc_form_desc," +
-                           $"receipt_number_from, " +
-                           $"receipt_number_to, " +
-                           $"received_date, " +
-                           $"quantity, " +
-                           $"user officer " +
-                           $"FROM {viewTableName} " +
-                           $"ORDER BY accountable_forms_id";
-
-            var dtri = new DataTable();
-            return _dbGenericCommands.Fill(query, dtri);
-        }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
@@ -172,23 +155,6 @@ namespace ACC.Data
             return false;
         }
 
-
-        //TRANSFER THIS METHOD TO RECEIPT ISSUED REPO.
-        public bool ReceiptsIssued(int id)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, id },
-            };
-
-            string query = $"SELECT id FROM {tableReceiptsIssued} WHERE receipts_id = @id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-        
-            return false;
-        }
-
         public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
         {
             int value = 0;          
@@ -222,29 +188,6 @@ namespace ACC.Data
             }
             
             return value;
-        }
-
-        public bool ReceiptConsumed(int receiptId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@receipt_id", DbType.Int32, receiptId },
-            };
-
-            string query =  $"SELECT id " +
-                            $"FROM {tableName} " +
-                            $"WHERE " +
-                            $"id = @id AND receipt_number_to = (SELECT SUM(IF(IFNULL(last_issued, 0) > 0, " +
-                            $"receipt_issued_to - last_issued,0)) " +
-                            $"FROM {tableReceiptsIssued} " +
-                            $"WHERE receipts_id = id AND IF(IFNULL(is_returned, true), false, true) = false)";
-
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult)) 
-                return true;
-
-            return false;
         }
 
         public bool Insert(ReceiptsModel entity)

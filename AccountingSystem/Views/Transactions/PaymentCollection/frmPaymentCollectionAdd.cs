@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     uc.cmdCollector.Enabled = false;
                 }
             }
-
         }
 
         private bool SaveData()

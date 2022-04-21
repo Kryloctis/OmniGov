@@ -783,7 +783,7 @@ namespace AccountingSystem
                 string collectingOfficer;
                 if (string.IsNullOrEmpty(row["job_orders_id"].ToString()))
                 {
-                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
+                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initital"]}. {row["collecting_officers_last_name"]}";
                     collectingOfficerId = row["collecting_officers_id"].ToString();
                 }
 

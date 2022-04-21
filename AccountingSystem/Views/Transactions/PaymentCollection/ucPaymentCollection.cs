@@ -70,10 +70,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var accountableFormRepo = Factory.ReceiptsIssuedRepository();
                 var dtAccountableForms = accountableFormRepo.GetIssuedReceiptByCollectorId(collectorsId);
 
-                dtAccountableForms.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
+                dtAccountableForms.Columns.Add("accountableForm", typeof(string), "accountable_forms + ' - ' + (quantity)");
                 cmbAccountableForms.DataSource = dtAccountableForms;
                 cmbAccountableForms.ValueMember = "accountable_form_id";
-                cmbAccountableForms.DisplayMember = "accountableForm";
+                cmbAccountableForms.DisplayMember = "accountable_forms";
             }
             catch (Exception ex)
             {
@@ -85,9 +85,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var accountableFormsDt = Factory.AccountableFormsRepository().GetRecords();
             HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, accountableFormsDt);
-
-
-            
         }
 
         internal void LoadFunds()

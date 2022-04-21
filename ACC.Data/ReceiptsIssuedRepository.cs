@@ -138,7 +138,7 @@ namespace ACC.Data
 
             string query = $"SELECT " +  
                            $"id, " +
-                           $"CONCAT(acc_form_no, ' ' , acc_form_desc) AS accountable_forms, " +
+                           $"accountable_forms, " +
                            $"receipt_issued_from, " +
                            $"receipt_issued_to, " +
                            $"date_issued, " +
@@ -166,8 +166,7 @@ namespace ACC.Data
 
             string query = $"SELECT " +
                            $"accountable_form_id, " +
-                           $"acc_form_no, " +
-                           $"acc_form_desc,  " +
+                           $"accountable_forms, " +
                            $"quantity " +
                            $"FROM " +
                            $"{viewTableName} " +
@@ -411,7 +410,7 @@ namespace ACC.Data
 
         }
 
-        public int GetReceiptIssuedQuantityByReceiptId(int receiptId)
+        public int GetTotalIssuedReceiptByReceiptId(int receiptId)
         {
             var parameter = new object[][] {
                 new object[]{ "@receipt_id", DbType.Int32, receiptId}
@@ -457,5 +456,22 @@ namespace ACC.Data
 
             return false;
         }
+
+        public bool ReceiptIsUsed(int receiptId)
+        {
+            var parameters = new object[][]
+           {
+                new object[] { "@receipts_id", DbType.Int32, receiptId },
+           };
+
+            string query = $"SELECT id FROM {tableName} WHERE receipts_id = @receipts_id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+
+            return false;
+        }
+
+
     }
 }
