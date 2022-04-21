@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(134, 30);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Real Property";
+            this.button1.Text = "Real Properties";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;

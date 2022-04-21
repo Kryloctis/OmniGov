@@ -111,7 +111,7 @@ namespace ACC.Data
                             $"job_orders_mid_initial, " +
                             $"job_orders_last_name, " +
                             $"job_orders_suffix, " +
-                            $"CONCAT(acc_form_no, ' ' , acc_form_desc) AS accountable_forms, " +
+                            $"accountable_forms, " +
                             $"receipt_issued_from, " +
                             $"receipt_issued_to, " +
                             $"date_issued,  " +
