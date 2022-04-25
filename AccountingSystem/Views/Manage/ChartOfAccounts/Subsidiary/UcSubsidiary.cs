@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 {
-    public partial class UcSubsidiary : UserControl
+    public partial class ucSubsidiary : UserControl
     {
         internal byte fundId;
         internal ushort generalLedgerId;
 
-        public UcSubsidiary()
+        public ucSubsidiary()
         {
             InitializeComponent();
         }
@@ -29,6 +29,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             txtCode.Clear();
             txtName.Clear();
         }
+
+        private void UcSubsidiary_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        #region Validations
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
@@ -50,9 +57,36 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
 
-        private void UcSubsidiary_Load(object sender, EventArgs e)
+        private void txtAddress_Validating(object sender, CancelEventArgs e)
         {
-
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAddress, "address");
         }
+
+        private void txtAddress_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtAddress);
+        }
+
+        private void txtContactPerson_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContactPerson, "address");
+        }
+
+        private void txtContactPerson_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtContactPerson);
+        }
+
+        private void txtContact_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "address");
+        }
+
+        private void txtContact_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtContact);
+        }
+
+        #endregion
     }
 }

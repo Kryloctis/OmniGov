@@ -58,11 +58,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(10, 52);
+            this.groupBox1.Location = new System.Drawing.Point(10, 58);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(673, 132);
+            this.groupBox1.Size = new System.Drawing.Size(872, 132);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Ledger Account Details";
@@ -82,15 +82,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.panel1.Location = new System.Drawing.Point(3, 18);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 112);
+            this.panel1.Size = new System.Drawing.Size(866, 112);
             this.panel1.TabIndex = 0;
             // 
             // txtYear
             // 
+            this.txtYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtYear.Location = new System.Drawing.Point(62, 86);
             this.txtYear.Name = "txtYear";
             this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(602, 23);
+            this.txtYear.Size = new System.Drawing.Size(801, 23);
             this.txtYear.TabIndex = 6;
             // 
             // label4
@@ -104,10 +106,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // txtFund
             // 
+            this.txtFund.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFund.Location = new System.Drawing.Point(62, 57);
             this.txtFund.Name = "txtFund";
             this.txtFund.ReadOnly = true;
-            this.txtFund.Size = new System.Drawing.Size(602, 23);
+            this.txtFund.Size = new System.Drawing.Size(801, 23);
             this.txtFund.TabIndex = 4;
             // 
             // label3
@@ -127,7 +131,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(602, 23);
+            this.txtCode.Size = new System.Drawing.Size(801, 23);
             this.txtCode.TabIndex = 1;
             // 
             // label2
@@ -147,7 +151,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
-            this.txtAccount.Size = new System.Drawing.Size(602, 23);
+            this.txtAccount.Size = new System.Drawing.Size(801, 23);
             this.txtAccount.TabIndex = 2;
             // 
             // label1
@@ -161,6 +165,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -171,7 +176,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnSetBalance});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(696, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 3, 1, 3);
+            this.toolStrip1.Size = new System.Drawing.Size(895, 56);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -230,12 +236,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgSubsidiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubsidiary.Location = new System.Drawing.Point(10, 188);
+            this.dgSubsidiary.Location = new System.Drawing.Point(10, 194);
             this.dgSubsidiary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgSubsidiary.Name = "dgSubsidiary";
             this.dgSubsidiary.RowHeadersWidth = 51;
             this.dgSubsidiary.RowTemplate.Height = 29;
-            this.dgSubsidiary.Size = new System.Drawing.Size(673, 302);
+            this.dgSubsidiary.Size = new System.Drawing.Size(872, 300);
             this.dgSubsidiary.TabIndex = 8;
             this.dgSubsidiary.SelectionChanged += new System.EventHandler(this.dgSubsidiary_SelectionChanged);
             // 
@@ -243,12 +249,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 505);
+            this.ClientSize = new System.Drawing.Size(895, 505);
             this.Controls.Add(this.dgSubsidiary);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(712, 497);
+            this.MinimumSize = new System.Drawing.Size(911, 544);
             this.Name = "frmSubsidiary";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
@@ -41,7 +34,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     FundId = uc.fundId,
                     GeneralLedgerAccountsId = uc.generalLedgerId,
                     Code = uc.txtCode.Text.Trim(),
-                    Name = uc.txtName.Text.Trim()
+                    Name = uc.txtName.Text.Trim(),
+                    Address = uc.txtAddress.Text.Trim(),
+                    ContactPerson = uc.txtContactPerson.Text.Trim(),
+                    Contact = uc.txtContact.Text.Trim()
                 };
 
                 return Factory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
@@ -50,7 +46,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
             return false;
         }
-
 
         private void frmSubsidiaryAdd_Load(object sender, EventArgs e)
         {

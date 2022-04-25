@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSubsidiaryAdd));
-            this.ucSubsidiary1 = new AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary.UcSubsidiary();
+            this.ucSubsidiary1 = new AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary.ucSubsidiary();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         #endregion
 
-        private UcSubsidiary ucSubsidiary1;
+        private ucSubsidiary ucSubsidiary1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

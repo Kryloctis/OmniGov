@@ -238,11 +238,15 @@ namespace AccountingSystem
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["general_ledger_accounts_id"].Visible = false;
             datagrid.Columns["sub_code"].HeaderText = "Code";
-            datagrid.Columns["sub_code"].Width = 200;
+            datagrid.Columns["sub_code"].Width = 100;
             datagrid.Columns["sub_name"].HeaderText = "Name";
             datagrid.Columns["sub_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["Balance"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["Balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["Balance"].Width = 100;
+            datagrid.Columns["address"].HeaderText = "Address";
+            datagrid.Columns["contact_person"].HeaderText = "Contact Person";
+            datagrid.Columns["contact"].HeaderText = "Contact";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
         }
@@ -976,7 +980,7 @@ namespace AccountingSystem
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
-       
+
 
         #endregion
 

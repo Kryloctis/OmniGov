@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class SubsidiaryLedgerAccountsModel
     {
@@ -11,5 +7,11 @@ namespace ACC.Domain.Models
         public ushort GeneralLedgerAccountsId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+
+        public string Address { get; set; }
+
+        public string ContactPerson { get; set; }
+
+        public string Contact { get; set; }
     }
 }
