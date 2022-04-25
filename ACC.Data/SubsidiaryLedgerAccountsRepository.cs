@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Transactions;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -62,7 +61,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.UInt16, Id},
                 };
 
-                string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+                string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -73,6 +72,9 @@ namespace ACC.Data
                     record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
                     record.Add("sub_code", reader.Rows[0]["sub_code"].ToString());
                     record.Add("sub_name", reader.Rows[0]["sub_name"].ToString());
+                    record.Add("address", reader.Rows[0]["address"].ToString());
+                    record.Add("contact_person", reader.Rows[0]["contact_person"].ToString());
+                    record.Add("contact", reader.Rows[0]["contact"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
@@ -130,7 +132,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsBySearchByReference(string srchtxt,int Id)
+        public DataTable GetRecordsBySearchByReference(string srchtxt, int Id)
         {
             try
             {
@@ -160,9 +162,9 @@ namespace ACC.Data
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.ExecuteReader(query, parameters);
             }
-            catch(MySqlException)
+            catch (MySqlException)
             {
-                throw; 
+                throw;
             }
             catch (Exception)
             {
@@ -185,9 +187,12 @@ namespace ACC.Data
                     new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
                     new object[] { "@sub_code", DbType.String, entity.Code},
                     new object[] { "@sub_name", DbType.String, entity.Name},
+                    new object[] { "@address", DbType.String, entity.Address},
+                    new object[] { "@contact_person", DbType.String, entity.ContactPerson},
+                    new object[] { "@contact", DbType.String, entity.Contact}
                 };
 
-                string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, sub_code, sub_name) VALUES (@funds_id, @general_ledger_accounts_id, @sub_code, @sub_name)";
+                string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact) VALUES (@funds_id, @general_ledger_accounts_id, @sub_code, @sub_name, @address, @contact_person, @contact)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -207,9 +212,12 @@ namespace ACC.Data
                     new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
                     new object[] { "@sub_code", DbType.String, entity.Code},
                     new object[] { "@sub_name", DbType.String, entity.Name},
+                    new object[] { "@address", DbType.String, entity.Address},
+                    new object[] { "@contact_person", DbType.String, entity.ContactPerson},
+                    new object[] { "@contact", DbType.String, entity.Contact}
                 };
 
-                string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name WHERE id = @id";
+                string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name, address = @address, contact_person = @contact_person, contact = @contact WHERE id = @id";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }

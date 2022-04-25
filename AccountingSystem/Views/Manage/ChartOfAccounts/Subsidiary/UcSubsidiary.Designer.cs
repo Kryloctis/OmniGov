@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 {
-    partial class UcSubsidiary
+    partial class ucSubsidiary
     {
         /// <summary> 
         /// Required designer variable.
@@ -95,6 +95,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(324, 23);
             this.txtAddress.TabIndex = 5;
+            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.txtAddress_Validating);
+            this.txtAddress.Validated += new System.EventHandler(this.txtAddress_Validated);
             // 
             // label1
             // 
@@ -120,6 +122,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtContactPerson.Name = "txtContactPerson";
             this.txtContactPerson.Size = new System.Drawing.Size(324, 23);
             this.txtContactPerson.TabIndex = 5;
+            this.txtContactPerson.Validating += new System.ComponentModel.CancelEventHandler(this.txtContactPerson_Validating);
+            this.txtContactPerson.Validated += new System.EventHandler(this.txtContactPerson_Validated);
             // 
             // label5
             // 
@@ -136,8 +140,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(324, 23);
             this.txtContact.TabIndex = 5;
+            this.txtContact.Validating += new System.ComponentModel.CancelEventHandler(this.txtContact_Validating);
+            this.txtContact.Validated += new System.EventHandler(this.txtContact_Validated);
             // 
-            // UcSubsidiary
+            // ucSubsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,7 +159,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "UcSubsidiary";
+            this.Name = "ucSubsidiary";
             this.Size = new System.Drawing.Size(428, 155);
             this.Load += new System.EventHandler(this.UcSubsidiary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

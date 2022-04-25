@@ -144,7 +144,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts.Name = "dgGeneralLedgerAccounts";
             this.dgGeneralLedgerAccounts.RowHeadersWidth = 51;
             this.dgGeneralLedgerAccounts.RowTemplate.Height = 29;
-            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1109, 422);
+            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1109, 416);
             this.dgGeneralLedgerAccounts.TabIndex = 4;
             this.dgGeneralLedgerAccounts.SelectionChanged += new System.EventHandler(this.dgGeneralLedgerAccounts_SelectionChanged);
             // 
@@ -155,13 +155,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabControl1.Controls.Add(this.tabMajorAccount);
             this.tabControl1.Controls.Add(this.tabAccountGroup);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 50);
+            this.tabControl1.Location = new System.Drawing.Point(0, 56);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1128, 491);
+            this.tabControl1.Size = new System.Drawing.Size(1128, 485);
             this.tabControl1.TabIndex = 5;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabGeneralLedgers.Name = "tabGeneralLedgers";
             this.tabGeneralLedgers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneralLedgers.Size = new System.Drawing.Size(1120, 463);
+            this.tabGeneralLedgers.Size = new System.Drawing.Size(1120, 457);
             this.tabGeneralLedgers.TabIndex = 0;
             this.tabGeneralLedgers.Text = "General Ledgers";
             this.tabGeneralLedgers.UseVisualStyleBackColor = true;
@@ -376,7 +376,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.BtnSetBalance});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1128, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 3, 1, 3);
+            this.toolStrip1.Size = new System.Drawing.Size(1128, 56);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 

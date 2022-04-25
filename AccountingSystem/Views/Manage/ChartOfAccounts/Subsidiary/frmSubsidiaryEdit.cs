@@ -28,6 +28,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
                 uc.txtCode.Text = data["sub_code"];
                 uc.txtName.Text = data["sub_name"];
+                uc.txtAddress.Text = data["address"];
+                uc.txtContactPerson.Text = data["contact_person"];
+                uc.txtContact.Text = data["contact"];
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -38,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             LoadSelectedRecord();
         }
 
-        private bool SaveData()
+        private bool UpdateData()
         {
             try
             {
@@ -57,7 +60,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     FundId = uc.fundId,
                     GeneralLedgerAccountsId = uc.generalLedgerId,
                     Code = uc.txtCode.Text.Trim(),
-                    Name = uc.txtName.Text.Trim()
+                    Name = uc.txtName.Text.Trim(),
+                    Address = uc.txtAddress.Text.Trim(),
+                    ContactPerson = uc.txtContactPerson.Text.Trim(),
+                    Contact = uc.txtContact.Text.Trim()
                 };
 
                 return Factory.SubsidiaryLedgerAccountsRepository().Update(subsidiaryLedgerAccountsModel);
@@ -69,7 +75,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (UpdateData())
             {
                 Helper.MessageBoxSuccess("Subsidiary ledger has been saved.");
                 frmSubsidiary.LoadSubsidiaryRecordsByFundAndGeneralLedger();
