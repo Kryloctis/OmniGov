@@ -34,15 +34,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.epCode = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtContactPerson = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtContact = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(52, 3);
+            this.txtCode.Location = new System.Drawing.Point(86, 3);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.MaxLength = 20;
             this.txtCode.Name = "txtCode";
@@ -62,7 +66,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(52, 30);
+            this.txtName.Location = new System.Drawing.Point(86, 30);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
@@ -80,38 +84,95 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.label3.TabIndex = 4;
             this.label3.Text = "Name";
             // 
-            // epCode
+            // errorProvider1
             // 
-            this.epCode.ContainerControl = this;
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
-            // epName
+            // txtAddress
             // 
-            this.epName.ContainerControl = this;
+            this.txtAddress.Location = new System.Drawing.Point(86, 58);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(324, 23);
+            this.txtAddress.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Address";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 88);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 30);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Contact \r\nPerson";
+            // 
+            // txtContactPerson
+            // 
+            this.txtContactPerson.Location = new System.Drawing.Point(86, 92);
+            this.txtContactPerson.Name = "txtContactPerson";
+            this.txtContactPerson.Size = new System.Drawing.Size(324, 23);
+            this.txtContactPerson.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 125);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 30);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Contact No.  \r\n/ E-mail";
+            // 
+            // txtContact
+            // 
+            this.txtContact.Location = new System.Drawing.Point(86, 129);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.Size = new System.Drawing.Size(324, 23);
+            this.txtContact.TabIndex = 5;
             // 
             // UcSubsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.Controls.Add(this.txtContact);
+            this.Controls.Add(this.txtContactPerson);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtAddress);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UcSubsidiary";
-            this.Size = new System.Drawing.Size(406, 56);
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
+            this.Size = new System.Drawing.Size(428, 155);
+            this.Load += new System.EventHandler(this.UcSubsidiary_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ErrorProvider epCode;
-        private System.Windows.Forms.ErrorProvider epName;
         internal System.Windows.Forms.TextBox txtCode;
         internal System.Windows.Forms.TextBox txtName;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.TextBox txtAddress;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtContact;
+        internal System.Windows.Forms.TextBox txtContactPerson;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label4;
     }
 }

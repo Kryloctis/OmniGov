@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
@@ -15,7 +9,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
     {
         private readonly frmSubsidiary frmSubsidiary;
         private readonly ushort subsidiaryLedgerId;
-  
 
         public frmSubsidiaryEdit(frmSubsidiary _frmSubsidiary, byte fundId, ushort generalLedgerId, ushort _subsidiaryLedgerId)
         {
