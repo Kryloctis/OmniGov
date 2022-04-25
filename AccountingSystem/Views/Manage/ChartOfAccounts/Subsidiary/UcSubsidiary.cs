@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
@@ -23,8 +17,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
-            errorArray[0] = epCode.GetError(txtCode);
-            errorArray[1] = epName.GetError(txtName);
+            errorArray[0] = errorProvider1.GetError(txtCode);
+            errorArray[1] = errorProvider1.GetError(txtName);
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -38,22 +32,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "code");
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCode, txtCode);
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "name");
         }
 
         private void txtName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epName, txtName);
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
+        }
+
+        private void UcSubsidiary_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
