@@ -17,61 +17,54 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         
         private void frmPaymentCollection_Load(object sender, EventArgs e)
         {
-            LoadRecords();
             LoadCollectors();
-            LoadCollectorLoggedIn();
+            SelectCurrentLoggedInCollector();
+            LoadRecords();
         }
 
-        private void LoadCollectorLoggedIn()
+        private void SelectCurrentLoggedInCollector()
         {
-            try
+            if (cmbCollector.Items.Count == 0) return;
+
+            var usersRepo = Factory.UsersRepository();
+            Dictionary<string, string> collectorDict = new();
+
+            if (usersRepo.LinkedCollector(Helper.UserId))
             {
-                if (cmbCollector.Items.Count == 0) return;
+                cmbCollector.Enabled = false;
+                cbCollectorTypeJO.Enabled = false;
 
-                
-                var usersRepo = Factory.UsersRepository();
-                if (usersRepo.LinkedCollector(Helper.UserId) || usersRepo.LinkedJobOrder(Helper.UserId))
-                {
-                    Dictionary<string, string> collectorDict = new();
-
-                    if (Helper.IsJobOrder(Helper.UserId))
-                    {
-                        var jobOrderRepo = Factory.JobOrderRepository();
-                        collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                        cmbCollector.SelectedValue = collectorDict["id"];
-                    }
-                    else
-                    {
-                        var colRepository = Factory.CollectingOfficerRepository();
-                        collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                        cmbCollector.SelectedValue = collectorDict["id"];
-                    }
-
-                    cmbCollector.Enabled = false;
-                    return;
-                }
+                collectorDict = Factory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                cmbCollector.SelectedValue = collectorDict["id"];
             }
-            catch (Exception)
+
+            else if (usersRepo.LinkedJobOrder(Helper.UserId))
             {
-                throw;
+                cmbCollector.Enabled = false;
+                cbCollectorTypeJO.Enabled = false;
+                cbCollectorTypeJO.Checked = true;
+
+                collectorDict = Factory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                cmbCollector.SelectedValue = collectorDict["id"];
             }
+
+            return;
         }
 
         internal void LoadCollectors()
         {
             try
             {
+                DataTable dtCollector;
                 var collectingOfficerRepository = Factory.CollectingOfficerRepository();
                 var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
 
-                DataTable dtCollectors = new();
-                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
-                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
-
-                dtRegularCollectors.Merge(dtJOCollectors);
-                dtCollectors = dtRegularCollectors;
-
-                cmbCollector.DataSource = dtCollectors;
+                if (cbCollectorTypeJO.Checked)
+                    dtCollector = collectingOfficerHasJORepo.GetRecords();
+                else
+                   dtCollector = collectingOfficerRepository.GetRecords();
+               
+                cmbCollector.DataSource = dtCollector;
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
             }
@@ -79,11 +72,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxError(ex.Message);
             }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmPaymentCollectionAdd(this).ShowDialog();
         }
 
         internal void LoadRecords()
@@ -120,10 +108,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtTotal.Text = totalCollections.ToString("N2");
         }
 
+
+        #region Form Events
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentCollectionAdd(this).ShowDialog();
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgpayments.SelectedRows.Count == 0) return;
-            
+
             var dgRowIndex = dgpayments.SelectedCells[0].Value.ToString();
             int paymentCollectionId = int.Parse(dgRowIndex);
 
@@ -135,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 int selectedRowCount = dgpayments.SelectedRows.Count;
-               
+
                 if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                 {
                     var paymentCollectionModelList = new List<PaymentCollectionModel>();
@@ -146,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = paymentCollectionId });
                         var paymentCollectionRepo = Factory.PaymentCollectionRepository().Delete(paymentCollectionModelList);
                     }
-                    
+
                     LoadRecords();
                 }
             }
@@ -154,13 +149,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxError(ex.Message);
             }
+
         }
 
         private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadRecords();
         }
-
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
             LoadRecords();
@@ -181,6 +176,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             //btnDelete.Enabled = !Factory.CollectorReportRepository().HasReported(paymentCollectionId);
 
         }
+        private void cbCollectorType_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
+
+
+        #endregion
+
 
     }
 }

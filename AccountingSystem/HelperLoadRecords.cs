@@ -497,7 +497,7 @@ namespace AccountingSystem
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
-                    row["receipt"],
+                    row["accountable_forms"],
                     serialNumberFrom,
                     serialNumberTo,
                     row["quantity"],
@@ -1382,6 +1382,23 @@ namespace AccountingSystem
         }
 
         internal static void CollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+
+            if (comboBox.DropDownStyle == ComboBoxStyle.DropDown)
+            {
+                // loop datatable to add items in autocompletesource
+                foreach (DataRow item in dataTable.Rows)
+                    comboBox.AutoCompleteCustomSource.Add(item[displayMember].ToString());
+
+                comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+                comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            }
+        }
+
+        internal static void RegularAndJOCollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;

@@ -115,15 +115,14 @@ namespace ACC.Data
 
             string query =      $"SELECT " +
                                 $"id, " +
-                                $"CONCAT(acc_form_no, ' - ', acc_form_desc) receipt, " +
+                                $"accountable_forms, " +
                                 $"receipt_number_from, " +
                                 $"receipt_number_to, " +
                                 $"received_date, " +
                                 $"quantity, " +
                                 $"user officer " +
                                 $"FROM {viewTableName} " +
-                                $"WHERE acc_form_desc LIKE @searchText " +
-                                $"OR acc_form_no LIKE @searchText " +
+                                $"WHERE accountable_forms LIKE @searchText " +
                                 $"OR user LIKE @searchText " +
                                 $"ORDER BY received_date DESC";
 

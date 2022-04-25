@@ -419,7 +419,7 @@ namespace ACC.Data
             string query = $"SELECT " +
                            $"COALESCE(SUM(quantity), 0) AS total_issued " +
                            $"FROM {tableName} " +
-                           $"WHERE receipts_id = @receipt_id AND is_returned = 0";
+                           $"WHERE receipts_id = @receipt_id";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }

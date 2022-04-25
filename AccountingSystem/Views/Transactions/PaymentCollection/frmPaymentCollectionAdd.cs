@@ -9,27 +9,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private readonly frmPaymentCollection _frmPaymentCollection;
         private readonly ucPaymentCollection uc;
 
-        public frmPaymentCollectionAdd(frmPaymentCollection frmpc)
+        public frmPaymentCollectionAdd(frmPaymentCollection frmPaymentCollection)
         {
             InitializeComponent();
-            _frmPaymentCollection = frmpc;
+            _frmPaymentCollection = frmPaymentCollection;
             uc = ucPaymentCollection1;
             uc.userId = Helper.UserId;
         }
-
+        
         private void frmPaymentCollectionAdd_Load(object sender, EventArgs e)
         {
-            if(uc.cmdCollector.Items.Count > 0)
-            {
-                var uRepository = Factory.UsersRepository();
-                if (uRepository.LinkedCollector(Helper.UserId))
-                {
-                    var colRepository = Factory.CollectingOfficerRepository();
-                    var data = colRepository.GetRecordByUserID(Helper.UserId);
-                    uc.cmdCollector.SelectedValue = data["id"];
-                    uc.cmdCollector.Enabled = false;
-                }
-            }
+
         }
 
         private bool SaveData()
@@ -42,14 +32,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     return false;
                 }
 
-                var collectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue);
+                var collectingOfficerId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
 
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
                     CollectingOfficerId = collectingOfficerId,
                     FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
-                    GeneralLedgerAccountId = uc.generalLedgerId,
+                    GeneralLedgerAccountId = Convert.ToInt32(uc.cmbAccount.SelectedValue),
                     Quantity = 1,
                     Payee = uc.txtPayee.Text.Trim(),
                     ReceiptNo = uc.txtReceiptNumber.Text.Trim(),
@@ -57,11 +47,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     Amount = Convert.ToDecimal(uc.txtAmount.Value),
                     CreatedBy = Helper.UserId,
                 };
+
                 var regularCollectingOfficerId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
+                var isCollectorJO = Convert.ToBoolean(regularCollectingOfficerId);
 
-                var isCollectorAJO = Convert.ToBoolean(regularCollectingOfficerId);
-
-                if (isCollectorAJO)
+                if (isCollectorJO)
                 {
                     paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
                     paymentCollectionModel.JobOrderId = collectingOfficerId;
@@ -86,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var collectorId = uc.cmdCollector.SelectedValue.ToString();
+                var collectorId = uc.cmbCollector.SelectedValue.ToString();
                 var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
                 var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
 
@@ -120,23 +110,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            bool isFormCashTicket = uc.isCashTicket;
-
-            if (isFormCashTicket)
-            {
-                uc.CancelReceiptFieldValidations(true);
-                SaveCashTickets();
-            }
-            else
-            {
-                uc.CancelCashTicketFieldValidations(true);
-                SaveReceipts();
-            }
-
-            uc.txtPayee.Focus();
-        }
 
         private void SaveCashTickets()
         {
@@ -148,11 +121,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     return;
                 }
 
-                var collectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue);
+                var collectingOfficerId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
 
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
-                    CollectingOfficerId = Convert.ToInt32(uc.cmdCollector.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(uc.cmbCollector.SelectedValue),
                     FundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = uc.generalLedgerId,
@@ -201,11 +174,30 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
 
                 uc.cmbcollector_SelectedIndexChanged(this, EventArgs.Empty);
-                uc.cmbforms_SelectedIndexChanged(this, EventArgs.Empty);
-                uc.cmbforms_SelectedValueChanged(this, EventArgs.Empty);
+                uc.cmbforms_SelectionChangeCommitted(this, EventArgs.Empty);
 
             }
         }
+
+        #region Form Events
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            bool isFormCashTicket = uc.isCashTicket;
+
+            if (isFormCashTicket)
+            {
+                uc.CancelNonCashTicketFieldValidations(true);
+                SaveCashTickets();
+            }
+            else
+            {
+                uc.CancelCashTicketFieldValidations(true);
+                SaveReceipts();
+            }
+
+            uc.txtPayee.Focus();
+        }
+        #endregion
 
     }
 }
