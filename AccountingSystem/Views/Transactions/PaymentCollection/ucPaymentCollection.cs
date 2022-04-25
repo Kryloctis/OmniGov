@@ -574,6 +574,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectorId = int.Parse(collector[0].ToString());
 
             LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(collectorId);
+            SwitchFields();
+            CreatePaymentCollection();
         }
 
         internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
@@ -582,7 +584,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             SwitchFields();
             CreatePaymentCollection();
         }
-
 
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {

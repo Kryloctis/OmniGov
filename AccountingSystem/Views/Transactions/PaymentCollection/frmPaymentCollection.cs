@@ -179,6 +179,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void cbCollectorType_CheckedChanged(object sender, EventArgs e)
         {
             LoadCollectors();
+            LoadRecords();
         }
 
 

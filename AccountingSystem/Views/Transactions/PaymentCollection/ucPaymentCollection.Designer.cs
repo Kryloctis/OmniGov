@@ -45,6 +45,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.epCollectingOfficer = new System.Windows.Forms.ErrorProvider(this.components);
             this.cmbAccountableForms = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbCollectorTypeJO = new System.Windows.Forms.CheckBox();
             this.cmbAccount = new System.Windows.Forms.ComboBox();
             this.cmbFund = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -68,7 +69,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.epCashTicketAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.epORDateOfCollection = new System.Windows.Forms.ErrorProvider(this.components);
             this.epCashTicketDateOfCollection = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cbCollectorTypeJO = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtAmount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.epCollectingOfficer)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -251,6 +251,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.groupBox1.Size = new System.Drawing.Size(659, 170);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
+            // 
+            // cbCollectorTypeJO
+            // 
+            this.cbCollectorTypeJO.AutoSize = true;
+            this.cbCollectorTypeJO.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbCollectorTypeJO.Location = new System.Drawing.Point(181, 13);
+            this.cbCollectorTypeJO.Name = "cbCollectorTypeJO";
+            this.cbCollectorTypeJO.Size = new System.Drawing.Size(85, 17);
+            this.cbCollectorTypeJO.TabIndex = 23;
+            this.cbCollectorTypeJO.Text = "Job Orders ";
+            this.cbCollectorTypeJO.UseVisualStyleBackColor = true;
+            this.cbCollectorTypeJO.CheckedChanged += new System.EventHandler(this.cbCollector_CheckedChanged);
             // 
             // cmbAccount
             // 
@@ -455,18 +467,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.epCashTicketDateOfCollection.ContainerControl = this;
             // 
-            // cbCollectorTypeJO
-            // 
-            this.cbCollectorTypeJO.AutoSize = true;
-            this.cbCollectorTypeJO.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cbCollectorTypeJO.Location = new System.Drawing.Point(181, 13);
-            this.cbCollectorTypeJO.Name = "cbCollectorTypeJO";
-            this.cbCollectorTypeJO.Size = new System.Drawing.Size(85, 17);
-            this.cbCollectorTypeJO.TabIndex = 23;
-            this.cbCollectorTypeJO.Text = "Job Orders ";
-            this.cbCollectorTypeJO.UseVisualStyleBackColor = true;
-            this.cbCollectorTypeJO.CheckedChanged += new System.EventHandler(this.cbCollector_CheckedChanged);
-            // 
             // ucPaymentCollection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -544,6 +544,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private System.Windows.Forms.ErrorProvider epCashTicketAmount;
         private System.Windows.Forms.ErrorProvider epORDateOfCollection;
         private System.Windows.Forms.ErrorProvider epCashTicketDateOfCollection;
-        private System.Windows.Forms.CheckBox cbCollectorTypeJO;
+        internal System.Windows.Forms.CheckBox cbCollectorTypeJO;
     }
 }
