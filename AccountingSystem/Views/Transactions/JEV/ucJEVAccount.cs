@@ -38,14 +38,31 @@ namespace AccountingSystem.Views.Transactions.JEV
             nudAmount.Value = 0;
         }
 
+        private DataTable SubsidiaryLedgerDataTable()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(Int32));
+            dataTable.Columns.Add("sub_name");
+            ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
+
+            var dtSubsidiaryLedger = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+
+            foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
+            {
+                string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
+                int subId = Convert.ToInt32(dataRow["id"]);
+
+                dataTable.Rows.Add(subId, subsidiaryName);
+            }
+
+            return dataTable;
+        }
+
         internal void LoadSubsidiary()
         {
             try
             {
-                ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
-                DataTable dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-
-                HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiary, cmbSubsidiary, "sub_name", "id");
+                HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiary, "sub_name", "id");
 
                 btnSubsidiaryLedger.Enabled = true;
             }
