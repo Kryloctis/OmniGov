@@ -45,10 +45,39 @@ namespace AccountingSystem.Views.Reports.Ledgers
             HelperLoadRecords.YearComboBox(cmbYear);
         }
 
-        private void LoadSubsidiaryAccounts(byte fundId, ushort generalLedgerId)
+        private DataTable SubsidiaryLedgerDataTable()
         {
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(Int32));
+            dataTable.Columns.Add("sub_name");
+
+            byte fundId = (byte)cmbFunds.SelectedValue;
+            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
+
             var dtSubsidiaryLedger = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
-            HelperLoadRecords.SubsidiaryLedgerComboBox(dtSubsidiaryLedger, cmbSubsidiaryLedger, "sub_name", "id");
+
+            foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
+            {
+                string subsidiaryName = $"{dataRow["sub_code"]} - {dataRow["sub_name"]}";
+                int subId = Convert.ToInt32(dataRow["id"]);
+
+                dataTable.Rows.Add(subId, subsidiaryName);
+            }
+
+            return dataTable;
+        }
+
+        private void LoadSubsidiaryAccounts()
+        {
+
+            try
+            {
+                HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
@@ -143,10 +172,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramGLCode", generalLedgerDict["account_code"]),
                     new ReportParameter("paramSLCode", subsidiaryLedgerDict["sub_code"]),
-                    new ReportParameter("paramAccountOf", "Sample account of"),
-                    new ReportParameter("paramAddress", "Sample Address"),
-                    new ReportParameter("paramContactPerson", "Sample Contact Person"),
-                    new ReportParameter("paramContactNoEmail", "Sample Contact Email"),
+                    new ReportParameter("paramAccountOf", generalLedgerDict["ledger_name"]),
+                    new ReportParameter("paramAddress", subsidiaryLedgerDict["address"]),
+                    new ReportParameter("paramContactPerson", subsidiaryLedgerDict["contact_person"]),
+                    new ReportParameter("paramContactNoEmail", subsidiaryLedgerDict["contact"]),
                     new ReportParameter("paramBalanceDate", balanceDate),
                     new ReportParameter("paramBalanceDebit", balanceDebit),
                     new ReportParameter("paramBalanceCredit", balanceCredit),
@@ -164,12 +193,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            byte fundId = (byte)cmbFunds.SelectedValue;
-            ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
-            LoadSubsidiaryAccounts(fundId, Convert.ToUInt16(generalLedgerId));
+
+            LoadSubsidiaryAccounts();
         }
 
-        //ACCOUNT COMBOBOX
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts;
