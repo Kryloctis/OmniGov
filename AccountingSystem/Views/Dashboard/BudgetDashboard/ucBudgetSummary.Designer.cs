@@ -2267,8 +2267,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             // 
             // ucBudgetSummary
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.Controls.Add(this.cmbxAllotmentClasses);
             this.Controls.Add(this.btnRefresh);

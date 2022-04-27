@@ -659,10 +659,5 @@ namespace AccountingSystem
         {
             _ = new frmSAAOBB().ShowDialog();
         }
-
-        private void ucBudgetSummary1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
