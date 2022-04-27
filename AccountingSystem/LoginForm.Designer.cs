@@ -49,20 +49,21 @@ namespace AccountingSystem
             // txtUsername
             // 
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtUsername.Location = new System.Drawing.Point(99, 202);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUsername.Location = new System.Drawing.Point(79, 162);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtUsername.MaxLength = 45;
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(367, 27);
+            this.txtUsername.Size = new System.Drawing.Size(294, 23);
             this.txtUsername.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 205);
+            this.label1.Location = new System.Drawing.Point(14, 164);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 20);
+            this.label1.Size = new System.Drawing.Size(60, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Username";
             // 
@@ -70,20 +71,21 @@ namespace AccountingSystem
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(18, 244);
+            this.label2.Location = new System.Drawing.Point(14, 195);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 20);
+            this.label2.Size = new System.Drawing.Size(57, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password";
             // 
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPassword.Location = new System.Drawing.Point(99, 241);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPassword.Location = new System.Drawing.Point(79, 193);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '•';
-            this.txtPassword.Size = new System.Drawing.Size(367, 27);
+            this.txtPassword.Size = new System.Drawing.Size(294, 23);
             this.txtPassword.TabIndex = 2;
             // 
             // panel1
@@ -95,9 +97,9 @@ namespace AccountingSystem
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(513, 148);
+            this.panel1.Size = new System.Drawing.Size(410, 118);
             this.panel1.TabIndex = 4;
             // 
             // label6
@@ -105,9 +107,10 @@ namespace AccountingSystem
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(191, 91);
+            this.label6.Location = new System.Drawing.Point(153, 73);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 20);
+            this.label6.Size = new System.Drawing.Size(116, 15);
             this.label6.TabIndex = 4;
             this.label6.Text = "Zamboanga Sibugay";
             // 
@@ -116,19 +119,20 @@ namespace AccountingSystem
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(191, 71);
+            this.label5.Location = new System.Drawing.Point(153, 57);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 20);
+            this.label5.Size = new System.Drawing.Size(174, 15);
             this.label5.TabIndex = 3;
             this.label5.Text = "Local Government Unit of Buug";
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(85, 23);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox2.Location = new System.Drawing.Point(68, 18);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(96, 107);
+            this.pictureBox2.Size = new System.Drawing.Size(77, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -138,18 +142,19 @@ namespace AccountingSystem
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(187, 35);
+            this.label3.Location = new System.Drawing.Point(150, 28);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 32);
+            this.label3.Size = new System.Drawing.Size(189, 25);
             this.label3.TabIndex = 1;
             this.label3.Text = "Local Finance System";
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(341, 276);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLogin.Location = new System.Drawing.Point(273, 221);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(125, 31);
+            this.btnLogin.Size = new System.Drawing.Size(100, 25);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -158,10 +163,10 @@ namespace AccountingSystem
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(0, 165);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 13, 3, 10);
+            this.label4.Location = new System.Drawing.Point(0, 132);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 10, 2, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(513, 21);
+            this.label4.Size = new System.Drawing.Size(410, 17);
             this.label4.TabIndex = 6;
             this.label4.Text = "Welcome! Please enter your username and password below.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -173,10 +178,10 @@ namespace AccountingSystem
             this.btnVisibility.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnVisibility.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVisibility.Image = global::AccountingSystem.Properties.Resources.visible_16px;
-            this.btnVisibility.Location = new System.Drawing.Point(469, 239);
+            this.btnVisibility.Location = new System.Drawing.Point(375, 191);
             this.btnVisibility.Margin = new System.Windows.Forms.Padding(0);
             this.btnVisibility.Name = "btnVisibility";
-            this.btnVisibility.Size = new System.Drawing.Size(26, 31);
+            this.btnVisibility.Size = new System.Drawing.Size(21, 25);
             this.btnVisibility.TabIndex = 7;
             this.btnVisibility.UseVisualStyleBackColor = true;
             this.btnVisibility.Click += new System.EventHandler(this.btnVisibility_Click);
@@ -184,9 +189,8 @@ namespace AccountingSystem
             // LoginForm
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(513, 325);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(410, 260);
             this.Controls.Add(this.btnVisibility);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnLogin);
@@ -197,7 +201,7 @@ namespace AccountingSystem
             this.Controls.Add(this.txtUsername);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
