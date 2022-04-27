@@ -189,7 +189,8 @@ namespace AccountingSystem
             // LoginForm
             // 
             this.AcceptButton = this.btnLogin;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(410, 260);
             this.Controls.Add(this.btnVisibility);
             this.Controls.Add(this.label4);
