@@ -68,6 +68,7 @@ namespace AccountingSystem
             this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.tabControlBudget = new System.Windows.Forms.TabControl();
             this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
             this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.chkbxDetailed = new System.Windows.Forms.CheckBox();
@@ -126,7 +127,6 @@ namespace AccountingSystem
             this.radFinancialStatements = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
-            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -539,6 +539,16 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.TabIndex = 0;
             this.tabPageBudgetSummary.Text = "Budget Summary";
             // 
+            // ucBudgetSummary1
+            // 
+            this.ucBudgetSummary1.AutoScroll = true;
+            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetSummary1.Location = new System.Drawing.Point(2, 3);
+            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1095, 379);
+            this.ucBudgetSummary1.TabIndex = 0;
+            // 
             // tabPageBudgetDetailed
             // 
             this.tabPageBudgetDetailed.BackColor = System.Drawing.SystemColors.Control;
@@ -648,7 +658,7 @@ namespace AccountingSystem
             this.btnSAAOB.Location = new System.Drawing.Point(428, 0);
             this.btnSAAOB.Margin = new System.Windows.Forms.Padding(0);
             this.btnSAAOB.Name = "btnSAAOB";
-            this.btnSAAOB.Size = new System.Drawing.Size(92, 32);
+            this.btnSAAOB.Size = new System.Drawing.Size(96, 32);
             this.btnSAAOB.TabIndex = 3;
             this.btnSAAOB.Text = "SAAOB";
             this.btnSAAOB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -659,10 +669,10 @@ namespace AccountingSystem
             // btnSAAOBB
             // 
             this.btnSAAOBB.Image = global::AccountingSystem.Properties.Resources.document_data_20px;
-            this.btnSAAOBB.Location = new System.Drawing.Point(520, 0);
+            this.btnSAAOBB.Location = new System.Drawing.Point(524, 0);
             this.btnSAAOBB.Margin = new System.Windows.Forms.Padding(0);
             this.btnSAAOBB.Name = "btnSAAOBB";
-            this.btnSAAOBB.Size = new System.Drawing.Size(92, 32);
+            this.btnSAAOBB.Size = new System.Drawing.Size(96, 32);
             this.btnSAAOBB.TabIndex = 3;
             this.btnSAAOBB.Text = "SAAOBB";
             this.btnSAAOBB.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1217,7 +1227,7 @@ namespace AccountingSystem
             this.radJournalEntryVoucher.Location = new System.Drawing.Point(0, 0);
             this.radJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.radJournalEntryVoucher.Name = "radJournalEntryVoucher";
-            this.radJournalEntryVoucher.Size = new System.Drawing.Size(143, 32);
+            this.radJournalEntryVoucher.Size = new System.Drawing.Size(169, 32);
             this.radJournalEntryVoucher.TabIndex = 5;
             this.radJournalEntryVoucher.TabStop = true;
             this.radJournalEntryVoucher.Text = "Journal Entry Voucher";
@@ -1232,10 +1242,10 @@ namespace AccountingSystem
             this.radJournals.Appearance = System.Windows.Forms.Appearance.Button;
             this.radJournals.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radJournals.Image = global::AccountingSystem.Properties.Resources.knowledge_books_filled_20px;
-            this.radJournals.Location = new System.Drawing.Point(145, 0);
+            this.radJournals.Location = new System.Drawing.Point(171, 0);
             this.radJournals.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.radJournals.Name = "radJournals";
-            this.radJournals.Size = new System.Drawing.Size(85, 32);
+            this.radJournals.Size = new System.Drawing.Size(109, 32);
             this.radJournals.TabIndex = 6;
             this.radJournals.TabStop = true;
             this.radJournals.Text = "Journals";
@@ -1250,10 +1260,10 @@ namespace AccountingSystem
             this.radLedgers.Appearance = System.Windows.Forms.Appearance.Button;
             this.radLedgers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radLedgers.Image = global::AccountingSystem.Properties.Resources.notes_text_20px;
-            this.radLedgers.Location = new System.Drawing.Point(232, 0);
+            this.radLedgers.Location = new System.Drawing.Point(282, 0);
             this.radLedgers.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.radLedgers.Name = "radLedgers";
-            this.radLedgers.Size = new System.Drawing.Size(74, 32);
+            this.radLedgers.Size = new System.Drawing.Size(105, 32);
             this.radLedgers.TabIndex = 7;
             this.radLedgers.TabStop = true;
             this.radLedgers.Text = "Ledgers";
@@ -1268,10 +1278,10 @@ namespace AccountingSystem
             this.radTrialBalance.Appearance = System.Windows.Forms.Appearance.Button;
             this.radTrialBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radTrialBalance.Image = global::AccountingSystem.Properties.Resources.justice_filled_document_20px;
-            this.radTrialBalance.Location = new System.Drawing.Point(308, 0);
+            this.radTrialBalance.Location = new System.Drawing.Point(389, 0);
             this.radTrialBalance.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.radTrialBalance.Name = "radTrialBalance";
-            this.radTrialBalance.Size = new System.Drawing.Size(100, 32);
+            this.radTrialBalance.Size = new System.Drawing.Size(121, 32);
             this.radTrialBalance.TabIndex = 8;
             this.radTrialBalance.TabStop = true;
             this.radTrialBalance.Text = "Trial Balance";
@@ -1286,10 +1296,10 @@ namespace AccountingSystem
             this.radFinancialStatements.Appearance = System.Windows.Forms.Appearance.Button;
             this.radFinancialStatements.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.radFinancialStatements.Image = global::AccountingSystem.Properties.Resources.document_text_graph_stats_filled_20px;
-            this.radFinancialStatements.Location = new System.Drawing.Point(410, 0);
+            this.radFinancialStatements.Location = new System.Drawing.Point(512, 0);
             this.radFinancialStatements.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.radFinancialStatements.Name = "radFinancialStatements";
-            this.radFinancialStatements.Size = new System.Drawing.Size(140, 32);
+            this.radFinancialStatements.Size = new System.Drawing.Size(179, 32);
             this.radFinancialStatements.TabIndex = 9;
             this.radFinancialStatements.TabStop = true;
             this.radFinancialStatements.Text = "Financial Statements";
@@ -1318,16 +1328,6 @@ namespace AccountingSystem
             this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
             this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1106, 449);
             this.ucTreasuryDashboard1.TabIndex = 0;
-            // 
-            // ucBudgetSummary1
-            // 
-            this.ucBudgetSummary1.AutoScroll = true;
-            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetSummary1.Location = new System.Drawing.Point(2, 3);
-            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
-            this.ucBudgetSummary1.Size = new System.Drawing.Size(1095, 379);
-            this.ucBudgetSummary1.TabIndex = 0;
             // 
             // MainForm
             // 

@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(811, 11);
+            this.btnRetrieve.Location = new System.Drawing.Point(705, 11);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(92, 23);
@@ -231,7 +231,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.Controls.Add(this.panelConfig);
             this.Controls.Add(this.panel1);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(931, 724);
+            this.MinimumSize = new System.Drawing.Size(931, 718);
             this.Name = "frmSAAOB";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
