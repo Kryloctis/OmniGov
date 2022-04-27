@@ -13,6 +13,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         public frmSubsidiaryEdit(frmSubsidiary _frmSubsidiary, byte fundId, ushort generalLedgerId, ushort _subsidiaryLedgerId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             frmSubsidiary = _frmSubsidiary;
             ucSubsidiary1.fundId = fundId;
             ucSubsidiary1.generalLedgerId = generalLedgerId;
