@@ -174,8 +174,8 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.Columns["general_ledger_accounts_id"].Visible = false;
             datagrid.Columns["account_code"].HeaderText = "Code";
-            datagrid.Columns["account_code"].Width = 70;
-            datagrid.Columns["account_code"].MinimumWidth = 70;
+            datagrid.Columns["account_code"].Width = 150;
+            datagrid.Columns["account_code"].MinimumWidth = 100;
             datagrid.Columns["ledger_name"].HeaderText = "Name";
             datagrid.Columns["ledger_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["created_at"].Visible = false;
