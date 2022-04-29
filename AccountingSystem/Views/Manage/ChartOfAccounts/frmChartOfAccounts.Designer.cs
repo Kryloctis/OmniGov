@@ -63,6 +63,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BtnSubsidiary = new System.Windows.Forms.ToolStripButton();
             this.BtnSetBalance = new System.Windows.Forms.ToolStripButton();
+            this.txtTotalDebit = new System.Windows.Forms.TextBox();
+            this.txtTotalCredit = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -144,7 +148,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts.Name = "dgGeneralLedgerAccounts";
             this.dgGeneralLedgerAccounts.RowHeadersWidth = 51;
             this.dgGeneralLedgerAccounts.RowTemplate.Height = 29;
-            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1109, 416);
+            this.dgGeneralLedgerAccounts.Size = new System.Drawing.Size(1109, 386);
             this.dgGeneralLedgerAccounts.TabIndex = 4;
             this.dgGeneralLedgerAccounts.SelectionChanged += new System.EventHandler(this.dgGeneralLedgerAccounts_SelectionChanged);
             // 
@@ -167,6 +171,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // tabGeneralLedgers
             // 
+            this.tabGeneralLedgers.Controls.Add(this.label5);
+            this.tabGeneralLedgers.Controls.Add(this.label4);
+            this.tabGeneralLedgers.Controls.Add(this.txtTotalCredit);
+            this.tabGeneralLedgers.Controls.Add(this.txtTotalDebit);
             this.tabGeneralLedgers.Controls.Add(this.cmbxGenLedgAccountGroup);
             this.tabGeneralLedgers.Controls.Add(this.btnRetrieveAll);
             this.tabGeneralLedgers.Controls.Add(this.cmbYear);
@@ -441,6 +449,44 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.BtnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BtnSetBalance.Click += new System.EventHandler(this.BtnSetBalance_Click);
             // 
+            // txtTotalDebit
+            // 
+            this.txtTotalDebit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalDebit.Location = new System.Drawing.Point(962, 427);
+            this.txtTotalDebit.MaxLength = 999999;
+            this.txtTotalDebit.Name = "txtTotalDebit";
+            this.txtTotalDebit.ReadOnly = true;
+            this.txtTotalDebit.Size = new System.Drawing.Size(152, 23);
+            this.txtTotalDebit.TabIndex = 11;
+            // 
+            // txtTotalCredit
+            // 
+            this.txtTotalCredit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalCredit.Location = new System.Drawing.Point(763, 427);
+            this.txtTotalCredit.MaxLength = 999999;
+            this.txtTotalCredit.Name = "txtTotalCredit";
+            this.txtTotalCredit.ReadOnly = true;
+            this.txtTotalCredit.Size = new System.Drawing.Size(152, 23);
+            this.txtTotalCredit.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(718, 431);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 15);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Credit";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(921, 431);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 15);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Debit";
+            // 
             // frmChartOfAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -513,5 +559,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.Button btnRetrieveAll;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbMajorAccount;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtTotalCredit;
+        private System.Windows.Forms.TextBox txtTotalDebit;
     }
 }

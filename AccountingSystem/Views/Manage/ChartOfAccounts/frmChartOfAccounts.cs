@@ -81,6 +81,25 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             }
         }
 
+        private void LoadTotalBalances()
+        {
+            try
+            {
+                int fundId = Convert.ToInt32(cmbFund.SelectedValue);
+                short year = Convert.ToInt16(cmbYear.Text);
+
+                decimal totalDebit = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
+                decimal totalCredit = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
+
+                txtTotalCredit.Text = totalCredit.ToString("N2");
+                txtTotalDebit.Text = totalDebit.ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private DataTable GeneralLedgersDataTable(int limitSize)
         {
             DataTable dataTable;
@@ -120,6 +139,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 lblRecordCount.Text = dgGeneralLedgerAccounts.Rows.Count.ToString();
                 Cursor.Current = Cursors.Default;
                 DisplayRecordCount(dgGeneralLedgerAccounts);
+                LoadTotalBalances();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
