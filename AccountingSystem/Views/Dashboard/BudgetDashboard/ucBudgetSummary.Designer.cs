@@ -185,7 +185,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.cmbxAllotmentClasses = new System.Windows.Forms.ComboBox();
             this.cmbSubFPP = new System.Windows.Forms.ComboBox();
             this.cmbxFPP = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -2199,7 +2198,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.flowLayoutPanel1.Controls.Add(this.btnRefresh);
             this.flowLayoutPanel1.Controls.Add(this.dtAsOf);
             this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
-            this.flowLayoutPanel1.Controls.Add(this.cmbxAllotmentClasses);
             this.flowLayoutPanel1.Controls.Add(this.cmbSubFPP);
             this.flowLayoutPanel1.Controls.Add(this.cmbxFPP);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -2245,21 +2243,12 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.cmbxFunds.Size = new System.Drawing.Size(160, 23);
             this.cmbxFunds.TabIndex = 80;
             // 
-            // cmbxAllotmentClasses
-            // 
-            this.cmbxAllotmentClasses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxAllotmentClasses.FormattingEnabled = true;
-            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(504, 3);
-            this.cmbxAllotmentClasses.Name = "cmbxAllotmentClasses";
-            this.cmbxAllotmentClasses.Size = new System.Drawing.Size(160, 23);
-            this.cmbxAllotmentClasses.TabIndex = 84;
-            // 
             // cmbSubFPP
             // 
             this.cmbSubFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSubFPP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cmbSubFPP.FormattingEnabled = true;
-            this.cmbSubFPP.Location = new System.Drawing.Point(260, 3);
+            this.cmbSubFPP.Location = new System.Drawing.Point(426, 3);
             this.cmbSubFPP.Name = "cmbSubFPP";
             this.cmbSubFPP.Size = new System.Drawing.Size(238, 23);
             this.cmbSubFPP.TabIndex = 83;
@@ -2269,7 +2258,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             this.cmbxFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxFPP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(16, 3);
+            this.cmbxFPP.Location = new System.Drawing.Point(182, 3);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(238, 23);
             this.cmbxFPP.TabIndex = 79;
@@ -2482,7 +2471,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         internal System.Windows.Forms.Button btnRefresh;
         internal System.Windows.Forms.DateTimePicker dtAsOf;
         internal System.Windows.Forms.ComboBox cmbxFunds;
-        private System.Windows.Forms.ComboBox cmbxAllotmentClasses;
         private System.Windows.Forms.ComboBox cmbSubFPP;
         internal System.Windows.Forms.ComboBox cmbxFPP;
     }

@@ -387,5 +387,19 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public decimal GetSumBalancesBy_FundId_Year_Availablility(int fundsId, short year, bool isDebit)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundsId},
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@is_debit", DbType.Boolean, isDebit}
+            };
+
+            string query = $"SELECT COALESCE(SUM((amount)),0) AS amount FROM {tableName} WHERE funds_id = @funds_id AND YEAR(date_entry) = @year AND is_debit = @is_debit";
+
+            return Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+        }
     }
 }

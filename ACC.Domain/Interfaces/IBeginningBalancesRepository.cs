@@ -10,6 +10,8 @@ namespace ACC.Domain.Interfaces
 
         decimal GetSumBalances(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null);
 
+        decimal GetSumBalancesBy_FundId_Year_Availablility(int fundsId, short year, bool isDebit);
+
         Dictionary<string, decimal> GetSumBalances(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
         Dictionary<string, decimal> GetSumBalancesByAccountGroup(byte fundsId, ushort accountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);

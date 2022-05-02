@@ -79,7 +79,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             LoadFPP(false);
             LoadSubFPP();
             LoadFunds();
-            LoadAllotmentClasses();
             LoadBudgetDashboardContents();
         }
 
@@ -90,12 +89,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
             cmbxFunds.DisplayMember = "fund_name";
             cmbxFunds.ValueMember = "id";
-        }
-
-        private void LoadAllotmentClasses()
-        {
-            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
-            HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClasses, "allotment_code", "id");
         }
 
         private DataTable DataTableFPP()
