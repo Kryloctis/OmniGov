@@ -40,6 +40,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.dgGeneralLedgerAccounts = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabGeneralLedgers = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtTotalCredit = new System.Windows.Forms.TextBox();
+            this.txtTotalDebit = new System.Windows.Forms.TextBox();
             this.cmbxGenLedgAccountGroup = new System.Windows.Forms.ComboBox();
             this.btnRetrieveAll = new System.Windows.Forms.Button();
             this.cmbYear = new System.Windows.Forms.ComboBox();
@@ -63,10 +67,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BtnSubsidiary = new System.Windows.Forms.ToolStripButton();
             this.BtnSetBalance = new System.Windows.Forms.ToolStripButton();
-            this.txtTotalDebit = new System.Windows.Forms.TextBox();
-            this.txtTotalCredit = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGeneralLedgerAccounts)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -190,6 +190,47 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.tabGeneralLedgers.TabIndex = 0;
             this.tabGeneralLedgers.Text = "General Ledgers";
             this.tabGeneralLedgers.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(893, 431);
+            this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 15);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Total Debit";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(655, 431);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 15);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Total Credit";
+            // 
+            // txtTotalCredit
+            // 
+            this.txtTotalCredit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalCredit.Location = new System.Drawing.Point(728, 427);
+            this.txtTotalCredit.MaxLength = 999999;
+            this.txtTotalCredit.Name = "txtTotalCredit";
+            this.txtTotalCredit.ReadOnly = true;
+            this.txtTotalCredit.Size = new System.Drawing.Size(152, 23);
+            this.txtTotalCredit.TabIndex = 11;
+            this.txtTotalCredit.Text = "0.00";
+            // 
+            // txtTotalDebit
+            // 
+            this.txtTotalDebit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalDebit.Location = new System.Drawing.Point(962, 427);
+            this.txtTotalDebit.MaxLength = 999999;
+            this.txtTotalDebit.Name = "txtTotalDebit";
+            this.txtTotalDebit.ReadOnly = true;
+            this.txtTotalDebit.Size = new System.Drawing.Size(152, 23);
+            this.txtTotalDebit.TabIndex = 11;
+            this.txtTotalDebit.Text = "0.00";
             // 
             // cmbxGenLedgAccountGroup
             // 
@@ -448,44 +489,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             this.BtnSetBalance.Text = "Set Balance...";
             this.BtnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.BtnSetBalance.Click += new System.EventHandler(this.BtnSetBalance_Click);
-            // 
-            // txtTotalDebit
-            // 
-            this.txtTotalDebit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalDebit.Location = new System.Drawing.Point(962, 427);
-            this.txtTotalDebit.MaxLength = 999999;
-            this.txtTotalDebit.Name = "txtTotalDebit";
-            this.txtTotalDebit.ReadOnly = true;
-            this.txtTotalDebit.Size = new System.Drawing.Size(152, 23);
-            this.txtTotalDebit.TabIndex = 11;
-            // 
-            // txtTotalCredit
-            // 
-            this.txtTotalCredit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalCredit.Location = new System.Drawing.Point(763, 427);
-            this.txtTotalCredit.MaxLength = 999999;
-            this.txtTotalCredit.Name = "txtTotalCredit";
-            this.txtTotalCredit.ReadOnly = true;
-            this.txtTotalCredit.Size = new System.Drawing.Size(152, 23);
-            this.txtTotalCredit.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(718, 431);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 15);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Credit";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(921, 431);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 15);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Debit";
             // 
             // frmChartOfAccounts
             // 
