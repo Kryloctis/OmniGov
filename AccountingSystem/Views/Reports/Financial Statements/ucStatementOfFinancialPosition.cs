@@ -9,9 +9,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
     {
         private readonly ReportViewer reportViewer;
 
-        decimal currentEndingBalance = 0;
-        decimal previousYearEndingBalance = 0;
-
         public ucStatementOfFinancialPosition()
         {
             InitializeComponent();
@@ -36,88 +33,72 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             }
         }
 
+        private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
+        {
+            decimal beginningBalance;
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
+
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
+
+            beginningBalance = (totalBeginningAndTransDebit - totalBeginningAndTransCredit);
+            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+        }
+
         private DataTable StatementOfFinancialPositionReport()
         {
             var dataSet = new dsLFS();
-            var dtStatementOfFinancialPosition = dataSet.dtStatementOfFinancialPosition;
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            DateTime dateAsOf = dtAsOf.Value;
-            var dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+            var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
+            byte fundId = (byte)cmbxFunds.SelectedValue;
+            var dateAsOf = dtAsOf.Value;
+            var previousYearEnded = new DateTime(year: dateAsOf.Year - 1, month: 12, DateTime.DaysInMonth(dateAsOf.Year, 12));
 
-            foreach (DataRow row in dtAccountGroup.Rows)
+            try
             {
-                int accountGroupId = Convert.ToInt32(row["id"]);
-                string accountGroupCode = row["account_group_code"].ToString();
-                string accountGroupName = row["account_group_name"].ToString();
-                var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId((byte)accountGroupId);
-                if (accountGroupId == 1 || accountGroupId == 2)
+                var dtJEVAccounts = Factory.JEVAccountsRepository().GetViewRecordsByLedgerAccounts();
+                foreach (DataRow row in dtJEVAccounts.Rows)
                 {
-                    GetAssetsAndLiabilities(dtStatementOfFinancialPosition, fundId, dateAsOf, accountGroupId, accountGroupCode, accountGroupName, dtMajorAccountGroup);
-                }
-                else if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5)
-                {
-                    GetRevenuesExpenses(fundId, dateAsOf, accountGroupId, accountGroupCode, accountGroupName, dtMajorAccountGroup);
-                }
-            }
+                    ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                    decimal balanceDebit = 0;
+                    decimal balanceCredit = 0;
+                    decimal previousBalanceDebit = 0;
+                    decimal previousBalanceCredit = 0;
 
-            return dtStatementOfFinancialPosition;
+                    GetDebitCredit(fundId, dateAsOf, accountId, out balanceDebit, out balanceCredit);
+                    GetDebitCredit(fundId, previousYearEnded, accountId, out previousBalanceDebit, out previousBalanceCredit);
 
-            static void GetAssetsAndLiabilities(dsLFS.dtStatementOfFinancialPositionDataTable dtStatementOfFinancialPosition, int fundId, DateTime dateAsOf, int accountGroupId, string accountGroupCode, string accountGroupName, DataTable dtMajorAccountGroup)
-            {
-                foreach (DataRow rowMajorAccountGroup in dtMajorAccountGroup.Rows)
-                {
-                    int majorAccountGroupId = Convert.ToInt32(rowMajorAccountGroup["maj_acc_group_id"]);
-                    string majorAccountGroupCode = rowMajorAccountGroup["maj_acc_group_code"].ToString();
-                    string majorAccountGroupName = rowMajorAccountGroup["maj_acc_group_name"].ToString();
-
-                    decimal currentDebitAmount = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 1, dateAsOf);
-                    decimal currentCreditAmoubt = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 0, dateAsOf);
-                    decimal currentEndingBalacnce = currentDebitAmount - currentCreditAmoubt;
-
-                    decimal previousYearDebitAmount = Factory.JEVRepository().GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(fundId, majorAccountGroupId, 1, dateAsOf);
-                    decimal previousYearCreditAmount = Factory.JEVRepository().GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(fundId, majorAccountGroupId, 0, dateAsOf);
-                    decimal previousYearEndingBalance = previousYearDebitAmount - previousYearCreditAmount;
+                    decimal currentAmount = balanceDebit - balanceCredit;
+                    decimal previousAmount = previousBalanceDebit - previousBalanceCredit;
 
                     var items = new object[]
                     {
-                            //account_group_id
-                            accountGroupId, 
-                            //account_group_code
-                            accountGroupCode,
-                            //account_group_name
-                            accountGroupName,
-                            //major_account_group_id
-                            majorAccountGroupId,
-                            //major_account_group_code
-                            majorAccountGroupCode,
-                            //major_account_group_name
-                            majorAccountGroupName,
-                            //current_amount
-                            currentEndingBalacnce,
-                            //last_year_amount
-                            previousYearEndingBalance,
-                            //is_current
-                            1
+                    row["account_group_id"],
+                    row["account_group_code"],
+                    row["account_group_name"],
+                    row["maj_acc_group_id"],
+                    row["maj_acc_group_code"],
+                    row["maj_acc_group_name"],
+                    row["sub_maj_acc_group_id"],
+                    row["sub_maj_acc_group_code"],
+                    row["sub_maj_acc_group_name"],
+                    row["general_ledger_accounts_id"],
+                    row["account_code"],
+                    row["general_ledger_accounts_name"],
+                    currentAmount,
+                    previousAmount
                     };
-                    dtStatementOfFinancialPosition.Rows.Add(items);
+
+                    dtStatementOfFinancialPerformance.Rows.Add(items);
                 }
             }
-        }
-
-        private void GetRevenuesExpenses(int fundId, DateTime dateAsOf, int accountGroupId, string accountGroupCode, string accountGroupName, DataTable dtMajorAccountGroup)
-        {
-            foreach (DataRow rowMajorAccountGroup in dtMajorAccountGroup.Rows)
+            catch (Exception ex)
             {
-                int majorAccountGroupId = Convert.ToInt32(rowMajorAccountGroup["maj_acc_group_id"]);
-
-                decimal currentDebitAmount = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 1, dateAsOf);
-                decimal currentCreditAmoubt = Factory.JEVRepository().GetSumByMajorAccountGroup(fundId, majorAccountGroupId, 0, dateAsOf);
-                currentEndingBalance += currentDebitAmount - currentCreditAmoubt;
-
-                decimal previousYearDebitAmount = Factory.JEVRepository().GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(fundId, majorAccountGroupId, 1, dateAsOf);
-                decimal previousYearCreditAmount = Factory.JEVRepository().GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(fundId, majorAccountGroupId, 0, dateAsOf);
-                previousYearEndingBalance += previousYearDebitAmount - previousYearCreditAmount;
+                Helper.MessageBoxError(ex.Message);
             }
+
+            return dtStatementOfFinancialPerformance;
         }
 
         private void LoadReport(LocalReport report)
@@ -136,8 +117,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 var parameters = new[] {
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
-                    new ReportParameter("paramGovernmentEquityCurrentAmount", currentEndingBalance.ToString("N2")),
-                    new ReportParameter("paramGovernmentEquityLastYearAmount", previousYearEndingBalance.ToString("N2")),
                 };
                 report.SetParameters(parameters);
 

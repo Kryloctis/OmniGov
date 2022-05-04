@@ -335,16 +335,12 @@ namespace AccountingSystem
                 tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
             }
 
-            //if (Helper.HasPermission("Report Statement of Financial Position"))
-            //{
-            //    radSFPosition.Enabled = true;
-            //    tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
-            //}
+            if (Helper.HasPermission("Report Statement of Financial Position"))
+            {
+                radSFPosition.Enabled = true;
+                tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
+            }
 
-
-            //if (Helper.HasPermission("Report Statement of Financial Position"))
-            //    radSFPosition.Checked = true;
-            //else 
             if (Helper.HasPermission("Report Statement of Financial Performance"))
                 radSFPerformance.Checked = true;
             else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))

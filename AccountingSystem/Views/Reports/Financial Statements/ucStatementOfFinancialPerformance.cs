@@ -18,12 +18,25 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
+        private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
+        {
+            decimal beginningBalance;
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
+
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["transaction_debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["transaction_credit"];
+
+            beginningBalance = (totalBeginningAndTransDebit - totalBeginningAndTransCredit);
+            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+        }
+
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
-
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            byte fundId = (byte)cmbxFunds.SelectedValue;
             var dateEnded = dtPickerDateEnds.Value;
             var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
@@ -32,8 +45,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 var dtJEVAccounts = Factory.JEVAccountsRepository().GetViewRecordsByLedgerAccounts();
                 foreach (DataRow row in dtJEVAccounts.Rows)
                 {
+                    ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                    decimal balanceDebit = 0;
+                    decimal balanceCredit = 0;
+                    decimal previousBalanceDebit = 0;
+                    decimal previousBalanceCredit = 0;
 
-                    decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+                    GetDebitCredit(fundId, dateEnded, accountId, out balanceDebit, out balanceCredit);
+                    GetDebitCredit(fundId, previousYearEnded, accountId, out previousBalanceDebit, out previousBalanceCredit);
+
+                    decimal currentAmount = balanceDebit - balanceCredit;
+                    decimal previousAmount = previousBalanceDebit - previousBalanceCredit;
 
                     var items = new object[]
                     {
@@ -50,8 +72,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     row["account_code"],
                     row["general_ledger_accounts_name"],
                     currentAmount,
-                    Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
-                };
+                    previousAmount
+                    };
+
                     dtStatementOfFinancialPerformance.Rows.Add(items);
                 }
             }

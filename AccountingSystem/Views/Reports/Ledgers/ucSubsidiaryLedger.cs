@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtSubsidiaryLedger = new dsLFS.SubsidiaryLedgerDataTable();
-            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(fundId, generalLedgerId, subsidiaryLedgerId, year);
+            var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)

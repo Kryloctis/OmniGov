@@ -41,8 +41,8 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
             var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
 
-            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["transaction_debit"];
-            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["transaction_credit"];
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
 
             beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
             balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
@@ -54,20 +54,20 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             beginningBalance = 0;
             int[] accountGroups = { 3, 4, 5 };
             decimal totalBeginningBalanceDebit = 0;
-            decimal totalTransactionDebit = 0;
             decimal totalBeginningBalanceCredit = 0;
+            decimal totalTransactionDebit = 0;
             decimal totalTransactionCredit = 0;
 
-            foreach (int item in accountGroups)
+            foreach (int accountGroup in accountGroups)
             {
-                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesByAccountGroup(fundId, (ushort)item, dateEntry);
-                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccountGroup(fundId, item, dateEntry);
+                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalance(fundId, (ushort)accountGroup, dateEntry);
+                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, accountGroup, dateEntry);
 
                 totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
-                totalBeginningBalanceCredit += +dictBeginningBalance["beginning_balance_credit"];
+                totalBeginningBalanceCredit += dictBeginningBalance["beginning_balance_credit"];
 
-                totalTransactionDebit += dictTransaction["transaction_debit"];
-                totalTransactionCredit += +dictTransaction["transaction_credit"];
+                totalTransactionDebit += dictTransaction["debit"];
+                totalTransactionCredit += dictTransaction["credit"];
             }
 
             decimal totalBeginningAndTransDebit = totalBeginningBalanceDebit + totalTransactionDebit;

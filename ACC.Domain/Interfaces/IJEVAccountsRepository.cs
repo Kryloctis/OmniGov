@@ -16,26 +16,17 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByFundJournalDate(string fundName, string journalName, DateTime dateEntry);
 
         //GENERAL LEDGER
-        DataTable GetViewRecordsByFundAndGeneralLedgerAndYear(int fundId, int generalLedgerId, short year);
+        DataTable GetViewRecords(int fundId, int generalLedgerId, short year);
 
         //SUBSIDIARY LEDGER
-        DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
+        DataTable GetViewRecords(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
 
-        //STATEMENT OF FINANCIAL PERFORMANCE
-        Decimal GetBalanceByFundAndAccountAndDateEntry(int fundId, int generalLedgerId, DateTime dateEntry);
 
         //TRIAL BALANCE
-        Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null);
-
-        Dictionary<string, decimal> GetSumTransactionsByAccountGroup(int fundId, int accountGroupId, DateTime dateEntry, ushort? subsidiaryId = null);
-
-
-        DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year);
+        Dictionary<string, decimal> GetSumTransactions(int fundsId, int accountGroupId, DateTime dateEntry);
 
         bool DeleteByJevId(int jevId);
 
         int CountByJevId(int jevId);
-
-        decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year);
     }
 }

@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 foreach (DataRow row in dtJEVAccounts.Rows)
                 {
 
-                    decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+                    //decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
 
                     var items = new object[]
                     {
@@ -50,8 +50,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     row["general_ledger_accounts_id"],
                     row["account_code"],
                     row["general_ledger_accounts_name"],
-                    currentAmount,
-                    Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
+                    //currentAmount,
+                    //Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
                 };
                     dtStatementOfChangesInNetAssetsEquity.Rows.Add(items);
                 }
