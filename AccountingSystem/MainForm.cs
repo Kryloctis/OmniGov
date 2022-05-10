@@ -341,10 +341,13 @@ namespace AccountingSystem
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
             }
 
-            if (Helper.HasPermission("Report Statement of Financial Performance"))
+            if (Helper.HasPermission("Report Statement of Financial Position"))
+                radSFPosition.Checked = true;
+            else if (Helper.HasPermission("Report Statement of Financial Performance"))
                 radSFPerformance.Checked = true;
             else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
                 radSCNAE.Checked = true;
+
 
 
             #endregion

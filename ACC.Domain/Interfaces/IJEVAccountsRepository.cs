@@ -23,7 +23,9 @@ namespace ACC.Domain.Interfaces
 
 
         //TRIAL BALANCE
-        Dictionary<string, decimal> GetSumTransactions(int fundsId, int accountGroupId, DateTime dateEntry);
+        Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime dateEntry);
+
+        Dictionary<string, decimal> GetSumTransactionsByGenLedgerId(int fundsId, int generalLedgerId, DateTime dateEntry);
 
         bool DeleteByJevId(int jevId);
 
