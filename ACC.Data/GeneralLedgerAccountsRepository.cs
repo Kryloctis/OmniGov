@@ -100,35 +100,10 @@ namespace ACC.Data
 
         public DataTable GetViewRecords()
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"account_group_id, " +
-                    $"account_group_code, " +
-                    $"account_group_name, " +
-                    $"major_account_group_id, " +
-                    $"maj_acc_group_code, " +
-                    $"maj_acc_group_name, " +
-                    $"sub_maj_acc_group_code, " +
-                    $"sub_maj_acc_group_name, " +
-                    $"sub_major_account_group_id, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"ledger_code, " +
-                    $"ledger_name, " +
-                    $"is_contra_account, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM " +
-                    $"{viewTableName}";
+            string query = $"SELECT account_group_id, account_group_code, account_group_name, major_account_group_id, maj_acc_group_code, maj_acc_group_name, sub_maj_acc_group_code, sub_maj_acc_group_name, sub_major_account_group_id, general_ledger_accounts_id, account_code, ledger_code, ledger_name, is_contra_account, created_at, updated_at FROM {viewTableName}";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtJournals = new DataTable();
+            return _dbGenericCommands.Fill(query, dtJournals);
         }
 
         public DataTable GetViewRecordsBySearch(string searchText)
@@ -475,6 +450,6 @@ namespace ACC.Data
             }
         }
 
-    
+
     }
 }

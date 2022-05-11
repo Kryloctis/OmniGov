@@ -35,16 +35,43 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            decimal beginningBalance;
             var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundsId, generalLedgerId, dateEntry);
             var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
 
-            beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
+            decimal beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
             balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
             balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+        }
+
+        private void GetGovernmentEquityDebitCredit(byte fundId, DateTime dateEntry, out decimal debit, out decimal credit)
+        {
+            int[] accountGroups = { 3, 4, 5 };
+            decimal totalBeginningBalanceDebit = 0;
+            decimal totalBeginningBalanceCredit = 0;
+            decimal totalTransactionDebit = 0;
+            decimal totalTransactionCredit = 0;
+
+            foreach (int accountGroup in accountGroups)
+            {
+                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalance(fundId, (ushort)accountGroup, dateEntry);
+                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccGrpId(fundId, accountGroup, dateEntry);
+
+                totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
+                totalBeginningBalanceCredit += dictBeginningBalance["beginning_balance_credit"];
+
+                totalTransactionDebit += dictTransaction["debit"];
+                totalTransactionCredit += dictTransaction["credit"];
+            }
+
+            decimal totalBeginningAndTransDebit = totalBeginningBalanceDebit + totalTransactionDebit;
+            decimal totalBeginningAndTransCredit = totalBeginningBalanceCredit + totalTransactionCredit;
+
+            decimal endingBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
+            debit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(endingBalance) : 0;
+            credit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(endingBalance) : 0;
         }
 
         private DataTable StatementOfFinancialPositionReport()
@@ -57,37 +84,57 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             try
             {
-                var dtJEVAccounts = Factory.JEVAccountsRepository().GetViewRecordsByLedgerAccounts();
-                foreach (DataRow row in dtJEVAccounts.Rows)
+                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
                 {
-                    ushort accountId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
-                    decimal balanceDebit = 0;
-                    decimal balanceCredit = 0;
-                    decimal previousBalanceDebit = 0;
-                    decimal previousBalanceCredit = 0;
+                    int accGrpId = Convert.ToInt32(row["account_group_id"]);
+                    string accGrpCode = row["account_group_code"].ToString();
+                    string accGrpName = row["account_group_name"].ToString();
+                    int majAccGrpId = Convert.ToInt32(row["major_account_group_id"]);
+                    string majAccGrpCode = row["maj_acc_group_code"].ToString();
+                    string majAccGrpName = row["maj_acc_group_name"].ToString();
+                    int subMajAccGrpId = Convert.ToInt32(row["sub_major_account_group_id"]);
+                    string subMajAccGrpCode = row["sub_maj_acc_group_code"].ToString();
+                    string subMajAccGrpName = row["sub_maj_acc_group_name"].ToString();
+                    ushort genLedgAccId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
+                    string genLedgAccCode = row["account_code"].ToString();
+                    string genLedgAccName = row["ledger_name"].ToString();
 
-                    GetDebitCredit(fundId, dateAsOf, accountId, out balanceDebit, out balanceCredit);
-                    GetDebitCredit(fundId, previousYearEnded, accountId, out previousBalanceDebit, out previousBalanceCredit);
+                    decimal presentDebit;
+                    decimal presentCredit;
+                    decimal previousDebit;
+                    decimal previousCredit;
 
-                    decimal currentAmount = balanceDebit - balanceCredit;
-                    decimal previousAmount = previousBalanceDebit - previousBalanceCredit;
+                    if (genLedgAccName == "Government Equity")
+                    {
+                        GetGovernmentEquityDebitCredit(fundId, dateAsOf, out presentDebit, out presentCredit);
+                        GetGovernmentEquityDebitCredit(fundId, previousYearEnded, out previousDebit, out previousCredit);
+                    }
+                    else
+                    {
+                        GetDebitCredit(fundId, dateAsOf, genLedgAccId, out presentDebit, out presentCredit);
+                        GetDebitCredit(fundId, previousYearEnded, genLedgAccId, out previousDebit, out previousCredit);
+                    }
+
+                    decimal presentAmount = presentDebit - presentCredit;
+                    decimal previousAmount = previousDebit - previousCredit;
 
                     var items = new object[]
                     {
-                    row["account_group_id"],
-                    row["account_group_code"],
-                    row["account_group_name"],
-                    row["maj_acc_group_id"],
-                    row["maj_acc_group_code"],
-                    row["maj_acc_group_name"],
-                    row["sub_maj_acc_group_id"],
-                    row["sub_maj_acc_group_code"],
-                    row["sub_maj_acc_group_name"],
-                    row["general_ledger_accounts_id"],
-                    row["account_code"],
-                    row["general_ledger_accounts_name"],
-                    currentAmount,
-                    previousAmount
+                        accGrpId,
+                        accGrpCode,
+                        accGrpName,
+                        majAccGrpId,
+                        majAccGrpCode,
+                        majAccGrpName,
+                        subMajAccGrpId,
+                        subMajAccGrpCode,
+                        subMajAccGrpName,
+                        genLedgAccId,
+                        genLedgAccCode,
+                        genLedgAccName,
+                        presentAmount,
+                        previousAmount
                     };
 
                     dtStatementOfFinancialPerformance.Rows.Add(items);

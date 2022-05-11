@@ -7875,7 +7875,6 @@ CDbl(Fields!previous_amount.Value),0))</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -9362,17 +9361,19 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox290">
+                        <Textbox Name="txtGovernmentEquityPresent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(IIF(Fields!account_name.Value ="Government Equity", 
+CDbl(Fields!current_amount.Value), 0))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -9381,7 +9382,6 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox290</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -9433,17 +9433,19 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox292">
+                        <Textbox Name="txtGovernmentEquityPrevious">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=SUM(IIF(Fields!account_name.Value = CStr("Government Equity").Trim(), 
+CDbl(Fields!previous_amount.Value), 0))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -9452,7 +9454,6 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox292</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -9550,18 +9551,19 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox297">
+                        <Textbox Name="txtTotalLiabNetAsstPresent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=CDbl(ReportItems!txtTotalLiabPresent.Value + ReportItems!txtGovernmentEquityPresent.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -9570,7 +9572,6 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox297</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -9631,18 +9632,19 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox299">
+                        <Textbox Name="txtTotalLiabNetAsstPrevious">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=CDbl(ReportItems!txtTotalLiabPrevious.Value + ReportItems!txtGovernmentEquityPrevious.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -9651,7 +9653,6 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox299</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -9671,6 +9672,7 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

@@ -187,7 +187,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError($"{ex.Message} /////// {ex.StackTrace}");
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
