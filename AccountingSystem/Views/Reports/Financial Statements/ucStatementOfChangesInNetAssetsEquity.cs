@@ -24,17 +24,17 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             var dataSet = new dsLFS();
             var dtStatementOfChangesInNetAssetsEquity = dataSet.dtStatementOfChangesInNetAssetsEquity;
-            int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
+            int fundsId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var dateEnded = dtPickerDateEnds.Value;
             var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtJEVAccounts = Factory.JEVAccountsRepository().GetViewRecordsByLedgerAccounts();
-                foreach (DataRow row in dtJEVAccounts.Rows)
+                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
                 {
 
-                    decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+                    //decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
 
                     var items = new object[]
                     {
@@ -50,8 +50,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                     row["general_ledger_accounts_id"],
                     row["account_code"],
                     row["general_ledger_accounts_name"],
-                    currentAmount,
-                    Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
+                    //currentAmount,
+                    //Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
                 };
                     dtStatementOfChangesInNetAssetsEquity.Rows.Add(items);
                 }

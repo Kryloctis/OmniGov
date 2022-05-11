@@ -189,7 +189,7 @@ namespace ACC.Data
             }
         }
 
-        public Dictionary<string, decimal> GetSumBalancesByAccountGroup(byte fundsId, ushort accountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
+        public Dictionary<string, decimal> GetSumBeginningBalance(byte fundsId, ushort accountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, decimal>();
 

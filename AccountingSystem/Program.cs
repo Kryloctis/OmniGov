@@ -12,7 +12,7 @@ namespace AccountingSystem
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.DpiUnawareGdiScaled);
+            Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

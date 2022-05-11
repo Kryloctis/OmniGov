@@ -154,58 +154,10 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsByLedgerAccounts()
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"id, " +
-                    $"jev_id, " +
-                    $"funds_id, " +
-                    $"fund_code, " +
-                    $"fund_name, " +
-                    $"journals_id, " +
-                    $"journal_name, " +
-                    $"is_special, " +
-                    $"jev_no, " +
-                    $"full_jev_no, " +
-                    $"date_entry, " +
-                    $"explanation, " +
-                    $"is_approved, " +
-                    $"is_disapproved, " +
-                    $"is_cancelled, " +
-                    $"fpp_id, " +
-                    $"fpp_code, " +
-                    $"fpp_name, " +
-                    $"general_ledger_accounts_id, " +
-                    $"account_code, " +
-                    $"general_ledger_accounts_code, " +
-                    $"general_ledger_accounts_name, " +
-                    $"general_ledger_accounts_is_contra_account, " +
-                    $"sub_maj_acc_group_id, " +
-                    $"sub_maj_acc_group_code, " +
-                    $"sub_maj_acc_group_name, " +
-                    $"maj_acc_group_id, " +
-                    $"maj_acc_group_code, " +
-                    $"maj_acc_group_name, " +
-                    $"account_group_id, " +
-                    $"account_group_code, " +
-                    $"account_group_name, " +
-                    $"subsidiary_ledger_accounts_id, " +
-                    $"subsidiary_ledger_accounts_code, " +
-                    $"subsidiary_ledger_accounts_name, " +
-                    $"obligation_no, " +
-                    $"is_deposit, " +
-                    $"is_debit, " +
-                    $"amount " +
-                    $"FROM {viewTableName} GROUP BY general_ledger_accounts_id";
+            string query = $"SELECT id, jev_id, funds_id, fund_code, fund_name, journals_id, journal_name, is_special, jev_no, full_jev_no, date_entry, explanation, is_approved, is_disapproved, is_cancelled, fpp_id, fpp_code, fpp_name, general_ledger_accounts_id, account_code, general_ledger_accounts_code, general_ledger_accounts_name, general_ledger_accounts_is_contra_account, sub_maj_acc_group_id, sub_maj_acc_group_code, sub_maj_acc_group_name, maj_acc_group_id, maj_acc_group_code, maj_acc_group_name, account_group_id, account_group_code, account_group_name, subsidiary_ledger_accounts_id, subsidiary_ledger_accounts_code, subsidiary_ledger_accounts_name, obligation_no, is_deposit, is_debit, amount FROM {viewTableName} GROUP BY general_ledger_accounts_id";
 
-                var datatable = new DataTable();
-                return _dbGenericCommands.Fill(query, datatable);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var datatable = new DataTable();
+            return _dbGenericCommands.Fill(query, datatable);
         }
 
         public DataTable GetViewRecordsByJevId(int jevId)
@@ -305,290 +257,89 @@ namespace ACC.Data
         }
 
 
-        //GENERAL LEDGER
-        public DataTable GetViewRecordsByFundAndGeneralLedgerAndYear(int fundId, int generalLedgerId, short year)
+        //Where general ledger report gets data for display
+        public DataTable GetViewRecords(int fundId, int generalLedgerId, short year)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                };
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                new object[] { "@year", DbType.Int16, year},
+            };
 
-                string query = $"SELECT " +
-                    $"jev_id, date_entry, " +
-                    $"MONTHNAME(MAX(date_entry)) AS month_name, " +
-                    $"jev_no, " +
-                    $"full_jev_no, " +
-                    $"journal_name, " +
-                    $"explanation, " +
-                    $"general_ledger_accounts_name, " +
-                    $"account_code, " +
-                    $"is_deposit, " +
-                    $"is_debit, " +
-                    $"SUM(amount) AS amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE is_approved = 1 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"GROUP BY " +
-                    $"general_ledger_accounts_id, " +
-                    $"journals_id, " +
-                    $"MONTH(date_entry), " +
-                    $"is_debit " +
-                    $"ORDER BY " +
-                    $"MONTH(date_entry), " +
-                    $"journals_id";
+            string query = $"SELECT jev_id, date_entry, MONTHNAME(MAX(date_entry)) AS month_name, jev_no, full_jev_no, journal_name, explanation, general_ledger_accounts_name, account_code, is_deposit, is_debit, SUM(amount) AS amount FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id, journals_id, MONTH(date_entry), is_debit ORDER BY MONTH(date_entry), journals_id";
 
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtGeneralLedgers = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
-        //SUBSIDIARY LEDGER
-        public DataTable GetViewRecordsByFundAndSubsidiaryLedgerAndSubsidiaryLedgerAndYear(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year)
+        //Where subsidiary ledger report gets data for display
+        public DataTable GetViewRecords(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                    new object[] { "@subsidiary_ledger_accounts_id",DbType.Int32, subsidiaryLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                };
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                new object[] { "@subsidiary_ledger_accounts_id",DbType.Int32, subsidiaryLedgerId},
+                new object[] { "@year", DbType.Int16, year},
+            };
 
-                string query = $"SELECT " +
-                    $"jev_id, " +
-                    $"date_entry, " +
-                    $"jev_no, " +
-                    $"full_jev_no, " +
-                    $"journal_name, " +
-                    $"explanation, " +
-                    $"general_ledger_accounts_name, " +
-                    $"account_code, " +
-                    $"is_deposit, " +
-                    $"is_debit, " +
-                    $"SUM(amount) AS amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE is_approved = 1 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"GROUP BY " +
-                    $"general_ledger_accounts_id, " +
-                    $"journals_id, " +
-                    $"MONTH(date_entry), " +
-                    $"is_debit " +
-                    $"ORDER BY " +
-                    $"MONTH(date_entry), " +
-                    $"journals_id";
+            string query = $"SELECT jev_id, date_entry, jev_no, full_jev_no, journal_name, explanation, general_ledger_accounts_name, account_code, is_deposit, is_debit, SUM(amount) AS amount FROM {viewTableName} WHERE is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id AND YEAR(date_entry) = @year GROUP BY general_ledger_accounts_id, journals_id, MONTH(date_entry), is_debit ORDER BY MONTH(date_entry), journals_id";
 
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtGeneralLedgers = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
 
-        //STATEMENT OF FINANCIAL PERFORMANCE
-        public decimal GetBalanceByFundAndAccountAndDateEntry(int fundId, int generalLedgerId, DateTime dateEntry)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                    new object[] { "@date_entry",DbType.Date, dateEntry.Date},
-                    new object[] { "@year",DbType.Int16, dateEntry.Year}
-                };
 
-                string queryDebit = $"SELECT COALESCE(SUM(amount),0) AS amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND is_debit = 1 " +
-                    $"AND is_approved = 1 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year";
-
-                string queryCredit = $"SELECT COALESCE(SUM(amount),0) AS amount " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND is_debit = 0 " +
-                    $"AND is_approved = 1 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year";
-
-                decimal debitAmount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(queryDebit, parameters));
-                decimal creditAmount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(queryCredit, parameters));
-
-                decimal balance = debitAmount - creditAmount;
-
-                return balance;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        //TRIAL BALANCE
-        public Dictionary<string, decimal> GetSumTransactions(int fundId, int generalLedgerId, DateTime dateEntry, ushort? subsidiaryId = null)
+        //Where trial balances and financial statements report gets data for display
+        public Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime dateEntry)
         {
             var record = new Dictionary<string, decimal>();
-            try
+
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                    new object[] { "@date_entry",DbType.Date, dateEntry.Date},
-                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryId}
-                };
-
-                string subsidiaryQuery = subsidiaryId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
-
-                string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS transaction_debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS transaction_credit " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND is_approved = 1 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"{subsidiaryQuery}";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("transaction_debit", Convert.ToDecimal(item[0]));
-                        record.Add("transaction_credit", Convert.ToDecimal(item[1]));
-                    }
-                }
-
-                return record;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public Dictionary<string, decimal> GetSumTransactionsByAccountGroup(int fundId, int accountGroupId, DateTime dateEntry, ushort? subsidiaryId = null)
-        {
-            var record = new Dictionary<string, decimal>();
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Int32, fundId},
+                    new object[] { "@funds_id", DbType.Int32, fundsId},
                     new object[] { "@account_group_id", DbType.Int32, accountGroupId},
                     new object[] { "@date_entry", DbType.Date, dateEntry.Date},
                     new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryId}
-                };
+            };
 
-                string subsidiaryQuery = subsidiaryId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+            string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND account_group_id = @account_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
 
-                string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS transaction_debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS transaction_credit " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND is_approved = 1 " +
-                    $"AND is_cancelled = 0 " +
-                    $"AND is_disapproved = 0 " +
-                    $"AND account_group_id = @account_group_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"{subsidiaryQuery}";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
                 {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("transaction_debit", Convert.ToDecimal(item[0]));
-                        record.Add("transaction_credit", Convert.ToDecimal(item[1]));
-                    }
+                    record.Add("debit", Convert.ToDecimal(item[0]));
+                    record.Add("credit", Convert.ToDecimal(item[1]));
                 }
-
-                return record;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return record;
         }
 
-
-        public decimal GetJEVSumByGeneralLedgerId(byte fundsId, ushort generalLedgerId, short year)
+        public Dictionary<string, decimal> GetSumTransactionsByGenLedgerId(int fundsId, int generalLedgerId, DateTime dateEntry)
         {
-            try
+            var record = new Dictionary<string, decimal>();
+
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@funds_id", DbType.Int32, fundsId},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+            };
+
+            string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved =1 AND is_cancelled = 0 AND is_disapproved = 0 AND general_ledger_accounts_id = @general_ledger_accounts_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                };
-
-                string query = $"SELECT ABS((SUM(IF(is_debit = 1, amount, 0)) - SUM(IF(is_debit = 0, amount, 0)))) AS Total FROM view_jev_accounts WHERE is_approved = 1 AND funds_id=@funds_id AND general_ledger_accounts_id=@general_ledger_accounts_id AND YEAR(date_entry)=@year";
-
-                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
-                if (!string.IsNullOrWhiteSpace(sumBalance))
-                    return Convert.ToDecimal(sumBalance);
-
-                return 0;
+                    record.Add("debit", Convert.ToDecimal(item[0]));
+                    record.Add("credit", Convert.ToDecimal(item[1]));
+                }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return record;
         }
-
-        public DataTable GetJEVAmount(byte fundId, ushort generalLedgerId, short year)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                };
-
-                string query = $"SELECT amount, is_debit FROM view_jev_accounts WHERE is_approved=1 AND funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year";
-
-                var dtGeneralLedgers = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
     }
 }

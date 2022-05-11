@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtGeneralLedger = new dsLFS.GeneralLedgerDataTable();
-            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundAndGeneralLedgerAndYear(fundId, generalLedgerId, year);
+            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)

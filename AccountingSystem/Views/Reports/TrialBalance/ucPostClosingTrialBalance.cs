@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
     {
 
         private readonly ReportViewer reportViewer;
-        private decimal beginningBalance;
 
         public ucPostClosingTrialBalance()
         {
@@ -37,12 +36,12 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            beginningBalance = 0;
+            decimal beginningBalance;
             var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactions(fundId, generalLedgerId, dateEntry);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundId, generalLedgerId, dateEntry);
 
-            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["transaction_debit"];
-            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["transaction_credit"];
+            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
+            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
 
             beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
             balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
@@ -51,31 +50,30 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         private void GetGovernmentEquityDebitCredit(byte fundId, DateTime dateEntry, out decimal governmentEquityDebit, out decimal governmentEquityCredit)
         {
-            beginningBalance = 0;
             int[] accountGroups = { 3, 4, 5 };
             decimal totalBeginningBalanceDebit = 0;
-            decimal totalTransactionDebit = 0;
             decimal totalBeginningBalanceCredit = 0;
+            decimal totalTransactionDebit = 0;
             decimal totalTransactionCredit = 0;
 
-            foreach (int item in accountGroups)
+            foreach (int accountGroup in accountGroups)
             {
-                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesByAccountGroup(fundId, (ushort)item, dateEntry);
-                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccountGroup(fundId, item, dateEntry);
+                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalance(fundId, (ushort)accountGroup, dateEntry);
+                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccGrpId(fundId, accountGroup, dateEntry);
 
                 totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
-                totalBeginningBalanceCredit += +dictBeginningBalance["beginning_balance_credit"];
+                totalBeginningBalanceCredit += dictBeginningBalance["beginning_balance_credit"];
 
-                totalTransactionDebit += dictTransaction["transaction_debit"];
-                totalTransactionCredit += +dictTransaction["transaction_credit"];
+                totalTransactionDebit += dictTransaction["debit"];
+                totalTransactionCredit += dictTransaction["credit"];
             }
 
             decimal totalBeginningAndTransDebit = totalBeginningBalanceDebit + totalTransactionDebit;
             decimal totalBeginningAndTransCredit = totalBeginningBalanceCredit + totalTransactionCredit;
 
-            beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
-            governmentEquityDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
-            governmentEquityCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            decimal endingBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
+            governmentEquityDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(endingBalance) : 0;
+            governmentEquityCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(endingBalance) : 0;
         }
 
         private DataTable DataTablePostTrialBalance()
@@ -97,57 +95,40 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 int subMajorAccountGroupId = Convert.ToInt32(row["sub_major_account_group_id"]);
                 string subMajorAccountGroupCode = row["sub_maj_acc_group_code"].ToString();
                 string subMajorAccountGroupName = row["sub_maj_acc_group_name"].ToString();
-                int accountId = Convert.ToInt32(row["general_ledger_accounts_id"]);
-                string accountCode = row["account_code"].ToString();
-                string accountName = row["ledger_name"].ToString();
+                int genLedgAccId = Convert.ToInt32(row["general_ledger_accounts_id"]);
+                string genLedgAccCode = row["account_code"].ToString();
+                string genLedgAccName = row["ledger_name"].ToString();
 
-                if (accountId == 331)
+
+                decimal balanceDebit, balanceCredit;
+
+                if (genLedgAccName == "Government Equity")
+                    GetGovernmentEquityDebitCredit(fundId, dateAsOF, out balanceDebit, out balanceCredit);
+                else
                 {
-                    decimal governmentEquityDebit, governmentEquityCredit;
-                    GetGovernmentEquityDebitCredit(fundId, dateAsOF, out governmentEquityDebit, out governmentEquityCredit);
-
-                    dtPreTrialBalance.Rows.Add(new object[]
-                    {
-                            accountGroupId,
-                            accountGroupCode,
-                            accountGroupName,
-                            majorAccountGroupId,
-                            majorAccountGroupCode,
-                            majorAccountGroupName,
-                            subMajorAccountGroupId,
-                            subMajorAccountGroupCode,
-                            subMajorAccountGroupName,
-                            accountId,
-                            accountCode,
-                            accountName,
-                            governmentEquityDebit,
-                            governmentEquityCredit
-                    });
+                    if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5) break;
+                    GetDebitCredit(fundId, dateAsOF, (ushort)genLedgAccId, out balanceDebit, out balanceCredit);
                 }
 
-                //
-                decimal balanceDebit, balanceCredit;
-                GetDebitCredit(fundId, dateAsOF, (ushort)accountId, out balanceDebit, out balanceCredit);
-
-                if (accountGroupId == 3 || accountGroupId == 4 || accountGroupId == 5) break;
-
-                dtPreTrialBalance.Rows.Add(new object[]
+                var items = new object[]
                 {
-                        accountGroupId,
-                        accountGroupCode,
-                        accountGroupName,
-                        majorAccountGroupId,
-                        majorAccountGroupCode,
-                        majorAccountGroupName,
-                        subMajorAccountGroupId,
-                        subMajorAccountGroupCode,
-                        subMajorAccountGroupName,
-                        accountId,
-                        accountCode,
-                        accountName,
-                        balanceDebit,
-                        balanceCredit
-                });
+                    accountGroupId,
+                    accountGroupCode,
+                    accountGroupName,
+                    majorAccountGroupId,
+                    majorAccountGroupCode,
+                    majorAccountGroupName,
+                    subMajorAccountGroupId,
+                    subMajorAccountGroupCode,
+                    subMajorAccountGroupName,
+                    genLedgAccId,
+                    genLedgAccCode,
+                    genLedgAccName,
+                    balanceDebit,
+                    balanceCredit
+                };
+
+                dtPreTrialBalance.Rows.Add(items);
             }
 
 
