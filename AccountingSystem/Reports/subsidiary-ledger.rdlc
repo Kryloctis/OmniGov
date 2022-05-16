@@ -815,7 +815,7 @@
                                     <Style>Solid</Style>
                                   </BottomBorder>
                                   <BackgroundColor>LightGrey</BackgroundColor>
-                                  <VerticalAlign>Middle</VerticalAlign>
+                                  <VerticalAlign>Bottom</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
                                   <PaddingTop>2pt</PaddingTop>
@@ -1807,7 +1807,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox24</rd:DefaultName>
             <Top>0.72097in</Top>
-            <Left>5.94938in</Left>
+            <Left>5.93412in</Left>
             <Height>0.22569in</Height>
             <Width>0.23048in</Width>
             <ZIndex>6</ZIndex>
@@ -1842,7 +1842,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox24</rd:DefaultName>
             <Top>0.72098in</Top>
-            <Left>6.19375in</Left>
+            <Left>6.17849in</Left>
             <Height>0.22569in</Height>
             <Width>1.50422in</Width>
             <ZIndex>7</ZIndex>
