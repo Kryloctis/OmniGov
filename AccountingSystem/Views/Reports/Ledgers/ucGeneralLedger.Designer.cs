@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbYear.FormattingEnabled = true;
-            this.cmbYear.Location = new System.Drawing.Point(608, 4);
+            this.cmbYear.Location = new System.Drawing.Point(605, 4);
             this.cmbYear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbYear.Name = "cmbYear";
             this.cmbYear.Size = new System.Drawing.Size(106, 28);
@@ -52,15 +52,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFunds.FormattingEnabled = true;
-            this.cmbFunds.Location = new System.Drawing.Point(3, 4);
-            this.cmbFunds.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbFunds.Location = new System.Drawing.Point(0, 4);
+            this.cmbFunds.Margin = new System.Windows.Forms.Padding(0, 4, 3, 4);
             this.cmbFunds.Name = "cmbFunds";
             this.cmbFunds.Size = new System.Drawing.Size(171, 28);
             this.cmbFunds.TabIndex = 16;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(720, 4);
+            this.btnRetrieve.Location = new System.Drawing.Point(717, 4);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(86, 31);
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // cmbAccount
             // 
             this.cmbAccount.FormattingEnabled = true;
-            this.cmbAccount.Location = new System.Drawing.Point(180, 4);
+            this.cmbAccount.Location = new System.Drawing.Point(177, 4);
             this.cmbAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(422, 28);
@@ -82,10 +82,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 37);
+            this.panel1.Location = new System.Drawing.Point(0, 41);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(970, 636);
+            this.panel1.Size = new System.Drawing.Size(970, 632);
             this.panel1.TabIndex = 18;
             // 
             // flowLayoutPanel1
@@ -96,8 +96,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.flowLayoutPanel1.Controls.Add(this.btnRetrieve);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(970, 37);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(970, 41);
             this.flowLayoutPanel1.TabIndex = 19;
             // 
             // ucGeneralLedger
