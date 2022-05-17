@@ -920,7 +920,7 @@
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>ref</Value>
+                                        <Value />
                                         <Style>
                                           <FontFamily>Calibri</FontFamily>
                                           <FontSize>9pt</FontSize>
@@ -952,6 +952,13 @@
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
+                  <Visibility>
+                    <Hidden>=IIF(COUNT(Fields!date.Value, "SubsidiaryLedger") = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0, Parameters!paramBalanceDebit.Value)) = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)) = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalance.Value), 0 , Parameters!paramBalance.Value)) = 0
+, true, false)</Hidden>
+                  </Visibility>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="date">
@@ -1930,7 +1937,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>General Ledger  </Value>
+                      <Value>Subsidiary Ledger  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
@@ -1964,7 +1971,7 @@
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Left>0.00003in</Left>
               <Height>0.25in</Height>
-              <Width>3.03125in</Width>
+              <Width>3.88542in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

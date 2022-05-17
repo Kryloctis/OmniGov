@@ -2975,6 +2975,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3012,6 +3013,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3049,6 +3051,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3086,6 +3089,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3140,6 +3144,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3194,6 +3199,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3231,6 +3237,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3268,6 +3275,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3325,6 +3333,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3382,6 +3391,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3436,6 +3446,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3490,6 +3501,7 @@
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </RightBorder>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3527,6 +3539,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3564,6 +3577,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -3969,6 +3983,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -3983,7 +3998,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>CashReceiptsJournal</DataSetName>
-            <Top>0.11333in</Top>
+            <Top>0.125in</Top>
             <Height>1.09468in</Height>
             <Width>12.35419in</Width>
             <Style>
@@ -4026,7 +4041,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="Textbox25">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -4060,7 +4074,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="Textbox27">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -4080,7 +4093,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox20</rd:DefaultName>
                 <Top>0.94644cm</Top>
-                <Left>23.667cm</Left>
+                <Left>23.66705cm</Left>
                 <Height>0.6cm</Height>
                 <Width>7.71257cm</Width>
                 <ZIndex>2</ZIndex>
@@ -4141,10 +4154,10 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>1.73139in</Top>
+            <Top>1.48139in</Top>
             <Left>0.00001in</Left>
             <Height>1.16461in</Height>
-            <Width>12.35416in</Width>
+            <Width>12.35418in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -4159,7 +4172,7 @@
       <Width>12.35419in</Width>
       <Page>
         <PageHeader>
-          <Height>1.21225in</Height>
+          <Height>1.23308in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -4172,6 +4185,7 @@
                     <TextRun>
                       <Value>CASH RECEIPTS JOURNAL</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>16pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -4197,7 +4211,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox8">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
@@ -4208,14 +4221,6 @@
                         <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
-                    <TextRun>
-                      <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
-                      </Style>
-                    </TextRun>
                   </TextRuns>
                   <Style>
                     <TextAlign>Right</TextAlign>
@@ -4223,10 +4228,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>2.33799cm</Top>
-              <Left>25.09604cm</Left>
-              <Height>0.6cm</Height>
-              <Width>6.28355cm</Width>
+              <Top>2.17869cm</Top>
+              <Left>26.23574cm</Left>
+              <Height>0.635cm</Height>
+              <Width>1.8542cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -4240,7 +4245,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Textbox10">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
@@ -4255,25 +4259,15 @@
                       <Value xml:space="preserve"> </Value>
                       <Style />
                     </TextRun>
-                    <TextRun>
-                      <Value>=MonthName(Month(Parameters!paramMonth.Value)) &amp;" "&amp; Year(Parameters!paramMonth.Value)</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
-                      </Style>
-                    </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.7323cm</Top>
-              <Left>0.00002cm</Left>
-              <Height>0.54708cm</Height>
-              <Width>31.37957cm</Width>
+              <Top>2.17869cm</Top>
+              <Left>0cm</Left>
+              <Height>0.635cm</Height>
+              <Width>1.3229cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -4285,24 +4279,15 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox4">
-              <CanGrow>true</CanGrow>
+            <Textbox Name="Textbox6">
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LGU: </Value>
+                      <Value>Fund: </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=Parameters!paramLGUName.Value</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -4310,10 +4295,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.45577cm</Top>
+              <Top>1.50841cm</Top>
               <Left>0cm</Left>
-              <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
+              <Height>0.635cm</Height>
+              <Width>1.3229cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -4325,14 +4310,253 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox6">
+            <Textbox Name="Textbox3">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Fund: </Value>
+                      <Value>=Parameters!paramLGUName.Value</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>0.27442in</Top>
+              <Height>0.25in</Height>
+              <Width>12.35417in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=MonthName(Month(Parameters!paramDate.Value))</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.85775in</Top>
+              <Left>0.53472in</Left>
+              <Height>0.25in</Height>
+              <Width>3.70013in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox7">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!paramFund.Value</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.59386in</Top>
+              <Left>0.53472in</Left>
+              <Height>0.25in</Height>
+              <Width>3.70013in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox11">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.85775in</Top>
+              <Left>11.07292in</Left>
+              <Height>0.25in</Height>
+              <Width>1.28125in</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox14">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>CY:  </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox14</rd:DefaultName>
+              <Top>1.54341cm</Top>
+              <Left>26.23574cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.8542cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox19">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=CDate(Parameters!paramDate.Value).Year</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox16</rd:DefaultName>
+              <Top>1.54341cm</Top>
+              <Left>28.12522cm</Left>
+              <Height>0.6cm</Height>
+              <Width>3.25438cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>0.26389in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox2">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Cash Receipts Journal  </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=MonthName(Month(Parameters!paramDate.Value))</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> - </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=CDate(Parameters!paramDate.Value).Year</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> (</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                       </Style>
@@ -4341,20 +4565,25 @@
                       <Value>=Parameters!paramFund.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>2.23216cm</Top>
-              <Left>0cm</Left>
-              <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
-              <ZIndex>4</ZIndex>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.01389in</Top>
+              <Left>0.00001in</Left>
+              <Height>0.25in</Height>
+              <Width>10.40625in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4371,7 +4600,7 @@
               <Style>None</Style>
             </Border>
           </Style>
-        </PageHeader>
+        </PageFooter>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>13in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
@@ -4392,7 +4621,7 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramMonth">
+    <ReportParameter Name="paramDate">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -4519,7 +4748,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramMonth</ParameterName>
+          <ParameterName>paramDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>

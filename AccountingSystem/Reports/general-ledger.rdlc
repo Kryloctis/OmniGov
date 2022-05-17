@@ -1076,7 +1076,11 @@
                     </TablixMember>
                   </TablixMembers>
                   <Visibility>
-                    <Hidden>=IIF(COUNT(Fields!date.Value, "GeneralLedger") = 0, false, true)</Hidden>
+                    <Hidden>=IIF(COUNT(Fields!date.Value, "GeneralLedger") = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0, Parameters!paramBalanceDebit.Value)) = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value)) = 0 
+AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalance.Value), 0 , Parameters!paramBalance.Value)) = 0
+, true, false)</Hidden>
                   </Visibility>
                 </TablixMember>
                 <TablixMember>
@@ -1907,9 +1911,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Left>0.03875in</Left>
               <Height>0.25in</Height>
-              <Width>3.03125in</Width>
+              <Width>4.0625in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

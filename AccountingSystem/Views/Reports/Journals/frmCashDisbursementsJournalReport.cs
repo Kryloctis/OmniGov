@@ -9,7 +9,6 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class frmCashDisbursementsJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
-        internal string fundName;
         internal string journalName;
         internal int fundId;
         internal DateTime date;
@@ -28,7 +27,8 @@ namespace AccountingSystem.Views.Reports.Journals
         private DataTable CashDisbursementsJournalDataTable()
         {
             var dtCashDisbursementsJournal = new dsLFS.CashDisbursementsJournalDataTable();
-            var dtCashDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
+            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtCashDisbursementFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -168,12 +168,13 @@ namespace AccountingSystem.Views.Reports.Journals
                 var lguDetails = Helper.LGUDetails();
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
+                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", date.ToString()),
+                    new ReportParameter("paramDate", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),

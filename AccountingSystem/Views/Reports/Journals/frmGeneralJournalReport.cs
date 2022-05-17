@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Reports.Journals
     public partial class frmGeneralJournalReport : Form
     {
         private readonly ReportViewer reportViewer;
-        internal string fundName;
+        internal int fundId;
         internal string journalName;
         internal DateTime date;
 
@@ -25,7 +25,8 @@ namespace AccountingSystem.Views.Reports.Journals
         private DataTable DataTableGeneralJournal()
         {
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
+            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -108,11 +109,12 @@ namespace AccountingSystem.Views.Reports.Journals
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", date.ToString()),
+                    new ReportParameter("paramDate", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
                 };

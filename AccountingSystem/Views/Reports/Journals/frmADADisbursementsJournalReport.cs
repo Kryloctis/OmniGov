@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Reports.Journals
     {
         private readonly ReportViewer reportViewer;
         internal int fundId;
-        internal string fundName;
         internal string journalName;
         internal DateTime date;
         private byte journalId = 6;
@@ -28,7 +27,8 @@ namespace AccountingSystem.Views.Reports.Journals
         {
 
             var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
-            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(fundName, journalName, date);
+            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtADADisbursementsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             int jevId;
             string jevNo;
@@ -171,12 +171,13 @@ namespace AccountingSystem.Views.Reports.Journals
                 var lguDetails = Helper.LGUDetails();
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
+                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
                 var parameters = new[] {
-                    new ReportParameter("paramMonth", date.ToString()),
+                    new ReportParameter("paramDate", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", fundName),
+                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                     new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
