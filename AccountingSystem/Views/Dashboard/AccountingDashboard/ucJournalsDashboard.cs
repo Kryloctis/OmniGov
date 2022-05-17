@@ -93,7 +93,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCheckDisbursementJournalReport = new frmCheckDisbursementsJournalReport();
             frmCheckDisbursementJournalReport.fundId = fundId;
-            frmCheckDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmCheckDisbursementJournalReport.journalName = "Check Disbursements Journal";
             frmCheckDisbursementJournalReport.date = dateTimePicker1.Value;
             frmCheckDisbursementJournalReport.ShowDialog();
