@@ -71,7 +71,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         {
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCashDisbursementJournalReport = new frmCashDisbursementsJournalReport();
-            frmCashDisbursementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmCashDisbursementJournalReport.journalName = "Cash Disbursements Journal";
             frmCashDisbursementJournalReport.fundId = fundId;
             frmCashDisbursementJournalReport.date = dateTimePicker1.Value;
