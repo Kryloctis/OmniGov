@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmADAdisburementJournalReport = new frmADADisbursementsJournalReport();
             frmADAdisburementJournalReport.fundId = fundId;
-            frmADAdisburementJournalReport.fundName = cmbxFunds.Text.Trim();
             frmADAdisburementJournalReport.journalName = "Authority to Debit Account Disbursement Journal";
             frmADAdisburementJournalReport.date = dateTimePicker1.Value;
             frmADAdisburementJournalReport.ShowDialog();

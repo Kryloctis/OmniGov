@@ -1391,7 +1391,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="Textbox25">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -1425,7 +1424,6 @@
                 </Style>
               </Textbox>
               <Textbox Name="Textbox26">
-                <CanGrow>true</CanGrow>
                 <KeepTogether>true</KeepTogether>
                 <Paragraphs>
                   <Paragraph>
@@ -1881,7 +1879,6 @@
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="Textbox2">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
@@ -1939,9 +1936,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.01389in</Top>
-              <Left>0.00001in</Left>
+              <Left>0.00002in</Left>
               <Height>0.25in</Height>
-              <Width>4.0625in</Width>
+              <Width>7.19998in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
