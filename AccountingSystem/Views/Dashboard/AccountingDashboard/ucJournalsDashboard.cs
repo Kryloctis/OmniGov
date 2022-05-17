@@ -113,7 +113,6 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmProcurementsReceivedJournalReport = new frmProcurementsReceivedJournalReport();
             frmProcurementsReceivedJournalReport.fundId = fundId;
-            frmProcurementsReceivedJournalReport.fundName = cmbxFunds.Text.Trim();
             frmProcurementsReceivedJournalReport.journalName = "Procurement Received Journal";
             frmProcurementsReceivedJournalReport.date = dateTimePicker1.Value;
             frmProcurementsReceivedJournalReport.ShowDialog();

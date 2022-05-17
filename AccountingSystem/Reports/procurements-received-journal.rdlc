@@ -103,7 +103,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -141,7 +141,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -179,7 +179,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -1235,6 +1235,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1272,6 +1273,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1308,6 +1310,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1344,6 +1347,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1381,6 +1385,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1418,6 +1423,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1455,6 +1461,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1491,6 +1498,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1527,6 +1535,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1564,6 +1573,7 @@
                             <Border>
                               <Style>Solid</Style>
                             </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1608,7 +1618,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -1657,7 +1667,7 @@
                               <RightBorder>
                                 <Style>Solid</Style>
                               </RightBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1709,7 +1719,7 @@
                                   <RightBorder>
                                     <Style>Solid</Style>
                                   </RightBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1763,7 +1773,7 @@
                               <RightBorder>
                                 <Style>Solid</Style>
                               </RightBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1815,7 +1825,7 @@
                                   <RightBorder>
                                     <Style>Solid</Style>
                                   </RightBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1857,7 +1867,7 @@
                               <Border>
                                 <Style>Solid</Style>
                               </Border>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -1897,7 +1907,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1940,7 +1950,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -1980,7 +1990,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2024,7 +2034,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
-                          <BackgroundColor>LightGrey</BackgroundColor>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -2076,7 +2086,7 @@
                               <RightBorder>
                                 <Style>Solid</Style>
                               </RightBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -2128,7 +2138,7 @@
                                   <RightBorder>
                                     <Style>Solid</Style>
                                   </RightBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2182,7 +2192,7 @@
                               <RightBorder>
                                 <Style>Solid</Style>
                               </RightBorder>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -2234,7 +2244,7 @@
                                   <RightBorder>
                                     <Style>Solid</Style>
                                   </RightBorder>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2276,7 +2286,7 @@
                               <Border>
                                 <Style>Solid</Style>
                               </Border>
-                              <BackgroundColor>LightGrey</BackgroundColor>
+                              <BackgroundColor>Gainsboro</BackgroundColor>
                               <VerticalAlign>Middle</VerticalAlign>
                               <PaddingLeft>2pt</PaddingLeft>
                               <PaddingRight>2pt</PaddingRight>
@@ -2316,7 +2326,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2356,7 +2366,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2396,7 +2406,7 @@
                                   <Border>
                                     <Style>Solid</Style>
                                   </Border>
-                                  <BackgroundColor>LightGrey</BackgroundColor>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
                                   <VerticalAlign>Middle</VerticalAlign>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
@@ -2592,6 +2602,7 @@
                           <Border>
                             <Style>Solid</Style>
                           </Border>
+                          <BackgroundColor>Gainsboro</BackgroundColor>
                           <VerticalAlign>Middle</VerticalAlign>
                           <PaddingLeft>2pt</PaddingLeft>
                           <PaddingRight>2pt</PaddingRight>
@@ -2610,6 +2621,7 @@
             </TablixRowHierarchy>
             <DataSetName>ProcurementsReceivedJournal</DataSetName>
             <Top>0.04167in</Top>
+            <Left>0.00001in</Left>
             <Height>2.35181cm</Height>
             <Width>31.37968cm</Width>
             <Style>
@@ -2767,8 +2779,8 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>1.54344in</Top>
-            <Left>0.00001in</Left>
+            <Top>1.16844in</Top>
+            <Left>0.00002in</Left>
             <Height>1.16462in</Height>
             <Width>12.35416in</Width>
             <ZIndex>1</ZIndex>
@@ -2779,13 +2791,13 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>2.8323in</Height>
+        <Height>2.57264in</Height>
         <Style />
       </Body>
-      <Width>12.3542in</Width>
+      <Width>12.35421in</Width>
       <Page>
         <PageHeader>
-          <Height>1.2004in</Height>
+          <Height>1.25369in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2798,6 +2810,7 @@
                     <TextRun>
                       <Value>PROCUREMENTS RECEIVED JOURNAL</Value>
                       <Style>
+                        <FontFamily>Calibri</FontFamily>
                         <FontSize>16pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
@@ -2809,7 +2822,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.00002cm</Left>
+              <Left>0.00005cm</Left>
               <Height>0.69702cm</Height>
               <Width>31.37957cm</Width>
               <Style>
@@ -2838,25 +2851,15 @@
                       <Value xml:space="preserve"> </Value>
                       <Style />
                     </TextRun>
-                    <TextRun>
-                      <Value>=MonthName(Month(Parameters!paramMonth.Value)) &amp;" "&amp; Year(Parameters!paramMonth.Value)</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
-                      </Style>
-                    </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0.76758cm</Top>
-              <Left>0.00002cm</Left>
-              <Height>0.54708cm</Height>
-              <Width>31.37957cm</Width>
+              <Top>2.14369cm</Top>
+              <Left>0.00003cm</Left>
+              <Height>0.635cm</Height>
+              <Width>1.40228cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -2880,14 +2883,6 @@
                         <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
-                    <TextRun>
-                      <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
-                      </Style>
-                    </TextRun>
                   </TextRuns>
                   <Style>
                     <TextAlign>Right</TextAlign>
@@ -2895,10 +2890,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.73799cm</Top>
-              <Left>25.09604cm</Left>
-              <Height>0.6cm</Height>
-              <Width>6.28355cm</Width>
+              <Top>2.14369cm</Top>
+              <Left>25.58994cm</Left>
+              <Height>0.635cm</Height>
+              <Width>1.75918cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -2918,28 +2913,24 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LGU: </Value>
-                      <Style>
-                        <FontFamily>Calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                         <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>1.49105cm</Top>
-              <Left>0cm</Left>
+              <Top>0.69702cm</Top>
+              <Left>0.00005cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
+              <Width>31.37955cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -2963,24 +2954,270 @@
                         <FontFamily>Calibri</FontFamily>
                       </Style>
                     </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>1.43813cm</Top>
+              <Left>0.00005cm</Left>
+              <Height>0.635cm</Height>
+              <Width>1.4023cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox7">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!paramFund.Value</Value>
+                      <Value>=MonthName(Month(Parameters!paramDate.Value))</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontWeight>Bold</FontWeight>
-                        <TextDecoration>Underline</TextDecoration>
                       </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>2.27263cm</Top>
-              <Left>0cm</Left>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>0.84397in</Top>
+              <Left>0.56598in</Left>
+              <Height>0.25in</Height>
+              <Width>3.87383in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox9">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!paramFund.Value</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>0.56619in</Top>
+              <Left>0.566in</Left>
+              <Height>0.25in</Height>
+              <Width>3.87383in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox11">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox11</rd:DefaultName>
+              <Top>0.84397in</Top>
+              <Left>10.78126in</Left>
+              <Height>0.25in</Height>
+              <Width>1.57292in</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox14">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>CY:  </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox14</rd:DefaultName>
+              <Top>1.50841cm</Top>
+              <Left>25.58994cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.96604cm</Width>
-              <ZIndex>4</ZIndex>
+              <Width>1.75918cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox19">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=CDate(Parameters!paramDate.Value).Year</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox16</rd:DefaultName>
+              <Top>1.50841cm</Top>
+              <Left>27.34911cm</Left>
+              <Height>0.6cm</Height>
+              <Width>4.03049cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>0.26389in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox12">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Procurement Received Journal  </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=MonthName(Month(Parameters!paramDate.Value))</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> - </Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=CDate(Parameters!paramDate.Value).Year</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value> (</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Parameters!paramFund.Value</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>)</Value>
+                      <Style>
+                        <FontFamily>Calibri</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.01389in</Top>
+              <Left>0.00002in</Left>
+              <Height>0.25in</Height>
+              <Width>4.0625in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2997,7 +3234,7 @@
               <Style>None</Style>
             </Border>
           </Style>
-        </PageHeader>
+        </PageFooter>
         <PageHeight>8.5in</PageHeight>
         <PageWidth>13in</PageWidth>
         <LeftMargin>0.25in</LeftMargin>
@@ -3018,7 +3255,7 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramMonth">
+    <ReportParameter Name="paramDate">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -3099,7 +3336,7 @@
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>paramMonth</ParameterName>
+          <ParameterName>paramDate</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
