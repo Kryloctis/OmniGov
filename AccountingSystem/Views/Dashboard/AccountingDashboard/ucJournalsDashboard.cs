@@ -103,7 +103,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         private void lnkGeneralJournal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var frmGeneralJournalReport = new frmGeneralJournalReport();
-            frmGeneralJournalReport.fundName = cmbxFunds.Text.Trim();
+            frmGeneralJournalReport.fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             frmGeneralJournalReport.journalName = "General Journal";
             frmGeneralJournalReport.date = dateTimePicker1.Value;
             frmGeneralJournalReport.ShowDialog();
