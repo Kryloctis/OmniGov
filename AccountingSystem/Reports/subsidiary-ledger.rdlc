@@ -1937,7 +1937,7 @@ AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalance.Value), 0 , Parameters
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>General Ledger  </Value>
+                      <Value>Subsidiary Ledger  </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
@@ -1971,7 +1971,7 @@ AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalance.Value), 0 , Parameters
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Left>0.00003in</Left>
               <Height>0.25in</Height>
-              <Width>3.03125in</Width>
+              <Width>3.88542in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

@@ -941,7 +941,7 @@
                 <Top>2.0406cm</Top>
                 <Left>0cm</Left>
                 <Height>0.6cm</Height>
-                <Width>0.91404cm</Width>
+                <Width>1.05515cm</Width>
                 <ZIndex>3</ZIndex>
                 <Style>
                   <Border>
@@ -971,7 +971,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox67</rd:DefaultName>
                 <Top>2.04061cm</Top>
-                <Left>0.91404cm</Left>
+                <Left>1.05515cm</Left>
                 <Height>0.6cm</Height>
                 <Width>3.96967cm</Width>
                 <ZIndex>4</ZIndex>
@@ -1188,6 +1188,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
+              <Top>0in</Top>
               <Left>5.0635in</Left>
               <Height>0.25in</Height>
               <Width>2.65788in</Width>
@@ -1207,7 +1208,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Pre-Closing TB </Value>
+                      <Value>Pre-Closing Trial Balance </Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>

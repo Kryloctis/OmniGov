@@ -1911,9 +1911,8 @@ AND CDbl(IIF(string.IsNullOrEmpty(Parameters!paramBalance.Value), 0 , Parameters
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Left>0.03875in</Left>
               <Height>0.25in</Height>
-              <Width>3.03125in</Width>
+              <Width>4.0625in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
