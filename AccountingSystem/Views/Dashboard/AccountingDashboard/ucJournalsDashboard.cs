@@ -82,9 +82,8 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
         {
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
             var frmCashReceiptsJournalReport = new frmCashReceiptsJournalReport();
-            frmCashReceiptsJournalReport.fundName = cmbxFunds.Text.Trim();
-            frmCashReceiptsJournalReport.journalName = "Cash Receipts Journal";
             frmCashReceiptsJournalReport.fundId = fundId;
+            frmCashReceiptsJournalReport.journalName = "Cash Receipts Journal";
             frmCashReceiptsJournalReport.date = dateTimePicker1.Value;
             frmCashReceiptsJournalReport.ShowDialog();
         }

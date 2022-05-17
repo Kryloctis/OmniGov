@@ -1347,8 +1347,8 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtGeneralJournal</DataSetName>
-            <Top>0.3175cm</Top>
-            <Left>0.00002cm</Left>
+            <Top>0.054cm</Top>
+            <Left>0.00004cm</Left>
             <Height>1.92376cm</Height>
             <Width>18.28798cm</Width>
             <Style>
@@ -1506,7 +1506,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>1.06641in</Top>
+            <Top>0.99201in</Top>
             <Height>1.16461in</Height>
             <Width>7.19999in</Width>
             <ZIndex>1</ZIndex>
@@ -1517,13 +1517,13 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>2.44792in</Height>
+        <Height>2.42666in</Height>
         <Style />
       </Body>
-      <Width>7.2in</Width>
+      <Width>7.20001in</Width>
       <Page>
         <PageHeader>
-          <Height>1.14776in</Height>
+          <Height>1.26468in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1571,6 +1571,7 @@
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
+                        <FontSize>11pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
