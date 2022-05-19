@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
         private void GetDebitCredit(byte fundId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
             beginningBalance = 0;
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, dateEntry);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, generalLedgerId, dateEntry);
             var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];

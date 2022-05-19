@@ -17,66 +17,58 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="account_group_id">
-          <DataField>account_group_id</DataField>
+        <Field Name="present_beginning_balance">
+          <DataField>present_beginning_balance</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="account_group_code">
-          <DataField>account_group_code</DataField>
+        <Field Name="present_change_in_acc_policy">
+          <DataField>present_change_in_acc_policy</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_group_name">
-          <DataField>account_group_name</DataField>
+        <Field Name="present_prior_period_err">
+          <DataField>present_prior_period_err</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="major_account_group_id">
-          <DataField>major_account_group_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="major_account_group_code">
-          <DataField>major_account_group_code</DataField>
+        <Field Name="present_add_deduct">
+          <DataField>present_add_deduct</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="major_account_group_name">
-          <DataField>major_account_group_name</DataField>
+        <Field Name="present_adjustment">
+          <DataField>present_adjustment</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="sub_major_account_group_id">
-          <DataField>sub_major_account_group_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="sub_major_account_group_code">
-          <DataField>sub_major_account_group_code</DataField>
+        <Field Name="present__surplus_deficit_for_the_period">
+          <DataField>present__surplus_deficit_for_the_period</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="sub_major_account_group_name">
-          <DataField>sub_major_account_group_name</DataField>
+        <Field Name="previous_beginning_balance">
+          <DataField>previous_beginning_balance</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_id">
-          <DataField>account_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="account_code">
-          <DataField>account_code</DataField>
+        <Field Name="previous_change_in_acc_policy">
+          <DataField>previous_change_in_acc_policy</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_name">
-          <DataField>account_name</DataField>
+        <Field Name="previous_prior_period_err">
+          <DataField>previous_prior_period_err</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="current_amount">
-          <DataField>current_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="previous_add_deduct">
+          <DataField>previous_add_deduct</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="previous_amount">
-          <DataField>previous_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="previous_adjustment">
+          <DataField>previous_adjustment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous__surplus_deficit_for_the_period">
+          <DataField>previous__surplus_deficit_for_the_period</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsLFS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Hyubane_Ronin\source\Repos\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Janrey Files\Projects\Repos\Local Finance System\LocalFinanceSystem\AccountingSystem\dsLFS.xsd</rd:SchemaPath>
         <rd:TableName>dtStatementOfChangesInNetAssetsEquity</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
@@ -699,14 +691,14 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtDateBeginningCurrent">
+                        <Textbox Name="txtPresentBegBal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtDateEndPrevious.Value)</Value>
+                                  <Value>=CDbl(Fields!present_beginning_balance.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -767,14 +759,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtDateBeginningPrevious">
+                        <Textbox Name="txtPreviousBegBal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!previous_beginning_balance.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -842,7 +834,7 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox21">
+                        <Textbox Name="Textbox56">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -861,7 +853,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox21</rd:DefaultName>
+                          <rd:DefaultName>Textbox56</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -877,7 +869,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox22">
+                        <Textbox Name="Textbox57">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -894,7 +886,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <rd:DefaultName>Textbox57</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -910,7 +902,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox23">
+                        <Textbox Name="Textbox59">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -929,7 +921,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox23</rd:DefaultName>
+                          <rd:DefaultName>Textbox59</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1015,14 +1007,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtChangeInAccountingPolicyCurrent">
+                        <Textbox Name="txtPresentChangeAccPolicy">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!present_change_in_acc_policy.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1039,6 +1031,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1083,14 +1076,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtChangeInAccountingPolicyPrevious">
+                        <Textbox Name="txtPreviousChangeAccPolicy">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!previous_change_in_acc_policy.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1107,6 +1100,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1189,15 +1183,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtPriorPeriodErrorsCurrent">
+                        <Textbox Name="txtPresentPriorPeriodErr">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!account_name.Value = CStr("Prior Period Adjustment").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=CDbl(Fields!present_prior_period_err.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1214,6 +1207,7 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1258,15 +1252,14 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtPriorPeriodErrorsPrevious">
+                        <Textbox Name="txtPreviousPriorPeriodErr">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!account_name.Value = CStr("Prior Period Adjustment").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=CDbl(Fields!previous_prior_period_err.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1283,6 +1276,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1335,16 +1329,16 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtRestatedBalanceCurrent">
+                        <Textbox Name="txtPresentRestatedBal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtChangeInAccountingPolicyCurrent.Value + 
-ReportItems!txtDateBeginningCurrent.Value +
-ReportItems!txtPriorPeriodErrorsCurrent.Value)</Value>
+                                  <Value>= CDbl(ReportItems!txtPresentBegBal.Value) 
++ CDbl(ReportItems!txtPresentChangeAccPolicy.Value) 
++ CDbl(ReportItems!txtPresentPriorPeriodErr.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1414,16 +1408,16 @@ ReportItems!txtPriorPeriodErrorsCurrent.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtRestatedBalancePrevious">
+                        <Textbox Name="txtPreviousRestatedBal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtChangeInAccountingPolicyPrevious.Value + 
-ReportItems!txtPriorPeriodErrorsPrevious.Value + 
-ReportItems!txtDateBeginningPrevious.Value)</Value>
+                                  <Value>= CDbl(ReportItems!txtPreviousBegBal.Value) 
++ CDbl(ReportItems!txtPreviousChangeAccPolicy.Value) 
++ CDbl(ReportItems!txtPreviousPriorPeriodErr.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1499,14 +1493,14 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtChangesInNetAssetsEquityDuringTheYearCurrent">
+                        <Textbox Name="txtPresentAddDeduct">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!present_add_deduct.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1523,6 +1517,7 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1567,14 +1562,14 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtChangesInNetAssetsEquityDuringTheYearPrevious">
+                        <Textbox Name="txtPreviousAddDeduct">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!previous_add_deduct.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1591,6 +1586,7 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1642,14 +1638,14 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtAdjustmentOfNetRevenueRecognizedDirectlyInNetAssetsEquityCurrent">
+                        <Textbox Name="txtPresentAdjustment">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!present_adjustment.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1666,6 +1662,7 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1710,14 +1707,14 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtAdjustmentOfNetRevenueRecognizedDirectlyInNetAssetsEquityPrevious">
+                        <Textbox Name="txtPreviousAdjustment">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>=CDbl(Fields!previous_adjustment.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1734,6 +1731,7 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <BackgroundColor>LightGrey</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1785,59 +1783,14 @@ ReportItems!txtDateBeginningPrevious.Value)</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtSurplusForThePeriodCurrent">
+                        <Textbox Name="txtPresentSurplusDeficit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=
-((Sum(IIF(Fields!major_account_group_name.Value = CStr("Tax Revenue").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!account_name.Value = CStr("Share from Internal Revenue Collections (IRA)").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Service and Business Income").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Shares, Grants and Donations").Trim(),
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Gains").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Miscellaneous Income").Trim(),
-CDbl(Fields!current_amount.Value), 0)))
-
--
-(Sum(IIF(Fields!major_account_group_name.Value = CStr("Personnel Services").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Financial Assistance/Subsidy").Trim()
-AND Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Transfers").Trim()
-AND Fields!major_account_group_name.Value = CStr("Maintenance and Other Operating Expenses"),
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Depreciation").Trim()
-OR Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
-CDbl(Fields!current_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
-CDbl(Fields!current_amount.Value), 0))))
-
-
-+
-
-(SUM(IIF(Fields!major_account_group_name.Value = CStr("Transfers and Subsidy").Trim(), 
-CDbl(Fields!current_amount.Value), 0))
-
-+
-
--(Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Assistance/Subsidy").Trim() 
-OR Fields!sub_major_account_group_name.Value = CStr("Transfers").Trim(), 
-CDbl(Fields!current_amount.Value), 0))))</Value>
+                                  <Value>=CDbl(Fields!present__surplus_deficit_for_the_period.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1898,59 +1851,14 @@ CDbl(Fields!current_amount.Value), 0))))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtSurplusForThePeriodPrevious">
+                        <Textbox Name="txtPreviousSurplusDeficit">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=
-((Sum(IIF(Fields!major_account_group_name.Value = CStr("Tax Revenue").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!account_name.Value = CStr("Share from Internal Revenue Collections (IRA)").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Service and Business Income").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Shares, Grants and Donations").Trim(),
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Gains").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!major_account_group_name.Value = CStr("Miscellaneous Income").Trim(),
-CDbl(Fields!previous_amount.Value), 0)))
-
--
-(Sum(IIF(Fields!major_account_group_name.Value = CStr("Personnel Services").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Financial Assistance/Subsidy").Trim()
-AND Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Transfers").Trim()
-AND Fields!major_account_group_name.Value = CStr("Maintenance and Other Operating Expenses"),
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Depreciation").Trim()
-OR Fields!sub_major_account_group_name.Value = CStr("Amortization").Trim(),
-CDbl(Fields!previous_amount.Value), 0))
-+
-Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
-CDbl(Fields!previous_amount.Value), 0))))
-
-
-+
-
-(SUM(IIF(Fields!major_account_group_name.Value = CStr("Transfers and Subsidy").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))
-
-+
-
--(Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Assistance/Subsidy").Trim() 
-OR Fields!sub_major_account_group_name.Value = CStr("Transfers").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))))</Value>
+                                  <Value>=CDbl(Fields!previous__surplus_deficit_for_the_period.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1974,6 +1882,7 @@ CDbl(Fields!previous_amount.Value), 0))))</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -2019,17 +1928,16 @@ CDbl(Fields!previous_amount.Value), 0))))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent">
+                        <Textbox Name="txtPresentRecognizedRevenue">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtChangesInNetAssetsEquityDuringTheYearCurrent.Value +
-ReportItems!txtChangesInNetAssetsEquityDuringTheYearCurrent.Value +
-ReportItems!txtAdjustmentOfNetRevenueRecognizedDirectlyInNetAssetsEquityCurrent.Value +
-ReportItems!txtSurplusForThePeriodCurrent.Value)</Value>
+                                  <Value>= CDbl(ReportItems!txtPresentAddDeduct.Value) 
++ CDbl(ReportItems!txtPresentAdjustment.Value) 
++ CDbl(ReportItems!txtPresentSurplusDeficit.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2099,17 +2007,16 @@ ReportItems!txtSurplusForThePeriodCurrent.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtTotalRecognizedRevenueAndExpensesForThePeriodPrevious">
+                        <Textbox Name="txtPreviousRecognizedRevenue">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtChangesInNetAssetsEquityDuringTheYearPrevious.Value +
-ReportItems!txtChangesInNetAssetsEquityDuringTheYearPrevious.Value +
-ReportItems!txtAdjustmentOfNetRevenueRecognizedDirectlyInNetAssetsEquityPrevious.Value +
-ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
+                                  <Value>= CDbl(ReportItems!txtPreviousAddDeduct.Value) 
++ CDbl(ReportItems!txtPreviousAdjustment.Value) 
++ CDbl(ReportItems!txtPreviousSurplusDeficit.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2214,7 +2121,7 @@ ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox67">
+                        <Textbox Name="Textbox52">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -2232,7 +2139,7 @@ ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox67</rd:DefaultName>
+                          <rd:DefaultName>Textbox52</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2280,7 +2187,7 @@ ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox69">
+                        <Textbox Name="Textbox42">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -2298,7 +2205,7 @@ ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox69</rd:DefaultName>
+                          <rd:DefaultName>Textbox42</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2381,15 +2288,15 @@ ReportItems!txtSurplusForThePeriodPrevious.Value)</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtDateEndCurrent">
+                        <Textbox Name="txtPresentEndBalance">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec(ReportItems!txtRestatedBalanceCurrent.Value + 
-ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Value>
+                                  <Value>= CDbl(ReportItems!txtPresentRestatedBal.Value) 
++ CDbl(ReportItems!txtPresentRecognizedRevenue.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2459,14 +2366,15 @@ ReportItems!txtTotalRecognizedRevenueAndExpensesForThePeriodCurrent.Value)</Valu
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtDateEndPrevious">
+                        <Textbox Name="txtPreviousEndBalance">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=0</Value>
+                                  <Value>= CDbl(ReportItems!txtPreviousRestatedBal.Value) 
++ CDbl(ReportItems!txtPreviousRecognizedRevenue.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
