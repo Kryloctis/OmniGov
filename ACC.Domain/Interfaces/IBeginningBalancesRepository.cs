@@ -16,6 +16,8 @@ namespace ACC.Domain.Interfaces
 
         Dictionary<string, decimal> GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(byte fundsId, ushort majAccountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
+        Dictionary<string, decimal> GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(byte fundsId, ushort subMajAccountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
+
         Dictionary<string, decimal> GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null);
 
         bool DeleteById(int Id);

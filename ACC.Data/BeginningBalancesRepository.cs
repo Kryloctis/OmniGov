@@ -55,87 +55,70 @@ namespace ACC.Data
 
         public decimal GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                    new object[] { "@is_debit", DbType.Byte, isDebit},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
-                };
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@is_debit", DbType.Byte, isDebit},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+            };
 
-                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
 
-                string query = $"SELECT " +
-                    $"COALESCE(SUM(amount), 0) AS amount " +
-                    $"FROM {tableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"{subsidiaryQuery}" +
-                    $"AND is_debit = @is_debit";
-                decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
-                return amount;
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT " +
+                $"COALESCE(SUM(amount), 0) AS amount " +
+                $"FROM {tableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                $"{subsidiaryQuery}" +
+                $"AND is_debit = @is_debit";
+            decimal amount = Convert.ToDecimal(_dbGenericCommands.ExecuteScalar(query, parameters));
+            return amount;
         }
 
         public Dictionary<string, string> GetRecordBy_FundId_GenLedgId_Year_SubLedgId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, string>();
-            try
+
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
-                };
-                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
+            };
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
 
-                string query = $"SELECT " +
-                    $"funds_id, " +
-                    $"id, " +
-                    $"subsidiary_ledger_accounts_id, " +
-                    $"is_debit, " +
-                    $"MAX(date_entry) AS date_entry, " +
-                    $"amount, " +
-                    $"created_at, " +
-                    $"updated_at " +
-                    $"FROM {tableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"{subsidiaryQuery}";
+            string query = $"SELECT " +
+                $"funds_id, " +
+                $"id, " +
+                $"subsidiary_ledger_accounts_id, " +
+                $"is_debit, " +
+                $"MAX(date_entry) AS date_entry, " +
+                $"amount, " +
+                $"created_at, " +
+                $"updated_at " +
+                $"FROM {tableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                $"AND YEAR(date_entry) = @year " +
+                $"{subsidiaryQuery}";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("id", reader.Rows[0]["id"].ToString());
-                    record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
-                    record.Add("is_debit", reader.Rows[0]["is_debit"].ToString());
-                    record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
+                record.Add("is_debit", reader.Rows[0]["is_debit"].ToString());
+                record.Add("date_entry", reader.Rows[0]["date_entry"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
             }
 
             return record;
@@ -145,177 +128,175 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, decimal>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@account_group_id", DbType.UInt16, accountGroupId},
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+            };
+
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+            string query = $"SELECT " +
+                $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
+                $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
+                $"FROM {viewTableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND date_entry <= @date_entry " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND account_group_id = @account_group_id " +
+                $"{subsidiaryQuery}";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@account_group_id", DbType.UInt16, accountGroupId},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
-                };
-
-                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
-
-                string query = $"SELECT " +
-                    $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
-                    $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND account_group_id = @account_group_id " +
-                    $"{subsidiaryQuery}";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
-                        record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
-                    }
+                    record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
+                    record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
                 }
+            }
 
-                return record;
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return record;
         }
 
         public Dictionary<string, decimal> GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(byte fundsId, ushort majAccountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, decimal>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@maj_acc_group_id", DbType.UInt16, majAccountGroupId},
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+            };
+
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+            string query = $"SELECT " +
+                $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
+                $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
+                $"FROM {viewTableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND date_entry <= @date_entry " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND maj_acc_group_id = @maj_acc_group_id " +
+                $"{subsidiaryQuery}";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@maj_acc_group_id", DbType.UInt16, majAccountGroupId},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
-                };
-
-                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
-
-                string query = $"SELECT " +
-                    $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
-                    $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
-                    $"FROM {viewTableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND maj_acc_group_id = @maj_acc_group_id " +
-                    $"{subsidiaryQuery}";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
-                        record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
-                    }
+                    record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
+                    record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
                 }
+            }
 
-                return record;
-            }
-            catch (MySqlException)
+            return record;
+        }
+
+        public Dictionary<string, decimal> GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(byte fundsId, ushort subMajAccountGroupId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
+        {
+            var record = new Dictionary<string, decimal>();
+
+            var parameters = new object[][]
             {
-                throw;
-            }
-            catch (Exception)
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@sub_maj_acc_group_id", DbType.UInt16, subMajAccountGroupId},
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+            };
+
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+            string query = $"SELECT " +
+                $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
+                $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
+                $"FROM {viewTableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND date_entry <= @date_entry " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND sub_maj_acc_group_id = @sub_maj_acc_group_id " +
+                $"{subsidiaryQuery}";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                foreach (DataRow item in reader.Rows)
+                {
+                    record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
+                    record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
+                }
             }
+
+            return record;
         }
 
         public Dictionary<string, decimal> GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(byte fundsId, ushort generalLedgerId, DateTime dateEntry, ushort? subsidiaryLedgerId = null)
         {
             var record = new Dictionary<string, decimal>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
+                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
+            };
+
+            string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
+
+            string query = $"SELECT " +
+                $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
+                $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
+                $"FROM {tableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND date_entry <= @date_entry " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                $"{subsidiaryQuery}";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
                 {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId}
-                };
-
-                string subsidiaryQuery = subsidiaryLedgerId == null ? string.Empty : $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id ";
-
-                string query = $"SELECT " +
-                    $"COALESCE(SUM(IF(is_debit = 1, amount, 0)), 0) AS beginning_balance_debit, " +
-                    $"COALESCE(SUM(IF(is_debit = 0, amount, 0)), 0) AS beginning_balance_credit " +
-                    $"FROM {tableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND date_entry <= @date_entry " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"{subsidiaryQuery}";
-
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    foreach (DataRow item in reader.Rows)
-                    {
-                        record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
-                        record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
-                    }
+                    record.Add("beginning_balance_debit", Convert.ToDecimal(item[0]));
+                    record.Add("beginning_balance_credit", Convert.ToDecimal(item[1]));
                 }
+            }
 
-                return record;
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return record;
         }
 
         public decimal GetSumBalanceBy_FundId_GenLedgId_Year_SubLedgId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
-            try
+
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundsId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
-                    new object[] { "@year", DbType.Int16, year},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
-                };
+                new object[] { "@funds_id", DbType.Byte, fundsId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId},
+                new object[] { "@year", DbType.Int16, year},
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.UInt16, subsidiaryLedgerId},
+            };
 
-                string query = $"SELECT " +
-                    $"COALESCE(SUM(amount)) " +
-                    $"FROM {tableName} " +
-                    $"WHERE funds_id = @funds_id " +
-                    $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
-                    $"AND YEAR(date_entry) = @year " +
-                    $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id " +
-                    $"GROUP BY general_ledger_accounts_id";
+            string query = $"SELECT " +
+                $"COALESCE(SUM(amount)) " +
+                $"FROM {tableName} " +
+                $"WHERE funds_id = @funds_id " +
+                $"AND general_ledger_accounts_id = @general_ledger_accounts_id " +
+                $"AND YEAR(date_entry) = @year " +
+                $"AND subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id " +
+                $"GROUP BY general_ledger_accounts_id";
 
-                string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
-                if (!string.IsNullOrWhiteSpace(sumBalance))
-                    return Convert.ToDecimal(sumBalance);
+            string sumBalance = _dbGenericCommands.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrWhiteSpace(sumBalance))
+                return Convert.ToDecimal(sumBalance);
 
-                return 0;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return 0;
         }
 
         public bool IdExist(int id)

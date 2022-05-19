@@ -40,8 +40,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
                 decimal presentBeginningBalance = GetBeginningBalance(fundId, 331, presentYear);
                 decimal previousBeginningBalance = GetBeginningBalance(fundId, 331, previousYear);
+                decimal presentSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, presentYear).SurplusDeficitPeriod();
+                decimal previousSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, previousYear).SurplusDeficitPeriod();
 
-                var records = new object[] { presentBeginningBalance, 0, 0, 0, 0, 0, previousBeginningBalance, 0, 0, 0, 0, 0 };
+                var records = new object[] { presentBeginningBalance, 0, 0, 0, 0, presentSurplusDeficit, previousBeginningBalance, 0, 0, 0, 0, previousSurplusDeficit };
 
                 dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
             }
