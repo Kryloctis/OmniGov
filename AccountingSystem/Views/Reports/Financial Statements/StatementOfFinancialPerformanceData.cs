@@ -100,7 +100,16 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         internal decimal TotalRevenue()
         {
-            decimal totalRevenue = GetTaxRevenue() + GetShareIntervalRevenue() + GetOtherShareNationalTaxes() + GetServicesBusinessIncome() + GetSharesGrantsDonations() + GetGains() + GetOtherIncome();
+            decimal taxRevenue = GetTaxRevenue();
+            decimal shareIntervalRevenue = GetShareIntervalRevenue();
+            decimal otherShareNationalTaxes = GetOtherShareNationalTaxes();
+            decimal servicesBusinessIncome = GetServicesBusinessIncome();
+            decimal shareGrantsDonations = GetSharesGrantsDonations();
+            decimal gains = GetGains();
+            decimal otherIncome = GetOtherIncome();
+
+
+            decimal totalRevenue = taxRevenue + shareIntervalRevenue + otherShareNationalTaxes + servicesBusinessIncome + shareGrantsDonations + gains + otherIncome;
             return totalRevenue;
         }
 
