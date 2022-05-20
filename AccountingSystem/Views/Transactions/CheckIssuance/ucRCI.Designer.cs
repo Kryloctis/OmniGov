@@ -184,9 +184,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(14, 14);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 15);
+            this.label6.Size = new System.Drawing.Size(95, 15);
             this.label6.TabIndex = 46;
-            this.label6.Text = "Obligation No.";
+            this.label6.Text = "Obligation No/s.";
             // 
             // dtcheckdate
             // 

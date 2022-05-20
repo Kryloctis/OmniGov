@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal void SetObligationLabel()
         {
             obligationNumberCount = (short)dtObligations.Rows.Count;
-            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s added.";
+            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s number added.";
         }
 
         internal void SetDeductionLabel()
