@@ -112,8 +112,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.cmbFPP.Name = "cmbFPP";
             this.cmbFPP.Size = new System.Drawing.Size(369, 23);
             this.cmbFPP.TabIndex = 6;
-            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
-            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
             // 
             // txtdvno
             // 
@@ -250,8 +248,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnAddObligation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddObligation.UseVisualStyleBackColor = true;
             this.btnAddObligation.Click += new System.EventHandler(this.btnAddObligation_Click);
-            this.btnAddObligation.Validating += new System.ComponentModel.CancelEventHandler(this.btnAddObligation_Validating);
-            this.btnAddObligation.Validated += new System.EventHandler(this.btnAddObligation_Validated);
             // 
             // label2
             // 
