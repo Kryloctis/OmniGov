@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundsId, generalLedgerId, dateEntry);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundsId, generalLedgerId, dateEntry);
             var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];

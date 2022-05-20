@@ -170,15 +170,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
             beginningBalance = 0;
-            var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 1);
-            var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundId, generalLedgerId, year, 0);
+            var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1);
+            var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0);
 
             beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
             balance = beginningBalance.ToString();
             balanceDebit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
             balanceCredit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(beginningBalance).ToString() : string.Empty;
 
-            var dateDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, generalLedgerId, year);
+            var dateDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year);
             balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM,dd,yyyy");
         }
 

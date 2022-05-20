@@ -18,43 +18,34 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
+        private decimal GetBeginningBalance(byte fundId, ushort genLedgerId, DateTime date)
+        {
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, genLedgerId, date);
+            decimal beginningBalanceDebit = dictBeginningBalance["beginning_balance_debit"];
+            decimal beginningBalanceCredit = dictBeginningBalance["beginning_balance_credit"];
+            decimal beginningBalance = beginningBalanceDebit - beginningBalanceCredit;
+
+            return Math.Abs(beginningBalance);
+        }
 
         private DataTable StatementOfChangesInNetAssetsEquityDatatable()
         {
-
             var dataSet = new dsLFS();
             var dtStatementOfChangesInNetAssetsEquity = dataSet.dtStatementOfChangesInNetAssetsEquity;
-            int fundsId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            var dateEnded = dtPickerDateEnds.Value;
-            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
-                {
+                byte fundId = Convert.ToByte(cmbxFunds.SelectedValue);
+                var presentYear = dtPickerDateEnds.Value;
+                var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
+                decimal presentBeginningBalance = GetBeginningBalance(fundId, 331, presentYear);
+                decimal previousBeginningBalance = GetBeginningBalance(fundId, 331, previousYear);
+                decimal presentSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, presentYear).SurplusDeficitPeriod();
+                decimal previousSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, previousYear).SurplusDeficitPeriod();
 
-                    //decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+                var records = new object[] { presentBeginningBalance, 0, 0, 0, 0, presentSurplusDeficit, previousBeginningBalance, 0, 0, 0, 0, previousSurplusDeficit };
 
-                    var items = new object[]
-                    {
-                    row["account_group_id"],
-                    row["account_group_code"],
-                    row["account_group_name"],
-                    row["maj_acc_group_id"],
-                    row["maj_acc_group_code"],
-                    row["maj_acc_group_name"],
-                    row["sub_maj_acc_group_id"],
-                    row["sub_maj_acc_group_code"],
-                    row["sub_maj_acc_group_name"],
-                    row["general_ledger_accounts_id"],
-                    row["account_code"],
-                    row["general_ledger_accounts_name"],
-                    //currentAmount,
-                    //Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
-                };
-                    dtStatementOfChangesInNetAssetsEquity.Rows.Add(items);
-                }
+                dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
             }
             catch (Exception ex)
             {
