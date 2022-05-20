@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             decimal beginningBalanceCredit = dictBeginningBalance["beginning_balance_credit"];
             decimal beginningBalance = beginningBalanceDebit - beginningBalanceCredit;
 
-            return beginningBalance;
+            return Math.Abs(beginningBalance);
         }
 
         private DataTable StatementOfChangesInNetAssetsEquityDatatable()
