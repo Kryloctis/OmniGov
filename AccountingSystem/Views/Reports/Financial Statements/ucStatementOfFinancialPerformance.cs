@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
@@ -18,81 +19,52 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
+        private object[] Records(StatementOfFinancialPerformanceData entity)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundsId, generalLedgerId, dateEntry);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
+            var records = new object[]
+            {
+                entity.GetTaxRevenue(),
+                entity.GetShareIntervalRevenue(),
+                entity.GetOtherShareNationalTaxes(),
+                entity.GetServicesBusinessIncome(),
+                entity.GetSharesGrantsDonations(),
+                entity.GetGains(),
+                entity.GetOtherIncome(),
+                entity.GetTotalRevenue(),
+                entity.GetPersonnelServices(),
+                entity.GetMaintenanceOtherOperatingExpenses(),
+                entity.GetNonCashExpenses(),
+                entity.GetFinancialExpenses(),
+                entity.GetCurrentOperatingExpenses(),
+                entity.GetSurplusDeficitFromCurrentOperation(),
+                entity.GetTransferSubsidyFrom(),
+                entity.GetTransferSubsidyTo(),
+                entity.SurplusDeficitPeriod()
+            };
 
-            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
-            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
-
-            decimal beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
-            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
-            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            return records;
         }
+
 
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
-            byte fundsId = (byte)cmbxFunds.SelectedValue;
-            var dateEnded = dtPickerDateEnds.Value;
-            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
-                {
-                    int accGrpId = Convert.ToInt32(row["account_group_id"]);
-                    string accGrpCode = row["account_group_code"].ToString();
-                    string accGrpName = row["account_group_name"].ToString();
-                    int majAccGrpId = Convert.ToInt32(row["major_account_group_id"]);
-                    string majAccGrpCode = row["maj_acc_group_code"].ToString();
-                    string majAccGrpName = row["maj_acc_group_name"].ToString();
-                    int subMajAccGrpId = Convert.ToInt32(row["sub_major_account_group_id"]);
-                    string subMajAccGrpCode = row["sub_maj_acc_group_code"].ToString();
-                    string subMajAccGrpName = row["sub_maj_acc_group_name"].ToString();
-                    ushort genLedgAccId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
-                    string genLedgAccCode = row["account_code"].ToString();
-                    string genLedgAccName = row["ledger_name"].ToString();
+                byte fundsId = (byte)cmbxFunds.SelectedValue;
+                var presentDate = dtPickerDateEnds.Value;
+                var previousDate = new DateTime(year: presentDate.Year - 1, month: 12, DateTime.DaysInMonth(presentDate.Year, 12));
+                var presentRecord = new StatementOfFinancialPerformanceData(fundsId, presentDate);
+                var previousRecord = new StatementOfFinancialPerformanceData(fundsId, previousDate);
 
-                    decimal balanceDebit;
-                    decimal balanceCredit;
-                    decimal previousBalanceDebit;
-                    decimal previousBalanceCredit;
+                var concatenatedArrays = Records(presentRecord).Concat(Records(previousRecord)).ToArray();
 
-                    GetDebitCredit(fundsId, dateEnded, genLedgAccId, out balanceDebit, out balanceCredit);
-                    GetDebitCredit(fundsId, previousYearEnded, genLedgAccId, out previousBalanceDebit, out previousBalanceCredit);
-
-                    decimal currentAmount = balanceDebit - balanceCredit;
-                    decimal previousAmount = previousBalanceDebit - previousBalanceCredit;
-
-                    var items = new object[]
-                    {
-                    accGrpId,
-                    accGrpCode,
-                    accGrpName,
-                    majAccGrpId,
-                    majAccGrpCode,
-                    majAccGrpName,
-                    subMajAccGrpId,
-                    subMajAccGrpCode,
-                    subMajAccGrpName,
-                    genLedgAccId,
-                    genLedgAccCode,
-                    genLedgAccName,
-                    currentAmount,
-                    previousAmount
-                    };
-
-                    dtStatementOfFinancialPerformance.Rows.Add(items);
-                }
+                dtStatementOfFinancialPerformance.Rows.Add(concatenatedArrays);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
             return dtStatementOfFinancialPerformance;
         }

@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         private DataTable StatementOfFinancialPositionReport()
         {
             var dataSet = new dsLFS();
-            var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
+            var dtStatementOfFinancialPosition = dataSet.dtStatementOfFinancialPosition;
             byte fundId = (byte)cmbxFunds.SelectedValue;
             var dateAsOf = dtAsOf.Value;
             var previousYearEnded = new DateTime(year: dateAsOf.Year - 1, month: 12, DateTime.DaysInMonth(dateAsOf.Year, 12));
@@ -137,15 +137,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                         previousAmount
                     };
 
-                    dtStatementOfFinancialPerformance.Rows.Add(items);
+                    dtStatementOfFinancialPosition.Rows.Add(items);
                 }
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
-            return dtStatementOfFinancialPerformance;
+            return dtStatementOfFinancialPosition;
         }
 
         private void LoadReport(LocalReport report)
