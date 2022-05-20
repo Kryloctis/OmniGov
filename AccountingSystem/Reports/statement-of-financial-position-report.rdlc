@@ -1056,8 +1056,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Cash").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Cash").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1129,8 +1129,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Cash").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Cash").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1281,8 +1281,8 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Investments").Trim(), 
-CDbl(Fields!current_amount.Value) ,0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Investments").Trim(), 
+CDbl(Fields!current_amount.Value) ,0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1354,8 +1354,8 @@ CDbl(Fields!current_amount.Value) ,0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Investments").Trim(), 
-CDbl(Fields!previous_amount.Value) ,0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Investments").Trim(), 
+CDbl(Fields!previous_amount.Value) ,0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1506,8 +1506,8 @@ CDbl(Fields!previous_amount.Value) ,0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Receivables").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Receivables").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1579,8 +1579,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Receivables").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Receivables").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1731,8 +1731,8 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Inventories").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Inventories").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1804,8 +1804,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Inventories").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Inventories").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1956,8 +1956,8 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Prepayments").Trim(),
-CDbl(Fields!current_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Prepayments").Trim(),
+CDbl(Fields!current_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2029,8 +2029,8 @@ CDbl(Fields!current_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Prepayments").Trim(),
-CDbl(Fields!previous_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Prepayments").Trim(),
+CDbl(Fields!previous_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5704,8 +5704,8 @@ ReportItems!txtTotalNonCurrAsstsPrevious.Value)</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Financial Liabilities").Trim(), 
-CDbl(Fields!current_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPresent.Value</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Financial Liabilities").Trim(), 
+CDbl(Fields!current_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPresent.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5776,8 +5776,8 @@ CDbl(Fields!current_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPresen
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Financial Liabilities").Trim(), 
-CDbl(Fields!previous_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPrevious.Value</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Financial Liabilities").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPrevious.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5927,8 +5927,8 @@ CDbl(Fields!previous_amount.Value), 0)) - ReportItems!txtNonCurrLiabFinLiabPrevi
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Inter-Agency Payables").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Inter-Agency Payables").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5999,8 +5999,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Inter-Agency Payables").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Inter-Agency Payables").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6150,8 +6150,8 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Intra-Agency Payables").Trim(), 
-CDbl(Fields!current_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Intra-Agency Payables").Trim(), 
+CDbl(Fields!current_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6222,8 +6222,8 @@ CDbl(Fields!current_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Intra-Agency Payables").Trim(), 
-CDbl(Fields!previous_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Intra-Agency Payables").Trim(), 
+CDbl(Fields!previous_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6373,8 +6373,8 @@ CDbl(Fields!previous_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Trust Liabilities").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Trust Liabilities").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6445,8 +6445,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Trust Liabilities").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Trust Liabilities").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6596,8 +6596,8 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Deferred Credits/Unearned Income").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Deferred Credits/Unearned Income").Trim(), 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -6668,8 +6668,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Deferred Credits/Unearned Income").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Deferred Credits/Unearned Income").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -7778,8 +7778,8 @@ ReportItems!txtCurrLiabDefCredUnearnedIncmPrevious.Value)</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Provisions").Trim(), 
-CDbl(Fields!current_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Provisions").Trim(), 
+CDbl(Fields!current_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -7850,8 +7850,8 @@ CDbl(Fields!current_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Provisions").Trim(), 
-CDbl(Fields!previous_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Provisions").Trim(), 
+CDbl(Fields!previous_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -8001,8 +8001,8 @@ CDbl(Fields!previous_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Other Payables").Trim(), 
-CDbl(Fields!current_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Other Payables").Trim(), 
+CDbl(Fields!current_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -8073,8 +8073,8 @@ CDbl(Fields!current_amount.Value),0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Other Payables").Trim(), 
-CDbl(Fields!previous_amount.Value),0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!major_account_group_name.Value = CStr("Other Payables").Trim(), 
+CDbl(Fields!previous_amount.Value),0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -9368,8 +9368,8 @@ ReportItems!txtTotalNonCurrLiabPrevious.Value)</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!account_name.Value ="Government Equity", 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!account_name.Value ="Government Equity", 
+CDbl(Fields!current_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -9440,8 +9440,8 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!account_name.Value = CStr("Government Equity").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Math.Abs(SUM(IIF(Fields!account_name.Value = CStr("Government Equity").Trim(), 
+CDbl(Fields!previous_amount.Value), 0)))</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
