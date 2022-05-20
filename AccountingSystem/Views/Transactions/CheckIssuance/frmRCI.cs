@@ -101,9 +101,5 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
     }
 }
