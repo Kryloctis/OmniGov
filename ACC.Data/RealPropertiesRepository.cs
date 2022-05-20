@@ -102,7 +102,7 @@ namespace ACC.Data
                     new object[] {"@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind OR (complete_arp_no LIKE @searchText AND owner_name LIKE @searchText ) LIMIT 30";
+            string query = $"SELECT property_kind, complete_arp_no, pin, owner_name, owner_address, market_value, assessed_value  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind OR (complete_arp_no LIKE @searchText AND owner_name LIKE @searchText ) LIMIT 30";
 
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
