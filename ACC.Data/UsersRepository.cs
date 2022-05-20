@@ -11,7 +11,7 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
-        private readonly string tableName2 = "collecting_officers";
+        private readonly string tableCollectionsOfficers = "collecting_officers";
         private readonly string tableName3 = "disbursing_officers";
         private readonly string tableName4 = "roles";
         private readonly string viewTableName = "view_users";
@@ -135,7 +135,7 @@ namespace ACC.Data
             string data = string.Empty;
             try
             {
-                string query = $"SELECT id FROM {tableName2} WHERE users_id='{id}'";
+                string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id='{id}'";
                 DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
                 if (dt.Rows.Count > 0)
                 {
@@ -433,7 +433,7 @@ namespace ACC.Data
                 new object[] { "@users_id", DbType.Int32, id },
             };
 
-            string query = $"SELECT id FROM {tableName2} WHERE users_id = @users_id";
+            string query = $"SELECT id FROM {tableCollectionsOfficers} WHERE users_id = @users_id";
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
@@ -590,7 +590,7 @@ namespace ACC.Data
 
         public string GetCollectorNameByUserId(int userId)
         {
-            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableName2} WHERE id='{userId}'";
+            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableCollectionsOfficers} WHERE id='{userId}'";
             return _dbGenericCommands.ExecuteScalar(query);
         }
 

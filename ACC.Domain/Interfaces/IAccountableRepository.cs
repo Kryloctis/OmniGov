@@ -10,6 +10,5 @@ namespace ACC.Domain.Interfaces
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);
-        DataTable GetRecords(int id);
     }
 }

@@ -114,13 +114,19 @@ namespace ACC.Data
          
         }
 
-        public DataTable GetRecordsByReceiptId(int rid)
+        public DataTable GetCollectorsWithReceiptsIssuedByReceiptId(int receiptsId)
         {
-            string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname FROM {tableName} WHERE id NOT IN(SELECT collecting_officers_id FROM {tableName3} WHERE receipts_id='{rid}' AND is_returned='NO')";
+            var parameters = new object[][] {new object[]{ "@receipts_id", DbType.Int32, receiptsId }};
 
-            var dtFunds = new DataTable();
-            return _dbGenericCommands.Fill(query, dtFunds);
-         
+            string query =  $"SELECT id, " +
+                            $"CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname " +
+                            $"FROM {tableName} " +
+                            $"WHERE id NOT IN(SELECT collecting_officers_id " +
+                            $"FROM {tableName3} " +
+                            $"WHERE receipts_id = @receipts_id AND is_returned='NO')";
+
+            var collectingOfficerReceiptsDt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, collectingOfficerReceiptsDt, parameters);
         }
 
         public DataTable GetRecordsBySearch(string searchText)

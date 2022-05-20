@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmReceiptsIssuedAdd(this, 0).ShowDialog();
+            _ = new frmReceiptsIssuedAdd(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
