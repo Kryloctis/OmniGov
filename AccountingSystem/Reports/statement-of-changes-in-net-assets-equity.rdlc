@@ -282,7 +282,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>3.98905in</Top>
+            <Top>4.23905in</Top>
             <Left>4.29157in</Left>
             <Height>0.80909in</Height>
             <Width>2.97747in</Width>
@@ -1882,7 +1882,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -2450,7 +2449,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>5.0218in</Height>
+        <Height>5.20647in</Height>
         <Style />
       </Body>
       <Width>7.27in</Width>

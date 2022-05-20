@@ -17,61 +17,141 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="account_group_id">
-          <DataField>account_group_id</DataField>
+        <Field Name="present_tax_revenue">
+          <DataField>present_tax_revenue</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="account_group_code">
-          <DataField>account_group_code</DataField>
+        <Field Name="present_share_internal_revenue_collections">
+          <DataField>present_share_internal_revenue_collections</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_group_name">
-          <DataField>account_group_name</DataField>
+        <Field Name="present_other_share_national_taxes">
+          <DataField>present_other_share_national_taxes</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="major_account_group_id">
-          <DataField>major_account_group_id</DataField>
+        <Field Name="present_service_business_income">
+          <DataField>present_service_business_income</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="major_account_group_code">
-          <DataField>major_account_group_code</DataField>
+        <Field Name="present_shares_grants_donations">
+          <DataField>present_shares_grants_donations</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="major_account_group_name">
-          <DataField>major_account_group_name</DataField>
+        <Field Name="present_gains">
+          <DataField>present_gains</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="sub_major_account_group_id">
-          <DataField>sub_major_account_group_id</DataField>
+        <Field Name="present_other_income">
+          <DataField>present_other_income</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="sub_major_account_group_code">
-          <DataField>sub_major_account_group_code</DataField>
+        <Field Name="present_total_revenue">
+          <DataField>present_total_revenue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="sub_major_account_group_name">
-          <DataField>sub_major_account_group_name</DataField>
+        <Field Name="present_personnel_services">
+          <DataField>present_personnel_services</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_id">
-          <DataField>account_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="account_code">
-          <DataField>account_code</DataField>
+        <Field Name="present_maintenance_other_operating_expenses">
+          <DataField>present_maintenance_other_operating_expenses</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="account_name">
-          <DataField>account_name</DataField>
+        <Field Name="present_non_cash_expenses">
+          <DataField>present_non_cash_expenses</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="current_amount">
-          <DataField>current_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="present_financial_expenses">
+          <DataField>present_financial_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="previous_amount">
-          <DataField>previous_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="present_current_operating_expenses">
+          <DataField>present_current_operating_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="present_surplus_deficit_current_operation">
+          <DataField>present_surplus_deficit_current_operation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="present_transfers_subsidy_from">
+          <DataField>present_transfers_subsidy_from</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="present_transfers_subsidy_to">
+          <DataField>present_transfers_subsidy_to</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="present_surplus_deficit_for_period">
+          <DataField>present_surplus_deficit_for_period</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_tax_revenue">
+          <DataField>previous_tax_revenue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_share_internal_revenue_collections">
+          <DataField>previous_share_internal_revenue_collections</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_other_share_national_taxes">
+          <DataField>previous_other_share_national_taxes</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_service_business_income">
+          <DataField>previous_service_business_income</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_shares_grants_donations">
+          <DataField>previous_shares_grants_donations</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_gains">
+          <DataField>previous_gains</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_other_income">
+          <DataField>previous_other_income</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_total_revenue">
+          <DataField>previous_total_revenue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_personnel_services">
+          <DataField>previous_personnel_services</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_maintenance_other_operating_expenses">
+          <DataField>previous_maintenance_other_operating_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_non_cash_expenses">
+          <DataField>previous_non_cash_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_financial_expenses">
+          <DataField>previous_financial_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_current_operating_expenses">
+          <DataField>previous_current_operating_expenses</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_surplus_deficit_current_operation">
+          <DataField>previous_surplus_deficit_current_operation</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_transfers_subsidy_from">
+          <DataField>previous_transfers_subsidy_from</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_transfers_subsidy_to">
+          <DataField>previous_transfers_subsidy_to</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="previous_surplus_deficit_for_period">
+          <DataField>previous_surplus_deficit_for_period</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -290,7 +370,7 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>5.22417in</Top>
+            <Top>5.47417in</Top>
             <Left>4.29253in</Left>
             <Height>0.80909in</Height>
             <Width>2.97747in</Width>
@@ -305,25 +385,22 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.18686in</Width>
+                  <Width>0.30365in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.2634in</Width>
+                  <Width>0.38019in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.09481in</Width>
+                  <Width>3.2116in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.70076in</Width>
+                  <Width>1.53462in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.41783in</Width>
+                  <Width>0.20298in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.08619in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.52017in</Width>
+                  <Width>1.63696in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -367,43 +444,6 @@
                     </TablixCell>
                     <TablixCell />
                     <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox19">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Note</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox19</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox22">
@@ -592,41 +632,6 @@
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox33">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>17</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox33</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtTaxRevenueCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -634,9 +639,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Tax Revenue").Trim(), 
-CDbl(Fields!current_amount.Value), 0))-
-CDbl(ReportItems!txtShareFromInternalRevenueCollectionsCurrent.Value))</Value>
+                                  <Value>=Sum(Fields!present_tax_revenue.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -706,9 +709,7 @@ CDbl(ReportItems!txtShareFromInternalRevenueCollectionsCurrent.Value))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Tax Revenue").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))-
-CDbl(ReportItems!txtShareFromInternalRevenueCollectionsPrevious.Value)</Value>
+                                  <Value>=Fields!previous_tax_revenue.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -809,41 +810,6 @@ CDbl(ReportItems!txtShareFromInternalRevenueCollectionsPrevious.Value)</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox11">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>17</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtShareFromInternalRevenueCollectionsCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -851,8 +817,7 @@ CDbl(ReportItems!txtShareFromInternalRevenueCollectionsPrevious.Value)</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!account_name.Value = CStr("Share from Internal Revenue Collections (IRA)").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Fields!present_share_internal_revenue_collections.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -922,8 +887,7 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!account_name.Value = CStr("Share from Internal Revenue Collections (IRA)").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_share_internal_revenue_collections.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1024,50 +988,14 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox26">
+                        <Textbox Name="present_other_share_national_taxes">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>17</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox26</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox34">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Math.Abs(SUM(IIF(Fields!sub_major_account_group_name.Value = CStr("Share").Trim(), 
-CDbl(Fields!current_amount.Value),0)))</Value>
+                                  <Value>=Fields!present_other_share_national_taxes.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1080,7 +1008,7 @@ CDbl(Fields!current_amount.Value),0)))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <rd:DefaultName>present_other_share_national_taxes</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1131,14 +1059,14 @@ CDbl(Fields!current_amount.Value),0)))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox41">
+                        <Textbox Name="previous_other_share_national_taxes">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!sub_major_account_group_name.Value = CStr("Share").Trim(), CDbl(Fields!previous_amount.Value),0))</Value>
+                                  <Value>=Fields!previous_other_share_national_taxes.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1151,7 +1079,7 @@ CDbl(Fields!current_amount.Value),0)))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox41</rd:DefaultName>
+                          <rd:DefaultName>previous_other_share_national_taxes</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1240,41 +1168,6 @@ CDbl(Fields!current_amount.Value),0)))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox45">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>18</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox45</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtServiceAndBusinessIncomeCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1282,8 +1175,7 @@ CDbl(Fields!current_amount.Value),0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Service and Business Income").Trim(), 
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Sum(Fields!present_service_business_income.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1353,8 +1245,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Service and Business Income").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_service_business_income.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1455,41 +1346,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox57">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>20</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox57</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtSharesGrantsAndDonationsCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1497,8 +1353,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Grants and Donations").Trim(),
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_shares_grants_donations.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1568,8 +1423,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Grants and Donations").Trim(),
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_shares_grants_donations.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1670,41 +1524,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox64">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>21</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox64</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtGainsCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1712,8 +1531,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Gains").Trim(), 
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_gains.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1783,8 +1601,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Gains").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_gains.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1885,41 +1702,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox72">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>22</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox72</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtOtherIncomeCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1927,8 +1709,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Miscellaneous Income").Trim(),
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Sum(Fields!present_other_income.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1998,8 +1779,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Miscellaneous Income").Trim(),
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_other_income.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2069,42 +1849,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox51">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox51</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtTotalRevenueCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2112,12 +1856,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtTaxRevenueCurrent.Value + 
-ReportItems!txtShareFromInternalRevenueCollectionsCurrent.Value +
-ReportItems!txtServiceAndBusinessIncomeCurrent.Value +
-ReportItems!txtSharesGrantsAndDonationsCurrent.Value +
-ReportItems!txtGainsCurrent.Value +
-ReportItems!txtOtherIncomeCurrent.Value</Value>
+                                  <Value>=Fields!present_total_revenue.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2196,12 +1935,7 @@ ReportItems!txtOtherIncomeCurrent.Value</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtTaxRevenuePrevious.Value + 
-ReportItems!txtShareFromInternalRevenueCollectionsPrevious.Value +
-ReportItems!txtServiceAndBusinessIncomePrevious.Value +
-ReportItems!txtSharesGrantsAndDonationsPrevious.Value +
-ReportItems!txtGainsPrevious.Value +
-ReportItems!txtOtherIncomePrevious.Value</Value>
+                                  <Value>=Fields!previous_total_revenue.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2326,41 +2060,6 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox131</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox132">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox132</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2523,42 +2222,6 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox13">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Textbox16">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2631,7 +2294,7 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox23">
+                        <Textbox Name="Textbox7">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -2651,7 +2314,7 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox23</rd:DefaultName>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2740,41 +2403,6 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox86">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>23</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox86</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtPersonnelServicesCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2782,8 +2410,7 @@ ReportItems!txtOtherIncomePrevious.Value</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Personnel Services").Trim(), 
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_personnel_services.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2851,8 +2478,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Personnel Services").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_personnel_services.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2953,41 +2579,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox100">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>25-28,31-32</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox100</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtMaintenanceAndOtherOperatingExpensesCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2995,12 +2586,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Financial Assistance/Subsidy").Trim()
-AND Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Transfers").Trim()
-AND Fields!major_account_group_name.Value = CStr("Maintenance and Other Operating Expenses"),
-CDbl(Fields!current_amount.Value), 0)) - Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Taxes, Insurance Premiums and Other Fees")
-AND Fields!sub_major_account_group_name.Value = CStr("Other Maintenance and Operating Expenses"),
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_maintenance_other_operating_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3068,12 +2654,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Financial Assistance/Subsidy").Trim()
-AND Fields!sub_major_account_group_name.Value &lt;&gt; CStr("Transfers").Trim()
-AND Fields!major_account_group_name.Value = CStr("Maintenance and Other Operating Expenses"),
-CDbl(Fields!previous_amount.Value), 0)) - Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Taxes, Insurance Premiums and Other Fees")
-AND Fields!sub_major_account_group_name.Value = CStr("Other Maintenance and Operating Expenses"),
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_maintenance_other_operating_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3174,41 +2755,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox107">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>35</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox107</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtNonCashExpensesCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3216,8 +2762,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!major_account_group_name.Value = CStr("Non-Cash Expenses").Trim(),
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_non_cash_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3285,8 +2830,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!major_account_group_name.Value = CStr("Non-Cash Expenses").Trim(),
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_non_cash_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3387,41 +2931,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox125">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>33</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox125</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtFinancialExpensesCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3429,8 +2938,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Math.Abs(Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
-CDbl(Fields!current_amount.Value), 0)))</Value>
+                                  <Value>=Fields!present_financial_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3454,7 +2962,6 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -3499,8 +3006,7 @@ CDbl(Fields!current_amount.Value), 0)))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Expenses").Trim(),
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_financial_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3570,42 +3076,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox15">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox15</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtCurrentOperatingExpensesCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -3613,10 +3083,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtPersonnelServicesCurrent.Value 
-+ ReportItems!txtMaintenanceAndOtherOperatingExpensesCurrent.Value
-+ ReportItems!txtNonCashExpensesCurrent.Value
-+ ReportItems!txtFinancialExpensesCurrent.Value</Value>
+                                  <Value>=Fields!present_current_operating_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3693,10 +3160,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtPersonnelServicesPrevious.Value 
-+ ReportItems!txtMaintenanceAndOtherOperatingExpensesPrevious.Value
-+ ReportItems!txtNonCashExpensesPrevious.Value
-+ ReportItems!txtFinancialExpensesPrevious.Value</Value>
+                                  <Value>=Fields!previous_current_operating_expenses.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -3836,7 +3300,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox31">
+                        <Textbox Name="Textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -3855,42 +3319,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox31</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox32">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox32</rd:DefaultName>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -3939,7 +3368,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox71">
+                        <Textbox Name="Textbox23">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -3958,7 +3387,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox71</rd:DefaultName>
+                          <rd:DefaultName>Textbox23</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -4016,42 +3445,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox109">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox109</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtSurplusDeficitCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -4059,7 +3452,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtTotalRevenueCurrent.Value - ReportItems!txtCurrentOperatingExpensesCurrent.Value</Value>
+                                  <Value>=Fields!present_surplus_deficit_current_operation.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -4129,7 +3522,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=ReportItems!txtTotalRevenuePrevious.Value - ReportItems!txtCurrentOperatingExpensesPrevious.Value</Value>
+                                  <Value>=Fields!previous_surplus_deficit_current_operation.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -4229,7 +3622,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox115">
+                        <Textbox Name="Textbox32">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -4247,41 +3640,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox115</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox116">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox116</rd:DefaultName>
+                          <rd:DefaultName>Textbox32</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -4329,7 +3688,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox118">
+                        <Textbox Name="Textbox34">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -4347,7 +3706,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox118</rd:DefaultName>
+                          <rd:DefaultName>Textbox34</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -4464,40 +3823,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox121">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>19</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox121</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtTransfersAndSubsidyFromCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -4505,8 +3830,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Transfers and Subsidy").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Fields!present_transfers_subsidy_from.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
@@ -4572,8 +3896,7 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(IIF(Fields!major_account_group_name.Value = CStr("Transfers and Subsidy").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_transfers_subsidy_from.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
@@ -4704,41 +4027,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox163">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>29,30</Value>
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox163</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="txtTransfersAndSubsidyToCurrent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -4746,9 +4034,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Assistance/Subsidy").Trim() 
-OR Fields!sub_major_account_group_name.Value = CStr("Transfers").Trim(), 
-CDbl(Fields!current_amount.Value), 0))</Value>
+                                  <Value>=Fields!present_transfers_subsidy_to.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -4816,9 +4102,7 @@ CDbl(Fields!current_amount.Value), 0))</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(IIF(Fields!sub_major_account_group_name.Value = CStr("Financial Assistance/Subsidy").Trim() 
-OR Fields!sub_major_account_group_name.Value = CStr("Transfers").Trim(), 
-CDbl(Fields!previous_amount.Value), 0))</Value>
+                                  <Value>=Fields!previous_transfers_subsidy_to.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -4888,52 +4172,14 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox170">
+                        <Textbox Name="present_surplus_deficit_for_period">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox170</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox171">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=CDec((ReportItems!txtSurplusDeficitCurrent.Value +
-ReportItems!txtTransfersAndSubsidyFromCurrent.Value) - 
-ReportItems!txtTransfersAndSubsidyToCurrent.Value)</Value>
+                                  <Value>=Fields!present_surplus_deficit_for_period.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -4947,7 +4193,7 @@ ReportItems!txtTransfersAndSubsidyToCurrent.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox171</rd:DefaultName>
+                          <rd:DefaultName>present_surplus_deficit_for_period</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -5005,16 +4251,14 @@ ReportItems!txtTransfersAndSubsidyToCurrent.Value)</Value>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox173">
+                        <Textbox Name="previous_surplus_deficit_for_period">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDec((ReportItems!txtSurplusDeficitPrevious.Value + 
-ReportItems!txtTransfersAndSubsidyFromPrevious.Value) - 
-ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
+                                  <Value>=Fields!previous_surplus_deficit_for_period.Value</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -5028,7 +4272,7 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox173</rd:DefaultName>
+                          <rd:DefaultName>previous_surplus_deficit_for_period</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -5056,7 +4300,6 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -5096,7 +4339,7 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
             <DataSetName>dtStatementOfFinancialPerformance</DataSetName>
             <Top>0.88143in</Top>
             <Height>4.12593in</Height>
-            <Width>7.27002in</Width>
+            <Width>7.27in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -5105,7 +4348,7 @@ ReportItems!txtTransfersAndSubsidyToPrevious.Value)</Value>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>6.23014in</Height>
+        <Height>6.40514in</Height>
         <Style />
       </Body>
       <Width>7.27002in</Width>

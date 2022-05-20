@@ -9672,7 +9672,6 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -9841,7 +9840,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>8.65532in</Top>
+            <Top>9.03032in</Top>
             <Left>4.29253in</Left>
             <Height>0.80909in</Height>
             <Width>2.97747in</Width>
@@ -9853,7 +9852,7 @@ CDbl(Fields!previous_amount.Value), 0))</Value>
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>9.65874in</Height>
+        <Height>9.93941in</Height>
         <Style />
       </Body>
       <Width>7.27in</Width>
