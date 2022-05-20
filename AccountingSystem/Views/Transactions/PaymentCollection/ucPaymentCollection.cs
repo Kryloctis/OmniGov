@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal string GetFormErrors()
         {
             var errorArray = new string[9];
-            errorArray[0] = epCollectingOfficer.GetError(cmdCollector);
+            errorArray[0] = epCollectingOfficer.GetError(cmbCollector);
             errorArray[1] = epFund.GetError(cmbFund);
             errorArray[2] = epAccountableForm.GetError(cmbAccountableForms);
             errorArray[3] = epAbstractOfGeneralCollection.GetError(cmbAccount);
@@ -63,17 +63,33 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             isSave = false;
         }
 
-        internal void LoadAccountableFormsByCollectorId(int collectorsId)
+        private void ucPaymentCollection_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadCollectors();
+                LoadFunds();
+                LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(Convert.ToInt32(cmbCollector.SelectedValue));
+                LoadAccounts();
+                GetAccountableFormSerialNumberRange();
+                GetAccountableFormFaceValue();
+                SwitchFields();
+                SelectCurrentLoggedInCollector();
+            }
+        }
+
+        internal void LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(int collectorsId)
         {
             try
             {
-                var accountableFormRepo = Factory.ReceiptsIssuedRepository();
-                var dtAccountableForms = accountableFormRepo.GetIssuedReceiptByCollectorId(collectorsId);
+                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var dtAccountableForms = receiptIssuedRepo.GetIssuedReceiptByCollectorId(collectorsId);
 
-                dtAccountableForms.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc + ' - ' + (quantity)");
+                
+                dtAccountableForms.Columns.Add("accountableForms", typeof(string), "accountable_forms + ' - ' + (quantity)");
                 cmbAccountableForms.DataSource = dtAccountableForms;
                 cmbAccountableForms.ValueMember = "accountable_form_id";
-                cmbAccountableForms.DisplayMember = "accountableForm";
+                cmbAccountableForms.DisplayMember = $"accountableForms";
             }
             catch (Exception ex)
             {
@@ -85,15 +101,33 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var accountableFormsDt = Factory.AccountableFormsRepository().GetRecords();
             HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, accountableFormsDt);
-
-
-            
         }
 
         internal void LoadFunds()
         {
             var fundDt = Factory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(fundDt, cmbFund, "fund_name", "id");
+        }
+
+        internal void LoadCollectors()
+        {
+            try
+            {
+                DataTable dtCollector;
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+
+                if (cbCollectorTypeJO.Checked)
+                    dtCollector = collectingOfficerHasJORepo.GetRecords();
+                else
+                    dtCollector = collectingOfficerRepository.GetRecords();
+
+                HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void SetSelectedValue(int Id, string table)
@@ -110,54 +144,33 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        internal void LoadCollectors()
+        internal void SelectCurrentLoggedInCollector()
         {
-            try
+            if (cmbCollector.Items.Count == 0) return;
+
+            var usersRepo = Factory.UsersRepository();
+            Dictionary<string, string> collectorDict = new();
+
+            if (usersRepo.LinkedCollector(Helper.UserId))
             {
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                cmbCollector.Enabled = false;
+                cbCollectorTypeJO.Enabled = false;
 
-                DataTable dtCollectors = new();
-                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
-                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
-
-                dtRegularCollectors.Merge(dtJOCollectors);
-                dtCollectors = dtRegularCollectors;
-
-                cmdCollector.DataSource = dtCollectors;
-                cmdCollector.ValueMember = "id";
-                cmdCollector.DisplayMember = "fullname";
+                collectorDict = Factory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                cmbCollector.SelectedValue = collectorDict["id"];
             }
-            catch (Exception ex)
+
+            else if (usersRepo.LinkedJobOrder(Helper.UserId))
             {
-                Helper.MessageBoxError(ex.Message);
+                cmbCollector.Enabled = false;
+                cbCollectorTypeJO.Enabled = false;
+                cbCollectorTypeJO.Checked = true;
+
+                collectorDict = Factory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                cmbCollector.SelectedValue = collectorDict["id"];
             }
-        }
 
-        internal void LoadLoggedInCollector()
-        {
-            if (cmdCollector.Items.Count == 0) return;
-
-            var userRepo = Factory.UsersRepository();
-            if (userRepo.LinkedCollector(Helper.UserId) || userRepo.LinkedJobOrder(Helper.UserId))
-            {
-                Dictionary<string, string> collectorDict = new();
-
-                if (Helper.IsJobOrder(Helper.UserId))
-                {
-                    var jobOrderRepo = Factory.JobOrderRepository();
-                    collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                    cmdCollector.SelectedValue = collectorDict["id"];
-                }
-                else
-                {
-                    var colRepository = Factory.CollectingOfficerRepository();
-                    collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                    cmdCollector.SelectedValue = collectorDict["id"];
-                }
-
-                cmdCollector.Enabled = false;
-            }
+            return;
         }
 
         internal bool IsReceiptNumberBetweenFromAndTo(int receiptNumber)
@@ -165,30 +178,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             return (receiptNumber >= serialNumberFrom) && (receiptNumber <= serialNumberTo);
         }
 
-        private void ucPaymentCollection_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                LoadAccountableFormsByCollectorId(Convert.ToInt32(cmdCollector.SelectedValue));
-                LoadCollectors();
-                LoadFunds();
-
-                cmbAccount.SelectedValueChanged -= cmbAccount_SelectedValueChanged;
-                LoadAccounts();
-                cmbAccount.SelectedValueChanged += cmbAccount_SelectedValueChanged;
-
-                cmbAccount.SelectedIndex = -1;
-                cmbFund.SelectedIndex = -1;
-                LoadLoggedInCollector();
-                GetAccountableFormSerialNumberRange();
-            }
-        }
-
         internal void GetAccountableFormSerialNumberRange()
-        {
-            if (cmdCollector.SelectedIndex == -1 || cmbAccountableForms.SelectedIndex == -1) return;
-           
-            var collectingOfficerId = Convert.ToInt32(cmdCollector.SelectedValue).ToString();
+        {   
+            var collectingOfficerId = Convert.ToInt32(cmbCollector.SelectedValue).ToString();
             var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
 
             var dtReceiptIssued = Factory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
@@ -201,12 +193,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         #region Validations
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingOfficer, cmdCollector, "Collecting Officer.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingOfficer, cmbCollector, "Collecting Officer.");
         }
 
         private void cmbcollector_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epCollectingOfficer, cmdCollector);
+            Helper.ClearErrorComboBox(epCollectingOfficer, cmbCollector);
         }
 
 
@@ -373,20 +365,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         }
 
         #endregion
-
-        internal void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbAccountableForms.SelectedIndex == -1)
-                return;
-
-            CreatePaymentCollection();
-        }
+        
 
         private void CreatePaymentCollection()
         {
             DataRowView accountableFormDRV = cmbAccountableForms.SelectedItem as DataRowView;
-            DataRowView collectingOfficerDRV = cmdCollector.SelectedItem as DataRowView;
-
+            DataRowView collectingOfficerDRV = cmbCollector.SelectedItem as DataRowView;
 
             if (accountableFormDRV == null || collectingOfficerDRV == null)
                 return;
@@ -448,42 +432,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             SetCollectionsData(dtReceiptIssued);
         }
 
-        private void EditPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
-        {
-         
-        }
-
-        internal void cmbforms_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (cmbAccountableForms.SelectedIndex != -1) return;
-           
-            GetAccountableFormFaceValue();
-            SwitchFields();
-            txtCashTicketQuantity_TextChanged(sender, e);
-        }
-
-        private void GetAccountableFormFaceValue()
-        {
-            int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
-        }
-
-        internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmdCollector.SelectedIndex == -1) return;
-            
-            DataRowView collector = cmdCollector.SelectedItem as DataRowView;
-            var collectorId = int.Parse(collector[0].ToString());
-
-            LoadAccountableFormsByCollectorId(collectorId);
-        }
-
-        private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
-        }
-
         private DataTable DatatableAccounts()
         {
             DataTable dtAccounts;
@@ -525,58 +473,29 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
-        internal void SwitchFields()
+
+        #region Local Methods
+
+        private void EditPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
         {
-            isCashTicket = cmbAccountableForms.Text.Contains("Tickets");
 
-            if (isCashTicket)
-            {
-                tabPaymentType.SelectedTab = tabCashTickets;
-                isCashTicket = true;
-                txtCashTicketsAmount.Value = accountableFormFaceValue;
-
-            }
-            else
-            {
-                tabPaymentType.SelectedTab = tabNonCashTickets;
-                isCashTicket = false;
-                txtAmount.Value = accountableFormFaceValue;
-            }
         }
 
-        private void txtCashTicketQuantity_TextChanged(object sender, EventArgs e)
+        private void GetAccountableFormFaceValue()
         {
-            var cashTicketAmount = accountableFormFaceValue;
-            var cashTicketQuantity = Convert.ToInt32(txtCashTicketQuantity.Value);
-            var amount = (cashTicketAmount) * (cashTicketQuantity);
-
-            txtCashTicketsAmount.Text = amount.ToString("N2");
+            int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
         }
 
-        private void cmbAccount_SelectedValueChanged(object sender, EventArgs e)
-        {
-            generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
-        }
-
-        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
-            {
-                LoadAccounts();
-                cmbAccount.DroppedDown = true;
-            }
-        }
-        
-        internal void CancelReceiptFieldValidations(bool cancelEvent)
+        internal void CancelNonCashTicketFieldValidations(bool cancelEvent)
         {
             if (cancelEvent)
             {
-               txtAmount.Validating -= new CancelEventHandler(txtAmount_Validating);
-               txtReceiptNumber.Validating -= new CancelEventHandler(txtreceipt_Validating);
-               txtPayee.Validating -= new CancelEventHandler(txtpayee_Validating);
+                txtAmount.Validating -= new CancelEventHandler(txtAmount_Validating);
+                txtReceiptNumber.Validating -= new CancelEventHandler(txtreceipt_Validating);
+                txtPayee.Validating -= new CancelEventHandler(txtpayee_Validating);
             }
             else
             {
@@ -598,6 +517,80 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtPayee.Validating += new CancelEventHandler(txtpayee_Validating);
             }
         }
+
+        internal void SwitchFields()
+        {
+            isCashTicket = cmbAccountableForms.Text.Contains("Tickets");
+
+            if (isCashTicket)
+            {
+                tabPaymentType.SelectedTab = tabCashTickets;
+                isCashTicket = true;
+                txtCashTicketsAmount.Value = accountableFormFaceValue;
+            }
+            else
+            {
+                tabPaymentType.SelectedTab = tabNonCashTickets;
+                isCashTicket = false;
+                txtAmount.Value = accountableFormFaceValue;
+            }
+        }
+
+        #endregion
+
+        #region Form Events
+
+        private void txtreceipt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            {
+                LoadAccounts();
+                cmbAccount.DroppedDown = true;
+            }
+        }
+        private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+        }
+
+        private void txtCashTicketQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            var cashTicketAmount = accountableFormFaceValue;
+            var cashTicketQuantity = Convert.ToInt32(txtCashTicketQuantity.Value);
+            var amount = (cashTicketAmount) * (cashTicketQuantity);
+
+            txtCashTicketsAmount.Text = amount.ToString("N2");
+        }
+
+        internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRowView collector = cmbCollector.SelectedItem as DataRowView;
+            var collectorId = int.Parse(collector[0].ToString());
+
+            LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(collectorId);
+            SwitchFields();
+            CreatePaymentCollection();
+        }
+
+        internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            GetAccountableFormFaceValue();
+            SwitchFields();
+            CreatePaymentCollection();
+        }
+
+        private void cbCollector_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
+        #endregion
+
 
     }
 }

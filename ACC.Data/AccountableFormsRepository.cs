@@ -29,7 +29,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT acc_form_no,acc_form_desc FROM {tableName} WHERE id = @id";
+                string query = $"SELECT acc_form_no, acc_form_desc FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -63,20 +63,7 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int id)
-        {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE id IN (SELECT receipts.accountable_forms_id FROM receipts LEFT JOIN receipts_issued ON receipts_issued.receipts_id = receipts.id WHERE receipts_issued.collecting_officers_id={id} AND IF(IFNULL(receipts_issued.is_returned,0)<1,false,true)=false AND IFNULL(receipts_issued.last_issued,0) < receipts_issued.issueto)";
-
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+    
         public bool Insert(AccountableModel entity)
         {
             try

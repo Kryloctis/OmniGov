@@ -13,7 +13,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetAccountabilityForAccountableForms(string reportNumber);
         DataTable GetReturnedReceipts();
         DataTable GetReturnedReceiptsBySearch(string searchKey);
-        int GetReceiptIssuedQuantityByReceiptId(int receiptId);
+        int GetTotalIssuedReceiptByReceiptId(int receiptId);
         bool CollectingOfficerHasReceiptAssigned(int id);
+        bool ReceiptIsUsed(int receiptId);
     }
 }

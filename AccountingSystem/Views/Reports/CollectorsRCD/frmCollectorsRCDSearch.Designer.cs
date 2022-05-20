@@ -195,7 +195,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btnClose;
         internal System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbstatus;

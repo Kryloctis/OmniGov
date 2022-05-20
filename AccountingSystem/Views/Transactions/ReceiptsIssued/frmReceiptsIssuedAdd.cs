@@ -10,12 +10,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private readonly int _receiptId = 0;
         private readonly ucReceiptsIssued uc;
 
-        public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued, int receiptId)
+        public frmReceiptsIssuedAdd(frmReceiptsIssued frmReceiptsIssued)
         {
             InitializeComponent();
 
             _frmReceiptIssued = frmReceiptsIssued;
-            _receiptId = receiptId;
             uc = ucReceipts1;
         }
 
@@ -23,14 +22,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             if(_receiptId != 0)
             {
-                uc.LoadCollectors(_receiptId);
+                uc.LoadCollectorsWithReceiptIssued(_receiptId);
                 uc.cmbReceipt.SelectedValue = _receiptId;
                 uc.cmbReceipt.Enabled = false;
             }
             else
-            {
-                uc.LoadCollectors();
-            }
+               uc.LoadCollectors();
         }
 
 

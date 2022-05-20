@@ -194,7 +194,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSelectCollections;
         private System.Windows.Forms.TextBox txtCollectionsCount;
         private System.Windows.Forms.MonthCalendar dtto;

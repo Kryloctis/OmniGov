@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             _uc.LoadAccountableForms();
             _uc.LoadCollectors();
             _uc.LoadFunds();
-            _uc.LoadLoggedInCollector();
+            _uc.SelectCurrentLoggedInCollector();
             LoadSelectedValue();
             _uc.GetAccountableFormSerialNumberRange();
             DisableUnEditableFields();
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void DisableUnEditableFields()
         {
-            _uc.cmdCollector.Enabled = false;
+            _uc.cmbCollector.Enabled = false;
             _uc.cmbAccountableForms.Enabled = false;
         }
 
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var regularCollectingOfficerId = paymentCollectionDict["collecting_officers_id"];
                 var jobOrderCollectingOfficerId = paymentCollectionDict["job_orders_id"];
-                _uc.cmdCollector.SelectedValue = string.IsNullOrEmpty(paymentCollectionDict["job_orders_id"]) ? regularCollectingOfficerId : jobOrderCollectingOfficerId; 
+                _uc.cmbCollector.SelectedValue = string.IsNullOrEmpty(paymentCollectionDict["job_orders_id"]) ? regularCollectingOfficerId : jobOrderCollectingOfficerId; 
                 _uc.cmbFund.SelectedValue = paymentCollectionDict["funds_id"];
                 _uc.cmbAccountableForms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
                 _uc.SetSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     _uc.txtAmount.Value = Convert.ToDecimal(paymentCollectionDict["amount"]);
                     receiptSerialNumber = paymentCollectionDict["receipt_no"];
                     _uc.serialNumber = Convert.ToInt32(paymentCollectionDict["receipt_no"]);
-                    _uc.cmdCollector.Enabled = false;
+                    _uc.cmbCollector.Enabled = false;
                 }
                 else
                 {
@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             if (uc.isCashTicket)
             {
-                uc.CancelReceiptFieldValidations(true);
+                uc.CancelNonCashTicketFieldValidations(true);
                 UpdateCashTickets();
             }
 
@@ -144,7 +144,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
-                    CollectingOfficerId = Convert.ToInt32(_uc.cmdCollector.SelectedValue),
+                    CollectingOfficerId = Convert.ToInt32(_uc.cmbCollector.SelectedValue),
                     FundId = Convert.ToInt32(_uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(_uc.cmbAccountableForms.SelectedValue),
                     GeneralLedgerAccountId = _uc.generalLedgerId,

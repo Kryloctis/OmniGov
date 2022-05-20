@@ -11,10 +11,6 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "real_properties";
-        private const string viewLandProperties = "view_land_properties";
-        private const string viewBuildingProperties = "view_building_properties";
-        private readonly string viewMachineryProperties = "view_machinery_properties";
-
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
 
         public RealPropertiesRepository(IDbGenericCommands dbGenericCommands)

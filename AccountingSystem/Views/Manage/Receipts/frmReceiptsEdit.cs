@@ -41,7 +41,9 @@ namespace AccountingSystem.Views.Manage.Receipts
                 uc.dtpReceivedDate.Value = Convert.ToDateTime(rcdata["received_date"]);
                 uc.txtQuantity.Text = rcdata["quantity"];
                 uc.txtRemark.Text = rcdata["remarks"];
-                if (rcRepository.ReceiptsIssued(uc.receiptId))
+
+                var receiptIsUsed = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(uc.receiptId);
+                if (receiptIsUsed)
                 {
                     uc.cmbAccountableForms.Enabled = false;
                     uc.txtReceiptNumberFrom.Enabled = false;
