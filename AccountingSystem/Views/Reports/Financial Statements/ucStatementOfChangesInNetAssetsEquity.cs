@@ -18,16 +18,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private decimal GetBeginningBalance(byte fundId, ushort genLedgerId, DateTime date)
-        {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, genLedgerId, date);
-            decimal beginningBalanceDebit = dictBeginningBalance["beginning_balance_debit"];
-            decimal beginningBalanceCredit = dictBeginningBalance["beginning_balance_credit"];
-            decimal beginningBalance = beginningBalanceDebit - beginningBalanceCredit;
-
-            return Math.Abs(beginningBalance);
-        }
-
         private DataTable StatementOfChangesInNetAssetsEquityDatatable()
         {
             var dataSet = new dsLFS();
@@ -38,19 +28,26 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 byte fundId = Convert.ToByte(cmbxFunds.SelectedValue);
                 var presentYear = dtPickerDateEnds.Value;
                 var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
-                decimal presentBeginningBalance = GetBeginningBalance(fundId, 331, presentYear);
-                decimal previousBeginningBalance = GetBeginningBalance(fundId, 331, previousYear);
-                decimal presentSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, presentYear).SurplusDeficitPeriod();
-                decimal previousSurplusDeficit = new StatementOfFinancialPerformanceData(fundId, previousYear).SurplusDeficitPeriod();
 
-                var records = new object[] { presentBeginningBalance, 0, 0, 0, 0, presentSurplusDeficit, previousBeginningBalance, 0, 0, 0, 0, previousSurplusDeficit };
+                var dictStatementOfChanges = new StatementOfChangesInNetAssetsEquityData().GetStatementOfChangesOfAssetsEquity(fundId, presentYear, previousYear);
+
+                var records = new object[] {
+                    dictStatementOfChanges["present_starting_balance"],
+                    0,
+                    0,
+                    0,
+                    0,
+                    dictStatementOfChanges["present_surplus_deficits_for_the_period"],
+                    dictStatementOfChanges["previous_starting_balance"],
+                    0,
+                    0,
+                    0,
+                    0,
+                    dictStatementOfChanges["previous_surplus_deficits_for_the_period"] };
 
                 dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
             return dtStatementOfChangesInNetAssetsEquity;
         }

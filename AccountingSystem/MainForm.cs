@@ -341,6 +341,13 @@ namespace AccountingSystem
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
             }
 
+            if (Helper.HasPermission("Report Statement of Cash Flows"))
+            {
+                radSCF.Enabled = true;
+                tabControlFinancialStatements.TabPages.Add(tabPageSCF);
+            }
+
+
             if (Helper.HasPermission("Report Statement of Financial Position"))
                 radSFPosition.Checked = true;
             else if (Helper.HasPermission("Report Statement of Financial Performance"))

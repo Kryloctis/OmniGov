@@ -1,35 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
 {
     public partial class StatementOfFinancialPerformanceData
     {
-        private byte _fundId;
-        private DateTime _date;
-
-        public StatementOfFinancialPerformanceData(byte fundId, DateTime date)
+        internal decimal GetTaxRevenue(byte fundId, DateTime date)
         {
-            _date = date;
-            _fundId = fundId;
-        }
-
-        internal decimal GetTaxRevenue()
-        {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 33, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 22, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 33, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 22, date);
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
-            decimal shareIntervalRevenue = GetShareIntervalRevenue();
+            decimal shareIntervalRevenue = GetShareIntervalRevenue(fundId, date);
             decimal endingBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
             decimal sum = Math.Abs(endingBalance) - shareIntervalRevenue;
 
             return Math.Abs(sum);
         }
 
-        internal decimal GetShareIntervalRevenue()
+        internal decimal GetShareIntervalRevenue(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(_fundId, 381, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(_fundId, 381, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, 381, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundId, 381, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -38,10 +30,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetOtherShareNationalTaxes()
+        internal decimal GetOtherShareNationalTaxes(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 64, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 64, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 64, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 64, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -50,10 +42,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetServicesBusinessIncome()
+        internal decimal GetServicesBusinessIncome(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 23, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 23, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 23, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 23, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -62,10 +54,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetSharesGrantsDonations()
+        internal decimal GetSharesGrantsDonations(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 65, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 65, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 65, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 65, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -74,10 +66,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetGains()
+        internal decimal GetGains(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 26, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 26, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 26, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 26, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -86,10 +78,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetOtherIncome()
+        internal decimal GetOtherIncome(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 27, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 27, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 27, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 27, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -98,25 +90,25 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetTotalRevenue()
+        internal decimal GetTotalRevenue(byte fundId, DateTime date)
         {
-            decimal taxRevenue = GetTaxRevenue();
-            decimal shareIntervalRevenue = GetShareIntervalRevenue();
-            decimal otherShareNationalTaxes = GetOtherShareNationalTaxes();
-            decimal servicesBusinessIncome = GetServicesBusinessIncome();
-            decimal shareGrantsDonations = GetSharesGrantsDonations();
-            decimal gains = GetGains();
-            decimal otherIncome = GetOtherIncome();
+            decimal taxRevenue = GetTaxRevenue(fundId, date);
+            decimal shareIntervalRevenue = GetShareIntervalRevenue(fundId, date);
+            decimal otherShareNationalTaxes = GetOtherShareNationalTaxes(fundId, date);
+            decimal servicesBusinessIncome = GetServicesBusinessIncome(fundId, date);
+            decimal shareGrantsDonations = GetSharesGrantsDonations(fundId, date);
+            decimal gains = GetGains(fundId, date);
+            decimal otherIncome = GetOtherIncome(fundId, date);
 
 
             decimal totalRevenue = taxRevenue + shareIntervalRevenue + otherShareNationalTaxes + servicesBusinessIncome + shareGrantsDonations + gains + otherIncome;
             return totalRevenue;
         }
 
-        internal decimal GetPersonnelServices()
+        internal decimal GetPersonnelServices(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 28, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 28, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 28, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 28, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -125,16 +117,16 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetMaintenanceOtherOperatingExpenses()
+        internal decimal GetMaintenanceOtherOperatingExpenses(byte fundId, DateTime date)
         {
-            var dictBeginningBalance1 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 29, _date);
-            var dictTransaction1 = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 29, _date);
+            var dictBeginningBalance1 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 29, date);
+            var dictTransaction1 = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 29, date);
 
-            var dictBeginningBalance2 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 87, _date);
-            var dictTransaction2 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 87, _date);
+            var dictBeginningBalance2 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 87, date);
+            var dictTransaction2 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 87, date);
 
-            var dictBeginningBalance3 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 88, _date);
-            var dictTransaction3 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 88, _date);
+            var dictBeginningBalance3 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 88, date);
+            var dictTransaction3 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 88, date);
 
             decimal totalBeginningAndTransDebit =
                 (dictBeginningBalance1["beginning_balance_debit"] + dictTransaction1["debit"])
@@ -151,10 +143,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetNonCashExpenses()
+        internal decimal GetNonCashExpenses(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 32, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 32, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 32, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 32, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -163,10 +155,10 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetFinancialExpenses()
+        internal decimal GetFinancialExpenses(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 30, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 30, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 30, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 30, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -175,22 +167,22 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetCurrentOperatingExpenses()
+        internal decimal GetCurrentOperatingExpenses(byte fundId, DateTime date)
         {
-            decimal currentOperatingExpenses = GetPersonnelServices() + GetMaintenanceOtherOperatingExpenses() + GetNonCashExpenses() + GetFinancialExpenses();
+            decimal currentOperatingExpenses = GetPersonnelServices(fundId, date) + GetMaintenanceOtherOperatingExpenses(fundId, date) + GetNonCashExpenses(fundId, date) + GetFinancialExpenses(fundId, date);
             return currentOperatingExpenses;
         }
 
-        internal decimal GetSurplusDeficitFromCurrentOperation()
+        internal decimal GetSurplusDeficitFromCurrentOperation(byte fundId, DateTime date)
         {
-            decimal SurplusDeficitFromCurrentOperation = GetTotalRevenue() - GetCurrentOperatingExpenses();
+            decimal SurplusDeficitFromCurrentOperation = GetTotalRevenue(fundId, date) - GetCurrentOperatingExpenses(fundId, date);
             return SurplusDeficitFromCurrentOperation;
         }
 
-        internal decimal GetTransferSubsidyFrom()
+        internal decimal GetTransferSubsidyFrom(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(_fundId, 24, _date);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(_fundId, 24, _date);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_MajAccGrpId_Date_SubLedgeId(fundId, 24, date);
+            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByMajAccGrpId(fundId, 24, date);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -199,13 +191,13 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal GetTransferSubsidyTo()
+        internal decimal GetTransferSubsidyTo(byte fundId, DateTime date)
         {
-            var dictBeginningBalance1 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 85, _date);
-            var dictTransaction1 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 85, _date);
+            var dictBeginningBalance1 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 85, date);
+            var dictTransaction1 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 85, date);
 
-            var dictBeginningBalance2 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(_fundId, 86, _date);
-            var dictTransaction2 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(_fundId, 86, _date);
+            var dictBeginningBalance2 = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_SubMajAccGrpId_Date_SubLedgeId(fundId, 86, date);
+            var dictTransaction2 = Factory.JEVAccountsRepository().GetSumTransactionsBySubMajAccGrpId(fundId, 86, date);
 
             decimal totalBeginningAndTransDebit =
                 (dictBeginningBalance1["beginning_balance_debit"] + dictTransaction1["debit"])
@@ -217,10 +209,54 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return Math.Abs(balance);
         }
 
-        internal decimal SurplusDeficitPeriod()
+        internal decimal SurplusDeficitPeriod(byte fundId, DateTime date)
         {
-            decimal surplusDeficitPeriod = GetSurplusDeficitFromCurrentOperation() + GetTransferSubsidyFrom() - GetTransferSubsidyTo();
+            decimal surplusDeficitPeriod = GetSurplusDeficitFromCurrentOperation(fundId, date) + GetTransferSubsidyFrom(fundId, date) - GetTransferSubsidyTo(fundId, date);
             return surplusDeficitPeriod;
+        }
+
+        internal Dictionary<string, dynamic> GetStatementOfFiancialPerformanceData(byte fundId, DateTime present, DateTime previous)
+        {
+            var dict = new Dictionary<string, dynamic>();
+
+            dict.Add("present_tax_revenue", GetTaxRevenue(fundId, present));
+            dict.Add("present_share_from_internal_revenue_collections", GetShareIntervalRevenue(fundId, present));
+            dict.Add("present_other_share_from_national_taxes", GetOtherShareNationalTaxes(fundId, present));
+            dict.Add("present_service_and_business_income", GetServicesBusinessIncome(fundId, present));
+            dict.Add("present_shares_grants_and_donations", GetSharesGrantsDonations(fundId, present));
+            dict.Add("present_gains", GetGains(fundId, present));
+            dict.Add("present_other_income", GetOtherIncome(fundId, present));
+            dict.Add("present_total_revenue", GetTotalRevenue(fundId, present));
+            dict.Add("present_personnel_services", GetPersonnelServices(fundId, present));
+            dict.Add("present_maintenance_and_other_operating_expenses", GetMaintenanceOtherOperatingExpenses(fundId, present));
+            dict.Add("present_non_cash_expenses", GetNonCashExpenses(fundId, present));
+            dict.Add("present_financial_expenses", GetFinancialExpenses(fundId, present));
+            dict.Add("present_current_operating_expenses", GetCurrentOperatingExpenses(fundId, present));
+            dict.Add("present_surplus_deficit_from_current_operation", GetSurplusDeficitFromCurrentOperation(fundId, present));
+            dict.Add("present_transfers_and_subsidy_from", GetTransferSubsidyFrom(fundId, present));
+            dict.Add("present_transfers_and_subsidy_to", GetTransferSubsidyTo(fundId, present));
+            dict.Add("present_surplus_deficit_for_the_period", SurplusDeficitPeriod(fundId, present));
+
+            dict.Add("previous_tax_revenue", GetTaxRevenue(fundId, previous));
+            dict.Add("previous_share_from_internal_revenue_collections", GetShareIntervalRevenue(fundId, previous));
+            dict.Add("previous_other_share_from_national_taxes", GetOtherShareNationalTaxes(fundId, previous));
+            dict.Add("previous_service_and_business_income", GetServicesBusinessIncome(fundId, previous));
+            dict.Add("previous_shares_grants_and_donations", GetSharesGrantsDonations(fundId, previous));
+            dict.Add("previous_gains", GetGains(fundId, previous));
+            dict.Add("previous_other_income", GetOtherIncome(fundId, previous));
+            dict.Add("previous_total_revenue", GetTotalRevenue(fundId, previous));
+            dict.Add("previous_personnel_services", GetPersonnelServices(fundId, previous));
+            dict.Add("previous_maintenance_and_other_operating_expenses", GetMaintenanceOtherOperatingExpenses(fundId, previous));
+            dict.Add("previous_non_cash_expenses", GetNonCashExpenses(fundId, previous));
+            dict.Add("previous_financial_expenses", GetFinancialExpenses(fundId, previous));
+            dict.Add("previous_current_operating_expenses", GetCurrentOperatingExpenses(fundId, previous));
+            dict.Add("previous_surplus_deficit_from_current_operation", GetSurplusDeficitFromCurrentOperation(fundId, previous));
+            dict.Add("previous_transfers_and_subsidy_from", GetTransferSubsidyFrom(fundId, previous));
+            dict.Add("previous_transfers_and_subsidy_to", GetTransferSubsidyTo(fundId, previous));
+            dict.Add("previous_surplus_deficit_for_the_period", SurplusDeficitPeriod(fundId, previous));
+
+
+            return dict;
         }
     }
 }
