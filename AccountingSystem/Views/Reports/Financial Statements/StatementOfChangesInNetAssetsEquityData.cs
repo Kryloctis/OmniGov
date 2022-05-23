@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         internal decimal GetSurplusDeficitForThePeriod(byte fundId, DateTime date)
         {
-            decimal statementOfFinancialPerformanceData = new StatementOfFinancialPerformanceData(fundId, date).SurplusDeficitPeriod();
+            decimal statementOfFinancialPerformanceData = new StatementOfFinancialPerformanceData().SurplusDeficitPeriod(fundId, date);
 
             return statementOfFinancialPerformanceData;
         }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Financial_Statements
@@ -19,27 +18,50 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private object[] Records(StatementOfFinancialPerformanceData entity)
+        private object[] StatementOfFinancialPerformanceData()
         {
+            byte fundsId = (byte)cmbxFunds.SelectedValue;
+            var presentDate = dtPickerDateEnds.Value;
+            var previousDate = new DateTime(year: presentDate.Year - 1, month: 12, DateTime.DaysInMonth(presentDate.Year, 12));
+
+            var dict = new StatementOfFinancialPerformanceData().GetStatementOfFiancialPerformanceData(fundsId, presentDate, previousDate);
+
             var records = new object[]
             {
-                entity.GetTaxRevenue(),
-                entity.GetShareIntervalRevenue(),
-                entity.GetOtherShareNationalTaxes(),
-                entity.GetServicesBusinessIncome(),
-                entity.GetSharesGrantsDonations(),
-                entity.GetGains(),
-                entity.GetOtherIncome(),
-                entity.GetTotalRevenue(),
-                entity.GetPersonnelServices(),
-                entity.GetMaintenanceOtherOperatingExpenses(),
-                entity.GetNonCashExpenses(),
-                entity.GetFinancialExpenses(),
-                entity.GetCurrentOperatingExpenses(),
-                entity.GetSurplusDeficitFromCurrentOperation(),
-                entity.GetTransferSubsidyFrom(),
-                entity.GetTransferSubsidyTo(),
-                entity.SurplusDeficitPeriod()
+                dict["present_tax_revenue"],
+                dict["present_share_from_internal_revenue_collections"],
+                dict["present_other_share_from_national_taxes"],
+                dict["present_service_and_business_income"],
+                dict["present_shares_grants_and_donations"],
+                dict["present_gains"],
+                dict["present_other_income"],
+                dict["present_total_revenue"],
+                dict["present_personnel_services"],
+                dict["present_maintenance_and_other_operating_expenses"],
+                dict["present_non_cash_expenses"],
+                dict["present_financial_expenses"],
+                dict["present_current_operating_expenses"],
+                dict["present_surplus_deficit_from_current_operation"],
+                dict["present_transfers_and_subsidy_from"],
+                dict["present_transfers_and_subsidy_to"],
+                dict["present_surplus_deficit_for_the_period"],
+                dict["previous_tax_revenue"],
+                dict["previous_share_from_internal_revenue_collections"],
+                dict["previous_other_share_from_national_taxes"],
+                dict["previous_service_and_business_income"],
+                dict["previous_shares_grants_and_donations"],
+                dict["previous_gains"],
+                dict["previous_other_income"],
+                dict["previous_total_revenue"],
+                dict["previous_personnel_services"],
+                dict["previous_maintenance_and_other_operating_expenses"],
+                dict["previous_non_cash_expenses"],
+                dict["previous_financial_expenses"],
+                dict["previous_current_operating_expenses"],
+                dict["previous_surplus_deficit_from_current_operation"],
+                dict["previous_transfers_and_subsidy_from"],
+                dict["previous_transfers_and_subsidy_to"],
+                dict["previous_surplus_deficit_for_the_period"]
             };
 
             return records;
@@ -53,15 +75,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             try
             {
-                byte fundsId = (byte)cmbxFunds.SelectedValue;
-                var presentDate = dtPickerDateEnds.Value;
-                var previousDate = new DateTime(year: presentDate.Year - 1, month: 12, DateTime.DaysInMonth(presentDate.Year, 12));
-                var presentRecord = new StatementOfFinancialPerformanceData(fundsId, presentDate);
-                var previousRecord = new StatementOfFinancialPerformanceData(fundsId, previousDate);
-
-                var concatenatedArrays = Records(presentRecord).Concat(Records(previousRecord)).ToArray();
-
-                dtStatementOfFinancialPerformance.Rows.Add(concatenatedArrays);
+                dtStatementOfFinancialPerformance.Rows.Add(StatementOfFinancialPerformanceData());
             }
 
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
