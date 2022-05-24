@@ -658,5 +658,17 @@ namespace AccountingSystem
         {
             _ = new frmSAAOBB().ShowDialog();
         }
+
+
+        #region Treasury
+
+
+
+        #endregion
+
+        private void tabControlAccounting_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

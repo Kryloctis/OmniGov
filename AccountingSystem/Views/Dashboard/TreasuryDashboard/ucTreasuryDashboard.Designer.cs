@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.btnReportCollections = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIssueReceipt = new System.Windows.Forms.Button();
@@ -39,22 +38,9 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnReportOfCollections = new System.Windows.Forms.Button();
             this.btnRCD = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.ucrcdDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 30);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1074, 361);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 0;
             // 
             // btnReportCollections
             // 
@@ -188,11 +174,19 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ucrcdDashboard1
+            // 
+            this.ucrcdDashboard1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucrcdDashboard1.Location = new System.Drawing.Point(0, 30);
+            this.ucrcdDashboard1.Name = "ucrcdDashboard1";
+            this.ucrcdDashboard1.Size = new System.Drawing.Size(1074, 147);
+            this.ucrcdDashboard1.TabIndex = 3;
+            // 
             // ucTreasuryDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.ucrcdDashboard1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "ucTreasuryDashboard";
             this.Size = new System.Drawing.Size(1074, 391);
@@ -205,7 +199,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         }
 
         #endregion
-        internal System.Windows.Forms.TabControl tabControl1;
         internal System.Windows.Forms.ToolStripButton btnReportCollections;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnIssueReceipt;
@@ -215,5 +208,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.Button btnReportOfCollections;
         internal System.Windows.Forms.Button btnRCD;
         internal System.Windows.Forms.Button button1;
+        private ucRCDSummary ucrcdDashboard1;
     }
 }
