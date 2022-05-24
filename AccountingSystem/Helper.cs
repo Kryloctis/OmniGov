@@ -144,26 +144,22 @@ namespace AccountingSystem
         {
             var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
 
-            try
-            {
-                dictSignatoriesReferencedDocument = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+            dictSignatoriesReferencedDocument = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
 
-                string prefix = dictSignatoriesReferencedDocument["signatories_prefix"].ToString();
-                string firstName = dictSignatoriesReferencedDocument["signatories_first_name"].ToString();
-                string middleInitial = dictSignatoriesReferencedDocument["signatories_middle_initial"].ToString();
-                string lastName = dictSignatoriesReferencedDocument["signatories_last_name"].ToString();
-                string suffix = dictSignatoriesReferencedDocument["signatories_suffix"].ToString();
+            if (dictSignatoriesReferencedDocument.Count < 1)
+                return dictSignatoriesReferencedDocument;
 
-                string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+            string prefix = dictSignatoriesReferencedDocument["signatories_prefix"].ToString();
+            string firstName = dictSignatoriesReferencedDocument["signatories_first_name"].ToString();
+            string middleInitial = dictSignatoriesReferencedDocument["signatories_middle_initial"].ToString();
+            string lastName = dictSignatoriesReferencedDocument["signatories_last_name"].ToString();
+            string suffix = dictSignatoriesReferencedDocument["signatories_suffix"].ToString();
+
+            string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
 
 
+            dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
 
-                dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
             return dictSignatoriesReferencedDocument;
         }
 

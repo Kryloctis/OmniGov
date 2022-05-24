@@ -57,6 +57,7 @@
     <None Remove="Reports\statement-of-changes-in-net-assets-equity.rdlc" />
     <None Remove="Reports\statement-of-financial-performance.rdlc" />
     <None Remove="Reports\statement-of-financial-position-report.rdlc" />
+    <None Remove="Reports\statement_of_cash_flows.rdlc" />
     <None Remove="Reports\status-of-appropriations-allotments-and-obligation.rdlc" />
     <None Remove="Reports\subsidiary-ledger.rdlc" />
     <None Remove="Views\Dashboard\BudgetDashboard\ucBudgetSummary.resx~RF15fbe303.TMP" />
@@ -124,6 +125,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\statement-of-financial-position-report.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\statement_of_cash_flows.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\status-of-appropriations-allotments-and-obligation.rdlc">
