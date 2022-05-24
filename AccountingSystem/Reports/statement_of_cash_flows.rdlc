@@ -19,111 +19,111 @@
       <Fields>
         <Field Name="collection_from_taxpayers">
           <DataField>collection_from_taxpayers</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="share_from_internal_revenue_allotment">
           <DataField>share_from_internal_revenue_allotment</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="receipts_from_business_service_income">
           <DataField>receipts_from_business_service_income</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="interest_income">
           <DataField>interest_income</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="dividend_income">
           <DataField>dividend_income</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="other_receipts">
           <DataField>other_receipts</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="payment_expenses">
           <DataField>payment_expenses</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="payments_to_suppliers_and_creditors">
           <DataField>payments_to_suppliers_and_creditors</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="payments_to_employees">
           <DataField>payments_to_employees</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="interest_expense">
           <DataField>interest_expense</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="other_expenses">
           <DataField>other_expenses</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="proceeds_from_sale_of_investment_property">
           <DataField>proceeds_from_sale_of_investment_property</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="proceeds_from_sale_disposal_of_property_plant_and_equipment">
           <DataField>proceeds_from_sale_disposal_of_property_plant_and_equipment</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="proceeds_from_sale_of_non_current_investments">
           <DataField>proceeds_from_sale_of_non_current_investments</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="collection_of_principal_on_loans_to_other_entities">
           <DataField>collection_of_principal_on_loans_to_other_entities</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="purchase_construction_of_investment_property">
           <DataField>purchase_construction_of_investment_property</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="purchase_construction_of_property_plant_and_equipment">
           <DataField>purchase_construction_of_property_plant_and_equipment</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="investment">
           <DataField>investment</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="purchase_of_bearer_biological_assets">
           <DataField>purchase_of_bearer_biological_assets</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="purchase_of_intangible_assets">
           <DataField>purchase_of_intangible_assets</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="grant_of_loans">
           <DataField>grant_of_loans</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="proceeds_from_issuance_of_bonds">
           <DataField>proceeds_from_issuance_of_bonds</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="proceeds_from_loans">
           <DataField>proceeds_from_loans</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="payment_of_long_term_liabilities">
           <DataField>payment_of_long_term_liabilities</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="retirement_redemption_of_debt_securities">
           <DataField>retirement_redemption_of_debt_securities</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="payment_of_loan_amortization">
           <DataField>payment_of_loan_amortization</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="cash_at_the_beginnig_of_the_year">
           <DataField>cash_at_the_beginnig_of_the_year</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -171,7 +171,7 @@
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.1875in</Top>
             <Height>0.32576in</Height>
-            <Width>7.72137in</Width>
+            <Width>7.27002in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -203,7 +203,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Height>0.1875in</Height>
-            <Width>7.72137in</Width>
+            <Width>7.27002in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -240,7 +240,7 @@
             <rd:DefaultName>Textbox1</rd:DefaultName>
             <Top>0.51326in</Top>
             <Height>0.1875in</Height>
-            <Width>7.72137in</Width>
+            <Width>7.27002in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -253,13 +253,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.40712in</Width>
+                  <Width>0.1875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.74046in</Width>
+                  <Width>5.02376in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.57379in</Width>
+                  <Width>2.05876in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -3442,6 +3442,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3517,6 +3518,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3868,6 +3870,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -3969,6 +3972,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4074,6 +4078,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4250,6 +4255,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4351,6 +4357,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4452,6 +4459,7 @@
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4558,6 +4566,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4633,6 +4642,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4812,6 +4822,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -4958,6 +4969,7 @@
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -5048,8 +5060,8 @@
             </TablixRowHierarchy>
             <DataSetName>dtStatementOfCashFlows</DataSetName>
             <Top>0.94667in</Top>
-            <Height>9.52287in</Height>
-            <Width>7.72137in</Width>
+            <Height>9.52296in</Height>
+            <Width>7.27002in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -5237,8 +5249,8 @@
               </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
-            <Top>10.83978in</Top>
-            <Left>3.55993in</Left>
+            <Top>10.96477in</Top>
+            <Left>3.10858in</Left>
             <Height>1.03961in</Height>
             <Width>4.16144in</Width>
             <ZIndex>4</ZIndex>
@@ -5249,10 +5261,10 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>12.14213in</Height>
+        <Height>12.36088in</Height>
         <Style />
       </Body>
-      <Width>7.72137in</Width>
+      <Width>7.27002in</Width>
       <Page>
         <PageFooter>
           <Height>0.26389in</Height>
@@ -5272,7 +5284,7 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Year(Parameters!paramAsOf.Value)</Value>
+                      <Value>=Year(Parameters!paramDate.Value)</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
                         <FontSize>9pt</FontSize>
@@ -5299,7 +5311,7 @@
               <rd:DefaultName>Textbox301</rd:DefaultName>
               <Top>0.01389in</Top>
               <Height>0.25in</Height>
-              <Width>4.84474in</Width>
+              <Width>4.27182in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -5350,8 +5362,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>0.01389in</Top>
-              <Left>5.06349in</Left>
+              <Left>4.61214in</Left>
               <Height>0.25in</Height>
               <Width>2.65788in</Width>
               <ZIndex>1</ZIndex>
@@ -5372,10 +5383,12 @@
             </Border>
           </Style>
         </PageFooter>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -5400,12 +5413,6 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="paramFund">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="paramAsOf">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
@@ -5436,11 +5443,6 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>paramFund</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>paramAsOf</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
