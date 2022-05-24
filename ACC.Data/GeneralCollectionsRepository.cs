@@ -471,6 +471,12 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public int GetRCDCount()
+        {
+            string query = $"SELECT COUNT(id) FROM {tableGeneralCollections}";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+        }
     }
 }
  

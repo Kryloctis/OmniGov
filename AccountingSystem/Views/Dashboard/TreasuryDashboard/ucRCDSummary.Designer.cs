@@ -29,27 +29,33 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucRCDSummary));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlPendingJEV = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lnkPending = new System.Windows.Forms.LinkLabel();
-            this.lblPendingJEVCounter = new System.Windows.Forms.Label();
+            this.lblPendingRCDCounter = new System.Windows.Forms.Label();
             this.pnlApprovedJEV = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lnkApproved = new System.Windows.Forms.LinkLabel();
-            this.lblApprovedJEVCounter = new System.Windows.Forms.Label();
+            this.lblApprovedRCDCounter = new System.Windows.Forms.Label();
             this.pnlJEV = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lnkJEV = new System.Windows.Forms.LinkLabel();
-            this.lblJEVCounter = new System.Windows.Forms.Label();
+            this.lnkRCD = new System.Windows.Forms.LinkLabel();
+            this.lblRCDCounter = new System.Windows.Forms.Label();
             this.pnlDisapproved = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.linkDisapproved = new System.Windows.Forms.LinkLabel();
-            this.lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
+            this.lblDisapprovedRCDCounter = new System.Windows.Forms.Label();
             this.pnlCancelled = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.lnkCancelled = new System.Windows.Forms.LinkLabel();
-            this.lblCancelledJEVCounter = new System.Windows.Forms.Label();
+            this.lblCancelledRCDCounter = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.cbMonth = new System.Windows.Forms.ComboBox();
+            this.nudYear = new System.Windows.Forms.NumericUpDown();
+            this.btnRefreshCounter = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlPendingJEV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -61,10 +67,14 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.pnlCancelled.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -76,8 +86,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.tableLayoutPanel1.Controls.Add(this.pnlJEV, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlDisapproved, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.pnlCancelled, 4, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 42);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -93,7 +102,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPendingJEV.Controls.Add(this.pictureBox3);
             this.pnlPendingJEV.Controls.Add(this.lnkPending);
-            this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
+            this.pnlPendingJEV.Controls.Add(this.lblPendingRCDCounter);
             this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPendingJEV.Location = new System.Drawing.Point(487, 13);
             this.pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
@@ -129,17 +138,17 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.lnkPending.Text = "Pending RCD";
             this.lnkPending.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblPendingJEVCounter
+            // lblPendingRCDCounter
             // 
-            this.lblPendingJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
-            this.lblPendingJEVCounter.Size = new System.Drawing.Size(234, 61);
-            this.lblPendingJEVCounter.TabIndex = 6;
-            this.lblPendingJEVCounter.Text = "0";
-            this.lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblPendingRCDCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblPendingRCDCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPendingRCDCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPendingRCDCounter.Location = new System.Drawing.Point(0, 0);
+            this.lblPendingRCDCounter.Name = "lblPendingRCDCounter";
+            this.lblPendingRCDCounter.Size = new System.Drawing.Size(234, 61);
+            this.lblPendingRCDCounter.TabIndex = 6;
+            this.lblPendingRCDCounter.Text = "0";
+            this.lblPendingRCDCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlApprovedJEV
             // 
@@ -147,7 +156,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlApprovedJEV.Controls.Add(this.pictureBox2);
             this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
-            this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
+            this.pnlApprovedJEV.Controls.Add(this.lblApprovedRCDCounter);
             this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlApprovedJEV.Location = new System.Drawing.Point(245, 13);
             this.pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
@@ -183,25 +192,25 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.lnkApproved.Text = "Approved RCD";
             this.lnkApproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblApprovedJEVCounter
+            // lblApprovedRCDCounter
             // 
-            this.lblApprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
-            this.lblApprovedJEVCounter.Size = new System.Drawing.Size(234, 61);
-            this.lblApprovedJEVCounter.TabIndex = 6;
-            this.lblApprovedJEVCounter.Text = "0";
-            this.lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblApprovedRCDCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblApprovedRCDCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblApprovedRCDCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblApprovedRCDCounter.Location = new System.Drawing.Point(0, 0);
+            this.lblApprovedRCDCounter.Name = "lblApprovedRCDCounter";
+            this.lblApprovedRCDCounter.Size = new System.Drawing.Size(234, 61);
+            this.lblApprovedRCDCounter.TabIndex = 6;
+            this.lblApprovedRCDCounter.Text = "0";
+            this.lblApprovedRCDCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlJEV
             // 
             this.pnlJEV.BackColor = System.Drawing.Color.White;
             this.pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlJEV.Controls.Add(this.pictureBox1);
-            this.pnlJEV.Controls.Add(this.lnkJEV);
-            this.pnlJEV.Controls.Add(this.lblJEVCounter);
+            this.pnlJEV.Controls.Add(this.lnkRCD);
+            this.pnlJEV.Controls.Add(this.lblRCDCounter);
             this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlJEV.Location = new System.Drawing.Point(3, 13);
             this.pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
@@ -219,35 +228,35 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
-            // lnkJEV
+            // lnkRCD
             // 
-            this.lnkJEV.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkJEV.BackColor = System.Drawing.Color.Transparent;
-            this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkJEV.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkJEV.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkJEV.Location = new System.Drawing.Point(0, 61);
-            this.lnkJEV.Name = "lnkJEV";
-            this.lnkJEV.Size = new System.Drawing.Size(234, 23);
-            this.lnkJEV.TabIndex = 15;
-            this.lnkJEV.TabStop = true;
-            this.lnkJEV.Text = "RCD";
-            this.lnkJEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lnkRCD.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkRCD.BackColor = System.Drawing.Color.Transparent;
+            this.lnkRCD.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lnkRCD.DisabledLinkColor = System.Drawing.Color.Silver;
+            this.lnkRCD.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkRCD.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lnkRCD.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lnkRCD.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lnkRCD.Location = new System.Drawing.Point(0, 61);
+            this.lnkRCD.Name = "lnkRCD";
+            this.lnkRCD.Size = new System.Drawing.Size(234, 23);
+            this.lnkRCD.TabIndex = 15;
+            this.lnkRCD.TabStop = true;
+            this.lnkRCD.Text = "RCD";
+            this.lnkRCD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblJEVCounter
+            // lblRCDCounter
             // 
-            this.lblJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblJEVCounter.Name = "lblJEVCounter";
-            this.lblJEVCounter.Size = new System.Drawing.Size(234, 61);
-            this.lblJEVCounter.TabIndex = 6;
-            this.lblJEVCounter.Text = "0";
-            this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblRCDCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRCDCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblRCDCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblRCDCounter.Location = new System.Drawing.Point(0, 0);
+            this.lblRCDCounter.Name = "lblRCDCounter";
+            this.lblRCDCounter.Size = new System.Drawing.Size(234, 61);
+            this.lblRCDCounter.TabIndex = 6;
+            this.lblRCDCounter.Text = "0";
+            this.lblRCDCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlDisapproved
             // 
@@ -255,7 +264,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.pnlDisapproved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDisapproved.Controls.Add(this.pictureBox4);
             this.pnlDisapproved.Controls.Add(this.linkDisapproved);
-            this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
+            this.pnlDisapproved.Controls.Add(this.lblDisapprovedRCDCounter);
             this.pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDisapproved.Location = new System.Drawing.Point(729, 13);
             this.pnlDisapproved.MinimumSize = new System.Drawing.Size(150, 113);
@@ -291,17 +300,17 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.linkDisapproved.Text = "Disapproved";
             this.linkDisapproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblDisapprovedJEVCounter
+            // lblDisapprovedRCDCounter
             // 
-            this.lblDisapprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblDisapprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
-            this.lblDisapprovedJEVCounter.Size = new System.Drawing.Size(234, 61);
-            this.lblDisapprovedJEVCounter.TabIndex = 6;
-            this.lblDisapprovedJEVCounter.Text = "0";
-            this.lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblDisapprovedRCDCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDisapprovedRCDCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblDisapprovedRCDCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblDisapprovedRCDCounter.Location = new System.Drawing.Point(0, 0);
+            this.lblDisapprovedRCDCounter.Name = "lblDisapprovedRCDCounter";
+            this.lblDisapprovedRCDCounter.Size = new System.Drawing.Size(234, 61);
+            this.lblDisapprovedRCDCounter.TabIndex = 6;
+            this.lblDisapprovedRCDCounter.Text = "0";
+            this.lblDisapprovedRCDCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlCancelled
             // 
@@ -309,7 +318,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.pnlCancelled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCancelled.Controls.Add(this.pictureBox5);
             this.pnlCancelled.Controls.Add(this.lnkCancelled);
-            this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
+            this.pnlCancelled.Controls.Add(this.lblCancelledRCDCounter);
             this.pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCancelled.Location = new System.Drawing.Point(971, 13);
             this.pnlCancelled.MinimumSize = new System.Drawing.Size(150, 113);
@@ -345,25 +354,92 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.lnkCancelled.Text = "Cancelled RCD";
             this.lnkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblCancelledJEVCounter
+            // lblCancelledRCDCounter
             // 
-            this.lblCancelledJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCancelledJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
-            this.lblCancelledJEVCounter.Size = new System.Drawing.Size(234, 61);
-            this.lblCancelledJEVCounter.TabIndex = 6;
-            this.lblCancelledJEVCounter.Text = "0";
-            this.lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblCancelledRCDCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblCancelledRCDCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCancelledRCDCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblCancelledRCDCounter.Location = new System.Drawing.Point(0, 0);
+            this.lblCancelledRCDCounter.Name = "lblCancelledRCDCounter";
+            this.lblCancelledRCDCounter.Size = new System.Drawing.Size(234, 61);
+            this.lblCancelledRCDCounter.TabIndex = 6;
+            this.lblCancelledRCDCounter.Text = "0";
+            this.lblCancelledRCDCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
+            this.flowLayoutPanel1.Controls.Add(this.cbMonth);
+            this.flowLayoutPanel1.Controls.Add(this.nudYear);
+            this.flowLayoutPanel1.Controls.Add(this.btnRefreshCounter);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 13);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1210, 29);
+            this.flowLayoutPanel1.TabIndex = 16;
+            // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(3, 3);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(189, 23);
+            this.cmbxFunds.TabIndex = 32;
+            // 
+            // cbMonth
+            // 
+            this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonth.FormattingEnabled = true;
+            this.cbMonth.Location = new System.Drawing.Point(198, 3);
+            this.cbMonth.Name = "cbMonth";
+            this.cbMonth.Size = new System.Drawing.Size(139, 23);
+            this.cbMonth.TabIndex = 28;
+            // 
+            // nudYear
+            // 
+            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudYear.Location = new System.Drawing.Point(343, 3);
+            this.nudYear.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudYear.Minimum = new decimal(new int[] {
+            1987,
+            0,
+            0,
+            0});
+            this.nudYear.Name = "nudYear";
+            this.nudYear.ReadOnly = true;
+            this.nudYear.Size = new System.Drawing.Size(109, 23);
+            this.nudYear.TabIndex = 29;
+            this.nudYear.Value = new decimal(new int[] {
+            2021,
+            0,
+            0,
+            0});
+            // 
+            // btnRefreshCounter
+            // 
+            this.btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
+            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRefreshCounter.Location = new System.Drawing.Point(458, 3);
+            this.btnRefreshCounter.Name = "btnRefreshCounter";
+            this.btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
+            this.btnRefreshCounter.TabIndex = 13;
+            this.btnRefreshCounter.Text = "Refresh";
+            this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRefreshCounter.UseVisualStyleBackColor = true;
             // 
             // ucRCDSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ucRCDSummary";
-            this.Size = new System.Drawing.Size(1210, 160);
+            this.Size = new System.Drawing.Size(1210, 175);
             this.Load += new System.EventHandler(this.ucRCDDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlPendingJEV.ResumeLayout(false);
@@ -376,6 +452,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.pnlCancelled.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -386,22 +464,27 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         private System.Windows.Forms.Panel pnlPendingJEV;
         private System.Windows.Forms.PictureBox pictureBox3;
         internal System.Windows.Forms.LinkLabel lnkPending;
-        internal System.Windows.Forms.Label lblPendingJEVCounter;
+        internal System.Windows.Forms.Label lblPendingRCDCounter;
         private System.Windows.Forms.Panel pnlApprovedJEV;
         private System.Windows.Forms.PictureBox pictureBox2;
         internal System.Windows.Forms.LinkLabel lnkApproved;
-        internal System.Windows.Forms.Label lblApprovedJEVCounter;
+        internal System.Windows.Forms.Label lblApprovedRCDCounter;
         private System.Windows.Forms.Panel pnlJEV;
         private System.Windows.Forms.PictureBox pictureBox1;
-        internal System.Windows.Forms.LinkLabel lnkJEV;
-        internal System.Windows.Forms.Label lblJEVCounter;
+        internal System.Windows.Forms.LinkLabel lnkRCD;
+        internal System.Windows.Forms.Label lblRCDCounter;
         private System.Windows.Forms.Panel pnlDisapproved;
         private System.Windows.Forms.PictureBox pictureBox4;
         internal System.Windows.Forms.LinkLabel linkDisapproved;
-        internal System.Windows.Forms.Label lblDisapprovedJEVCounter;
+        internal System.Windows.Forms.Label lblDisapprovedRCDCounter;
         private System.Windows.Forms.Panel pnlCancelled;
         private System.Windows.Forms.PictureBox pictureBox5;
         internal System.Windows.Forms.LinkLabel lnkCancelled;
-        internal System.Windows.Forms.Label lblCancelledJEVCounter;
+        internal System.Windows.Forms.Label lblCancelledRCDCounter;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        internal System.Windows.Forms.ComboBox cmbxFunds;
+        private System.Windows.Forms.ComboBox cbMonth;
+        internal System.Windows.Forms.NumericUpDown nudYear;
+        private System.Windows.Forms.Button btnRefreshCounter;
     }
 }

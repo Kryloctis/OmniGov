@@ -20,12 +20,28 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void ucRCDDashboard_Load(object sender, EventArgs e)
         {
-            LoadRCDCounters();
+            if (!DesignMode)
+            {
+                LoadRCDCounters();
+            }
+ 
         }
 
         private void LoadRCDCounters()
         {
-         
+           
+            var rcdApprovedCount = Factory.CollectorReportRepository().GetApprovedRCDCount();
+            var rcdPendingCount = Factory.CollectorReportRepository().GetPendingRCDCount();
+            var rcdDisapprovedCount = Factory.CollectorReportRepository().GetDisapprovedRCDCount();
+            var rcdCancelledCount = Factory.CollectorReportRepository().GetCancelledRCDCount();
+            var rcdCount = (rcdApprovedCount + rcdPendingCount + rcdDisapprovedCount + rcdCancelledCount);
+
+
+            lblRCDCounter.Text = rcdCount.ToString();
+            lblApprovedRCDCounter.Text = rcdApprovedCount.ToString();
+            lblPendingRCDCounter.Text = rcdPendingCount.ToString();
+            lblDisapprovedRCDCounter.Text = rcdDisapprovedCount.ToString();
+            lblCancelledRCDCounter.Text = rcdCancelledCount.ToString();
         }
     }
 }

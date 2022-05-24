@@ -34,5 +34,12 @@ namespace ACC.Domain.Interfaces
 
         bool SetRemarks(string reportNo, string remark);
         string GetRemarks(string reportNo);
+
+        int GetApprovedRCDCount();
+        int GetPendingRCDCount();
+        int GetDisapprovedRCDCount();
+        int GetCancelledRCDCount();
+
+
     }
 }

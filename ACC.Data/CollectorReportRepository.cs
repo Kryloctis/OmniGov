@@ -526,5 +526,33 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+
+        #region RCD DashBoard Counter
+
+        public int GetApprovedRCDCount()
+        {
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+        }
+
+        public int GetPendingRCDCount()
+        {
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 0";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+        }
+
+        public int GetDisapprovedRCDCount()
+        {
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_disapproved = 1";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+        }
+
+        public int GetCancelledRCDCount()
+        {
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND is_disapproved = 1";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+        }
+        #endregion
     }
 }

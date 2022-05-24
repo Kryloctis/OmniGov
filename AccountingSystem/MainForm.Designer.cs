@@ -126,7 +126,7 @@ namespace AccountingSystem
             this.radTrialBalance = new System.Windows.Forms.RadioButton();
             this.radFinancialStatements = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
-            this.ucTreasuryDashboard1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard();
+            this.ucrcdSummary1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnIssueReceipt = new System.Windows.Forms.Button();
             this.btnPaymentCollection = new System.Windows.Forms.Button();
@@ -1322,7 +1322,7 @@ namespace AccountingSystem
             // 
             // tabPageTreasury
             // 
-            this.tabPageTreasury.Controls.Add(this.ucTreasuryDashboard1);
+            this.tabPageTreasury.Controls.Add(this.ucrcdSummary1);
             this.tabPageTreasury.Controls.Add(this.flowLayoutPanel7);
             this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
             this.tabPageTreasury.Margin = new System.Windows.Forms.Padding(0);
@@ -1332,14 +1332,14 @@ namespace AccountingSystem
             this.tabPageTreasury.Text = "Treasury";
             this.tabPageTreasury.UseVisualStyleBackColor = true;
             // 
-            // ucTreasuryDashboard1
+            // ucrcdSummary1
             // 
-            this.ucTreasuryDashboard1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ucrcdSummary1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucTreasuryDashboard1.Location = new System.Drawing.Point(3, 33);
-            this.ucTreasuryDashboard1.Name = "ucTreasuryDashboard1";
-            this.ucTreasuryDashboard1.Size = new System.Drawing.Size(1074, 391);
-            this.ucTreasuryDashboard1.TabIndex = 4;
+            this.ucrcdSummary1.Location = new System.Drawing.Point(8, 32);
+            this.ucrcdSummary1.Name = "ucrcdSummary1";
+            this.ucrcdSummary1.Size = new System.Drawing.Size(1054, 178);
+            this.ucrcdSummary1.TabIndex = 4;
             // 
             // flowLayoutPanel7
             // 
@@ -1647,7 +1647,7 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnReportOfCollections;
         internal System.Windows.Forms.Button btnRCD;
         internal System.Windows.Forms.Button btnRealProperties;
-        private Views.Dashboard.TreasuryDashboard.ucTreasuryDashboard ucTreasuryDashboard1;
+        private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
     }
 }
 
