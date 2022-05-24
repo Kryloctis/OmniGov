@@ -29,60 +29,51 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
             this.dgCollectorsCollection = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsCollection)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnRefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_14px;
-            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRefresh.Location = new System.Drawing.Point(252, 4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(110, 27);
-            this.btnRefresh.TabIndex = 86;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            // 
-            // dtAsOf
-            // 
-            this.dtAsOf.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.dtAsOf.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.dtAsOf.Location = new System.Drawing.Point(2, 6);
-            this.dtAsOf.Name = "dtAsOf";
-            this.dtAsOf.Size = new System.Drawing.Size(246, 23);
-            this.dtAsOf.TabIndex = 85;
-            // 
             // dgCollectorsCollection
             // 
+            this.dgCollectorsCollection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCollectorsCollection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCollectorsCollection.Location = new System.Drawing.Point(3, 33);
+            this.dgCollectorsCollection.Location = new System.Drawing.Point(3, 34);
             this.dgCollectorsCollection.Name = "dgCollectorsCollection";
             this.dgCollectorsCollection.RowTemplate.Height = 25;
-            this.dgCollectorsCollection.Size = new System.Drawing.Size(504, 337);
+            this.dgCollectorsCollection.Size = new System.Drawing.Size(504, 336);
             this.dgCollectorsCollection.TabIndex = 87;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label11.Location = new System.Drawing.Point(1, 7);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(182, 20);
+            this.label11.TabIndex = 88;
+            this.label11.Text = "COLLECTIONS SUMMARY";
             // 
             // ucPaymentCollectionsSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.dgCollectorsCollection);
-            this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.dtAsOf);
             this.Name = "ucPaymentCollectionsSummary";
             this.Size = new System.Drawing.Size(511, 373);
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsCollection)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        internal System.Windows.Forms.Button btnRefresh;
-        internal System.Windows.Forms.DateTimePicker dtAsOf;
         private System.Windows.Forms.DataGridView dgCollectorsCollection;
+        internal System.Windows.Forms.Label label11;
     }
 }

@@ -29,6 +29,7 @@ using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.RCI;
+using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -669,7 +670,7 @@ namespace AccountingSystem
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
         {
-            _ = new frmBankDeposits().ShowDialog();
+            _ = new frmReceiptsIssued().ShowDialog();  
         }
 
         private void btnPaymentCollection_Click(object sender, EventArgs e)
