@@ -15,11 +15,17 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         public ucRCDSummary()
         {
             InitializeComponent();
+
         }
 
         private void ucRCDDashboard_Load(object sender, EventArgs e)
         {
+            LoadRCDCounters();
+        }
 
+        private void LoadRCDCounters()
+        {
+         
         }
     }
 }
