@@ -248,7 +248,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_debit</Label>
-                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceDebit.Value), 0,Parameters!paramBalanceDebit.Value))</Value>
+                                  <Value>=CDec(Parameters!paramBalanceDebit.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -284,7 +284,7 @@
                               <TextRuns>
                                 <TextRun>
                                   <Label>beginning_credit</Label>
-                                  <Value>=CDec(IIF(string.IsNullOrEmpty(Parameters!paramBalanceCredit.Value), 0, Parameters!paramBalanceCredit.Value))</Value>
+                                  <Value>=CDec(Parameters!paramBalanceCredit.Value)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -345,6 +345,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
