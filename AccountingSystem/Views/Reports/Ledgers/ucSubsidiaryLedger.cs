@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
                 DataRow row = dtSubsidiaryLedger.NewRow();
                 row["date"] = item["date_entry"];
-                row["ref"] = item["jev_no"];
+                row["ref"] = item["full_jev_no"];
 
                 ValidateDebitCreditRow(particulars, item, row, ref beginningBalance);
 
