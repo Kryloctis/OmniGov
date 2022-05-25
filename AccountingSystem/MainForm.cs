@@ -63,6 +63,7 @@ namespace AccountingSystem
             lblUserRole.Text = userDict["role_name"];
         }
 
+        #region  Permission Validations
 
         private void ValidatePermissions()
         {
@@ -75,6 +76,40 @@ namespace AccountingSystem
             ValidateReportPermissions();
 
             ValidateAccountingControlPermissions();
+        }
+
+        private void ValidateDashboadPermissions()
+        {
+            #region Dashboard
+
+            if (Helper.HasPermission("Budget Dashboard"))
+            {
+                radBtnBudget.Visible = true;
+                tabControlDashboard.TabPages.Add(tabPageBudget);
+            }
+
+            if (Helper.HasPermission("Accounting Dashboard"))
+            {
+                radBtnAccounting.Visible = true;
+                tabControlDashboard.TabPages.Add(tabPageAccounting);
+            }
+
+            if (Helper.HasPermission("Treasury Dashboard"))
+            {
+                radBtnTreasury.Visible = true;
+                tabControlDashboard.TabPages.Add(tabPageTreasury);
+            }
+
+
+            if (Helper.HasPermission("Budget Dashboard"))
+                radBtnBudget.Checked = true;
+            else if (Helper.HasPermission("Accounting Dashboard"))
+                radBtnAccounting.Checked = true;
+            else if (Helper.HasPermission("Treasury Dashboard"))
+                radBtnTreasury.Checked = true;
+
+
+            #endregion
         }
 
         private void ValidateReportPermissions()
@@ -278,6 +313,12 @@ namespace AccountingSystem
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
             }
 
+            if (Helper.HasPermission("Report Transaction Log"))
+            {
+                radioTransactionLog.Enabled = true;
+                tabControlLedgers.TabPages.Add(tabPageTransactionLog);
+            }
+
 
             if (Helper.HasPermission("Report General Ledger"))
                 radioGeneralLedger.Checked = true;
@@ -372,40 +413,7 @@ namespace AccountingSystem
                 radFinancialStatements.Checked = true;
         }
 
-        private void ValidateDashboadPermissions()
-        {
-            #region Dashboard
-
-            if (Helper.HasPermission("Budget Dashboard"))
-            {
-                radBtnBudget.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageBudget);
-            }
-
-            if (Helper.HasPermission("Accounting Dashboard"))
-            {
-                radBtnAccounting.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageAccounting);
-            }
-
-            if (Helper.HasPermission("Treasury Dashboard"))
-            {
-                radBtnTreasury.Visible = true;
-                tabControlDashboard.TabPages.Add(tabPageTreasury);
-            }
-
-
-            if (Helper.HasPermission("Budget Dashboard"))
-                radBtnBudget.Checked = true;
-            else if (Helper.HasPermission("Accounting Dashboard"))
-                radBtnAccounting.Checked = true;
-            else if (Helper.HasPermission("Treasury Dashboard"))
-                radBtnTreasury.Checked = true;
-
-
-            #endregion
-        }
-
+        #endregion
 
         private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
         {
@@ -503,7 +511,6 @@ namespace AccountingSystem
             _ = new frmSearch(new frmRCD()).ShowDialog();
         }
 
-
         private void menureceipts_Click(object sender, EventArgs e)
         {
             _ = new frmReceipts().ShowDialog();
@@ -524,72 +531,20 @@ namespace AccountingSystem
             _ = new frmDailyCash().ShowDialog();
         }
 
-        #region BUDGET REPORTS
-
-        private void MenuSAAOB_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuSAAOBB_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlLedgers.SelectedTab = tabPageGeneralLedger;
-        }
-
-        private void radioSubsidiaryLedger_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlLedgers.SelectedTab = tabPageSubsidiaryLedger;
-        }
-
-        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlTrialBalance.SelectedTab = tabPagePreTrial;
-        }
-
-        private void radioPostTB_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlTrialBalance.SelectedTab = tabPagePostTrial;
-        }
-
-        private void radSFPosition_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSFPosition;
-        }
-
-        private void radSFPerformance_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSFPerformance;
-        }
-
-        private void radSCNAE_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCNAE;
-        }
-
-        private void radSCF_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCF;
-        }
-
-        private void radSCBAA_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
-        }
-
         private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmAmortization().ShowDialog();
         }
 
+        #region Budget Module
 
-        #region BUDGET
+        private void chkbxDetailed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkbxDetailed.Checked)
+                tabControlBudget.SelectedTab = tabPageBudgetDetailed;
+            else
+                tabControlBudget.SelectedTab = tabPageBudgetSummary;
+        }
 
         private void btnBudgetAppropriations_Click(object sender, EventArgs e)
         {
@@ -606,15 +561,23 @@ namespace AccountingSystem
             _ = new frmObligationRequestMain().ShowDialog();
         }
 
+        #region SAAOB and SAAOBB report
+
+        private void btnSAAOB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOB().ShowDialog();
+        }
+
+        private void btnSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
+        }
+
         #endregion
 
-        private void chkbxDetailed_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkbxDetailed.Checked)
-                tabControlBudget.SelectedTab = tabPageBudgetDetailed;
-            else
-                tabControlBudget.SelectedTab = tabPageBudgetSummary;
-        }
+        #endregion
+
+        #region Accounting Module
 
         private void radJournalEntryVoucher_CheckedChanged(object sender, EventArgs e)
         {
@@ -641,6 +604,73 @@ namespace AccountingSystem
             tabControlAccounting.SelectedTab = tabPageFinancialStatements;
         }
 
+        //Reports   
+
+        #region Ledger Reports
+
+        private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlLedgers.SelectedTab = tabPageGeneralLedger;
+        }
+
+        private void radioSubsidiaryLedger_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlLedgers.SelectedTab = tabPageSubsidiaryLedger;
+        }
+
+        private void radioTransactionLog_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlLedgers.SelectedTab = tabPageTransactionLog;
+        }
+
+        #endregion
+
+        #region Trial Balance Reports
+
+        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlTrialBalance.SelectedTab = tabPagePreTrial;
+        }
+
+        private void radioPostTB_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlTrialBalance.SelectedTab = tabPagePostTrial;
+        }
+
+        #endregion
+
+        #region Financial Statement Reports
+
+        private void radSFPosition_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSFPosition;
+        }
+
+        private void radSFPerformance_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSFPerformance;
+        }
+
+        private void radSCNAE_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCNAE;
+        }
+
+        private void radSCF_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCF;
+        }
+
+        private void radSCBAA_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
+        }
+
+        #endregion
+
+
+        #endregion
+
         private void signatoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSignatories().ShowDialog();
@@ -654,16 +684,6 @@ namespace AccountingSystem
         private void menuReturnReceipts_Click(object sender, EventArgs e)
         {
             _ = new frmReturnedReceipts().ShowDialog();
-        }
-
-        private void btnSAAOB_Click(object sender, EventArgs e)
-        {
-            _ = new frmSAAOB().ShowDialog();
-        }
-
-        private void btnSAAOBB_Click(object sender, EventArgs e)
-        {
-            _ = new frmSAAOBB().ShowDialog();
         }
     }
 }

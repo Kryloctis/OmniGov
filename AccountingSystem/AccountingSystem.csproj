@@ -60,6 +60,7 @@
     <None Remove="Reports\statement_of_cash_flows.rdlc" />
     <None Remove="Reports\status-of-appropriations-allotments-and-obligation.rdlc" />
     <None Remove="Reports\subsidiary-ledger.rdlc" />
+    <None Remove="Reports\transaction_log.rdlc" />
     <None Remove="Views\Dashboard\BudgetDashboard\ucBudgetSummary.resx~RF15fbe303.TMP" />
   </ItemGroup>
 
@@ -134,6 +135,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\subsidiary-ledger.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\transaction_log.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
