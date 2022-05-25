@@ -31,5 +31,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             var collectorsCollectionDT = Factory.PaymentCollectionRepository().GetCollectionsPerCollector();
             HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
         }
+
     }
 }

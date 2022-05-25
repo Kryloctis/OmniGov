@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
@@ -22,9 +16,30 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
             if (!DesignMode)
             {
+                LoadMonths();
+                LoadFunds();
                 LoadRCDCounters();
             }
- 
+
+        }
+
+        private void LoadMonths()
+        {
+            foreach (var item in Helper.MonthsDatasource().Values)
+                cbMonth.Items.Add(item);
+            cbMonth.SelectedIndex = DateTime.Now.Month - 1;
+            Dock = DockStyle.Fill;
+        }
+
+        internal void LoadFunds()
+        {
+            var dtFunds = Factory.FundsRepository().GetRecords();
+            DataRow dr = dtFunds.NewRow();
+            dr["id"] = 0;
+            dr["fund_name"] = "All";
+            dtFunds.Rows.InsertAt(dr, 0);
+
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbFunds, "fund_name", "id");
         }
 
         private void LoadRCDCounters()

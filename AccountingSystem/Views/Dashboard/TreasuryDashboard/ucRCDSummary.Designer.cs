@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.lnkCancelled = new System.Windows.Forms.LinkLabel();
             this.lblCancelledRCDCounter = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.cmbFunds = new System.Windows.Forms.ComboBox();
             this.cbMonth = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.btnRefreshCounter = new System.Windows.Forms.Button();
@@ -368,7 +368,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
+            this.flowLayoutPanel1.Controls.Add(this.cmbFunds);
             this.flowLayoutPanel1.Controls.Add(this.cbMonth);
             this.flowLayoutPanel1.Controls.Add(this.nudYear);
             this.flowLayoutPanel1.Controls.Add(this.btnRefreshCounter);
@@ -377,14 +377,14 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1210, 29);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
-            // cmbxFunds
+            // cmbFunds
             // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(3, 3);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(189, 23);
-            this.cmbxFunds.TabIndex = 32;
+            this.cmbFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFunds.FormattingEnabled = true;
+            this.cmbFunds.Location = new System.Drawing.Point(3, 3);
+            this.cmbFunds.Name = "cmbFunds";
+            this.cmbFunds.Size = new System.Drawing.Size(189, 23);
+            this.cmbFunds.TabIndex = 32;
             // 
             // cbMonth
             // 
@@ -482,7 +482,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         internal System.Windows.Forms.LinkLabel lnkCancelled;
         internal System.Windows.Forms.Label lblCancelledRCDCounter;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        internal System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.ComboBox cmbFunds;
         private System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.Button btnRefreshCounter;

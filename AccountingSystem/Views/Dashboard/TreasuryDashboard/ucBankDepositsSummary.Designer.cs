@@ -29,22 +29,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgBankDeposit = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
+            this.dgBankDeposit = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgBankDeposit)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgBankDeposit
-            // 
-            this.dgBankDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgBankDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBankDeposit.Location = new System.Drawing.Point(3, 34);
-            this.dgBankDeposit.Name = "dgBankDeposit";
-            this.dgBankDeposit.RowTemplate.Height = 25;
-            this.dgBankDeposit.Size = new System.Drawing.Size(504, 336);
-            this.dgBankDeposit.TabIndex = 90;
             // 
             // label11
             // 
@@ -58,12 +46,24 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.label11.TabIndex = 91;
             this.label11.Text = "BANK DEPOSITS";
             // 
+            // dgBankDeposit
+            // 
+            this.dgBankDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgBankDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBankDeposit.Location = new System.Drawing.Point(3, 34);
+            this.dgBankDeposit.Name = "dgBankDeposit";
+            this.dgBankDeposit.RowTemplate.Height = 25;
+            this.dgBankDeposit.Size = new System.Drawing.Size(504, 336);
+            this.dgBankDeposit.TabIndex = 92;
+            // 
             // ucBankDepositsSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.dgBankDeposit);
+            this.Controls.Add(this.label11);
             this.Name = "ucBankDepositsSummary";
             this.Size = new System.Drawing.Size(511, 373);
             this.Load += new System.EventHandler(this.ucBankDepositsSummary_Load);
@@ -77,5 +77,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private System.Windows.Forms.DataGridView dgBankDeposit;
         internal System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridView s;
     }
 }

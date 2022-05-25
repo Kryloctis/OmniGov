@@ -572,22 +572,33 @@ namespace AccountingSystem
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
-            datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].HeaderText = "Amount";
-            datagrid.Columns[3].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns[1].Width = 130;
-            datagrid.Columns[1].MinimumWidth = 130;
+            datagrid.Columns.Add("banks_id", "Bank ID");
+            datagrid.Columns.Add("account_number", "Account No.");
+            datagrid.Columns.Add("bank_name", "Bank Name");
+            datagrid.Columns.Add("amount", "Amount");
 
-            datagrid.Columns[2].Width = 170;
-            datagrid.Columns[2].MinimumWidth = 170;
+            datagrid.Columns["banks_id"].Visible = false;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns[3].Width = 80;
-            datagrid.Columns[3].MinimumWidth = 80;
+            datagrid.Columns["account_number"].Width = 130;
+            datagrid.Columns["account_number"].MinimumWidth = 130;
+            datagrid.Columns["bank_name"].Width = 170;
+            datagrid.Columns["bank_name"].MinimumWidth = 170;
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["banks_id"], 
+                    row["account_no"], 
+                    row["bank_name"], 
+                    row["amount"], 
+                });
+            }
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
