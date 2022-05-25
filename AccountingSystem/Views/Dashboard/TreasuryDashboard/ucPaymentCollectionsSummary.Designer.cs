@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.Controls.Add(this.dgCollectorsCollection);
             this.Name = "ucPaymentCollectionsSummary";
             this.Size = new System.Drawing.Size(511, 373);
+            this.Load += new System.EventHandler(this.ucPaymentCollectionsSummary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsCollection)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

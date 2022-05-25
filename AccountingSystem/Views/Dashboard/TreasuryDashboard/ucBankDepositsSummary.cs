@@ -15,6 +15,21 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         public ucBankDepositsSummary()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgBankDeposit);
+        }
+
+        private void ucBankDepositsSummary_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadBanksDepositsSummary();
+            }
+        }
+
+        private void LoadBanksDepositsSummary()
+        {
+            var bankDepositSummaryDT = Factory.BankDepositsRepository().GetBankDepositsSummary();
+            HelperLoadRecords.BanksDepositsSummaryDatagridView(bankDepositSummaryDT, dgBankDeposit);
         }
     }
 }

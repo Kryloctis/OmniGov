@@ -15,6 +15,21 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         public ucPaymentCollectionsSummary()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgCollectorsCollection);
+        }
+
+        private void ucPaymentCollectionsSummary_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadColllectorsCollectionSummary();
+            }
+        }
+
+        private void LoadColllectorsCollectionSummary()
+        {
+            var collectorsCollectionDT = Factory.PaymentCollectionRepository().GetCollectionsPerCollector();
+            HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
         }
     }
 }

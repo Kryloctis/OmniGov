@@ -386,6 +386,23 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
         }
 
+        public DataTable GetCollectionsPerCollector()
+        {
 
+            string query = $"SELECT " +
+                $"collecting_officer_id, " +
+                $"collecting_officers_first_name, " +
+                $"collecting_officers_mid_initial, " +
+                $"collecting_officers_last_name   , " +
+                $"job_orders_id, " +
+                $"job_orders_first_name, " +
+                $"job_orders_mid_initial, " +
+                $"job_orders_last_name, " +
+                $"SUM(amount) AS amount " +
+                $"FROM view_payment_collections GROUP BY collecting_officer_id";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt);
+        }
     }
 }

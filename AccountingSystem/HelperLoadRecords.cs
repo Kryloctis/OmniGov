@@ -566,6 +566,37 @@ namespace AccountingSystem
         #endregion
 
         #region Banks
+
+        internal static void BanksDepositsSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "Account No.";
+            datagrid.Columns[2].HeaderText = "Bank Name";
+            datagrid.Columns[3].HeaderText = "Amount";
+            datagrid.Columns[3].DefaultCellStyle.Format = "N2";
+            datagrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns[1].Width = 130;
+            datagrid.Columns[1].MinimumWidth = 130;
+
+            datagrid.Columns[2].Width = 170;
+            datagrid.Columns[2].MinimumWidth = 170;
+
+            datagrid.Columns[3].Width = 80;
+            datagrid.Columns[3].MinimumWidth = 80;
+
+            float fontSize = 8.5f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            datagrid.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
+        }
+
         internal static void BanksDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -577,6 +608,8 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+
         #endregion
 
         #region FaceValue
@@ -1071,6 +1104,45 @@ namespace AccountingSystem
         #endregion
 
         #region PaymentCollection
+
+        internal static void PaymentSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            datagrid.Columns.Add("collecting_officer_id", "ID");
+            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
+            datagrid.Columns.Add("amount", "Amount");
+
+            datagrid.Columns["collecting_officer_id"].Visible = false;
+            datagrid.Columns["collecting_officer"].Width = 300;
+            datagrid.Columns["collecting_officer"].MinimumWidth = 300;
+
+            datagrid.Columns["amount"].Width = 80;
+            datagrid.Columns["amount"].MinimumWidth = 80;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var regularCollector = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
+                var jobOrderCollector = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
+                var collectingOfficer = string.IsNullOrEmpty(row["job_orders_id"].ToString()) ? regularCollector : jobOrderCollector;
+
+                datagrid.Rows.Add(new object[]
+                {
+                    row["collecting_officer_id"],
+                    collectingOfficer,
+                    row["amount"]
+                });
+            }
+
+            float fontSize = 8.5f;
+            datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
+
+            datagrid.ClearSelection();
+            Helper.DatagridFullRowSelectStyle(datagrid, true);
+        }
 
         internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {

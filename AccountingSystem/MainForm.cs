@@ -665,7 +665,6 @@ namespace AccountingSystem
             _ = new frmSAAOBB().ShowDialog();
         }
 
-
         #region Treasury
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
@@ -704,8 +703,8 @@ namespace AccountingSystem
         }
 
 
-        #endregion
 
+        #endregion
 
     }
 }

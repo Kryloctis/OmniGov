@@ -10,6 +10,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordByLedger(object[] parameter);
         DataTable GetRecordsByDate(string date);
         DataTable GetRecordsByFilter(string date, int collectorId, string searchKey);
+        DataTable GetCollectionsPerCollector();
         bool ReceiptExist(string receipt, int formid);
         bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
     }

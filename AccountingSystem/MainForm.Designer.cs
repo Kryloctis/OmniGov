@@ -1340,9 +1340,9 @@ namespace AccountingSystem
             // 
             this.ucBankDepositsSummary1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.ucBankDepositsSummary1.Location = new System.Drawing.Point(306, 207);
+            this.ucBankDepositsSummary1.Location = new System.Drawing.Point(406, 207);
             this.ucBankDepositsSummary1.Name = "ucBankDepositsSummary1";
-            this.ucBankDepositsSummary1.Size = new System.Drawing.Size(293, 229);
+            this.ucBankDepositsSummary1.Size = new System.Drawing.Size(393, 229);
             this.ucBankDepositsSummary1.TabIndex = 6;
             // 
             // ucPaymentCollectionsSummary1
@@ -1351,7 +1351,7 @@ namespace AccountingSystem
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ucPaymentCollectionsSummary1.Location = new System.Drawing.Point(7, 207);
             this.ucPaymentCollectionsSummary1.Name = "ucPaymentCollectionsSummary1";
-            this.ucPaymentCollectionsSummary1.Size = new System.Drawing.Size(293, 229);
+            this.ucPaymentCollectionsSummary1.Size = new System.Drawing.Size(393, 229);
             this.ucPaymentCollectionsSummary1.TabIndex = 5;
             // 
             // ucrcdSummary1

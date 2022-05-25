@@ -66,6 +66,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.Controls.Add(this.dgBankDeposit);
             this.Name = "ucBankDepositsSummary";
             this.Size = new System.Drawing.Size(511, 373);
+            this.Load += new System.EventHandler(this.ucBankDepositsSummary_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBankDeposit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
