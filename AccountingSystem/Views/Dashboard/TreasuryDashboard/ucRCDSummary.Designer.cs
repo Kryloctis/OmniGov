@@ -385,6 +385,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.cmbFunds.Name = "cmbFunds";
             this.cmbFunds.Size = new System.Drawing.Size(189, 23);
             this.cmbFunds.TabIndex = 32;
+            this.cmbFunds.SelectedIndexChanged += new System.EventHandler(this.cmbFunds_SelectedIndexChanged);
             // 
             // cbMonth
             // 
@@ -394,6 +395,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.cbMonth.Name = "cbMonth";
             this.cbMonth.Size = new System.Drawing.Size(139, 23);
             this.cbMonth.TabIndex = 28;
+            this.cbMonth.SelectedIndexChanged += new System.EventHandler(this.cbMonth_SelectedIndexChanged);
             // 
             // nudYear
             // 
@@ -414,10 +416,11 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.nudYear.Size = new System.Drawing.Size(109, 23);
             this.nudYear.TabIndex = 29;
             this.nudYear.Value = new decimal(new int[] {
-            2021,
+            2022,
             0,
             0,
             0});
+            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
             // 
             // btnRefreshCounter
             // 
@@ -431,6 +434,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnRefreshCounter.Text = "Refresh";
             this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefreshCounter.UseVisualStyleBackColor = true;
+            this.btnRefreshCounter.Click += new System.EventHandler(this.btnRefreshCounter_Click);
             // 
             // ucRCDSummary
             // 

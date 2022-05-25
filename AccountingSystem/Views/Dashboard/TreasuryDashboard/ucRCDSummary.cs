@@ -44,11 +44,15 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void LoadRCDCounters()
         {
-           
-            var rcdApprovedCount = Factory.CollectorReportRepository().GetApprovedRCDCount();
-            var rcdPendingCount = Factory.CollectorReportRepository().GetPendingRCDCount();
-            var rcdDisapprovedCount = Factory.CollectorReportRepository().GetDisapprovedRCDCount();
-            var rcdCancelledCount = Factory.CollectorReportRepository().GetCancelledRCDCount();
+            //int fundName = Convert.ToInt32(cmbFunds.SelectedValue);
+            int fundName = 1;
+            short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
+            short year = Convert.ToInt16(nudYear.Value);
+
+            var rcdApprovedCount = Factory.CollectorReportRepository().GetApprovedRCDCount(fundName, month, year);
+            var rcdPendingCount = Factory.CollectorReportRepository().GetPendingRCDCount(fundName, month, year);
+            var rcdDisapprovedCount = Factory.CollectorReportRepository().GetDisapprovedRCDCount(fundName, month, year);
+            var rcdCancelledCount = Factory.CollectorReportRepository().GetCancelledRCDCount(fundName, month, year);
             var rcdCount = (rcdApprovedCount + rcdPendingCount + rcdDisapprovedCount + rcdCancelledCount);
 
 
@@ -57,6 +61,26 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             lblPendingRCDCounter.Text = rcdPendingCount.ToString();
             lblDisapprovedRCDCounter.Text = rcdDisapprovedCount.ToString();
             lblCancelledRCDCounter.Text = rcdCancelledCount.ToString();
+        }
+
+        private void btnRefreshCounter_Click(object sender, EventArgs e)
+        {
+            LoadRCDCounters();
+        }
+
+        private void cmbFunds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadRCDCounters();
+        }
+
+        private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadRCDCounters();
+        }
+
+        private void nudYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadRCDCounters();
         }
     }
 }

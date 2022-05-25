@@ -530,28 +530,68 @@ namespace ACC.Data
 
         #region RCD DashBoard Counter
 
-        public int GetApprovedRCDCount()
+        public int GetApprovedRCDCount(int fundId, short month, short year)
         {
-            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1";
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            var parameters = new object[][]
+             {
+                    new object[] { "@fund_id", DbType.Int32, fundId},
+                    new object[] { "@month", DbType.Int16, month},
+                    new object[] { "@year", DbType.Int16, year}
+             };
+
+            string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
+
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
 
-        public int GetPendingRCDCount()
+        public int GetPendingRCDCount(int fundId, short month, short year)
         {
-            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 0";
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            var parameters = new object[][]
+            {
+                new object[] { "@fund_id", DbType.Int32, fundId},
+                new object[] { "@month", DbType.Int16, month},
+                new object[] { "@year", DbType.Int16, year}
+            };
+
+
+            string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
+
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 0 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
 
-        public int GetDisapprovedRCDCount()
+        public int GetDisapprovedRCDCount(int fundId, short month, short year)
         {
-            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_disapproved = 1";
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            var parameters = new object[][]
+            {
+                new object[] { "@fund_id", DbType.Int32, fundId},
+                new object[] { "@month", DbType.Int16, month},
+                new object[] { "@year", DbType.Int16, year}
+            };
+
+
+            string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
+
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_disapproved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
+
         }
 
-        public int GetCancelledRCDCount()
+        public int GetCancelledRCDCount(int fundId, short month, short year)
         {
-            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND is_disapproved = 1";
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+            var parameters = new object[][]
+            {
+                new object[] { "@fund_id", DbType.Int32, fundId},
+                new object[] { "@month", DbType.Int16, month},
+                new object[] { "@year", DbType.Int16, year}
+            };
+
+
+            string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
+
+            string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND is_disapproved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
+            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
         #endregion
     }
