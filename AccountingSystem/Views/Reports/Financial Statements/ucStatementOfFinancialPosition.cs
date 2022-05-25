@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundsId, generalLedgerId, dateEntry);
+            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundsId, generalLedgerId, dateEntry);
             var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             foreach (int accountGroup in accountGroups)
             {
-                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalance(fundId, (ushort)accountGroup, dateEntry);
+                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_AccGrpId_Date_SubLedgeId(fundId, (ushort)accountGroup, dateEntry);
                 var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccGrpId(fundId, accountGroup, dateEntry);
 
                 totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         private DataTable StatementOfFinancialPositionReport()
         {
             var dataSet = new dsLFS();
-            var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
+            var dtStatementOfFinancialPosition = dataSet.dtStatementOfFinancialPosition;
             byte fundId = (byte)cmbxFunds.SelectedValue;
             var dateAsOf = dtAsOf.Value;
             var previousYearEnded = new DateTime(year: dateAsOf.Year - 1, month: 12, DateTime.DaysInMonth(dateAsOf.Year, 12));
@@ -137,15 +137,15 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                         previousAmount
                     };
 
-                    dtStatementOfFinancialPerformance.Rows.Add(items);
+                    dtStatementOfFinancialPosition.Rows.Add(items);
                 }
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
-            return dtStatementOfFinancialPerformance;
+            return dtStatementOfFinancialPosition;
         }
 
         private void LoadReport(LocalReport report)

@@ -18,48 +18,36 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-
         private DataTable StatementOfChangesInNetAssetsEquityDatatable()
         {
-
             var dataSet = new dsLFS();
             var dtStatementOfChangesInNetAssetsEquity = dataSet.dtStatementOfChangesInNetAssetsEquity;
-            int fundsId = Convert.ToInt32(cmbxFunds.SelectedValue);
-            var dateEnded = dtPickerDateEnds.Value;
-            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
-                {
+                byte fundId = Convert.ToByte(cmbxFunds.SelectedValue);
+                var presentYear = dtPickerDateEnds.Value;
+                var previousYear = new DateTime(year: presentYear.Year - 1, month: 12, DateTime.DaysInMonth(presentYear.Year, 12));
 
-                    //decimal currentAmount = Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), dateEnded);
+                var dictStatementOfChanges = new StatementOfChangesInNetAssetsEquityData().GetStatementOfChangesOfAssetsEquity(fundId, presentYear, previousYear);
 
-                    var items = new object[]
-                    {
-                    row["account_group_id"],
-                    row["account_group_code"],
-                    row["account_group_name"],
-                    row["maj_acc_group_id"],
-                    row["maj_acc_group_code"],
-                    row["maj_acc_group_name"],
-                    row["sub_maj_acc_group_id"],
-                    row["sub_maj_acc_group_code"],
-                    row["sub_maj_acc_group_name"],
-                    row["general_ledger_accounts_id"],
-                    row["account_code"],
-                    row["general_ledger_accounts_name"],
-                    //currentAmount,
-                    //Factory.JEVAccountsRepository().GetBalanceByFundAndAccountAndDateEntry(fundId, Convert.ToInt32(row["general_ledger_accounts_id"]), previousYearEnded)
-                };
-                    dtStatementOfChangesInNetAssetsEquity.Rows.Add(items);
-                }
+                var records = new object[] {
+                    dictStatementOfChanges["present_starting_balance"],
+                    0,
+                    0,
+                    0,
+                    0,
+                    dictStatementOfChanges["present_surplus_deficits_for_the_period"],
+                    dictStatementOfChanges["previous_starting_balance"],
+                    0,
+                    0,
+                    0,
+                    0,
+                    dictStatementOfChanges["previous_surplus_deficits_for_the_period"] };
+
+                dtStatementOfChangesInNetAssetsEquity.Rows.Add(records);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
             return dtStatementOfChangesInNetAssetsEquity;
         }

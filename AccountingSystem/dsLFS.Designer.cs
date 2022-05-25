@@ -80,6 +80,10 @@ namespace AccountingSystem {
         
         private dtAccountabilityForAccountableFormsDataTable tabledtAccountabilityForAccountableForms;
         
+        private dtStatementOfCashFlowsDataTable tabledtStatementOfCashFlows;
+        
+        private dtTransactionLogDataTable tabledtTransactionLog;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -191,6 +195,12 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtAccountabilityForAccountableForms"] != null)) {
                     base.Tables.Add(new dtAccountabilityForAccountableFormsDataTable(ds.Tables["dtAccountabilityForAccountableForms"]));
+                }
+                if ((ds.Tables["dtStatementOfCashFlows"] != null)) {
+                    base.Tables.Add(new dtStatementOfCashFlowsDataTable(ds.Tables["dtStatementOfCashFlows"]));
+                }
+                if ((ds.Tables["dtTransactionLog"] != null)) {
+                    base.Tables.Add(new dtTransactionLogDataTable(ds.Tables["dtTransactionLog"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -492,6 +502,26 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtStatementOfCashFlowsDataTable dtStatementOfCashFlows {
+            get {
+                return this.tabledtStatementOfCashFlows;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtTransactionLogDataTable dtTransactionLog {
+            get {
+                return this.tabledtTransactionLog;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -640,6 +670,12 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtAccountabilityForAccountableForms"] != null)) {
                     base.Tables.Add(new dtAccountabilityForAccountableFormsDataTable(ds.Tables["dtAccountabilityForAccountableForms"]));
+                }
+                if ((ds.Tables["dtStatementOfCashFlows"] != null)) {
+                    base.Tables.Add(new dtStatementOfCashFlowsDataTable(ds.Tables["dtStatementOfCashFlows"]));
+                }
+                if ((ds.Tables["dtTransactionLog"] != null)) {
+                    base.Tables.Add(new dtTransactionLogDataTable(ds.Tables["dtTransactionLog"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -842,6 +878,18 @@ namespace AccountingSystem {
                     this.tabledtAccountabilityForAccountableForms.InitVars();
                 }
             }
+            this.tabledtStatementOfCashFlows = ((dtStatementOfCashFlowsDataTable)(base.Tables["dtStatementOfCashFlows"]));
+            if ((initTable == true)) {
+                if ((this.tabledtStatementOfCashFlows != null)) {
+                    this.tabledtStatementOfCashFlows.InitVars();
+                }
+            }
+            this.tabledtTransactionLog = ((dtTransactionLogDataTable)(base.Tables["dtTransactionLog"]));
+            if ((initTable == true)) {
+                if ((this.tabledtTransactionLog != null)) {
+                    this.tabledtTransactionLog.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -908,6 +956,10 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtCollectorsReports);
             this.tabledtAccountabilityForAccountableForms = new dtAccountabilityForAccountableFormsDataTable();
             base.Tables.Add(this.tabledtAccountabilityForAccountableForms);
+            this.tabledtStatementOfCashFlows = new dtStatementOfCashFlowsDataTable();
+            base.Tables.Add(this.tabledtStatementOfCashFlows);
+            this.tabledtTransactionLog = new dtTransactionLogDataTable();
+            base.Tables.Add(this.tabledtTransactionLog);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1080,6 +1132,18 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtStatementOfCashFlows() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private bool ShouldSerializedtTransactionLog() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1216,6 +1280,12 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtAccountabilityForAccountableFormsRowChangeEventHandler(object sender, dtAccountabilityForAccountableFormsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtStatementOfCashFlowsRowChangeEventHandler(object sender, dtStatementOfCashFlowsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public delegate void dtTransactionLogRowChangeEventHandler(object sender, dtTransactionLogRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -9901,33 +9971,73 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtStatementOfFinancialPerformanceDataTable : global::System.Data.TypedTableBase<dtStatementOfFinancialPerformanceRow> {
             
-            private global::System.Data.DataColumn columnaccount_group_id;
+            private global::System.Data.DataColumn columnpresent_tax_revenue;
             
-            private global::System.Data.DataColumn columnaccount_group_code;
+            private global::System.Data.DataColumn columnpresent_share_internal_revenue_collections;
             
-            private global::System.Data.DataColumn columnaccount_group_name;
+            private global::System.Data.DataColumn columnpresent_other_share_national_taxes;
             
-            private global::System.Data.DataColumn columnmajor_account_group_id;
+            private global::System.Data.DataColumn columnpresent_service_business_income;
             
-            private global::System.Data.DataColumn columnmajor_account_group_code;
+            private global::System.Data.DataColumn columnpresent_shares_grants_donations;
             
-            private global::System.Data.DataColumn columnmajor_account_group_name;
+            private global::System.Data.DataColumn columnpresent_gains;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_id;
+            private global::System.Data.DataColumn columnpresent_other_income;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_code;
+            private global::System.Data.DataColumn columnpresent_total_revenue;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_name;
+            private global::System.Data.DataColumn columnpresent_personnel_services;
             
-            private global::System.Data.DataColumn columnaccount_id;
+            private global::System.Data.DataColumn columnpresent_maintenance_other_operating_expenses;
             
-            private global::System.Data.DataColumn columnaccount_code;
+            private global::System.Data.DataColumn columnpresent_non_cash_expenses;
             
-            private global::System.Data.DataColumn columnaccount_name;
+            private global::System.Data.DataColumn columnpresent_financial_expenses;
             
-            private global::System.Data.DataColumn columncurrent_amount;
+            private global::System.Data.DataColumn columnpresent_current_operating_expenses;
             
-            private global::System.Data.DataColumn columnprevious_amount;
+            private global::System.Data.DataColumn columnpresent_surplus_deficit_current_operation;
+            
+            private global::System.Data.DataColumn columnpresent_transfers_subsidy_from;
+            
+            private global::System.Data.DataColumn columnpresent_transfers_subsidy_to;
+            
+            private global::System.Data.DataColumn columnpresent_surplus_deficit_for_period;
+            
+            private global::System.Data.DataColumn columnprevious_tax_revenue;
+            
+            private global::System.Data.DataColumn columnprevious_share_internal_revenue_collections;
+            
+            private global::System.Data.DataColumn columnprevious_other_share_national_taxes;
+            
+            private global::System.Data.DataColumn columnprevious_service_business_income;
+            
+            private global::System.Data.DataColumn columnprevious_shares_grants_donations;
+            
+            private global::System.Data.DataColumn columnprevious_gains;
+            
+            private global::System.Data.DataColumn columnprevious_other_income;
+            
+            private global::System.Data.DataColumn columnprevious_total_revenue;
+            
+            private global::System.Data.DataColumn columnprevious_personnel_services;
+            
+            private global::System.Data.DataColumn columnprevious_maintenance_other_operating_expenses;
+            
+            private global::System.Data.DataColumn columnprevious_non_cash_expenses;
+            
+            private global::System.Data.DataColumn columnprevious_financial_expenses;
+            
+            private global::System.Data.DataColumn columnprevious_current_operating_expenses;
+            
+            private global::System.Data.DataColumn columnprevious_surplus_deficit_current_operation;
+            
+            private global::System.Data.DataColumn columnprevious_transfers_subsidy_from;
+            
+            private global::System.Data.DataColumn columnprevious_transfers_subsidy_to;
+            
+            private global::System.Data.DataColumn columnprevious_surplus_deficit_for_period;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -9964,113 +10074,273 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_idColumn {
+            public global::System.Data.DataColumn present_tax_revenueColumn {
                 get {
-                    return this.columnaccount_group_id;
+                    return this.columnpresent_tax_revenue;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_codeColumn {
+            public global::System.Data.DataColumn present_share_internal_revenue_collectionsColumn {
                 get {
-                    return this.columnaccount_group_code;
+                    return this.columnpresent_share_internal_revenue_collections;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_nameColumn {
+            public global::System.Data.DataColumn present_other_share_national_taxesColumn {
                 get {
-                    return this.columnaccount_group_name;
+                    return this.columnpresent_other_share_national_taxes;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_idColumn {
+            public global::System.Data.DataColumn present_service_business_incomeColumn {
                 get {
-                    return this.columnmajor_account_group_id;
+                    return this.columnpresent_service_business_income;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_codeColumn {
+            public global::System.Data.DataColumn present_shares_grants_donationsColumn {
                 get {
-                    return this.columnmajor_account_group_code;
+                    return this.columnpresent_shares_grants_donations;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_nameColumn {
+            public global::System.Data.DataColumn present_gainsColumn {
                 get {
-                    return this.columnmajor_account_group_name;
+                    return this.columnpresent_gains;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_idColumn {
+            public global::System.Data.DataColumn present_other_incomeColumn {
                 get {
-                    return this.columnsub_major_account_group_id;
+                    return this.columnpresent_other_income;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_codeColumn {
+            public global::System.Data.DataColumn present_total_revenueColumn {
                 get {
-                    return this.columnsub_major_account_group_code;
+                    return this.columnpresent_total_revenue;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_nameColumn {
+            public global::System.Data.DataColumn present_personnel_servicesColumn {
                 get {
-                    return this.columnsub_major_account_group_name;
+                    return this.columnpresent_personnel_services;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_idColumn {
+            public global::System.Data.DataColumn present_maintenance_other_operating_expensesColumn {
                 get {
-                    return this.columnaccount_id;
+                    return this.columnpresent_maintenance_other_operating_expenses;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_codeColumn {
+            public global::System.Data.DataColumn present_non_cash_expensesColumn {
                 get {
-                    return this.columnaccount_code;
+                    return this.columnpresent_non_cash_expenses;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_nameColumn {
+            public global::System.Data.DataColumn present_financial_expensesColumn {
                 get {
-                    return this.columnaccount_name;
+                    return this.columnpresent_financial_expenses;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn current_amountColumn {
+            public global::System.Data.DataColumn present_current_operating_expensesColumn {
                 get {
-                    return this.columncurrent_amount;
+                    return this.columnpresent_current_operating_expenses;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn previous_amountColumn {
+            public global::System.Data.DataColumn present_surplus_deficit_current_operationColumn {
                 get {
-                    return this.columnprevious_amount;
+                    return this.columnpresent_surplus_deficit_current_operation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn present_transfers_subsidy_fromColumn {
+                get {
+                    return this.columnpresent_transfers_subsidy_from;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn present_transfers_subsidy_toColumn {
+                get {
+                    return this.columnpresent_transfers_subsidy_to;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn present_surplus_deficit_for_periodColumn {
+                get {
+                    return this.columnpresent_surplus_deficit_for_period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_tax_revenueColumn {
+                get {
+                    return this.columnprevious_tax_revenue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_share_internal_revenue_collectionsColumn {
+                get {
+                    return this.columnprevious_share_internal_revenue_collections;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_other_share_national_taxesColumn {
+                get {
+                    return this.columnprevious_other_share_national_taxes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_service_business_incomeColumn {
+                get {
+                    return this.columnprevious_service_business_income;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_shares_grants_donationsColumn {
+                get {
+                    return this.columnprevious_shares_grants_donations;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_gainsColumn {
+                get {
+                    return this.columnprevious_gains;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_other_incomeColumn {
+                get {
+                    return this.columnprevious_other_income;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_total_revenueColumn {
+                get {
+                    return this.columnprevious_total_revenue;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_personnel_servicesColumn {
+                get {
+                    return this.columnprevious_personnel_services;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_maintenance_other_operating_expensesColumn {
+                get {
+                    return this.columnprevious_maintenance_other_operating_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_non_cash_expensesColumn {
+                get {
+                    return this.columnprevious_non_cash_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_financial_expensesColumn {
+                get {
+                    return this.columnprevious_financial_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_current_operating_expensesColumn {
+                get {
+                    return this.columnprevious_current_operating_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_surplus_deficit_current_operationColumn {
+                get {
+                    return this.columnprevious_surplus_deficit_current_operation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_transfers_subsidy_fromColumn {
+                get {
+                    return this.columnprevious_transfers_subsidy_from;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_transfers_subsidy_toColumn {
+                get {
+                    return this.columnprevious_transfers_subsidy_to;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_surplus_deficit_for_periodColumn {
+                get {
+                    return this.columnprevious_surplus_deficit_for_period;
                 }
             }
             
@@ -10111,23 +10381,77 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtStatementOfFinancialPerformanceRow AdddtStatementOfFinancialPerformanceRow(int account_group_id, string account_group_code, string account_group_name, int major_account_group_id, string major_account_group_code, string major_account_group_name, int sub_major_account_group_id, string sub_major_account_group_code, string sub_major_account_group_name, int account_id, string account_code, string account_name, decimal current_amount, decimal previous_amount) {
+            public dtStatementOfFinancialPerformanceRow AdddtStatementOfFinancialPerformanceRow(
+                        decimal present_tax_revenue, 
+                        decimal present_share_internal_revenue_collections, 
+                        decimal present_other_share_national_taxes, 
+                        decimal present_service_business_income, 
+                        decimal present_shares_grants_donations, 
+                        decimal present_gains, 
+                        decimal present_other_income, 
+                        decimal present_total_revenue, 
+                        decimal present_personnel_services, 
+                        decimal present_maintenance_other_operating_expenses, 
+                        decimal present_non_cash_expenses, 
+                        decimal present_financial_expenses, 
+                        decimal present_current_operating_expenses, 
+                        decimal present_surplus_deficit_current_operation, 
+                        decimal present_transfers_subsidy_from, 
+                        decimal present_transfers_subsidy_to, 
+                        decimal present_surplus_deficit_for_period, 
+                        decimal previous_tax_revenue, 
+                        decimal previous_share_internal_revenue_collections, 
+                        decimal previous_other_share_national_taxes, 
+                        decimal previous_service_business_income, 
+                        decimal previous_shares_grants_donations, 
+                        decimal previous_gains, 
+                        decimal previous_other_income, 
+                        decimal previous_total_revenue, 
+                        decimal previous_personnel_services, 
+                        decimal previous_maintenance_other_operating_expenses, 
+                        decimal previous_non_cash_expenses, 
+                        decimal previous_financial_expenses, 
+                        decimal previous_current_operating_expenses, 
+                        decimal previous_surplus_deficit_current_operation, 
+                        decimal previous_transfers_subsidy_from, 
+                        decimal previous_transfers_subsidy_to, 
+                        decimal previous_surplus_deficit_for_period) {
                 dtStatementOfFinancialPerformanceRow rowdtStatementOfFinancialPerformanceRow = ((dtStatementOfFinancialPerformanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        account_group_id,
-                        account_group_code,
-                        account_group_name,
-                        major_account_group_id,
-                        major_account_group_code,
-                        major_account_group_name,
-                        sub_major_account_group_id,
-                        sub_major_account_group_code,
-                        sub_major_account_group_name,
-                        account_id,
-                        account_code,
-                        account_name,
-                        current_amount,
-                        previous_amount};
+                        present_tax_revenue,
+                        present_share_internal_revenue_collections,
+                        present_other_share_national_taxes,
+                        present_service_business_income,
+                        present_shares_grants_donations,
+                        present_gains,
+                        present_other_income,
+                        present_total_revenue,
+                        present_personnel_services,
+                        present_maintenance_other_operating_expenses,
+                        present_non_cash_expenses,
+                        present_financial_expenses,
+                        present_current_operating_expenses,
+                        present_surplus_deficit_current_operation,
+                        present_transfers_subsidy_from,
+                        present_transfers_subsidy_to,
+                        present_surplus_deficit_for_period,
+                        previous_tax_revenue,
+                        previous_share_internal_revenue_collections,
+                        previous_other_share_national_taxes,
+                        previous_service_business_income,
+                        previous_shares_grants_donations,
+                        previous_gains,
+                        previous_other_income,
+                        previous_total_revenue,
+                        previous_personnel_services,
+                        previous_maintenance_other_operating_expenses,
+                        previous_non_cash_expenses,
+                        previous_financial_expenses,
+                        previous_current_operating_expenses,
+                        previous_surplus_deficit_current_operation,
+                        previous_transfers_subsidy_from,
+                        previous_transfers_subsidy_to,
+                        previous_surplus_deficit_for_period};
                 rowdtStatementOfFinancialPerformanceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtStatementOfFinancialPerformanceRow);
                 return rowdtStatementOfFinancialPerformanceRow;
@@ -10150,53 +10474,113 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnaccount_group_id = base.Columns["account_group_id"];
-                this.columnaccount_group_code = base.Columns["account_group_code"];
-                this.columnaccount_group_name = base.Columns["account_group_name"];
-                this.columnmajor_account_group_id = base.Columns["major_account_group_id"];
-                this.columnmajor_account_group_code = base.Columns["major_account_group_code"];
-                this.columnmajor_account_group_name = base.Columns["major_account_group_name"];
-                this.columnsub_major_account_group_id = base.Columns["sub_major_account_group_id"];
-                this.columnsub_major_account_group_code = base.Columns["sub_major_account_group_code"];
-                this.columnsub_major_account_group_name = base.Columns["sub_major_account_group_name"];
-                this.columnaccount_id = base.Columns["account_id"];
-                this.columnaccount_code = base.Columns["account_code"];
-                this.columnaccount_name = base.Columns["account_name"];
-                this.columncurrent_amount = base.Columns["current_amount"];
-                this.columnprevious_amount = base.Columns["previous_amount"];
+                this.columnpresent_tax_revenue = base.Columns["present_tax_revenue"];
+                this.columnpresent_share_internal_revenue_collections = base.Columns["present_share_internal_revenue_collections"];
+                this.columnpresent_other_share_national_taxes = base.Columns["present_other_share_national_taxes"];
+                this.columnpresent_service_business_income = base.Columns["present_service_business_income"];
+                this.columnpresent_shares_grants_donations = base.Columns["present_shares_grants_donations"];
+                this.columnpresent_gains = base.Columns["present_gains"];
+                this.columnpresent_other_income = base.Columns["present_other_income"];
+                this.columnpresent_total_revenue = base.Columns["present_total_revenue"];
+                this.columnpresent_personnel_services = base.Columns["present_personnel_services"];
+                this.columnpresent_maintenance_other_operating_expenses = base.Columns["present_maintenance_other_operating_expenses"];
+                this.columnpresent_non_cash_expenses = base.Columns["present_non_cash_expenses"];
+                this.columnpresent_financial_expenses = base.Columns["present_financial_expenses"];
+                this.columnpresent_current_operating_expenses = base.Columns["present_current_operating_expenses"];
+                this.columnpresent_surplus_deficit_current_operation = base.Columns["present_surplus_deficit_current_operation"];
+                this.columnpresent_transfers_subsidy_from = base.Columns["present_transfers_subsidy_from"];
+                this.columnpresent_transfers_subsidy_to = base.Columns["present_transfers_subsidy_to"];
+                this.columnpresent_surplus_deficit_for_period = base.Columns["present_surplus_deficit_for_period"];
+                this.columnprevious_tax_revenue = base.Columns["previous_tax_revenue"];
+                this.columnprevious_share_internal_revenue_collections = base.Columns["previous_share_internal_revenue_collections"];
+                this.columnprevious_other_share_national_taxes = base.Columns["previous_other_share_national_taxes"];
+                this.columnprevious_service_business_income = base.Columns["previous_service_business_income"];
+                this.columnprevious_shares_grants_donations = base.Columns["previous_shares_grants_donations"];
+                this.columnprevious_gains = base.Columns["previous_gains"];
+                this.columnprevious_other_income = base.Columns["previous_other_income"];
+                this.columnprevious_total_revenue = base.Columns["previous_total_revenue"];
+                this.columnprevious_personnel_services = base.Columns["previous_personnel_services"];
+                this.columnprevious_maintenance_other_operating_expenses = base.Columns["previous_maintenance_other_operating_expenses"];
+                this.columnprevious_non_cash_expenses = base.Columns["previous_non_cash_expenses"];
+                this.columnprevious_financial_expenses = base.Columns["previous_financial_expenses"];
+                this.columnprevious_current_operating_expenses = base.Columns["previous_current_operating_expenses"];
+                this.columnprevious_surplus_deficit_current_operation = base.Columns["previous_surplus_deficit_current_operation"];
+                this.columnprevious_transfers_subsidy_from = base.Columns["previous_transfers_subsidy_from"];
+                this.columnprevious_transfers_subsidy_to = base.Columns["previous_transfers_subsidy_to"];
+                this.columnprevious_surplus_deficit_for_period = base.Columns["previous_surplus_deficit_for_period"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnaccount_group_id = new global::System.Data.DataColumn("account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_id);
-                this.columnaccount_group_code = new global::System.Data.DataColumn("account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_code);
-                this.columnaccount_group_name = new global::System.Data.DataColumn("account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_name);
-                this.columnmajor_account_group_id = new global::System.Data.DataColumn("major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_id);
-                this.columnmajor_account_group_code = new global::System.Data.DataColumn("major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_code);
-                this.columnmajor_account_group_name = new global::System.Data.DataColumn("major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_name);
-                this.columnsub_major_account_group_id = new global::System.Data.DataColumn("sub_major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_id);
-                this.columnsub_major_account_group_code = new global::System.Data.DataColumn("sub_major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_code);
-                this.columnsub_major_account_group_name = new global::System.Data.DataColumn("sub_major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_name);
-                this.columnaccount_id = new global::System.Data.DataColumn("account_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_id);
-                this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_code);
-                this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_name);
-                this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncurrent_amount);
-                this.columnprevious_amount = new global::System.Data.DataColumn("previous_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprevious_amount);
+                this.columnpresent_tax_revenue = new global::System.Data.DataColumn("present_tax_revenue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_tax_revenue);
+                this.columnpresent_share_internal_revenue_collections = new global::System.Data.DataColumn("present_share_internal_revenue_collections", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_share_internal_revenue_collections);
+                this.columnpresent_other_share_national_taxes = new global::System.Data.DataColumn("present_other_share_national_taxes", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_other_share_national_taxes);
+                this.columnpresent_service_business_income = new global::System.Data.DataColumn("present_service_business_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_service_business_income);
+                this.columnpresent_shares_grants_donations = new global::System.Data.DataColumn("present_shares_grants_donations", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_shares_grants_donations);
+                this.columnpresent_gains = new global::System.Data.DataColumn("present_gains", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_gains);
+                this.columnpresent_other_income = new global::System.Data.DataColumn("present_other_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_other_income);
+                this.columnpresent_total_revenue = new global::System.Data.DataColumn("present_total_revenue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_total_revenue);
+                this.columnpresent_personnel_services = new global::System.Data.DataColumn("present_personnel_services", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_personnel_services);
+                this.columnpresent_maintenance_other_operating_expenses = new global::System.Data.DataColumn("present_maintenance_other_operating_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_maintenance_other_operating_expenses);
+                this.columnpresent_non_cash_expenses = new global::System.Data.DataColumn("present_non_cash_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_non_cash_expenses);
+                this.columnpresent_financial_expenses = new global::System.Data.DataColumn("present_financial_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_financial_expenses);
+                this.columnpresent_current_operating_expenses = new global::System.Data.DataColumn("present_current_operating_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_current_operating_expenses);
+                this.columnpresent_surplus_deficit_current_operation = new global::System.Data.DataColumn("present_surplus_deficit_current_operation", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_surplus_deficit_current_operation);
+                this.columnpresent_transfers_subsidy_from = new global::System.Data.DataColumn("present_transfers_subsidy_from", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_transfers_subsidy_from);
+                this.columnpresent_transfers_subsidy_to = new global::System.Data.DataColumn("present_transfers_subsidy_to", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_transfers_subsidy_to);
+                this.columnpresent_surplus_deficit_for_period = new global::System.Data.DataColumn("present_surplus_deficit_for_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_surplus_deficit_for_period);
+                this.columnprevious_tax_revenue = new global::System.Data.DataColumn("previous_tax_revenue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_tax_revenue);
+                this.columnprevious_share_internal_revenue_collections = new global::System.Data.DataColumn("previous_share_internal_revenue_collections", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_share_internal_revenue_collections);
+                this.columnprevious_other_share_national_taxes = new global::System.Data.DataColumn("previous_other_share_national_taxes", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_other_share_national_taxes);
+                this.columnprevious_service_business_income = new global::System.Data.DataColumn("previous_service_business_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_service_business_income);
+                this.columnprevious_shares_grants_donations = new global::System.Data.DataColumn("previous_shares_grants_donations", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_shares_grants_donations);
+                this.columnprevious_gains = new global::System.Data.DataColumn("previous_gains", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_gains);
+                this.columnprevious_other_income = new global::System.Data.DataColumn("previous_other_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_other_income);
+                this.columnprevious_total_revenue = new global::System.Data.DataColumn("previous_total_revenue", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_total_revenue);
+                this.columnprevious_personnel_services = new global::System.Data.DataColumn("previous_personnel_services", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_personnel_services);
+                this.columnprevious_maintenance_other_operating_expenses = new global::System.Data.DataColumn("previous_maintenance_other_operating_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_maintenance_other_operating_expenses);
+                this.columnprevious_non_cash_expenses = new global::System.Data.DataColumn("previous_non_cash_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_non_cash_expenses);
+                this.columnprevious_financial_expenses = new global::System.Data.DataColumn("previous_financial_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_financial_expenses);
+                this.columnprevious_current_operating_expenses = new global::System.Data.DataColumn("previous_current_operating_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_current_operating_expenses);
+                this.columnprevious_surplus_deficit_current_operation = new global::System.Data.DataColumn("previous_surplus_deficit_current_operation", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_surplus_deficit_current_operation);
+                this.columnprevious_transfers_subsidy_from = new global::System.Data.DataColumn("previous_transfers_subsidy_from", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_transfers_subsidy_from);
+                this.columnprevious_transfers_subsidy_to = new global::System.Data.DataColumn("previous_transfers_subsidy_to", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_transfers_subsidy_to);
+                this.columnprevious_surplus_deficit_for_period = new global::System.Data.DataColumn("previous_surplus_deficit_for_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_surplus_deficit_for_period);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10330,33 +10714,29 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtStatementOfChangesInNetAssetsEquityDataTable : global::System.Data.TypedTableBase<dtStatementOfChangesInNetAssetsEquityRow> {
             
-            private global::System.Data.DataColumn columnaccount_group_id;
+            private global::System.Data.DataColumn columnpresent_beginning_balance;
             
-            private global::System.Data.DataColumn columnaccount_group_code;
+            private global::System.Data.DataColumn columnpresent_change_in_acc_policy;
             
-            private global::System.Data.DataColumn columnaccount_group_name;
+            private global::System.Data.DataColumn columnpresent_prior_period_err;
             
-            private global::System.Data.DataColumn columnmajor_account_group_id;
+            private global::System.Data.DataColumn columnpresent_add_deduct;
             
-            private global::System.Data.DataColumn columnmajor_account_group_code;
+            private global::System.Data.DataColumn columnpresent_adjustment;
             
-            private global::System.Data.DataColumn columnmajor_account_group_name;
+            private global::System.Data.DataColumn columnpresent__surplus_deficit_for_the_period;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_id;
+            private global::System.Data.DataColumn columnprevious_beginning_balance;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_code;
+            private global::System.Data.DataColumn columnprevious_change_in_acc_policy;
             
-            private global::System.Data.DataColumn columnsub_major_account_group_name;
+            private global::System.Data.DataColumn columnprevious_prior_period_err;
             
-            private global::System.Data.DataColumn columnaccount_id;
+            private global::System.Data.DataColumn columnprevious_add_deduct;
             
-            private global::System.Data.DataColumn columnaccount_code;
+            private global::System.Data.DataColumn columnprevious_adjustment;
             
-            private global::System.Data.DataColumn columnaccount_name;
-            
-            private global::System.Data.DataColumn columncurrent_amount;
-            
-            private global::System.Data.DataColumn columnprevious_amount;
+            private global::System.Data.DataColumn columnprevious__surplus_deficit_for_the_period;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -10393,113 +10773,97 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_idColumn {
+            public global::System.Data.DataColumn present_beginning_balanceColumn {
                 get {
-                    return this.columnaccount_group_id;
+                    return this.columnpresent_beginning_balance;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_codeColumn {
+            public global::System.Data.DataColumn present_change_in_acc_policyColumn {
                 get {
-                    return this.columnaccount_group_code;
+                    return this.columnpresent_change_in_acc_policy;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_group_nameColumn {
+            public global::System.Data.DataColumn present_prior_period_errColumn {
                 get {
-                    return this.columnaccount_group_name;
+                    return this.columnpresent_prior_period_err;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_idColumn {
+            public global::System.Data.DataColumn present_add_deductColumn {
                 get {
-                    return this.columnmajor_account_group_id;
+                    return this.columnpresent_add_deduct;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_codeColumn {
+            public global::System.Data.DataColumn present_adjustmentColumn {
                 get {
-                    return this.columnmajor_account_group_code;
+                    return this.columnpresent_adjustment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn major_account_group_nameColumn {
+            public global::System.Data.DataColumn present__surplus_deficit_for_the_periodColumn {
                 get {
-                    return this.columnmajor_account_group_name;
+                    return this.columnpresent__surplus_deficit_for_the_period;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_idColumn {
+            public global::System.Data.DataColumn previous_beginning_balanceColumn {
                 get {
-                    return this.columnsub_major_account_group_id;
+                    return this.columnprevious_beginning_balance;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_codeColumn {
+            public global::System.Data.DataColumn previous_change_in_acc_policyColumn {
                 get {
-                    return this.columnsub_major_account_group_code;
+                    return this.columnprevious_change_in_acc_policy;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sub_major_account_group_nameColumn {
+            public global::System.Data.DataColumn previous_prior_period_errColumn {
                 get {
-                    return this.columnsub_major_account_group_name;
+                    return this.columnprevious_prior_period_err;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_idColumn {
+            public global::System.Data.DataColumn previous_add_deductColumn {
                 get {
-                    return this.columnaccount_id;
+                    return this.columnprevious_add_deduct;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_codeColumn {
+            public global::System.Data.DataColumn previous_adjustmentColumn {
                 get {
-                    return this.columnaccount_code;
+                    return this.columnprevious_adjustment;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn account_nameColumn {
+            public global::System.Data.DataColumn previous__surplus_deficit_for_the_periodColumn {
                 get {
-                    return this.columnaccount_name;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn current_amountColumn {
-                get {
-                    return this.columncurrent_amount;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn previous_amountColumn {
-                get {
-                    return this.columnprevious_amount;
+                    return this.columnprevious__surplus_deficit_for_the_period;
                 }
             }
             
@@ -10540,23 +10904,21 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtStatementOfChangesInNetAssetsEquityRow AdddtStatementOfChangesInNetAssetsEquityRow(int account_group_id, string account_group_code, string account_group_name, int major_account_group_id, string major_account_group_code, string major_account_group_name, int sub_major_account_group_id, string sub_major_account_group_code, string sub_major_account_group_name, int account_id, string account_code, string account_name, decimal current_amount, decimal previous_amount) {
+            public dtStatementOfChangesInNetAssetsEquityRow AdddtStatementOfChangesInNetAssetsEquityRow(decimal present_beginning_balance, decimal present_change_in_acc_policy, decimal present_prior_period_err, decimal present_add_deduct, decimal present_adjustment, decimal present__surplus_deficit_for_the_period, decimal previous_beginning_balance, decimal previous_change_in_acc_policy, decimal previous_prior_period_err, decimal previous_add_deduct, decimal previous_adjustment, decimal previous__surplus_deficit_for_the_period) {
                 dtStatementOfChangesInNetAssetsEquityRow rowdtStatementOfChangesInNetAssetsEquityRow = ((dtStatementOfChangesInNetAssetsEquityRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        account_group_id,
-                        account_group_code,
-                        account_group_name,
-                        major_account_group_id,
-                        major_account_group_code,
-                        major_account_group_name,
-                        sub_major_account_group_id,
-                        sub_major_account_group_code,
-                        sub_major_account_group_name,
-                        account_id,
-                        account_code,
-                        account_name,
-                        current_amount,
-                        previous_amount};
+                        present_beginning_balance,
+                        present_change_in_acc_policy,
+                        present_prior_period_err,
+                        present_add_deduct,
+                        present_adjustment,
+                        present__surplus_deficit_for_the_period,
+                        previous_beginning_balance,
+                        previous_change_in_acc_policy,
+                        previous_prior_period_err,
+                        previous_add_deduct,
+                        previous_adjustment,
+                        previous__surplus_deficit_for_the_period};
                 rowdtStatementOfChangesInNetAssetsEquityRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtStatementOfChangesInNetAssetsEquityRow);
                 return rowdtStatementOfChangesInNetAssetsEquityRow;
@@ -10579,53 +10941,47 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnaccount_group_id = base.Columns["account_group_id"];
-                this.columnaccount_group_code = base.Columns["account_group_code"];
-                this.columnaccount_group_name = base.Columns["account_group_name"];
-                this.columnmajor_account_group_id = base.Columns["major_account_group_id"];
-                this.columnmajor_account_group_code = base.Columns["major_account_group_code"];
-                this.columnmajor_account_group_name = base.Columns["major_account_group_name"];
-                this.columnsub_major_account_group_id = base.Columns["sub_major_account_group_id"];
-                this.columnsub_major_account_group_code = base.Columns["sub_major_account_group_code"];
-                this.columnsub_major_account_group_name = base.Columns["sub_major_account_group_name"];
-                this.columnaccount_id = base.Columns["account_id"];
-                this.columnaccount_code = base.Columns["account_code"];
-                this.columnaccount_name = base.Columns["account_name"];
-                this.columncurrent_amount = base.Columns["current_amount"];
-                this.columnprevious_amount = base.Columns["previous_amount"];
+                this.columnpresent_beginning_balance = base.Columns["present_beginning_balance"];
+                this.columnpresent_change_in_acc_policy = base.Columns["present_change_in_acc_policy"];
+                this.columnpresent_prior_period_err = base.Columns["present_prior_period_err"];
+                this.columnpresent_add_deduct = base.Columns["present_add_deduct"];
+                this.columnpresent_adjustment = base.Columns["present_adjustment"];
+                this.columnpresent__surplus_deficit_for_the_period = base.Columns["present__surplus_deficit_for_the_period"];
+                this.columnprevious_beginning_balance = base.Columns["previous_beginning_balance"];
+                this.columnprevious_change_in_acc_policy = base.Columns["previous_change_in_acc_policy"];
+                this.columnprevious_prior_period_err = base.Columns["previous_prior_period_err"];
+                this.columnprevious_add_deduct = base.Columns["previous_add_deduct"];
+                this.columnprevious_adjustment = base.Columns["previous_adjustment"];
+                this.columnprevious__surplus_deficit_for_the_period = base.Columns["previous__surplus_deficit_for_the_period"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnaccount_group_id = new global::System.Data.DataColumn("account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_id);
-                this.columnaccount_group_code = new global::System.Data.DataColumn("account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_code);
-                this.columnaccount_group_name = new global::System.Data.DataColumn("account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_group_name);
-                this.columnmajor_account_group_id = new global::System.Data.DataColumn("major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_id);
-                this.columnmajor_account_group_code = new global::System.Data.DataColumn("major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_code);
-                this.columnmajor_account_group_name = new global::System.Data.DataColumn("major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmajor_account_group_name);
-                this.columnsub_major_account_group_id = new global::System.Data.DataColumn("sub_major_account_group_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_id);
-                this.columnsub_major_account_group_code = new global::System.Data.DataColumn("sub_major_account_group_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_code);
-                this.columnsub_major_account_group_name = new global::System.Data.DataColumn("sub_major_account_group_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsub_major_account_group_name);
-                this.columnaccount_id = new global::System.Data.DataColumn("account_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_id);
-                this.columnaccount_code = new global::System.Data.DataColumn("account_code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_code);
-                this.columnaccount_name = new global::System.Data.DataColumn("account_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnaccount_name);
-                this.columncurrent_amount = new global::System.Data.DataColumn("current_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncurrent_amount);
-                this.columnprevious_amount = new global::System.Data.DataColumn("previous_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprevious_amount);
+                this.columnpresent_beginning_balance = new global::System.Data.DataColumn("present_beginning_balance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_beginning_balance);
+                this.columnpresent_change_in_acc_policy = new global::System.Data.DataColumn("present_change_in_acc_policy", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_change_in_acc_policy);
+                this.columnpresent_prior_period_err = new global::System.Data.DataColumn("present_prior_period_err", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_prior_period_err);
+                this.columnpresent_add_deduct = new global::System.Data.DataColumn("present_add_deduct", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_add_deduct);
+                this.columnpresent_adjustment = new global::System.Data.DataColumn("present_adjustment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent_adjustment);
+                this.columnpresent__surplus_deficit_for_the_period = new global::System.Data.DataColumn("present__surplus_deficit_for_the_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpresent__surplus_deficit_for_the_period);
+                this.columnprevious_beginning_balance = new global::System.Data.DataColumn("previous_beginning_balance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_beginning_balance);
+                this.columnprevious_change_in_acc_policy = new global::System.Data.DataColumn("previous_change_in_acc_policy", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_change_in_acc_policy);
+                this.columnprevious_prior_period_err = new global::System.Data.DataColumn("previous_prior_period_err", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_prior_period_err);
+                this.columnprevious_add_deduct = new global::System.Data.DataColumn("previous_add_deduct", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_add_deduct);
+                this.columnprevious_adjustment = new global::System.Data.DataColumn("previous_adjustment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_adjustment);
+                this.columnprevious__surplus_deficit_for_the_period = new global::System.Data.DataColumn("previous__surplus_deficit_for_the_period", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious__surplus_deficit_for_the_period);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11649,6 +12005,978 @@ namespace AccountingSystem {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "dtAccountabilityForAccountableFormsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtStatementOfCashFlowsDataTable : global::System.Data.TypedTableBase<dtStatementOfCashFlowsRow> {
+            
+            private global::System.Data.DataColumn columncollection_from_taxpayers;
+            
+            private global::System.Data.DataColumn columnshare_from_internal_revenue_allotment;
+            
+            private global::System.Data.DataColumn columnreceipts_from_business_service_income;
+            
+            private global::System.Data.DataColumn columninterest_income;
+            
+            private global::System.Data.DataColumn columndividend_income;
+            
+            private global::System.Data.DataColumn columnother_receipts;
+            
+            private global::System.Data.DataColumn columnpayment_expenses;
+            
+            private global::System.Data.DataColumn columnpayments_to_suppliers_and_creditors;
+            
+            private global::System.Data.DataColumn columnpayments_to_employees;
+            
+            private global::System.Data.DataColumn columninterest_expense;
+            
+            private global::System.Data.DataColumn columnother_expenses;
+            
+            private global::System.Data.DataColumn columnproceeds_from_sale_of_investment_property;
+            
+            private global::System.Data.DataColumn columnproceeds_from_sale_disposal_of_property_plant_and_equipment;
+            
+            private global::System.Data.DataColumn columnproceeds_from_sale_of_non_current_investments;
+            
+            private global::System.Data.DataColumn columncollection_of_principal_on_loans_to_other_entities;
+            
+            private global::System.Data.DataColumn columnpurchase_construction_of_investment_property;
+            
+            private global::System.Data.DataColumn columnpurchase_construction_of_property_plant_and_equipment;
+            
+            private global::System.Data.DataColumn columninvestment;
+            
+            private global::System.Data.DataColumn columnpurchase_of_bearer_biological_assets;
+            
+            private global::System.Data.DataColumn columnpurchase_of_intangible_assets;
+            
+            private global::System.Data.DataColumn columngrant_of_loans;
+            
+            private global::System.Data.DataColumn columnproceeds_from_issuance_of_bonds;
+            
+            private global::System.Data.DataColumn columnproceeds_from_loans;
+            
+            private global::System.Data.DataColumn columnpayment_of_long_term_liabilities;
+            
+            private global::System.Data.DataColumn columnretirement_redemption_of_debt_securities;
+            
+            private global::System.Data.DataColumn columnpayment_of_loan_amortization;
+            
+            private global::System.Data.DataColumn columncash_at_the_beginnig_of_the_year;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsDataTable() {
+                this.TableName = "dtStatementOfCashFlows";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfCashFlowsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtStatementOfCashFlowsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn collection_from_taxpayersColumn {
+                get {
+                    return this.columncollection_from_taxpayers;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn share_from_internal_revenue_allotmentColumn {
+                get {
+                    return this.columnshare_from_internal_revenue_allotment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn receipts_from_business_service_incomeColumn {
+                get {
+                    return this.columnreceipts_from_business_service_income;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn interest_incomeColumn {
+                get {
+                    return this.columninterest_income;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn dividend_incomeColumn {
+                get {
+                    return this.columndividend_income;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn other_receiptsColumn {
+                get {
+                    return this.columnother_receipts;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payment_expensesColumn {
+                get {
+                    return this.columnpayment_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payments_to_suppliers_and_creditorsColumn {
+                get {
+                    return this.columnpayments_to_suppliers_and_creditors;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payments_to_employeesColumn {
+                get {
+                    return this.columnpayments_to_employees;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn interest_expenseColumn {
+                get {
+                    return this.columninterest_expense;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn other_expensesColumn {
+                get {
+                    return this.columnother_expenses;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proceeds_from_sale_of_investment_propertyColumn {
+                get {
+                    return this.columnproceeds_from_sale_of_investment_property;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proceeds_from_sale_disposal_of_property_plant_and_equipmentColumn {
+                get {
+                    return this.columnproceeds_from_sale_disposal_of_property_plant_and_equipment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proceeds_from_sale_of_non_current_investmentsColumn {
+                get {
+                    return this.columnproceeds_from_sale_of_non_current_investments;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn collection_of_principal_on_loans_to_other_entitiesColumn {
+                get {
+                    return this.columncollection_of_principal_on_loans_to_other_entities;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn purchase_construction_of_investment_propertyColumn {
+                get {
+                    return this.columnpurchase_construction_of_investment_property;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn purchase_construction_of_property_plant_and_equipmentColumn {
+                get {
+                    return this.columnpurchase_construction_of_property_plant_and_equipment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn investmentColumn {
+                get {
+                    return this.columninvestment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn purchase_of_bearer_biological_assetsColumn {
+                get {
+                    return this.columnpurchase_of_bearer_biological_assets;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn purchase_of_intangible_assetsColumn {
+                get {
+                    return this.columnpurchase_of_intangible_assets;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn grant_of_loansColumn {
+                get {
+                    return this.columngrant_of_loans;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proceeds_from_issuance_of_bondsColumn {
+                get {
+                    return this.columnproceeds_from_issuance_of_bonds;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proceeds_from_loansColumn {
+                get {
+                    return this.columnproceeds_from_loans;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payment_of_long_term_liabilitiesColumn {
+                get {
+                    return this.columnpayment_of_long_term_liabilities;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn retirement_redemption_of_debt_securitiesColumn {
+                get {
+                    return this.columnretirement_redemption_of_debt_securities;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payment_of_loan_amortizationColumn {
+                get {
+                    return this.columnpayment_of_loan_amortization;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn cash_at_the_beginnig_of_the_yearColumn {
+                get {
+                    return this.columncash_at_the_beginnig_of_the_year;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsRow this[int index] {
+                get {
+                    return ((dtStatementOfCashFlowsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfCashFlowsRowChangeEventHandler dtStatementOfCashFlowsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfCashFlowsRowChangeEventHandler dtStatementOfCashFlowsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfCashFlowsRowChangeEventHandler dtStatementOfCashFlowsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtStatementOfCashFlowsRowChangeEventHandler dtStatementOfCashFlowsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtStatementOfCashFlowsRow(dtStatementOfCashFlowsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsRow AdddtStatementOfCashFlowsRow(
+                        decimal collection_from_taxpayers, 
+                        decimal share_from_internal_revenue_allotment, 
+                        decimal receipts_from_business_service_income, 
+                        decimal interest_income, 
+                        decimal dividend_income, 
+                        decimal other_receipts, 
+                        decimal payment_expenses, 
+                        decimal payments_to_suppliers_and_creditors, 
+                        decimal payments_to_employees, 
+                        decimal interest_expense, 
+                        decimal other_expenses, 
+                        decimal proceeds_from_sale_of_investment_property, 
+                        decimal proceeds_from_sale_disposal_of_property_plant_and_equipment, 
+                        decimal proceeds_from_sale_of_non_current_investments, 
+                        decimal collection_of_principal_on_loans_to_other_entities, 
+                        decimal purchase_construction_of_investment_property, 
+                        decimal purchase_construction_of_property_plant_and_equipment, 
+                        decimal investment, 
+                        decimal purchase_of_bearer_biological_assets, 
+                        decimal purchase_of_intangible_assets, 
+                        decimal grant_of_loans, 
+                        decimal proceeds_from_issuance_of_bonds, 
+                        decimal proceeds_from_loans, 
+                        decimal payment_of_long_term_liabilities, 
+                        decimal retirement_redemption_of_debt_securities, 
+                        decimal payment_of_loan_amortization, 
+                        decimal cash_at_the_beginnig_of_the_year) {
+                dtStatementOfCashFlowsRow rowdtStatementOfCashFlowsRow = ((dtStatementOfCashFlowsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        collection_from_taxpayers,
+                        share_from_internal_revenue_allotment,
+                        receipts_from_business_service_income,
+                        interest_income,
+                        dividend_income,
+                        other_receipts,
+                        payment_expenses,
+                        payments_to_suppliers_and_creditors,
+                        payments_to_employees,
+                        interest_expense,
+                        other_expenses,
+                        proceeds_from_sale_of_investment_property,
+                        proceeds_from_sale_disposal_of_property_plant_and_equipment,
+                        proceeds_from_sale_of_non_current_investments,
+                        collection_of_principal_on_loans_to_other_entities,
+                        purchase_construction_of_investment_property,
+                        purchase_construction_of_property_plant_and_equipment,
+                        investment,
+                        purchase_of_bearer_biological_assets,
+                        purchase_of_intangible_assets,
+                        grant_of_loans,
+                        proceeds_from_issuance_of_bonds,
+                        proceeds_from_loans,
+                        payment_of_long_term_liabilities,
+                        retirement_redemption_of_debt_securities,
+                        payment_of_loan_amortization,
+                        cash_at_the_beginnig_of_the_year};
+                rowdtStatementOfCashFlowsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtStatementOfCashFlowsRow);
+                return rowdtStatementOfCashFlowsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtStatementOfCashFlowsDataTable cln = ((dtStatementOfCashFlowsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtStatementOfCashFlowsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columncollection_from_taxpayers = base.Columns["collection_from_taxpayers"];
+                this.columnshare_from_internal_revenue_allotment = base.Columns["share_from_internal_revenue_allotment"];
+                this.columnreceipts_from_business_service_income = base.Columns["receipts_from_business_service_income"];
+                this.columninterest_income = base.Columns["interest_income"];
+                this.columndividend_income = base.Columns["dividend_income"];
+                this.columnother_receipts = base.Columns["other_receipts"];
+                this.columnpayment_expenses = base.Columns["payment_expenses"];
+                this.columnpayments_to_suppliers_and_creditors = base.Columns["payments_to_suppliers_and_creditors"];
+                this.columnpayments_to_employees = base.Columns["payments_to_employees"];
+                this.columninterest_expense = base.Columns["interest_expense"];
+                this.columnother_expenses = base.Columns["other_expenses"];
+                this.columnproceeds_from_sale_of_investment_property = base.Columns["proceeds_from_sale_of_investment_property"];
+                this.columnproceeds_from_sale_disposal_of_property_plant_and_equipment = base.Columns["proceeds_from_sale_disposal_of_property_plant_and_equipment"];
+                this.columnproceeds_from_sale_of_non_current_investments = base.Columns["proceeds_from_sale_of_non_current_investments"];
+                this.columncollection_of_principal_on_loans_to_other_entities = base.Columns["collection_of_principal_on_loans_to_other_entities"];
+                this.columnpurchase_construction_of_investment_property = base.Columns["purchase_construction_of_investment_property"];
+                this.columnpurchase_construction_of_property_plant_and_equipment = base.Columns["purchase_construction_of_property_plant_and_equipment"];
+                this.columninvestment = base.Columns["investment"];
+                this.columnpurchase_of_bearer_biological_assets = base.Columns["purchase_of_bearer_biological_assets"];
+                this.columnpurchase_of_intangible_assets = base.Columns["purchase_of_intangible_assets"];
+                this.columngrant_of_loans = base.Columns["grant_of_loans"];
+                this.columnproceeds_from_issuance_of_bonds = base.Columns["proceeds_from_issuance_of_bonds"];
+                this.columnproceeds_from_loans = base.Columns["proceeds_from_loans"];
+                this.columnpayment_of_long_term_liabilities = base.Columns["payment_of_long_term_liabilities"];
+                this.columnretirement_redemption_of_debt_securities = base.Columns["retirement_redemption_of_debt_securities"];
+                this.columnpayment_of_loan_amortization = base.Columns["payment_of_loan_amortization"];
+                this.columncash_at_the_beginnig_of_the_year = base.Columns["cash_at_the_beginnig_of_the_year"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columncollection_from_taxpayers = new global::System.Data.DataColumn("collection_from_taxpayers", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollection_from_taxpayers);
+                this.columnshare_from_internal_revenue_allotment = new global::System.Data.DataColumn("share_from_internal_revenue_allotment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnshare_from_internal_revenue_allotment);
+                this.columnreceipts_from_business_service_income = new global::System.Data.DataColumn("receipts_from_business_service_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnreceipts_from_business_service_income);
+                this.columninterest_income = new global::System.Data.DataColumn("interest_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninterest_income);
+                this.columndividend_income = new global::System.Data.DataColumn("dividend_income", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndividend_income);
+                this.columnother_receipts = new global::System.Data.DataColumn("other_receipts", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnother_receipts);
+                this.columnpayment_expenses = new global::System.Data.DataColumn("payment_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayment_expenses);
+                this.columnpayments_to_suppliers_and_creditors = new global::System.Data.DataColumn("payments_to_suppliers_and_creditors", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayments_to_suppliers_and_creditors);
+                this.columnpayments_to_employees = new global::System.Data.DataColumn("payments_to_employees", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayments_to_employees);
+                this.columninterest_expense = new global::System.Data.DataColumn("interest_expense", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninterest_expense);
+                this.columnother_expenses = new global::System.Data.DataColumn("other_expenses", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnother_expenses);
+                this.columnproceeds_from_sale_of_investment_property = new global::System.Data.DataColumn("proceeds_from_sale_of_investment_property", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproceeds_from_sale_of_investment_property);
+                this.columnproceeds_from_sale_disposal_of_property_plant_and_equipment = new global::System.Data.DataColumn("proceeds_from_sale_disposal_of_property_plant_and_equipment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproceeds_from_sale_disposal_of_property_plant_and_equipment);
+                this.columnproceeds_from_sale_of_non_current_investments = new global::System.Data.DataColumn("proceeds_from_sale_of_non_current_investments", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproceeds_from_sale_of_non_current_investments);
+                this.columncollection_of_principal_on_loans_to_other_entities = new global::System.Data.DataColumn("collection_of_principal_on_loans_to_other_entities", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncollection_of_principal_on_loans_to_other_entities);
+                this.columnpurchase_construction_of_investment_property = new global::System.Data.DataColumn("purchase_construction_of_investment_property", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpurchase_construction_of_investment_property);
+                this.columnpurchase_construction_of_property_plant_and_equipment = new global::System.Data.DataColumn("purchase_construction_of_property_plant_and_equipment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpurchase_construction_of_property_plant_and_equipment);
+                this.columninvestment = new global::System.Data.DataColumn("investment", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvestment);
+                this.columnpurchase_of_bearer_biological_assets = new global::System.Data.DataColumn("purchase_of_bearer_biological_assets", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpurchase_of_bearer_biological_assets);
+                this.columnpurchase_of_intangible_assets = new global::System.Data.DataColumn("purchase_of_intangible_assets", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpurchase_of_intangible_assets);
+                this.columngrant_of_loans = new global::System.Data.DataColumn("grant_of_loans", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngrant_of_loans);
+                this.columnproceeds_from_issuance_of_bonds = new global::System.Data.DataColumn("proceeds_from_issuance_of_bonds", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproceeds_from_issuance_of_bonds);
+                this.columnproceeds_from_loans = new global::System.Data.DataColumn("proceeds_from_loans", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproceeds_from_loans);
+                this.columnpayment_of_long_term_liabilities = new global::System.Data.DataColumn("payment_of_long_term_liabilities", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayment_of_long_term_liabilities);
+                this.columnretirement_redemption_of_debt_securities = new global::System.Data.DataColumn("retirement_redemption_of_debt_securities", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnretirement_redemption_of_debt_securities);
+                this.columnpayment_of_loan_amortization = new global::System.Data.DataColumn("payment_of_loan_amortization", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayment_of_loan_amortization);
+                this.columncash_at_the_beginnig_of_the_year = new global::System.Data.DataColumn("cash_at_the_beginnig_of_the_year", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncash_at_the_beginnig_of_the_year);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsRow NewdtStatementOfCashFlowsRow() {
+                return ((dtStatementOfCashFlowsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtStatementOfCashFlowsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtStatementOfCashFlowsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtStatementOfCashFlowsRowChanged != null)) {
+                    this.dtStatementOfCashFlowsRowChanged(this, new dtStatementOfCashFlowsRowChangeEvent(((dtStatementOfCashFlowsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtStatementOfCashFlowsRowChanging != null)) {
+                    this.dtStatementOfCashFlowsRowChanging(this, new dtStatementOfCashFlowsRowChangeEvent(((dtStatementOfCashFlowsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtStatementOfCashFlowsRowDeleted != null)) {
+                    this.dtStatementOfCashFlowsRowDeleted(this, new dtStatementOfCashFlowsRowChangeEvent(((dtStatementOfCashFlowsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtStatementOfCashFlowsRowDeleting != null)) {
+                    this.dtStatementOfCashFlowsRowDeleting(this, new dtStatementOfCashFlowsRowChangeEvent(((dtStatementOfCashFlowsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtStatementOfCashFlowsRow(dtStatementOfCashFlowsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLFS ds = new dsLFS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtStatementOfCashFlowsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtTransactionLogDataTable : global::System.Data.TypedTableBase<dtTransactionLogRow> {
+            
+            private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columnparticulars;
+            
+            private global::System.Data.DataColumn columnref;
+            
+            private global::System.Data.DataColumn columndebit_amount;
+            
+            private global::System.Data.DataColumn columncredit_amount;
+            
+            private global::System.Data.DataColumn columnbalance;
+            
+            private global::System.Data.DataColumn columnproxy;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogDataTable() {
+                this.TableName = "dtTransactionLog";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtTransactionLogDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected dtTransactionLogDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn particularsColumn {
+                get {
+                    return this.columnparticulars;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn refColumn {
+                get {
+                    return this.columnref;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn debit_amountColumn {
+                get {
+                    return this.columndebit_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn credit_amountColumn {
+                get {
+                    return this.columncredit_amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn balanceColumn {
+                get {
+                    return this.columnbalance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn proxyColumn {
+                get {
+                    return this.columnproxy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogRow this[int index] {
+                get {
+                    return ((dtTransactionLogRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtTransactionLogRowChangeEventHandler dtTransactionLogRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtTransactionLogRowChangeEventHandler dtTransactionLogRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtTransactionLogRowChangeEventHandler dtTransactionLogRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public event dtTransactionLogRowChangeEventHandler dtTransactionLogRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void AdddtTransactionLogRow(dtTransactionLogRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogRow AdddtTransactionLogRow(string date, string particulars, string _ref, decimal debit_amount, decimal credit_amount, decimal balance, string proxy) {
+                dtTransactionLogRow rowdtTransactionLogRow = ((dtTransactionLogRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        date,
+                        particulars,
+                        _ref,
+                        debit_amount,
+                        credit_amount,
+                        balance,
+                        proxy};
+                rowdtTransactionLogRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtTransactionLogRow);
+                return rowdtTransactionLogRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtTransactionLogDataTable cln = ((dtTransactionLogDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtTransactionLogDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal void InitVars() {
+                this.columndate = base.Columns["date"];
+                this.columnparticulars = base.Columns["particulars"];
+                this.columnref = base.Columns["ref"];
+                this.columndebit_amount = base.Columns["debit_amount"];
+                this.columncredit_amount = base.Columns["credit_amount"];
+                this.columnbalance = base.Columns["balance"];
+                this.columnproxy = base.Columns["proxy"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            private void InitClass() {
+                this.columndate = new global::System.Data.DataColumn("date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.columnparticulars = new global::System.Data.DataColumn("particulars", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnparticulars);
+                this.columnref = new global::System.Data.DataColumn("ref", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnref.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "refColumn");
+                this.columnref.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnref");
+                this.columnref.ExtendedProperties.Add("Generator_UserColumnName", "ref");
+                base.Columns.Add(this.columnref);
+                this.columndebit_amount = new global::System.Data.DataColumn("debit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndebit_amount);
+                this.columncredit_amount = new global::System.Data.DataColumn("credit_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncredit_amount);
+                this.columnbalance = new global::System.Data.DataColumn("balance", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbalance);
+                this.columnproxy = new global::System.Data.DataColumn("proxy", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnproxy);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogRow NewdtTransactionLogRow() {
+                return ((dtTransactionLogRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtTransactionLogRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtTransactionLogRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtTransactionLogRowChanged != null)) {
+                    this.dtTransactionLogRowChanged(this, new dtTransactionLogRowChangeEvent(((dtTransactionLogRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtTransactionLogRowChanging != null)) {
+                    this.dtTransactionLogRowChanging(this, new dtTransactionLogRowChangeEvent(((dtTransactionLogRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtTransactionLogRowDeleted != null)) {
+                    this.dtTransactionLogRowDeleted(this, new dtTransactionLogRowChangeEvent(((dtTransactionLogRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtTransactionLogRowDeleting != null)) {
+                    this.dtTransactionLogRowDeleting(this, new dtTransactionLogRowChangeEvent(((dtTransactionLogRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void RemovedtTransactionLogRow(dtTransactionLogRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLFS ds = new dsLFS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtTransactionLogDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -18613,408 +19941,988 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int account_group_id {
+            public decimal present_tax_revenue {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfFinancialPerformance.account_group_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_tax_revenueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_id\' in table \'dtStatementOfFinancialPerforman" +
-                                "ce\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_tax_revenue\' in table \'dtStatementOfFinancialPerfor" +
+                                "mance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_group_idColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_tax_revenueColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_group_code {
+            public decimal present_share_internal_revenue_collections {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.account_group_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_share_internal_revenue_collectionsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_code\' in table \'dtStatementOfFinancialPerform" +
-                                "ance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_share_internal_revenue_collections\' in table \'dtSta" +
+                                "tementOfFinancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_share_internal_revenue_collectionsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_group_name {
+            public decimal present_other_share_national_taxes {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_other_share_national_taxesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_name\' in table \'dtStatementOfFinancialPerform" +
-                                "ance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_other_share_national_taxes\' in table \'dtStatementOf" +
+                                "FinancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_group_nameColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_other_share_national_taxesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int major_account_group_id {
+            public decimal present_service_business_income {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfFinancialPerformance.major_account_group_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_service_business_incomeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_id\' in table \'dtStatementOfFinancialPer" +
-                                "formance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_service_business_income\' in table \'dtStatementOfFin" +
+                                "ancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.major_account_group_idColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_service_business_incomeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string major_account_group_code {
+            public decimal present_shares_grants_donations {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.major_account_group_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_shares_grants_donationsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_code\' in table \'dtStatementOfFinancialP" +
-                                "erformance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_shares_grants_donations\' in table \'dtStatementOfFin" +
+                                "ancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.major_account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_shares_grants_donationsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string major_account_group_name {
+            public decimal present_gains {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.major_account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_gainsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_name\' in table \'dtStatementOfFinancialP" +
-                                "erformance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_gains\' in table \'dtStatementOfFinancialPerformance\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.major_account_group_nameColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_gainsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int sub_major_account_group_id {
+            public decimal present_other_income {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_other_incomeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_id\' in table \'dtStatementOfFinancia" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_other_income\' in table \'dtStatementOfFinancialPerfo" +
+                                "rmance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_other_incomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_total_revenue {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_total_revenueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_total_revenue\' in table \'dtStatementOfFinancialPerf" +
+                                "ormance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_total_revenueColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_personnel_services {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_personnel_servicesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_personnel_services\' in table \'dtStatementOfFinancia" +
                                 "lPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_idColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_personnel_servicesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_major_account_group_code {
+            public decimal present_maintenance_other_operating_expenses {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_maintenance_other_operating_expensesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_code\' in table \'dtStatementOfFinanc" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_maintenance_other_operating_expenses\' in table \'dtS" +
+                                "tatementOfFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_maintenance_other_operating_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_non_cash_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_non_cash_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_non_cash_expenses\' in table \'dtStatementOfFinancial" +
+                                "Performance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_non_cash_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_financial_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_financial_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_financial_expenses\' in table \'dtStatementOfFinancia" +
+                                "lPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_financial_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_current_operating_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_current_operating_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_current_operating_expenses\' in table \'dtStatementOf" +
+                                "FinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_current_operating_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_surplus_deficit_current_operation {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_current_operationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_surplus_deficit_current_operation\' in table \'dtStat" +
+                                "ementOfFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_current_operationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_transfers_subsidy_from {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_fromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_transfers_subsidy_from\' in table \'dtStatementOfFina" +
+                                "ncialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_fromColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present_transfers_subsidy_to {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_toColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_transfers_subsidy_to\' in table \'dtStatementOfFinanc" +
                                 "ialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_toColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_major_account_group_name {
+            public decimal present_surplus_deficit_for_period {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_for_periodColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_name\' in table \'dtStatementOfFinanc" +
-                                "ialPerformance\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_surplus_deficit_for_period\' in table \'dtStatementOf" +
+                                "FinancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_nameColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_for_periodColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int account_id {
+            public decimal previous_tax_revenue {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfFinancialPerformance.account_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_tax_revenueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_id\' in table \'dtStatementOfFinancialPerformance\' is" +
-                                " DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_tax_revenue\' in table \'dtStatementOfFinancialPerfo" +
+                                "rmance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_idColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.previous_tax_revenueColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code {
+            public decimal previous_share_internal_revenue_collections {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.account_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_share_internal_revenue_collectionsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtStatementOfFinancialPerformance\' " +
-                                "is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_share_internal_revenue_collections\' in table \'dtSt" +
+                                "atementOfFinancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_codeColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.previous_share_internal_revenue_collectionsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_name {
+            public decimal previous_other_share_national_taxes {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfFinancialPerformance.account_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_other_share_national_taxesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_name\' in table \'dtStatementOfFinancialPerformance\' " +
-                                "is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_other_share_national_taxes\' in table \'dtStatementO" +
+                                "fFinancialPerformance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.account_nameColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.previous_other_share_national_taxesColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal current_amount {
+            public decimal previous_service_business_income {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.current_amountColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_service_business_incomeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'current_amount\' in table \'dtStatementOfFinancialPerformance" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_service_business_income\' in table \'dtStatementOfFi" +
+                                "nancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_service_business_incomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal previous_shares_grants_donations {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_shares_grants_donationsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_shares_grants_donations\' in table \'dtStatementOfFi" +
+                                "nancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_shares_grants_donationsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal previous_gains {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_gainsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_gains\' in table \'dtStatementOfFinancialPerformance" +
                                 "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.current_amountColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.previous_gainsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal previous_amount {
+            public decimal previous_other_income {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_amountColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_other_incomeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'previous_amount\' in table \'dtStatementOfFinancialPerformanc" +
-                                "e\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_other_income\' in table \'dtStatementOfFinancialPerf" +
+                                "ormance\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfFinancialPerformance.previous_amountColumn] = value;
+                    this[this.tabledtStatementOfFinancialPerformance.previous_other_incomeColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_group_idColumn);
+            public decimal previous_total_revenue {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_total_revenueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_total_revenue\' in table \'dtStatementOfFinancialPer" +
+                                "formance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_total_revenueColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_group_idColumn] = global::System.Convert.DBNull;
+            public decimal previous_personnel_services {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_personnel_servicesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_personnel_services\' in table \'dtStatementOfFinanci" +
+                                "alPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_personnel_servicesColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_group_codeColumn);
+            public decimal previous_maintenance_other_operating_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_maintenance_other_operating_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_maintenance_other_operating_expenses\' in table \'dt" +
+                                "StatementOfFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_maintenance_other_operating_expensesColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_codeNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_group_codeColumn] = global::System.Convert.DBNull;
+            public decimal previous_non_cash_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_non_cash_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_non_cash_expenses\' in table \'dtStatementOfFinancia" +
+                                "lPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_non_cash_expensesColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_group_nameColumn);
+            public decimal previous_financial_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_financial_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_financial_expenses\' in table \'dtStatementOfFinanci" +
+                                "alPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_financial_expensesColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_nameNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_group_nameColumn] = global::System.Convert.DBNull;
+            public decimal previous_current_operating_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_current_operating_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_current_operating_expenses\' in table \'dtStatementO" +
+                                "fFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_current_operating_expensesColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.major_account_group_idColumn);
+            public decimal previous_surplus_deficit_current_operation {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_current_operationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_surplus_deficit_current_operation\' in table \'dtSta" +
+                                "tementOfFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_current_operationColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.major_account_group_idColumn] = global::System.Convert.DBNull;
+            public decimal previous_transfers_subsidy_from {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_fromColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_transfers_subsidy_from\' in table \'dtStatementOfFin" +
+                                "ancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_fromColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.major_account_group_codeColumn);
+            public decimal previous_transfers_subsidy_to {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_toColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_transfers_subsidy_to\' in table \'dtStatementOfFinan" +
+                                "cialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_toColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_codeNull() {
-                this[this.tabledtStatementOfFinancialPerformance.major_account_group_codeColumn] = global::System.Convert.DBNull;
+            public decimal previous_surplus_deficit_for_period {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_for_periodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_surplus_deficit_for_period\' in table \'dtStatementO" +
+                                "fFinancialPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_for_periodColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.major_account_group_nameColumn);
+            public bool Ispresent_tax_revenueNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_tax_revenueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_nameNull() {
-                this[this.tabledtStatementOfFinancialPerformance.major_account_group_nameColumn] = global::System.Convert.DBNull;
+            public void Setpresent_tax_revenueNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_tax_revenueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.sub_major_account_group_idColumn);
+            public bool Ispresent_share_internal_revenue_collectionsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_share_internal_revenue_collectionsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_idColumn] = global::System.Convert.DBNull;
+            public void Setpresent_share_internal_revenue_collectionsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_share_internal_revenue_collectionsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.sub_major_account_group_codeColumn);
+            public bool Ispresent_other_share_national_taxesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_other_share_national_taxesColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_codeNull() {
-                this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_codeColumn] = global::System.Convert.DBNull;
+            public void Setpresent_other_share_national_taxesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_other_share_national_taxesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.sub_major_account_group_nameColumn);
+            public bool Ispresent_service_business_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_service_business_incomeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_nameNull() {
-                this[this.tabledtStatementOfFinancialPerformance.sub_major_account_group_nameColumn] = global::System.Convert.DBNull;
+            public void Setpresent_service_business_incomeNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_service_business_incomeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_idNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_idColumn);
+            public bool Ispresent_shares_grants_donationsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_shares_grants_donationsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_idNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_idColumn] = global::System.Convert.DBNull;
+            public void Setpresent_shares_grants_donationsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_shares_grants_donationsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_codeNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_codeColumn);
+            public bool Ispresent_gainsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_gainsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_codeNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_codeColumn] = global::System.Convert.DBNull;
+            public void Setpresent_gainsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_gainsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_nameNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.account_nameColumn);
+            public bool Ispresent_other_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_other_incomeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_nameNull() {
-                this[this.tabledtStatementOfFinancialPerformance.account_nameColumn] = global::System.Convert.DBNull;
+            public void Setpresent_other_incomeNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_other_incomeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscurrent_amountNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.current_amountColumn);
+            public bool Ispresent_total_revenueNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_total_revenueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcurrent_amountNull() {
-                this[this.tabledtStatementOfFinancialPerformance.current_amountColumn] = global::System.Convert.DBNull;
+            public void Setpresent_total_revenueNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_total_revenueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isprevious_amountNull() {
-                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_amountColumn);
+            public bool Ispresent_personnel_servicesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_personnel_servicesColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setprevious_amountNull() {
-                this[this.tabledtStatementOfFinancialPerformance.previous_amountColumn] = global::System.Convert.DBNull;
+            public void Setpresent_personnel_servicesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_personnel_servicesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_maintenance_other_operating_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_maintenance_other_operating_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_maintenance_other_operating_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_maintenance_other_operating_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_non_cash_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_non_cash_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_non_cash_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_non_cash_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_financial_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_financial_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_financial_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_financial_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_current_operating_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_current_operating_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_current_operating_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_current_operating_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_surplus_deficit_current_operationNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_current_operationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_surplus_deficit_current_operationNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_current_operationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_transfers_subsidy_fromNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_fromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_transfers_subsidy_fromNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_fromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_transfers_subsidy_toNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_toColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_transfers_subsidy_toNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_transfers_subsidy_toColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispresent_surplus_deficit_for_periodNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_for_periodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpresent_surplus_deficit_for_periodNull() {
+                this[this.tabledtStatementOfFinancialPerformance.present_surplus_deficit_for_periodColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_tax_revenueNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_tax_revenueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_tax_revenueNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_tax_revenueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_share_internal_revenue_collectionsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_share_internal_revenue_collectionsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_share_internal_revenue_collectionsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_share_internal_revenue_collectionsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_other_share_national_taxesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_other_share_national_taxesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_other_share_national_taxesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_other_share_national_taxesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_service_business_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_service_business_incomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_service_business_incomeNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_service_business_incomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_shares_grants_donationsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_shares_grants_donationsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_shares_grants_donationsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_shares_grants_donationsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_gainsNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_gainsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_gainsNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_gainsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_other_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_other_incomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_other_incomeNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_other_incomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_total_revenueNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_total_revenueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_total_revenueNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_total_revenueColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_personnel_servicesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_personnel_servicesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_personnel_servicesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_personnel_servicesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_maintenance_other_operating_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_maintenance_other_operating_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_maintenance_other_operating_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_maintenance_other_operating_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_non_cash_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_non_cash_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_non_cash_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_non_cash_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_financial_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_financial_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_financial_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_financial_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_current_operating_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_current_operating_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_current_operating_expensesNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_current_operating_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_surplus_deficit_current_operationNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_current_operationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_surplus_deficit_current_operationNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_current_operationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_transfers_subsidy_fromNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_fromColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_transfers_subsidy_fromNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_fromColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_transfers_subsidy_toNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_toColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_transfers_subsidy_toNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_transfers_subsidy_toColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_surplus_deficit_for_periodNull() {
+                return this.IsNull(this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_for_periodColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_surplus_deficit_for_periodNull() {
+                this[this.tabledtStatementOfFinancialPerformance.previous_surplus_deficit_for_periodColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -19034,408 +20942,350 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int account_group_id {
+            public decimal present_beginning_balance {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present_beginning_balanceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_id\' in table \'dtStatementOfChangesInNetAssets" +
-                                "Equity\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_beginning_balance\' in table \'dtStatementOfChangesIn" +
+                                "NetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present_beginning_balanceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_group_code {
+            public decimal present_change_in_acc_policy {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present_change_in_acc_policyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_code\' in table \'dtStatementOfChangesInNetAsse" +
-                                "tsEquity\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_change_in_acc_policy\' in table \'dtStatementOfChange" +
+                                "sInNetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present_change_in_acc_policyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_group_name {
+            public decimal present_prior_period_err {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present_prior_period_errColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_group_name\' in table \'dtStatementOfChangesInNetAsse" +
-                                "tsEquity\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int major_account_group_id {
-                get {
-                    try {
-                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_id\' in table \'dtStatementOfChangesInNet" +
-                                "AssetsEquity\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string major_account_group_code {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_code\' in table \'dtStatementOfChangesInN" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_prior_period_err\' in table \'dtStatementOfChangesInN" +
                                 "etAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present_prior_period_errColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string major_account_group_name {
+            public decimal present_add_deduct {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present_add_deductColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'major_account_group_name\' in table \'dtStatementOfChangesInN" +
-                                "etAssetsEquity\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_add_deduct\' in table \'dtStatementOfChangesInNetAsse" +
+                                "tsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present_add_deductColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int sub_major_account_group_id {
+            public decimal present_adjustment {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present_adjustmentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_id\' in table \'dtStatementOfChangesI" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'present_adjustment\' in table \'dtStatementOfChangesInNetAsse" +
+                                "tsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present_adjustmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal present__surplus_deficit_for_the_period {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.present__surplus_deficit_for_the_periodColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'present__surplus_deficit_for_the_period\' in table \'dtStatem" +
+                                "entOfChangesInNetAssetsEquity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.present__surplus_deficit_for_the_periodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal previous_beginning_balance {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_beginning_balanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_beginning_balance\' in table \'dtStatementOfChangesI" +
                                 "nNetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_beginning_balanceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_major_account_group_code {
+            public decimal previous_change_in_acc_policy {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_change_in_acc_policyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_code\' in table \'dtStatementOfChange" +
-                                "sInNetAssetsEquity\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_change_in_acc_policy\' in table \'dtStatementOfChang" +
+                                "esInNetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_change_in_acc_policyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sub_major_account_group_name {
+            public decimal previous_prior_period_err {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_prior_period_errColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sub_major_account_group_name\' in table \'dtStatementOfChange" +
-                                "sInNetAssetsEquity\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_prior_period_err\' in table \'dtStatementOfChangesIn" +
+                                "NetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_prior_period_errColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int account_id {
+            public decimal previous_add_deduct {
                 get {
                     try {
-                        return ((int)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_add_deductColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_id\' in table \'dtStatementOfChangesInNetAssetsEquity" +
-                                "\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_add_deduct\' in table \'dtStatementOfChangesInNetAss" +
+                                "etsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_add_deductColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_code {
+            public decimal previous_adjustment {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_adjustmentColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_code\' in table \'dtStatementOfChangesInNetAssetsEqui" +
-                                "ty\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_adjustment\' in table \'dtStatementOfChangesInNetAss" +
+                                "etsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_adjustmentColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string account_name {
+            public decimal previous__surplus_deficit_for_the_period {
                 get {
                     try {
-                        return ((string)(this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn]));
+                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous__surplus_deficit_for_the_periodColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'account_name\' in table \'dtStatementOfChangesInNetAssetsEqui" +
-                                "ty\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous__surplus_deficit_for_the_period\' in table \'dtState" +
+                                "mentOfChangesInNetAssetsEquity\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn] = value;
+                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous__surplus_deficit_for_the_periodColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal current_amount {
-                get {
-                    try {
-                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'current_amount\' in table \'dtStatementOfChangesInNetAssetsEq" +
-                                "uity\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn] = value;
-                }
+            public bool Ispresent_beginning_balanceNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present_beginning_balanceColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal previous_amount {
-                get {
-                    try {
-                        return ((decimal)(this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'previous_amount\' in table \'dtStatementOfChangesInNetAssetsE" +
-                                "quity\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn] = value;
-                }
+            public void Setpresent_beginning_balanceNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present_beginning_balanceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn);
+            public bool Ispresent_change_in_acc_policyNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present_change_in_acc_policyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_idNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_idColumn] = global::System.Convert.DBNull;
+            public void Setpresent_change_in_acc_policyNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present_change_in_acc_policyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn);
+            public bool Ispresent_prior_period_errNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present_prior_period_errColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_codeNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_codeColumn] = global::System.Convert.DBNull;
+            public void Setpresent_prior_period_errNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present_prior_period_errColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn);
+            public bool Ispresent_add_deductNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present_add_deductColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_group_nameNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_group_nameColumn] = global::System.Convert.DBNull;
+            public void Setpresent_add_deductNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present_add_deductColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn);
+            public bool Ispresent_adjustmentNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present_adjustmentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_idNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_idColumn] = global::System.Convert.DBNull;
+            public void Setpresent_adjustmentNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present_adjustmentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn);
+            public bool Ispresent__surplus_deficit_for_the_periodNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.present__surplus_deficit_for_the_periodColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_codeNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_codeColumn] = global::System.Convert.DBNull;
+            public void Setpresent__surplus_deficit_for_the_periodNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.present__surplus_deficit_for_the_periodColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ismajor_account_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn);
+            public bool Isprevious_beginning_balanceNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_beginning_balanceColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setmajor_account_group_nameNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.major_account_group_nameColumn] = global::System.Convert.DBNull;
+            public void Setprevious_beginning_balanceNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_beginning_balanceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_idNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn);
+            public bool Isprevious_change_in_acc_policyNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_change_in_acc_policyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_idNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_idColumn] = global::System.Convert.DBNull;
+            public void Setprevious_change_in_acc_policyNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_change_in_acc_policyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_codeNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn);
+            public bool Isprevious_prior_period_errNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_prior_period_errColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_codeNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_codeColumn] = global::System.Convert.DBNull;
+            public void Setprevious_prior_period_errNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_prior_period_errColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issub_major_account_group_nameNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn);
+            public bool Isprevious_add_deductNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_add_deductColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsub_major_account_group_nameNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.sub_major_account_group_nameColumn] = global::System.Convert.DBNull;
+            public void Setprevious_add_deductNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_add_deductColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_idNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn);
+            public bool Isprevious_adjustmentNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_adjustmentColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_idNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_idColumn] = global::System.Convert.DBNull;
+            public void Setprevious_adjustmentNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_adjustmentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_codeNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn);
+            public bool Isprevious__surplus_deficit_for_the_periodNull() {
+                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous__surplus_deficit_for_the_periodColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_codeNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_codeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isaccount_nameNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setaccount_nameNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.account_nameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscurrent_amountNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcurrent_amountNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.current_amountColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isprevious_amountNull() {
-                return this.IsNull(this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setprevious_amountNull() {
-                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous_amountColumn] = global::System.Convert.DBNull;
+            public void Setprevious__surplus_deficit_for_the_periodNull() {
+                this[this.tabledtStatementOfChangesInNetAssetsEquity.previous__surplus_deficit_for_the_periodColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -19968,6 +21818,1014 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setending_bal_serial_toNull() {
                 this[this.tabledtAccountabilityForAccountableForms.ending_bal_serial_toColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtStatementOfCashFlowsRow : global::System.Data.DataRow {
+            
+            private dtStatementOfCashFlowsDataTable tabledtStatementOfCashFlows;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtStatementOfCashFlowsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtStatementOfCashFlows = ((dtStatementOfCashFlowsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal collection_from_taxpayers {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.collection_from_taxpayersColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'collection_from_taxpayers\' in table \'dtStatementOfCashFlows" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.collection_from_taxpayersColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal share_from_internal_revenue_allotment {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.share_from_internal_revenue_allotmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'share_from_internal_revenue_allotment\' in table \'dtStatemen" +
+                                "tOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.share_from_internal_revenue_allotmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal receipts_from_business_service_income {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.receipts_from_business_service_incomeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'receipts_from_business_service_income\' in table \'dtStatemen" +
+                                "tOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.receipts_from_business_service_incomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal interest_income {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.interest_incomeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'interest_income\' in table \'dtStatementOfCashFlows\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.interest_incomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal dividend_income {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.dividend_incomeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dividend_income\' in table \'dtStatementOfCashFlows\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.dividend_incomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal other_receipts {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.other_receiptsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'other_receipts\' in table \'dtStatementOfCashFlows\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.other_receiptsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal payment_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.payment_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payment_expenses\' in table \'dtStatementOfCashFlows\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.payment_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal payments_to_suppliers_and_creditors {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.payments_to_suppliers_and_creditorsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payments_to_suppliers_and_creditors\' in table \'dtStatementO" +
+                                "fCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.payments_to_suppliers_and_creditorsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal payments_to_employees {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.payments_to_employeesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payments_to_employees\' in table \'dtStatementOfCashFlows\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.payments_to_employeesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal interest_expense {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.interest_expenseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'interest_expense\' in table \'dtStatementOfCashFlows\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.interest_expenseColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal other_expenses {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.other_expensesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'other_expenses\' in table \'dtStatementOfCashFlows\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.other_expensesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal proceeds_from_sale_of_investment_property {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_investment_propertyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proceeds_from_sale_of_investment_property\' in table \'dtStat" +
+                                "ementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_investment_propertyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal proceeds_from_sale_disposal_of_property_plant_and_equipment {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.proceeds_from_sale_disposal_of_property_plant_and_equipmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proceeds_from_sale_disposal_of_property_plant_and_equipment" +
+                                "\' in table \'dtStatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.proceeds_from_sale_disposal_of_property_plant_and_equipmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal proceeds_from_sale_of_non_current_investments {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_non_current_investmentsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proceeds_from_sale_of_non_current_investments\' in table \'dt" +
+                                "StatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_non_current_investmentsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal collection_of_principal_on_loans_to_other_entities {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.collection_of_principal_on_loans_to_other_entitiesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'collection_of_principal_on_loans_to_other_entities\' in tabl" +
+                                "e \'dtStatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.collection_of_principal_on_loans_to_other_entitiesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal purchase_construction_of_investment_property {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.purchase_construction_of_investment_propertyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'purchase_construction_of_investment_property\' in table \'dtS" +
+                                "tatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.purchase_construction_of_investment_propertyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal purchase_construction_of_property_plant_and_equipment {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.purchase_construction_of_property_plant_and_equipmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'purchase_construction_of_property_plant_and_equipment\' in t" +
+                                "able \'dtStatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.purchase_construction_of_property_plant_and_equipmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal investment {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.investmentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'investment\' in table \'dtStatementOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.investmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal purchase_of_bearer_biological_assets {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.purchase_of_bearer_biological_assetsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'purchase_of_bearer_biological_assets\' in table \'dtStatement" +
+                                "OfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.purchase_of_bearer_biological_assetsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal purchase_of_intangible_assets {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.purchase_of_intangible_assetsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'purchase_of_intangible_assets\' in table \'dtStatementOfCashF" +
+                                "lows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.purchase_of_intangible_assetsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal grant_of_loans {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.grant_of_loansColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'grant_of_loans\' in table \'dtStatementOfCashFlows\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.grant_of_loansColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal proceeds_from_issuance_of_bonds {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.proceeds_from_issuance_of_bondsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proceeds_from_issuance_of_bonds\' in table \'dtStatementOfCas" +
+                                "hFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.proceeds_from_issuance_of_bondsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal proceeds_from_loans {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.proceeds_from_loansColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proceeds_from_loans\' in table \'dtStatementOfCashFlows\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.proceeds_from_loansColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal payment_of_long_term_liabilities {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.payment_of_long_term_liabilitiesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payment_of_long_term_liabilities\' in table \'dtStatementOfCa" +
+                                "shFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.payment_of_long_term_liabilitiesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal retirement_redemption_of_debt_securities {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.retirement_redemption_of_debt_securitiesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'retirement_redemption_of_debt_securities\' in table \'dtState" +
+                                "mentOfCashFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.retirement_redemption_of_debt_securitiesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal payment_of_loan_amortization {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.payment_of_loan_amortizationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payment_of_loan_amortization\' in table \'dtStatementOfCashFl" +
+                                "ows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.payment_of_loan_amortizationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal cash_at_the_beginnig_of_the_year {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtStatementOfCashFlows.cash_at_the_beginnig_of_the_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'cash_at_the_beginnig_of_the_year\' in table \'dtStatementOfCa" +
+                                "shFlows\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtStatementOfCashFlows.cash_at_the_beginnig_of_the_yearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscollection_from_taxpayersNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.collection_from_taxpayersColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcollection_from_taxpayersNull() {
+                this[this.tabledtStatementOfCashFlows.collection_from_taxpayersColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isshare_from_internal_revenue_allotmentNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.share_from_internal_revenue_allotmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setshare_from_internal_revenue_allotmentNull() {
+                this[this.tabledtStatementOfCashFlows.share_from_internal_revenue_allotmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isreceipts_from_business_service_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.receipts_from_business_service_incomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setreceipts_from_business_service_incomeNull() {
+                this[this.tabledtStatementOfCashFlows.receipts_from_business_service_incomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isinterest_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.interest_incomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setinterest_incomeNull() {
+                this[this.tabledtStatementOfCashFlows.interest_incomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isdividend_incomeNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.dividend_incomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setdividend_incomeNull() {
+                this[this.tabledtStatementOfCashFlows.dividend_incomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isother_receiptsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.other_receiptsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setother_receiptsNull() {
+                this[this.tabledtStatementOfCashFlows.other_receiptsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispayment_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.payment_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpayment_expensesNull() {
+                this[this.tabledtStatementOfCashFlows.payment_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispayments_to_suppliers_and_creditorsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.payments_to_suppliers_and_creditorsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpayments_to_suppliers_and_creditorsNull() {
+                this[this.tabledtStatementOfCashFlows.payments_to_suppliers_and_creditorsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispayments_to_employeesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.payments_to_employeesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpayments_to_employeesNull() {
+                this[this.tabledtStatementOfCashFlows.payments_to_employeesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isinterest_expenseNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.interest_expenseColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setinterest_expenseNull() {
+                this[this.tabledtStatementOfCashFlows.interest_expenseColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isother_expensesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.other_expensesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setother_expensesNull() {
+                this[this.tabledtStatementOfCashFlows.other_expensesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isproceeds_from_sale_of_investment_propertyNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.proceeds_from_sale_of_investment_propertyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setproceeds_from_sale_of_investment_propertyNull() {
+                this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_investment_propertyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isproceeds_from_sale_disposal_of_property_plant_and_equipmentNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.proceeds_from_sale_disposal_of_property_plant_and_equipmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setproceeds_from_sale_disposal_of_property_plant_and_equipmentNull() {
+                this[this.tabledtStatementOfCashFlows.proceeds_from_sale_disposal_of_property_plant_and_equipmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isproceeds_from_sale_of_non_current_investmentsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.proceeds_from_sale_of_non_current_investmentsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setproceeds_from_sale_of_non_current_investmentsNull() {
+                this[this.tabledtStatementOfCashFlows.proceeds_from_sale_of_non_current_investmentsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscollection_of_principal_on_loans_to_other_entitiesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.collection_of_principal_on_loans_to_other_entitiesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcollection_of_principal_on_loans_to_other_entitiesNull() {
+                this[this.tabledtStatementOfCashFlows.collection_of_principal_on_loans_to_other_entitiesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispurchase_construction_of_investment_propertyNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.purchase_construction_of_investment_propertyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpurchase_construction_of_investment_propertyNull() {
+                this[this.tabledtStatementOfCashFlows.purchase_construction_of_investment_propertyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispurchase_construction_of_property_plant_and_equipmentNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.purchase_construction_of_property_plant_and_equipmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpurchase_construction_of_property_plant_and_equipmentNull() {
+                this[this.tabledtStatementOfCashFlows.purchase_construction_of_property_plant_and_equipmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsinvestmentNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.investmentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetinvestmentNull() {
+                this[this.tabledtStatementOfCashFlows.investmentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispurchase_of_bearer_biological_assetsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.purchase_of_bearer_biological_assetsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpurchase_of_bearer_biological_assetsNull() {
+                this[this.tabledtStatementOfCashFlows.purchase_of_bearer_biological_assetsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispurchase_of_intangible_assetsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.purchase_of_intangible_assetsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpurchase_of_intangible_assetsNull() {
+                this[this.tabledtStatementOfCashFlows.purchase_of_intangible_assetsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isgrant_of_loansNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.grant_of_loansColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setgrant_of_loansNull() {
+                this[this.tabledtStatementOfCashFlows.grant_of_loansColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isproceeds_from_issuance_of_bondsNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.proceeds_from_issuance_of_bondsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setproceeds_from_issuance_of_bondsNull() {
+                this[this.tabledtStatementOfCashFlows.proceeds_from_issuance_of_bondsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isproceeds_from_loansNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.proceeds_from_loansColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setproceeds_from_loansNull() {
+                this[this.tabledtStatementOfCashFlows.proceeds_from_loansColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispayment_of_long_term_liabilitiesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.payment_of_long_term_liabilitiesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpayment_of_long_term_liabilitiesNull() {
+                this[this.tabledtStatementOfCashFlows.payment_of_long_term_liabilitiesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isretirement_redemption_of_debt_securitiesNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.retirement_redemption_of_debt_securitiesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setretirement_redemption_of_debt_securitiesNull() {
+                this[this.tabledtStatementOfCashFlows.retirement_redemption_of_debt_securitiesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Ispayment_of_loan_amortizationNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.payment_of_loan_amortizationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setpayment_of_loan_amortizationNull() {
+                this[this.tabledtStatementOfCashFlows.payment_of_loan_amortizationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscash_at_the_beginnig_of_the_yearNull() {
+                return this.IsNull(this.tabledtStatementOfCashFlows.cash_at_the_beginnig_of_the_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcash_at_the_beginnig_of_the_yearNull() {
+                this[this.tabledtStatementOfCashFlows.cash_at_the_beginnig_of_the_yearColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtTransactionLogRow : global::System.Data.DataRow {
+            
+            private dtTransactionLogDataTable tabledtTransactionLog;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            internal dtTransactionLogRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtTransactionLog = ((dtTransactionLogDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string date {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTransactionLog.dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string particulars {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTransactionLog.particularsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.particularsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string _ref {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTransactionLog.refColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.refColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal debit_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtTransactionLog.debit_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'debit_amount\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.debit_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal credit_amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtTransactionLog.credit_amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'credit_amount\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.credit_amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public decimal balance {
+                get {
+                    try {
+                        return ((decimal)(this[this.tabledtTransactionLog.balanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'balance\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.balanceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string proxy {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTransactionLog.proxyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'proxy\' in table \'dtTransactionLog\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTransactionLog.proxyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdateNull() {
+                return this.IsNull(this.tabledtTransactionLog.dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdateNull() {
+                this[this.tabledtTransactionLog.dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsparticularsNull() {
+                return this.IsNull(this.tabledtTransactionLog.particularsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetparticularsNull() {
+                this[this.tabledtTransactionLog.particularsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Is_refNull() {
+                return this.IsNull(this.tabledtTransactionLog.refColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Set_refNull() {
+                this[this.tabledtTransactionLog.refColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isdebit_amountNull() {
+                return this.IsNull(this.tabledtTransactionLog.debit_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setdebit_amountNull() {
+                this[this.tabledtTransactionLog.debit_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscredit_amountNull() {
+                return this.IsNull(this.tabledtTransactionLog.credit_amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcredit_amountNull() {
+                this[this.tabledtTransactionLog.credit_amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsbalanceNull() {
+                return this.IsNull(this.tabledtTransactionLog.balanceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetbalanceNull() {
+                this[this.tabledtTransactionLog.balanceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsproxyNull() {
+                return this.IsNull(this.tabledtTransactionLog.proxyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetproxyNull() {
+                this[this.tabledtTransactionLog.proxyColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -20909,6 +23767,74 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtAccountabilityForAccountableFormsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtStatementOfCashFlowsRowChangeEvent : global::System.EventArgs {
+            
+            private dtStatementOfCashFlowsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsRowChangeEvent(dtStatementOfCashFlowsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtStatementOfCashFlowsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        public class dtTransactionLogRowChangeEvent : global::System.EventArgs {
+            
+            private dtTransactionLogRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogRowChangeEvent(dtTransactionLogRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public dtTransactionLogRow Row {
                 get {
                     return this.eventRow;
                 }

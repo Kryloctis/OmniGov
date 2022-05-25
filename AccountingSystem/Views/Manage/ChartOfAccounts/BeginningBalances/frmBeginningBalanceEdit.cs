@@ -35,9 +35,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Dictionary<string, string> beginningBalanceDict = new();
                 if (uc.subsidiaryLedgerId == 0)
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, uc.generalLedgerId, year);
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
                 else
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordByFundsAndGeneralLedgerID(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
+                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
                 uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
                 CheckedDebitCredit(beginningBalanceDict["is_debit"]);

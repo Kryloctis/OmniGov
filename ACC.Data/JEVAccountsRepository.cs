@@ -292,7 +292,7 @@ namespace ACC.Data
 
 
         //Where trial balances and financial statements report gets data for display
-        public Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime dateEntry)
+        public Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime date)
         {
             var record = new Dictionary<string, decimal>();
 
@@ -300,8 +300,8 @@ namespace ACC.Data
             {
                     new object[] { "@funds_id", DbType.Int32, fundsId},
                     new object[] { "@account_group_id", DbType.Int32, accountGroupId},
-                    new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                    new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                    new object[] { "@date_entry", DbType.Date, date.Date},
+                    new object[] { "@year", DbType.Int16, date.Date.Year},
             };
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND account_group_id = @account_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
@@ -317,7 +317,57 @@ namespace ACC.Data
             return record;
         }
 
-        public Dictionary<string, decimal> GetSumTransactionsByGenLedgerId(int fundsId, int generalLedgerId, DateTime dateEntry)
+        public Dictionary<string, decimal> GetSumTransactionsByMajAccGrpId(int fundId, int majAccGrpId, DateTime date)
+        {
+            var record = new Dictionary<string, decimal>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@maj_acc_group_id", DbType.Int32, majAccGrpId},
+                new object[] { "@date_entry", DbType.Date, date.Date},
+                new object[] { "@year", DbType.Int16, date.Date.Year},
+            };
+
+            string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND maj_acc_group_id = @maj_acc_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
+                {
+                    record.Add("debit", Convert.ToDecimal(item[0]));
+                    record.Add("credit", Convert.ToDecimal(item[1]));
+                }
+            }
+            return record;
+        }
+
+        public Dictionary<string, decimal> GetSumTransactionsBySubMajAccGrpId(int fundId, int SubMajAccGrpId, DateTime date)
+        {
+            var record = new Dictionary<string, decimal>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@sub_maj_acc_group_id", DbType.Int32, SubMajAccGrpId},
+                new object[] { "@date_entry", DbType.Date, date.Date},
+                new object[] { "@year", DbType.Int16, date.Date.Year},
+            };
+
+            string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND sub_maj_acc_group_id = @sub_maj_acc_group_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                foreach (DataRow item in reader.Rows)
+                {
+                    record.Add("debit", Convert.ToDecimal(item[0]));
+                    record.Add("credit", Convert.ToDecimal(item[1]));
+                }
+            }
+            return record;
+        }
+
+        public Dictionary<string, decimal> GetSumTransactionsByGenLedgerId(int fundsId, int generalLedgerId, DateTime date)
         {
             var record = new Dictionary<string, decimal>();
 
@@ -325,8 +375,8 @@ namespace ACC.Data
             {
                 new object[] { "@funds_id", DbType.Int32, fundsId},
                 new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId},
-                new object[] { "@date_entry", DbType.Date, dateEntry.Date},
-                new object[] { "@year", DbType.Int16, dateEntry.Date.Year},
+                new object[] { "@date_entry", DbType.Date, date.Date},
+                new object[] { "@year", DbType.Int16, date.Date.Year},
             };
 
             string query = $"SELECT COALESCE(SUM(IF(is_debit = 1, amount, 0)),0) AS debit, COALESCE(SUM(IF(is_debit = 0, amount, 0)),0) AS credit FROM {viewTableName} WHERE funds_id = @funds_id AND is_approved =1 AND is_cancelled = 0 AND is_disapproved = 0 AND general_ledger_accounts_id = @general_ledger_accounts_id AND date_entry <= @date_entry AND YEAR(date_entry) = @year ";

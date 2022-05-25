@@ -18,81 +18,67 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             panel1.Controls.Add(reportViewer);
         }
 
-        private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
+        private object[] StatementOfFinancialPerformanceData()
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalances(fundsId, generalLedgerId, dateEntry);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
+            byte fundsId = (byte)cmbxFunds.SelectedValue;
+            var presentDate = dtPickerDateEnds.Value;
+            var previousDate = new DateTime(year: presentDate.Year - 1, month: 12, DateTime.DaysInMonth(presentDate.Year, 12));
 
-            decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
-            decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
+            var dict = new StatementOfFinancialPerformanceData().GetStatementOfFiancialPerformanceData(fundsId, presentDate, previousDate);
 
-            decimal beginningBalance = totalBeginningAndTransDebit - totalBeginningAndTransCredit;
-            balanceDebit = totalBeginningAndTransDebit > totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
-            balanceCredit = totalBeginningAndTransDebit < totalBeginningAndTransCredit ? Math.Abs(beginningBalance) : 0;
+            var records = new object[]
+            {
+                dict["present_tax_revenue"],
+                dict["present_share_from_internal_revenue_collections"],
+                dict["present_other_share_from_national_taxes"],
+                dict["present_service_and_business_income"],
+                dict["present_shares_grants_and_donations"],
+                dict["present_gains"],
+                dict["present_other_income"],
+                dict["present_total_revenue"],
+                dict["present_personnel_services"],
+                dict["present_maintenance_and_other_operating_expenses"],
+                dict["present_non_cash_expenses"],
+                dict["present_financial_expenses"],
+                dict["present_current_operating_expenses"],
+                dict["present_surplus_deficit_from_current_operation"],
+                dict["present_transfers_and_subsidy_from"],
+                dict["present_transfers_and_subsidy_to"],
+                dict["present_surplus_deficit_for_the_period"],
+                dict["previous_tax_revenue"],
+                dict["previous_share_from_internal_revenue_collections"],
+                dict["previous_other_share_from_national_taxes"],
+                dict["previous_service_and_business_income"],
+                dict["previous_shares_grants_and_donations"],
+                dict["previous_gains"],
+                dict["previous_other_income"],
+                dict["previous_total_revenue"],
+                dict["previous_personnel_services"],
+                dict["previous_maintenance_and_other_operating_expenses"],
+                dict["previous_non_cash_expenses"],
+                dict["previous_financial_expenses"],
+                dict["previous_current_operating_expenses"],
+                dict["previous_surplus_deficit_from_current_operation"],
+                dict["previous_transfers_and_subsidy_from"],
+                dict["previous_transfers_and_subsidy_to"],
+                dict["previous_surplus_deficit_for_the_period"]
+            };
+
+            return records;
         }
+
 
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
             var dataSet = new dsLFS();
             var dtStatementOfFinancialPerformance = dataSet.dtStatementOfFinancialPerformance;
-            byte fundsId = (byte)cmbxFunds.SelectedValue;
-            var dateEnded = dtPickerDateEnds.Value;
-            var previousYearEnded = new DateTime(year: dateEnded.Year - 1, month: 12, DateTime.DaysInMonth(dateEnded.Year, 12));
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
-                foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
-                {
-                    int accGrpId = Convert.ToInt32(row["account_group_id"]);
-                    string accGrpCode = row["account_group_code"].ToString();
-                    string accGrpName = row["account_group_name"].ToString();
-                    int majAccGrpId = Convert.ToInt32(row["major_account_group_id"]);
-                    string majAccGrpCode = row["maj_acc_group_code"].ToString();
-                    string majAccGrpName = row["maj_acc_group_name"].ToString();
-                    int subMajAccGrpId = Convert.ToInt32(row["sub_major_account_group_id"]);
-                    string subMajAccGrpCode = row["sub_maj_acc_group_code"].ToString();
-                    string subMajAccGrpName = row["sub_maj_acc_group_name"].ToString();
-                    ushort genLedgAccId = Convert.ToUInt16(row["general_ledger_accounts_id"]);
-                    string genLedgAccCode = row["account_code"].ToString();
-                    string genLedgAccName = row["ledger_name"].ToString();
-
-                    decimal balanceDebit;
-                    decimal balanceCredit;
-                    decimal previousBalanceDebit;
-                    decimal previousBalanceCredit;
-
-                    GetDebitCredit(fundsId, dateEnded, genLedgAccId, out balanceDebit, out balanceCredit);
-                    GetDebitCredit(fundsId, previousYearEnded, genLedgAccId, out previousBalanceDebit, out previousBalanceCredit);
-
-                    decimal currentAmount = balanceDebit - balanceCredit;
-                    decimal previousAmount = previousBalanceDebit - previousBalanceCredit;
-
-                    var items = new object[]
-                    {
-                    accGrpId,
-                    accGrpCode,
-                    accGrpName,
-                    majAccGrpId,
-                    majAccGrpCode,
-                    majAccGrpName,
-                    subMajAccGrpId,
-                    subMajAccGrpCode,
-                    subMajAccGrpName,
-                    genLedgAccId,
-                    genLedgAccCode,
-                    genLedgAccName,
-                    currentAmount,
-                    previousAmount
-                    };
-
-                    dtStatementOfFinancialPerformance.Rows.Add(items);
-                }
+                dtStatementOfFinancialPerformance.Rows.Add(StatementOfFinancialPerformanceData());
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
             return dtStatementOfFinancialPerformance;
         }

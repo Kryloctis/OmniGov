@@ -6,12 +6,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.Ledgers
 {
-    public partial class ucSubsidiaryLedger : UserControl
+    public partial class ucTransactionLog : UserControl
     {
         private readonly ReportViewer reportViewer;
         private decimal beginningBalance;
 
-        public ucSubsidiaryLedger()
+        public ucTransactionLog()
         {
             InitializeComponent();
             reportViewer = new ReportViewer();
@@ -19,11 +19,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
             panel1.Controls.Add(reportViewer);
         }
 
-        private void ucSubsidiaryLedger_Load(object sender, EventArgs e)
+        private void ucTransactionLog_Load(object sender, System.EventArgs e)
         {
             if (!DesignMode)
             {
-                //ACCOUNTS
                 LoadAccounts();
                 cmbAccount.SelectedIndex = -1;
                 cmbAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
@@ -45,7 +44,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             HelperLoadRecords.YearComboBox(cmbYear);
         }
 
-        private DataTable SubsidiaryLedgerDataTable()
+        private DataTable SubsidiaryLegerAccountsDataTable()
         {
             var dataTable = new DataTable();
             dataTable.Columns.Add("id", typeof(Int32));
@@ -72,7 +71,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             try
             {
-                HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
+                HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLegerAccountsDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
             }
             catch (Exception ex)
             {
@@ -102,24 +101,40 @@ namespace AccountingSystem.Views.Reports.Ledgers
             row["balance"] = balance;
         }
 
-        private DataTable DataTableSubsidiaryLedger()
+        private static void GetJEVCreatedByAndUpdatedBy(int jevId, ref string createdBy, ref string updatedBy)
+        {
+            var dictJev = Factory.JEVRepository().GetViewRecordByJEVId(jevId);
+
+            int createdById = Convert.ToInt32(dictJev["created_by"]);
+            createdBy = Helper.GetUserDataById(createdById)["user_full_name"];
+            //int updatedById = Convert.ToInt32(dictJev["updated_by"]);
+            updatedBy = "";
+        }
+
+        private DataTable TransactionLogDataTable()
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
             int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
 
-            var dtSubsidiaryLedger = new dsLFS.SubsidiaryLedgerDataTable();
+            var dtSubsidiaryLedger = new dsLFS.dtTransactionLogDataTable();
             var dtSubsidiaryLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
+            string particulars = string.Empty;
 
-            string particulars;
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
             {
                 particulars = item["explanation"].ToString();
+                int jevId = Convert.ToInt32(item["jev_id"]);
+                string createBy = string.Empty;
+                string updatedBy = string.Empty;
+
+                GetJEVCreatedByAndUpdatedBy(jevId, ref createBy, ref updatedBy);
 
                 DataRow row = dtSubsidiaryLedger.NewRow();
                 row["date"] = item["date_entry"];
                 row["ref"] = item["full_jev_no"];
+                row["proxy"] = createBy;
 
                 ValidateDebitCreditRow(particulars, item, row, ref beginningBalance);
 
@@ -145,7 +160,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceCredit = credit.ToString();
 
             var dateDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year, subsidiaryLedgerId);
-            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM dd, yy");
+            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("dd/MM/yyyy");
         }
 
         private void LoadReport(LocalReport report)
@@ -165,10 +180,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 var generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 var subsidiaryLedgerDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 var fundName = cmbFunds.Text;
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\subsidiary-ledger.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\transaction_log.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("SubsidiaryLedger", DataTableSubsidiaryLedger()));
+                report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
 
                 var parameters = new[] {
                     new ReportParameter("paramLGUName", lguDict["lgu_name"]),
@@ -190,7 +205,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
         }
 
@@ -265,7 +280,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             }
         }
 
-        private void btnRetrieve_Click_1(object sender, EventArgs e)
+        private void btnRetrieve_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(cmbAccount.Text) || string.IsNullOrWhiteSpace(cmbSubsidiaryLedger.Text))
             {
@@ -279,6 +294,5 @@ namespace AccountingSystem.Views.Reports.Ledgers
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
         }
-
     }
 }
