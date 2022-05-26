@@ -45,7 +45,7 @@ namespace AccountingSystem
                     Cursor = Cursors.Default;
                     return;
                 }
-                
+
                 Helper.MessageBoxError("Incorrect username or password.");
             }
             catch (Exception ex)
