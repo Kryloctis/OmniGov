@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.AccountableForm;
+﻿using AccountingSystem.Views;
+using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
@@ -16,6 +17,7 @@ using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
+using AccountingSystem.Views.Reports.CollectorsRCD;
 using AccountingSystem.Views.Reports.ConsolidatedReceipts;
 using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
@@ -23,7 +25,11 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
+using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
+using AccountingSystem.Views.Transactions.PaymentCollection;
+using AccountingSystem.Views.Transactions.RCI;
+using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -139,7 +145,7 @@ namespace AccountingSystem
                 btnSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Report Collector's RCD"))
-                ucTreasuryDashboard1.btnReportOfCollections.Enabled = false;
+                btnReportOfCollections.Enabled = false;
         }
 
         private void ValidateTransactionPermissions()
@@ -148,16 +154,16 @@ namespace AccountingSystem
                 btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-                ucTreasuryDashboard1.btnIssueCheck.Enabled = false;
+                btnIssueCheck.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-                ucTreasuryDashboard1.btnBankDeposit.Enabled = false;
+                btnBankDeposit.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Payments"))
-                ucTreasuryDashboard1.btnPaymentCollection.Enabled = false;
+                btnPaymentCollection.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
+                btnIssueReceipt.Enabled = false;
         }
 
         private void ValidateManagePermissions()
@@ -208,10 +214,10 @@ namespace AccountingSystem
                 menuReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                ucTreasuryDashboard1.btnIssueReceipt.Enabled = false;
+                btnIssueReceipt.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
-                ucTreasuryDashboard1.btnRCD.Enabled = false;
+                btnRCD.Enabled = false;
 
             if (!Helper.HasPermission("Report of Checks Issued"))
                 menuprintRCI.Visible = false;
@@ -685,5 +691,57 @@ namespace AccountingSystem
         {
             _ = new frmReturnedReceipts().ShowDialog();
         }
+
+        private void btnSAAOB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOB().ShowDialog();
+        }
+
+        private void btnSAAOBB_Click(object sender, EventArgs e)
+        {
+            _ = new frmSAAOBB().ShowDialog();
+        }
+
+        #region Treasury
+
+        private void btnIssueReceipt_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceiptsIssued().ShowDialog();  
+        }
+
+        private void btnPaymentCollection_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentCollection().ShowDialog();
+        }
+
+        private void btnIssueCheck_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCI().ShowDialog();
+        }
+
+        private void btnBankDeposit_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
+        }
+
+        private void btnReportOfCollections_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectorsRCD().ShowDialog();
+        }
+
+        private void btnRCD_Click(object sender, EventArgs e)
+        {
+            _ =  new frmRCD().ShowDialog();
+        }
+
+        private void btnRealProperties_Click(object sender, EventArgs e)
+        {
+            _ = new frmSearchProperties().ShowDialog();
+        }
+
+
+
+        #endregion
+
     }
 }

@@ -51,7 +51,8 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
         private void btnConfirmObligation_Click(object sender, EventArgs e)
         {
-            if (Helper.MessageBoxConfirmCancel("Confirm obligations that has been set?"))
+            sbyte totalObligationNumberCount = (sbyte)dgObligation.Rows.Count;
+            if (Helper.MessageBoxConfirmCancel($"Confirm {totalObligationNumberCount} obligation number/s ?"))
             {
                 _uc.SetObligationLabel();
                 this.Close();

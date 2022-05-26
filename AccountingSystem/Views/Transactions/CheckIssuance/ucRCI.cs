@@ -191,7 +191,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal void SetObligationLabel()
         {
             obligationNumberCount = (short)dtObligations.Rows.Count;
-            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s added.";
+            btnAddObligation.Text = $"({obligationNumberCount}) obligation/s number added.";
         }
 
         internal void SetDeductionLabel()
@@ -206,36 +206,17 @@ namespace AccountingSystem.Views.Transactions.RCI
         #region Validations
         internal string GetFormErrors()
         {
-            var errorArray = new string[10];
-            errorArray[0] = epObligations.GetError(btnAddObligation);
-            errorArray[1] = epDVNo.GetError(txtdvno);
-            errorArray[2] = epFund.GetError(cmbfund);
-            errorArray[3] = epFpp.GetError(cmbFPP);
-            errorArray[4] = epBank.GetError(cmbbank);
-            errorArray[5] = epCheckNo.GetError(txtcheckno);
-            errorArray[6] = epCheckDate.GetError(dtcheckdate);
-            errorArray[7] = epPayee.GetError(txtpayee);
-            errorArray[8] = epNatureOfPayment.GetError(txtnature);
-            errorArray[9] = epNetAmount.GetError(nudNetAmount);
+            var errorArray = new string[7];
+            errorArray[0] = epFund.GetError(cmbfund);
+            errorArray[1] = epBank.GetError(cmbbank);
+            errorArray[2] = epCheckNo.GetError(txtcheckno);
+            errorArray[3] = epCheckDate.GetError(dtcheckdate);
+            errorArray[4] = epPayee.GetError(txtpayee);
+            errorArray[5] = epNatureOfPayment.GetError(txtnature);
+            errorArray[6] = epNetAmount.GetError(nudNetAmount);
 
             IError _errors = Factory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
-        }
-
-        private void btnAddObligation_Validating(object sender, CancelEventArgs e)
-        {
-            obligationNumberCount = (short)dtObligations.Rows.Count;
-            if (obligationNumberCount == 0)
-            {
-                epObligations.SetError(btnAddObligation, "Please enter an obligation number.");
-                e.Cancel = true;
-            }
-
-        }
-
-        private void btnAddObligation_Validated(object sender, EventArgs e)
-        {
-            epObligations.SetError(btnAddObligation, string.Empty);
         }
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
@@ -276,16 +257,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private void txtcheckno_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epCheckNo, txtcheckno);
-        }
-
-        private void cmbFPP_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epFpp, cmbFPP, "fpp.");
-        }
-
-        private void cmbFPP_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epFpp, cmbFPP);
         }
 
         private void txtpayee_Validating(object sender, CancelEventArgs e)

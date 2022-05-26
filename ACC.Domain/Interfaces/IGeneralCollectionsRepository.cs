@@ -25,5 +25,7 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByRCDNo(string rcdNo);
         int GetGeneralCollectionId(string rcdNo);
+        int GetRCDCount();
+
     }
 }

@@ -10,6 +10,7 @@ namespace ACC.Data
 {
     public class BankDepositsRepository : IBankDepositsRepository
     {
+
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string tableName = "bank_deposits";
         private readonly string tableName2 = "banks";
@@ -257,6 +258,15 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public DataTable GetBankDepositsSummary()
+        {
+            string query = $"SELECT banks_id, account_no, bank_name, SUM(amount) AS amount FROM view_bank_deposits";
+
+            var dtBanksDeposit = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBanksDeposit);
+
         }
     }
 }

@@ -423,6 +423,26 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_large_1x {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_large_1x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_small_1x {
+            get {
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_small_1x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_undo_2_28px {
             get {
                 object obj = ResourceManager.GetObject("document_delivery_receipt_signed_undo_2_28px", resourceCulture);
