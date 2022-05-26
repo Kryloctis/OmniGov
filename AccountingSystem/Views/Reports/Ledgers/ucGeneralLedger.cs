@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceCredit = debit.ToString();
 
             var dateDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year);
-            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MMM dd, yy");
+            balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MM/dd/yyyy");
         }
 
         private void LoadReport(LocalReport report)
