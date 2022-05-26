@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 226);
+            this.label3.Location = new System.Drawing.Point(8, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 15);
             this.label3.TabIndex = 2;
@@ -130,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 140);
+            this.label4.Location = new System.Drawing.Point(8, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 6;
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 196);
+            this.label5.Location = new System.Drawing.Point(8, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 15);
             this.label5.TabIndex = 7;
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 167);
+            this.label6.Location = new System.Drawing.Point(8, 66);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 15);
             this.label6.TabIndex = 8;
@@ -247,8 +247,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtReceiptQuantity);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtReceiptIssuedTo);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.radioCustomQuantity);
             this.groupBox1.Controls.Add(this.txtReceiptIssuedFrom);
             this.groupBox1.Controls.Add(this.radioStubQuantity);
@@ -277,10 +281,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -297,7 +297,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
