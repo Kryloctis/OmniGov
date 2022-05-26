@@ -56,6 +56,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.cbMonth = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.btnRefreshCounter = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dgCollectorsCollection = new System.Windows.Forms.DataGridView();
+            this.dgBankDeposit = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlPendingJEV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -69,6 +73,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsCollection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBankDeposit)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -436,14 +442,64 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.btnRefreshCounter.UseVisualStyleBackColor = true;
             this.btnRefreshCounter.Click += new System.EventHandler(this.btnRefreshCounter_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label11.Location = new System.Drawing.Point(2, 178);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(182, 20);
+            this.label11.TabIndex = 90;
+            this.label11.Text = "COLLECTIONS SUMMARY";
+            // 
+            // dgCollectorsCollection
+            // 
+            this.dgCollectorsCollection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgCollectorsCollection.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgCollectorsCollection.Location = new System.Drawing.Point(4, 201);
+            this.dgCollectorsCollection.Name = "dgCollectorsCollection";
+            this.dgCollectorsCollection.RowTemplate.Height = 25;
+            this.dgCollectorsCollection.Size = new System.Drawing.Size(399, 278);
+            this.dgCollectorsCollection.TabIndex = 89;
+            // 
+            // dgBankDeposit
+            // 
+            this.dgBankDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgBankDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBankDeposit.Location = new System.Drawing.Point(409, 201);
+            this.dgBankDeposit.Name = "dgBankDeposit";
+            this.dgBankDeposit.RowTemplate.Height = 25;
+            this.dgBankDeposit.Size = new System.Drawing.Size(399, 278);
+            this.dgBankDeposit.TabIndex = 94;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(409, 178);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 16, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 20);
+            this.label1.TabIndex = 93;
+            this.label1.Text = "BANK DEPOSITS";
+            // 
             // ucRCDSummary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgBankDeposit);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.dgCollectorsCollection);
             this.Name = "ucRCDSummary";
-            this.Size = new System.Drawing.Size(1210, 175);
+            this.Size = new System.Drawing.Size(1210, 482);
             this.Load += new System.EventHandler(this.ucRCDDashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlPendingJEV.ResumeLayout(false);
@@ -458,7 +514,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCollectorsCollection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBankDeposit)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -490,5 +549,9 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         private System.Windows.Forms.ComboBox cbMonth;
         internal System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.Button btnRefreshCounter;
+        internal System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridView dgCollectorsCollection;
+        private System.Windows.Forms.DataGridView dgBankDeposit;
+        internal System.Windows.Forms.Label label1;
     }
 }
