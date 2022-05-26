@@ -692,16 +692,6 @@ namespace AccountingSystem
             _ = new frmReturnedReceipts().ShowDialog();
         }
 
-        private void btnSAAOB_Click(object sender, EventArgs e)
-        {
-            _ = new frmSAAOB().ShowDialog();
-        }
-
-        private void btnSAAOBB_Click(object sender, EventArgs e)
-        {
-            _ = new frmSAAOBB().ShowDialog();
-        }
-
         #region Treasury
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
