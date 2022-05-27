@@ -193,6 +193,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(893, 431);
             this.label5.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
@@ -203,6 +204,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(655, 431);
             this.label4.Name = "label4";
@@ -212,6 +214,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // txtTotalCredit
             // 
+            this.txtTotalCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalCredit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalCredit.Location = new System.Drawing.Point(728, 427);
             this.txtTotalCredit.MaxLength = 999999;
@@ -223,6 +226,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // 
             // txtTotalDebit
             // 
+            this.txtTotalDebit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalDebit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalDebit.Location = new System.Drawing.Point(962, 427);
             this.txtTotalDebit.MaxLength = 999999;
