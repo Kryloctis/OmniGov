@@ -374,8 +374,12 @@
                           <rd:DefaultName>debit_amount</rd:DefaultName>
                           <Style>
                             <Border>
+                              <Color>Gainsboro</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -409,8 +413,12 @@
                           <rd:DefaultName>credit_amount</rd:DefaultName>
                           <Style>
                             <Border>
+                              <Color>Gainsboro</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -444,8 +452,12 @@
                           <rd:DefaultName>balance</rd:DefaultName>
                           <Style>
                             <Border>
+                              <Color>Gainsboro</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1008,8 +1020,12 @@
                                 <rd:DefaultName>Textbox34</rd:DefaultName>
                                 <Style>
                                   <Border>
+                                    <Color>Gainsboro</Color>
                                     <Style>None</Style>
                                   </Border>
+                                  <TopBorder>
+                                    <Style>Solid</Style>
+                                  </TopBorder>
                                   <PaddingLeft>2pt</PaddingLeft>
                                   <PaddingRight>2pt</PaddingRight>
                                   <PaddingTop>2pt</PaddingTop>
@@ -1043,8 +1059,12 @@
                                     <rd:DefaultName>Textbox23</rd:DefaultName>
                                     <Style>
                                       <Border>
+                                        <Color>Gainsboro</Color>
                                         <Style>None</Style>
                                       </Border>
+                                      <TopBorder>
+                                        <Style>Solid</Style>
+                                      </TopBorder>
                                       <PaddingLeft>2pt</PaddingLeft>
                                       <PaddingRight>2pt</PaddingRight>
                                       <PaddingTop>2pt</PaddingTop>
@@ -1080,8 +1100,12 @@
                                         <rd:DefaultName>ref1</rd:DefaultName>
                                         <Style>
                                           <Border>
+                                            <Color>Gainsboro</Color>
                                             <Style>None</Style>
                                           </Border>
+                                          <TopBorder>
+                                            <Style>Solid</Style>
+                                          </TopBorder>
                                           <PaddingLeft>2pt</PaddingLeft>
                                           <PaddingRight>2pt</PaddingRight>
                                           <PaddingTop>2pt</PaddingTop>
@@ -1192,7 +1216,7 @@
             <DataSetName>SubsidiaryLedger</DataSetName>
             <Top>5.36135cm</Top>
             <Left>0.01798in</Left>
-            <Height>1.31282in</Height>
+            <Height>1.31284in</Height>
             <Width>7.6952in</Width>
             <Style>
               <Border>
