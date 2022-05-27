@@ -333,11 +333,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgSubMajorAccount.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubMajorAccount.Location = new System.Drawing.Point(7, 33);
+            this.dgSubMajorAccount.Location = new System.Drawing.Point(3, 33);
             this.dgSubMajorAccount.Name = "dgSubMajorAccount";
             this.dgSubMajorAccount.RowHeadersWidth = 51;
             this.dgSubMajorAccount.RowTemplate.Height = 29;
-            this.dgSubMajorAccount.Size = new System.Drawing.Size(1107, 421);
+            this.dgSubMajorAccount.Size = new System.Drawing.Size(1114, 421);
             this.dgSubMajorAccount.TabIndex = 0;
             this.dgSubMajorAccount.SelectionChanged += new System.EventHandler(this.dgSubMajorAccount_SelectionChanged);
             // 
@@ -380,12 +380,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgMajorAccountGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgMajorAccountGroup.Location = new System.Drawing.Point(5, 32);
+            this.dgMajorAccountGroup.Location = new System.Drawing.Point(3, 32);
             this.dgMajorAccountGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgMajorAccountGroup.Name = "dgMajorAccountGroup";
             this.dgMajorAccountGroup.RowHeadersWidth = 51;
             this.dgMajorAccountGroup.RowTemplate.Height = 29;
-            this.dgMajorAccountGroup.Size = new System.Drawing.Size(1109, 425);
+            this.dgMajorAccountGroup.Size = new System.Drawing.Size(1114, 422);
             this.dgMajorAccountGroup.TabIndex = 0;
             this.dgMajorAccountGroup.SelectionChanged += new System.EventHandler(this.dgMajorAccountGroup_SelectionChanged);
             // 
@@ -406,12 +406,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgAccountGroup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAccountGroup.Location = new System.Drawing.Point(5, 2);
+            this.dgAccountGroup.Location = new System.Drawing.Point(3, 2);
             this.dgAccountGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgAccountGroup.Name = "dgAccountGroup";
             this.dgAccountGroup.RowHeadersWidth = 51;
             this.dgAccountGroup.RowTemplate.Height = 29;
-            this.dgAccountGroup.Size = new System.Drawing.Size(1111, 456);
+            this.dgAccountGroup.Size = new System.Drawing.Size(1113, 452);
             this.dgAccountGroup.TabIndex = 0;
             this.dgAccountGroup.SelectionChanged += new System.EventHandler(this.dgAccountGroup_SelectionChanged);
             // 
