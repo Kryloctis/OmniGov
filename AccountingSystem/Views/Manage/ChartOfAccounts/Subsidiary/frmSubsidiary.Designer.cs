@@ -253,6 +253,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.Controls.Add(this.dgSubsidiary);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(911, 544);
             this.Name = "frmSubsidiary";
