@@ -29,13 +29,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.dgObligationRequests = new System.Windows.Forms.DataGridView();
-            this.cmbxStatus = new System.Windows.Forms.ComboBox();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.cmbxAllotmentClasses = new System.Windows.Forms.ComboBox();
-            this.dtDateRequested = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,84 +41,20 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dtDateRequested = new System.Windows.Forms.DateTimePicker();
+            this.cmbxAllotmentClasses = new System.Windows.Forms.ComboBox();
+            this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.cmbxStatus = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.dgObligationRequests = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(548, 14);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(274, 23);
-            this.txtSearch.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(828, 14);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // dgObligationRequests
-            // 
-            this.dgObligationRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgObligationRequests.Location = new System.Drawing.Point(12, 41);
-            this.dgObligationRequests.Name = "dgObligationRequests";
-            this.dgObligationRequests.RowTemplate.Height = 25;
-            this.dgObligationRequests.Size = new System.Drawing.Size(891, 394);
-            this.dgObligationRequests.TabIndex = 2;
-            this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
-            this.dgObligationRequests.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgObligationRequests_RowHeaderMouseDoubleClick);
-            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
-            // 
-            // cmbxStatus
-            // 
-            this.cmbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxStatus.FormattingEnabled = true;
-            this.cmbxStatus.Items.AddRange(new object[] {
-            "All",
-            "Pending",
-            "Approved",
-            "Disapproved",
-            "Cancelled"});
-            this.cmbxStatus.Location = new System.Drawing.Point(12, 12);
-            this.cmbxStatus.Name = "cmbxStatus";
-            this.cmbxStatus.Size = new System.Drawing.Size(95, 23);
-            this.cmbxStatus.TabIndex = 3;
-            this.cmbxStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbxStatus_SelectionChangeCommitted);
-            // 
-            // cmbxFunds
-            // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(113, 12);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(165, 23);
-            this.cmbxFunds.TabIndex = 4;
-            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
-            // 
-            // cmbxAllotmentClasses
-            // 
-            this.cmbxAllotmentClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxAllotmentClasses.FormattingEnabled = true;
-            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(284, 12);
-            this.cmbxAllotmentClasses.Name = "cmbxAllotmentClasses";
-            this.cmbxAllotmentClasses.Size = new System.Drawing.Size(80, 23);
-            this.cmbxAllotmentClasses.TabIndex = 5;
-            this.cmbxAllotmentClasses.SelectionChangeCommitted += new System.EventHandler(this.cmbxAllotmentClasses_SelectionChangeCommitted);
-            // 
-            // dtDateRequested
-            // 
-            this.dtDateRequested.CustomFormat = "MMM dd, yyy";
-            this.dtDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateRequested.Location = new System.Drawing.Point(370, 12);
-            this.dtDateRequested.Name = "dtDateRequested";
-            this.dtDateRequested.Size = new System.Drawing.Size(121, 23);
-            this.dtDateRequested.TabIndex = 6;
-            this.dtDateRequested.ValueChanged += new System.EventHandler(this.dtDateRequested_ValueChanged);
             // 
             // panel1
             // 
@@ -261,6 +190,107 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dtDateRequested);
+            this.panel2.Controls.Add(this.cmbxAllotmentClasses);
+            this.panel2.Controls.Add(this.cmbxFunds);
+            this.panel2.Controls.Add(this.cmbxStatus);
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Controls.Add(this.txtSearch);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(915, 32);
+            this.panel2.TabIndex = 8;
+            // 
+            // dtDateRequested
+            // 
+            this.dtDateRequested.CustomFormat = "MMM dd, yyy";
+            this.dtDateRequested.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDateRequested.Location = new System.Drawing.Point(361, 3);
+            this.dtDateRequested.Name = "dtDateRequested";
+            this.dtDateRequested.Size = new System.Drawing.Size(121, 23);
+            this.dtDateRequested.TabIndex = 12;
+            this.dtDateRequested.ValueChanged += new System.EventHandler(this.dtDateRequested_ValueChanged);
+            // 
+            // cmbxAllotmentClasses
+            // 
+            this.cmbxAllotmentClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxAllotmentClasses.FormattingEnabled = true;
+            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(275, 3);
+            this.cmbxAllotmentClasses.Name = "cmbxAllotmentClasses";
+            this.cmbxAllotmentClasses.Size = new System.Drawing.Size(80, 23);
+            this.cmbxAllotmentClasses.TabIndex = 11;
+            this.cmbxAllotmentClasses.SelectionChangeCommitted += new System.EventHandler(this.cmbxAllotmentClasses_SelectionChangeCommitted);
+            // 
+            // cmbxFunds
+            // 
+            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFunds.FormattingEnabled = true;
+            this.cmbxFunds.Location = new System.Drawing.Point(104, 3);
+            this.cmbxFunds.Name = "cmbxFunds";
+            this.cmbxFunds.Size = new System.Drawing.Size(165, 23);
+            this.cmbxFunds.TabIndex = 10;
+            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
+            // 
+            // cmbxStatus
+            // 
+            this.cmbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxStatus.FormattingEnabled = true;
+            this.cmbxStatus.Items.AddRange(new object[] {
+            "All",
+            "Pending",
+            "Approved",
+            "Disapproved",
+            "Cancelled"});
+            this.cmbxStatus.Location = new System.Drawing.Point(3, 3);
+            this.cmbxStatus.Name = "cmbxStatus";
+            this.cmbxStatus.Size = new System.Drawing.Size(95, 23);
+            this.cmbxStatus.TabIndex = 9;
+            this.cmbxStatus.SelectionChangeCommitted += new System.EventHandler(this.cmbxStatus_SelectionChangeCommitted);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(837, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 8;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(557, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(274, 23);
+            this.txtSearch.TabIndex = 7;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.dgObligationRequests);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(0, 32);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(3);
+            this.panel7.Size = new System.Drawing.Size(915, 409);
+            this.panel7.TabIndex = 9;
+            // 
+            // dgObligationRequests
+            // 
+            this.dgObligationRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgObligationRequests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgObligationRequests.Location = new System.Drawing.Point(3, 3);
+            this.dgObligationRequests.Name = "dgObligationRequests";
+            this.dgObligationRequests.RowTemplate.Height = 25;
+            this.dgObligationRequests.Size = new System.Drawing.Size(909, 403);
+            this.dgObligationRequests.TabIndex = 3;
+            this.dgObligationRequests.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgObligationRequests_CellDoubleClick);
+            this.dgObligationRequests.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgObligationRequests_ColumnAdded);
+            this.dgObligationRequests.SelectionChanged += new System.EventHandler(this.dgObligationRequests_SelectionChanged);
+            // 
             // frmObligationRequestSearch
             // 
             this.AcceptButton = this.btnSearch;
@@ -269,38 +299,27 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(915, 471);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dtDateRequested);
-            this.Controls.Add(this.cmbxAllotmentClasses);
-            this.Controls.Add(this.cmbxFunds);
-            this.Controls.Add(this.cmbxStatus);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.dgObligationRequests);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmObligationRequestSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Obligation Request";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmObligationRequestSearch_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgObligationRequests)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        internal System.Windows.Forms.TextBox txtSearch;
-        internal System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridView dgObligationRequests;
-        internal System.Windows.Forms.ComboBox cmbxStatus;
-        internal System.Windows.Forms.ComboBox cmbxFunds;
-        internal System.Windows.Forms.ComboBox cmbxAllotmentClasses;
-        internal System.Windows.Forms.DateTimePicker dtDateRequested;
         private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnSelect;
@@ -313,5 +332,14 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.DateTimePicker dtDateRequested;
+        internal System.Windows.Forms.ComboBox cmbxAllotmentClasses;
+        internal System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.ComboBox cmbxStatus;
+        internal System.Windows.Forms.Button btnSearch;
+        internal System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.DataGridView dgObligationRequests;
     }
 }

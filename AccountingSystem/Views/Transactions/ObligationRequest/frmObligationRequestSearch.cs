@@ -198,11 +198,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             LoadSelected();
         }
 
-        private void dgObligationRequests_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            LoadSelected();
-        }
-
         private void frmObligationRequestSearch_Load(object sender, EventArgs e)
         {
             LoadFunds();
@@ -238,6 +233,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void dtDateRequested_ValueChanged(object sender, EventArgs e)
         {
             LoadObligationRequests();
+        }
+
+        private void dgObligationRequests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                LoadSelected();
         }
     }
 }
