@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.dgAllotmentRelease.RowTemplate.Height = 25;
             this.dgAllotmentRelease.Size = new System.Drawing.Size(891, 394);
             this.dgAllotmentRelease.TabIndex = 2;
-            this.dgAllotmentRelease.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgAllotmentRelease_RowHeaderMouseDoubleClick);
+            this.dgAllotmentRelease.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAllotmentRelease_CellDoubleClick);
             this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 
             // txtSearch

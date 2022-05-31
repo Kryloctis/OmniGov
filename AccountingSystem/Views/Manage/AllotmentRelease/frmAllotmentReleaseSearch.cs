@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 btnSelect.Enabled = false;
         }
 
-        private void ApplySelected()
+        private void LoadSearched()
         {
             var ucMain = _frmAllotmentReleaseMain.ucAllotmentReleaseMain1;
             int rowIndex = dgAllotmentRelease.CurrentCell.RowIndex;
@@ -131,14 +131,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Close();
         }
 
-        private void dgAllotmentRelease_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            ApplySelected();
-        }
-
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            ApplySelected();
+            LoadSearched();
         }
 
         private void cmbxFunds_SelectionChangeCommitted(object sender, EventArgs e)
@@ -155,6 +150,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void dtDateIssued_ValueChanged(object sender, EventArgs e)
         {
             LoadAllotmentRelease();
+        }
+
+        private void dgAllotmentRelease_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex > -1)
+                LoadSearched();
         }
     }
 }
