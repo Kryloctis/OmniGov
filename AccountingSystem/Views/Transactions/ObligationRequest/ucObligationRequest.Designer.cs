@@ -133,6 +133,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtRemainingBalance
             // 
+            this.txtRemainingBalance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRemainingBalance.Location = new System.Drawing.Point(127, 116);
             this.txtRemainingBalance.Name = "txtRemainingBalance";
             this.txtRemainingBalance.ReadOnly = true;

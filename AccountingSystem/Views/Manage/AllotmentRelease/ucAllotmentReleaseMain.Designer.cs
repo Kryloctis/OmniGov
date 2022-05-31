@@ -307,10 +307,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // txtTotalAllotmentRelease
             // 
+            this.txtTotalAllotmentRelease.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalAllotmentRelease.Location = new System.Drawing.Point(141, 526);
             this.txtTotalAllotmentRelease.Name = "txtTotalAllotmentRelease";
             this.txtTotalAllotmentRelease.ReadOnly = true;
-            this.txtTotalAllotmentRelease.Size = new System.Drawing.Size(194, 23);
+            this.txtTotalAllotmentRelease.Size = new System.Drawing.Size(200, 23);
             this.txtTotalAllotmentRelease.TabIndex = 48;
             // 
             // ucAllotmentReleaseMain

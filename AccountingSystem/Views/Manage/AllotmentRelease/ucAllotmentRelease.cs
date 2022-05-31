@@ -24,6 +24,15 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
+        private decimal GetRemainingBalance() 
+        {
+            decimal unreleasedBal = Convert.ToDecimal(txtUnreleasedBal.Text);
+            decimal amount = nudAmount.Value;
+
+            decimal remainingBalance = unreleasedBal - amount;
+            return remainingBalance < 0? 0: remainingBalance;
+        }
+
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain)
         {
             _ucAllotmentMain = ucAllotmentReleaseMain;
@@ -79,8 +88,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
                 cmbxBudgetAppropriations.DisplayMember = "value";
-                cmbxBudgetAppropriations.ValueMember = "key";
-
+                cmbxBudgetAppropriations.ValueMember = "key";              
 
                 cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
                 cmbxBudgetAppropriations.SelectedValue = _budgetAppropriationId;
@@ -90,14 +98,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void cmbxBudgetAppropriations_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
+            txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
+            txtRemainingBal.Text = GetRemainingBalance().ToString("N2");
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
@@ -132,10 +140,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
-            errorArray[0] = epYear.GetError(nudYear);
-            errorArray[1] = epBudgetAppropriation.GetError(cmbxBudgetAppropriations);
-            errorArray[2] = epAmount.GetError(nudAmount);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(nudYear),
+                errorProvider1.GetError(cmbxBudgetAppropriations),
+                errorProvider1.GetError(nudAmount)
+            };
+       
 
             return Factory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -147,7 +158,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 nudYear.Maximum = dateIssued.Year;
                 nudYear.Value = dateIssued.Year;
                 LoadBudgetAppropriations();
-                txtBalance.Text = GetBudgetAppropriationBalance().ToString("N2");
+                txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
             }
         }
 
@@ -190,17 +201,21 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return appropriationBalance < 0 ? 0 : appropriationBalance;
         }
 
+        private void nudAmount_ValueChanged(object sender, EventArgs e)
+        {
+            txtRemainingBal.Text = GetRemainingBalance().ToString("N2");
+        }
 
         #region VALIDATIONS
 
         private void nudYear_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epYear, nudYear, "Year");
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudYear, "Year");
         }
 
         private void nudYear_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epYear, nudYear);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudYear);
         }
 
         private bool AmountExceeds()
@@ -208,7 +223,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
             if (nudAmount.Value > GetBudgetAppropriationBalance())
             {
-                epAmount.SetError(nudAmount, "Amount you entered exceeds to the appropriate balance.");
+                errorProvider1.SetError(nudAmount, "Amount you entered exceeds to the appropriate balance.");
                 return true;
             }
 
@@ -219,7 +234,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var isEmpty = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
+                var isEmpty = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount");
 
                 if (isEmpty)
                 {
@@ -227,7 +242,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 }
                 else if (nudAmount.Value == 0)
                 {
-                    epAmount.SetError(nudAmount, Helper.ErrorMessage("Amount"));
+                    errorProvider1.SetError(nudAmount, Helper.ErrorMessage("Amount"));
                     return true;
                 }
                 else if (AmountExceeds())
@@ -247,7 +262,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
         private bool AllotmentReleaseExist()
@@ -267,7 +282,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
                 {
-                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
+                    errorProvider1.SetError(cmbxBudgetAppropriations, "Budget appropriation acount you entered has an allotment released on the date it was issued.");
                     return allotmentReleaseExist;
                 }
 
@@ -290,7 +305,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 if (rowBudgetAppropriationId == budgetAppropriationId && rowBudgetAppropriationId != _budgetAppropriationId)
                 {
-                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation Account is already on the list.");
+                    errorProvider1.SetError(cmbxBudgetAppropriations, "Budget Appropriation Account is already on the list.");
                     return true;
                 }
             }
@@ -302,13 +317,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var isEmpty = Helper.ShowErrorComboBoxEmpty(epBudgetAppropriation, cmbxBudgetAppropriations, "Budget Appropriation");
+                var isEmpty = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBudgetAppropriations, "Budget Appropriation");
 
                 if (isEmpty)
                     return true;
                 else if (cmbxBudgetAppropriations.FindStringExact(cmbxBudgetAppropriations.Text) < 0 && !string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
                 {
-                    epBudgetAppropriation.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in your records");
+                    errorProvider1.SetError(cmbxBudgetAppropriations, "Budget Appropriation doesn't exist in your records");
                     return true;
                 }
                 else if (BudgetAppropriationExistOnList())
@@ -330,10 +345,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void cmbxBudgetAppropriations_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epBudgetAppropriation, cmbxBudgetAppropriations);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxBudgetAppropriations);
         }
 
         #endregion
-
     }
 }
