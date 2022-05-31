@@ -67,8 +67,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         internal void ResetForm()
         {
-            EnableDisableComponents(true);
-
             if (isEdit)
             {
                 isEdit = false;
@@ -89,6 +87,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dgObligationRequests.Rows.Clear();
             txtTotalObligations.Text = "0.00";
             GenerateSeriesNo();
+            SetFieldsReadOnly(false);
         }
 
         internal void GetTotalObligations()
@@ -120,6 +119,26 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             dgObligationRequests.Columns["budget_appropriation_id"].Visible = false;
             Helper.DatagridFullRowSelectStyle(dgObligationRequests, true);
+        }
+
+        internal void SetFieldsReadOnly(bool isReadOnly)
+        {
+            cmbxFPP.Enabled = !isReadOnly;
+            flowLayoutPanelFunds.Enabled = !isReadOnly;
+            flowLayoutPanelAllotmentClass.Enabled = !isReadOnly;
+            mskTxtObligationNoSeries.ReadOnly = isReadOnly;
+            dtDateRequest.Enabled = !isReadOnly;
+            txtReferenceNo.ReadOnly = isReadOnly;
+            txtPayee.ReadOnly = isReadOnly;
+            txtExplanation.ReadOnly = isReadOnly;
+            btnAdd.Enabled = !isReadOnly;
+            btnEdit.Enabled = !isReadOnly;
+            btnRemove.Enabled = !isReadOnly;
+
+            if (isReadOnly)
+                dgObligationRequests.SelectionChanged -= new EventHandler(dgObligationRequests_SelectionChanged);
+            else
+                dgObligationRequests.SelectionChanged += new EventHandler(dgObligationRequests_SelectionChanged);
         }
 
         internal void EnableDisableComponents(bool enableComponents)
@@ -232,7 +251,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             allotmentClassId = radAllotmentClassId;
         }
 
-
         private void ShowCheckIcon(RadioButton radioButton)
         {
             if (radioButton.Checked)
@@ -331,7 +349,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ShowCheckIcon(allotmentClass);
         }
 
-
         //GENERATE OBLIGATION REQUEST NO.
         internal string GenerateObligationRequestNoTemplate()
         {
@@ -357,7 +374,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             if (dgObligationRequests.Rows.Count == 0)
                 EnableDisableComponents(true);
         }
-
 
         //ADD
         internal string GetFormErrorsAdd()
@@ -411,7 +427,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             ShowObligationRequestAdd();
         }
 
-
         //EDIT
         private void ShowObligationRequestEdit()
         {
@@ -446,7 +461,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             ShowObligationRequestEdit();
         }
-
 
         #region VALIDATIONS
 
