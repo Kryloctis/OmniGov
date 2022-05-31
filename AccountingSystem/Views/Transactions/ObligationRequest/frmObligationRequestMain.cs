@@ -59,9 +59,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 string referenceNo = dictObligationRequest["reference_no"].ToString();
                 string payee = dictObligationRequest["payee"].ToString();
                 string explanation = dictObligationRequest["explanation"].ToString();
-                string createdBy = dictObligationRequest["created_by_full_name"].ToString();
+                int createById = Convert.ToInt32(dictObligationRequest["created_by_id"]);
+                string createdByName = dictObligationRequest["created_by_full_name"].ToString();
 
-
+                ResetControls();
                 uc.cmbxFPP.SelectedValue = fppId;
                 uc.CheckedFund(fundId);
                 uc.CheckedAllotmentClass(allotmentClassId);
@@ -70,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 uc.txtReferenceNo.Text = referenceNo;
                 uc.txtPayee.Text = payee;
                 uc.txtExplanation.Text = explanation;
-                lblCreatedBy.Text = createdBy;
+                lblCreatedBy.Text = createdByName;
 
                 foreach (DataRow item in dtObligationRequest.Rows)
                 {
@@ -87,11 +88,166 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     uc.dgObligationRequests.Rows.Add(obligationRequest);
                     uc.GetTotalObligations();
                 }
+
+                GetObligationStatus();
+                ClearAllErrors();
+
+                if (createById == Helper.UserId)
+                {
+                    uc.SetFieldsReadOnly(false);
+                    btnSave.Enabled = true;
+                    btnDelete.Enabled = true;
+                }
+                else
+                {
+                    uc.SetFieldsReadOnly(true);
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void ClearAllErrors()
+        {
+            Helper.ClearErrorComboBox(uc.epFPP, uc.cmbxFPP);
+            Helper.ClearMaskedTextboxError(uc.epObligationNo, uc.mskTxtObligationNoTemplate);
+            Helper.ClearMaskedTextboxError(uc.epObligationRequest, uc.mskTxtObligationNoTemplate);
+            Helper.ClearErrorTextBox(uc.epPayee, uc.txtPayee);
+            Helper.ClearErrorTextBox(uc.epReferenceNo, uc.txtReferenceNo);
+            Helper.ClearErrorTextBox(uc.epExplanation, uc.txtExplanation);
+        }
+
+        private bool SetObligationStatus(string status)
+        {
+            try
+            {
+                return Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        internal void GetObligationStatus()
+        {
+            try
+            {
+                string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+
+
+                switch (ObligationRequestStatus.ToLower())
+                {
+                    case "approved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                        uc.SetFieldsReadOnly(true);
+                        break;
+                    case "disapproved":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnDelete.Enabled = false;
+                        btnSave.Enabled = false;
+                        linkShowMessage.Visible = true;
+                        lblStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                        uc.SetFieldsReadOnly(true);
+                        break;
+                    case "cancelled":
+                        btnApprove.Enabled = false;
+                        btnDisapprove.Enabled = false;
+                        btnSave.Enabled = false;
+                        btnCancelObligation.Enabled = false;
+                        btnDelete.Enabled = false;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(66, 63, 62);
+                        uc.SetFieldsReadOnly(true);
+                        break;
+                    case "pending":
+                        btnApprove.Enabled = true;
+                        btnDisapprove.Enabled = true;
+                        btnCancelObligation.Enabled = true;
+                        btnSave.Enabled = true;
+                        linkShowMessage.Visible = false;
+                        lblStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                        break;
+                    default:
+                        break;
+                }
+
+                lblStatus.Text = ObligationRequestStatus.ToUpper();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void VerifyPermissions()
+        {
+            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            {
+                btnApprove.Visible = false;
+                btnDisapprove.Visible = false;
+                btnCancelObligation.Visible = false;
+                toolStripSeparator1.Visible = false;
+            }
+        }
+
+        private void CancelAction()
+        {
+            var obligationStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+            string message = "Are you sure? Changes will not be saved.";
+
+            void ResetForm()
+            {
+                btnSave.Text = "Save";
+                lblStatus.ForeColor = Color.Black;
+                uc.ResetForm();
+                ResetControls();
+            }
+
+            if (obligationStatus.ToLower() == "pending" || (uc.dgObligationRequests.Rows.Count > 0 && !uc.isEdit))
+                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    ResetForm();
+                else
+                    return;
+
+            ResetForm();
+        }
+
+        internal void ResetControls()
+        {
+            if (!uc.isEdit)
+            {
+                btnApprove.Enabled = false;
+                btnDisapprove.Enabled = false;
+                btnCancelObligation.Enabled = false;
+                lblStatus.Text = "--";
+                lblStatus.ForeColor = Color.Black;
+                lblCreatedBy.Text = "--";
+                linkShowMessage.Visible = false;
+                btnDelete.Enabled = false;
+                btnSave.Enabled = true;
+            }
+            else
+            {
+                btnApprove.Enabled = true;
+                btnDisapprove.Enabled = true;
+                btnCancelObligation.Enabled = true;
+                btnDelete.Enabled = true;
+                lblCreatedBy.Text = "--";
+                lblStatus.ForeColor = Color.Black;
+            }
+
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -229,45 +385,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
         }
 
-        private void CancelAction()
-        {
-            var obligationStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
-            string message = "Are you sure? Changes will not be saved.";
-
-            void ResetForm()
-            {
-                btnSave.Text = "Save";
-                lblStatus.ForeColor = Color.Black;
-                uc.Enabled = true;
-                uc.isEdit = false;
-                ResetControls();
-                uc.ResetForm();
-            }
-
-            if (uc.isEdit || uc.dgObligationRequests.Rows.Count > 0)
-            {
-                switch (obligationStatus.ToLower())
-                {
-                    case "approved":
-                        ResetForm();
-                        break;
-                    case "disapproved":
-                        ResetForm();
-                        break;
-                    case "cancelled":
-                        ResetForm();
-                        break;
-
-                    default:
-                        if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            ResetForm();
-                        }
-                        break;
-                }
-            }
-        }
-
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             CancelAction();
@@ -278,118 +395,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             _ = new frmObligationRequestSearch(this).ShowDialog();
         }
 
-        internal void ResetControls()
-        {
-            if (!uc.isEdit)
-            {
-                btnApprove.Enabled = false;
-                btnDisapprove.Enabled = false;
-                btnCancelObligation.Enabled = false;
-                lblStatus.Text = "--";
-                lblStatus.ForeColor = Color.Black;
-                lblCreatedBy.Text = "--";
-                linkShowMessage.Visible = false;
-                btnDelete.Enabled = false;
-                btnSave.Enabled = true;
-            }
-            else
-            {
-                btnApprove.Enabled = true;
-                btnDisapprove.Enabled = true;
-                btnCancelObligation.Enabled = true;
-                btnDelete.Enabled = true;
-                lblCreatedBy.Text = "--";
-                lblStatus.ForeColor = Color.Black;
-            }
-
-        }
-
-        private void VerifyPermissions()
-        {
-            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
-            {
-                btnApprove.Visible = false;
-                btnDisapprove.Visible = false;
-                btnCancelObligation.Visible = false;
-                toolStripSeparator1.Visible = false;
-            }
-        }
-
         private void frmObligationRequestMain_Load(object sender, EventArgs e)
         {
             ResetControls();
             VerifyPermissions();
-        }
-
-        internal void GetObligationStatus()
-        {
-            try
-            {
-                string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
-
-
-                switch (ObligationRequestStatus.ToLower())
-                {
-                    case "approved":
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnDelete.Enabled = false;
-                        btnSave.Enabled = false;
-                        linkShowMessage.Visible = false;
-                        lblStatus.ForeColor = Color.FromArgb(78, 159, 61);
-                        uc.Enabled = false;
-                        break;
-                    case "disapproved":
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnDelete.Enabled = false;
-                        btnSave.Enabled = false;
-                        linkShowMessage.Visible = true;
-                        lblStatus.ForeColor = Color.FromArgb(149, 1, 1);
-                        uc.Enabled = false;
-                        break;
-                    case "cancelled":
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnSave.Enabled = false;
-                        btnCancelObligation.Enabled = false;
-                        btnDelete.Enabled = false;
-                        linkShowMessage.Visible = false;
-                        lblStatus.ForeColor = Color.FromArgb(66, 63, 62);
-                        uc.Enabled = false;
-                        break;
-                    case "pending":
-                        btnApprove.Enabled = true;
-                        btnDisapprove.Enabled = true;
-                        btnCancelObligation.Enabled = true;
-                        btnSave.Enabled = true;
-                        uc.Enabled = true;
-                        linkShowMessage.Visible = false;
-                        lblStatus.ForeColor = Color.FromArgb(216, 146, 22);
-                        break;
-                    default:
-                        break;
-                }
-
-                lblStatus.Text = ObligationRequestStatus.ToUpper();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private bool SetObligationStatus(string status)
-        {
-            try
-            {
-                return Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
         }
 
         private void btnApprove_Click(object sender, EventArgs e)

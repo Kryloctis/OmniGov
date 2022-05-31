@@ -177,28 +177,15 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
             int obligationRequestId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["id"].Value);
             _ucObligationRequestMain.obligationRequestId = obligationRequestId;
-            _frmObligationRequestMain.ResetControls();
             _frmObligationRequestMain.LoadSearched();
-            _ucObligationRequestMain.EnableDisableComponents(false);
-            _frmObligationRequestMain.GetObligationStatus();
             _frmObligationRequestMain.btnSave.Text = "Update";
-
-            Helper.ClearErrorComboBox(_ucObligationRequestMain.epFPP, _ucObligationRequestMain.cmbxFPP);
-            Helper.ClearMaskedTextboxError(_ucObligationRequestMain.epObligationNo, _ucObligationRequestMain.mskTxtObligationNoTemplate);
-            Helper.ClearMaskedTextboxError(_ucObligationRequestMain.epObligationRequest, _ucObligationRequestMain.mskTxtObligationNoTemplate);
-            Helper.ClearErrorTextBox(_ucObligationRequestMain.epPayee, _ucObligationRequestMain.txtPayee);
-            Helper.ClearErrorTextBox(_ucObligationRequestMain.epReferenceNo, _ucObligationRequestMain.txtReferenceNo);
-            Helper.ClearErrorTextBox(_ucObligationRequestMain.epExplanation, _ucObligationRequestMain.txtExplanation);
 
             Close();
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
-        {
-            LoadSelected();
-        }
 
-        private void dgObligationRequests_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+
+        private void btnSelect_Click(object sender, EventArgs e)
         {
             LoadSelected();
         }
@@ -238,6 +225,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private void dtDateRequested_ValueChanged(object sender, EventArgs e)
         {
             LoadObligationRequests();
+        }
+
+        private void dgObligationRequests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                LoadSelected();
         }
     }
 }

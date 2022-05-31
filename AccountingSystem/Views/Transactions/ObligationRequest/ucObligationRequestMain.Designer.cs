@@ -257,11 +257,13 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtTotalObligations
             // 
+            this.txtTotalObligations.BackColor = System.Drawing.Color.White;
+            this.txtTotalObligations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotalObligations.Location = new System.Drawing.Point(105, 497);
             this.txtTotalObligations.MaxLength = 999999999;
             this.txtTotalObligations.Name = "txtTotalObligations";
             this.txtTotalObligations.ReadOnly = true;
-            this.txtTotalObligations.Size = new System.Drawing.Size(137, 23);
+            this.txtTotalObligations.Size = new System.Drawing.Size(236, 23);
             this.txtTotalObligations.TabIndex = 13;
             // 
             // label9
