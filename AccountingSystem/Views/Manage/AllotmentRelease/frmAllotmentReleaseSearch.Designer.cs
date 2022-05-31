@@ -32,13 +32,17 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
-            this.dgAllotmentRelease = new System.Windows.Forms.DataGridView();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dtDateIssued = new System.Windows.Forms.DateTimePicker();
             this.cmbxAllotmentClasses = new System.Windows.Forms.ComboBox();
             this.cmbxFunds = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dgAllotmentRelease = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,9 +61,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // btnCancel
             // 
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(798, 3);
+            this.btnCancel.Location = new System.Drawing.Point(828, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(114, 23);
+            this.btnCancel.Size = new System.Drawing.Size(84, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -67,101 +71,123 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnSelect
             // 
-            this.btnSelect.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelect.Location = new System.Drawing.Point(684, 3);
+            this.btnSelect.Location = new System.Drawing.Point(744, 3);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(108, 23);
+            this.btnSelect.Size = new System.Drawing.Size(78, 23);
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "OK";
             this.btnSelect.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // dgAllotmentRelease
+            // panel1
             // 
-            this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAllotmentRelease.Location = new System.Drawing.Point(12, 41);
-            this.dgAllotmentRelease.Name = "dgAllotmentRelease";
-            this.dgAllotmentRelease.RowTemplate.Height = 25;
-            this.dgAllotmentRelease.Size = new System.Drawing.Size(891, 394);
-            this.dgAllotmentRelease.TabIndex = 2;
-            this.dgAllotmentRelease.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAllotmentRelease_CellDoubleClick);
-            this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(597, 12);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(225, 23);
-            this.txtSearch.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(828, 12);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.panel1.Controls.Add(this.dtDateIssued);
+            this.panel1.Controls.Add(this.cmbxAllotmentClasses);
+            this.panel1.Controls.Add(this.cmbxFunds);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(915, 31);
+            this.panel1.TabIndex = 3;
             // 
             // dtDateIssued
             // 
             this.dtDateIssued.CustomFormat = "MMM dd, yyy";
             this.dtDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtDateIssued.Location = new System.Drawing.Point(269, 13);
+            this.dtDateIssued.Location = new System.Drawing.Point(260, 3);
             this.dtDateIssued.Name = "dtDateIssued";
             this.dtDateIssued.Size = new System.Drawing.Size(121, 23);
-            this.dtDateIssued.TabIndex = 10;
+            this.dtDateIssued.TabIndex = 15;
             this.dtDateIssued.ValueChanged += new System.EventHandler(this.dtDateIssued_ValueChanged);
             // 
             // cmbxAllotmentClasses
             // 
             this.cmbxAllotmentClasses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxAllotmentClasses.FormattingEnabled = true;
-            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(183, 13);
+            this.cmbxAllotmentClasses.Location = new System.Drawing.Point(174, 3);
             this.cmbxAllotmentClasses.Name = "cmbxAllotmentClasses";
             this.cmbxAllotmentClasses.Size = new System.Drawing.Size(80, 23);
-            this.cmbxAllotmentClasses.TabIndex = 9;
+            this.cmbxAllotmentClasses.TabIndex = 14;
             this.cmbxAllotmentClasses.SelectionChangeCommitted += new System.EventHandler(this.cmbxAllotmentClasses_SelectionChangeCommitted);
             // 
             // cmbxFunds
             // 
             this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(12, 13);
+            this.cmbxFunds.Location = new System.Drawing.Point(3, 3);
             this.cmbxFunds.Name = "cmbxFunds";
             this.cmbxFunds.Size = new System.Drawing.Size(165, 23);
-            this.cmbxFunds.TabIndex = 8;
+            this.cmbxFunds.TabIndex = 13;
             this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(837, 3);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 12;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(606, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(225, 23);
+            this.txtSearch.TabIndex = 11;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgAllotmentRelease);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 31);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(3);
+            this.panel2.Size = new System.Drawing.Size(915, 410);
+            this.panel2.TabIndex = 4;
+            // 
+            // dgAllotmentRelease
+            // 
+            this.dgAllotmentRelease.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgAllotmentRelease.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgAllotmentRelease.Location = new System.Drawing.Point(3, 3);
+            this.dgAllotmentRelease.Name = "dgAllotmentRelease";
+            this.dgAllotmentRelease.RowTemplate.Height = 25;
+            this.dgAllotmentRelease.Size = new System.Drawing.Size(909, 404);
+            this.dgAllotmentRelease.TabIndex = 3;
+            this.dgAllotmentRelease.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAllotmentRelease_CellDoubleClick);
+            this.dgAllotmentRelease.SelectionChanged += new System.EventHandler(this.dgAllotmentRelease_SelectionChanged);
             // 
             // frmAllotmentReleaseSearch
             // 
-            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(915, 471);
-            this.Controls.Add(this.dtDateIssued);
-            this.Controls.Add(this.cmbxAllotmentClasses);
-            this.Controls.Add(this.cmbxFunds);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.dgAllotmentRelease);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAllotmentReleaseSearch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Allotment Release";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAllotmentReleaseSearch_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgAllotmentRelease)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -169,11 +195,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnSelect;
-        internal System.Windows.Forms.Button btnSearch;
-        internal System.Windows.Forms.TextBox txtSearch;
-        internal System.Windows.Forms.DataGridView dgAllotmentRelease;
+        private System.Windows.Forms.Panel panel1;
         internal System.Windows.Forms.DateTimePicker dtDateIssued;
         internal System.Windows.Forms.ComboBox cmbxAllotmentClasses;
         internal System.Windows.Forms.ComboBox cmbxFunds;
+        internal System.Windows.Forms.Button btnSearch;
+        internal System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.DataGridView dgAllotmentRelease;
     }
 }

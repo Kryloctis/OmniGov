@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         public frmAllotmentReleaseSearch(frmAllotmentReleaseMain frmAllotmentReleaseMain)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmAllotmentReleaseMain = frmAllotmentReleaseMain;
             btnSelect.Enabled = false;
         }
