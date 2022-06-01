@@ -87,6 +87,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxFPP.Size = new System.Drawing.Size(259, 23);
             this.cmbxFPP.TabIndex = 10;
             this.cmbxFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
+            this.cmbxFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFPP_Validating);
+            this.cmbxFPP.Validated += new System.EventHandler(this.cmbxFPP_Validated);
             // 
             // nudYear
             // 
@@ -113,6 +115,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             0,
             0});
             this.nudYear.ValueChanged += new System.EventHandler(this.NudYear_ValueChanged);
+            this.nudYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudYear_Validating);
+            this.nudYear.Validated += new System.EventHandler(this.nudYear_Validated);
             // 
             // cmbxFunds
             // 
@@ -124,6 +128,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxFunds.Size = new System.Drawing.Size(146, 23);
             this.cmbxFunds.TabIndex = 8;
             this.cmbxFunds.SelectedValueChanged += new System.EventHandler(this.cmbxFundType_SelectedValueChanged);
+            this.cmbxFunds.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxFunds_Validating);
+            this.cmbxFunds.Validated += new System.EventHandler(this.cmbxFunds_Validated);
             // 
             // cmbxAllotmentClass
             // 
@@ -135,6 +141,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(146, 23);
             this.cmbxAllotmentClass.TabIndex = 6;
             this.cmbxAllotmentClass.SelectedValueChanged += new System.EventHandler(this.cmbxAllotmentClass_SelectedValueChanged);
+            this.cmbxAllotmentClass.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAllotmentClass_Validating);
+            this.cmbxAllotmentClass.Validated += new System.EventHandler(this.cmbxAllotmentClass_Validated);
             // 
             // txtTotal
             // 
