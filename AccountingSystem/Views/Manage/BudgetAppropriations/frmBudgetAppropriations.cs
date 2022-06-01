@@ -35,6 +35,19 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
+        private string GetFormErrors()
+        {
+            var errorArray = new dynamic[]
+            {
+                cmbxFPP.Tag,
+                cmbxAllotmentClass.Tag,
+                cmbxFunds.Tag,
+                nudYear.Tag
+            };
+
+            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
         private void ShowRecordTimeStamp(DataGridView dataGridView)
         {
             if (dataGridView.SelectedRows.Count == 1 && dataGridView.CurrentRow.Cells["fpp_id"].Value != null)
@@ -172,6 +185,12 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return;
+            }
+
             var frmBudgetAppropriationsAdd = new frmBudgetAppropriationsAdd(this);
             var ucBudgetAppropriationsAdd = frmBudgetAppropriationsAdd.ucBudgetAppropriations1;
 
@@ -355,10 +374,15 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         #endregion
 
-
         private void ShowSupplementalAppropriations()
         {
             var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
+
+            if (!ValidateChildren()) 
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return;
+            }
 
             if (dgBudgetAppropriations.SelectedRows.Count == 1)
             {
@@ -366,7 +390,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 int budgetAppropriationId = Convert.ToInt32(dgBudgetAppropriations.Rows[rowIndex].Cells["id"].Value);
                 frmSupplementalAppropriationsMain.budgetAppropriationId = budgetAppropriationId;
             }
-
 
             int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
             int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
@@ -415,5 +438,73 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             dgBudgetAppropriations.ClearSelection();
         }
+
+        #region Validations
+
+        private void cmbxFPP_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbxFPP.SelectedIndex == -1)
+            {
+                cmbxFPP.Tag = "Invalid FPP, please select on the list.";
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void cmbxFPP_Validated(object sender, EventArgs e)
+        {
+            cmbxFPP.Tag = string.Empty;
+        }
+
+        private void cmbxAllotmentClass_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbxAllotmentClass.SelectedIndex == -1)
+            {
+                cmbxAllotmentClass.Tag = "Invalid allotment class, please select on the list";
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void cmbxAllotmentClass_Validated(object sender, EventArgs e)
+        {
+            cmbxAllotmentClass.Tag = string.Empty;
+        }
+
+        private void cmbxFunds_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbxFunds.SelectedIndex == -1)
+            {
+                cmbxFunds.Tag = "Invalid fund, please select on the list";
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void cmbxFunds_Validated(object sender, EventArgs e)
+        {
+            cmbxFunds.Tag = string.Empty;
+        }
+
+        private void nudYear_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (nudYear.Value == 0 || nudYear.Value.ToString() == string.Empty)
+            {
+                nudYear.Tag = "Invalid year, please enter a valid year.";
+                e.Cancel = true;
+            }
+            else
+                e.Cancel = false;
+        }
+
+        private void nudYear_Validated(object sender, EventArgs e)
+        {
+            nudYear.Tag = string.Empty;
+        } 
+
+        #endregion
     }
 }
