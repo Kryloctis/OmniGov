@@ -10,7 +10,6 @@ namespace ACC.Data
     {
         private readonly string connectionString;
 
-
         public MySqlGenericCommands(string connectionName)
         {
             connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;

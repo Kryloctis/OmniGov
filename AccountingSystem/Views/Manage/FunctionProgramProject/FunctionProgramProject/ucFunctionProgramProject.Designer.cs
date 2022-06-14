@@ -58,7 +58,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             // txtCode
             // 
             this.txtCode.Location = new System.Drawing.Point(91, 30);
-            this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(324, 23);
             this.txtCode.TabIndex = 10;
