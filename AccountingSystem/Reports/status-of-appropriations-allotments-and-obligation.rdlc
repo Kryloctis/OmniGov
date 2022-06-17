@@ -1980,7 +1980,7 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!account_name.Value</Value>
+                                  <Value>=Fields!remarks.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>
@@ -2013,7 +2013,7 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!account_code.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>
@@ -2046,24 +2046,23 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="appropriations">
+                        <Textbox Name="Textbox7">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!appropriations.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>appropriations</rd:DefaultName>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2085,24 +2084,23 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="allotment_release">
+                        <Textbox Name="Textbox9">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!allotment_release.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>allotment_release</rd:DefaultName>
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2124,24 +2122,23 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox112">
+                        <Textbox Name="Textbox10">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!obligations.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox112</rd:DefaultName>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2163,24 +2160,23 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox132">
+                        <Textbox Name="Textbox11">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!unobligated_balance.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox132</rd:DefaultName>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -2251,7 +2247,7 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!remarks.Value</Value>
+                                  <Value>=Fields!account_name.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>
@@ -2283,7 +2279,7 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!account_code.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>
@@ -5382,9 +5378,9 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                                   <KeepWithGroup>After</KeepWithGroup>
                                 </TablixMember>
                                 <TablixMember>
-                                  <Group Name="account_name">
+                                  <Group Name="remarks">
                                     <GroupExpressions>
-                                      <GroupExpression>=Fields!account_name.Value</GroupExpression>
+                                      <GroupExpression>=Fields!remarks.Value</GroupExpression>
                                     </GroupExpressions>
                                   </Group>
                                   <SortExpressions>
@@ -5394,17 +5390,17 @@ RunningValue(Fields!function_classification_sector_name.Value,CountDistinct,"dtS
                                   </SortExpressions>
                                   <TablixMembers>
                                     <TablixMember>
+                                      <Visibility>
+                                        <Hidden>=IIF(string.IsNullOrWhiteSpace(Fields!remarks.Value), true, false)</Hidden>
+                                      </Visibility>
                                       <KeepWithGroup>After</KeepWithGroup>
                                     </TablixMember>
                                     <TablixMember>
-                                      <Group Name="remarks">
+                                      <Group Name="account_name">
                                         <GroupExpressions>
-                                          <GroupExpression>=Fields!remarks.Value</GroupExpression>
+                                          <GroupExpression>=Fields!account_name.Value</GroupExpression>
                                         </GroupExpressions>
                                       </Group>
-                                      <Visibility>
-                                        <Hidden>=IIF(ReportItems!remarks.Value = "", true, false)</Hidden>
-                                      </Visibility>
                                     </TablixMember>
                                   </TablixMembers>
                                 </TablixMember>
