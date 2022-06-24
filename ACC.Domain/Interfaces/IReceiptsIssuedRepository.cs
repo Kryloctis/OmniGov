@@ -6,7 +6,7 @@ namespace ACC.Domain.Interfaces
     public interface IReceiptsIssuedRepository : IRepository<ReceiptsIssuedModel>
     {
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
-        bool UpdateCurrentIssued(ReceiptsIssuedModel entity);
+        bool UpdateLastIssued(ReceiptsIssuedModel entity);
         bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
         DataTable GetIssuedReceiptByCollectorIdAndAccountableFormId(string coid, string formid);
         DataTable GetIssuedReceiptByCollectorId(int collectorId);

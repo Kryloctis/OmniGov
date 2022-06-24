@@ -316,7 +316,7 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool UpdateCurrentIssued(ReceiptsIssuedModel entity)
+        public bool UpdateLastIssued(ReceiptsIssuedModel entity)
         {
             var parameters = new object[][]
             {

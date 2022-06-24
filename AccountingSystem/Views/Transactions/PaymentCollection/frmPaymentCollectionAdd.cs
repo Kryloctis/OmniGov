@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                     if (insertSuccess)
                     {
+                        UpdateReceiptsCount();   
                         Helper.MessageBoxSuccess("Payment Collection has been saved.");
                         _frmPaymentCollection.LoadRecords();
                         uc.ResetForm();
@@ -135,6 +136,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                     if (insertSuccess)
                     {
+                        UpdateReceiptsCount();
                         Helper.MessageBoxSuccess("Payment Collection has been saved.");
                         _frmPaymentCollection.LoadRecords();
                         uc.ResetForm();
@@ -150,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        private bool UpdateReceiptsCount()
+        private void UpdateReceiptsCount()
         {
             try
             {
@@ -161,24 +163,22 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
-                if (receiptIssuedCount > 0)
+                if (receiptIssuedCount == 0)
+                    return;
+
+                int issuanceId = 0;
+
+                for (int i = 0; i < receiptIssuedCount; i++)
+                    issuanceId = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
+               
+
+                var receiptIssuedModel = new ReceiptsIssuedModel()
                 {
-                    int rid = 0;
-                    for (int i = 0; i < receiptIssuedCount; i++)
-                    {
-                        rid = Convert.ToInt32(dtReceiptIssued.Rows[i]["id"]);
-                    }
-
-
-                    var rcModel = new ReceiptsIssuedModel()
-                    {
-                        Id = rid,
-                        Last_issued = Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
-                    };
-                    return receiptsIssuedRepo.UpdateCurrentIssued(rcModel);
-                }
-
-                return false;
+                    Id = issuanceId,
+                    Last_issued = Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
+                };
+                receiptsIssuedRepo.UpdateLastIssued(receiptIssuedModel);
+             
             }
             catch (Exception)
             {

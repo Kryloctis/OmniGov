@@ -120,6 +120,7 @@ namespace AccountingSystem
 
         private void ValidateReportPermissions()
         {
+
             if (!Helper.HasPermission("Report of Checks Issued"))
                 menuprintRCI.Visible = false;
 
@@ -154,16 +155,19 @@ namespace AccountingSystem
                 btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-                btnIssueCheck.Enabled = false;
+                btnIssueCheck.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-                btnBankDeposit.Enabled = false;
+                btnBankDeposit.Visible = false;
 
             if (!Helper.HasPermission("Transaction Payments"))
-                btnPaymentCollection.Enabled = false;
+                btnPaymentCollection.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                btnIssueReceipt.Enabled = false;
+                btnIssueReceipt.Visible = false;
+
+            if (!Helper.HasPermission("Transaction RCD Approval"))
+                btnRCD.Visible = false;
         }
 
         private void ValidateManagePermissions()

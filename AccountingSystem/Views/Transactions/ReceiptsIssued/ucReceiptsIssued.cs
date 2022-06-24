@@ -45,8 +45,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isCollectorJO = false;
             receiptNumberFrom = "0";
             receiptNumberTo = "0";
-            radioStubQuantity.Checked = false;
-            radioCustomQuantity.Checked = false;
             txtReceiptIssuedFrom.Text = "0";
             txtReceiptIssuedTo.Text = "0";
             txtReceiptQuantity.Clear();
@@ -110,7 +108,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 foreach (DataRow row in receiptsDt.Rows)
                 {
                     var receiptsId = Convert.ToInt32(row["id"]);
-                    var accountableForm = $"{row["acc_form_desc"]} - {row["acc_form_no"]}";
+                    var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
                     var receiptQuantity = Convert.ToInt32(row["quantity"]);
                     string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
                     string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
@@ -160,8 +158,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedTo.ResetText();
             txtReceiptIssuedFrom.Enabled = false;
             txtReceiptIssuedTo.Enabled = false;
-            radioStubQuantity.Enabled = false;
-            radioCustomQuantity.Enabled = false;
         }
 
         private void SetFieldsForNonCashTickets()
@@ -170,8 +166,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedFrom.Enabled = true;
             txtReceiptIssuedTo.Enabled = true;
             txtReceiptQuantity.ReadOnly = true;
-            radioStubQuantity.Enabled = true;
-            radioCustomQuantity.Enabled = true;
         }
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)

@@ -104,5 +104,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             LoadRecords();
         }
+
+        private void dgCollectorsReport_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _frmCollectorsRCD.LoadSelectedValue(reportNo);
+            _frmCollectorsRCD.CheckRCDStatus(reportNo);
+
+            _uc.TotalCollections();
+            this.Close();
+        }
     }
 }
