@@ -7,14 +7,13 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class frmFaceValue : Form
     {
-        internal int accountableFormId = 0;
-        internal int faceValueId = 0;
+        internal int accountableFormId;
+        internal int faceValueId;
 
         public frmFaceValue(int accountableFormId)
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgfacevalue);
-
             this.accountableFormId = accountableFormId;
         }
 
@@ -30,21 +29,12 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 if (accountableFormId != 0)
                 {
                     var facevaluerepo = Factory.FaceValueRepository();
-                    var dtfacevalue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
+                    var dtFaceValue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
 
-                    HelperLoadRecords.FaceValueDatagridView(dtfacevalue, dgfacevalue);
+                    HelperLoadRecords.FaceValueDatagridView(dtFaceValue, dgfacevalue);
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-
-        private void btnrefresh_Click(object sender, EventArgs e)
-        {
-            faceValueId = 0;
-            dtdate.Value = DateTime.Now;
-            txtamount.Value = 0;
-            LoadList();
         }
 
         private void dgfacevalue_SelectionChanged(object sender, EventArgs e)
@@ -172,5 +162,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
     }
 }

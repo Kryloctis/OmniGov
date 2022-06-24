@@ -93,7 +93,8 @@ namespace ACC.Data
             string query  = $"SELECT " +
                             $"id, " +
                             $"accountable_forms_id, " +
-                            $"accountable_forms, " +
+                            $"acc_form_no, " +
+                            $"acc_form_desc, " +
                             $"receipt_number_from, " +
                             $"receipt_number_to, " +
                             $"received_date, " +

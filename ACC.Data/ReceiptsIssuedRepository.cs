@@ -144,14 +144,13 @@ namespace ACC.Data
                            $"date_issued, " +
                            $"quantity, " +
                            $"last_issued, " +
-                           $"IF(is_returned > 0, 'YES', 'NO') AS returned, " +
+                           $"is_returned, " +
                            $"returned_date " +
-                           $"FROM view_receipts_issued " +
+                           $"FROM {viewTableName} " +
                            $"WHERE " +
                            $"(collecting_officer_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id) " +
                            $"AND " +
                            $"accountable_form_id = @accountable_form_id AND " +
-                           $"IF(is_returned > 0, 1, 0) = 0  AND " +
                            $"IF(receipt_issued_to = last_issued, true, false) = false";
 
             var dtReceiptIssued = new DataTable();
@@ -175,8 +174,8 @@ namespace ACC.Data
                            $"OR job_orders_id = @collectingOfficerId AND is_returned = false";
 
 
-            var dtri = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtri, parameter);
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -336,8 +335,7 @@ namespace ACC.Data
             };
             string query =  $"SELECT " +
                             $"accountable_form_id, " +
-                            $"acc_form_no, " +
-                            $"acc_form_desc, " +
+                            $"accountable_forms, " +
                             $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
                             $"LPAD(MIN(receipt_issued_from), 7, 0) receipt_issued_from, " +
                             $"LPAD(MAX(receipt_issued_to), 7, 0)  receipt_issued_to, " +

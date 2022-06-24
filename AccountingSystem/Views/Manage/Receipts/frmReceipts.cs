@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             {
                 var dtReceipts = Factory.ReceiptsRepository().GetRecordsBySearch(txtSearch.Text.Trim());
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
-
+                
             }
             catch (Exception ex)
             {

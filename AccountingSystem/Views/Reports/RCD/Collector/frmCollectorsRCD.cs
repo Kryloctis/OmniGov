@@ -105,8 +105,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtFromDataSource.NewRow();
-                    var accountableForm = $"{item["acc_form_no"]} - {item["acc_form_desc"]}";
-                    row["accountable_form"] = accountableForm;
+                    //var accountableForm = $"{item["acc_form_no"]} - {item["acc_form_desc"]}";
+                    row["accountable_form"] = item["accountable_forms"];
                     row["beginning_bal_quantity"] = item["quantity"];
                     row["beginning_bal_serial_from"] = item["receipt_issued_from"];
                     row["beginning_bal_serial_to"] = item["receipt_issued_to"];

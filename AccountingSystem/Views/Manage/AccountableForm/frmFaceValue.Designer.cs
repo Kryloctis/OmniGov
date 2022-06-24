@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnrefresh = new System.Windows.Forms.ToolStripButton();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dtdate = new System.Windows.Forms.DateTimePicker();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -124,8 +123,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnEdit,
-            this.btnDelete,
-            this.btnrefresh});
+            this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
@@ -156,17 +154,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnrefresh
-            // 
-            this.btnrefresh.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
-            this.btnrefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnrefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnrefresh.Name = "btnrefresh";
-            this.btnrefresh.Size = new System.Drawing.Size(50, 47);
-            this.btnrefresh.Text = "Refresh";
-            this.btnrefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
             // errorProvider
             // 
@@ -247,6 +234,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             // 
             // frmFaceValue
             // 
+            this.AcceptButton = this.btnsave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 247);
@@ -288,7 +276,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         private System.Windows.Forms.Button btnsave;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton btnEdit;
-        private System.Windows.Forms.ToolStripButton btnrefresh;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.DateTimePicker dtdate;

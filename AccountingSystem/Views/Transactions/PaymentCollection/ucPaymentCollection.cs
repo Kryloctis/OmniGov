@@ -184,9 +184,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
 
             var dtReceiptIssued = Factory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
-
-            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
-            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+            if (dtReceiptIssued.Rows.Count != 0)
+            {
+                serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+                serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+            }
         }
 
 
