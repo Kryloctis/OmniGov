@@ -6,7 +6,6 @@ namespace AccountingSystem.Views
 {
     public partial class frmSearchProperties : Form
     {
-
         public frmSearchProperties()
         {
             InitializeComponent();

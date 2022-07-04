@@ -60,12 +60,37 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
+        private void LoadCollectors()
+        {
+            try
+            {
+                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+
+                DataTable dtCollectors = new();
+                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
+                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
+
+                dtRegularCollectors.Merge(dtJOCollectors);
+                dtCollectors = dtRegularCollectors;
+
+                cmbCollector.DataSource = dtCollectors;
+                cmbCollector.DisplayMember = "fullname";
+                cmbCollector.ValueMember = "id";
+
+                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void LoadCurrentCollector()
         {
             try
             {
                 if (cmbCollector.Items.Count == 0) return;
-
 
                 var usersRepo = Factory.UsersRepository();
                 if (usersRepo.LinkedCollector(Helper.UserId) || usersRepo.LinkedJobOrder(Helper.UserId))
@@ -84,8 +109,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                         collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
                         cmbCollector.SelectedValue = collectorDict["id"];
                     }
-                    collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
-                    cmbCollector.Enabled = false;
+
+                    //collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
+                    //cmbCollector.Enabled = false;
                     return;
                 }
 
@@ -138,31 +164,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-        private void LoadCollectors()
-        {
-            try
-            {
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
-
-                DataTable dtCollectors = new();
-                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
-                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
-
-                dtRegularCollectors.Merge(dtJOCollectors);
-                dtCollectors = dtRegularCollectors;
-
-                cmbCollector.DataSource = dtCollectors;
-                cmbCollector.DisplayMember = "fullname";
-                cmbCollector.ValueMember = "id";
-
-                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
 
         internal void TotalCollections()
         {

@@ -165,6 +165,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.dgCollectorsReport.RowTemplate.Height = 29;
             this.dgCollectorsReport.Size = new System.Drawing.Size(807, 327);
             this.dgCollectorsReport.TabIndex = 18;
+            this.dgCollectorsReport.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCollectorsReport_CellDoubleClick);
             this.dgCollectorsReport.SelectionChanged += new System.EventHandler(this.dgCollectorsReport_SelectionChanged);
             // 
             // frmCollectorsRCDSearch

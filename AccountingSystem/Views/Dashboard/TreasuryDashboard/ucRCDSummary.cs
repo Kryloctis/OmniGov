@@ -10,6 +10,8 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         {
             InitializeComponent();
 
+            Helper.DatagridFullRowSelectStyle(dgCollectorsCollection);
+            Helper.DatagridFullRowSelectStyle(dgBankDeposit);
         }
 
         private void ucRCDDashboard_Load(object sender, EventArgs e)
@@ -18,7 +20,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             {
                 LoadMonths();
                 LoadFunds();
-                LoadRCDCounters();
+                LoadDashboardData();
             }
 
         }
@@ -63,24 +65,51 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             lblCancelledRCDCounter.Text = rcdCancelledCount.ToString();
         }
 
-        private void btnRefreshCounter_Click(object sender, EventArgs e)
+        private void LoadDashboardData()
         {
             LoadRCDCounters();
+            LoadBanksDepositsSummary();
+            LoadColllectorsCollectionSummary();
+        }
+
+        private void btnRefreshCounter_Click(object sender, EventArgs e)
+        {
+            LoadDashboardData();
         }
 
         private void cmbFunds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadRCDCounters();
+            LoadDashboardData();
         }
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadRCDCounters();
+            LoadDashboardData();
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)
         {
-            LoadRCDCounters();
+            LoadDashboardData();
         }
+
+
+        #region Bank Deposit Summary
+        private void LoadBanksDepositsSummary()
+        {
+            var bankDepositSummaryDT = Factory.BankDepositsRepository().GetBankDepositsSummary();
+            HelperLoadRecords.BanksDepositsSummaryDatagridView(bankDepositSummaryDT, dgBankDeposit);
+        }
+
+        #endregion
+
+        #region Payment Collection Summary
+
+        private void LoadColllectorsCollectionSummary()
+        {
+            var collectorsCollectionDT = Factory.PaymentCollectionRepository().GetCollectionsPerCollector();
+            HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
+        }
+
+        #endregion
     }
 }

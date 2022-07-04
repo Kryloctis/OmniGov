@@ -10,5 +10,7 @@ namespace ACC.Domain.Interfaces
         int GetReceiptNumberFromByReceiptId(int receiptId);
         bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo);
 
+
+       
     }
 }

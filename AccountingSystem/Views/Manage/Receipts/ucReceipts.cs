@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int receiptId;
         internal int accountableFormId;
         internal bool isCashTicket;
-
+        
         public ucReceipts()
         {
             InitializeComponent();

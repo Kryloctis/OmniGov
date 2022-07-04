@@ -50,7 +50,7 @@ namespace ACC.Data
                 throw;
             }
         }
-
+    
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -82,7 +82,7 @@ namespace ACC.Data
 
             return record;
         }
-
+       
         public DataTable GetRecords()
         {
             try

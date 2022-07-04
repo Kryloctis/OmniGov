@@ -45,8 +45,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             isCollectorJO = false;
             receiptNumberFrom = "0";
             receiptNumberTo = "0";
-            radioStubQuantity.Checked = false;
-            radioCustomQuantity.Checked = false;
             txtReceiptIssuedFrom.Text = "0";
             txtReceiptIssuedTo.Text = "0";
             txtReceiptQuantity.Clear();
@@ -110,15 +108,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 foreach (DataRow row in receiptsDt.Rows)
                 {
                     var receiptsId = Convert.ToInt32(row["id"]);
-                    var accountableForm =  row["accountable_forms"].ToString();
+                    var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
                     var receiptQuantity = Convert.ToInt32(row["quantity"]);
                     string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
                     string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
 
-                    if (row["accountable_forms"].ToString().Contains("Tickets"))
-                        row["accountable_forms"] = $"{accountableForm} ({receiptQuantity - TotalIssued(receiptsId)}) ";
+                    if (accountableForm.ToString().Contains("Tickets"))
+                        row["acc_form_desc"] = $"{accountableForm} ({receiptQuantity - TotalIssued(receiptsId)}) ";
                     else
-                        row["accountable_forms"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
+                        row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
 
                     //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
                     if ((receiptQuantity - TotalIssued(receiptsId)) <= 0) row.Delete();
@@ -126,7 +124,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 cmbReceipt.DataSource = receiptsDt;
                 cmbReceipt.ValueMember = "id";
-                cmbReceipt.DisplayMember = "accountable_forms";
+                cmbReceipt.DisplayMember = "acc_form_desc";
 
                 int TotalIssued(int receiptId)
                 {
@@ -160,8 +158,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedTo.ResetText();
             txtReceiptIssuedFrom.Enabled = false;
             txtReceiptIssuedTo.Enabled = false;
-            radioStubQuantity.Enabled = false;
-            radioCustomQuantity.Enabled = false;
         }
 
         private void SetFieldsForNonCashTickets()
@@ -170,8 +166,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptIssuedFrom.Enabled = true;
             txtReceiptIssuedTo.Enabled = true;
             txtReceiptQuantity.ReadOnly = true;
-            radioStubQuantity.Enabled = true;
-            radioCustomQuantity.Enabled = true;
         }
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
@@ -313,7 +307,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             receiptQuantity = (int)item["quantity"] - (Factory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId));
             receiptNumberFrom = item["receipt_number_from"].ToString();
 
-            if (item["accountable_forms"].ToString().Contains("Tickets"))
+            if (item["acc_form_desc"].ToString().Contains("Tickets"))
                 SetFieldsForCashTickets();
             else
             {

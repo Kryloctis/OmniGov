@@ -501,7 +501,7 @@ namespace AccountingSystem
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
-                    row["accountable_forms"],
+                    $"{row["acc_form_no"]} - {row["acc_form_desc"]}",
                     serialNumberFrom,
                     serialNumberTo,
                     row["quantity"],

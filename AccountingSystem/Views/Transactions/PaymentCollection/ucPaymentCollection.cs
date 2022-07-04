@@ -67,10 +67,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (!DesignMode)
             {
-                LoadCollectors();
                 LoadFunds();
-                LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(Convert.ToInt32(cmbCollector.SelectedValue));
                 LoadAccounts();
+
+                LoadCollectors();
+                LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(Convert.ToInt32(cmbCollector.SelectedValue));
                 GetAccountableFormSerialNumberRange();
                 GetAccountableFormFaceValue();
                 SwitchFields();
@@ -184,9 +185,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
 
             var dtReceiptIssued = Factory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
-
-            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
-            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+            if (dtReceiptIssued.Rows.Count != 0)
+            {
+                serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+                serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+            }
         }
 
 
@@ -381,21 +384,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 EditPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
         }
 
-        private void SetCollectionsData(DataTable dtReceiptIssued)
-        {
-            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
-            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
-
-            var lastIssuedSerialNumber = dtReceiptIssued.Rows[0]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[0]["last_issued"]);
-
-            if (lastIssuedSerialNumber == 0)
-                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
-            else if (lastIssuedSerialNumber.Equals(serialNumberTo))
-                txtReceiptNumber.Text = string.Empty;
-            else
-                txtReceiptNumber.Text = (lastIssuedSerialNumber + 1).ToString("D7");
-        }
-
         private void EnableDisableNonCashTicketsFields(bool enable)
         {
             if (!enable)
@@ -430,6 +418,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             EnableDisableNonCashTicketsFields(true);
             SetCollectionsData(dtReceiptIssued);
+        }
+        private void SetCollectionsData(DataTable dtReceiptIssued)
+        {
+            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+
+            var lastIssuedReceiptNumber = dtReceiptIssued.Rows[0]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[0]["last_issued"]);
+
+            if (lastIssuedReceiptNumber == 0)
+                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
+            else if (lastIssuedReceiptNumber.Equals(serialNumberTo))
+                txtReceiptNumber.Text = string.Empty;
+            else
+                txtReceiptNumber.Text = (lastIssuedReceiptNumber + 1).ToString("D7");
         }
 
         private DataTable DatatableAccounts()

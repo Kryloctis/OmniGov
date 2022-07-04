@@ -122,9 +122,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(2, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 15);
+            this.label4.Size = new System.Drawing.Size(99, 15);
             this.label4.TabIndex = 3;
-            this.label4.Text = "OR/Serial Number ";
+            this.label4.Text = "Receipt Number  ";
             // 
             // label5
             // 
