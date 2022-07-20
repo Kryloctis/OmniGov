@@ -22,10 +22,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             Helper.LoadFormIcon(this);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-        }
-
         private void frmRptDiscount_Load(object sender, EventArgs e)
         {
         }

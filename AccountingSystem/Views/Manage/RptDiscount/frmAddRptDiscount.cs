@@ -13,16 +13,45 @@ namespace AccountingSystem.Views.Manage.RptDiscount
     public partial class frmAddRptDiscount : Form
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
+        private readonly ucRptDiscounts uc;
         public frmAddRptDiscount(frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
             _frmRptDiscounts = frmRptDiscounts;
+            uc = ucRptDiscounts1;
             Helper.LoadFormIcon(this);
         }
 
         private void frmAddRptDiscount_Load(object sender, EventArgs e)
         {
+            uc.isEdit = false;
+        }
 
+        private bool Save() 
+        {
+            try
+            {
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Save())
+            {
+                Helper.MessageBoxSuccess("Discount has been saved.");
+                uc.ResetForm();
+            }
         }
     }
 }
