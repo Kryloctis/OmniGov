@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    public partial class ucDiscounts : UserControl
+    public partial class ucRptDiscounts : UserControl
     {
-        public ucDiscounts()
+        public ucRptDiscounts()
         {
             InitializeComponent();
         }

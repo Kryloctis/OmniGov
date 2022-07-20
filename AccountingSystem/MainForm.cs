@@ -740,7 +740,7 @@ namespace AccountingSystem
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmRptDiscount(this).ShowDialog();
+            _ = new frmRptDiscounts(this).ShowDialog();
         }
     }
 }

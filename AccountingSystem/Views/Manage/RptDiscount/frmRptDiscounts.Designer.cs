@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    partial class frmRptDiscount
+    partial class frmRptDiscounts
     {
         /// <summary>
         /// Required designer variable.
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // frmRptDiscount
+            // frmRptDiscounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -115,12 +115,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRptDiscount";
+            this.Name = "frmRptDiscounts";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Discounts";
+            this.Text = "Manage > Discounts";
             this.Load += new System.EventHandler(this.frmRptDiscount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);

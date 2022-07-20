@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    partial class ucDiscounts
+    partial class ucRptDiscounts
     {
         /// <summary> 
         /// Required designer variable.
@@ -128,12 +128,12 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.NumericUpDown nudRate;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox txtCode;
+        internal System.Windows.Forms.TextBox txtDescription;
+        internal System.Windows.Forms.NumericUpDown nudRate;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
