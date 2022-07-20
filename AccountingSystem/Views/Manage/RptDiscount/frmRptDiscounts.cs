@@ -29,5 +29,15 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         private void frmRptDiscount_Load(object sender, EventArgs e)
         {
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddRptDiscount(this).ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            _ = new frmEditRptDiscounts(this).ShowDialog();
+        }
     }
 }

@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    public partial class frmAddRptDiscount : Form
+    public partial class frmEditRptDiscounts : Form
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
-        public frmAddRptDiscount(frmRptDiscounts frmRptDiscounts)
+        public frmEditRptDiscounts(frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
             _frmRptDiscounts = frmRptDiscounts;
             Helper.LoadFormIcon(this);
         }
 
-        private void frmAddRptDiscount_Load(object sender, EventArgs e)
+        private void frmEditRptDiscounts_Load(object sender, EventArgs e)
         {
 
         }

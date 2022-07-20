@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.txtCode.Location = new System.Drawing.Point(93, 3);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(321, 27);
-            this.txtCode.TabIndex = 1;
+            this.txtCode.TabIndex = 0;
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
-            // ucDiscounts
+            // ucRptDiscounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ucDiscounts";
+            this.Name = "ucRptDiscounts";
             this.Size = new System.Drawing.Size(436, 151);
             ((System.ComponentModel.ISupportInitialize)(this.nudRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
