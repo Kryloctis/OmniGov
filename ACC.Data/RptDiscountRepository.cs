@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ACC.Data
 {
-    public class RptDiscountRepository : IRptDiscountRepository
+    public class RptDiscountRepository : IRptDiscountsRepository
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_discount";

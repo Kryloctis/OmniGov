@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptDiscountRepository : IRepository<RptDiscountsModel>
+    public interface IRptDiscountsRepository : IRepository<RptDiscountsModel>
     {
     }
 }
