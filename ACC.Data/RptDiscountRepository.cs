@@ -43,7 +43,7 @@ namespace ACC.Data
                 if (reader.Rows.Count < 1)
                     return dict;
 
-                dict.Add("id", reader.Rows[0]["percentage"].ToString()); 
+                dict.Add("percentage", reader.Rows[0]["percentage"].ToString()); 
             }
 
             return dict;
