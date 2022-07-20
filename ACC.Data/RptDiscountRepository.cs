@@ -22,7 +22,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<RptDiscountModel> entityList)
+        public bool Delete(List<RptDiscountsModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -64,12 +64,12 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RptDiscountModel entity)
+        public bool Insert(RptDiscountsModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(RptDiscountModel entity)
+        public bool Update(RptDiscountsModel entity)
         {
             var parameters = new object[][]
             {
