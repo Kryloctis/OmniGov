@@ -737,5 +737,9 @@ namespace AccountingSystem
 
         #endregion
 
+        private void discountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
