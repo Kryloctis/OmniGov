@@ -9,6 +9,19 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region RPT Discounts
+
+        public static void DiscountsDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["description"].HeaderText = "Description";
+            dataGridView.Columns["rate"].HeaderText = "Rate";
+        }
+
+        #endregion
 
         #region References
 
