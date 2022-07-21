@@ -133,5 +133,7 @@ namespace AccountingSystem
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsRPT);
 
         public static IRptDiscountsRepository rptDiscountRepository() => new RptDiscountsRepository(mySqlGenericCommandsLFS);
+
+        public static IRptPenaltiesRepository rptPenaltiesRepository() => new RptPenaltiesRepository(mySqlGenericCommandsLFS);
     }
 }

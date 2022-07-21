@@ -14,6 +14,7 @@ using AccountingSystem.Views.Manage.Journals;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
 using AccountingSystem.Views.Manage.RptDiscount;
+using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
@@ -741,6 +742,11 @@ namespace AccountingSystem
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRptDiscounts(this).ShowDialog();
+        }
+
+        private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptPenalties(this).ShowDialog();
         }
     }
 }

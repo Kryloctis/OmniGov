@@ -62,14 +62,63 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             ShowEditRptDiscounts();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadDiscounts();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private bool Delete(out int deletedCount)
         {
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            try
+            {
+                var rptDiscountsModelList = new List<RptDiscountsModel>();
+                int rowCount = dataGridView1.SelectedRows.Count;
+
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        int discountsId = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new RptDiscountsModel() { Id = discountsId };
+                        rptDiscountsModelList.Add(model);
+                    }
+
+                    deletedCount = rowCount;
+                    return Factory.rptDiscountRepository().Delete(rptDiscountsModelList);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            deletedCount = 0;
+            return false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount;
+
+            if (Delete(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadDiscounts();
+            }
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(Cursor.Position);
+            }
         }
     }
 }
