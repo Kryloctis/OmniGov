@@ -51,6 +51,15 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             return false;
         }
 
+        private void LoadRecord()
+        {
+            var dictRptDiscounts = Factory.rptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
+
+            uc.txtCode.Text = dictRptDiscounts["code"];
+            uc.txtDescription.Text = dictRptDiscounts["description"];
+            uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
+        }
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (Save())
@@ -59,6 +68,12 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 _frmRptPenalties.LoadPenalties();
                 Close();
             }
+        }
+
+        private void frmEditRptPenalties_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = true;
+            LoadRecord();
         }
     }
 }

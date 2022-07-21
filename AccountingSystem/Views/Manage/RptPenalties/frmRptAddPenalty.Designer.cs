@@ -94,6 +94,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add";
+            this.Load += new System.EventHandler(this.frmRptAddPenalty_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

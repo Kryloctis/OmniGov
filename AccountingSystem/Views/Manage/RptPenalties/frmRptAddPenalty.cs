@@ -59,5 +59,10 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 _frmRptPenalties.LoadPenalties();
             }
         }
+
+        private void frmRptAddPenalty_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = false;
+        }
     }
 }

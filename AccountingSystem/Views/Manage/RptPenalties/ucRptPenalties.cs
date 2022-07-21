@@ -56,17 +56,22 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
+        }
 
+        private bool DescriptionValidated() 
+        {
+            return Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
         }
 
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
-
+            e.Cancel = DescriptionValidated();
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)
         {
-
+            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
 
         private bool RateValidated()
@@ -91,7 +96,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void nudRate_Validated(object sender, EventArgs e)
         {
-
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         } 
         #endregion
     }
