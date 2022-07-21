@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,11 +15,12 @@ namespace AccountingSystem.Views.Manage.RptDiscount
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
         private readonly ucRptDiscounts uc;
-        public frmEditRptDiscounts(frmRptDiscounts frmRptDiscounts)
+        public frmEditRptDiscounts(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
             _frmRptDiscounts = frmRptDiscounts;
             uc = ucRptDiscounts1;
+            uc.rptDiscountId = rptDiscountId;
             Helper.LoadFormIcon(this);
         }
 
@@ -32,7 +34,15 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     return false;
                 }
 
-                return true;
+                var model = new RptDiscountsModel()
+                {
+                    Id = uc.rptDiscountId,
+                    Code = uc.txtCode.Text.Trim(),
+                    Description = uc.txtDescription.Text.Trim(),
+                    Rate = uc.nudRate.Value
+                };
+
+                return Factory.rptDiscountRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -41,9 +51,19 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             return false;
         }
 
+        private void LoadRecord() 
+        {
+            var dictRptDiscounts = Factory.rptDiscountRepository().GetRecordByID(uc.rptDiscountId);
+
+            uc.txtCode.Text = dictRptDiscounts["code"];
+            uc.txtDescription.Text = dictRptDiscounts["description"];
+            uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
+        }
+
         private void frmEditRptDiscounts_Load(object sender, EventArgs e)
         {
             uc.isEdit = true;
+            LoadRecord();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -51,6 +71,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             if (Save())
             {
                 Helper.MessageBoxSuccess("Discount has been updated.");
+                _frmRptDiscounts.LoadDiscounts();
                 Close();
             }
         }
