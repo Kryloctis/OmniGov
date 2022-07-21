@@ -98,7 +98,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@code", DbType.String, entity.Code},
-                new object[] { "@desrciption",DbType.String, entity.Description},
+                new object[] { "@description",DbType.String, entity.Description},
                 new object[] { "@rate", DbType.Decimal, entity.Rate}
             };
 
@@ -112,7 +112,7 @@ namespace ACC.Data
              {
                 new object[] { "@id",DbType.Int32, entity.Id},
                 new object[] { "@code", DbType.String, entity.Code},
-                new object[] { "@desrciption",DbType.String, entity.Description},
+                new object[] { "@description", DbType.String, entity.Description},
                 new object[] { "@rate", DbType.Decimal, entity.Rate}
              };
 

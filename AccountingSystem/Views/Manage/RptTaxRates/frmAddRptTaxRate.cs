@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +32,14 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     return false;
                 }
 
+                var model = new RptTaxRatesModel()
+                {
+                    Code = uc.txtCode.Text.Trim(),
+                    Description = uc.txtDescription.Text.Trim(),
+                    Rate = uc.nudRate.Value
+                };
+
+                return Factory.rptTaxRatesRepository().Insert(model);
             }
             catch (Exception ex)
             {

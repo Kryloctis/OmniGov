@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,11 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void LoadRecord() 
         {
+            var dictTaxRates = Factory.rptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
 
+            uc.txtCode.Text = dictTaxRates["code"];
+            uc.txtDescription.Text = dictTaxRates["description"];
+            uc.nudRate.Value = Convert.ToDecimal(dictTaxRates["rate"]);
         }
 
         private bool Save() 
@@ -38,6 +43,15 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     return false;
                 }
 
+                var model = new RptTaxRatesModel()
+                {
+                    Id = uc.rptTaxRatesId,
+                    Code = uc.txtCode.Text.Trim(),
+                    Description = uc.txtDescription.Text.Trim(),
+                    Rate = uc.nudRate.Value
+                };
+
+                return Factory.rptTaxRatesRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -54,6 +68,12 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                 _frmRptTaxRates.LoadTaxRates();
                 Close();
             }
+        }
+
+        private void frmEditRptTaxRates_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = true;
+            LoadRecord();
         }
     }
 }

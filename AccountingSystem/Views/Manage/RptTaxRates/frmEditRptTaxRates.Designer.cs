@@ -79,9 +79,11 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             // 
             // frmEditRptTaxRates
             // 
+            this.AcceptButton = this.btnUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(393, 160);
             this.Controls.Add(this.ucRptTaxRates1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -92,6 +94,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit";
+            this.Load += new System.EventHandler(this.frmEditRptTaxRates_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
