@@ -49,14 +49,27 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             _ = new frmAddRptDiscount(this).ShowDialog();
         }
 
+        private void ShowEditRptDiscounts() 
+        {
+            int rowIndex = dataGridView1.CurrentCell.RowIndex;
+            int rptDiscountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+
+            _ = new frmEditRptDiscounts(rptDiscountId, this).ShowDialog();
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmEditRptDiscounts(this).ShowDialog();
+            ShowEditRptDiscounts();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadDiscounts();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace AccountingSystem
             dataGridView.Columns["code"].HeaderText = "Code";
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
+            dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
         }
 
         #endregion

@@ -59,7 +59,12 @@ namespace ACC.Data
                 if (reader.Rows.Count < 1)
                     return dict;
 
-                dict.Add("percentage", reader.Rows[0]["percentage"].ToString()); 
+                foreach (DataRow item in reader.Rows)
+                {
+                    dict.Add("code", item["code"].ToString());
+                    dict.Add("description", item["description"].ToString());
+                    dict.Add("rate", item["rate"].ToString());
+                }
             }
 
             return dict;
