@@ -54,6 +54,8 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             this.nudRate.Name = "nudRate";
             this.nudRate.Size = new System.Drawing.Size(281, 23);
             this.nudRate.TabIndex = 8;
+            this.nudRate.Validating += new System.ComponentModel.CancelEventHandler(this.nudRate_Validating);
+            this.nudRate.Validated += new System.EventHandler(this.nudRate_Validated);
             // 
             // txtDescription
             // 
@@ -63,6 +65,8 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(281, 58);
             this.txtDescription.TabIndex = 7;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // txtCode
             // 
@@ -71,6 +75,8 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(281, 23);
             this.txtCode.TabIndex = 3;
+            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
+            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // label3
             // 
