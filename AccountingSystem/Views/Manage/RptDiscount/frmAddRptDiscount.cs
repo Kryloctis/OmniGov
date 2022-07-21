@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,7 +37,15 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
                 }
-                return true;
+
+                var model = new RptDiscountsModel()
+                {
+                    Code = uc.txtCode.Text.Trim(),
+                    Description = uc.txtDescription.Text.Trim(),
+                    Rate = uc.nudRate.Value
+                };
+
+                return Factory.rptDiscountRepository().Insert(model);
             }
             catch (Exception ex)
             {

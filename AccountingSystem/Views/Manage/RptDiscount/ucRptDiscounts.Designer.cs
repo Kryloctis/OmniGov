@@ -44,45 +44,47 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 6);
+            this.label1.Location = new System.Drawing.Point(2, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 20);
+            this.label1.Size = new System.Drawing.Size(35, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Code";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 39);
+            this.label2.Location = new System.Drawing.Point(2, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 20);
+            this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Description";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 120);
+            this.label3.Location = new System.Drawing.Point(2, 90);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 20);
+            this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Rate";
+            this.label3.Text = "Rate (%)";
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(93, 3);
+            this.txtCode.Location = new System.Drawing.Point(81, 2);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(321, 27);
+            this.txtCode.Size = new System.Drawing.Size(281, 23);
             this.txtCode.TabIndex = 0;
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(93, 36);
+            this.txtDescription.Location = new System.Drawing.Point(81, 27);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(321, 76);
+            this.txtDescription.Size = new System.Drawing.Size(281, 58);
             this.txtDescription.TabIndex = 1;
             this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
             this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
@@ -95,9 +97,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             0,
             0,
             65536});
-            this.nudRate.Location = new System.Drawing.Point(93, 118);
+            this.nudRate.Location = new System.Drawing.Point(81, 88);
+            this.nudRate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudRate.Name = "nudRate";
-            this.nudRate.Size = new System.Drawing.Size(321, 27);
+            this.nudRate.Size = new System.Drawing.Size(281, 23);
             this.nudRate.TabIndex = 2;
             this.nudRate.Validating += new System.ComponentModel.CancelEventHandler(this.nudRate_Validating);
             this.nudRate.Validated += new System.EventHandler(this.nudRate_Validated);
@@ -109,7 +112,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             // ucRptDiscounts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.nudRate);
             this.Controls.Add(this.txtDescription);
@@ -117,8 +120,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRptDiscounts";
-            this.Size = new System.Drawing.Size(436, 151);
+            this.Size = new System.Drawing.Size(382, 113);
             ((System.ComponentModel.ISupportInitialize)(this.nudRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
