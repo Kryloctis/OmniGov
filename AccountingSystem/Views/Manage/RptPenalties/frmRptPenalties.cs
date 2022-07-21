@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmRptAddPenalty(this).ShowDialog();
+            _ = new frmAddRptPenalty(this).ShowDialog();
         }
 
         private void ShowEditForm()

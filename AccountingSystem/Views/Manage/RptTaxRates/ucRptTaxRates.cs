@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         internal int rptTaxRatesId;
         internal bool isEdit = false;
 
-        public ucRptTaxRates(frmRptTaxRates frmRptTaxRates)
+        public ucRptTaxRates()
         {
             InitializeComponent();
         }

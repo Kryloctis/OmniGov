@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
 {
-    public partial class frmRptAddPenalty : Form
+    public partial class frmAddRptPenalty : Form
     {
         private ucRptPenalties uc;
         private readonly frmRptPenalties _frmRptPenalties;
-        public frmRptAddPenalty(frmRptPenalties frmRptPenalties)
+        public frmAddRptPenalty(frmRptPenalties frmRptPenalties)
         {
             InitializeComponent();
             uc = ucRptPenalties1;

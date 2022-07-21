@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             Helper.LoadFormIcon(this);
         }
 
-        private void LoadTaxRates() 
+        internal void LoadTaxRates() 
         {
 
         }
