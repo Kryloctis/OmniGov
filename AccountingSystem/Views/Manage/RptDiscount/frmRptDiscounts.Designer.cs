@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.btnSearch.Location = new System.Drawing.Point(648, 10);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(82, 22);
+            this.btnSearch.Size = new System.Drawing.Size(82, 25);
             this.btnSearch.TabIndex = 8;
             this.btnSearch.Text = "Search";
             this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
