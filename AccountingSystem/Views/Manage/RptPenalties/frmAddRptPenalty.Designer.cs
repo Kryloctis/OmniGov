@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.RptPenalties
 {
-    partial class frmRptAddPenalty
+    partial class frmAddRptPenalty
     {
         /// <summary>
         /// Required designer variable.

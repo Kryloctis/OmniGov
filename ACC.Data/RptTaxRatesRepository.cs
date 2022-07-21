@@ -8,11 +8,11 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptPenaltiesRepository : IRptPenaltiesRepository
+    public class RptTaxRatesRepository : IRptTaxRatesRepository
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
-        private readonly string tableName = "rpt_penalties";
-        public RptPenaltiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        private readonly string tableName = "rpt_tax_rates";
+        public RptTaxRatesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
@@ -22,15 +22,15 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<RptPenaltiesModel> entityList)
+        public bool Delete(List<RptTaxRatesModel> entityList)
         {
-            using (var scope = new TransactionScope())
+            using (var scope = new TransactionScope()) 
             {
                 foreach (var entity in entityList)
                 {
                     var parameters = new object[][]
                     {
-                        new object[] { @"id", DbType.Int32, entity.Id}
+                        new object[] { "@id", DbType.Int32, entity.Id}
                     };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
@@ -58,7 +58,7 @@ namespace ACC.Data
                 if (items.Rows.Count < 1)
                     return dict;
 
-                foreach (DataRow item in items.Rows)
+                foreach(DataRow item in items.Rows)
                 {
                     dict.Add("code", item["code"].ToString());
                     dict.Add("description", item["description"].ToString());
@@ -80,7 +80,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@searchText", DbType.String, $"%{searchText}%"}
+                new object[] {"@searchText", DbType.String, $"%{searchText}%"}
             };
 
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @searchText OR description LIKE @searchText";
@@ -93,12 +93,12 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RptPenaltiesModel entity)
+        public bool Insert(RptTaxRatesModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] { "@code", DbType.String, entity.Code},
-                new object[] { "@description", DbType.String, entity.Description},
+                new object[] { "@description",DbType.String, entity.Description},
                 new object[] { "@rate", DbType.Decimal, entity.Rate}
             };
 
@@ -106,15 +106,15 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(RptPenaltiesModel entity)
+        public bool Update(RptTaxRatesModel entity)
         {
             var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, entity.Id},
+             {
+                new object[] { "@id",DbType.Int32, entity.Id},
                 new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@description", DbType.String, entity.Description},
                 new object[] { "@rate", DbType.Decimal, entity.Rate}
-            };
+             };
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);

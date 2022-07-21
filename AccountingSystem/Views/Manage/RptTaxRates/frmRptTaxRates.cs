@@ -9,12 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Manage.RptPenalties
+namespace AccountingSystem.Views.Manage.RptTaxRates
 {
-    public partial class frmRptPenalties : Form
+    public partial class frmRptTaxRates : Form
     {
         private readonly MainForm _mainForm;
-        public frmRptPenalties(MainForm mainForm)
+        public frmRptTaxRates(MainForm mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
@@ -28,19 +28,19 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             lblRecordCount.Text = recordCount.ToString();
         }
 
-        internal void LoadPenalties() 
+        internal void LoadTaxRates() 
         {
             string searchText = txtSearch.Text.Trim();
 
             if (searchText.Length < 2)
             {
-                var dt = Factory.rptPenaltiesRepository().GetRecords();
-                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
+                var dt = Factory.rptTaxRatesRepository().GetRecords();
+                HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dt);
             }
             else
             {
-                var dt = Factory.rptPenaltiesRepository().GetRecordsBySearch(searchText);
-                HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
+                var dt = Factory.rptTaxRatesRepository().GetRecordsBySearch(searchText);
+                HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dt);
             }
 
             UpdateRecordCount(dataGridView1);
@@ -48,15 +48,22 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRptPenalty(this).ShowDialog();
+            _ = new frmAddRptTaxRate(this).ShowDialog();
         }
 
-        private void ShowEditForm()
+        private void ShowEditForm() 
         {
-            int rowIndex = dataGridView1.CurrentCell.RowIndex;
-            int penaltiesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+            try
+            {
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                int rptTaxRatesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmEditRptPenalties(penaltiesId, this).ShowDialog();
+                _ = new frmEditRptTaxRates(rptTaxRatesId, this).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -64,26 +71,26 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             ShowEditForm();
         }
 
-        private bool Delete(out int deletedCount) 
+        private bool Delete(out int deletedCount)
         {
             try
             {
-                var rptPenalitiesModelList = new List<RptPenaltiesModel>();
+                var rptTaxRatesModelList = new List<RptTaxRatesModel>();
                 int rowCount = dataGridView1.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount)) 
+                if (Helper.MessageBoxConfirmDelete(rowCount))
                 {
                     foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                     {
                         int penaltiesId = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new RptPenaltiesModel() { Id = penaltiesId };
-                        rptPenalitiesModelList.Add(model);
+                        var model = new RptTaxRatesModel() { Id = penaltiesId };
+                        rptTaxRatesModelList.Add(model);
                     }
 
                     deletedCount = rowCount;
-                    return Factory.rptPenaltiesRepository().Delete(rptPenalitiesModelList);
+                    return Factory.rptTaxRatesRepository().Delete(rptTaxRatesModelList);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -99,31 +106,20 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             int deletedRecordCount;
 
             if (Delete(out deletedRecordCount))
-            { 
+            {
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadPenalties();
+                LoadTaxRates();
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadTaxRates();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private void frmRptPenalties_Load(object sender, EventArgs e)
-        {
-            LoadPenalties();
-            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadPenalties();
-        }
-
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadPenalties();
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
@@ -132,6 +128,12 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             {
                 contextMenuStrip1.Show(Cursor.Position);
             }
+        }
+
+        private void frmRptTaxRates_Load(object sender, EventArgs e)
+        {
+            LoadTaxRates();
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
     }
 }

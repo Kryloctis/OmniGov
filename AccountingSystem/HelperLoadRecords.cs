@@ -9,6 +9,21 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region RPT Tax Rates
+
+        public static void TaxRatesDatagridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["description"].HeaderText = "Description";
+            dataGridView.Columns["rate"].HeaderText = "Rate";
+            dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+        }
+
+        #endregion
+
         #region RPT Penalties
 
         public static void PenaltiesDatagridView(DataGridView dataGridView, DataTable dataTable)
