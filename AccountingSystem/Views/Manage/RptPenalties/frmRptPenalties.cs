@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             Helper.DatagridDefaultStyle(dataGridView1, true);
         }
 
-        private void LoadPenalties() 
+        internal void LoadPenalties() 
         {
 
         }
