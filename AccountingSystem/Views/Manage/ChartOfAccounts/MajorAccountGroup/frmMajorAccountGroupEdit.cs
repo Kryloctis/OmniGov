@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             try
             {
                 var uc = ucMajorAccountGroup1;
-                var majorAccountGroupRepository = Factory.MajorAccountGroupRepository();
+                var majorAccountGroupRepository = AccFactory.MajorAccountGroupRepository();
                 Dictionary<string, string> data = majorAccountGroupRepository.GetRecordByID(uc.majorAccountGroupId);
 
                 uc.cmbAccountGroup.SelectedValue = data["account_group_id"];
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
                     MajorAccountGroupName = uc.txtName.Text.Trim()
                 };
 
-                return Factory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
+                return AccFactory.MajorAccountGroupRepository().Update(majorAccountGroupModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

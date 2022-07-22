@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 epCollectingDisbursing.GetError(cmbCollectingDisbursingOfficer)
             };
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void LoadFunds()
         {
-            var funds = Factory.FundsRepository().GetRecords();
+            var funds = AccFactory.FundsRepository().GetRecords();
 
             foreach (DataRow fund in funds.Rows)
             {
@@ -130,7 +130,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal void LoadJournals()
         {
             string CheckedJournal = "General Journal";
-            var journals = Factory.JournalsRepository().GetRecords();
+            var journals = AccFactory.JournalsRepository().GetRecords();
 
             foreach (DataRow journal in journals.Rows)
             {
@@ -161,13 +161,13 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void LoadCollectingOfficer()
         {
-            var dtCollectingOfficer = Factory.CollectingOfficerRepository().GetRecords();
+            var dtCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecords();
             HelperLoadRecords.CollectingOfficerComboBox(dtCollectingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
         }
 
         internal void LoadDisbursingOfficer()
         {
-            var dtDisbursingOfficer = Factory.DisbursingOfficerRepository().GetRecords();
+            var dtDisbursingOfficer = AccFactory.DisbursingOfficerRepository().GetRecords();
             HelperLoadRecords.DisbursingOfficerComboBox(dtDisbursingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
         }
 
@@ -181,7 +181,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void GenerateJEVNumber()
         {
-            var fund = Factory.FundsRepository().GetRecordByID(fundId);
+            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
             string fundCode = fund["fund_code"];
 
@@ -417,7 +417,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                var jev = Factory.JEVRepository().GetLastJevNoSeries(fundId);
+                var jev = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
                 return jev.ToString();
             }
             catch (Exception ex)
@@ -551,9 +551,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             string jevNo = txtJEVNo.Text;
             bool jevNoExist;
             if (jevId == 0)
-                jevNoExist = Factory.JEVRepository().JevNumberExistBy_JevNo_FundId_Year(jevNo, fundId, year);
+                jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevNo_FundId_Year(jevNo, fundId, year);
             else
-                jevNoExist = Factory.JEVRepository().JevNumberExistBy_JevId_JevNo_FundId_Year(jevId, jevNo, fundId, year);
+                jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevId_JevNo_FundId_Year(jevId, jevNo, fundId, year);
 
             if (jevNoExist)
             {

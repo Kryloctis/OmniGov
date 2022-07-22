@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 }
 
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxBudgetAppropriations.SelectedValue);
-                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
                 string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
                 string accountName = $"{budgetAppropriationsDict["general_ledger_accounts_name"]} {remarks}";

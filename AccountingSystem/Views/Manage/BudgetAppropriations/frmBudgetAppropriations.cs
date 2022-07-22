@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 nudYear.Tag
             };
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ShowRecordTimeStamp(DataGridView dataGridView)
@@ -107,10 +107,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             try
             {
-                var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+                var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClass, "allotment_code", "id");
 
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.BudgetAppropriationsTypeOfFundsCombobox(dtFunds, cmbxFunds, "fund_name", "id");
 
                 LoadFPP();
@@ -267,7 +267,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                             }
                         }
 
-                        _ = Factory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
+                        _ = AccFactory.BudgetAppropriationsRepository().Delete(budgetAppropriationsModelList);
                         LoadBudgetAppropriationRecords();
                     }
                 }
@@ -315,9 +315,9 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
             foreach (DataRow item in dtFPP.Rows)
             {

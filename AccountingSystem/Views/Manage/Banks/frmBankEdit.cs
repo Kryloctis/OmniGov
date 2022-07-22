@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Banks
         { 
             try
             {
-                var banksRepository = Factory.BanksRepository();
+                var banksRepository = AccFactory.BanksRepository();
                 var bankData = banksRepository.GetRecordByID(uc.bankId);
                 uc.txtacode.Text = bankData["account_no"];
                 uc.txtbankname.Text = bankData["bank_name"];
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Banks
                     AccountNo = uc.txtacode.Text.Trim(),
                     BankName = uc.txtbankname.Text.Trim()
                 };
-                var banksrepository = Factory.BanksRepository();
+                var banksrepository = AccFactory.BanksRepository();
                 return banksrepository.Update(banksModel);
               
             }

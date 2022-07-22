@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         internal void LoadBudgetRealignments()
         {
-            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetBudgetRealignmentByAppropriationId(int.Parse(budgetAppropriationId));
+            var dtBudgetRealignment = AccFactory.BudgetRealignmentRepository().GetBudgetRealignmentByAppropriationId(int.Parse(budgetAppropriationId));
             HelperLoadRecords.BudgetRealignmentDatagridView(dtBudgetRealignment, dgRealignment);
 
             TotalRealignmentDisplay();
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private  bool BudgetHasObligations()
         {
-            var hasObligation = Factory.ObligationAccountRepository().CheckObligationRequestExistByBudgetAppropriationId(Convert.ToInt32(budgetAppropriationId));
+            var hasObligation = AccFactory.ObligationAccountRepository().CheckObligationRequestExistByBudgetAppropriationId(Convert.ToInt32(budgetAppropriationId));
 
             return hasObligation;
         }
@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                             }
                         }
 
-                        _ = Factory.BudgetRealignmentRepository().Delete(budgetRealignmentModelList);
+                        _ = AccFactory.BudgetRealignmentRepository().Delete(budgetRealignmentModelList);
                         LoadBudgetRealignments();
                     }
                 }

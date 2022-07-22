@@ -79,9 +79,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
             return dtFPP;
         }
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var fundRepository = Factory.FundsRepository();
+                var fundRepository = AccFactory.FundsRepository();
                 var dtFund = fundRepository.GetRecords();
                 dtFund.Columns.Add("funddisplay", typeof(string), "fund_code + ' - ' + fund_name");
                 cmbfund.DataSource = dtFund;
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var fundRepository = Factory.BanksRepository();
+                var fundRepository = AccFactory.BanksRepository();
                 var dtBank = fundRepository.GetRecords();
                 dtBank.Columns.Add("bankdisplay", typeof(string), "bank_name + ' - ' + account_no");
                 cmbbank.DataSource = dtBank;
@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     if (table.Equals("functions"))
                     {
-                        var functionRepository = Factory.FunctionProgramProjectRepository();
+                        var functionRepository = AccFactory.FunctionProgramProjectRepository();
                         var functionData = functionRepository.GetRecordByID(Id);
                         functionId = Convert.ToInt16(functionData["id"]);
                         cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
@@ -215,7 +215,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             errorArray[5] = epNatureOfPayment.GetError(txtnature);
             errorArray[6] = epNetAmount.GetError(nudNetAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 

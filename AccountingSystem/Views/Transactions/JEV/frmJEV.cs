@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     if (uc.isEdit)
                     {
-                        string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId);
+                        string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
 
                         if (Helper.HasPermission("Transaction Edit Approved JEV") && jevStatus == "approved")
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             string jevNo = uc.txtJEVNo.Text.Trim();
             var jevModel = new JEVModel();
-            string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId).ToLower();
+            string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId).ToLower();
 
             if (isUpdate) jevModel.Id = uc.jevId;
 
@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             JEVModel jevModel = ParseJEVModelData(userId);
 
-            return Factory.JEVRepository().Insert(jevModel, JevAcountsModelList());
+            return AccFactory.JEVRepository().Insert(jevModel, JevAcountsModelList());
         }
 
         private bool InsertCheckDisbursementJournal(byte userId)
@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
-            return Factory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
+            return AccFactory.JEVRepository().InsertWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
         }
 
         private bool InsertCashReceiptsJournal(byte userId)
@@ -234,7 +234,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ORDate = uc.dtpCheckORPaid.Value
             };
 
-            return Factory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
+            return AccFactory.JEVRepository().InsertWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
         }
 
         private bool InsertADADisbursementsJournal(byte userId)
@@ -247,7 +247,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 DVNo = uc.txtDVRCDNo.Text.Trim()
             };
 
-            return Factory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
+            return AccFactory.JEVRepository().InsertWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
         }
 
         private bool InsertCashDisbursementsJournal(byte userId)
@@ -261,7 +261,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 DatePaid = uc.dtpCheckORPaid.Value
             };
 
-            return Factory.JEVRepository().InsertWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
+            return AccFactory.JEVRepository().InsertWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
         }
 
         private bool InsertGeneralJournal(byte userId)
@@ -275,7 +275,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ORNo = uc.txtRCIORADA.Text.Trim()
             };
 
-            return Factory.JEVRepository().InsertWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
+            return AccFactory.JEVRepository().InsertWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
         //UPDATE
@@ -283,7 +283,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             JEVModel jevModel = ParseJEVModelData(userId, true);
 
-            return Factory.JEVRepository().Update(jevModel, JevAcountsModelList());
+            return AccFactory.JEVRepository().Update(jevModel, JevAcountsModelList());
         }
 
         private bool UpdateCheckDisbursementJournal(byte userId)
@@ -299,7 +299,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 RCINo = uc.txtRCIORADA.Text.Trim()
             };
 
-            return Factory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
+            return AccFactory.JEVRepository().UpdateWithCheckDisbursement(jevModel, JevAcountsModelList(), checkDisbursementsModel);
         }
 
         private bool UpdateCashReceiptsJournal(byte userId)
@@ -315,7 +315,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ORDate = uc.dtpCheckORPaid.Value
             };
 
-            return Factory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
+            return AccFactory.JEVRepository().UpdateWithCashReceipts(jevModel, JevAcountsModelList(), cashReceiptsJournalModel);
         }
 
         private bool UpdateADADisbursementsJournal(byte userId)
@@ -329,7 +329,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 DVNo = uc.txtDVRCDNo.Text.Trim()
             };
 
-            return Factory.JEVRepository().UpdateWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
+            return AccFactory.JEVRepository().UpdateWithADADisbursements(jevModel, JevAcountsModelList(), aDADisbursementsJournalModel);
         }
 
         private bool UpdateCashDisbursementsJournal(byte userId)
@@ -344,7 +344,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 DatePaid = uc.dtpCheckORPaid.Value
             };
 
-            return Factory.JEVRepository().UpdateWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
+            return AccFactory.JEVRepository().UpdateWithCashDisbursements(jevModel, JevAcountsModelList(), cashDisbursementsJournalModel);
         }
 
         private bool UpdateGeneralJournal(byte userId)
@@ -360,7 +360,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             };
 
 
-            return Factory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
+            return AccFactory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
         private bool SetRemarks()
@@ -368,7 +368,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 int jevId = ucjev1.jevId;
-                var remarks = Factory.JEVRepository().SetRemarks(jevId, string.Empty);
+                var remarks = AccFactory.JEVRepository().SetRemarks(jevId, string.Empty);
 
                 return remarks;
             }
@@ -427,7 +427,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 try
                 {
-                    string jevStatus = Factory.JEVRepository().GetJevStatus(uc.jevId);
+                    string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
                     if (jevStatus.ToLower() == "disapproved")
                     {
@@ -470,22 +470,22 @@ namespace AccountingSystem.Views.Transactions.JEV
                         switch (uc.oldJournalId)
                         {
                             case 1:
-                                Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
+                                AccFactory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
                             case 2:
-                                Factory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
+                                AccFactory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
                             case 3:
                                 //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                                 break;
                             case 4:
-                                Factory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
+                                AccFactory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
                             case 5:
-                                Factory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
+                                AccFactory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
                             case 6:
@@ -535,7 +535,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     var jevModel = new JEVModel();
                     jevModel.Id = uc.jevId;
 
-                    var jevRepository = Factory.JEVRepository();
+                    var jevRepository = AccFactory.JEVRepository();
                     return jevRepository.Delete(jevModel);
                 }
             }
@@ -588,7 +588,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         ORNo = uc.txtRCIORADA.Text.Trim()
                     };
 
-                    Factory.GeneralJournalRepository().Insert(generalJournalModel);
+                    AccFactory.GeneralJournalRepository().Insert(generalJournalModel);
                     return;
                 case 2:
                     var cashReceiptsJournalModel = new CashReceiptsJournalModel()
@@ -600,7 +600,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         ORDate = uc.dtpCheckORPaid.Value
                     };
 
-                    Factory.CashReceiptsJournalRepository().Insert(cashReceiptsJournalModel);
+                    AccFactory.CashReceiptsJournalRepository().Insert(cashReceiptsJournalModel);
                     return;
                 case 3:
                     //DO NOTHING
@@ -614,7 +614,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         DatePaid = uc.dtpCheckORPaid.Value
                     };
 
-                    Factory.CashDisbursementsJournalRepository().Insert(cashDisbursementsJournalModel);
+                    AccFactory.CashDisbursementsJournalRepository().Insert(cashDisbursementsJournalModel);
                     return;
                 case 5:
 
@@ -627,7 +627,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         RCINo = uc.txtRCIORADA.Text.Trim()
                     };
 
-                    Factory.CheckDisbursementsJournalRepository().Insert(checkDisbursementsModel);
+                    AccFactory.CheckDisbursementsJournalRepository().Insert(checkDisbursementsModel);
                     return;
                 case 6:
                     //DO NOTHING
@@ -655,7 +655,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                string jevStatus = Factory.JEVRepository().GetJevStatus(jevId).ToLower();
+                string jevStatus = AccFactory.JEVRepository().GetJevStatus(jevId).ToLower();
 
                 switch (jevStatus)
                 {
@@ -726,7 +726,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (!FormValidations())
                     return false;
 
-                return Factory.JEVRepository().SetJEVStatus(uc.jevId, status);
+                return AccFactory.JEVRepository().SetJEVStatus(uc.jevId, status);
             }
             catch (Exception)
             {
@@ -816,7 +816,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadJevAccounts()
         {
-            DataTable dtJEV = Factory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
+            DataTable dtJEV = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(uc.jevId);
 
             foreach (DataRow row in dtJEV.Rows)
             {
@@ -886,7 +886,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadCheckDisbursementsDataIfExist(int jevId)
         {
-            var checkDisbursementsRepository = Factory.CheckDisbursementsJournalRepository();
+            var checkDisbursementsRepository = AccFactory.CheckDisbursementsJournalRepository();
 
             if (checkDisbursementsRepository.JevIdExist(jevId))
             {
@@ -901,7 +901,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadCashReceiptsDataIfExist(int jevId)
         {
-            var cashReceiptsJournalRepository = Factory.CashReceiptsJournalRepository();
+            var cashReceiptsJournalRepository = AccFactory.CashReceiptsJournalRepository();
 
             if (cashReceiptsJournalRepository.JevIdExist(jevId))
             {
@@ -916,7 +916,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadADADisbursementDataIfExist(int jevId)
         {
-            var aDADisbursementsJournalRepository = Factory.ADADisbursementsJournalRepository();
+            var aDADisbursementsJournalRepository = AccFactory.ADADisbursementsJournalRepository();
 
             if (aDADisbursementsJournalRepository.JevIdExist(jevId))
             {
@@ -929,7 +929,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadCashDisbursementDataIfExist(int jevId)
         {
-            var cashDisbursementsJournalRepository = Factory.CashDisbursementsJournalRepository();
+            var cashDisbursementsJournalRepository = AccFactory.CashDisbursementsJournalRepository();
 
             if (cashDisbursementsJournalRepository.JevIdExist(jevId))
             {
@@ -943,7 +943,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void LoadGeneralJournalDataIfExist(int jevId)
         {
-            var generalJournalRepository = Factory.GeneralJournalRepository();
+            var generalJournalRepository = AccFactory.GeneralJournalRepository();
 
             if (generalJournalRepository.JevIdExist(jevId))
             {
@@ -961,7 +961,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Cursor = Cursors.WaitCursor;
                 Enabled = true;
-                Dictionary<string, string> jevDict = Factory.JEVRepository().GetViewRecordByJEVId(jevId);
+                Dictionary<string, string> jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
 
                 LoadCheckDisbursementsDataIfExist(uc.jevId);
                 LoadCashReceiptsDataIfExist(uc.jevId);

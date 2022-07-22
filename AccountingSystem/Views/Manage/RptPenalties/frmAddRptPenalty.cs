@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     Rate = uc.nudRate.Value
                 };
 
-                return Factory.rptPenaltiesRepository().Insert(model);
+                return AccFactory.rptPenaltiesRepository().Insert(model);
             }
             catch (Exception ex)
             {

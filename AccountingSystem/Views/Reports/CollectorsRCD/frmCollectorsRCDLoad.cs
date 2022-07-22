@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 collectionTo
             };
 
-            dtPaymentCollection = Factory.PaymentCollectionRepository().GetRecordByLedger(parameter);
+            dtPaymentCollection = AccFactory.PaymentCollectionRepository().GetRecordByLedger(parameter);
             PaymentCollectionChecker();
 
             int collectionsCount = dtPaymentCollection.Rows.Count;
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             foreach (DataRow item in dtPaymentCollection.Rows)
             {
                 var paymentCollectionId = Convert.ToInt32(item["payment_collections_id"].ToString());
-                var isPaymentCollectionHasReport = Factory.CollectorReportRepository().HasGenerated(paymentCollectionId);
+                var isPaymentCollectionHasReport = AccFactory.CollectorReportRepository().HasGenerated(paymentCollectionId);
 
                 if (isPaymentCollectionHasReport)
                 {

@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                var dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+                var dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
                 HelperLoadRecords.AccountGroupDatagridView(dtAccountGroup, dgAccountGroup);
                 DisplayRecordCount(dgAccountGroup);
             }
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             try
             {
                 byte accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
-                var dtMajorAccountGroup = Factory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
+                var dtMajorAccountGroup = AccFactory.MajorAccountGroupRepository().GetViewRecordsByAccountGroupId(accountGroupId);
                 HelperLoadRecords.MajorAccountGroupDatagridView(dtMajorAccountGroup, dgMajorAccountGroup);
                 DisplayRecordCount(dgMajorAccountGroup);
             }
@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 if (!string.IsNullOrWhiteSpace(cmbMajorAccount.Text))
                 {
                     short majorAccountGroupId = short.Parse(cmbMajorAccount.SelectedValue.ToString());
-                    DataTable dtSubMajorAccountGroup = Factory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
+                    DataTable dtSubMajorAccountGroup = AccFactory.SubMajorAccountGroupRepository().GetViewRecordsByMajorAccountId(majorAccountGroupId);
                     HelperLoadRecords.SubMajorAccountGroupDatagridView(dtSubMajorAccountGroup, dgSubMajorAccount);
                     DisplayRecordCount(dgSubMajorAccount);
                 }
@@ -88,8 +88,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 int fundId = Convert.ToInt32(cmbFund.SelectedValue);
                 short year = Convert.ToInt16(cmbYear.Text);
 
-                decimal totalDebit = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
-                decimal totalCredit = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
+                decimal totalDebit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
+                decimal totalCredit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
 
                 txtTotalCredit.Text = totalCredit.ToString("N2");
                 txtTotalDebit.Text = totalDebit.ToString("N2");
@@ -109,9 +109,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             string searchText = txtSearch.Text.Trim();
 
             if (limitSize > 0)
-                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
+                dataTable = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search_Limited(accountGroupId, searchText, limitSize);
             else
-                dataTable = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
+                dataTable = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBy_AccountGroupId_Search(accountGroupId, searchText);
 
             dataTable.Columns.Add("Debit", typeof(decimal));
             dataTable.Columns.Add("Credit", typeof(decimal));
@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             foreach (DataRow item in dataTable.Rows)
             {
                 ushort generalLedgerId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
-                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                var beginningBalanceRepository = AccFactory.BeginningBalancesRepository();
                 decimal debit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1);
                 decimal credit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0);
 
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+                DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
                 HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
                 HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbxGenLedgAccountGroup, "account_group_name", "id");
             }
@@ -162,7 +162,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                DataTable dtAccountGroup = Factory.MajorAccountGroupRepository().GetRecords();
+                DataTable dtAccountGroup = AccFactory.MajorAccountGroupRepository().GetRecords();
                 HelperLoadRecords.MajorAccountGroupComboBox(dtAccountGroup, cmbMajorAccount, "maj_acc_group_name", "id");
             }
             catch (Exception ex)
@@ -173,7 +173,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void LoadFunds()
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
         }
 
@@ -199,7 +199,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                             accountGroupModelList.Add(new AccountGroupModel() { Id = accountGroupId });
                         }
 
-                        var accountGroupRepository = Factory.AccountGroupRepository();
+                        var accountGroupRepository = AccFactory.AccountGroupRepository();
                         _ = accountGroupRepository.Delete(accountGroupModelList);
                         LoadAccountGroup();
                     }
@@ -237,7 +237,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                             majorAccountGroupModelList.Add(new MajorAccountGroupModel() { Id = majorAccountGroupId });
                         }
 
-                        _ = Factory.MajorAccountGroupRepository().Delete(majorAccountGroupModelList);
+                        _ = AccFactory.MajorAccountGroupRepository().Delete(majorAccountGroupModelList);
                         LoadMajorAccountGroup();
                     }
                 }
@@ -369,14 +369,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 {
 
 
-                    bool hasSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
+                    bool hasSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
                     if (hasSubsidiary)
                     {
                         ShowSubsidiaryForm();
                         return;
                     }
 
-                    var generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+                    var generalLedgerBalanceExist = AccFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
 
                     if (generalLedgerBalanceExist)
                     {
@@ -457,7 +457,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
             short year = Convert.ToInt16(cmbYear.Text);
-            bool generalLedgerBalanceExist = Factory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+            bool generalLedgerBalanceExist = AccFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
 
             if (generalLedgerBalanceExist)
                 BtnSubsidiary.Enabled = false;

@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 dgReferences.Tag.ToString()
             };
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ValidatePermissions()
@@ -76,8 +76,8 @@ namespace AccountingSystem.Views.Manage.Signatories
                 foreach (DataGridViewRow row in dgReferences.Rows)
                 {
                     int referenceId = Convert.ToInt32(row.Cells["id"].Value);
-                    bool isReferenced = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
-                    bool isReferencedBySignatoryId = Factory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
+                    bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId);
+                    bool isReferencedBySignatoryId = AccFactory.SignatoriesHasReferencesRepository().ReferenceIdExist(referenceId, signatoriesId);
 
                     if (!isEdit ? isReferenced : isReferencedBySignatoryId)
                     {
@@ -102,12 +102,12 @@ namespace AccountingSystem.Views.Manage.Signatories
             HelperLoadRecords.ReferencesDatagridView(null, dgReferences);
             dgReferences.RowHeadersVisible = false;
             string office = cmbxOfficeFilter.Text.Trim();
-            var dtViewDocumentReferences = Factory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
+            var dtViewDocumentReferences = AccFactory.DocumentReferencesRepository().GetViewRecordsByOffice(office);
 
             foreach (DataRow row in dtViewDocumentReferences.Rows)
             {
                 int documentReferencesId = Convert.ToInt32(row["document_references_id"]);
-                bool isReferenced = Factory.SignatoriesHasReferencesRepository().IsReferencedBySignatory(documentReferencesId, signatoriesId);
+                bool isReferenced = AccFactory.SignatoriesHasReferencesRepository().IsReferencedBySignatory(documentReferencesId, signatoriesId);
 
                 var data = new object[]
                 {

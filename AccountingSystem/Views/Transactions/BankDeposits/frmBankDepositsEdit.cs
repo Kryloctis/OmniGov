@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             try
             {
                 var uc = ucBankDeposit1;
-                var bdRepository = Factory.BankDepositsRepository();
+                var bdRepository = AccFactory.BankDepositsRepository();
                 var bdData = bdRepository.GetRecordByID(uc.Id);
                 uc.cmbBank.SelectedValue = bdData["banks_id"];
                 uc.cmbFund.SelectedValue = bdData["funds_id"];
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     UpdatedBy = uc.userid,
                 };
 
-                var bdrepository = Factory.BankDepositsRepository();
+                var bdrepository = AccFactory.BankDepositsRepository();
                 return bdrepository.Update(bdModel);
             }
             catch (Exception ex)

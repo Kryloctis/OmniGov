@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             try
             {
-                var dtAmortizationRecords = Factory.AmortizationRepository().GetRecords();
+                var dtAmortizationRecords = AccFactory.AmortizationRepository().GetRecords();
                 HelperLoadRecords.AmortizationDataGridView(dtAmortizationRecords, dgAmortization);
             }
             catch (Exception ex)
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Manage.Amortization
                     amortizationModelList.Add(amortizationModel);
                 }
 
-                return Factory.AmortizationRepository().Delete(amortizationModelList);
+                return AccFactory.AmortizationRepository().Delete(amortizationModelList);
 
             }
             catch (Exception ex)

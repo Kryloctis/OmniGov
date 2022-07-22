@@ -1,13 +1,13 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+
 using System;
 
 namespace AccountingSystem
 {
-    public static class Factory
+    public static class AccFactory
     {
         private static MySqlGenericCommands mySqlGenericCommandsLFS = new MySqlGenericCommands("LocalFinanceInstance");
-        private static MySqlGenericCommands mySqlGenericCommandsRPT = new MySqlGenericCommands("RealPropertyTaxInstance");
         public static byte UserId = 2;
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
@@ -129,8 +129,6 @@ namespace AccountingSystem
         public static IJobOrder JobOrderRepository() => new JobOrderRepository(mySqlGenericCommandsLFS);
 
         public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => new CollectingOfficerHasJobOrdersRepository(mySqlGenericCommandsLFS);
-
-        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsRPT);
 
         public static IRptDiscountsRepository rptDiscountRepository() => new RptDiscountsRepository(mySqlGenericCommandsLFS);
 

@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
             DateTime dateRequestedCoverage = dtDateRequested.Value;
             string filterStatus = cmbxStatus.Text.Trim().ToLower();
-            var dtObligationRequests = Factory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
+            var dtObligationRequests = AccFactory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
 
 
             foreach (DataRow row in dtObligationRequests.Rows)
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var updatedAt = row["updated_at"].ToString();
                 var updatedById = row["updated_by_id"].ToString();
                 var updatedByFullName = row["updated_by_full_name"].ToString();
-                string totalObligations = Factory.ObligationRequestRepository().GetSumObligationsById(Convert.ToInt32(id)).ToString("N2");
+                string totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsById(Convert.ToInt32(id)).ToString("N2");
 
                 var item = new object[] { id, obligationNo, dateRequested, payee, explanation, referenceNo, createdAt, createdById, createdByFullName, updatedAt, updatedById, updatedByFullName, totalObligations, status };
 
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
             }
             catch (Exception ex)
@@ -105,7 +105,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+                var dtFunds = AccFactory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
             }
             catch (Exception ex)

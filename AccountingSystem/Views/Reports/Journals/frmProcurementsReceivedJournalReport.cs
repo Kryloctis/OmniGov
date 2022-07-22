@@ -26,8 +26,8 @@ namespace AccountingSystem.Views.Reports.Journals
         private DataTable ProcurementsReceivedJournalDataTable()
         {
             var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
-            var dtProcurementsReceivedFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtProcurementsReceivedFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -75,9 +75,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
             try
             {
-                DataTable dtCreditDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+                DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
 
-                DataTable dtDebitDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+                DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
 
                 //Debit default Accounts
@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 var lguDetails = Helper.LGUDetails();
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
-                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
                 var parameters = new[] {

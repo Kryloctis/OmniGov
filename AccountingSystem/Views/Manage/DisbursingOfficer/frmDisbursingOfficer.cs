@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             try
             {
-                var dtDisbursingOfficers = Factory.DisbursingOfficerRepository().GetRecords();
+                var dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecords();
 
                 foreach (DataRow row in dtDisbursingOfficers.Rows)
                 {
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                             modelList.Add(new DisbursingOfficerModel() { Id = disbursingOfficerId });
                         }
 
-                        _ = Factory.DisbursingOfficerRepository().Delete(modelList);
+                        _ = AccFactory.DisbursingOfficerRepository().Delete(modelList);
                         LoadRecords();
                     }
                 }

@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var paymentCollectionRepository = Factory.PaymentCollectionRepository();
+                var paymentCollectionRepository = AccFactory.PaymentCollectionRepository();
                 var paymentCollectionDict = paymentCollectionRepository.GetRecordByID(_uc.paymentCollectionId);
 
                 var regularCollectingOfficerId = paymentCollectionDict["collecting_officers_id"];
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     UpdatedBy =_uc.userId,
                 };
 
-                var paymentcollectionRepo = Factory.PaymentCollectionRepository();
+                var paymentcollectionRepo = AccFactory.PaymentCollectionRepository();
 
                 if (paymentcollectionRepo.Update(paymentCollectionModel))
                     return true;            
@@ -155,7 +155,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 };
 
 
-                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
 
                 bool insertSuccess = paymentCollectionRepo.Update(paymentCollectionModel);
 

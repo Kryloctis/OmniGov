@@ -25,8 +25,8 @@ namespace AccountingSystem.Views.Reports.Journals
         private DataTable DataTableGeneralJournal()
         {
             var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
-            var dtGeneralJournalFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private static void AddExplanationRow(dsLFS.dtGeneralJournalDataTable dtGeneralJournal, string jevNo, ref string particulars, int jevId, ref byte i, DataRow item)
         {
-            var countJevAccounts = Factory.JEVAccountsRepository().CountByJevId(jevId);
+            var countJevAccounts = AccFactory.JEVAccountsRepository().CountByJevId(jevId);
             if (i == countJevAccounts)
             {
                 particulars = $"          {item["explanation"]}";
@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
                     new ReportParameter("paramDate", date.ToString()),

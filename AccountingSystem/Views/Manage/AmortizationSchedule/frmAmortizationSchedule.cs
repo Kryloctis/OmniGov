@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.Amortization
 
         internal void LoadRecords() 
         {
-            var dtAmortizationSheduleRecords = Factory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
+            var dtAmortizationSheduleRecords = AccFactory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
 
             HelperLoadRecords.DatagridViewAmortizationSchedule(dtAmortizationSheduleRecords, amortizationTerm, dgAmortizationSched);
         }
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Manage.Amortization
                     amortizationScheduleModelList.Add(amortizationScheduleModel);
                 }
 
-                return Factory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
+                return AccFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
 
             }
             catch (Exception ex)

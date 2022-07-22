@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             try
             {
-                var repository = Factory.CollectingOfficerRepository();
+                var repository = AccFactory.CollectingOfficerRepository();
                 var dt = repository.GetRecords();
 
                 foreach (DataRow row in dt.Rows)
@@ -68,9 +68,9 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 {
                     if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
                     {
-                        var issuedReceiptRepo = Factory.ReceiptsIssuedRepository();
+                        var issuedReceiptRepo = AccFactory.ReceiptsIssuedRepository();
 
-                        var repository = Factory.CollectingOfficerRepository();
+                        var repository = AccFactory.CollectingOfficerRepository();
                         var modelList = new List<CollectingOfficerModel>();
                         foreach (DataGridViewRow row in dgCollectingOfficer.SelectedRows)
                         {
@@ -99,12 +99,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             byte[] columnIndexTimestamp = { 3, 4 };
 
 
-            lblJOCount.Text = Factory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
+            lblJOCount.Text = AccFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
 
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgCollectingOfficer, btnEdit, btnDelete);
 
-            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
 
             btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
             btnJobOrder.Enabled = selectedRowCount == 1;
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             {
                 try
                 {
-                    var repository = Factory.CollectingOfficerRepository();
+                    var repository = AccFactory.CollectingOfficerRepository();
                     var dt = repository.GetRecordsBySearch(txtsearch.Text.Trim());
                     HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
 

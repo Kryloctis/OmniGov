@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
                 if (!string.IsNullOrEmpty(userType))
                 {
                     if (userType.Equals("collector")) {
-                        var userRepository = Factory.UsersRepository();
+                        var userRepository = AccFactory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
 
                         foreach (DataRow row in dtusers.Rows)
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
                     if (userType.Equals("disburser"))
                     {
-                        var userRepository = Factory.UsersRepository();
+                        var userRepository = AccFactory.UsersRepository();
                         var dtusers = userRepository.GetLinksDisbursingOfficers();
 
                         foreach (DataRow row in dtusers.Rows)
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
                     if (userType.Equals("JO"))
                     {
-                        var userRepository = Factory.UsersRepository();
+                        var userRepository = AccFactory.UsersRepository();
                         var dtusers = userRepository.GetLinksJOCollectingOfficers();
 
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);

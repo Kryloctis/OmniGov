@@ -25,7 +25,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
             {
                 int ucBudgetAppropriationId = uc.budgetAppropriationId;
 
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
+                var selectedBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetRecordByID(ucBudgetAppropriationId);
 
                 int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
                 int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
@@ -95,7 +95,7 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                     Remarks = uc.txtRemarks.Text.Trim()
                 };
 
-                return Factory.BudgetAppropriationsRepository().Update(budgetAppModel);
+                return AccFactory.BudgetAppropriationsRepository().Update(budgetAppModel);
             }
             catch (Exception ex)
             {

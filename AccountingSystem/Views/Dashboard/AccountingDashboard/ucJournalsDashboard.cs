@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
 
         private void LoadFunds()
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
         }
 
@@ -41,12 +41,12 @@ namespace AccountingSystem.Views.Dashboard.AccountingDashboard
             string fundName = cmbxFunds.Text.Trim();
             int month = dateTimePicker1.Value.Month;
             int year = dateTimePicker1.Value.Year;
-            int generalJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "General Journal");
-            int cashReceiptsJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Receipts Journal");
-            int procurementReceivedJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "Procurement Received Journal");
-            int cashDisbursementJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Disbursements Journal");
-            int checkDisbursementJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "Check Disbursements Journal");
-            int adaDisbursementJournalCount = Factory.JEVRepository().JevCounterByJournal(fundName, month, year, "Authority to Debit Account Disbursement Journal");
+            int generalJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "General Journal");
+            int cashReceiptsJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Receipts Journal");
+            int procurementReceivedJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Procurement Received Journal");
+            int cashDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Cash Disbursements Journal");
+            int checkDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Check Disbursements Journal");
+            int adaDisbursementJournalCount = AccFactory.JEVRepository().JevCounterByJournal(fundName, month, year, "Authority to Debit Account Disbursement Journal");
 
             lblGeneralJournalCount.Text = generalJournalCount.ToString();
             lblCashReceiptsJournalCount.Text = cashReceiptsJournalCount.ToString();

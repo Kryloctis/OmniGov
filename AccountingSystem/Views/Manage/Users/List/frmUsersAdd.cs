@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.Users.List
 
                 };
 
-                var usersRepository = Factory.UsersRepository();
+                var usersRepository = AccFactory.UsersRepository();
                 return usersRepository.Insert(userModel);
             }
             catch (Exception ex)

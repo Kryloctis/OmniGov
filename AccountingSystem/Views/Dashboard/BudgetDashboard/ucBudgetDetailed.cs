@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             var errorArray = new string[1];
 
             errorArray[0] = cmbxFPP.Tag.ToString();
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool isValidated()
@@ -49,14 +49,14 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
 
         internal void LoadFunds()
         {
-            cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbxFunds.DataSource = AccFactory.FundsRepository().GetRecords();
             cmbxFunds.DisplayMember = "fund_name";
             cmbxFunds.ValueMember = "id";
         }
 
         private void LoadAllotmentClasses()
         {
-            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+            var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
             HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbxAllotmentClasses, "allotment_code", "id");
         }
 
@@ -65,9 +65,9 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
             return dtFPP;
         }

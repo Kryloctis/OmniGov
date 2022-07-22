@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             errorArray[0] = epYear.GetError(dtpDateEntry);
             errorArray[1] = epAmount.GetError(nudAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         {
             try
             {
-                var generalLedgerAccount = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+                var generalLedgerAccount = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
                 txtAccountCode.Text = generalLedgerAccount["account_code"];
                 txtAccountName.Text = generalLedgerAccount["ledger_name"];
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         {
             if (subsidiaryLedgerId != 0)
             {
-                var subsidiaryDict = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
                 txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
         {
             if (!DesignMode)
             {
-                var dtFund = Factory.FundsRepository().GetRecordByID(fundId);
+                var dtFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 txtFunName.Text = dtFund["fund_name"];
                 txtYear.Text = year.ToString();
                 dtpDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));

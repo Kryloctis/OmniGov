@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                 errorProvider1.GetError(nudRate)
             };
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         #region Validations

@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     PermissionsModels = permissionModelList
                 };
 
-                return Factory.RolesRepository().Insert(roleModel);
+                return AccFactory.RolesRepository().Insert(roleModel);
             }
             catch (Exception ex)
             {

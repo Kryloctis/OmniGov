@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             errorArray[2] = epReferenceNumber.GetError(txtReferenceNumber);
             errorArray[3] = epAmount.GetError(nudAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         private void ucBD_Load(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                var bankRepository = Factory.BanksRepository();
+                var bankRepository = AccFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
                 dtBank.Columns.Add("bankdetails", typeof(string), "bank_name +'-'+account_no");
                 cmbBank.DataSource = dtBank;
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                var fundsRepository = Factory.FundsRepository();
+                var fundsRepository = AccFactory.FundsRepository();
                 var dtfunds = fundsRepository.GetRecords();
                 dtfunds.Columns.Add("funddetails", typeof(string), "fund_code +'-'+fund_name");
                 cmbFund.DataSource = dtfunds;

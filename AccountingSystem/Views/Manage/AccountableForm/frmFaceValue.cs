@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             {
                 if (accountableFormId != 0)
                 {
-                    var facevaluerepo = Factory.FaceValueRepository();
+                    var facevaluerepo = AccFactory.FaceValueRepository();
                     var dtFaceValue = facevaluerepo.GetRecordsByAccountableFormId(accountableFormId);
 
                     HelperLoadRecords.FaceValueDatagridView(dtFaceValue, dgfacevalue);
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 try
                 {
 
-                    var facevaluerepo = Factory.FaceValueRepository();
+                    var facevaluerepo = AccFactory.FaceValueRepository();
                     var faceval = facevaluerepo.GetRecordByID(Id);
                     faceValueId = int.Parse(faceval["id"]);
                     dtdate.Value = Convert.ToDateTime(faceval["date"]);
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 if (Helper.MessageBoxConfirmDelete(dgfacevalue.SelectedRows.Count))
                 {
                     var facemodel = new List<FaceValueModel>();
-                    var facevaluerepo = Factory.FaceValueRepository();
+                    var facevaluerepo = AccFactory.FaceValueRepository();
                     foreach (DataGridViewRow row in dgfacevalue.SelectedRows)
                     {
                         int fid = int.Parse(row.Cells[0].Value.ToString());
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     facedate = dtdate.Value,
                     facevalue = txtamount.Value
                 };
-                var facevaluerepo = Factory.FaceValueRepository();
+                var facevaluerepo = AccFactory.FaceValueRepository();
                 if (facevaluerepo.Insert(facemodel))
                     faceValueId = 0;
                 dtdate.Value = DateTime.Now;
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     facevalue = txtamount.Value,
                 };
 
-                var facevaluerepo = Factory.FaceValueRepository();
+                var facevaluerepo = AccFactory.FaceValueRepository();
                 if (facevaluerepo.Update(facemodel))
                     faceValueId = 0;
                 dtdate.Value = DateTime.Now;

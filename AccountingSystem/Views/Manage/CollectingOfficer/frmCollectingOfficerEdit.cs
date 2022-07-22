@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             try
             {
                 var uc = ucCollectingOfficer1;
-                var repository = Factory.CollectingOfficerRepository();
+                var repository = AccFactory.CollectingOfficerRepository();
                 var data = repository.GetRecordByID(uc.OfficerId);
 
                 uc.txtPrefix.Text = data["prefix"];
@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     UserId = _uc.UserId
                 };
 
-                var collectingrepository = Factory.CollectingOfficerRepository();
+                var collectingrepository = AccFactory.CollectingOfficerRepository();
                 return collectingrepository.Update(collectingmodel);
 
             }

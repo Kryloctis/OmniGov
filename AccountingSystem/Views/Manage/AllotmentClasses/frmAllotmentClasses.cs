@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             try
             {
-                var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
                 var dtAllotmentClasses = allotmentClassesRepository.GetRecords();
                 HelperLoadRecords.AllotmentClassesDatagridView(dtAllotmentClasses, dgAllotmentClasses);
 
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                             allotmentClassesModelList.Add(new AllotmentClassesModel() { Id = allotmentId });
                         }
 
-                        var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+                        var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
                         _ = allotmentClassesRepository.Delete(allotmentClassesModelList);
                         LoadRecords();
                     }

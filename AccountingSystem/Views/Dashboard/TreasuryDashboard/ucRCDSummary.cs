@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         internal void LoadFunds()
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
             DataRow dr = dtFunds.NewRow();
             dr["id"] = 0;
             dr["fund_name"] = "All";
@@ -51,10 +51,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var rcdApprovedCount = Factory.CollectorReportRepository().GetApprovedRCDCount(fundName, month, year);
-            var rcdPendingCount = Factory.CollectorReportRepository().GetPendingRCDCount(fundName, month, year);
-            var rcdDisapprovedCount = Factory.CollectorReportRepository().GetDisapprovedRCDCount(fundName, month, year);
-            var rcdCancelledCount = Factory.CollectorReportRepository().GetCancelledRCDCount(fundName, month, year);
+            var rcdApprovedCount = AccFactory.CollectorReportRepository().GetApprovedRCDCount(fundName, month, year);
+            var rcdPendingCount = AccFactory.CollectorReportRepository().GetPendingRCDCount(fundName, month, year);
+            var rcdDisapprovedCount = AccFactory.CollectorReportRepository().GetDisapprovedRCDCount(fundName, month, year);
+            var rcdCancelledCount = AccFactory.CollectorReportRepository().GetCancelledRCDCount(fundName, month, year);
             var rcdCount = (rcdApprovedCount + rcdPendingCount + rcdDisapprovedCount + rcdCancelledCount);
 
 
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         #region Bank Deposit Summary
         private void LoadBanksDepositsSummary()
         {
-            var bankDepositSummaryDT = Factory.BankDepositsRepository().GetBankDepositsSummary();
+            var bankDepositSummaryDT = AccFactory.BankDepositsRepository().GetBankDepositsSummary();
             HelperLoadRecords.BanksDepositsSummaryDatagridView(bankDepositSummaryDT, dgBankDeposit);
         }
 
@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void LoadColllectorsCollectionSummary()
         {
-            var collectorsCollectionDT = Factory.PaymentCollectionRepository().GetCollectionsPerCollector();
+            var collectorsCollectionDT = AccFactory.PaymentCollectionRepository().GetCollectionsPerCollector();
             HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
         }
 

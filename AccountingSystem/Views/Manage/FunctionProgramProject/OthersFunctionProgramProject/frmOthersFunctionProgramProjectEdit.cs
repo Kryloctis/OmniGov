@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             try
             {
                 var uc = ucOthersFunctionProgramProject1;
-                var dicOthersFPPRecord = Factory.SubFPPRepository().GetRecordByID(uc.othersFPPID);
+                var dicOthersFPPRecord = AccFactory.SubFPPRepository().GetRecordByID(uc.othersFPPID);
                 uc.txtCode.Text = dicOthersFPPRecord["others_fpp_code"];
                 uc.txtName.Text = dicOthersFPPRecord["name"];
             }
@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                     othersFPPName = uc.txtName.Text.Trim()
                 };
 
-                return Factory.SubFPPRepository().Update(othersFPPModel);
+                return AccFactory.SubFPPRepository().Update(othersFPPModel);
             }
             catch (Exception ex)
             {

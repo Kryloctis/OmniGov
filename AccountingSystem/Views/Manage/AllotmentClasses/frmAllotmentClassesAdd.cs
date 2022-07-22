@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
                 };
 
-                var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
                 return allotmentClassesRepository.Insert(allotmentModel);
             }
             catch (Exception ex)

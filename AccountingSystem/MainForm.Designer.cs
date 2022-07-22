@@ -1541,10 +1541,11 @@ namespace AccountingSystem
             // 
             // btnAssessmentPosting
             // 
+            this.btnAssessmentPosting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnAssessmentPosting.Image = global::AccountingSystem.Properties.Resources.document_project_pin_18px;
             this.btnAssessmentPosting.Location = new System.Drawing.Point(756, 3);
             this.btnAssessmentPosting.Name = "btnAssessmentPosting";
-            this.btnAssessmentPosting.Size = new System.Drawing.Size(146, 29);
+            this.btnAssessmentPosting.Size = new System.Drawing.Size(157, 29);
             this.btnAssessmentPosting.TabIndex = 1;
             this.btnAssessmentPosting.Text = "Assessment Posting";
             this.btnAssessmentPosting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1741,7 +1742,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem taxRateToolStripMenuItem;
-        private System.Windows.Forms.Button btnAssessmentPosting;
+        internal System.Windows.Forms.Button btnAssessmentPosting;
     }
 }
 

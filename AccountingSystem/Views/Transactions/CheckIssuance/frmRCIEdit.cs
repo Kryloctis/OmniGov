@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 frmObligations frmObligations = new(uc);
 
-                var rciObligationsRepo = Factory.RCIObligationsRepository();
+                var rciObligationsRepo = AccFactory.RCIObligationsRepository();
                 var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
 
                 foreach (DataRow row in dtRCIObligations.Rows)
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 frmDeductions frmDeductions = new(uc);
 
-                var rciDeductionRepo = Factory.RCIDeductionsRepository();
+                var rciDeductionRepo = AccFactory.RCIDeductionsRepository();
                 var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(uc.Id);
 
                 foreach (DataRow row in dtRCIDeductions.Rows)
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var rciRepository = Factory.RCIRepository();
+                var rciRepository = AccFactory.RCIRepository();
                 var rcidata = rciRepository.GetRecordByID(uc.Id);
 
                 uc.txtdvno.Text = rcidata["dv_no"];
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                     if (table.Equals("functions"))
                     {
-                        var functionreposity = Factory.FunctionProgramProjectRepository();
+                        var functionreposity = AccFactory.FunctionProgramProjectRepository();
                         var functiondata = functionreposity.GetRecordByID(Id);
                         uc.functionId = Id;
                         uc.cmbFPP.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void UpdateRCIObligation()
         {
-            var deleteResult = Factory.RCIObligationsRepository().DeleteRecordsByRCIId(uc.Id);
+            var deleteResult = AccFactory.RCIObligationsRepository().DeleteRecordsByRCIId(uc.Id);
        
             if (deleteResult)
             {
@@ -130,14 +130,14 @@ namespace AccountingSystem.Views.Transactions.RCI
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row[0].ToString();
-                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
                 }
             }
         }
 
         private void UpdateRCIDeductions()
         {
-            var deleteResult = Factory.RCIDeductionsRepository().DeleteRecordsByRCIId(uc.Id);
+            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(uc.Id);
 
             if (deleteResult)
             {
@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 {
                     string description = row[0].ToString();
                     decimal amount = Convert.ToDecimal(row[1].ToString());
-                    Factory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
+                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, description, amount);
                 }
             }
         }
@@ -176,7 +176,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
                 };
 
-                var rcirepository = Factory.RCIRepository();
+                var rcirepository = AccFactory.RCIRepository();
                 return rcirepository.Update(rciModel);
             }
             catch (Exception ex)

@@ -22,9 +22,9 @@ namespace AccountingSystem.Views.Manage.Users.List
             var dataTable = new DataTable();
 
             if (string.IsNullOrEmpty(searchkey))
-                dataTable = Factory.UsersRepository().GetViewRecordsByOffice(userOffice);
+                dataTable = AccFactory.UsersRepository().GetViewRecordsByOffice(userOffice);
             else
-                dataTable = Factory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
+                dataTable = AccFactory.UsersRepository().GetViewRecordsBySearch(userOffice, searchkey);
 
             dataTable.Columns.Add("user_full_name").SetOrdinal(7);
 
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.Users.List
                             usersModelList.Add(new UsersModel() { Id = userId });
                         }
 
-                        var usersRepository = Factory.UsersRepository();
+                        var usersRepository = AccFactory.UsersRepository();
                         _ = usersRepository.Delete(usersModelList);
                         LoadRecords();
                     }

@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
+                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsById(uc.allotmentReleaseId);
                 int fppId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["function_program_project_id"]);
                 string subFPPId = dtAllotmentRelease.Rows[0]["others_fpp_id"].ToString();
                 int fundId = Convert.ToInt32(dtAllotmentRelease.Rows[0]["funds_id"]);
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     DateIssued = uc.dtDateIssued.Value
                 };
 
-                return Factory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
+                return AccFactory.AllotmentReleaseRepository().Insert(allotmemtReleaseModel, AllotmentAccountModelList());
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 };
 
 
-                return Factory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
+                return AccFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
             }
             catch (Exception ex)
             {
@@ -211,7 +211,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             {
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
-                    return Factory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
+                    return AccFactory.AllotmentReleaseRepository().Delete(uc.allotmentReleaseId);
                 }
             }
             catch (MySqlException ex)

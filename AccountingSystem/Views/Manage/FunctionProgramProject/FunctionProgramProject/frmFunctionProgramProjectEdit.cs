@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         {
             try
             {
-                var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
+                var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
                 Dictionary<string, string> dicfunctionProgramProject = functionProgramProjectRepository.GetRecordByID(uc.FppID);
 
                 uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                     IsSpecial = uc.chckboxSpecial.Checked ? true : false
                 };
 
-                return Factory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
+                return AccFactory.FunctionProgramProjectRepository().Update(functionProgramProjectModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

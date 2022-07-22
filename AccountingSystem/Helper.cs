@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,7 +8,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        internal static byte UserId = Factory.UserId;
+        internal static byte UserId = AccFactory.UserId;
 
         public static void LoadFormIcon(Form form)
         {
@@ -144,7 +145,7 @@ namespace AccountingSystem
         {
             var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
 
-            dictSignatoriesReferencedDocument = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+            dictSignatoriesReferencedDocument = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
 
             if (dictSignatoriesReferencedDocument.Count < 1)
                 return dictSignatoriesReferencedDocument;
@@ -168,7 +169,7 @@ namespace AccountingSystem
             var dictUser = new Dictionary<string, dynamic>();
             try
             {
-                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
+                dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
 
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
@@ -191,7 +192,7 @@ namespace AccountingSystem
             try
             {
 
-                dictUser = Factory.UsersRepository().GetViewRecordById(UserId);
+                dictUser = AccFactory.UsersRepository().GetViewRecordById(UserId);
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
 
@@ -546,7 +547,7 @@ namespace AccountingSystem
         {
             try
             {
-                return Factory.UsersRepository().HasPermission(UserId, permissionName);
+                return AccFactory.UsersRepository().HasPermission(UserId, permissionName);
             }
             catch (Exception ex)
             {
@@ -574,13 +575,43 @@ namespace AccountingSystem
         {
             try
             {
-                var jobOrderRepo = Factory.JobOrderRepository();
+                var jobOrderRepo = AccFactory.JobOrderRepository();
                 return jobOrderRepo.IsUserJobOrder(userId);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        public static DataTable QuarterDataTable()
+        {
+            var dtQuarter = new DataTable();
+            dtQuarter.Columns.Add("id");
+            dtQuarter.Columns.Add("quarter");
+
+            DataRow row1 = dtQuarter.NewRow();
+            row1["id"] = 1;
+            row1["quarter"] = "1st";
+            dtQuarter.Rows.Add(row1);
+
+            DataRow row2 = dtQuarter.NewRow();
+            row2["id"] = 2;
+
+            row2["quarter"] = "2nd";
+            dtQuarter.Rows.Add(row2);
+
+            DataRow row3 = dtQuarter.NewRow();
+            row3["id"] = 3;
+            row3["quarter"] = "3rd";
+            dtQuarter.Rows.Add(row3);
+
+            DataRow row4 = dtQuarter.NewRow();
+            row4["id"] = 4;
+            row4["quarter"] = "4th";
+            dtQuarter.Rows.Add(row4);
+
+            return dtQuarter;
         }
     }
 }

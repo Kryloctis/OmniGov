@@ -34,12 +34,12 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
             if (searchText.Length < 2)
             {
-                var dt = Factory.rptTaxRatesRepository().GetRecords();
+                var dt = AccFactory.rptTaxRatesRepository().GetRecords();
                 HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dt);
             }
             else
             {
-                var dt = Factory.rptTaxRatesRepository().GetRecordsBySearch(searchText);
+                var dt = AccFactory.rptTaxRatesRepository().GetRecordsBySearch(searchText);
                 HelperLoadRecords.TaxRatesDatagridView(dataGridView1, dt);
             }
 
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     }
 
                     deletedCount = rowCount;
-                    return Factory.rptTaxRatesRepository().Delete(rptTaxRatesModelList);
+                    return AccFactory.rptTaxRatesRepository().Delete(rptTaxRatesModelList);
                 }
 
             }

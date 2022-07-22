@@ -48,8 +48,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 uc.dgObligationRequests.Rows.Clear();
 
-                var dictObligationRequest = Factory.ObligationRequestRepository().GetViewRecordById(uc.obligationRequestId);
-                var dtObligationRequest = Factory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
+                var dictObligationRequest = AccFactory.ObligationRequestRepository().GetViewRecordById(uc.obligationRequestId);
+                var dtObligationRequest = AccFactory.ObligationRequestRepository().GetViewRecordsById(uc.obligationRequestId);
 
                 int fppId = Convert.ToInt32(dictObligationRequest["function_program_project_id"]);
                 int fundId = Convert.ToInt32(dictObligationRequest["funds_id"]);
@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                return Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
+                return AccFactory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, status);
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+                string ObligationRequestStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
 
 
                 switch (ObligationRequestStatus.ToLower())
@@ -204,7 +204,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void CancelAction()
         {
-            var obligationStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+            var obligationStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
             string message = "Are you sure? Changes will not be saved.";
 
             void ResetForm()
@@ -256,7 +256,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 if (Helper.MessageBoxConfirmDelete(1))
                 {
-                    _ = Factory.ObligationRequestRepository().Delete(uc.obligationRequestId);
+                    _ = AccFactory.ObligationRequestRepository().Delete(uc.obligationRequestId);
                     uc.ResetForm();
                     ResetControls();
                     btnSave.Text = "&Save";
@@ -293,7 +293,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 }
 
                 message = "Obligation Request has been saved.";
-                return Factory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
+                return AccFactory.ObligationRequestRepository().Insert(obligationRequestModel, ObligationAccountsModelList());
             }
             catch (MySqlException ex)
             {
@@ -327,18 +327,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         UpdatedBy = Helper.UserId
                     };
 
-                    string ObligationRequestStatus = Factory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
+                    string ObligationRequestStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
 
                     if (ObligationRequestStatus.ToLower() == "disapproved")
                     {
-                        _ = Factory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, "pending");
+                        _ = AccFactory.ObligationRequestRepository().SetObligationRequestStatus(uc.obligationRequestId, "pending");
                         obligationRequestModel.DisapprovalMessage = string.Empty;
                         message = "Obligation request updated and will be send back to pending.";
                     }
                     else
                         message = "Obligation Request has been Updated";
 
-                    _ = Factory.ObligationRequestRepository().Update(obligationRequestModel, ObligationAccountsModelList());
+                    _ = AccFactory.ObligationRequestRepository().Update(obligationRequestModel, ObligationAccountsModelList());
 
                     scope.Complete();
                 }

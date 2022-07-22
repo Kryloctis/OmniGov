@@ -25,11 +25,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             if (string.IsNullOrEmpty(cmbAccount.Text))
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             }
             else
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
+                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbAccount.Text);
             }
 
             return dtAccounts;
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadFunds()
         {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbFunds.DataSource = AccFactory.FundsRepository().GetRecords();
             cmbFunds.ValueMember = "id";
             cmbFunds.DisplayMember = "fund_name";
         }
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             short year = Convert.ToInt16(cmbYear.Text);
 
             var dtGeneralLedger = new dsLFS.GeneralLedgerDataTable();
-            var dtGeneralLedgerFromDB = Factory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, year);
+            var dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, year);
 
             string particulars;
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
@@ -170,8 +170,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void BeginningBalanceRow(byte fundId, short year, ushort generalLedgerId, out string balanceDate, out string balanceDebit, out string balanceCredit, out string balance)
         {
             beginningBalance = 0;
-            var DebitBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1);
-            var CreditBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0);
+            var DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1);
+            var CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0);
 
             beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
             balance = beginningBalance.ToString();
@@ -181,7 +181,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             balanceDebit = debit.ToString();
             balanceCredit = debit.ToString();
 
-            var dateDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year);
+            var dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, generalLedgerId, year);
             balanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MM/dd/yyyy");
         }
 
@@ -197,7 +197,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 string balanceDate, balanceDebit, balanceCredit, balance;
                 BeginningBalanceRow(fundId, year, generalLedgerId, out balanceDate, out balanceDebit, out balanceCredit, out balance);
                 var lguDict = Helper.LGUDetails();
-                var generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+                var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 var fundName = cmbFunds.Text;
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\general-ledger.rdlc";
                 report.DataSources.Clear();

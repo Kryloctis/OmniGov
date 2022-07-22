@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
         private DataTable DataTableCash(string fund, string date)
         {
             var dtcash = new dsLFS.dtCashreportDataTable();
-            var dtdata = Factory.FundsRepository().GetRecordsPrintCashposition(date);
+            var dtdata = AccFactory.FundsRepository().GetRecordsPrintCashposition(date);
             if (dtdata.Rows.Count > 0)
             {
                 var rows = dtdata.Select($"fund LIKE '%{fund}%'");
@@ -93,13 +93,13 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                     }
                 }
 
-                var dictCertifiedCorrectSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Daily Cash Position Report");
+                var dictCertifiedCorrectSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Daily Cash Position Report");
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
 
-                var dictNotedSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Noted", "Daily Cash Position Report");
+                var dictNotedSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Noted", "Daily Cash Position Report");
                 string notedSignatory = string.Empty;
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);

@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
                     UserId = _uc.users_id
                 };
 
-                var repository = Factory.JobOrderRepository();
+                var repository = AccFactory.JobOrderRepository();
                 return repository.Insert(jobOrderModel);
             }
             catch (Exception)
@@ -99,8 +99,8 @@ namespace AccountingSystem.Views.Manage.JobOrders
             try
             {
                 var regularCollectingOfficerId = _frmJobOrder.collectingOfficerId;
-                var JOCollectingOfficerId = Factory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var JOCollectingOfficerId = AccFactory.JobOrderRepository().GetJobOrderIdByUserId(_uc.users_id);
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
                 var collectingOfficerHasJOModel = new CollectingOfficerHasJobOrdersModel()
                 {

@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void frmRemarks_Load(object sender, EventArgs e)
         {
             int jevId = _frmJEV.ucjev1.jevId;
-            txtRemarks.Text = Factory.JEVRepository().GetRemarks(jevId);
+            txtRemarks.Text = AccFactory.JEVRepository().GetRemarks(jevId);
             txtRemarks.SelectionStart = 0;
             PermissionVerification();
         }
@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     return false;
 
                 int jevId = _frmJEV.ucjev1.jevId;
-                var remarks = Factory.JEVRepository().SetRemarks(jevId, txtRemarks.Text.Trim());
+                var remarks = AccFactory.JEVRepository().SetRemarks(jevId, txtRemarks.Text.Trim());
 
                 return remarks;
             }
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 if (!_frmJEV.FormValidations())
                     return false;
 
-                var isDisapproved = Factory.JEVRepository().SetJEVStatus(jevId, "disapprove");
+                var isDisapproved = AccFactory.JEVRepository().SetJEVStatus(jevId, "disapprove");
 
                 return isDisapproved;
 

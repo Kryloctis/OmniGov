@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             errorArray[0] = epFormNo.GetError(txtformno);
             errorArray[1] = epFormDescription.GetError(txtformdesc);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         internal void ResetForm()
@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epFormNo, txtformno, "Form No.");
 
-            var accountableFormRepository = Factory.AccountableFormsRepository();
+            var accountableFormRepository = AccFactory.AccountableFormsRepository();
             string formNumber = txtformno.Text.Trim();
 
             bool formNumberExist;

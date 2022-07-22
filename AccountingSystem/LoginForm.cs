@@ -31,7 +31,7 @@ namespace AccountingSystem
                     return;
                 }
 
-                var userId = Factory.UsersRepository().ValidateLogin(username, password);
+                var userId = AccFactory.UsersRepository().ValidateLogin(username, password);
 
                 if (userId != 0)
                 {

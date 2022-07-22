@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             try
             {
-                var functionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository();
+                var functionalClassificationServiceRepository = AccFactory.FunctionalClassificationServiceRepository();
                 Dictionary<string, string> data = functionalClassificationServiceRepository.GetRecordByID(uc.serviceID);
 
                 uc.cmbSectorName.SelectedValue = data["functional_classifications_id"];
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                     ServiceName = serviceName,
                 };
 
-                return Factory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
+                return AccFactory.FunctionalClassificationServiceRepository().Update(functionalClassificationServiceModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

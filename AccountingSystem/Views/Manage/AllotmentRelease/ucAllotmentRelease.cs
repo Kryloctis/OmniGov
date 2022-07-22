@@ -54,9 +54,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             string searchTxt = cmbxBudgetAppropriations.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxBudgetAppropriations.Text))
-                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
             else
-                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
 
             return dtBudgetAppropriation;
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             };
        
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ucAllotmentRelease_Load(object sender, EventArgs e)
@@ -182,12 +182,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 if (cmbxBudgetAppropriations.SelectedIndex > -1)
                 {
                     int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
-                    var budgetAppropriationDict = Factory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
-                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
+                    var budgetAppropriationDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByIdDateEntry(budgetAppropriationId, dateIssued);
+                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(budgetAppropriationId);
 
                     decimal budgetAppropriation = budgetAppropriationDict.Values.Count == 0 ? 0 : Convert.ToDecimal(budgetAppropriationDict["amount"]);
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
+                    decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
 
                     appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
 
@@ -276,9 +276,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 var dateIssued = _ucAllotmentMain.dtDateIssued.Value;
 
                 if (allotmentReleaseId == 0)
-                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
+                    allotmentReleaseExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseExist(budgetAppropriationId, dateIssued);
                 else
-                    allotmentReleaseExist = Factory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
+                    allotmentReleaseExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseExist(allotmentReleaseId, budgetAppropriationId, dateIssued);
 
                 if (allotmentReleaseExist && budgetAppropriationId != _budgetAppropriationId)
                 {

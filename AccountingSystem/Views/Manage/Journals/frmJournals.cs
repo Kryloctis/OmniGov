@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Manage.Journals
                             journalsModelList.Add(new JournalsModel() { Id = journalId });
                         }
 
-                        var journalsRepository = Factory.JournalsRepository();
+                        var journalsRepository = AccFactory.JournalsRepository();
                         _ = journalsRepository.Delete(journalsModelList);
                         LoadRecords();
                     }

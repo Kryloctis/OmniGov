@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                     }
                 }
 
-                return Factory.SignatoriesRepository().Insert(signatoriesModel, signatoriesHasDocumentReferences);
+                return AccFactory.SignatoriesRepository().Insert(signatoriesModel, signatoriesHasDocumentReferences);
             }
             catch (Exception ex)
             {

@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             errorArray[4] = epRemarks.GetError(txtRemarks);
             errorArray[5] = epDgAccount.GetError(dgBudgetRealignment);
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
         internal void ResetForm()
         {
@@ -62,14 +62,14 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         internal void LoadFunds()
         {
-            cmbFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbFunds.DataSource = AccFactory.FundsRepository().GetRecords();
             cmbFunds.DisplayMember = "fund_name";
             cmbFunds.ValueMember = "id";
         }
 
         private void LoadAllotmentClasses()
         {
-            var dtAllotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+            var dtAllotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
             HelperLoadRecords.BudgetAppropriationsAllotmentClassCombobox(dtAllotmentClasses, cmbAllotmentClass, "allotment_code", "id");
         }
 
@@ -111,7 +111,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         internal void LoadOthersFPPByFPPIdCombobox()
         {
             byte fppId = Convert.ToByte(cmbFPP.SelectedValue);
-            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbOthersFPP, "name", "id");
         }
 
         private DataTable DataTableFPP()
@@ -119,9 +119,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
             return dtFPP;
         }
@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private DataTable DatatableAccounts()
         {
             DataTable dtRealignmentAccounts;
-            dtRealignmentAccounts = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId, fundId, allotmentClassId, dtDateIssued.Value, budgetId);
+            dtRealignmentAccounts = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(fppId.ToString(), othersFPPId, fundId, allotmentClassId, dtDateIssued.Value, budgetId);
             return dtRealignmentAccounts;
         }
 
@@ -318,7 +318,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private string GetBudgetIdByGeneralLedgerAccountId(string generalLedgerId)
         {
-            return Factory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
+            return AccFactory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
         }
 
 

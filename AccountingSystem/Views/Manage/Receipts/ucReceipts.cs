@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         internal void LoadAccountableForms()
         {
-            var dtAccountableFormRepo = Factory.AccountableFormsRepository().GetRecords();
+            var dtAccountableFormRepo = AccFactory.AccountableFormsRepository().GetRecords();
             HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dtAccountableFormRepo);
         }
 
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             errorArray[3] = epReceivedDate.GetError(dtpReceivedDate);
             errorArray[4] = epQuantity.GetError(txtQuantity);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 

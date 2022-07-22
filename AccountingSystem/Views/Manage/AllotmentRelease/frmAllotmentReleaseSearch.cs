@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-                var dtFunds = Factory.AllotmentClassesRepository().GetRecords();
+                var dtFunds = AccFactory.AllotmentClassesRepository().GetRecords();
                 HelperLoadRecords.AllotmentClasssesCombobox(dtFunds, cmbxAllotmentClasses, "allotment_code", "id");
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 int allotmentClassId = Convert.ToInt32(cmbxAllotmentClasses.SelectedValue);
                 var dateIssued = dtDateIssued.Value;
 
-                var dtAllotmentReleaseSearch = Factory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
+                var dtAllotmentReleaseSearch = AccFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
 
 
                 foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     DateTime rowDateIssued = Convert.ToDateTime(row["date_issued"]);
                     string rowPurpose = row["purpose"].ToString();
                     bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
-                    string rowTotalAllotmentRelease = Factory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
+                    string rowTotalAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
 
 
                     var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };

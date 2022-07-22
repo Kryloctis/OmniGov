@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             try
             {
-                var fundsRepository = Factory.FundsRepository();
+                var fundsRepository = AccFactory.FundsRepository();
                 var dtFunds = fundsRepository.GetRecords();
                 HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
 
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.Funds
                             fundsModelList.Add(new FundsModel() { Id = fundId });
                         }
 
-                        var fundsRepository = Factory.FundsRepository();
+                        var fundsRepository = AccFactory.FundsRepository();
                         _ = fundsRepository.Delete(fundsModelList);
                         LoadRecords();
                     }
@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Manage.Funds
                 try
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtFunds = Factory.FundsRepository().GetRecordsBySearch(searchkey);
+                    var dtFunds = AccFactory.FundsRepository().GetRecordsBySearch(searchkey);
                     HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
 
                     lblRecordCount.Text = dgFunds.Rows.Count.ToString();

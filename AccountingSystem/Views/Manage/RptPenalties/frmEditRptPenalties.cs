@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     Rate = uc.nudRate.Value
                 };
 
-                return Factory.rptPenaltiesRepository().Update(model);
+                return AccFactory.rptPenaltiesRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void LoadRecord()
         {
-            var dictRptDiscounts = Factory.rptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
+            var dictRptDiscounts = AccFactory.rptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
 
             uc.txtCode.Text = dictRptDiscounts["code"];
             uc.txtDescription.Text = dictRptDiscounts["description"];

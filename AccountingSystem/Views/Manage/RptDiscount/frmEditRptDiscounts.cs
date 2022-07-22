@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     Rate = uc.nudRate.Value
                 };
 
-                return Factory.rptDiscountRepository().Update(model);
+                return AccFactory.rptDiscountRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void LoadRecord() 
         {
-            var dictRptDiscounts = Factory.rptDiscountRepository().GetRecordByID(uc.rptDiscountId);
+            var dictRptDiscounts = AccFactory.rptDiscountRepository().GetRecordByID(uc.rptDiscountId);
 
             uc.txtCode.Text = dictRptDiscounts["code"];
             uc.txtDescription.Text = dictRptDiscounts["description"];

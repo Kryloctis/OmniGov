@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                     IsSpecial = uc.chckboxSpecial.Checked ? true : false
                 };
 
-                var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
+                var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
                 return functionProgramProjectRepository.Insert(functionProgramProjectModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

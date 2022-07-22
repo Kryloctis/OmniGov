@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 var uc = ucReceipts1;
-                var riRepository = Factory.ReceiptsIssuedRepository();
+                var riRepository = AccFactory.ReceiptsIssuedRepository();
                 var riData = riRepository.GetRecordByID(uc.receiptIssuedId);
 
                 uc.cmbCollector.SelectedValue = riData["collecting_officers_id"];
@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     Quantity = Convert.ToInt32(uc.txtReceiptQuantity.Text.Trim())
                 };
 
-                var riRepository = Factory.ReceiptsIssuedRepository();
+                var riRepository = AccFactory.ReceiptsIssuedRepository();
                 if (!uc.isCashTickets)
                 {
                     if (Convert.ToInt32(uc.txtReceiptIssuedFrom.Text.Trim()) > Convert.ToInt32(uc.txtReceiptIssuedTo.Text.Trim()))

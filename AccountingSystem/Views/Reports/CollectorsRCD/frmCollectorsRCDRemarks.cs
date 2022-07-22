@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 if (String.IsNullOrEmpty(remark))
                     return false;
 
-                var remarks = Factory.CollectorReportRepository().SetRemarks(reportNo, remark);
+                var remarks = AccFactory.CollectorReportRepository().SetRemarks(reportNo, remark);
 
                 return remarks;
             }
@@ -72,7 +72,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             string reportNo = _frmCollectorsRCD.ucCollectorsRCD1.txtReport.Text;
 
-            txtRemarks.Text = Factory.CollectorReportRepository().GetRemarks(reportNo);
+            txtRemarks.Text = AccFactory.CollectorReportRepository().GetRemarks(reportNo);
             txtRemarks.SelectionStart = 0;
         }
 

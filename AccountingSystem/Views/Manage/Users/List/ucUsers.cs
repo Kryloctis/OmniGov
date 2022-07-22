@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             {
                 string office = cmbOffice.Text;
 
-                DataTable dtRoleName = Factory.RolesRepository().GetRecordsByOffice(office);
+                DataTable dtRoleName = AccFactory.RolesRepository().GetRecordsByOffice(office);
                 HelperLoadRecords.RoleNameComboBox(dtRoleName, cmbRoles, "role_name", "id");
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             errorArray[5] = txtPassword.Tag.ToString();
             errorArray[6] = txtConfirmPassword.Tag.ToString();
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epUserName, txtUsername, "username");
 
-            var usersRepository = Factory.UsersRepository();
+            var usersRepository = AccFactory.UsersRepository();
             string userName = txtUsername.Text.Trim();
             bool userNameExist;
 
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epRole, cmbRoles, "role name");
 
             int roleId = Convert.ToByte(cmbRoles.SelectedValue);
-            bool idExist = Factory.RolesRepository().IdExist(roleId);
+            bool idExist = AccFactory.RolesRepository().IdExist(roleId);
 
             if (!idExist)
             {

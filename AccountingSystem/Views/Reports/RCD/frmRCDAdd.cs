@@ -33,8 +33,8 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
 
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
                 DataTable dtCollectors = new();
                 var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Reports.RCD
                 string keySearch = txtsearch.Text;
 
 
-                var colectorRepository = Factory.CollectorReportRepository();
+                var colectorRepository = AccFactory.CollectorReportRepository();
 
 
                 var dtrcd = new DataTable();
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var fundrepo = Factory.FundsRepository();
+                var fundrepo = AccFactory.FundsRepository();
                 var dtfunds = fundrepo.GetRecords();
                 cmbfunds.DataSource = dtfunds;
                 cmbfunds.ValueMember = "id";

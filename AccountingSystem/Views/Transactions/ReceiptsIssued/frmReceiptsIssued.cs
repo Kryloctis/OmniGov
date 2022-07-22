@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
                 var receiptIssuedDt = receiptIssuedRepository.GetRecords();
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 try
                 {
-                    var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                    var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
                     var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(txtsearch.Text.Trim());
 
                     HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
@@ -70,7 +70,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 try
                 {
-                    var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                    var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
                     var receiptModel = new List<ReceiptsIssuedModel>();
 
                     foreach (DataGridViewRow row in dgReceiptIssued.SelectedRows)

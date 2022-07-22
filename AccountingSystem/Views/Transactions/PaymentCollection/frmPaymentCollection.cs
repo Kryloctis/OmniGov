@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (cmbCollector.Items.Count == 0) return;
 
-            var usersRepo = Factory.UsersRepository();
+            var usersRepo = AccFactory.UsersRepository();
             Dictionary<string, string> collectorDict = new();
 
             if (usersRepo.LinkedCollector(Helper.UserId))
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbCollector.Enabled = false;
                 cbCollectorTypeJO.Enabled = false;
 
-                collectorDict = Factory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                collectorDict = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
                 cmbCollector.SelectedValue = collectorDict["id"];
             }
 
@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cbCollectorTypeJO.Enabled = false;
                 cbCollectorTypeJO.Checked = true;
 
-                collectorDict = Factory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                collectorDict = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
                 cmbCollector.SelectedValue = collectorDict["id"];
             }
 
@@ -56,8 +56,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 DataTable dtCollector;
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
                 if (cbCollectorTypeJO.Checked)
                     dtCollector = collectingOfficerHasJORepo.GetRecords();
@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
 
-                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
                 var dtpayments  = paymentCollectionRepo.GetRecordsByFilter(date, collectorId, searchKey);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     {
                         int paymentCollectionId = Convert.ToInt32(row.Cells[0].Value.ToString());
                         paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = paymentCollectionId });
-                        var paymentCollectionRepo = Factory.PaymentCollectionRepository().Delete(paymentCollectionModelList);
+                        var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().Delete(paymentCollectionModelList);
                     }
 
                     LoadRecords();

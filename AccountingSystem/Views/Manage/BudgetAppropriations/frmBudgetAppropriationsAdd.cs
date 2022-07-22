@@ -44,7 +44,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     Remarks = uc.txtRemarks.Text.Trim()
                 };
 
-                return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
+                return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel);
             }
             catch (Exception ex)
             {

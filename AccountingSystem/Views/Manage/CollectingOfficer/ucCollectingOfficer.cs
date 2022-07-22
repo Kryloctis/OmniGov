@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             errorArray[2] = epLastName.GetError(txtLastName);
             errorArray[3] = epJobtitle.GetError(txtJobtitle);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstName, "first name");
 
-            var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             string fName = txtFirstName.Text.Trim();
             string midInitial = txtMiddleInitial.Text.Trim();
             string lname = txtLastName.Text.Trim();
@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epMiddleInitial, txtMiddleInitial, "middle initial");
 
-            var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             string fName = txtFirstName.Text.Trim();
             string midInitial = txtMiddleInitial.Text.Trim();
             string lname = txtLastName.Text.Trim();
@@ -101,7 +101,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             string lastName = txtLastName.Text.Trim();
             bool fullNameExist;
 
-            var collectingOfficerRepository = Factory.CollectingOfficerRepository();
+            var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             fullNameExist = collectingOfficerRepository.FullNameExist(firstName, middleInitial, lastName, OfficerId); 
 
             if (fullNameExist)
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             try
             {
-                var userRepository = Factory.UsersRepository();
+                var userRepository = AccFactory.UsersRepository();
                 var data = userRepository.GetUserByID(id);
                 if(data.Count > 0)
                 {

@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         {
             try
             {
-                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
                
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             {
                 var searchKey = txtSearch.Text.Trim();
 
-                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceiptsBySearch(searchKey);
 
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);

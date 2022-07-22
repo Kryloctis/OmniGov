@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         private void LoadRealignmentDetails()
         {
             int realignmentId = int.Parse(_budgetRealignmentId);
-            Dictionary<string, string> realignmentDict = Factory.BudgetRealignmentRepository().GetRecordByRealignmentId(realignmentId);
+            Dictionary<string, string> realignmentDict = AccFactory.BudgetRealignmentRepository().GetRecordByRealignmentId(realignmentId);
 
 
             uc.txtRemarks.Text = realignmentDict["remarks"];
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             int budgetRealignmentId = int.Parse(_budgetRealignmentId);
 
-            var dtBudgetRealignment = Factory.BudgetRealignmentRepository().GetRealignedAccountsByRealignmentId(budgetRealignmentId);
+            var dtBudgetRealignment = AccFactory.BudgetRealignmentRepository().GetRealignedAccountsByRealignmentId(budgetRealignmentId);
             HelperLoadRecords.BudgetRealignmentAccountsDatagridView(dtBudgetRealignment, uc.dgBudgetRealignment);
         }
 
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                         Amount = amount
                     };
 
-                    Factory.BudgetRealignmentRepository().InsertRealignment(budgetRealignmentModel);
+                    AccFactory.BudgetRealignmentRepository().InsertRealignment(budgetRealignmentModel);
                 }
 
                 return true;
@@ -121,9 +121,9 @@ namespace AccountingSystem.Views.Manage.Realignment
                 Remarks = remarks
             };
 
-            var isAccountUpdateSuccess =  Factory.BudgetRealignmentRepository().RemoveRealignmentAccounts(realignmentId);
+            var isAccountUpdateSuccess =  AccFactory.BudgetRealignmentRepository().RemoveRealignmentAccounts(realignmentId);
 
-            var isDetailUpdateSuccess = Factory.BudgetRealignmentRepository().Update(realignmentModel);
+            var isDetailUpdateSuccess = AccFactory.BudgetRealignmentRepository().Update(realignmentModel);
 
             return isAccountUpdateSuccess && isDetailUpdateSuccess;
 

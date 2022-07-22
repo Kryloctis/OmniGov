@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     Contact = uc.txtContact.Text.Trim()
                 };
 
-                return Factory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
+                return AccFactory.SubsidiaryLedgerAccountsRepository().Insert(subsidiaryLedgerAccountsModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

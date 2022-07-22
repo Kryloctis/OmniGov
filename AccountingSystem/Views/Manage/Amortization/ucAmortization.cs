@@ -51,10 +51,10 @@ namespace AccountingSystem.Views.Manage.Amortization
                 if (isEdit)
                 {
                     amortizationModel.Id = amortizationId;
-                    return Factory.AmortizationRepository().Update(amortizationModel);
+                    return AccFactory.AmortizationRepository().Update(amortizationModel);
                 }
                 else
-                    return Factory.AmortizationRepository().Insert(amortizationModel);
+                    return AccFactory.AmortizationRepository().Insert(amortizationModel);
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             try
             {
-                var dicAmortizationRecord = Factory.AmortizationRepository().GetRecordByID(amortizationId);
+                var dicAmortizationRecord = AccFactory.AmortizationRepository().GetRecordByID(amortizationId);
 
                 string bankName = dicAmortizationRecord["bank_name"];
                 string amortizationTerm = dicAmortizationRecord["amortization_term"];
@@ -92,7 +92,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             errorArray[0] = epBankName.GetError(txtBankName);
             errorArray[1] = epAmountRelease.GetError(nudAmountRelease);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 

@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
 
@@ -35,8 +35,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private void GetDebitCredit(byte fundsId, DateTime dateEntry, ushort generalLedgerId, out decimal balanceDebit, out decimal balanceCredit)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundsId, generalLedgerId, dateEntry);
-            var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
+            var dictBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundsId, generalLedgerId, dateEntry);
+            var dictTransaction = AccFactory.JEVAccountsRepository().GetSumTransactionsByGenLedgerId(fundsId, generalLedgerId, dateEntry);
 
             decimal totalBeginningAndTransDebit = dictBeginningBalance["beginning_balance_debit"] + dictTransaction["debit"];
             decimal totalBeginningAndTransCredit = dictBeginningBalance["beginning_balance_credit"] + dictTransaction["credit"];
@@ -56,8 +56,8 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             foreach (int accountGroup in accountGroups)
             {
-                var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_AccGrpId_Date_SubLedgeId(fundId, (ushort)accountGroup, dateEntry);
-                var dictTransaction = Factory.JEVAccountsRepository().GetSumTransactionsByAccGrpId(fundId, accountGroup, dateEntry);
+                var dictBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBeginningBalanceBy_FundId_AccGrpId_Date_SubLedgeId(fundId, (ushort)accountGroup, dateEntry);
+                var dictTransaction = AccFactory.JEVAccountsRepository().GetSumTransactionsByAccGrpId(fundId, accountGroup, dateEntry);
 
                 totalBeginningBalanceDebit += dictBeginningBalance["beginning_balance_debit"];
                 totalBeginningBalanceCredit += dictBeginningBalance["beginning_balance_credit"];
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
             try
             {
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
                 foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
                 {
                     int accGrpId = Convert.ToInt32(row["account_group_id"]);
@@ -160,7 +160,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtStatementOfFinancialPosition", StatementOfFinancialPositionReport()));
 
-                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
+                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
                 var parameters = new[] {
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),

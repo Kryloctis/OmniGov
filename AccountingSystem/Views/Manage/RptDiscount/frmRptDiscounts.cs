@@ -29,12 +29,12 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
             if (searchText.Length < 2)
             {
-                var dt = Factory.rptDiscountRepository().GetRecords();
+                var dt = AccFactory.rptDiscountRepository().GetRecords();
                 HelperLoadRecords.DiscountsDatagridView(dataGridView1, dt);
             }
             else
             {
-                var dt = Factory.rptDiscountRepository().GetRecordsBySearch(searchText);
+                var dt = AccFactory.rptDiscountRepository().GetRecordsBySearch(searchText);
                 HelperLoadRecords.DiscountsDatagridView(dataGridView1, dt);
             }
         }
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     }
 
                     deletedCount = rowCount;
-                    return Factory.rptDiscountRepository().Delete(rptDiscountsModelList);
+                    return AccFactory.rptDiscountRepository().Delete(rptDiscountsModelList);
                 }
 
             }

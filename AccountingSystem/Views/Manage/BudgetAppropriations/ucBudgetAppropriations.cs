@@ -27,7 +27,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         private void SetAppropriationInfoToolTip()
         {
 
-            decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
+            decimal totalSupplementalApprorpriationAmount = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
 
             if (totalSupplementalApprorpriationAmount == 0)
                 return;
@@ -47,12 +47,12 @@ namespace BudgetSystem.Views.BudgetAppropriations
             errorArray[1] = epGeneralLedgerAcc.GetError(cmbxAccount);
             errorArray[2] = epAmount.GetError(nudAmount);
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadSubFPPByFPPIdCombobox(int fppId)
         {
-            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxOthersFPP, "name", "id");
             cmbxOthersFPP.SelectedIndex = -1;
             cmbxOthersFPP.Text = string.Empty;
             cmbxOthersFPP.Enabled = true;
@@ -66,7 +66,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                if (!Factory.SubFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
+                if (!AccFactory.SubFPPRepository().NameExist(cmbxOthersFPP.Text) && !string.IsNullOrWhiteSpace(cmbxOthersFPP.Text))
                 {
                     ep.SetError(comboBox, fieldText);
                     return true;
@@ -120,9 +120,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 else
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
 
                 if (budgetAppropriationExist)
                 {
@@ -151,9 +151,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
                 else
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, year, remarks);
 
                 if (budgetAppropriationExist)
                 {
@@ -201,7 +201,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         {
             try
             {
-                decimal totalSupplementalApprorpriationAmount = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
+                decimal totalSupplementalApprorpriationAmount = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
 
                 decimal appropriationAmount = nudAmount.Value;
 
@@ -240,7 +240,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private DataTable DatatableAccounts()
         {
-            var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
             string accountGroupName = allotmentClassRepo["allotment_name"];
 
             DataTable dtAccounts;
@@ -248,16 +248,16 @@ namespace BudgetSystem.Views.BudgetAppropriations
             if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
                 if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
             }
             else
             {
                 if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
             }
 
             return dtAccounts;
@@ -322,9 +322,9 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 if (!DesignMode)
                 {
-                    var fppRepo = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                    var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
-                    var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+                    var fppRepo = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                    var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
+                    var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
                     txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
                     txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";

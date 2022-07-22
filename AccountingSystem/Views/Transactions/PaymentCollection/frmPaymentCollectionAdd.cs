@@ -64,12 +64,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     //CHANGE SOME VALUE IF COLLECTING OFFICER IS JOB ORDER.
                     if (uc.cbCollectorTypeJO.Checked)
                     {
-                        var regularCollectingOfficerId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
+                        var regularCollectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
                         paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
                         paymentCollectionModel.JobOrderId = collectingOfficerId;
                     }
 
-                    var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                    var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
                     bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
                     if (insertSuccess)
@@ -126,12 +126,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     //CHANGE SOME VALUE IF COLLECTING OFFICER IS JOB ORDER.
                     if (uc.cbCollectorTypeJO.Checked)
                     {
-                        var regularCollectingOfficerId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
+                        var regularCollectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
                         paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
                         paymentCollectionModel.JobOrderId = collectingOfficerId;
                     }
 
-                    var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                    var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
                     bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
 
                     if (insertSuccess)
@@ -158,7 +158,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 var collectorId = uc.cmbCollector.SelectedValue.ToString();
                 var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
-                var receiptsIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var receiptsIssuedRepo = AccFactory.ReceiptsIssuedRepository();
 
                 var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;

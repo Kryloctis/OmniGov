@@ -28,11 +28,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 if (toolStripTxtSearch.Text.Length > 3 && !string.IsNullOrEmpty(toolStripTxtSearch.Text))
                 {
-                    dtOthersFPP = Factory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
+                    dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
                 }
                 else 
                 {
-                    dtOthersFPP = Factory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
+                    dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
                 }
 
                 HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                             otherFPPModelList.Add(otherFPPModel);
                         }
 
-                        _ = Factory.SubFPPRepository().Delete(otherFPPModelList);
+                        _ = AccFactory.SubFPPRepository().Delete(otherFPPModelList);
                         LoadRecords();
                     }
                 }

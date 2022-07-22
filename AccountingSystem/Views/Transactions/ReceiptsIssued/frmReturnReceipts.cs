@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
                 var riModel = new ReceiptsIssuedModel()
                 {
                     Id = issuanceId,

@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Manage.Journals
             try
             {
                 var uc = ucJournals1;
-                var journalsRepository = Factory.JournalsRepository();
+                var journalsRepository = AccFactory.JournalsRepository();
                 var journalData = journalsRepository.GetRecordByID(uc.journalId);
 
                 uc.txtName.Text = journalData["journal_name"];
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.Journals
                     IsSpecialJournal = uc.chkSpecialJournal.Checked
                 };
 
-                var journalsRepository = Factory.JournalsRepository();
+                var journalsRepository = AccFactory.JournalsRepository();
                 return journalsRepository.Update(journalModel);
             }
             catch (Exception ex)

@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 }
 
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
-                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
                 string remarks = $"({budgetAppropriationsDict["remarks"]})";
 

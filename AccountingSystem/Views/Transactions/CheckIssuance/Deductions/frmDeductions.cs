@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             errorArray[0] = epDescription.GetError(txtDescription);
             errorArray[1] = epAmount.GetError(nudAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 

@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Journals
                     IsSpecialJournal = uc.chkSpecialJournal.Checked
                 };
 
-                var journalsRepository = Factory.JournalsRepository();
+                var journalsRepository = AccFactory.JournalsRepository();
                 return journalsRepository.Insert(journalModel);
             }
             catch (Exception ex)

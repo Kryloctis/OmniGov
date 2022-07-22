@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
         {
 
             var dtPC = new dsLFS.dtPCDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByGC(from, to);
+            var dt = AccFactory.GeneralCollectionsRepository().GetRecordByGC(from, to);
 
 
             foreach (DataRow item in dt.Rows)
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSignatoryTitle = string.Empty;
 
-                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Report of General Collections ");
+                var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Report of General Collections ");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)

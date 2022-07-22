@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             errorArray[0] = epCode.GetError(txtCode);
             errorArray[1] = epName.GetError(txtName);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
 
-            _functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+            _functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
             string functionalClassificationCode = txtCode.Text.Trim();
             bool codeExist;
 
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
 
-            _functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+            _functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
             string functionalClassificationName = txtName.Text.Trim();
             bool nameExist;
 

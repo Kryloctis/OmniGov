@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 else
                     isDeposit = null;
 
-                Dictionary<string, string> accountDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+                Dictionary<string, string> accountDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
 
                 int rowIndex = ucJEV.dgAccounts.CurrentCell.RowIndex;
 
