@@ -28,6 +28,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
+using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.PaymentCollection;
@@ -745,6 +746,11 @@ namespace AccountingSystem
         private void taxRateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRptTaxRates(this).ShowDialog();
+        }
+
+        private void btnAssessmentPosting_Click(object sender, EventArgs e)
+        {
+            _ = new frmAssessmentPosting().ShowDialog();
         }
     }
 }
