@@ -131,5 +131,11 @@ namespace AccountingSystem
         public static ICollectingOfficerHasJobOrders CollectingOfficerHasJobOrdersRepository() => new CollectingOfficerHasJobOrdersRepository(mySqlGenericCommandsLFS);
 
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsRPT);
+
+        public static IRptDiscountsRepository rptDiscountRepository() => new RptDiscountsRepository(mySqlGenericCommandsLFS);
+
+        public static IRptPenaltiesRepository rptPenaltiesRepository() => new RptPenaltiesRepository(mySqlGenericCommandsLFS);
+
+        public static IRptTaxRatesRepository rptTaxRatesRepository() => new RptTaxRatesRepository(mySqlGenericCommandsLFS);
     }
 }
