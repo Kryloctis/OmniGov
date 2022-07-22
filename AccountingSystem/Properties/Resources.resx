@@ -490,4 +490,25 @@
   <data name="document_delivery_receipt_signed_small_1x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-receipt-signed_small@1x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="document_project_pin_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_project_pin_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-project-pin@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
