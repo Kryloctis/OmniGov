@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Transactions;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 
@@ -10,7 +9,6 @@ namespace ACC.Data
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly string tableName = "real_properties";
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
 
         public RealPropertiesRepository(IDbGenericCommands dbGenericCommands)
@@ -58,54 +56,19 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewLandRecordsBySearch(string searchText)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-            };
-
-            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = 'L' OR complete_arp_no LIKE @searchText OR owner_name LIKE @searchText LIMIT 30";
-
-            var dataTable = new DataTable();
-
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
-        }
-
-        public DataTable GetViewBuildingRecordsBySearch(string searchText)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] {"@searchText", DbType.String, $"%{searchText}%" }
-                };
-
-                string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = 'B' OR complete_arp_no LIKE @searchText OR owner_name LIKE @searchText LIMIT 30";
-
-                var dataTable = new DataTable();
-                return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public DataTable GetViewPropertiesByPropertyKindAndSearch(string propertyKind, string searchText)
         {
             var parameters = new object[][]
             {
-                    new object[] {"@property_kind", DbType.String, propertyKind },
-                    new object[] {"@searchText", DbType.String, $"%{searchText}%" }
+                new object[] {"@property_kind", DbType.String, propertyKind },
+                new object[] {"@searchText", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT property_kind, complete_arp_no, pin, owner_name, owner_address, market_value, assessed_value  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind OR (complete_arp_no LIKE @searchText AND owner_name LIKE @searchText ) LIMIT 30";
+            string query = $"SELECT property_kind, complete_arp_no, pin, owner_name, owner_address, market_value, assessed_value  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind AND (complete_arp_no LIKE @searchText OR owner_name LIKE @searchText ) LIMIT 30";
 
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
+
     }
 }
