@@ -28,6 +28,7 @@ using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
+using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.PaymentCollection;
@@ -730,14 +731,6 @@ namespace AccountingSystem
         {
             _ =  new frmRCD().ShowDialog();
         }
-
-        private void btnRealProperties_Click(object sender, EventArgs e)
-        {
-            _ = new frmSearchProperties().ShowDialog();
-        }
-
-
-
         #endregion
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
@@ -755,9 +748,9 @@ namespace AccountingSystem
             _ = new frmRptTaxRates(this).ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAssessmentPosting_Click(object sender, EventArgs e)
         {
-
+            _ = new frmAssessmentPosting().ShowDialog();
         }
     }
 }

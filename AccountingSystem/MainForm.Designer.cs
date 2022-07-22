@@ -143,7 +143,6 @@ namespace AccountingSystem
             this.btnBankDeposit = new System.Windows.Forms.Button();
             this.btnReportOfCollections = new System.Windows.Forms.Button();
             this.btnRCD = new System.Windows.Forms.Button();
-            this.btnRealProperties = new System.Windows.Forms.Button();
             this.btnAssessmentPosting = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -1436,7 +1435,6 @@ namespace AccountingSystem
             this.flowLayoutPanel7.Controls.Add(this.btnBankDeposit);
             this.flowLayoutPanel7.Controls.Add(this.btnReportOfCollections);
             this.flowLayoutPanel7.Controls.Add(this.btnRCD);
-            this.flowLayoutPanel7.Controls.Add(this.btnRealProperties);
             this.flowLayoutPanel7.Controls.Add(this.btnAssessmentPosting);
             this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel7.Location = new System.Drawing.Point(0, 0);
@@ -1541,33 +1539,18 @@ namespace AccountingSystem
             this.btnRCD.UseVisualStyleBackColor = true;
             this.btnRCD.Click += new System.EventHandler(this.btnRCD_Click);
             // 
-            // btnRealProperties
-            // 
-            this.btnRealProperties.AutoSize = true;
-            this.btnRealProperties.Image = global::AccountingSystem.Properties.Resources.building_1_filled_browse_small_1x;
-            this.btnRealProperties.Location = new System.Drawing.Point(753, 0);
-            this.btnRealProperties.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnRealProperties.Name = "btnRealProperties";
-            this.btnRealProperties.Size = new System.Drawing.Size(111, 32);
-            this.btnRealProperties.TabIndex = 1;
-            this.btnRealProperties.Text = "Real Properties";
-            this.btnRealProperties.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRealProperties.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRealProperties.UseVisualStyleBackColor = true;
-            this.btnRealProperties.Click += new System.EventHandler(this.btnRealProperties_Click);
-            // 
             // btnAssessmentPosting
             // 
             this.btnAssessmentPosting.Image = global::AccountingSystem.Properties.Resources.document_project_pin_18px;
-            this.btnAssessmentPosting.Location = new System.Drawing.Point(870, 3);
+            this.btnAssessmentPosting.Location = new System.Drawing.Point(756, 3);
             this.btnAssessmentPosting.Name = "btnAssessmentPosting";
-            this.btnAssessmentPosting.Size = new System.Drawing.Size(140, 29);
-            this.btnAssessmentPosting.TabIndex = 2;
+            this.btnAssessmentPosting.Size = new System.Drawing.Size(146, 29);
+            this.btnAssessmentPosting.TabIndex = 1;
             this.btnAssessmentPosting.Text = "Assessment Posting";
             this.btnAssessmentPosting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAssessmentPosting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAssessmentPosting.UseVisualStyleBackColor = true;
-            this.btnAssessmentPosting.Click += new System.EventHandler(this.button1_Click);
+            this.btnAssessmentPosting.Click += new System.EventHandler(this.btnAssessmentPosting_Click);
             // 
             // MainForm
             // 
@@ -1748,7 +1731,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnBankDeposit;
         internal System.Windows.Forms.Button btnReportOfCollections;
         internal System.Windows.Forms.Button btnRCD;
-        internal System.Windows.Forms.Button btnRealProperties;
         private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
         private Views.Reports.Financial_Statements.ucStatementOfCashFlows ucStatementOfCashFlows1;
         internal System.Windows.Forms.TabPage tabPageTransactionLog;
