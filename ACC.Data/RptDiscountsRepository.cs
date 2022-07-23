@@ -154,19 +154,5 @@ namespace ACC.Data
             else
                 return false;
         }
-
-        public DataTable GetViewRecordsByMonth_IsAdvance_Search(int month, bool isAdvance, string searchText)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@month", DbType.Int32, month},
-                new object[] { "@is_advance", DbType.Boolean, isAdvance},
-                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
-            };
-
-            string query = $"SELECT * FROM {tableName} WHERE month = @month AND is_advance = @is_advance AND description LIKE @search_text";
-            var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
-        }
     }
 }

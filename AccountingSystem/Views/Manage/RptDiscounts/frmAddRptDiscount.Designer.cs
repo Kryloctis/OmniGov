@@ -43,25 +43,28 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 179);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 151);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(449, 35);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(393, 26);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(352, 3);
+            this.btnCancel.Location = new System.Drawing.Point(308, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.Size = new System.Drawing.Size(82, 22);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(252, 3);
+            this.btnSave.Location = new System.Drawing.Point(220, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -69,22 +72,24 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             // 
             // ucRptDiscounts1
             // 
-            this.ucRptDiscounts1.Location = new System.Drawing.Point(12, 12);
+            this.ucRptDiscounts1.Location = new System.Drawing.Point(10, 9);
+            this.ucRptDiscounts1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucRptDiscounts1.Name = "ucRptDiscounts1";
-            this.ucRptDiscounts1.Size = new System.Drawing.Size(441, 161);
+            this.ucRptDiscounts1.Size = new System.Drawing.Size(386, 138);
             this.ucRptDiscounts1.TabIndex = 0;
             // 
             // frmAddRptDiscount
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(449, 214);
+            this.ClientSize = new System.Drawing.Size(393, 177);
             this.Controls.Add(this.ucRptDiscounts1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAddRptDiscount";

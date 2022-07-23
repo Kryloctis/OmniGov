@@ -11,7 +11,5 @@ namespace ACC.Domain.Interfaces
         bool DescriptionExist(string description);
 
         bool DescriptionExist(int id, string description);
-
-        DataTable GetViewRecordsByMonth_IsAdvance_Search(int month, bool isAdvance, string searchText);
     }
 }

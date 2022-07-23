@@ -40,9 +40,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
                 var model = new RptDiscountsModel()
                 {
-                    Code = uc.txtCode.Text.Trim(),
+                    Month = Convert.ToInt32(uc.cmbxMonth.SelectedValue),
                     Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
+                    Rate = uc.nudRate.Value,
+                    IsAdvance = uc.chckBxAdvance.Checked
                 };
 
                 return AccFactory.rptDiscountRepository().Insert(model);
