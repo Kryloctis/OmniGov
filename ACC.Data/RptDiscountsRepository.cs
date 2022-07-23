@@ -61,9 +61,10 @@ namespace ACC.Data
 
                 foreach (DataRow item in reader.Rows)
                 {
-                    dict.Add("code", item["code"].ToString());
+                    dict.Add("month", item["month"].ToString());
                     dict.Add("description", item["description"].ToString());
                     dict.Add("rate", item["rate"].ToString());
+                    dict.Add("is_advance", item["is_advance"].ToString());
                 }
             }
 
@@ -84,7 +85,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE code LIKE @searchText OR description LIKE @searchText";
+            string query = $"SELECT * FROM {tableName} WHERE description LIKE @searchText";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -98,12 +99,13 @@ namespace ACC.Data
         {
             var parameter = new object[][]
             {
-                new object[] { "@code", DbType.String, entity.Code},
+                new object[] { "@month", DbType.Int32, entity.Month},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance}
             };
 
-            string query = $"INSERT INTO {tableName} (code, description, rate) VALUES (@code, @description, @rate)";
+            string query = $"INSERT INTO {tableName} (month, description, rate, is_advance) VALUES (@month, @description, @rate, @is_advance)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
         }
 
@@ -112,44 +114,14 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@code", DbType.String, entity.Code},
+                new object[] { "@month", DbType.Int32, entity.Month},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance}
             };
 
-            string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
+            string query = $"UPDATE {tableName} SET month = @month, description = @description, rate = @rate, is_advance = @is_advance  WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-        }
-
-        public bool CodeExist(string code)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@code", DbType.String, code}
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE code = @code";
-            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-            if (!string.IsNullOrEmpty(result))
-                return true;
-            else
-                return false;
-        }
-
-        public bool CodeExist(int id, string code)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, id},
-                new object[] { "@code", DbType.String, code}
-            };
-
-            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND code = @code";
-            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-            if (!string.IsNullOrEmpty(result))
-                return true;
-            else
-                return false;
         }
 
         public bool DescriptionExist(string description)
@@ -181,6 +153,20 @@ namespace ACC.Data
                 return true;
             else
                 return false;
+        }
+
+        public DataTable GetViewRecordsByMonth_IsAdvance_Search(int month, bool isAdvance, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@month", DbType.Int32, month},
+                new object[] { "@is_advance", DbType.Boolean, isAdvance},
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE month = @month AND is_advance = @is_advance AND description LIKE @search_text";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }
