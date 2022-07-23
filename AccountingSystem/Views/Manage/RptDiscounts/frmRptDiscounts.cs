@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int rptDiscountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmEditRptDiscounts(rptDiscountId, this).ShowDialog();
+            _ = new frmEditRptDiscount(rptDiscountId, this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

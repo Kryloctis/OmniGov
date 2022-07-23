@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    public partial class frmEditRptDiscounts : Form
+    public partial class frmEditRptDiscount : Form
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
         private readonly ucRptDiscounts uc;
-        public frmEditRptDiscounts(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
+        public frmEditRptDiscount(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
             _frmRptDiscounts = frmRptDiscounts;

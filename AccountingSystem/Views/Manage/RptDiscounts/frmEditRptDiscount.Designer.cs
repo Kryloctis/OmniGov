@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    partial class frmEditRptDiscounts
+    partial class frmEditRptDiscount
     {
         /// <summary>
         /// Required designer variable.

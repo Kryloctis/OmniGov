@@ -8,10 +8,12 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
 
-        public string Code { get; set; }
+        public string Month { get; set; }
 
         public string Description { get; set; }
         
         public decimal Rate { get; set; }
+
+        public bool IsAdvance { get; set; }
     }
 }
