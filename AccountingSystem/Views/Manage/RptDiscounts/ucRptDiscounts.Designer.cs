@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.cmbxMonth.Location = new System.Drawing.Point(81, 1);
             this.cmbxMonth.Name = "cmbxMonth";
             this.cmbxMonth.Size = new System.Drawing.Size(281, 23);
-            this.cmbxMonth.TabIndex = 3;
+            this.cmbxMonth.TabIndex = 0;
             // 
             // chckBxAdvance
             // 
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.chckBxAdvance.Location = new System.Drawing.Point(290, 116);
             this.chckBxAdvance.Name = "chckBxAdvance";
             this.chckBxAdvance.Size = new System.Drawing.Size(72, 19);
-            this.chckBxAdvance.TabIndex = 4;
+            this.chckBxAdvance.TabIndex = 3;
             this.chckBxAdvance.Text = "Advance";
             this.chckBxAdvance.UseVisualStyleBackColor = true;
             // 

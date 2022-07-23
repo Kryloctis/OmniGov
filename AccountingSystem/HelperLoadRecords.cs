@@ -30,11 +30,11 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
 
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["id"].Visible = false;   
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
             dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+            dataGridView.Columns["frequency"].HeaderText = "Frequency";
         }
 
         #endregion

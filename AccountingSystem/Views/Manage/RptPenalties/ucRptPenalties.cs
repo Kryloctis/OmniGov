@@ -20,12 +20,18 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             InitializeComponent();
         }
 
+        private void LoadFrequencies() 
+        {
+            cmbxFrequency.Items.AddRange(new string[] { "Monthly", "Annually" });
+            cmbxFrequency.SelectedIndex = 0;
+        }
+
         internal void ResetForm()
         {
             if (isEdit)
                 rptPenaltiesId = 0;
 
-            txtCode.Clear();
+            LoadFrequencies();
             txtDescription.Clear();
             nudRate.Value = 0;
         }
@@ -34,7 +40,6 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(txtCode),
                 errorProvider1.GetError(txtDescription),
                 errorProvider1.GetError(nudRate)
             };
@@ -43,22 +48,6 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         }
 
         #region Validations
-
-        private bool CodeValidated()
-        {
-            return Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Code");
-        }
-
-        private void txtCode_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = CodeValidated();
-        }
-
-        private void txtCode_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtCode);
-        }
-
         private bool DescriptionValidated() 
         {
             return Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
@@ -97,7 +86,15 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         private void nudRate_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
-        } 
+        }
         #endregion
+
+        private void ucRptPenalties_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode) 
+            {
+                LoadFrequencies();
+            }
+        }
     }
 }

@@ -35,9 +35,10 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
                 var model = new RptPenaltiesModel()
                 {
-                    Code = uc.txtCode.Text.Trim(),
                     Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
+                    Rate = uc.nudRate.Value,
+                    Frequency = uc.cmbxFrequency.Text.Trim()
+                    
                 };
 
                 return AccFactory.rptPenaltiesRepository().Insert(model);
