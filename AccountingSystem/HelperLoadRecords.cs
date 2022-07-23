@@ -54,6 +54,32 @@ namespace AccountingSystem
 
         #endregion
 
+        #region RPT Posting
+        internal static void BarangayCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
+        }
+
+        internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].HeaderText = "ARP No.";
+            datagrid.Columns[2].HeaderText = "Owner";
+            datagrid.Columns[3].HeaderText = "Barangay";
+            datagrid.Columns[4].HeaderText = "PIN";
+            datagrid.Columns[5].HeaderText = "Taxable";
+
+
+            datagrid.Columns[6].HeaderText = "Status";
+
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        #endregion
+
         #region References
 
         public static void ReferencesDatagridView(DataTable dataTable, DataGridView dataGridView)

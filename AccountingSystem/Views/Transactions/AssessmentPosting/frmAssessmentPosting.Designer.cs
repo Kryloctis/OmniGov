@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgProperties = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnPost = new System.Windows.Forms.Button();
             this.btnAutoPost = new System.Windows.Forms.Button();
@@ -38,23 +38,23 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radLand = new System.Windows.Forms.RadioButton();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.cbmBarangay = new System.Windows.Forms.ComboBox();
+            this.cmbBarangays = new System.Windows.Forms.ComboBox();
             this.cmbEffectivityQuarter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgProperties
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 93);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 351);
-            this.dataGridView1.TabIndex = 11;
+            this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgProperties.Location = new System.Drawing.Point(12, 79);
+            this.dgProperties.Name = "dgProperties";
+            this.dgProperties.RowTemplate.Height = 25;
+            this.dgProperties.Size = new System.Drawing.Size(776, 365);
+            this.dgProperties.TabIndex = 11;
             // 
             // panel2
             // 
@@ -63,12 +63,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 36);
+            this.panel2.Size = new System.Drawing.Size(800, 28);
             this.panel2.TabIndex = 10;
             // 
             // btnPost
             // 
-            this.btnPost.Location = new System.Drawing.Point(713, 6);
+            this.btnPost.Location = new System.Drawing.Point(713, 3);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(75, 23);
             this.btnPost.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // btnAutoPost
             // 
-            this.btnAutoPost.Location = new System.Drawing.Point(632, 6);
+            this.btnAutoPost.Location = new System.Drawing.Point(632, 3);
             this.btnAutoPost.Name = "btnAutoPost";
             this.btnAutoPost.Size = new System.Drawing.Size(75, 23);
             this.btnAutoPost.TabIndex = 0;
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Controls.Add(this.radioButton1);
             this.panel1.Controls.Add(this.radLand);
             this.panel1.Controls.Add(this.nudYear);
-            this.panel1.Controls.Add(this.cbmBarangay);
+            this.panel1.Controls.Add(this.cmbBarangays);
             this.panel1.Controls.Add(this.cmbEffectivityQuarter);
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -139,13 +139,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.nudYear.Size = new System.Drawing.Size(101, 23);
             this.nudYear.TabIndex = 9;
             // 
-            // cbmBarangay
+            // cmbBarangays
             // 
-            this.cbmBarangay.FormattingEnabled = true;
-            this.cbmBarangay.Location = new System.Drawing.Point(255, 12);
-            this.cbmBarangay.Name = "cbmBarangay";
-            this.cbmBarangay.Size = new System.Drawing.Size(160, 23);
-            this.cbmBarangay.TabIndex = 7;
+            this.cmbBarangays.FormattingEnabled = true;
+            this.cmbBarangays.Location = new System.Drawing.Point(255, 12);
+            this.cmbBarangays.Name = "cmbBarangays";
+            this.cmbBarangays.Size = new System.Drawing.Size(160, 23);
+            this.cmbBarangays.TabIndex = 7;
             // 
             // cmbEffectivityQuarter
             // 
@@ -173,13 +173,14 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgProperties);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmAssessmentPosting";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assessment Posting";
             this.Load += new System.EventHandler(this.frmAssessmentPosting_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -190,7 +191,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgProperties;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Button btnAutoPost;
@@ -199,7 +200,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radLand;
         private System.Windows.Forms.NumericUpDown nudYear;
-        private System.Windows.Forms.ComboBox cbmBarangay;
+        private System.Windows.Forms.ComboBox cmbBarangays;
         private System.Windows.Forms.ComboBox cmbEffectivityQuarter;
         private System.Windows.Forms.TextBox txtSearch;
     }

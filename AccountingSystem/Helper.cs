@@ -597,6 +597,7 @@ namespace AccountingSystem
 
             DataRow row2 = dtQuarter.NewRow();
             row2["id"] = 2;
+
             row2["quarter"] = "2nd";
             dtQuarter.Rows.Add(row2);
 

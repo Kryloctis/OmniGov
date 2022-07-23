@@ -15,17 +15,26 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         public frmAssessmentPosting()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgProperties);
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
-            //LoadBarangay();
+            LoadBarangays();
             LoadEffectivityQuarter();
+            LoadProperties();
         }
 
 
 
+
         #region Loaddata
+
+        internal void LoadBarangays()
+        {
+            var dtBarangays = Factory.RealPropertiesRepository().GetBarangays();
+            HelperLoadRecords.BarangayCombobox(dtBarangays, cmbBarangays, "name", "id");
+        }
 
         internal void LoadEffectivityQuarter()
         {
@@ -34,6 +43,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             cmbEffectivityQuarter.ValueMember = "id";
         }
 
+        private void LoadProperties()
+        {
+            var dtProperties = Factory.RealPropertiesRepository().GetProperties();
+            HelperLoadRecords.RealPropertiesSearchDatagridView(dtProperties, dgProperties);
+        }
 
         #endregion
 

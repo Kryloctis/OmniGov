@@ -10,6 +10,9 @@ namespace ACC.Data
     {
         private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
+        private readonly string tblBarangays = "barangays";
+        private readonly string viewRealProperties = "view_real_properties";
+        
 
         public RealPropertiesRepository(IDbGenericCommands dbGenericCommands)
         {
@@ -70,5 +73,34 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
+        public DataTable GetBarangays()
+        {
+            try
+            {
+                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY name";
+
+                var dtBarangay = new DataTable();
+                return _dbGenericCommands.Fill(query, dtBarangay);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetProperties()
+        {
+            try
+            {
+                string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties}";
+
+                var dtProperties = new DataTable();
+                return _dbGenericCommands.Fill(query, dtProperties);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
