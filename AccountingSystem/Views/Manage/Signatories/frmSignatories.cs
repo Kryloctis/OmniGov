@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             try
             {
                 var dictUserLoggedIn = Helper.LoggedInUserData();
-                var dtSignatories = Factory.SignatoriesHasReferencesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
+                var dtSignatories = AccFactory.SignatoriesHasReferencesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
 
                 foreach (DataRow row in dtSignatories.Rows)
                 {
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                 {
                     int signatoriesId = Convert.ToInt32(dgSignatories.Rows[dgSignatories.CurrentCell.RowIndex].Cells["id"].Value);
 
-                    var dtReferencedDocuments = Factory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
+                    var dtReferencedDocuments = AccFactory.SignatoriesHasReferencesRepository().GetDocumentRecordsBySignatoryId(signatoriesId);
                     foreach (DataRow row in dtReferencedDocuments.Rows)
                     {
                         listDocuments.Items.Add(row["documents_name"]);
@@ -158,7 +158,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                             }
                         }
 
-                        _ = Factory.SignatoriesRepository().Delete(signatoriesModelList);
+                        _ = AccFactory.SignatoriesRepository().Delete(signatoriesModelList);
                         LoadSignatories();
                     }
                 }

@@ -8,7 +8,7 @@ namespace AccountingSystem
 {
     public class Helper
     {
-        internal static byte UserId = Factory.UserId;
+        internal static byte UserId = AccFactory.UserId;
 
         public static void LoadFormIcon(Form form)
         {
@@ -145,7 +145,7 @@ namespace AccountingSystem
         {
             var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
 
-            dictSignatoriesReferencedDocument = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+            dictSignatoriesReferencedDocument = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
 
             if (dictSignatoriesReferencedDocument.Count < 1)
                 return dictSignatoriesReferencedDocument;
@@ -169,7 +169,7 @@ namespace AccountingSystem
             var dictUser = new Dictionary<string, dynamic>();
             try
             {
-                dictUser = Factory.UsersRepository().GetViewRecordById(userId);
+                dictUser = AccFactory.UsersRepository().GetViewRecordById(userId);
 
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
@@ -192,7 +192,7 @@ namespace AccountingSystem
             try
             {
 
-                dictUser = Factory.UsersRepository().GetViewRecordById(UserId);
+                dictUser = AccFactory.UsersRepository().GetViewRecordById(UserId);
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
 
@@ -547,7 +547,7 @@ namespace AccountingSystem
         {
             try
             {
-                return Factory.UsersRepository().HasPermission(UserId, permissionName);
+                return AccFactory.UsersRepository().HasPermission(UserId, permissionName);
             }
             catch (Exception ex)
             {
@@ -575,7 +575,7 @@ namespace AccountingSystem
         {
             try
             {
-                var jobOrderRepo = Factory.JobOrderRepository();
+                var jobOrderRepo = AccFactory.JobOrderRepository();
                 return jobOrderRepo.IsUserJobOrder(userId);
             }
             catch (Exception)

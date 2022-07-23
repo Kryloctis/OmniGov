@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
         {
             try
             {
-                var fundRepository = Factory.BanksRepository();
+                var fundRepository = AccFactory.BanksRepository();
                 var dtBank = fundRepository.GetRecords();
                 dtBank.Columns.Add("bankdisplay", typeof(string), "bank_name + ' - ' + account_no");
                 cmbbank.DataSource = dtBank;
@@ -38,8 +38,8 @@ namespace AccountingSystem.Views.Reports.Cashbook
         private DataTable DataTableCashBook(int id)
         {
             var dtCB = new dsLFS.dtCashbookDataTable();
-            var dtBD = Factory.BankDepositsRepository().GetRecordsBySearch(id);
-            var dtRC = Factory.RCIRepository().GetRecords(id);
+            var dtBD = AccFactory.BankDepositsRepository().GetRecordsBySearch(id);
+            var dtRC = AccFactory.RCIRepository().GetRecords(id);
 
             if(dtBD.Rows.Count > 0 || dtRC.Rows.Count > 0)
             {

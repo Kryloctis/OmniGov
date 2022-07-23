@@ -47,10 +47,10 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 if (cmbxObjectOfExpenditure.SelectedIndex > -1)
                 {
                     int budgetAppropriationId = Convert.ToInt32(cmbxObjectOfExpenditure.SelectedValue);
-                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
+                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(budgetAppropriationId, dateRequested);
 
                     decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("Sum(amount)", string.Empty));
-                    decimal totalObligations = Factory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(budgetAppropriationId);
+                    decimal totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(budgetAppropriationId);
 
                     allotmentReleaseBalance = (totalAllotmentRelease - totalObligations) + (budgetAppropriationId == _budgetAppropriationsId ? _amount : 0);
                 }
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[0] = epObjectOfExpenditure.GetError(cmbxObjectOfExpenditure);
             errorArray[1] = epAmount.GetError(nudAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -114,9 +114,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             DataTable dtSubFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
+                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId);
             else
-                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
+                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 
             return dtSubFPP;
         }
@@ -197,9 +197,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             string searchTxt = cmbxObjectOfExpenditure.Text.Trim();
 
             if (string.IsNullOrEmpty(cmbxObjectOfExpenditure.Text))
-                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
             else
-                dtBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
+                dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
 
 
             return dtBudgetAppropriation;

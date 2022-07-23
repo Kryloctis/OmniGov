@@ -36,11 +36,11 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             try
             {
                 Cursor = Cursors.WaitCursor;
-                string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
+                string accountableOfficer = AccFactory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
                 string verificationSignatory = string.Empty;
                 string verificationSignatoryTitle = string.Empty;
 
-                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+                var dictVerification = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             DataTable dtFromDataSource = new dsLFS.dtAccountabilityForAccountableFormsDataTable();
             string collectorId = GetCollectorIdByReportNumber(_reportNumber);
 
-            DataTable dt = Factory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
+            DataTable dt = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
 
             if (dt.Rows.Count != 0)
             {
@@ -127,7 +127,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         {
             try
             {
-                var collectorReportRepo = Factory.CollectorReportRepository();
+                var collectorReportRepo = AccFactory.CollectorReportRepository();
                 return collectorReportRepo.GetCollectorIdByReportNumber(reportNumber);
             }
             catch (Exception)
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
-            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
+            DataTable dt = AccFactory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
             if (dt.Rows.Count != 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable CollectionDetails()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectionsDataTable();
-            DataTable dt = Factory.CollectorReportPaymentsRepository().GetCollectorsReportByReportNo(_reportNumber);
+            DataTable dt = AccFactory.CollectorReportPaymentsRepository().GetCollectorsReportByReportNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {
@@ -187,7 +187,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
         private DataTable ReportDetails()
         {
             DataTable dtFromDataSource = new dsLFS.dtRCDDetailsDataTable();
-            DataTable dt = Factory.CollectorReportRepository().GetRecordsByReportNumber(_reportNumber);
+            DataTable dt = AccFactory.CollectorReportRepository().GetRecordsByReportNumber(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {

@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             try
             {
                 var uc = ucAccountGroup1;
-                var accountGroupRepository = Factory.AccountGroupRepository();
+                var accountGroupRepository = AccFactory.AccountGroupRepository();
                 Dictionary<string, string> accountGroupData = accountGroupRepository.GetRecordByID(uc.accountGroupId);
 
                 uc.txtCode.Text = accountGroupData["account_group_code"];
@@ -57,7 +57,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
                     AccountGroupName = uc.txtName.Text.Trim()
                 };
 
-                var accountGroupRepository = Factory.AccountGroupRepository();
+                var accountGroupRepository = AccFactory.AccountGroupRepository();
                 return accountGroupRepository.Update(accountGroupModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

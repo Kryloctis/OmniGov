@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             errorArray[0] = epCode.GetError(txtCode);
             errorArray[1] = epName.GetError(txtName);
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm() 
@@ -42,9 +42,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 bool nameExist;
 
                 if (othersFPPID == 0)
-                    nameExist = Factory.SubFPPRepository().NameExist(name);
+                    nameExist = AccFactory.SubFPPRepository().NameExist(name);
                 else
-                    nameExist = Factory.SubFPPRepository().NameExist(othersFPPID, name);
+                    nameExist = AccFactory.SubFPPRepository().NameExist(othersFPPID, name);
 
                 if (nameExist)
                 {
@@ -82,9 +82,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 bool codeExist;
 
                 if (othersFPPID == 0)
-                    codeExist = Factory.SubFPPRepository().CodeExist(othersFPPCode);
+                    codeExist = AccFactory.SubFPPRepository().CodeExist(othersFPPCode);
                 else
-                    codeExist = Factory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
+                    codeExist = AccFactory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
 
                 if (codeExist)
                 {

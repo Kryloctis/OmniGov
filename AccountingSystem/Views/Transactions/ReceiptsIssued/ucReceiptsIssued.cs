@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             errorArray[3] = epTo.GetError(txtReceiptIssuedTo);
             errorArray[4] = epQuantity.GetError(txtReceiptQuantity);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -57,8 +57,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var collectorRepository = Factory.CollectingOfficerRepository();
-                var collectorHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectorRepository = AccFactory.CollectingOfficerRepository();
+                var collectorHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
                 var dtCollector = new DataTable();
 
                 if (cbCollector.Checked)
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var collectorRepository = Factory.CollectingOfficerRepository();
+                var collectorRepository = AccFactory.CollectingOfficerRepository();
                 var dtCollector = collectorRepository.GetCollectorsWithReceiptsIssuedByReceiptId(receiptId);
                 cmbCollector.DataSource = dtCollector;
                 cmbCollector.ValueMember = "id";
@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptsRepo = Factory.ReceiptsRepository();
+                var receiptsRepo = AccFactory.ReceiptsRepository();
                 var receiptsDt = receiptsRepo.GetRecords();
 
                 foreach (DataRow row in receiptsDt.Rows)
@@ -128,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 int TotalIssued(int receiptId)
                 {
-                    return Factory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+                    return AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var totalUsedReceipt = Factory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
+                var totalUsedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
                txtReceiptIssuedFrom.Text = (Convert.ToInt32(receiptNumberFrom) + Convert.ToInt32(totalUsedReceipt)).ToString("D7");
             }
             catch (Exception)
@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptsRepo = Factory.ReceiptsRepository();
+                var receiptsRepo = AccFactory.ReceiptsRepository();
                 var receiptNumberFrom = Convert.ToInt32(txtReceiptIssuedFrom.Text);
                 var receiptNumberTo = Convert.ToInt32(txtReceiptIssuedTo.Text);
                 var receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
@@ -304,7 +304,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             //SET DATA
             receiptId = int.Parse(item["id"].ToString());
-            receiptQuantity = (int)item["quantity"] - (Factory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId));
+            receiptQuantity = (int)item["quantity"] - (AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId));
             receiptNumberFrom = item["receipt_number_from"].ToString();
 
             if (item["acc_form_desc"].ToString().Contains("Tickets"))

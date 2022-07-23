@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             try
             {
                 string searchkey = Convert.ToString(txtSearch.Text);
-                var dtfunctionalClassificationRepository = Factory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
+                var dtfunctionalClassificationRepository = AccFactory.FunctionalClassificationRepository().GetRecordsBySearch(searchkey);
                 HelperLoadRecords.FunctionalClassificationDatagridView(dtfunctionalClassificationRepository, dgFunctionalClassification);
 
                 dgFunctionalClassification.CurrentCell = dgFunctionalClassification.FirstDisplayedCell;
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                             functionalClassificationModelList.Add(new FunctionalClassificationModel() { Id = functionalClassificationId });
                         }
 
-                        var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+                        var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
                         _ = functionalClassificationRepository.Delete(functionalClassificationModelList);
                         LoadFunctionalClassifications();
                         LoadSectorComboBox();
@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
         {
             try
             {
-                DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
+                DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
 
 
                 var dataTable = new DataTable();
@@ -145,9 +145,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             DataTable functionClassificationServicesDataTable;
 
             if (sectorId == 0)
-                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch(searchText);
+                functionClassificationServicesDataTable = AccFactory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch(searchText);
             else
-                functionClassificationServicesDataTable = Factory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch_And_Sector(searchText, sectorId);
+                functionClassificationServicesDataTable = AccFactory.FunctionalClassificationServiceRepository().GetViewRecordsBySearch_And_Sector(searchText, sectorId);
 
             return functionClassificationServicesDataTable;
         }
@@ -187,7 +187,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                             functionalClassificationServiceModelList.Add(new FunctionalClassificationServiceModel() { Id = serviceId });
                         }
 
-                        var functionalClassificationServiceRepository = Factory.FunctionalClassificationServiceRepository();
+                        var functionalClassificationServiceRepository = AccFactory.FunctionalClassificationServiceRepository();
                         _ = functionalClassificationServiceRepository.Delete(functionalClassificationServiceModelList);
                         LoadFunctionClassificationServices();
                         LoadServiceNameComboBox();
@@ -225,7 +225,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
                 dtServiceName.Rows.Add(0, "All");
 
-                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+                foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
                 {
                     string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
 
@@ -252,9 +252,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             DataTable fppDataTable;
 
             if (serviceId == 0)
-                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
+                fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
             else
-                fppDataTable = Factory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
+                fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
 
 
             var dataTable = new DataTable();
@@ -358,7 +358,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                             functionProgramProjectModelList.Add(new FunctionProgramProjectModel() { Id = fppID });
                         }
 
-                        var functionProgramProjectRepository = Factory.FunctionProgramProjectRepository();
+                        var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
                         _ = functionProgramProjectRepository.Delete(functionProgramProjectModelList);
                         LoadFPP();
                     }

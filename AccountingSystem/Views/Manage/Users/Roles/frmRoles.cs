@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             try
             {
                 var dictUserLoggedIn = Helper.LoggedInUserData();
-                var dtRoles = Factory.RolesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
+                var dtRoles = AccFactory.RolesRepository().GetRecordsByOffice(dictUserLoggedIn["office"]);
                 HelperLoadRecords.RolesDatagridView(dtRoles, dgRoles);
 
                 lblRecordCount.Text = dgRoles.Rows.Count.ToString();
@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void LoadPermissionsByRoleId(byte roleId)
         {
-            lstboxAuthorize.DataSource = Factory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
+            lstboxAuthorize.DataSource = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(roleId);
             lstboxAuthorize.DisplayMember = "permission_name";
             lstboxAuthorize.ValueMember = "permissions_id";
         }
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                             rolesModelList.Add(new RolesModel() { Id = roleId });
                         }
 
-                        var rolesRepository = Factory.RolesRepository();
+                        var rolesRepository = AccFactory.RolesRepository();
                         _ = rolesRepository.Delete(rolesModelList);
                         LoadRoles();
                     }

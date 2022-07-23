@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.Funds
             try
             {
                 var uc = ucFunds1;
-                var fundsRepository = Factory.FundsRepository();
+                var fundsRepository = AccFactory.FundsRepository();
                 var fundData = fundsRepository.GetRecordByID(uc.fundId);
                 uc.txtCode.Text = fundData["fund_code"];
                 uc.txtName.Text = fundData["fund_name"];
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.Funds
                     FundName = uc.txtName.Text.Trim()
                 };
 
-                var fundsRepository = Factory.FundsRepository();
+                var fundsRepository = AccFactory.FundsRepository();
                 return fundsRepository.Update(fundModel);
 
 

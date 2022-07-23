@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             var errorArray = new string[1];
             errorArray[0] = epName.GetError(txtName);
 
-            var _errors = Factory.CreateErrors(errorArray);
+            var _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 var userDict = Helper.LoggedInUserData();
                 string office = cmbOffice.Text;
 
-               dtPermissions = Factory.PermissionsRepository().GetRecordsByOffice(office);
+               dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
 
                 foreach (DataRow row in dtPermissions.Rows)
                 {
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "role name");
 
-            var rolesRepository = Factory.RolesRepository();
+            var rolesRepository = AccFactory.RolesRepository();
             string roleName = txtName.Text.Trim();
             string office = cmbOffice.Text;
             bool roleNameExist;

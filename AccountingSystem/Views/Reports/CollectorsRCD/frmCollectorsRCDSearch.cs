@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                var fundrepo = Factory.FundsRepository();
+                var fundrepo = AccFactory.FundsRepository();
                 var dtfunds = fundrepo.GetRecords();
                 cmbfunds.DataSource = dtfunds;
                 cmbfunds.ValueMember = "id";
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 byte fundId = Convert.ToByte(cmbfunds.SelectedValue);
                 string keySearch = txtsearch.Text;
 
-                var colectorRepository = Factory.CollectorReportRepository();
+                var colectorRepository = AccFactory.CollectorReportRepository();
                 var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);

@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
         {
             try
             {
-                var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+                var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
                 var functionalClassificationData = functionalClassificationRepository.GetRecordByID(uc.functionalClassificationId);
 
                 uc.txtCode.Text = functionalClassificationData["sector_code"];
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
                     SectorName = uc.txtName.Text.Trim()
                 };
 
-                var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+                var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
                 return functionalClassificationRepository.Update(functionalClassificationModel);
 
             }

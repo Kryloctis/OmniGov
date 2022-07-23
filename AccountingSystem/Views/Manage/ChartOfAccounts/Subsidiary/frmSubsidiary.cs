@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             try
             {
-                var data = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+                var data = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 txtCode.Text = data["ledger_code"];
                 txtAccount.Text = data["ledger_name"];
             }
@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             try
             {
-                var dtSubsidiary = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+                var dtSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
 
                 HelperLoadRecords.SubsidiaryLedgerAccountsDatagridView(dtSubsidiary, dgSubsidiary, fundId, year);
             }
@@ -59,7 +59,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             Helper.DatagridFullRowSelectStyle(dgSubsidiary, true);
             LoadSelectedGeneralLedger();
             LoadSubsidiaryRecordsByFundAndGeneralLedger();
-            var dtFunds = Factory.FundsRepository().GetRecordByID(fundId);
+            var dtFunds = AccFactory.FundsRepository().GetRecordByID(fundId);
             txtFund.Text = dtFunds["fund_name"].ToString();
             txtYear.Text = year.ToString();
 
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                             subsidiaryModelList.Add(new SubsidiaryLedgerAccountsModel() { Id = subsidiaryLedgerId });
                         }
 
-                        _ = Factory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
+                        _ = AccFactory.SubsidiaryLedgerAccountsRepository().Delete(subsidiaryModelList);
                         LoadSubsidiaryRecordsByFundAndGeneralLedger();
                     }
                 }
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                 {
                     ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);
 
-                    var subsidiaryLedgerBalanceExist = Factory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
+                    var subsidiaryLedgerBalanceExist = AccFactory.BeginningBalancesRepository().SubsidiaryLedgerBalanceExist(fundId, generalLedgerId, year, subsidiaryLedgerId);
 
                     if (subsidiaryLedgerBalanceExist)
                     {

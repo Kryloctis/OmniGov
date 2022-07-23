@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             try
             {
-                var depositsRepository = Factory.BankDepositsRepository();
+                var depositsRepository = AccFactory.BankDepositsRepository();
                 var dtdeposits = depositsRepository.GetRecords();
                 HelperLoadRecords.DepositsDatagridView(dtdeposits, dgbankdeposits);
 
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                             bdModelList.Add(new BankDepositsModel() { Id = bdId });
                         }
 
-                        var bdRepository = Factory.BankDepositsRepository();
+                        var bdRepository = AccFactory.BankDepositsRepository();
                         _ = bdRepository.Delete(bdModelList);
                         LoadRecords();
                     }
@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 try
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtdeposits = Factory.BankDepositsRepository().GetRecordsBySearch(searchkey);
+                    var dtdeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
                     HelperLoadRecords.DepositsDatagridView(dtdeposits, dgbankdeposits);
 
                     lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();

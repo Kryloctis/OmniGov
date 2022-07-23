@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 errorProvider1.GetError(nudAmount)
             };
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()

@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         {
             try
             {
-                var rolesRepository = Factory.RolesRepository();
+                var rolesRepository = AccFactory.RolesRepository();
                 var roleDict = rolesRepository.GetRecordByID(uc.roleId);
 
 
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void LoadPermissionsByRoleId()
         {
-            var dtRolesHasPermissions = Factory.RoleHasPermissionsRepository().GetRecordsByRoleId(uc.roleId);
+            var dtRolesHasPermissions = AccFactory.RoleHasPermissionsRepository().GetRecordsByRoleId(uc.roleId);
             foreach (DataRow row in dtRolesHasPermissions.Rows)
             {
                 string permissionId = row["permissions_id"].ToString();
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                     PermissionsModels = permissionModelList
                 };
 
-                return Factory.RolesRepository().Update(roleModel);
+                return AccFactory.RolesRepository().Update(roleModel);
             }
             catch (Exception ex)
             {

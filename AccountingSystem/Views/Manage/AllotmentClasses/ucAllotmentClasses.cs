@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             errorArray[1] = epCode.GetError(txtCode);
 
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "Allotment class name");
 
-            var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+            var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
             string allotmentName = txtName.Text.Trim();
             bool allotmentNameExist;
 
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "Allotment class code");
 
-            var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+            var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
             string allotmentCode = txtCode.Text.Trim();
             bool allotmentCodeExist;
 

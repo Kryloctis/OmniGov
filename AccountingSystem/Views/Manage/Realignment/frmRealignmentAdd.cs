@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                     Amount = uc.nudAmount.Value
                 };
 
-                return Factory.BudgetRealignmentRepository().Insert(budgetRealignmentModel);
+                return AccFactory.BudgetRealignmentRepository().Insert(budgetRealignmentModel);
             }
             catch (Exception ex)
             {
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Manage.Realignment
                         Amount = amount
                     };
 
-                    Factory.BudgetRealignmentRepository().InsertRealignment(budgetRealignmentModel);
+                    AccFactory.BudgetRealignmentRepository().InsertRealignment(budgetRealignmentModel);
                 }
 
                 return true;
@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private ushort GetLastInsertedId()
         {
-            return Factory.BudgetRealignmentRepository().GetLastInsertedID();
+            return AccFactory.BudgetRealignmentRepository().GetLastInsertedID();
         }
 
     }

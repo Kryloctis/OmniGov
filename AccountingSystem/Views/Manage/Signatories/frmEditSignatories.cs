@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Manage.Signatories
 
         private void LoadSelectedRecord()
         {
-            var dictSignatories = Factory.SignatoriesRepository().GetRecordByID(uc.signatoriesId);
+            var dictSignatories = AccFactory.SignatoriesRepository().GetRecordByID(uc.signatoriesId);
 
             uc.txtPrefix.Text = dictSignatories["prefix"];
             uc.txtFirstName.Text = dictSignatories["first_name"];
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                     }
                 }
 
-                return Factory.SignatoriesRepository().Update(signatoriesModel, signatoriesHasDocumentReferences);
+                return AccFactory.SignatoriesRepository().Update(signatoriesModel, signatoriesHasDocumentReferences);
             }
             catch (Exception ex)
             {

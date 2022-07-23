@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var rowIndex = _ucObligationRequestMain.dgObligationRequests.CurrentCell.RowIndex;
 
                 int budgetAppropriationId = Convert.ToInt32(uc.cmbxObjectOfExpenditure.SelectedValue);
-                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetViewRecordByID(budgetAppropriationId);
 
                 string remarks = string.IsNullOrEmpty(budgetAppropriationsDict["remarks"].ToString()) ? string.Empty : $"({budgetAppropriationsDict["remarks"]})";
 

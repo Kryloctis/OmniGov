@@ -63,12 +63,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 if (uc.isCollectorJO == true) 
                 {
                     receiptIssuedModel.JobOrderId = collectorId;
-                    receiptIssuedModel.CollectorId = Factory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);   
+                    receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);   
                 }
 
 
 
-                var receiptIssuedRepository = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
                 return receiptIssuedRepository.Insert(receiptIssuedModel);
             
             }

@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
                     SectorName = uc.txtName.Text.Trim()
                 };
 
-                var functionalClassificationRepository = Factory.FunctionalClassificationRepository();
+                var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
                 return functionalClassificationRepository.Insert(functionalClassificationModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

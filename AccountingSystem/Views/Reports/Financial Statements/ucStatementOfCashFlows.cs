@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 localReport.DataSources.Clear();
                 localReport.DataSources.Add(new ReportDataSource("dtStatementOfCashFlows", SCFDatatable()));
 
-                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 var parameters = new[] {
                     new ReportParameter("paramCertifiedCorrectSignatory", ""),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", ""),
@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
 

@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
         {
             try
             {
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
                 var collectingOfficerHasJODT = collectingOfficerHasJORepo.GetJobOrdersByCollectingOfficerId(collectingOfficerId);
 
                 HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODT, dgJobOrders);
@@ -50,14 +50,14 @@ namespace AccountingSystem.Views.Manage.JobOrders
             Helper.EnableDisableToolStripButtons(dgJobOrders, btnEdit, btnDelete);
 
             int id = int.Parse(dgJobOrders.CurrentRow.Cells[0].Value.ToString());
-            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
             btnDelete.Enabled = receiptIssuedRepo.CollectingOfficerHasReceiptAssigned(id) ? false : true;
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.Trim();
-            var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+            var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
             var collectingOfficerHasJODt = collectingOfficerHasJORepo.GetRecordsBySearch(collectingOfficerId, searchText);
 
             HelperLoadRecords.JobOrdersDatagridView(collectingOfficerHasJODt, dgJobOrders);
@@ -87,9 +87,9 @@ namespace AccountingSystem.Views.Manage.JobOrders
                         jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId }); 
                     }
 
-                    var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                    var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
-                    var jobOrderRepo = Factory.JobOrderRepository();
+                    var jobOrderRepo = AccFactory.JobOrderRepository();
 
                     if (collectingOfficerHasJORepo.Delete(collectingOfficerHasJOModel) == true && jobOrderRepo.Delete(jobOrderModel) == true)
                     {

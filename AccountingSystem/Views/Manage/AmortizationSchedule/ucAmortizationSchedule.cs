@@ -80,10 +80,10 @@ namespace AccountingSystem.Views.Manage.Amortization
                 if (isEdit)
                 {
                     amortizationScheduleModel.Id = amortizationScheduleId;
-                    return Factory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
+                    return AccFactory.AmortizationScheduleRepository().Update(amortizationScheduleModel);
                 }
                 else
-                    return Factory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
+                    return AccFactory.AmortizationScheduleRepository().Insert(amortizationScheduleModel);
             }
             catch (Exception ex)
             {

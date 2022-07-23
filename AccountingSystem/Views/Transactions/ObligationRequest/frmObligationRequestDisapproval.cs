@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 txtDissaprovalMessage.Tag.ToString()
             };
 
-            IError error = Factory.CreateErrors(errorArray);
+            IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
         }
 
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                return Factory.ObligationRequestRepository().SetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId, status, disapprovalMessage);
+                return AccFactory.ObligationRequestRepository().SetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId, status, disapprovalMessage);
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private string GetDissaprovalMessage()
         {
             int obligationrequestId = _frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId;
-            string disapprovalMessage = Factory.ObligationRequestRepository().GetRecordByID(obligationrequestId)["disapproval_message"];
+            string disapprovalMessage = AccFactory.ObligationRequestRepository().GetRecordByID(obligationrequestId)["disapproval_message"];
 
 
             return disapprovalMessage;
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void frmObligationRequestDisapproval_Load(object sender, EventArgs e)
         {
-            if (Factory.ObligationRequestRepository().GetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId).ToLower() == "disapproved")
+            if (AccFactory.ObligationRequestRepository().GetObligationRequestStatus(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId).ToLower() == "disapproved")
             {
                 if (_frmObligationRequestMain.ucObligationRequestMain1.Enabled)
                     btnAccept.Visible = false;
@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             }
 
 
-            var dictObligationRequest = Factory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
+            var dictObligationRequest = AccFactory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
 
             int obligationRequestCreatedById = Convert.ToInt32(dictObligationRequest["created_by_id"]);
 

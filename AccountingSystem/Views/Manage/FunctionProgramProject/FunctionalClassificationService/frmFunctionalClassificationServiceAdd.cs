@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                     ServiceName = serviceName
                 };
 
-                return Factory.FunctionalClassificationServiceRepository().Insert(functionalClassificationServiceModel);
+                return AccFactory.FunctionalClassificationServiceRepository().Insert(functionalClassificationServiceModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

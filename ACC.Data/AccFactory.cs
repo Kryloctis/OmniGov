@@ -5,7 +5,7 @@ using System;
 
 namespace AccountingSystem
 {
-    public static class Factory
+    public static class AccFactory
     {
         private static MySqlGenericCommands mySqlGenericCommandsLFS = new MySqlGenericCommands("LocalFinanceInstance");
         public static byte UserId = 2;

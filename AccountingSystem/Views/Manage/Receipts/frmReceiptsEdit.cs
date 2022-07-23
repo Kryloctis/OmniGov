@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                var rcRepository = Factory.ReceiptsRepository();
+                var rcRepository = AccFactory.ReceiptsRepository();
                 var rcdata = rcRepository.GetRecordByID(uc.receiptId);
 
                 var formatedReceiptNumberFrom = 
@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 uc.txtQuantity.Text = rcdata["quantity"];
                 uc.txtRemark.Text = rcdata["remarks"];
 
-                var receiptIsUsed = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(uc.receiptId);
+                var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(uc.receiptId);
                 if (receiptIsUsed)
                 {
                     uc.cmbAccountableForms.Enabled = false;
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                 };
 
-                var rcRepository = Factory.ReceiptsRepository();
+                var rcRepository = AccFactory.ReceiptsRepository();
                 if (uc.isCashTicket == false)
                     return rcRepository.Update(rModel);
                 else 

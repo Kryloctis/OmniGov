@@ -26,13 +26,13 @@ namespace AccountingSystem.Views.Reports.Journals
         private DataTable CashReceiptsJournalDataTable()
         {
             var dtCashReceiptsJournal = new dsLFS.CashReceiptsJournalDataTable();
-            var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
-            var dtCashReceiptsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            var dtCashReceiptsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             int jevId;
             string jevNo;
 
-            var cashReceiptsJournalRepository = Factory.CashReceiptsJournalRepository();
+            var cashReceiptsJournalRepository = AccFactory.CashReceiptsJournalRepository();
             foreach (DataRow item in dtCashReceiptsFromDB.Rows)
             {
                 jevId = Convert.ToInt32(item["jev_id"]);
@@ -102,9 +102,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
             try
             {
-                DataTable dtCreditDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+                DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
 
-                DataTable dtDebitDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+                DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
 
                 //Debit default Accounts
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 var lguDetails = Helper.LGUDetails();
                 var certifiedCorrectSignatory = string.Empty;
                 var certifiedCorrectSinatoryTitle = string.Empty;
-                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
+                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSinatoryTitle);
 
                 var parameters = new[] {

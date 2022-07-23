@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Dashboard
 
             try
             {
-                var dtJournals = Factory.JournalsRepository().GetRecords();
+                var dtJournals = AccFactory.JournalsRepository().GetRecords();
                 dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
                 DataRow dr = dataTable.NewRow();
                 dr["id"] = "0";
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Dashboard
 
         internal void LoadFunds()
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
             DataRow dr = dtFunds.NewRow();
             dr["id"] = 0;
             dr["fund_name"] = "All";
@@ -78,11 +78,11 @@ namespace AccountingSystem.Views.Dashboard
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
-            var jevCount = Factory.JEVRepository().GetJEVCount(string.Empty, journalName, fundName, month, year);
-            var approvedJEVCount = Factory.JEVRepository().GetJEVCount("approved", journalName, fundName, month, year);
-            var pendingJEVCount = Factory.JEVRepository().GetJEVCount("pending", journalName, fundName, month, year);
-            var disapprovedJEVCOunt = Factory.JEVRepository().GetJEVCount("disapproved", journalName, fundName, month, year);
-            var cancelledJEVCount = Factory.JEVRepository().GetJEVCount("cancelled", journalName, fundName, month, year);
+            var jevCount = AccFactory.JEVRepository().GetJEVCount(string.Empty, journalName, fundName, month, year);
+            var approvedJEVCount = AccFactory.JEVRepository().GetJEVCount("approved", journalName, fundName, month, year);
+            var pendingJEVCount = AccFactory.JEVRepository().GetJEVCount("pending", journalName, fundName, month, year);
+            var disapprovedJEVCOunt = AccFactory.JEVRepository().GetJEVCount("disapproved", journalName, fundName, month, year);
+            var cancelledJEVCount = AccFactory.JEVRepository().GetJEVCount("cancelled", journalName, fundName, month, year);
 
             lblJEVCounter.Text = jevCount.ToString();
             lblApprovedJEVCounter.Text = approvedJEVCount.ToString();

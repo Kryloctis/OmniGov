@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             errorArray[0] = errorProvider1.GetError(txtCode);
             errorArray[1] = errorProvider1.GetError(txtName);
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()

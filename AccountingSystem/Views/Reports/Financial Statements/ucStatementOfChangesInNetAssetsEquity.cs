@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtStatementOfChangesInNetAssetsEquity", StatementOfChangesInNetAssetsEquityDatatable()));
 
-                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
+                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
                 var parameters = new[] {
                     new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                     new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
@@ -105,7 +105,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
 

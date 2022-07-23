@@ -33,12 +33,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 errorProvider1.GetError(cmbxAccount)
             };
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadSubFPPByFPPIdCombobox(int fppId)
         {
-            HelperLoadRecords.OthersFPPCombobox(Factory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxSubFPP, "name", "id");
+            HelperLoadRecords.OthersFPPCombobox(AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId), cmbxSubFPP, "name", "id");
             cmbxSubFPP.SelectedIndex = -1;
             cmbxSubFPP.Text = string.Empty;
             cmbxSubFPP.Enabled = true;
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
         private DataTable DatatableAccounts()
         {
-            var allotmentClassRepo = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+            var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
             string accountGroupName = allotmentClassRepo["allotment_name"];
 
             DataTable dtAccounts;
@@ -56,16 +56,16 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
                 if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupName("Assets");
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupName(accountGroupName);
             }
             else
             {
                 if (Convert.ToInt32(allotmentClassId) == 4)
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByAccountGroupNameSearch("Assets", cmbxAccount.Text);
                 else
-                    dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
+                    dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsByMajorAccGroupNameSearch(accountGroupName, cmbxAccount.Text);
             }
 
             return dtAccounts;
@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 
             if (budgetAppropriationId != 0)
             {
-                var dtSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
+                var dtSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationId(budgetAppropriationId);
                 foreach (DataRow row in dtSupplementalAppropriation.Rows)
                 {
                     var dateEntry = row["date_entry"];
@@ -313,7 +313,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             try
             {
-                var selectedBudgetAppropriation = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var selectedBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 int fundId = Convert.ToInt32(selectedBudgetAppropriation["funds_id"]);
                 int fppId = Convert.ToInt32(selectedBudgetAppropriation["function_program_project_id"]);
@@ -347,9 +347,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             try
             {
-                var dictFPP = Factory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                var dictFund = Factory.FundsRepository().GetRecordByID(fundId);
-                var dictAllotmentClass = Factory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+                var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+                var dictAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
                 string fppName = $"{dictFPP["fpp_code"]} - {dictFPP["fpp_name"]}";
                 string fundName = $"{dictFund["fund_code"]} - {dictFund["fund_name"]}";
@@ -390,7 +390,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
         {
             try
             {
-                if (!Factory.SubFPPRepository().NameExist(cmbxSubFPP.Text) && !string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
+                if (!AccFactory.SubFPPRepository().NameExist(cmbxSubFPP.Text) && !string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
                 {
                     ep.SetError(comboBox, fieldText);
                     return true;
@@ -441,9 +441,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
                 else
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationContinuing(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId);
 
                 if (budgetAppropriationExist)
                 {
@@ -470,9 +470,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 bool budgetAppropriationExist;
 
                 if (budgetAppropriationId == 0)
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
                 else
-                    budgetAppropriationExist = Factory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
+                    budgetAppropriationExist = AccFactory.BudgetAppropriationsRepository().BudgetAppropriationExist(budgetAppropriationId, fundId, fppId, othersFPPId, allotmentClassId, generalLedgerAccId, (short)year, remarks);
 
                 if (budgetAppropriationExist)
                 {
@@ -556,9 +556,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 }
 
                 if (budgetAppropriationId == 0)
-                    return Factory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel, SupplementalAppropriationList);
+                    return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel, SupplementalAppropriationList);
                 else
-                    return Factory.SupplementalAppropriationsRepository().Insert(SupplementalAppropriationList, budgetAppropriationId);
+                    return AccFactory.SupplementalAppropriationsRepository().Insert(SupplementalAppropriationList, budgetAppropriationId);
 
             }
             catch (Exception ex) { Helper.MessageBoxSuccess(ex.Message); }

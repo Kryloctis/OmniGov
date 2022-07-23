@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                var rciRepository = Factory.RCIRepository();
+                var rciRepository = AccFactory.RCIRepository();
                 var dtRCI = rciRepository.GetRecords();
                 HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
 
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                             rciModelList.Add(new RCIModel() { Id = rciId });
                         }
 
-                        var rciRepository = Factory.RCIRepository();
+                        var rciRepository = AccFactory.RCIRepository();
                         _ = rciRepository.Delete(rciModelList);
                         LoadRecords();
                     }
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 try
                 {
                     string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtRCI = Factory.RCIRepository().GetRecordsBySearch(searchkey);
+                    var dtRCI = AccFactory.RCIRepository().GetRecordsBySearch(searchkey);
                     HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
 
                     lblRecordCount.Text = dgRCI.Rows.Count.ToString();

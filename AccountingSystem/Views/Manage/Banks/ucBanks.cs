@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Manage.Banks
             errorArray[0] = epAccountNumber.GetError(txtacode);
             errorArray[1] = epBankName.GetError(txtbankname);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epAccountNumber, txtacode, "account no.");
 
-            var banksrepository = Factory.BanksRepository();
+            var banksrepository = AccFactory.BanksRepository();
             string accountno = txtacode.Text.Trim();
             bool accountNoexist;
 

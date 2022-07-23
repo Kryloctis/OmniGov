@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var fundrepo = Factory.FundsRepository();
+                var fundrepo = AccFactory.FundsRepository();
                 var dtfunds = fundrepo.GetRecords();
 
                 cmbfunds.DataSource = dtfunds;
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var rcdRepository = Factory.GeneralCollectionsRepository();
+                var rcdRepository = AccFactory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
 
                 HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                var dtrcd = Factory.GeneralCollectionsRepository().GetRecordsByFundIdAndSearchKey(fundId, searchkey);
+                var dtrcd = AccFactory.GeneralCollectionsRepository().GetRecordsByFundIdAndSearchKey(fundId, searchkey);
 
                 HelperLoadRecords.RCDSearchDatagridView(dtrcd, dgRCDSearch);
             }
@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Reports.RCD
             {
                 fundId = Convert.ToInt32(cmbfunds.SelectedValue);
 
-                var rcdRepository = Factory.GeneralCollectionsRepository();
+                var rcdRepository = AccFactory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
 
                 HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);

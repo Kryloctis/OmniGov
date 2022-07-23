@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
         {
             try
             {
-                DataTable dtAccountGroup = Factory.AccountGroupRepository().GetRecords();
+                DataTable dtAccountGroup = AccFactory.AccountGroupRepository().GetRecords();
                 HelperLoadRecords.AccountGroupComboBox(dtAccountGroup, cmbAccountGroup, "account_group_name", "id");
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             errorArray[1] = epCode.GetError(txtCode);
             errorArray[2] = epName.GetError(txtName);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountGroup, cmbAccountGroup, "account group");
 
             int accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
-            bool idExist = Factory.AccountGroupRepository().IdExist(accountGroupId);
+            bool idExist = AccFactory.AccountGroupRepository().IdExist(accountGroupId);
 
             if (!idExist)
             {

@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void btnGet_Click(object sender, EventArgs e)
         {
-            DataTable dtAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
+            DataTable dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbGeneralLedgerAccount.Text);
 
             if (dtAccounts.Rows.Count == 0 || string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text)) return;
 
@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 int generalLedgerId = Convert.ToInt32(cmbGeneralLedgerAccount.SelectedValue);
 
-                var idExist = Factory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
+                var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
 
                 if (!idExist)
                 {

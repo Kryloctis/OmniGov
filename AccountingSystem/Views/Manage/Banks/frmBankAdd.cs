@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.Banks
 
                 };
 
-                var banksrepository = Factory.BanksRepository();
+                var banksrepository = AccFactory.BanksRepository();
                 if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
                 {
                     return banksrepository.Insert(banksModel);

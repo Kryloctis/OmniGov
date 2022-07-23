@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             epName.GetError(txtName)
             };
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
         {
             try
             {
-                DataTable dtSectorName = Factory.FunctionalClassificationRepository().GetRecords();
+                DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
                 HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
             }
@@ -72,8 +72,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                     return false;
                 }
 
-                bool nameExist = serviceID == 0 ? Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
-                                                  Factory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
+                bool nameExist = serviceID == 0 ? AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim()) :
+                                                  AccFactory.FunctionalClassificationServiceRepository().NameExist(textBox.Text.Trim(), serviceID);
                 if (nameExist)
                 {
                     errorProvider.SetError(textBox, "Service Name already exist.");

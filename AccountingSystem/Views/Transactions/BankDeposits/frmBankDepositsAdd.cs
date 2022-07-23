@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     CreatedBy = uc.userid,
                 };
 
-                var bankDepositRepo = Factory.BankDepositsRepository();
+                var bankDepositRepo = AccFactory.BankDepositsRepository();
 
                 if (generalCollectionId > 0)
                 {
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
                     if (insertId > 0)  //IF SUCCESS DAW ANG PAG SAVE SA BANK DEPOSIT
                     {
-                        var generalCollectionDepositsRepo = Factory.GeneralCollectionsDepositsRepository();
+                        var generalCollectionDepositsRepo = AccFactory.GeneralCollectionsDepositsRepository();
                         var generalCollectionDepositModel = new GeneralCollectionsDepositsModel()
                         {
                             BankDepositId = insertId,

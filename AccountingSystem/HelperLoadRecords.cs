@@ -72,9 +72,10 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Barangay";
             datagrid.Columns[4].HeaderText = "PIN";
             datagrid.Columns[5].HeaderText = "Taxable";
+            datagrid.Columns["is_posted"].DefaultCellStyle.NullValue = null;
+            datagrid.Columns["is_posted"].HeaderText = "Posted";
 
 
-            datagrid.Columns[6].HeaderText = "Status";
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -291,7 +292,7 @@ namespace AccountingSystem
                 ushort subsidiaryLedgerId = Convert.ToUInt16(item["id"]);
                 string debitCreditType = string.Empty;
 
-                var beginningBalanceRepository = Factory.BeginningBalancesRepository();
+                var beginningBalanceRepository = AccFactory.BeginningBalancesRepository();
                 decimal generalLedgerBalance = beginningBalanceRepository.GetSumBalanceBy_FundId_GenLedgId_Year_SubLedgId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
                 var beginningBalanceDict = beginningBalanceRepository.GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundsId, generalLedgerId, year, subsidiaryLedgerId);
 
@@ -360,7 +361,7 @@ namespace AccountingSystem
             datagrid.Columns.Clear();
             datagrid.Rows.Clear();
 
-            var dtJournals = Factory.JournalsRepository().GetRecords();
+            var dtJournals = AccFactory.JournalsRepository().GetRecords();
 
             //Image Column
             Image continuingIcon = Properties.Resources.ok14px;
@@ -590,7 +591,7 @@ namespace AccountingSystem
         {
             try
             {
-                var dtAccountableFormRepo = Factory.AccountableFormsRepository().GetRecords();
+                var dtAccountableFormRepo = AccFactory.AccountableFormsRepository().GetRecords();
                 dtAccountableFormRepo.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
 
                 combobbox.DataSource = dtAccountableFormRepo;
@@ -1835,7 +1836,7 @@ namespace AccountingSystem
 
             budgetAppropriationsModel.OthersFPPId = null;
 
-            var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
+            var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
 
             //Load by loop All Budget Appropriations Records without Others FPP 
@@ -1846,7 +1847,7 @@ namespace AccountingSystem
 
 
             //Initialize Repository Method for others fpp records
-            var dtGetRecordsOthersFPP = Factory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, year);
+            var dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, year);
 
             //Load by loop All Budget Appropriations Records with Others FPP 
             foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
@@ -1859,7 +1860,7 @@ namespace AccountingSystem
 
 
                 budgetAppropriationsModel.OthersFPPId = othersFPPID;
-                DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
+                DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
                 foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                 {
@@ -1881,27 +1882,27 @@ namespace AccountingSystem
                 decimal rowAppropriationAmount = Convert.ToDecimal(drGetViewRecordsByIds["amount"]);
                 short rowYear = Convert.ToInt16(drGetViewRecordsByIds["year"]);
                 byte rowContinuing = Convert.ToByte(drGetViewRecordsByIds["continuing"]);
-                byte rowRealignment = Convert.ToByte(Factory.BudgetRealignmentRepository().BudgetHasRealignment(rowId));
+                byte rowRealignment = Convert.ToByte(AccFactory.BudgetRealignmentRepository().BudgetHasRealignment(rowId));
                 string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                 //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                decimal totalSupplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
+                decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
 
 
                 //GET TOTAL ALLOTMENT RELEASE
-                var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
+                var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
                 decimal totalAllotmentRelease = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
                 //GET TOTAL REALIGNMENT
-                var totalRealignmentTo = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
+                var totalRealignmentTo = AccFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedToByBudgetId(rowId);
 
-                var totalRealignmentFrom = Factory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
+                var totalRealignmentFrom = AccFactory.BudgetRealignmentRepository().GetAmountOfBudgetRealignedFromByBudgetId(rowId);
 
                 //GET TOTAL APPROPRIATION
                 decimal totalAppropriationAmount = (totalSupplementalAppropriation + rowAppropriationAmount + totalRealignmentTo) - totalRealignmentFrom;
 
                 //GET TOTAL OBLIGATIONS
-                var totalObligations = Factory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
+                var totalObligations = AccFactory.ObligationRequestRepository().GetSumObligationsByBudgetAppropriationAndStatus(rowId);
                 var unobligatedBalance = totalAppropriationAmount - totalObligations;
 
                 dgvBudgetAppropriations.Rows.Add(new object[] {
@@ -2101,7 +2102,7 @@ namespace AccountingSystem
                 int? sub_fpp;
                 sub_fpp = null;
 
-                var dtGetViewRecordsByFFPIDByAllotmentClass = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
 
                 //Load by loop All Budget Appropriations Records without Others FPP 
@@ -2112,7 +2113,7 @@ namespace AccountingSystem
 
 
                 //Initialize Repository Method for others fpp records
-                DataTable dtGetRecordsOthersFPP = Factory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, Convert.ToInt16(dateAsOf.Year));
+                DataTable dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, Convert.ToInt16(dateAsOf.Year));
 
                 //Load by loop All Budget Appropriations Records with Others FPP 
                 foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
@@ -2125,7 +2126,7 @@ namespace AccountingSystem
 
 
                     sub_fpp = othersFPPID;
-                    DataTable dtGetViewRecordsByIds = Factory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
+                    DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
                     foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByIds.Rows)
                     {
@@ -2150,12 +2151,12 @@ namespace AccountingSystem
                     string remarks = drGetViewRecordsByIds["remarks"].ToString();
 
                     //GET TOTAL SUPPLEMENTAL APPROPRIATIONS
-                    decimal supplementalAppropriation = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(rowId, dateAsOf);
+                    decimal supplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(rowId, dateAsOf);
 
                     //GET TOTAL ALLOTMENT RELEASE
-                    decimal allotments = Factory.AllotmentReleaseRepository().GetSumAllotments(rowId, dateAsOf);
+                    decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(rowId, dateAsOf);
 
-                    decimal obligations = Factory.ObligationRequestRepository().GetSumObligationsByAppropriationId(rowId, dateAsOf);
+                    decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligationsByAppropriationId(rowId, dateAsOf);
 
                     //GET TOTAL APPROPRIATION
                     decimal totalAppropriationAmount = supplementalAppropriation + rowAppropriationAmount;

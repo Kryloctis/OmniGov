@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.Funds
             errorArray[0] = epCode.GetError(txtCode);
             errorArray[1] = epName.GetError(txtName);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Manage.Funds
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "fund name");
 
-            var fundsRepository = Factory.FundsRepository();
+            var fundsRepository = AccFactory.FundsRepository();
             string fundName = txtName.Text.Trim();
             bool fundNameExist;
 
@@ -71,7 +71,7 @@ namespace AccountingSystem.Views.Manage.Funds
 		{
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "fund code");
 
-            var fundsRepository = Factory.FundsRepository();
+            var fundsRepository = AccFactory.FundsRepository();
             string fundCode = txtCode.Text.Trim();
             bool fundCodeExist;
 

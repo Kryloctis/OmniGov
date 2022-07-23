@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.Funds
                     
                 };
 
-                var fundsRepository = Factory.FundsRepository();
+                var fundsRepository = AccFactory.FundsRepository();
                 return fundsRepository.Insert(fundModel);
             }
             catch (Exception ex)

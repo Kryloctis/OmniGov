@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 else
                     isDeposit = null;
 
-                Dictionary<string, string> generalLedgerDict = Factory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
+                Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(Convert.ToUInt16(generalLedgerId));
 
                 object[] accountRow;
                 if (isDebit)

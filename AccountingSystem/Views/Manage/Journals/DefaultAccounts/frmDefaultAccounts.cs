@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 cmbxFunds.Tag.ToString()
             };
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 string searchKey = txtAccounts.Text.Trim();
                 CreateDatagridViewColumns(dgAccounts);
 
-                var dtGeneralLedgerAccounts = Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
+                var dtGeneralLedgerAccounts = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(searchKey);
 
                 foreach (DataRow row in dtGeneralLedgerAccounts.Rows)
                 {
@@ -104,7 +104,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                     bool isDebit = radDebit.Checked;
 
-                    if (Factory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
+                    if (AccFactory.JournalsDefaultAccountsRepository().GeneralLedgerAccountExist(journalId, generalLedgerAccountId, fundId, isDebit)) continue;
 
                     dgAccounts.Rows.Add(new object[]
                     {
@@ -130,7 +130,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 bool isDebit = radDebit.Checked;
 
-                var dtDefaultAccounts = Factory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
+                var dtDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, isDebit);
 
                 foreach (DataRow row in dtDefaultAccounts.Rows)
                 {
@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             {
                 Helper.DatagridFullRowSelectStyle(dgAccounts, true);
                 Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
-                var dtJournals = Factory.JournalsRepository().GetRecordByID(journalId);
+                var dtJournals = AccFactory.JournalsRepository().GetRecordByID(journalId);
                 lblJournalName.Text = dtJournals["journal_name"].ToString();
                 LoadFunds();
                 LoadDefaultAccounts();
@@ -270,7 +270,7 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     journalsDefaulAccountsModelList.Add(journalsDefaulAccountsModel);
                 }
 
-                return Factory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
+                return AccFactory.JournalsDefaultAccountsRepository().Insert(journalId, fundId, isDebit, journalsDefaulAccountsModelList);
             }
             catch (Exception ex)
             {

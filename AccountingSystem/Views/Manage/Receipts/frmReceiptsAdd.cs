@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                     UserId = userId
                 };
 
-                var receiptRepository = Factory.ReceiptsRepository();
+                var receiptRepository = AccFactory.ReceiptsRepository();
                 return receiptRepository.Insert(receiptModel);
             }
             catch (Exception ex)

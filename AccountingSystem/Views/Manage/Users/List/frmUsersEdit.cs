@@ -22,9 +22,9 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             try
             {
-                var usersRepository = Factory.UsersRepository();
+                var usersRepository = AccFactory.UsersRepository();
                 var userData = usersRepository.GetRecordByID(uc.userId);
-                var dictRoles = Factory.RolesRepository().GetRecordByID(Convert.ToInt32(userData["roles_id"]));
+                var dictRoles = AccFactory.RolesRepository().GetRecordByID(Convert.ToInt32(userData["roles_id"]));
 
 
                 uc.cmbOffice.Text = dictRoles["office"];
@@ -73,9 +73,9 @@ namespace AccountingSystem.Views.Manage.Users.List
                 };
 
                 if (string.IsNullOrWhiteSpace(uc.txtPassword.Text))
-                    return Factory.UsersRepository().Update(userModel);
+                    return AccFactory.UsersRepository().Update(userModel);
                 else
-                    return Factory.UsersRepository().UpdateWithPassword(userModel);
+                    return AccFactory.UsersRepository().UpdateWithPassword(userModel);
             }
             catch (Exception ex)
             {

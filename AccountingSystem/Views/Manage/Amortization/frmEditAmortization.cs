@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             try
             {
-                var dicAmortizationRecord = Factory.AmortizationRepository().GetRecordByID(amortizationId);
+                var dicAmortizationRecord = AccFactory.AmortizationRepository().GetRecordByID(amortizationId);
 
                 string bankName = dicAmortizationRecord["bank_name"];
                 string amortizationTerm = dicAmortizationRecord["amortization_term"];

@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             try
             {
-                var dtFunds = Factory.FundsRepository().GetRecords();
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
 
@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
             try
             {
-                var dtBudgetAppropriations = Factory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
+                var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
 
 
                 foreach (DataRow row in dtBudgetAppropriations.Rows)
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     int rowFPPId = Convert.ToInt32(row["fpp_id"]);
                     string rowFPPCode = row["fpp_code"].ToString();
                     string rowFPPName = row["fpp_name"].ToString();
-                    var dictFPP = Factory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
+                    var dictFPP = AccFactory.FunctionProgramProjectRepository().GetRecordByID(rowFPPId);
                     byte rowFPPIsSpecial = Convert.ToByte(dictFPP["is_special"]);
                     byte rowIsContinuing = Convert.ToByte(row["continuing"]);
                     string rowSubFPPId = row["others_fpp_id"].ToString();
@@ -78,18 +78,18 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     decimal rowAppropriation = Convert.ToDecimal(row["amount"]);
 
                     //SUPPLEMENTED AMOUNT
-                    var dtSupplemtedAmount = Factory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, date);
+                    var dtSupplemtedAmount = AccFactory.SupplementalAppropriationsRepository().GetRecordsByBudgetAppropriationIdDateEntry(rowBudgetAppropriationId, date);
                     decimal supplementedAmount = Convert.ToDecimal(dtSupplemtedAmount.Rows.Count == 0 ? 0 : dtSupplemtedAmount.Compute("SUM(amount)", string.Empty));
 
                     decimal TotalBudgetAppropraition = rowAppropriation + supplementedAmount;
 
                     //ALLOTMENT RELEASE
-                    var dtAllotmentRelease = Factory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
+                    var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
                     decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
 
                     //OBLIGATIONS
-                    var dtObligation = Factory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, date);
+                    var dtObligation = AccFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, date);
                     decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
 
                     //UNOBLIGATED BALANCE
@@ -173,7 +173,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
                 DateTime AsOf = dtAsOf.Value;
 
-                var fundRepo = Factory.FundsRepository().GetRecordByID(fundId);
+                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),

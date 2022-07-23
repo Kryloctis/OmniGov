@@ -35,9 +35,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
             {
                 Dictionary<string, string> beginningBalanceDict = new();
                 if (uc.subsidiaryLedgerId == 0)
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
+                    beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year);
                 else
-                    beginningBalanceDict = Factory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
+                    beginningBalanceDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId(fundId, uc.generalLedgerId, year, uc.subsidiaryLedgerId);
 
                 uc.beginningBalanceId = int.Parse(beginningBalanceDict["id"]);
                 CheckedDebitCredit(beginningBalanceDict["is_debit"]);
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
                     Amount = uc.nudAmount.Value
                 };
 
-                return Factory.BeginningBalancesRepository().Update(beginningBalanceModel);
+                return AccFactory.BeginningBalancesRepository().Update(beginningBalanceModel);
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         {
             string message = "Are you sure you want to delete the balance?";
             if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                return Factory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
+                return AccFactory.BeginningBalancesRepository().DeleteById(uc.beginningBalanceId);
 
             return false;
         }

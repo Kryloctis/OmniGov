@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             try
             {
                 var uc = ucAccountable1;
-                var accRepository = Factory.AccountableFormsRepository();
+                var accRepository = AccFactory.AccountableFormsRepository();
                 var accData = accRepository.GetRecordByID(uc.accId);
                 uc.txtformno.Text = accData["acc_form_no"];
                 uc.txtformdesc.Text = accData["acc_form_desc"];
@@ -58,7 +58,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
                 };
 
-                var accrepository = Factory.AccountableFormsRepository();
+                var accrepository = AccFactory.AccountableFormsRepository();
                 return accrepository.Update(accModel);
             }
             catch (Exception ex)

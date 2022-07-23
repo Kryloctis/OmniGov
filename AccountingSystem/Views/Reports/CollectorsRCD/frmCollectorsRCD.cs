@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     Remarks = string.Empty
                 };
 
-                var collectingOfficerHasJO = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerHasJO = AccFactory.CollectingOfficerHasJobOrdersRepository();
                 var regularCollectingOfficerId = collectingOfficerHasJO.GetCollectingOfficerIDByJobOrderId(collectorsReportModel.CollectorId);
                 var isCollectorAJO = Convert.ToBoolean(regularCollectingOfficerId);
 
@@ -88,9 +88,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     collectorsReportModel.JobOrderId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 }
 
-                bool rcdDetailsUpdateSuccess = Factory.CollectorReportRepository().Update(collectorsReportModel);
+                bool rcdDetailsUpdateSuccess = AccFactory.CollectorReportRepository().Update(collectorsReportModel);
                 var collectorReportPaymentModel = new CollectorReportPaymentModel() { CollectorsReportId = uc.reportId };
-                bool isDeleteSuccess = Factory.CollectorReportPaymentsRepository().Delete(collectorReportPaymentModel);
+                bool isDeleteSuccess = AccFactory.CollectorReportPaymentsRepository().Delete(collectorReportPaymentModel);
 
                 if (rcdDetailsUpdateSuccess == false || isDeleteSuccess == false) return false;
 
@@ -115,7 +115,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     PaymentCollectionsId = PaymentCollectionsId
                 };
 
-                Factory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
+                AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
             }
         }
 
@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     Remarks = string.Empty
                 };
 
-                var collectingOfficerHasJO = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerHasJO = AccFactory.CollectingOfficerHasJobOrdersRepository();
                 var regularCollectingOfficerId = collectingOfficerHasJO.GetCollectingOfficerIDByJobOrderId(collectorId);
                 var isCollectorAJO = Convert.ToBoolean(regularCollectingOfficerId);
 
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     collectorsReportModel.JobOrderId = collectorId;  
                 }
 
-                bool rcdDetailsSaveSuccess = Factory.CollectorReportRepository().Insert(collectorsReportModel);
+                bool rcdDetailsSaveSuccess = AccFactory.CollectorReportRepository().Insert(collectorsReportModel);
                 if (!rcdDetailsSaveSuccess) 
                     return false;
 
@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         PaymentCollectionsId = PaymentCollectionsId
                     };
 
-                    Factory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
+                    AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
                 }
 
                 scope.Complete();
@@ -188,7 +188,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             var collectorId = uc.collectorId;
             var reportNumber = uc.txtReport.Text;
 
-            int collectorsReportId = Factory.CollectorReportRepository().GetReportId(collectorId, reportNumber);
+            int collectorsReportId = AccFactory.CollectorReportRepository().GetReportId(collectorId, reportNumber);
             return collectorsReportId;
         }
 
@@ -201,7 +201,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                var collectorReportRepo = Factory.CollectorReportRepository();
+                var collectorReportRepo = AccFactory.CollectorReportRepository();
                 var rcdData = collectorReportRepo.GetRecordByID(reportNo);
 
                 var jobOrderIdChecker = string.IsNullOrEmpty(rcdData["job_orders_id"]) ? "0" : rcdData["job_orders_id"];
@@ -220,7 +220,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 uc.txtReport.Text = rcdData["report_no"];
                 uc.dtRCDDate.Value = Convert.ToDateTime(rcdData["date"]);
 
-                var collectionOfPaymentReportsRepo = Factory.CollectorReportPaymentsRepository();
+                var collectionOfPaymentReportsRepo = AccFactory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
 
@@ -235,7 +235,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                switch (Factory.CollectorReportRepository().GetRCDStatus(reportNo))
+                switch (AccFactory.CollectorReportRepository().GetRCDStatus(reportNo))
                 {
                     case "pending":
                         //PENDING
@@ -291,7 +291,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             try
             {
-                var updateResult = Factory.CollectorReportRepository().SetRCDStatus(status, reportNo);
+                var updateResult = AccFactory.CollectorReportRepository().SetRCDStatus(status, reportNo);
                 return updateResult;
             }
             catch (Exception)
@@ -370,13 +370,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     string reportNo = uc.txtReport.Text.Trim();
 
                     var collectorReportPaymentModel = new CollectorReportPaymentModel() {CollectorsReportId = reportId };
-                    var collectorReportPaymentRepo = Factory.CollectorReportPaymentsRepository();
+                    var collectorReportPaymentRepo = AccFactory.CollectorReportPaymentsRepository();
                     bool isDeleteSuccess =  collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
 
                     if (isDeleteSuccess)
                     {
                         var collectorReportModel = new CollectorReportModel() { Id = reportId, ReportNo = reportNo };
-                        var collectorReportRepo = Factory.CollectorReportRepository();
+                        var collectorReportRepo = AccFactory.CollectorReportRepository();
                         return collectorReportRepo.Delete(collectorReportModel);
                     }
                 }

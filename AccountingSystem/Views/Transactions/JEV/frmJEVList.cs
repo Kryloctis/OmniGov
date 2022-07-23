@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             try
             {
-                var dtJournals = Factory.JournalsRepository().GetRecords();
+                var dtJournals = AccFactory.JournalsRepository().GetRecords();
                 dataTable = new DataView(dtJournals).ToTable(false, "id", "journal_name");
                 DataRow dr = dataTable.NewRow();
                 dr["id"] = "0";
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void LoadFunds()
         {
-            var dtFunds = Factory.FundsRepository().GetRecords();
+            var dtFunds = AccFactory.FundsRepository().GetRecords();
             DataRow dr = dtFunds.NewRow();
             dr["id"] = 0;
             dr["fund_name"] = "All";
@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 string searchTxt = txtSearch.Text;
                 short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
 
-                var dataTable = Factory.JEVRepository().GetViewRecords_By_Status_JournalName_Search_Month_Year(jevStatus, searchTxt, _journalName, _fundName, month, _year);
+                var dataTable = AccFactory.JEVRepository().GetViewRecords_By_Status_JournalName_Search_Month_Year(jevStatus, searchTxt, _journalName, _fundName, month, _year);
 
                 foreach (DataRow row in dataTable.Rows)
                 {
@@ -189,7 +189,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     string rowExplanation = row["explanation"].ToString();
                     string rowCreatedAt = row["created_at"].ToString();
                     string rowCreatedById = row["created_by"].ToString();
-                    var dictUserCreatedBy = Factory.UsersRepository().GetUserByID(Convert.ToByte(rowCreatedById));
+                    var dictUserCreatedBy = AccFactory.UsersRepository().GetUserByID(Convert.ToByte(rowCreatedById));
                     var rowCreatedByName = string.IsNullOrEmpty(rowCreatedById) ? string.Empty : Helper.GetUserDataById(Convert.ToInt32(rowCreatedById))["user_full_name"];
                     string rowUpdatedAt = row["updated_at"].ToString();
                     string rowUpdatedById = row["updated_by"].ToString();

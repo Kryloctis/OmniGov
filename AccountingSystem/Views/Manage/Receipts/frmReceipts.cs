@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                var dtReceipts = Factory.ReceiptsRepository().GetRecords();
+                var dtReceipts = AccFactory.ReceiptsRepository().GetRecords();
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
             }
             catch (Exception ex) 
@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-                var dtReceipts = Factory.ReceiptsRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+                var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsBySearch(txtSearch.Text.Trim());
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
                 
             }
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             Helper.EnableDisableToolStripButtons(dgReceipts, btnEdit, btnDelete);
 
             int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells[0].Value);
-            bool hasIssueance = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
+            bool hasIssueance = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
             
             btnDelete.Enabled = !hasIssueance;
         }
@@ -84,14 +84,14 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             if (Helper.MessageBoxConfirmDelete(dgReceipts.SelectedRows.Count))
             {
-                var receiptsRepository = Factory.ReceiptsRepository();
+                var receiptsRepository = AccFactory.ReceiptsRepository();
                 var receiptModel = new List<ReceiptsModel>();
 
                 foreach (DataGridViewRow row in dgReceipts.SelectedRows)
                 {
                     int receiptId = int.Parse(row.Cells[0].Value.ToString());
 
-                    var receiptIsUsed = Factory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
+                    var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
 
                     if (!receiptIsUsed)
                         receiptModel.Add(new ReceiptsModel() { Id = receiptId });

@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             errorArray[2] = epLastName.GetError(txtLastName);
             errorArray[3] = epJobTitle.GetError(txtJobTitle);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             try
             {
-                var userRepository = Factory.UsersRepository();
+                var userRepository = AccFactory.UsersRepository();
                 var data = userRepository.GetUserByID(id);
                 if (data.Count > 0)
                 {

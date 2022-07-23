@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             try
             {
-                var disbursingOfficerDict = Factory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
+                var disbursingOfficerDict = AccFactory.DisbursingOfficerRepository().GetRecordByID(uc.disbursingOfficerId);
 
                 uc.txtPrefix.Text = disbursingOfficerDict["prefix"];
                 uc.txtFirstName.Text = disbursingOfficerDict["first_name"];
@@ -74,7 +74,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     UserId = uc.UserId
                 };
 
-                return Factory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
+                return AccFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
             }
             catch (Exception ex)
             {

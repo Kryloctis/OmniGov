@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     UserId = uc.UserId
                 };
 
-                return Factory.DisbursingOfficerRepository().Insert(disbursingOfficerModel);
+                return AccFactory.DisbursingOfficerRepository().Insert(disbursingOfficerModel);
             }
             catch (Exception ex)
             {

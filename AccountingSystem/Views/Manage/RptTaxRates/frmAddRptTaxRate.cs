@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     Rate = uc.nudRate.Value
                 };
 
-                return Factory.rptTaxRatesRepository().Insert(model);
+                return AccFactory.rptTaxRatesRepository().Insert(model);
             }
             catch (Exception ex)
             {

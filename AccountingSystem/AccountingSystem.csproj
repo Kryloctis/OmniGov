@@ -151,6 +151,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ACC.Data\ACC.Data.csproj" />
+    <ProjectReference Include="..\RPT.Data\RPT.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

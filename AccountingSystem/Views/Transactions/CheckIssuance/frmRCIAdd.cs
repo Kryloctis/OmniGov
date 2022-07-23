@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
                 };
 
-                var rcirepository = Factory.RCIRepository();
+                var rcirepository = AccFactory.RCIRepository();
                 return rcirepository.Insert(rciModel);
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                string lastRecentRCIId = AccFactory.RCIRepository().GetRecentRCIId();
 
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
                 string obligationNo = String.Empty;
@@ -84,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row["obligation_no"].ToString();
-                    Factory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
                 }
             }
             catch (Exception)
@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             try
             {
-                string lastRecentRCIId = Factory.RCIRepository().GetRecentRCIId();
+                string lastRecentRCIId = AccFactory.RCIRepository().GetRecentRCIId();
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
 
                 string deductionDescription = String.Empty; 
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                     deductionAmount = Convert.ToDecimal(row[1].ToString());
                     uc.totalDeduction += deductionAmount;
 
-                    Factory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, deductionAmount);
+                    AccFactory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, deductionAmount);
                 } 
             }
             catch (Exception)

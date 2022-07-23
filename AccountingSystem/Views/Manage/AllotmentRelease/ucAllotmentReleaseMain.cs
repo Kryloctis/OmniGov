@@ -37,9 +37,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             DataTable dtFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
 
             return dtFPP;
         }
@@ -119,9 +119,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             var fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
             if (string.IsNullOrWhiteSpace(cmbxSubFPP.Text))
-                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
+                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId);
             else
-                dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
+                dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPIdCodeName(fppId, cmbxSubFPP.Text);
 
             return dtSubFPP;
         }
@@ -223,14 +223,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[3] = epPurpose.GetError(txtPurpose);
             errorArray[4] = dgAllotmentRelease.Tag.ToString();
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void AutoGenerateSeriesNo()
         {
             try
             {
-                mskSeriesNo.Text = Factory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
+                mskSeriesNo.Text = AccFactory.AllotmentReleaseRepository().GetLeastAllotmentReleaseNumber();
             }
             catch (Exception ex)
             {
@@ -240,7 +240,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadFunds()
         {
-            var funds = Factory.FundsRepository().GetRecords();
+            var funds = AccFactory.FundsRepository().GetRecords();
 
             flowLayoutPanelFunds.Controls.Clear();
 
@@ -273,7 +273,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         internal void LoadAllotmentClasses()
         {
-            var allotmentClasses = Factory.AllotmentClassesRepository().GetRecords();
+            var allotmentClasses = AccFactory.AllotmentClassesRepository().GetRecords();
 
             flowLayoutPanelAllotmentClass.Controls.Clear();
 
@@ -459,7 +459,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             errorArray[0] = epFPP.GetError(cmbxFPP);
             errorArray[1] = epSubFPP.GetError(cmbxSubFPP);
 
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool Validation()
@@ -648,9 +648,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 bool allotmentReleaseNoExist;
 
                 if (allotmentReleaseId == 0)
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
+                    allotmentReleaseNoExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseNo, dateIssued);
                 else
-                    allotmentReleaseNoExist = Factory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
+                    allotmentReleaseNoExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
 
 
                 if (allotmentReleaseNoExist)

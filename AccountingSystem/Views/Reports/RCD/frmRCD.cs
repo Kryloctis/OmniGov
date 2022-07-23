@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var fundrepo = Factory.FundsRepository();
+                var fundrepo = AccFactory.FundsRepository();
                 var dtfunds = fundrepo.GetRecords();
 
                 cmbfunds.DataSource = dtfunds;
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var generalCollectionsPaymentRepo = Factory.GeneralCollectionsPaymentsRepository();
+                var generalCollectionsPaymentRepo = AccFactory.GeneralCollectionsPaymentsRepository();
                 var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
 
                 string reportId;
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
-                var rcdRepository = Factory.CollectorReportRepository();
+                var rcdRepository = AccFactory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(reportNo);
 
 
@@ -109,7 +109,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
 
 
-                var colectorRepository = Factory.CollectorReportRepository();
+                var colectorRepository = AccFactory.CollectorReportRepository();
                 var dtrcd = new DataTable();
                 dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
                 HelperLoadRecords.RCDDatagridView(dtrcd, dgListOfApprovedReport);
@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Reports.RCD
                     Userid = Helper.UserId
                 };
 
-                bool rcdSaveSuccess = Factory.GeneralCollectionsRepository().Insert(generalCollectionModel);
+                bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
                 if (!rcdSaveSuccess) return false;
 
                 var generalCollectionsId = GetGeneralCollectionsId();
@@ -177,7 +177,7 @@ namespace AccountingSystem.Views.Reports.RCD
                         GeneralCollectionsId = generalCollectionsId
                     };
 
-                    Factory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
+                    AccFactory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
                 }
 
                 scope.Complete();
@@ -188,7 +188,7 @@ namespace AccountingSystem.Views.Reports.RCD
         private int GetGeneralCollectionsId()
         {
             var rcdNo = txtRCDNo.Text;
-            int generalCollectionId = Factory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
+            int generalCollectionId = AccFactory.GeneralCollectionsRepository().GetGeneralCollectionId(rcdNo);
             return generalCollectionId;
         }
 
@@ -261,7 +261,7 @@ namespace AccountingSystem.Views.Reports.RCD
             errorArray[0] = epRCDNo.GetError(txtRCDNo);
             errorArray[1] = epDgCollectorRepor.GetError(dgListOfApprovedReport);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 

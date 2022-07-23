@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 epObligationNo.GetError(txtObligationNo)
             };
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
 
         }
@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             dataTable.Columns.Add("sub_name");
             ushort generalLedgerId = Convert.ToUInt16(cmbxAccount.SelectedValue);
 
-            var dtSubsidiaryLedger = Factory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
+            var dtSubsidiaryLedger = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordsByFundAndGeneralLedger(fundId, generalLedgerId);
 
             foreach (DataRow dataRow in dtSubsidiaryLedger.Rows)
             {
@@ -118,9 +118,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbFPP.Text);
 
             return dtFPP;
         }
@@ -182,9 +182,9 @@ namespace AccountingSystem.Views.Transactions.JEV
         private DataTable DatatableAccounts()
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
-                return Factory.GeneralLedgerAccountsRepository().GetViewRecords();
+                return AccFactory.GeneralLedgerAccountsRepository().GetViewRecords();
             else
-                return Factory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
+                return AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
         }
 
         private void Set_Default_Account_Of_CashReceiptsJournal()
@@ -317,7 +317,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 int generalLedgerId = Convert.ToInt32(cmbxAccount.SelectedValue);
 
-                var idExist = Factory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
+                var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
 
                 if (!idExist)
                 {

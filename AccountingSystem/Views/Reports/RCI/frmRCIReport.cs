@@ -31,13 +31,13 @@ namespace AccountingSystem.Views.Reports.RCI
             var errorArray = new string[1];
             errorArray[0] = errorProvider1.GetError(cmbBanks);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
         private void LoadBanks()
         {
-            cmbBanks.DataSource = Factory.BanksRepository().GetRecords();
+            cmbBanks.DataSource = AccFactory.BanksRepository().GetRecords();
             cmbBanks.ValueMember = "id";
             cmbBanks.DisplayMember = "account_no";
         }
@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Reports.RCI
 
 
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = Factory.RCIRepository().GetRecordsByBankIdAndMonth(bankId, dateYearMonth);
+            var dt = AccFactory.RCIRepository().GetRecordsByBankIdAndMonth(bankId, dateYearMonth);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -87,7 +87,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     return;
                 }
 
-                var dictDepartmentHeadSignatory = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
+                var dictDepartmentHeadSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Department Head", "Report of Check Issued");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -110,14 +110,14 @@ namespace AccountingSystem.Views.Reports.RCI
                 ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
 
 
-                var dictAdministrativeOfficer = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
+                var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
                 string administrativeOfficerSignatory = string.Empty;
                 string administrativeOfficerSignatoryTitle = string.Empty;
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
                 var lguDetails = Helper.LGUDetails();
 
-                var bankrepo = Factory.BanksRepository();
+                var bankrepo = AccFactory.BanksRepository();
                 var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
                 var fund = fundName;
 

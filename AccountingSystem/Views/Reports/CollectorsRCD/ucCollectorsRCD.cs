@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             errorArray[1] = epCollector.GetError(cmbCollector);
             errorArray[2] = epPayments.GetError(dgPayments);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
         
@@ -64,8 +64,8 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             try
             {
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
                 DataTable dtCollectors = new();
                 var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
@@ -92,20 +92,20 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 if (cmbCollector.Items.Count == 0) return;
 
-                var usersRepo = Factory.UsersRepository();
+                var usersRepo = AccFactory.UsersRepository();
                 if (usersRepo.LinkedCollector(Helper.UserId) || usersRepo.LinkedJobOrder(Helper.UserId))
                 {
                     Dictionary<string, string> collectorDict = new();
 
                     if (Helper.IsJobOrder(Helper.UserId))
                     {
-                        var jobOrderRepo = Factory.JobOrderRepository();
+                        var jobOrderRepo = AccFactory.JobOrderRepository();
                         collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
                         cmbCollector.SelectedValue = collectorDict["id"];
                     }
                     else
                     {
-                        var colRepository = Factory.CollectingOfficerRepository();
+                        var colRepository = AccFactory.CollectingOfficerRepository();
                         collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
                         cmbCollector.SelectedValue = collectorDict["id"];
                     }
@@ -124,7 +124,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal void LoadFunds()
         {
-            var funds = Factory.FundsRepository().GetRecords();
+            var funds = AccFactory.FundsRepository().GetRecords();
 
             foreach (DataRow fund in funds.Rows)
             {
@@ -240,9 +240,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             
 
             if (isSaveFunction == true)
-                reportNoExist  = Factory.CollectorReportRepository().ReportNumberExist(reportNo);
+                reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
             else
-                reportNoExist  = Factory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
+                reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
             if (reportNoExist == true)
             {

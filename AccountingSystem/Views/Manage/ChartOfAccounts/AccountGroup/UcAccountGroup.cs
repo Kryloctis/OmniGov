@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             errorArray[0] = epCode.GetError(txtCode);
             errorArray[1] = epName.GetError(txtName);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
 
-            _accountGroupRepository = Factory.AccountGroupRepository();
+            _accountGroupRepository = AccFactory.AccountGroupRepository();
             string accountGroupCode = txtCode.Text.Trim();
             bool codeExist;
 
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
 
-            _accountGroupRepository = Factory.AccountGroupRepository();
+            _accountGroupRepository = AccFactory.AccountGroupRepository();
             string accountGroupName = txtName.Text.Trim();
             bool nameExist;
 

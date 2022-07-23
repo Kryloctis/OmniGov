@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                     othersFPPName = uc.txtName.Text.Trim()
                 };
 
-                return Factory.SubFPPRepository().Insert(othersFPPModel);
+                return AccFactory.SubFPPRepository().Insert(othersFPPModel);
             }
             catch (Exception ex)
             {

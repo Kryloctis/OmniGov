@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var banksRepository = Factory.BanksRepository();
+                var banksRepository = AccFactory.BanksRepository();
                 var dtBanks = banksRepository.GetRecords();
                 HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
 
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.Banks
                             banksModelList.Add(new BanksModel() { Id = bankId });
                         }
 
-                        var banksRepository = Factory.BanksRepository();
+                        var banksRepository = AccFactory.BanksRepository();
                         _ = banksRepository.Delete(banksModelList);
                         LoadRecords();
                     }
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.Banks
                try
                {
                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                   var dtBanks = Factory.BanksRepository().GetRecordsBySearch(searchkey);
+                   var dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchkey);
                    HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
 
                    lblRecordCount.Text = dgBanks.Rows.Count.ToString();

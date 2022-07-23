@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.Journals
             var errorArray = new string[1];
             errorArray[0] = epName.GetError(txtName);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.Journals
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "journal name");
 
-            var journalsRepository = Factory.JournalsRepository();
+            var journalsRepository = AccFactory.JournalsRepository();
             string journalName = txtName.Text.Trim();
             bool journalNameExist;
 

@@ -39,7 +39,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                     UserId = _uc.UserId
                 };
 
-                var repository = Factory.CollectingOfficerRepository();
+                var repository = AccFactory.CollectingOfficerRepository();
                 return repository.Insert(model);
             }
             catch (Exception ex)

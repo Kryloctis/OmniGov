@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
                     AccountGroupName = uc.txtName.Text.Trim()
                 };
 
-                var accountGroupRepository = Factory.AccountGroupRepository();
+                var accountGroupRepository = AccFactory.AccountGroupRepository();
                 return accountGroupRepository.Insert(accountGroupModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

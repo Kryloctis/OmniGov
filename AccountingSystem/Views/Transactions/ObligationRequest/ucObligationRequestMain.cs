@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             try
             {
-                mskTxtObligationNoSeries.Text = Factory.ObligationRequestRepository().GetLeastAllotmentReleaseNumber();
+                mskTxtObligationNoSeries.Text = AccFactory.ObligationRequestRepository().GetLeastAllotmentReleaseNumber();
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             errorArray[4] = epExplanation.GetError(txtExplanation);
             errorArray[5] = dgObligationRequests.Tag == null ? string.Empty : dgObligationRequests.Tag.ToString();
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -184,9 +184,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             DataTable dtFPP;
 
             if (string.IsNullOrWhiteSpace(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text.Trim());
 
             return dtFPP;
         }
@@ -262,7 +262,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         //FUNDS
         internal void LoadFunds()
         {
-            var funds = Factory.FundsRepository().GetRecords();
+            var funds = AccFactory.FundsRepository().GetRecords();
 
             foreach (DataRow fund in funds.Rows)
             {
@@ -308,7 +308,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         //ALLOTMENT CLASSES
         internal void LoadAllotmentClasses()
         {
-            var dtAllotmentClass = Factory.AllotmentClassesRepository().GetRecords();
+            var dtAllotmentClass = AccFactory.AllotmentClassesRepository().GetRecords();
 
             foreach (DataRow allotmentClass in dtAllotmentClass.Rows)
             {
@@ -352,7 +352,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         //GENERATE OBLIGATION REQUEST NO.
         internal string GenerateObligationRequestNoTemplate()
         {
-            string fundCode = Factory.FundsRepository().GetRecordByID(fundId)["fund_code"];
+            string fundCode = AccFactory.FundsRepository().GetRecordByID(fundId)["fund_code"];
 
             string obligationNoTemplate = $"{dtDateRequest.Value.ToString("MM")}-{dtDateRequest.Value.ToString("yy")}-{fundCode}";
 
@@ -381,7 +381,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             var errorArray = new string[1];
             errorArray[0] = epFPP.GetError(cmbxFPP);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -438,7 +438,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
 
                 int budgetAppropriationId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["budget_appropriation_id"].Value);
-                var budgetAppropriationsDict = Factory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
+                var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 var subFPP = budgetAppropriationsDict["others_fpp_id"];
                 decimal amount = Convert.ToDecimal(dgObligationRequests.Rows[rowIndex].Cells["obligation_amount"].Value);
@@ -551,9 +551,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 bool obligationRequestNoExist;
 
                 if (obligationRequestId == 0)
-                    obligationRequestNoExist = Factory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
+                    obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationNo);
                 else
-                    obligationRequestNoExist = Factory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
+                    obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
 
 
                 if (obligationRequestNoExist)

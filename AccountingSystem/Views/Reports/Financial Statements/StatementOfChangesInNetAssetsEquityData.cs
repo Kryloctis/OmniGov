@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
         private decimal GetStartingBalance(byte fundId, DateTime date)
         {
-            var dictBeginningBalance = Factory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, 331, date);
+            var dictBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_Date_SubLedgId(fundId, 331, date);
             decimal beginningBalanceDebit = dictBeginningBalance["beginning_balance_debit"];
             decimal beginningBalanceCredit = dictBeginningBalance["beginning_balance_credit"];
             decimal beginningBalance = beginningBalanceDebit - beginningBalanceCredit;

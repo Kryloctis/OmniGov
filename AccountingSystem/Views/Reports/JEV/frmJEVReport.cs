@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Reports.JEV
             switch (_journalId)
             {
                 case 1:
-                    journalDict = Factory.GeneralJournalRepository().GetViewRecordByJevID(_jevId);
+                    journalDict = AccFactory.GeneralJournalRepository().GetViewRecordByJevID(_jevId);
                     paramCheckDate = "";
                     paramOfficer = "";
                     paramCheckNo = journalDict["check_no"];
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     SetJournalData("", "Check No. :", "OR No. :", "DV No. :", "");
                     return;
                 case 2:
-                    journalDict = Factory.CashReceiptsJournalRepository().GetViewRecordByJevID(_jevId);
+                    journalDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(_jevId);
 
 
                     paramCheckDate = Convert.ToDateTime(journalDict["or_date"]).ToString("MM/dd/yy");
@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 case 3:     //NO OTHER FIELDS ASIDE FROM DATE OF ENTRY
                     return;
                 case 4:
-                    journalDict = Factory.CashDisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
+                    journalDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
                     paramCheckDate = Convert.ToDateTime(journalDict["date_paid"]).ToString("MM/dd/yy");
                     paramCheckNo = "";
                     paramORNo = "";
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
                     return;
                 case 5:
-                    journalDict = Factory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
+                    journalDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
 
                     paramCheckDate = Convert.ToDateTime(journalDict["check_date"]).ToString("MM/dd/yy");
                     paramCheckNo = journalDict["check_no"];
@@ -99,7 +99,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     return;
 
                 case 6:
-                    journalDict = Factory.ADADisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
+                    journalDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
                     SetJournalData("", "", "ADA No. :", "DV No. :", "");
                     return;
                 default:
@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Reports.JEV
                 if (_jevId != 0)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    var data = Factory.JEVRepository().GetRecordByID(_jevId);
+                    var data = AccFactory.JEVRepository().GetRecordByID(_jevId);
 
                     var lguDetails = Helper.LGUDetails();
 
@@ -139,8 +139,8 @@ namespace AccountingSystem.Views.Reports.JEV
                     var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
 
-                    var dictJev = Factory.JEVRepository().GetRecordByID(_jevId);
-                    var dictUser = Factory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
+                    var dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
+                    var dictUser = AccFactory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
 
                     SetJournalCustomFields();
 
@@ -201,7 +201,7 @@ namespace AccountingSystem.Views.Reports.JEV
         {
             var dtJEVAccounts = new dsLFS.dtJournalVoucherDataTable();
 
-            var dtJEVAccountsFromDB = Factory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
+            var dtJEVAccountsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByJevId(_jevId);
 
             byte i = 0;
 
@@ -268,7 +268,7 @@ namespace AccountingSystem.Views.Reports.JEV
             var year = (ushort)nudYear.Value;
             var journalId = (byte)(cmbJournal.SelectedIndex + 1);
 
-            var dtJEV = Factory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
+            var dtJEV = AccFactory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
             HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
 
             cbMonths.SelectedIndexChanged += new EventHandler(cbMonths_SelectedIndexChanged);
@@ -296,7 +296,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void LoadJournals()
         {
-            cmbJournal.DataSource = Factory.JournalsRepository().GetRecords();
+            cmbJournal.DataSource = AccFactory.JournalsRepository().GetRecords();
             cmbJournal.ValueMember = "id";
             cmbJournal.DisplayMember = "journal_name";
         }

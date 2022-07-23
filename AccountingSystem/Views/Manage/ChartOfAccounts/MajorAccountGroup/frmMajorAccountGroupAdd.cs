@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
                     MajorAccountGroupName = uc.txtName.Text.Trim()
                 };
 
-                var majorAccountGroupRepository = Factory.MajorAccountGroupRepository();
+                var majorAccountGroupRepository = AccFactory.MajorAccountGroupRepository();
                 return majorAccountGroupRepository.Insert(majorAccountGroupModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

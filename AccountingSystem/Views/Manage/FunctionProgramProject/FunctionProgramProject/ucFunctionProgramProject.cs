@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             errorArray[1] = epName.GetError(txtName);
             errorArray[2] = epServiceName.GetError(cmbFunctionalClassificationService);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                 dtServiceName.Columns.Add("id");
                 dtServiceName.Columns.Add("service_name");
 
-                foreach (DataRow item in Factory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
+                foreach (DataRow item in AccFactory.FunctionalClassificationServiceRepository().GetViewRecords().Rows)
                 {
                     string serviceName = $"{item["functional_classifications_sector_code"]} - {item["service_name"]}";
 
@@ -101,8 +101,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                     return false;
                 }
 
-                bool codeExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) :
-                                              Factory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), FppID);
+                bool codeExist = FppID == 0 ? AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) :
+                                              AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), FppID);
 
                 if (codeExist)
                 {
@@ -132,8 +132,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
                     return false;
                 }
 
-                bool nameExist = FppID == 0 ? Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) :
-                                              Factory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, FppID);
+                bool nameExist = FppID == 0 ? AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) :
+                                              AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, FppID);
 
                 if (nameExist)
                 {

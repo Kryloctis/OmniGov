@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RPT.Data
 {
-    public class Factory
+    public class RptFactory
     {
         private static MySqlGenericCommands mySqlGenericCommandsRPT = new MySqlGenericCommands("RealPropertyTaxInstance");
 

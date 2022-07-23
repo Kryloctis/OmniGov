@@ -36,11 +36,11 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
             try
             {
                 Cursor = Cursors.WaitCursor;
-                string accountableOfficer = Factory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
+                string accountableOfficer = AccFactory.UsersRepository().GetCollectorNameByUserId(Helper.UserId);
                 string verificationSignatory = string.Empty;
                 string verificationSignatoryTitle = string.Empty;
 
-                var dictVerification = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
+                var dictVerification = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Verification and Acknowledgement", "Report of Collections and Deposits");
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
-            DataTable dt = Factory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
+            DataTable dt = AccFactory.GeneralCollectionsDepositsRepository().GetCollectionsDepositsByRCDNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {
@@ -139,7 +139,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable CollectorsReports()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
-            DataTable dt = Factory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
+            DataTable dt = AccFactory.CollectorReportRepository().GetCollectorsReportByReportNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {
@@ -164,7 +164,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable CollectionDetails()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectionsDataTable();
-            DataTable dt = Factory.CollectorReportPaymentsRepository().GetCollectorsReportByReportNo(_reportNumber);
+            DataTable dt = AccFactory.CollectorReportPaymentsRepository().GetCollectorsReportByReportNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {
@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable ReportDetails()
         {
             DataTable dtFromDataSource = new dsLFS.dtRCDDetailsDataTable();
-            DataTable dt = Factory.GeneralCollectionsRepository().GetRecordsByRCDNo(_reportNumber);
+            DataTable dt = AccFactory.GeneralCollectionsRepository().GetRecordsByRCDNo(_reportNumber);
 
             if (dt.Rows.Count != 0)
             {
@@ -206,7 +206,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable DataTableForms(int id)
         {
             var dtPC = new dsLFS.dtRCDFormsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByForms(Convert.ToInt32(_reportNumber));
+            var dt = AccFactory.GeneralCollectionsRepository().GetRecordByForms(Convert.ToInt32(_reportNumber));
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -226,7 +226,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable DataTableCollections(int rcdNo)
         {
             var dtPC = new dsLFS.dtRCDCollectionsDataTable();
-            var dt = Factory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-002");
+            var dt = AccFactory.GeneralCollectionsPaymentsRepository().GetCollectionPaymentByRCDNo("RCD-002");
 
             if (dt.Rows.Count > 0)
             {
@@ -247,7 +247,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         private DataTable DataTableDeposits(int id)
         {
             var dtPC = new dsLFS.dtRemittanceDepositsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByDeposits(2);
+            var dt = AccFactory.GeneralCollectionsRepository().GetRecordByDeposits(2);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -268,7 +268,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
         {
 
             var dtRC = new dsLFS.dtReceiptsDataTable();
-            var dt = Factory.GeneralCollectionsRepository().GetRecordByReceipts(id);
+            var dt = AccFactory.GeneralCollectionsRepository().GetRecordByReceipts(id);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)

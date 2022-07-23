@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
 
         private void LoadSelectedAmortizationSchedule() 
         {
-            var dicAmortizationScheduleRecord = Factory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
+            var dicAmortizationScheduleRecord = AccFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
 
             uc.dtDate.Value = Convert.ToDateTime(dicAmortizationScheduleRecord["date"]);
             uc.nudPrincipal.Value = Convert.ToDecimal(dicAmortizationScheduleRecord["principal_amount"]);

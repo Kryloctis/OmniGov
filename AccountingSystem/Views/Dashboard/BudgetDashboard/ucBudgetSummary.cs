@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             var errorArray = new string[1];
 
             errorArray[0] = cmbxFPP.Tag.ToString();
-            return Factory.CreateErrors(errorArray).GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private bool isValidated()
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
 
         internal void LoadFunds()
         {
-            cmbxFunds.DataSource = Factory.FundsRepository().GetRecords();
+            cmbxFunds.DataSource = AccFactory.FundsRepository().GetRecords();
             cmbxFunds.DisplayMember = "fund_name";
             cmbxFunds.ValueMember = "id";
         }
@@ -96,9 +96,9 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             DataTable dtFPP;
 
             if (string.IsNullOrEmpty(cmbxFPP.Text))
-                dtFPP = Factory.FunctionProgramProjectRepository().GetViewRecords();
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetViewRecords();
             else
-                dtFPP = Factory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
+                dtFPP = AccFactory.FunctionProgramProjectRepository().GetRecordsByCodeName(cmbxFPP.Text);
 
             return dtFPP;
         }
@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             DataTable dtSubFPP;
             int fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
 
-            dtSubFPP = Factory.SubFPPRepository().GetRecordsByFPPId(fppId);
+            dtSubFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(fppId);
 
             return dtSubFPP;
         }
@@ -210,9 +210,9 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-                decimal appropriations = Factory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+                decimal appropriations = AccFactory.BudgetAppropriationsRepository().GetSumBudgetAppropriations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
-                decimal supplementalAppropriations = Factory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+                decimal supplementalAppropriations = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_FppId_SubFPPId_DateEntry_AllotmentClassId_IsContinuing(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
                 decimal totalAppropriations = appropriations + supplementalAppropriations;
 
@@ -237,7 +237,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-                decimal allotments = Factory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+                decimal allotments = AccFactory.AllotmentReleaseRepository().GetSumAllotments(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
                 return allotments;
             }
@@ -260,7 +260,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-                decimal obligations = Factory.ObligationRequestRepository().GetSumObligations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
+                decimal obligations = AccFactory.ObligationRequestRepository().GetSumObligations(fppId, subFPPId, fundId, DateAsOf.Date, allotmentClassId, isContinuing);
 
                 return obligations;
             }

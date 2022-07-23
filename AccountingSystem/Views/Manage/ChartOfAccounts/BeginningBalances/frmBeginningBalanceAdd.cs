@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                     Amount = uc.nudAmount.Value
                 };
 
-                return Factory.BeginningBalancesRepository().Insert(beginningBalanceModel);
+                return AccFactory.BeginningBalancesRepository().Insert(beginningBalanceModel);
             }
             catch (Exception ex)
             {

@@ -45,7 +45,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     Rate = uc.nudRate.Value
                 };
 
-                return Factory.rptDiscountRepository().Insert(model);
+                return AccFactory.rptDiscountRepository().Insert(model);
             }
             catch (Exception ex)
             {

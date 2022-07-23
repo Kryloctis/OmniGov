@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             try
             {
                 var uc = ucAllotmentClasses1;
-                var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
                 var allotmentData = allotmentClassesRepository.GetRecordByID(uc.allotmentId);
 
                 uc.txtName.Text = allotmentData["allotment_name"];
@@ -62,7 +62,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
                 };
 
-                var allotmentClassesRepository = Factory.AllotmentClassesRepository();
+                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
                 return allotmentClassesRepository.Update(allotmentModel);
             }
             catch (Exception ex)

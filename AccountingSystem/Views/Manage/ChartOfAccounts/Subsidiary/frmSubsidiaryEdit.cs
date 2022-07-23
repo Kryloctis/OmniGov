@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             try
             {
                 var uc = ucSubsidiary1;
-                Dictionary<string, string> data = Factory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                Dictionary<string, string> data = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
 
                 uc.txtCode.Text = data["sub_code"];
                 uc.txtName.Text = data["sub_name"];
@@ -67,7 +67,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     Contact = uc.txtContact.Text.Trim()
                 };
 
-                return Factory.SubsidiaryLedgerAccountsRepository().Update(subsidiaryLedgerAccountsModel);
+                return AccFactory.SubsidiaryLedgerAccountsRepository().Update(subsidiaryLedgerAccountsModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 

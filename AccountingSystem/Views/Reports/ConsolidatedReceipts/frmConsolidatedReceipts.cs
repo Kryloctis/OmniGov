@@ -27,7 +27,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         {
 
             var dtConsolidatedReceipts = new dsLFS.dtConsolidatedReceiptsDataTable();
-            var dtConsolidatedReceiptsFromDB = Factory.GeneralCollectionsRepository().GetRecordsOfConsolidatedReceiptsByEndingDate(date);
+            var dtConsolidatedReceiptsFromDB = AccFactory.GeneralCollectionsRepository().GetRecordsOfConsolidatedReceiptsByEndingDate(date);
 
             if (dtConsolidatedReceiptsFromDB.Rows.Count == 0) return dtConsolidatedReceipts;
         
@@ -62,9 +62,9 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 string treasurer = string.Empty;
                 string treasurerTitle = string.Empty;
 
-                var dictCertifiedCorrect = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
+                var dictCertifiedCorrect = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Certified Correct", "Consolidated Report of Accountability for Accountable Forms");
 
-                var dictTreasurer = Factory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
+                var dictTreasurer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Treasurer", "Consolidated Report of Accountability for Accountable Forms");
 
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {

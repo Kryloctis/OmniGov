@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[7] = epCashTicketAmount.GetError(txtCashTicketsAmount);
             errorArray[8] = epORAmount.GetError(txtAmount);
 
-            IError _errors = Factory.CreateErrors(errorArray);
+            IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
                 var dtAccountableForms = receiptIssuedRepo.GetIssuedReceiptByCollectorId(collectorsId);
 
                 
@@ -100,13 +100,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void LoadAccountableForms()
         {
-            var accountableFormsDt = Factory.AccountableFormsRepository().GetRecords();
+            var accountableFormsDt = AccFactory.AccountableFormsRepository().GetRecords();
             HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, accountableFormsDt);
         }
 
         internal void LoadFunds()
         {
-            var fundDt = Factory.FundsRepository().GetRecords();
+            var fundDt = AccFactory.FundsRepository().GetRecords();
             HelperLoadRecords.FundsComboBox(fundDt, cmbFund, "fund_name", "id");
         }
 
@@ -115,8 +115,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 DataTable dtCollector;
-                var collectingOfficerRepository = Factory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = Factory.CollectingOfficerHasJobOrdersRepository();
+                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
+                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
                 if (cbCollectorTypeJO.Checked)
                     dtCollector = collectingOfficerHasJORepo.GetRecords();
@@ -137,7 +137,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 if (table.Equals("ledger"))
                 {
-                    var ledgerRepository = Factory.GeneralLedgerAccountsRepository();
+                    var ledgerRepository = AccFactory.GeneralLedgerAccountsRepository();
                     var ledgerData = ledgerRepository.GetRecordByID(Id);
                     generalLedgerId = Id;
                     cmbAccount.Text = String.Format("{0} - {1}", ledgerData["ledger_code"], ledgerData["ledger_name"]);
@@ -149,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             if (cmbCollector.Items.Count == 0) return;
 
-            var usersRepo = Factory.UsersRepository();
+            var usersRepo = AccFactory.UsersRepository();
             Dictionary<string, string> collectorDict = new();
 
             if (usersRepo.LinkedCollector(Helper.UserId))
@@ -157,7 +157,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cmbCollector.Enabled = false;
                 cbCollectorTypeJO.Enabled = false;
 
-                collectorDict = Factory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                collectorDict = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
                 cmbCollector.SelectedValue = collectorDict["id"];
             }
 
@@ -167,7 +167,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 cbCollectorTypeJO.Enabled = false;
                 cbCollectorTypeJO.Checked = true;
 
-                collectorDict = Factory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                collectorDict = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
                 cmbCollector.SelectedValue = collectorDict["id"];
             }
 
@@ -184,7 +184,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectingOfficerId = Convert.ToInt32(cmbCollector.SelectedValue).ToString();
             var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
 
-            var dtReceiptIssued = Factory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
+            var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
             if (dtReceiptIssued.Rows.Count != 0)
             {
                 serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
@@ -283,7 +283,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
                 var paymentCollectionId = this.paymentCollectionId;
 
-                var paymentCollectionRepo = Factory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
 
 
                 bool isReceiptRecorded;
@@ -405,7 +405,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectorId = collectingOfficerDRV[0].ToString();
             var accountableFormId = accountableFormDRV[0].ToString();
 
-            var receiptIssuedRepo = Factory.ReceiptsIssuedRepository();
+            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
             var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
             var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
 
@@ -442,11 +442,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             if (string.IsNullOrEmpty(searchText))
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetGeneralLedgerAccountsIncomeRecords();
+                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetGeneralLedgerAccountsIncomeRecords();
             }
             else
             {
-                dtAccounts = Factory.GeneralLedgerAccountsRepository().GetGeneralLedgerAccountsIncomeRecords(searchText);
+                dtAccounts = AccFactory.GeneralLedgerAccountsRepository().GetGeneralLedgerAccountsIncomeRecords(searchText);
             }
 
             return dtAccounts;
@@ -488,7 +488,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void GetAccountableFormFaceValue()
         {
             int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            accountableFormFaceValue = Factory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
+            accountableFormFaceValue = AccFactory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
         }
 
         internal void CancelNonCashTicketFieldValidations(bool cancelEvent)
