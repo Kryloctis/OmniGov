@@ -17,19 +17,25 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             InitializeComponent();
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
-
+            //LoadBarangay();
+            LoadEffectivityQuarter();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+
+        #region Loaddata
+
+        internal void LoadEffectivityQuarter()
+        {
+            cmbEffectivityQuarter.DataSource = Helper.QuarterDataTable();
+            cmbEffectivityQuarter.DisplayMember = "quarter";
+            cmbEffectivityQuarter.ValueMember = "id";
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
 
-        }
+        #endregion
+
     }
 }
