@@ -23,19 +23,84 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        internal void LoadDiscounts()
+        private string MonthToName(int month)
         {
+            switch (month)
+            {
+                case 1:
+                    return "January";
+                case 2:
+                    return "February";
+                case 3:
+                    return "March";
+                case 4:
+                    return "April";
+                case 5:
+                    return "May";
+                case 6:
+                    return "June";
+                case 7:
+                    return "July";
+                case 8:
+                    return "August";
+                case 9:
+                    return "September";
+                case 10:
+                    return "October";
+                case 11:
+                    return "November";
+                case 12:
+                    return "December";
+
+                default:
+                    return string.Empty;
+            }
+        }
+
+        private DataTable DataTableDiscounts()
+        {
+            DataTable dtRptDiscounts; 
+            var dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("month", typeof(int));
+            dataTable.Columns.Add("month_name", typeof(string));
+            dataTable.Columns.Add("description", typeof(string));
+            dataTable.Columns.Add("rate", typeof(decimal));
+            dataTable.Columns.Add("is_advance", typeof(Image));
+
             string searchText = txtSearch.Text.Trim();
 
             if (searchText.Length < 2)
-            {
-                var dt = AccFactory.rptDiscountRepository().GetRecords();
-                HelperLoadRecords.DiscountsDatagridView(dataGridView1, dt);
-            }
+                dtRptDiscounts = AccFactory.rptDiscountRepository().GetRecords();
             else
+                dtRptDiscounts = AccFactory.rptDiscountRepository().GetRecordsBySearch(searchText);
+
+            foreach (DataRow row in dtRptDiscounts.Rows)
             {
-                var dt = AccFactory.rptDiscountRepository().GetRecordsBySearch(searchText);
-                HelperLoadRecords.DiscountsDatagridView(dataGridView1, dt);
+                int id = Convert.ToInt32(row["id"]);
+                int month = Convert.ToInt32(row["month"]);
+                string montName = MonthToName(month);
+                string description = row["description"].ToString();
+                decimal rate = Convert.ToDecimal(row["rate"]);
+                bool isAdvance = Convert.ToBoolean(row["is_advance"]);
+                Image isAdvanceImg = isAdvance ? Properties.Resources.ok14px : null;
+
+                dataTable.Rows.Add(id, month, montName, description, rate, isAdvanceImg);
+            }
+
+            return dataTable;
+        }
+
+        internal void LoadDiscounts()
+        {
+            try
+            {
+                HelperLoadRecords.DiscountsDatagridView(dataGridView1, DataTableDiscounts());
+                lblRecordCount.Text = dataGridView1.Rows.Count.ToString();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -54,7 +119,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int rptDiscountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmEditRptDiscounts(rptDiscountId, this).ShowDialog();
+            _ = new frmEditRptDiscount(rptDiscountId, this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -119,6 +184,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             {
                 contextMenuStrip1.Show(Cursor.Position);
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDiscounts();
         }
     }
 }

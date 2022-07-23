@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
 {
-    public partial class frmEditRptDiscounts : Form
+    public partial class frmEditRptDiscount : Form
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
         private readonly ucRptDiscounts uc;
-        public frmEditRptDiscounts(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
+        public frmEditRptDiscount(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
             _frmRptDiscounts = frmRptDiscounts;
@@ -37,9 +37,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                 var model = new RptDiscountsModel()
                 {
                     Id = uc.rptDiscountId,
-                    Code = uc.txtCode.Text.Trim(),
+                    Month = Convert.ToInt32(uc.cmbxMonth.SelectedValue),
                     Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
+                    Rate = uc.nudRate.Value,
+                    IsAdvance = uc.chckBxAdvance.Checked
                 };
 
                 return AccFactory.rptDiscountRepository().Update(model);
@@ -55,9 +56,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         {
             var dictRptDiscounts = AccFactory.rptDiscountRepository().GetRecordByID(uc.rptDiscountId);
 
-            uc.txtCode.Text = dictRptDiscounts["code"];
+            uc.cmbxMonth.SelectedValue = dictRptDiscounts["month"];
             uc.txtDescription.Text = dictRptDiscounts["description"];
             uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
+            uc.chckBxAdvance.Checked = Convert.ToBoolean(Convert.ToUInt16(dictRptDiscounts["is_advance"]));
         }
 
         private void frmEditRptDiscounts_Load(object sender, EventArgs e)

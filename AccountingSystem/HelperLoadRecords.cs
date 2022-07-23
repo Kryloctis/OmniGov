@@ -46,10 +46,17 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["month"].Visible = false;
+            dataGridView.Columns["month_name"].HeaderText = "Month";
+            dataGridView.Columns["month_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
             dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+            dataGridView.Columns["rate"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["rate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_advance"].HeaderText = "Advance";
+            dataGridView.Columns["is_advance"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["is_advance"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
         #endregion
