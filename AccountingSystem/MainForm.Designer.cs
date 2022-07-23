@@ -137,7 +137,6 @@ namespace AccountingSystem
             this.btnBankDeposit = new System.Windows.Forms.Button();
             this.btnReportOfCollections = new System.Windows.Forms.Button();
             this.btnRCD = new System.Windows.Forms.Button();
-            this.btnRealProperties = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -204,14 +203,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Size = new System.Drawing.Size(180, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -1385,7 +1384,6 @@ namespace AccountingSystem
             this.flowLayoutPanel7.Controls.Add(this.btnBankDeposit);
             this.flowLayoutPanel7.Controls.Add(this.btnReportOfCollections);
             this.flowLayoutPanel7.Controls.Add(this.btnRCD);
-            this.flowLayoutPanel7.Controls.Add(this.btnRealProperties);
             this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
@@ -1488,21 +1486,6 @@ namespace AccountingSystem
             this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRCD.UseVisualStyleBackColor = true;
             this.btnRCD.Click += new System.EventHandler(this.btnRCD_Click);
-            // 
-            // btnRealProperties
-            // 
-            this.btnRealProperties.AutoSize = true;
-            this.btnRealProperties.Image = global::AccountingSystem.Properties.Resources.building_1_filled_browse_small_1x;
-            this.btnRealProperties.Location = new System.Drawing.Point(856, 0);
-            this.btnRealProperties.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnRealProperties.Name = "btnRealProperties";
-            this.btnRealProperties.Size = new System.Drawing.Size(134, 30);
-            this.btnRealProperties.TabIndex = 1;
-            this.btnRealProperties.Text = "Real Properties";
-            this.btnRealProperties.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRealProperties.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRealProperties.UseVisualStyleBackColor = true;
-            this.btnRealProperties.Click += new System.EventHandler(this.btnRealProperties_Click);
             // 
             // MainForm
             // 
@@ -1683,7 +1666,6 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnBankDeposit;
         internal System.Windows.Forms.Button btnReportOfCollections;
         internal System.Windows.Forms.Button btnRCD;
-        internal System.Windows.Forms.Button btnRealProperties;
         private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
         private Views.Reports.Financial_Statements.ucStatementOfCashFlows ucStatementOfCashFlows1;
         internal System.Windows.Forms.TabPage tabPageTransactionLog;

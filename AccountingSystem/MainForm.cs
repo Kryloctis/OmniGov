@@ -727,14 +727,6 @@ namespace AccountingSystem
         {
             _ =  new frmRCD().ShowDialog();
         }
-
-        private void btnRealProperties_Click(object sender, EventArgs e)
-        {
-            _ = new frmSearchProperties().ShowDialog();
-        }
-
-
-
         #endregion
 
     }

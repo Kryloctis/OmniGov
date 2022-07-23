@@ -1021,6 +1021,11 @@ namespace AccountingSystem
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
+
+            //datagrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            datagrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
@@ -1030,7 +1035,6 @@ namespace AccountingSystem
 
         internal static void CollectionDataGridColumns(DataGridView datagrid)
         {
-
             datagrid.Columns.Add("payment_collection_id", "Payment Collection ID");
             datagrid.Columns.Add("fund_id", "Fund Id");
             datagrid.Columns.Add("fund", "Fund");
