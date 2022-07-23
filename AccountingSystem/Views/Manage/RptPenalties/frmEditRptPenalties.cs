@@ -37,9 +37,9 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                 var model = new RptPenaltiesModel()
                 {
                     Id = uc.rptPenaltiesId,
-                    Code = uc.txtCode.Text.Trim(),
                     Description = uc.txtDescription.Text.Trim(),
-                    Rate = uc.nudRate.Value
+                    Rate = uc.nudRate.Value,
+                    Frequency = uc.cmbxFrequency.Text.Trim()
                 };
 
                 return AccFactory.rptPenaltiesRepository().Update(model);
@@ -54,10 +54,10 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         private void LoadRecord()
         {
             var dictRptDiscounts = AccFactory.rptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
-
-            uc.txtCode.Text = dictRptDiscounts["code"];
+           
             uc.txtDescription.Text = dictRptDiscounts["description"];
             uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
+            uc.cmbxFrequency.Text = dictRptDiscounts["frequency"];
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)

@@ -60,7 +60,7 @@ namespace ACC.Data
 
                 foreach (DataRow item in items.Rows)
                 {
-                    dict.Add("code", item["code"].ToString());
+                    dict.Add("frequency", item["frequency"].ToString());
                     dict.Add("description", item["description"].ToString());
                     dict.Add("rate", item["rate"].ToString());
                 }
@@ -83,7 +83,7 @@ namespace ACC.Data
                 new object[] { "@searchText", DbType.String, $"%{searchText}%"}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE code LIKE @searchText OR description LIKE @searchText";
+            string query = $"SELECT * FROM {tableName} WHERE description LIKE @searchText";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -97,12 +97,12 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@frequency", DbType.String, entity.Frequency}
             };
 
-            string query = $"INSERT INTO {tableName} (code, description, rate) VALUES (@code, @description, @rate)";
+            string query = $"INSERT INTO {tableName} (description, rate, frequency) VALUES (@description, @rate, @frequency)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -111,12 +111,12 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@frequency", DbType.String, entity.Frequency}
             };
 
-            string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
+            string query = $"UPDATE {tableName} SET description = @description, rate = @rate, frequency = @frequency WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }

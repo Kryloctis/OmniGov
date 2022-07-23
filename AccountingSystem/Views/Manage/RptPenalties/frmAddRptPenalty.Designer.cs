@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.ucRptPenalties1.Size = new System.Drawing.Size(382, 113);
             this.ucRptPenalties1.TabIndex = 0;
             // 
-            // frmRptAddPenalty
+            // frmAddRptPenalty
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRptAddPenalty";
+            this.Name = "frmAddRptPenalty";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add";

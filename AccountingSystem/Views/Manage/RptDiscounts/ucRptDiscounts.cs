@@ -59,7 +59,8 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         {
             if (isEdit)
                 rptDiscountId = 0;
-          
+
+            LoadMonths();
             txtDescription.Clear();
             nudRate.Value = 0;
         }
