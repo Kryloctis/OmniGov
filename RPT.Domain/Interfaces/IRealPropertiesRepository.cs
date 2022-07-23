@@ -1,9 +1,10 @@
 ﻿using System.Data;
-using ACC.Domain.Models;
+using ACC.Domain.Interfaces;
+using RPT.Domain.Models;
 
-namespace ACC.Domain.Interfaces
+namespace RPT.Domain.Interfaces
 {
-    public interface IRealPropertiesRepository : IRepository<RealPropertiesModel>
+    public interface IRealPropertiesRepository : IRepository<RealPropertiesModel> 
     {
         DataTable GetViewPropertiesByPropertyKindAndSearch(string propertyKind, string searchText);
         DataTable GetBarangays();

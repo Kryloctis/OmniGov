@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ACC.Data\ACC.Data.csproj" />
     <ProjectReference Include="..\ACC.Domain\ACC.Domain.csproj" />
-    <ProjectReference Include="..\RPT.Domain\RPT.Domain.csproj" />
   </ItemGroup>
 
 </Project>

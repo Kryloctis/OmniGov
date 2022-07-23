@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
+using ACC.Data;
+using RPT.Domain.Interfaces;
+using RPT.Domain.Models;
 
-namespace ACC.Data
+namespace RPT.Data
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
         private readonly string tblBarangays = "barangays";
         private readonly string viewRealProperties = "view_real_properties";
-        
+        private MySqlGenericCommands _mySqlGenericCommandsRPT;
 
-        public RealPropertiesRepository(IDbGenericCommands dbGenericCommands)
+        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
         {
-            _dbGenericCommands = dbGenericCommands;
+            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }
 
         public int CountRecords()
@@ -70,7 +70,7 @@ namespace ACC.Data
             string query = $"SELECT property_kind, complete_arp_no, pin, owner_name, owner_address, market_value, assessed_value  FROM {viewPropertyAssessmentGrouped} WHERE property_kind = @property_kind AND (complete_arp_no LIKE @searchText OR owner_name LIKE @searchText ) LIMIT 30";
 
             var dataTable = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
+            return _mySqlGenericCommandsRPT.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetBarangays()
@@ -80,7 +80,7 @@ namespace ACC.Data
                 string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY name";
 
                 var dtBarangay = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBarangay);
+                return _mySqlGenericCommandsRPT.Fill(query, dtBarangay);
             }
             catch (Exception)
             {
@@ -95,7 +95,7 @@ namespace ACC.Data
                 string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties}";
 
                 var dtProperties = new DataTable();
-                return _dbGenericCommands.Fill(query, dtProperties);
+                return _mySqlGenericCommandsRPT.Fill(query, dtProperties);
             }
             catch (Exception)
             {
