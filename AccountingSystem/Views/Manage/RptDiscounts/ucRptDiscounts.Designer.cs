@@ -33,10 +33,11 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.nudRate = new System.Windows.Forms.NumericUpDown();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cmbxMonth = new System.Windows.Forms.ComboBox();
+            this.chckBxAdvance = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -46,9 +47,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(2, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
+            this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Code";
+            this.label1.Text = "Month";
             // 
             // label2
             // 
@@ -67,16 +68,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.label3.Size = new System.Drawing.Size(51, 15);
             this.label3.TabIndex = 0;
             this.label3.Text = "Rate (%)";
-            // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(81, 2);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(281, 23);
-            this.txtCode.TabIndex = 0;
-            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
-            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // txtDescription
             // 
@@ -110,19 +101,40 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // cmbxMonth
+            // 
+            this.cmbxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxMonth.FormattingEnabled = true;
+            this.cmbxMonth.Location = new System.Drawing.Point(81, 1);
+            this.cmbxMonth.Name = "cmbxMonth";
+            this.cmbxMonth.Size = new System.Drawing.Size(281, 23);
+            this.cmbxMonth.TabIndex = 0;
+            // 
+            // chckBxAdvance
+            // 
+            this.chckBxAdvance.AutoSize = true;
+            this.chckBxAdvance.Location = new System.Drawing.Point(290, 116);
+            this.chckBxAdvance.Name = "chckBxAdvance";
+            this.chckBxAdvance.Size = new System.Drawing.Size(72, 19);
+            this.chckBxAdvance.TabIndex = 3;
+            this.chckBxAdvance.Text = "Advance";
+            this.chckBxAdvance.UseVisualStyleBackColor = true;
+            // 
             // ucRptDiscounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chckBxAdvance);
+            this.Controls.Add(this.cmbxMonth);
             this.Controls.Add(this.nudRate);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ucRptDiscounts";
-            this.Size = new System.Drawing.Size(382, 113);
+            this.Size = new System.Drawing.Size(382, 137);
+            this.Load += new System.EventHandler(this.ucRptDiscounts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -135,9 +147,10 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox txtCode;
         internal System.Windows.Forms.TextBox txtDescription;
         internal System.Windows.Forms.NumericUpDown nudRate;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.ComboBox cmbxMonth;
+        internal System.Windows.Forms.CheckBox chckBxAdvance;
     }
 }
