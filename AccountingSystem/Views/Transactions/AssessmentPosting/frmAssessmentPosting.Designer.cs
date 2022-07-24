@@ -54,10 +54,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             this.btnPost.Location = new System.Drawing.Point(12, 12);
             this.btnPost.Name = "btnPost";
-            this.btnPost.Size = new System.Drawing.Size(75, 23);
+            this.btnPost.Size = new System.Drawing.Size(126, 23);
             this.btnPost.TabIndex = 1;
-            this.btnPost.Text = "Post";
+            this.btnPost.Text = "Post Selected Rows";
             this.btnPost.UseVisualStyleBackColor = true;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
             // 
             // panel1
             // 

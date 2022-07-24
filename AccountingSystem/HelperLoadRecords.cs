@@ -57,6 +57,11 @@ namespace AccountingSystem
         #region RPT Posting
         internal static void BarangayCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
+            DataRow dr = dataTable.NewRow();
+            dr["id"] = "0";
+            dr["name"] = "All";
+            dataTable.Rows.InsertAt(dr, 0);
+
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;

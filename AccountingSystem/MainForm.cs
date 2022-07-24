@@ -752,5 +752,10 @@ namespace AccountingSystem
         {
             _ = new frmAssessmentPosting().ShowDialog();
         }
+
+        private void tabPageAccounting_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

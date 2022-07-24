@@ -1,4 +1,5 @@
 ﻿using RPT.Data;
+using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,9 +27,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             LoadEffectivityQuarter();
             LoadProperties();
         }
-
-
-
 
         #region Loaddata
 
@@ -94,5 +92,42 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #endregion
 
+        private void btnPost_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Property successfully posted.");
+                LoadProperties();
+            }
+            
+        }
+
+        private bool SaveData()
+        {
+
+            foreach (DataGridViewRow dgvRow in dgProperties.SelectedRows)
+            {
+                string arpNo = dgvRow.Cells["arp_no"].Value.ToString();
+                decimal taxRate = 0.0m;
+                decimal discountRate = 0.0m;
+                decimal penaltyRate = 0.0m;
+                DateTime postedAt = DateTime.Now;
+
+                var assessmentPostsModel = new AssessmentPostsModel() {
+
+                    ArpNo = arpNo,
+                    TaxRate = taxRate,
+                    DiscountRate = discountRate,
+                    PenaltyRate = penaltyRate,
+                    PostedAt = postedAt
+                };
+
+
+                var assessmentPostsRepository = AccFactory.AssessmentPostsRepository();
+                return assessmentPostsRepository.Insert(assessmentPostsModel);
+            }
+
+            return false;
+        }
     }
 }

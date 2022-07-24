@@ -756,6 +756,7 @@ namespace AccountingSystem
             this.tabPageAccounting.TabIndex = 1;
             this.tabPageAccounting.Text = "Accounting";
             this.tabPageAccounting.UseVisualStyleBackColor = true;
+            this.tabPageAccounting.Click += new System.EventHandler(this.tabPageAccounting_Click);
             // 
             // tabControlAccounting
             // 

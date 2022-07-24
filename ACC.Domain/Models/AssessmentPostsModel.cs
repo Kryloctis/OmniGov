@@ -13,5 +13,6 @@ namespace RPT.Domain.Models
         public decimal TaxRate { get; set; }
         public decimal DiscountRate { get; set; }
         public decimal PenaltyRate { get; set; }
+        public DateTime PostedAt { get; set; }
     }
 }
