@@ -32,13 +32,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.dgProperties = new System.Windows.Forms.DataGridView();
             this.btnPost = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
+            this.nudEffectivityYear = new System.Windows.Forms.NumericUpDown();
             this.cmbBarangays = new System.Windows.Forms.ComboBox();
             this.cmbEffectivityQuarter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEffectivityYear)).BeginInit();
             this.SuspendLayout();
             // 
             // dgProperties
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // panel1
             // 
             this.panel1.Controls.Add(this.btnPost);
-            this.panel1.Controls.Add(this.nudYear);
+            this.panel1.Controls.Add(this.nudEffectivityYear);
             this.panel1.Controls.Add(this.cmbBarangays);
             this.panel1.Controls.Add(this.cmbEffectivityQuarter);
             this.panel1.Controls.Add(this.txtSearch);
@@ -73,27 +73,23 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Size = new System.Drawing.Size(800, 45);
             this.panel1.TabIndex = 9;
             // 
-            // nudYear
+            // nudEffectivityYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(490, 12);
-            this.nudYear.Maximum = new decimal(new int[] {
+            this.nudEffectivityYear.Location = new System.Drawing.Point(490, 12);
+            this.nudEffectivityYear.Maximum = new decimal(new int[] {
             2099,
             0,
             0,
             0});
-            this.nudYear.Minimum = new decimal(new int[] {
+            this.nudEffectivityYear.Name = "nudEffectivityYear";
+            this.nudEffectivityYear.Size = new System.Drawing.Size(101, 23);
+            this.nudEffectivityYear.TabIndex = 9;
+            this.nudEffectivityYear.Value = new decimal(new int[] {
             2022,
             0,
             0,
             0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.Size = new System.Drawing.Size(101, 23);
-            this.nudYear.TabIndex = 9;
-            this.nudYear.Value = new decimal(new int[] {
-            2022,
-            0,
-            0,
-            0});
+            this.nudEffectivityYear.ValueChanged += new System.EventHandler(this.nudEffectivityYear_ValueChanged);
             // 
             // cmbBarangays
             // 
@@ -102,6 +98,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.cmbBarangays.Name = "cmbBarangays";
             this.cmbBarangays.Size = new System.Drawing.Size(160, 23);
             this.cmbBarangays.TabIndex = 7;
+            this.cmbBarangays.SelectionChangeCommitted += new System.EventHandler(this.cmbBarangays_SelectionChangeCommitted);
             // 
             // cmbEffectivityQuarter
             // 
@@ -115,6 +112,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.cmbEffectivityQuarter.Name = "cmbEffectivityQuarter";
             this.cmbEffectivityQuarter.Size = new System.Drawing.Size(63, 23);
             this.cmbEffectivityQuarter.TabIndex = 8;
+            this.cmbEffectivityQuarter.SelectionChangeCommitted += new System.EventHandler(this.cmbEffectivityQuarter_SelectionChangeCommitted);
             // 
             // txtSearch
             // 
@@ -138,7 +136,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEffectivityYear)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -148,7 +146,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.DataGridView dgProperties;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown nudYear;
+        private System.Windows.Forms.NumericUpDown nudEffectivityYear;
         private System.Windows.Forms.ComboBox cmbBarangays;
         private System.Windows.Forms.ComboBox cmbEffectivityQuarter;
         private System.Windows.Forms.TextBox txtSearch;

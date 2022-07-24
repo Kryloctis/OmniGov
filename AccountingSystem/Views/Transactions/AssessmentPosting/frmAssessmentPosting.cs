@@ -45,7 +45,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private DataTable DataTableAssessmentPosting()
         {
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties();
+            var barangaysId = Convert.ToInt32(cmbBarangays.SelectedValue);
+            var effectivityQuarter = Convert.ToInt16(cmbEffectivityQuarter.SelectedValue);
+            var effectivityYear = Convert.ToInt32(nudEffectivityYear.Value);
+            var searchKey = txtSearch.Text.Trim();
+
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangaysId, effectivityQuarter, effectivityYear, searchKey);
             var dataTable = new DataTable();
 
             foreach (DataColumn column in dtViewRealProperties.Columns)
@@ -128,6 +133,21 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
 
             return false;
+        }
+
+        private void cmbBarangays_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
+
+        private void cmbEffectivityQuarter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
+
+        private void nudEffectivityYear_ValueChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
         }
     }
 }

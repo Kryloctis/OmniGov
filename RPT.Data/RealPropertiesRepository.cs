@@ -88,14 +88,27 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties()
+        public DataTable GetProperties(int barangayId, int effectivityQuarter, int effectivityYear, string searchKey)
         {
             try
             {
-                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties}";
+                var parameters = new object[][] { 
+                    new object[]{"@barangays_id", DbType.Int32, barangayId},
+                    new object[]{"@effectivity_quarter", DbType.Int16, effectivityQuarter},
+                    new object[]{"@effectivity_year", DbType.Int32, effectivityYear},
+                    new object[]{"@search_key", DbType.String, searchKey},
+                };
+
+                string filterQuery = $"barangays_id = @barangays_id AND effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year ";
+
+                if (barangayId == 0)
+                    filterQuery = $"effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year";
+                
+                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties} " +
+                    $"WHERE {filterQuery} ";
 
                 var dtProperties = new DataTable();
-                return _mySqlGenericCommandsRPT.Fill(query, dtProperties);
+                return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
             }
             catch (Exception)
             {
