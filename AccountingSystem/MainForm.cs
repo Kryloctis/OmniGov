@@ -126,22 +126,22 @@ namespace AccountingSystem
         {
 
             if (!Helper.HasPermission("Report of Checks Issued"))
-                menuprintRCI.Visible = false;
+                rCIToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                menuprintPC.Visible = false;
+                rCDToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
-                menuprintGC.Visible = false;
+                abstractOfGeneralCollectionsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
-                menuBankCashBook.Visible = false;
+                bankCashbookToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Consolidated Receipts"))
-                menuReceiptsConsolidated.Visible = false;
+                consolidatedReceiptsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
-                menuDailyCash.Visible = false;
+                dailyCashPositionsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
                 btnSAAOB.Visible = false;
@@ -150,7 +150,7 @@ namespace AccountingSystem
                 btnSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Report Collector's RCD"))
-                btnReportOfCollections.Enabled = false;
+                collectorsRCDToolStripMenuItem.Enabled = false;
         }
 
         private void ValidateTransactionPermissions()
@@ -159,19 +159,19 @@ namespace AccountingSystem
                 btnObligationRequest.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-                btnIssueCheck.Visible = false;
+                issueReceiptsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-                btnBankDeposit.Visible = false;
+                bankDepositToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Transaction Payments"))
-                btnPaymentCollection.Visible = false;
+                paymentCollectionsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                btnIssueReceipt.Visible = false;
+                issueReceiptsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Transaction RCD Approval"))
-                btnRCD.Visible = false;
+                liquidatorsRCDToolStripMenuItem.Visible = false;
         }
 
         private void ValidateManagePermissions()
@@ -222,28 +222,28 @@ namespace AccountingSystem
                 menuReceipts.Visible = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                btnIssueReceipt.Enabled = false;
+                issueReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Generate RCD"))
-                btnRCD.Enabled = false;
+                liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Checks Issued"))
-                menuprintRCI.Visible = false;
+                rCIToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                menuprintPC.Visible = false;
+                rCDToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
-                menuprintGC.Visible = false;
+                abstractOfGeneralCollectionsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
-                menuBankCashBook.Visible = false;
+                bankCashbookToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Consolidated Receipts"))
-                menuReceiptsConsolidated.Visible = false;
+                consolidatedReceiptsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
-                menuDailyCash.Visible = false;
+                dailyCashPositionsToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
                 btnSAAOB.Visible = false;
@@ -257,7 +257,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Visible = false;
             if (!Helper.HasPermission("Manage Returned Receipts"))
-                menuReturnReceipts.Visible = false;
+                returnedReceiptsToolStripMenuItem.Visible = false;
         }
 
         private void ValidateAccountingControlPermissions()
@@ -491,7 +491,7 @@ namespace AccountingSystem
 
         private void menuprintRCI_Click(object sender, EventArgs e)
         {
-            _ = new frmRCIReport().ShowDialog();
+           
         }
 
         private void MenuDisbursingOffice_Click(object sender, EventArgs e)
@@ -522,7 +522,7 @@ namespace AccountingSystem
 
         private void menuprintPC_Click(object sender, EventArgs e)
         {
-            _ = new frmSearch(new frmRCD()).ShowDialog();
+            
         }
 
         private void menureceipts_Click(object sender, EventArgs e)
@@ -532,17 +532,17 @@ namespace AccountingSystem
 
         private void menucashbook_Click(object sender, EventArgs e)
         {
-            _ = new frmCashbook().ShowDialog();
+            
         }
 
         private void menuReceiptsConsolidated_Click(object sender, EventArgs e)
         {
-            _ = new frmConsolidatedReceipts().ShowDialog();
+            
         }
 
         private void menuDailyCash_Click(object sender, EventArgs e)
         {
-            _ = new frmDailyCash().ShowDialog();
+           
         }
 
         private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -692,7 +692,7 @@ namespace AccountingSystem
 
         private void menuprintGC_Click(object sender, EventArgs e)
         {
-            _ = new AbstractOfGeneralCollection().ShowDialog();
+           
         }
 
         private void menuReturnReceipts_Click(object sender, EventArgs e)
@@ -709,27 +709,23 @@ namespace AccountingSystem
 
         private void btnPaymentCollection_Click(object sender, EventArgs e)
         {
-            _ = new frmPaymentCollection().ShowDialog();
+          
         }
 
-        private void btnIssueCheck_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCI().ShowDialog();
-        }
 
         private void btnBankDeposit_Click(object sender, EventArgs e)
         {
-            _ = new frmBankDeposits().ShowDialog();
+           
         }
 
         private void btnReportOfCollections_Click(object sender, EventArgs e)
         {
-            _ = new frmCollectorsRCD().ShowDialog();
+           
         }
 
         private void btnRCD_Click(object sender, EventArgs e)
         {
-            _ =  new frmRCD().ShowDialog();
+            
         }
         #endregion
 
@@ -750,12 +746,67 @@ namespace AccountingSystem
 
         private void btnAssessmentPosting_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void checkIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCI().ShowDialog();
+        }
+
+        private void bankDepositToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
+        }
+
+        private void collectorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectorsRCD().ShowDialog();
+        }
+
+        private void liquidatorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
             _ = new frmAssessmentPosting().ShowDialog();
         }
 
-        private void tabPageAccounting_Click(object sender, EventArgs e)
+        private void paymentCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            _ = new frmPaymentCollection().ShowDialog();
+        }
 
+        private void rCIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCIReport().ShowDialog();
+        }
+
+        private void rCDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmSearch(new frmRCD()).ShowDialog();
+        }
+
+        private void abstractOfGeneralCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new AbstractOfGeneralCollection().ShowDialog();
+        }
+
+        private void bankCashbookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmCashbook().ShowDialog();
+        }
+
+        private void consolidatedReceiptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmConsolidatedReceipts().ShowDialog();
+        }
+
+        private void dailyCashPositionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmDailyCash().ShowDialog();
         }
     }
 }

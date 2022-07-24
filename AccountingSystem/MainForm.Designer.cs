@@ -51,18 +51,10 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReturnReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReports = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuprintRCI = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuprintPC = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuprintGC = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBankCashBook = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuReceiptsConsolidated = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuDailyCash = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -136,14 +128,27 @@ namespace AccountingSystem
             this.radFinancialStatements = new System.Windows.Forms.RadioButton();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucrcdSummary1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnIssueReceipt = new System.Windows.Forms.Button();
-            this.btnPaymentCollection = new System.Windows.Forms.Button();
-            this.btnIssueCheck = new System.Windows.Forms.Button();
-            this.btnBankDeposit = new System.Windows.Forms.Button();
-            this.btnReportOfCollections = new System.Windows.Forms.Button();
-            this.btnRCD = new System.Windows.Forms.Button();
-            this.btnAssessmentPosting = new System.Windows.Forms.Button();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.issueReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.rCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consolidatedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -177,7 +182,7 @@ namespace AccountingSystem
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.tabPageTreasury.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -188,8 +193,7 @@ namespace AccountingSystem
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(0, 0);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFile,
-            this.menuManage,
-            this.menuReports});
+            this.menuManage});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -210,14 +214,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Size = new System.Drawing.Size(180, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -239,7 +243,6 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
-            this.menuReturnReceipts,
             this.toolStripSeparator1,
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
@@ -365,14 +368,6 @@ namespace AccountingSystem
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
             // 
-            // menuReturnReceipts
-            // 
-            this.menuReturnReceipts.Name = "menuReturnReceipts";
-            this.menuReturnReceipts.Size = new System.Drawing.Size(214, 22);
-            this.menuReturnReceipts.Text = "Returned Receipts";
-            this.menuReturnReceipts.Visible = false;
-            this.menuReturnReceipts.Click += new System.EventHandler(this.menuReturnReceipts_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -398,61 +393,6 @@ namespace AccountingSystem
             this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.taxRateToolStripMenuItem.Text = "Tax Rates";
             this.taxRateToolStripMenuItem.Click += new System.EventHandler(this.taxRateToolStripMenuItem_Click);
-            // 
-            // menuReports
-            // 
-            this.menuReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuprintRCI,
-            this.menuprintPC,
-            this.menuprintGC,
-            this.menuBankCashBook,
-            this.menuReceiptsConsolidated,
-            this.menuDailyCash});
-            this.menuReports.Name = "menuReports";
-            this.menuReports.Size = new System.Drawing.Size(59, 24);
-            this.menuReports.Text = "Reports";
-            // 
-            // menuprintRCI
-            // 
-            this.menuprintRCI.Name = "menuprintRCI";
-            this.menuprintRCI.Size = new System.Drawing.Size(232, 22);
-            this.menuprintRCI.Text = "RCI";
-            this.menuprintRCI.Click += new System.EventHandler(this.menuprintRCI_Click);
-            // 
-            // menuprintPC
-            // 
-            this.menuprintPC.Name = "menuprintPC";
-            this.menuprintPC.Size = new System.Drawing.Size(232, 22);
-            this.menuprintPC.Text = "RCD";
-            this.menuprintPC.Click += new System.EventHandler(this.menuprintPC_Click);
-            // 
-            // menuprintGC
-            // 
-            this.menuprintGC.Name = "menuprintGC";
-            this.menuprintGC.Size = new System.Drawing.Size(232, 22);
-            this.menuprintGC.Text = "Abstract of General Collection";
-            this.menuprintGC.Click += new System.EventHandler(this.menuprintGC_Click);
-            // 
-            // menuBankCashBook
-            // 
-            this.menuBankCashBook.Name = "menuBankCashBook";
-            this.menuBankCashBook.Size = new System.Drawing.Size(232, 22);
-            this.menuBankCashBook.Text = "Bank Cashbook";
-            this.menuBankCashBook.Click += new System.EventHandler(this.menucashbook_Click);
-            // 
-            // menuReceiptsConsolidated
-            // 
-            this.menuReceiptsConsolidated.Name = "menuReceiptsConsolidated";
-            this.menuReceiptsConsolidated.Size = new System.Drawing.Size(232, 22);
-            this.menuReceiptsConsolidated.Text = "Consolidated Receipts";
-            this.menuReceiptsConsolidated.Click += new System.EventHandler(this.menuReceiptsConsolidated_Click);
-            // 
-            // menuDailyCash
-            // 
-            this.menuDailyCash.Name = "menuDailyCash";
-            this.menuDailyCash.Size = new System.Drawing.Size(232, 22);
-            this.menuDailyCash.Text = "Daily Cash Position";
-            this.menuDailyCash.Click += new System.EventHandler(this.menuDailyCash_Click);
             // 
             // statusStrip1
             // 
@@ -756,7 +696,6 @@ namespace AccountingSystem
             this.tabPageAccounting.TabIndex = 1;
             this.tabPageAccounting.Text = "Accounting";
             this.tabPageAccounting.UseVisualStyleBackColor = true;
-            this.tabPageAccounting.Click += new System.EventHandler(this.tabPageAccounting_Click);
             // 
             // tabControlAccounting
             // 
@@ -1409,7 +1348,7 @@ namespace AccountingSystem
             // tabPageTreasury
             // 
             this.tabPageTreasury.Controls.Add(this.ucrcdSummary1);
-            this.tabPageTreasury.Controls.Add(this.flowLayoutPanel7);
+            this.tabPageTreasury.Controls.Add(this.menuStrip2);
             this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
             this.tabPageTreasury.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTreasury.Name = "tabPageTreasury";
@@ -1421,138 +1360,189 @@ namespace AccountingSystem
             // ucrcdSummary1
             // 
             this.ucrcdSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucrcdSummary1.Location = new System.Drawing.Point(0, 35);
+            this.ucrcdSummary1.Location = new System.Drawing.Point(0, 28);
             this.ucrcdSummary1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ucrcdSummary1.Name = "ucrcdSummary1";
-            this.ucrcdSummary1.Size = new System.Drawing.Size(1070, 414);
+            this.ucrcdSummary1.Size = new System.Drawing.Size(1070, 421);
             this.ucrcdSummary1.TabIndex = 4;
             // 
-            // flowLayoutPanel7
+            // menuStrip2
             // 
-            this.flowLayoutPanel7.AutoSize = true;
-            this.flowLayoutPanel7.Controls.Add(this.btnIssueReceipt);
-            this.flowLayoutPanel7.Controls.Add(this.btnPaymentCollection);
-            this.flowLayoutPanel7.Controls.Add(this.btnIssueCheck);
-            this.flowLayoutPanel7.Controls.Add(this.btnBankDeposit);
-            this.flowLayoutPanel7.Controls.Add(this.btnReportOfCollections);
-            this.flowLayoutPanel7.Controls.Add(this.btnRCD);
-            this.flowLayoutPanel7.Controls.Add(this.btnAssessmentPosting);
-            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(1070, 35);
-            this.flowLayoutPanel7.TabIndex = 3;
+            this.menuStrip2.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.checkIssuanceToolStripMenuItem,
+            this.bankDepositToolStripMenuItem,
+            this.paymentsToolStripMenuItem,
+            this.reportsToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Padding = new System.Windows.Forms.Padding(0);
+            this.menuStrip2.Size = new System.Drawing.Size(1070, 28);
+            this.menuStrip2.TabIndex = 5;
+            this.menuStrip2.Text = "menuStrip2";
             // 
-            // btnIssueReceipt
+            // toolStripMenuItem1
             // 
-            this.btnIssueReceipt.AutoSize = true;
-            this.btnIssueReceipt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnIssueReceipt.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_filled_20px;
-            this.btnIssueReceipt.Location = new System.Drawing.Point(0, 0);
-            this.btnIssueReceipt.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnIssueReceipt.Name = "btnIssueReceipt";
-            this.btnIssueReceipt.Size = new System.Drawing.Size(110, 32);
-            this.btnIssueReceipt.TabIndex = 0;
-            this.btnIssueReceipt.Text = "Issue Receipts";
-            this.btnIssueReceipt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIssueReceipt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnIssueReceipt.UseVisualStyleBackColor = true;
-            this.btnIssueReceipt.Click += new System.EventHandler(this.btnIssueReceipt_Click);
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.issueReceiptsToolStripMenuItem,
+            this.returnedReceiptsToolStripMenuItem});
+            this.toolStripMenuItem1.Image = global::AccountingSystem.Properties.Resources.document_delivery_24px;
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(87, 28);
+            this.toolStripMenuItem1.Text = "Receipts";
             // 
-            // btnPaymentCollection
+            // issueReceiptsToolStripMenuItem
             // 
-            this.btnPaymentCollection.AutoSize = true;
-            this.btnPaymentCollection.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnPaymentCollection.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_20px;
-            this.btnPaymentCollection.Location = new System.Drawing.Point(113, 0);
-            this.btnPaymentCollection.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnPaymentCollection.Name = "btnPaymentCollection";
-            this.btnPaymentCollection.Size = new System.Drawing.Size(148, 32);
-            this.btnPaymentCollection.TabIndex = 0;
-            this.btnPaymentCollection.Text = "Payment Collections";
-            this.btnPaymentCollection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPaymentCollection.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnPaymentCollection.UseVisualStyleBackColor = true;
-            this.btnPaymentCollection.Click += new System.EventHandler(this.btnPaymentCollection_Click);
+            this.issueReceiptsToolStripMenuItem.Name = "issueReceiptsToolStripMenuItem";
+            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.issueReceiptsToolStripMenuItem.Text = "Issue Receipts";
+            this.issueReceiptsToolStripMenuItem.Click += new System.EventHandler(this.btnIssueReceipt_Click);
             // 
-            // btnIssueCheck
+            // returnedReceiptsToolStripMenuItem
             // 
-            this.btnIssueCheck.AutoSize = true;
-            this.btnIssueCheck.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnIssueCheck.Image = global::AccountingSystem.Properties.Resources.check_20px;
-            this.btnIssueCheck.Location = new System.Drawing.Point(264, 0);
-            this.btnIssueCheck.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnIssueCheck.Name = "btnIssueCheck";
-            this.btnIssueCheck.Size = new System.Drawing.Size(118, 32);
-            this.btnIssueCheck.TabIndex = 0;
-            this.btnIssueCheck.Text = "Check Issuance";
-            this.btnIssueCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIssueCheck.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnIssueCheck.UseVisualStyleBackColor = true;
-            this.btnIssueCheck.Click += new System.EventHandler(this.btnIssueCheck_Click);
+            this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
+            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
+            this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
-            // btnBankDeposit
+            // checkIssuanceToolStripMenuItem
             // 
-            this.btnBankDeposit.AutoSize = true;
-            this.btnBankDeposit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnBankDeposit.Image = global::AccountingSystem.Properties.Resources.bank_deposit_filled_20px;
-            this.btnBankDeposit.Location = new System.Drawing.Point(385, 0);
-            this.btnBankDeposit.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnBankDeposit.Name = "btnBankDeposit";
-            this.btnBankDeposit.Size = new System.Drawing.Size(113, 32);
-            this.btnBankDeposit.TabIndex = 0;
-            this.btnBankDeposit.Text = "Bank Deposit";
-            this.btnBankDeposit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBankDeposit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBankDeposit.UseVisualStyleBackColor = true;
-            this.btnBankDeposit.Click += new System.EventHandler(this.btnBankDeposit_Click);
+            this.checkIssuanceToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.check_24px;
+            this.checkIssuanceToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
+            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(124, 28);
+            this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
+            this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.checkIssuanceToolStripMenuItem_Click);
             // 
-            // btnReportOfCollections
+            // bankDepositToolStripMenuItem
             // 
-            this.btnReportOfCollections.AutoSize = true;
-            this.btnReportOfCollections.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnReportOfCollections.Image = global::AccountingSystem.Properties.Resources.money_banknotes_2_document_text_20px;
-            this.btnReportOfCollections.Location = new System.Drawing.Point(501, 0);
-            this.btnReportOfCollections.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnReportOfCollections.Name = "btnReportOfCollections";
-            this.btnReportOfCollections.Size = new System.Drawing.Size(121, 32);
-            this.btnReportOfCollections.TabIndex = 0;
-            this.btnReportOfCollections.Text = "Collector\'s RCD";
-            this.btnReportOfCollections.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnReportOfCollections.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnReportOfCollections.UseVisualStyleBackColor = true;
-            this.btnReportOfCollections.Click += new System.EventHandler(this.btnReportOfCollections_Click);
+            this.bankDepositToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.bank_deposit_filled_24px;
+            this.bankDepositToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(112, 28);
+            this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
+            this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
             // 
-            // btnRCD
+            // paymentsToolStripMenuItem
             // 
-            this.btnRCD.AutoSize = true;
-            this.btnRCD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnRCD.Image = global::AccountingSystem.Properties.Resources.report_document_text_20px;
-            this.btnRCD.Location = new System.Drawing.Point(625, 0);
-            this.btnRCD.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.btnRCD.Name = "btnRCD";
-            this.btnRCD.Size = new System.Drawing.Size(125, 32);
-            this.btnRCD.TabIndex = 0;
-            this.btnRCD.Text = "Liquidator\'s RCD";
-            this.btnRCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRCD.UseVisualStyleBackColor = true;
-            this.btnRCD.Click += new System.EventHandler(this.btnRCD_Click);
+            this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.paymentCollectionsToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.paymentsToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_24px;
+            this.paymentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(95, 28);
+            this.paymentsToolStripMenuItem.Text = "Payments";
             // 
-            // btnAssessmentPosting
+            // paymentCollectionsToolStripMenuItem
             // 
-            this.btnAssessmentPosting.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnAssessmentPosting.Image = global::AccountingSystem.Properties.Resources.document_project_pin_18px;
-            this.btnAssessmentPosting.Location = new System.Drawing.Point(756, 3);
-            this.btnAssessmentPosting.Name = "btnAssessmentPosting";
-            this.btnAssessmentPosting.Size = new System.Drawing.Size(157, 29);
-            this.btnAssessmentPosting.TabIndex = 1;
-            this.btnAssessmentPosting.Text = "Assessment Posting";
-            this.btnAssessmentPosting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAssessmentPosting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAssessmentPosting.UseVisualStyleBackColor = true;
-            this.btnAssessmentPosting.Click += new System.EventHandler(this.btnAssessmentPosting_Click);
+            this.paymentCollectionsToolStripMenuItem.Name = "paymentCollectionsToolStripMenuItem";
+            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.paymentCollectionsToolStripMenuItem.Text = "Payment Collections";
+            this.paymentCollectionsToolStripMenuItem.Click += new System.EventHandler(this.paymentCollectionsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuItem2.Text = "Assessment Posting";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Enabled = false;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuItem3.Text = "Payment Posting";
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.collectorsRCDToolStripMenuItem,
+            this.liquidatorsRCDToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.rCIToolStripMenuItem,
+            this.rCDToolStripMenuItem,
+            this.abstractOfGeneralCollectionsToolStripMenuItem,
+            this.bankCashbookToolStripMenuItem,
+            this.consolidatedReceiptsToolStripMenuItem,
+            this.dailyCashPositionsToolStripMenuItem});
+            this.reportsToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.knowledge_books_filled_24px;
+            this.reportsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(83, 28);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // collectorsRCDToolStripMenuItem
+            // 
+            this.collectorsRCDToolStripMenuItem.Name = "collectorsRCDToolStripMenuItem";
+            this.collectorsRCDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.collectorsRCDToolStripMenuItem.Text = "Collector\'s RCD";
+            this.collectorsRCDToolStripMenuItem.Click += new System.EventHandler(this.collectorsRCDToolStripMenuItem_Click);
+            // 
+            // liquidatorsRCDToolStripMenuItem
+            // 
+            this.liquidatorsRCDToolStripMenuItem.Name = "liquidatorsRCDToolStripMenuItem";
+            this.liquidatorsRCDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.liquidatorsRCDToolStripMenuItem.Text = "Liquidator\'s RCD";
+            this.liquidatorsRCDToolStripMenuItem.Click += new System.EventHandler(this.liquidatorsRCDToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(234, 6);
+            // 
+            // rCIToolStripMenuItem
+            // 
+            this.rCIToolStripMenuItem.Name = "rCIToolStripMenuItem";
+            this.rCIToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.rCIToolStripMenuItem.Text = "RCI";
+            this.rCIToolStripMenuItem.Click += new System.EventHandler(this.rCIToolStripMenuItem_Click);
+            // 
+            // abstractOfGeneralCollectionsToolStripMenuItem
+            // 
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections";
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Click += new System.EventHandler(this.abstractOfGeneralCollectionsToolStripMenuItem_Click);
+            // 
+            // bankCashbookToolStripMenuItem
+            // 
+            this.bankCashbookToolStripMenuItem.Name = "bankCashbookToolStripMenuItem";
+            this.bankCashbookToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.bankCashbookToolStripMenuItem.Text = "Bank Cashbook";
+            this.bankCashbookToolStripMenuItem.Click += new System.EventHandler(this.bankCashbookToolStripMenuItem_Click);
+            // 
+            // consolidatedReceiptsToolStripMenuItem
+            // 
+            this.consolidatedReceiptsToolStripMenuItem.Name = "consolidatedReceiptsToolStripMenuItem";
+            this.consolidatedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.consolidatedReceiptsToolStripMenuItem.Text = "Consolidated Receipts";
+            this.consolidatedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.consolidatedReceiptsToolStripMenuItem_Click);
+            // 
+            // dailyCashPositionsToolStripMenuItem
+            // 
+            this.dailyCashPositionsToolStripMenuItem.Name = "dailyCashPositionsToolStripMenuItem";
+            this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
+            this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
+            // 
+            // rCDToolStripMenuItem
+            // 
+            this.rCDToolStripMenuItem.Name = "rCDToolStripMenuItem";
+            this.rCDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.rCDToolStripMenuItem.Text = "RCD";
+            this.rCDToolStripMenuItem.Click += new System.EventHandler(this.rCDToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1620,8 +1610,8 @@ namespace AccountingSystem
             this.flowLayoutPanel5.ResumeLayout(false);
             this.tabPageTreasury.ResumeLayout(false);
             this.tabPageTreasury.PerformLayout();
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1633,7 +1623,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem menuFile;
         private System.Windows.Forms.ToolStripMenuItem menuManage;
         private System.Windows.Forms.ToolStripMenuItem menuJournals;
-        private System.Windows.Forms.ToolStripMenuItem menuReports;
         private System.Windows.Forms.ToolStripMenuItem menuAllotmentClasses;
         private System.Windows.Forms.ToolStripMenuItem menuFunds;
         private System.Windows.Forms.ToolStripMenuItem menuChartOfAccounts;
@@ -1647,21 +1636,15 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripStatusLabel lblUserFullName;
         private System.Windows.Forms.ToolStripStatusLabel lblUserRole;
         private System.Windows.Forms.ToolStripMenuItem menuBanks;
-        private System.Windows.Forms.ToolStripMenuItem menuprintRCI;
         private System.Windows.Forms.ToolStripMenuItem menuAccForm;
         private System.Windows.Forms.ToolStripMenuItem menuLogout;
         private System.Windows.Forms.ToolStripMenuItem menuExitApp;
-        private System.Windows.Forms.ToolStripMenuItem menuprintPC;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.RadioButton radBtnBudget;
         private System.Windows.Forms.RadioButton radBtnAccounting;
-        private System.Windows.Forms.ToolStripMenuItem menuprintGC;
         private System.Windows.Forms.ToolStripMenuItem menuReceipts;
-        private System.Windows.Forms.ToolStripMenuItem menuBankCashBook;
         private System.Windows.Forms.TabControl tabControlDashboard;
         internal System.Windows.Forms.TabPage tabPageAccounting;
-        private System.Windows.Forms.ToolStripMenuItem menuReceiptsConsolidated;
-        private System.Windows.Forms.ToolStripMenuItem menuDailyCash;
         internal System.Windows.Forms.TabPage tabPageBudget;
         private System.Windows.Forms.TabControl tabControlAccounting;
         private System.Windows.Forms.TabPage tabPageJournalEntryVoucher;
@@ -1721,18 +1704,10 @@ namespace AccountingSystem
         internal System.Windows.Forms.Button btnBudgetAppropriations;
         internal System.Windows.Forms.Button btnAllotmentRelease;
         internal System.Windows.Forms.Button btnObligationRequest;
-        private System.Windows.Forms.ToolStripMenuItem menuReturnReceipts;
         private System.Windows.Forms.Button btnSAAOB;
         private System.Windows.Forms.Button btnSAAOBB;
         private Views.Reports.Financial_Statements.ucStatementOfFinancialPosition ucStatementOfFinancialPosition1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
-        internal System.Windows.Forms.Button btnIssueReceipt;
-        internal System.Windows.Forms.Button btnPaymentCollection;
-        internal System.Windows.Forms.Button btnIssueCheck;
-        internal System.Windows.Forms.Button btnBankDeposit;
-        internal System.Windows.Forms.Button btnReportOfCollections;
-        internal System.Windows.Forms.Button btnRCD;
         private Views.Dashboard.TreasuryDashboard.ucRCDSummary ucrcdSummary1;
         private Views.Reports.Financial_Statements.ucStatementOfCashFlows ucStatementOfCashFlows1;
         internal System.Windows.Forms.TabPage tabPageTransactionLog;
@@ -1743,7 +1718,27 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem taxRateToolStripMenuItem;
-        internal System.Windows.Forms.Button btnAssessmentPosting;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem checkIssuanceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bankDepositToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentCollectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem collectorsRCDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem liquidatorsRCDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem rCIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bankCashbookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consolidatedReceiptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dailyCashPositionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem issueReceiptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rCDToolStripMenuItem;
     }
 }
 
