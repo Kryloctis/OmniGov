@@ -66,16 +66,18 @@ namespace AccountingSystem
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "ARP No.";
-            datagrid.Columns[2].HeaderText = "Owner";
-            datagrid.Columns[3].HeaderText = "Barangay";
-            datagrid.Columns[4].HeaderText = "PIN";
-            datagrid.Columns[5].HeaderText = "Taxable";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["owners_id"].Visible = false;
+            datagrid.Columns["barangays_id"].Visible = false;
+            datagrid.Columns["arp_no"].Visible = false;
+
+            datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            datagrid.Columns["owner_name"].HeaderText = "Owner";
+            datagrid.Columns["barangay_name"].HeaderText = "Barangay";
+            datagrid.Columns["pin"].HeaderText = "PIN";
+            datagrid.Columns["is_taxable"].HeaderText = "Taxable";
             datagrid.Columns["is_posted"].DefaultCellStyle.NullValue = null;
             datagrid.Columns["is_posted"].HeaderText = "Posted";
-
-
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

@@ -92,7 +92,7 @@ namespace RPT.Data
         {
             try
             {
-                string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties}";
+                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties}";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.Fill(query, dtProperties);

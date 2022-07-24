@@ -66,15 +66,22 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
                 int id = Convert.ToInt32(row["id"]);
-                string arpNo = row["complete_arp_no"].ToString();
+                int ownerId = Convert.ToInt32(row["owners_id"]);
+                int barangayId = Convert.ToInt32(row["barangays_id"]);
+                string arpNo = row["arp_no"].ToString();
+
+                string completeARP = row["complete_arp_no"].ToString();
                 string ownerName = row["owner_name"].ToString();
                 string barangayName = row["barangay_name"].ToString();
                 string pin = row["pin"].ToString();
 
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
+                bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(arpNo);
+
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
-                 
-                dataTable.Rows.Add(id, arpNo, ownerName, barangayName, pin, isTaxableImg, null);
+                Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
+
+                dataTable.Rows.Add(id, ownerId, barangayId, arpNo, completeARP, ownerName, barangayName, pin, isTaxableImg, isPostedImg);
             }
 
             return dataTable;

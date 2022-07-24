@@ -30,19 +30,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void InitializeComponent()
         {
             this.dgProperties = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.btnPost = new System.Windows.Forms.Button();
-            this.btnAutoPost = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radLand = new System.Windows.Forms.RadioButton();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.cmbBarangays = new System.Windows.Forms.ComboBox();
             this.cmbEffectivityQuarter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
-            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
@@ -50,45 +44,24 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // dgProperties
             // 
             this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgProperties.Location = new System.Drawing.Point(12, 79);
+            this.dgProperties.Location = new System.Drawing.Point(12, 51);
             this.dgProperties.Name = "dgProperties";
             this.dgProperties.RowTemplate.Height = 25;
-            this.dgProperties.Size = new System.Drawing.Size(776, 365);
+            this.dgProperties.Size = new System.Drawing.Size(776, 393);
             this.dgProperties.TabIndex = 11;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnPost);
-            this.panel2.Controls.Add(this.btnAutoPost);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 45);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 28);
-            this.panel2.TabIndex = 10;
             // 
             // btnPost
             // 
-            this.btnPost.Location = new System.Drawing.Point(713, 3);
+            this.btnPost.Location = new System.Drawing.Point(12, 12);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(75, 23);
             this.btnPost.TabIndex = 1;
             this.btnPost.Text = "Post";
             this.btnPost.UseVisualStyleBackColor = true;
             // 
-            // btnAutoPost
-            // 
-            this.btnAutoPost.Location = new System.Drawing.Point(632, 3);
-            this.btnAutoPost.Name = "btnAutoPost";
-            this.btnAutoPost.Size = new System.Drawing.Size(75, 23);
-            this.btnAutoPost.TabIndex = 0;
-            this.btnAutoPost.Text = "Auto Post";
-            this.btnAutoPost.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Controls.Add(this.radLand);
+            this.panel1.Controls.Add(this.btnPost);
             this.panel1.Controls.Add(this.nudYear);
             this.panel1.Controls.Add(this.cmbBarangays);
             this.panel1.Controls.Add(this.cmbEffectivityQuarter);
@@ -99,45 +72,27 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Size = new System.Drawing.Size(800, 45);
             this.panel1.TabIndex = 9;
             // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(168, 12);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(81, 19);
-            this.radioButton2.TabIndex = 10;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Machinery";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(86, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(69, 19);
-            this.radioButton1.TabIndex = 10;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Building";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radLand
-            // 
-            this.radLand.AutoSize = true;
-            this.radLand.Location = new System.Drawing.Point(12, 12);
-            this.radLand.Name = "radLand";
-            this.radLand.Size = new System.Drawing.Size(51, 19);
-            this.radLand.TabIndex = 10;
-            this.radLand.TabStop = true;
-            this.radLand.Text = "Land";
-            this.radLand.UseVisualStyleBackColor = true;
-            // 
             // nudYear
             // 
             this.nudYear.Location = new System.Drawing.Point(490, 12);
+            this.nudYear.Maximum = new decimal(new int[] {
+            2099,
+            0,
+            0,
+            0});
+            this.nudYear.Minimum = new decimal(new int[] {
+            2022,
+            0,
+            0,
+            0});
             this.nudYear.Name = "nudYear";
             this.nudYear.Size = new System.Drawing.Size(101, 23);
             this.nudYear.TabIndex = 9;
+            this.nudYear.Value = new decimal(new int[] {
+            2022,
+            0,
+            0,
+            0});
             // 
             // cmbBarangays
             // 
@@ -174,14 +129,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgProperties);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmAssessmentPosting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assessment Posting";
             this.Load += new System.EventHandler(this.frmAssessmentPosting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
@@ -192,13 +145,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         #endregion
 
         private System.Windows.Forms.DataGridView dgProperties;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnPost;
-        private System.Windows.Forms.Button btnAutoPost;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radLand;
         private System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ComboBox cmbBarangays;
         private System.Windows.Forms.ComboBox cmbEffectivityQuarter;
