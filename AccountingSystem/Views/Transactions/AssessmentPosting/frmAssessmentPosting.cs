@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgProperties);
+            Helper.LoadFormIcon(this);
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
@@ -109,21 +110,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private bool SaveData()
         {
-
             foreach (DataGridViewRow dgvRow in dgProperties.SelectedRows)
             {
                 string arpNo = dgvRow.Cells["arp_no"].Value.ToString();
-                decimal taxRate = 0.0m;
-                decimal discountRate = 0.0m;
-                decimal penaltyRate = 0.0m;
                 DateTime postedAt = DateTime.Now;
 
-                var assessmentPostsModel = new AssessmentPostsModel() {
-
+                var assessmentPostsModel = new AssessmentPostingModel() {
                     ArpNo = arpNo,
-                    TaxRate = taxRate,
-                    DiscountRate = discountRate,
-                    PenaltyRate = penaltyRate,
                     PostedAt = postedAt
                 };
 

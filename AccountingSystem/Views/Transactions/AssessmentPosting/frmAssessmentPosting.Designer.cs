@@ -43,11 +43,14 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // dgProperties
             // 
+            this.dgProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProperties.Location = new System.Drawing.Point(12, 51);
             this.dgProperties.Name = "dgProperties";
             this.dgProperties.RowTemplate.Height = 25;
-            this.dgProperties.Size = new System.Drawing.Size(776, 393);
+            this.dgProperties.Size = new System.Drawing.Size(852, 408);
             this.dgProperties.TabIndex = 11;
             // 
             // btnPost
@@ -70,12 +73,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 45);
+            this.panel1.Size = new System.Drawing.Size(876, 45);
             this.panel1.TabIndex = 9;
             // 
             // nudEffectivityYear
             // 
-            this.nudEffectivityYear.Location = new System.Drawing.Point(490, 12);
+            this.nudEffectivityYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudEffectivityYear.Location = new System.Drawing.Point(566, 12);
             this.nudEffectivityYear.Maximum = new decimal(new int[] {
             2099,
             0,
@@ -93,8 +97,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // cmbBarangays
             // 
+            this.cmbBarangays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbBarangays.FormattingEnabled = true;
-            this.cmbBarangays.Location = new System.Drawing.Point(255, 12);
+            this.cmbBarangays.Location = new System.Drawing.Point(331, 12);
             this.cmbBarangays.Name = "cmbBarangays";
             this.cmbBarangays.Size = new System.Drawing.Size(160, 23);
             this.cmbBarangays.TabIndex = 7;
@@ -102,13 +107,14 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // cmbEffectivityQuarter
             // 
+            this.cmbEffectivityQuarter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEffectivityQuarter.FormattingEnabled = true;
             this.cmbEffectivityQuarter.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
             "4"});
-            this.cmbEffectivityQuarter.Location = new System.Drawing.Point(421, 12);
+            this.cmbEffectivityQuarter.Location = new System.Drawing.Point(497, 12);
             this.cmbEffectivityQuarter.Name = "cmbEffectivityQuarter";
             this.cmbEffectivityQuarter.Size = new System.Drawing.Size(63, 23);
             this.cmbEffectivityQuarter.TabIndex = 8;
@@ -116,8 +122,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(597, 12);
+            this.txtSearch.Location = new System.Drawing.Point(673, 12);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(191, 23);
             this.txtSearch.TabIndex = 6;
@@ -126,12 +133,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(876, 471);
             this.Controls.Add(this.dgProperties);
             this.Controls.Add(this.panel1);
             this.Name = "frmAssessmentPosting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assessment Posting";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmAssessmentPosting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.panel1.ResumeLayout(false);

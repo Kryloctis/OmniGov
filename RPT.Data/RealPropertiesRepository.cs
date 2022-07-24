@@ -104,7 +104,7 @@ namespace RPT.Data
                 if (barangayId == 0)
                     filterQuery = $"effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year";
                 
-                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable FROM {viewRealProperties} " +
+                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
                     $"WHERE {filterQuery} ";
 
                 var dtProperties = new DataTable();

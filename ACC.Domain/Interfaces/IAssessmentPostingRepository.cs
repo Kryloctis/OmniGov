@@ -4,7 +4,7 @@ using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface IAssessmentPostsRepository : IRepository<AssessmentPostingModel>
+    public interface IAssessmentPostingRepository : IRepository<AssessmentPostingModel>
     {
         bool IsPropertyPosted(string arpNo);
     }

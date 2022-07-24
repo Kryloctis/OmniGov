@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ACC.Data
 {
-    public class AssessmentPostsRepository : IAssessmentPostsRepository
+    public class AssessmentPostsRepository : IAssessmentPostingRepository
     {
 
         private readonly string tableName = "assessment_posts";
@@ -27,7 +27,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<AssessmentPostsModel> entityList)
+        public bool Delete(List<AssessmentPostingModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -52,20 +52,15 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(AssessmentPostsModel entity)
+        public bool Insert(AssessmentPostingModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] { "@arp_no", DbType.String, entity.ArpNo },
-                new object[] { "@tax_rate", DbType.Decimal, entity.TaxRate },
-                new object[] { "@discount_rate", DbType.Decimal, entity.DiscountRate },
-                new object[] { "@penalty_rate", DbType.Decimal, entity.PenaltyRate },
                 new object[] { "@posted_at", DbType.DateTime2, entity.PostedAt.ToString("yyyy-MM-dd hh:mm:ss") }
             };
 
-            string query = $"INSERT INTO " +
-                            $"{tableName} (arp_no, tax_rate, discount_rate, penalty_rate, posted_at)" +
-                            $"VALUES (@arp_no, @tax_rate, @discount_rate, @penalty_rate, @posted_at)";
+            string query = $"INSERT INTO {tableName} (arp_no, posted_at) VALUES (@arp_no, @posted_at)";
 
             return _mySqlGenericCommandsRPT.ExecuteNonQuery(query, parameters);
         }
@@ -88,7 +83,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(AssessmentPostsModel entity)
+        public bool Update(AssessmentPostingModel entity)
         {
             throw new NotImplementedException();
         }

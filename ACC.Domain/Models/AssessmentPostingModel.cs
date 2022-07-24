@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace RPT.Domain.Models
 {
-    public class AssessmentPostsModel
+    public class AssessmentPostingModel
     {
         public int Id { get; set; }
         public string ArpNo  { get; set; }
-        public decimal TaxRate { get; set; }
-        public decimal DiscountRate { get; set; }
-        public decimal PenaltyRate { get; set; }
         public DateTime PostedAt { get; set; }
     }
 }
