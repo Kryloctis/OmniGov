@@ -49,26 +49,26 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnGetTaxDue = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -113,8 +113,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnPay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(32, 47);
-            this.btnPay.Text = "Pay";
+            this.btnPay.Size = new System.Drawing.Size(104, 47);
+            this.btnPay.Text = "Proceed Payment";
             this.btnPay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // btnNew
@@ -138,8 +138,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnTransactions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnTransactions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(76, 47);
-            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.Size = new System.Drawing.Size(99, 47);
+            this.btnTransactions.Text = "Payment History";
             this.btnTransactions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
@@ -331,6 +331,24 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.label7.TabIndex = 2;
             this.label7.Text = "Collector";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 153);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 15);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Date Paid";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(7, 127);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 15);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Time Paid";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -366,6 +384,24 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(273, 23);
             this.textBox7.TabIndex = 4;
+            // 
+            // textBox10
+            // 
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox10.Location = new System.Drawing.Point(81, 151);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ReadOnly = true;
+            this.textBox10.Size = new System.Drawing.Size(273, 23);
+            this.textBox10.TabIndex = 4;
+            // 
+            // textBox9
+            // 
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox9.Location = new System.Drawing.Point(81, 123);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(273, 23);
+            this.textBox9.TabIndex = 4;
             // 
             // textBox6
             // 
@@ -430,6 +466,28 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel5.Size = new System.Drawing.Size(547, 407);
             this.panel5.TabIndex = 0;
             // 
+            // textBox11
+            // 
+            this.textBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox11.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox11.Location = new System.Drawing.Point(366, 373);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.ReadOnly = true;
+            this.textBox11.Size = new System.Drawing.Size(178, 23);
+            this.textBox11.TabIndex = 4;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(300, 377);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 15);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Total Due";
+            // 
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -464,6 +522,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnGetTaxDue.Size = new System.Drawing.Size(73, 37);
             this.btnGetTaxDue.Text = "Get Tax Due";
             this.btnGetTaxDue.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnGetTaxDue.Click += new System.EventHandler(this.btnGetTaxDue_Click);
             // 
             // panel1
             // 
@@ -474,64 +533,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(945, 439);
             this.panel1.TabIndex = 2;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 127);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 15);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Time Paid";
-            // 
-            // textBox9
-            // 
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox9.Location = new System.Drawing.Point(81, 123);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(273, 23);
-            this.textBox9.TabIndex = 4;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 153);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 15);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Date Paid";
-            // 
-            // textBox10
-            // 
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox10.Location = new System.Drawing.Point(81, 151);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(273, 23);
-            this.textBox10.TabIndex = 4;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(300, 377);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 15);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Total Due";
-            // 
-            // textBox11
-            // 
-            this.textBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox11.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox11.Location = new System.Drawing.Point(366, 373);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.ReadOnly = true;
-            this.textBox11.Size = new System.Drawing.Size(178, 23);
-            this.textBox11.TabIndex = 4;
             // 
             // frmPaymentPosting
             // 

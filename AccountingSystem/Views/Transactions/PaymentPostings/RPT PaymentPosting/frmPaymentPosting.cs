@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +24,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void btnTransactions_Click(object sender, EventArgs e)
         {
             _ = new frmTaxPayerTransactions(this).ShowDialog();
+        }
+
+        private void btnGetTaxDue_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptTaxDue(this).ShowDialog();
         }
     }
 }
