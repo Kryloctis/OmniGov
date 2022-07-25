@@ -46,12 +46,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private DataTable DataTableAssessmentPosting()
         {
-            var barangaysId = Convert.ToInt32(cmbBarangays.SelectedValue);
+            var barangay = cmbBarangays.Text.ToString();
             var effectivityQuarter = Convert.ToInt16(cmbEffectivityQuarter.SelectedValue);
             var effectivityYear = Convert.ToInt32(nudEffectivityYear.Value);
             var searchKey = txtSearch.Text.Trim();
 
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangaysId, effectivityQuarter, effectivityYear, searchKey);
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, effectivityQuarter, effectivityYear, searchKey);
             var dataTable = new DataTable();
 
             foreach (DataColumn column in dtViewRealProperties.Columns)
@@ -91,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
 
-                decimal discountRate = 0m;
+                decimal discountRate = (assessedValue * Convert.ToDecimal(0.98));
                 decimal penaltyRate = 0m;
                 decimal penaltyFrequency = 0m;
                 decimal basicRate = 0m;

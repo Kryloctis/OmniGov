@@ -8,7 +8,7 @@ namespace RPT.Domain.Interfaces
     {
         DataTable GetViewPropertiesByPropertyKindAndSearch(string propertyKind, string searchText);
         DataTable GetBarangays();
-        DataTable GetProperties(int barangayId, int effectivityQuarter, int effectivityYear, string searchKey);
+        DataTable GetProperties(string barangayName, int effectivityQuarter, int effectivityYear, string searchKey);
         decimal GetAssessedValueByARPNo(string arpNo);
 
 
