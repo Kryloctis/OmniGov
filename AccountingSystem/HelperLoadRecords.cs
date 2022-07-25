@@ -9,6 +9,16 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region RPT Payment Posting
+
+        public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+
+        }
+
+        #endregion
+
         #region RPT Tax Rates
 
         public static void TaxRatesDatagridView(DataGridView dataGridView, DataTable dataTable)

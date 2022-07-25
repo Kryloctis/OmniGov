@@ -111,7 +111,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 0;
-            this.btnAccept.Text = "Accept";
+            this.btnAccept.Text = "Apply";
             this.btnAccept.UseVisualStyleBackColor = true;
             // 
             // splitContainer1

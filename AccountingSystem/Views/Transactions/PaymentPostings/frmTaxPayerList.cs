@@ -20,6 +20,18 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             Helper.LoadFormIcon(this);
         }
 
+        private void LoadTaxpayerList() 
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message); 
+            }
+        }
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentPosting(this).ShowDialog();

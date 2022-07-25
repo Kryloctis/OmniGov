@@ -116,6 +116,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnPay.Size = new System.Drawing.Size(104, 47);
             this.btnPay.Text = "Proceed Payment";
             this.btnPay.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // btnNew
             // 

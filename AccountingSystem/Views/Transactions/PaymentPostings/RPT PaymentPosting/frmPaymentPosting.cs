@@ -30,5 +30,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             _ = new frmRptTaxDue(this).ShowDialog();
         }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptTaxPayment(this).ShowDialog();
+        }
     }
 }
