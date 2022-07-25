@@ -511,4 +511,82 @@
   <data name="document_project_pin_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-project-pin@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="user_clipboard_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_clipboard_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user-clipboard@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_blue_time_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-blue-time@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list_money_banknotes_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-money-banknotes@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list_money_banknotes_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-money-banknotes@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list_money_banknotes_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-money-banknotes@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list_money_banknotes_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-money-banknotes@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="list_money_banknotes_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\list-money-banknotes@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_banknotes_2_pin_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money-banknotes-2-pin@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

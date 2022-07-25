@@ -32,6 +32,7 @@ using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.PaymentCollection;
+using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
@@ -807,6 +808,11 @@ namespace AccountingSystem
         private void dailyCashPositionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmDailyCash().ShowDialog();
+        }
+
+        private void toolStripMenuPaymentPosting_Click(object sender, EventArgs e)
+        {
+            _ = new frmPaymentPosting().ShowDialog();
         }
     }
 }
