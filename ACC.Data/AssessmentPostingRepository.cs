@@ -15,11 +15,11 @@ namespace ACC.Data
 
         private readonly string tableName = "assessment_posts";
 
-        private MySqlGenericCommands _mySqlGenericCommandsRPT;
+        private MySqlGenericCommands _mySqlGenericCommands;
 
-        public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
         {
-            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
+            _mySqlGenericCommands = mySqlGenericCommands;
         }
 
         public int CountRecords()
@@ -39,12 +39,21 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            throw new NotImplementedException();
+            string query = $"SELECT * FROM {tableName}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object [] { "@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR owner_name LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text OR owner_contact LIKE @search_text OR barangay_name LIKE @search_text OR municipality_name LIKE @search_text OR province_name LIKE @search_text";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -62,7 +71,7 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (complete_arp_no, posted_at) VALUES (@arp_no, @posted_at)";
 
-            return _mySqlGenericCommandsRPT.ExecuteNonQuery(query, parameters);
+            return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool IsPropertyPosted(string arpNo)
@@ -74,7 +83,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT complete_arp_no FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-                string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+                string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult))
                     return true;

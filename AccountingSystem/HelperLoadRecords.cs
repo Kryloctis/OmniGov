@@ -14,7 +14,13 @@ namespace AccountingSystem
         public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable) 
         {
             dataGridView.DataSource = dataTable;
-
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["owner_name"].HeaderText = "Name";
+            dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
+            dataGridView.Columns["province_name"].HeaderText = "Province";
+            dataGridView.Columns["owner_address"].HeaderText = "Address";
         }
 
         #endregion
