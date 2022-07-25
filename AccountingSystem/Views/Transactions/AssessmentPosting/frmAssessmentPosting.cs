@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
             var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangaysId, effectivityQuarter, effectivityYear, searchKey);
             var dataTable = new DataTable();
-            
+
             foreach (DataColumn column in dtViewRealProperties.Columns)
             {
                 if (column.ColumnName == "is_taxable")
@@ -82,15 +82,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
                 int id = Convert.ToInt32(row["id"]);
-                int ownerId = Convert.ToInt32(row["owners_id"]);
-                int barangayId = Convert.ToInt32(row["barangays_id"]);
                 string completeArpNo = row["complete_arp_no"].ToString();
                 decimal assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeArpNo);
-
                 string ownerName = row["owner_name"].ToString();
                 string barangayName = row["barangay_name"].ToString();
                 string pin = row["pin"].ToString();
-
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
@@ -105,7 +101,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(id, ownerId, barangayId, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
+                dataTable.Rows.Add(id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
 
             }
 
@@ -133,7 +129,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             foreach (DataGridViewRow dgvRow in dgProperties.SelectedRows)
             {
-                string arpNo = dgvRow.Cells["arp_no"].Value.ToString();
+                string arpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
                 DateTime postedAt = DateTime.Now;
 
                 var assessmentPostsModel = new AssessmentPostingModel() {

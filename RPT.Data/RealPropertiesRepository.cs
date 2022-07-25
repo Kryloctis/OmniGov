@@ -99,13 +99,8 @@ namespace RPT.Data
                     new object[]{"@search_key", DbType.String, searchKey},
                 };
 
-                string filterQuery = $"barangays_id = @barangays_id AND effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year ";
-
-                if (barangayId == 0)
-                    filterQuery = $"effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year";
-                
-                string query = $"SELECT id, owners_id, barangays_id,  complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE {filterQuery} ";
+                string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
+                    $"WHERE effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year ";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);

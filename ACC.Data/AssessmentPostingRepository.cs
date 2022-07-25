@@ -12,7 +12,6 @@ namespace ACC.Data
 {
     public class AssessmentPostingRepository : IAssessmentPostingRepository
     {
-
         private readonly string tableName = "assessment_posts";
 
         private MySqlGenericCommands _mySqlGenericCommandsRPT;

@@ -79,26 +79,21 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["owners_id"].Visible = false;
-            datagrid.Columns["barangays_id"].Visible = false;
 
             datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
             datagrid.Columns["owner_name"].HeaderText = "Owner";
             datagrid.Columns["barangay_name"].HeaderText = "Barangay";
+            datagrid.Columns["pin"].HeaderText = "PIN";
+            datagrid.Columns["is_taxable"].HeaderText = "Taxable";
+            datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
+            datagrid.Columns["is_cancelled"].HeaderText = "Cancelled";
             datagrid.Columns["assessed_value"].HeaderText = "Assessed Value";
-
             datagrid.Columns["discount_rate"].HeaderText = "Discount Rate";
             datagrid.Columns["penalty_rate"].HeaderText = "Penalty Rate";
             datagrid.Columns["penalty_frequency"].HeaderText = "Penalty Frequency";
             datagrid.Columns["basic_rate"].HeaderText = "Basic Rate";
             datagrid.Columns["sef_rate"].HeaderText = "SEF Rate";
 
-
-
-            datagrid.Columns["pin"].HeaderText = "PIN";
-            datagrid.Columns["is_taxable"].HeaderText = "Taxable";
-            datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
-            datagrid.Columns["is_cancelled"].HeaderText = "Cancelled";
             datagrid.Columns["is_posted"].DefaultCellStyle.NullValue = null;
             datagrid.Columns["is_posted"].HeaderText = "Posted";
 
