@@ -1,0 +1,91 @@
+﻿using ACC.Data;
+using RPT.Domain.Interfaces;
+using RPT.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ACC.Data
+{
+    public class AssessmentPostingRepository : IAssessmentPostingRepository
+    {
+
+        private readonly string tableName = "assessment_posts";
+
+        private MySqlGenericCommands _mySqlGenericCommandsRPT;
+
+        public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        {
+            _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
+        }
+
+        public int CountRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(List<AssessmentPostingModel> entityList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordByID(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecords()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IdExist(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Insert(AssessmentPostingModel entity)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@arp_no", DbType.String, entity.ArpNo },
+                new object[] { "@posted_at", DbType.DateTime2, entity.PostedAt.ToString("yyyy-MM-dd hh:mm:ss") }
+            };
+
+            string query = $"INSERT INTO {tableName} (complete_arp_no, posted_at) VALUES (@arp_no, @posted_at)";
+
+            return _mySqlGenericCommandsRPT.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool IsPropertyPosted(string arpNo)
+        {
+            {
+                var parameters = new object[][]
+                {
+                new object[] { "@complete_arp_no", DbType.String, arpNo },
+                };
+
+                string query = $"SELECT complete_arp_no FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+                string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+
+                if (!string.IsNullOrEmpty(queryResult))
+                    return true;
+
+                return false;
+            }
+        }
+
+        public bool Update(AssessmentPostingModel entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

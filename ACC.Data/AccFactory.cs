@@ -1,6 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
-
+using RPT.Domain.Interfaces;
 using System;
 
 namespace AccountingSystem
@@ -135,5 +135,7 @@ namespace AccountingSystem
         public static IRptPenaltiesRepository rptPenaltiesRepository() => new RptPenaltiesRepository(mySqlGenericCommandsLFS);
 
         public static IRptTaxRatesRepository rptTaxRatesRepository() => new RptTaxRatesRepository(mySqlGenericCommandsLFS);
+
+        public static IAssessmentPostingRepository AssessmentPostsRepository() => new AssessmentPostingRepository(mySqlGenericCommandsLFS);
     }
 }

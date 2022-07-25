@@ -74,6 +74,11 @@ namespace AccountingSystem
         #region RPT Posting
         internal static void BarangayCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
+            DataRow dr = dataTable.NewRow();
+            dr["id"] = "0";
+            dr["name"] = "All";
+            dataTable.Rows.InsertAt(dr, 0);
+
             comboBox.DataSource = dataTable;
             comboBox.DisplayMember = displayMember;
             comboBox.ValueMember = valueMember;
@@ -83,16 +88,29 @@ namespace AccountingSystem
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "ARP No.";
-            datagrid.Columns[2].HeaderText = "Owner";
-            datagrid.Columns[3].HeaderText = "Barangay";
-            datagrid.Columns[4].HeaderText = "PIN";
-            datagrid.Columns[5].HeaderText = "Taxable";
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["owners_id"].Visible = false;
+            datagrid.Columns["barangays_id"].Visible = false;
+
+            datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            datagrid.Columns["owner_name"].HeaderText = "Owner";
+            datagrid.Columns["barangay_name"].HeaderText = "Barangay";
+            datagrid.Columns["assessed_value"].HeaderText = "Assessed Value";
+
+            datagrid.Columns["discount_rate"].HeaderText = "Discount Rate";
+            datagrid.Columns["penalty_rate"].HeaderText = "Penalty Rate";
+            datagrid.Columns["penalty_frequency"].HeaderText = "Penalty Frequency";
+            datagrid.Columns["basic_rate"].HeaderText = "Basic Rate";
+            datagrid.Columns["sef_rate"].HeaderText = "SEF Rate";
+
+
+
+            datagrid.Columns["pin"].HeaderText = "PIN";
+            datagrid.Columns["is_taxable"].HeaderText = "Taxable";
+            datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
+            datagrid.Columns["is_cancelled"].HeaderText = "Cancelled";
             datagrid.Columns["is_posted"].DefaultCellStyle.NullValue = null;
             datagrid.Columns["is_posted"].HeaderText = "Posted";
-
-
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
