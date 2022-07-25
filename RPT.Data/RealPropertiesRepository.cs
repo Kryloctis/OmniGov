@@ -104,7 +104,7 @@ namespace RPT.Data
                 if (barangayId == 0)
                     filterQuery = $"effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year";
                 
-                string query = $"SELECT id, owners_id, barangays_id,  arp_no, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
+                string query = $"SELECT id, owners_id, barangays_id,  complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
                     $"WHERE {filterQuery} ";
 
                 var dtProperties = new DataTable();
@@ -114,6 +114,23 @@ namespace RPT.Data
             {
                 throw;
             }
+        }
+
+        public decimal GetAssessedValueByARPNo(string arpNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@arp_no", DbType.String, arpNo},
+            };
+
+            string query = $"SELECT assessed_value FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @arp_no";
+
+            string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return decimal.Parse(queryResult);
+
+            return 0;
         }
     }
 }

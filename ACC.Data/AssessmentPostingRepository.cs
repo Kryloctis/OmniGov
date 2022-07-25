@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace ACC.Data
 {
-    public class AssessmentPostsRepository : IAssessmentPostingRepository
+    public class AssessmentPostingRepository : IAssessmentPostingRepository
     {
 
         private readonly string tableName = "assessment_posts";
 
         private MySqlGenericCommands _mySqlGenericCommandsRPT;
 
-        public AssessmentPostsRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
         {
             _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }
@@ -60,7 +60,7 @@ namespace ACC.Data
                 new object[] { "@posted_at", DbType.DateTime2, entity.PostedAt.ToString("yyyy-MM-dd hh:mm:ss") }
             };
 
-            string query = $"INSERT INTO {tableName} (arp_no, posted_at) VALUES (@arp_no, @posted_at)";
+            string query = $"INSERT INTO {tableName} (complete_arp_no, posted_at) VALUES (@arp_no, @posted_at)";
 
             return _mySqlGenericCommandsRPT.ExecuteNonQuery(query, parameters);
         }
@@ -70,10 +70,10 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                new object[] { "@arp_no", DbType.String, arpNo },
+                new object[] { "@complete_arp_no", DbType.String, arpNo },
                 };
 
-                string query = $"SELECT arp_no FROM {tableName} WHERE arp_no = @arp_no";
+                string query = $"SELECT complete_arp_no FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
                 string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult))

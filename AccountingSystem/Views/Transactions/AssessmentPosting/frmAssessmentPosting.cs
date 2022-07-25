@@ -72,6 +72,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
 
             dataTable.Columns.Add("assessed_value", typeof(string));
+            dataTable.Columns.Add("discount_rate", typeof(decimal));
+            dataTable.Columns.Add("penalty_rate", typeof(decimal));
+            dataTable.Columns.Add("penalty_frequency", typeof(decimal));
+            dataTable.Columns.Add("basic_rate", typeof(decimal));
+            dataTable.Columns.Add("sef_rate", typeof(decimal));
             dataTable.Columns.Add("is_posted", typeof(Image));
 
             foreach (DataRow row in dtViewRealProperties.Rows)
@@ -79,24 +84,29 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 int id = Convert.ToInt32(row["id"]);
                 int ownerId = Convert.ToInt32(row["owners_id"]);
                 int barangayId = Convert.ToInt32(row["barangays_id"]);
-                string arpNo = row["arp_no"].ToString();
+                string completeArpNo = row["complete_arp_no"].ToString();
+                decimal assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeArpNo);
 
-                decimal assessedValue = 39123.42m;
-
-                string completeARP = row["complete_arp_no"].ToString();
                 string ownerName = row["owner_name"].ToString();
                 string barangayName = row["barangay_name"].ToString();
                 string pin = row["pin"].ToString();
 
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
-                bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(arpNo);
+                bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
 
+                decimal discountRate = 0m;
+                decimal penaltyRate = 0m;
+                decimal penaltyFrequency = 0m;
+                decimal basicRate = 0m;
+                decimal sefRate = 0m;
+                
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(id, ownerId, barangayId, arpNo, completeARP, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, isPostedImg);
+                dataTable.Rows.Add(id, ownerId, barangayId, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
+
             }
 
             return dataTable;
