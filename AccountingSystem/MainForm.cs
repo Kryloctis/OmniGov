@@ -810,9 +810,9 @@ namespace AccountingSystem
             _ = new frmDailyCash().ShowDialog();
         }
 
-        private void toolStripMenuPaymentPosting_Click(object sender, EventArgs e)
+        private void toolStripMenuPaymentPostings_Click(object sender, EventArgs e)
         {
-            _ = new frmPaymentPosting().ShowDialog();
+            _ = new frmTaxPayerList(this).ShowDialog();
         }
     }
 }
