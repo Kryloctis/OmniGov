@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
             var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangaysId, effectivityQuarter, effectivityYear, searchKey);
             var dataTable = new DataTable();
-
+            
             foreach (DataColumn column in dtViewRealProperties.Columns)
             {
                 if (column.ColumnName == "is_taxable")
@@ -62,9 +62,16 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     continue;
                 }
 
+                if (column.ColumnName == "is_cancelled")
+                {
+                    dataTable.Columns.Add(column.ToString(), typeof(Image));
+                    continue;
+                }
+
                 dataTable.Columns.Add(column.ToString(), column.DataType);
             }
 
+            dataTable.Columns.Add("assessed_value", typeof(string));
             dataTable.Columns.Add("is_posted", typeof(Image));
 
             foreach (DataRow row in dtViewRealProperties.Rows)
@@ -74,18 +81,22 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 int barangayId = Convert.ToInt32(row["barangays_id"]);
                 string arpNo = row["arp_no"].ToString();
 
+                decimal assessedValue = 39123.42m;
+
                 string completeARP = row["complete_arp_no"].ToString();
                 string ownerName = row["owner_name"].ToString();
                 string barangayName = row["barangay_name"].ToString();
                 string pin = row["pin"].ToString();
 
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
+                bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(arpNo);
 
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
+                Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(id, ownerId, barangayId, arpNo, completeARP, ownerName, barangayName, pin, isTaxableImg, isPostedImg);
+                dataTable.Rows.Add(id, ownerId, barangayId, arpNo, completeARP, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, isPostedImg);
             }
 
             return dataTable;
