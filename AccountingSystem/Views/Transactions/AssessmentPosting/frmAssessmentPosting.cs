@@ -37,6 +37,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private DataTable DataTableAssessmentPosting()
         {
+            var currentDate = Convert.ToSByte(1);
             var barangay = cmbBarangays.Text.ToString();
             var searchKey = txtSearch.Text.Trim();
 
@@ -64,11 +65,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
 
             dataTable.Columns.Add("assessed_value", typeof(string));
-            dataTable.Columns.Add("discount_rate", typeof(decimal));
-            dataTable.Columns.Add("penalty_rate", typeof(decimal));
-            dataTable.Columns.Add("penalty_frequency", typeof(decimal));
-            dataTable.Columns.Add("basic_rate", typeof(decimal));
-            dataTable.Columns.Add("sef_rate", typeof(decimal));
+            dataTable.Columns.Add("discount_rate", typeof(string));
+            dataTable.Columns.Add("penalty_rate", typeof(string));
+            dataTable.Columns.Add("penalty_frequency", typeof(string));
+            dataTable.Columns.Add("basic_rate", typeof(string));
+            dataTable.Columns.Add("sef_rate", typeof(string));
             dataTable.Columns.Add("is_posted", typeof(Image));
 
             foreach (DataRow row in dtViewRealProperties.Rows)
@@ -83,17 +84,17 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
 
-                decimal discountRate = (assessedValue * Convert.ToDecimal(0.98));
-                decimal penaltyRate = 0m;
-                decimal penaltyFrequency = 0m;
-                decimal basicRate = 0m;
-                decimal sefRate = 0m;
+                decimal discountRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
+                decimal penaltyRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
+                string penaltyFrequency = "Monthly";
+                decimal basicRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
+                decimal sefRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
                 
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
+                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate.ToString("P0"), penaltyRate.ToString("P0"), penaltyFrequency, basicRate, sefRate, isPostedImg);
 
             }
 
@@ -141,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
                     bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
                     DateTime postedAt = DateTime.Now;
-                    decimal discountRate = 0m; ;
+                    decimal discountRate = Convert.ToDecimal(dgvRow.Cells["discount_rate"].Value);
                     decimal penaltyRate = 0m;
                     string penaltyFrequency = string.Empty;
                     decimal basicRate = 0m;
