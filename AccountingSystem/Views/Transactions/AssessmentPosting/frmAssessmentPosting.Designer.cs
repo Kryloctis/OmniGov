@@ -33,13 +33,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.btnPost = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.nudEffectivityYear = new System.Windows.Forms.NumericUpDown();
             this.cmbBarangays = new System.Windows.Forms.ComboBox();
-            this.cmbEffectivityQuarter = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEffectivityYear)).BeginInit();
             this.SuspendLayout();
             // 
             // dgProperties
@@ -68,9 +65,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.btnPost);
-            this.panel1.Controls.Add(this.nudEffectivityYear);
             this.panel1.Controls.Add(this.cmbBarangays);
-            this.panel1.Controls.Add(this.cmbEffectivityQuarter);
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -89,46 +84,15 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.button1_Click);
             // 
-            // nudEffectivityYear
-            // 
-            this.nudEffectivityYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudEffectivityYear.Location = new System.Drawing.Point(493, 12);
-            this.nudEffectivityYear.Maximum = new decimal(new int[] {
-            2099,
-            0,
-            0,
-            0});
-            this.nudEffectivityYear.Name = "nudEffectivityYear";
-            this.nudEffectivityYear.Size = new System.Drawing.Size(101, 23);
-            this.nudEffectivityYear.TabIndex = 9;
-            this.nudEffectivityYear.Value = new decimal(new int[] {
-            2022,
-            0,
-            0,
-            0});
-            // 
             // cmbBarangays
             // 
             this.cmbBarangays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbBarangays.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBarangays.FormattingEnabled = true;
-            this.cmbBarangays.Location = new System.Drawing.Point(258, 12);
+            this.cmbBarangays.Location = new System.Drawing.Point(434, 12);
             this.cmbBarangays.Name = "cmbBarangays";
             this.cmbBarangays.Size = new System.Drawing.Size(160, 23);
             this.cmbBarangays.TabIndex = 7;
-            // 
-            // cmbEffectivityQuarter
-            // 
-            this.cmbEffectivityQuarter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEffectivityQuarter.FormattingEnabled = true;
-            this.cmbEffectivityQuarter.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.cmbEffectivityQuarter.Location = new System.Drawing.Point(424, 12);
-            this.cmbEffectivityQuarter.Name = "cmbEffectivityQuarter";
-            this.cmbEffectivityQuarter.Size = new System.Drawing.Size(63, 23);
-            this.cmbEffectivityQuarter.TabIndex = 8;
             // 
             // txtSearch
             // 
@@ -147,6 +111,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.Controls.Add(this.dgProperties);
             this.Controls.Add(this.panel1);
             this.Name = "frmAssessmentPosting";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transaction > Payments > Assessment Posting";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -154,7 +119,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEffectivityYear)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -164,9 +128,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.DataGridView dgProperties;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown nudEffectivityYear;
         private System.Windows.Forms.ComboBox cmbBarangays;
-        private System.Windows.Forms.ComboBox cmbEffectivityQuarter;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
     }

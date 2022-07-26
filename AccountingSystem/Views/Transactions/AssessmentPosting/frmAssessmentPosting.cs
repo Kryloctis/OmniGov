@@ -25,7 +25,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
             LoadBarangays();
-            LoadEffectivityQuarter();
             LoadProperties();
         }
 
@@ -37,21 +36,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             HelperLoadRecords.BarangayCombobox(dtBarangays, cmbBarangays, "name", "id");
         }
 
-        internal void LoadEffectivityQuarter()
-        {
-            cmbEffectivityQuarter.DataSource = Helper.QuarterDataTable();
-            cmbEffectivityQuarter.DisplayMember = "quarter";
-            cmbEffectivityQuarter.ValueMember = "id";
-        }
-
         private DataTable DataTableAssessmentPosting()
         {
             var barangay = cmbBarangays.Text.ToString();
-            var effectivityQuarter = Convert.ToInt16(cmbEffectivityQuarter.SelectedValue);
-            var effectivityYear = Convert.ToInt32(nudEffectivityYear.Value);
             var searchKey = txtSearch.Text.Trim();
 
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, effectivityQuarter, effectivityYear, searchKey);
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, searchKey);
             var dataTable = new DataTable();
 
             foreach (DataColumn column in dtViewRealProperties.Columns)

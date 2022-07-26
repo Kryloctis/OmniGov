@@ -88,19 +88,17 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties(string barangayName, int effectivityQuarter, int effectivityYear, string searchKey)
+        public DataTable GetProperties(string barangayName, string searchKey)
         {
             try
             {
                 var parameters = new object[][] { 
                     new object[]{"@barangay_name", DbType.String, barangayName},
-                    new object[]{"@effectivity_quarter", DbType.Int16, effectivityQuarter},
-                    new object[]{"@effectivity_year", DbType.Int32, effectivityYear},
                     new object[]{"@search_key", DbType.String, $"%searchKey%" },
                 };
 
                 string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE barangay_name = @barangay_name AND effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year OR owner_name LIKE @search_key";
+                    $"WHERE barangay_name = @barangay_name OR owner_name LIKE @search_key";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
