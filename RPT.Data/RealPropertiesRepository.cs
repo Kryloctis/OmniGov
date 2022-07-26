@@ -92,13 +92,16 @@ namespace RPT.Data
         {
             try
             {
+                if (barangayName.Equals("All"))
+                    barangayName = "";
+
                 var parameters = new object[][] { 
-                    new object[]{"@barangay_name", DbType.String, barangayName},
+                    new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
                     new object[]{"@search_key", DbType.String, $"%{searchKey}%" },
                 };
 
                 string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE barangay_name = @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE()) ";
+                    $"WHERE barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE()) ";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);

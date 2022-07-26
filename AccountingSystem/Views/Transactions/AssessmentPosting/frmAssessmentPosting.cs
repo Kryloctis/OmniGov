@@ -25,7 +25,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
             LoadBarangays();
-            LoadProperties();
         }
 
         #region Loaddata
