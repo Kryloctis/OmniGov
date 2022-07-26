@@ -83,18 +83,18 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
-
+                
                 decimal discountRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
-                decimal penaltyRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
+                decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
                 string penaltyFrequency = "Monthly";
-                decimal basicRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
-                decimal sefRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
+                decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
+                decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
                 
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate.ToString("P0"), penaltyRate.ToString("P0"), penaltyFrequency, basicRate, sefRate, isPostedImg);
+                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate.ToString("P0"), penaltyRate.ToString("P0"), penaltyFrequency, basicRate.ToString("P0"), sefRate.ToString("P0"), isPostedImg);
 
             }
 

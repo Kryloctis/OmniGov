@@ -119,5 +119,19 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public decimal GetTaxRateByCode(string taxRateCode)
+        {
+            var parameters = new object[][] {
+                new object[] {"@code", DbType.String, taxRateCode}
+            };
+            string query = $"SELECT rate FROM {tableName} WHERE code = @code";
+            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return decimal.Parse(queryResult);
+
+            return 0;
+        }
     }
 }
