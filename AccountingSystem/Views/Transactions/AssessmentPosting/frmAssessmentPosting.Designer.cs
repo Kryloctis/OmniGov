@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.dgProperties.RowTemplate.Height = 25;
             this.dgProperties.Size = new System.Drawing.Size(852, 408);
             this.dgProperties.TabIndex = 11;
+            this.dgProperties.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgProperties_ColumnAdded);
             this.dgProperties.SelectionChanged += new System.EventHandler(this.dgProperties_SelectionChanged);
             // 
             // btnPost

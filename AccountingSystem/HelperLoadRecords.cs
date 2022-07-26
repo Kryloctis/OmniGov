@@ -78,8 +78,15 @@ namespace AccountingSystem
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns["id"].Visible = false;
+            datagrid.ReadOnly = false;
 
+            datagrid.Columns["checkbox"].DisplayIndex = 1;
+            datagrid.Columns["checkbox"].Width = 20;
+            datagrid.Columns["checkbox"].ReadOnly = false;
+            datagrid.Columns["checkbox"].HeaderText = "";
+            datagrid.Columns["checkbox"].FillWeight = 20;
+
+            datagrid.Columns["id"].Visible = false;
             datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
             datagrid.Columns["owner_name"].HeaderText = "Owner";
             datagrid.Columns["barangay_name"].HeaderText = "Barangay";
