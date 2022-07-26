@@ -155,20 +155,5 @@ namespace ACC.Data
                 return false;
         }
 
-        public decimal GetDiscountRateByMonth(sbyte month)
-        {
-            var parameters = new object[][]
-            {
-                 new object[] { "@month", DbType.SByte, month},
-            };
-
-            string query = $"SELECT rate FROM {tableName} WHERE month = @month";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
-
-            return 0;
-        }
     }
 }

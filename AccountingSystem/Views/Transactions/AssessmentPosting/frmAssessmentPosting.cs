@@ -37,11 +37,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private DataTable DataTableAssessmentPosting()
         {
-            var currentDate = Convert.ToSByte(1);
+            var isCancelledProeprty = checkFilterCancelledProp.Checked;
             var barangay = cmbBarangays.Text.ToString();
             var searchKey = txtSearch.Text.Trim();
 
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, searchKey);
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, searchKey, isCancelledProeprty);
             var dataTable = new DataTable();
 
 
@@ -65,7 +65,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
 
             dataTable.Columns.Add("assessed_value", typeof(string));
-            dataTable.Columns.Add("discount_rate", typeof(string));
             dataTable.Columns.Add("penalty_rate", typeof(string));
             dataTable.Columns.Add("penalty_frequency", typeof(string));
             dataTable.Columns.Add("basic_rate", typeof(string));
@@ -83,8 +82,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
-                
-                decimal discountRate = AccFactory.rptDiscountRepository().GetDiscountRateByMonth(currentDate);
                 decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
                 string penaltyFrequency = "Monthly";
                 decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
@@ -94,7 +91,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate.ToString("P0"), penaltyRate.ToString("P0"), penaltyFrequency, basicRate.ToString("P0"), sefRate.ToString("P0"), isPostedImg);
+                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, penaltyRate.ToString("P0"), penaltyFrequency, basicRate.ToString("P0"), sefRate.ToString("P0"), isPostedImg);
 
             }
 
@@ -198,6 +195,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 e.Column.ReadOnly = true;
             else
                 e.Column.ReadOnly = false;
+        }
+
+        private void checkFilterCancelledProp_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadProperties();
         }
     }
 }
