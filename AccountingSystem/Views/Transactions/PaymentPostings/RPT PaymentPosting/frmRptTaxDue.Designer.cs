@@ -37,6 +37,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chckBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.chckBxCancelled = new System.Windows.Forms.CheckBox();
@@ -148,6 +149,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chckBoxSelectAll);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.flowLayoutPanel2);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -158,6 +160,20 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.panel1.Size = new System.Drawing.Size(465, 403);
             this.panel1.TabIndex = 0;
             // 
+            // chckBoxSelectAll
+            // 
+            this.chckBoxSelectAll.AutoSize = true;
+            this.chckBoxSelectAll.BackColor = System.Drawing.Color.Transparent;
+            this.chckBoxSelectAll.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chckBoxSelectAll.FlatAppearance.BorderSize = 0;
+            this.chckBoxSelectAll.Location = new System.Drawing.Point(5, 35);
+            this.chckBoxSelectAll.Name = "chckBoxSelectAll";
+            this.chckBoxSelectAll.Size = new System.Drawing.Size(15, 14);
+            this.chckBoxSelectAll.TabIndex = 3;
+            this.chckBoxSelectAll.UseVisualStyleBackColor = false;
+            this.chckBoxSelectAll.CheckedChanged += new System.EventHandler(this.chckBoxSelectAll_CheckedChanged);
+            this.chckBoxSelectAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBoxSelectAll_MouseClick);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -167,6 +183,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(465, 374);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             // 
             // flowLayoutPanel2
             // 
@@ -277,6 +295,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -307,5 +326,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnRecalculate;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.CheckBox chckBoxSelectAll;
     }
 }

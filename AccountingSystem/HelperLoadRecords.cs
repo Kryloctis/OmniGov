@@ -27,6 +27,7 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
             dataGridView.ReadOnly = false;
+            dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
             dataGridView.Columns["complete_arp_no"].ReadOnly = true;
