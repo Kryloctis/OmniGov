@@ -145,17 +145,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return false;
         }
 
-        private void cmbBarangays_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        private void cmbEffectivityQuarter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        private void nudEffectivityYear_ValueChanged(object sender, EventArgs e)
+      
+        private void button1_Click(object sender, EventArgs e)
         {
             LoadProperties();
         }
