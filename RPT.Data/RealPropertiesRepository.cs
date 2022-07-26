@@ -77,7 +77,7 @@ namespace RPT.Data
         {
             try
             {
-                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY name";
+                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY code";
 
                 var dtBarangay = new DataTable();
                 return _mySqlGenericCommandsRPT.Fill(query, dtBarangay);
