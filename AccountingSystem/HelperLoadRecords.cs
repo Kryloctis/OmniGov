@@ -9,6 +9,43 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region RPT Payment Posting
+
+        public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["owner_name"].HeaderText = "Name";
+            dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
+            dataGridView.Columns["province_name"].HeaderText = "Province";
+            dataGridView.Columns["owner_address"].HeaderText = "Address";
+        }
+
+        public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.ReadOnly = false;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_checked"].HeaderText = string.Empty;
+            dataGridView.Columns["complete_arp_no"].ReadOnly = true;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["property_pin"].ReadOnly = true;
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["barangay_name"].ReadOnly = true;
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].ReadOnly = true;
+            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            dataGridView.Columns["is_cancelled"].ReadOnly = true;
+            dataGridView.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        }
+
+        #endregion
+
         #region RPT Tax Rates
 
         public static void TaxRatesDatagridView(DataGridView dataGridView, DataTable dataTable)
@@ -19,7 +56,7 @@ namespace AccountingSystem
             dataGridView.Columns["code"].HeaderText = "Code";
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
-            dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+            dataGridView.Columns["rate"].DefaultCellStyle.Format = "P";
         }
 
         #endregion
@@ -33,7 +70,7 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;   
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
-            dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+            dataGridView.Columns["rate"].DefaultCellStyle.Format = "P";
             dataGridView.Columns["frequency"].HeaderText = "Frequency";
         }
 
@@ -51,7 +88,7 @@ namespace AccountingSystem
             dataGridView.Columns["month_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
-            dataGridView.Columns["rate"].DefaultCellStyle.Format = "0\\.00%";
+            dataGridView.Columns["rate"].DefaultCellStyle.Format = "P";
             dataGridView.Columns["rate"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["rate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_advance"].HeaderText = "Advance";

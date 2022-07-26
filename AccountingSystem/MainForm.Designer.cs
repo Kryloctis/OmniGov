@@ -138,17 +138,17 @@ namespace AccountingSystem
             this.paymentCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuPaymentPostings = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.rCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -214,14 +214,14 @@ namespace AccountingSystem
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(180, 22);
+            this.menuLogout.Size = new System.Drawing.Size(157, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
             this.menuExitApp.Text = "Exit Application";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -1396,14 +1396,14 @@ namespace AccountingSystem
             // issueReceiptsToolStripMenuItem
             // 
             this.issueReceiptsToolStripMenuItem.Name = "issueReceiptsToolStripMenuItem";
-            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.issueReceiptsToolStripMenuItem.Text = "Issue Receipts";
             this.issueReceiptsToolStripMenuItem.Click += new System.EventHandler(this.btnIssueReceipt_Click);
             // 
             // returnedReceiptsToolStripMenuItem
             // 
             this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
@@ -1431,7 +1431,7 @@ namespace AccountingSystem
             this.paymentCollectionsToolStripMenuItem,
             this.toolStripSeparator4,
             this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
+            this.toolStripMenuPaymentPostings});
             this.paymentsToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_24px;
             this.paymentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
@@ -1441,28 +1441,28 @@ namespace AccountingSystem
             // paymentCollectionsToolStripMenuItem
             // 
             this.paymentCollectionsToolStripMenuItem.Name = "paymentCollectionsToolStripMenuItem";
-            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.paymentCollectionsToolStripMenuItem.Text = "Payment Collections";
             this.paymentCollectionsToolStripMenuItem.Click += new System.EventHandler(this.paymentCollectionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(184, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(187, 22);
             this.toolStripMenuItem2.Text = "Assessment Posting";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // toolStripMenuItem3
+            // toolStripMenuPaymentPostings
             // 
-            this.toolStripMenuItem3.Enabled = false;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(183, 22);
-            this.toolStripMenuItem3.Text = "Payment Posting";
+            this.toolStripMenuPaymentPostings.Name = "toolStripMenuPaymentPostings";
+            this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuPaymentPostings.Text = "RPT Payment Posting";
+            this.toolStripMenuPaymentPostings.Click += new System.EventHandler(this.toolStripMenuPaymentPostings_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -1509,6 +1509,13 @@ namespace AccountingSystem
             this.rCIToolStripMenuItem.Text = "RCI";
             this.rCIToolStripMenuItem.Click += new System.EventHandler(this.rCIToolStripMenuItem_Click);
             // 
+            // rCDToolStripMenuItem
+            // 
+            this.rCDToolStripMenuItem.Name = "rCDToolStripMenuItem";
+            this.rCDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.rCDToolStripMenuItem.Text = "RCD";
+            this.rCDToolStripMenuItem.Click += new System.EventHandler(this.rCDToolStripMenuItem_Click);
+            // 
             // abstractOfGeneralCollectionsToolStripMenuItem
             // 
             this.abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
@@ -1536,13 +1543,6 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
-            // 
-            // rCDToolStripMenuItem
-            // 
-            this.rCDToolStripMenuItem.Name = "rCDToolStripMenuItem";
-            this.rCDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.rCDToolStripMenuItem.Text = "RCD";
-            this.rCDToolStripMenuItem.Click += new System.EventHandler(this.rCDToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1726,7 +1726,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem paymentCollectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuPaymentPostings;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collectorsRCDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liquidatorsRCDToolStripMenuItem;
