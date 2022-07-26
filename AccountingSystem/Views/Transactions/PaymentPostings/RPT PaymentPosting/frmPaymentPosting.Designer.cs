@@ -107,12 +107,13 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Size = new System.Drawing.Size(945, 60);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnPay
             // 
             this.btnPay.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnPay.Enabled = false;
             this.btnPay.Image = global::AccountingSystem.Properties.Resources.give_money_2_28px;
             this.btnPay.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPay.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
@@ -230,7 +231,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtTaxpayer.Name = "txtTaxpayer";
             this.txtTaxpayer.ReadOnly = true;
             this.txtTaxpayer.Size = new System.Drawing.Size(260, 23);
-            this.txtTaxpayer.TabIndex = 4;
+            this.txtTaxpayer.TabIndex = 2;
             // 
             // txtProvince
             // 
@@ -248,7 +249,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.ReadOnly = true;
             this.txtMunicipality.Size = new System.Drawing.Size(260, 23);
-            this.txtMunicipality.TabIndex = 5;
+            this.txtMunicipality.TabIndex = 4;
             // 
             // txtBarangay
             // 
@@ -257,7 +258,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.ReadOnly = true;
             this.txtBarangay.Size = new System.Drawing.Size(260, 23);
-            this.txtBarangay.TabIndex = 5;
+            this.txtBarangay.TabIndex = 3;
             // 
             // txtAddress
             // 
@@ -266,7 +267,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.ReadOnly = true;
             this.txtAddress.Size = new System.Drawing.Size(260, 23);
-            this.txtAddress.TabIndex = 5;
+            this.txtAddress.TabIndex = 6;
             // 
             // label13
             // 
@@ -284,7 +285,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtTin.Name = "txtTin";
             this.txtTin.ReadOnly = true;
             this.txtTin.Size = new System.Drawing.Size(260, 23);
-            this.txtTin.TabIndex = 5;
+            this.txtTin.TabIndex = 1;
             // 
             // label12
             // 
@@ -426,7 +427,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtCollector.Name = "txtCollector";
             this.txtCollector.ReadOnly = true;
             this.txtCollector.Size = new System.Drawing.Size(260, 23);
-            this.txtCollector.TabIndex = 4;
+            this.txtCollector.TabIndex = 9;
             // 
             // txtDatePaid
             // 
@@ -435,7 +436,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtDatePaid.Name = "txtDatePaid";
             this.txtDatePaid.ReadOnly = true;
             this.txtDatePaid.Size = new System.Drawing.Size(260, 23);
-            this.txtDatePaid.TabIndex = 4;
+            this.txtDatePaid.TabIndex = 12;
             // 
             // txtTimePaid
             // 
@@ -444,7 +445,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtTimePaid.Name = "txtTimePaid";
             this.txtTimePaid.ReadOnly = true;
             this.txtTimePaid.Size = new System.Drawing.Size(260, 23);
-            this.txtTimePaid.TabIndex = 4;
+            this.txtTimePaid.TabIndex = 11;
             // 
             // txtPayee
             // 
@@ -453,7 +454,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.ReadOnly = true;
             this.txtPayee.Size = new System.Drawing.Size(260, 23);
-            this.txtPayee.TabIndex = 4;
+            this.txtPayee.TabIndex = 10;
             // 
             // txtReceiptNo
             // 
@@ -462,7 +463,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtReceiptNo.Name = "txtReceiptNo";
             this.txtReceiptNo.ReadOnly = true;
             this.txtReceiptNo.Size = new System.Drawing.Size(260, 23);
-            this.txtReceiptNo.TabIndex = 4;
+            this.txtReceiptNo.TabIndex = 8;
             // 
             // txtAccountableForm
             // 
@@ -471,7 +472,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtAccountableForm.Name = "txtAccountableForm";
             this.txtAccountableForm.ReadOnly = true;
             this.txtAccountableForm.Size = new System.Drawing.Size(260, 23);
-            this.txtAccountableForm.TabIndex = 5;
+            this.txtAccountableForm.TabIndex = 7;
             // 
             // panel4
             // 
@@ -514,20 +515,22 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalDue.BackColor = System.Drawing.SystemColors.Control;
             this.txtTotalDue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalDue.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtTotalDue.Location = new System.Drawing.Point(366, 373);
             this.txtTotalDue.Name = "txtTotalDue";
             this.txtTotalDue.ReadOnly = true;
-            this.txtTotalDue.Size = new System.Drawing.Size(178, 23);
-            this.txtTotalDue.TabIndex = 4;
+            this.txtTotalDue.Size = new System.Drawing.Size(178, 27);
+            this.txtTotalDue.TabIndex = 14;
+            this.txtTotalDue.Text = "0.00";
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(300, 377);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(284, 376);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 15);
+            this.label11.Size = new System.Drawing.Size(76, 20);
             this.label11.TabIndex = 3;
             this.label11.Text = "Total Due";
             // 
@@ -553,7 +556,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.toolStrip2.Location = new System.Drawing.Point(4, 4);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(539, 40);
-            this.toolStrip2.TabIndex = 2;
+            this.toolStrip2.TabIndex = 13;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // btnGetTaxDue
@@ -590,6 +593,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RPT Payment Posting";
+            this.Load += new System.EventHandler(this.frmPaymentPosting_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

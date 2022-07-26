@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
-    public partial class frmTaxPayerTransactions : Form
+    public partial class frmTaxPayerPaymentHistory : Form
     {
         private readonly frmPaymentPosting _frmPaymentPosting;
-        public frmTaxPayerTransactions(frmPaymentPosting frmPaymentPosting)
+        public frmTaxPayerPaymentHistory(frmPaymentPosting frmPaymentPosting)
         {
             InitializeComponent();
             _frmPaymentPosting = frmPaymentPosting;

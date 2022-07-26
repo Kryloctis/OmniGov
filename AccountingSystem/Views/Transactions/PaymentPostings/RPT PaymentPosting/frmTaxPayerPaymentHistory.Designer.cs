@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
-    partial class frmTaxPayerTransactions
+    partial class frmTaxPayerPaymentHistory
     {
         /// <summary>
         /// Required designer variable.
@@ -154,7 +154,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             // 
-            // frmTaxPayerTransactions
+            // frmTaxPayerPaymentHistory
             // 
             this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -171,10 +171,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmTaxPayerTransactions";
+            this.Name = "frmTaxPayerPaymentHistory";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions";
+            this.Text = "Payment History";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

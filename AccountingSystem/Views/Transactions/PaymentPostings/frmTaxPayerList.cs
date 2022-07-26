@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPaymentPosting;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
@@ -46,7 +47,24 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             if(dataGridView1.SelectedRows.Count == 1)
             {
-                _ = new frmPaymentPosting(this).ShowDialog();
+                int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                string tin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
+                string taxPayerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+                string address = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
+                string barangayName = dataGridView1.Rows[rowIndex].Cells["barangay_name"].Value.ToString();
+                string municipalityName = dataGridView1.Rows[rowIndex].Cells["municipality_name"].Value.ToString();
+                string provinceName = dataGridView1.Rows[rowIndex].Cells["province_name"].Value.ToString();
+
+                var paymentPostingFields = new PaymentTaxPayerInfo()
+                {
+                    TIN = tin,
+                    TaxPayerName = taxPayerName,
+                    Address = address, 
+                    BarangayName = barangayName, 
+                    MunicipalityName = municipalityName, 
+                    ProvinceName = provinceName
+                };
+                _ = new frmPaymentPosting(paymentPostingFields, this).ShowDialog();
             }
         }
 
