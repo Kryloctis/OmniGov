@@ -77,7 +77,7 @@ namespace RPT.Data
         {
             try
             {
-                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY name";
+                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY code";
 
                 var dtBarangay = new DataTable();
                 return _mySqlGenericCommandsRPT.Fill(query, dtBarangay);
@@ -88,24 +88,21 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties(int barangayId, int effectivityQuarter, int effectivityYear, string searchKey)
+        public DataTable GetProperties(string barangayName, string searchKey, bool isCancelled)
         {
             try
             {
+                if (barangayName.Equals("All"))
+                    barangayName = "";
+
                 var parameters = new object[][] { 
-                    new object[]{"@barangays_id", DbType.Int32, barangayId},
-                    new object[]{"@effectivity_quarter", DbType.Int16, effectivityQuarter},
-                    new object[]{"@effectivity_year", DbType.Int32, effectivityYear},
-                    new object[]{"@search_key", DbType.String, searchKey},
+                    new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
+                    new object[]{"@search_key", DbType.String, $"%{searchKey}%" },
+                    new object[]{"@is_cancelled", DbType.Boolean, isCancelled },
                 };
 
-                string filterQuery = $"barangays_id = @barangays_id AND effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year ";
-
-                if (barangayId == 0)
-                    filterQuery = $"effectivity_quarter = @effectivity_quarter AND effectivity_year = @effectivity_year";
-                
-                string query = $"SELECT id, owners_id, barangays_id,  complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE {filterQuery} ";
+                string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
+                    $"WHERE is_cancelled = @is_cancelled AND barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
