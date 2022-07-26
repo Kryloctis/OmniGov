@@ -106,36 +106,84 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (MessageBox.Show("Post selected properties?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Property successfully posted.");
-                LoadProperties();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Property successfully posted.");
+                    LoadProperties();
+                }
             }
-            
+            return;
         }
 
         private bool SaveData()
         {
             foreach (DataGridViewRow dgvRow in dgProperties.SelectedRows)
             {
-                string arpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
+                string completeArpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
+                string propertyPIN = dgvRow.Cells["pin"].Value.ToString();
+                string ownerName = dgvRow.Cells["owner_name"].Value.ToString();
+                string barangayCode = "code";
+                string barangayName = dgvRow.Cells["barangay_name"].Value.ToString();
+                string municipalityCode = "code";
+                string municipalityName = "name";
+                string provinceCode = "code";
+                string provinceName = "name";
+                string propertyKind = "L";
+                int effectivityQuarter = 1;
+                int effectivityYear = 2022;
+                bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
+                bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
                 DateTime postedAt = DateTime.Now;
+                decimal discountRate = 0m; ;
+                decimal penaltyRate = 0m;
+                string penaltyFrequency = string.Empty;
+                decimal basicRate = 0m;
+                decimal sefRate = 0m;
 
-                var assessmentPostsModel = new AssessmentPostingModel() {
-                    ArpNo = arpNo,
-                    PostedAt = postedAt
+                var assessmentPostingModel = new AssessmentPostingModel()
+                {
+                    ArpNo = completeArpNo,
+                    PIN = propertyPIN,
+                    Owner = ownerName,
+                    BarangayCode = barangayCode,
+                    BarangayName = barangayName,
+                    MunicipalityCode = municipalityCode,
+                    MunicipalityName = municipalityName,
+                    ProvinceCode = provinceCode,
+                    ProvinceName = provinceName,
+                    PropertyKind = propertyKind,
+                    EffectivityQuarter = effectivityQuarter,
+                    EffectivityYear = effectivityYear,
+                    IsTaxable = isTaxable,
+                    IsCancelled = isCancelled,
+                    PostedAt = postedAt,
+                    DiscountRate = discountRate,
+                    PenaltyRate = penaltyRate,
+                    PenaltyFrequency = penaltyFrequency,
+                    BasicRate = basicRate,
+                    SEFRate = sefRate
                 };
 
-                var assessmentPostsRepository = AccFactory.AssessmentPostsRepository();
-                return assessmentPostsRepository.Insert(assessmentPostsModel);
+                AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
+               
             }
 
-            return false;
+            return true;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadProperties();
+        }
+
+        private void dgProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgProperties.SelectedRows.Count == 0)
+                btnPost.Enabled = false;
+            else
+                btnPost.Enabled = true;
         }
     }
 }

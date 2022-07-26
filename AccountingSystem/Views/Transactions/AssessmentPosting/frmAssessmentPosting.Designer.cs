@@ -50,9 +50,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.dgProperties.RowTemplate.Height = 25;
             this.dgProperties.Size = new System.Drawing.Size(852, 408);
             this.dgProperties.TabIndex = 11;
+            this.dgProperties.SelectionChanged += new System.EventHandler(this.dgProperties_SelectionChanged);
             // 
             // btnPost
             // 
+            this.btnPost.Enabled = false;
             this.btnPost.Location = new System.Drawing.Point(12, 12);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(126, 23);
