@@ -71,7 +71,6 @@ namespace ACC.Data
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
                 new object[] { "@posted_at", DbType.String, entity.PostedAt.ToString("yyyy-MM-dd hh:mm:ss") },
-                new object[] { "@discount_rate", DbType.Decimal, entity.DiscountRate },
                 new object[] { "@penalty_rate", DbType.Decimal, entity.PenaltyRate },
                 new object[] { "@penalty_frequency", DbType.String, entity.PenaltyFrequency },
                 new object[] { "@basic_rate", DbType.Decimal, entity.BasicRate },
@@ -79,7 +78,7 @@ namespace ACC.Data
                 new object[] { "@created_at", DbType.DateTime2, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") }
             };
 
-            string query = $"INSERT INTO {tableName} (complete_arp_no, property_pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, posted_at, discount_rate, penalty_rate, penalty_frequency, basic_rate, sef_rate, created_at) VALUES (@complete_arp_no, @property_pin, @owner_name, @barangay_code, @barangay_name, @municipality_code, @municipality_name, @province_code, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @posted_at, @discount_rate, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @created_at)";
+            string query = $"INSERT INTO {tableName} (complete_arp_no, property_pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, posted_at, penalty_rate, penalty_frequency, basic_rate, sef_rate, created_at) VALUES (@complete_arp_no, @property_pin, @owner_name, @barangay_code, @barangay_name, @municipality_code, @municipality_name, @province_code, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @posted_at, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @created_at)";
 
             return _mySqlGenericCommandsRPT.ExecuteNonQuery(query, parameters);
         }

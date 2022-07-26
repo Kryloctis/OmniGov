@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
             LoadBarangays();
+            LoadProperties();
         }
 
         #region Loaddata
@@ -139,7 +140,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
                     bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
                     DateTime postedAt = DateTime.Now;
-                    decimal discountRate = Convert.ToDecimal(dgvRow.Cells["discount_rate"].Value);
                     decimal penaltyRate = 0m;
                     string penaltyFrequency = string.Empty;
                     decimal basicRate = 0m;
@@ -162,7 +162,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         IsTaxable = isTaxable,
                         IsCancelled = isCancelled,
                         PostedAt = postedAt,
-                        DiscountRate = discountRate,
                         PenaltyRate = penaltyRate,
                         PenaltyFrequency = penaltyFrequency,
                         BasicRate = basicRate,
@@ -200,6 +199,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void checkFilterCancelledProp_CheckedChanged(object sender, EventArgs e)
         {
             LoadProperties();
+        }
+
+        private void checkAll_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -88,7 +88,7 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties(string barangayName, string searchKey)
+        public DataTable GetProperties(string barangayName, string searchKey, bool isCancelled)
         {
             try
             {
@@ -98,10 +98,11 @@ namespace RPT.Data
                 var parameters = new object[][] { 
                     new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
                     new object[]{"@search_key", DbType.String, $"%{searchKey}%" },
+                    new object[]{"@is_cancelled", DbType.Boolean, isCancelled },
                 };
 
                 string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE()) ";
+                    $"WHERE is_cancelled = @is_cancelled AND barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);

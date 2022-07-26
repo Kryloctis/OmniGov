@@ -21,7 +21,6 @@ namespace RPT.Domain.Models
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
         public DateTime PostedAt { get; set; }
-        public Decimal DiscountRate { get; set; }
         public Decimal PenaltyRate { get; set; }
         public string   PenaltyFrequency { get; set; }
         public Decimal BasicRate { get; set; }

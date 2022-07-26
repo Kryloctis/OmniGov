@@ -83,8 +83,8 @@ namespace AccountingSystem
             datagrid.Columns["checkbox"].DisplayIndex = 1;
             datagrid.Columns["checkbox"].Width = 20;
             datagrid.Columns["checkbox"].ReadOnly = false;
-            datagrid.Columns["checkbox"].HeaderText = "";
-            datagrid.Columns["checkbox"].FillWeight = 20;
+            datagrid.Columns["checkbox"].HeaderText = string.Empty;
+            datagrid.Columns["checkbox"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
@@ -95,7 +95,6 @@ namespace AccountingSystem
             datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
             datagrid.Columns["is_cancelled"].HeaderText = "Cancelled";
             datagrid.Columns["assessed_value"].HeaderText = "Assessed Value";
-            datagrid.Columns["discount_rate"].HeaderText = "Discount Rate";
             datagrid.Columns["penalty_rate"].HeaderText = "Penalty Rate";
             datagrid.Columns["penalty_frequency"].HeaderText = "Penalty Frequency";
             datagrid.Columns["basic_rate"].HeaderText = "Basic Rate";
