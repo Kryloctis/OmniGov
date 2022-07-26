@@ -186,6 +186,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.chckBxCancelled.TabIndex = 0;
             this.chckBxCancelled.Text = "Show Cancelled";
             this.chckBxCancelled.UseVisualStyleBackColor = true;
+            this.chckBxCancelled.CheckedChanged += new System.EventHandler(this.chckBxCancelled_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -266,6 +267,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RPT Taxes Due";
+            this.Load += new System.EventHandler(this.frmRptTaxDue_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);

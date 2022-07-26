@@ -44,6 +44,25 @@ namespace ACC.Data
             return _mySqlGenericCommands.Fill(query, dataTable);
         }
 
+        public DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@owner_name", DbType.String, ownerName},
+            };
+
+            string isCancelledQuery = $"AND is_cancelled = 0";
+            string query;
+
+            if (isCancelled)
+                query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name";
+            else
+               query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name {isCancelledQuery}";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][]

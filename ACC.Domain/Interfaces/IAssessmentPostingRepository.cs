@@ -7,5 +7,7 @@ namespace RPT.Domain.Interfaces
     public interface IAssessmentPostingRepository : IRepository<AssessmentPostingModel>
     {
         bool IsPropertyPosted(string arpNo);
+
+        DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled);
     }
 }

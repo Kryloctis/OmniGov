@@ -99,7 +99,7 @@ namespace ACC.Data
             {
                 new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@description",DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100 }
             };
 
             string query = $"INSERT INTO {tableName} (code, description, rate) VALUES (@code, @description, @rate)";
@@ -113,7 +113,7 @@ namespace ACC.Data
                 new object[] { "@id",DbType.Int32, entity.Id},
                 new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate}
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100 }
              };
 
             string query = $"UPDATE {tableName} SET code = @code, description = @description, rate = @rate WHERE id = @id";

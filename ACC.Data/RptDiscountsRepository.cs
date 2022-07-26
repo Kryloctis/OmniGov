@@ -101,7 +101,7 @@ namespace ACC.Data
             {
                 new object[] { "@month", DbType.Int32, entity.Month},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100},
                 new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance}
             };
 
@@ -116,7 +116,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@month", DbType.Int32, entity.Month},
                 new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@rate", DbType.Decimal, entity.Rate},
+                new object[] { "@rate", DbType.Decimal, entity.Rate / 100},
                 new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance}
             };
 

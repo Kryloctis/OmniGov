@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void btnGetTaxDue_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxDue(this).ShowDialog();
+            _ = new frmRptTaxDue(_paymentTaxPayerInfo.TaxPayerName,this).ShowDialog();
         }
 
         private void btnPay_Click(object sender, EventArgs e)
