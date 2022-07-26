@@ -127,7 +127,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     PostedAt = postedAt
                 };
 
-
                 var assessmentPostsRepository = AccFactory.AssessmentPostsRepository();
                 return assessmentPostsRepository.Insert(assessmentPostsModel);
             }
@@ -135,8 +134,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return false;
         }
 
-      
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadProperties();
         }

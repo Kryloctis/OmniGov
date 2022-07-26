@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPT.Domain.Models
 {
@@ -10,6 +6,23 @@ namespace RPT.Domain.Models
     {
         public int Id { get; set; }
         public string ArpNo  { get; set; }
+        public int PIN { get; set; }
+        public string[] Owner { get; set; }
+        public string  BarangayCode { get; set; }
+        public string BarangayName { get; set; }
+        public string MunicipalityCode { get; set; }
+        public string ProvinceCode { get; set; }
+        public string ProvinceName { get; set; }
+        public string PropertyKind { get; set; }
+        public string EffectivityYear  { get; set; }
+        public decimal AssessedValue { get; set; }
+        public bool IsTaxable { get; set; }
+        public bool IsCancelled { get; set; }
         public DateTime PostedAt { get; set; }
+        public Decimal DiscountRate { get; set; }
+        public Decimal PenaltyRate { get; set; }
+        public string   PenaltyFrequency { get; set; }
+        public Decimal BasicRate { get; set; }
+        public decimal SEFRate { get; set; }
     }
 }
