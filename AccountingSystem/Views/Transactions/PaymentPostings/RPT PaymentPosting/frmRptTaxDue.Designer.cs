@@ -37,12 +37,13 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chckBoxSelectAll = new System.Windows.Forms.CheckBox();
+            this.chckBoxProperties = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.chckBxCancelled = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chckBxTaxDues = new System.Windows.Forms.CheckBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -71,7 +72,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.btnPrintTaxBill});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1060, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(1203, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -92,14 +93,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.flowLayoutPanel1.Controls.Add(this.btnAccept);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 483);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 518);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1060, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1203, 29);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(982, 3);
+            this.btnCancel.Location = new System.Drawing.Point(1125, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -108,7 +109,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(901, 3);
+            this.btnAccept.Location = new System.Drawing.Point(1044, 3);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 0;
@@ -117,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 50);
             this.splitContainer1.Name = "splitContainer1";
@@ -131,8 +132,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.splitContainer1.Size = new System.Drawing.Size(1060, 433);
-            this.splitContainer1.SplitterDistance = 479;
+            this.splitContainer1.Size = new System.Drawing.Size(1203, 468);
+            this.splitContainer1.SplitterDistance = 512;
             this.splitContainer1.TabIndex = 2;
             // 
             // groupBox1
@@ -142,14 +143,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(471, 425);
+            this.groupBox1.Size = new System.Drawing.Size(504, 460);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Properties";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.chckBoxSelectAll);
+            this.panel1.Controls.Add(this.chckBoxProperties);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.flowLayoutPanel2);
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
@@ -157,22 +158,21 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(465, 403);
+            this.panel1.Size = new System.Drawing.Size(498, 438);
             this.panel1.TabIndex = 0;
             // 
-            // chckBoxSelectAll
+            // chckBoxProperties
             // 
-            this.chckBoxSelectAll.AutoSize = true;
-            this.chckBoxSelectAll.BackColor = System.Drawing.Color.Transparent;
-            this.chckBoxSelectAll.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chckBoxSelectAll.FlatAppearance.BorderSize = 0;
-            this.chckBoxSelectAll.Location = new System.Drawing.Point(5, 35);
-            this.chckBoxSelectAll.Name = "chckBoxSelectAll";
-            this.chckBoxSelectAll.Size = new System.Drawing.Size(15, 14);
-            this.chckBoxSelectAll.TabIndex = 3;
-            this.chckBoxSelectAll.UseVisualStyleBackColor = false;
-            this.chckBoxSelectAll.CheckedChanged += new System.EventHandler(this.chckBoxSelectAll_CheckedChanged);
-            this.chckBoxSelectAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBoxSelectAll_MouseClick);
+            this.chckBoxProperties.AutoSize = true;
+            this.chckBoxProperties.BackColor = System.Drawing.Color.Transparent;
+            this.chckBoxProperties.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chckBoxProperties.FlatAppearance.BorderSize = 0;
+            this.chckBoxProperties.Location = new System.Drawing.Point(4, 35);
+            this.chckBoxProperties.Name = "chckBoxProperties";
+            this.chckBoxProperties.Size = new System.Drawing.Size(15, 14);
+            this.chckBoxProperties.TabIndex = 3;
+            this.chckBoxProperties.UseVisualStyleBackColor = false;
+            this.chckBoxProperties.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBoxProperties_MouseClick);
             // 
             // dataGridView1
             // 
@@ -181,7 +181,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.dataGridView1.Location = new System.Drawing.Point(0, 29);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(465, 374);
+            this.dataGridView1.Size = new System.Drawing.Size(498, 409);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
@@ -193,12 +193,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(465, 29);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(498, 29);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
             // chckBxCancelled
             // 
-            this.chckBxCancelled.Location = new System.Drawing.Point(352, 3);
+            this.chckBxCancelled.Location = new System.Drawing.Point(385, 3);
             this.chckBxCancelled.Name = "chckBxCancelled";
             this.chckBxCancelled.Size = new System.Drawing.Size(110, 26);
             this.chckBxCancelled.TabIndex = 0;
@@ -209,25 +209,38 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(569, 425);
+            this.groupBox2.Size = new System.Drawing.Size(679, 460);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Taxes Due";
+            this.groupBox2.Text = "Tax Dues";
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.chckBxTaxDues);
             this.panel2.Controls.Add(this.dataGridView2);
             this.panel2.Controls.Add(this.flowLayoutPanel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(3, 19);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(563, 403);
+            this.panel2.Size = new System.Drawing.Size(673, 438);
             this.panel2.TabIndex = 0;
+            // 
+            // chckBxTaxDues
+            // 
+            this.chckBxTaxDues.AutoSize = true;
+            this.chckBxTaxDues.BackColor = System.Drawing.Color.Transparent;
+            this.chckBxTaxDues.Location = new System.Drawing.Point(4, 35);
+            this.chckBxTaxDues.Name = "chckBxTaxDues";
+            this.chckBxTaxDues.Size = new System.Drawing.Size(15, 14);
+            this.chckBxTaxDues.TabIndex = 3;
+            this.chckBxTaxDues.UseVisualStyleBackColor = false;
+            this.chckBxTaxDues.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBxTaxDues_MouseClick);
             // 
             // dataGridView2
             // 
@@ -236,8 +249,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.dataGridView2.Location = new System.Drawing.Point(0, 29);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 25;
-            this.dataGridView2.Size = new System.Drawing.Size(563, 374);
+            this.dataGridView2.Size = new System.Drawing.Size(673, 409);
             this.dataGridView2.TabIndex = 2;
+            this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
+            this.dataGridView2.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView2_ColumnAdded);
+            this.dataGridView2.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView2_CurrentCellDirtyStateChanged);
             // 
             // flowLayoutPanel3
             // 
@@ -247,12 +263,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(563, 29);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(673, 29);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(418, 3);
+            this.btnRemove.Location = new System.Drawing.Point(528, 3);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(142, 23);
             this.btnRemove.TabIndex = 0;
@@ -261,7 +277,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             // 
             // btnRecalculate
             // 
-            this.btnRecalculate.Location = new System.Drawing.Point(279, 3);
+            this.btnRecalculate.Location = new System.Drawing.Point(389, 3);
             this.btnRecalculate.Name = "btnRecalculate";
             this.btnRecalculate.Size = new System.Drawing.Size(133, 23);
             this.btnRecalculate.TabIndex = 0;
@@ -274,7 +290,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1060, 512);
+            this.ClientSize = new System.Drawing.Size(1203, 547);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
@@ -284,7 +300,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.Name = "frmRptTaxDue";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RPT Taxes Due";
+            this.Text = "RPT Tax Dues";
             this.Load += new System.EventHandler(this.frmRptTaxDue_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -300,6 +316,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.flowLayoutPanel2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -326,6 +343,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnRecalculate;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.CheckBox chckBoxSelectAll;
+        private System.Windows.Forms.CheckBox chckBoxProperties;
+        private System.Windows.Forms.CheckBox chckBxTaxDues;
     }
 }
