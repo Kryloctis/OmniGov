@@ -76,15 +76,24 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 int id = Convert.ToInt32(row["id"]);
                 string completeArpNo = row["complete_arp_no"].ToString();
+                string pin = row["pin"].ToString();
                 decimal assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeArpNo);
                 string ownerName = row["owner_name"].ToString();
+                string barangayCode = row["barangay_code"].ToString();
                 string barangayName = row["barangay_name"].ToString();
-                string pin = row["pin"].ToString();
+                string municipalityCode = row["municipality_code"].ToString();
+                string municipalityName = row["municipality_name"].ToString();
+                string provinceCode = row["province_code"].ToString();
+                string provinceName = row["province_name"].ToString();
+                string propertyKind = row["property_kind"].ToString();
+                int effectivityQuarter = Convert.ToInt32(row["effectivity_quarter"].ToString());
+                int effectivityYear = Convert.ToInt32(row["effectivity_year"].ToString());
+
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
                 decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
-                string penaltyFrequency = "Monthly";
+                string penaltyFrequency = AccFactory.rptPenaltiesRepository().GetPenaltyFrequency();
                 decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
                 decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
                 
@@ -92,7 +101,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, penaltyRate.ToString("P0"), penaltyFrequency, basicRate.ToString("P0"), sefRate.ToString("P0"), isPostedImg);
+                dataTable.Rows.Add(false, id, completeArpNo, pin, ownerName, barangayCode, barangayName, municipalityCode, municipalityName, provinceCode, provinceName, propertyKind, effectivityQuarter, effectivityYear, isTaxableImg, isCancelledImg, assessedValue, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
 
             }
 
@@ -128,22 +137,24 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     string completeArpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
                     string propertyPIN = dgvRow.Cells["pin"].Value.ToString();
                     string ownerName = dgvRow.Cells["owner_name"].Value.ToString();
-                    string barangayCode = "code";
+                    string barangayCode = dgvRow.Cells["barangay_code"].Value.ToString();
                     string barangayName = dgvRow.Cells["barangay_name"].Value.ToString();
-                    string municipalityCode = "code";
-                    string municipalityName = "name";
-                    string provinceCode = "code";
-                    string provinceName = "name";
-                    string propertyKind = "L";
-                    int effectivityQuarter = 1;
-                    int effectivityYear = 2022;
+                    string municipalityCode = dgvRow.Cells["municipality_code"].Value.ToString();
+                    string municipalityName = dgvRow.Cells["municipality_name"].Value.ToString();
+                    string provinceCode = dgvRow.Cells["province_code"].Value.ToString();
+                    string provinceName = dgvRow.Cells["province_name"].Value.ToString();
+                    string propertyKind = dgvRow.Cells["property_kind"].Value.ToString(); 
+                    int effectivityQuarter =Convert.ToInt32(dgvRow.Cells["effectivity_quarter"].Value);
+                    int effectivityYear = Convert.ToInt32(dgvRow.Cells["effectivity_year"].Value);
+                    decimal assessedValue = Convert.ToDecimal(dgvRow.Cells["assessed_value"].Value);
                     bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
                     bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
                     DateTime postedAt = DateTime.Now;
-                    decimal penaltyRate = 0m;
-                    string penaltyFrequency = string.Empty;
-                    decimal basicRate = 0m;
-                    decimal sefRate = 0m;
+                    decimal penaltyRate = Convert.ToDecimal(dgvRow.Cells["penalty_rate"].Value);
+                    string penaltyFrequency = dgvRow.Cells["penalty_frequency"].Value.ToString();
+                    decimal basicRate = Convert.ToDecimal(dgvRow.Cells["basic_rate"].Value);
+                    decimal sefRate = Convert.ToDecimal(dgvRow.Cells["sef_rate"].Value);
+
 
                     var assessmentPostingModel = new AssessmentPostingModel()
                     {
@@ -159,6 +170,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         PropertyKind = propertyKind,
                         EffectivityQuarter = effectivityQuarter,
                         EffectivityYear = effectivityYear,
+                        AssessedValue = assessedValue,
                         IsTaxable = isTaxable,
                         IsCancelled = isCancelled,
                         PostedAt = postedAt,
@@ -203,7 +215,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void checkAll_CheckedChanged(object sender, EventArgs e)
         {
-
+            foreach (DataGridViewRow row in dgProperties.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+                chk.Value = !(chk.Value == null ? false : (bool)chk.Value); 
+            }
         }
+
+
     }
 }
