@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             _ownerName = ownerName;
             _frmPaymentPosting = frmPaymentPosting;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true, false);
             Helper.DatagridFullRowSelectStyle(dataGridView2, true, false);
             HelperLoadRecords.TaxPayerDues(dataGridView2);
         }
@@ -66,7 +66,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             LoadProperties();
         }
 
-
         #region Properties
 
         private void LoadProperties()
@@ -106,6 +105,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         {
             Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_checked", chckBoxProperties);
             LoadTaxDues();
+        }
+
+        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (e.Column.Name != "is_checked")
+                e.Column.ReadOnly = true;
         }
 
         #endregion
