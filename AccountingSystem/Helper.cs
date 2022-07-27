@@ -41,7 +41,7 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        public static void DatagridFullRowSelectStyle(DataGridView dgv, Boolean Fill = false)
+        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true)
         {
             dgv.RowHeadersVisible = false;
             dgv.EnableHeadersVisualStyles = false;
@@ -53,7 +53,7 @@ namespace AccountingSystem
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
             dgv.BorderStyle = BorderStyle.FixedSingle;
-            dgv.ReadOnly = true;
+            dgv.ReadOnly = isReadOnly;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToResizeRows = false;
             dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
@@ -109,16 +109,34 @@ namespace AccountingSystem
 
         #endregion
 
-        public static Dictionary<string, string> LGUDetails()
+        #region Check Box Column Utility Datagrid
+        public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
         {
-            var lguDict = new Dictionary<string, string>
-            {
-                { "lgu_name", "Municipality of Buug" }
-            };
+            int totalRowCount = dataGridView.Rows.Count;
+            int checkedRowCount = 0;
 
-            return lguDict;
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[checkBoxColumnName].Value) == true)
+                    checkedRowCount += 1;
+            }
+
+            if (totalRowCount == checkedRowCount)
+                checkBox.Checked = true;
+            else
+                checkBox.Checked = false;
         }
 
+        public static void CheckUncheckCheckBoxRows(DataGridView dataGridView, string checkBoxColumnName, bool isChecked)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                row.Cells[checkBoxColumnName].Value = isChecked;
+            }
+        }
+        #endregion 
+
+        #region  Miscellaneous
         public static Color StatusColor(string status)
         {
             switch (status)
@@ -140,6 +158,17 @@ namespace AccountingSystem
                     return Color.Black;
             }
         }
+
+        public static Dictionary<string, string> LGUDetails()
+        {
+            var lguDict = new Dictionary<string, string>
+            {
+                { "lgu_name", "Municipality of Buug" }
+            };
+
+            return lguDict;
+        }
+        #endregion
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
         {

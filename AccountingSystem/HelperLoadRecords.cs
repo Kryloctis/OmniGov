@@ -26,22 +26,55 @@ namespace AccountingSystem
         public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable) 
         {
             dataGridView.DataSource = dataTable;
-            dataGridView.ReadOnly = false;
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
-            dataGridView.Columns["complete_arp_no"].ReadOnly = true;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_pin"].HeaderText = "PIN";
-            dataGridView.Columns["property_pin"].ReadOnly = true;
+            dataGridView.Columns["property_pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["barangay_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["barangay_name"].ReadOnly = true;
             dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
-            dataGridView.Columns["property_kind"].ReadOnly = true;
+            dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            dataGridView.Columns["is_cancelled"].ReadOnly = true;
             dataGridView.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
             dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        }
+
+        public static void TaxPayerDues(DataGridView dataGridView) 
+        {
+            var datagridViewColumns = new DataGridViewColumn[]
+            {
+                new DataGridViewCheckBoxColumn(){HeaderText = string.Empty, 
+                                                Name = "is_checked",
+                                                MinimumWidth = 20,
+                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells},
+                new DataGridViewTextBoxColumn(){HeaderText = "Year", 
+                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
+                                                Name = "year" },
+                new DataGridViewTextBoxColumn(){HeaderText = "ARP No." , 
+                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
+                                                Name = "complete_arp_no"},
+                new DataGridViewTextBoxColumn(){HeaderText = "Assessed Value", Name = "assessed_value"},
+                new DataGridViewTextBoxColumn(){HeaderText = "Tax Due", Name = "tax_due"},
+                new DataGridViewTextBoxColumn(){HeaderText = "Discount", Name = "discount"},
+                new DataGridViewTextBoxColumn(){HeaderText = "Penalty", Name = "penalty"},
+                new DataGridViewTextBoxColumn(){HeaderText = "Total Tax Due", Name = "total_tax_due"}
+            };
+
+               
+            dataGridView.Columns.AddRange(datagridViewColumns);
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["discount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["discount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["penalty"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["penalty"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["total_tax_due"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["total_tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         #endregion

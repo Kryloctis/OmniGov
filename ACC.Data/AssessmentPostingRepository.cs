@@ -12,7 +12,6 @@ namespace ACC.Data
 {
     public class AssessmentPostingRepository : IAssessmentPostingRepository
     {
-
         private readonly string tableName = "assessment_posts";
 
         private MySqlGenericCommands _mySqlGenericCommands;
@@ -44,6 +43,18 @@ namespace ACC.Data
             return _mySqlGenericCommands.Fill(query, dataTable);
         }
 
+        public DataTable GetRecordsByArpNo(string arpNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, arpNo}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no ORDER BY complete_arp_no";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
         public DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled)
         {
             var parameters = new object[][]
@@ -55,9 +66,9 @@ namespace ACC.Data
             string query;
 
             if (isCancelled)
-                query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name";
+                query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             else
-               query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name {isCancelledQuery}";
+               query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
