@@ -124,6 +124,13 @@ namespace AccountingSystem
             datagrid.Columns["province_code"].Visible = false;
             datagrid.Columns["province_name"].Visible = false;
 
+
+            datagrid.Columns["penalty_rate"].Visible = false;
+            datagrid.Columns["penalty_frequency"].Visible = false;
+            datagrid.Columns["basic_rate"].Visible = false;
+            datagrid.Columns["sef_rate"].Visible = false;
+
+
             datagrid.Columns["checkbox"].DisplayIndex = 1;
             datagrid.Columns["checkbox"].Width = 20;
             datagrid.Columns["checkbox"].ReadOnly = false;

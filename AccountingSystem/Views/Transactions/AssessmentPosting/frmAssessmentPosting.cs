@@ -222,6 +222,22 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            var searchCount = txtSearch.Text.Trim().Length;
+            if (searchCount >= 2 || searchCount == 0)
+                LoadProperties();
+            return;
+        }
 
+        private void cmbBarangays_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
+
+        private void btnManualPosting_Click(object sender, EventArgs e)
+        {
+            _ = new frmManualPosting().ShowDialog();
+        }
     }
 }
