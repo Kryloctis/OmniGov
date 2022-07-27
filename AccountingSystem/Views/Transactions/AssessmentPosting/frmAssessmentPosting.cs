@@ -25,7 +25,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
             LoadBarangays();
-            LoadEffectivityQuarter();
             LoadProperties();
         }
 
@@ -37,23 +36,18 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             HelperLoadRecords.BarangayCombobox(dtBarangays, cmbBarangays, "name", "id");
         }
 
-        internal void LoadEffectivityQuarter()
-        {
-            cmbEffectivityQuarter.DataSource = Helper.QuarterDataTable();
-            cmbEffectivityQuarter.DisplayMember = "quarter";
-            cmbEffectivityQuarter.ValueMember = "id";
-        }
-
         private DataTable DataTableAssessmentPosting()
         {
-            var barangaysId = Convert.ToInt32(cmbBarangays.SelectedValue);
-            var effectivityQuarter = Convert.ToInt16(cmbEffectivityQuarter.SelectedValue);
-            var effectivityYear = Convert.ToInt32(nudEffectivityYear.Value);
+            var isCancelledProeprty = checkFilterCancelledProp.Checked;
+            var barangay = cmbBarangays.Text.ToString();
             var searchKey = txtSearch.Text.Trim();
 
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangaysId, effectivityQuarter, effectivityYear, searchKey);
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, searchKey, isCancelledProeprty);
             var dataTable = new DataTable();
-            
+
+
+            dataTable.Columns.Add("checkbox", typeof(bool));
+
             foreach (DataColumn column in dtViewRealProperties.Columns)
             {
                 if (column.ColumnName == "is_taxable")
@@ -72,40 +66,33 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
 
             dataTable.Columns.Add("assessed_value", typeof(string));
-            dataTable.Columns.Add("discount_rate", typeof(decimal));
-            dataTable.Columns.Add("penalty_rate", typeof(decimal));
-            dataTable.Columns.Add("penalty_frequency", typeof(decimal));
-            dataTable.Columns.Add("basic_rate", typeof(decimal));
-            dataTable.Columns.Add("sef_rate", typeof(decimal));
+            dataTable.Columns.Add("penalty_rate", typeof(string));
+            dataTable.Columns.Add("penalty_frequency", typeof(string));
+            dataTable.Columns.Add("basic_rate", typeof(string));
+            dataTable.Columns.Add("sef_rate", typeof(string));
             dataTable.Columns.Add("is_posted", typeof(Image));
 
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
                 int id = Convert.ToInt32(row["id"]);
-                int ownerId = Convert.ToInt32(row["owners_id"]);
-                int barangayId = Convert.ToInt32(row["barangays_id"]);
                 string completeArpNo = row["complete_arp_no"].ToString();
                 decimal assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeArpNo);
-
                 string ownerName = row["owner_name"].ToString();
                 string barangayName = row["barangay_name"].ToString();
                 string pin = row["pin"].ToString();
-
                 bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
                 bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
                 bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
-
-                decimal discountRate = 0m;
-                decimal penaltyRate = 0m;
-                decimal penaltyFrequency = 0m;
-                decimal basicRate = 0m;
-                decimal sefRate = 0m;
+                decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
+                string penaltyFrequency = "Monthly";
+                decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
+                decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
                 
                 Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
                 Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
                 Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
 
-                dataTable.Rows.Add(id, ownerId, barangayId, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, discountRate, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
+                dataTable.Rows.Add(false, id, completeArpNo, ownerName, barangayName, pin, isTaxableImg, isCancelledImg, assessedValue, penaltyRate.ToString("P0"), penaltyFrequency, basicRate.ToString("P0"), sefRate.ToString("P0"), isPostedImg);
 
             }
 
@@ -121,47 +108,102 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            if (MessageBox.Show("Post selected properties?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Property successfully posted.");
-                LoadProperties();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Property successfully posted.");
+                    LoadProperties();
+                }
             }
-            
+            return;
         }
 
         private bool SaveData()
         {
-            foreach (DataGridViewRow dgvRow in dgProperties.SelectedRows)
+            foreach (DataGridViewRow dgvRow in dgProperties.Rows)
             {
-                string arpNo = dgvRow.Cells["arp_no"].Value.ToString();
-                DateTime postedAt = DateTime.Now;
+                if (Convert.ToBoolean(dgvRow.Cells["checkbox"].Value))
+                {
+                    string completeArpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
+                    string propertyPIN = dgvRow.Cells["pin"].Value.ToString();
+                    string ownerName = dgvRow.Cells["owner_name"].Value.ToString();
+                    string barangayCode = "code";
+                    string barangayName = dgvRow.Cells["barangay_name"].Value.ToString();
+                    string municipalityCode = "code";
+                    string municipalityName = "name";
+                    string provinceCode = "code";
+                    string provinceName = "name";
+                    string propertyKind = "L";
+                    int effectivityQuarter = 1;
+                    int effectivityYear = 2022;
+                    bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
+                    bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
+                    DateTime postedAt = DateTime.Now;
+                    decimal penaltyRate = 0m;
+                    string penaltyFrequency = string.Empty;
+                    decimal basicRate = 0m;
+                    decimal sefRate = 0m;
 
-                var assessmentPostsModel = new AssessmentPostingModel() {
-                    ArpNo = arpNo,
-                    PostedAt = postedAt
-                };
+                    var assessmentPostingModel = new AssessmentPostingModel()
+                    {
+                        ArpNo = completeArpNo,
+                        PIN = propertyPIN,
+                        Owner = ownerName,
+                        BarangayCode = barangayCode,
+                        BarangayName = barangayName,
+                        MunicipalityCode = municipalityCode,
+                        MunicipalityName = municipalityName,
+                        ProvinceCode = provinceCode,
+                        ProvinceName = provinceName,
+                        PropertyKind = propertyKind,
+                        EffectivityQuarter = effectivityQuarter,
+                        EffectivityYear = effectivityYear,
+                        IsTaxable = isTaxable,
+                        IsCancelled = isCancelled,
+                        PostedAt = postedAt,
+                        PenaltyRate = penaltyRate,
+                        PenaltyFrequency = penaltyFrequency,
+                        BasicRate = basicRate,
+                        SEFRate = sefRate
+                    };
 
-
-                var assessmentPostsRepository = AccFactory.AssessmentPostsRepository();
-                return assessmentPostsRepository.Insert(assessmentPostsModel);
+                    AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
+                }
             }
 
-            return false;
+            return true;
         }
 
-        private void cmbBarangays_SelectionChangeCommitted(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadProperties();
         }
 
-        private void cmbEffectivityQuarter_SelectionChangeCommitted(object sender, EventArgs e)
+        private void dgProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgProperties.SelectedRows.Count == 0)
+                btnPost.Enabled = false;
+            else
+                btnPost.Enabled = true;
+        }
+
+        private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (e.Column.Name != "checkbox")
+                e.Column.ReadOnly = true;
+            else
+                e.Column.ReadOnly = false;
+        }
+
+        private void checkFilterCancelledProp_CheckedChanged(object sender, EventArgs e)
         {
             LoadProperties();
         }
 
-        private void nudEffectivityYear_ValueChanged(object sender, EventArgs e)
+        private void checkAll_CheckedChanged(object sender, EventArgs e)
         {
-            LoadProperties();
+
         }
     }
 }
