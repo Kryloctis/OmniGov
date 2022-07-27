@@ -110,6 +110,7 @@ namespace AccountingSystem
         #endregion
 
         #region Check Box Column Utility Datagrid
+
         public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
         {
             int totalRowCount = dataGridView.Rows.Count;
@@ -134,6 +135,7 @@ namespace AccountingSystem
                 row.Cells[checkBoxColumnName].Value = isChecked;
             }
         }
+
         #endregion 
 
         #region  Miscellaneous
