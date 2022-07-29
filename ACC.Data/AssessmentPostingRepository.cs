@@ -96,7 +96,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@complete_arp_no", DbType.String, entity.ArpNo },
-                new object[] { "@property_pin", DbType.String, entity.PropertyKind },
+                new object[] { "@property_pin", DbType.String, entity.PIN },
                 new object[] { "@owner_name", DbType.String, entity.Owner },
                 new object[] { "@barangay_code", DbType.String, entity.BarangayCode },
                 new object[] { "@barangay_name", DbType.String, entity.BarangayName },

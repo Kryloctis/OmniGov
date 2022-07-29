@@ -92,17 +92,21 @@ namespace RPT.Data
         {
             try
             {
+                string isCancelledFilter = string.Empty;
+
                 if (barangayName.Equals("All"))
-                    barangayName = "";
+                    barangayName = string.Empty;
+
+                if (!isCancelled)
+                    isCancelledFilter = $"is_cancelled = 0 AND ";
 
                 var parameters = new object[][] { 
                     new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
-                    new object[]{"@search_key", DbType.String, $"%{searchKey}%" },
-                    new object[]{"@is_cancelled", DbType.Boolean, isCancelled },
+                    new object[]{"@search_key", DbType.String, $"%{searchKey}%" }
                 };
 
-                string query = $"SELECT id, complete_arp_no, owner_name, barangay_name, pin, is_taxable, is_cancelled FROM {viewRealProperties} " +
-                    $"WHERE is_cancelled = @is_cancelled AND barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
+                string query = $"SELECT id, complete_arp_no, pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name,  property_kind,  effectivity_quarter, effectivity_year, is_taxable, is_cancelled  FROM {viewRealProperties} " +
+                    $"WHERE {isCancelledFilter} barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
 
                 var dtProperties = new DataTable();
                 return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
