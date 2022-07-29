@@ -111,6 +111,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void LoadProperties()
         {
             HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(), dgProperties);
+            CheckUncheckCheckBoxHeader(dgProperties, "checkbox", checkAll);
         }
 
         #endregion
@@ -187,11 +188,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return true;
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
             if (dgProperties.SelectedRows.Count == 0)
@@ -215,11 +211,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void checkAll_CheckedChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgProperties.Rows)
-            {
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
-                chk.Value = !(chk.Value == null ? false : (bool)chk.Value); 
-            }
+            
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -238,6 +230,55 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void btnManualPosting_Click(object sender, EventArgs e)
         {
             _ = new frmManualPosting().ShowDialog();
+        }
+
+        private void checkAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (checkAll.Checked)
+                CheckUncheckCheckBoxRows(dgProperties, "checkbox", true);
+            else
+                CheckUncheckCheckBoxRows(dgProperties, "checkbox", false);
+        }
+
+        private void CheckUncheckCheckBoxRows(DataGridView dataGridView, string checkBoxColumnName, bool isChecked)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                row.Cells[checkBoxColumnName].Value = isChecked;
+            }
+        }
+
+        private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dgProperties.CurrentCell is DataGridViewCheckBoxCell)
+                dgProperties.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            CheckUncheckCheckBoxHeader(dgProperties, "checkbox", checkAll);
+        }
+
+        private void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
+        {
+            int totalRowCount = dataGridView.Rows.Count;
+            int checkedRowCount = 0;
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[checkBoxColumnName].Value) == true)
+                    checkedRowCount += 1;
+            }
+
+            if (totalRowCount == checkedRowCount)
+                checkBox.Checked = true;
+            else
+                checkBox.Checked = false;
+
+            if (checkedRowCount == 0)
+                btnPost.Enabled = false;
+            else
+                btnPost.Enabled = true;
         }
     }
 }

@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Property successfully posted.");
+                    Close();
                 }
             }
             return;
@@ -59,11 +60,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             bool isTaxable = cbTaxable.Checked ? true : false;
             bool isCancelled = cbCancelled.Checked ? true : false;
             DateTime postedAt = DateTime.Now;
-            decimal penaltyRate = 0.0m;
-            string penaltyFrequency = string.Empty;
-            decimal basicRate = 0.0m;
-            decimal sefRate = 0.0m;
-
+            decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
+            string penaltyFrequency = AccFactory.rptPenaltiesRepository().GetPenaltyFrequency();
+            decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
+            decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
 
             var assessmentPostingModel = new AssessmentPostingModel()
             {

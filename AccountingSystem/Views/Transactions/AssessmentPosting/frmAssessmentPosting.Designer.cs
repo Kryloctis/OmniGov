@@ -52,7 +52,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.dgProperties.RowTemplate.Height = 25;
             this.dgProperties.Size = new System.Drawing.Size(852, 387);
             this.dgProperties.TabIndex = 11;
+            this.dgProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProperties_CellValueChanged);
             this.dgProperties.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgProperties_ColumnAdded);
+            this.dgProperties.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgProperties_CurrentCellDirtyStateChanged);
             this.dgProperties.SelectionChanged += new System.EventHandler(this.dgProperties_SelectionChanged);
             // 
             // btnPost
@@ -118,6 +120,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.checkAll.TabIndex = 14;
             this.checkAll.UseVisualStyleBackColor = true;
             this.checkAll.CheckedChanged += new System.EventHandler(this.checkAll_CheckedChanged);
+            this.checkAll.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkAll_MouseClick);
             // 
             // panel1
             // 
