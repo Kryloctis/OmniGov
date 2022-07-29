@@ -11,5 +11,7 @@ namespace ACC.Domain.Interfaces
         bool DescriptionExist(string description);
 
         bool DescriptionExist(int id, string description);
+
+        Dictionary<string, string> GetRecordByMonth(int month, bool isAdvance);
     }
 }
