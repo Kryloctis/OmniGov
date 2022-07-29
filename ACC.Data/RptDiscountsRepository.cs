@@ -155,5 +155,33 @@ namespace ACC.Data
                 return false;
         }
 
+        public Dictionary<string, string> GetRecordByMonth(int month, bool isAdvance)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@month", DbType.Int32, month},
+                new object[] { "@is_advance", DbType.Boolean, isAdvance}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE month = @month AND is_advance = @is_advance";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count == 0)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("month", row["month"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("rate", row["rate"].ToString());
+                    dict.Add("is_advance", row["is_advance"].ToString());
+                }
+            }
+
+            return dict;
+        }
     }
 }

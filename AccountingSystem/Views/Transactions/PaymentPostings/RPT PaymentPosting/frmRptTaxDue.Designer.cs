@@ -284,6 +284,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.btnRecalculate.TabIndex = 0;
             this.btnRecalculate.Text = "Recalc DISC && Penal.";
             this.btnRecalculate.UseVisualStyleBackColor = true;
+            this.btnRecalculate.Click += new System.EventHandler(this.btnRecalculate_Click);
             // 
             // frmRptTaxDue
             // 
