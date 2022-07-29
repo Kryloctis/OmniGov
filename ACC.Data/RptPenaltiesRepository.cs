@@ -130,5 +130,18 @@ namespace ACC.Data
 
             return 0;
         }
+
+        public string GetPenaltyFrequency()
+        {
+            try
+            {
+                string query = $"SELECT frequency FROM {tableName} LIMIT 1";
+                return _mySqlGenericCommandsLFS.ExecuteScalar(query).ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

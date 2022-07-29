@@ -150,16 +150,37 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
             datagrid.ReadOnly = false;
 
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["barangay_code"].Visible = false;
+            datagrid.Columns["municipality_code"].Visible = false;
+            datagrid.Columns["municipality_name"].Visible = false;
+            datagrid.Columns["province_code"].Visible = false;
+            datagrid.Columns["province_name"].Visible = false;
+
+
+            datagrid.Columns["penalty_rate"].Visible = false;
+            datagrid.Columns["penalty_frequency"].Visible = false;
+            datagrid.Columns["basic_rate"].Visible = false;
+            datagrid.Columns["sef_rate"].Visible = false;
+
+
             datagrid.Columns["checkbox"].DisplayIndex = 1;
             datagrid.Columns["checkbox"].Width = 20;
             datagrid.Columns["checkbox"].ReadOnly = false;
             datagrid.Columns["checkbox"].HeaderText = string.Empty;
             datagrid.Columns["checkbox"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
-            datagrid.Columns["id"].Visible = false;
             datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
             datagrid.Columns["owner_name"].HeaderText = "Owner";
+            datagrid.Columns["barangay_code"].HeaderText = "Barangay Code";
             datagrid.Columns["barangay_name"].HeaderText = "Barangay";
+            datagrid.Columns["property_kind"].HeaderText = "Property Kind";
+            datagrid.Columns["effectivity_quarter"].HeaderText = "Effectivity Quarter";
+            datagrid.Columns["effectivity_year"].HeaderText = "Effectivity Year";
+            datagrid.Columns["municipality_code"].HeaderText = "Municipality Code";
+            datagrid.Columns["municipality_name"].HeaderText = "Municipality Name";
+            datagrid.Columns["province_code"].HeaderText = "Province Code";
+            datagrid.Columns["province_name"].HeaderText = "Province Name";
             datagrid.Columns["pin"].HeaderText = "PIN";
             datagrid.Columns["is_taxable"].HeaderText = "Taxable";
             datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
