@@ -159,9 +159,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                     var assessmentPostingModel = new AssessmentPostingModel()
                     {
-                        ArpNo = completeArpNo,
-                        PIN = propertyPIN,
-                        Owner = ownerName,
+                        CompleteArpNo = completeArpNo,
+                        PropertyPin = propertyPIN,
+                        OwnerName = ownerName,
                         BarangayCode = barangayCode,
                         BarangayName = barangayName,
                         MunicipalityCode = municipalityCode,
@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         PenaltyRate = penaltyRate,
                         PenaltyFrequency = penaltyFrequency,
                         BasicRate = basicRate,
-                        SEFRate = sefRate
+                        SefRate = sefRate
                     };
 
                     AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
