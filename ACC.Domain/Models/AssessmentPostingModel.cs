@@ -27,7 +27,5 @@ namespace RPT.Domain.Models
         public bool isAdvance { get; set; }
         public DateTime PostedAt { get; set; }
         public int PostedBy { get; set; }
-        public DateTime RepostedAt { get; set; }
-        public int RepostedBy { get; set; }
     }
 }

@@ -131,70 +131,37 @@ namespace AccountingSystem
 
         #endregion
 
-        #region RPT Posting
-        internal static void BarangayCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        #region RPT Assessment Posting
+        internal static void BarangaysCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
             dr["id"] = "0";
             dr["name"] = "All";
             dataTable.Rows.InsertAt(dr, 0);
 
-            comboBox.DataSource = dataTable;
-            comboBox.DisplayMember = displayMember;
-            comboBox.ValueMember = valueMember;
-            comboBox.DropDownHeight = 200;
+            toolStripComboBox.ComboBox.DataSource = dataTable;
+            toolStripComboBox.ComboBox.DisplayMember = displayMember;
+            toolStripComboBox.ComboBox.ValueMember = valueMember;
+            toolStripComboBox.DropDownHeight = 200;
         }
 
-        internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
-            datagrid.DataSource = dataTable;
-            datagrid.ReadOnly = false;
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["barangay_code"].Visible = false;
-            datagrid.Columns["municipality_code"].Visible = false;
-            datagrid.Columns["municipality_name"].Visible = false;
-            datagrid.Columns["province_code"].Visible = false;
-            datagrid.Columns["province_name"].Visible = false;
-
-
-            datagrid.Columns["penalty_rate"].Visible = false;
-            datagrid.Columns["penalty_frequency"].Visible = false;
-            datagrid.Columns["basic_rate"].Visible = false;
-            datagrid.Columns["sef_rate"].Visible = false;
-
-
-            datagrid.Columns["checkbox"].DisplayIndex = 1;
-            datagrid.Columns["checkbox"].Width = 20;
-            datagrid.Columns["checkbox"].ReadOnly = false;
-            datagrid.Columns["checkbox"].HeaderText = string.Empty;
-            datagrid.Columns["checkbox"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            datagrid.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            datagrid.Columns["owner_name"].HeaderText = "Owner";
-            datagrid.Columns["barangay_code"].HeaderText = "Barangay Code";
-            datagrid.Columns["barangay_name"].HeaderText = "Barangay";
-            datagrid.Columns["property_kind"].HeaderText = "Property Kind";
-            datagrid.Columns["effectivity_quarter"].HeaderText = "Effectivity Quarter";
-            datagrid.Columns["effectivity_year"].HeaderText = "Effectivity Year";
-            datagrid.Columns["municipality_code"].HeaderText = "Municipality Code";
-            datagrid.Columns["municipality_name"].HeaderText = "Municipality Name";
-            datagrid.Columns["province_code"].HeaderText = "Province Code";
-            datagrid.Columns["province_name"].HeaderText = "Province Name";
-            datagrid.Columns["pin"].HeaderText = "PIN";
-            datagrid.Columns["is_taxable"].HeaderText = "Taxable";
-            datagrid.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
-            datagrid.Columns["is_cancelled"].HeaderText = "Cancelled";
-            datagrid.Columns["assessed_value"].HeaderText = "Assessed Value";
-            datagrid.Columns["penalty_rate"].HeaderText = "Penalty Rate";
-            datagrid.Columns["penalty_frequency"].HeaderText = "Penalty Frequency";
-            datagrid.Columns["basic_rate"].HeaderText = "Basic Rate";
-            datagrid.Columns["sef_rate"].HeaderText = "SEF Rate";
-
-            datagrid.Columns["is_posted"].DefaultCellStyle.NullValue = null;
-            datagrid.Columns["is_posted"].HeaderText = "Posted";
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_checked"].MinimumWidth = 20;
+            dataGridView.Columns["is_checked"].HeaderText = string.Empty;
+            dataGridView.Columns["posting_status"].HeaderText = "Posting Status";
+            dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["pin"].HeaderText = "Pin";
+            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["is_taxable"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
         }
         #endregion
 

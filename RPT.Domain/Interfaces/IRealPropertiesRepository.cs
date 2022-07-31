@@ -7,8 +7,11 @@ namespace RPT.Domain.Interfaces
     public interface IRealPropertiesRepository : IRepository<RealPropertiesModel> 
     {
         DataTable GetViewPropertiesByPropertyKindAndSearch(string propertyKind, string searchText);
+
         DataTable GetBarangays();
-        DataTable GetProperties(string barangayName, string searchKey, bool isCancelled);
-        decimal GetAssessedValueByARPNo(string arpNo);
+
+        DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText);
+
+        decimal GetAssessedValueByARPNo(string arpNo, string ownerName);
     }
 }

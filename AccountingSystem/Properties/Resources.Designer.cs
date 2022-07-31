@@ -733,6 +733,76 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_14px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_16px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_18px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_20px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_24px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_28px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_filled_pin_32px {
+            get {
+                object obj = ResourceManager.GetObject("gear_filled_pin_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap give_money_2_16px {
             get {
                 object obj = ResourceManager.GetObject("give_money_2_16px", resourceCulture);
@@ -1203,6 +1273,76 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_14px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_16px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_18px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_20px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_24px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_28px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_red_filled_cancel_32px {
+            get {
+                object obj = ResourceManager.GetObject("pin_red_filled_cancel_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap print_14px {
             get {
                 object obj = ResourceManager.GetObject("print_14px", resourceCulture);
@@ -1466,6 +1606,76 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap symbol_refresh_28px {
             get {
                 object obj = ResourceManager.GetObject("symbol_refresh_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_14px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_16px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_18px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_20px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_24px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_28px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap task_list_pin_32px {
+            get {
+                object obj = ResourceManager.GetObject("task_list_pin_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

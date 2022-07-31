@@ -10,7 +10,7 @@ namespace RPT.Data
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
-        private readonly string tblBarangays = "barangays";
+        private readonly string viewPropertyAssessmentGroupedCancelled = "view_property_assessment_grouped_cancelled";
         private readonly string viewRealProperties = "view_real_properties";
         private MySqlGenericCommands _mySqlGenericCommandsRPT;
 
@@ -88,49 +88,32 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties(string barangayName, string searchKey, bool isCancelled)
+        public DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText)
         {
-            try
-            {
-                string isCancelledFilter = string.Empty;
 
-                if (barangayName.Equals("All"))
-                    barangayName = string.Empty;
-
-                if (!isCancelled)
-                    isCancelledFilter = $"is_cancelled = 0 AND ";
-
-                var parameters = new object[][] { 
-                    new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
-                    new object[]{"@search_key", DbType.String, $"%{searchKey}%" }
-                };
-
-                string query = $"SELECT id, complete_arp_no, pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name,  property_kind,  effectivity_quarter, effectivity_year, is_taxable, is_cancelled  FROM {viewRealProperties} " +
-                    $"WHERE {isCancelledFilter} barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
-
-                var dtProperties = new DataTable();
-                return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public decimal GetAssessedValueByARPNo(string arpNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@arp_no", DbType.String, arpNo},
+            var parameters = new object[][] 
+            { 
+                new object[] { "@effectivity_year", DbType.Int32, effectivityYear },
+                new object[] { "@barangays_id", DbType.Int32, barangayId },
+                new object[] { "@search_text", DbType.String, $"%{searchText}%" }
             };
 
-            string query = $"SELECT assessed_value FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @arp_no";
+            string BarangayId() 
+            {
+                if (barangayId == 0)
+                    return string.Empty;
+                else
+                    return "AND barangays_id = @barangays_id";
+            }
 
-            string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+            string query = $"SELECT *  FROM {viewRealProperties} WHERE (owner_name LIKE @search_text OR pin LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text) AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
+            var dtProperties = new DataTable();
+            return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
+        }
 
+        public decimal GetAssessedValueByARPNo(string completeArpNo, string ownerName)
+        {
             return 0;
         }
     }

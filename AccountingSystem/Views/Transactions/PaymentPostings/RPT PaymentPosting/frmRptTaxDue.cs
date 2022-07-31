@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private DataTable DataTableProperties() 
         {
             bool isCancelled = chckBxCancelled.Checked;
-            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByOwnerName_IsCancelled(_ownerName,isCancelled);
+            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByOwnerName_IsCancelled(_ownerName, isCancelled);
             var dataTable = new DataTable();
 
             var dataColumns= new DataColumn[]
