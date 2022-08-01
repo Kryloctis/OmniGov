@@ -37,10 +37,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.checkAll = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
             this.SuspendLayout();
             // 
             // dgProperties
@@ -62,11 +60,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // btnPost
             // 
             this.btnPost.Enabled = false;
-            this.btnPost.Location = new System.Drawing.Point(12, 37);
+            this.btnPost.Location = new System.Drawing.Point(10, 37);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(126, 23);
             this.btnPost.TabIndex = 1;
-            this.btnPost.Text = "Post Selected";
+            this.btnPost.Text = "Post Selected Rows";
             this.btnPost.UseVisualStyleBackColor = true;
             this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
             // 
@@ -84,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // btnManualPosting
             // 
-            this.btnManualPosting.Location = new System.Drawing.Point(12, 12);
+            this.btnManualPosting.Location = new System.Drawing.Point(10, 12);
             this.btnManualPosting.Name = "btnManualPosting";
             this.btnManualPosting.Size = new System.Drawing.Size(126, 23);
             this.btnManualPosting.TabIndex = 1;
@@ -126,7 +124,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.nudYear);
             this.panel1.Controls.Add(this.checkFilterCancelledProp);
             this.panel1.Controls.Add(this.btnManualPosting);
             this.panel1.Controls.Add(this.btnPost);
@@ -137,29 +134,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(876, 66);
             this.panel1.TabIndex = 9;
-            // 
-            // nudYear
-            // 
-            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.Location = new System.Drawing.Point(381, 12);
-            this.nudYear.Maximum = new decimal(new int[] {
-            2099,
-            0,
-            0,
-            0});
-            this.nudYear.Minimum = new decimal(new int[] {
-            2022,
-            0,
-            0,
-            0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.Size = new System.Drawing.Size(120, 23);
-            this.nudYear.TabIndex = 15;
-            this.nudYear.Value = new decimal(new int[] {
-            2022,
-            0,
-            0,
-            0});
             // 
             // frmAssessmentPosting
             // 
@@ -179,7 +153,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,6 +168,5 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.CheckBox checkAll;
         private System.Windows.Forms.Button btnManualPosting;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown nudYear;
     }
 }

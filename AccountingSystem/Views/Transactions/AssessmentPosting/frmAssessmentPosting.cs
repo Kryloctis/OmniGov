@@ -118,17 +118,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void btnPost_Click(object sender, EventArgs e)
         {
-            DateTime yearPosting = Convert.ToDateTime(nudYear.Value);
-            DateTime currentYear = Convert.ToDateTime(DateTime.Now.Year);
-
-            if (yearPosting > currentYear)
-                AdvancePosting();
-            else
-                PostProperties();
-        }
-
-        private void PostProperties()
-        {
             if (MessageBox.Show("Post selected properties?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (SaveData())
@@ -137,11 +126,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     LoadProperties();
                 }
             }
-        }
-
-        private void AdvancePosting()
-        {
-            throw new NotImplementedException();
+            return;
         }
 
         private bool SaveData()
