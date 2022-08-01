@@ -1575,13 +1575,13 @@
             </TablixRowHierarchy>
             <DataSetName>RealPropertyTaxDueBill</DataSetName>
             <Top>4.35811cm</Top>
-            <Left>0.00005cm</Left>
+            <Left>0.00008cm</Left>
             <Height>1.2cm</Height>
             <Width>31.37954cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
-                <Style>None</Style>
+                <Style>Solid</Style>
               </Border>
             </Style>
           </Tablix>
