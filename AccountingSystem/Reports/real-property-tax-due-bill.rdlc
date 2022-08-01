@@ -523,7 +523,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Parameters!paramCertifiedCorrectSignatory.Value</Value>
+                        <Value>=Parameters!paramCertifiedCorrectSignatoryName.Value</Value>
                         <Style>
                           <FontFamily>Calibri</FontFamily>
                         </Style>
