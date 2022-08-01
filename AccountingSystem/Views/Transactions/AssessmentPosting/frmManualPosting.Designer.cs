@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnManualPosting = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -506,15 +506,15 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.label10.TabIndex = 3;
             this.label10.Text = "ARP No.";
             // 
-            // btnManualPosting
+            // btnCancel
             // 
-            this.btnManualPosting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnManualPosting.Location = new System.Drawing.Point(740, 310);
-            this.btnManualPosting.Name = "btnManualPosting";
-            this.btnManualPosting.Size = new System.Drawing.Size(84, 23);
-            this.btnManualPosting.TabIndex = 12;
-            this.btnManualPosting.Text = "Cancel";
-            this.btnManualPosting.UseVisualStyleBackColor = true;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Location = new System.Drawing.Point(740, 310);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(84, 23);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnPost
             // 
@@ -531,11 +531,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(839, 349);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnPost);
-            this.Controls.Add(this.btnManualPosting);
+            this.Controls.Add(this.btnCancel);
             this.MinimizeBox = false;
             this.Name = "frmManualPosting";
             this.ShowInTaskbar = false;
@@ -590,7 +591,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown txtEffectivityYear;
         private System.Windows.Forms.TextBox txtEffectivityQuarter;
-        private System.Windows.Forms.Button btnManualPosting;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.CheckBox cbCancelled;
         private System.Windows.Forms.CheckBox cbTaxable;
