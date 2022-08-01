@@ -94,12 +94,13 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
+                new object[] { "@property_identifier", DbType.String, entity.propertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
                 new object[] { "@owner_name", DbType.String, entity.OwnerName },
                 new object[] { "@owner_tin", DbType.String, entity.OwnerTin },
-                new object[] { "@owner_address", DbType.String, entity.OwnerAddress},
-                new object[] { "@owner_contact", DbType.String, entity.OwnerContact},
+                new object[] { "@owner_address", DbType.String, entity.OwnerAddress },
+                new object[] { "@owner_contact", DbType.String, entity.OwnerContact },
                 new object[] { "@barangay_name", DbType.String, entity.BarangayName },
                 new object[] { "@municipality_name", DbType.String, entity.MunicipalityName },
                 new object[] { "@province_name", DbType.String, entity.ProvinceName },
@@ -108,16 +109,17 @@ namespace ACC.Data
                 new object[] { "@effectivity_year", DbType.Int32, entity.EffectivityYear },
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue },
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
-                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
                 new object[] { "@penalty_rate", DbType.Decimal, entity.PenaltyRate },
                 new object[] { "@penalty_frequency", DbType.String, entity.PenaltyFrequency },
                 new object[] { "@basic_rate", DbType.Decimal, entity.BasicRate },
                 new object[] { "@sef_rate", DbType.Decimal, entity.SefRate },
-                new object[] { "@is_advance", DbType.Boolean, entity.isAdvance},
-                new object[] { "@posted_by", DbType.Int32, entity.PostedBy }
+                new object[] { "@year", DbType.Int32, entity.Year },
+                new object[] { "@posted_at", DbType.DateTime, entity.PostedAt },
+                new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, is_advance, posted_by) VALUES (@complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @is_advance, @posted_by)";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }

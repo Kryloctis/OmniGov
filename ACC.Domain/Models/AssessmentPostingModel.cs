@@ -5,6 +5,7 @@ namespace RPT.Domain.Models
     public class AssessmentPostingModel
     {
         public int Id { get; set; }
+        public string propertyIdentifier { get; set; }
         public string CompleteArpNo  { get; set; }
         public string PropertyPin { get; set; }
         public string OwnerName { get; set; }
@@ -21,10 +22,10 @@ namespace RPT.Domain.Models
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
         public decimal PenaltyRate { get; set; }
-        public string   PenaltyFrequency { get; set; }
+        public string  PenaltyFrequency { get; set; }
         public decimal BasicRate { get; set; }
         public decimal SefRate { get; set; }
-        public bool isAdvance { get; set; }
+        public int Year { get; set; }
         public DateTime PostedAt { get; set; }
         public int PostedBy { get; set; }
     }

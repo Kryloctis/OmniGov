@@ -151,6 +151,7 @@ namespace AccountingSystem
             dataGridView.Columns["is_checked"].MinimumWidth = 20;
             dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
+            dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["posting_status"].HeaderText = "Posting Status";
             dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;

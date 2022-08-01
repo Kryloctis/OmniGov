@@ -64,6 +64,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 new DataColumn("is_checked", typeof(bool)),
                 new DataColumn("posting_status", typeof(string)),
+                new DataColumn("real_properties_id", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("owner_name", typeof(string)),
                 new DataColumn("owner_address", typeof(string)),
@@ -88,6 +89,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
                 string rowPostingStatus = string.Empty;
+                int rowId = Convert.ToInt32(row["real_properties_id"]);
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
                 string rowOwnerName = row["owner_name"].ToString();
                 string rowOwnerAddress = row["owner_address"].ToString();
@@ -105,7 +107,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowPostedBy = string.Empty;
 
                 dataTable.Rows.Add(false, 
-                                   rowPostingStatus, 
+                                   rowPostingStatus,
+                                   rowId,
                                    rowCompleteArpNo, 
                                    rowOwnerName, 
                                    rowOwnerAddress, 
@@ -149,11 +152,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 e.Column.ReadOnly = false;
         }
 
-        private void chckShowCancelled_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadProperties();
@@ -186,61 +184,79 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             _ = new frmManualPosting().ShowDialog();
         }
 
+
+
         private dynamic GetDatagridViewValue(DataGridView dataGridView, int rowIndex, string columnName)
         {
             return dataGridView.Rows[rowIndex].Cells[columnName].Value;
+        }
+
+        private decimal GetTaxRate(string description) 
+        {
+            var dicTaxRate = AccFactory.rptTaxRatesRepository().GetRecordByDescription(description);
+            decimal taxRate = 0;
+
+            if (dicTaxRate != null)
+                taxRate = Convert.ToDecimal(dicTaxRate["rate"]);
+
+            return taxRate;
         }
 
         private bool SaveData()
         {
             foreach (DataGridViewRow dgvRow in dgProperties.Rows)
             {
-                bool isChecked = Convert.ToBoolean(dgvRow.Cells["checkbox"].Value);
+                bool isChecked = Convert.ToBoolean(dgvRow.Cells["is_checked"].Value);
                 if (isChecked)
                 {
+                    int realPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
                     string completeArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
-                    string propertyPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
                     string ownerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_name");
-                    string ownerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_tin");
-                    string ownerContact = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_contact");
                     string ownerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_address");
-                    string barangayName = GetDatagridViewValue(dgProperties, dgvRow.Index, "barangay_name");
-                    string municipalityName = GetDatagridViewValue(dgProperties, dgvRow.Index, "municipality_name");
-                    string provinceName = GetDatagridViewValue(dgProperties, dgvRow.Index, "province_name");
                     string propertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
                     int effectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
                     int effectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
                     decimal assessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
                     bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
-                    bool isCancelled = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_cancelled");
-                    DateTime postedAt = GetDatagridViewValue(dgProperties, dgvRow.Index, "posted_at");  
-                    decimal penaltyRate = GetDatagridViewValue(dgProperties, dgvRow.Index, "penalty_rate");
-                    string penaltyFrequency = GetDatagridViewValue(dgProperties, dgvRow.Index, "penalty_frequency");
-                    decimal basicRate = GetDatagridViewValue(dgProperties, dgvRow.Index, "basic_rate");
-                    decimal sefRate = GetDatagridViewValue(dgProperties, dgvRow.Index, "sef_rate");
+
+                    //Get Penalty and Tax Rates
+                    var dictRptPenalties = AccFactory.rptPenaltiesRepository().GetRecordByID(9);
+                    var dictRealProperties = RptFactory.RealPropertiesRepository().GetRecordByID(realPropertiesId);
+                    var dictViewRealProperties = RptFactory.RealPropertiesRepository().GetViewRealPropertiesById(realPropertiesId);
+
+                    decimal penaltyRate = dictRptPenalties == null? 0 : Convert.ToDecimal(dictRptPenalties["rate"]);
+                    string penaltyFrequency = dictRptPenalties == null? string.Empty : dictRptPenalties["frequency"].ToString();
+                    decimal basicRate = GetTaxRate("Basic");
+                    decimal sefRate = GetTaxRate("Special Educational Fund");
+                    DateTime postedAt = DateTime.Now;
+                    int year = (int)nudYear.Value;
 
                     var assessmentPostingModel = new AssessmentPostingModel()
                     {
+                        propertyIdentifier = dictRealProperties == null? null : dictRealProperties["property_identifier"],
                         CompleteArpNo = completeArpNo,
-                        PropertyPin = propertyPin,
+                        PropertyPin = dictViewRealProperties == null? string.Empty : dictViewRealProperties["pin"],
                         OwnerName = ownerName,
-                        OwnerTin = ownerTin,
-                        OwnerContact = ownerContact,
+                        OwnerTin = dictRealProperties == null? string.Empty : dictRealProperties["owner_tin"],
                         OwnerAddress = ownerAddress,
-                        BarangayName = barangayName,
-                        MunicipalityName = municipalityName,
-                        ProvinceName = provinceName,
+                        OwnerContact = dictRealProperties == null ? string.Empty : dictRealProperties["owner_contact"],
+                        BarangayName =  dictViewRealProperties == null ? string.Empty : dictViewRealProperties["barangay_name"],
+                        MunicipalityName =  dictViewRealProperties == null ? string.Empty : dictViewRealProperties["municipality_name"],
+                        ProvinceName =  dictViewRealProperties == null ? string.Empty : dictViewRealProperties["province_name"],
                         PropertyKind = propertyKind,
                         EffectivityQuarter = effectiviyQuarter,
                         EffectivityYear = effectivityYear,
                         AssessedValue = assessedValue,
                         IsTaxable = isTaxable,
-                        IsCancelled = isCancelled,
-                        PostedAt = postedAt,
+                        IsCancelled = Convert.ToBoolean(int.Parse(dictRealProperties == null? "0" : dictRealProperties["is_cancelled"])),
+
                         PenaltyRate = penaltyRate,
                         PenaltyFrequency = penaltyFrequency,
                         BasicRate = basicRate,
                         SefRate = sefRate,
+                        Year = year,
+                        PostedAt = postedAt,
+                        PostedBy = Helper.UserId
                     };
 
                     AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
@@ -302,7 +318,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void btnPostSelected_Click(object sender, EventArgs e)
         {
-
+            SaveData();
         }
 
         private void nudYear_ValueChanged(object sender, EventArgs e)

@@ -119,29 +119,5 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET description = @description, rate = @rate, frequency = @frequency WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
-
-        public decimal GetPenaltyRate()
-        {
-            string query = $"SELECT rate FROM {tableName} LIMIT 1";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query);
-
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
-
-            return 0;
-        }
-
-        public string GetPenaltyFrequency()
-        {
-            try
-            {
-                string query = $"SELECT frequency FROM {tableName} LIMIT 1";
-                return _mySqlGenericCommandsLFS.ExecuteScalar(query).ToString();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

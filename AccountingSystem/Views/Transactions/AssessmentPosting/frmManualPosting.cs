@@ -44,49 +44,49 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private bool SaveData()
         {
-            string completeArpNo = txtARPNo.Text;
-            string propertyPIN = txtPIN.Text;
-            string ownerName = txtOwner.Text;
-            string barangayCode = txtBarangayCode.Text;
-            string barangayName = txtBarangayName.Text;
-            string municipalityCode = txtMunicipalityCode.Text;
-            string municipalityName = txtMunicipalityName.Text;
-            string provinceCode = txtProvinceCode.Text;
-            string provinceName = txtProvinceName.Text;
-            string propertyKind = panel1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
-            int effectivityQuarter = Convert.ToInt32(txtEffectivityQuarter.Text);
-            int effectivityYear = Convert.ToInt32(txtEffectivityYear.Value);
-            decimal assessedValue = nudAssessmentValue.Value;
-            bool isTaxable = cbTaxable.Checked ? true : false;
-            bool isCancelled = cbCancelled.Checked ? true : false;
-            DateTime postedAt = DateTime.Now;
-            decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
-            string penaltyFrequency = AccFactory.rptPenaltiesRepository().GetPenaltyFrequency();
-            decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
-            decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
+            //string completeArpNo = txtARPNo.Text;
+            //string propertyPIN = txtPIN.Text;
+            //string ownerName = txtOwner.Text;
+            //string barangayCode = txtBarangayCode.Text;
+            //string barangayName = txtBarangayName.Text;
+            //string municipalityCode = txtMunicipalityCode.Text;
+            //string municipalityName = txtMunicipalityName.Text;
+            //string provinceCode = txtProvinceCode.Text;
+            //string provinceName = txtProvinceName.Text;
+            //string propertyKind = panel1.Controls.OfType<RadioButton>().FirstOrDefault(r => r.Checked).Tag.ToString();
+            //int effectivityQuarter = Convert.ToInt32(txtEffectivityQuarter.Text);
+            //int effectivityYear = Convert.ToInt32(txtEffectivityYear.Value);
+            //decimal assessedValue = nudAssessmentValue.Value;
+            //bool isTaxable = cbTaxable.Checked ? true : false;
+            //bool isCancelled = cbCancelled.Checked ? true : false;
+            //DateTime postedAt = DateTime.Now;
+            //decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRateById();
+            //string penaltyFrequency = AccFactory.rptPenaltiesRepository().GetPenaltyFrequency();
+            //decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
+            //decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
 
-            var assessmentPostingModel = new AssessmentPostingModel()
-            {
-                CompleteArpNo = completeArpNo,
-                PropertyPin = propertyPIN,
-                OwnerName = ownerName,
-                BarangayName = barangayName,
-                MunicipalityName = municipalityName,
-                ProvinceName = provinceName,
-                PropertyKind = propertyKind,
-                EffectivityQuarter = effectivityQuarter,
-                EffectivityYear = effectivityYear,
-                AssessedValue = assessedValue,
-                IsTaxable = isTaxable,
-                IsCancelled = isCancelled,
-                PostedAt = postedAt,
-                PenaltyRate = penaltyRate,
-                PenaltyFrequency = penaltyFrequency,
-                BasicRate = basicRate,
-                SefRate = sefRate
-            };
+            //var assessmentPostingModel = new AssessmentPostingModel()
+            //{
+            //    CompleteArpNo = completeArpNo,
+            //    PropertyPin = propertyPIN,
+            //    OwnerName = ownerName,
+            //    BarangayName = barangayName,
+            //    MunicipalityName = municipalityName,
+            //    ProvinceName = provinceName,
+            //    PropertyKind = propertyKind,
+            //    EffectivityQuarter = effectivityQuarter,
+            //    EffectivityYear = effectivityYear,
+            //    AssessedValue = assessedValue,
+            //    IsTaxable = isTaxable,
+            //    IsCancelled = isCancelled,
+            //    PostedAt = postedAt,
+            //    PenaltyRate = penaltyRate,
+            //    PenaltyFrequency = penaltyFrequency,
+            //    BasicRate = basicRate,
+            //    SefRate = sefRate
+            //};
 
-            AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
+            //AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
              
             return true;
         }
