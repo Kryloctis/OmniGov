@@ -12,6 +12,6 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText);
 
-        decimal GetAssessedValueByARPNo(string arpNo, string ownerName);
+        decimal GetAssessedValueByARPNo(string arpNo);
     }
 }

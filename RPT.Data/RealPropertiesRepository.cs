@@ -106,15 +106,21 @@ namespace RPT.Data
                     return "AND barangays_id = @barangays_id";
             }
 
-            string query = $"SELECT *  FROM {viewRealProperties} WHERE (owner_name LIKE @search_text OR pin LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text) AND effectivity_year <= @effectivity_year {BarangayId()} ";
+            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
             var dtProperties = new DataTable();
             return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
         }
 
-        public decimal GetAssessedValueByARPNo(string completeArpNo, string ownerName)
+        public decimal GetAssessedValueByARPNo(string completeArpNo)
         {
-            return 0;
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo}
+            };
+
+            string query = $"SELECT COALESCE(assessed_value, 0) FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @complete_arp_no";
+            return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
     }
 }

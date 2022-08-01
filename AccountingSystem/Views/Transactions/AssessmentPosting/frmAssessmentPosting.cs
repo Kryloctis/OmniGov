@@ -50,185 +50,38 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
         }
 
-        private void GetAssessedValues(DataGridView dataGridView)
-        {
-            foreach (DataGridViewRow row in dataGridView.Rows) 
-            {
-
-            }
-        }
-
-        private void DataTableAssessmentPosting()
+        private DataTable DataTableAssessmentPosting()
         {
             int year = (int)nudYear.Value;
             int barangayId = int.Parse(((DataRowView)cmbxBarangays.ComboBox.SelectedItem)["id"].ToString());
             string searchText = txtSearch.Text.Trim();
-            dgProperties.Rows.Clear();
-            dgProperties.Columns.Clear();
             var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
+            var dataTable = new DataTable();
 
             #region Populate columns for new datagridView
 
-            var rptColumns = new DataGridViewColumn[]
+            var rptColumns = new DataColumn[]
             {
-                new DataGridViewCheckBoxColumn()
-                {
-                    Name = "is_checked",
-                    HeaderText = string.Empty,
-                    MinimumWidth = 20,
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "posting_status",
-                    HeaderText = "Posting Status"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "complete_arp_no",
-                    HeaderText = "ARP No."
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "pin",
-                    HeaderText = "PIN"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "owner_name",
-                    HeaderText = "Owner Name"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "owner_tin",
-                    HeaderText = "Local TIN"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "owner_contact",
-                    HeaderText = "Owner Contact",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "owner_address",
-                    HeaderText = "Owner Address",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "barangay_name",
-                    HeaderText = "Barangay"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "municipality_name",
-                    HeaderText = "Municipality",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "province_name",
-                    HeaderText = "Province",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "property_kind",
-                    HeaderText = "Property Kind",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "effectivity_quarter",
-                    HeaderText = "Effectivity Quarter",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "effectivity_year",
-                    HeaderText = "Effectivity Year",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "assessed_value",
-                    HeaderText = "Assessed Value"
-                },
-
-                new DataGridViewCheckBoxColumn()
-                {
-                    Name = "is_taxable",
-                    HeaderText = "Taxable",
-                    Visible = false
-                },
-
-                new DataGridViewCheckBoxColumn()
-                {
-                    Name = "is_cancelled",
-                    HeaderText = "Cancelled",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "penalty_rate",
-                    HeaderText = "Penalty Rate",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "penalty_frequency",
-                    HeaderText = "Penalty Frequency",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "basic_rate",
-                    HeaderText = "Basic Rate",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    Name = "sef_rate",
-                    HeaderText = "SEF Rate",
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn() 
-                { 
-                    Name = "posted_at", 
-                    HeaderText = "Posted at", 
-                    Visible = false
-                },
-
-                new DataGridViewTextBoxColumn() 
-                { 
-                    Name = "posted_by", 
-                    HeaderText = "Posted By",
-                    Visible = false
-                }
-
+                new DataColumn("is_checked", typeof(bool)),
+                new DataColumn("posting_status", typeof(string)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("owner_name", typeof(string)),
+                new DataColumn("owner_address", typeof(string)),
+                new DataColumn("property_kind", typeof(string)),
+                new DataColumn("effectivity_quarter", typeof(int)),
+                new DataColumn("effectivity_year", typeof(int)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("is_taxable", typeof(bool)),
+                new DataColumn("penalty_rate", typeof(decimal)),
+                new DataColumn("penalty_frequency", typeof(string)),
+                new DataColumn("basic_rate", typeof(decimal)),
+                new DataColumn("sef_rate", typeof(decimal)),
+                new DataColumn("posted_at", typeof(string)),
+                new DataColumn("posted_by", typeof(string))
             };
-            dgProperties.Columns.AddRange(rptColumns);
-            dgProperties.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+
+
+            dataTable.Columns.AddRange(rptColumns);
 
             #endregion
 
@@ -236,61 +89,47 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 string rowPostingStatus = string.Empty;
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
-                string rowPin = row["pin"].ToString();
                 string rowOwnerName = row["owner_name"].ToString();
-                string rowOwnerTin = row["owner_tin"].ToString();
-                string rowOwnerContact = row["owner_contact"].ToString();
                 string rowOwnerAddress = row["owner_address"].ToString();
-                string rowBarangayName = row["barangay_name"].ToString();
-                string rowMunicipalityName = row["municipality_name"].ToString();
-                string rowProvinceName = row["province_name"].ToString();
                 string rowPropertyKind = row["property_kind"].ToString();
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
            
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
-                bool rowIsCancelled = Convert.ToBoolean(row["is_cancelled"]);
-                decimal rowAssessedValue = 0;
-                string rowIsPostedAt = string.Empty;
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
+                string rowPostedAt = string.Empty;
                 decimal rowPenaltyRate = 0;
                 string rowPenaltyFrequency = string.Empty;
                 decimal rowBasicRate = 0;
                 decimal rowSefRate = 0;
                 string rowPostedBy = string.Empty;
-                
-                dgProperties.Rows.Add(false, 
+
+                dataTable.Rows.Add(false, 
                                    rowPostingStatus, 
                                    rowCompleteArpNo, 
-                                   rowPin, 
                                    rowOwnerName, 
-                                   rowOwnerTin, 
-                                   rowOwnerContact, 
                                    rowOwnerAddress, 
-                                   rowBarangayName, 
-                                   rowMunicipalityName, 
-                                   rowProvinceName, 
                                    rowPropertyKind, 
                                    rowEffectivityQuarter, 
                                    rowEffectivityYear, 
                                    rowAssessedValue,
-                                   rowIsTaxable, 
-                                   rowIsCancelled, 
-                                   rowIsPostedAt,
+                                   rowIsTaxable,                        
                                    rowPenaltyRate,
                                    rowPenaltyFrequency, 
                                    rowBasicRate, 
-                                   rowSefRate, 
+                                   rowSefRate,
+                                   rowPostedAt,
                                    rowPostedBy);
             }
 
+            return dataTable;
         }
 
         private void LoadProperties()
         {
             try
             {
-                DataTableAssessmentPosting();
-                //HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(), dgProperties);
+                HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(), dgProperties);
                 lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
                 EnableDisableToolStripButton(dgProperties, btnPostSelected, btnUnpostSelected);
                 chckBxAll.Checked = false;

@@ -148,20 +148,28 @@ namespace AccountingSystem
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
-            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].MinimumWidth = 20;
+            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
             dataGridView.Columns["posting_status"].HeaderText = "Posting Status";
             dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            dataGridView.Columns["pin"].HeaderText = "Pin";
             dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
-            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
-            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["is_taxable"].DefaultCellStyle.NullValue = null;
+            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["property_kind"].Visible = false;
+            dataGridView.Columns["effectivity_quarter"].Visible = false;
+            dataGridView.Columns["effectivity_year"].Visible = false;
+            dataGridView.Columns["assessed_value"].Visible = false;
             dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
+            dataGridView.Columns["is_taxable"].MinimumWidth = 20;
+            dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["penalty_rate"].Visible = false;
+            dataGridView.Columns["penalty_frequency"].Visible = false;
+            dataGridView.Columns["basic_rate"].Visible = false;
+            dataGridView.Columns["sef_rate"].Visible = false;
+            dataGridView.Columns["posted_at"].Visible = false;
+            dataGridView.Columns["posted_by"].Visible = false;
         }
         #endregion
 
