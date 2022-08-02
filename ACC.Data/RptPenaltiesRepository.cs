@@ -119,5 +119,31 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET description = @description, rate = @rate, frequency = @frequency WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public Dictionary<string, string> GetRecordByDescription(string description)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@description", DbType.String, description}
+            };
+
+            string query = $"SELECT id, description, frequency, rate FROM {tableName} WHERE description = @description";
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["id"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("frequency", row["frequency"].ToString());
+                    dict.Add("rate", row["rate"].ToString());
+                }
+                return dict;
+            }
+        }
     }
 }

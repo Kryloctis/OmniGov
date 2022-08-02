@@ -132,17 +132,17 @@ namespace AccountingSystem
         #endregion
 
         #region RPT Assessment Posting
-        internal static void BarangaysCombobox(DataTable dataTable, ToolStripComboBox toolStripComboBox, string displayMember, string valueMember)
+        internal static void BarangaysCombobox(DataTable dataTable, ComboBox  comboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
             dr["id"] = "0";
             dr["name"] = "All";
             dataTable.Rows.InsertAt(dr, 0);
 
-            toolStripComboBox.ComboBox.DataSource = dataTable;
-            toolStripComboBox.ComboBox.DisplayMember = displayMember;
-            toolStripComboBox.ComboBox.ValueMember = valueMember;
-            toolStripComboBox.DropDownHeight = 200;
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
         }
 
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView dataGridView)

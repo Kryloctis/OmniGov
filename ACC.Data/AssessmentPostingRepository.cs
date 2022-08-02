@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -18,6 +19,20 @@ namespace ACC.Data
         public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
+        }
+
+        public bool BulkInsert(List<AssessmentPostingModel> assessmentPostingModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (AssessmentPostingModel assessmentPostingModel in assessmentPostingModels) 
+                {
+                    _ = Insert(assessmentPostingModel);
+                }
+
+                scope.Complete();
+                return true;
+            }           
         }
 
         public int CountRecords()
@@ -33,6 +48,54 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordBy_ArpNo_Year(string completeArpNo, int year)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+                new object[] { "@year", DbType.Int32, year}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND year = @year";
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["penalty_rate"].ToString());
+                    dict.Add("property_identifier", row["property_identifier"].ToString());
+                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("property_pin", row["property_pin"].ToString());
+                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("owner_tin", row["owner_tin"].ToString());
+                    dict.Add("owner_address", row["owner_address"].ToString());
+                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("barangay_name", row["barangay_name"].ToString());
+                    dict.Add("municipality_name", row["municipality_name"].ToString());
+                    dict.Add("province_name", row["province_name"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("effectivity_quarterly", row["effectivity_quarterly"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("assessed_value", row["assessed_value"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("penalty_rate", row["penalty_rate"].ToString());
+                    dict.Add("penalty_frequency", row["penalty_frequency"].ToString());
+                    dict.Add("basic_rate", row["basic_rate"].ToString());
+                    dict.Add("sef_rate", row["sef_rate"].ToString());
+                    dict.Add("year", row["year"].ToString());
+                    dict.Add("posted_at", row["posted_at"].ToString());
+                    dict.Add("posted_by", row["posted_by"].ToString());
+                }
+            }
+
+            return dict;
         }
 
         public DataTable GetRecords()
