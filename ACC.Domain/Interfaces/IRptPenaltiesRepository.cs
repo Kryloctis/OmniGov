@@ -7,7 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRptPenaltiesRepository: IRepository<RptPenaltiesModel>
     {
-        decimal GetPenaltyRate();
-        string GetPenaltyFrequency();
+        Dictionary<string, string> GetRecordByDescription(string description);
     }
 }

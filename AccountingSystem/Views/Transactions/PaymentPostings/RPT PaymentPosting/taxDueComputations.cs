@@ -20,7 +20,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return months;
         }
 
-
         public static decimal GetCurrentPenaltyRate(int effectivityYear, int effectivityQuarter)
         {
             DateTime currentDate = DateTime.Now;

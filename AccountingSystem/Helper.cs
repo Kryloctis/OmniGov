@@ -113,6 +113,9 @@ namespace AccountingSystem
 
         public static void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
         {
+            if (dataGridView.Rows.Count < 1)
+                return;
+
             int totalRowCount = dataGridView.Rows.Count;
             int checkedRowCount = 0;
 
@@ -170,6 +173,17 @@ namespace AccountingSystem
 
             return lguDict;
         }
+
+        public static int GetDatagridViewRecordCount(DataGridView dataGridView)
+        {
+            return dataGridView.Rows.Count;
+        }
+
+        public static DateTime GetCurrentDate() 
+        {
+            return DateTime.Now;
+        }
+
         #endregion
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)

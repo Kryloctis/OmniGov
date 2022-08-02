@@ -18,235 +18,179 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         public frmAssessmentPosting()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgProperties);
+            Helper.DatagridFullRowSelectStyle(dgProperties, true, false);
             Helper.LoadFormIcon(this);
+            lblPostedAt.Text = string.Empty;
+            lblPosting.Visible = false;
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
         {
             LoadBarangays();
+            nudYear.Value = Helper.GetCurrentDate().Year;
             LoadProperties();
+            EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
-
-        #region Loaddata
 
         internal void LoadBarangays()
         {
-            var dtBarangays = RptFactory.RealPropertiesRepository().GetBarangays();
-            HelperLoadRecords.BarangayCombobox(dtBarangays, cmbBarangays, "name", "id");
+            try
+            {
+                var dtBarangays = RptFactory.RealPropertiesRepository().GetBarangays();
+                HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangays, "name", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
         }
 
-        private DataTable DataTableAssessmentPosting()
+        private string GetAssessmentPostingRecord(string arpNo, int year, string parameter) 
         {
-            var isCancelledProeprty = checkFilterCancelledProp.Checked;
-            var barangay = cmbBarangays.Text.ToString();
-            var searchKey = txtSearch.Text.Trim();
+            var dtAssessment = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(arpNo, year);
 
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetProperties(barangay, searchKey, isCancelledProeprty);
+            if (dtAssessment.Values.Count == 0)
+                return string.Empty;
+
+            return dtAssessment[parameter];
+        }
+
+        private string PostedBy(string completeArpNo) 
+        {
+            int year = (int)nudYear.Value;
+            string postedById = GetAssessmentPostingRecord(completeArpNo, year, "posted_by");
+
+            if (string.IsNullOrEmpty(postedById))
+                return string.Empty;
+
+            return Helper.GetUserDataById(Convert.ToInt32(postedById))["user_full_name"];
+        }
+
+        private DataTable DataTableAssessmentPosting(int year, int barangayId, string searchText)
+        {
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
+       
             var dataTable = new DataTable();
 
+            #region Populate columns for new datagridView
 
-            dataTable.Columns.Add("checkbox", typeof(bool));
-
-            foreach (DataColumn column in dtViewRealProperties.Columns)
+            var rptColumns = new DataColumn[]
             {
-                if (column.ColumnName == "is_taxable")
-                {
-                    dataTable.Columns.Add(column.ToString(), typeof(Image));
-                    continue;
-                }
+                new DataColumn("is_checked", typeof(bool)),
+                new DataColumn("posting_status", typeof(string)),
+                new DataColumn("real_properties_id", typeof(int)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("owner_name", typeof(string)),
+                new DataColumn("owner_address", typeof(string)),
+                new DataColumn("property_kind", typeof(string)),
+                new DataColumn("effectivity_quarter", typeof(int)),
+                new DataColumn("effectivity_year", typeof(int)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("is_taxable", typeof(bool)),
+                new DataColumn("penalty_rate", typeof(decimal)),
+                new DataColumn("penalty_frequency", typeof(string)),
+                new DataColumn("basic_rate", typeof(decimal)),
+                new DataColumn("sef_rate", typeof(decimal)),
+                new DataColumn("posted_at", typeof(string)),
+                new DataColumn("posted_by", typeof(string))
+            };
 
-                if (column.ColumnName == "is_cancelled")
-                {
-                    dataTable.Columns.Add(column.ToString(), typeof(Image));
-                    continue;
-                }
 
-                dataTable.Columns.Add(column.ToString(), column.DataType);
-            }
+            dataTable.Columns.AddRange(rptColumns);
 
-            dataTable.Columns.Add("assessed_value", typeof(string));
-            dataTable.Columns.Add("penalty_rate", typeof(string));
-            dataTable.Columns.Add("penalty_frequency", typeof(string));
-            dataTable.Columns.Add("basic_rate", typeof(string));
-            dataTable.Columns.Add("sef_rate", typeof(string));
-            dataTable.Columns.Add("is_posted", typeof(Image));
+            #endregion
 
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
-                int id = Convert.ToInt32(row["id"]);
-                string completeArpNo = row["complete_arp_no"].ToString();
-                string pin = row["pin"].ToString();
-                decimal assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeArpNo);
-                string ownerName = row["owner_name"].ToString();
-                string barangayCode = row["barangay_code"].ToString();
-                string barangayName = row["barangay_name"].ToString();
-                string municipalityCode = row["municipality_code"].ToString();
-                string municipalityName = row["municipality_name"].ToString();
-                string provinceCode = row["province_code"].ToString();
-                string provinceName = row["province_name"].ToString();
-                string propertyKind = row["property_kind"].ToString();
-                int effectivityQuarter = Convert.ToInt32(row["effectivity_quarter"].ToString());
-                int effectivityYear = Convert.ToInt32(row["effectivity_year"].ToString());
-
-                bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
-                bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
-                bool isPosted = AccFactory.AssessmentPostsRepository().IsPropertyPosted(completeArpNo);
-                decimal penaltyRate = AccFactory.rptPenaltiesRepository().GetPenaltyRate();
-                string penaltyFrequency = AccFactory.rptPenaltiesRepository().GetPenaltyFrequency();
-                decimal basicRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("BSC");
-                decimal sefRate = AccFactory.rptTaxRatesRepository().GetTaxRateByCode("SEF");
                 
-                Image isTaxableImg = isTaxable ? Properties.Resources.symbol_ok_18px : null;
-                Image isCancelledImg = isCancelled ? Properties.Resources.symbol_ok_18px : null;
-                Image isPostedImg = isPosted ? Properties.Resources.symbol_ok_18px : null;
+                int rowId = Convert.ToInt32(row["real_properties_id"]);
+                string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                string rowOwnerName = row["owner_name"].ToString();
+                string rowOwnerAddress = row["owner_address"].ToString();
+                string rowPropertyKind = row["property_kind"].ToString();
+                int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
+                int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                var dictAssessmentPosts = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
 
-                dataTable.Rows.Add(false, id, completeArpNo, pin, ownerName, barangayCode, barangayName, municipalityCode, municipalityName, provinceCode, provinceName, propertyKind, effectivityQuarter, effectivityYear, isTaxableImg, isCancelledImg, assessedValue, penaltyRate, penaltyFrequency, basicRate, sefRate, isPostedImg);
+                string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
+                bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
+                decimal rowAssessedValue = 0;
+                string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, (int)nudYear.Value, "posted_at");
+                decimal rowPenaltyRate = 0;
+                string rowPenaltyFrequency = string.Empty;
+                decimal rowBasicRate = 0;
+                decimal rowSefRate = 0;
+                string rowPostedBy = PostedBy(rowCompleteArpNo);
 
+                dataTable.Rows.Add(false, 
+                                   rowPostingStatus,
+                                   rowId,
+                                   rowCompleteArpNo, 
+                                   rowOwnerName, 
+                                   rowOwnerAddress, 
+                                   rowPropertyKind, 
+                                   rowEffectivityQuarter, 
+                                   rowEffectivityYear, 
+                                   rowAssessedValue,
+                                   rowIsTaxable,                        
+                                   rowPenaltyRate,
+                                   rowPenaltyFrequency, 
+                                   rowBasicRate, 
+                                   rowSefRate,
+                                   rowPostedAt,
+                                   rowPostedBy);
             }
 
             return dataTable;
         }
 
+        private void Miscellaneous() 
+        {
+            chckBxAll.Checked = false;
+            txtYear.Text = nudYear.Value.ToString();
+            txtBarangay.Text = cmbxBarangays.Text;
+        }
+
         private void LoadProperties()
         {
-            HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(), dgProperties);
-            CheckUncheckCheckBoxHeader(dgProperties, "checkbox", checkAll);
-        }
-
-        #endregion
-
-        private void btnPost_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Post selected properties?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            Cursor = Cursors.WaitCursor;
+            try
             {
-                if (SaveData())
-                {
-                    Helper.MessageBoxSuccess("Property successfully posted.");
-                    LoadProperties();
-                }
+                int year = (int)nudYear.Value;
+                int barangayId = Convert.ToInt32(cmbxBarangays.SelectedValue);
+                string searchText = txtSearch.Text.Trim();
+
+                HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(year, barangayId, searchText), dgProperties);
+                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
+                EnableDisableToolStripButton(dgProperties, btnPostSelected);
+                Miscellaneous();
             }
-            return;
-        }
-
-        private bool SaveData()
-        {
-            foreach (DataGridViewRow dgvRow in dgProperties.Rows)
+            catch (Exception ex)
             {
-                if (Convert.ToBoolean(dgvRow.Cells["checkbox"].Value))
-                {
-                    string completeArpNo = dgvRow.Cells["complete_arp_no"].Value.ToString();
-                    string propertyPIN = dgvRow.Cells["pin"].Value.ToString();
-                    string ownerName = dgvRow.Cells["owner_name"].Value.ToString();
-                    string barangayCode = dgvRow.Cells["barangay_code"].Value.ToString();
-                    string barangayName = dgvRow.Cells["barangay_name"].Value.ToString();
-                    string municipalityCode = dgvRow.Cells["municipality_code"].Value.ToString();
-                    string municipalityName = dgvRow.Cells["municipality_name"].Value.ToString();
-                    string provinceCode = dgvRow.Cells["province_code"].Value.ToString();
-                    string provinceName = dgvRow.Cells["province_name"].Value.ToString();
-                    string propertyKind = dgvRow.Cells["property_kind"].Value.ToString(); 
-                    int effectivityQuarter =Convert.ToInt32(dgvRow.Cells["effectivity_quarter"].Value);
-                    int effectivityYear = Convert.ToInt32(dgvRow.Cells["effectivity_year"].Value);
-                    decimal assessedValue = Convert.ToDecimal(dgvRow.Cells["assessed_value"].Value);
-                    bool isTaxable = string.IsNullOrEmpty(dgvRow.Cells["is_taxable"].ToString());
-                    bool isCancelled = string.IsNullOrEmpty(dgvRow.Cells["is_cancelled"].ToString());
-                    DateTime postedAt = DateTime.Now;
-                    decimal penaltyRate = Convert.ToDecimal(dgvRow.Cells["penalty_rate"].Value);
-                    string penaltyFrequency = dgvRow.Cells["penalty_frequency"].Value.ToString();
-                    decimal basicRate = Convert.ToDecimal(dgvRow.Cells["basic_rate"].Value);
-                    decimal sefRate = Convert.ToDecimal(dgvRow.Cells["sef_rate"].Value);
-
-
-                    var assessmentPostingModel = new AssessmentPostingModel()
-                    {
-                        ArpNo = completeArpNo,
-                        PIN = propertyPIN,
-                        Owner = ownerName,
-                        BarangayCode = barangayCode,
-                        BarangayName = barangayName,
-                        MunicipalityCode = municipalityCode,
-                        MunicipalityName = municipalityName,
-                        ProvinceCode = provinceCode,
-                        ProvinceName = provinceName,
-                        PropertyKind = propertyKind,
-                        EffectivityQuarter = effectivityQuarter,
-                        EffectivityYear = effectivityYear,
-                        AssessedValue = assessedValue,
-                        IsTaxable = isTaxable,
-                        IsCancelled = isCancelled,
-                        PostedAt = postedAt,
-                        PenaltyRate = penaltyRate,
-                        PenaltyFrequency = penaltyFrequency,
-                        BasicRate = basicRate,
-                        SEFRate = sefRate
-                    };
-
-                    AccFactory.AssessmentPostsRepository().Insert(assessmentPostingModel);
-                }
+                Helper.MessageBoxError(ex.Message);
             }
 
-            return true;
+            Cursor = Cursors.Default;
         }
 
-        private void dgProperties_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgProperties.SelectedRows.Count == 0)
-                btnPost.Enabled = false;
-            else
-                btnPost.Enabled = true;
-        }
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            if (e.Column.Name != "checkbox")
+            if (e.Column.Name != "is_checked")
                 e.Column.ReadOnly = true;
             else
                 e.Column.ReadOnly = false;
         }
 
-        private void checkFilterCancelledProp_CheckedChanged(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        private void checkAll_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            var searchCount = txtSearch.Text.Trim().Length;
-            if (searchCount >= 2 || searchCount == 0)
-                LoadProperties();
-            return;
-        }
-
-        private void cmbBarangays_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        private void btnManualPosting_Click(object sender, EventArgs e)
-        {
-            _ = new frmManualPosting().ShowDialog();
-        }
-
         private void checkAll_MouseClick(object sender, MouseEventArgs e)
         {
-            if (checkAll.Checked)
-                CheckUncheckCheckBoxRows(dgProperties, "checkbox", true);
+            if (chckBxAll.Checked)
+                Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
             else
-                CheckUncheckCheckBoxRows(dgProperties, "checkbox", false);
+                Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
         }
 
-        private void CheckUncheckCheckBoxRows(DataGridView dataGridView, string checkBoxColumnName, bool isChecked)
-        {
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                row.Cells[checkBoxColumnName].Value = isChecked;
-            }
-        }
+
 
         private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -256,29 +200,235 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CheckUncheckCheckBoxHeader(dgProperties, "checkbox", checkAll);
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
+            EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
 
-        private void CheckUncheckCheckBoxHeader(DataGridView dataGridView, string checkBoxColumnName, CheckBox checkBox)
+        private dynamic GetDatagridViewValue(DataGridView dataGridView, int rowIndex, string columnName)
         {
-            int totalRowCount = dataGridView.Rows.Count;
-            int checkedRowCount = 0;
+            return dataGridView.Rows[rowIndex].Cells[columnName].Value;
+        }
 
-            foreach (DataGridViewRow row in dataGridView.Rows)
+        private decimal GetTaxRate(string description) 
+        {
+            var dicTaxRate = AccFactory.rptTaxRatesRepository().GetRecordByDescription(description);
+            decimal taxRate = 0;
+
+            if (dicTaxRate != null)
+                taxRate = Convert.ToDecimal(dicTaxRate["rate"]);
+
+            return taxRate;
+        }
+
+        private void EnableDisableToolStripButton(DataGridView dataGridView, ToolStripButton post) 
+        {
+            try
             {
-                if (Convert.ToBoolean(row.Cells[checkBoxColumnName].Value) == true)
-                    checkedRowCount += 1;
+                int postedCount = 0;
+                int unpostedCount = 0;
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                    string postingStatus = row.Cells["posting_status"].Value.ToString();
+
+                    if (!isChecked)
+                        continue;
+
+                    if (postingStatus == "Posted")
+                        postedCount += 1;
+                    else
+                        unpostedCount += 1;
+
+                }
+
+                if (unpostedCount > 0)
+                {
+                    post.Enabled = true;
+                    post.Text = $"Post({unpostedCount})";
+                }
+                else
+                {
+                    post.Enabled = false;
+                    post.Text = $"Post({0})";
+                }
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);    
+            }
+        }
 
-            if (totalRowCount == checkedRowCount)
-                checkBox.Checked = true;
-            else
-                checkBox.Checked = false;
 
-            if (checkedRowCount == 0)
-                btnPost.Enabled = false;
+        private void btnPostSelected_Click(object sender, EventArgs e)
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+
+        private string GetViewRealPropertyRecord(int realPropertiesId, string parameter) 
+        {
+            var dictViewRealProperty = RptFactory.RealPropertiesRepository().GetViewRealPropertiesById(realPropertiesId);
+
+            if (dictViewRealProperty.Values.Count == 0)
+                return string.Empty;
+
+            return dictViewRealProperty[parameter];
+        }
+
+        private string GetRealPropertyRecord(int realPropertiesId, string parameter)
+        {
+            var dictRealProperties = RptFactory.RealPropertiesRepository().GetRecordByID(realPropertiesId);
+
+            if (dictRealProperties.Values.Count == 0)
+                return string.Empty;
+
+            return dictRealProperties[parameter];
+        }
+
+        private string GetPenaltyRecord(string description, string parameters)
+        {
+            var dictPenaltyRecord = AccFactory.rptPenaltiesRepository().GetRecordByDescription(description);
+
+            if (dictPenaltyRecord.Values.Count < 1)
+                return string.Empty;
+
+            return dictPenaltyRecord[parameters];
+        }
+
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var assessmentPostingModels = new List<AssessmentPostingModel>();
+
+                int reportProgress = 0;
+
+                foreach (DataGridViewRow dgvRow in dgProperties.Rows)
+                {
+                    bool isChecked = Convert.ToBoolean(dgvRow.Cells["is_checked"].Value);
+                    string postingStatus = dgvRow.Cells["posting_status"].Value.ToString();
+                    if (isChecked && string.IsNullOrEmpty(postingStatus))
+                    {
+                        int realPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
+                        string completeArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
+                        string ownerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_name");
+                        string ownerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_address");
+                        string propertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
+                        int effectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
+                        int effectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
+                        decimal assessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
+                        bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
+                        int year = Convert.ToInt32(txtYear.Text);
+
+                        //Get Penalty and Tax Rates
+                        var dictRptPenalties = AccFactory.rptPenaltiesRepository().GetRecordByID(9);
+                        
+
+                        decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate"))? 0 : 
+                                                                   Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
+                        string penaltyFrequency = GetPenaltyRecord("RPT monthly penalty", "frequency");
+                        decimal basicRate = GetTaxRate("Basic");
+                        decimal sefRate = GetTaxRate("Special Educational Fund");
+                        DateTime postedAt = DateTime.Now;
+
+                        #region GetIsCancelled
+
+                        bool isCancelled;
+                        if (string.IsNullOrEmpty(GetRealPropertyRecord(realPropertiesId, "is_cancelled")))
+                            isCancelled = false;
+                        else
+                            isCancelled = true; 
+
+                        #endregion
+
+                        var assessmentPostingModel = new AssessmentPostingModel()
+                        {
+                            propertyIdentifier = GetRealPropertyRecord(realPropertiesId, "property_identifier"),
+                            CompleteArpNo = completeArpNo,
+                            PropertyPin = GetViewRealPropertyRecord(realPropertiesId, "pin"),
+                            OwnerName = ownerName,
+                            OwnerTin = GetRealPropertyRecord(realPropertiesId, "owner_tin"),
+                            OwnerAddress = ownerAddress,
+                            OwnerContact = GetRealPropertyRecord(realPropertiesId, "owner_contact"),
+                            BarangayName = GetViewRealPropertyRecord(realPropertiesId, "barangay_name"),
+                            MunicipalityName = GetViewRealPropertyRecord(realPropertiesId, "municipality_name"),
+                            ProvinceName = GetViewRealPropertyRecord(realPropertiesId, "province_name"),
+                            PropertyKind = propertyKind,
+                            EffectivityQuarter = effectiviyQuarter,
+                            EffectivityYear = effectivityYear,
+                            AssessedValue = assessedValue,
+                            IsTaxable = isTaxable,
+                            IsCancelled = isCancelled,
+
+                            PenaltyRate = penaltyRate,
+                            PenaltyFrequency = penaltyFrequency,
+                            BasicRate = basicRate,
+                            SefRate = sefRate,
+                            Year = year,
+                            PostedAt = postedAt,
+                            PostedBy = Helper.UserId
+                        };
+
+                        assessmentPostingModels.Add(assessmentPostingModel);
+                        int progressCount = reportProgress += 1;
+                        backgroundWorker1.ReportProgress(progressCount);
+                    }
+                }
+
+                AccFactory.AssessmentPostsRepository().BulkInsert(assessmentPostingModels);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            lblPosting.Visible = true;
+            lblPosting.Text = "Posting Assessments...";
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+                lblPosting.Text = "Posting Failed";
             else
-                btnPost.Enabled = true;
+                lblPosting.Text = "Posting Complete";
+        }
+
+
+        private void dgProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            int selectedRowCount = dgProperties.SelectedRows.Count;
+            if (selectedRowCount > 0)
+            {
+                int rowIndex = dgProperties.CurrentRow.Index;
+
+                string postedAt = GetDatagridViewValue(dgProperties, rowIndex, "posted_at");
+                string postedBy = GetDatagridViewValue(dgProperties, rowIndex, "posted_by");
+
+                if (selectedRowCount == 1)
+                {
+                    lblPostedAt.Text = postedAt;
+                    lblPostedBy.Text = postedBy;
+                }
+                else
+                {
+                    lblPostedAt.Text = "-";
+                    lblPostedBy.Text = "-";
+                }
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {         
+            LoadProperties();
         }
     }
 }

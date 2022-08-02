@@ -120,18 +120,32 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public decimal GetTaxRateByCode(string taxRateCode)
+        public Dictionary<string, string> GetRecordByDescription(string description)
         {
-            var parameters = new object[][] {
-                new object[] {"@code", DbType.String, taxRateCode}
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@description", DbType.String, description}
             };
-            string query = $"SELECT rate FROM {tableName} WHERE code = @code";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
+            string query = $"SELECT * FROM {tableName} WHERE description = @description";
 
-            return 0;
+            using (var items = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (items.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow item in items.Rows)
+                {
+                    dict.Add("id", item["id"].ToString());
+                    dict.Add("code", item["code"].ToString());
+                    dict.Add("description", item["description"].ToString());
+                    dict.Add("rate", item["rate"].ToString());
+                }
+
+                return dict;
+            }
         }
     }
 }

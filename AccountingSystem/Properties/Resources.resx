@@ -589,4 +589,67 @@
   <data name="money_banknotes_2_pin_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\money-banknotes-2-pin@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gear_filled_pin_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_filled_pin_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear-filled-pin@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="task_list_pin_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\task-list-pin@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_red_filled_cancel_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin-red-filled-cancel@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

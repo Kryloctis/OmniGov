@@ -120,27 +120,29 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public decimal GetPenaltyRate()
+        public Dictionary<string, string> GetRecordByDescription(string description)
         {
-            string query = $"SELECT rate FROM {tableName} LIMIT 1";
-            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query);
+            var dict = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
-
-            return 0;
-        }
-
-        public string GetPenaltyFrequency()
-        {
-            try
+            var parameters = new object[][]
             {
-                string query = $"SELECT frequency FROM {tableName} LIMIT 1";
-                return _mySqlGenericCommandsLFS.ExecuteScalar(query).ToString();
-            }
-            catch (Exception)
+                new object[] { "@description", DbType.String, description}
+            };
+
+            string query = $"SELECT id, description, frequency, rate FROM {tableName} WHERE description = @description";
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["id"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("frequency", row["frequency"].ToString());
+                    dict.Add("rate", row["rate"].ToString());
+                }
+                return dict;
             }
         }
     }

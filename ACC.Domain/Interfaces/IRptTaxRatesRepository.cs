@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRptTaxRatesRepository : IRepository<RptTaxRatesModel>
     {
-        decimal GetTaxRateByCode(string taxRateCode);
+        Dictionary<string, string> GetRecordByDescription(string description);
     }
 }

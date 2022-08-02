@@ -7,18 +7,32 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ACC.Data
 {
     public class AssessmentPostingRepository : IAssessmentPostingRepository
     {
         private readonly string tableName = "assessment_posts";
-
         private MySqlGenericCommands _mySqlGenericCommands;
 
         public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
+        }
+
+        public bool BulkInsert(List<AssessmentPostingModel> assessmentPostingModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (AssessmentPostingModel assessmentPostingModel in assessmentPostingModels) 
+                {
+                    _ = Insert(assessmentPostingModel);
+                }
+
+                scope.Complete();
+                return true;
+            }           
         }
 
         public int CountRecords()
@@ -34,6 +48,54 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
+        }
+
+        public Dictionary<string, string> GetRecordBy_ArpNo_Year(string completeArpNo, int year)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+                new object[] { "@year", DbType.Int32, year}
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND year = @year";
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["penalty_rate"].ToString());
+                    dict.Add("property_identifier", row["property_identifier"].ToString());
+                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("property_pin", row["property_pin"].ToString());
+                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("owner_tin", row["owner_tin"].ToString());
+                    dict.Add("owner_address", row["owner_address"].ToString());
+                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("barangay_name", row["barangay_name"].ToString());
+                    dict.Add("municipality_name", row["municipality_name"].ToString());
+                    dict.Add("province_name", row["province_name"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("effectivity_quarterly", row["effectivity_quarterly"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("assessed_value", row["assessed_value"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("penalty_rate", row["penalty_rate"].ToString());
+                    dict.Add("penalty_frequency", row["penalty_frequency"].ToString());
+                    dict.Add("basic_rate", row["basic_rate"].ToString());
+                    dict.Add("sef_rate", row["sef_rate"].ToString());
+                    dict.Add("year", row["year"].ToString());
+                    dict.Add("posted_at", row["posted_at"].ToString());
+                    dict.Add("posted_by", row["posted_by"].ToString());
+                }
+            }
+
+            return dict;
         }
 
         public DataTable GetRecords()
@@ -95,30 +157,32 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, entity.ArpNo },
-                new object[] { "@property_pin", DbType.String, entity.PIN },
-                new object[] { "@owner_name", DbType.String, entity.Owner },
-                new object[] { "@barangay_code", DbType.String, entity.BarangayCode },
+                new object[] { "@property_identifier", DbType.String, entity.propertyIdentifier },
+                new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
+                new object[] { "@property_pin", DbType.String, entity.PropertyPin },
+                new object[] { "@owner_name", DbType.String, entity.OwnerName },
+                new object[] { "@owner_tin", DbType.String, entity.OwnerTin },
+                new object[] { "@owner_address", DbType.String, entity.OwnerAddress },
+                new object[] { "@owner_contact", DbType.String, entity.OwnerContact },
                 new object[] { "@barangay_name", DbType.String, entity.BarangayName },
-                new object[] { "@municipality_code", DbType.String, entity.MunicipalityCode },
                 new object[] { "@municipality_name", DbType.String, entity.MunicipalityName },
-                new object[] { "@province_code", DbType.String, entity.ProvinceCode },
                 new object[] { "@province_name", DbType.String, entity.ProvinceName },
                 new object[] { "@property_kind", DbType.String, entity.PropertyKind },
                 new object[] { "@effectivity_quarterly", DbType.Int32, entity.EffectivityQuarter },
                 new object[] { "@effectivity_year", DbType.Int32, entity.EffectivityYear },
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue },
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
-                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
-                new object[] { "@posted_at", DbType.String, entity.PostedAt.ToString("yyyy-MM-dd hh:mm:ss") },
+                new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
                 new object[] { "@penalty_rate", DbType.Decimal, entity.PenaltyRate },
                 new object[] { "@penalty_frequency", DbType.String, entity.PenaltyFrequency },
                 new object[] { "@basic_rate", DbType.Decimal, entity.BasicRate },
-                new object[] { "@sef_rate", DbType.Decimal, entity.SEFRate },
-                new object[] { "@created_at", DbType.DateTime2, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") }
+                new object[] { "@sef_rate", DbType.Decimal, entity.SefRate },
+                new object[] { "@year", DbType.Int32, entity.Year },
+                new object[] { "@posted_at", DbType.DateTime, entity.PostedAt },
+                new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (complete_arp_no, property_pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, posted_at, penalty_rate, penalty_frequency, basic_rate, sef_rate, created_at) VALUES (@complete_arp_no, @property_pin, @owner_name, @barangay_code, @barangay_name, @municipality_code, @municipality_name, @province_code, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @posted_at, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @created_at)";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }

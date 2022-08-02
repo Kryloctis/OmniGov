@@ -10,8 +10,9 @@ namespace RPT.Data
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
-        private readonly string tblBarangays = "barangays";
+        //private readonly string viewPropertyAssessmentGroupedCancelled = "view_property_assessment_grouped_cancelled";
         private readonly string viewRealProperties = "view_real_properties";
+        private readonly string tableName = "real_properties";
         private MySqlGenericCommands _mySqlGenericCommandsRPT;
 
         public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
@@ -31,7 +32,61 @@ namespace RPT.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id",DbType.Int32, Id}
+            };
+
+            string query = $"SELECT transaction_codes_id, owners_id, barangays_id, property_identifier, property_kind, arp_no, pin_section, pin_lot, owner_name, owner_address, owner_contact, owner_tin, admin_name, admin_address, admin_contact, admin_tin, street, is_taxable, effectivity_quarter, effectivity_year, memoranda, date_of_entry, gryear, appraised_by, appraised_date, recom_approval_by, recom_approval_date, approved_by, approved_date, is_cancelled, is_pending, created_at, created_by, updated_at, updated_by FROM {tableName} WHERE id = @id";
+
+            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("transaction_codes_id", row["transaction_codes_id"].ToString());
+                    dict.Add("owners_id", row["owners_id"].ToString());
+                    dict.Add("barangays_id", row["barangays_id"].ToString());
+                    dict.Add("property_identifier", row["property_identifier"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("arp_no", row["arp_no"].ToString());
+                    dict.Add("pin_section", row["pin_section"].ToString());
+                    dict.Add("pin_lot", row["pin_lot"].ToString());
+                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("owner_address", row["owner_address"].ToString());
+                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("owner_tin", row["owner_tin"].ToString());
+                    dict.Add("admin_name", row["admin_name"].ToString());
+                    dict.Add("admin_address", row["admin_address"].ToString());
+                    dict.Add("admin_contact", row["admin_contact"].ToString());
+                    dict.Add("admin_tin", row["admin_tin"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("memoranda", row["memoranda"].ToString());
+                    dict.Add("date_of_entry", row["date_of_entry"].ToString());
+                    dict.Add("gryear", row["gryear"].ToString());
+                    dict.Add("appraised_by", row["appraised_by"].ToString());
+                    dict.Add("appraised_date", row["appraised_date"].ToString());
+                    dict.Add("recom_approval_by", row["recom_approval_by"].ToString());
+                    dict.Add("recom_approval_date", row["recom_approval_date"].ToString());
+                    dict.Add("approved_by", row["approved_by"].ToString());
+                    dict.Add("approved_date", row["approved_date"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("is_pending", row["is_pending"].ToString());
+                    dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("created_by", row["created_by"].ToString());
+                    dict.Add("updated_at", row["updated_at"].ToString());
+                    dict.Add("updated_by", row["updated_by"].ToString());
+                }
+            }
+
+            return dict;
         }
 
         public DataTable GetRecords()
@@ -88,50 +143,107 @@ namespace RPT.Data
             }
         }
 
-        public DataTable GetProperties(string barangayName, string searchKey, bool isCancelled)
+        public DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText)
         {
-            try
+
+            var parameters = new object[][] 
+            { 
+                new object[] { "@effectivity_year", DbType.Int32, effectivityYear },
+                new object[] { "@barangays_id", DbType.Int32, barangayId },
+                new object[] { "@search_text", DbType.String, $"%{searchText}%" }
+            };
+
+            string BarangayId() 
             {
-                string isCancelledFilter = string.Empty;
-
-                if (barangayName.Equals("All"))
-                    barangayName = string.Empty;
-
-                if (!isCancelled)
-                    isCancelledFilter = $"is_cancelled = 0 AND ";
-
-                var parameters = new object[][] { 
-                    new object[]{"@barangay_name", DbType.String, $"%{barangayName}%"},
-                    new object[]{"@search_key", DbType.String, $"%{searchKey}%" }
-                };
-
-                string query = $"SELECT id, complete_arp_no, pin, owner_name, barangay_code, barangay_name, municipality_code, municipality_name, province_code, province_name,  property_kind,  effectivity_quarter, effectivity_year, is_taxable, is_cancelled  FROM {viewRealProperties} " +
-                    $"WHERE {isCancelledFilter} barangay_name LIKE @barangay_name AND owner_name LIKE @search_key AND effectivity_quarter <= quarter(CURRENT_DATE()) AND effectivity_year <= YEAR(CURRENT_DATE())";
-
-                var dtProperties = new DataTable();
-                return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
+                if (barangayId == 0)
+                    return string.Empty;
+                else
+                    return "AND barangays_id = @barangays_id";
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
+
+            var dtProperties = new DataTable();
+            return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
         }
 
-        public decimal GetAssessedValueByARPNo(string arpNo)
+        public decimal GetAssessedValueByARPNo(string completeArpNo)
         {
             var parameters = new object[][]
             {
-                new object[] { "@arp_no", DbType.String, arpNo},
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo}
             };
 
-            string query = $"SELECT assessed_value FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @arp_no";
+            string query = $"SELECT COALESCE(assessed_value, 0) FROM {viewPropertyAssessmentGrouped} WHERE complete_arp_no = @complete_arp_no";
+            return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
+        }
 
-            string queryResult = _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+        public Dictionary<string, string> GetViewRealPropertiesById(int Id)
+        {
+            var dict = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(queryResult))
-                return decimal.Parse(queryResult);
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+            string query = $"SELECT transaction_codes_id, owners_id, barangays_id, property_kind, arp_no, pin, owner_name, owner_address, owner_contact, owner_tin, admin_name, admin_address, admin_contact, admin_tin, street, is_taxable, effectivity_quarter, effectivity_year, memoranda, date_of_entry, gryear, appraised_by, appraised_date, recom_approval_by, recom_approval_date, approved_by, approved_date, is_cancelled, is_pending, created_at, created_by, updated_at, updated_by, complete_arp_no, transaction_code, transaction, owner_types_id, owner_type_code, owner_type, real_owner_name, municipalities_id, barangay_code, barangay_name, is_poblacion, municipality_code, municipality_name, province_code, province_name FROM {viewRealProperties} WHERE id = @id";
+            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
 
-            return 0;
+                foreach (DataRow row  in reader.Rows)
+                {
+
+                    dict.Add("transaction_codes_id", row["transaction_codes_id"].ToString());
+                    dict.Add("owners_id", row["owners_id"].ToString());
+                    dict.Add("barangays_id", row["barangays_id"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("arp_no", row["arp_no"].ToString());
+                    dict.Add("pin", row["pin"].ToString());
+                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("owner_address", row["owner_address"].ToString());
+                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("owner_tin", row["owner_tin"].ToString());
+                    dict.Add("admin_name", row["admin_name"].ToString());
+                    dict.Add("admin_address", row["admin_address"].ToString());
+                    dict.Add("admin_contact", row["admin_contact"].ToString());
+                    dict.Add("admin_tin", row["admin_tin"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("memoranda", row["memoranda"].ToString());
+                    dict.Add("date_of_entry", row["date_of_entry"].ToString());
+                    dict.Add("gryear", row["gryear"].ToString());
+                    dict.Add("appraised_by", row["appraised_by"].ToString());
+                    dict.Add("appraised_date", row["appraised_date"].ToString());
+                    dict.Add("recom_approval_by", row["recom_approval_by"].ToString());
+                    dict.Add("recom_approval_date", row["recom_approval_date"].ToString());
+                    dict.Add("approved_by", row["approved_by"].ToString());
+                    dict.Add("approved_date", row["approved_date"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("is_pending", row["is_pending"].ToString());
+                    dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("created_by", row["created_by"].ToString());
+                    dict.Add("updated_at", row["updated_at"].ToString());
+                    dict.Add("updated_by", row["updated_by"].ToString());
+                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("transaction_code", row["transaction_code"].ToString());
+                    dict.Add("transaction", row["transaction"].ToString());
+                    dict.Add("owner_types_id", row["owner_types_id"].ToString());
+                    dict.Add("owner_type_code", row["owner_type_code"].ToString());
+                    dict.Add("owner_type", row["owner_type"].ToString());
+                    dict.Add("real_owner_name", row["real_owner_name"].ToString());
+                    dict.Add("municipalities_id", row["municipalities_id"].ToString());
+                    dict.Add("barangay_code", row["barangay_code"].ToString());
+                    dict.Add("barangay_name", row["barangay_name"].ToString());
+                    dict.Add("is_poblacion", row["is_poblacion"].ToString());
+                    dict.Add("municipality_code", row["municipality_code"].ToString());
+                    dict.Add("municipality_name", row["municipality_name"].ToString());
+                    dict.Add("province_code", row["province_code"].ToString());
+                    dict.Add("province_name", row["province_name"].ToString());
+                }
+            }
+
+            return dict;
         }
     }
 }
