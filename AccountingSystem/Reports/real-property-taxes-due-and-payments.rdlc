@@ -783,7 +783,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Tax Colected</Value>
+                                  <Value>Tax Collected</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1778,7 +1778,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!is_cancelled.Value</Value>
+                                  <Value>=CBool(Fields!is_cancelled.Value)</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                   </Style>

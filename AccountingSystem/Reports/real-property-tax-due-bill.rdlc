@@ -1754,14 +1754,6 @@
                         </Style>
                       </TextRun>
                       <TextRun>
-                        <Value xml:space="preserve"> </Value>
-                        <Style>
-                          <FontFamily>calibri</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
                         <Value>.</Value>
                         <Style>
                           <FontFamily>calibri</FontFamily>

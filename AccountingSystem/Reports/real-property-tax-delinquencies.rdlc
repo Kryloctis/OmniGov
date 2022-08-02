@@ -159,10 +159,11 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!paramComputedAsOf.Value</Value>
+                    <Value>=CDate(Parameters!paramComputedAsOf.Value)</Value>
                     <Style>
                       <FontFamily>Calibri</FontFamily>
                       <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
