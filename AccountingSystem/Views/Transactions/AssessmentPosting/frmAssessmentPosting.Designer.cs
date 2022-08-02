@@ -46,10 +46,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPostedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblPostedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -202,7 +205,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.lblRecordCount,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
-            this.lblPostedAt});
+            this.lblPostedAt,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabel5,
+            this.lblPostedBy});
             this.statusStrip1.Location = new System.Drawing.Point(0, 483);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1039, 22);
@@ -224,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(831, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(773, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -236,8 +242,20 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // lblPostedAt
             // 
             this.lblPostedAt.Name = "lblPostedAt";
-            this.lblPostedAt.Size = new System.Drawing.Size(69, 17);
-            this.lblPostedAt.Text = "date posted";
+            this.lblPostedAt.Size = new System.Drawing.Size(12, 17);
+            this.lblPostedAt.Text = "-";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(62, 17);
+            this.toolStripStatusLabel5.Text = "Posted by:";
+            // 
+            // lblPostedBy
+            // 
+            this.lblPostedBy.Name = "lblPostedBy";
+            this.lblPostedBy.Size = new System.Drawing.Size(12, 17);
+            this.lblPostedBy.Text = "-";
             // 
             // backgroundWorker1
             // 
@@ -276,6 +294,14 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel6.Text = "|";
+            this.toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmAssessmentPosting
             // 
@@ -334,5 +360,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBarangay;
         private System.Windows.Forms.TextBox txtYear;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel lblPostedBy;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
     }
 }

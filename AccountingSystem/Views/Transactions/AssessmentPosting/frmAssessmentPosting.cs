@@ -55,6 +55,17 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return dtAssessment[parameter];
         }
 
+        private string PostedBy(string completeArpNo) 
+        {
+            int year = (int)nudYear.Value;
+            string postedById = GetAssessmentPostingRecord(completeArpNo, year, "posted_by");
+
+            if (string.IsNullOrEmpty(postedById))
+                return string.Empty;
+
+            return Helper.GetUserDataById(Convert.ToInt32(postedById))["user_full_name"];
+        }
+
         private DataTable DataTableAssessmentPosting(int year, int barangayId, string searchText)
         {
             var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
@@ -109,7 +120,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowPenaltyFrequency = string.Empty;
                 decimal rowBasicRate = 0;
                 decimal rowSefRate = 0;
-                string rowPostedBy = string.Empty;
+                string rowPostedBy = PostedBy(rowCompleteArpNo);
 
                 dataTable.Rows.Add(false, 
                                    rowPostingStatus,
@@ -255,8 +266,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
 
-
-
         private string GetViewRealPropertyRecord(int realPropertiesId, string parameter) 
         {
             var dictViewRealProperty = RptFactory.RealPropertiesRepository().GetViewRealPropertiesById(realPropertiesId);
@@ -395,12 +404,20 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             int selectedRowCount = dgProperties.SelectedRows.Count;
             int rowIndex = dgProperties.CurrentCell.RowIndex;
-            string postedAt = dgProperties.Rows[rowIndex].Cells["posted_at"].Value.ToString();
+
+            string postedAt = GetDatagridViewValue(dgProperties, rowIndex, "posted_at");
+            string postedBy = GetDatagridViewValue(dgProperties, rowIndex, "posted_by");
 
             if (selectedRowCount == 1)
+            {
                 lblPostedAt.Text = postedAt;
+                lblPostedBy.Text = postedBy;
+            }
             else
-                lblPostedAt.Text = string.Empty;
+            {
+                lblPostedAt.Text = "-";
+                lblPostedBy.Text = "-";
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
