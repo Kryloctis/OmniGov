@@ -349,7 +349,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblPostedAt;
         private System.Windows.Forms.Label lblPosting;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
@@ -357,7 +356,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBarangay;
         private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;

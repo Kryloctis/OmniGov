@@ -153,6 +153,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void LoadProperties()
         {
+            Cursor = Cursors.WaitCursor;
             try
             {
                 int year = (int)nudYear.Value;
@@ -168,6 +169,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 Helper.MessageBoxError(ex.Message);
             }
+
+            Cursor = Cursors.Default;
         }
 
 
@@ -403,20 +406,23 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
             int selectedRowCount = dgProperties.SelectedRows.Count;
-            int rowIndex = dgProperties.CurrentCell.RowIndex;
-
-            string postedAt = GetDatagridViewValue(dgProperties, rowIndex, "posted_at");
-            string postedBy = GetDatagridViewValue(dgProperties, rowIndex, "posted_by");
-
-            if (selectedRowCount == 1)
+            if (selectedRowCount > 0)
             {
-                lblPostedAt.Text = postedAt;
-                lblPostedBy.Text = postedBy;
-            }
-            else
-            {
-                lblPostedAt.Text = "-";
-                lblPostedBy.Text = "-";
+                int rowIndex = dgProperties.CurrentRow.Index;
+
+                string postedAt = GetDatagridViewValue(dgProperties, rowIndex, "posted_at");
+                string postedBy = GetDatagridViewValue(dgProperties, rowIndex, "posted_by");
+
+                if (selectedRowCount == 1)
+                {
+                    lblPostedAt.Text = postedAt;
+                    lblPostedBy.Text = postedBy;
+                }
+                else
+                {
+                    lblPostedAt.Text = "-";
+                    lblPostedBy.Text = "-";
+                }
             }
         }
 
