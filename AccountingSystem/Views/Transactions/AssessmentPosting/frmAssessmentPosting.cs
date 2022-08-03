@@ -335,16 +335,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         decimal basicRate = GetTaxRate("Basic");
                         decimal sefRate = GetTaxRate("Special Educational Fund");
                         DateTime postedAt = DateTime.Now;
-
-                        #region GetIsCancelled
-
-                        bool isCancelled;
-                        if (string.IsNullOrEmpty(GetRealPropertyRecord(realPropertiesId, "is_cancelled")))
-                            isCancelled = false;
-                        else
-                            isCancelled = true; 
-
-                        #endregion
+                        bool isCancelled = Convert.ToBoolean(Convert.ToInt32((GetRealPropertyRecord(realPropertiesId, "is_cancelled"))));
 
                         var assessmentPostingModel = new AssessmentPostingModel()
                         {
