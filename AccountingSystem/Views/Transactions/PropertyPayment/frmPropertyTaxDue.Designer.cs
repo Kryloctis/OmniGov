@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
-    partial class frmRptTaxDue
+    partial class frmPropertyTaxDue
     {
         /// <summary>
         /// Required designer variable.

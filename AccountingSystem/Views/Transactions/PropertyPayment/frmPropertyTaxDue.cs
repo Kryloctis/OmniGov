@@ -12,15 +12,15 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
-    public partial class frmRptTaxDue : Form
+    public partial class frmPropertyTaxDue : Form
     {
-        private readonly frmPaymentPosting _frmPaymentPosting;
+        private readonly frmPropertyPayment _frmPropertyPayment;
         private readonly string _ownerName; 
-        public frmRptTaxDue(string ownerName, frmPaymentPosting frmPaymentPosting)
+        public frmPropertyTaxDue(string ownerName, frmPropertyPayment frmPropertyPayment)
         {
             InitializeComponent();
             _ownerName = ownerName;
-            _frmPaymentPosting = frmPaymentPosting;
+            _frmPropertyPayment = frmPropertyPayment;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true, false);
             Helper.DatagridFullRowSelectStyle(dataGridView2, true, false);
