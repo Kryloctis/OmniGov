@@ -86,13 +86,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmTaxPayerList_Load(object sender, EventArgs e)
         {
-            LoadTaxpayerList();
             EnableDisableSelectButton();
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadTaxpayerList();
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
@@ -127,6 +121,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableSelectButton();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadTaxpayerList();
         }
     }
 }

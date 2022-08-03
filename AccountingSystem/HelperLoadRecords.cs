@@ -29,6 +29,7 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
+            dataGridView.Columns["is_checked"].MinimumWidth = 20;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_pin"].HeaderText = "PIN";

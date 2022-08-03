@@ -59,9 +59,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.label11 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnGetTaxDue = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnCancelTransaction = new System.Windows.Forms.Button();
             this.btnPay = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -415,28 +416,28 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(571, 319);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.btnGetTaxDue});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(578, 25);
             this.toolStrip2.TabIndex = 15;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButton1
+            // btnGetTaxDue
             // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.Image = global::AccountingSystem.Properties.Resources.document_color_blue_time_24px;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(83, 22);
-            this.toolStripButton1.Text = "GetTaxDue";
+            this.btnGetTaxDue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnGetTaxDue.Image = global::AccountingSystem.Properties.Resources.document_color_blue_time_24px;
+            this.btnGetTaxDue.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGetTaxDue.Name = "btnGetTaxDue";
+            this.btnGetTaxDue.Size = new System.Drawing.Size(89, 22);
+            this.btnGetTaxDue.Text = "Get Tax Due";
+            this.btnGetTaxDue.Click += new System.EventHandler(this.btnGetTaxDue_Click);
             // 
             // panel1
             // 
@@ -448,10 +449,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(1040, 449);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.btnCancelTransaction);
             this.flowLayoutPanel1.Controls.Add(this.btnPay);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -461,9 +462,18 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1030, 30);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
+            // btnCancelTransaction
+            // 
+            this.btnCancelTransaction.Location = new System.Drawing.Point(886, 3);
+            this.btnCancelTransaction.Name = "btnCancelTransaction";
+            this.btnCancelTransaction.Size = new System.Drawing.Size(141, 23);
+            this.btnCancelTransaction.TabIndex = 1;
+            this.btnCancelTransaction.Text = "Cancel Transaction";
+            this.btnCancelTransaction.UseVisualStyleBackColor = true;
+            // 
             // btnPay
             // 
-            this.btnPay.Location = new System.Drawing.Point(943, 3);
+            this.btnPay.Location = new System.Drawing.Point(796, 3);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(84, 23);
             this.btnPay.TabIndex = 1;
@@ -547,7 +557,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private PropertyPayment.ucPropertyTaxPayment ucPropertyTaxPayment1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnGetTaxDue;
         private System.Windows.Forms.Button btnPay;
+        private System.Windows.Forms.Button btnCancelTransaction;
     }
 }

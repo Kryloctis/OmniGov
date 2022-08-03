@@ -47,34 +47,25 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             _ = new frmTaxPayerPaymentHistory(this).ShowDialog();
         }
 
-        private void LoadTaxPayerValues()
-        {
-            //txtTin.Text = _paymentTaxPayerInfo.TIN;
-            //txtTaxpayer.Text = _paymentTaxPayerInfo.TaxPayerName;
-            //txtBarangay.Text = _paymentTaxPayerInfo.BarangayName;
-            //txtMunicipality.Text = _paymentTaxPayerInfo.MunicipalityName;
-            //txtProvince.Text = _paymentTaxPayerInfo.ProvinceName;
-            //txtAddress.Text = _paymentTaxPayerInfo.Address;
-        }
-
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
-            LoadTaxPayerValues();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
             _ = new frmTaxPayerList(this).ShowDialog();
+        }
+
+        private void ShowTaxDue() 
+        {
+            string taxPayerName = txtTaxpayer.Text.Trim();
+
+            _ = new frmPropertyTaxDue(taxPayerName, this).ShowDialog();
+        }
+
+        private void btnGetTaxDue_Click(object sender, EventArgs e)
+        {
+            ShowTaxDue();
         }
     }
 }
