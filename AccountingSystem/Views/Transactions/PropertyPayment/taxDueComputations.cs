@@ -20,25 +20,28 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return months;
         }
 
-        public static decimal GetCurrentPenaltyRate(int effectivityYear, int effectivityQuarter)
+        public static int GetCountMonthsDelinquent(int year, DateTime postedDate)
         {
-            DateTime currentDate = DateTime.Now;
-            var dictRptPenalty = AccFactory.rptPenaltiesRepository().GetRecordByID(9);
-            var penaltyRate = dictRptPenalty == null ? 0 : Convert.ToDecimal(dictRptPenalty["rate"]);
+            var currentDate = Helper.GetCurrentDate();
+            var currentMonth = currentDate.Month;
+            var currentYear = currentDate.Year;
+            int months;
 
-            if (effectivityYear >= currentDate.Year && effectivityQuarter < 4)
-                return 0;
+            if (year == currentDate.Year && postedDate.Month > 3)
+                return currentDate.Month;
+            else if (year < currentYear)
+                months = (GetMonthsBetweenYears(year, currentYear) - 12) + currentMonth;
+            else
+                months = 0;
 
-            int quarter = effectivityQuarter - 1;
-            decimal monthsDelignquent = GetMonthsBetweenYears(effectivityYear, currentDate.Year) - (quarter * 3);
-            decimal totalPenaltyRate = penaltyRate * monthsDelignquent;
-            return totalPenaltyRate;
+            return months;
         }
 
-        public static decimal GetPenalty(decimal penaltyRate, decimal taxDue)
+        public static decimal GetPenalty(decimal penaltyRate, int monthsDelinquent, decimal taxDue)
         {
-            decimal penalty = taxDue * penaltyRate;
-            return 0;
+            decimal totalPenaltyRate = penaltyRate * monthsDelinquent;
+            decimal penalty = taxDue * totalPenaltyRate;
+            return penalty;
         }
 
         public static decimal GetCurrentDiscountRate(DateTime assessmentPostDate, int effectivityYear, int effectivityQuarter)
@@ -46,19 +49,23 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             DateTime currentDate = DateTime.Now;
             int postYear = assessmentPostDate.Year;
             int postMonth = assessmentPostDate.Month;
-            decimal discountRate = 0;
+            decimal discountRate;
 
-            if (postYear < currentDate.Year)
+            if (effectivityYear < currentDate.Year)
+                return 0;
+
+            if (postYear <= currentDate.Year && effectivityYear > currentDate.Year)
             {
                 var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
                 discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);
             }
-
-            if (postYear == currentDate.Year && (postMonth == 1 || postMonth == 2 || postMonth == 3))
+            else if (postYear == currentDate.Year && (postMonth == 1 || postMonth == 2 || postMonth == 3))
             {
                 var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
                 discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);
             }
+            else
+                discountRate = 0;
 
             return discountRate;
         }
@@ -81,44 +88,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return basic;
         }
 
-
-        public static decimal GetTotalBasic(decimal taxDue, decimal discount, decimal penalty)
-        {
-            decimal totalBasic = (taxDue + penalty) - discount;
-            return totalBasic;
-        }
-
-        public static decimal GetTotalSef(decimal taxDue, decimal discount, decimal penalty)
-        {
-            decimal totalSef = (taxDue + penalty) - discount;
-            return totalSef;
-        }
-
-
         public static decimal GetSefBasicTotalTaxDue(decimal basicTaxRate, decimal sefTaxRate, decimal assessedValue)
         {
             decimal basicTaxDue = GetBasicTaxDue(basicTaxRate, assessedValue);
             decimal sefTaxDue = GetSefTaxDue(sefTaxRate, assessedValue);
 
             return basicTaxDue + sefTaxDue;
-        }
-
-        public static decimal GetTotalTaxDue(decimal basicTaxRate, decimal sefTaxRate, decimal discountRate, decimal penaltyRate, decimal assessedValue)
-        {
-
-            decimal basicTaxDue = GetBasicTaxDue(basicTaxRate, assessedValue);
-            decimal basicDiscount = GetDiscount(discountRate, basicTaxDue);
-            decimal basicPenalty = 0;
-
-            decimal sefTaxDue = GetSefTaxDue(sefTaxRate, assessedValue);
-            decimal sefDiscount = GetDiscount(discountRate, sefTaxDue);
-            decimal sefPenalty = 0;
-
-            decimal totalBasic = GetTotalBasic(basicTaxDue, basicDiscount, basicPenalty);
-            decimal totalSef = GetTotalSef(sefTaxDue, sefDiscount, sefPenalty);
-            decimal totalTaxDue = totalBasic + totalSef;
-
-            return totalTaxDue;
         }
     }
 }

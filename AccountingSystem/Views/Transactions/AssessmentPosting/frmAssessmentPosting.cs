@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                 string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
-                decimal rowAssessedValue = 0;
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                 string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, (int)nudYear.Value, "posted_at");
                 decimal rowPenaltyRate = 0;
                 string rowPenaltyFrequency = string.Empty;
