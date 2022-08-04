@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             txtMunicipality.Text = paymentTaxPayerInfo.MunicipalityName;
             txtProvince.Text = paymentTaxPayerInfo.ProvinceName;
             txtAddress.Text = paymentTaxPayerInfo.Address;
+            btnGetTaxDue.Enabled = true;
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)
@@ -66,6 +67,16 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void btnGetTaxDue_Click(object sender, EventArgs e)
         {
             ShowTaxDue();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCancelTransaction_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

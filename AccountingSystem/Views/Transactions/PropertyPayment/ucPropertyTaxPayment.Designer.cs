@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtPayee = new System.Windows.Forms.TextBox();
             this.txtReceiptNo = new System.Windows.Forms.TextBox();
             this.dtPaymentDate = new System.Windows.Forms.DateTimePicker();
@@ -40,6 +41,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.label1 = new System.Windows.Forms.Label();
             this.cmbxCollectingOfficers = new System.Windows.Forms.ComboBox();
             this.chckBxJobOrders = new System.Windows.Forms.CheckBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPayee
@@ -119,6 +122,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             // 
             // cmbxCollectingOfficers
             // 
+            this.cmbxCollectingOfficers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxCollectingOfficers.FormattingEnabled = true;
             this.cmbxCollectingOfficers.Location = new System.Drawing.Point(110, 25);
             this.cmbxCollectingOfficers.Name = "cmbxCollectingOfficers";
@@ -134,6 +138,12 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.chckBxJobOrders.TabIndex = 6;
             this.chckBxJobOrders.Text = "Job Orders";
             this.chckBxJobOrders.UseVisualStyleBackColor = true;
+            this.chckBxJobOrders.CheckedChanged += new System.EventHandler(this.chckBxJobOrders_CheckedChanged);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // ucPropertyTaxPayment
             // 
@@ -153,6 +163,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.Controls.Add(this.chckBxJobOrders);
             this.Name = "ucPropertyTaxPayment";
             this.Size = new System.Drawing.Size(437, 167);
+            this.Load += new System.EventHandler(this.ucPropertyTaxPayment_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,16 +172,17 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtPayee;
-        private System.Windows.Forms.TextBox txtReceiptNo;
-        private System.Windows.Forms.DateTimePicker dtPaymentDate;
-        private System.Windows.Forms.TextBox txtAccountableForm;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbxCollectingOfficers;
-        private System.Windows.Forms.CheckBox chckBxJobOrders;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.TextBox txtPayee;
+        internal System.Windows.Forms.TextBox txtReceiptNo;
+        internal System.Windows.Forms.DateTimePicker dtPaymentDate;
+        internal System.Windows.Forms.TextBox txtAccountableForm;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.ComboBox cmbxCollectingOfficers;
+        internal System.Windows.Forms.CheckBox chckBxJobOrders;
     }
 }

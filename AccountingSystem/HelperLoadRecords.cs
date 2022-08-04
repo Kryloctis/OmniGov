@@ -47,21 +47,63 @@ namespace AccountingSystem
         {
             var datagridViewColumns = new DataGridViewColumn[]
             {
-                new DataGridViewCheckBoxColumn(){HeaderText = string.Empty, 
-                                                Name = "is_checked",
-                                                MinimumWidth = 20,
-                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells},
-                new DataGridViewTextBoxColumn(){HeaderText = "Year", 
-                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
-                                                Name = "year" },
-                new DataGridViewTextBoxColumn(){HeaderText = "ARP No." , 
-                                                AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
-                                                Name = "complete_arp_no"},
-                new DataGridViewTextBoxColumn(){HeaderText = "Assessed Value", Name = "assessed_value"},
-                new DataGridViewTextBoxColumn(){HeaderText = "Tax Due", Name = "tax_due"},
-                new DataGridViewTextBoxColumn(){HeaderText = "Discount", Name = "discount"},
-                new DataGridViewTextBoxColumn(){HeaderText = "Penalty", Name = "penalty"},
-                new DataGridViewTextBoxColumn(){HeaderText = "Total Tax Due", Name = "total_tax_due"}
+                new DataGridViewCheckBoxColumn()
+                {
+                    HeaderText = string.Empty,
+                    Name = "is_checked",
+                    MinimumWidth = 20,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "ID",
+                    Name = "id",
+                    Visible = false
+                },
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Year", 
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
+                    Name = "year" 
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "ARP No." , 
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
+                    Name = "complete_arp_no"
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Assessed Value", 
+                    Name = "assessed_value"
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Tax Due", 
+                    Name = "tax_due"
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Discount", 
+                    Name = "discount"
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Penalty", 
+                    Name = "penalty"
+                },
+
+                new DataGridViewTextBoxColumn()
+                {
+                    HeaderText = "Total Tax Due", 
+                    Name = "total_tax_due"
+                }
             };
 
                
@@ -1285,7 +1327,7 @@ namespace AccountingSystem
 
         #region PaymentCollection
 
-        internal static void PaymentSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
+        public static void PaymentSummaryDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
@@ -1324,7 +1366,7 @@ namespace AccountingSystem
             Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
 
-        internal static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
+        public static void PaymentDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
@@ -1396,6 +1438,14 @@ namespace AccountingSystem
             Helper.DatagridFullRowSelectStyle(datagrid, true);
 
         }
+
+        public static void CollectorComboBox(DataTable dataTabe, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTabe;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+        }
+
         #endregion
 
         #region PaymentCollectionReport

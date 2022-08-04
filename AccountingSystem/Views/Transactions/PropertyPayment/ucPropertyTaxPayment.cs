@@ -16,5 +16,38 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         {
             InitializeComponent();
         }
+
+        private DataTable CollectorDataTable() 
+        {
+            if (chckBxJobOrders.Checked)
+                return AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecords();
+            else
+                return AccFactory.CollectingOfficerRepository().GetRecords();
+        }
+
+        internal void LoadCollectors() 
+        {
+            try
+            {
+                HelperLoadRecords.CollectingOfficerComboBox(CollectorDataTable(), cmbxCollectingOfficers, "fullname", "id");
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void ucPropertyTaxPayment_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadCollectors();
+            }
+        }
+
+        private void chckBxJobOrders_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
     }
 }

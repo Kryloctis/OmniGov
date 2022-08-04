@@ -112,7 +112,7 @@ namespace ACC.Data
                 new object[] { "@complete_arp_no", DbType.String, arpNo}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no ORDER BY year DESC";
+            string query = $"SELECT * FROM {tableName} WHERE NOT EXISTS(SELECT * FROM tax_dues WHERE {tableName}.id = tax_dues.assessment_posts_id) AND complete_arp_no = @complete_arp_no ORDER BY year DESC";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }

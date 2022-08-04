@@ -122,6 +122,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnNew.Size = new System.Drawing.Size(35, 47);
             this.btnNew.Text = "New";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // toolStripSeparator1
             // 
@@ -432,6 +433,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // btnGetTaxDue
             // 
             this.btnGetTaxDue.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnGetTaxDue.Enabled = false;
             this.btnGetTaxDue.Image = global::AccountingSystem.Properties.Resources.document_color_blue_time_24px;
             this.btnGetTaxDue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGetTaxDue.Name = "btnGetTaxDue";
@@ -470,6 +472,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnCancelTransaction.TabIndex = 1;
             this.btnCancelTransaction.Text = "Cancel Transaction";
             this.btnCancelTransaction.UseVisualStyleBackColor = true;
+            this.btnCancelTransaction.Click += new System.EventHandler(this.btnCancelTransaction_Click);
             // 
             // btnPay
             // 
