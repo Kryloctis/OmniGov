@@ -112,7 +112,7 @@ namespace ACC.Data
                 new object[] { "@complete_arp_no", DbType.String, arpNo}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no ORDER BY complete_arp_no";
+            string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no ORDER BY year DESC";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -146,6 +146,20 @@ namespace ACC.Data
             string query = $"SELECT * FROM {tableName} WHERE complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR owner_name LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text OR owner_contact LIKE @search_text OR barangay_name LIKE @search_text OR municipality_name LIKE @search_text OR province_name LIKE @search_text GROUP BY owner_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public int PreviousAssessmentPostCount(string completeArpNo, int year)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+                new object[] { "@year", DbType.Int32, year}
+            };
+
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = complete_arp_no AND year = (SELECT MAX(year) FROM lfsdb.assessment_posts WHERE year < @year)";
+
+            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
+            return Convert.ToInt32(result);
         }
 
         public bool IdExist(int id)

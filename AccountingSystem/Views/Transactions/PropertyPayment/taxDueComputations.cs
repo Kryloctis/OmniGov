@@ -9,28 +9,31 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
     public static class taxDueComputations
     {
         public static int GetMonthsBetweenYears(int fromYear, int toYear)
-        {
-            int months = 0;
-
-            for (int i = fromYear; i <= toYear; i++)
-            {
-                months += 12;
-            }
+        {        
+            int years = toYear - fromYear;
+            int months = 12 * years;
 
             return months;
         }
 
-        public static int GetCountMonthsDelinquent(int year, DateTime postedDate)
+        public static int GetCountMonthsDelinquent(int year, DateTime postedDate, int effectivityQuarter, int effectivityYear, int previousAssessmentCount)
         {
             var currentDate = Helper.GetCurrentDate();
             var currentMonth = currentDate.Month;
             var currentYear = currentDate.Year;
             int months;
 
+            //If assessment year is same as current year
             if (year == currentDate.Year && postedDate.Month > 3)
                 return currentDate.Month;
-            else if (year < currentYear)
-                months = (GetMonthsBetweenYears(year, currentYear) - 12) + currentMonth;
+
+            //If previous assessements are paid
+            else if (year < currentYear && previousAssessmentCount > 0)
+                months = (GetMonthsBetweenYears(year, currentYear)) + currentMonth;
+
+            //If no previous years of assessments
+            else if (previousAssessmentCount < 1)
+                months = (GetMonthsBetweenYears(effectivityYear, currentYear) + currentMonth);
             else
                 months = 0;
 
@@ -44,22 +47,20 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return penalty;
         }
 
-        public static decimal GetCurrentDiscountRate(DateTime assessmentPostDate, int effectivityYear, int effectivityQuarter)
+        public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, int effectivityYear, int effectivityQuarter)
         {
             DateTime currentDate = DateTime.Now;
-            int postYear = assessmentPostDate.Year;
-            int postMonth = assessmentPostDate.Month;
+            int postYear = postedDate.Year;
+            int postMonth = postedDate.Month;
             decimal discountRate;
 
-            if (effectivityYear < currentDate.Year)
-                return 0;
-
-            if (postYear <= currentDate.Year && effectivityYear > currentDate.Year)
+            ///
+            if (postYear < year && year > currentDate.Year)
             {
                 var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
                 discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);
             }
-            else if (postYear == currentDate.Year && (postMonth == 1 || postMonth == 2 || postMonth == 3))
+            else if ((postYear == currentDate.Year && year == postYear) && (postMonth == 1 || postMonth == 2 || postMonth == 3))
             {
                 var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
                 discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);

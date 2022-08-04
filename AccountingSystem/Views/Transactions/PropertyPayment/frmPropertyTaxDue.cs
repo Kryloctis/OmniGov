@@ -189,6 +189,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
                 decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
                 int year = Convert.ToInt32(row["year"]);
+                int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
 
                
@@ -199,11 +200,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
 
                 //Discount
-                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(postedAt, year, effectivityQuarter);
+                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(postedAt, year, effectivityYear, effectivityQuarter);
                 decimal discountAmount = taxDueComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
 
                 //Penalties
-                int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(year, postedAt);
+                int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, year);
+                int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(year, postedAt, effectivityQuarter, effectivityYear, previousAssessmentCount);
                 decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
                 decimal penaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
 

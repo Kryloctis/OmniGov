@@ -9,6 +9,8 @@ namespace RPT.Domain.Interfaces
     {
         bool IsPropertyPosted(string arpNo);
 
+        int PreviousAssessmentPostCount(string completeArpNo, int year);
+
         Dictionary<string, string> GetRecordBy_ArpNo_Year(string completeArpNo, int year);
 
         DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled);
