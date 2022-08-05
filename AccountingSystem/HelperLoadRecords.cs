@@ -9,7 +9,7 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
-        #region RPT Payment Posting
+        #region Property Payment 
 
         public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable) 
         {
@@ -43,81 +43,44 @@ namespace AccountingSystem
             dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
-        public static void TaxPayerDues(DataGridView dataGridView) 
+        public static void PropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView) 
         {
-            var datagridViewColumns = new DataGridViewColumn[]
-            {
-                new DataGridViewCheckBoxColumn()
-                {
-                    HeaderText = string.Empty,
-                    Name = "is_checked",
-                    MinimumWidth = 20,
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
-                },
+            dataGridView.DataSource = dataTable;
 
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "ID",
-                    Name = "id",
-                    Visible = false
-                },
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Year", 
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
-                    Name = "year" 
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "ARP No." , 
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells, 
-                    Name = "complete_arp_no"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Assessed Value", 
-                    Name = "assessed_value"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Tax Due", 
-                    Name = "tax_due"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Discount", 
-                    Name = "discount"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Penalty", 
-                    Name = "penalty"
-                },
-
-                new DataGridViewTextBoxColumn()
-                {
-                    HeaderText = "Total Tax Due", 
-                    Name = "total_tax_due"
-                }
-            };
-
-               
-            dataGridView.Columns.AddRange(datagridViewColumns);
+            dataGridView.Columns["is_checked"].HeaderText = string.Empty;
+            dataGridView.Columns["is_checked"].MinimumWidth = 20;
+            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["year"].HeaderText = "Year";
+            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
             dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["discount"].HeaderText = "Discount";
             dataGridView.Columns["discount"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["discount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["penalty"].HeaderText = "Penalty";
             dataGridView.Columns["penalty"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["penalty"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView.Columns["total_tax_due"].HeaderText = "Total Tax Due";
             dataGridView.Columns["total_tax_due"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["total_tax_due"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        public static void PropertyPaymentPropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["assessment_post_id"].Visible = false;
+            dataGridView.Columns["year"].HeaderText = "Year";
+            dataGridView.Columns["year"].MinimumWidth = 20;
+            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["tax_type"].HeaderText = "Type";
+            dataGridView.Columns["tax_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
+            dataGridView.Columns["discount"].HeaderText = "Discount";
+            dataGridView.Columns["penalty"].HeaderText = "Penalty";
+            dataGridView.Columns["total_sef_basic"].HeaderText = "Total SEF/BSC";
         }
 
         #endregion

@@ -24,16 +24,22 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true, false);
             Helper.DatagridFullRowSelectStyle(dataGridView2, true, false);
-            HelperLoadRecords.TaxPayerDues(dataGridView2);
         }
 
-        private DataTable DataTableProperties() 
+        private void frmRptTaxDue_Load(object sender, EventArgs e)
+        {
+            LoadProperties();
+        }
+
+        #region Properties
+
+        private DataTable DataTableProperties()
         {
             bool isCancelled = chckBxCancelled.Checked;
             var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByOwnerName_IsCancelled(_ownerName, isCancelled);
             var dataTable = new DataTable();
 
-            var dataColumns= new DataColumn[]
+            var dataColumns = new DataColumn[]
             {
                 new ("is_checked", typeof(bool)),
                 new ("id", typeof(int)),
@@ -61,20 +67,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return dataTable;
         }
 
-        private void frmRptTaxDue_Load(object sender, EventArgs e)
-        {
-            LoadProperties();
-        }
-
-        #region Properties
-
         private void LoadProperties()
         {
             try
             {
                 HelperLoadRecords.TaxPayerProperties(dataGridView1, DataTableProperties());
                 Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_checked", chckBoxProperties);
-                dataGridView2.Rows.Clear();
+                LoadTaxDues(dataGridView1, dataGridView2);
+
             }
             catch (Exception ex)
             {
@@ -117,6 +117,112 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         #region Tax Dues
 
+
+        private DataTable TaxDuesDataTable(List<string> arpNoList) 
+        {
+            var dataTable = new DataTable();
+
+            //Create data columns
+            var columns = new DataColumn[]
+            {
+                new DataColumn("is_checked", typeof(bool)),
+                new DataColumn("id", typeof(int)),
+                new DataColumn("year", typeof(int)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("tax_due", typeof(decimal)),
+                new DataColumn("discount", typeof(decimal)),
+                new DataColumn("penalty", typeof(decimal)),
+                new DataColumn("total_tax_due", typeof(decimal))
+            };
+
+            dataTable.Columns.AddRange(columns);
+
+            foreach (var arpNo in arpNoList)
+            {
+                foreach (var taxDues in GetTaxDues(arpNo))
+                {
+                    dataTable.Rows.Add(taxDues);
+                }
+            }
+
+            return dataTable;
+        }
+
+        private List<dynamic[]> GetTaxDues(string completeArpNo)
+        {
+            var taxDuesList = new List<dynamic[]>();
+            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByArpNo(completeArpNo);
+
+            foreach (DataRow row in dtAssessmentPosting.Rows)
+            {
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
+                decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
+                int year = Convert.ToInt32(row["year"]);
+                int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
+
+
+                decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
+
+                decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
+                decimal basicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(basicRate, sefRate, assessedValue);
+
+
+                //Discount
+                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(postedAt, year, effectivityYear, effectivityQuarter);
+                decimal discountAmount = taxDueComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
+
+                //Penalties
+                int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, year);
+                int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(year, postedAt, effectivityQuarter, effectivityYear, previousAssessmentCount);
+                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+                decimal penaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
+
+                //TotalTaxDue
+                decimal totalTaxDue = (basicSefTotalTaxDue + penaltyAmount) - discountAmount;
+
+                var rowValue = new dynamic[] { true, rowId, year, rowCompleteArpNo, assessedValue, basicSefTotalTaxDue, discountAmount, penaltyAmount, totalTaxDue };
+
+                taxDuesList.Add(rowValue);
+            }
+
+            return taxDuesList;
+        }
+
+        private void LoadTaxDues(DataGridView dgvProperties, DataGridView dgvTaxDues)
+        {
+            try
+            {
+                if (dgvProperties.Rows.Count < 1)
+                    return;
+
+                var arpNoList = new List<string>();
+
+                foreach (DataGridViewRow row in dgvProperties.Rows)
+                {
+                    string arpNo = row.Cells["complete_arp_no"].Value.ToString();
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+
+                    if (isChecked)
+                        arpNoList.Add(arpNo);
+                }
+
+                HelperLoadRecords.PropertiesTaxDuesDatagridView(TaxDuesDataTable(arpNoList), dataGridView2);
+
+                chckBxTaxDues.Checked = false;
+                txtTotalDue.Text = GetSelectedTotalTaxDues(dgvTaxDues).ToString("N2");
+                txtTotalAvgTaxDue.Text = GetTotalTaxDues(dgvTaxDues).ToString("N2");
+                Helper.CheckUncheckCheckBoxHeader(dataGridView2, "is_checked", chckBxTaxDues);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private decimal GetSelectedTotalTaxDues(DataGridView dataGridView)
         {
             decimal totalTaxDues = 0;
@@ -132,7 +238,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return totalTaxDues;
         }
 
-
         private decimal GetTotalTaxDues(DataGridView dataGridView) 
         {
             decimal totalTaxDues = 0;
@@ -143,81 +248,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             }
 
             return totalTaxDues;
-        }
-
-        private void LoadTaxDues(DataGridView dgvProperties, DataGridView dgvTaxDues)
-        {
-            try
-            {
-                if (dgvProperties.Rows.Count < 1)
-                    return;
-
-                dgvTaxDues.Rows.Clear();
-                chckBxTaxDues.Checked = false;
-
-                foreach (DataGridViewRow row in dgvProperties.Rows)
-                {
-                    string arpNo = row.Cells["complete_arp_no"].Value.ToString();
-                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
-
-                    if (isChecked)
-                        GetTaxDues(arpNo);
-                }
-
-                txtTotalDue.Text = GetSelectedTotalTaxDues(dgvTaxDues).ToString("N2");
-                txtTotalAvgTaxDue.Text = GetTotalTaxDues(dgvTaxDues).ToString("N2");
-                Helper.CheckUncheckCheckBoxHeader(dataGridView2, "is_checked", chckBxTaxDues);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private void GetTaxDues(string completeArpNo)
-        {
-            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByArpNo(completeArpNo);
-
-            foreach (DataRow row in dtAssessmentPosting.Rows)
-            {
-                int id = Convert.ToInt32(row["id"]);
-                string arpNo = row["complete_arp_no"].ToString();
-                DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
-                decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
-                int year = Convert.ToInt32(row["year"]);
-                int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
-                int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
-
-               
-                decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
-              
-                decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
-                decimal basicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(basicRate, sefRate, assessedValue);
-
-
-                //Discount
-                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(postedAt, year, effectivityYear, effectivityQuarter);
-                decimal discountAmount = taxDueComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
-
-                //Penalties
-                int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, year);
-                int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(year, postedAt, effectivityQuarter, effectivityYear, previousAssessmentCount);
-                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-                decimal penaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
-
-                //TotalTaxDue
-                decimal totalTaxDue = (basicSefTotalTaxDue + penaltyAmount) - discountAmount;
-
-                dataGridView2.Rows.Add(true,
-                                        id,
-                                        year, 
-                                        arpNo, 
-                                        assessedValue,
-                                        basicSefTotalTaxDue,
-                                        discountAmount,
-                                        penaltyAmount,
-                                        totalTaxDue);
-            }
         }
 
         private void chckBxTaxDues_MouseClick(object sender, MouseEventArgs e)

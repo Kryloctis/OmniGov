@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             InitializeComponent();
             _mainForm = mainForm;
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
         public class PaymentTaxPayerInfo
@@ -30,6 +31,37 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             public string MunicipalityName { get; set; }
             public string ProvinceName { get; set; }
             public string Address { get; set; } 
+        }
+
+        private DataTable RealPropertyPaymentTaxDuesDataTable()
+        {
+            var dataTable = new DataTable();
+            var columns = new DataColumn[]
+            {
+                new DataColumn("assessment_post_id", typeof(int)),
+                new DataColumn("year", typeof(int)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("tax_type", typeof(string)),
+                new DataColumn("tax_due", typeof(decimal)),
+                new DataColumn("discount", typeof(decimal)),
+                new DataColumn("penalty", typeof(decimal)),
+                new DataColumn("total_sef_basic", typeof(decimal))
+            };
+
+            dataTable.Columns.AddRange(columns);
+            return dataTable;
+        }
+
+        internal void LoadRealPropertyPaymentTaxDues() 
+        {
+            try
+            {
+                HelperLoadRecords.PropertyPaymentPropertiesTaxDuesDatagridView(RealPropertyPaymentTaxDuesDataTable(), dataGridView1);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         internal void GetSelectedTaxPayerInfo(PaymentTaxPayerInfo paymentTaxPayerInfo) 
@@ -50,6 +82,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
+            LoadRealPropertyPaymentTaxDues();
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
