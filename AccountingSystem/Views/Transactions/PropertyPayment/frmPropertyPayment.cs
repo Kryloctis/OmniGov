@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+using AccountingSystem.Views.Transactions.PropertyPayment;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmPropertyPayment : Form
     {
+        private ucPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
 
         public frmPropertyPayment(MainForm mainForm)
@@ -154,9 +156,16 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         }
 
+        private void CancelTransaction() 
+        {
+            LoadRealPropertyPaymentTaxDues(null);
+            ucPaymentInfo.txtPayee.Clear();
+            ucPaymentInfo.txtReceiptNo.Clear();
+        }
+
         private void btnCancelTransaction_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void btnPay_Click(object sender, EventArgs e)
