@@ -49,22 +49,19 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, int effectivityYear, int effectivityQuarter)
         {
+            decimal discountRate;
             DateTime currentDate = DateTime.Now;
             int postYear = postedDate.Year;
-            int postMonth = postedDate.Month;
-            decimal discountRate;
+            int postMonth = postedDate.Month; 
+            var annualDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
+            var monthlyDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
 
-            ///
             if (postYear < year && year > currentDate.Year)
-            {
-                var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
-                discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);
-            }
+                discountRate = annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
+
             else if ((postYear == currentDate.Year && year == postYear) && (postMonth == 1 || postMonth == 2 || postMonth == 3))
-            {
-                var dictDiscount = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
-                discountRate = dictDiscount == null ? 0 : Convert.ToDecimal(dictDiscount["rate"]);
-            }
+                discountRate = monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
+
             else
                 discountRate = 0;
 

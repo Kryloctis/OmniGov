@@ -68,7 +68,7 @@ namespace ACC.Data
 
                 foreach (DataRow row in reader.Rows)
                 {
-                    dict.Add("id", row["penalty_rate"].ToString());
+                    dict.Add("id", row["id"].ToString());
                     dict.Add("property_identifier", row["property_identifier"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());

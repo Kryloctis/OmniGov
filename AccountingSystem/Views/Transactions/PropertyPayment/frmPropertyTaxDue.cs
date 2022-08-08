@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPropertyPayment;
 
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
@@ -118,6 +119,19 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         #region Tax Dues
 
 
+        public class TaxDuesModel 
+        {
+            public bool IsChecked { get; set; }
+            public int Id { get; set; }
+            public int Year { get; set; }
+            public string CompleteArpNo { get; set; }
+            public decimal AssessedValue { get; set; }
+            public decimal TaxDue { get; set; }
+            public decimal Discount { get; set; }
+            public decimal Penalty { get; set; }
+            public decimal TotalTaxDue { get; set; }
+        }
+
         private DataTable TaxDuesDataTable(List<string> arpNoList) 
         {
             var dataTable = new DataTable();
@@ -142,16 +156,26 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             {
                 foreach (var taxDues in GetTaxDues(arpNo))
                 {
-                    dataTable.Rows.Add(taxDues);
+                    bool isChecked = taxDues.IsChecked;
+                    int id = taxDues.Id;
+                    int year = taxDues.Year;
+                    string completeArpNo = taxDues.CompleteArpNo;
+                    decimal assessedValue = taxDues.AssessedValue;
+                    decimal taxDue = taxDues.TaxDue;
+                    decimal discount = taxDues.Discount;
+                    decimal penalty = taxDues.Penalty;
+                    decimal totalTaxDue = taxDues.TotalTaxDue;
+
+                    dataTable.Rows.Add(isChecked, id, year, completeArpNo, assessedValue, taxDue, discount, penalty, totalTaxDue);
                 }
             }
 
             return dataTable;
         }
 
-        private List<dynamic[]> GetTaxDues(string completeArpNo)
+        private List<TaxDuesModel> GetTaxDues(string completeArpNo)
         {
-            var taxDuesList = new List<dynamic[]>();
+            var taxDuesList = new List<TaxDuesModel>();
             var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByArpNo(completeArpNo);
 
             foreach (DataRow row in dtAssessmentPosting.Rows)
@@ -164,12 +188,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 int effectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
 
-
                 decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
 
                 decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
                 decimal basicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(basicRate, sefRate, assessedValue);
-
 
                 //Discount
                 decimal discountRate = taxDueComputations.GetCurrentDiscountRate(postedAt, year, effectivityYear, effectivityQuarter);
@@ -184,9 +206,20 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 //TotalTaxDue
                 decimal totalTaxDue = (basicSefTotalTaxDue + penaltyAmount) - discountAmount;
 
-                var rowValue = new dynamic[] { true, rowId, year, rowCompleteArpNo, assessedValue, basicSefTotalTaxDue, discountAmount, penaltyAmount, totalTaxDue };
+                var model = new TaxDuesModel()
+                {
+                    IsChecked = true,
+                    Id = rowId,
+                    Year= year,
+                    CompleteArpNo = completeArpNo,
+                    AssessedValue = assessedValue,
+                    TaxDue = basicSefTotalTaxDue,
+                    Discount = discountAmount,
+                    Penalty = penaltyAmount,
+                    TotalTaxDue = totalTaxDue
+                };
 
-                taxDuesList.Add(rowValue);
+                taxDuesList.Add(model);
             }
 
             return taxDuesList;
@@ -276,7 +309,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 e.Column.ReadOnly = true;
         }
 
-
         #endregion
 
         #region Skipped TaxDue Validations
@@ -316,13 +348,138 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             }
 
             return false;
-        } 
+        }
+        #endregion
+
+        #region Breakdown of TaxDues for property payment form
+   
+        private List<RealPropertyPaymentTaxDueModel> GetDetailedTaxDues(string completeArpNo, int year)
+        {
+            var list = new List<RealPropertyPaymentTaxDueModel>();
+
+            var dictAssessmentPosts = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
+
+            int rowId = Convert.ToInt32(dictAssessmentPosts["id"]);
+            string rowCompleteArpNo = dictAssessmentPosts["complete_arp_no"].ToString();
+            DateTime rowPostedAt = Convert.ToDateTime(dictAssessmentPosts["posted_at"]);
+            decimal rowAssessedValue = Convert.ToDecimal(dictAssessmentPosts["assessed_value"]);
+            int rowYear = Convert.ToInt32(dictAssessmentPosts["year"]);
+            int rowEffectivityYear = Convert.ToInt32(dictAssessmentPosts["effectivity_year"]);
+            int rowEffectivityQuarter = Convert.ToInt32(dictAssessmentPosts["effectivity_quarterly"]);
+
+            decimal basicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
+
+            decimal sefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
+
+            #region Tax Due
+
+            decimal basicTaxDue = taxDueComputations.GetBasicTaxDue(basicRate, rowAssessedValue);
+            decimal sefTaxDue = taxDueComputations.GetSefTaxDue(sefRate, rowAssessedValue);
+
+            #endregion
+
+            #region Discount
+
+            //Discount
+            decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowPostedAt, rowYear, rowEffectivityYear, rowEffectivityQuarter);
+
+            //Basic Discount
+            decimal basicDiscountAmount = taxDueComputations.GetDiscount(discountRate, basicTaxDue);
+
+            //SEF Discount
+            decimal sefDiscountAmount = taxDueComputations.GetDiscount(discountRate, sefTaxDue);
+
+            #endregion
+
+            #region  Penalty
+
+            //Penalties
+            int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowYear);
+            int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(rowYear, rowPostedAt, rowEffectivityQuarter, rowEffectivityYear, previousAssessmentCount);
+            decimal penaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
+
+            //Basic Penalty
+            decimal basicPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDue);
+
+            //SEF Penalty
+            decimal sefPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDue);
+
+            #endregion
+
+            #region Total Tax Due
+
+            decimal totalBasicTaxDue = (basicTaxDue + basicPenaltyAmount) - basicDiscountAmount;
+            decimal totalSefTaxDue = (sefTaxDue + sefPenaltyAmount) - sefDiscountAmount; 
+
+            #endregion
+
+            var basicModel = new RealPropertyPaymentTaxDueModel()
+            {
+                AssessmentPostId = rowId,
+                Year = rowYear,
+                CompleteArpNo = rowCompleteArpNo,
+                TaxType =  "Basic",
+                TaxDue = basicTaxDue,
+                Discount = basicDiscountAmount,
+                Penalty = basicPenaltyAmount,
+                TotalTaxDue = totalBasicTaxDue
+            };
+
+            var sefMode = new RealPropertyPaymentTaxDueModel()
+            {
+                AssessmentPostId = rowId,
+                Year = rowYear,
+                CompleteArpNo = rowCompleteArpNo,
+                TaxType = "SEF",
+                TaxDue = sefTaxDue,
+                Discount = sefDiscountAmount,
+                Penalty = sefPenaltyAmount,
+                TotalTaxDue = totalSefTaxDue
+            };
+
+            list.Add(basicModel);
+            list.Add(sefMode);
+
+
+            return list;
+        }
+
+        private void LoadDetailedTaxDues()
+        {
+            try
+            {
+                var list = new List<RealPropertyPaymentTaxDueModel>();
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                    string completeArpNo = row.Cells["complete_arp_no"].Value.ToString();
+                    int year = Convert.ToInt32(row.Cells["year"].Value);
+
+                    if (isChecked)
+                        list.AddRange(GetDetailedTaxDues(completeArpNo, year)); 
+                }
+
+                _frmPropertyPayment.LoadRealPropertyPaymentTaxDues(list);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         #endregion
 
         private void btnApply_Click(object sender, EventArgs e)
         {
             if (!ValidateSkipped(dataGridView2))
+            {
                 Helper.MessageBoxError("Skipped Tax Due/s.");
+                return;
+            }
+
+            LoadDetailedTaxDues();
+            Close();
         }
     }
 }

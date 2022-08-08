@@ -30,10 +30,23 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             public string BarangayName { get; set; }
             public string MunicipalityName { get; set; }
             public string ProvinceName { get; set; }
-            public string Address { get; set; } 
+            public string Address { get; set; }
         }
 
-        private DataTable RealPropertyPaymentTaxDuesDataTable()
+        public class RealPropertyPaymentTaxDueModel
+        {
+            public int AssessmentPostId {get; set;}
+            public int Year { get; set; }
+            public string CompleteArpNo { get; set; }
+            public string TaxType { get; set; }
+            public decimal TaxDue { get; set; }
+            public decimal Discount { get; set; }
+            public decimal Penalty { get; set; }
+            public decimal TotalTaxDue { get; set; }
+
+        }
+
+        private DataTable RealPropertyPaymentTaxDuesDataTable(List<RealPropertyPaymentTaxDueModel> realPropertyPaymentTaxDueModelList)
         {
             var dataTable = new DataTable();
             var columns = new DataColumn[]
@@ -49,14 +62,47 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             };
 
             dataTable.Columns.AddRange(columns);
+
+
+            //Populate DataTable
+            if (realPropertyPaymentTaxDueModelList != null)
+            {
+                foreach (RealPropertyPaymentTaxDueModel model in realPropertyPaymentTaxDueModelList)
+                {
+                    int assessmentPostId = model.AssessmentPostId;
+                    int year = model.Year;
+                    string arpNo = model.CompleteArpNo;
+                    string taxType = model.TaxType;
+                    decimal taxDue = model.TaxDue;
+                    decimal discount = model.Discount;
+                    decimal penalty = model.Penalty;
+                    decimal totalSefBasic = model.TotalTaxDue;
+
+                    dataTable.Rows.Add(assessmentPostId, year, arpNo, taxType, taxDue, discount, penalty, totalSefBasic);
+                }
+            }
+
             return dataTable;
         }
 
-        internal void LoadRealPropertyPaymentTaxDues() 
+        private decimal GetTotalDue(DataGridView dataGridView)
+        {
+            decimal totalDue = 0;
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                totalDue += Convert.ToDecimal(row.Cells["total_sef_basic"].Value);
+            }
+
+            return totalDue;
+        }
+
+        internal void LoadRealPropertyPaymentTaxDues(List<RealPropertyPaymentTaxDueModel> realPropertyPaymentTaxDueModelList)
         {
             try
             {
-                HelperLoadRecords.PropertyPaymentPropertiesTaxDuesDatagridView(RealPropertyPaymentTaxDuesDataTable(), dataGridView1);
+                HelperLoadRecords.PropertyPaymentPropertiesTaxDuesDatagridView(RealPropertyPaymentTaxDuesDataTable(realPropertyPaymentTaxDueModelList), dataGridView1);
+                txtTotalDue.Text = GetTotalDue(dataGridView1).ToString("N2");
             }
             catch (Exception ex)
             {
@@ -64,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             }
         }
 
-        internal void GetSelectedTaxPayerInfo(PaymentTaxPayerInfo paymentTaxPayerInfo) 
+        internal void GetSelectedTaxPayerInfo(PaymentTaxPayerInfo paymentTaxPayerInfo)
         {
             txtTin.Text = paymentTaxPayerInfo.TIN;
             txtTaxpayer.Text = paymentTaxPayerInfo.TaxPayerName;
@@ -82,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
-            LoadRealPropertyPaymentTaxDues();
+            LoadRealPropertyPaymentTaxDues(null);
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
@@ -90,7 +136,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             _ = new frmTaxPayerList(this).ShowDialog();
         }
 
-        private void ShowTaxDue() 
+        private void ShowTaxDue()
         {
             string taxPayerName = txtTaxpayer.Text.Trim();
 
@@ -110,6 +156,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void btnCancelTransaction_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+       
         }
     }
 }

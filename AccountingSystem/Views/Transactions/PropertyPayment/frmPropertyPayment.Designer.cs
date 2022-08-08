@@ -482,6 +482,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnPay.TabIndex = 1;
             this.btnPay.Text = "Pay";
             this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // frmPropertyPayment
             // 

@@ -78,9 +78,13 @@ namespace AccountingSystem
             dataGridView.Columns["tax_type"].HeaderText = "Type";
             dataGridView.Columns["tax_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
+            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["discount"].HeaderText = "Discount";
+            dataGridView.Columns["discount"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["penalty"].HeaderText = "Penalty";
+            dataGridView.Columns["penalty"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["total_sef_basic"].HeaderText = "Total SEF/BSC";
+            dataGridView.Columns["total_sef_basic"].DefaultCellStyle.Format = "N2";
         }
 
         #endregion
