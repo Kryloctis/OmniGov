@@ -279,9 +279,50 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         #endregion
 
+        #region Skipped TaxDue Validations
+        private int GetGreatestCheckedYear(DataGridView dataGridView)
+        {
+            var years = new List<int>();
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+
+                if (isChecked)
+                    years.Add(Convert.ToInt32(row.Cells["year"].Value));
+            }
+
+            return years.Max();
+        }
+
+        private bool ValidateSkipped(DataGridView dataGridView)
+        {
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    string arpNo = row.Cells["complete_arp_no"].Value.ToString();
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                    int year = Convert.ToInt32(row.Cells["year"].Value);
+
+                    if (!isChecked && (year < GetGreatestCheckedYear(dataGridView)))
+                        return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
+        } 
+        #endregion
+
         private void btnApply_Click(object sender, EventArgs e)
         {
-
+            if (!ValidateSkipped(dataGridView2))
+                Helper.MessageBoxError("Skipped Tax Due/s.");
         }
     }
 }
