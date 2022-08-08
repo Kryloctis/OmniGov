@@ -216,6 +216,7 @@ namespace ACC.Data
 
             return false;
         }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             try
@@ -230,6 +231,33 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public Dictionary<string, string> GetRecordByAccFormNo(string accFormNo)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@acc_form_no", DbType.String, accFormNo}
+            };
+
+            string query = $"SELECT id, acc_form_no, acc_form_desc FROM {tableName} WHERE acc_form_no = @acc_form_no";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query,parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["id"].ToString());
+                    dict.Add("acc_form_no", row["acc_form_no"].ToString());
+                    dict.Add("acc_form_desc", row["acc_form_desc"].ToString());
+                }
+
+                return dict;
             }
         }
     }

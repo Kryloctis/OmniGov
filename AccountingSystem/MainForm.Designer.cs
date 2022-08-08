@@ -1441,27 +1441,27 @@ namespace AccountingSystem
             // paymentCollectionsToolStripMenuItem
             // 
             this.paymentCollectionsToolStripMenuItem.Name = "paymentCollectionsToolStripMenuItem";
-            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.paymentCollectionsToolStripMenuItem.Text = "Payment Collections";
             this.paymentCollectionsToolStripMenuItem.Click += new System.EventHandler(this.paymentCollectionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(184, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(187, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(183, 22);
             this.toolStripMenuItem2.Text = "Assessment Posting";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuPaymentPostings
             // 
             this.toolStripMenuPaymentPostings.Name = "toolStripMenuPaymentPostings";
-            this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(187, 22);
-            this.toolStripMenuPaymentPostings.Text = "RPT Payment Posting";
+            this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuPaymentPostings.Text = "Property Payment";
             this.toolStripMenuPaymentPostings.Click += new System.EventHandler(this.toolStripMenuPaymentPostings_Click);
             // 
             // reportsToolStripMenuItem

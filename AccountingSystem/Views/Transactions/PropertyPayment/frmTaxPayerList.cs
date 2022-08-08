@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmPaymentPosting;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPropertyPayment;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerList : Form
     {
-        private readonly MainForm _mainForm;
-        public frmTaxPayerList(MainForm mainForm)
+        private readonly frmPropertyPayment _frmPropertyPayment;
+
+        public frmTaxPayerList(frmPropertyPayment frmPropertyPayment)
         {
             InitializeComponent();
-            _mainForm = mainForm;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            _frmPropertyPayment = frmPropertyPayment;
         }
 
         private DataTable DataTableAssessmentPost(string searchText) 
@@ -45,26 +46,36 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void ShowPaymentPosting() 
         {
-            if(dataGridView1.SelectedRows.Count == 1)
+            try
             {
-                int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                string tin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
-                string taxPayerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
-                string address = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
-                string barangayName = dataGridView1.Rows[rowIndex].Cells["barangay_name"].Value.ToString();
-                string municipalityName = dataGridView1.Rows[rowIndex].Cells["municipality_name"].Value.ToString();
-                string provinceName = dataGridView1.Rows[rowIndex].Cells["province_name"].Value.ToString();
-
-                var paymentPostingFields = new PaymentTaxPayerInfo()
+                if (dataGridView1.SelectedRows.Count == 1)
                 {
-                    TIN = tin,
-                    TaxPayerName = taxPayerName,
-                    Address = address, 
-                    BarangayName = barangayName, 
-                    MunicipalityName = municipalityName, 
-                    ProvinceName = provinceName
-                };
-                _ = new frmPaymentPosting(paymentPostingFields, this).ShowDialog();
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    string tin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
+                    string taxPayerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+                    string address = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
+                    string barangayName = dataGridView1.Rows[rowIndex].Cells["barangay_name"].Value.ToString();
+                    string municipalityName = dataGridView1.Rows[rowIndex].Cells["municipality_name"].Value.ToString();
+                    string provinceName = dataGridView1.Rows[rowIndex].Cells["province_name"].Value.ToString();
+
+                    var paymentPostingFields = new PaymentTaxPayerInfo()
+                    {
+                        TIN = tin,
+                        TaxPayerName = taxPayerName,
+                        Address = address,
+                        BarangayName = barangayName,
+                        MunicipalityName = municipalityName,
+                        ProvinceName = provinceName
+                    };
+
+                    _frmPropertyPayment.GetSelectedTaxPayerInfo(paymentPostingFields);
+                }
+
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -75,13 +86,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmTaxPayerList_Load(object sender, EventArgs e)
         {
-            LoadTaxpayerList();
             EnableDisableSelectButton();
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadTaxpayerList();
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
@@ -116,6 +121,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableSelectButton();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            LoadTaxpayerList();
         }
     }
 }

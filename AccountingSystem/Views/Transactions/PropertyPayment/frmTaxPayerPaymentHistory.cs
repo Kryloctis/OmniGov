@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerPaymentHistory : Form
     {
-        private readonly frmPaymentPosting _frmPaymentPosting;
-        public frmTaxPayerPaymentHistory(frmPaymentPosting frmPaymentPosting)
+        private readonly frmPropertyPayment _frmPaymentPosting;
+        public frmTaxPayerPaymentHistory(frmPropertyPayment frmPaymentPosting)
         {
             InitializeComponent();
             _frmPaymentPosting = frmPaymentPosting;
