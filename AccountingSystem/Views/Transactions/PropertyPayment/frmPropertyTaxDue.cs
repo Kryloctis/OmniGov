@@ -249,6 +249,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 txtTotalDue.Text = GetSelectedTotalTaxDues(dgvTaxDues).ToString("N2");
                 txtTotalAvgTaxDue.Text = GetTotalTaxDues(dgvTaxDues).ToString("N2");
                 Helper.CheckUncheckCheckBoxHeader(dataGridView2, "is_checked", chckBxTaxDues);
+                EnableDisableButtons(btnPrintTaxBill, btnApply, dataGridView2);
             }
             catch (Exception ex)
             {
@@ -291,10 +292,43 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 Helper.CheckUncheckCheckBoxRows(dataGridView2, "is_checked", false);
         }
 
+        private void EnableDisableButtons(ToolStripButton btnTaxBill, Button btnApply, DataGridView dataGridView)
+        {
+            try
+            {
+                int checkedItemCount = 0;
+
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+
+                    if (isChecked)
+                        checkedItemCount += 1;
+                }
+
+
+                if (checkedItemCount > 0)
+                {
+                    btnTaxBill.Enabled = true;
+                    btnApply.Enabled = true;
+                }
+                else
+                {
+                    btnTaxBill.Enabled = false;
+                    btnApply.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             Helper.CheckUncheckCheckBoxHeader(dataGridView2, "is_checked", chckBxTaxDues);
             txtTotalDue.Text = GetSelectedTotalTaxDues(dataGridView2).ToString("N2");
+            EnableDisableButtons(btnPrintTaxBill, btnApply, dataGridView2);
         }
 
         private void dataGridView2_CurrentCellDirtyStateChanged(object sender, EventArgs e)

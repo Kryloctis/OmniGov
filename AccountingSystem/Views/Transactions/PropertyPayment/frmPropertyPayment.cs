@@ -134,6 +134,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
             _ = new frmTaxPayerList(this).ShowDialog();
+            LoadRealPropertyPaymentTaxDues(null);
         }
 
         private void ShowTaxDue()
