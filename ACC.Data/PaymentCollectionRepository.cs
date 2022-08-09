@@ -143,45 +143,50 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][]
+                using (var scope = new TransactionScope())
                 {
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                    new object[] { "@payee", DbType.String, entity.Payee},
-                    new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
-                    new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
-                    new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
-                };
-                
-                string query =  $"INSERT INTO {tableName} " +
-                                $"(funds_id, " +
-                                $"collecting_officers_id, " +
-                                $"job_orders_id, " +
-                                $"accountable_forms_id, " +
-                                $"general_ledger_accounts_id, " +
-                                $"payee, " +
-                                $"receipt_no,  " +
-                                $"quantity, " +
-                                $"payment_date, " +
-                                $"amount, " +
-                                $"created_by) " +
-                                $"VALUES " +
-                                $"(@funds_id, " +
-                                $"@collecting_officers_id, " +
-                                $"@job_orders_id, " +
-                                $"@accountable_forms_id, " +
-                                $"@general_ledger_accounts_id, " +
-                                $"@payee, " +
-                                $"@receipt_no, " +
-                                $"@quantity, " +
-                                $"@payment_date, " +
-                                $"@amount, " +
-                                $"@created_by)";
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
+                        new object[] { "@funds_id", DbType.Int16, entity.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
+                        new object[] { "@payee", DbType.String, entity.Payee},
+                        new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, entity.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
+                    };
 
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    string query = $"INSERT INTO {tableName} " +
+                               $"(collecting_officers_id, " +
+                               $"job_orders_id," +
+                               $"funds_id, " +
+                               $"accountable_forms_id, " +
+                               $"payee, " +
+                               $"receipt_no,  " +
+                               $"payment_date, " +
+                               $"amount, " +
+                               $"is_cancelled, " +
+                               $"created_by) " +
+                               $"VALUES " +
+                               $"(@collecting_officers_id, " +
+                               $"@job_orders_id, " +
+                               $"@funds_id, " +
+                               $"@accountable_forms_id, " +
+                               $"@payee, " +
+                               $"@receipt_no, " +
+                               $"@payment_date, " +
+                               $"@amount, " +
+                               $"@is_cancelled, " +
+                               $"@created_by)";
+
+                    _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    scope.Complete();
+                    return true;
+                }
+              
             }
             catch (Exception)
             {
