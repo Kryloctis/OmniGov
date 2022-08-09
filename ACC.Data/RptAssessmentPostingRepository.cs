@@ -11,12 +11,13 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class AssessmentPostingRepository : IAssessmentPostingRepository
+    public class RptAssessmentPostingRepository : IAssessmentPostingRepository
     {
-        private readonly string tableName = "assessment_posts";
+        private readonly string tableName = "rpt_assessment_posts";
+        private readonly string rptTaxDues = "rpt_tax_dues";
         private MySqlGenericCommands _mySqlGenericCommands;
 
-        public AssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
+        public RptAssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }
@@ -112,7 +113,7 @@ namespace ACC.Data
                 new object[] { "@complete_arp_no", DbType.String, arpNo}
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE NOT EXISTS(SELECT * FROM tax_dues WHERE {tableName}.id = tax_dues.assessment_posts_id) AND complete_arp_no = @complete_arp_no ORDER BY year DESC";
+            string query = $"SELECT * FROM {tableName} WHERE NOT EXISTS(SELECT * FROM {rptTaxDues} WHERE {tableName}.id = {rptTaxDues}.rpt_assessment_posts_id) AND complete_arp_no = @complete_arp_no ORDER BY year DESC";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -156,7 +157,7 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int32, year}
             };
 
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = complete_arp_no AND year = (SELECT MAX(year) FROM lfsdb.assessment_posts WHERE year < @year)";
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = complete_arp_no AND year = (SELECT MAX(year) FROM {tableName} WHERE year < @year)";
 
             string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
             return Convert.ToInt32(result);
