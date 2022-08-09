@@ -52,8 +52,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         CollectingOfficerId = collectingOfficerId,
                         FundId = fundId,
                         AccountableFormId = accountableFormId,
-                        GeneralLedgerAccountId = generalLedgerId,
-                        Quantity = quantity,
                         Payee = payee,
                         ReceiptNo = receiptNumber,
                         PaymentDate = paymentDate,
@@ -116,8 +114,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         CollectingOfficerId = collectingOfficerId,
                         FundId = fundId,
                         AccountableFormId = accountableFormId,
-                        GeneralLedgerAccountId = generalLedgerId,
-                        Quantity = quantity,
                         PaymentDate = paymentDate,
                         Amount = amount,
                         CreatedBy = createdBy
