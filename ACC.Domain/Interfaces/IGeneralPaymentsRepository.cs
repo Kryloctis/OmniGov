@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    interface IGeneralPaymentsRepository : IRepository<GeneralPaymentsModel>
+    public interface IGeneralPaymentsRepository : IRepository<GeneralPaymentsModel>
     {
 
     }
