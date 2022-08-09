@@ -35,18 +35,20 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 var collectingOfficerId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 var fundId = Convert.ToInt32(uc.cmbFund.SelectedValue);
-                var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
+                var accountableFormID = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
+                var generalLedgerAccountsID = Convert.ToInt32(uc.cmbAccount.SelectedValue);
                 var payee = uc.txtPayee.Text.Trim();
                 var receiptNumber = uc.txtReceiptNumber.Text.Trim();
                 var paymentDate = Convert.ToDateTime(uc.dtDateOfCollection.Text.Trim());
                 var amount = Convert.ToDecimal(uc.txtAmount.Value);
                 var createdBy = Helper.UserId;
 
+
                 var paymentCollectionModel = new PaymentCollectionModel()
                 {
                     CollectingOfficerId = collectingOfficerId,
                     FundId = fundId,
-                    AccountableFormId = accountableFormId,
+                    AccountableFormId = accountableFormID,
                     Payee = payee,
                     ReceiptNo = receiptNumber,
                     PaymentDate = paymentDate,
@@ -55,21 +57,18 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CreatedBy = Helper.UserId
                 };
 
-                if (uc.cbCollectorTypeJO.Checked)
+                if (uc.cbJOCollector.Checked)
                 {
                     var regularCollectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
                     paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
                     paymentCollectionModel.JobOrderId = collectingOfficerId;
                 }
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
-                paymentCollectionRepo.Insert(paymentCollectionModel);
+                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().InsertWithGeneralPayment(paymentCollectionModel,  new GeneralPaymentsModel() { Quantity = 1});
 
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
-                _frmPaymentCollection.LoadRecords();
                 UpdateReceiptsCount();
-                uc.ResetForm();
-                return;
+                return; 
 
             }
             catch (Exception ex)
@@ -89,49 +88,37 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     return;
                 }
 
+                var collectingOfficerID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+                var fundId = Convert.ToInt32(uc.cmbFund.SelectedValue);
+                var accountableFormID = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
+                var quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value);
+                var paymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim());
+                var amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text);
+                var createdBy = Helper.UserId;
 
-                using (var scope = new TransactionScope()) {
-
-                    var collectingOfficerId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-                    var fundId = Convert.ToInt32(uc.cmbFund.SelectedValue);
-                    var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
-                    var generalLedgerId = Convert.ToInt32(uc.cmbAccount.SelectedValue);
-                    var quantity = Convert.ToInt32(uc.txtCashTicketQuantity.Value);
-                    var paymentDate = Convert.ToDateTime(uc.dtCashTicketDateOfCollection.Text.Trim());
-                    var amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text);
-                    var createdBy = Helper.UserId;
-
-                    var paymentCollectionModel = new PaymentCollectionModel()
-                    {
-                        CollectingOfficerId = collectingOfficerId,
-                        FundId = fundId,
-                        AccountableFormId = accountableFormId,
-                        PaymentDate = paymentDate,
-                        Amount = amount,
-                        CreatedBy = createdBy
-                    };
-
-                    //CHANGE SOME VALUE IF COLLECTING OFFICER IS JOB ORDER.
-                    if (uc.cbCollectorTypeJO.Checked)
-                    {
-                        var regularCollectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerId);
-                        paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
-                        paymentCollectionModel.JobOrderId = collectingOfficerId;
-                    }
-
-                    var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
-                    bool insertSuccess = paymentCollectionRepo.Insert(paymentCollectionModel);
-
-                    if (insertSuccess)
-                    {
-                        UpdateReceiptsCount();
-                        Helper.MessageBoxSuccess("Payment Collection has been saved.");
-                        _frmPaymentCollection.LoadRecords();
-                        uc.ResetForm();
-                        scope.Complete();
-                    }
-
+                var paymentCollectionModel = new PaymentCollectionModel()
+                {
+                    CollectingOfficerId = collectingOfficerID,
+                    FundId = fundId,
+                    AccountableFormId = accountableFormID,
+                    PaymentDate = paymentDate,
+                    Amount = amount,
+                    CreatedBy = createdBy
                 };
+
+                if (uc.cbJOCollector.Checked)
+                {
+                    var regularCollectingOfficerId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectingOfficerID);
+                    paymentCollectionModel.CollectingOfficerId = regularCollectingOfficerId;
+                    paymentCollectionModel.JobOrderId = collectingOfficerID;
+                }
+
+                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().InsertWithGeneralPayment(paymentCollectionModel, new GeneralPaymentsModel() { Quantity = quantity});
+
+                Helper.MessageBoxSuccess("Payment Collection has been saved.");
+                UpdateReceiptsCount();
+                return;
+
 
             }
             catch (Exception ex)
@@ -144,11 +131,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var collectorId = uc.cmbCollector.SelectedValue.ToString();
-                var accountableFormId = uc.cmbAccountableForms.SelectedValue.ToString();
+                var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+                var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
                 var receiptsIssuedRepo = AccFactory.ReceiptsIssuedRepository();
 
-                var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
+                var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
                 if (receiptIssuedCount == 0)
@@ -194,6 +181,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 SaveReceipts();
             }
 
+            uc.ResetForm();
             uc.txtPayee.Focus();
         }
         #endregion
