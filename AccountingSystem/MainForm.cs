@@ -154,6 +154,18 @@ namespace AccountingSystem
                 collectorsRCDToolStripMenuItem.Enabled = false;
         }
 
+        private bool IsUserCollector() 
+        {
+            var dictJobOrderRepo = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecordByJobOrderUserId(Helper.UserId);
+            var dictCollectingOfficerRepo = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+
+
+            if (dictJobOrderRepo.Values.Count < 1 && dictCollectingOfficerRepo.Values.Count < 1)
+                return false;
+
+            return true;        
+        }
+
         private void ValidateTransactionPermissions()
         {
             if (!Helper.HasPermission("Transaction Obligation Request"))
@@ -173,6 +185,10 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Transaction RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Visible = false;
+
+            if(!IsUserCollector())
+                toolStripMenuPaymentPostings.Enabled = false;
+
         }
 
         private void ValidateManagePermissions()

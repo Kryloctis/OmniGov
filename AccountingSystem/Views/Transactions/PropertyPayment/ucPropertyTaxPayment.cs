@@ -19,26 +19,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             InitializeComponent();
         }
 
-        private DataTable CollectorDataTable() 
-        {
-            if (chckBxJobOrders.Checked)
-                return AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecords();
-            else
-                return AccFactory.CollectingOfficerRepository().GetRecords();
-        }
-
-        internal void LoadCollectors() 
-        {
-            try
-            {
-                HelperLoadRecords.CollectingOfficerComboBox(CollectorDataTable(), cmbxCollectingOfficers, "fullname", "id");
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
         private string GetAccountableFormData(string columName)
         {
             var dictAccForm = AccFactory.AccountableFormsRepository().GetRecordByAccFormNo(accountableFormNo);
@@ -65,14 +45,14 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         {
             if (!DesignMode)
             {
-                LoadCollectors();
                 LoadAccountableForm();
+                txtCollectingOfficer.Text = Helper.LoggedInUserData()["user_full_name"];
             }
         }
 
+
         private void chckBxJobOrders_CheckedChanged(object sender, EventArgs e)
         {
-            LoadCollectors();
         }
     }
 }
