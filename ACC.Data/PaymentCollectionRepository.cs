@@ -199,8 +199,6 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
                     new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
