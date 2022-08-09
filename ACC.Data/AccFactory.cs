@@ -136,6 +136,6 @@ namespace AccountingSystem
 
         public static IRptTaxRatesRepository rptTaxRatesRepository() => new RptTaxRatesRepository(mySqlGenericCommandsLFS);
 
-        public static IAssessmentPostingRepository AssessmentPostsRepository() => new AssessmentPostingRepository(mySqlGenericCommandsLFS);
+        public static IAssessmentPostingRepository AssessmentPostsRepository() => new RptAssessmentPostingRepository(mySqlGenericCommandsLFS);
     }
 }

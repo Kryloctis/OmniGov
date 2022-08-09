@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             InitializeComponent();
             _mainForm = mainForm;
+            ucPaymentInfo = ucPropertyTaxPayment1;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
