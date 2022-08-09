@@ -812,7 +812,7 @@ namespace AccountingSystem
 
         private void toolStripMenuPaymentPostings_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerList(this).ShowDialog();
+            _ = new frmPropertyPayment(this).ShowDialog();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace ACC.Domain.Interfaces
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);
+        Dictionary<string, string> GetRecordByAccFormNo(string accFormNo);
     }
 }

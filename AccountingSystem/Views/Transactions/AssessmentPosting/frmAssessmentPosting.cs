@@ -114,7 +114,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                 string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
-                decimal rowAssessedValue = 0;
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                 string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, (int)nudYear.Value, "posted_at");
                 decimal rowPenaltyRate = 0;
                 string rowPenaltyFrequency = string.Empty;
@@ -335,16 +335,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         decimal basicRate = GetTaxRate("Basic");
                         decimal sefRate = GetTaxRate("Special Educational Fund");
                         DateTime postedAt = DateTime.Now;
-
-                        #region GetIsCancelled
-
-                        bool isCancelled;
-                        if (string.IsNullOrEmpty(GetRealPropertyRecord(realPropertiesId, "is_cancelled")))
-                            isCancelled = false;
-                        else
-                            isCancelled = true; 
-
-                        #endregion
+                        bool isCancelled = Convert.ToBoolean(Convert.ToInt32((GetRealPropertyRecord(realPropertiesId, "is_cancelled"))));
 
                         var assessmentPostingModel = new AssessmentPostingModel()
                         {
