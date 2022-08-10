@@ -10,11 +10,14 @@ namespace ACC.Data
     public class PaymentCollectionRepository:IPaymentCollectionRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IGeneralPaymentsRepository _generalPaymentRepository;
+
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        public PaymentCollectionRepository(IDbGenericCommands dbGenericCommands)
+        public PaymentCollectionRepository(IDbGenericCommands dbGenericCommands, IGeneralPaymentsRepository generalPaymentsRepository)
         {
             _dbGenericCommands = dbGenericCommands;
+            _generalPaymentRepository = generalPaymentsRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -143,48 +146,50 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][]
+                using (var scope = new TransactionScope())
                 {
-                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
-                    new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
-                    new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
-                    new object[] { "@payee", DbType.String, entity.Payee},
-                    new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
-                    new object[] { "@quantity", DbType.String, entity.Quantity},
-                    new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
-                    new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@created_by", DbType.Int16, entity.CreatedBy}                    
-                };
-                
-                string query =  $"INSERT INTO {tableName} " +
-                                $"(funds_id, " +
-                                $"collecting_officers_id, " +
-                                $"job_orders_id, " +
-                                $"accountable_forms_id, " +
-                                $"general_ledger_accounts_id, " +
-                                $"payee, " +
-                                $"receipt_no,  " +
-                                $"quantity, " +
-                                $"payment_date, " +
-                                $"amount, " +
-                                $"created_by) " +
-                                $"VALUES " +
-                                $"(@funds_id, " +
-                                $"@collecting_officers_id, " +
-                                $"@job_orders_id, " +
-                                $"@accountable_forms_id, " +
-                                $"@general_ledger_accounts_id, " +
-                                $"@payee, " +
-                                $"@receipt_no, " +
-                                $"@quantity, " +
-                                $"@payment_date, " +
-                                $"@amount, " +
-                                $"@created_by)";
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@collecting_officers_id", DbType.Int32, entity.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, entity.JobOrderId},
+                        new object[] { "@funds_id", DbType.Int16, entity.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
+                        new object[] { "@payee", DbType.String, entity.Payee},
+                        new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, entity.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, entity.CreatedBy}
+                    };
 
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    string query = $"INSERT INTO {tableName} " +
+                               $"(collecting_officers_id, " +
+                               $"job_orders_id," +
+                               $"funds_id, " +
+                               $"accountable_forms_id, " +
+                               $"payee, " +
+                               $"receipt_no,  " +
+                               $"payment_date, " +
+                               $"amount, " +
+                               $"is_cancelled, " +
+                               $"created_by) " +
+                               $"VALUES " +
+                               $"(@collecting_officers_id, " +
+                               $"@job_orders_id, " +
+                               $"@funds_id, " +
+                               $"@accountable_forms_id, " +
+                               $"@payee, " +
+                               $"@receipt_no, " +
+                               $"@payment_date, " +
+                               $"@amount, " +
+                               $"@is_cancelled, " +
+                               $"@created_by)";
+
+                    _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    scope.Complete();
+                    return true;
+                }
+              
             }
             catch (Exception)
             {
@@ -202,8 +207,6 @@ namespace ACC.Data
                     new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@collecting_officers_id", DbType.Int16, entity.CollectingOfficerId},
                     new object[] { "@accountable_forms_id", DbType.Int16, entity.AccountableFormId},
-                    new object[] { "@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountId},
-                    new object[] { "@subsidiary_ledger_accounts_id", DbType.Int16, entity.SlaId},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@receipt_no", DbType.String, entity.ReceiptNo},
                     new object[] { "@payment_date", DbType.DateTime, entity.PaymentDate},
@@ -404,5 +407,100 @@ namespace ACC.Data
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt);
         }
+
+        public int GetLastInsertedID()
+        {
+            try
+            {
+                string query = $"SELECT COALESCE(MAX(id)) FROM {tableName}";
+                return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool InsertWithGeneralPayment(PaymentCollectionModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel)
+        {
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@collecting_officers_id", DbType.Int32, paymentCollectionModel.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, paymentCollectionModel.JobOrderId},
+                        new object[] { "@funds_id", DbType.Int16, paymentCollectionModel.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionModel.AccountableFormId},
+                        new object[] { "@payee", DbType.String, paymentCollectionModel.Payee},
+                        new object[] { "@receipt_no", DbType.String, paymentCollectionModel.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionModel.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, paymentCollectionModel.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionModel.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, paymentCollectionModel.CreatedBy}
+                    };
+
+                    string query = $"INSERT INTO {tableName} " +
+                                   $"(collecting_officers_id, " +
+                                   $"job_orders_id," +
+                                   $"funds_id, " +
+                                   $"accountable_forms_id, " +
+                                   $"payee, " +
+                                   $"receipt_no,  " +
+                                   $"payment_date, " +
+                                   $"amount, " +
+                                   $"is_cancelled, " +
+                                   $"created_by) " +
+                                   $"VALUES " +
+                                   $"(@collecting_officers_id, " +
+                                   $"@job_orders_id, " +
+                                   $"@funds_id, " +
+                                   $"@accountable_forms_id, " +
+                                   $"@payee, " +
+                                   $"@receipt_no, " +
+                                   $"@payment_date, " +
+                                   $"@amount, " +
+                                   $"@is_cancelled, " +
+                                   $"@created_by)";
+
+                    _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                    generalPaymentModel.PaymentCollectionId = GetLastInsertedID();
+                    generalPaymentModel.GeneralLedgerAccountsId = paymentCollectionModel.AccountableFormId;
+
+                    _generalPaymentRepository.Insert(generalPaymentModel);
+
+                    scope.Complete();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID)
+        {
+            try
+            {
+                var parameter = new object[][] { 
+                    new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerID},
+                    new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
+                };
+
+                string query = $"SELECT COALESCE(MAX(receipt_no), 0) FROM payment_collections WHERE collecting_officers_id = @collecting_officers_id AND accountable_forms_id = @accountable_forms_id AND is_cancelled <> 1";
+
+                return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

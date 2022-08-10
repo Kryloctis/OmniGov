@@ -71,26 +71,28 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 LoadAccounts();
 
                 LoadCollectors();
-                LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(Convert.ToInt32(cmbCollector.SelectedValue));
-                GetAccountableFormSerialNumberRange();
-                GetAccountableFormFaceValue();
+                LoadCollectorsAccountableForms();
+                //GetAccountableFormSerialNumberRange();
+                //GetAccountableFormFaceValue();
                 SwitchFields();
+
                 SelectCurrentLoggedInCollector();
+
+
             }
         }
 
-        internal void LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(int collectorsId)
+        internal void LoadCollectorsAccountableForms()
         {
             try
             {
+                var collectorsId = Convert.ToInt32(cmbCollector.SelectedValue);
                 var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-                var dtAccountableForms = receiptIssuedRepo.GetIssuedReceiptByCollectorId(collectorsId);
+                var dtAccountableForms = receiptIssuedRepo.GetCollectorsAccountbleForms(collectorsId);
 
-                
-                dtAccountableForms.Columns.Add("accountableForms", typeof(string), "accountable_forms + ' - ' + (quantity)");
                 cmbAccountableForms.DataSource = dtAccountableForms;
                 cmbAccountableForms.ValueMember = "accountable_form_id";
-                cmbAccountableForms.DisplayMember = $"accountableForms";
+                cmbAccountableForms.DisplayMember = $"accountable_forms";
             }
             catch (Exception ex)
             {
@@ -118,10 +120,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
                 var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
-                if (cbCollectorTypeJO.Checked)
+                if (cbJOCollector.Checked)
                     dtCollector = collectingOfficerHasJORepo.GetRecords();
                 else
                     dtCollector = collectingOfficerRepository.GetRecords();
+
 
                 HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
             }
@@ -147,44 +150,36 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal void SelectCurrentLoggedInCollector()
         {
-            if (cmbCollector.Items.Count == 0) return;
-
             var usersRepo = AccFactory.UsersRepository();
-            Dictionary<string, string> collectorDict = new();
 
             if (usersRepo.LinkedCollector(Helper.UserId))
             {
+                cbJOCollector.Enabled = false;
                 cmbCollector.Enabled = false;
-                cbCollectorTypeJO.Enabled = false;
-
-                collectorDict = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
-                cmbCollector.SelectedValue = collectorDict["id"];
+                cmbCollector.SelectedValue = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId)["id"];
+                return;
             }
-
             else if (usersRepo.LinkedJobOrder(Helper.UserId))
             {
+                cbJOCollector.Checked = true;
+                cbJOCollector.Enabled = false;
                 cmbCollector.Enabled = false;
-                cbCollectorTypeJO.Enabled = false;
-                cbCollectorTypeJO.Checked = true;
-
-                collectorDict = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
-                cmbCollector.SelectedValue = collectorDict["id"];
+                cmbCollector.SelectedValue = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId)["id"];
             }
-
-            return;
         }
 
         internal bool IsReceiptNumberBetweenFromAndTo(int receiptNumber)
         {
-            return (receiptNumber >= serialNumberFrom) && (receiptNumber <= serialNumberTo);
+            //return (receiptNumber >= serialNumberFrom) && (receiptNumber <= serialNumberTo);
+            return false; //temporary
         }
 
         internal void GetAccountableFormSerialNumberRange()
         {   
-            var collectingOfficerId = Convert.ToInt32(cmbCollector.SelectedValue).ToString();
-            var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue).ToString();
+            var collectingOfficerId = Convert.ToInt32(cmbCollector.SelectedValue);
+            var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
-            var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectingOfficerId, accountableFormId);
+            var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerId, accountableFormId);
             if (dtReceiptIssued.Rows.Count != 0)
             {
                 serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
@@ -267,12 +262,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 return;
             }
 
-            if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
-            {
-                epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
-                e.Cancel = true;
-                return;
-            }
+            //if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
+            //{
+            //    epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
+            //    e.Cancel = true;
+            //    return;
+            //}
         }
 
         private bool ReceiptNumberHasCollection()
@@ -402,11 +397,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void InsertPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
         {
-            var collectorId = collectingOfficerDRV[0].ToString();
-            var accountableFormId = accountableFormDRV[0].ToString();
+            var collectorId = Convert.ToInt32(collectingOfficerDRV[0].ToString());
+            var accountableFormId = Convert.ToInt32(accountableFormDRV[0].ToString());
 
             var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId, accountableFormId);
+            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
             var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
 
             if (dtReceiptIssuedRowCount == 0)   //if all receipt has been used.
@@ -417,21 +412,26 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
 
             EnableDisableNonCashTicketsFields(true);
-            SetCollectionsData(dtReceiptIssued);
+            SetNextReceiptNumber();
         }
-        private void SetCollectionsData(DataTable dtReceiptIssued)
+
+        private void SetNextReceiptNumber()
         {
-            serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
-            serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+            var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
+            var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
-            var lastIssuedReceiptNumber = dtReceiptIssued.Rows[0]["last_issued"].Equals(DBNull.Value) ? 0 : Convert.ToInt32(dtReceiptIssued.Rows[0]["last_issued"]);
-
-            if (lastIssuedReceiptNumber == 0)
-                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
-            else if (lastIssuedReceiptNumber.Equals(serialNumberTo))
-                txtReceiptNumber.Text = string.Empty;
+            var lastUsedReceipt = AccFactory.PaymentCollectionRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
+            if (lastUsedReceipt != 0)
+            {
+                txtReceiptNumber.Text = (lastUsedReceipt + 1).ToString("D7");
+            }
             else
-                txtReceiptNumber.Text = (lastIssuedReceiptNumber + 1).ToString("D7");
+            {
+                var dtReceiptsOfCollector = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerID, accountableFormID);
+
+                serialNumberFrom = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_from"]);
+                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
+            }
         }
 
         private DataTable DatatableAccounts()
@@ -570,19 +570,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtCashTicketsAmount.Text = amount.ToString("N2");
         }
 
-        internal void cmbcollector_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            DataRowView collector = cmbCollector.SelectedItem as DataRowView;
-            var collectorId = int.Parse(collector[0].ToString());
+            //DataRowView collector = cmbCollector.SelectedItem as DataRowView;
+            //var collectorId = int.Parse(collector[0].ToString());
 
-            LoadAccountableFormsOfCollectingOfficerByCollectingOfficerId(collectorId);
+            LoadCollectorsAccountableForms();
             SwitchFields();
-            CreatePaymentCollection();
+            //CreatePaymentCollection();
         }
 
         internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            GetAccountableFormFaceValue();
+            //GetAccountableFormFaceValue();
             SwitchFields();
             CreatePaymentCollection();
         }
@@ -591,6 +591,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             LoadCollectors();
         }
+
         #endregion
 
 

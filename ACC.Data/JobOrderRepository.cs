@@ -128,8 +128,9 @@ namespace ACC.Data
 
             using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
             {
-                if (reader.Rows.Count < 1)
+                if (reader.Rows.Count == 0)
                     return record;
+
                 record.Add("id", reader.Rows[0][0].ToString());
                 record.Add("first_name", reader.Rows[0][1].ToString());
                 record.Add("mid_initial", reader.Rows[0][2].ToString());

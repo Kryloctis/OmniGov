@@ -90,23 +90,11 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query  = $"SELECT " +
-                            $"id, " +
-                            $"accountable_forms_id, " +
-                            $"acc_form_no, " +
-                            $"acc_form_desc, " +
-                            $"receipt_number_from, " +
-                            $"receipt_number_to, " +
-                            $"received_date, " +
-                            $"quantity, " +
-                            $"user officer " +
-                            $"FROM {viewTableName} " +
-                            $"ORDER BY accountable_forms_id ";
+            string query  = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} ORDER BY accountable_forms_id ";
 
             var dtri = new DataTable();
             return _dbGenericCommands.Fill(query, dtri);
         }
-
 
         public DataTable GetRecordsBySearch(string searchText)
         {

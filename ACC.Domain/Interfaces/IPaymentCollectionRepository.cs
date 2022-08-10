@@ -11,7 +11,12 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByDate(string date);
         DataTable GetRecordsByFilter(string date, int collectorId, string searchKey);
         DataTable GetCollectionsPerCollector();
+
+        int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID);
+
         bool ReceiptExist(string receipt, int formid);
         bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
+        int GetLastInsertedID();
+        bool InsertWithGeneralPayment(PaymentCollectionModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
     }
 }

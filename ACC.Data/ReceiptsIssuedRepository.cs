@@ -129,11 +129,11 @@ namespace ACC.Data
         }
 
 
-        public DataTable GetIssuedReceiptByCollectorIdAndAccountableFormId(string collectorId, string accountableFormId)
+        public DataTable GetIssuedReceiptToCollector(int collectorId, int accountableFormId)
         {
             var parameter = new object[][] {
-                new object[]{"@collecting_officer_id", DbType.String, collectorId },
-                new object[]{"@accountable_form_id", DbType.String, accountableFormId }
+                new object[]{"@collecting_officer_id", DbType.Int32, collectorId },
+                new object[]{"@accountable_form_id", DbType.Int32, accountableFormId }
             };
 
             string query = $"SELECT " +  
@@ -157,22 +157,13 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
-        public DataTable GetIssuedReceiptByCollectorId(int collectorId)
+        public DataTable GetCollectorsAccountbleForms(int collectingOfficerID)
         {
             var parameter = new object[][] {
-                new object[]{"@collectingOfficerId", DbType.Int32, collectorId }
+                new object[]{"@collecting_officer_id", DbType.Int32, collectingOfficerID }
             };
 
-            string query = $"SELECT " +
-                           $"accountable_form_id, " +
-                           $"accountable_forms, " +
-                           $"quantity " +
-                           $"FROM " +
-                           $"{viewTableName} " +
-                           $"WHERE " +
-                           $"collecting_officer_id = @collectingOfficerId AND ISNULL(job_orders_id) " +
-                           $"OR job_orders_id = @collectingOfficerId AND is_returned = false";
-
+            string query = $"SELECT accountable_form_id, accountable_forms, quantity FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND ISNULL(job_orders_id) OR job_orders_id = @collecting_officer_id AND is_returned = false";
 
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
