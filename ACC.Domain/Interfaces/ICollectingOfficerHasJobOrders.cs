@@ -11,5 +11,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsBySearch(int collectingOfficerId, string searchText);
         DataTable GetJobOrdersByCollectingOfficerId(int collectingOfficerId);
         int GetCollectingOfficerIDByJobOrderId(int collectingOfficerId);
+
+        Dictionary<string, string> GetViewRecordByJobOrderUserId(int jobOrderUserId);
     }
 }

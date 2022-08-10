@@ -118,6 +118,47 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dt, parameter);
         }
 
+        public Dictionary<string, string> GetViewRecordByJobOrderUserId(int jobOrderUserId)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@job_orders_user_id", DbType.Int32, jobOrderUserId}
+            };
+
+            string query = $"SELECT collecting_officers_id, collecting_officers_prefix, collecting_officers_firstname, collecting_officers_mid_initial, collecting_officers_last_name, collecting_officers_suffix, collecting_officers_job_title, collecting_officers_is_deleted, job_orders_id, job_orders_user_id, job_orders_prefix, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, job_orders_suffix, job_orders_job_title, job_orders_is_deleted FROM {viewTableName} WHERE job_orders_user_id = @job_orders_user_id AND job_orders_is_deleted = 0";
+
+            using (var reader = mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("collecting_officers_id", row["collecting_officers_id"].ToString());
+                    dict.Add("collecting_officers_prefix", row["collecting_officers_prefix"].ToString());
+                    dict.Add("collecting_officers_firstname", row["collecting_officers_firstname"].ToString());
+                    dict.Add("collecting_officers_mid_initial", row["collecting_officers_mid_initial"].ToString());
+                    dict.Add("collecting_officers_last_name", row["collecting_officers_last_name"].ToString());
+                    dict.Add("collecting_officers_suffix", row["collecting_officers_suffix"].ToString());
+                    dict.Add("collecting_officers_job_title", row["collecting_officers_job_title"].ToString());
+                    dict.Add("collecting_officers_is_deleted", row["collecting_officers_is_deleted"].ToString());
+                    dict.Add("job_orders_id", row["job_orders_id"].ToString());
+                    dict.Add("job_orders_user_id", row["job_orders_user_id"].ToString());
+                    dict.Add("job_orders_prefix", row["job_orders_prefix"].ToString());
+                    dict.Add("job_orders_first_name", row["job_orders_first_name"].ToString());
+                    dict.Add("job_orders_mid_initial", row["job_orders_mid_initial"].ToString());
+                    dict.Add("job_orders_last_name", row["job_orders_last_name"].ToString());
+                    dict.Add("job_orders_suffix", row["job_orders_suffix"].ToString());
+                    dict.Add("job_orders_job_title", row["job_orders_job_title"].ToString());
+                    dict.Add("job_orders_is_deleted", row["job_orders_is_deleted"].ToString());
+                }
+
+                return dict;
+            }
+        }
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();

@@ -31,7 +31,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         {
             this.components = new System.ComponentModel.Container();
             this.txtPayee = new System.Windows.Forms.TextBox();
-            this.txtReceiptNo = new System.Windows.Forms.TextBox();
             this.dtPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.txtAccountableForm = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,9 +38,10 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbxCollectingOfficers = new System.Windows.Forms.ComboBox();
-            this.chckBxJobOrders = new System.Windows.Forms.CheckBox();
+            this.chckBxJobOrder = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtCollectingOfficer = new System.Windows.Forms.TextBox();
+            this.txtReceipts = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,13 +51,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(308, 23);
             this.txtPayee.TabIndex = 15;
-            // 
-            // txtReceiptNo
-            // 
-            this.txtReceiptNo.Location = new System.Drawing.Point(110, 112);
-            this.txtReceiptNo.Name = "txtReceiptNo";
-            this.txtReceiptNo.Size = new System.Drawing.Size(308, 23);
-            this.txtReceiptNo.TabIndex = 16;
+            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayee_Validating);
+            this.txtPayee.Validated += new System.EventHandler(this.txtPayee_Validated);
             // 
             // dtPaymentDate
             // 
@@ -120,38 +115,51 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.label1.TabIndex = 12;
             this.label1.Text = "Collecting Officer";
             // 
-            // cmbxCollectingOfficers
+            // chckBxJobOrder
             // 
-            this.cmbxCollectingOfficers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxCollectingOfficers.FormattingEnabled = true;
-            this.cmbxCollectingOfficers.Location = new System.Drawing.Point(110, 25);
-            this.cmbxCollectingOfficers.Name = "cmbxCollectingOfficers";
-            this.cmbxCollectingOfficers.Size = new System.Drawing.Size(308, 23);
-            this.cmbxCollectingOfficers.TabIndex = 7;
-            // 
-            // chckBxJobOrders
-            // 
-            this.chckBxJobOrders.AutoSize = true;
-            this.chckBxJobOrders.Location = new System.Drawing.Point(336, 0);
-            this.chckBxJobOrders.Name = "chckBxJobOrders";
-            this.chckBxJobOrders.Size = new System.Drawing.Size(82, 19);
-            this.chckBxJobOrders.TabIndex = 6;
-            this.chckBxJobOrders.Text = "Job Orders";
-            this.chckBxJobOrders.UseVisualStyleBackColor = true;
-            this.chckBxJobOrders.CheckedChanged += new System.EventHandler(this.chckBxJobOrders_CheckedChanged);
+            this.chckBxJobOrder.AutoCheck = false;
+            this.chckBxJobOrder.AutoSize = true;
+            this.chckBxJobOrder.Location = new System.Drawing.Point(341, 0);
+            this.chckBxJobOrder.Name = "chckBxJobOrder";
+            this.chckBxJobOrder.Size = new System.Drawing.Size(77, 19);
+            this.chckBxJobOrder.TabIndex = 6;
+            this.chckBxJobOrder.Text = "Job Order";
+            this.chckBxJobOrder.UseVisualStyleBackColor = true;
+            this.chckBxJobOrder.CheckedChanged += new System.EventHandler(this.chckBxJobOrders_CheckedChanged);
             // 
             // errorProvider1
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // txtCollectingOfficer
+            // 
+            this.txtCollectingOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCollectingOfficer.Location = new System.Drawing.Point(110, 25);
+            this.txtCollectingOfficer.Name = "txtCollectingOfficer";
+            this.txtCollectingOfficer.ReadOnly = true;
+            this.txtCollectingOfficer.Size = new System.Drawing.Size(308, 23);
+            this.txtCollectingOfficer.TabIndex = 17;
+            // 
+            // txtReceipts
+            // 
+            this.txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtReceipts.Location = new System.Drawing.Point(110, 112);
+            this.txtReceipts.Name = "txtReceipts";
+            this.txtReceipts.Size = new System.Drawing.Size(308, 23);
+            this.txtReceipts.TabIndex = 18;
+            this.txtReceipts.Validating += new System.ComponentModel.CancelEventHandler(this.txtReceipts_Validating);
+            this.txtReceipts.Validated += new System.EventHandler(this.txtReceipts_Validated);
+            // 
             // ucPropertyTaxPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.txtReceipts);
+            this.Controls.Add(this.txtCollectingOfficer);
             this.Controls.Add(this.txtPayee);
-            this.Controls.Add(this.txtReceiptNo);
             this.Controls.Add(this.dtPaymentDate);
             this.Controls.Add(this.txtAccountableForm);
             this.Controls.Add(this.label4);
@@ -159,8 +167,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbxCollectingOfficers);
-            this.Controls.Add(this.chckBxJobOrders);
+            this.Controls.Add(this.chckBxJobOrder);
             this.Name = "ucPropertyTaxPayment";
             this.Size = new System.Drawing.Size(437, 167);
             this.Load += new System.EventHandler(this.ucPropertyTaxPayment_Load);
@@ -174,7 +181,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
         internal System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.TextBox txtPayee;
-        internal System.Windows.Forms.TextBox txtReceiptNo;
         internal System.Windows.Forms.DateTimePicker dtPaymentDate;
         internal System.Windows.Forms.TextBox txtAccountableForm;
         internal System.Windows.Forms.Label label4;
@@ -182,7 +188,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.ComboBox cmbxCollectingOfficers;
-        internal System.Windows.Forms.CheckBox chckBxJobOrders;
+        internal System.Windows.Forms.CheckBox chckBxJobOrder;
+        private System.Windows.Forms.TextBox txtCollectingOfficer;
+        internal System.Windows.Forms.TextBox txtReceipts;
     }
 }
