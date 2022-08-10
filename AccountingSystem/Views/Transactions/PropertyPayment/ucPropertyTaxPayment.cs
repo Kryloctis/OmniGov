@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,31 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
     public partial class ucPropertyTaxPayment : UserControl
     {
         private readonly string accountableFormNo = "56";
+        private readonly int accountableFormNoId = 9;
 
         public ucPropertyTaxPayment()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors() 
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtReceipts),
+                errorProvider1.GetError(txtPayee)
+            };
+          
+
+            IError _errors = AccFactory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        internal void ResetForm() 
+        {
+            loadreceiptnos();
+            txtPayee.Clear();
+            dtPaymentDate.Value = Helper.GetCurrentDate();
         }
 
         private string GetAccountableFormData(string columName)
@@ -57,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 collectorId = Convert.ToInt32(dictCollectingOfficerRepo["id"]);
 
 
-            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectorId, 9);
+            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectorId, accountableFormNoId);
 
 
             foreach (DataRow row in dtReceiptsIssued.Rows)
@@ -67,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
                 for (int i = receiptIssuedFrom; i <= receiptIssuedTo; i++)
                 {
-                    bool receiptNoExist = AccFactory.PaymentCollectionRepository().ReceiptExist(i.ToString(), 9);
+                    bool receiptNoExist = AccFactory.PaymentCollectionRepository().ReceiptExist(i.ToString(), accountableFormNoId);
                    
                     if(!receiptNoExist)
                         dataTable.Rows.Add(i);
@@ -81,8 +103,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         {
             try
             {
+                //Populate text box autocomplete source
                 var autocompletesource = new AutoCompleteStringCollection();
-
                 foreach (DataRow row in DataTableRecieptNos().Rows)
                 {
                     string receipt = row["receipt_no"].ToString();
@@ -90,6 +112,11 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                     autocompletesource.Add(receipt);
                 }
 
+                //Get Least OR Number
+                if(DataTableRecieptNos().Rows.Count > 1)
+                    txtReceipts.Text = DataTableRecieptNos().Rows[0]["receipt_no"].ToString();
+
+                //Apply autocomplete source
                 txtReceipts.AutoCompleteCustomSource = autocompletesource;
             }
             catch (Exception ex)
@@ -124,21 +151,26 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         }
 
 
-        private void chckBxJobOrders_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtReceipts_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private bool ValidateReceipts(ErrorProvider errorProvider, TextBox textBox) 
         {
             try
             {
+                string receiptNo = txtReceipts.Text.Trim();
+                bool receiptExist = AccFactory.PaymentCollectionRepository().ReceiptExist(receiptNo, accountableFormNoId);
+                bool receiptValid = DataTableRecieptNos().AsEnumerable().Where(c => c.Field<string>("receipt_no").Equals(receiptNo)).Count() > 0;
+
                 if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Receipt No."))
                     return true;
+                else if (receiptExist)
+                {
+                    errorProvider.SetError(txtReceipts, "Receipt already been used to other transaction.");
+                    return true;
+                }
+                else if (!receiptValid)
+                {
+                    errorProvider.SetError(txtReceipts, "Invalid Receipt No.");
+                    return true;
+                }
                 else
                     return false;
             }

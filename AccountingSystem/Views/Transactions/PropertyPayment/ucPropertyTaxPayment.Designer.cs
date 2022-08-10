@@ -125,7 +125,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.chckBxJobOrder.TabIndex = 6;
             this.chckBxJobOrder.Text = "Job Order";
             this.chckBxJobOrder.UseVisualStyleBackColor = true;
-            this.chckBxJobOrder.CheckedChanged += new System.EventHandler(this.chckBxJobOrders_CheckedChanged);
             // 
             // errorProvider1
             // 

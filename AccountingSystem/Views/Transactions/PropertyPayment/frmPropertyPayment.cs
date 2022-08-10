@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         public class RealPropertyPaymentTaxDueModel
         {
-            public int AssessmentPostId {get; set;}
+            public int AssessmentPostId { get; set; }
             public int Year { get; set; }
             public string CompleteArpNo { get; set; }
             public string TaxType { get; set; }
@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
-            LoadRealPropertyPaymentTaxDues(null);       
+            LoadRealPropertyPaymentTaxDues(null);
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
@@ -157,33 +157,86 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         }
 
+
         #region Cancel Transaction Methods
 
         private void CancelTransaction()
         {
             LoadRealPropertyPaymentTaxDues(null);
-            ucPaymentInfo.txtPayee.Clear();
-            ucPaymentInfo.txtReceipts.Clear();
-            ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
+            ucPaymentInfo.ResetForm();
         }
 
         private void btnCancelTransaction_Click(object sender, EventArgs e)
         {
             CancelTransaction();
-        } 
+        }
 
         #endregion
-
-
-
 
         #region Payment Methods
 
+        private bool ValidatePayment()
+        {
+            decimal totalDue = Convert.ToDecimal(txtTotalDue.Text);
+
+            if (totalDue == 0)
+                return false;
+
+            return true;
+        }
+
+        private bool SavePayment() 
+        {
+            try
+            {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucPaymentInfo.GetFormErrors());
+                    return false;
+                }
+
+                if(Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                    return true;
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void btnPay_Click(object sender, EventArgs e)
         {
-
-        } 
+            if (SavePayment())
+            {
+                Helper.MessageBoxSuccess("Payment Confirmed.");
+                LoadRealPropertyPaymentTaxDues(null);
+                ucPaymentInfo.ResetForm();
+            }
+        }
 
         #endregion
+
+        private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel) 
+        {
+            if (!ValidatePayment())
+            {
+                btnPay.Enabled = false;
+                btnCancel.Enabled = false;
+            }
+            else
+            {
+                btnPay.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+
+        }
+
+        private void txtTotalDue_TextChanged(object sender, EventArgs e)
+        {
+            EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+        }
     }
 }

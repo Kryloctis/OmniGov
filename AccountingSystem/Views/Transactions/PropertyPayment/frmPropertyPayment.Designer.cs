@@ -394,6 +394,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.txtTotalDue.Size = new System.Drawing.Size(178, 27);
             this.txtTotalDue.TabIndex = 14;
             this.txtTotalDue.Text = "0.00";
+            this.txtTotalDue.TextChanged += new System.EventHandler(this.txtTotalDue_TextChanged);
             // 
             // label11
             // 
@@ -466,6 +467,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // btnCancelTransaction
             // 
+            this.btnCancelTransaction.Enabled = false;
             this.btnCancelTransaction.Location = new System.Drawing.Point(886, 3);
             this.btnCancelTransaction.Name = "btnCancelTransaction";
             this.btnCancelTransaction.Size = new System.Drawing.Size(141, 23);
@@ -476,6 +478,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // btnPay
             // 
+            this.btnPay.Enabled = false;
             this.btnPay.Location = new System.Drawing.Point(796, 3);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(84, 23);
