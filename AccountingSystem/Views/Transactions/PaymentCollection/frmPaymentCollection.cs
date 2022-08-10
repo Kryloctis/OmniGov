@@ -73,11 +73,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             try
             {
                 string date = dtpDate.Value.ToString("yyyy-MM-dd");
-                int collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
+                int collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
+                bool isJobOrder = cbCollectorTypeJO.Checked;
 
                 var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
-                var dtpayments  = paymentCollectionRepo.FilterRecords(date, collectorId, searchKey);
+                var dtpayments  = paymentCollectionRepo.FilterRecords(date, collectingOfficerID, isJobOrder, searchKey);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 

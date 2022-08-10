@@ -151,7 +151,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
                 if (isCollectorAJO == true)
                 {
-                    
                     collectorsReportModel.CollectorId = regularCollectingOfficerId;
                     collectorsReportModel.JobOrderId = collectorId;  
                 }

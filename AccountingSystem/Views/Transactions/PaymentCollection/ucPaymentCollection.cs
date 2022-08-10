@@ -588,8 +588,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             SetNextReceiptNumber();
         }
 
+
         #endregion
 
-
+  
     }
 }

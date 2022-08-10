@@ -9,7 +9,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByUserId(int userId);
         DataTable GetRecordByLedger(object[] parameter);
         DataTable GetRecordsByDate(string date);
-        DataTable FilterRecords(string date, int collectorId, string searchKey);
+        DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey);
         DataTable GetCollectionsPerCollector();
 
         int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID);

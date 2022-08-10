@@ -158,9 +158,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 throw;
             }
-
         }
-
 
 
         #region Form Events
@@ -172,13 +170,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 uc.CancelNonCashTicketFieldValidations(true);
                 SaveCashTickets();
-                return;
             }
             else
             {
                 uc.CancelCashTicketFieldValidations(true);
                 SaveReceipts();
-                return;
             }
 
             uc.ResetForm();     
