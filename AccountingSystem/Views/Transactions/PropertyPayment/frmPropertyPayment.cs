@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
-            LoadRealPropertyPaymentTaxDues(null);
+            LoadRealPropertyPaymentTaxDues(null);       
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             LoadRealPropertyPaymentTaxDues(null);
             ucPaymentInfo.txtPayee.Clear();
-            ucPaymentInfo.txtReceiptNo.Clear();
+            ucPaymentInfo.txtReceipts.Clear();
         }
 
         private void btnCancelTransaction_Click(object sender, EventArgs e)
