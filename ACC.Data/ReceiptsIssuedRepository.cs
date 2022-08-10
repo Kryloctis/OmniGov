@@ -128,7 +128,6 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtri);
         }
 
-
         public DataTable GetIssuedReceiptToCollector(int collectorId, int accountableFormId)
         {
             var parameter = new object[][] {
@@ -163,7 +162,7 @@ namespace ACC.Data
                 new object[]{"@collecting_officer_id", DbType.Int32, collectingOfficerID }
             };
 
-            string query = $"SELECT accountable_form_id, accountable_forms, quantity FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND ISNULL(job_orders_id) OR job_orders_id = @collecting_officer_id AND is_returned = false";
+            string query = $"SELECT accountable_form_id, accountable_forms, quantity, receipt_issued_from, receipt_issued_to, last_issued FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND ISNULL(job_orders_id) OR job_orders_id = @collecting_officer_id AND is_returned = false";
 
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);

@@ -172,14 +172,16 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 uc.CancelNonCashTicketFieldValidations(true);
                 SaveCashTickets();
+                return;
             }
             else
             {
                 uc.CancelCashTicketFieldValidations(true);
                 SaveReceipts();
+                return;
             }
 
-            uc.ResetForm();
+            uc.ResetForm();     
             uc.txtPayee.Focus();
         }
         #endregion

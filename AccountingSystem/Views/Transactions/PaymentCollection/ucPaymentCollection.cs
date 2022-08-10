@@ -70,14 +70,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             {
                 LoadFunds();
                 LoadAccounts();
-
                 LoadCollectors();
-                LoadCollectorsAccountableForms();
-                //GetAccountableFormSerialNumberRange();
-                //GetAccountableFormFaceValue();
-                SwitchFields();
-
                 SelectCurrentLoggedInCollector();
+                LoadCollectorsAccountableForms();
             }
         }
 
@@ -364,36 +359,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void CreatePaymentCollection()
         {
-            DataRowView accountableFormDRV = cmbAccountableForms.SelectedItem as DataRowView;
-            DataRowView collectingOfficerDRV = cmbCollector.SelectedItem as DataRowView;
-
-            if (accountableFormDRV == null || collectingOfficerDRV == null)
-                return;
-
-            if (paymentCollectionId == 0)    //accountableForm
-                InsertPaymentCollectionTransaction();
-            else
-                EditPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
-        }
-
-
-        private void InsertPaymentCollectionTransaction()
-        {
-            var collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
-            var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-
-            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
-         
-            if (dtReceiptIssued.Rows.Count == 0)   //if all receipt has been used.
+            if (paymentCollectionId == 0)   
             {
-                Helper.MessageBoxSuccess("All Receipts has been recorded");
-                EnableDisableNonCashTicketsFields(false);
-                return;
+                SetNextReceiptNumber();
+                EnableDisableNonCashTicketsFields(true);
             }
-
-            EnableDisableNonCashTicketsFields(true);
-            SetNextReceiptNumber();
+            else
+            {
+                EditPaymentCollectionTransaction();
+            }
         }
 
         private void EnableDisableNonCashTicketsFields(bool enable)
@@ -472,15 +446,14 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         #region Local Methods
 
-        private void EditPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
+        private void EditPaymentCollectionTransaction()
         {
 
         }
 
         private void GetAccountableFormFaceValue()
         {
-            int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            accountableFormFaceValue = AccFactory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
+         
         }
 
         internal void CancelNonCashTicketFieldValidations(bool cancelEvent)
@@ -566,16 +539,21 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void cmbCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadCollectorsAccountableForms();
-            SwitchFields();
             CreatePaymentCollection();
         }
 
         internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            GetAccountableFormFaceValue();
             SwitchFields();
             CreatePaymentCollection();
             GetAccountableForms_FormAndTo();
+        }
+
+        private void SetFaceValue()
+        {
+            int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+            accountableFormFaceValue = AccFactory.FaceValueRepository().GetFaceValueByAccountableFormId(accountableFormId);
+            txtAmount.Value = Convert.ToInt32(accountableFormFaceValue);
         }
 
         private void GetAccountableForms_FormAndTo()
