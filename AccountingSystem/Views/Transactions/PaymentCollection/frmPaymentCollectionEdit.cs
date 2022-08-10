@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var paymentCollectionRepository = AccFactory.PaymentCollectionRepository();
+                var paymentCollectionRepository = AccFactory.PaymentCollectionsRepository();
                 var paymentCollectionDict = paymentCollectionRepository.GetRecordByID(_uc.paymentCollectionId);
 
                 var regularCollectingOfficerId = paymentCollectionDict["collecting_officers_id"];
@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     return false;
                 }
 
-                var paymentCollectionModel = new PaymentCollectionModel()
+                var paymentCollectionModel = new PaymentCollectionsModel()
                 {
                     Id = _uc.paymentCollectionId,
                     FundId = Convert.ToInt32(_uc.cmbFund.SelectedValue),
@@ -97,7 +97,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     UpdatedBy =_uc.userId,
                 };
 
-                var paymentcollectionRepo = AccFactory.PaymentCollectionRepository();
+                var paymentcollectionRepo = AccFactory.PaymentCollectionsRepository();
 
                 if (paymentcollectionRepo.Update(paymentCollectionModel))
                     return true;            
@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 }
 
 
-                var paymentCollectionModel = new PaymentCollectionModel()
+                var paymentCollectionModel = new PaymentCollectionsModel()
                 {
                     CollectingOfficerId = Convert.ToInt32(_uc.cmbCollector.SelectedValue),
                     FundId = Convert.ToInt32(_uc.cmbFund.SelectedValue),
@@ -152,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 };
 
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository();
 
                 bool insertSuccess = paymentCollectionRepo.Update(paymentCollectionModel);
 

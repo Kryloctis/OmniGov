@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     IsAdvance = uc.chckBxAdvance.Checked
                 };
 
-                return AccFactory.rptDiscountRepository().Insert(model);
+                return AccFactory.RptDiscountRepository().Insert(model);
             }
             catch (Exception ex)
             {

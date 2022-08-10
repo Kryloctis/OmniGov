@@ -41,7 +41,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     
                 };
 
-                return AccFactory.rptPenaltiesRepository().Insert(model);
+                return AccFactory.RptPenaltiesRepository().Insert(model);
             }
             catch (Exception ex)
             {

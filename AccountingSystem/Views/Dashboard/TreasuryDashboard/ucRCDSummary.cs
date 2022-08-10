@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void LoadColllectorsCollectionSummary()
         {
-            var collectorsCollectionDT = AccFactory.PaymentCollectionRepository().GetCollectionsPerCollector();
+            var collectorsCollectionDT = AccFactory.PaymentCollectionsRepository().GetCollectionsPerCollector();
             HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
         }
 

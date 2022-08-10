@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 collectionTo
             };
 
-            dtPaymentCollection = AccFactory.PaymentCollectionRepository().GetRecordByLedger(parameter);
+            dtPaymentCollection = AccFactory.PaymentCollectionsRepository().GetRecordByLedger(parameter);
             PaymentCollectionChecker();
 
             int collectionsCount = dtPaymentCollection.Rows.Count;

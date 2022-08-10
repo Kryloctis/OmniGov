@@ -3,7 +3,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IPaymentCollectionRepository : IRepository<PaymentCollectionModel>
+    public interface IPaymentCollectionsRepository : IRepository<PaymentCollectionsModel>
     {
         DataTable GetRecordsByCollectingOfficerId(int collectorId);
         DataTable GetRecordsByUserId(int userId);
@@ -17,6 +17,6 @@ namespace ACC.Domain.Interfaces
         bool ReceiptExist(string receipt, int formid);
         bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
         int GetLastInsertedID();
-        bool InsertWithGeneralPayment(PaymentCollectionModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
+        bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
     }
 }

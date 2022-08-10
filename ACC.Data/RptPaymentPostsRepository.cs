@@ -9,6 +9,13 @@ namespace ACC.Data
 {
     public class RptPaymentPostsRepository : IRptPaymentPostsRepository
     {
+        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+
+        public RptPaymentPostsRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        {
+            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();

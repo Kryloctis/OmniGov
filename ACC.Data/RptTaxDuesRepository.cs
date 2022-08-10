@@ -9,6 +9,13 @@ namespace ACC.Data
 {
     public class RptTaxDuesRepository : IRptTaxDuesRepository
     {
+        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+
+        public RptTaxDuesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        {
+            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();

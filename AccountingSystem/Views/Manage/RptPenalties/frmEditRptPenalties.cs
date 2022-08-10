@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     Frequency = uc.cmbxFrequency.Text.Trim()
                 };
 
-                return AccFactory.rptPenaltiesRepository().Update(model);
+                return AccFactory.RptPenaltiesRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
         private void LoadRecord()
         {
-            var dictRptDiscounts = AccFactory.rptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
+            var dictRptDiscounts = AccFactory.RptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
            
             uc.txtDescription.Text = dictRptDiscounts["description"];
             uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);

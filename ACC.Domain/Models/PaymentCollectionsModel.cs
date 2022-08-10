@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class PaymentCollectionModel
+    public class PaymentCollectionsModel
     {
         public int Id { get; set; }
         public int CollectingOfficerId { get; set; }

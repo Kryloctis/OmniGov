@@ -278,7 +278,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
                 var paymentCollectionId = this.paymentCollectionId;
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository();
 
 
                 bool isReceiptRecorded;
@@ -420,7 +420,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
             var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
-            var lastUsedReceipt = AccFactory.PaymentCollectionRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
+            var lastUsedReceipt = AccFactory.PaymentCollectionsRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
             if (lastUsedReceipt != 0)
             {
                 txtReceiptNumber.Text = (lastUsedReceipt + 1).ToString("D7");

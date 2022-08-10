@@ -211,7 +211,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private decimal GetTaxRate(string description) 
         {
-            var dicTaxRate = AccFactory.rptTaxRatesRepository().GetRecordByDescription(description);
+            var dicTaxRate = AccFactory.RptTaxRatesRepository().GetRecordByDescription(description);
             decimal taxRate = 0;
 
             if (dicTaxRate != null)
@@ -291,7 +291,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private string GetPenaltyRecord(string description, string parameters)
         {
-            var dictPenaltyRecord = AccFactory.rptPenaltiesRepository().GetRecordByDescription(description);
+            var dictPenaltyRecord = AccFactory.RptPenaltiesRepository().GetRecordByDescription(description);
 
             if (dictPenaltyRecord.Values.Count < 1)
                 return string.Empty;
@@ -326,7 +326,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         int year = Convert.ToInt32(txtYear.Text);
 
                         //Get Penalty and Tax Rates
-                        var dictRptPenalties = AccFactory.rptPenaltiesRepository().GetRecordByID(9);
+                        var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
                         
 
                         decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate"))? 0 : 

@@ -53,8 +53,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             DateTime currentDate = DateTime.Now;
             int postYear = postedDate.Year;
             int postMonth = postedDate.Month; 
-            var annualDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
-            var monthlyDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
+            var annualDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(10, true);
+            var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(postMonth, false);
 
             if (postYear < year && year > currentDate.Year)
                 discountRate = annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);

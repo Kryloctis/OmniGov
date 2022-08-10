@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
                 string searchKey = txtSearch.Text.Trim();
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
+                var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository();
                 var dtpayments  = paymentCollectionRepo.GetRecordsByFilter(date, collectorId, searchKey);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
@@ -133,13 +133,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
                 if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                 {
-                    var paymentCollectionModelList = new List<PaymentCollectionModel>();
+                    var paymentCollectionModelList = new List<PaymentCollectionsModel>();
 
                     foreach (DataGridViewRow row in dgpayments.SelectedRows)
                     {
                         int paymentCollectionId = Convert.ToInt32(row.Cells[0].Value.ToString());
-                        paymentCollectionModelList.Add(new PaymentCollectionModel() { Id = paymentCollectionId });
-                        var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().Delete(paymentCollectionModelList);
+                        paymentCollectionModelList.Add(new PaymentCollectionsModel() { Id = paymentCollectionId });
+                        var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository().Delete(paymentCollectionModelList);
                     }
 
                     LoadRecords();

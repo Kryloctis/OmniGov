@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
                 for (int i = receiptIssuedFrom; i <= receiptIssuedTo; i++)
                 {
-                    bool receiptNoExist = AccFactory.PaymentCollectionRepository().ReceiptExist(i.ToString(), accountableFormNoId);
+                    bool receiptNoExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(i.ToString(), accountableFormNoId);
                    
                     if(!receiptNoExist)
                         dataTable.Rows.Add(i);
@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             try
             {
                 string receiptNo = txtReceipts.Text.Trim();
-                bool receiptExist = AccFactory.PaymentCollectionRepository().ReceiptExist(receiptNo, accountableFormNoId);
+                bool receiptExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(receiptNo, accountableFormNoId);
                 bool receiptValid = DataTableRecieptNos().AsEnumerable().Where(c => c.Field<string>("receipt_no").Equals(receiptNo)).Count() > 0;
 
                 if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Receipt No."))

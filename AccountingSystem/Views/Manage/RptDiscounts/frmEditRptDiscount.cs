@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     IsAdvance = uc.chckBxAdvance.Checked
                 };
 
-                return AccFactory.rptDiscountRepository().Update(model);
+                return AccFactory.RptDiscountRepository().Update(model);
             }
             catch (Exception ex)
             {
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private void LoadRecord() 
         {
-            var dictRptDiscounts = AccFactory.rptDiscountRepository().GetRecordByID(uc.rptDiscountId);
+            var dictRptDiscounts = AccFactory.RptDiscountRepository().GetRecordByID(uc.rptDiscountId);
 
             uc.cmbxMonth.SelectedValue = dictRptDiscounts["month"];
             uc.txtDescription.Text = dictRptDiscounts["description"];

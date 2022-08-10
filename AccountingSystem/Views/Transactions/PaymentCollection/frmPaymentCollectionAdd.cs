@@ -44,7 +44,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var createdBy = Helper.UserId;
 
 
-                var paymentCollectionModel = new PaymentCollectionModel()
+                var paymentCollectionModel = new PaymentCollectionsModel()
                 {
                     CollectingOfficerId = collectingOfficerId,
                     FundId = fundId,
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     paymentCollectionModel.JobOrderId = collectingOfficerId;
                 }
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().InsertWithGeneralPayment(paymentCollectionModel,  new GeneralPaymentsModel() { Quantity = 1});
+                var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository().InsertWithGeneralPayment(paymentCollectionModel,  new GeneralPaymentsModel() { Quantity = 1});
 
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 UpdateReceiptsCount();
@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var amount = Convert.ToDecimal(uc.txtCashTicketsAmount.Text);
                 var createdBy = Helper.UserId;
 
-                var paymentCollectionModel = new PaymentCollectionModel()
+                var paymentCollectionModel = new PaymentCollectionsModel()
                 {
                     CollectingOfficerId = collectingOfficerID,
                     FundId = fundId,
@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     paymentCollectionModel.JobOrderId = collectingOfficerID;
                 }
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository().InsertWithGeneralPayment(paymentCollectionModel, new GeneralPaymentsModel() { Quantity = quantity});
+                var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository().InsertWithGeneralPayment(paymentCollectionModel, new GeneralPaymentsModel() { Quantity = quantity});
 
                 Helper.MessageBoxSuccess("Payment Collection has been saved.");
                 UpdateReceiptsCount();
