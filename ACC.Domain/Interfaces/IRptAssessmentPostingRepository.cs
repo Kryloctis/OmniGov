@@ -5,7 +5,7 @@ using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface IAssessmentPostingRepository : IRepository<AssessmentPostingModel>
+    public interface IRptAssessmentPostingRepository : IRepository<RptAssessmentPostingModel>
     {
         bool IsPropertyPosted(string arpNo);
 
@@ -17,6 +17,6 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetRecordsByArpNo(string arpNo);
 
-        bool BulkInsert(List<AssessmentPostingModel> assessmentPostingModels);
+        bool BulkInsert(List<RptAssessmentPostingModel> assessmentPostingModels);
     }
 }

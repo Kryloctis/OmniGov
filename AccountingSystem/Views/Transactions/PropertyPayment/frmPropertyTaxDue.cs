@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private DataTable DataTableProperties()
         {
             bool isCancelled = chckBxCancelled.Checked;
-            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByOwnerName_IsCancelled(_ownerName, isCancelled);
+            var dtAssessmentPosting = AccFactory.RptAssessmentPostingRepository().GetRecordsByOwnerName_IsCancelled(_ownerName, isCancelled);
             var dataTable = new DataTable();
 
             var dataColumns = new DataColumn[]
@@ -176,7 +176,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private List<TaxDuesModel> GetTaxDues(string completeArpNo)
         {
             var taxDuesList = new List<TaxDuesModel>();
-            var dtAssessmentPosting = AccFactory.AssessmentPostsRepository().GetRecordsByArpNo(completeArpNo);
+            var dtAssessmentPosting = AccFactory.RptAssessmentPostingRepository().GetRecordsByArpNo(completeArpNo);
 
             foreach (DataRow row in dtAssessmentPosting.Rows)
             {
@@ -198,7 +198,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 decimal discountAmount = taxDueComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
 
                 //Penalties
-                int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, year);
+                int previousAssessmentCount = AccFactory.RptAssessmentPostingRepository().PreviousAssessmentPostCount(rowCompleteArpNo, year);
                 int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(year, postedAt, effectivityQuarter, effectivityYear, previousAssessmentCount);
                 decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
                 decimal penaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
@@ -391,7 +391,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         {
             var list = new List<RealPropertyPaymentTaxDueModel>();
 
-            var dictAssessmentPosts = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
+            var dictAssessmentPosts = AccFactory.RptAssessmentPostingRepository().GetRecordBy_ArpNo_Year(completeArpNo, year);
 
             int rowId = Convert.ToInt32(dictAssessmentPosts["id"]);
             string rowCompleteArpNo = dictAssessmentPosts["complete_arp_no"].ToString();
@@ -428,7 +428,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             #region  Penalty
 
             //Penalties
-            int previousAssessmentCount = AccFactory.AssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowYear);
+            int previousAssessmentCount = AccFactory.RptAssessmentPostingRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowYear);
             int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(rowYear, rowPostedAt, rowEffectivityQuarter, rowEffectivityYear, previousAssessmentCount);
             decimal penaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
 

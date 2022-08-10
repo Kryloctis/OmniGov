@@ -2,7 +2,7 @@
 
 namespace RPT.Domain.Models
 {
-    public class AssessmentPostingModel
+    public class RptAssessmentPostingModel
     {
         public int Id { get; set; }
         public string propertyIdentifier { get; set; }

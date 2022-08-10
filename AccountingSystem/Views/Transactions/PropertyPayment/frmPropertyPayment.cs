@@ -157,21 +157,33 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         }
 
-        private void CancelTransaction() 
+        #region Cancel Transaction Methods
+
+        private void CancelTransaction()
         {
             LoadRealPropertyPaymentTaxDues(null);
             ucPaymentInfo.txtPayee.Clear();
             ucPaymentInfo.txtReceipts.Clear();
+            ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
         }
 
         private void btnCancelTransaction_Click(object sender, EventArgs e)
         {
-           
-        }
+            CancelTransaction();
+        } 
+
+        #endregion
+
+
+
+
+        #region Payment Methods
 
         private void btnPay_Click(object sender, EventArgs e)
         {
-       
-        }
+
+        } 
+
+        #endregion
     }
 }

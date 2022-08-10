@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptAssessmentPostingRepository : IAssessmentPostingRepository
+    public class RptAssessmentPostingRepository : IRptAssessmentPostingRepository
     {
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
@@ -22,11 +22,11 @@ namespace ACC.Data
             _mySqlGenericCommands = mySqlGenericCommands;
         }
 
-        public bool BulkInsert(List<AssessmentPostingModel> assessmentPostingModels)
+        public bool BulkInsert(List<RptAssessmentPostingModel> assessmentPostingModels)
         {
             using (var scope = new TransactionScope())
             {
-                foreach (AssessmentPostingModel assessmentPostingModel in assessmentPostingModels) 
+                foreach (RptAssessmentPostingModel assessmentPostingModel in assessmentPostingModels) 
                 {
                     _ = Insert(assessmentPostingModel);
                 }
@@ -41,7 +41,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<AssessmentPostingModel> entityList)
+        public bool Delete(List<RptAssessmentPostingModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -168,7 +168,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(AssessmentPostingModel entity)
+        public bool Insert(RptAssessmentPostingModel entity)
         {
             var parameters = new object[][]
             {
@@ -220,7 +220,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(AssessmentPostingModel entity)
+        public bool Update(RptAssessmentPostingModel entity)
         {
             throw new NotImplementedException();
         }

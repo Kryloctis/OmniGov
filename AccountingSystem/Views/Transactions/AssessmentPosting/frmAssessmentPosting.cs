@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private string GetAssessmentPostingRecord(string arpNo, int year, string parameter) 
         {
-            var dtAssessment = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(arpNo, year);
+            var dtAssessment = AccFactory.RptAssessmentPostingRepository().GetRecordBy_ArpNo_Year(arpNo, year);
 
             if (dtAssessment.Values.Count == 0)
                 return string.Empty;
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowPropertyKind = row["property_kind"].ToString();
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
-                var dictAssessmentPosts = AccFactory.AssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
+                var dictAssessmentPosts = AccFactory.RptAssessmentPostingRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
 
                 string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
@@ -304,7 +304,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             try
             {
-                var assessmentPostingModels = new List<AssessmentPostingModel>();
+                var assessmentPostingModels = new List<RptAssessmentPostingModel>();
 
                 int reportProgress = 0;
 
@@ -337,7 +337,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         DateTime postedAt = DateTime.Now;
                         bool isCancelled = Convert.ToBoolean(Convert.ToInt32((GetRealPropertyRecord(realPropertiesId, "is_cancelled"))));
 
-                        var assessmentPostingModel = new AssessmentPostingModel()
+                        var assessmentPostingModel = new RptAssessmentPostingModel()
                         {
                             propertyIdentifier = GetRealPropertyRecord(realPropertiesId, "property_identifier"),
                             CompleteArpNo = completeArpNo,
@@ -371,7 +371,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     }
                 }
 
-                AccFactory.AssessmentPostsRepository().BulkInsert(assessmentPostingModels);
+                AccFactory.RptAssessmentPostingRepository().BulkInsert(assessmentPostingModels);
             }
             catch (Exception ex)
             {
