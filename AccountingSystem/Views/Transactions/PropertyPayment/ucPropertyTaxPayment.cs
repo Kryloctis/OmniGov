@@ -46,18 +46,18 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             var dataTable = new DataTable();
             dataTable.Columns.Add("receipt_no");
 
-            string collectorId;
+            int collectorId;
 
             var dictJobOrderRepo = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecordByJobOrderUserId(Helper.UserId);
             var dictCollectingOfficerRepo = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
 
             if (dictJobOrderRepo.Values.Count > 1)
-                collectorId = dictJobOrderRepo["job_orders_id"];
+                collectorId = Convert.ToInt32(dictJobOrderRepo["job_orders_id"]);
             else
-                collectorId = dictCollectingOfficerRepo["id"];
+                collectorId = Convert.ToInt32(dictCollectingOfficerRepo["id"]);
 
 
-            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptByCollectorIdAndAccountableFormId(collectorId.ToString(), "9");
+            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectorId, 9);
 
 
             foreach (DataRow row in dtReceiptsIssued.Rows)

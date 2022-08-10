@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private DataTable DataTableAssessmentPost(string searchText) 
         {
             var columns = new string[] {"id", "owner_tin", "owner_name", "barangay_name", "municipality_name", "province_name", "owner_address"};
-            var dtAssessmentPostin = AccFactory.RptAssessmentPostingRepository().GetRecordsBySearch(searchText);
+            var dtAssessmentPostin = AccFactory.RptAssessmentPostsRepository().GetRecordsBySearch(searchText);
             var dtView = new DataView(dtAssessmentPostin);
             return dtView.ToTable(false, columns);
         }

@@ -102,24 +102,24 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
-                var receiptsRepo = AccFactory.ReceiptsRepository();
-                var receiptsDt = receiptsRepo.GetRecords();
+                var receiptsDt = AccFactory.ReceiptsRepository().GetRecords();
 
                 foreach (DataRow row in receiptsDt.Rows)
                 {
                     var receiptsId = Convert.ToInt32(row["id"]);
                     var accountableForm = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
-                    var receiptQuantity = Convert.ToInt32(row["quantity"]);
+                    var quantity = Convert.ToInt32(row["quantity"]);
                     string receiptNumberFrom = Convert.ToInt32(row["receipt_number_from"]).ToString("D7");
                     string receiptNumberTo = Convert.ToInt32(row["receipt_number_to"]).ToString("D7");
 
                     if (accountableForm.ToString().Contains("Tickets"))
-                        row["acc_form_desc"] = $"{accountableForm} ({receiptQuantity - TotalIssued(receiptsId)}) ";
+                        row["acc_form_desc"] = $"{accountableForm} ({quantity - TotalIssued(receiptsId)}) ";
                     else
                         row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
 
                     //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
-                    if ((receiptQuantity - TotalIssued(receiptsId)) <= 0) row.Delete();
+                    if ((quantity - TotalIssued(receiptsId)) == 0) 
+                        row.Delete();
                 }
 
                 cmbReceipt.DataSource = receiptsDt;
@@ -174,7 +174,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 LoadCollectors();
                 LoadReceipts();
-                cmbReceipt_SelectionChangeCommitted(sender, e);
             }
         }
 

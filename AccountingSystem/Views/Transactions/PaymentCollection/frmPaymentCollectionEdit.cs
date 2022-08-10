@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             _uc.LoadAccountableForms();
             _uc.LoadCollectors();
             _uc.LoadFunds();
-            _uc.SelectCurrentLoggedInCollector();
+            //_uc.SelectCurrentLoggedInCollector();
             LoadSelectedValue();
             _uc.GetAccountableFormSerialNumberRange();
             DisableUnEditableFields();
@@ -90,7 +90,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 {
                     Id = _uc.paymentCollectionId,
                     FundId = Convert.ToInt32(_uc.cmbFund.SelectedValue),
-                    GeneralLedgerAccountId = _uc.generalLedgerId,
                     Payee = _uc.txtPayee.Text.Trim(),
                     ReceiptNo = _uc.txtReceiptNumber.Text.Trim(),
                     PaymentDate = Convert.ToDateTime(_uc.dtDateOfCollection.Text.Trim()),
@@ -147,8 +146,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     CollectingOfficerId = Convert.ToInt32(_uc.cmbCollector.SelectedValue),
                     FundId = Convert.ToInt32(_uc.cmbFund.SelectedValue),
                     AccountableFormId = Convert.ToInt32(_uc.cmbAccountableForms.SelectedValue),
-                    GeneralLedgerAccountId = _uc.generalLedgerId,
-                    Quantity = Convert.ToInt32(_uc.txtCashTicketQuantity.Value),
                     PaymentDate = Convert.ToDateTime(_uc.dtCashTicketDateOfCollection.Text.Trim()),
                     Amount = Convert.ToDecimal(_uc.txtCashTicketsAmount.Text),
                     CreatedBy = _uc.userId,

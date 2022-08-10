@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private string GetAssessmentPostingRecord(string arpNo, int year, string parameter) 
         {
-            var dtAssessment = AccFactory.RptAssessmentPostingRepository().GetRecordBy_ArpNo_Year(arpNo, year);
+            var dtAssessment = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(arpNo, year);
 
             if (dtAssessment.Values.Count == 0)
                 return string.Empty;
@@ -110,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowPropertyKind = row["property_kind"].ToString();
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
-                var dictAssessmentPosts = AccFactory.RptAssessmentPostingRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
+                var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
 
                 string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
@@ -371,7 +371,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     }
                 }
 
-                AccFactory.RptAssessmentPostingRepository().BulkInsert(assessmentPostingModels);
+                AccFactory.RptAssessmentPostsRepository().BulkInsert(assessmentPostingModels);
             }
             catch (Exception ex)
             {

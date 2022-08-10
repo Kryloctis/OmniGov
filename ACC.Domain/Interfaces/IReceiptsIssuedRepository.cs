@@ -8,8 +8,8 @@ namespace ACC.Domain.Interfaces
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
         bool UpdateLastIssued(ReceiptsIssuedModel entity);
         bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
-        DataTable GetIssuedReceiptByCollectorIdAndAccountableFormId(string coid, string formid);
-        DataTable GetIssuedReceiptByCollectorId(int collectorId);
+        DataTable GetIssuedReceiptToCollector(int collectingOfficerID, int accountableFormID);
+        DataTable GetCollectorsAccountbleForms(int collectorId);
         DataTable GetAccountabilityForAccountableForms(string reportNumber);
         DataTable GetReturnedReceipts();
         DataTable GetReturnedReceiptsBySearch(string searchKey);
