@@ -145,7 +145,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(903, 29);
+            this.label6.Location = new System.Drawing.Point(904, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 13;
@@ -238,12 +238,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             this.cbCollectorTypeJO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbCollectorTypeJO.AutoSize = true;
-            this.cbCollectorTypeJO.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cbCollectorTypeJO.Location = new System.Drawing.Point(641, 8);
+            this.cbCollectorTypeJO.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbCollectorTypeJO.Location = new System.Drawing.Point(643, 5);
             this.cbCollectorTypeJO.Name = "cbCollectorTypeJO";
-            this.cbCollectorTypeJO.Size = new System.Drawing.Size(143, 16);
+            this.cbCollectorTypeJO.Size = new System.Drawing.Size(82, 17);
             this.cbCollectorTypeJO.TabIndex = 41;
-            this.cbCollectorTypeJO.Text = " Show Job Order Collectors";
+            this.cbCollectorTypeJO.Text = "Job Orders";
             this.cbCollectorTypeJO.UseVisualStyleBackColor = true;
             this.cbCollectorTypeJO.CheckedChanged += new System.EventHandler(this.cbCollectorType_CheckedChanged);
             // 

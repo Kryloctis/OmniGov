@@ -156,13 +156,15 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
-        public DataTable GetCollectorsAccountbleForms(int collectingOfficerID)
+        public DataTable GetCollectorsAccountbleForms(int collectingOfficerID, bool collectorIsJO)
         {
             var parameter = new object[][] {
                 new object[]{"@collecting_officer_id", DbType.Int32, collectingOfficerID }
             };
 
-            string query = $"SELECT accountable_form_id, accountable_forms, quantity, receipt_issued_from, receipt_issued_to, last_issued FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND ISNULL(job_orders_id) OR job_orders_id = @collecting_officer_id AND is_returned = false";
+            string columnFilter = collectorIsJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
+
+            string query = $"SELECT accountable_form_id, accountable_forms, quantity, receipt_issued_from, receipt_issued_to, last_issued FROM {viewTableName} WHERE is_returned = false AND {columnFilter} = @collecting_officer_id";
 
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);

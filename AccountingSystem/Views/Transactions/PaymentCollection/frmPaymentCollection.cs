@@ -20,35 +20,30 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadCollectors();
             SelectCurrentLoggedInCollector();
             LoadRecords();
+
+
+            
         }
 
-        private void SelectCurrentLoggedInCollector()
-        {
-            if (cmbCollector.Items.Count == 0) return;
 
+        internal void SelectCurrentLoggedInCollector()
+        {
             var usersRepo = AccFactory.UsersRepository();
-            Dictionary<string, string> collectorDict = new();
 
             if (usersRepo.LinkedCollector(Helper.UserId))
             {
-                cmbCollector.Enabled = false;
                 cbCollectorTypeJO.Enabled = false;
-
-                collectorDict = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
-                cmbCollector.SelectedValue = collectorDict["id"];
+                cmbCollector.Enabled = false;
+                cmbCollector.SelectedValue = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId)["id"];
+                return;
             }
-
             else if (usersRepo.LinkedJobOrder(Helper.UserId))
             {
-                cmbCollector.Enabled = false;
-                cbCollectorTypeJO.Enabled = false;
                 cbCollectorTypeJO.Checked = true;
-
-                collectorDict = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
-                cmbCollector.SelectedValue = collectorDict["id"];
+                cbCollectorTypeJO.Enabled = false;
+                cmbCollector.Enabled = false;
+                cmbCollector.SelectedValue = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId)["id"];
             }
-
-            return;
         }
 
         internal void LoadCollectors()
@@ -62,11 +57,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (cbCollectorTypeJO.Checked)
                     dtCollector = collectingOfficerHasJORepo.GetRecords();
                 else
-                   dtCollector = collectingOfficerRepository.GetRecords();
-               
-                cmbCollector.DataSource = dtCollector;
-                cmbCollector.ValueMember = "id";
-                cmbCollector.DisplayMember = "fullname";
+                    dtCollector = collectingOfficerRepository.GetRecords();
+
+
+                HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
             }
             catch (Exception ex)
             {
@@ -83,7 +77,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 string searchKey = txtSearch.Text.Trim();
 
                 var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
-                var dtpayments  = paymentCollectionRepo.GetRecordsByFilter(date, collectorId, searchKey);
+                var dtpayments  = paymentCollectionRepo.FilterRecords(date, collectorId, searchKey);
 
                 HelperLoadRecords.PaymentDatagridView(dtpayments, dgpayments);
 

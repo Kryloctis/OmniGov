@@ -73,6 +73,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 LoadCollectors();
                 SelectCurrentLoggedInCollector();
                 LoadCollectorsAccountableForms();
+                GetAccountableFormSerialNumberRange();
+                SetNextReceiptNumber();
             }
         }
 
@@ -80,10 +82,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             try
             {
-                var collectorsId = Convert.ToInt32(cmbCollector.SelectedValue);
-                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-                var dtAccountableForms = receiptIssuedRepo.GetCollectorsAccountbleForms(collectorsId);
+                var collectingOfficerID  = Convert.ToInt32(cmbCollector.SelectedValue);
+                bool collectingOfficerIsJO = cbJOCollector.Checked;
 
+                var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
+                var dtAccountableForms = receiptIssuedRepo.GetCollectorsAccountbleForms(collectingOfficerID, collectingOfficerIsJO);
+
+                foreach (DataRow row in dtAccountableForms.Rows)
+                {
+                    if (row["last_issued"].ToString() == row["receipt_issued_to"].ToString())
+                        row.Delete();
+                }
+
+                dtAccountableForms.AcceptChanges();
                 cmbAccountableForms.DataSource = dtAccountableForms;
                 cmbAccountableForms.ValueMember = "accountable_form_id";
                 cmbAccountableForms.DisplayMember = $"accountable_forms";
@@ -392,12 +403,15 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
             var lastUsedReceipt = AccFactory.PaymentCollectionRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
+
             if (lastUsedReceipt != 0)
-            {
                 txtReceiptNumber.Text = (lastUsedReceipt + 1).ToString("D7");
-            }
-            else
+
+            else if (lastUsedReceipt == 0)
                 txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
+
+            else
+                txtReceiptNumber.Text = string.Empty;
         }
 
         private DataTable DatatableAccounts()
@@ -540,6 +554,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             LoadCollectorsAccountableForms();
             CreatePaymentCollection();
+            SetNextReceiptNumber();
         }
 
         internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
@@ -569,6 +584,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {
             LoadCollectors();
+            LoadCollectorsAccountableForms();
+            SetNextReceiptNumber();
         }
 
         #endregion

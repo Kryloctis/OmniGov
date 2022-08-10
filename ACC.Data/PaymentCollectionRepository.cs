@@ -107,7 +107,7 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
-        public DataTable GetRecordsByFilter(string date, int collectorId, string searchKey)
+        public DataTable FilterRecords(string date, int collectorId, string searchKey)
         {
             var parameter = new object[][]
             {
