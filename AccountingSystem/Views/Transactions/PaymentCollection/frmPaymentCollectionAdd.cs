@@ -7,13 +7,11 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 {
     public partial class frmPaymentCollectionAdd : Form
     {
-        private readonly frmPaymentCollection _frmPaymentCollection;
         private readonly ucPaymentCollection uc;
 
-        public frmPaymentCollectionAdd(frmPaymentCollection frmPaymentCollection)
+        public frmPaymentCollectionAdd()
         {
             InitializeComponent();
-            _frmPaymentCollection = frmPaymentCollection;
             uc = ucPaymentCollection1;
             uc.userId = Helper.UserId;
         }

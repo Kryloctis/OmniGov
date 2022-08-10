@@ -169,7 +169,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // 
             // dtDateOfCollection
             // 
-            this.dtDateOfCollection.Enabled = false;
             this.dtDateOfCollection.Location = new System.Drawing.Point(174, 12);
             this.dtDateOfCollection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtDateOfCollection.Name = "dtDateOfCollection";
@@ -255,10 +254,10 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             // cbJOCollector
             // 
             this.cbJOCollector.AutoSize = true;
-            this.cbJOCollector.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbJOCollector.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cbJOCollector.Location = new System.Drawing.Point(181, 13);
             this.cbJOCollector.Name = "cbJOCollector";
-            this.cbJOCollector.Size = new System.Drawing.Size(85, 17);
+            this.cbJOCollector.Size = new System.Drawing.Size(85, 19);
             this.cbJOCollector.TabIndex = 23;
             this.cbJOCollector.Text = "Job Orders ";
             this.cbJOCollector.UseVisualStyleBackColor = true;

@@ -112,7 +112,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         #region Form Events
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmPaymentCollectionAdd(this).ShowDialog();
+            _ = new frmPaymentCollectionAdd().ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

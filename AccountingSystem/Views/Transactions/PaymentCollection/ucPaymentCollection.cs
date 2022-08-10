@@ -14,8 +14,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         internal int fundId;
         internal int generalLedgerId;
         internal int userId;
-        internal int serialNumberFrom;
-        internal int serialNumberTo;
+        internal int receiptNumberFrom;
+        internal int receiptlNumberTo;
         internal int serialNumber;
 
         internal bool isCashTicket;
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[9];
+            var errorArray = new string[10];
             errorArray[0] = epCollectingOfficer.GetError(cmbCollector);
             errorArray[1] = epFund.GetError(cmbFund);
             errorArray[2] = epAccountableForm.GetError(cmbAccountableForms);
@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             errorArray[6] = epCashTicketQuantity.GetError(txtCashTicketQuantity);
             errorArray[7] = epCashTicketAmount.GetError(txtCashTicketsAmount);
             errorArray[8] = epORAmount.GetError(txtAmount);
+            errorArray[9] = epORDateOfCollection.GetError(dtDateOfCollection);
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -53,8 +54,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtPayee.Clear();
             dtDateOfCollection.Value = DateTime.Now;
             txtAmount.Value = Convert.ToDecimal("0.00");
-            serialNumberFrom = 0;
-            serialNumberTo = 0;
+            receiptNumberFrom = 0;
+            receiptlNumberTo = 0;
             serialNumber = 0;
 
             isCashTicket = false;
@@ -77,8 +78,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 SwitchFields();
 
                 SelectCurrentLoggedInCollector();
-
-
             }
         }
 
@@ -168,10 +167,19 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        internal bool IsReceiptNumberBetweenFromAndTo(int receiptNumber)
+        internal bool IsReceiptNumberValid(int receiptNumber)
         {
-            //return (receiptNumber >= serialNumberFrom) && (receiptNumber <= serialNumberTo);
-            return false; //temporary
+            if(receiptNumber <= 0)
+                return false;
+
+            if((receiptNumber < receiptNumberFrom) || (receiptNumber > receiptlNumberTo))
+                return false;
+
+            if (ReceiptNumberHasCollection())
+                return false;
+          
+
+            return true;
         }
 
         internal void GetAccountableFormSerialNumberRange()
@@ -182,8 +190,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerId, accountableFormId);
             if (dtReceiptIssued.Rows.Count != 0)
             {
-                serialNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
-                serialNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
+                receiptNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
+                receiptlNumberTo = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_to"]);
             }
         }
 
@@ -199,7 +207,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             Helper.ClearErrorComboBox(epCollectingOfficer, cmbCollector);
         }
 
-
         private void cmbfund_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epFund, cmbFund, "Funds.");
@@ -212,7 +219,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbAccountableForms_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForm, cmbAccountableForms, "Accountable Forms!");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountableForm, cmbAccountableForms, "Accountable Forms.");
         }
 
         private void cmbAccountableForms_Validated(object sender, EventArgs e)
@@ -237,7 +244,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             DateTime todaysDate = DateTime.Now;
             DateTime dateOfCollection = dtDateOfCollection.Value;
-            e.Cancel = Helper.ShowErrorDateTimePickerRange(epORDateOfCollection, todaysDate, dateOfCollection, dtDateOfCollection, "Date of Collection");
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(epORDateOfCollection, todaysDate, dateOfCollection, dtDateOfCollection, "Date of collection");
+
+         
         }
 
         private void dtDateOfCollection_Validated(object sender, EventArgs e)
@@ -255,19 +264,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             var receiptNumber = Convert.ToInt32(txtReceiptNumber.Text.Trim());
 
-            if (ReceiptNumberHasCollection())
+            if (IsReceiptNumberValid(receiptNumber) == false)
             {
-                epSerialNo.SetError(txtReceiptNumber, "Receipt number already recorded.");
+                epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
                 e.Cancel = true;
                 return;
             }
-
-            //if (IsReceiptNumberBetweenFromAndTo(receiptNumber) == false || receiptNumber <= 0)
-            //{
-            //    epSerialNo.SetError(txtReceiptNumber, "Invalid Receipt number.");
-            //    e.Cancel = true;
-            //    return;
-            //}
         }
 
         private bool ReceiptNumberHasCollection()
@@ -278,17 +280,12 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 int accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
                 var paymentCollectionId = this.paymentCollectionId;
 
-                var paymentCollectionRepo = AccFactory.PaymentCollectionRepository();
-
-
-                bool isReceiptRecorded;
 
                 if (isSave)
-                    isReceiptRecorded = paymentCollectionRepo.ReceiptExist(receiptNumber, accountableFormId);
+                    return AccFactory.PaymentCollectionRepository().ReceiptExist(receiptNumber, accountableFormId);
                 else
-                    isReceiptRecorded = paymentCollectionRepo.ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
+                    return AccFactory.PaymentCollectionRepository().ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
 
-                return isReceiptRecorded;
             }
             catch (Exception)
             {
@@ -333,7 +330,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             DateTime todaysDate = DateTime.Now;
             DateTime dateOfCollection = dtCashTicketDateOfCollection.Value;
-            e.Cancel = Helper.ShowErrorDateTimePickerRange(epCashTicketDateOfCollection, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of Collection");
+            e.Cancel = Helper.ShowErrorDateTimePickerRange(epCashTicketDateOfCollection, todaysDate, dateOfCollection, dtCashTicketDateOfCollection, "Date of collection");
         }
 
         private void dtCashTicketDateOfCollection_Validated(object sender, EventArgs e)
@@ -374,9 +371,29 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 return;
 
             if (paymentCollectionId == 0)    //accountableForm
-                InsertPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
+                InsertPaymentCollectionTransaction();
             else
                 EditPaymentCollectionTransaction(accountableFormDRV, collectingOfficerDRV);
+        }
+
+
+        private void InsertPaymentCollectionTransaction()
+        {
+            var collectorId = Convert.ToInt32(cmbCollector.SelectedValue);
+            var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+
+            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
+            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
+         
+            if (dtReceiptIssued.Rows.Count == 0)   //if all receipt has been used.
+            {
+                Helper.MessageBoxSuccess("All Receipts has been recorded");
+                EnableDisableNonCashTicketsFields(false);
+                return;
+            }
+
+            EnableDisableNonCashTicketsFields(true);
+            SetNextReceiptNumber();
         }
 
         private void EnableDisableNonCashTicketsFields(bool enable)
@@ -395,26 +412,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtAmount.Enabled = enable;
         }
 
-        private void InsertPaymentCollectionTransaction(DataRowView accountableFormDRV, DataRowView collectingOfficerDRV)
-        {
-            var collectorId = Convert.ToInt32(collectingOfficerDRV[0].ToString());
-            var accountableFormId = Convert.ToInt32(accountableFormDRV[0].ToString());
-
-            var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-            var dtReceiptIssued = receiptIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
-            var dtReceiptIssuedRowCount = dtReceiptIssued.Rows.Count;
-
-            if (dtReceiptIssuedRowCount == 0)   //if all receipt has been used.
-            {
-                Helper.MessageBoxSuccess("All Receipts has been recorded");
-                EnableDisableNonCashTicketsFields(false);
-                return;
-            }
-
-            EnableDisableNonCashTicketsFields(true);
-            SetNextReceiptNumber();
-        }
-
         private void SetNextReceiptNumber()
         {
             var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
@@ -426,12 +423,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 txtReceiptNumber.Text = (lastUsedReceipt + 1).ToString("D7");
             }
             else
-            {
-                var dtReceiptsOfCollector = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerID, accountableFormID);
-
-                serialNumberFrom = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_from"]);
-                txtReceiptNumber.Text = serialNumberFrom.ToString("D7");
-            }
+                txtReceiptNumber.Text = receiptNumberFrom.ToString("D7");
         }
 
         private DataTable DatatableAccounts()
@@ -550,12 +542,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbAccount_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
+            if (e.KeyCode == Keys.Enter || !string.IsNullOrEmpty(cmbAccount.Text) && cmbAccount.Focused)
             {
                 LoadAccounts();
                 cmbAccount.DroppedDown = true;
             }
         }
+
         private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
             generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
@@ -572,19 +565,27 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmbCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //DataRowView collector = cmbCollector.SelectedItem as DataRowView;
-            //var collectorId = int.Parse(collector[0].ToString());
-
             LoadCollectorsAccountableForms();
             SwitchFields();
-            //CreatePaymentCollection();
+            CreatePaymentCollection();
         }
 
         internal void cmbforms_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //GetAccountableFormFaceValue();
+            GetAccountableFormFaceValue();
             SwitchFields();
             CreatePaymentCollection();
+            GetAccountableForms_FormAndTo();
+        }
+
+        private void GetAccountableForms_FormAndTo()
+        {
+            var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
+            var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
+            var dtReceiptsOfCollector = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerID, accountableFormID);
+
+            receiptNumberFrom = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_from"]);
+            receiptlNumberTo = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_to"]);
         }
 
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
