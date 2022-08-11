@@ -399,9 +399,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         }
         #endregion
 
-        #region Breakdown of TaxDues for property payment form
-   
-        private List<RealPropertyPaymentTaxDueModel> GetDetailedTaxDues(string completeArpNo, int year)
+        #region Get Current Detailed Tax Dues
+
+        private List<RealPropertyPaymentTaxDueModel> GetCurrentDetailedTaxDues(string completeArpNo, int year)
         {
             var list = new List<RealPropertyPaymentTaxDueModel>();
 
@@ -415,14 +415,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             int rowEffectivityYear = Convert.ToInt32(dictAssessmentPosts["effectivity_year"]);
             int rowEffectivityQuarter = Convert.ToInt32(dictAssessmentPosts["effectivity_quarterly"]);
 
-            decimal basicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
-
-            decimal sefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
-
             #region Tax Due
 
-            decimal basicTaxDue = taxDueComputations.GetBasicTaxDue(basicRate, rowAssessedValue);
-            decimal sefTaxDue = taxDueComputations.GetSefTaxDue(sefRate, rowAssessedValue);
+            decimal basicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
+            decimal sefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
+            decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(basicRate, rowAssessedValue);
+            decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(sefRate, rowAssessedValue);
 
             #endregion
 
@@ -432,11 +430,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             bool discountIsAdvance = false;
             decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowPostedAt, rowYear, ref discountIsAdvance);
 
-            //Basic Discount
-            decimal basicDiscountAmount = taxDueComputations.GetDiscount(discountRate, basicTaxDue);
-
-            //SEF Discount
-            decimal sefDiscountAmount = taxDueComputations.GetDiscount(discountRate, sefTaxDue);
+            decimal basicDiscountAmount = taxDueComputations.GetDiscount(discountRate, basicTaxDueAmount);
+            decimal sefDiscountAmount = taxDueComputations.GetDiscount(discountRate, sefTaxDueAmount);
 
             #endregion
 
@@ -447,18 +442,16 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             int delinquentMonths = taxDueComputations.GetCountMonthsDelinquent(rowYear, rowPostedAt, rowEffectivityQuarter, rowEffectivityYear, previousAssessmentCount);
             decimal penaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
 
-            //Basic Penalty
-            decimal basicPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDue);
 
-            //SEF Penalty
-            decimal sefPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDue);
+            decimal basicPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDueAmount);
+            decimal sefPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDueAmount);
 
             #endregion
 
             #region Total Tax Due
 
-            decimal totalBasicTaxDue = (basicTaxDue + basicPenaltyAmount) - basicDiscountAmount;
-            decimal totalSefTaxDue = (sefTaxDue + sefPenaltyAmount) - sefDiscountAmount;
+            decimal totalBasicTaxDue = (basicTaxDueAmount + basicPenaltyAmount) - basicDiscountAmount;
+            decimal totalSefTaxDue = (sefTaxDueAmount + sefPenaltyAmount) - sefDiscountAmount;
 
             #endregion
 
@@ -468,32 +461,31 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 Year = rowYear,
                 CompleteArpNo = rowCompleteArpNo,
                 TaxType = "Basic",
-                TaxDue = basicTaxDue,
+                TaxDue = basicTaxDueAmount,
                 Discount = basicDiscountAmount,
                 Penalty = basicPenaltyAmount,
                 TotalTaxDue = totalBasicTaxDue
             };
-
-            var sefMode = new RealPropertyPaymentTaxDueModel()
+            var sefModel = new RealPropertyPaymentTaxDueModel()
             {
                 AssessmentPostId = rowId,
                 Year = rowYear,
                 CompleteArpNo = rowCompleteArpNo,
                 TaxType = "SEF",
-                TaxDue = sefTaxDue,
+                TaxDue = sefTaxDueAmount,
                 Discount = sefDiscountAmount,
                 Penalty = sefPenaltyAmount,
                 TotalTaxDue = totalSefTaxDue
             };
 
             list.Add(basicModel);
-            list.Add(sefMode);
+            list.Add(sefModel);
 
 
             return list;
         }
 
-        private void LoadDetailedTaxDues()
+        private void LoadCurrentDetailedTaxDues()
         {
             try
             {
@@ -506,7 +498,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                     int year = Convert.ToInt32(row.Cells["year"].Value);
 
                     if (isChecked)
-                        list.AddRange(GetDetailedTaxDues(completeArpNo, year)); 
+                        list.AddRange(GetCurrentDetailedTaxDues(completeArpNo, year)); 
                 }
 
                 _frmPropertyPayment.LoadRealPropertyPaymentTaxDues(list);
@@ -519,7 +511,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         #endregion
 
-
+        //Tax Dues for Saving
         private void ApplyTaxDues() 
         {
             var rptTaxDuesModelList = new List<RptTaxDuesModel>();
@@ -527,6 +519,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             foreach (DataRow row in dtDgvTaxDues.Rows)
             {
+                bool isChecked = Convert.ToBoolean(row["is_checked"]);
                 int assessmentPostsId = Convert.ToInt32(row["id"]);
                 decimal discountRate = Convert.ToDecimal(row["discount_rate"]);
                 bool discountIsAdvance = Convert.ToBoolean(row["discount_is_advance"]);
@@ -538,12 +531,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                     IsAdvance = discountIsAdvance
                 };
 
-                rptTaxDuesModelList.Add(rptTaxDuesModel);
+                if(isChecked)
+                    rptTaxDuesModelList.Add(rptTaxDuesModel);
             }
 
             _frmPropertyPayment.rptTaxDuesModels = rptTaxDuesModelList;
         }
-
 
         private void btnApply_Click(object sender, EventArgs e)
         {
@@ -553,7 +546,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 return;
             }
 
-            LoadDetailedTaxDues();
+            LoadCurrentDetailedTaxDues();
             ApplyTaxDues();
             Close();
         }

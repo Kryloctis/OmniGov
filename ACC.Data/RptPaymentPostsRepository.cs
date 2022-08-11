@@ -13,6 +13,7 @@ namespace ACC.Data
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private IRptTaxDuesRepository _rptTaxDuesRepository;
         private readonly string tableName = "rpt_payment_posts";
+        private readonly string viewTableName = "view_rpt_payment_posts";
 
         public RptPaymentPostsRepository(MySqlGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
         {
@@ -87,6 +88,27 @@ namespace ACC.Data
                 scope.Complete();
                 return true;
             }
+        }
+
+        public DataTable GetViewRecordsByDateTaxPayerName(DateTime dateFrom, DateTime dateTo, string taxPayerName)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayer_name", DbType.String, taxPayerName},
+                new object[] { "@date_from", DbType.DateTime, dateFrom},
+                new object[] { "@date_to", DbType.DateTime, dateTo}
+            };
+
+            string filter;
+
+            if (dateFrom.Date == dateTo.Date)
+                filter = string.Empty;
+            else
+                filter = "AND payment_date BETWEEN @date_from AND @date_to";
+
+            string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name = @taxpayer_name {filter}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

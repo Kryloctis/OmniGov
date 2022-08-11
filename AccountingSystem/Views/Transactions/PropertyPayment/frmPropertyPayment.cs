@@ -125,11 +125,13 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             txtProvince.Text = paymentTaxPayerInfo.ProvinceName;
             txtAddress.Text = paymentTaxPayerInfo.Address;
             btnGetTaxDue.Enabled = true;
+            btnPaymentHistory.Enabled = true;
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerPaymentHistory(this).ShowDialog();
+            string taxPayerName = txtTaxpayer.Text.Trim();
+            _ = new frmTaxPayerPaymentHistory(this, taxPayerName).ShowDialog();
         }
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
@@ -160,10 +162,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         }
 
-
         #region Cancel Transaction Methods
 
-        private void CancelTransaction()
+        internal void CancelTransaction()
         {
             LoadRealPropertyPaymentTaxDues(null);
             ucPaymentInfo.ResetForm();

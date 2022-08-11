@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnFindTaxPayer = new System.Windows.Forms.ToolStripButton();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnTransactions = new System.Windows.Forms.ToolStripButton();
+            this.btnPaymentHistory = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -93,7 +93,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnFindTaxPayer,
             this.btnNew,
             this.toolStripSeparator1,
-            this.btnTransactions});
+            this.btnPaymentHistory});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5);
@@ -129,16 +129,17 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
             // 
-            // btnTransactions
+            // btnPaymentHistory
             // 
-            this.btnTransactions.Image = global::AccountingSystem.Properties.Resources.list_money_banknotes_28px;
-            this.btnTransactions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnTransactions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTransactions.Name = "btnTransactions";
-            this.btnTransactions.Size = new System.Drawing.Size(99, 47);
-            this.btnTransactions.Text = "Payment History";
-            this.btnTransactions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnTransactions.Click += new System.EventHandler(this.btnTransactions_Click);
+            this.btnPaymentHistory.Enabled = false;
+            this.btnPaymentHistory.Image = global::AccountingSystem.Properties.Resources.list_money_banknotes_28px;
+            this.btnPaymentHistory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPaymentHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPaymentHistory.Name = "btnPaymentHistory";
+            this.btnPaymentHistory.Size = new System.Drawing.Size(99, 47);
+            this.btnPaymentHistory.Text = "Payment History";
+            this.btnPaymentHistory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPaymentHistory.Click += new System.EventHandler(this.btnTransactions_Click);
             // 
             // splitContainer1
             // 
@@ -542,7 +543,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private System.Windows.Forms.ToolStripButton btnFindTaxPayer;
         private System.Windows.Forms.ToolStripButton btnNew;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnTransactions;
+        private System.Windows.Forms.ToolStripButton btnPaymentHistory;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel2;

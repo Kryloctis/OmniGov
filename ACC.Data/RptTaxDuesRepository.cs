@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_tax_dues";
+        private readonly string viewTableName = "view_rpt_tax_dues";
 
         public RptTaxDuesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
@@ -64,6 +65,18 @@ namespace ACC.Data
         public bool Update(RptTaxDuesModel entity)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentPostsId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_payment_posts_id", DbType.Int32, rptPaymentPostsId }
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_payment_posts_id = @rpt_payment_posts_id";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }
