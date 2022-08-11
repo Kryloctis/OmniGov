@@ -73,10 +73,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 HelperLoadRecords.TaxPayerProperties(dataGridView1, DataTableProperties());
                 Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_checked", chckBoxProperties);
                 LoadTaxDues(dataGridView1, dataGridView2);
-
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
@@ -238,6 +239,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 if (dgvProperties.Rows.Count < 1)
                     return;
 
@@ -259,6 +262,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 txtTotalAvgTaxDue.Text = GetTotalTaxDues(dgvTaxDues).ToString("N2");
                 Helper.CheckUncheckCheckBoxHeader(dataGridView2, "is_checked", chckBxTaxDues);
                 EnableDisableButtons(btnPrintTaxBill, btnApply, dataGridView2);
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {
