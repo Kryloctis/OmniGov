@@ -151,7 +151,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-
         internal void TotalCollections()
         {
             string TotalCollections;
@@ -177,7 +176,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
         }
-
 
         private void btndelete_Click(object sender, EventArgs e)
         {
@@ -220,13 +218,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 return;
             }
             
-
-            if (isSaveFunction == true)
+            if (isSaveFunction)
                 reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
             else
                 reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
-            if (reportNoExist == true)
+
+            if (reportNoExist)
             {
                 epReportNo.SetError(txtReport, "Report number already existed.");
                 e.Cancel = true;

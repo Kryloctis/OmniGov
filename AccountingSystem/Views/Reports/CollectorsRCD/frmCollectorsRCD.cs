@@ -12,7 +12,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
     public partial class frmCollectorsRCD : Form
     {
         internal readonly ucCollectorsRCD uc;
-        private List<CollectorReportPaymentModel> data;
+        private List<CollectorReportPaymentModel> collectorPaymentReportList;
 
         public frmCollectorsRCD()
         {
@@ -52,9 +52,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
             }
 
+            CheckRCDStatus(uc.txtReport.Text.Trim());
             ResetLocalControls();
             uc.ResetForm();
-            CheckRCDStatus(uc.txtReport.Text.Trim());
         }
 
         private bool UpdateData()
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             var isJOCollectingOfficer = uc.cbJOCollector.Checked;
             var collectorID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-            var jobOrderID = 0;
+            int? jobOrderID = null;
             var reportNo = uc.txtReport.Text.Trim();
             var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
             var reportFund = uc.fundId;
@@ -151,41 +151,36 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 return false;
             }
 
-            AccFactory.CollectorReportRepository().Insert(CollectorReportModelData());
+            return AccFactory.CollectorReportRepository().InsertWithCollectorReportPayments(CollectorReportModelData(), CollectorReportPaymentModelData());
 
+        }
 
-
-
-            data = new List<CollectorReportPaymentModel>();
-            data.Clear();
+        private List <CollectorReportPaymentModel> CollectorReportPaymentModelData()
+        {
+            collectorPaymentReportList = new List<CollectorReportPaymentModel>();
+            collectorPaymentReportList.Clear();
 
             foreach (DataGridViewRow item in uc.dgPayments.Rows)
             {
-                var CollectorsReportId = GetCollectorsReportId();
                 var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
 
-                var collectorReportPaymentModel = new CollectorReportPaymentModel()
+                var collectorReportPaymentModel = new CollectorReportPaymentModel() 
                 {
-                       
-                    CollectorsReportId = CollectorsReportId,
                     PaymentCollectionsId = PaymentCollectionsId
                 };
 
-                AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
+                collectorPaymentReportList.Add(collectorReportPaymentModel);
             }
 
-            return true;
-            
+            return collectorPaymentReportList;
         }
-
 
         private int GetCollectorsReportId()
         {
             var collectorId = uc.collectorId;
             var reportNumber = uc.txtReport.Text;
 
-            int collectorsReportId = AccFactory.CollectorReportRepository().GetReportId(collectorId, reportNumber);
-            return collectorsReportId;
+            return AccFactory.CollectorReportRepository().GetReportID(collectorId, reportNumber);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

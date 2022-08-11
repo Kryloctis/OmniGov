@@ -12,5 +12,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByReportNo(string reportNo);
         DataTable GetCollectorsReportByReportNo(string reportNo);
         bool Append(List<CollectorReportPaymentModel> entityList);
+
     }
 }
