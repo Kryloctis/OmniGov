@@ -195,22 +195,25 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 var collectorReportRepo = AccFactory.CollectorReportRepository();
                 var rcdData = collectorReportRepo.GetRecordByID(reportNo);
 
-                var jobOrderIdChecker = string.IsNullOrEmpty(rcdData["job_orders_id"]) ? "0" : rcdData["job_orders_id"];
-
                 uc.reportId = (ushort)Convert.ToInt32(rcdData["id"]);
                 uc.collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
-                uc.jobOrderId = (ushort)Convert.ToInt16(jobOrderIdChecker);
+                uc.jobOrderId = (ushort)Convert.ToInt16(string.IsNullOrEmpty(rcdData["job_orders_id"]) ? 0 : rcdData["job_orders_id"]);
                 uc.fundId = (byte)Convert.ToInt32(rcdData["funds_id"]);
                 uc.flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == Convert.ToInt16(rcdData["funds_id"])) ? r.Checked = true : r.Checked = false);
-
-                if (uc.jobOrderId != 0)
-                    uc.cmbCollector.SelectedValue = rcdData["job_orders_id"];
-                else
-                    uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
-               
                 uc.txtReport.Text = rcdData["report_no"];
                 uc.dtRCDDate.Value = Convert.ToDateTime(rcdData["date"]);
 
+                if (uc.jobOrderId != 0)
+                {
+                    uc.cbJOCollector.Checked =  true;
+                    uc.cmbCollector.SelectedValue = rcdData["job_orders_id"];
+                }
+                else
+                {
+                    uc.cbJOCollector.Checked = false;
+                    uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
+                }
+                
                 var collectionOfPaymentReportsRepo = AccFactory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);

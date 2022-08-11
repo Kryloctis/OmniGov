@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             InitializeComponent();
         }
 
-
         internal string GetFormErrors()
         {
             var errorArray = new string[1];

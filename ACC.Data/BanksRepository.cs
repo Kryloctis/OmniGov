@@ -13,12 +13,10 @@ namespace ACC.Data
         private readonly IDbGenericCommands _dbGenericCommands;
 
         private readonly string tableName = "banks";
-
         public BanksRepository(IDbGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
-
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -30,7 +28,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int32, Id},
                 };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id";
+                string query = $"SELECT account_no, bank_name, created_at, updated_at FROM {tableName} WHERE id = @id";
 
                 using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
                 {
@@ -38,7 +36,7 @@ namespace ACC.Data
                         return record;
 
                     record.Add("account_no", reader.Rows[0]["account_no"].ToString());
-                    record.Add("bank_name", reader.Rows[0]["bank_name"].ToString());
+                    record.Add("bank_name",  reader.Rows[0]["bank_name"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
@@ -50,7 +48,6 @@ namespace ACC.Data
 
             return record;
         }
-
         public DataTable GetRecords()
         {
             try
@@ -83,8 +80,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
         public bool Update(BanksModel entity)
         {
             var parameters = new object[][]
@@ -97,8 +92,6 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET account_no = @account_no, bank_name = @bank_name WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
-
-
         public bool Delete(List<BanksModel> entityList)
         {
             try
@@ -125,7 +118,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
         public int CountRecords()
         {
             try
@@ -139,8 +131,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
         public bool IdExist(int id)
         {
             try
@@ -163,7 +153,6 @@ namespace ACC.Data
 
             return false;
         }
-
         public bool CodeExist(string accountCode)
         {
             try
@@ -186,7 +175,6 @@ namespace ACC.Data
 
             return false;
         }
-
         public bool CodeExist(string accountCode, int bankId)
         {
             var parameters = new object[][]

@@ -46,8 +46,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void LoadRCDCounters()
         {
-            //int fundName = Convert.ToInt32(cmbFunds.SelectedValue);
-            int fundName = 1;
+            int fundName = Convert.ToInt32(cmbFunds.SelectedValue);
             short month = Convert.ToInt16(cbMonth.SelectedIndex + 1);
             short year = Convert.ToInt16(nudYear.Value);
 
@@ -56,7 +55,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             var rcdDisapprovedCount = AccFactory.CollectorReportRepository().GetDisapprovedRCDCount(fundName, month, year);
             var rcdCancelledCount = AccFactory.CollectorReportRepository().GetCancelledRCDCount(fundName, month, year);
             var rcdCount = (rcdApprovedCount + rcdPendingCount + rcdDisapprovedCount + rcdCancelledCount);
-
 
             lblRCDCounter.Text = rcdCount.ToString();
             lblApprovedRCDCounter.Text = rcdApprovedCount.ToString();
@@ -79,7 +77,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
 
         private void cmbFunds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDashboardData();
         }
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,5 +108,10 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
         }
 
         #endregion
+
+        private void cmbFunds_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadDashboardData();
+        }
     }
 }

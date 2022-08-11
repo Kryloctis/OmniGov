@@ -167,9 +167,7 @@ namespace ACC.Data
                 new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
             };
 
-            string query  = $"INSERT INTO {tableName} " +
-                            $"(prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) " +
-                            $"VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
+            string query  = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -189,7 +187,7 @@ namespace ACC.Data
                 };
 
                 string query = $"UPDATE {tableName} " +
-                $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =                @job_title,users_id=@users_id WHERE id = @id";
+                $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =             @job_title,users_id=@users_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
@@ -204,8 +202,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT * FROM {tableName} " +
-                           $"WHERE id <> @id AND " +
-                           $"first_name = @first_name AND mid_initial = @middle_initial AND last_name = @last_name";
+                           $"WHERE id <> @id AND first_name = @first_name AND mid_initial = @middle_initial AND last_name = @last_name";
 
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
@@ -222,10 +219,7 @@ namespace ACC.Data
                 new object[] { "@collecting_officers_id", DbType.Int32, collectingOfficerId },
             };
 
-            string query = $"SELECT " +
-                           $"COUNT(collecting_officers_id) " +
-                           $"FROM collecting_officers_has_job_orders " +
-                           $"WHERE collecting_officers_id = @collecting_officers_id";
+            string query = $"SELECT COUNT(collecting_officers_id) FROM collecting_officers_has_job_orders WHERE collecting_officers_id =    @collecting_officers_id";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
         }

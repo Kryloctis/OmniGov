@@ -107,9 +107,5 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            LoadRecords();
-        }
     }
 }
