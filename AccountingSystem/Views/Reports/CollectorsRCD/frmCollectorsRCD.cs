@@ -44,21 +44,17 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             if (uc.isSaveFunction)
             {
                 if (SaveData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
-                    CheckRCDStatus(uc.txtReport.Text.Trim());
-                }
             }
             else
             {
                 if (UpdateData())
-                {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
-                    CheckRCDStatus(uc.txtReport.Text.Trim());
-                    ResetLocalControls();
-                    uc.ResetForm();
-                }
             }
+
+            ResetLocalControls();
+            uc.ResetForm();
+            CheckRCDStatus(uc.txtReport.Text.Trim());
         }
 
         private bool UpdateData()
@@ -119,6 +115,34 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             }
         }
 
+
+        private CollectorReportModel CollectorReportModelData()
+        {
+            var isJOCollectingOfficer = uc.cbJOCollector.Checked;
+            var collectorID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+            var jobOrderID = 0;
+            var reportNo = uc.txtReport.Text.Trim();
+            var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
+            var reportFund = uc.fundId;
+
+            if (isJOCollectingOfficer)
+            {
+                jobOrderID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
+                collectorID = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(jobOrderID);
+            }
+            
+            var collectorsReportModel = new CollectorReportModel()
+            {
+                CollectorId = collectorID,
+                JobOrderId = jobOrderID,
+                ReportNo = reportNo,
+                Date = reportDate,
+                FundId = reportFund
+            };
+
+            return collectorsReportModel;
+        }
+
         private bool SaveData()
         {
             if (!uc.ValidateChildren())
@@ -127,60 +151,33 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 return false;
             }
 
-            using (var scope = new TransactionScope())
-            {
-                var collectorId = Convert.ToInt32(uc.cmbCollector.SelectedValue);
-                var reportNo = uc.txtReport.Text.Trim();
-                var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
-                var reportFund = uc.fundId;
+            AccFactory.CollectorReportRepository().Insert(CollectorReportModelData());
 
-                var collectorsReportModel = new CollectorReportModel()
+
+
+
+            data = new List<CollectorReportPaymentModel>();
+            data.Clear();
+
+            foreach (DataGridViewRow item in uc.dgPayments.Rows)
+            {
+                var CollectorsReportId = GetCollectorsReportId();
+                var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
+
+                var collectorReportPaymentModel = new CollectorReportPaymentModel()
                 {
-                    CollectorId = collectorId,
-                    ReportNo = reportNo,
-                    Date = reportDate,
-                    IsApproved = 0,
-                    IsDisapproved = 0,
-                    FundId = reportFund,
-                    Remarks = string.Empty
+                       
+                    CollectorsReportId = CollectorsReportId,
+                    PaymentCollectionsId = PaymentCollectionsId
                 };
 
-                var collectingOfficerHasJO = AccFactory.CollectingOfficerHasJobOrdersRepository();
-                var regularCollectingOfficerId = collectingOfficerHasJO.GetCollectingOfficerIDByJobOrderId(collectorId);
-                var isCollectorAJO = Convert.ToBoolean(regularCollectingOfficerId);
-
-                if (isCollectorAJO == true)
-                {
-                    collectorsReportModel.CollectorId = regularCollectingOfficerId;
-                    collectorsReportModel.JobOrderId = collectorId;  
-                }
-
-                bool rcdDetailsSaveSuccess = AccFactory.CollectorReportRepository().Insert(collectorsReportModel);
-                if (!rcdDetailsSaveSuccess) 
-                    return false;
-
-                data = new List<CollectorReportPaymentModel>();
-                data.Clear();
-
-                foreach (DataGridViewRow item in uc.dgPayments.Rows)
-                {
-                    var CollectorsReportId = GetCollectorsReportId();
-                    var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
-
-                    var collectorReportPaymentModel = new CollectorReportPaymentModel()
-                    {
-                       
-                        CollectorsReportId = CollectorsReportId,
-                        PaymentCollectionsId = PaymentCollectionsId
-                    };
-
-                    AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
-                }
-
-                scope.Complete();
-                return true;
+                AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
             }
+
+            return true;
+            
         }
+
 
         private int GetCollectorsReportId()
         {
