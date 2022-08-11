@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -18,5 +19,6 @@ namespace ACC.Domain.Interfaces
         bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
         int GetLastInsertedID();
         bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
+        bool InsertWithPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
     }
 }

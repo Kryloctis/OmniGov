@@ -53,6 +53,8 @@ namespace AccountingSystem
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["year"].HeaderText = "Year";
             dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["discount_rate"].Visible = false;
+            dataGridView.Columns["discount_is_advance"].Visible = false;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";

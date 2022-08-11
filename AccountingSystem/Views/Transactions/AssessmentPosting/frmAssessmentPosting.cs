@@ -304,7 +304,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             try
             {
-                var assessmentPostingModels = new List<RptAssessmentPostingModel>();
+                var assessmentPostingModels = new List<RptAssessmentPostsModel>();
 
                 int reportProgress = 0;
 
@@ -337,7 +337,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         DateTime postedAt = DateTime.Now;
                         bool isCancelled = Convert.ToBoolean(Convert.ToInt32((GetRealPropertyRecord(realPropertiesId, "is_cancelled"))));
 
-                        var assessmentPostingModel = new RptAssessmentPostingModel()
+                        var assessmentPostingModel = new RptAssessmentPostsModel()
                         {
                             propertyIdentifier = GetRealPropertyRecord(realPropertiesId, "property_identifier"),
                             CompleteArpNo = completeArpNo,

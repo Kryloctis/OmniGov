@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             // 
             // txtPayee
             // 
+            this.txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPayee.Location = new System.Drawing.Point(110, 141);
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(308, 23);

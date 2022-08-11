@@ -505,6 +505,56 @@ namespace ACC.Data
             }
         }
 
+        public bool InsertWithPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        {
+            using (var scope = new TransactionScope()) 
+            {
+                var parameters = new object[][]
+                   {
+                        new object[] { "@collecting_officers_id", DbType.Int32, paymentCollectionsModel.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, paymentCollectionsModel.JobOrderId},
+                        new object[] { "@funds_id", DbType.Int16, paymentCollectionsModel.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
+                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
+                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
+                   };
 
+                string query = $"INSERT INTO {tableName} " +
+                               $"(collecting_officers_id, " +
+                               $"job_orders_id," +
+                               $"funds_id, " +
+                               $"accountable_forms_id, " +
+                               $"payee, " +
+                               $"receipt_no,  " +
+                               $"payment_date, " +
+                               $"amount, " +
+                               $"is_cancelled, " +
+                               $"created_by) " +
+                               $"VALUES " +
+                               $"(@collecting_officers_id, " +
+                               $"@job_orders_id, " +
+                               $"@funds_id, " +
+                               $"@accountable_forms_id, " +
+                               $"@payee, " +
+                               $"@receipt_no, " +
+                               $"@payment_date, " +
+                               $"@amount, " +
+                               $"@is_cancelled, " +
+                               $"@created_by)";
+
+                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+
+                rptPaymentPostsModel.PaymentCollectionsId = GetLastInsertedID();
+
+                _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentPostsModel, rptTaxDuesModels);
+
+                scope.Complete();
+                return true;
+            }
+        }
     }
 }

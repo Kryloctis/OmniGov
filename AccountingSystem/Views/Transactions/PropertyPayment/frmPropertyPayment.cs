@@ -1,5 +1,7 @@
-﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment;
+using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
     {
         private ucPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
+        internal List<RptTaxDuesModel> rptTaxDuesModels;
 
         public frmPropertyPayment(MainForm mainForm)
         {
@@ -195,10 +198,35 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     return false;
                 }
 
-                if(Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                    return true;
+                if(!Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                    return false;
 
-                return false;
+                //Payment Collections
+                int accountableFormId = ucPaymentInfo.accountableFormNoId;
+                decimal amount = Convert.ToDecimal(txtTotalDue.Text.Trim());
+                string receiptNo = ucPaymentInfo.txtReceipts.Text.Trim();
+                string payee = ucPaymentInfo.txtPayee.Text.Trim();
+                DateTime paymentDate = ucPaymentInfo.dtPaymentDate.Value;
+                var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                int collectingOfficerId = dictCollectingOfficer.Values.Count < 1 ? 0 : Convert.ToInt32(dictCollectingOfficer["id"]);
+                int? jobOrderId = dictJobOrder.Values.Count < 1 ? null : Convert.ToInt32(dictJobOrder["id"]);
+
+                var paymentCollectionsModel = new PaymentCollectionsModel()
+                {
+                    AccountableFormId = accountableFormId,
+                    CollectingOfficerId = collectingOfficerId,
+                    JobOrderId = jobOrderId,
+                    Amount = amount,
+                    FundId = null,
+                    ReceiptNo = receiptNo,
+                    Payee = payee,
+                    PaymentDate = paymentDate,
+                    IsCancelled = false,
+                    CreatedBy = Helper.UserId
+                };
+
+                return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, new RptPaymentPostsModel(), rptTaxDuesModels);
             }
             catch (Exception ex)
             {
@@ -213,6 +241,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             {
                 Helper.MessageBoxSuccess("Payment Confirmed.");
                 LoadRealPropertyPaymentTaxDues(null);
+                rptTaxDuesModels.Clear();
                 ucPaymentInfo.ResetForm();
             }
         }

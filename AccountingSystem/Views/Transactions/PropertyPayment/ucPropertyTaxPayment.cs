@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
     public partial class ucPropertyTaxPayment : UserControl
     {
         private readonly string accountableFormNo = "56";
-        private readonly int accountableFormNoId = 9;
+        internal readonly int accountableFormNoId = 9;
 
         public ucPropertyTaxPayment()
         {

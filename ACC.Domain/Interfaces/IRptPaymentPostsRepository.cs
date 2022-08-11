@@ -7,5 +7,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRptPaymentPostsRepository : IRepository<RptPaymentPostsModel>
     {
+        bool InsertWithRptTaxDues(RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
+
+        int GetLastInsertedID();
     }
 }
