@@ -14,11 +14,10 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         public frmCollectorsRCDSearch(frmCollectorsRCD frmCollectorsRCD, ucCollectorsRCD uc)
         {
             InitializeComponent();
-
             Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
+
             _frmCollectorsRCD = frmCollectorsRCD;
             _uc = uc;
-
             cmbstatus.SelectedIndex = 1;
         }
 
@@ -40,12 +39,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void frmCollectorsRCDSearch_Load(object sender, EventArgs e)
         {
-            cmbfunds.SelectedValueChanged -= new EventHandler(cmbfunds_SelectedValueChanged);
             LoadFunds();
-            cmbfunds.SelectedValueChanged += new EventHandler(cmbfunds_SelectedValueChanged);
             LoadRecords();
         }
-
 
         private void LoadRecords()
         {
@@ -56,9 +52,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 string keySearch = txtsearch.Text;
 
                 var colectorRepository = AccFactory.CollectorReportRepository();
-                var dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
+                var dtRCD = colectorRepository.FilterRecords(status, fundId, keySearch);
 
-                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
+                HelperLoadRecords.CollectorReportDatagridView(dtRCD, dgCollectorsReport);
 
                 if (dgCollectorsReport.Rows.Count == 0)
                 {
@@ -95,12 +91,13 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             LoadRecords();
         }
 
-        private void cmbstatus_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
+
             LoadRecords();
         }
 
-        private void cmbfunds_SelectedValueChanged(object sender, EventArgs e)
+        private void cmbstatus_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadRecords();
         }
@@ -111,7 +108,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
 
             _uc.TotalCollections();
-            this.Close();
+            Close();
         }
+
     }
 }

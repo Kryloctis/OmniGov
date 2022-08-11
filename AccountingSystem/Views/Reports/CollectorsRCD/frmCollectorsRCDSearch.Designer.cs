@@ -83,7 +83,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.cmbstatus.Name = "cmbstatus";
             this.cmbstatus.Size = new System.Drawing.Size(185, 23);
             this.cmbstatus.TabIndex = 9;
-            this.cmbstatus.SelectedValueChanged += new System.EventHandler(this.cmbstatus_SelectedValueChanged);
+            this.cmbstatus.SelectionChangeCommitted += new System.EventHandler(this.cmbstatus_SelectionChangeCommitted);
             // 
             // label2
             // 
@@ -104,7 +104,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             this.cmbfunds.Name = "cmbfunds";
             this.cmbfunds.Size = new System.Drawing.Size(185, 23);
             this.cmbfunds.TabIndex = 10;
-            this.cmbfunds.SelectedValueChanged += new System.EventHandler(this.cmbfunds_SelectedValueChanged);
+            this.cmbfunds.SelectionChangeCommitted += new System.EventHandler(this.cmbfunds_SelectionChangeCommitted);
             // 
             // label3
             // 

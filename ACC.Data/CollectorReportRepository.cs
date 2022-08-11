@@ -331,14 +331,7 @@ namespace ACC.Data
                     new object[] {"@fundId", DbType.Byte, fundId }
                 };
 
-                string query =  $"SELECT * FROM {viewTableName} " +
-                                $"WHERE {statusQuery} " +
-                                $"fund_id = @fundId AND " +
-                                $"(collecting_officers_first_name LIKE @keySearch OR " +
-                                $"collecting_officers_last_name LIKE @keySearch OR " +
-                                $"job_orders_first_name LIKE @keySearch OR " +
-                                $"job_orders_last_name LIKE @keySearch OR " +
-                                $"report_no LIKE @keySearch)";
+                string query =  $"SELECT id, fund_id, fund_name, date, report_no, collecting_officers_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, amount, is_approved, is_disapproved  FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId";
 
                 var dtCollectorReport = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
