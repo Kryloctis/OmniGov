@@ -110,5 +110,50 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
+
+        public Dictionary<string, string> GetViewRecordById(int Id)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@rpt_payment_posts_id", DbType.Int32, Id }
+            };
+
+            string query = $"SELECT rpt_payment_posts_id, taxpayer_name, taxpayer_tin, taxpayer_address, taxpayer_contact, rpt_payment_posts_posted_at, rpt_payment_posts_posted_by, payment_collections_id, payment_collections_collecting_officers_id, payment_collections_job_orders_id, payment_collections_funds_id, payment_collections_accountable_forms_id, payment_collections_payee, payment_collections_receipt_no, payment_collections_payment_date, payment_collections_amount, payment_collections_is_cancelled, payment_collections_created_at, payment_collections_created_by, payment_collections_updated_at, payment_collections_updated_by FROM {viewTableName} WHERE rpt_payment_posts_id = @rpt_payment_posts_id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("rpt_payment_posts_id", row["rpt_payment_posts_id"].ToString());
+                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
+                    dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
+                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
+                    dict.Add("taxpayer_contact", row["taxpayer_contact"].ToString());
+                    dict.Add("rpt_payment_posts_posted_at", row["rpt_payment_posts_posted_at"].ToString());
+                    dict.Add("rpt_payment_posts_posted_by", row["rpt_payment_posts_posted_by"].ToString());
+                    dict.Add("payment_collections_id", row["payment_collections_id"].ToString());
+                    dict.Add("payment_collections_collecting_officers_id", row["payment_collections_collecting_officers_id"].ToString());
+                    dict.Add("payment_collections_job_orders_id", row["payment_collections_job_orders_id"].ToString());
+                    dict.Add("payment_collections_funds_id", row["payment_collections_funds_id"].ToString());
+                    dict.Add("payment_collections_accountable_forms_id", row["payment_collections_accountable_forms_id"].ToString());
+                    dict.Add("payment_collections_payee", row["payment_collections_payee"].ToString());
+                    dict.Add("payment_collections_receipt_no", row["payment_collections_receipt_no"].ToString());
+                    dict.Add("payment_collections_payment_date", row["payment_collections_payment_date"].ToString());
+                    dict.Add("payment_collections_amount", row["payment_collections_amount"].ToString());
+                    dict.Add("payment_collections_is_cancelled", row["payment_collections_is_cancelled"].ToString());
+                    dict.Add("payment_collections_created_at", row["payment_collections_created_at"].ToString());
+                    dict.Add("payment_collections_created_by", row["payment_collections_created_by"].ToString());
+                    dict.Add("payment_collections_updated_at", row["payment_collections_updated_at"].ToString());
+                    dict.Add("payment_collections_updated_by", row["payment_collections_updated_by"].ToString());
+                }
+
+                return dict;
+            }
+        }
     }
 }

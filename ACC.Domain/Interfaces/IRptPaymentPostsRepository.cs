@@ -12,6 +12,8 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByDateTaxPayerName(DateTime dateFrom, DateTime dateTo, string taxPayerName);
 
+        Dictionary<string, string> GetViewRecordById(int Id);
+
         int GetLastInsertedID();
     }
 }

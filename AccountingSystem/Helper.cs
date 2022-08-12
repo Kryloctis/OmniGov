@@ -209,6 +209,8 @@ namespace AccountingSystem
             return dictSignatoriesReferencedDocument;
         }
 
+        #region Get User Data
+
         public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
             var dictUser = new Dictionary<string, dynamic>();
@@ -254,7 +256,9 @@ namespace AccountingSystem
             }
 
             return dictUser;
-        }
+        } 
+
+        #endregion
 
         #region ErrorProviders on Controls
 

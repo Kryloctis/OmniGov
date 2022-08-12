@@ -16,7 +16,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return months;
         }
 
-        public static int GetCountMonthsDelinquent(int year, DateTime postedDate, int effectivityQuarter, int effectivityYear, int previousAssessmentCount)
+        //For current tax dues use only
+        public static int GetCurrentMonthsDelinquent(int assessmentYear, DateTime assessmentPostsDate, int effectivityYear, int previousAssessmentCount)
         {
             var currentDate = Helper.GetCurrentDate();
             var currentMonth = currentDate.Month;
@@ -24,12 +25,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             int months;
 
             //If assessment year is same as current year
-            if (year == currentDate.Year && postedDate.Month > 3)
-                return currentDate.Month;
+            if (assessmentYear == currentYear && assessmentPostsDate.Month > 3)
+                return currentMonth;
 
             //If previous assessements are paid
-            else if (year < currentYear && previousAssessmentCount > 0)
-                months = (GetMonthsBetweenYears(year, currentYear)) + currentMonth;
+            else if (assessmentYear < currentYear && previousAssessmentCount > 0)
+                months = (GetMonthsBetweenYears(assessmentYear, currentYear)) + currentMonth;
 
             //If no previous years of assessments
             else if (previousAssessmentCount < 1)
@@ -39,6 +40,32 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             return months;
         }
+
+
+        //For selected tax dues use only
+        public static int GetSelectedMonthsDelinquent(int assessmentYear, DateTime assessmentPostsDate, DateTime paymentPostsDate, int effectivityYear, int previousAssessmentCount)
+        {
+            var paymentPostsMonth = paymentPostsDate.Month;
+            var paymentPostsYear = paymentPostsDate.Year;
+            int months;
+
+            //If assessment year is same as current year
+            if (assessmentYear == paymentPostsYear && assessmentPostsDate.Month > 3)
+                return paymentPostsMonth;
+
+            //If previous assessements are paid
+            else if (assessmentYear < paymentPostsYear && previousAssessmentCount > 0)
+                months = (GetMonthsBetweenYears(assessmentYear, paymentPostsYear)) + paymentPostsMonth;
+
+            //If no previous years of assessments
+            else if (previousAssessmentCount < 1)
+                months = (GetMonthsBetweenYears(effectivityYear, paymentPostsYear) + paymentPostsMonth);
+            else
+                months = 0;
+
+            return months;
+        }
+
 
         public static decimal GetPenalty(decimal penaltyRate, int monthsDelinquent, decimal taxDue)
         {

@@ -19,6 +19,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private ucPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
         internal List<RptTaxDuesModel> rptTaxDuesModels;
+        internal bool isReadonly = false;
 
         public frmPropertyPayment(MainForm mainForm)
         {
@@ -29,6 +30,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
+        #region Models
         public class PaymentTaxPayerInfo
         {
             public string TIN { get; set; }
@@ -51,6 +53,35 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             public decimal TotalTaxDue { get; set; }
 
         }
+        #endregion
+
+        internal void LoadSelectedDetailedTaxDues(List<RealPropertyPaymentTaxDueModel> realPropertyPaymentTaxDueModels, int paymentPostsId)
+        {
+            try
+            {
+                var dictViewPaymentPost = AccFactory.RptPaymentPostsRepository().GetViewRecordById(paymentPostsId);
+
+                string payee = dictViewPaymentPost["payment_collections_payee"];
+                DateTime paymentDate = Convert.ToDateTime(dictViewPaymentPost["payment_collections_payment_date"]);
+                string receiptNo = dictViewPaymentPost["payment_collections_receipt_no"];
+                int collectingOfficerId = Convert.ToInt32(dictViewPaymentPost["payment_collections_collecting_officers_id"]);
+                string jobOrderId = dictViewPaymentPost["payment_collections_job_orders_id"];
+
+                ucPaymentInfo.txtPayee.Text = payee;
+                ucPaymentInfo.dtPaymentDate.Value = paymentDate;
+                ucPaymentInfo.txtReceipts.Text = receiptNo;
+
+                ucPaymentInfo.LoadCollectorInfoById(collectingOfficerId, jobOrderId);         
+                FormIsReadOnly(true);
+
+                LoadRealPropertyPaymentTaxDues(realPropertyPaymentTaxDueModels);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+        }
+
 
         private DataTable RealPropertyPaymentTaxDuesDataTable(List<RealPropertyPaymentTaxDueModel> realPropertyPaymentTaxDueModelList)
         {
@@ -159,7 +190,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-
+            FormIsReadOnly(false);
         }
 
         #region Cancel Transaction Methods
@@ -249,9 +280,34 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         #endregion
 
+        private void FormIsReadOnly(bool isReadOnly) 
+        {
+            ucPaymentInfo.isReadOnly = isReadOnly;
+            isReadonly = isReadOnly;
+            btnGetTaxDue.Enabled = !isReadOnly;
+            btnPay.Enabled = !isReadOnly;
+            btnPay.Text = "Paid";
+            ucPaymentInfo.txtReceipts.ReadOnly = isReadOnly;
+            ucPaymentInfo.txtPayee.ReadOnly = isReadOnly;
+            btnCancelTransaction.Enabled = !isReadOnly;
+            ucPaymentInfo.dtPaymentDate.Enabled = !isReadOnly;
+            btnNew.Enabled = isReadOnly;
+
+            if (!isReadOnly)
+            {
+                LoadRealPropertyPaymentTaxDues(null);
+                EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+                btnPay.Text = "Pay";
+                ucPaymentInfo.LoadCollectorInfoByUserId();
+                ucPaymentInfo.loadReceiptNos();
+                ucPaymentInfo.txtPayee.Clear();
+                ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
+            }
+        }
+
         private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel) 
         {
-            if (!ValidatePayment())
+            if (isReadonly || !ValidatePayment())
             {
                 btnPay.Enabled = false;
                 btnCancel.Enabled = false;
