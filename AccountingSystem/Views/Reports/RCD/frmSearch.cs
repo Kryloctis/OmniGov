@@ -49,6 +49,7 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             try
             {
+                var fundId = Convert.ToInt32(cmbfunds.SelectedValue);
                 var rcdRepository = AccFactory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
 
@@ -116,7 +117,6 @@ namespace AccountingSystem.Views.Reports.RCD
             try
             {
                 fundId = Convert.ToInt32(cmbfunds.SelectedValue);
-
                 var rcdRepository = AccFactory.GeneralCollectionsRepository();
                 var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
 

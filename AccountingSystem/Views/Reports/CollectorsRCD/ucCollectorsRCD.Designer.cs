@@ -49,6 +49,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             this.label4 = new System.Windows.Forms.Label();
             this.epCollector = new System.Windows.Forms.ErrorProvider(this.components);
             this.epPayments = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cbJOCollector = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.epReportNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgPayments)).BeginInit();
             this.groubBoxFund.SuspendLayout();
@@ -58,7 +59,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // dtRCDDate
             // 
-            this.dtRCDDate.Location = new System.Drawing.Point(569, 75);
+            this.dtRCDDate.Location = new System.Drawing.Point(593, 88);
             this.dtRCDDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtRCDDate.Name = "dtRCDDate";
             this.dtRCDDate.Size = new System.Drawing.Size(225, 23);
@@ -66,11 +67,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             // txtReport
             // 
-            this.txtReport.Location = new System.Drawing.Point(82, 75);
+            this.txtReport.Location = new System.Drawing.Point(82, 88);
             this.txtReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtReport.MaxLength = 20;
             this.txtReport.Name = "txtReport";
-            this.txtReport.Size = new System.Drawing.Size(171, 23);
+            this.txtReport.Size = new System.Drawing.Size(140, 23);
             this.txtReport.TabIndex = 0;
             this.txtReport.Validating += new System.ComponentModel.CancelEventHandler(this.txtReport_Validating);
             this.txtReport.Validated += new System.EventHandler(this.txtReport_Validated);
@@ -79,10 +80,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.cmbCollector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCollector.FormattingEnabled = true;
-            this.cmbCollector.Location = new System.Drawing.Point(339, 76);
+            this.cmbCollector.Location = new System.Drawing.Point(310, 88);
             this.cmbCollector.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbCollector.Name = "cmbCollector";
-            this.cmbCollector.Size = new System.Drawing.Size(171, 23);
+            this.cmbCollector.Size = new System.Drawing.Size(218, 23);
             this.cmbCollector.TabIndex = 1;
             this.cmbCollector.SelectionChangeCommitted += new System.EventHandler(this.cmbCollector_SelectionChangeCommitted);
             this.cmbCollector.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollector_Validating);
@@ -91,7 +92,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(530, 78);
+            this.label3.Location = new System.Drawing.Point(554, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 15);
             this.label3.TabIndex = 20;
@@ -100,7 +101,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 78);
+            this.label2.Location = new System.Drawing.Point(15, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 15);
             this.label2.TabIndex = 18;
@@ -109,7 +110,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(272, 79);
+            this.label1.Location = new System.Drawing.Point(243, 91);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 16;
@@ -127,12 +128,12 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.epPayments.SetIconAlignment(this.dgPayments, System.Windows.Forms.ErrorIconAlignment.TopRight);
-            this.dgPayments.Location = new System.Drawing.Point(19, 107);
+            this.dgPayments.Location = new System.Drawing.Point(19, 116);
             this.dgPayments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgPayments.Name = "dgPayments";
             this.dgPayments.RowHeadersWidth = 51;
             this.dgPayments.RowTemplate.Height = 29;
-            this.dgPayments.Size = new System.Drawing.Size(878, 370);
+            this.dgPayments.Size = new System.Drawing.Size(878, 361);
             this.dgPayments.TabIndex = 21;
             this.dgPayments.SelectionChanged += new System.EventHandler(this.dgPayments_SelectionChanged);
             this.dgPayments.Validating += new System.ComponentModel.CancelEventHandler(this.dgPayments_Validating);
@@ -238,11 +239,24 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             // 
             this.epPayments.ContainerControl = this;
             // 
+            // cbJOCollector
+            // 
+            this.cbJOCollector.AutoSize = true;
+            this.cbJOCollector.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cbJOCollector.Location = new System.Drawing.Point(311, 69);
+            this.cbJOCollector.Name = "cbJOCollector";
+            this.cbJOCollector.Size = new System.Drawing.Size(85, 19);
+            this.cbJOCollector.TabIndex = 28;
+            this.cbJOCollector.Text = "Job Orders ";
+            this.cbJOCollector.UseVisualStyleBackColor = true;
+            this.cbJOCollector.CheckedChanged += new System.EventHandler(this.cbJOCollector_CheckedChanged);
+            // 
             // ucCollectorsRCD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.cbJOCollector);
             this.Controls.Add(this.dtRCDDate);
             this.Controls.Add(this.txtReport);
             this.Controls.Add(this.cmbCollector);
@@ -288,5 +302,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private System.Windows.Forms.ErrorProvider epCollector;
         internal System.Windows.Forms.GroupBox groubBoxFund;
         private System.Windows.Forms.ErrorProvider epPayments;
+        internal System.Windows.Forms.CheckBox cbJOCollector;
     }
 }

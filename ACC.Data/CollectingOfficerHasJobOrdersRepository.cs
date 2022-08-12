@@ -44,7 +44,7 @@ namespace ACC.Data
             }
         }
 
-        public int GetCollectingOfficerIDByJobOrderId(int collectingOfficerId)
+        public int GetCollectingOfficerIDByJobOrderId(int? collectingOfficerId)
         {
             var parameter = new object[][] {
                 new object[] { "@job_orders_id", DbType.Int32, collectingOfficerId }

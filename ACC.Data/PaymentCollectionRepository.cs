@@ -107,36 +107,18 @@ namespace ACC.Data
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
-        public DataTable GetRecordsByFilter(string date, int collectorId, string searchKey)
+        public DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey)
         {
             var parameter = new object[][]
             {
-                new object[]{ "@date", DbType.DateTime2, date},
-                new object[]{ "@collectorId", DbType.Int32, collectorId },
-                new object[]{ "@searchKey", DbType.String, $"%{searchKey}%" }
+                new object[]{ "@payment_date", DbType.DateTime2, date},
+                new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID },
+                new object[]{ "@search_key", DbType.String, $"%{searchKey}%" }
             };
 
-            string query =  $"SELECT " +
-                            $"id, " +
-                            $"funds_id, " +
-                            $"fund_name, " +
-                            $"accountable_form_id, " +
-                            $"accountable_forms, " +
-                            $"account_code, " +
-                            $"general_ledger_accounts_id, " +
-                            $"ledger_name, " +
-                            $"payee, " +
-                            $"receipt_no, " +
-                            $"quantity, " +
-                            $"payment_date, " +
-                            $"amount " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE " +
-                            $"payment_date = @date AND " +
-                            $"(collecting_officer_id = @collectorId AND ISNULL(job_orders_id)) OR " +
-                            $"job_orders_id = @collectorId AND " +
-                            $"(receipt_no LIKE @searchKey OR accountable_forms LIKE @searchKey OR payee LIKE @searchKey) " +
-                            $"ORDER BY accountable_form_id";
+            string columnFilter = collectingOfficerJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
+
+            string query =  $"SELECT id, funds_id, fund_name, accountable_form_id, accountable_forms, account_code, general_ledger_accounts_id, ledger_name, payee, receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date AND (receipt_no LIKE @search_key OR payee LIKE @search_key) ORDER BY accountable_form_id";
 
             var dtPaymentCollection = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
@@ -367,8 +349,7 @@ namespace ACC.Data
                             $"payment_date, " +
                             $"amount " +
                             $"FROM {viewTableName} " +
-                            $"WHERE (collecting_officer_id = @collectorId AND ISNULL(job_orders_id)) OR job_orders_id = @collectorId " +
-                            $"AND " +
+                            $"WHERE " +
                             $"payment_date BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
             var dtPaymentCollection = new DataTable();

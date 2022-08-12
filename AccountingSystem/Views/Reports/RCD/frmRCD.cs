@@ -162,26 +162,31 @@ namespace AccountingSystem.Views.Reports.RCD
                 };
 
                 bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
-                if (!rcdSaveSuccess) return false;
+                if (!rcdSaveSuccess)
+                    return false;
 
-                var generalCollectionsId = GetGeneralCollectionsId();
 
-
-                foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
-                {
-                    ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
-
-                    var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
-                    {
-                        CollectorsReportId = collectionsReportId,
-                        GeneralCollectionsId = generalCollectionsId
-                    };
-
-                    AccFactory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
-                }
-
+                InsertGeneralCollectionsPayment();
                 scope.Complete();
                 return true;
+            }
+        }
+
+        private void InsertGeneralCollectionsPayment()
+        {
+            var generalCollectionsId = GetGeneralCollectionsId();
+
+            foreach (DataGridViewRow row in dgListOfApprovedReport.Rows)
+            {
+                ushort collectionsReportId = (ushort)Convert.ToInt32(row.Cells["reportId"].Value);
+
+                var generalCollectionPaymentModel = new GeneralCollectionPaymentsModel()
+                {
+                    CollectorsReportId = collectionsReportId,
+                    GeneralCollectionsId = generalCollectionsId
+                };
+
+                AccFactory.GeneralCollectionsPaymentsRepository().Insert(generalCollectionPaymentModel);
             }
         }
 

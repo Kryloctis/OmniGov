@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             {
                 LoadFunds();
                 LoadCollectors();
-                LoadCurrentCollector();
+                SelectCurrentLoggedInCollector();
             }
         }
 
@@ -64,21 +64,17 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         {
             try
             {
+                DataTable dtCollector;
                 var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
                 var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
 
-                DataTable dtCollectors = new();
-                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
-                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
+                if (cbJOCollector.Checked)
+                    dtCollector = collectingOfficerHasJORepo.GetRecords();
+                else
+                    dtCollector = collectingOfficerRepository.GetRecords();
 
-                dtRegularCollectors.Merge(dtJOCollectors);
-                dtCollectors = dtRegularCollectors;
 
-                cmbCollector.DataSource = dtCollectors;
-                cmbCollector.DisplayMember = "fullname";
-                cmbCollector.ValueMember = "id";
-
-                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+                HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
             }
             catch (Exception ex)
             {
@@ -86,35 +82,26 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-        private void LoadCurrentCollector()
+        private void SelectCurrentLoggedInCollector()
         {
             try
             {
-                if (cmbCollector.Items.Count == 0) return;
-
                 var usersRepo = AccFactory.UsersRepository();
-                if (usersRepo.LinkedCollector(Helper.UserId) || usersRepo.LinkedJobOrder(Helper.UserId))
+
+                if (usersRepo.LinkedCollector(Helper.UserId))
                 {
-                    Dictionary<string, string> collectorDict = new();
-
-                    if (Helper.IsJobOrder(Helper.UserId))
-                    {
-                        var jobOrderRepo = AccFactory.JobOrderRepository();
-                        collectorDict = jobOrderRepo.GetRecordByUserID(Helper.UserId);
-                        cmbCollector.SelectedValue = collectorDict["id"];
-                    }
-                    else
-                    {
-                        var colRepository = AccFactory.CollectingOfficerRepository();
-                        collectorDict = colRepository.GetRecordByUserID(Helper.UserId);
-                        cmbCollector.SelectedValue = collectorDict["id"];
-                    }
-
-                    //collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
-                    //cmbCollector.Enabled = false;
+                    cbJOCollector.Enabled = false;
+                    cmbCollector.Enabled = false;
+                    cmbCollector.SelectedValue = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId)["id"];
                     return;
                 }
-
+                else if (usersRepo.LinkedJobOrder(Helper.UserId))
+                {
+                    cbJOCollector.Checked = true;
+                    cbJOCollector.Enabled = false;
+                    cmbCollector.Enabled = false;
+                    cmbCollector.SelectedValue = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId)["id"];
+                }
             }
             catch (Exception)
             {
@@ -164,7 +151,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-
         internal void TotalCollections()
         {
             string TotalCollections;
@@ -189,13 +175,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         private void cmbCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
             collectorId = (ushort)Convert.ToSByte(cmbCollector.SelectedValue);
-
-            //if (cmbCollector.SelectedIndex == -1)
-            //    btnAdd.Enabled = false;
-            //else
-            //    btnAdd.Enabled = true;
         }
-
 
         private void btndelete_Click(object sender, EventArgs e)
         {
@@ -238,13 +218,13 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 return;
             }
             
-
-            if (isSaveFunction == true)
+            if (isSaveFunction)
                 reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
             else
                 reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
-            if (reportNoExist == true)
+
+            if (reportNoExist)
             {
                 epReportNo.SetError(txtReport, "Report number already existed.");
                 e.Cancel = true;
@@ -253,7 +233,6 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             { 
                 e.Cancel = false;
             }
-
         }
 
         private void txtReport_Validated(object sender, EventArgs e)
@@ -286,7 +265,10 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             ResetForm();
         }
 
-    
+        private void cbJOCollector_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadCollectors();
+        }
     }
 
     #endregion

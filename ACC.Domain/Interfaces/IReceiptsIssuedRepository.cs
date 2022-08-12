@@ -9,7 +9,7 @@ namespace ACC.Domain.Interfaces
         bool UpdateLastIssued(ReceiptsIssuedModel entity);
         bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
         DataTable GetIssuedReceiptToCollector(int collectingOfficerID, int accountableFormID);
-        DataTable GetCollectorsAccountbleForms(int collectorId);
+        DataTable GetCollectorsAccountbleForms(int collectorId, bool collectorIsJO );
         DataTable GetAccountabilityForAccountableForms(string reportNumber);
         DataTable GetReturnedReceipts();
         DataTable GetReturnedReceiptsBySearch(string searchKey);
