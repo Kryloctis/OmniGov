@@ -1,5 +1,7 @@
-﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment;
+using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
     {
         private ucPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
+        internal List<RptTaxDuesModel> rptTaxDuesModels;
 
         public frmPropertyPayment(MainForm mainForm)
         {
@@ -38,7 +41,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         public class RealPropertyPaymentTaxDueModel
         {
-            public int AssessmentPostId {get; set;}
+            public int AssessmentPostId { get; set; }
             public int Year { get; set; }
             public string CompleteArpNo { get; set; }
             public string TaxType { get; set; }
@@ -122,16 +125,18 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             txtProvince.Text = paymentTaxPayerInfo.ProvinceName;
             txtAddress.Text = paymentTaxPayerInfo.Address;
             btnGetTaxDue.Enabled = true;
+            btnPaymentHistory.Enabled = true;
         }
 
         private void btnTransactions_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerPaymentHistory(this).ShowDialog();
+            string taxPayerName = txtTaxpayer.Text.Trim();
+            _ = new frmTaxPayerPaymentHistory(this, taxPayerName).ShowDialog();
         }
 
         private void frmPaymentPosting_Load(object sender, EventArgs e)
         {
-            LoadRealPropertyPaymentTaxDues(null);       
+            LoadRealPropertyPaymentTaxDues(null);
         }
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
@@ -159,31 +164,109 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         #region Cancel Transaction Methods
 
-        private void CancelTransaction()
+        internal void CancelTransaction()
         {
             LoadRealPropertyPaymentTaxDues(null);
-            ucPaymentInfo.txtPayee.Clear();
-            ucPaymentInfo.txtReceipts.Clear();
-            ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
+            ucPaymentInfo.ResetForm();
         }
 
         private void btnCancelTransaction_Click(object sender, EventArgs e)
         {
             CancelTransaction();
-        } 
+        }
 
         #endregion
-
-
-
 
         #region Payment Methods
 
+        private bool ValidatePayment()
+        {
+            decimal totalDue = Convert.ToDecimal(txtTotalDue.Text);
+
+            if (totalDue == 0)
+                return false;
+
+            return true;
+        }
+
+        private bool SavePayment() 
+        {
+            try
+            {
+                if (!ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucPaymentInfo.GetFormErrors());
+                    return false;
+                }
+
+                if(!Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+                    return false;
+
+                //Payment Collections
+                int accountableFormId = ucPaymentInfo.accountableFormNoId;
+                decimal amount = Convert.ToDecimal(txtTotalDue.Text.Trim());
+                string receiptNo = ucPaymentInfo.txtReceipts.Text.Trim();
+                string payee = ucPaymentInfo.txtPayee.Text.Trim();
+                DateTime paymentDate = ucPaymentInfo.dtPaymentDate.Value;
+                var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+                int collectingOfficerId = dictCollectingOfficer.Values.Count < 1 ? 0 : Convert.ToInt32(dictCollectingOfficer["id"]);
+                int? jobOrderId = dictJobOrder.Values.Count < 1 ? null : Convert.ToInt32(dictJobOrder["id"]);
+
+                var paymentCollectionsModel = new PaymentCollectionsModel()
+                {
+                    AccountableFormId = accountableFormId,
+                    CollectingOfficerId = collectingOfficerId,
+                    JobOrderId = jobOrderId,
+                    Amount = amount,
+                    FundId = null,
+                    ReceiptNo = receiptNo,
+                    Payee = payee,
+                    PaymentDate = paymentDate,
+                    IsCancelled = false,
+                    CreatedBy = Helper.UserId
+                };
+
+                return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, new RptPaymentPostsModel(), rptTaxDuesModels);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void btnPay_Click(object sender, EventArgs e)
         {
-
-        } 
+            if (SavePayment())
+            {
+                Helper.MessageBoxSuccess("Payment Confirmed.");
+                LoadRealPropertyPaymentTaxDues(null);
+                rptTaxDuesModels.Clear();
+                ucPaymentInfo.ResetForm();
+            }
+        }
 
         #endregion
+
+        private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel) 
+        {
+            if (!ValidatePayment())
+            {
+                btnPay.Enabled = false;
+                btnCancel.Enabled = false;
+            }
+            else
+            {
+                btnPay.Enabled = true;
+                btnCancel.Enabled = true;
+            }
+
+        }
+
+        private void txtTotalDue_TextChanged(object sender, EventArgs e)
+        {
+            EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+        }
     }
 }

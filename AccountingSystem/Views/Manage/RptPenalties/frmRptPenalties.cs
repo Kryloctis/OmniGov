@@ -34,12 +34,12 @@ namespace AccountingSystem.Views.Manage.RptPenalties
 
             if (searchText.Length < 2)
             {
-                var dt = AccFactory.rptPenaltiesRepository().GetRecords();
+                var dt = AccFactory.RptPenaltiesRepository().GetRecords();
                 HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
             }
             else
             {
-                var dt = AccFactory.rptPenaltiesRepository().GetRecordsBySearch(searchText);
+                var dt = AccFactory.RptPenaltiesRepository().GetRecordsBySearch(searchText);
                 HelperLoadRecords.PenaltiesDatagridView(dataGridView1, dt);
             }
 
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     }
 
                     deletedCount = rowCount;
-                    return AccFactory.rptPenaltiesRepository().Delete(rptPenalitiesModelList);
+                    return AccFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
                 }
                 
             }

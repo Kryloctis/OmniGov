@@ -35,8 +35,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 string searchText = txtSearch.Text.Trim();
                 HelperLoadRecords.TaxPayerListDatagridView(dataGridView1, DataTableAssessmentPost(searchText));
+
+                Cursor = Cursors.Default;
             }
             catch (Exception ex)
             {

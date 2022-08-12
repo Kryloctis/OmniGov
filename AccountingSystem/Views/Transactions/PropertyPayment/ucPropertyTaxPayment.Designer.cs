@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             // 
             // txtPayee
             // 
+            this.txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPayee.Location = new System.Drawing.Point(110, 141);
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(308, 23);
@@ -125,7 +126,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             this.chckBxJobOrder.TabIndex = 6;
             this.chckBxJobOrder.Text = "Job Order";
             this.chckBxJobOrder.UseVisualStyleBackColor = true;
-            this.chckBxJobOrder.CheckedChanged += new System.EventHandler(this.chckBxJobOrders_CheckedChanged);
             // 
             // errorProvider1
             // 

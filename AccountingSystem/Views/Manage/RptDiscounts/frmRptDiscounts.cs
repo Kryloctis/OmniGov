@@ -71,9 +71,9 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             string searchText = txtSearch.Text.Trim();
 
             if (searchText.Length < 2)
-                dtRptDiscounts = AccFactory.rptDiscountRepository().GetRecords();
+                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecords();
             else
-                dtRptDiscounts = AccFactory.rptDiscountRepository().GetRecordsBySearch(searchText);
+                dtRptDiscounts = AccFactory.RptDiscountRepository().GetRecordsBySearch(searchText);
 
             foreach (DataRow row in dtRptDiscounts.Rows)
             {
@@ -154,7 +154,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     }
 
                     deletedCount = rowCount;
-                    return AccFactory.rptDiscountRepository().Delete(rptDiscountsModelList);
+                    return AccFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
                 }
 
             }

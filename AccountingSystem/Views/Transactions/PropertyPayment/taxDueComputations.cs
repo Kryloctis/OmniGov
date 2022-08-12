@@ -47,20 +47,26 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return penalty;
         }
 
-        public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, int effectivityYear, int effectivityQuarter)
+        public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, ref bool isAdvance)
         {
             decimal discountRate;
             DateTime currentDate = DateTime.Now;
             int postYear = postedDate.Year;
             int postMonth = postedDate.Month; 
-            var annualDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(10, true);
-            var monthlyDiscountRate = AccFactory.rptDiscountRepository().GetRecordByMonth(postMonth, false);
+            var annualDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(10, true);
+            var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(postMonth, false);
 
             if (postYear < year && year > currentDate.Year)
+            {
                 discountRate = annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
+                isAdvance = true;
+            }
 
             else if ((postYear == currentDate.Year && year == postYear) && (postMonth == 1 || postMonth == 2 || postMonth == 3))
+            {
                 discountRate = monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
+                isAdvance = false;
+            }
 
             else
                 discountRate = 0;

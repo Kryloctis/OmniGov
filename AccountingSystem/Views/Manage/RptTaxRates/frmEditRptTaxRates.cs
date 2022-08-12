@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
 
         private void LoadRecord() 
         {
-            var dictTaxRates = AccFactory.rptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
+            var dictTaxRates = AccFactory.RptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
 
             uc.txtCode.Text = dictTaxRates["code"];
             uc.txtDescription.Text = dictTaxRates["description"];
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     Rate = uc.nudRate.Value
                 };
 
-                return AccFactory.rptTaxRatesRepository().Update(model);
+                return AccFactory.RptTaxRatesRepository().Update(model);
             }
             catch (Exception ex)
             {

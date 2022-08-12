@@ -288,9 +288,9 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
 
                 if (isSave)
-                    return AccFactory.PaymentCollectionRepository().ReceiptExist(receiptNumber, accountableFormId);
+                    return AccFactory.PaymentCollectionsRepository().ReceiptExist(receiptNumber, accountableFormId);
                 else
-                    return AccFactory.PaymentCollectionRepository().ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
+                    return AccFactory.PaymentCollectionsRepository().ReceiptExist(paymentCollectionId, receiptNumber, accountableFormId);
 
             }
             catch (Exception)
@@ -402,8 +402,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
             var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
-            var lastUsedReceipt = AccFactory.PaymentCollectionRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
-
+            var lastUsedReceipt = AccFactory.PaymentCollectionsRepository().GetPreviouslyUsedReceiptNumber(collectingOfficerID, accountableFormID);
             if (lastUsedReceipt != 0)
                 txtReceiptNumber.Text = (lastUsedReceipt + 1).ToString("D7");
 

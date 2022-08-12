@@ -22,11 +22,11 @@ namespace ACC.Data
             _mySqlGenericCommands = mySqlGenericCommands;
         }
 
-        public bool BulkInsert(List<RptAssessmentPostingModel> assessmentPostingModels)
+        public bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels)
         {
             using (var scope = new TransactionScope())
             {
-                foreach (RptAssessmentPostingModel assessmentPostingModel in assessmentPostingModels) 
+                foreach (RptAssessmentPostsModel assessmentPostingModel in assessmentPostingModels) 
                 {
                     _ = Insert(assessmentPostingModel);
                 }
@@ -41,7 +41,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<RptAssessmentPostingModel> entityList)
+        public bool Delete(List<RptAssessmentPostsModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -168,7 +168,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RptAssessmentPostingModel entity)
+        public bool Insert(RptAssessmentPostsModel entity)
         {
             var parameters = new object[][]
             {
@@ -220,7 +220,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(RptAssessmentPostingModel entity)
+        public bool Update(RptAssessmentPostsModel entity)
         {
             throw new NotImplementedException();
         }

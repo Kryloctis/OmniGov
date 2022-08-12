@@ -7,17 +7,21 @@ using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class PaymentCollectionRepository:IPaymentCollectionRepository
+    public class PaymentCollectionsRepository:IPaymentCollectionsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
-        private readonly IGeneralPaymentsRepository _generalPaymentRepository;
-
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        public PaymentCollectionRepository(IDbGenericCommands dbGenericCommands, IGeneralPaymentsRepository generalPaymentsRepository)
+        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private IGeneralPaymentsRepository _generalPaymentsRepository;
+        private IRptPaymentPostsRepository _rptPaymentPostsRepository;
+
+        public PaymentCollectionsRepository(MySqlGenericCommands mySqlGenericCommandsLFS, 
+                                            IGeneralPaymentsRepository generalPaymentsRepository, 
+                                            IRptPaymentPostsRepository rptPaymentPostsRepository)
         {
-            _dbGenericCommands = dbGenericCommands;
-            _generalPaymentRepository = generalPaymentsRepository;
+            _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            _generalPaymentsRepository = generalPaymentsRepository;
+            _rptPaymentPostsRepository = rptPaymentPostsRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -33,7 +37,7 @@ namespace ACC.Data
 
                 string query = $"SELECT * FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
@@ -83,7 +87,7 @@ namespace ACC.Data
                             $"ORDER BY accountable_form_id";
 
             var dt = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
         }
 
         public DataTable GetRecords()
@@ -91,7 +95,7 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName}";
                 
             var dtPaymentCollection = new DataTable();
-            return _dbGenericCommands.Fill(query, dtPaymentCollection);
+            return _mySqlGenericCommandsLFS.Fill(query, dtPaymentCollection);
         }
 
         public DataTable GetRecordsByDate(string date)
@@ -104,7 +108,7 @@ namespace ACC.Data
             string query  = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
 
             var dtPaymentCollection = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
         }
 
         public DataTable FilterRecords(string date, int collectingOfficerID, bool collectingOfficerJO, string searchKey)
@@ -121,10 +125,10 @@ namespace ACC.Data
             string query =  $"SELECT id, funds_id, fund_name, accountable_form_id, accountable_forms, account_code, general_ledger_accounts_id, ledger_name, payee, receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date AND (receipt_no LIKE @search_key OR payee LIKE @search_key) ORDER BY accountable_form_id";
 
             var dtPaymentCollection = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameter);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
         }
-
-        public bool Insert(PaymentCollectionModel entity)
+        
+        public bool Insert(PaymentCollectionsModel entity)
         {
             try
             {
@@ -167,7 +171,7 @@ namespace ACC.Data
                                $"@is_cancelled, " +
                                $"@created_by)";
 
-                    _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     scope.Complete();
                     return true;
                 }
@@ -179,7 +183,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(PaymentCollectionModel entity)
+        public bool Update(PaymentCollectionsModel entity)
         {
             try
             {
@@ -207,14 +211,14 @@ namespace ACC.Data
                                 $"updated_by = @updated_by " +
                                 $"WHERE id = @id";
                             
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public bool Delete(List<PaymentCollectionModel> entityList)
+        public bool Delete(List<PaymentCollectionsModel> entityList)
         {
             try
             {
@@ -228,7 +232,7 @@ namespace ACC.Data
                         };
 
                         string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                     }
 
                     scope.Complete();
@@ -247,7 +251,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                return int.Parse(_mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -263,7 +267,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE id = @id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -280,7 +284,7 @@ namespace ACC.Data
             };
 
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) 
                 return true;
@@ -302,7 +306,7 @@ namespace ACC.Data
                            $"receipt_no = @receipt_no AND " +
                            $"accountable_forms_id = @accountable_forms_id";
 
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
@@ -320,7 +324,7 @@ namespace ACC.Data
 
                
             var dtpc = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
         }
 
 
@@ -353,7 +357,7 @@ namespace ACC.Data
                             $"payment_date BETWEEN @collectionDateFrom AND @collectionDateTo ";
 
             var dtPaymentCollection = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtPaymentCollection, parameters);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
         }
 
 
@@ -367,7 +371,7 @@ namespace ACC.Data
 
             var dt = new DataTable();
 
-            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dt, parameter);
         }
 
         public DataTable GetCollectionsPerCollector()
@@ -386,7 +390,7 @@ namespace ACC.Data
                 $"FROM view_payment_collections GROUP BY collecting_officer_id";
 
             var dt = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dt);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dt);
         }
 
         public int GetLastInsertedID()
@@ -394,7 +398,7 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT COALESCE(MAX(id)) FROM {tableName}";
-                return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -402,7 +406,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithGeneralPayment(PaymentCollectionModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel)
+        public bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel)
         {
             try
             {
@@ -445,12 +449,12 @@ namespace ACC.Data
                                    $"@is_cancelled, " +
                                    $"@created_by)";
 
-                    _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                    _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
                     generalPaymentModel.PaymentCollectionId = GetLastInsertedID();
                     generalPaymentModel.GeneralLedgerAccountsId = paymentCollectionModel.AccountableFormId;
 
-                    _generalPaymentRepository.Insert(generalPaymentModel);
+                    _generalPaymentsRepository.Insert(generalPaymentModel);
 
                     scope.Complete();
                     return true;
@@ -474,7 +478,7 @@ namespace ACC.Data
 
                 string query = $"SELECT COALESCE(MAX(receipt_no), 0) FROM payment_collections WHERE collecting_officers_id = @collecting_officers_id AND accountable_forms_id = @accountable_forms_id AND is_cancelled <> 1";
 
-                return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
+                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
             }
             catch (Exception)
             {
@@ -482,6 +486,56 @@ namespace ACC.Data
             }
         }
 
+        public bool InsertWithPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        {
+            using (var scope = new TransactionScope()) 
+            {
+                var parameters = new object[][]
+                   {
+                        new object[] { "@collecting_officers_id", DbType.Int32, paymentCollectionsModel.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.Int32, paymentCollectionsModel.JobOrderId},
+                        new object[] { "@funds_id", DbType.Int16, paymentCollectionsModel.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
+                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
+                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
+                   };
 
+                string query = $"INSERT INTO {tableName} " +
+                               $"(collecting_officers_id, " +
+                               $"job_orders_id," +
+                               $"funds_id, " +
+                               $"accountable_forms_id, " +
+                               $"payee, " +
+                               $"receipt_no,  " +
+                               $"payment_date, " +
+                               $"amount, " +
+                               $"is_cancelled, " +
+                               $"created_by) " +
+                               $"VALUES " +
+                               $"(@collecting_officers_id, " +
+                               $"@job_orders_id, " +
+                               $"@funds_id, " +
+                               $"@accountable_forms_id, " +
+                               $"@payee, " +
+                               $"@receipt_no, " +
+                               $"@payment_date, " +
+                               $"@amount, " +
+                               $"@is_cancelled, " +
+                               $"@created_by)";
+
+                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+
+                rptPaymentPostsModel.PaymentCollectionsId = GetLastInsertedID();
+
+                _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentPostsModel, rptTaxDuesModels);
+
+                scope.Complete();
+                return true;
+            }
+        }
     }
 }
