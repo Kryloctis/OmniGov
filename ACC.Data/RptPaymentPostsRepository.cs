@@ -55,10 +55,11 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId }
+                new object[] { "@payment_collections_id", DbType.Int32, entity.PaymentCollectionsId },
+                new object[] { "@posted_by", DbType.Int32, entity.PostedBy }
             };
 
-            string query = $"INSERT INTO  {tableName}  (payment_collections_id ) VALUES (@payment_collections_id)";
+            string query = $"INSERT INTO  {tableName}  (payment_collections_id, posted_by ) VALUES (@payment_collections_id, @posted_by)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 

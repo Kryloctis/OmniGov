@@ -250,7 +250,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     CollectingOfficerId = collectingOfficerId,
                     JobOrderId = jobOrderId,
                     Amount = amount,
-                    FundId = null,
+                    FundId = 1,
                     ReceiptNo = receiptNo,
                     Payee = payee,
                     PaymentDate = paymentDate,
@@ -258,7 +258,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     CreatedBy = Helper.UserId
                 };
 
-                return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, new RptPaymentPostsModel(), rptTaxDuesModels);
+                var rptPaymentPostsModel = new RptPaymentPostsModel()
+                {
+                    PostedBy = Helper.UserId
+                };
+
+                return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, rptPaymentPostsModel, rptTaxDuesModels);
             }
             catch (Exception ex)
             {
