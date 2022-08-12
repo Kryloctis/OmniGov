@@ -391,7 +391,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             this.cmbFunds.Name = "cmbFunds";
             this.cmbFunds.Size = new System.Drawing.Size(189, 23);
             this.cmbFunds.TabIndex = 32;
-            this.cmbFunds.SelectedIndexChanged += new System.EventHandler(this.cmbFunds_SelectedIndexChanged);
+            this.cmbFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbFunds_SelectionChangeCommitted);
             // 
             // cbMonth
             // 

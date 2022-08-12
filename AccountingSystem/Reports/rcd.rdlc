@@ -221,10 +221,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Fund</Value>
+                                  <Value>Fund:</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -258,6 +257,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -287,10 +287,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Report No</Value>
+                                  <Value>Report No.:</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -324,6 +323,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -360,10 +360,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Name of Accountable Officer</Value>
+                                  <Value>Name of Accountable Officer:</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -397,6 +396,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -426,10 +426,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Date</Value>
+                                  <Value>Date:</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -463,6 +462,7 @@
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
                                     <Format>dd/MM/yyyy</Format>
                                   </Style>
                                 </TextRun>
@@ -5927,13 +5927,13 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>10.42953in</Height>
+        <Height>26.49101cm</Height>
         <Style />
       </Body>
-      <Width>7.86184in</Width>
+      <Width>19.96907cm</Width>
       <Page>
         <PageHeader>
-          <Height>1.15278in</Height>
+          <Height>2.92806cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <ReportItems>
             <Textbox Name="Textbox1">
@@ -5957,43 +5957,8 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Left>0.12742cm</Left>
               <Height>0.89105cm</Height>
-              <Width>19.7729cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox3">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>LGU</Value>
-                      <Style>
-                        <FontFamily>calibri</FontFamily>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>1.56161cm</Top>
-              <Left>8.87849cm</Left>
-              <Height>0.6cm</Height>
-              <Width>1.26295cm</Width>
-              <ZIndex>1</ZIndex>
+              <Width>19.96907cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -6014,7 +5979,7 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
                         <FontFamily>calibri</FontFamily>
-                        <FontWeight>Bold</FontWeight>
+                        <FontSize>11pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -6028,7 +5993,7 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
               <Left>6.31027cm</Left>
               <Height>0.6cm</Height>
               <Width>6.28354cm</Width>
-              <ZIndex>2</ZIndex>
+              <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -6068,7 +6033,7 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
               <Left>14.99469cm</Left>
               <Height>0.6cm</Height>
               <Width>2.33067cm</Width>
-              <ZIndex>3</ZIndex>
+              <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -6104,7 +6069,7 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
               <Left>17.39592cm</Left>
               <Height>0.6cm</Height>
               <Width>2.50437cm</Width>
-              <ZIndex>4</ZIndex>
+              <ZIndex>3</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -6122,12 +6087,13 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>11.69in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
-        <LeftMargin>0.2in</LeftMargin>
-        <RightMargin>0.2in</RightMargin>
-        <TopMargin>0.2in</TopMargin>
-        <BottomMargin>0.2in</BottomMargin>
+        <PageHeight>29.718cm</PageHeight>
+        <PageWidth>21.082cm</PageWidth>
+        <LeftMargin>1.27cm</LeftMargin>
+        <RightMargin>1.27cm</RightMargin>
+        <TopMargin>1.27cm</TopMargin>
+        <BottomMargin>1.27cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
@@ -6202,6 +6168,6 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>321a4175-341b-49f6-9317-94e8c95fda58</rd:ReportID>
 </Report>

@@ -318,7 +318,7 @@ namespace AccountingSystem
         {
             if (string.IsNullOrWhiteSpace(numUpDown.Text.ToString()))
             {
-                ep.SetError(numUpDown, $"{ErrorMessageForEmpty(fieldName)}");
+                ep.SetError(numUpDown, $"{ErrorMessageForEmpty(fieldName)}.");
                 return true;
             }
 
@@ -360,15 +360,13 @@ namespace AccountingSystem
 
         public static bool ShowErrorDateTimePickerRange(ErrorProvider ep, DateTime firstDate, DateTime secondDate, DateTimePicker dtp, string fieldName = "Field")
         {
-            //bool isValidDate = Convert.ToBoolean(DateTime.Compare(firstDate, secondDate));
-            bool isValidDate = firstDate <= secondDate;
+            bool isValidDate = firstDate > secondDate;
 
-            if (isValidDate)
+            if (!isValidDate)
             {
-                ep.SetError(dtp, $"{fieldName} is invalid");
+                ep.SetError(dtp, $"{fieldName} is invalid.");
                 return true;
             }
-
             return false;
         }
         public static void ClearErrorDateTimePickerRange(ErrorProvider ep, DateTimePicker dtpDateRange)

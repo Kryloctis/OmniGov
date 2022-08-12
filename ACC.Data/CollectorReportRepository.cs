@@ -10,13 +10,16 @@ namespace ACC.Data
     class CollectorReportRepository : ICollectorReportRepository
     {
         private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly ICollectorReportPaymentsRepository _collectorReportPaymentsRepository;
+
         private readonly string tableName = "collector_report";
         private readonly string viewTableName = "view_collector_report";
         private readonly string tableCollectorReportPayments = "collector_report_payments";
 
-        public CollectorReportRepository(IDbGenericCommands dbGenericCommands)
+        public CollectorReportRepository(IDbGenericCommands dbGenericCommands, ICollectorReportPaymentsRepository collectorReportPaymentsRepository)
         {
             _dbGenericCommands = dbGenericCommands;
+            _collectorReportPaymentsRepository = collectorReportPaymentsRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int id)
@@ -279,7 +282,7 @@ namespace ACC.Data
             return false;
         }
 
-        public int GetReportId(int collectorId, string collectorReportNumber)
+        public int GetReportID(int collectorId, string collectorReportNumber)
         {
 
             var parameter = new object[][] {
@@ -328,14 +331,7 @@ namespace ACC.Data
                     new object[] {"@fundId", DbType.Byte, fundId }
                 };
 
-                string query =  $"SELECT * FROM {viewTableName} " +
-                                $"WHERE {statusQuery} " +
-                                $"fund_id = @fundId AND " +
-                                $"(collecting_officers_first_name LIKE @keySearch OR " +
-                                $"collecting_officers_last_name LIKE @keySearch OR " +
-                                $"job_orders_first_name LIKE @keySearch OR " +
-                                $"job_orders_last_name LIKE @keySearch OR " +
-                                $"report_no LIKE @keySearch)";
+                string query =  $"SELECT id, fund_id, fund_name, date, report_no, collecting_officers_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, amount, is_approved, is_disapproved  FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId";
 
                 var dtCollectorReport = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
@@ -419,10 +415,10 @@ namespace ACC.Data
           
             var parameters = new object[][]
             {
-                new object[] { "@reportNo", DbType.String, reportNo }
+                new object[] { "@report_no", DbType.String, reportNo }
             };
 
-            string query = $"SELECT is_approved, is_disapproved FROM {tableName} WHERE report_no = @reportNo";
+            string query = $"SELECT is_approved, is_disapproved FROM {tableName} WHERE report_no = @report_no";
             using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
                 foreach (DataRow item in reader.Rows)
@@ -527,6 +523,42 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
+        public bool InsertWithCollectorReportPayments(CollectorReportModel collectorReportModel, List<CollectorReportPaymentModel> collectorReportPaymentModelList)
+        {
+            using (var scope = new TransactionScope()) {
+
+                var parameters = new object[][]
+               {
+                new object[] {"@collecting_officers_id", DbType.Int32, collectorReportModel.CollectorId},
+                new object[] {"@job_orders_id", DbType.Int32, collectorReportModel.JobOrderId},
+                new object[] {"@funds_id", DbType.Int16, collectorReportModel.FundId},
+                new object[] {"@report_no", DbType.String, collectorReportModel.ReportNo},
+                new object[] {"@date", DbType.Date, collectorReportModel.Date},
+                new object[] {"@is_approved", DbType.Int16, collectorReportModel.IsApproved},
+                new object[] {"@is_disapproved", DbType.Int16, collectorReportModel.IsDisapproved},
+                new object[] {"@remarks", DbType.String, collectorReportModel.Remarks}
+               };
+
+                string query = $"INSERT INTO {tableName} VALUES (null, @collecting_officers_id, @job_orders_id,  @funds_id,  @report_no, @date,            @is_approved, @is_disapproved, @remarks)";
+
+                _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+
+                foreach (var collectorsPayments in collectorReportPaymentModelList)
+                {
+                    collectorsPayments.CollectorsReportId = GetReportID(collectorReportModel.CollectorId, collectorReportModel.ReportNo);
+                    collectorsPayments.PaymentCollectionsId = collectorsPayments.PaymentCollectionsId;
+
+                    _collectorReportPaymentsRepository.Insert(collectorsPayments);
+                }
+                
+
+                scope.Complete();
+                return true;
+            }
+
+        }
+
 
         #region RCD DashBoard Counter
 
@@ -593,6 +625,8 @@ namespace ACC.Data
             string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND is_disapproved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
+
+       
         #endregion
     }
 }

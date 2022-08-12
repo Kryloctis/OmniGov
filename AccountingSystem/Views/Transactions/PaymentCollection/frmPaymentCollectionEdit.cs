@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             _uc.LoadAccountableForms();
             _uc.LoadCollectors();
             _uc.LoadFunds();
-            //_uc.SelectCurrentLoggedInCollector();
+            _uc.SelectCurrentLoggedInCollector();
             LoadSelectedValue();
             _uc.GetAccountableFormSerialNumberRange();
             DisableUnEditableFields();
