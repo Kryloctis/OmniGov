@@ -102,9 +102,9 @@ namespace ACC.Data
             string filter;
 
             if (dateFrom.Date == dateTo.Date)
-                filter = string.Empty;
+                filter = "AND payment_collections_payment_date = @date_from";
             else
-                filter = "AND payment_date BETWEEN @date_from AND @date_to";
+                filter = "AND payment_collections_payment_date BETWEEN @date_from AND @date_to";
 
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayer_name = @taxpayer_name {filter}";
             var dataTable = new DataTable();
