@@ -36,7 +36,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.label1 = new System.Windows.Forms.Label();
             this.txtBarangay = new System.Windows.Forms.TextBox();
             this.txtYear = new System.Windows.Forms.TextBox();
-            this.lblPosting = new System.Windows.Forms.Label();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnPostSelected = new System.Windows.Forms.ToolStripButton();
@@ -46,13 +45,16 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPostedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPostedBy = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.prgrsBarPostingAssessments = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblPostingAssessments = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -105,7 +107,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtBarangay);
             this.panel1.Controls.Add(this.txtYear);
-            this.panel1.Controls.Add(this.lblPosting);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Name = "panel1";
@@ -138,16 +139,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(77, 23);
             this.txtYear.TabIndex = 17;
-            // 
-            // lblPosting
-            // 
-            this.lblPosting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPosting.Location = new System.Drawing.Point(861, 7);
-            this.lblPosting.Name = "lblPosting";
-            this.lblPosting.Size = new System.Drawing.Size(162, 15);
-            this.lblPosting.TabIndex = 16;
-            this.lblPosting.Text = "Posting...";
-            this.lblPosting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // nudYear
             // 
@@ -204,6 +195,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel2,
+            this.lblPostingAssessments,
+            this.prgrsBarPostingAssessments,
+            this.toolStripStatusLabel4,
             this.toolStripStatusLabel3,
             this.lblPostedAt,
             this.toolStripStatusLabel6,
@@ -230,7 +224,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(773, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(566, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -244,6 +238,14 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.lblPostedAt.Name = "lblPostedAt";
             this.lblPostedAt.Size = new System.Drawing.Size(12, 17);
             this.lblPostedAt.Text = "-";
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel6.Text = "|";
+            this.toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // toolStripStatusLabel5
             // 
@@ -295,13 +297,24 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // toolStripStatusLabel6
+            // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel6.Text = "|";
-            this.toolStripStatusLabel6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripStatusLabel4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
+            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // prgrsBarPostingAssessments
+            // 
+            this.prgrsBarPostingAssessments.Name = "prgrsBarPostingAssessments";
+            this.prgrsBarPostingAssessments.Size = new System.Drawing.Size(100, 16);
+            // 
+            // lblPostingAssessments
+            // 
+            this.lblPostingAssessments.Name = "lblPostingAssessments";
+            this.lblPostingAssessments.Size = new System.Drawing.Size(126, 17);
+            this.lblPostingAssessments.Text = "Posting Assessments...";
             // 
             // frmAssessmentPosting
             // 
@@ -350,7 +363,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblPostedAt;
-        private System.Windows.Forms.Label lblPosting;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox cmbxBarangays;
         private System.Windows.Forms.TextBox txtSearch;
@@ -361,5 +373,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblPostedBy;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel lblPostingAssessments;
+        private System.Windows.Forms.ToolStripProgressBar prgrsBarPostingAssessments;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
     }
 }

@@ -21,7 +21,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Helper.DatagridFullRowSelectStyle(dgProperties, true, false);
             Helper.LoadFormIcon(this);
             lblPostedAt.Text = string.Empty;
-            lblPosting.Visible = false;
+            lblPostingAssessments.Visible = false;
+            prgrsBarPostingAssessments.Visible = false;
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
@@ -306,7 +307,17 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             {
                 var assessmentPostingModels = new List<RptAssessmentPostsModel>();
 
-                int reportProgress = 0;
+                int progressCount = 0;
+                int totalCheckedRowCount = 0;
+
+                foreach (DataGridViewRow row in dgProperties.Rows)
+                {
+                    bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                    string postingStatus = row.Cells["posting_status"].Value.ToString();
+
+                    if (isChecked && string.IsNullOrEmpty(postingStatus))
+                        totalCheckedRowCount += 1;
+                }
 
                 foreach (DataGridViewRow dgvRow in dgProperties.Rows)
                 {
@@ -322,7 +333,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         int effectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
                         int effectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
                         decimal assessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
-                        bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
+                        bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable"); 
                         int year = Convert.ToInt32(txtYear.Text);
 
                         //Get Penalty and Tax Rates
@@ -366,8 +377,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         };
 
                         assessmentPostingModels.Add(assessmentPostingModel);
-                        int progressCount = reportProgress += 1;
-                        backgroundWorker1.ReportProgress(progressCount);
+                        progressCount += 1;
+                        backgroundWorker1.ReportProgress((progressCount * 100) / totalCheckedRowCount);
                     }
                 }
 
@@ -381,16 +392,27 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            lblPosting.Visible = true;
-            lblPosting.Text = "Posting Assessments...";
+            lblPostingAssessments.Visible = true;
+            prgrsBarPostingAssessments.Visible = true;
+            prgrsBarPostingAssessments.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Error != null)
-                lblPosting.Text = "Posting Failed";
+            if (prgrsBarPostingAssessments.Value == 100)
+            {      
+                Helper.MessageBoxSuccess("Assessments has been posted.");
+                LoadProperties();
+                lblPostingAssessments.Visible = false;
+                prgrsBarPostingAssessments.Visible = false;         
+            }
             else
-                lblPosting.Text = "Posting Complete";
+            {
+                Helper.MessageBoxError("Assessments failed to post.");
+                lblPostingAssessments.Visible = false;
+                prgrsBarPostingAssessments.Visible = false;
+            }
+
         }
 
 
