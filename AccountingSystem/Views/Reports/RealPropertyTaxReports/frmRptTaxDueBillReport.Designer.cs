@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 {
-    partial class frmRptDueBill
+    partial class frmRptTaxDueBillReport
     {
         /// <summary>
         /// Required designer variable.
@@ -29,19 +29,33 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // frmRptDueBill
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(990, 619);
+            this.panel1.TabIndex = 0;
+            // 
+            // frmRptTaxDueBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(990, 619);
-            this.Name = "frmRptDueBill";
+            this.Controls.Add(this.panel1);
+            this.Name = "frmRptTaxDueBill";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Real Property Tax Due Bill";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel1;
     }
 }

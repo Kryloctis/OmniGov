@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
     public partial class frmPropertyTaxDue : Form
     {
         private readonly frmPropertyPayment _frmPropertyPayment;
-        private readonly string _ownerName; 
+        private readonly string _ownerName;
         public frmPropertyTaxDue(string ownerName, frmPropertyPayment frmPropertyPayment)
         {
             InitializeComponent();
@@ -95,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             if (chckBoxProperties.Checked)
                 Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_checked", true);
             else
-                Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_checked", false);    
+                Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_checked", false);
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -134,10 +135,10 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             public decimal Discount { get; set; }
             public decimal Penalty { get; set; }
             public decimal TotalTaxDue { get; set; }
-        } 
+        }
         #endregion
 
-        private DataTable TaxDuesDataTable(List<string> arpNoList) 
+        private DataTable TaxDuesDataTable(List<string> arpNoList)
         {
             var dataTable = new DataTable();
 
@@ -221,7 +222,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
                 #region Getting Total Tax Due
 
-                decimal totalTaxDue = (basicSefTotalTaxDue + penaltyAmount) - discountAmount; 
+                decimal totalTaxDue = (basicSefTotalTaxDue + penaltyAmount) - discountAmount;
 
                 #endregion
 
@@ -229,7 +230,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 {
                     IsChecked = true,
                     Id = rowId,
-                    Year= assessmentYear,
+                    Year = assessmentYear,
                     CompleteArpNo = completeArpNo,
                     AssessedValue = assessedValue,
                     TaxDue = basicSefTotalTaxDue,
@@ -297,7 +298,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return totalTaxDues;
         }
 
-        private decimal GetTotalTaxDues(DataGridView dataGridView) 
+        private decimal GetTotalTaxDues(DataGridView dataGridView)
         {
             decimal totalTaxDues = 0;
 
@@ -486,7 +487,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 Discount = sefDiscountAmount,
                 Penalty = sefPenaltyAmount,
                 TotalTaxDue = totalSefTaxDue
-            }; 
+            };
             #endregion
 
             list.Add(basicModel);
@@ -495,6 +496,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             return list;
         }
+
 
         private void LoadCurrentDetailedTaxDues()
         {
@@ -509,7 +511,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                     int year = Convert.ToInt32(row.Cells["year"].Value);
 
                     if (isChecked)
-                        list.AddRange(GetCurrentDetailedTaxDues(completeArpNo, year)); 
+                        list.AddRange(GetCurrentDetailedTaxDues(completeArpNo, year));
                 }
 
                 _frmPropertyPayment.LoadRealPropertyPaymentTaxDues(list);
@@ -523,7 +525,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         #endregion
 
         //Tax Dues for Saving
-        private void ApplyTaxDues() 
+        private void ApplyTaxDues()
         {
             var rptTaxDuesModelList = new List<RptTaxDuesModel>();
             var dtDgvTaxDues = (DataTable)dataGridView2.DataSource;
@@ -542,7 +544,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                     IsAdvance = discountIsAdvance
                 };
 
-                if(isChecked)
+                if (isChecked)
                     rptTaxDuesModelList.Add(rptTaxDuesModel);
             }
 
@@ -560,6 +562,37 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             LoadCurrentDetailedTaxDues();
             ApplyTaxDues();
             Close();
+        }
+
+
+        #region Get Report Tax Dues
+
+
+
+
+        #endregion
+
+
+        private void ShowRptTaxDueBillReport() 
+        {
+            var list = new List<RealPropertyPaymentTaxDueModel>();
+
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                string completeArpNo = row.Cells["complete_arp_no"].Value.ToString();
+                int year = Convert.ToInt32(row.Cells["year"].Value);
+
+                if (isChecked)
+                    list.AddRange(GetCurrentDetailedTaxDues(completeArpNo, year));
+            }
+
+
+        }
+
+        private void btnPrintTaxBill_Click(object sender, EventArgs e)
+        {
+         
         }
     }
 }

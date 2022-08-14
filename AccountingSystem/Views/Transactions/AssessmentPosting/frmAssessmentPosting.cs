@@ -87,6 +87,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("effectivity_quarter", typeof(int)),
                 new DataColumn("effectivity_year", typeof(int)),
                 new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("area", typeof(decimal)),
+                new DataColumn("classification_code", typeof(string)),
+                new DataColumn("classification_name", typeof(string)),
+                new DataColumn("actual_use_code", typeof(string)),
+                new DataColumn("actual_use_name", typeof(string)),
+                new DataColumn("gr_year", typeof(int)),
                 new DataColumn("is_taxable", typeof(bool)),
                 new DataColumn("penalty_rate", typeof(decimal)),
                 new DataColumn("penalty_frequency", typeof(string)),
@@ -103,12 +109,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
-                
+                var newRow = dataTable.NewRow();
                 int rowId = Convert.ToInt32(row["real_properties_id"]);
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
                 string rowOwnerName = row["owner_name"].ToString();
                 string rowOwnerAddress = row["owner_address"].ToString();
                 string rowPropertyKind = row["property_kind"].ToString();
+                int landBldgMachPropertiesId = Convert.ToInt32(row["land_bldg_mach_properties_id"]);
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
@@ -116,6 +123,19 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
+
+                //Get Land Total Area
+                decimal totalArea = 0;
+
+                if (rowPropertyKind == "L")
+                    totalArea = RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(landBldgMachPropertiesId);
+
+                string rowClassificationCode = row["classification_code"].ToString();
+                string rowClassificationName = row["classification_name"].ToString();
+                string rowActualCode = row["actual_use_code"].ToString();
+                string rowActualName = row["actual_use_name"].ToString();
+                int rowGrYear = Convert.ToInt32(row["gryear"]);
+
                 string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, (int)nudYear.Value, "posted_at");
                 decimal rowPenaltyRate = 0;
                 string rowPenaltyFrequency = string.Empty;
@@ -123,27 +143,37 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 decimal rowSefRate = 0;
                 string rowPostedBy = PostedBy(rowCompleteArpNo);
 
-                dataTable.Rows.Add(false, 
-                                   rowPostingStatus,
-                                   rowId,
-                                   rowCompleteArpNo, 
-                                   rowOwnerName, 
-                                   rowOwnerAddress, 
-                                   rowPropertyKind, 
-                                   rowEffectivityQuarter, 
-                                   rowEffectivityYear, 
-                                   rowAssessedValue,
-                                   rowIsTaxable,                        
-                                   rowPenaltyRate,
-                                   rowPenaltyFrequency, 
-                                   rowBasicRate, 
-                                   rowSefRate,
-                                   rowPostedAt,
-                                   rowPostedBy);
+                newRow["is_checked"] = false;
+                newRow["posting_status"] = rowPostingStatus;
+                newRow["real_properties_id"] = rowId;
+                newRow["complete_arp_no"] = rowCompleteArpNo;
+                newRow["owner_name"] = rowOwnerName;
+                newRow["owner_address"] = rowOwnerAddress;
+                newRow["property_kind"] = rowPropertyKind;
+                newRow["effectivity_quarter"] = rowEffectivityQuarter;
+                newRow["effectivity_year"] = rowEffectivityYear;
+                newRow["assessed_value"] = rowAssessedValue;
+                newRow["area"] = totalArea;
+                newRow["classification_code"] = rowClassificationCode;
+                newRow["classification_name"] = rowClassificationName;
+                newRow["actual_use_code"] = rowActualCode;
+                newRow["actual_use_name"] = rowActualName;
+                newRow["gr_year"] = rowGrYear;
+                newRow["is_taxable"] = rowIsTaxable;
+                newRow["penalty_rate"] = rowPenaltyRate;
+                newRow["penalty_frequency"] = rowPenaltyFrequency;
+                newRow["basic_rate"] = rowBasicRate;
+                newRow["sef_rate"] = rowSefRate;
+                newRow["posted_at"] = rowPostedAt;
+                newRow["posted_by"] = rowPostedBy;
+
+
+                dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
         }
+
 
         private void Miscellaneous() 
         {
@@ -168,12 +198,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(ex.StackTrace);
             }
 
-            Cursor = Cursors.Default;
+    Cursor = Cursors.Default;
         }
-
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
@@ -333,6 +362,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         int effectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
                         int effectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
                         decimal assessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
+                        decimal totalArea = GetDatagridViewValue(dgProperties, dgvRow.Index, "area");
+                        string classificationCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_code");
+                        string classificationName = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_name");
+                        string actualUseCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_code");
+                        string actualUseName = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_name");
+                        int grYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "gr_year");
                         bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable"); 
                         int year = Convert.ToInt32(txtYear.Text);
 
@@ -364,6 +399,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                             EffectivityQuarter = effectiviyQuarter,
                             EffectivityYear = effectivityYear,
                             AssessedValue = assessedValue,
+                            Area = totalArea,
+                            ClassificationCode = classificationCode,
+                            ClassificationName = classificationName,
+                            ActualUseCode = actualUseCode,
+                            ActualUseName = actualUseName,
+                            GrYear = grYear,
                             IsTaxable = isTaxable,
                             IsCancelled = isCancelled,
 

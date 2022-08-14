@@ -161,7 +161,7 @@ namespace RPT.Data
                     return "AND barangays_id = @barangays_id";
             }
 
-            string query = $"SELECT *  FROM {viewPropertyAssessmentGrouped} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
+            string query = $"SELECT * FROM {viewPropertyAssessmentGrouped} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
             var dtProperties = new DataTable();
             return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);

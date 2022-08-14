@@ -40,7 +40,7 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
+            dataGridView.Columns["owner_tin"].HeaderText = "TIN";
             dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
             dataGridView.Columns["owner_name"].HeaderText = "Name";
             dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
@@ -199,6 +199,12 @@ namespace AccountingSystem
             dataGridView.Columns["effectivity_quarter"].Visible = false;
             dataGridView.Columns["effectivity_year"].Visible = false;
             dataGridView.Columns["assessed_value"].Visible = false;
+            dataGridView.Columns["area"].Visible = false;
+            dataGridView.Columns["classification_code"].Visible = false;
+            dataGridView.Columns["classification_name"].Visible = false;
+            dataGridView.Columns["actual_use_code"].Visible = false;
+            dataGridView.Columns["actual_use_name"].Visible = false;
+            dataGridView.Columns["gr_year"].Visible = false;
             dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
             dataGridView.Columns["is_taxable"].MinimumWidth = 20;
             dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
