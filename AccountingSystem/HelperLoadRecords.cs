@@ -1412,20 +1412,22 @@ namespace AccountingSystem
 
             foreach (DataRow row in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
+                //var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
+                var abstractOfGeneralCollection = "123";
+                var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
 
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
                     row["funds_id"],
                     row["fund_name"],
-                    row["accountable_form_id"],
-                    row["accountable_forms"],
-                    row["general_ledger_accounts_id"],
+                    row["accountable_forms_id"],
+                    accountableFOrms,
+                    "general_ledger_accounts_id",
                     abstractOfGeneralCollection,
                     row["payee"],
                     row["receipt_no"],
-                    row["quantity"],
+                    "quantity",
                     row["payment_date"],
                     row["amount"]
                 });

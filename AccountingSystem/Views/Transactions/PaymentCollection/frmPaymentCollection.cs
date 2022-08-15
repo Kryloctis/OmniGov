@@ -20,9 +20,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             LoadCollectors();
             SelectCurrentLoggedInCollector();
             LoadRecords();
-
-
-            
         }
 
 

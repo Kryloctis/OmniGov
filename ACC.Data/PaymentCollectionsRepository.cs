@@ -122,7 +122,7 @@ namespace ACC.Data
 
             string columnFilter = collectingOfficerJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
 
-            string query =  $"SELECT id, funds_id, fund_name, accountable_form_id, accountable_forms, account_code, general_ledger_accounts_id, ledger_name, payee, receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date AND (receipt_no LIKE @search_key OR payee LIKE @search_key) ORDER BY accountable_form_id";
+            string query =  $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND (receipt_no LIKE @search_key OR payee LIKE @search_key) ORDER BY accountable_forms_id";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
