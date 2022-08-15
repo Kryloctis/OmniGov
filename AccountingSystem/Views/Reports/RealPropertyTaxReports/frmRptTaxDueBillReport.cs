@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
     public partial class frmRptTaxDueBillReport : Form
     {
 
-        private readonly List<TaxDuesModel> _taxDuesModels;
+        private readonly List<taxDuesModel> _taxDuesModels;
 
-        public frmRptTaxDueBillReport(List<TaxDuesModel> taxDuesModels)
+        public frmRptTaxDueBillReport(List<taxDuesModel> taxDuesModels)
         {
             InitializeComponent();
             var reportViewer = new ReportViewer();
@@ -27,11 +28,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         }
 
 
-        private void RptTaxDueBillDataTable() 
+        private DataTable RptTaxDueBillDataTable() 
         {
             var dtRPTDueBill = new dsLFS.dtRPTDueBillDataTable();       
 
-            foreach (TaxDuesModel taxDuesModel in _taxDuesModels)
+            foreach (taxDuesModel taxDuesModel in _taxDuesModels)
             {
                 var row = dtRPTDueBill.NewRow();
                 row["arp_no"] = taxDuesModel.CompleteArpNo;
@@ -51,6 +52,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                 dtRPTDueBill.Rows.Add(row);
             }
 
+            return dtRPTDueBill;
         }
     }
 }

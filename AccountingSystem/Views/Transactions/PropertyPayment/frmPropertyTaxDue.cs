@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Transactions.PaymentPosting;
+using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,24 +120,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         #endregion
 
-        #region Get Current Consolidated Tax Dues
 
-        #region Models
-        public class TaxDuesModel
-        {
-            public bool IsChecked { get; set; }
-            public int Id { get; set; }
-            public int Year { get; set; }
-            public string CompleteArpNo { get; set; }
-            public decimal AssessedValue { get; set; }
-            public decimal TaxDue { get; set; }
-            public decimal DiscountRate { get; set; }
-            public bool DiscountIsAdvance { get; set; }
-            public decimal Discount { get; set; }
-            public decimal Penalty { get; set; }
-            public decimal TotalTaxDue { get; set; }
-        }
-        #endregion
+
+        #region Get Current Consolidated Tax Dues
 
         private DataTable TaxDuesDataTable(List<string> arpNoList)
         {
@@ -183,9 +169,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return dataTable;
         }
 
-        private List<TaxDuesModel> GetTaxDues(string completeArpNo)
+        private List<taxDuesModel> GetTaxDues(string completeArpNo)
         {
-            var taxDuesList = new List<TaxDuesModel>();
+            var taxDuesList = new List<taxDuesModel>();
             var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetRecordsByArpNo(completeArpNo);
 
             foreach (DataRow row in dtAssessmentPosting.Rows)
@@ -226,7 +212,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
                 #endregion
 
-                var model = new TaxDuesModel()
+                var model = new taxDuesModel()
                 {
                     IsChecked = true,
                     Id = rowId,
@@ -411,6 +397,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         }
         #endregion
 
+
         #region Get Current Detailed Tax Dues
 
         private List<RealPropertyPaymentTaxDueModel> GetCurrentDetailedTaxDues(string completeArpNo, int year)
@@ -465,7 +452,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             #endregion
 
-            #region Models
+
             var basicModel = new RealPropertyPaymentTaxDueModel()
             {
                 AssessmentPostId = rowId,
@@ -488,7 +475,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 Penalty = sefPenaltyAmount,
                 TotalTaxDue = totalSefTaxDue
             };
-            #endregion
 
             list.Add(basicModel);
             list.Add(sefModel);
@@ -565,13 +551,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         }
 
 
-        #region Get Report Tax Dues
-
-
-
-
-        #endregion
-
+        #region Report Tax Dues
 
         private void ShowRptTaxDueBillReport() 
         {
@@ -590,9 +570,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         }
 
+
         private void btnPrintTaxBill_Click(object sender, EventArgs e)
         {
          
         }
+        
+        #endregion
     }
 }
