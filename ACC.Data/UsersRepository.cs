@@ -590,8 +590,13 @@ namespace ACC.Data
 
         public string GetCollectorNameByUserId(int userId)
         {
-            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ', last_name) AS full_name FROM {tableCollectionsOfficers} WHERE id='{userId}'";
-            return _dbGenericCommands.ExecuteScalar(query);
+            var parameter = new object[][] {
+                new object[]{"@user_id", DbType.Int32, userId}
+            };
+
+            string query = $"SELECT CONCAT(first_name, ' ', mid_initial, ' ' ,last_name) AS full_name FROM {tableCollectionsOfficers} WHERE users_id   = @user_id";
+
+            return string.IsNullOrEmpty(_dbGenericCommands.ExecuteScalar(query, parameter)) ? string.Empty : _dbGenericCommands.ExecuteScalar(query, parameter);
         }
 
         public DataTable GetViewRecordsByOffice(string office)
