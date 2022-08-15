@@ -548,7 +548,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             Close();
         }
 
-
         #region Report Tax Dues
 
         private rptTaxDueBillReportModel GetRptTaxDueBillData(string completeArpNo, int assessmentYear) 

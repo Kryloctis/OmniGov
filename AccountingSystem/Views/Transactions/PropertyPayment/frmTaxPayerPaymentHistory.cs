@@ -103,6 +103,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 int rowAssessmentYear = Convert.ToInt32(row["year"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
+                DateTime rowPaymentPostedDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
 
                 #region Tax Due
 
@@ -126,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 #region  Penalty
 
                 int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
-                int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
+                int delinquentMonths = taxDueComputations.GetSelectedMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowPaymentPostedDate, rowEffectivityYear, previousAssessmentCount);
                 decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
 
 
