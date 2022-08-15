@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             LoadCollectors();
             SelectCurrentLoggedInCollector();
-            LoadRecords();
+            LoadPaymentCollections();
         }
 
 
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
         }
 
-        internal void LoadRecords()
+        internal void LoadPaymentCollections()
         {
             try
             {
@@ -134,7 +134,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                         var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository().Delete(paymentCollectionModelList);
                     }
 
-                    LoadRecords();
+                    LoadPaymentCollections();
                 }
             }
             catch (Exception ex)
@@ -146,17 +146,17 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
         private void cmdCollector_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            LoadRecords();
+            LoadPaymentCollections();
         }
         private void dtpdate_ValueChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            LoadPaymentCollections();
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             if (txtSearch.Text.Length > 3 || txtSearch.Text.Length == 0)
-                LoadRecords();
+                LoadPaymentCollections();
         }
 
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
@@ -171,12 +171,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void cbCollectorType_CheckedChanged(object sender, EventArgs e)
         {
             LoadCollectors();
-            LoadRecords();
+            LoadPaymentCollections();
         }
+
 
 
         #endregion
 
-
+     
     }
 }

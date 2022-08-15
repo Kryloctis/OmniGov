@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IGeneralPaymentsRepository : IRepository<GeneralPaymentsModel>
     {
-
+        Dictionary<string, string> GetRecordsByPaymentCollectionsID(int paymentCollectionID);
     }
 }

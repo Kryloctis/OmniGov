@@ -1412,9 +1412,14 @@ namespace AccountingSystem
 
             foreach (DataRow row in dataTable.Rows)
             {
-                //var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
-                var abstractOfGeneralCollection = "123";
+                var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(row["id"]));
+
+
+                var quantity = generalPaymentsDict["quantity"];
+                var abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
                 var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
+                var accountCode = 
+
 
                 datagrid.Rows.Add(new object[]
                 {
@@ -1423,11 +1428,11 @@ namespace AccountingSystem
                     row["fund_name"],
                     row["accountable_forms_id"],
                     accountableFOrms,
-                    "general_ledger_accounts_id",
+                    generalPaymentsDict["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
                     row["payee"],
                     row["receipt_no"],
-                    "quantity",
+                    quantity,
                     row["payment_date"],
                     row["amount"]
                 });

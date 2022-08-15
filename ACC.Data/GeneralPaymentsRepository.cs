@@ -64,5 +64,45 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public Dictionary<string, string> GetRecordsByPaymentCollectionsID(int paymentCollectionID)
+        {
+            try
+            {
+                var record = new Dictionary<string, string>();
+
+                var parameter = new object[][] {
+                    new object[]{"@payment_collections_id", DbType.Int32, paymentCollectionID}
+                };
+
+                string query = $"SELECT general_payments_id, payment_collections_id, general_ledger_accounts_id, general_ledger_accounts_code, general_ledger_name, quantity FROM {viewTableName}  WHERE payment_collections_id = @payment_collections_id";
+
+
+                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameter))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+
+                    foreach (DataRow item in reader.Rows)
+                    {
+                        record.Add("general_payments_id", item[0].ToString());
+                        record.Add("payment_collections_id", item[1].ToString());
+                        record.Add("general_ledger_accounts_id", item[2].ToString());
+                        record.Add("general_ledger_accounts_code", item[3].ToString());
+                        record.Add("general_ledger_name", item[4].ToString());
+                        record.Add("quantity", item[5].ToString());
+                    }
+
+                }
+
+                return record;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

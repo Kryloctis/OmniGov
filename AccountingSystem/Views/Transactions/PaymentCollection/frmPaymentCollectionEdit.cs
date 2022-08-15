@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (insertSuccess)
                 {
                     Helper.MessageBoxSuccess("Payment Collection has been updated.");
-                    _frmPaymentCollection.LoadRecords();
+                    _frmPaymentCollection.LoadPaymentCollections();
                     ucPaymentCollection1.ResetForm();
                 }
                 else
@@ -180,7 +180,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             if (UpdateData())
             {
                 Helper.MessageBoxSuccess("Payment Collection has been updated.");
-                _frmPaymentCollection.LoadRecords();
+                _frmPaymentCollection.LoadPaymentCollections();
                 Close();
             }
         }
