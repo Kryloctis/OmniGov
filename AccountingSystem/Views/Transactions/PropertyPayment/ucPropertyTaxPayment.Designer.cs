@@ -189,7 +189,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.CheckBox chckBxJobOrder;
-        private System.Windows.Forms.TextBox txtCollectingOfficer;
         internal System.Windows.Forms.TextBox txtReceipts;
+        internal System.Windows.Forms.TextBox txtCollectingOfficer;
     }
 }

@@ -87,6 +87,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.btnPrintTaxBill.Size = new System.Drawing.Size(75, 47);
             this.btnPrintTaxBill.Text = "Print Tax Bill";
             this.btnPrintTaxBill.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrintTaxBill.Click += new System.EventHandler(this.btnPrintTaxBill_Click);
             // 
             // flowLayoutPanel1
             // 

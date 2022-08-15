@@ -13,7 +13,7 @@ namespace AccountingSystem
 
         public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable) 
         {
-            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_id", "receipt_no", "payee", "payment_date", "amount", "is_cancelled" };
+            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
             var dataView = new DataView(dataTable);
             var _dataTable = dataView.ToTable(false, columns);
 
@@ -21,14 +21,14 @@ namespace AccountingSystem
 
             dataGridView.Columns["rpt_payment_posts_id"].Visible = false;
             dataGridView.Columns["payment_collections_id"].Visible = false;
-            dataGridView.Columns["receipt_no"].HeaderText = "Receipt No.";
-            dataGridView.Columns["payment_date"].HeaderText = "Date";
-            dataGridView.Columns["payment_date"].DefaultCellStyle.Format = "dd MMM, yyyy";
-            dataGridView.Columns["payee"].HeaderText = "Payee";
-            dataGridView.Columns["amount"].HeaderText = "Amount";
-            dataGridView.Columns["amount"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["is_cancelled"].HeaderText = "Void";
-            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["payment_collections_receipt_no"].HeaderText = "Receipt No.";
+            dataGridView.Columns["payment_collections_payment_date"].HeaderText = "Date";
+            dataGridView.Columns["payment_collections_payment_date"].DefaultCellStyle.Format = "dd MMM, yyyy";
+            dataGridView.Columns["payment_collections_payee"].HeaderText = "Payee";
+            dataGridView.Columns["payment_collections_amount"].HeaderText = "Amount";
+            dataGridView.Columns["payment_collections_amount"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["payment_collections_is_cancelled"].HeaderText = "Void";
+            dataGridView.Columns["payment_collections_is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
         }
 
@@ -40,7 +40,7 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["owner_tin"].HeaderText = "Local TIN";
+            dataGridView.Columns["owner_tin"].HeaderText = "TIN";
             dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
             dataGridView.Columns["owner_name"].HeaderText = "Name";
             dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
@@ -199,6 +199,12 @@ namespace AccountingSystem
             dataGridView.Columns["effectivity_quarter"].Visible = false;
             dataGridView.Columns["effectivity_year"].Visible = false;
             dataGridView.Columns["assessed_value"].Visible = false;
+            dataGridView.Columns["area"].Visible = false;
+            dataGridView.Columns["classification_code"].Visible = false;
+            dataGridView.Columns["classification_name"].Visible = false;
+            dataGridView.Columns["actual_use_code"].Visible = false;
+            dataGridView.Columns["actual_use_name"].Visible = false;
+            dataGridView.Columns["gr_year"].Visible = false;
             dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
             dataGridView.Columns["is_taxable"].MinimumWidth = 20;
             dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;

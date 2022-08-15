@@ -84,6 +84,12 @@ namespace ACC.Data
                     dict.Add("effectivity_quarterly", row["effectivity_quarterly"].ToString());
                     dict.Add("effectivity_year", row["effectivity_year"].ToString());
                     dict.Add("assessed_value", row["assessed_value"].ToString());
+                    dict.Add("area", row["area"].ToString());
+                    dict.Add("classification_code", row["classification_code"].ToString());
+                    dict.Add("classification_name", row["classification_name"].ToString());
+                    dict.Add("actual_use_code", row["actual_use_code"].ToString());
+                    dict.Add("actual_use_name", row["actual_use_name"].ToString());
+                    dict.Add("gr_year", row["gr_year"].ToString());
                     dict.Add("is_taxable", row["is_taxable"].ToString());
                     dict.Add("is_cancelled", row["is_cancelled"].ToString());
                     dict.Add("penalty_rate", row["penalty_rate"].ToString());
@@ -186,6 +192,12 @@ namespace ACC.Data
                 new object[] { "@effectivity_quarterly", DbType.Int32, entity.EffectivityQuarter },
                 new object[] { "@effectivity_year", DbType.Int32, entity.EffectivityYear },
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue },
+                new object[] { "@area", DbType.Decimal, entity.Area},
+                new object[] { "@classification_code", DbType.String, entity.ClassificationCode},
+                new object[] { "@classification_name", DbType.String, entity.ClassificationName},
+                new object[] { "@actual_use_code", DbType.String, entity.ActualUseCode},
+                new object[] { "@actual_use_name", DbType.String, entity.ActualUseName},
+                new object[] { "@gr_year", DbType.Int32, entity.GrYear},
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
                 new object[] { "@penalty_rate", DbType.Decimal, entity.PenaltyRate },
@@ -197,7 +209,7 @@ namespace ACC.Data
                 new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, area, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @area, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }

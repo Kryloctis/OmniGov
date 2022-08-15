@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void frmTaxPayerPaymentHistory_Load(object sender, EventArgs e)
         {
+            dtPckDateFrom.Value = new DateTime(dtPckDateFrom.Value.Year, dtPckDateFrom.Value.Month, 1);
             LoadPaymentHistory();
             EnableDisableButtons(btnPrintReceipt, btnSelect);
         }
@@ -96,9 +97,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
                 int assessmentPostId = Convert.ToInt32(row["rpt_assessment_posts_id"]);
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
-                DateTime rowPostedAt = Convert.ToDateTime(row["posted_at"]);
+                DateTime rowAssessmentPostsDate = Convert.ToDateTime(row["posted_at"]);
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-                int rowYear = Convert.ToInt32(row["year"]);
+                int rowAssessmentYear = Convert.ToInt32(row["year"]);
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarterly"]);
 
@@ -113,7 +114,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
                 #region Discount
 
-                //Discount
                 bool discountIsAdvance = Convert.ToBoolean(row["is_advance"]);
                 decimal discountRate = Convert.ToDecimal(row["discount_rate"]);
 
@@ -122,41 +122,53 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
                 #endregion
 
-                #region Total Tax Due
+                #region  Penalty
 
-                decimal totalBasicTaxDue = (basicTaxDueAmount + 0) - basicDiscountAmount;
-                decimal totalSefTaxDue = (sefTaxDueAmount + 0) - sefDiscountAmount;
+                int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
+                int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
+                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+
+
+                decimal basicPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDueAmount);
+                decimal sefPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDueAmount);
 
                 #endregion
 
+                #region Total TaxDue
+
+                decimal totalBasicTaxDue = (basicTaxDueAmount + basicPenaltyAmount) - basicDiscountAmount;
+                decimal totalSefTaxDue = (sefTaxDueAmount + sefPenaltyAmount) - sefDiscountAmount;
+
+                #endregion
+
+                #region Models
                 var basicModel = new RealPropertyPaymentTaxDueModel()
                 {
                     AssessmentPostId = assessmentPostId,
-                    Year = rowYear,
+                    Year = rowAssessmentYear,
                     CompleteArpNo = rowCompleteArpNo,
                     TaxType = "Basic",
                     TaxDue = basicTaxDueAmount,
                     Discount = basicDiscountAmount,
-                    Penalty = 0,
+                    Penalty = basicPenaltyAmount,
                     TotalTaxDue = totalBasicTaxDue
                 };
 
                 var sefModel = new RealPropertyPaymentTaxDueModel()
                 {
                     AssessmentPostId = assessmentPostId,
-                    Year = rowYear,
+                    Year = rowAssessmentYear,
                     CompleteArpNo = rowCompleteArpNo,
                     TaxType = "SEF",
                     TaxDue = sefTaxDueAmount,
                     Discount = sefDiscountAmount,
-                    Penalty = 0,
+                    Penalty = sefPenaltyAmount,
                     TotalTaxDue = totalSefTaxDue
-                };
-
+                }; 
+                #endregion
 
                 list.Add(basicModel);
                 list.Add(sefModel);
-
             }
 
             return list;
@@ -164,35 +176,26 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void LoadSelectedDetailedTaxDues()
         {
-            try
-            {
-                int rowIndex = dataGridView1.CurrentRow.Index;
-                int paymentPostsId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["rpt_payment_posts_id"].Value);
+            int rowIndex = dataGridView1.CurrentRow.Index;
+            int paymentPostsId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["rpt_payment_posts_id"].Value);
 
-                _frmPropertyPayment.LoadRealPropertyPaymentTaxDues(GetSelectedDetailedTaxDues(paymentPostsId));
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            _frmPropertyPayment.CancelTransaction();
+            _frmPropertyPayment.LoadSelectedDetailedTaxDues(GetSelectedDetailedTaxDues(paymentPostsId), paymentPostsId);
+
+            Close();
         }
 
         #endregion
 
         private void btnSelect_Click(object sender, EventArgs e)
-        {
-            _frmPropertyPayment.CancelTransaction();
+        {            
             LoadSelectedDetailedTaxDues();
-            Close();
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)
-            {
                 LoadSelectedDetailedTaxDues();
-                Close();
-            }
         }
     }
 }

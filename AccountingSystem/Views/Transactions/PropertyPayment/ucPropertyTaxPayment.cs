@@ -15,6 +15,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
     {
         private readonly string accountableFormNo = "56";
         internal readonly int accountableFormNoId = 9;
+        internal bool isReadOnly = false;
+
 
         public ucPropertyTaxPayment()
         {
@@ -36,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
         internal void ResetForm() 
         {
-            loadreceiptnos();
+            loadReceiptNos();
             txtPayee.Clear();
             dtPaymentDate.Value = Helper.GetCurrentDate();
         }
@@ -99,7 +101,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             return dataTable;
         }
 
-        internal void loadreceiptnos()
+        internal void loadReceiptNos()
         {
             try
             {
@@ -125,7 +127,32 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             }
         }
 
-        internal void LoadCollectorInfo() 
+        internal void LoadCollectorInfoById(int collectingOfficerId, string jobOrder) 
+        {
+            bool isJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(collectingOfficerId);
+            chckBxJobOrder.Checked = isJobOrder;
+
+            if (!string.IsNullOrEmpty(jobOrder))
+            {
+                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByID(Convert.ToInt32(jobOrder));
+                int userId = Convert.ToInt32(dictJobOrder["users_id"]);
+                var userFullName = Helper.GetUserDataById(userId)["user_full_name"];
+
+                chckBxJobOrder.Checked = true;
+                txtCollectingOfficer.Text = userFullName;
+            }
+            else
+            {
+                var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByID(collectingOfficerId);
+                int userId = Convert.ToInt32(dictCollectingOfficer["users_id"]);
+                var userFullName = Helper.GetUserDataById(userId)["user_full_name"];
+
+                chckBxJobOrder.Checked = false;
+                txtCollectingOfficer.Text = userFullName;
+            }
+        }
+
+        internal void LoadCollectorInfoByUserId() 
         {
             try
             {
@@ -145,8 +172,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             if (!DesignMode)
             {
                 LoadAccountableForm();
-                LoadCollectorInfo();
-                loadreceiptnos();
+                LoadCollectorInfoByUserId();
+                loadReceiptNos();
             }
         }
 
@@ -183,6 +210,9 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
         private void txtReceipts_Validating(object sender, CancelEventArgs e)
         {
+            if (isReadOnly)
+                return;
+
             e.Cancel = ValidateReceipts(errorProvider1, txtReceipts);
         }
 
@@ -193,6 +223,9 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
+            if (isReadOnly)
+                return;
+
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
         }
 

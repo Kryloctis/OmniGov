@@ -13329,7 +13329,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDueBillRow AdddtRPTDueBillRow(string arp_no, string kind, string classification, string lot_no, string location, string tax_year, decimal area, decimal assessed_value, decimal basic_tax, decimal sef_tax, decimal discount, decimal penalty, decimal net_tax_due) {
+            public dtRPTDueBillRow AdddtRPTDueBillRow(string arp_no, string kind, string classification, string lot_no, string location, int tax_year, decimal area, decimal assessed_value, decimal basic_tax, decimal sef_tax, decimal discount, decimal penalty, decimal net_tax_due) {
                 dtRPTDueBillRow rowdtRPTDueBillRow = ((dtRPTDueBillRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         arp_no,
@@ -13395,7 +13395,7 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnlot_no);
                 this.columnlocation = new global::System.Data.DataColumn("location", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlocation);
-                this.columntax_year = new global::System.Data.DataColumn("tax_year", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columntax_year = new global::System.Data.DataColumn("tax_year", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_year);
                 this.columnarea = new global::System.Data.DataColumn("area", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnarea);
@@ -24335,10 +24335,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string tax_year {
+            public int tax_year {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDueBill.tax_yearColumn]));
+                        return ((int)(this[this.tabledtRPTDueBill.tax_yearColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'tax_year\' in table \'dtRPTDueBill\' is DBNull.", e);
