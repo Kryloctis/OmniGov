@@ -35,12 +35,14 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             var collectionFrom = Convert.ToDateTime(dtfrom.SelectionRange.Start.ToShortDateString());
             var collectionTo = Convert.ToDateTime(dtto.SelectionRange.Start.ToShortDateString());
+            var isCollectorJO = _uc.cbJOCollector.Checked;
 
             var parameter = new object[] {
                 _collectorId,
                 _fundId,
                 collectionFrom,
-                collectionTo
+                collectionTo,
+                isCollectorJO
             };
 
             dtPaymentCollection = AccFactory.PaymentCollectionsRepository().GetRecordByLedger(parameter);

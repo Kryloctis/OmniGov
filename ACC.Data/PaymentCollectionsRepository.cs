@@ -338,7 +338,9 @@ namespace ACC.Data
                 new object[] { "@collection_to", DbType.Date, parameter[3] }
             };
 
-            string query =  $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE payment_date BETWEEN @collection_from AND @collection_to ";
+            string columnFilter = Convert.ToBoolean(parameter[4]) ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
+
+            string query =  $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);

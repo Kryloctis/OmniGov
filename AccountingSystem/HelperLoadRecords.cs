@@ -1413,13 +1413,19 @@ namespace AccountingSystem
             foreach (DataRow row in dataTable.Rows)
             {
                 var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(row["id"]));
+                var quantity = 1;
+                var generalLedgerAccountsID = 0;
+                var abstractOfGeneralCollection = string.Empty;
 
+                if (generalPaymentsDict.Count != 0)
+                {
+                    quantity = Convert.ToInt32(generalPaymentsDict["quantity"]);
+                    generalLedgerAccountsID = Convert.ToInt32(generalPaymentsDict["general_ledger_accounts_id"]);
+                    abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                }
 
-                var quantity = generalPaymentsDict["quantity"];
-                var abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
                 var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
           
-
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
@@ -1427,7 +1433,7 @@ namespace AccountingSystem
                     row["fund_name"],
                     row["accountable_forms_id"],
                     accountableFOrms,
-                    generalPaymentsDict["general_ledger_accounts_id"],
+                    generalLedgerAccountsID,
                     abstractOfGeneralCollection,
                     row["payee"],
                     row["receipt_no"],
@@ -1500,8 +1506,18 @@ namespace AccountingSystem
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
                 var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(drPaymentCollection["payment_collections_id"]));
+            
+                var quantity = 1;
+                var generalLedgerAccountsID = 0;
+                var abstractOfGeneralCollection = string.Empty;
 
-                var abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                if (generalPaymentsDict.Count != 0)
+                {
+                    quantity = Convert.ToInt32(generalPaymentsDict["quantity"]);
+                    generalLedgerAccountsID = Convert.ToInt32(generalPaymentsDict["general_ledger_accounts_id"]);
+                    abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                }
+
                 var accountableForms = $"{drPaymentCollection["accountable_forms_no"]} - {drPaymentCollection["accountable_forms_desc"]}";
 
                 datagrid.Rows.Add(new object[]
@@ -1511,11 +1527,11 @@ namespace AccountingSystem
                     drPaymentCollection["fund_name"],
                     drPaymentCollection["accountable_forms_id"],
                     accountableForms,
-                    generalPaymentsDict["general_ledger_accounts_id"],
+                    generalLedgerAccountsID,
                     abstractOfGeneralCollection,
                     drPaymentCollection["payee"],
                     drPaymentCollection["receipt_no"],
-                    generalPaymentsDict["quantity"],
+                    quantity,
                     drPaymentCollection["payment_date"],
                     drPaymentCollection["amount"]
                 });

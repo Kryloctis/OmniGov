@@ -75,6 +75,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
 
                 HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
+
+                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+
             }
             catch (Exception ex)
             {
