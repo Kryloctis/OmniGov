@@ -1418,8 +1418,7 @@ namespace AccountingSystem
                 var quantity = generalPaymentsDict["quantity"];
                 var abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
                 var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
-                var accountCode = 
-
+          
 
                 datagrid.Rows.Add(new object[]
                 {
@@ -1496,22 +1495,27 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+
+
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
+                var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(drPaymentCollection["payment_collections_id"]));
+
+                var abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                var accountableForms = $"{drPaymentCollection["accountable_forms_no"]} - {drPaymentCollection["accountable_forms_desc"]}";
 
                 datagrid.Rows.Add(new object[]
                 {
                     drPaymentCollection["payment_collections_id"],
                     drPaymentCollection["funds_id"],
                     drPaymentCollection["fund_name"],
-                    drPaymentCollection["accountable_form_id"],
-                    drPaymentCollection["accountable_forms"],
-                    drPaymentCollection["general_ledger_accounts_id"],
+                    drPaymentCollection["accountable_forms_id"],
+                    accountableForms,
+                    generalPaymentsDict["general_ledger_accounts_id"],
                     abstractOfGeneralCollection,
                     drPaymentCollection["payee"],
                     drPaymentCollection["receipt_no"],
-                    drPaymentCollection["quantity"],
+                    generalPaymentsDict["quantity"],
                     drPaymentCollection["payment_date"],
                     drPaymentCollection["amount"]
                 });

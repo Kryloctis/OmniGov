@@ -332,29 +332,13 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@collectorId", DbType.UInt16, parameter[0] },
-                new object[] { "@collectionFund", DbType.UInt16, parameter[1] },
-                new object[] { "@collectionDateFrom", DbType.Date, parameter[2] },
-                new object[] { "@collectionDateTo", DbType.Date, parameter[3] }
+                new object[] { "@collecting_officer_id", DbType.UInt16, parameter[0] },
+                new object[] { "@funds_id", DbType.UInt16, parameter[1] },
+                new object[] { "@collection_from", DbType.Date, parameter[2] },
+                new object[] { "@collection_to", DbType.Date, parameter[3] }
             };
 
-            string query =  $"SELECT " +
-                            $"id AS payment_collections_id, " +
-                            $"funds_id, " +
-                            $"fund_name, " +
-                            $"accountable_form_id," +
-                            $"accountable_forms," +
-                            $"general_ledger_accounts_id, " +
-                            $"account_code, " +
-                            $"ledger_name, " +
-                            $"payee, " +
-                            $"receipt_no, " +
-                            $"quantity, " +
-                            $"payment_date, " +
-                            $"amount " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE " +
-                            $"payment_date BETWEEN @collectionDateFrom AND @collectionDateTo ";
+            string query =  $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
