@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+﻿using AccountingSystem.Views.Transactions.PaymentPosting;
+using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -15,44 +16,66 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 {
     public partial class frmRptTaxDueBillReport : Form
     {
+        private ReportViewer reportViewer;
+        private readonly DataTable _dtRPTDueBill;
+        private readonly rptPropertyPaymentTaxPayerInfoModel _rptPropertyPaymentTaxPayerInfoModel;
 
-        private readonly List<taxDuesModel> _taxDuesModels;
-
-        public frmRptTaxDueBillReport(List<taxDuesModel> taxDuesModels)
+        public frmRptTaxDueBillReport(DataTable dtRPTDueBill, rptPropertyPaymentTaxPayerInfoModel paymentTaxPayerInfoModel)
         {
             InitializeComponent();
-            var reportViewer = new ReportViewer();
+            Helper.LoadFormIcon(this);
+            reportViewer = new ReportViewer();
             panel1.Controls.Add(reportViewer);
             reportViewer.Dock = DockStyle.Fill;
-            _taxDuesModels = taxDuesModels;
+            _rptPropertyPaymentTaxPayerInfoModel = paymentTaxPayerInfoModel;
+            _dtRPTDueBill = dtRPTDueBill;
         }
 
-
-        private DataTable RptTaxDueBillDataTable() 
+        private void LoadReport(LocalReport report) 
         {
-            var dtRPTDueBill = new dsLFS.dtRPTDueBillDataTable();       
-
-            foreach (taxDuesModel taxDuesModel in _taxDuesModels)
+            try
             {
-                var row = dtRPTDueBill.NewRow();
-                row["arp_no"] = taxDuesModel.CompleteArpNo;
-                row["kind"] = string.Empty;
-                row["classification"] = string.Empty;
-                row["lot_no"] = string.Empty;
-                row["location"] = string.Empty;
-                row["tax_year"] = taxDuesModel.Year;
-                row["area"] = 0;
-                row["assessed_value"] = taxDuesModel.AssessedValue;
-                row["basic_tax"] = 0;
-                row["sef_tax"] = 0;
-                row["discount"] = taxDuesModel.Discount;
-                row["penalty"] = taxDuesModel.Penalty;
-                row["net_tax_due"] = taxDuesModel.TotalTaxDue;
+                Cursor.Current = Cursors.WaitCursor;
+                var lguDetails = Helper.LGUDetails();
+                var dictPenalty = AccFactory.RptPenaltiesRepository().GetRecordByDescription("RPT monthly penalty");
+                string penaltyRate = dictPenalty.Values.Count < 1 ? "0" : dictPenalty["rate"];
 
-                dtRPTDueBill.Rows.Add(row);
+                var parameters = new[]
+                {
+                    new ReportParameter("paramMunicipality",  lguDetails["lgu_name"]),
+                    new ReportParameter("paramProvince", lguDetails["lgu_province"]),
+                    new ReportParameter("paramTaxPayerName", _rptPropertyPaymentTaxPayerInfoModel.TaxPayerName),
+                    new ReportParameter("paramAddress", _rptPropertyPaymentTaxPayerInfoModel.Address),
+                    new ReportParameter("paramTin", _rptPropertyPaymentTaxPayerInfoModel.TIN),
+                    new ReportParameter("paramPreparedBy", Helper.LoggedInUserData()["user_full_name"]), 
+                    new ReportParameter("paramCurrentDate", Helper.GetCurrentDate().ToString()),
+                    new ReportParameter("paramPenaltyRate", penaltyRate)
+                };
+
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-due-bill.rdlc";
+                report.DataSources.Clear();
+
+                report.DataSources.Add(new ReportDataSource("dtRPTDueBill", _dtRPTDueBill));
+                report.SetParameters(parameters);
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+
+                Cursor.Current = Cursors.Default;
             }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+                Cursor.Current = Cursors.Default;
+            }
+        }
 
-            return dtRPTDueBill;
+        private void frmRptTaxDueBillReport_Load(object sender, EventArgs e)
+        {
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

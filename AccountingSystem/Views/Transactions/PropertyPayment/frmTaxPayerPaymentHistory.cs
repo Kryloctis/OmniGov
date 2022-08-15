@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,9 +87,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         #region Get Selected Detailed Tax Dues
 
-        private List<RealPropertyPaymentTaxDueModel> GetSelectedDetailedTaxDues(int paymentPostId)
+        private List<RptDetailedTaxDuesModel> GetSelectedDetailedTaxDues(int paymentPostId)
         {
-            var list = new List<RealPropertyPaymentTaxDueModel>();
+            var list = new List<RptDetailedTaxDuesModel>();
 
             var dtRptTaxDues = AccFactory.RptTaxDuesRepository().GetViewRecordsByRptPaymentPostsId(paymentPostId);
 
@@ -141,8 +142,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
                 #endregion
 
-                #region Models
-                var basicModel = new RealPropertyPaymentTaxDueModel()
+                var basicModel = new RptDetailedTaxDuesModel()
                 {
                     AssessmentPostId = assessmentPostId,
                     Year = rowAssessmentYear,
@@ -154,7 +154,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     TotalTaxDue = totalBasicTaxDue
                 };
 
-                var sefModel = new RealPropertyPaymentTaxDueModel()
+                var sefModel = new RptDetailedTaxDuesModel()
                 {
                     AssessmentPostId = assessmentPostId,
                     Year = rowAssessmentYear,
@@ -165,7 +165,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     Penalty = sefPenaltyAmount,
                     TotalTaxDue = totalSefTaxDue
                 }; 
-                #endregion
 
                 list.Add(basicModel);
                 list.Add(sefModel);

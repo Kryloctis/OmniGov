@@ -168,7 +168,8 @@ namespace AccountingSystem
         {
             var lguDict = new Dictionary<string, string>
             {
-                { "lgu_name", "Municipality of Buug" }
+                { "lgu_name", "Municipality of Buug" },
+                { "lgu_province", "Zamboanga Sibugay"}
             };
 
             return lguDict;

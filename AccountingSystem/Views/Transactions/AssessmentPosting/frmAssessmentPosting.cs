@@ -174,7 +174,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return dataTable;
         }
 
-
         private void Miscellaneous() 
         {
             chckBxAll.Checked = false;
@@ -219,8 +218,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             else
                 Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
         }
-
-
 
         private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
@@ -288,7 +285,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 Helper.MessageBoxError(ex.Message);    
             }
         }
-
 
         private void btnPostSelected_Click(object sender, EventArgs e)
         {
