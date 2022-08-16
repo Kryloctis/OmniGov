@@ -502,7 +502,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.Name = "frmPropertyPayment";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Property Payment";
+            this.Text = "RPT Payment";
             this.Load += new System.EventHandler(this.frmPaymentPosting_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

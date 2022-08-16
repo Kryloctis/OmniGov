@@ -1396,7 +1396,7 @@ namespace AccountingSystem
             // issueReceiptsToolStripMenuItem
             // 
             this.issueReceiptsToolStripMenuItem.Name = "issueReceiptsToolStripMenuItem";
-            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.issueReceiptsToolStripMenuItem.Text = "Issue Receipts";
             this.issueReceiptsToolStripMenuItem.Click += new System.EventHandler(this.btnIssueReceipt_Click);
             // 
@@ -1404,7 +1404,7 @@ namespace AccountingSystem
             // 
             this.returnedReceiptsToolStripMenuItem.Enabled = false;
             this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
@@ -1462,7 +1462,7 @@ namespace AccountingSystem
             // 
             this.toolStripMenuPaymentPostings.Name = "toolStripMenuPaymentPostings";
             this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(183, 22);
-            this.toolStripMenuPaymentPostings.Text = "Property Payment";
+            this.toolStripMenuPaymentPostings.Text = "RPT Payment";
             this.toolStripMenuPaymentPostings.Click += new System.EventHandler(this.toolStripMenuPaymentPostings_Click);
             // 
             // reportsToolStripMenuItem
