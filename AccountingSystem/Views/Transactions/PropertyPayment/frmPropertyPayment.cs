@@ -2,12 +2,14 @@
 using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using Microsoft.Reporting.WinForms;
 using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -191,6 +193,49 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         #region Payment Methods
 
+        private bool PrintReceipt() 
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;   
+                var localReport = new LocalReport();
+                var dictLguDetails = Helper.LGUDetails();
+                var amountToWords = new Helper.AmountToWords();
+                string amount = txtTotalDue.Text.Trim();
+
+                var parameters = new[]
+                {
+                new ReportParameter("paramMunicipality", dictLguDetails["lgu_name"]),
+                new ReportParameter("paramReceiptNo", ucPaymentInfo.txtReceipts.Text.Trim()),
+                new ReportParameter("paramPaymentDate", ucPaymentInfo.dtPaymentDate.Value.ToString()),
+                new ReportParameter("paramAmount", amount),
+                new ReportParameter("paramPayee", ucPaymentInfo.txtPayee.Text.Trim()),
+                new ReportParameter("paramCollectorName", ucPaymentInfo.txtCollectingOfficer.Text.Trim()),
+                new ReportParameter("paramAmountInWord", amountToWords.ConvertAmountToWords(amount))
+                };            
+
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-payment-receipt.rdlc";
+                localReport.SetParameters(parameters);
+
+                //Set page settings for receipt printing
+                var localReportDefaultSetting = localReport.GetDefaultPageSettings();
+                var pageSettings = new PageSettings();
+                pageSettings.PaperSize = localReportDefaultSetting.PaperSize;
+
+                Helper.PrintToPrinter(localReport, pageSettings);
+                Helper.DisposePrintToPrinter();
+                Cursor.Current = Cursors.Default;
+                return true;
+                
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            Cursor.Current = Cursors.Default;
+            return false;       
+        }
+
         private bool ValidatePayment()
         {
             decimal totalDue = Convert.ToDecimal(txtTotalDue.Text);
@@ -257,11 +302,12 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             if (SavePayment())
             {
-                Helper.MessageBoxSuccess("Payment Confirmed.");
+                PrintReceipt();
+                Helper.MessageBoxSuccess("Payment Confirmed.\nPrinting Receipt...");
                 LoadRptDetailedTaxDues(null);
                 rptTaxDuesModels.Clear();
                 ucPaymentInfo.ResetForm();
-            }
+            }   
         }
 
         #endregion
