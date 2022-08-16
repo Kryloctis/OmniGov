@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Transactions;
 
 namespace ACC.Data
 {
@@ -62,7 +63,29 @@ namespace ACC.Data
 
         public bool Delete(List<GeneralPaymentsModel> entityList)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var entity in entityList)
+                    {
+                        var parameters = new object[][]
+                        {
+                            new object[] { "@id", DbType.Int32, entity.PaymentCollectionId},
+                        };
+
+                        string query = $"DELETE FROM {tableName} WHERE payment_collections_id = @id";
+                        _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Dictionary<string, string> GetRecordsByPaymentCollectionsID(int paymentCollectionID)

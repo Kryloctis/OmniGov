@@ -126,20 +126,26 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 if (Helper.MessageBoxConfirmDelete(selectedRowCount))
                 {
                     var paymentCollectionModelList = new List<PaymentCollectionsModel>();
+                    var GeneralPaymentsModelList = new List<GeneralPaymentsModel>();
 
+              
                     foreach (DataGridViewRow row in dgpayments.SelectedRows)
                     {
                         int paymentCollectionId = Convert.ToInt32(row.Cells[0].Value.ToString());
                         paymentCollectionModelList.Add(new PaymentCollectionsModel() { Id = paymentCollectionId });
+                        GeneralPaymentsModelList.Add(new GeneralPaymentsModel() { PaymentCollectionId = paymentCollectionId });
+
+                        AccFactory.GeneralPaymentRepository().Delete(GeneralPaymentsModelList);
                         var paymentCollectionRepo = AccFactory.PaymentCollectionsRepository().Delete(paymentCollectionModelList);
                     }
 
+                    Helper.MessageBoxSuccess("Payment Collection Deleted.");
                     LoadPaymentCollections();
                 }
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError("Record cannot be deleted.");
             }
 
         }
