@@ -129,7 +129,7 @@ namespace AccountingSystem
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.ucrcdSummary1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.issueReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1370,7 +1370,7 @@ namespace AccountingSystem
             // 
             this.menuStrip2.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
+            this.toolStripMenuItemReceipts,
             this.checkIssuanceToolStripMenuItem,
             this.bankDepositToolStripMenuItem,
             this.paymentsToolStripMenuItem,
@@ -1382,28 +1382,28 @@ namespace AccountingSystem
             this.menuStrip2.TabIndex = 5;
             this.menuStrip2.Text = "menuStrip2";
             // 
-            // toolStripMenuItem1
+            // toolStripMenuItemReceipts
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemReceipts.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.issueReceiptsToolStripMenuItem,
             this.returnedReceiptsToolStripMenuItem});
-            this.toolStripMenuItem1.Image = global::AccountingSystem.Properties.Resources.document_delivery_24px;
-            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(87, 28);
-            this.toolStripMenuItem1.Text = "Receipts";
+            this.toolStripMenuItemReceipts.Image = global::AccountingSystem.Properties.Resources.document_delivery_24px;
+            this.toolStripMenuItemReceipts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItemReceipts.Name = "toolStripMenuItemReceipts";
+            this.toolStripMenuItemReceipts.Size = new System.Drawing.Size(87, 28);
+            this.toolStripMenuItemReceipts.Text = "Receipts";
             // 
             // issueReceiptsToolStripMenuItem
             // 
             this.issueReceiptsToolStripMenuItem.Name = "issueReceiptsToolStripMenuItem";
-            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.issueReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.issueReceiptsToolStripMenuItem.Text = "Issue Receipts";
             this.issueReceiptsToolStripMenuItem.Click += new System.EventHandler(this.btnIssueReceipt_Click);
             // 
             // returnedReceiptsToolStripMenuItem
             // 
             this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.menuReturnReceipts_Click);
             // 
@@ -1719,7 +1719,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem taxRateToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemReceipts;
         private System.Windows.Forms.ToolStripMenuItem checkIssuanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankDepositToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;

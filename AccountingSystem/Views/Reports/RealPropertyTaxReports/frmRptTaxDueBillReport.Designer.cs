@@ -37,19 +37,21 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(990, 619);
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1253, 654);
             this.panel1.TabIndex = 0;
             // 
-            // frmRptTaxDueBill
+            // frmRptTaxDueBillReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 619);
+            this.ClientSize = new System.Drawing.Size(1253, 654);
             this.Controls.Add(this.panel1);
-            this.Name = "frmRptTaxDueBill";
+            this.Name = "frmRptTaxDueBillReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Real Property Tax Due Bill";
+            this.Load += new System.EventHandler(this.frmRptTaxDueBillReport_Load);
             this.ResumeLayout(false);
 
         }

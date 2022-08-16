@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,7 +63,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                     string municipalityName = dataGridView1.Rows[rowIndex].Cells["municipality_name"].Value.ToString();
                     string provinceName = dataGridView1.Rows[rowIndex].Cells["province_name"].Value.ToString();
 
-                    var paymentPostingFields = new PaymentTaxPayerInfo()
+                    var paymentPostingFields = new rptPropertyPaymentTaxPayerInfoModel()
                     {
                         TIN = tin,
                         TaxPayerName = taxPayerName,
@@ -72,7 +73,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                         ProvinceName = provinceName
                     };
 
-                    _frmPropertyPayment.GetSelectedTaxPayerInfo(paymentPostingFields);
+                    _frmPropertyPayment.paymentTaxPayerInfoModel = paymentPostingFields;
+                    _frmPropertyPayment.GetSelectedTaxPayerInfo();
                 }
 
                 Close();

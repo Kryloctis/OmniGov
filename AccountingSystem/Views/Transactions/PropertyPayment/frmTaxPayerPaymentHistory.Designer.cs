@@ -69,6 +69,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnPrintReceipt.Size = new System.Drawing.Size(78, 47);
             this.btnPrintReceipt.Text = "Print Receipt";
             this.btnPrintReceipt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrintReceipt.Click += new System.EventHandler(this.btnPrintReceipt_Click);
             // 
             // dtPckDateFrom
             // 

@@ -52,6 +52,7 @@
     <None Remove="Reports\procurements-received-journal.rdlc" />
     <None Remove="Reports\rcd.rdlc" />
     <None Remove="Reports\rcdreceipts.rdlc" />
+    <None Remove="Reports\real-property-payment-receipt.rdlc" />
     <None Remove="Reports\real-property-tax-delinquencies.rdlc" />
     <None Remove="Reports\real-property-tax-due-bill.rdlc" />
     <None Remove="Reports\real-property-taxes-due-and-payments.rdlc" />
@@ -114,6 +115,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\rcdreceipts.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\real-property-payment-receipt.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\real-property-tax-delinquencies.rdlc">

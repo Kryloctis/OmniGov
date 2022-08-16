@@ -11,13 +11,13 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptAssessmentPostingRepository : IRptAssessmentPostingRepository
+    public class RptAssessmentPostsRepository : IRptAssessmentPostingRepository
     {
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
         private MySqlGenericCommands _mySqlGenericCommands;
 
-        public RptAssessmentPostingRepository(MySqlGenericCommands mySqlGenericCommands)
+        public RptAssessmentPostsRepository(MySqlGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }

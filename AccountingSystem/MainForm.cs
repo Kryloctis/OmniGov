@@ -233,10 +233,7 @@ namespace AccountingSystem
                 menuAccForm.Visible = false;
 
             if (!Helper.HasPermission("Manage Disbursing Officer"))
-                menuDisbursingOfficer.Visible = false;
-
-            if (!Helper.HasPermission("Manage Receipts"))
-                menuReceipts.Visible = false;
+                menuDisbursingOfficer.Visible = false;          
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
@@ -273,8 +270,19 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Visible = false;
+
+            #region Receipts
+
+            if (!Helper.HasPermission("Manage Receipts"))
+                menuReceipts.Visible = false;
+
             if (!Helper.HasPermission("Manage Returned Receipts"))
                 returnedReceiptsToolStripMenuItem.Visible = false;
+
+            if (!Helper.HasPermission("Manage Receipts") && !Helper.HasPermission("Manage Returned Receipts"))
+                toolStripMenuItemReceipts.Visible = false;
+
+            #endregion
         }
 
         private void ValidateAccountingControlPermissions()

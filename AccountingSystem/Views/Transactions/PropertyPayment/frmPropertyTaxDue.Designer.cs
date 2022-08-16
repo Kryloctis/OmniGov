@@ -84,8 +84,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             this.btnPrintTaxBill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrintTaxBill.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPrintTaxBill.Name = "btnPrintTaxBill";
-            this.btnPrintTaxBill.Size = new System.Drawing.Size(75, 47);
-            this.btnPrintTaxBill.Text = "Print Tax Bill";
+            this.btnPrintTaxBill.Size = new System.Drawing.Size(99, 47);
+            this.btnPrintTaxBill.Text = "Print Tax Due Bill";
             this.btnPrintTaxBill.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrintTaxBill.Click += new System.EventHandler(this.btnPrintTaxBill_Click);
             // 
