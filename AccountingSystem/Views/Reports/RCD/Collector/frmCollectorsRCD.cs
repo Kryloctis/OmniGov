@@ -105,17 +105,28 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtFromDataSource.NewRow();
-                    //var accountableForm = $"{item["acc_form_no"]} - {item["acc_form_desc"]}";
-                    row["accountable_form"] = item["accountable_forms"];
-                    row["beginning_bal_quantity"] = item["quantity"];
-                    row["beginning_bal_serial_from"] = item["receipt_issued_from"];
-                    row["beginning_bal_serial_to"] = item["receipt_issued_to"];
-                    row["issue_quantity"] = item["issue_quantity"];
-                    row["issue_serial_from"] = item["receipt_issued_from"];
-                    row["issue_serial_to"] = item["receipt_issued_to"];
-                    row["ending_bal_quantity"] = item["ending_balance_quantity"];
-                    row["ending_bal_serial_from"] = item["ending_balance_serial_from"];
-                    row["ending_bal_serial_to"] = item["ending_balance_serial_to"];
+                    var lastIssued = item["last_issued"];
+
+                    var accountableForm = item["accountable_forms"];
+                    var beginningQuantity = item["quantity"];
+                    var receiptBeginningBalanceFrom = item["receipt_issued_from"];
+                    var receiptBeginningBalanceTo = item["receipt_issued_to"];
+
+                    row["accountable_form"] = accountableForm;
+                    row["beginning_bal_quantity"] = beginningQuantity;
+                    row["beginning_bal_serial_from"] = receiptBeginningBalanceFrom;
+                    row["beginning_bal_serial_to"] = receiptBeginningBalanceTo;
+
+                    row["issue_quantity"] = beginningQuantity;
+                    row["issue_serial_from"] = receiptBeginningBalanceFrom;
+                    row["issue_serial_to"] = receiptBeginningBalanceFrom;
+
+
+                    row["ending_bal_quantity"] = beginningQuantity;
+                    row["ending_bal_serial_from"] = receiptBeginningBalanceFrom;
+                    row["ending_bal_serial_to"] = receiptBeginningBalanceFrom;
+
+
                     dtFromDataSource.Rows.Add(row);
                 }
             }
@@ -173,9 +184,14 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtFromDataSource.NewRow();
+
+                    var receiptNumberFrom = string.IsNullOrEmpty(item["report_number_from"].ToString()) ? string.Empty : Convert.ToInt32(item["report_number_from"]).ToString("D7");
+                    var receiptNumberTo = string.IsNullOrEmpty(item["report_number_to"].ToString()) ? string.Empty : Convert.ToInt32(item["report_number_to"]).ToString("D7");
+
+
                     row["type_of_form"] = item["accountable_forms"];
-                    row["serial_no_from"] = Convert.ToInt32(item["report_number_from"]).ToString("D7");
-                    row["serial_no_to"] = Convert.ToInt32(item["report_number_to"]).ToString("D7");
+                    row["serial_no_from"] = receiptNumberFrom;
+                    row["serial_no_to"] = receiptNumberTo;
                     row["amount"] = item["amount"];
                     dtFromDataSource.Rows.Add(row);
                 }

@@ -1414,20 +1414,32 @@ namespace AccountingSystem
 
             foreach (DataRow row in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{row["account_code"]} - {row["ledger_name"]}";
+                var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(row["id"]));
+                var quantity = 1;
+                var generalLedgerAccountsID = 0;
+                var abstractOfGeneralCollection = string.Empty;
 
+                if (generalPaymentsDict.Count != 0)
+                {
+                    quantity = Convert.ToInt32(generalPaymentsDict["quantity"]);
+                    generalLedgerAccountsID = Convert.ToInt32(generalPaymentsDict["general_ledger_accounts_id"]);
+                    abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                }
+
+                var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
+          
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
                     row["funds_id"],
                     row["fund_name"],
-                    row["accountable_form_id"],
-                    row["accountable_forms"],
-                    row["general_ledger_accounts_id"],
+                    row["accountable_forms_id"],
+                    accountableFOrms,
+                    generalLedgerAccountsID,
                     abstractOfGeneralCollection,
                     row["payee"],
                     row["receipt_no"],
-                    row["quantity"],
+                    quantity,
                     row["payment_date"],
                     row["amount"]
                 });
@@ -1491,22 +1503,37 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+
+
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
-                var abstractOfGeneralCollection = $"{drPaymentCollection["account_code"]} - {drPaymentCollection["ledger_name"]}";
+                var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(drPaymentCollection["payment_collections_id"]));
+            
+                var quantity = 1;
+                var generalLedgerAccountsID = 0;
+                var abstractOfGeneralCollection = string.Empty;
+
+                if (generalPaymentsDict.Count != 0)
+                {
+                    quantity = Convert.ToInt32(generalPaymentsDict["quantity"]);
+                    generalLedgerAccountsID = Convert.ToInt32(generalPaymentsDict["general_ledger_accounts_id"]);
+                    abstractOfGeneralCollection = $"{generalPaymentsDict["general_ledger_accounts_code"]} - {generalPaymentsDict["general_ledger_name"]}";
+                }
+
+                var accountableForms = $"{drPaymentCollection["accountable_forms_no"]} - {drPaymentCollection["accountable_forms_desc"]}";
 
                 datagrid.Rows.Add(new object[]
                 {
                     drPaymentCollection["payment_collections_id"],
                     drPaymentCollection["funds_id"],
                     drPaymentCollection["fund_name"],
-                    drPaymentCollection["accountable_form_id"],
-                    drPaymentCollection["accountable_forms"],
-                    drPaymentCollection["general_ledger_accounts_id"],
+                    drPaymentCollection["accountable_forms_id"],
+                    accountableForms,
+                    generalLedgerAccountsID,
                     abstractOfGeneralCollection,
                     drPaymentCollection["payee"],
                     drPaymentCollection["receipt_no"],
-                    drPaymentCollection["quantity"],
+                    quantity,
                     drPaymentCollection["payment_date"],
                     drPaymentCollection["amount"]
                 });

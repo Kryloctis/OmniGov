@@ -325,22 +325,24 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[]{"@collecting_officer_id", DbType.String, collectingOfficerId}
             };
-            string query =  $"SELECT " +
-                            $"accountable_form_id, " +
-                            $"accountable_forms, " +
-                            $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
-                            $"LPAD(MIN(receipt_issued_from), 7, 0) receipt_issued_from, " +
-                            $"LPAD(MAX(receipt_issued_to), 7, 0)  receipt_issued_to, " +
-                            $"((receipt_issued_to - receipt_issued_from) + 1) issue_quantity, " +
-                            $"LPAD(receipt_issued_from, 7, 0) , " +
-                            $"LPAD(receipt_issued_to, 7, 0) , " +
-                            $"(receipt_issued_to - last_issued) ending_balance_quantity, " +
-                            $"LPAD((last_issued + 1), 7, 0) ending_balance_serial_from, " +
-                            $"LPAD(receipt_issued_to, 7, 0) ending_balance_serial_to " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE " +
-                            $"collecting_officer_id = @collecting_officer_id " +
-                            $"GROUP BY collecting_officer_id";
+            //string query =  $"SELECT " +
+            //                $"accountable_form_id, " +
+            //                $"accountable_forms, " +
+            //                $"(MAX(receipt_issued_to) - MIN(receipt_issued_from) + 1) quantity, " +
+            //                $"LPAD(MIN(receipt_issued_from), 7, 0) receipt_issued_from, " +
+            //                $"LPAD(MAX(receipt_issued_to), 7, 0)  receipt_issued_to, " +
+            //                $"((receipt_issued_to - receipt_issued_from) + 1) issue_quantity, " +
+            //                $"LPAD(receipt_issued_from, 7, 0) , " +
+            //                $"LPAD(receipt_issued_to, 7, 0) , " +
+            //                $"(receipt_issued_to - last_issued) ending_balance_quantity, " +
+            //                $"LPAD((last_issued + 1), 7, 0) ending_balance_serial_from, " +
+            //                $"LPAD(receipt_issued_to, 7, 0) ending_balance_serial_to " +
+            //                $"FROM {viewTableName} " +
+            //                $"WHERE " +
+            //                $"collecting_officer_id = @collecting_officer_id " +
+            //                $"GROUP BY collecting_officer_id";
+
+            var query = $"SELECT accountable_form_id, accountable_forms, receipt_issued_from, receipt_issued_to, quantity, last_issued FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id GROUP BY collecting_officer_id";
 
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt, parameter);

@@ -8,11 +8,13 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
     public partial class frmPaymentCollectionAdd : Form
     {
         private readonly ucPaymentCollection uc;
+        private readonly frmPaymentCollection _frmPaymentCollection;
 
-        public frmPaymentCollectionAdd()
+        public frmPaymentCollectionAdd(frmPaymentCollection frmPaymentCollection)
         {
             InitializeComponent();
             uc = ucPaymentCollection1;
+            _frmPaymentCollection = frmPaymentCollection;
             uc.userId = Helper.UserId;
         }
         
@@ -179,6 +181,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
 
             uc.ResetForm();     
             uc.txtPayee.Focus();
+            _frmPaymentCollection.LoadPaymentCollections();
         }
         #endregion
 

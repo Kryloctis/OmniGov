@@ -75,6 +75,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
 
                 HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
+
+                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+
             }
             catch (Exception ex)
             {
@@ -164,6 +167,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void btnadd_Click(object sender, EventArgs e)
         {
+            collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
             _ = new frmCollectorsRCDLoad(fundId, collectorId, this).ShowDialog();
         }
 

@@ -5927,13 +5927,13 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>26.49101cm</Height>
+        <Height>10.37015in</Height>
         <Style />
       </Body>
-      <Width>19.96907cm</Width>
+      <Width>7.86184in</Width>
       <Page>
         <PageHeader>
-          <Height>2.92806cm</Height>
+          <Height>1.15278in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <ReportItems>
             <Textbox Name="Textbox1">
@@ -6087,13 +6087,12 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
             </Border>
           </Style>
         </PageHeader>
-        <PageHeight>29.718cm</PageHeight>
-        <PageWidth>21.082cm</PageWidth>
-        <LeftMargin>1.27cm</LeftMargin>
-        <RightMargin>1.27cm</RightMargin>
-        <TopMargin>1.27cm</TopMargin>
-        <BottomMargin>1.27cm</BottomMargin>
-        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>0.2in</LeftMargin>
+        <RightMargin>0.2in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -6168,6 +6167,6 @@ Sum(Fields!amount.Value, "dtCollections"))</Value>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>321a4175-341b-49f6-9317-94e8c95fda58</rd:ReportID>
 </Report>

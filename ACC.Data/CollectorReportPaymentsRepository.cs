@@ -213,7 +213,7 @@ namespace ACC.Data
                 new object[]{ "@report_no", DbType.String, reportNo},
             };
 
-            string query = $"SELECT payment_collections_id, funds_id, fund_name, accountable_form_id, account_code, accountable_forms, general_ledger_accounts_id, ledger_name, payee, LPAD(receipt_no, 7, 0) AS receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE report_no = @report_no";
+            string query = $"SELECT payment_collections_id, funds_id, fund_name, accountable_forms_id, account_code, accountable_forms_no, accountable_forms_desc, accountable_forms, general_ledger_accounts_id, ledger_name, payee, LPAD(receipt_no, 7, 0) AS receipt_no, quantity, payment_date, amount FROM {viewTableName} WHERE report_no = @report_no";
 
             var dtpc = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
@@ -225,14 +225,7 @@ namespace ACC.Data
                 new object[]{"@reportNo", DbType.String, reportNo},
             };
 
-            string query =  $"SELECT " +
-                            $"accountable_forms,  " +
-                            $"MIN(receipt_no)report_number_from, " +
-                            $"MAX(receipt_no)report_number_to, " +
-                            $"SUM(amount) amount " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE report_no = @reportNo " +
-                            $"GROUP BY accountable_form_id ";
+            string query =  $"SELECT accountable_forms, MIN(receipt_no) report_number_from, MAX(receipt_no) report_number_to, SUM(amount) amount FROM {viewTableName} WHERE report_no = @reportNo GROUP BY accountable_form_id ";
 
             var dtpc = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
