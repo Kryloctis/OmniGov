@@ -94,6 +94,7 @@ namespace AccountingSystem
                 printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
                 m_currentPageIndex = 0;
                 printDoc.Print();
+                MessageBoxSuccess("Printing Receipt...");
             }
         }
         // Create a local report for Report.rdlc, load the data,

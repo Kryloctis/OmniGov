@@ -236,5 +236,16 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
+
+        public int GetMinAssessmentPostYear(string completeArpNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo}
+            };
+
+            string query = $"SELECT COALESCE(MIN(year), 0) AS min_year FROM lfsdb.rpt_assessment_posts WHERE complete_arp_no = @complete_arp_no";
+            return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+        }
     }
 }

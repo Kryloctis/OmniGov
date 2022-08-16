@@ -11,6 +11,8 @@ namespace RPT.Domain.Interfaces
 
         int PreviousAssessmentPostCount(string completeArpNo, int year);
 
+        int GetMinAssessmentPostYear(string completeArpNo);
+
         Dictionary<string, string> GetRecordBy_ArpNo_Year(string completeArpNo, int year);
 
         DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled);

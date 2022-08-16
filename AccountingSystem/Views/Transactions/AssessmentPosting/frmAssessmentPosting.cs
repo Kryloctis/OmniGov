@@ -110,8 +110,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
                 var newRow = dataTable.NewRow();
+               
                 int rowId = Convert.ToInt32(row["real_properties_id"]);
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
+                if (leastAssessedYear > year && leastAssessedYear != 0)
+                    continue;
+
                 string rowOwnerName = row["owner_name"].ToString();
                 string rowOwnerAddress = row["owner_address"].ToString();
                 string rowPropertyKind = row["property_kind"].ToString();

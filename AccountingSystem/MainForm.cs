@@ -127,28 +127,28 @@ namespace AccountingSystem
         {
 
             if (!Helper.HasPermission("Report of Checks Issued"))
-                rCIToolStripMenuItem.Visible = false;
+                rCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                rCDToolStripMenuItem.Visible = false;
+                rCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Visible = false;
+                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
-                bankCashbookToolStripMenuItem.Visible = false;
+                bankCashbookToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Consolidated Receipts"))
-                consolidatedReceiptsToolStripMenuItem.Visible = false;
+                consolidatedReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
-                dailyCashPositionsToolStripMenuItem.Visible = false;
+                dailyCashPositionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                btnSAAOB.Visible = false;
+                btnSAAOB.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                btnSAAOBB.Visible = false;
+                btnSAAOBB.Enabled = false;
 
             if (!Helper.HasPermission("Report Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
@@ -169,22 +169,22 @@ namespace AccountingSystem
         private void ValidateTransactionPermissions()
         {
             if (!Helper.HasPermission("Transaction Obligation Request"))
-                btnObligationRequest.Visible = false;
+                btnObligationRequest.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-                issueReceiptsToolStripMenuItem.Visible = false;
+                issueReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
-                bankDepositToolStripMenuItem.Visible = false;
+                bankDepositToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Payments"))
-                paymentCollectionsToolStripMenuItem.Visible = false;
+                paymentCollectionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                issueReceiptsToolStripMenuItem.Visible = false;
+                issueReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction RCD Approval"))
-                liquidatorsRCDToolStripMenuItem.Visible = false;
+                liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if(!IsUserCollector())
                 toolStripMenuPaymentPostings.Enabled = false;
@@ -194,7 +194,7 @@ namespace AccountingSystem
         private void ValidateManagePermissions()
         {
             if (!Helper.HasPermission("Manage Allotment Classes"))
-                menuAllotmentClasses.Visible = false;
+                menuAllotmentClasses.Enabled = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations"))
                 btnBudgetAppropriations.Enabled = false;
@@ -203,37 +203,37 @@ namespace AccountingSystem
                 btnAllotmentRelease.Enabled = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts"))
-                menuChartOfAccounts.Visible = false;
+                menuChartOfAccounts.Enabled = false;
 
             if (!Helper.HasPermission("Manage Function/Program/Project"))
-                menuFunctionProgramProject.Visible = false;
+                menuFunctionProgramProject.Enabled = false;
 
             if (!Helper.HasPermission("Manage Collecting Officer"))
-                menuCollectingOfficer.Visible = false;
+                menuCollectingOfficer.Enabled = false;
 
             if (!Helper.HasPermission("Manage Funds"))
-                menuFunds.Visible = false;
+                menuFunds.Enabled = false;
 
             if (!Helper.HasPermission("Manage Journals"))
-                menuJournals.Visible = false;
+                menuJournals.Enabled = false;
 
             if (!Helper.HasPermission("Manage Users") && !Helper.HasPermission("Manage Roles"))
-                menuUsers.Visible = false;
+                menuUsers.Enabled = false;
 
             if (!Helper.HasPermission("Manage Users"))
-                menuUserList.Visible = false;
+                menuUserList.Enabled = false;
 
             if (!Helper.HasPermission("Manage Roles"))
-                menuRoles.Visible = false;
+                menuRoles.Enabled = false;
 
             if (!Helper.HasPermission("Manage Banks"))
-                menuBanks.Visible = false;
+                menuBanks.Enabled = false;
 
             if (!Helper.HasPermission("Manage Accountable Forms"))
-                menuAccForm.Visible = false;
+                menuAccForm.Enabled = false;
 
             if (!Helper.HasPermission("Manage Disbursing Officer"))
-                menuDisbursingOfficer.Visible = false;          
+                menuDisbursingOfficer.Enabled = false;          
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
@@ -242,22 +242,22 @@ namespace AccountingSystem
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Checks Issued"))
-                rCIToolStripMenuItem.Visible = false;
+                rCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                rCDToolStripMenuItem.Visible = false;
+                rCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Visible = false;
+                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
-                bankCashbookToolStripMenuItem.Visible = false;
+                bankCashbookToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Consolidated Receipts"))
-                consolidatedReceiptsToolStripMenuItem.Visible = false;
+                consolidatedReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
-                dailyCashPositionsToolStripMenuItem.Visible = false;
+                dailyCashPositionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
                 btnSAAOB.Visible = false;
@@ -266,21 +266,21 @@ namespace AccountingSystem
                 btnSAAOBB.Visible = false;
 
             if (!Helper.HasPermission("Manage Amortization"))
-                amortiaztionToolStripMenuItem.Visible = false;
+                amortiaztionToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage Signatories"))
-                signatoriesToolStripMenuItem.Visible = false;
+                signatoriesToolStripMenuItem.Enabled = false;
 
             #region Receipts
 
             if (!Helper.HasPermission("Manage Receipts"))
-                menuReceipts.Visible = false;
+                menuReceipts.Enabled = false;
 
             if (!Helper.HasPermission("Manage Returned Receipts"))
-                returnedReceiptsToolStripMenuItem.Visible = false;
+                returnedReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage Receipts") && !Helper.HasPermission("Manage Returned Receipts"))
-                toolStripMenuItemReceipts.Visible = false;
+                toolStripMenuItemReceipts.Enabled = false;
 
             #endregion
         }
