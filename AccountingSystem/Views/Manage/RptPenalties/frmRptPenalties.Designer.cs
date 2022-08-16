@@ -93,6 +93,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             // btnEdit
             // 
+            this.btnEdit.Enabled = false;
             this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -105,6 +106,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -172,7 +174,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(88, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
