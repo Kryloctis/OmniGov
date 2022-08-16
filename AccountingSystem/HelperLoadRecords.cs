@@ -13,12 +13,15 @@ namespace AccountingSystem
 
         public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable) 
         {
-            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
+            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_collecting_officers_id", "payment_collections_job_orders_id",  "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
             var dataView = new DataView(dataTable);
             var _dataTable = dataView.ToTable(false, columns);
 
             dataGridView.DataSource = _dataTable;
 
+            dataGridView.Columns["payment_collections_collecting_officers_id"].Visible = false;
+            dataGridView.Columns["payment_collections_job_orders_id"].Visible = false;
+            dataGridView.Columns["payment_collections_is_cancelled"].Visible = false;
             dataGridView.Columns["rpt_payment_posts_id"].Visible = false;
             dataGridView.Columns["payment_collections_id"].Visible = false;
             dataGridView.Columns["payment_collections_receipt_no"].HeaderText = "Receipt No.";
@@ -29,7 +32,6 @@ namespace AccountingSystem
             dataGridView.Columns["payment_collections_amount"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["payment_collections_is_cancelled"].HeaderText = "Void";
             dataGridView.Columns["payment_collections_is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
         }
 
         #endregion

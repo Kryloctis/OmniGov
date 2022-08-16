@@ -495,6 +495,13 @@ namespace AccountingSystem
 
         #region Get User Data
 
+        public static string GenerateFullName(string prefix, string firstName, string MiddleName, string LastName, string suffix) 
+        {
+            string fullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {firstName} {MiddleName.Substring(0, 1)}. {LastName} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
+
+            return fullName;
+        }
+
         public static Dictionary<string, dynamic> GetUserDataById(int userId)
         {
             var dictUser = new Dictionary<string, dynamic>();
