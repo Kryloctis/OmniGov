@@ -50,7 +50,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 _uc.cmbCollector.SelectedValue = string.IsNullOrEmpty(paymentCollectionDict["job_orders_id"]) ? regularCollectingOfficerId : jobOrderCollectingOfficerId; 
                 _uc.cmbFund.SelectedValue = paymentCollectionDict["funds_id"];
                 _uc.cmbAccountableForms.SelectedValue = paymentCollectionDict["accountable_forms_id"];
-                _uc.SetSelectedValue(Convert.ToInt32(paymentCollectionDict["general_ledger_accounts_id"]), "ledger");
                 _uc.accountableFormId = Convert.ToInt32(paymentCollectionDict["accountable_forms_id"]);
                 bool isCashTickets = string.IsNullOrEmpty(paymentCollectionDict["receipt_no"]);
 

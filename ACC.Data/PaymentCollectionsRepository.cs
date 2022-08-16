@@ -45,11 +45,8 @@ namespace ACC.Data
                     record.Add("collecting_officers_id", reader.Rows[0]["collecting_officers_id"].ToString());
                     record.Add("job_orders_id", reader.Rows[0]["job_orders_id"].ToString());
                     record.Add("accountable_forms_id", reader.Rows[0]["accountable_forms_id"].ToString());
-                    record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
-                    record.Add("subsidiary_ledger_accounts_id", reader.Rows[0]["subsidiary_ledger_accounts_id"].ToString());
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("receipt_no", reader.Rows[0]["receipt_no"].ToString());
-                    record.Add("quantity", reader.Rows[0]["quantity"].ToString());
                     record.Add("payment_date", reader.Rows[0]["payment_date"].ToString());
                     record.Add("amount", reader.Rows[0]["amount"].ToString());                    
                 }
@@ -122,7 +119,7 @@ namespace ACC.Data
 
             string columnFilter = collectingOfficerJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
 
-            string query =  $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id ORDER BY accountable_forms_id";
+            string query =  $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date ORDER BY accountable_forms_id";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
@@ -200,16 +197,7 @@ namespace ACC.Data
                     new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
                 };
                  
-                string query =  $"UPDATE {tableName} " +
-                                $"SET " +
-                                $"funds_id = @funds_id, " +
-                                $"general_ledger_accounts_id = @general_ledger_accounts_id, " +
-                                $"payee = @payee, " +
-                                $"receipt_no = @receipt_no, " +
-                                $"payment_date = @payment_date, " +
-                                $"amount = @amount, " +
-                                $"updated_by = @updated_by " +
-                                $"WHERE id = @id";
+                string query =  $"UPDATE {tableName} SET funds_id = @funds_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, updated_by = @updated_by WHERE id = @id";
                             
                 return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }

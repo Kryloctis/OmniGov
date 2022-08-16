@@ -1402,6 +1402,7 @@ namespace AccountingSystem
             // 
             // returnedReceiptsToolStripMenuItem
             // 
+            this.returnedReceiptsToolStripMenuItem.Enabled = false;
             this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
             this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";

@@ -41,20 +41,28 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            
             if (uc.isSaveFunction)
-            {
+             {
                 if (SaveData())
+                {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
+                    CheckRCDStatus(uc.txtReport.Text.Trim());
+                    ResetLocalControls();
+                    uc.ResetForm();
+                }
             }
             else
             {
                 if (UpdateData())
+                {
                     Helper.MessageBoxSuccess("Collector's report has been updated.");
+                    CheckRCDStatus(uc.txtReport.Text.Trim());
+                    ResetLocalControls();
+                    uc.ResetForm();
+                }
             }
-
-            CheckRCDStatus(uc.txtReport.Text.Trim());
-            ResetLocalControls();
-            uc.ResetForm();
+            return;
         }
 
         private bool UpdateData()
@@ -151,8 +159,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 return false;
             }
 
-            return AccFactory.CollectorReportRepository().InsertWithCollectorReportPayments(CollectorReportModelData(), CollectorReportPaymentModelData());
+            if (MessageBox.Show("Create RCD?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                return AccFactory.CollectorReportRepository().InsertWithCollectorReportPayments(CollectorReportModelData(), CollectorReportPaymentModelData());
+            }
 
+            return false;
         }
 
         private List <CollectorReportPaymentModel> CollectorReportPaymentModelData()
