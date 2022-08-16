@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
                 string searchText = txtSearch.Text.Trim();
                 HelperLoadRecords.TaxPayerListDatagridView(dataGridView1, DataTableAssessmentPost(searchText));
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
 
                 Cursor = Cursors.Default;
             }

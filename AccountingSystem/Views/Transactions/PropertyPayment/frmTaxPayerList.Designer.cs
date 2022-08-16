@@ -106,10 +106,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.btnSearch);
             this.flowLayoutPanel2.Controls.Add(this.txtSearch);
+            this.flowLayoutPanel2.Controls.Add(this.btnSearch);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(3);
@@ -118,7 +117,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(788, 6);
+            this.btnSearch.Location = new System.Drawing.Point(197, 6);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 1;
@@ -129,7 +128,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // txtSearch
             // 
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(597, 6);
+            this.txtSearch.Location = new System.Drawing.Point(6, 6);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(185, 23);
             this.txtSearch.TabIndex = 0;
