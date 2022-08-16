@@ -168,11 +168,6 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         private void dgpayments_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgpayments, btnEdit, btnDelete);
-
-            //int paymentCollectionId = int.Parse(dgpayments.CurrentRow.Cells[0].Value.ToString());
-            //btnEdit.Enabled = !Factory.CollectorReportRepository().HasReported(paymentCollectionId);
-            //btnDelete.Enabled = !Factory.CollectorReportRepository().HasReported(paymentCollectionId);
-
         }
         private void cbCollectorType_CheckedChanged(object sender, EventArgs e)
         {
