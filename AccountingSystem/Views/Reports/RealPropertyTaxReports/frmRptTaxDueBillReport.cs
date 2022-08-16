@@ -31,6 +31,14 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             _dtRPTDueBill = dtRPTDueBill;
         }
 
+        private string GetSignatories(Dictionary<string, string> keyValuePairs) 
+        {
+            if (keyValuePairs.Values.Count < 1)
+                return string.Empty;
+
+            return keyValuePairs["signatories_full_name"];
+        }
+
         private void LoadReport(LocalReport report) 
         {
             try
@@ -39,6 +47,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                 var lguDetails = Helper.LGUDetails();
                 var dictPenalty = AccFactory.RptPenaltiesRepository().GetRecordByDescription("RPT monthly penalty");
                 string penaltyRate = dictPenalty.Values.Count < 1 ? "0" : dictPenalty["rate"];
+                var dictCheckedBy = Helper.GetSignatoryDataBy_Reference_DocumentName("Checked By", "Real Property Tax Due Bill");
+                var dictCertCorrect = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Real Property Tax Due Bill");
 
                 var parameters = new[]
                 {
@@ -47,9 +57,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                     new ReportParameter("paramTaxPayerName", _rptPropertyPaymentTaxPayerInfoModel.TaxPayerName),
                     new ReportParameter("paramAddress", _rptPropertyPaymentTaxPayerInfoModel.Address),
                     new ReportParameter("paramTin", _rptPropertyPaymentTaxPayerInfoModel.TIN),
-                    new ReportParameter("paramPreparedBy", Helper.LoggedInUserData()["user_full_name"]), 
+                    new ReportParameter("paramPreparedBy", Helper.LoggedInUserData()["user_full_name"]),
                     new ReportParameter("paramCurrentDate", Helper.GetCurrentDate().ToString()),
-                    new ReportParameter("paramPenaltyRate", penaltyRate)
+                    new ReportParameter("paramPenaltyRate", penaltyRate),
+                    new ReportParameter("paramCheckedBy", GetSignatories(dictCheckedBy)),
+                    new ReportParameter("paramCertifiedCorrect", GetSignatories(dictCertCorrect))
                 };
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-due-bill.rdlc";
