@@ -277,8 +277,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void btnPrintReceipt_Click(object sender, EventArgs e)
         {
-            PrintSelectedReceipt();
-            Helper.MessageBoxSuccess("Printing Receipt...");            
+            PrintSelectedReceipt();      
         }
     }
 }

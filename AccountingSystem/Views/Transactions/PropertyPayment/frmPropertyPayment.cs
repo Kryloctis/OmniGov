@@ -303,7 +303,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             if (SavePayment())
             {
                 PrintReceipt();
-                Helper.MessageBoxSuccess("Payment Confirmed.\nPrinting Receipt...");
+                Helper.MessageBoxSuccess("Payment Confirmed.");
                 LoadRptDetailedTaxDues(null);
                 rptTaxDuesModels.Clear();
                 ucPaymentInfo.ResetForm();
