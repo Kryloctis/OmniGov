@@ -13933,15 +13933,19 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnarp_no;
             
-            private global::System.Data.DataColumn columnis_cancelled;
+            private global::System.Data.DataColumn columnpin;
+            
+            private global::System.Data.DataColumn columnbarangay;
+            
+            private global::System.Data.DataColumn columnmunicipality;
+            
+            private global::System.Data.DataColumn columnprovince;
             
             private global::System.Data.DataColumn columntax_year;
             
             private global::System.Data.DataColumn columnland_assessed_value;
             
             private global::System.Data.DataColumn columnimprovement_assessed_value;
-            
-            private global::System.Data.DataColumn columntotal_assessed_value;
             
             private global::System.Data.DataColumn columnpayment_period;
             
@@ -13966,6 +13970,10 @@ namespace AccountingSystem {
             private global::System.Data.DataColumn columnor_number;
             
             private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columnpayee;
+            
+            private global::System.Data.DataColumn columnis_cancelled;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -14010,9 +14018,33 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn is_cancelledColumn {
+            public global::System.Data.DataColumn pinColumn {
                 get {
-                    return this.columnis_cancelled;
+                    return this.columnpin;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn barangayColumn {
+                get {
+                    return this.columnbarangay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn municipalityColumn {
+                get {
+                    return this.columnmunicipality;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn provinceColumn {
+                get {
+                    return this.columnprovince;
                 }
             }
             
@@ -14037,14 +14069,6 @@ namespace AccountingSystem {
             public global::System.Data.DataColumn improvement_assessed_valueColumn {
                 get {
                     return this.columnimprovement_assessed_value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn total_assessed_valueColumn {
-                get {
-                    return this.columntotal_assessed_value;
                 }
             }
             
@@ -14146,6 +14170,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn payeeColumn {
+                get {
+                    return this.columnpayee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn is_cancelledColumn {
+                get {
+                    return this.columnis_cancelled;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -14183,11 +14223,13 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public dtTaxesDuesAndPaymentsRow AdddtTaxesDuesAndPaymentsRow(
                         string arp_no, 
-                        bool is_cancelled, 
+                        string pin, 
+                        string barangay, 
+                        string municipality, 
+                        string province, 
                         string tax_year, 
                         decimal land_assessed_value, 
                         decimal improvement_assessed_value, 
-                        decimal total_assessed_value, 
                         string payment_period, 
                         string tax_type, 
                         decimal regular_tax_due, 
@@ -14199,15 +14241,19 @@ namespace AccountingSystem {
                         decimal penalty_tax_collected, 
                         decimal total_tax_collected, 
                         string or_number, 
-                        string date) {
+                        string date, 
+                        string payee, 
+                        bool is_cancelled) {
                 dtTaxesDuesAndPaymentsRow rowdtTaxesDuesAndPaymentsRow = ((dtTaxesDuesAndPaymentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         arp_no,
-                        is_cancelled,
+                        pin,
+                        barangay,
+                        municipality,
+                        province,
                         tax_year,
                         land_assessed_value,
                         improvement_assessed_value,
-                        total_assessed_value,
                         payment_period,
                         tax_type,
                         regular_tax_due,
@@ -14219,7 +14265,9 @@ namespace AccountingSystem {
                         penalty_tax_collected,
                         total_tax_collected,
                         or_number,
-                        date};
+                        date,
+                        payee,
+                        is_cancelled};
                 rowdtTaxesDuesAndPaymentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtTaxesDuesAndPaymentsRow);
                 return rowdtTaxesDuesAndPaymentsRow;
@@ -14243,11 +14291,13 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
                 this.columnarp_no = base.Columns["arp_no"];
-                this.columnis_cancelled = base.Columns["is_cancelled"];
+                this.columnpin = base.Columns["pin"];
+                this.columnbarangay = base.Columns["barangay"];
+                this.columnmunicipality = base.Columns["municipality"];
+                this.columnprovince = base.Columns["province"];
                 this.columntax_year = base.Columns["tax_year"];
                 this.columnland_assessed_value = base.Columns["land_assessed_value"];
                 this.columnimprovement_assessed_value = base.Columns["improvement_assessed_value"];
-                this.columntotal_assessed_value = base.Columns["total_assessed_value"];
                 this.columnpayment_period = base.Columns["payment_period"];
                 this.columntax_type = base.Columns["tax_type"];
                 this.columnregular_tax_due = base.Columns["regular_tax_due"];
@@ -14260,6 +14310,8 @@ namespace AccountingSystem {
                 this.columntotal_tax_collected = base.Columns["total_tax_collected"];
                 this.columnor_number = base.Columns["or_number"];
                 this.columndate = base.Columns["date"];
+                this.columnpayee = base.Columns["payee"];
+                this.columnis_cancelled = base.Columns["is_cancelled"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14267,16 +14319,20 @@ namespace AccountingSystem {
             private void InitClass() {
                 this.columnarp_no = new global::System.Data.DataColumn("arp_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnarp_no);
-                this.columnis_cancelled = new global::System.Data.DataColumn("is_cancelled", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnis_cancelled);
+                this.columnpin = new global::System.Data.DataColumn("pin", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpin);
+                this.columnbarangay = new global::System.Data.DataColumn("barangay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbarangay);
+                this.columnmunicipality = new global::System.Data.DataColumn("municipality", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmunicipality);
+                this.columnprovince = new global::System.Data.DataColumn("province", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprovince);
                 this.columntax_year = new global::System.Data.DataColumn("tax_year", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_year);
                 this.columnland_assessed_value = new global::System.Data.DataColumn("land_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnland_assessed_value);
                 this.columnimprovement_assessed_value = new global::System.Data.DataColumn("improvement_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimprovement_assessed_value);
-                this.columntotal_assessed_value = new global::System.Data.DataColumn("total_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntotal_assessed_value);
                 this.columnpayment_period = new global::System.Data.DataColumn("payment_period", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpayment_period);
                 this.columntax_type = new global::System.Data.DataColumn("tax_type", typeof(string), null, global::System.Data.MappingType.Element);
@@ -14301,6 +14357,10 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnor_number);
                 this.columndate = new global::System.Data.DataColumn("date", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
+                this.columnpayee = new global::System.Data.DataColumn("payee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayee);
+                this.columnis_cancelled = new global::System.Data.DataColumn("is_cancelled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnis_cancelled);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -24973,17 +25033,65 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool is_cancelled {
+            public string pin {
                 get {
                     try {
-                        return ((bool)(this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn]));
+                        return ((string)(this[this.tabledtTaxesDuesAndPayments.pinColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'is_cancelled\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'pin\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn] = value;
+                    this[this.tabledtTaxesDuesAndPayments.pinColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string barangay {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTaxesDuesAndPayments.barangayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'barangay\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTaxesDuesAndPayments.barangayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string municipality {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTaxesDuesAndPayments.municipalityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'municipality\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTaxesDuesAndPayments.municipalityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string province {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTaxesDuesAndPayments.provinceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'province\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTaxesDuesAndPayments.provinceColumn] = value;
                 }
             }
             
@@ -25034,23 +25142,6 @@ namespace AccountingSystem {
                 }
                 set {
                     this[this.tabledtTaxesDuesAndPayments.improvement_assessed_valueColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal total_assessed_value {
-                get {
-                    try {
-                        return ((decimal)(this[this.tabledtTaxesDuesAndPayments.total_assessed_valueColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total_assessed_value\' in table \'dtTaxesDuesAndPayments\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtTaxesDuesAndPayments.total_assessed_valueColumn] = value;
                 }
             }
             
@@ -25257,6 +25348,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string payee {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtTaxesDuesAndPayments.payeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payee\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTaxesDuesAndPayments.payeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool is_cancelled {
+                get {
+                    try {
+                        return ((bool)(this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'is_cancelled\' in table \'dtTaxesDuesAndPayments\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isarp_noNull() {
                 return this.IsNull(this.tabledtTaxesDuesAndPayments.arp_noColumn);
             }
@@ -25269,14 +25392,50 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isis_cancelledNull() {
-                return this.IsNull(this.tabledtTaxesDuesAndPayments.is_cancelledColumn);
+            public bool IspinNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.pinColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setis_cancelledNull() {
-                this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn] = global::System.Convert.DBNull;
+            public void SetpinNull() {
+                this[this.tabledtTaxesDuesAndPayments.pinColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsbarangayNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.barangayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetbarangayNull() {
+                this[this.tabledtTaxesDuesAndPayments.barangayColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsmunicipalityNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.municipalityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetmunicipalityNull() {
+                this[this.tabledtTaxesDuesAndPayments.municipalityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsprovinceNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.provinceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetprovinceNull() {
+                this[this.tabledtTaxesDuesAndPayments.provinceColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -25313,18 +25472,6 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setimprovement_assessed_valueNull() {
                 this[this.tabledtTaxesDuesAndPayments.improvement_assessed_valueColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istotal_assessed_valueNull() {
-                return this.IsNull(this.tabledtTaxesDuesAndPayments.total_assessed_valueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settotal_assessed_valueNull() {
-                this[this.tabledtTaxesDuesAndPayments.total_assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -25469,6 +25616,30 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetdateNull() {
                 this[this.tabledtTaxesDuesAndPayments.dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IspayeeNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.payeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetpayeeNull() {
+                this[this.tabledtTaxesDuesAndPayments.payeeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isis_cancelledNull() {
+                return this.IsNull(this.tabledtTaxesDuesAndPayments.is_cancelledColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setis_cancelledNull() {
+                this[this.tabledtTaxesDuesAndPayments.is_cancelledColumn] = global::System.Convert.DBNull;
             }
         }
         

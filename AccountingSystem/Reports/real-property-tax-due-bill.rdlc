@@ -867,7 +867,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Lot jNo.</Value>
+                                  <Value>Lot No.</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -930,6 +930,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -2470,7 +2471,7 @@
             <Top>4.79026cm</Top>
             <Left>0.08019cm</Left>
             <Height>2.73458cm</Height>
-            <Width>28.23716cm</Width>
+            <Width>28.23715cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
