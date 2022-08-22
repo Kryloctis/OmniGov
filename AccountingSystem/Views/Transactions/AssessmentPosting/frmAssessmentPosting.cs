@@ -485,5 +485,15 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {         
             LoadProperties();
         }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            var tooltip = new ToolTip();
+            tooltip.RemoveAll();
+            tooltip.ShowAlways = true;
+            tooltip.UseAnimation = false;
+
+            tooltip.SetToolTip(pictureBox1, "Make sure to post previous year/s.");
+        }
     }
 }
