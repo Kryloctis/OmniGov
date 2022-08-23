@@ -43,6 +43,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progressBarLoadRecords = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPostingAssessments = new System.Windows.Forms.ToolStripStatusLabel();
             this.prgrsBarPostingAssessments = new System.Windows.Forms.ToolStripProgressBar();
@@ -56,6 +57,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -208,6 +210,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblRecordCount,
+            this.progressBarLoadRecords,
             this.toolStripStatusLabel2,
             this.lblPostingAssessments,
             this.prgrsBarPostingAssessments,
@@ -234,6 +237,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.lblRecordCount.Name = "lblRecordCount";
             this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
             this.lblRecordCount.Text = "0";
+            // 
+            // progressBarLoadRecords
+            // 
+            this.progressBarLoadRecords.Name = "progressBarLoadRecords";
+            this.progressBarLoadRecords.Size = new System.Drawing.Size(100, 16);
+            this.progressBarLoadRecords.Visible = false;
             // 
             // toolStripStatusLabel2
             // 
@@ -330,10 +339,18 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // bgwLoadAsessmentPosts
+            // 
+            this.bgwLoadAsessmentPosts.WorkerReportsProgress = true;
+            this.bgwLoadAsessmentPosts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwLoadAsessmentPosts_DoWork);
+            this.bgwLoadAsessmentPosts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwLoadAsessmentPosts_ProgressChanged);
+            this.bgwLoadAsessmentPosts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwLoadAsessmentPosts_RunWorkerCompleted);
+            // 
             // frmAssessmentPosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1039, 505);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
@@ -392,5 +409,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripProgressBar prgrsBarPostingAssessments;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.ComponentModel.BackgroundWorker bgwLoadAsessmentPosts;
+        private System.Windows.Forms.ToolStripProgressBar progressBarLoadRecords;
     }
 }

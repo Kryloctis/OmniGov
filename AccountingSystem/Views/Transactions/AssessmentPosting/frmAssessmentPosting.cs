@@ -15,6 +15,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 {
     public partial class frmAssessmentPosting : Form
     {
+        private DataTable assessmentPostsDataTable;
+
         public frmAssessmentPosting()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Helper.LoadFormIcon(this);
             lblPostedAt.Text = string.Empty;
             lblPostingAssessments.Visible = false;
-            prgrsBarPostingAssessments.Visible = false;
+            prgrsBarPostingAssessments.Visible = false;        
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
@@ -46,46 +48,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
         }
 
-        private string GetAssessmentPostingRecord(string arpNo, int year, string parameter) 
+        #region Load AssessmentPosts
+
+        private DataColumn[] AssessmentPostsDataColumns() 
         {
-            var dtAssessment = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(arpNo, year);
-
-            if (dtAssessment.Values.Count == 0)
-                return string.Empty;
-
-            return dtAssessment[parameter];
-        }
-
-        private string PostedBy(string completeArpNo) 
-        {
-            int year = (int)nudYear.Value;
-            string postedById = GetAssessmentPostingRecord(completeArpNo, year, "posted_by");
-
-            if (string.IsNullOrEmpty(postedById))
-                return string.Empty;
-
-            return Helper.GetUserDataById(Convert.ToInt32(postedById))["user_full_name"];
-        }
-
-        private decimal GetPropertyArea(string propertyKind, int propertyId) 
-        {
-            if (propertyKind == "L")
-                return RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(propertyId);
-            else if (propertyKind == "B")
-                return RptFactory.BuildingDetailsRepository().GetTotalAreaByBuildingPropertiesId(propertyId);
-            else
-                return 0;
-        }
-
-        private DataTable DataTableAssessmentPosting(int year, int barangayId, string searchText)
-        {
-            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
-       
-            var dataTable = new DataTable();
-
-            #region Populate columns for new datagridView
-
-            var rptColumns = new DataColumn[]
+            var dataColumns = new DataColumn[]
             {
                 new DataColumn("is_checked", typeof(bool)),
                 new DataColumn("posting_status", typeof(string)),
@@ -112,15 +79,104 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("posted_by", typeof(string))
             };
 
+            return dataColumns;
+        }
 
-            dataTable.Columns.AddRange(rptColumns);
+        private string PostedBy(string completeArpNo)
+        {
+            int year = (int)nudYear.Value;
+            string postedById = GetAssessmentPostingRecord(completeArpNo, year, "posted_by");
 
-            #endregion
+            if (string.IsNullOrEmpty(postedById))
+                return string.Empty;
+
+            return Helper.GetUserDataById(Convert.ToInt32(postedById))["user_full_name"];
+        }
+
+        private decimal GetPropertyArea(string propertyKind, int propertyId)
+        {
+            if (propertyKind == "L")
+                return RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(propertyId);
+            else if (propertyKind == "B")
+                return RptFactory.BuildingDetailsRepository().GetTotalAreaByBuildingPropertiesId(propertyId);
+            else
+                return 0;
+        }
+
+        private void Miscellaneous()
+        {
+            chckBxAll.Checked = false;
+            txtYear.Text = nudYear.Value.ToString();
+            txtBarangay.Text = cmbxBarangays.Text;
+        }
+
+        private void LoadProperties()
+        {
+            try
+            {
+                if (!bgwLoadAsessmentPosts.IsBusy)
+                    bgwLoadAsessmentPosts.RunWorkerAsync();
+
+                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
+                EnableDisableToolStripButton(dgProperties, btnPostSelected);
+                Miscellaneous();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.StackTrace);
+            }
+        }
+
+        private void GetParameters(ref int year, ref int barangayId, ref string searchText)
+        {
+            year = (int)nudYear.Value;
+            barangayId = Convert.ToInt32(cmbxBarangays.SelectedValue);
+            searchText = txtSearch.Text.Trim();
+        }
+
+        private string GetAssessmentPostingRecord(string arpNo, int year, string parameter)
+        {
+            var dtAssessment = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(arpNo, year);
+
+            if (dtAssessment.Values.Count == 0)
+                return string.Empty;
+
+            return dtAssessment[parameter];
+        }
+
+        private void bgwLoadAsessmentPosts_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int totalRowCount = 0;
+            int rowCount = 0;
+            int year = 0;
+            int barangayId = 0;
+            string searchText = string.Empty;
+
+            assessmentPostsDataTable = new DataTable();
+            assessmentPostsDataTable.Columns.AddRange(AssessmentPostsDataColumns());
+
+            Invoke((MethodInvoker)delegate
+            {
+                GetParameters(ref year, ref barangayId, ref searchText);
+            });
+
+            var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
 
             foreach (DataRow row in dtViewRealProperties.Rows)
             {
-                var newRow = dataTable.NewRow();
-               
+                string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
+                if (leastAssessedYear > year && leastAssessedYear != 0)
+                    continue;
+
+                totalRowCount += 1;
+            }
+
+
+            foreach (DataRow row in dtViewRealProperties.Rows)
+            {
+                var newRow = assessmentPostsDataTable.NewRow();
+
                 int rowId = Convert.ToInt32(row["real_properties_id"]);
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
                 int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
@@ -135,11 +191,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                 var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
 
-                string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ?  "Posted" : string.Empty;
+                string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : string.Empty;
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
 
-                decimal area = GetPropertyArea(rowPropertyKind, landBldgMachPropertiesId);           
+                decimal area = GetPropertyArea(rowPropertyKind, landBldgMachPropertiesId);
 
                 string rowClassificationCode = row["classification_code"].ToString();
                 string rowClassificationName = row["classification_name"].ToString();
@@ -147,7 +203,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 string rowActualName = row["actual_use_name"].ToString();
                 int rowGrYear = Convert.ToInt32(row["gryear"]);
 
-                string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, (int)nudYear.Value, "posted_at");
+                string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, year, "posted_at");
                 decimal rowPenaltyRate = 0;
                 string rowPenaltyFrequency = string.Empty;
                 decimal rowBasicRate = 0;
@@ -178,41 +234,30 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 newRow["posted_at"] = rowPostedAt;
                 newRow["posted_by"] = rowPostedBy;
 
-
-                dataTable.Rows.Add(newRow);
+                rowCount += 1;
+                bgwLoadAsessmentPosts.ReportProgress(((rowCount * 100) / totalRowCount), rowCount);
+                assessmentPostsDataTable.Rows.Add(newRow);
             }
-
-            return dataTable;
         }
 
-        private void Miscellaneous() 
-        {
-            chckBxAll.Checked = false;
-            txtYear.Text = nudYear.Value.ToString();
-            txtBarangay.Text = cmbxBarangays.Text;
-        }
-
-        private void LoadProperties()
+        private void bgwLoadAsessmentPosts_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            try
-            {
-                int year = (int)nudYear.Value;
-                int barangayId = Convert.ToInt32(cmbxBarangays.SelectedValue);
-                string searchText = txtSearch.Text.Trim();
-
-                HelperLoadRecords.RealPropertiesSearchDatagridView(DataTableAssessmentPosting(year, barangayId, searchText), dgProperties);
-                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
-                EnableDisableToolStripButton(dgProperties, btnPostSelected);
-                Miscellaneous();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
-
-    Cursor = Cursors.Default;
+            progressBarLoadRecords.Visible = true;
+            lblRecordCount.Text = e.UserState.ToString();
+            progressBarLoadRecords.Value = e.ProgressPercentage;
         }
+
+        private void bgwLoadAsessmentPosts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (progressBarLoadRecords.Value == 100)
+                progressBarLoadRecords.Visible = false;
+
+            HelperLoadRecords.RealPropertiesSearchDatagridView(assessmentPostsDataTable, dgProperties);
+            Cursor = Cursors.Default;
+        }
+
+        #endregion
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
@@ -500,6 +545,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             tooltip.UseAnimation = false;
 
             tooltip.SetToolTip(pictureBox1, "Make sure to post previous year/s.");
-        }
+        }    
     }
 }
