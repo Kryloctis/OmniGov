@@ -71,6 +71,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             if (propertyKind == "L")
                 return RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(propertyId);
+            else if (propertyKind == "B")
+                return RptFactory.BuildingDetailsRepository().GetTotalAreaByBuildingPropertiesId(propertyId);
             else
                 return 0;
         }

@@ -10,5 +10,7 @@ namespace RPT.Domain.Interfaces
 {
     public interface IBuildingDetailsRepository : IRepository<BuildingDetailsModel>
     {
+        public decimal GetTotalAreaByBuildingPropertiesId(int buildingPropertiesId);
+
     }
 }
