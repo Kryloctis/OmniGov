@@ -67,6 +67,16 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return Helper.GetUserDataById(Convert.ToInt32(postedById))["user_full_name"];
         }
 
+        private decimal GetPropertyArea(string propertyKind, int propertyId) 
+        {
+            if (propertyKind == "L")
+                return RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(propertyId);
+            else if (propertyKind == "B")
+                return RptFactory.BuildingDetailsRepository().GetTotalAreaByBuildingPropertiesId(propertyId);
+            else
+                return 0;
+        }
+
         private DataTable DataTableAssessmentPosting(int year, int barangayId, string searchText)
         {
             var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
@@ -129,11 +139,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
 
-                //Get Land Total Area
-                decimal totalArea = 0;
-
-                if (rowPropertyKind == "L")
-                    totalArea = RptFactory.LandAppraisalRepository().GetTotalAreaByLandPropertiesId(landBldgMachPropertiesId);
+                decimal area = GetPropertyArea(rowPropertyKind, landBldgMachPropertiesId);           
 
                 string rowClassificationCode = row["classification_code"].ToString();
                 string rowClassificationName = row["classification_name"].ToString();
@@ -158,7 +164,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 newRow["effectivity_quarter"] = rowEffectivityQuarter;
                 newRow["effectivity_year"] = rowEffectivityYear;
                 newRow["assessed_value"] = rowAssessedValue;
-                newRow["area"] = totalArea;
+                newRow["area"] = area;
                 newRow["classification_code"] = rowClassificationCode;
                 newRow["classification_name"] = rowClassificationName;
                 newRow["actual_use_code"] = rowActualCode;
@@ -484,6 +490,16 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void btnSearch_Click(object sender, EventArgs e)
         {         
             LoadProperties();
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            var tooltip = new ToolTip();
+            tooltip.RemoveAll();
+            tooltip.ShowAlways = true;
+            tooltip.UseAnimation = false;
+
+            tooltip.SetToolTip(pictureBox1, "Make sure to post previous year/s.");
         }
     }
 }
