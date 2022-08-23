@@ -238,6 +238,9 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
 
+            if (!Helper.HasPermission("Transaction Issue Check"))
+                checkIssuanceToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Transaction Generate RCD"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
@@ -281,6 +284,8 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Receipts") && !Helper.HasPermission("Manage Returned Receipts"))
                 toolStripMenuItemReceipts.Enabled = false;
+
+
 
             #endregion
         }
