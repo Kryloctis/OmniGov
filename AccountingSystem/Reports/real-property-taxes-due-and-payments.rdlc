@@ -514,7 +514,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>1.44667cm</Height>
+                  <Height>0.97042cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -525,14 +525,12 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Pay Prd</Value>
+                                  <Value>Pay </Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>None</TextDecoration>
-                                    <Color>#000000</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -568,10 +566,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Tax Type</Value>
+                                  <Value>Tax </Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -611,7 +609,7 @@
                                   <Value>Tax Due</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -774,9 +772,8 @@
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>None</TextDecoration>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -806,7 +803,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.75875cm</Height>
+                  <Height>0.6cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -817,10 +814,11 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Prd</Value>
                                   <Style>
+                                    <FontStyle>Normal</FontStyle>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -839,7 +837,7 @@
                               <Style>None</Style>
                             </TopBorder>
                             <BackgroundColor>Gainsboro</BackgroundColor>
-                            <VerticalAlign>Middle</VerticalAlign>
+                            <VerticalAlign>Top</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -857,10 +855,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Type</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -879,7 +877,7 @@
                               <Style>None</Style>
                             </TopBorder>
                             <BackgroundColor>Gainsboro</BackgroundColor>
-                            <VerticalAlign>Middle</VerticalAlign>
+                            <VerticalAlign>Top</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -900,7 +898,7 @@
                                   <Value>Regular</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -937,7 +935,7 @@
                                   <Value>Discount</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -974,7 +972,7 @@
                                   <Value>Penalty</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1011,7 +1009,7 @@
                                   <Value>Total</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1048,7 +1046,7 @@
                                   <Value>Regular</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1085,7 +1083,7 @@
                                   <Value>Discount</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1122,7 +1120,7 @@
                                   <Value>Penalty</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1159,7 +1157,7 @@
                                   <Value>Total</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1196,7 +1194,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1236,7 +1234,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1276,7 +1274,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1307,7 +1305,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.635cm</Height>
+                  <Height>0.58208cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1321,6 +1319,7 @@
                                   <Value>Location: </Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -1328,12 +1327,14 @@
                                   <Value>=First(Fields!barangay.Value, "pin")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>, </Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -1341,12 +1342,14 @@
                                   <Value>=First(Fields!municipality.Value, "pin")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
                                   <Value>, </Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -1354,6 +1357,7 @@
                                   <Value>=First(Fields!province.Value, "pin")</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1390,7 +1394,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.6cm</Height>
+                  <Height>0.52062cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1404,6 +1408,7 @@
                                   <Value>=Fields!payment_period.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1438,6 +1443,7 @@
                                   <Value>=Fields!tax_type.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1472,6 +1478,7 @@
                                   <Value>=Fields!regular_tax_due.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1506,6 +1513,7 @@
                                   <Value>=Fields!discount_tax_due.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1540,6 +1548,7 @@
                                   <Value>=Fields!penalty_tax_due.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1574,6 +1583,7 @@
                                   <Value>=Fields!total_tax_due.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1608,6 +1618,7 @@
                                   <Value>=Fields!regular_tax_collected.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1642,6 +1653,7 @@
                                   <Value>=Fields!discount_tax_collected.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1676,6 +1688,7 @@
                                   <Value>=Fields!penalty_tax_collected.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1710,6 +1723,7 @@
                                   <Value>=Fields!total_tax_collected.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1744,6 +1758,7 @@
                                   <Value>=Fields!or_number.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1776,6 +1791,7 @@
                                   <Value>=Fields!date.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <Format>MMMM d, yyyy</Format>
                                   </Style>
                                 </TextRun>
@@ -1811,6 +1827,7 @@
                                   <Value>=Fields!payee.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1870,7 +1887,7 @@
                                 <Value>ARP No.</Value>
                                 <Style>
                                   <FontFamily>calibri</FontFamily>
-                                  <FontSize>9pt</FontSize>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1910,7 +1927,7 @@
                                     <Value>Cancelled</Value>
                                     <Style>
                                       <FontFamily>calibri</FontFamily>
-                                      <FontSize>9pt</FontSize>
+                                      <FontSize>8pt</FontSize>
                                       <FontWeight>Bold</FontWeight>
                                     </Style>
                                   </TextRun>
@@ -1951,7 +1968,7 @@
                                         <Value>Tax Year</Value>
                                         <Style>
                                           <FontFamily>calibri</FontFamily>
-                                          <FontSize>9pt</FontSize>
+                                          <FontSize>8pt</FontSize>
                                           <FontWeight>Bold</FontWeight>
                                         </Style>
                                       </TextRun>
@@ -1991,7 +2008,7 @@
                                             <Value>Assessed Vaue</Value>
                                             <Style>
                                               <FontFamily>calibri</FontFamily>
-                                              <FontSize>9pt</FontSize>
+                                              <FontSize>8pt</FontSize>
                                               <FontWeight>Bold</FontWeight>
                                             </Style>
                                           </TextRun>
@@ -2034,7 +2051,7 @@
                                             <Value>Land</Value>
                                             <Style>
                                               <FontFamily>calibri</FontFamily>
-                                              <FontSize>9pt</FontSize>
+                                              <FontSize>8pt</FontSize>
                                               <FontWeight>Bold</FontWeight>
                                             </Style>
                                           </TextRun>
@@ -2074,7 +2091,7 @@
                                                 <Value>Improvement</Value>
                                                 <Style>
                                                   <FontFamily>calibri</FontFamily>
-                                                  <FontSize>9pt</FontSize>
+                                                  <FontSize>8pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
@@ -2114,7 +2131,7 @@
                                                     <Value>Total</Value>
                                                     <Style>
                                                       <FontFamily>calibri</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontSize>8pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -2179,6 +2196,7 @@
                                     <Value>PIN No. </Value>
                                     <Style>
                                       <FontFamily>calibri</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                     </Style>
                                   </TextRun>
                                   <TextRun>
@@ -2186,6 +2204,7 @@
                                     <Value>=Fields!pin.Value</Value>
                                     <Style>
                                       <FontFamily>calibri</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                     </Style>
                                   </TextRun>
                                 </TextRuns>
@@ -2235,6 +2254,7 @@
                                     <Value>=Fields!arp_no.Value</Value>
                                     <Style>
                                       <FontFamily>calibri</FontFamily>
+                                      <FontSize>8pt</FontSize>
                                     </Style>
                                   </TextRun>
                                 </TextRuns>
@@ -2270,6 +2290,7 @@
                                         <Value>=Fields!is_cancelled.Value</Value>
                                         <Style>
                                           <FontFamily>calibri</FontFamily>
+                                          <FontSize>8pt</FontSize>
                                         </Style>
                                       </TextRun>
                                     </TextRuns>
@@ -2315,6 +2336,7 @@
                                             <Value>=Fields!tax_year.Value</Value>
                                             <Style>
                                               <FontFamily>calibri</FontFamily>
+                                              <FontSize>8pt</FontSize>
                                             </Style>
                                           </TextRun>
                                         </TextRuns>
@@ -2350,6 +2372,7 @@
                                                 <Value>=Fields!land_assessed_value.Value</Value>
                                                 <Style>
                                                   <FontFamily>calibri</FontFamily>
+                                                  <FontSize>8pt</FontSize>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -2385,6 +2408,7 @@
                                                     <Value>=Fields!improvement_assessed_value.Value</Value>
                                                     <Style>
                                                       <FontFamily>calibri</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
@@ -2421,6 +2445,7 @@
                                                         <Value>=Fields!land_assessed_value.Value + Fields!improvement_assessed_value.Value</Value>
                                                         <Style>
                                                           <FontFamily>calibri</FontFamily>
+                                                          <FontSize>8pt</FontSize>
                                                         </Style>
                                                       </TextRun>
                                                     </TextRuns>
@@ -2467,7 +2492,7 @@
             <DataSetName>dtTaxesDuesAndPayments</DataSetName>
             <Top>3.58495cm</Top>
             <Left>0.08963cm</Left>
-            <Height>3.44042cm</Height>
+            <Height>2.67313cm</Height>
             <Width>32.58317cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
@@ -2477,7 +2502,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.91878in</Height>
+        <Height>2.58545in</Height>
         <Style />
       </Body>
       <Width>12.9in</Width>

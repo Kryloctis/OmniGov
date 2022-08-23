@@ -639,7 +639,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 newRow["arp_no"] = getTaxDueBillData.CompleteArpNo;
                 newRow["kind"] = getTaxDueBillData.Kind;
                 newRow["classification"] = getTaxDueBillData.Classification;
-                newRow["lot_no"] = getTaxDueBillData.LotNo;
+                newRow["cadastral_lot_no"] = getTaxDueBillData.LotNo;
                 newRow["location"] = getTaxDueBillData.Location;
                 newRow["tax_year"] = getTaxDueBillData.TaxYear;
                 newRow["area"] = getTaxDueBillData.Area;
