@@ -456,57 +456,6 @@
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
-              <Textbox Name="Textbox17">
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Page </Value>
-                        <Style>
-                          <FontFamily>Calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>=Globals!PageNumber</Value>
-                        <Style>
-                          <FontFamily>Calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value> of </Value>
-                        <Style>
-                          <FontFamily>Calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                      <TextRun>
-                        <Value>=Globals!OverallTotalPages</Value>
-                        <Style>
-                          <FontFamily>Calibri</FontFamily>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Right</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox4</rd:DefaultName>
-                <Top>1.38879cm</Top>
-                <Left>23.09135cm</Left>
-                <Height>0.63497cm</Height>
-                <Width>9.49206cm</Width>
-                <ZIndex>8</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>1.36229cm</Top>
@@ -2519,7 +2468,7 @@
             <Top>3.58495cm</Top>
             <Left>0.08963cm</Left>
             <Height>3.44042cm</Height>
-            <Width>32.5832cm</Width>
+            <Width>32.58317cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>

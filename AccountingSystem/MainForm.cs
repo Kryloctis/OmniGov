@@ -26,6 +26,7 @@ using AccountingSystem.Views.Reports.DailyCashReport;
 using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
@@ -130,7 +131,7 @@ namespace AccountingSystem
                 rCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                rCDToolStripMenuItem.Enabled = false;
+                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
                 abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
@@ -245,7 +246,7 @@ namespace AccountingSystem
                 rCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
-                rCDToolStripMenuItem.Enabled = false;
+                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Reports of General Collections"))
                 abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
@@ -809,7 +810,7 @@ namespace AccountingSystem
             _ = new frmRCIReport().ShowDialog();
         }
 
-        private void rCDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void reportOfCollectionsDepositsRCDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSearch(new frmRCD()).ShowDialog();
         }
@@ -837,6 +838,16 @@ namespace AccountingSystem
         private void toolStripMenuPaymentPostings_Click(object sender, EventArgs e)
         {
             _ = new frmPropertyPayment(this).ShowDialog();
+        }
+
+        private void listOfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
         }
     }
 }
