@@ -119,17 +119,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            if (dgReceiptIssued.SelectedRows.Count == 0)
-                return;
             
             int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-            var lastIssued = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
-
+            string lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? string.Empty : dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString();
+          
             int issuedSerialNoFrom = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_from"].Value);
-            int issuedSerialNoTo = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_to"].Value);
-
-            int returnSerialNoFrom = string.IsNullOrEmpty(lastIssued.ToString()) ? issuedSerialNoFrom : lastIssued + 1;
-            int returnSerialNoTo = issuedSerialNoTo;
+            
+            int returnSerialNoFrom = string.IsNullOrEmpty(lastIssued.ToString()) ? issuedSerialNoFrom : Convert.ToInt32(lastIssued) + 1;
+            int returnSerialNoTo = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_to"].Value);
 
             _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }

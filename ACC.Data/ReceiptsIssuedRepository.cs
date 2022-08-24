@@ -121,6 +121,7 @@ namespace ACC.Data
                             $"returned_date,  " +
                             $"issued_by  " +
                             $"FROM {viewTableName} " +
+                            $"WHERE is_returned = false " +
                             $"ORDER BY date_issued DESC";
 
                 
