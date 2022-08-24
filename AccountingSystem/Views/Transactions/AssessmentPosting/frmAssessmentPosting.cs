@@ -65,6 +65,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("effectivity_year", typeof(int)),
                 new DataColumn("assessed_value", typeof(decimal)),
                 new DataColumn("area", typeof(decimal)),
+                new DataColumn("lot_no", typeof(string)),
+                new DataColumn("improv_assessed_value", typeof(decimal)),
                 new DataColumn("classification_code", typeof(string)),
                 new DataColumn("classification_name", typeof(string)),
                 new DataColumn("actual_use_code", typeof(string)),
@@ -196,6 +198,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
 
                 decimal area = GetPropertyArea(rowPropertyKind, landBldgMachPropertiesId);
+                
 
                 string rowClassificationCode = row["classification_code"].ToString();
                 string rowClassificationName = row["classification_name"].ToString();
@@ -221,6 +224,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 newRow["effectivity_year"] = rowEffectivityYear;
                 newRow["assessed_value"] = rowAssessedValue;
                 newRow["area"] = area;
+                newRow["lot_no"] = string.Empty;
+                newRow["improv_assessed_value"] = 0;
                 newRow["classification_code"] = rowClassificationCode;
                 newRow["classification_name"] = rowClassificationName;
                 newRow["actual_use_code"] = rowActualCode;
