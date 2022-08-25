@@ -100,8 +100,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             DataTable dt = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
 
-
-
             if (dt.Rows.Count == 0)
                 return dt;
 

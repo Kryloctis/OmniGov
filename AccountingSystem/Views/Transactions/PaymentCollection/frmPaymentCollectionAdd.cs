@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var receiptIssuedModel = new ReceiptsIssuedModel()
                 {
                     Id = issuanceId,
-                    Last_issued = Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
+                    Last_issued = uc.isCashTicket ? 0 : Convert.ToInt32(uc.txtReceiptNumber.Text.Trim())
                 };
                 receiptsIssuedRepo.UpdateLastIssued(receiptIssuedModel);
              

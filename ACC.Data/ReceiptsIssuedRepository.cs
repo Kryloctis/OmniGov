@@ -327,7 +327,7 @@ namespace ACC.Data
                 new object[]{"@collecting_officer_id", DbType.String, collectingOfficerId}
             };
      
-            var query = $"SELECT accountable_form_id, accountable_forms, receipt_issued_from, receipt_issued_to, quantity, last_issued FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id GROUP BY collecting_officer_id";
+            var query = $"SELECT accountable_form_id, accountable_forms, receipt_issued_from, receipt_issued_to, quantity, last_issued FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id";
 
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
