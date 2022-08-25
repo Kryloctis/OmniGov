@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.dtto = new System.Windows.Forms.DateTimePicker();
+            this.dtpEndingDate = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -44,13 +44,13 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.label2.TabIndex = 28;
             this.label2.Text = "Ending Date ";
             // 
-            // dtto
+            // dtpEndingDate
             // 
-            this.dtto.Location = new System.Drawing.Point(102, 10);
-            this.dtto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtto.Name = "dtto";
-            this.dtto.Size = new System.Drawing.Size(258, 23);
-            this.dtto.TabIndex = 27;
+            this.dtpEndingDate.Location = new System.Drawing.Point(102, 10);
+            this.dtpEndingDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpEndingDate.Name = "dtpEndingDate";
+            this.dtpEndingDate.Size = new System.Drawing.Size(196, 23);
+            this.dtpEndingDate.TabIndex = 27;
             // 
             // panel1
             // 
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(364, 10);
+            this.btnRetrieve.Location = new System.Drawing.Point(303, 10);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 23;
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 562);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dtto);
+            this.Controls.Add(this.dtpEndingDate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRetrieve);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -97,5 +97,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         private System.Windows.Forms.DateTimePicker dtto;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.DateTimePicker dtpEndingDate;
     }
 }

@@ -396,7 +396,7 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT " +
-                    $"CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form, " +
+                    $"{tableAccountableForms}.acc_form_no," +
                     $"{tableReceipts}.receipt_number_from, " +
                     $"{tableReceipts}.receipt_number_to, " +
                     $"{tableReceiptsIssued}.receipt_issued_from, " +
@@ -418,6 +418,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
 
         public int GetGeneralCollectionId(string rcdNo)
         {       

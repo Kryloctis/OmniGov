@@ -270,7 +270,7 @@ namespace ACC.Data
             return false;
         }
 
-        public int GetReportID(int collectorId, string collectorReportNumber)
+        public int GetReportID(int collectorId, string collectorReportNumber, bool isJO)
         {
 
             var parameter = new object[][] {
@@ -278,10 +278,17 @@ namespace ACC.Data
                 new object[] {"@collectorReportNumber", DbType.String, collectorReportNumber}
             };
 
+            
+            string filter;
+            if (isJO)
+                filter = $"job_orders_id";
+            else
+                filter = $"collecting_officers_id";
+
             string query = $"SELECT id " +
                            $"FROM {tableName} " +
                            $"WHERE " +
-                           $"(collecting_officers_id = @collectorId AND ISNULL(job_orders_id) OR job_orders_id = @collectorId) " +
+                           $"{filter} = @collectorId " +
                            $"AND " +
                            $"report_no = @collectorReportNumber ";
 
@@ -534,7 +541,7 @@ namespace ACC.Data
 
                 foreach (var collectorsPayments in collectorReportPaymentModelList)
                 {
-                    collectorsPayments.CollectorsReportId = GetReportID(collectorReportModel.CollectorId, collectorReportModel.ReportNo);
+                    collectorsPayments.CollectorsReportId = GetReportID(collectorReportModel.CollectorId, collectorReportModel.ReportNo, collectorReportModel.IsJO);
                     collectorsPayments.PaymentCollectionsId = collectorsPayments.PaymentCollectionsId;
 
                     _collectorReportPaymentsRepository.Insert(collectorsPayments);

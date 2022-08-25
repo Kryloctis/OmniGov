@@ -397,7 +397,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             txtAmount.Enabled = enable;
         }
 
-        private void SetNextReceiptNumber()
+        internal void SetNextReceiptNumber()
         {
             var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
             var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);

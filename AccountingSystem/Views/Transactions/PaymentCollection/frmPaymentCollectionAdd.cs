@@ -184,6 +184,8 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             }
 
             _frmPaymentCollection.LoadPaymentCollections();
+            uc.cmbforms_SelectionChangeCommitted(sender, e);
+            uc.SetNextReceiptNumber();
         }
         #endregion
 

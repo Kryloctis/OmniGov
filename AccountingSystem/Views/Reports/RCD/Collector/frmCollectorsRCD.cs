@@ -125,7 +125,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 //RECEIPTS USED BY THE COLLECTING OFFICER.
                 row["issue_quantity"] = totalUsedByCollectingOfficer;
                 row["issue_serial_from"] = receiptBeginningBalanceFrom;
-                row["issue_serial_to"] = lastIssued;
+                row["issued_quanity"] = totalUsedByCollectingOfficer;
 
                 //REMAINING RECEIPT AFTER CREATION OF REPORT.
                 row["ending_bal_quantity"] = beginningQuantity - totalUsedByCollectingOfficer;

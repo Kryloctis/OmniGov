@@ -448,5 +448,25 @@ namespace ACC.Data
 
             return false;
         }
+
+        public DataTable GetAccountabilityForAccountableForms(DateTime date)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[]{"@date_issued", DbType.DateTime2, date}
+                };
+
+                //string query = $"SELECT * FROM {viewTableName} WHERE date_issued = MONTH(@date_issued)";
+                string query = $"SELECT * FROM {viewTableName}";
+
+                var dt = new DataTable();
+                return _dbGenericCommands.FillBySearch(query, dt, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

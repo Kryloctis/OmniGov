@@ -144,32 +144,36 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private bool SaveData()
         {
-
-            using (var scope = new TransactionScope())
+            if (MessageBox.Show("Create RCD?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (!ValidateChildren())
+                using (var scope = new TransactionScope())
                 {
-                    Helper.MessageBoxError(GetFormErrors());
-                    return false;
+                    if (!ValidateChildren())
+                    {
+                        Helper.MessageBoxError(GetFormErrors());
+                        return false;
+                    }
+
+                    var generalCollectionModel = new GeneralCollectionsModel()
+                    {
+                        RcdNo = txtRCDNo.Text,
+                        Rcddate = Convert.ToDateTime(dtpDate.Value),
+                        FundId = Convert.ToInt32(cmbfunds.SelectedValue),
+                        Userid = Helper.UserId
+                    };
+
+                    bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
+                    if (!rcdSaveSuccess)
+                        return false;
+
+
+                    InsertGeneralCollectionsPayment();
+                    scope.Complete();
+                    return true;
                 }
-
-                var generalCollectionModel = new GeneralCollectionsModel()
-                {
-                    RcdNo = txtRCDNo.Text,
-                    Rcddate = Convert.ToDateTime(dtpDate.Value),
-                    FundId = Convert.ToInt32(cmbfunds.SelectedValue),
-                    Userid = Helper.UserId
-                };
-
-                bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
-                if (!rcdSaveSuccess)
-                    return false;
-
-
-                InsertGeneralCollectionsPayment();
-                scope.Complete();
-                return true;
             }
+
+            return false;
         }
 
         private void InsertGeneralCollectionsPayment()

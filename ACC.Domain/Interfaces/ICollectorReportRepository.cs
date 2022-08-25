@@ -16,7 +16,7 @@ namespace ACC.Domain.Interfaces
         bool ReportNumberExist(int reportId, string reporNo);
         bool HasReported(int id);
         bool HasGenerated(int paymentCollectionsId);
-        int GetReportID(int collectorId, string collectorReportNumber);
+        int GetReportID(int collectorId, string collectorReportNumber, bool isJO);
         DataTable FilterRecords(string status, byte fundId, string keySearch, short collectingOfficerId);
         DataTable FilterRecords(string status, byte fundId, string keySearch);
         DataTable FilterRecords(sbyte fundId, ushort collectorId, string reportNo);

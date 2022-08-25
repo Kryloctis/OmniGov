@@ -132,20 +132,22 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             var reportNo = uc.txtReport.Text.Trim();
             var reportDate = Convert.ToDateTime(uc.dtRCDDate.Value);
             var reportFund = uc.fundId;
+            var isJobOrder = uc.cbJOCollector.Checked;
 
             if (isJOCollectingOfficer)
             {
                 jobOrderID = Convert.ToInt32(uc.cmbCollector.SelectedValue);
                 collectorID = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(jobOrderID);
             }
-            
+
             var collectorsReportModel = new CollectorReportModel()
             {
                 CollectorId = collectorID,
                 JobOrderId = jobOrderID,
                 ReportNo = reportNo,
                 Date = reportDate,
-                FundId = reportFund
+                FundId = reportFund,
+                IsJO = isJobOrder
             };
 
             return collectorsReportModel;
@@ -191,8 +193,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         {
             var collectorId = uc.collectorId;
             var reportNumber = uc.txtReport.Text;
+            var isJO = uc.cbJOCollector.Checked;
 
-            return AccFactory.CollectorReportRepository().GetReportID(collectorId, reportNumber);
+            return AccFactory.CollectorReportRepository().GetReportID(collectorId, reportNumber, isJO);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

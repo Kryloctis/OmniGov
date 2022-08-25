@@ -15,5 +15,8 @@ namespace ACC.Domain.Models
         public sbyte IsDisapproved { get; set; }
         public int FundId { get; set; }
         public string Remarks { get; set; }
+        public bool IsJO { get; set; }
+
+
     }
 }
