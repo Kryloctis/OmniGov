@@ -555,67 +555,68 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             var rptTaxDueBillReport = new List<rptTaxDueBillReportModel>();
             var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, assessmentYear);
 
-                int rowId = Convert.ToInt32(dictAssessmentPosts["id"]);
-                string rowCompleteArpNo = dictAssessmentPosts["complete_arp_no"].ToString();
-                DateTime rowAssessmentPostsDate = Convert.ToDateTime(dictAssessmentPosts["posted_at"]);
-                decimal rowAssessedValue = Convert.ToDecimal(dictAssessmentPosts["assessed_value"]);
-                int rowAssessmentYear = Convert.ToInt32(dictAssessmentPosts["year"]);
-                int rowEffectivityYear = Convert.ToInt32(dictAssessmentPosts["effectivity_year"]);
-                int rowEffectivityQuarter = Convert.ToInt32(dictAssessmentPosts["effectivity_quarterly"]);
-                decimal rowArea = Convert.ToDecimal(dictAssessmentPosts["area"]);
-                string rowActualUseName = dictAssessmentPosts["actual_use_name"].ToString();
-                string rowPropertyKind = dictAssessmentPosts["property_kind"].ToString();
-                string rowBarangayName = dictAssessmentPosts["barangay_name"].ToString();
+            int rowId = Convert.ToInt32(dictAssessmentPosts["id"]);
+            string rowCompleteArpNo = dictAssessmentPosts["complete_arp_no"].ToString();
+            DateTime rowAssessmentPostsDate = Convert.ToDateTime(dictAssessmentPosts["posted_at"]);
+            decimal rowAssessedValue = Convert.ToDecimal(dictAssessmentPosts["assessed_value"]);
+            int rowAssessmentYear = Convert.ToInt32(dictAssessmentPosts["year"]);
+            int rowEffectivityYear = Convert.ToInt32(dictAssessmentPosts["effectivity_year"]);
+            int rowEffectivityQuarter = Convert.ToInt32(dictAssessmentPosts["effectivity_quarterly"]);
+            decimal rowArea = Convert.ToDecimal(dictAssessmentPosts["area"]);
+            string rowActualUseName = dictAssessmentPosts["actual_use_name"].ToString();
+            string rowPropertyKind = dictAssessmentPosts["property_kind"].ToString();
+            string rowBarangayName = dictAssessmentPosts["barangay_name"].ToString();
+            string lotNo = dictAssessmentPosts["lot_no"].ToString();
 
-                #region Tax Due
+            #region Tax Due
 
-                decimal rowBasicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
-                decimal rowSefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
-                decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
-                decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
-                decimal rowBasicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue); 
+            decimal rowBasicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
+            decimal rowSefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
+            decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
+            decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+            decimal rowBasicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue); 
 
-                #endregion
+            #endregion
 
-                #region Getting Discount
+            #region Getting Discount
 
-                bool discountIsAdvance = false;
-                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
-                decimal discountAmount = taxDueComputations.GetDiscount(discountRate, rowBasicSefTotalTaxDue);
+            bool discountIsAdvance = false;
+            decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
+            decimal discountAmount = taxDueComputations.GetDiscount(discountRate, rowBasicSefTotalTaxDue);
 
-                #endregion
+            #endregion
 
-                #region Getting Penalties
+            #region Getting Penalties
 
-                int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
-                int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
-                decimal rowPenaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
-                decimal penaltyAmount = taxDueComputations.GetPenalty(rowPenaltyRate, delinquentMonths, rowBasicSefTotalTaxDue);
+            int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
+            int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
+            decimal rowPenaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
+            decimal penaltyAmount = taxDueComputations.GetPenalty(rowPenaltyRate, delinquentMonths, rowBasicSefTotalTaxDue);
 
-                #endregion
+            #endregion
 
-                #region Getting Total Tax Due
+            #region Getting Total Tax Due
 
-                decimal totalTaxDue = (rowBasicSefTotalTaxDue + penaltyAmount) - discountAmount;
+            decimal totalTaxDue = (rowBasicSefTotalTaxDue + penaltyAmount) - discountAmount;
 
-                #endregion
+            #endregion
 
-                var model = new rptTaxDueBillReportModel()
-                {
-                    CompleteArpNo = rowCompleteArpNo,
-                    AssessedValue = rowAssessedValue,
-                    Area = rowArea,
-                    Classification = rowActualUseName,
-                    Kind = rowPropertyKind,
-                    Location = rowBarangayName,
-                    BasicTax = basicTaxDueAmount,
-                    SefTax = sefTaxDueAmount,
-                    LotNo = string.Empty,
-                    Discount = discountAmount,
-                    Penalty = penaltyAmount,
-                    TaxYear = rowAssessmentYear,
-                    netTaxDue = totalTaxDue
-                };
+            var model = new rptTaxDueBillReportModel()
+            {
+                CompleteArpNo = rowCompleteArpNo,
+                AssessedValue = rowAssessedValue,
+                Area = rowArea,
+                Classification = rowActualUseName,
+                Kind = rowPropertyKind,
+                Location = rowBarangayName,
+                BasicTax = basicTaxDueAmount,
+                SefTax = sefTaxDueAmount,
+                LotNo = lotNo,
+                Discount = discountAmount,
+                Penalty = penaltyAmount,
+                TaxYear = rowAssessmentYear,
+                netTaxDue = totalTaxDue
+            };
 
 
             return model;
@@ -639,7 +640,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 newRow["arp_no"] = getTaxDueBillData.CompleteArpNo;
                 newRow["kind"] = getTaxDueBillData.Kind;
                 newRow["classification"] = getTaxDueBillData.Classification;
-                newRow["cadastral_lot_no"] = getTaxDueBillData.LotNo;
+                newRow["lot_no"] = getTaxDueBillData.LotNo;
                 newRow["location"] = getTaxDueBillData.Location;
                 newRow["tax_year"] = getTaxDueBillData.TaxYear;
                 newRow["area"] = getTaxDueBillData.Area;

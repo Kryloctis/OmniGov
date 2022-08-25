@@ -13135,7 +13135,7 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnclassification;
             
-            private global::System.Data.DataColumn columncadastral_lot_no;
+            private global::System.Data.DataColumn columnlot_no;
             
             private global::System.Data.DataColumn columnlocation;
             
@@ -13214,9 +13214,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn cadastral_lot_noColumn {
+            public global::System.Data.DataColumn lot_noColumn {
                 get {
-                    return this.columncadastral_lot_no;
+                    return this.columnlot_no;
                 }
             }
             
@@ -13329,13 +13329,13 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDueBillRow AdddtRPTDueBillRow(string arp_no, string kind, string classification, string cadastral_lot_no, string location, int tax_year, decimal area, decimal assessed_value, decimal basic_tax, decimal sef_tax, decimal discount, decimal penalty, decimal net_tax_due) {
+            public dtRPTDueBillRow AdddtRPTDueBillRow(string arp_no, string kind, string classification, string lot_no, string location, int tax_year, decimal area, decimal assessed_value, decimal basic_tax, decimal sef_tax, decimal discount, decimal penalty, decimal net_tax_due) {
                 dtRPTDueBillRow rowdtRPTDueBillRow = ((dtRPTDueBillRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         arp_no,
                         kind,
                         classification,
-                        cadastral_lot_no,
+                        lot_no,
                         location,
                         tax_year,
                         area,
@@ -13370,7 +13370,7 @@ namespace AccountingSystem {
                 this.columnarp_no = base.Columns["arp_no"];
                 this.columnkind = base.Columns["kind"];
                 this.columnclassification = base.Columns["classification"];
-                this.columncadastral_lot_no = base.Columns["cadastral_lot_no"];
+                this.columnlot_no = base.Columns["lot_no"];
                 this.columnlocation = base.Columns["location"];
                 this.columntax_year = base.Columns["tax_year"];
                 this.columnarea = base.Columns["area"];
@@ -13391,8 +13391,8 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnkind);
                 this.columnclassification = new global::System.Data.DataColumn("classification", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnclassification);
-                this.columncadastral_lot_no = new global::System.Data.DataColumn("cadastral_lot_no", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncadastral_lot_no);
+                this.columnlot_no = new global::System.Data.DataColumn("lot_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnlot_no);
                 this.columnlocation = new global::System.Data.DataColumn("location", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlocation);
                 this.columntax_year = new global::System.Data.DataColumn("tax_year", typeof(int), null, global::System.Data.MappingType.Element);
@@ -24363,17 +24363,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string cadastral_lot_no {
+            public string lot_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDueBill.cadastral_lot_noColumn]));
+                        return ((string)(this[this.tabledtRPTDueBill.lot_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'cadastral_lot_no\' in table \'dtRPTDueBill\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'lot_no\' in table \'dtRPTDueBill\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDueBill.cadastral_lot_noColumn] = value;
+                    this[this.tabledtRPTDueBill.lot_noColumn] = value;
                 }
             }
             
@@ -24559,14 +24559,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Iscadastral_lot_noNull() {
-                return this.IsNull(this.tabledtRPTDueBill.cadastral_lot_noColumn);
+            public bool Islot_noNull() {
+                return this.IsNull(this.tabledtRPTDueBill.lot_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setcadastral_lot_noNull() {
-                this[this.tabledtRPTDueBill.cadastral_lot_noColumn] = global::System.Convert.DBNull;
+            public void Setlot_noNull() {
+                this[this.tabledtRPTDueBill.lot_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

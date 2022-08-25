@@ -21,7 +21,7 @@ namespace RPT.Domain.Models
         public decimal AssessedValue { get; set; }
         public decimal Area { get; set; }
         public string LotNo { get; set; }
-        public decimal ImprovAssessedValue { get; set; }
+        public decimal OtherImprovements { get; set; }
         public string ClassificationCode { get; set; }
         public string ClassificationName { get; set; }
         public string ActualUseCode { get; set; }

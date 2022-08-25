@@ -86,7 +86,7 @@ namespace ACC.Data
                     dict.Add("assessed_value", row["assessed_value"].ToString());
                     dict.Add("area", row["area"].ToString());
                     dict.Add("lot_no", row["lot_no"].ToString());
-                    dict.Add("improv_assessed_value", row["improv_assessed_value"].ToString());
+                    dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("classification_code", row["classification_code"].ToString());
                     dict.Add("classification_name", row["classification_name"].ToString());
                     dict.Add("actual_use_code", row["actual_use_code"].ToString());
@@ -196,7 +196,7 @@ namespace ACC.Data
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue },
                 new object[] { "@area", DbType.Decimal, entity.Area},
                 new object[] { "@lot_no", DbType.String, entity.LotNo},
-                new object[] { "@improv_assessed_value",DbType.Decimal, entity.ImprovAssessedValue},
+                new object[] { "@other_improvements",DbType.Decimal, entity.OtherImprovements},
                 new object[] { "@classification_code", DbType.String, entity.ClassificationCode},
                 new object[] { "@classification_name", DbType.String, entity.ClassificationName},
                 new object[] { "@actual_use_code", DbType.String, entity.ActualUseCode},
@@ -213,7 +213,7 @@ namespace ACC.Data
                 new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, area, lot_no, improv_assessed_value, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @area, @lot_no,  @improv_assessed_value, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, area, lot_no, other_improvements, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @area, @lot_no,  @other_improvements, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }

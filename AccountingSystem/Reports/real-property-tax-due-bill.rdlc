@@ -29,8 +29,8 @@
           <DataField>classification</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="cadastral_lot_no">
-          <DataField>cadastral_lot_no</DataField>
+        <Field Name="lot_no">
+          <DataField>lot_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="location">
@@ -1831,14 +1831,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="cadastral_lot_no">
+                        <Textbox Name="lot_no">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!cadastral_lot_no.Value</Value>
+                                  <Value>=Fields!lot_no.Value</Value>
                                   <Style>
                                     <FontFamily>calibri</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -1848,7 +1848,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>cadastral_lot_no</rd:DefaultName>
+                          <rd:DefaultName>lot_no</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>Solid</Style>

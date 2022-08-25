@@ -10,5 +10,6 @@ namespace RPT.Domain.Interfaces
 {
     public interface ILandPropertiesRepository : IRepository<LandPropertiesModel>
     {
+        public Dictionary<string, string> GetViewRecordByArpNo(string arpNo);
     }
 }
