@@ -10,7 +10,8 @@ namespace RPT.Data
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
         private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
-        //private readonly string viewPropertyAssessmentGroupedCancelled = "view_property_assessment_grouped_cancelled";
+        private readonly string viewPropertAssessmentPosting = "view_property_assessment_posting";
+        private readonly string viewPropertyAssessessment = "view_property_assessment";
         private readonly string viewRealProperties = "view_real_properties";
         private readonly string tableName = "real_properties";
         private MySqlGenericCommands _mySqlGenericCommandsRPT;
@@ -161,7 +162,7 @@ namespace RPT.Data
                     return "AND barangays_id = @barangays_id";
             }
 
-            string query = $"SELECT * FROM {viewPropertyAssessmentGrouped} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
+            string query = $"SELECT * FROM {viewPropertAssessmentPosting} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
             var dtProperties = new DataTable();
             return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
@@ -244,6 +245,18 @@ namespace RPT.Data
             }
 
             return dict;
+        }
+
+        public decimal GetOtherImprovementsAssessedValueBy_ArpNo_ActualUseCode(string arpNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, arpNo},
+            };
+
+            string query = $"SELECT COALESCE(SUM(assessed_value), 0) AS assessed_value FROM {viewPropertyAssessessment} WHERE complete_arp_no = @complete_arp_no AND actual_use_code = 'AIM'";
+
+            return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
     }
 }
