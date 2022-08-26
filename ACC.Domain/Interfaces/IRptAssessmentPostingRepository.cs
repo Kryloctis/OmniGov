@@ -17,6 +17,8 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetRecordsByOwnerName_IsCancelled(string ownerName, bool isCancelled);
 
+        DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo);
+
         DataTable GetRecordsByArpNo(string arpNo);
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);

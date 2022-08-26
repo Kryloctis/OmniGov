@@ -15,6 +15,7 @@ namespace ACC.Data
     {
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
+        private readonly string viewRptPropertyAssessments = "view_rpt_property_assessments";
         private MySqlGenericCommands _mySqlGenericCommands;
 
         public RptAssessmentPostsRepository(MySqlGenericCommands mySqlGenericCommands)
@@ -250,6 +251,21 @@ namespace ACC.Data
 
             string query = $"SELECT COALESCE(MIN(year), 0) AS min_year FROM lfsdb.rpt_assessment_posts WHERE complete_arp_no = @complete_arp_no";
             return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query, parameters));
+        }
+
+        public DataTable GetViewRptPropertyAssessmentsRecordsBy_OwnerName_Years(string ownerName, int yearFrom, int yearTo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@owner_name", DbType.String, ownerName},
+                new object[] { "@year_from", DbType.Int32, yearFrom},
+                new object[] { "@year_to", DbType.Int32, yearTo}
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND (year >= @year_to AND year <= @year_from) ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

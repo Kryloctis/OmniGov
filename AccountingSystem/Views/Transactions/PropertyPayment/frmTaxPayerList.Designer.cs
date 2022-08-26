@@ -37,8 +37,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -72,6 +73,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSelect);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -82,7 +84,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(794, 3);
+            this.btnSelect.Location = new System.Drawing.Point(713, 3);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 0;
@@ -115,6 +117,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.flowLayoutPanel2.Size = new System.Drawing.Size(872, 34);
             this.flowLayoutPanel2.TabIndex = 5;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(6, 6);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(185, 23);
+            this.txtSearch.TabIndex = 0;
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(197, 6);
@@ -125,13 +135,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // txtSearch
+            // btnCancel
             // 
-            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSearch.Location = new System.Drawing.Point(6, 6);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(185, 23);
-            this.txtSearch.TabIndex = 0;
+            this.btnCancel.Location = new System.Drawing.Point(794, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // frmTaxPayerList
             // 
@@ -139,6 +150,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(872, 438);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -170,5 +182,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
