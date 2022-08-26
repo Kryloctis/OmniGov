@@ -96,5 +96,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                 Close();
             }
         }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            InitializeReport();
+            Close();
+        }
     }
 }
