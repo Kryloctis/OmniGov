@@ -83,6 +83,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnAddDeductions
             // 
+            this.btnAddDeductions.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDeductions.Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.btnAddDeductions.Image = global::AccountingSystem.Properties.Resources.others;
             this.btnAddDeductions.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -115,6 +116,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtdvno
             // 
+            this.txtdvno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtdvno.Location = new System.Drawing.Point(133, 40);
             this.txtdvno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtdvno.MaxLength = 20;
@@ -144,6 +146,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtnature
             // 
+            this.txtnature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtnature.Location = new System.Drawing.Point(133, 236);
             this.txtnature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnature.MaxLength = 150;
@@ -168,6 +171,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtpayee
             // 
+            this.txtpayee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtpayee.Location = new System.Drawing.Point(133, 208);
             this.txtpayee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtpayee.MaxLength = 150;
@@ -205,6 +209,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // txtcheckno
             // 
+            this.txtcheckno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtcheckno.Location = new System.Drawing.Point(133, 153);
             this.txtcheckno.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtcheckno.MaxLength = 15;
@@ -225,7 +230,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // cmbfund
             // 
-            this.cmbfund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfund.FormattingEnabled = true;
             this.cmbfund.Location = new System.Drawing.Point(133, 68);
             this.cmbfund.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -237,6 +241,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // btnAddObligation
             // 
+            this.btnAddObligation.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddObligation.Font = new System.Drawing.Font("Segoe UI", 8.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.btnAddObligation.Image = global::AccountingSystem.Properties.Resources.others;
             this.btnAddObligation.ImageAlign = System.Drawing.ContentAlignment.BottomRight;

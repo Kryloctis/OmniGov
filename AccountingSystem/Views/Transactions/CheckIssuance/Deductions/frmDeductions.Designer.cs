@@ -88,6 +88,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             // nudAmount
             // 
+            this.nudAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudAmount.DecimalPlaces = 2;
             this.nudAmount.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.nudAmount.Location = new System.Drawing.Point(80, 62);
@@ -117,6 +118,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             // 
             // txtDescription
             // 
+            this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtDescription.Location = new System.Drawing.Point(87, 23);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

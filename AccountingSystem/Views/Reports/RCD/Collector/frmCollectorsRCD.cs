@@ -100,36 +100,42 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             DataTable dt = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(collectorId);
 
-            if (dt.Rows.Count != 0)
+            if (dt.Rows.Count == 0)
+                return dt;
+
+
+            foreach (DataRow item in dt.Rows)
             {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtFromDataSource.NewRow();
-                    var lastIssued = item["last_issued"];
+                DataRow row = dtFromDataSource.NewRow();
+                var lastIssued = item["last_issued"];
 
-                    var accountableForm = item["accountable_forms"];
-                    var beginningQuantity = item["quantity"];
-                    var receiptBeginningBalanceFrom = item["receipt_issued_from"];
-                    var receiptBeginningBalanceTo = item["receipt_issued_to"];
+                var accountableForm = item["accountable_forms"];
+                var beginningQuantity = Convert.ToInt32(item["quantity"]);
+                var receiptBeginningBalanceFrom = item["receipt_issued_from"];
+                var receiptBeginningBalanceTo = item["receipt_issued_to"];
 
-                    row["accountable_form"] = accountableForm;
-                    row["beginning_bal_quantity"] = beginningQuantity;
-                    row["beginning_bal_serial_from"] = receiptBeginningBalanceFrom;
-                    row["beginning_bal_serial_to"] = receiptBeginningBalanceTo;
+                var totalUsedByCollectingOfficer = (Convert.ToInt32(lastIssued) - Convert.ToInt32(receiptBeginningBalanceFrom)) + 1;
 
-                    row["issue_quantity"] = beginningQuantity;
-                    row["issue_serial_from"] = receiptBeginningBalanceFrom;
-                    row["issue_serial_to"] = receiptBeginningBalanceFrom;
+                //RECEIPTS ISSUED TO COLLECTING OFFICER.
+                row["accountable_form"] = accountableForm;
+                row["beginning_bal_quantity"] = beginningQuantity;
+                row["beginning_bal_serial_from"] = receiptBeginningBalanceFrom;
+                row["beginning_bal_serial_to"] = receiptBeginningBalanceTo;
+
+                //RECEIPTS USED BY THE COLLECTING OFFICER.
+                row["issue_quantity"] = totalUsedByCollectingOfficer;
+                row["issue_serial_from"] = receiptBeginningBalanceFrom;
+                row["issued_quanity"] = totalUsedByCollectingOfficer;
+
+                //REMAINING RECEIPT AFTER CREATION OF REPORT.
+                row["ending_bal_quantity"] = beginningQuantity - totalUsedByCollectingOfficer;
+                row["ending_bal_serial_from"] = Convert.ToInt32(lastIssued) + 1;
+                row["ending_bal_serial_to"] = receiptBeginningBalanceTo;
 
 
-                    row["ending_bal_quantity"] = beginningQuantity;
-                    row["ending_bal_serial_from"] = receiptBeginningBalanceFrom;
-                    row["ending_bal_serial_to"] = receiptBeginningBalanceFrom;
-
-
-                    dtFromDataSource.Rows.Add(row);
-                }
+                dtFromDataSource.Rows.Add(row);
             }
+            
 
             return dtFromDataSource;
         }
