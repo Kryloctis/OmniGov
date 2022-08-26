@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1278, 58);
+            this.toolStrip1.Size = new System.Drawing.Size(1141, 58);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.panel1.Location = new System.Drawing.Point(0, 58);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1278, 633);
+            this.panel1.Size = new System.Drawing.Size(1141, 559);
             this.panel1.TabIndex = 1;
             // 
             // nudYearTo
@@ -131,9 +131,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblReportStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 691);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 617);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1278, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1141, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -165,7 +165,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1278, 713);
+            this.ClientSize = new System.Drawing.Size(1141, 639);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -174,7 +174,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.MinimumSize = new System.Drawing.Size(1294, 752);
+            this.MinimumSize = new System.Drawing.Size(1157, 678);
             this.Name = "frmRealPropertyTaxAccountRegisterReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
