@@ -130,11 +130,10 @@ namespace AccountingSystem.Views.Reports.RCD
 
                     if (reportNo == reportNoChecker)
                     {
-                        Helper.MessageBoxError("Selected collector's report is already on the list.");
+                        Helper.MessageBoxSuccess("Selected collector's report is already on the list.");
                         return;
                     }
                 }
-
 
                 object[] reportRow = new object[]
                 {

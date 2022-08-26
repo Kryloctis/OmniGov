@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -11,6 +12,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetIssuedReceiptToCollector(int collectingOfficerID, int accountableFormID);
         DataTable GetCollectorsAccountbleForms(int collectorId, bool collectorIsJO );
         DataTable GetAccountabilityForAccountableForms(string reportNumber);
+        DataTable GetAccountabilityForAccountableForms(DateTime date);
         DataTable GetReturnedReceipts();
         DataTable GetReturnedReceiptsBySearch(string searchKey);
         int GetTotalIssuedReceiptByReceiptId(int receiptId);

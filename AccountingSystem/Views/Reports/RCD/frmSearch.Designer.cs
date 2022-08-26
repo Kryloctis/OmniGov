@@ -124,6 +124,7 @@ namespace AccountingSystem.Views.Reports.RCD
             // 
             // frmSearch
             // 
+            this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;

@@ -27,21 +27,38 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         {
 
             var dtConsolidatedReceipts = new dsLFS.dtConsolidatedReceiptsDataTable();
-            var dtConsolidatedReceiptsFromDB = AccFactory.GeneralCollectionsRepository().GetRecordsOfConsolidatedReceiptsByEndingDate(date);
+            DataTable dtConsolidatedReceiptsFromDB = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(Convert.ToDateTime(date));
 
             if (dtConsolidatedReceiptsFromDB.Rows.Count == 0) return dtConsolidatedReceipts;
         
             foreach (DataRow item in dtConsolidatedReceiptsFromDB.Rows)
             {
                 DataRow row = dtConsolidatedReceipts.NewRow();
-                row["form"] = item["form"].ToString();
-                row["receiptfrom"] = Convert.ToInt32(item["receipt_number_from"]);
-                row["receiptto"] = Convert.ToInt32(item["receipt_number_to"]);
-                row["issuefrom"] = string.IsNullOrEmpty(item["receipt_issued_from"].ToString()) ? 0 : Convert.ToInt32(item["receipt_issued_from"]);
-                row["issueto"] = string.IsNullOrEmpty(item["receipt_issued_to"].ToString()) ? 0 :  Convert.ToInt32(item["receipt_issued_to"].ToString());
-                row["usedfrom"] = string.IsNullOrEmpty(item["ifrom"].ToString()) ? 0 : Convert.ToInt32(item["ifrom"].ToString());
-                row["usedto"] = string.IsNullOrEmpty(item["ito"].ToString()) ? 0 : Convert.ToInt32(item["ito"].ToString());
-                row["officers"] = item["officers"].ToString();
+
+                var lastIssued = Convert.ToInt32(item["last_issued"]);
+                var accountableForm = $"AF - {item["acc_form_no"]}";
+                var beginningQuantity = Convert.ToInt32(item["quantity"]);
+                var receiptBeginningBalanceFrom = Convert.ToInt32(item["receipt_issued_from"]);
+                var receiptBeginningBalanceTo = Convert.ToInt32(item["receipt_issued_to"]);
+                var totalUsedByCollectingOfficer = (Convert.ToInt32(lastIssued) - Convert.ToInt32(receiptBeginningBalanceFrom)) + 1;
+                var collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
+
+
+                row["form"] = accountableForm;
+                //BEGINNING BALANCE
+                row["beginning_quantity"] = beginningQuantity;
+                row["receiptfrom"] = receiptBeginningBalanceFrom;
+                row["receiptto"] = receiptBeginningBalanceTo;
+                //ISSUED RECEIPTS
+                row["issued_quantity"] = totalUsedByCollectingOfficer;
+                row["issuefrom"] = receiptBeginningBalanceFrom;
+                row["issueto"] = lastIssued;
+                //ENDING BALANCE
+                row["ending_quantity"] = Convert.ToInt32(receiptBeginningBalanceTo) - lastIssued;
+                row["usedfrom"] = lastIssued;
+                row["usedto"] = receiptBeginningBalanceTo;
+                row["officers"] = collectingOfficer;
+
                 dtConsolidatedReceipts.Rows.Add(row);
             }
            
@@ -55,7 +72,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 Cursor = Cursors.WaitCursor;
 
                 var lguDetails = Helper.LGUDetails();
-                var date = string.Format("{0:yyyy-MM-dd}", dtto.Value);
+                var date = string.Format("{0:yyyy-MM-dd}", dtpEndingDate.Value);
 
                 string certifiedCorrectSignatory = string.Empty;
                 string certifiedCorrectSignatoryTitle = string.Empty;
@@ -88,6 +105,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                            new ReportParameter("paramForTheMonthOf", dtpEndingDate.Value.ToString("MMMM, yyyy")),
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                             new ReportParameter("paramTreasurer", treasurer),
