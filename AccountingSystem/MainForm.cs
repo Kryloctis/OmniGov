@@ -27,6 +27,7 @@ using AccountingSystem.Views.Reports.GeneralCollection;
 using AccountingSystem.Views.Reports.RCD;
 using AccountingSystem.Views.Reports.RCI;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
@@ -854,6 +855,11 @@ namespace AccountingSystem
         private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
+        }
+
+        private void consolidatedRealPropertyTaxDuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
         }
     }
 }

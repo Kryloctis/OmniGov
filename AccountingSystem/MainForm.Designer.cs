@@ -1494,21 +1494,21 @@ namespace AccountingSystem
             // collectorsRCDToolStripMenuItem
             // 
             this.collectorsRCDToolStripMenuItem.Name = "collectorsRCDToolStripMenuItem";
-            this.collectorsRCDToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.collectorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.collectorsRCDToolStripMenuItem.Text = "Collector\'s RCD";
             this.collectorsRCDToolStripMenuItem.Click += new System.EventHandler(this.collectorsRCDToolStripMenuItem_Click);
             // 
             // liquidatorsRCDToolStripMenuItem
             // 
             this.liquidatorsRCDToolStripMenuItem.Name = "liquidatorsRCDToolStripMenuItem";
-            this.liquidatorsRCDToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.liquidatorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.liquidatorsRCDToolStripMenuItem.Text = "Liquidator\'s RCD";
             this.liquidatorsRCDToolStripMenuItem.Click += new System.EventHandler(this.liquidatorsRCDToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(320, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(397, 6);
             // 
             // collectionPaymentToolStripMenuItem
             // 
@@ -1521,7 +1521,7 @@ namespace AccountingSystem
             this.consolidatedRealPropertyTaxDuesToolStripMenuItem,
             this.listOfToolStripMenuItem});
             this.collectionPaymentToolStripMenuItem.Name = "collectionPaymentToolStripMenuItem";
-            this.collectionPaymentToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.collectionPaymentToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.collectionPaymentToolStripMenuItem.Text = "Collection/Payment";
             // 
             // reportOfCollectionsDepositsRCDToolStripMenuItem
@@ -1560,6 +1560,7 @@ namespace AccountingSystem
             this.consolidatedRealPropertyTaxDuesToolStripMenuItem.Name = "consolidatedRealPropertyTaxDuesToolStripMenuItem";
             this.consolidatedRealPropertyTaxDuesToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.consolidatedRealPropertyTaxDuesToolStripMenuItem.Text = "Consolidated Real Property Tax Deliquences";
+            this.consolidatedRealPropertyTaxDuesToolStripMenuItem.Click += new System.EventHandler(this.consolidatedRealPropertyTaxDuesToolStripMenuItem_Click);
             // 
             // listOfToolStripMenuItem
             // 
@@ -1571,19 +1572,19 @@ namespace AccountingSystem
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(320, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(397, 6);
             // 
             // rCIToolStripMenuItem
             // 
             this.rCIToolStripMenuItem.Name = "rCIToolStripMenuItem";
-            this.rCIToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.rCIToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.rCIToolStripMenuItem.Text = "Report of Check Issued (RCI)";
             this.rCIToolStripMenuItem.Click += new System.EventHandler(this.rCIToolStripMenuItem_Click);
             // 
             // bankCashbookToolStripMenuItem
             // 
             this.bankCashbookToolStripMenuItem.Name = "bankCashbookToolStripMenuItem";
-            this.bankCashbookToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.bankCashbookToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.bankCashbookToolStripMenuItem.Text = "Bank Cashbook";
             this.bankCashbookToolStripMenuItem.Click += new System.EventHandler(this.bankCashbookToolStripMenuItem_Click);
             // 
@@ -1597,7 +1598,7 @@ namespace AccountingSystem
             // dailyCashPositionsToolStripMenuItem
             // 
             this.dailyCashPositionsToolStripMenuItem.Name = "dailyCashPositionsToolStripMenuItem";
-            this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
             // 

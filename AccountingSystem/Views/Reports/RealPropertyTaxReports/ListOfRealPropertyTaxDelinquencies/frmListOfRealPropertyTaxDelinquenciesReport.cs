@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             InitializeComponent();
             Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
-            panel1.Controls.Add(reportViewer);
+            panel2.Controls.Add(reportViewer);
             reportViewer.Dock = DockStyle.Fill;
             cmbxLoadBy.SelectedIndex = 0;
             nudTaxYear.Value = Helper.GetCurrentDate().Year;
