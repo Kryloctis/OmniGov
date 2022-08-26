@@ -207,6 +207,8 @@ namespace AccountingSystem
             dataGridView.Columns["actual_use_code"].Visible = false;
             dataGridView.Columns["actual_use_name"].Visible = false;
             dataGridView.Columns["gr_year"].Visible = false;
+            dataGridView.Columns["lot_no"].Visible = false;
+            dataGridView.Columns["other_improvements"].Visible = false;
             dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
             dataGridView.Columns["is_taxable"].MinimumWidth = 20;
             dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
