@@ -37,10 +37,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.btnFindTaxPayer = new System.Windows.Forms.Button();
             this.cmbxMunicipality = new System.Windows.Forms.ComboBox();
             this.cmbxBarangay = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nudTaxYear = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.dtAsOf = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nudTaxYear = new System.Windows.Forms.NumericUpDown();
             this.chkbxTaxYear = new System.Windows.Forms.CheckBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -82,10 +82,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.flowLayoutPanel1.Controls.Add(this.btnFindTaxPayer);
             this.flowLayoutPanel1.Controls.Add(this.cmbxMunicipality);
             this.flowLayoutPanel1.Controls.Add(this.cmbxBarangay);
-            this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.nudTaxYear);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.dtAsOf);
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.nudTaxYear);
             this.flowLayoutPanel1.Controls.Add(this.chkbxTaxYear);
             this.flowLayoutPanel1.Controls.Add(this.btnRetrieve);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -148,30 +148,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.cmbxBarangay.TabIndex = 16;
             this.cmbxBarangay.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(541, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 26);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Tax Year";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nudTaxYear
-            // 
-            this.nudTaxYear.Location = new System.Drawing.Point(596, 3);
-            this.nudTaxYear.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.nudTaxYear.Name = "nudTaxYear";
-            this.nudTaxYear.Size = new System.Drawing.Size(120, 23);
-            this.nudTaxYear.TabIndex = 11;
-            // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(722, 0);
+            this.label1.Location = new System.Drawing.Point(541, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 26);
             this.label1.TabIndex = 9;
@@ -182,10 +161,32 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // 
             this.dtAsOf.CustomFormat = "MMM dd, yyyy";
             this.dtAsOf.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtAsOf.Location = new System.Drawing.Point(762, 3);
+            this.dtAsOf.Location = new System.Drawing.Point(581, 3);
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(120, 23);
             this.dtAsOf.TabIndex = 7;
+            this.dtAsOf.ValueChanged += new System.EventHandler(this.dtAsOf_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(707, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 26);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tax Year";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // nudTaxYear
+            // 
+            this.nudTaxYear.Location = new System.Drawing.Point(762, 3);
+            this.nudTaxYear.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.nudTaxYear.Name = "nudTaxYear";
+            this.nudTaxYear.Size = new System.Drawing.Size(120, 23);
+            this.nudTaxYear.TabIndex = 11;
             // 
             // chkbxTaxYear
             // 
@@ -205,6 +206,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.btnRetrieve.TabIndex = 14;
             this.btnRetrieve.Text = "Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // panel2
             // 
