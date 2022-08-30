@@ -86,7 +86,7 @@ namespace AccountingSystem {
         
         private dtRPTDueBillDataTable tabledtRPTDueBill;
         
-        private dtRPTDelinquenciesDataTable tabledtRPTDelinquencies;
+        private dtListOfRealPropertyTaxDelinquenciesDataTable tabledtListOfRealPropertyTaxDelinquencies;
         
         private dtTaxesDuesAndPaymentsDataTable tabledtTaxesDuesAndPayments;
         
@@ -211,8 +211,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtRPTDueBill"] != null)) {
                     base.Tables.Add(new dtRPTDueBillDataTable(ds.Tables["dtRPTDueBill"]));
                 }
-                if ((ds.Tables["dtRPTDelinquencies"] != null)) {
-                    base.Tables.Add(new dtRPTDelinquenciesDataTable(ds.Tables["dtRPTDelinquencies"]));
+                if ((ds.Tables["dtListOfRealPropertyTaxDelinquencies"] != null)) {
+                    base.Tables.Add(new dtListOfRealPropertyTaxDelinquenciesDataTable(ds.Tables["dtListOfRealPropertyTaxDelinquencies"]));
                 }
                 if ((ds.Tables["dtTaxesDuesAndPayments"] != null)) {
                     base.Tables.Add(new dtTaxesDuesAndPaymentsDataTable(ds.Tables["dtTaxesDuesAndPayments"]));
@@ -549,9 +549,9 @@ namespace AccountingSystem {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public dtRPTDelinquenciesDataTable dtRPTDelinquencies {
+        public dtListOfRealPropertyTaxDelinquenciesDataTable dtListOfRealPropertyTaxDelinquencies {
             get {
-                return this.tabledtRPTDelinquencies;
+                return this.tabledtListOfRealPropertyTaxDelinquencies;
             }
         }
         
@@ -725,8 +725,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["dtRPTDueBill"] != null)) {
                     base.Tables.Add(new dtRPTDueBillDataTable(ds.Tables["dtRPTDueBill"]));
                 }
-                if ((ds.Tables["dtRPTDelinquencies"] != null)) {
-                    base.Tables.Add(new dtRPTDelinquenciesDataTable(ds.Tables["dtRPTDelinquencies"]));
+                if ((ds.Tables["dtListOfRealPropertyTaxDelinquencies"] != null)) {
+                    base.Tables.Add(new dtListOfRealPropertyTaxDelinquenciesDataTable(ds.Tables["dtListOfRealPropertyTaxDelinquencies"]));
                 }
                 if ((ds.Tables["dtTaxesDuesAndPayments"] != null)) {
                     base.Tables.Add(new dtTaxesDuesAndPaymentsDataTable(ds.Tables["dtTaxesDuesAndPayments"]));
@@ -950,10 +950,10 @@ namespace AccountingSystem {
                     this.tabledtRPTDueBill.InitVars();
                 }
             }
-            this.tabledtRPTDelinquencies = ((dtRPTDelinquenciesDataTable)(base.Tables["dtRPTDelinquencies"]));
+            this.tabledtListOfRealPropertyTaxDelinquencies = ((dtListOfRealPropertyTaxDelinquenciesDataTable)(base.Tables["dtListOfRealPropertyTaxDelinquencies"]));
             if ((initTable == true)) {
-                if ((this.tabledtRPTDelinquencies != null)) {
-                    this.tabledtRPTDelinquencies.InitVars();
+                if ((this.tabledtListOfRealPropertyTaxDelinquencies != null)) {
+                    this.tabledtListOfRealPropertyTaxDelinquencies.InitVars();
                 }
             }
             this.tabledtTaxesDuesAndPayments = ((dtTaxesDuesAndPaymentsDataTable)(base.Tables["dtTaxesDuesAndPayments"]));
@@ -1034,8 +1034,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtTransactionLog);
             this.tabledtRPTDueBill = new dtRPTDueBillDataTable();
             base.Tables.Add(this.tabledtRPTDueBill);
-            this.tabledtRPTDelinquencies = new dtRPTDelinquenciesDataTable();
-            base.Tables.Add(this.tabledtRPTDelinquencies);
+            this.tabledtListOfRealPropertyTaxDelinquencies = new dtListOfRealPropertyTaxDelinquenciesDataTable();
+            base.Tables.Add(this.tabledtListOfRealPropertyTaxDelinquencies);
             this.tabledtTaxesDuesAndPayments = new dtTaxesDuesAndPaymentsDataTable();
             base.Tables.Add(this.tabledtTaxesDuesAndPayments);
         }
@@ -1228,7 +1228,7 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializedtRPTDelinquencies() {
+        private bool ShouldSerializedtListOfRealPropertyTaxDelinquencies() {
             return false;
         }
         
@@ -1387,7 +1387,7 @@ namespace AccountingSystem {
         public delegate void dtRPTDueBillRowChangeEventHandler(object sender, dtRPTDueBillRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void dtRPTDelinquenciesRowChangeEventHandler(object sender, dtRPTDelinquenciesRowChangeEvent e);
+        public delegate void dtListOfRealPropertyTaxDelinquenciesRowChangeEventHandler(object sender, dtListOfRealPropertyTaxDelinquenciesRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void dtTaxesDuesAndPaymentsRowChangeEventHandler(object sender, dtTaxesDuesAndPaymentsRowChangeEvent e);
@@ -13584,23 +13584,23 @@ namespace AccountingSystem {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class dtRPTDelinquenciesDataTable : global::System.Data.TypedTableBase<dtRPTDelinquenciesRow> {
+        public partial class dtListOfRealPropertyTaxDelinquenciesDataTable : global::System.Data.TypedTableBase<dtListOfRealPropertyTaxDelinquenciesRow> {
             
             private global::System.Data.DataColumn columndeclarant;
             
             private global::System.Data.DataColumn columnlot_no;
             
-            private global::System.Data.DataColumn columntd_no;
+            private global::System.Data.DataColumn columnarp_no;
             
             private global::System.Data.DataColumn columnassessed_value;
             
             private global::System.Data.DataColumn columnstart_year;
             
-            private global::System.Data.DataColumn columnbasic_tax;
+            private global::System.Data.DataColumn columnbasic_tax_due;
             
             private global::System.Data.DataColumn columnbasic_penalty;
             
-            private global::System.Data.DataColumn columnsef_tax;
+            private global::System.Data.DataColumn columnsef_tax_due;
             
             private global::System.Data.DataColumn columnsef_penalty;
             
@@ -13610,8 +13610,8 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesDataTable() {
-                this.TableName = "dtRPTDelinquencies";
+            public dtListOfRealPropertyTaxDelinquenciesDataTable() {
+                this.TableName = "dtListOfRealPropertyTaxDelinquencies";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -13619,7 +13619,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtRPTDelinquenciesDataTable(global::System.Data.DataTable table) {
+            internal dtListOfRealPropertyTaxDelinquenciesDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -13636,7 +13636,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected dtRPTDelinquenciesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtListOfRealPropertyTaxDelinquenciesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -13659,9 +13659,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn td_noColumn {
+            public global::System.Data.DataColumn arp_noColumn {
                 get {
-                    return this.columntd_no;
+                    return this.columnarp_no;
                 }
             }
             
@@ -13683,9 +13683,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn basic_taxColumn {
+            public global::System.Data.DataColumn basic_tax_dueColumn {
                 get {
-                    return this.columnbasic_tax;
+                    return this.columnbasic_tax_due;
                 }
             }
             
@@ -13699,9 +13699,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn sef_taxColumn {
+            public global::System.Data.DataColumn sef_tax_dueColumn {
                 get {
-                    return this.columnsef_tax;
+                    return this.columnsef_tax_due;
                 }
             }
             
@@ -13740,55 +13740,55 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesRow this[int index] {
+            public dtListOfRealPropertyTaxDelinquenciesRow this[int index] {
                 get {
-                    return ((dtRPTDelinquenciesRow)(this.Rows[index]));
+                    return ((dtListOfRealPropertyTaxDelinquenciesRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtRPTDelinquenciesRowChangeEventHandler dtRPTDelinquenciesRowChanging;
+            public event dtListOfRealPropertyTaxDelinquenciesRowChangeEventHandler dtListOfRealPropertyTaxDelinquenciesRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtRPTDelinquenciesRowChangeEventHandler dtRPTDelinquenciesRowChanged;
+            public event dtListOfRealPropertyTaxDelinquenciesRowChangeEventHandler dtListOfRealPropertyTaxDelinquenciesRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtRPTDelinquenciesRowChangeEventHandler dtRPTDelinquenciesRowDeleting;
+            public event dtListOfRealPropertyTaxDelinquenciesRowChangeEventHandler dtListOfRealPropertyTaxDelinquenciesRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event dtRPTDelinquenciesRowChangeEventHandler dtRPTDelinquenciesRowDeleted;
+            public event dtListOfRealPropertyTaxDelinquenciesRowChangeEventHandler dtListOfRealPropertyTaxDelinquenciesRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AdddtRPTDelinquenciesRow(dtRPTDelinquenciesRow row) {
+            public void AdddtListOfRealPropertyTaxDelinquenciesRow(dtListOfRealPropertyTaxDelinquenciesRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesRow AdddtRPTDelinquenciesRow(string declarant, string lot_no, string td_no, decimal assessed_value, decimal start_year, decimal basic_tax, decimal basic_penalty, decimal sef_tax, decimal sef_penalty, decimal total, string remarks) {
-                dtRPTDelinquenciesRow rowdtRPTDelinquenciesRow = ((dtRPTDelinquenciesRow)(this.NewRow()));
+            public dtListOfRealPropertyTaxDelinquenciesRow AdddtListOfRealPropertyTaxDelinquenciesRow(string declarant, string lot_no, string arp_no, decimal assessed_value, decimal start_year, decimal basic_tax_due, decimal basic_penalty, decimal sef_tax_due, decimal sef_penalty, decimal total, string remarks) {
+                dtListOfRealPropertyTaxDelinquenciesRow rowdtListOfRealPropertyTaxDelinquenciesRow = ((dtListOfRealPropertyTaxDelinquenciesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         declarant,
                         lot_no,
-                        td_no,
+                        arp_no,
                         assessed_value,
                         start_year,
-                        basic_tax,
+                        basic_tax_due,
                         basic_penalty,
-                        sef_tax,
+                        sef_tax_due,
                         sef_penalty,
                         total,
                         remarks};
-                rowdtRPTDelinquenciesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowdtRPTDelinquenciesRow);
-                return rowdtRPTDelinquenciesRow;
+                rowdtListOfRealPropertyTaxDelinquenciesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtListOfRealPropertyTaxDelinquenciesRow);
+                return rowdtListOfRealPropertyTaxDelinquenciesRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                dtRPTDelinquenciesDataTable cln = ((dtRPTDelinquenciesDataTable)(base.Clone()));
+                dtListOfRealPropertyTaxDelinquenciesDataTable cln = ((dtListOfRealPropertyTaxDelinquenciesDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -13796,7 +13796,7 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new dtRPTDelinquenciesDataTable();
+                return new dtListOfRealPropertyTaxDelinquenciesDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13804,12 +13804,12 @@ namespace AccountingSystem {
             internal void InitVars() {
                 this.columndeclarant = base.Columns["declarant"];
                 this.columnlot_no = base.Columns["lot_no"];
-                this.columntd_no = base.Columns["td_no"];
+                this.columnarp_no = base.Columns["arp_no"];
                 this.columnassessed_value = base.Columns["assessed_value"];
                 this.columnstart_year = base.Columns["start_year"];
-                this.columnbasic_tax = base.Columns["basic_tax"];
+                this.columnbasic_tax_due = base.Columns["basic_tax_due"];
                 this.columnbasic_penalty = base.Columns["basic_penalty"];
-                this.columnsef_tax = base.Columns["sef_tax"];
+                this.columnsef_tax_due = base.Columns["sef_tax_due"];
                 this.columnsef_penalty = base.Columns["sef_penalty"];
                 this.columntotal = base.Columns["total"];
                 this.columnremarks = base.Columns["remarks"];
@@ -13822,18 +13822,18 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columndeclarant);
                 this.columnlot_no = new global::System.Data.DataColumn("lot_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlot_no);
-                this.columntd_no = new global::System.Data.DataColumn("td_no", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntd_no);
+                this.columnarp_no = new global::System.Data.DataColumn("arp_no", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarp_no);
                 this.columnassessed_value = new global::System.Data.DataColumn("assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnassessed_value);
                 this.columnstart_year = new global::System.Data.DataColumn("start_year", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstart_year);
-                this.columnbasic_tax = new global::System.Data.DataColumn("basic_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbasic_tax);
+                this.columnbasic_tax_due = new global::System.Data.DataColumn("basic_tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbasic_tax_due);
                 this.columnbasic_penalty = new global::System.Data.DataColumn("basic_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasic_penalty);
-                this.columnsef_tax = new global::System.Data.DataColumn("sef_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsef_tax);
+                this.columnsef_tax_due = new global::System.Data.DataColumn("sef_tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsef_tax_due);
                 this.columnsef_penalty = new global::System.Data.DataColumn("sef_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_penalty);
                 this.columntotal = new global::System.Data.DataColumn("total", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -13844,28 +13844,28 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesRow NewdtRPTDelinquenciesRow() {
-                return ((dtRPTDelinquenciesRow)(this.NewRow()));
+            public dtListOfRealPropertyTaxDelinquenciesRow NewdtListOfRealPropertyTaxDelinquenciesRow() {
+                return ((dtListOfRealPropertyTaxDelinquenciesRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new dtRPTDelinquenciesRow(builder);
+                return new dtListOfRealPropertyTaxDelinquenciesRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(dtRPTDelinquenciesRow);
+                return typeof(dtListOfRealPropertyTaxDelinquenciesRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.dtRPTDelinquenciesRowChanged != null)) {
-                    this.dtRPTDelinquenciesRowChanged(this, new dtRPTDelinquenciesRowChangeEvent(((dtRPTDelinquenciesRow)(e.Row)), e.Action));
+                if ((this.dtListOfRealPropertyTaxDelinquenciesRowChanged != null)) {
+                    this.dtListOfRealPropertyTaxDelinquenciesRowChanged(this, new dtListOfRealPropertyTaxDelinquenciesRowChangeEvent(((dtListOfRealPropertyTaxDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -13873,8 +13873,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.dtRPTDelinquenciesRowChanging != null)) {
-                    this.dtRPTDelinquenciesRowChanging(this, new dtRPTDelinquenciesRowChangeEvent(((dtRPTDelinquenciesRow)(e.Row)), e.Action));
+                if ((this.dtListOfRealPropertyTaxDelinquenciesRowChanging != null)) {
+                    this.dtListOfRealPropertyTaxDelinquenciesRowChanging(this, new dtListOfRealPropertyTaxDelinquenciesRowChangeEvent(((dtListOfRealPropertyTaxDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -13882,8 +13882,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.dtRPTDelinquenciesRowDeleted != null)) {
-                    this.dtRPTDelinquenciesRowDeleted(this, new dtRPTDelinquenciesRowChangeEvent(((dtRPTDelinquenciesRow)(e.Row)), e.Action));
+                if ((this.dtListOfRealPropertyTaxDelinquenciesRowDeleted != null)) {
+                    this.dtListOfRealPropertyTaxDelinquenciesRowDeleted(this, new dtListOfRealPropertyTaxDelinquenciesRowChangeEvent(((dtListOfRealPropertyTaxDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
@@ -13891,14 +13891,14 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.dtRPTDelinquenciesRowDeleting != null)) {
-                    this.dtRPTDelinquenciesRowDeleting(this, new dtRPTDelinquenciesRowChangeEvent(((dtRPTDelinquenciesRow)(e.Row)), e.Action));
+                if ((this.dtListOfRealPropertyTaxDelinquenciesRowDeleting != null)) {
+                    this.dtListOfRealPropertyTaxDelinquenciesRowDeleting(this, new dtListOfRealPropertyTaxDelinquenciesRowChangeEvent(((dtListOfRealPropertyTaxDelinquenciesRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovedtRPTDelinquenciesRow(dtRPTDelinquenciesRow row) {
+            public void RemovedtListOfRealPropertyTaxDelinquenciesRow(dtListOfRealPropertyTaxDelinquenciesRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -13925,7 +13925,7 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "dtRPTDelinquenciesDataTable";
+                attribute2.FixedValue = "dtListOfRealPropertyTaxDelinquenciesDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -24795,15 +24795,15 @@ namespace AccountingSystem {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class dtRPTDelinquenciesRow : global::System.Data.DataRow {
+        public partial class dtListOfRealPropertyTaxDelinquenciesRow : global::System.Data.DataRow {
             
-            private dtRPTDelinquenciesDataTable tabledtRPTDelinquencies;
+            private dtListOfRealPropertyTaxDelinquenciesDataTable tabledtListOfRealPropertyTaxDelinquencies;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal dtRPTDelinquenciesRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtListOfRealPropertyTaxDelinquenciesRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tabledtRPTDelinquencies = ((dtRPTDelinquenciesDataTable)(this.Table));
+                this.tabledtListOfRealPropertyTaxDelinquencies = ((dtListOfRealPropertyTaxDelinquenciesDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -24811,14 +24811,15 @@ namespace AccountingSystem {
             public string declarant {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDelinquencies.declarantColumn]));
+                        return ((string)(this[this.tabledtListOfRealPropertyTaxDelinquencies.declarantColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'declarant\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'declarant\' in table \'dtListOfRealPropertyTaxDelinquencies\' " +
+                                "is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.declarantColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.declarantColumn] = value;
                 }
             }
             
@@ -24827,30 +24828,32 @@ namespace AccountingSystem {
             public string lot_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDelinquencies.lot_noColumn]));
+                        return ((string)(this[this.tabledtListOfRealPropertyTaxDelinquencies.lot_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'lot_no\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'lot_no\' in table \'dtListOfRealPropertyTaxDelinquencies\' is " +
+                                "DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.lot_noColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.lot_noColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string td_no {
+            public string arp_no {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDelinquencies.td_noColumn]));
+                        return ((string)(this[this.tabledtListOfRealPropertyTaxDelinquencies.arp_noColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'td_no\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'arp_no\' in table \'dtListOfRealPropertyTaxDelinquencies\' is " +
+                                "DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.td_noColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.arp_noColumn] = value;
                 }
             }
             
@@ -24859,14 +24862,15 @@ namespace AccountingSystem {
             public decimal assessed_value {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'assessed_value\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'assessed_value\' in table \'dtListOfRealPropertyTaxDelinquenc" +
+                                "ies\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.assessed_valueColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.assessed_valueColumn] = value;
                 }
             }
             
@@ -24875,30 +24879,32 @@ namespace AccountingSystem {
             public decimal start_year {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.start_yearColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.start_yearColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'start_year\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'start_year\' in table \'dtListOfRealPropertyTaxDelinquencies\'" +
+                                " is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.start_yearColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.start_yearColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal basic_tax {
+            public decimal basic_tax_due {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.basic_taxColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_tax_dueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax_due\' in table \'dtListOfRealPropertyTaxDelinquenci" +
+                                "es\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.basic_taxColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_tax_dueColumn] = value;
                 }
             }
             
@@ -24907,30 +24913,32 @@ namespace AccountingSystem {
             public decimal basic_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.basic_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtListOfRealPropertyTaxDelinquenci" +
+                                "es\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.basic_penaltyColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_penaltyColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal sef_tax {
+            public decimal sef_tax_due {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.sef_taxColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_tax_dueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_tax_due\' in table \'dtListOfRealPropertyTaxDelinquencies" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.sef_taxColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_tax_dueColumn] = value;
                 }
             }
             
@@ -24939,14 +24947,15 @@ namespace AccountingSystem {
             public decimal sef_penalty {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.sef_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtListOfRealPropertyTaxDelinquencies" +
+                                "\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.sef_penaltyColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_penaltyColumn] = value;
                 }
             }
             
@@ -24955,14 +24964,15 @@ namespace AccountingSystem {
             public decimal total {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTDelinquencies.totalColumn]));
+                        return ((decimal)(this[this.tabledtListOfRealPropertyTaxDelinquencies.totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'total\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total\' in table \'dtListOfRealPropertyTaxDelinquencies\' is D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.totalColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.totalColumn] = value;
                 }
             }
             
@@ -24971,147 +24981,148 @@ namespace AccountingSystem {
             public string remarks {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRPTDelinquencies.remarksColumn]));
+                        return ((string)(this[this.tabledtListOfRealPropertyTaxDelinquencies.remarksColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'remarks\' in table \'dtRPTDelinquencies\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'remarks\' in table \'dtListOfRealPropertyTaxDelinquencies\' is" +
+                                " DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTDelinquencies.remarksColumn] = value;
+                    this[this.tabledtListOfRealPropertyTaxDelinquencies.remarksColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsdeclarantNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.declarantColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.declarantColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetdeclarantNull() {
-                this[this.tabledtRPTDelinquencies.declarantColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.declarantColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Islot_noNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.lot_noColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.lot_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setlot_noNull() {
-                this[this.tabledtRPTDelinquencies.lot_noColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.lot_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Istd_noNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.td_noColumn);
+            public bool Isarp_noNull() {
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.arp_noColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Settd_noNull() {
-                this[this.tabledtRPTDelinquencies.td_noColumn] = global::System.Convert.DBNull;
+            public void Setarp_noNull() {
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.arp_noColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isassessed_valueNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.assessed_valueColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.assessed_valueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setassessed_valueNull() {
-                this[this.tabledtRPTDelinquencies.assessed_valueColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.assessed_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isstart_yearNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.start_yearColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.start_yearColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setstart_yearNull() {
-                this[this.tabledtRPTDelinquencies.start_yearColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.start_yearColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbasic_taxNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.basic_taxColumn);
+            public bool Isbasic_tax_dueNull() {
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.basic_tax_dueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbasic_taxNull() {
-                this[this.tabledtRPTDelinquencies.basic_taxColumn] = global::System.Convert.DBNull;
+            public void Setbasic_tax_dueNull() {
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_tax_dueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isbasic_penaltyNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.basic_penaltyColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.basic_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setbasic_penaltyNull() {
-                this[this.tabledtRPTDelinquencies.basic_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.basic_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Issef_taxNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.sef_taxColumn);
+            public bool Issef_tax_dueNull() {
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.sef_tax_dueColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setsef_taxNull() {
-                this[this.tabledtRPTDelinquencies.sef_taxColumn] = global::System.Convert.DBNull;
+            public void Setsef_tax_dueNull() {
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_tax_dueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Issef_penaltyNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.sef_penaltyColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.sef_penaltyColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setsef_penaltyNull() {
-                this[this.tabledtRPTDelinquencies.sef_penaltyColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.sef_penaltyColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IstotalNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.totalColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.totalColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SettotalNull() {
-                this[this.tabledtRPTDelinquencies.totalColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.totalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsremarksNull() {
-                return this.IsNull(this.tabledtRPTDelinquencies.remarksColumn);
+                return this.IsNull(this.tabledtListOfRealPropertyTaxDelinquencies.remarksColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetremarksNull() {
-                this[this.tabledtRPTDelinquencies.remarksColumn] = global::System.Convert.DBNull;
+                this[this.tabledtListOfRealPropertyTaxDelinquencies.remarksColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -26786,22 +26797,22 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class dtRPTDelinquenciesRowChangeEvent : global::System.EventArgs {
+        public class dtListOfRealPropertyTaxDelinquenciesRowChangeEvent : global::System.EventArgs {
             
-            private dtRPTDelinquenciesRow eventRow;
+            private dtListOfRealPropertyTaxDelinquenciesRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesRowChangeEvent(dtRPTDelinquenciesRow row, global::System.Data.DataRowAction action) {
+            public dtListOfRealPropertyTaxDelinquenciesRowChangeEvent(dtListOfRealPropertyTaxDelinquenciesRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTDelinquenciesRow Row {
+            public dtListOfRealPropertyTaxDelinquenciesRow Row {
                 get {
                     return this.eventRow;
                 }
