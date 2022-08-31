@@ -267,5 +267,75 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
+
+
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear)
+        {
+            string taxYearQuery;
+
+            if (taxYear == null) taxYearQuery = string.Empty;
+            else taxYearQuery = $"AND year = {taxYear}";
+
+            var parameters = new object[][]
+            {
+                new object[] { "@owner_name", DbType.String, ownerName},
+                new object[] { "@posted_at", DbType.Date, asOfDate}
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear)
+        {
+            string taxYearQuery;
+
+            if (taxYear == null) taxYearQuery = string.Empty;
+            else taxYearQuery = $"AND year = {taxYear}";
+
+            var parameters = new object[][]
+            {
+                new object[] { "@barangay_name", DbType.String, barangayName},
+                new object[] { "@posted_at", DbType.Date, asOfDate.Date }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear)
+        {
+            string taxYearQuery;
+
+            if (taxYear == null) taxYearQuery = string.Empty;
+            else taxYearQuery = $"AND year = {taxYear}";
+
+            var parameters = new object[][]
+            {
+                new object[] { "@municipality_name", DbType.String, municipalityName},
+                new object[] { "@posted_at", DbType.Date, asOfDate.Date }
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE municipality_name = @municipality_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable Get_Grouped_Barangay_Records()
+        {
+            string query = $"SELECT barangay_name FROM {tableName} GROUP BY barangay_name";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable Get_Grouped_Municipality_Records()
+        {
+            string query = $"SELECT municipality_name FROM {tableName} GROUP BY municipality_name";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.Fill(query, dataTable);
+        }
     }
 }

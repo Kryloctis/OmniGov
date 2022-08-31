@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using ACC.Domain.Interfaces;
 using RPT.Domain.Models;
@@ -22,5 +23,12 @@ namespace RPT.Domain.Interfaces
         DataTable GetRecordsByArpNo(string arpNo);
 
         bool BulkInsert(List<RptAssessmentPostsModel> assessmentPostingModels);
+
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear);
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear);
+        DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear);
+
+        DataTable Get_Grouped_Barangay_Records();
+        DataTable Get_Grouped_Municipality_Records();
     }
 }
