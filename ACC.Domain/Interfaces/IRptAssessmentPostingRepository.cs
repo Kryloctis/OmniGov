@@ -28,6 +28,8 @@ namespace RPT.Domain.Interfaces
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_BarangayName_AsOfDate_TaxYear(string barangayName, DateTime asOfDate, int? taxYear);
         DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Municipality_AsOfDate_TaxYear(string municipalityName, DateTime asOfDate, int? taxYear);
 
+        DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate);
+
         DataTable Get_Grouped_Barangay_Records();
         DataTable Get_Grouped_Municipality_Records();
     }

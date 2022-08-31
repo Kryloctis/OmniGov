@@ -269,7 +269,6 @@ namespace ACC.Data
         }
 
 
-
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear)
         {
             string taxYearQuery;
@@ -336,6 +335,20 @@ namespace ACC.Data
             string query = $"SELECT municipality_name FROM {tableName} GROUP BY municipality_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.Fill(query, dataTable);
+        }
+
+        public DataTable Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(string barangayName, DateTime asOfDate)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@barangay_name", DbType.String, barangayName},
+                new object[] { "@posted_at", DbType.Date, asOfDate.Date}
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3)";
+            var dataTable = new DataTable();
+
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }

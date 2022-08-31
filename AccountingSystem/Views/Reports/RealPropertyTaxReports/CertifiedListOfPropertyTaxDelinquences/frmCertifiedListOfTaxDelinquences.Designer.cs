@@ -31,17 +31,16 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
+            this.cmbxBarangays = new System.Windows.Forms.ComboBox();
+            this.dtAsOf = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblReportStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -57,7 +56,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnRetrieve);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.cmbxBarangays);
             this.groupBox1.Controls.Add(this.dtAsOf);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -69,6 +68,25 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter";
             // 
+            // btnRetrieve
+            // 
+            this.btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRetrieve.Location = new System.Drawing.Point(426, 22);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(82, 23);
+            this.btnRetrieve.TabIndex = 5;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
+            // 
+            // cmbxBarangays
+            // 
+            this.cmbxBarangays.FormattingEnabled = true;
+            this.cmbxBarangays.Location = new System.Drawing.Point(70, 22);
+            this.cmbxBarangays.Name = "cmbxBarangays";
+            this.cmbxBarangays.Size = new System.Drawing.Size(165, 23);
+            this.cmbxBarangays.TabIndex = 4;
+            // 
             // dtAsOf
             // 
             this.dtAsOf.CustomFormat = "MMM dd, yyyy";
@@ -77,15 +95,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(120, 23);
             this.dtAsOf.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(254, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "As of";
             // 
             // label2
             // 
@@ -96,28 +105,17 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             this.label2.TabIndex = 3;
             this.label2.Text = "Barangay";
             // 
-            // comboBox1
+            // label1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(70, 22);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(165, 23);
-            this.comboBox1.TabIndex = 4;
-            // 
-            // btnRetrieve
-            // 
-            this.btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRetrieve.Location = new System.Drawing.Point(426, 22);
-            this.btnRetrieve.Name = "btnRetrieve";
-            this.btnRetrieve.Size = new System.Drawing.Size(82, 23);
-            this.btnRetrieve.TabIndex = 5;
-            this.btnRetrieve.Text = "Retrieve";
-            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(254, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "As of";
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblReportStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 617);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1141, 22);
@@ -133,11 +131,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             this.panel2.Size = new System.Drawing.Size(1141, 553);
             this.panel2.TabIndex = 2;
             // 
-            // lblReportStatus
+            // backgroundWorker1
             // 
-            this.lblReportStatus.Name = "lblReportStatus";
-            this.lblReportStatus.Size = new System.Drawing.Size(86, 17);
-            this.lblReportStatus.Text = "Report Status...";
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // frmCertifiedListOfTaxDelinquences
             // 
@@ -154,11 +153,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Collection/Payment > Certified List of Real Property Tax Delinquencies";
+            this.Load += new System.EventHandler(this.frmCertifiedListOfTaxDelinquences_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,10 +169,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
         private System.Windows.Forms.DateTimePicker dtAsOf;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxBarangays;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStripStatusLabel lblReportStatus;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
