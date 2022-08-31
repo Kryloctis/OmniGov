@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
     {
         private ReportViewer reportViewer;
         private DataTable dataTable;
-        private string _ownerName = string.Empty;
+        internal string _ownerName = string.Empty;
 
         public frmListOfRealPropertyTaxDelinquenciesReport()
         {
@@ -53,12 +53,16 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     btnFindTaxPayer.Visible = true;
                     cmbxBarangay.Visible = false;
                     cmbxMunicipality.Visible = false;
+                    taxPayerStatusStrip.Visible = true;
+                    _ownerName = string.Empty;
                     break;
 
                 case "Municipality":
                     cmbxMunicipality.Visible = true;
                     cmbxBarangay.Visible = false;
                     btnFindTaxPayer.Visible = false;
+                    taxPayerStatusStrip.Visible = false;
+                    _ownerName = string.Empty;
                     LoadMunicipalities();
                     break;
 
@@ -66,6 +70,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     cmbxBarangay.Visible = true;
                     btnFindTaxPayer.Visible = false;
                     cmbxMunicipality.Visible = false;
+                    taxPayerStatusStrip.Visible = false;
+                    _ownerName = string.Empty;
                     LoadBarangays();
                     break;
 
@@ -73,6 +79,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     btnFindTaxPayer.Visible = false;
                     cmbxBarangay.Visible = false;
                     cmbxMunicipality.Visible = false;
+                    taxPayerStatusStrip.Visible = false;
+                    _ownerName = string.Empty;
                     break;
             }
         }
@@ -92,6 +100,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         {
             try
             {
+                lblTaxPayerName.Text = _ownerName;
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 DateTime asOfDate = dtAsOf.Value.Date;
 
@@ -251,7 +260,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -270,6 +278,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         {         
             nudTaxYear.Maximum = dtAsOf.Value.Year;
             nudTaxYear.Value = dtAsOf.Value.Year;
+        }
+
+        private void btnFindTaxPayer_Click(object sender, EventArgs e)
+        {
+            _ = new frmTaxPayerList(this).ShowDialog();
         }
     }
 }

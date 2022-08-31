@@ -277,14 +277,13 @@ namespace ACC.Data
             if (taxYear == null) taxYearQuery = string.Empty;
             else taxYearQuery = $"AND year = {taxYear}";
 
-
             var parameters = new object[][]
             {
                 new object[] { "@owner_name", DbType.String, ownerName},
-                new object[] { "@posted_at", DbType.Date, asOfDate.Date }
+                new object[] { "@posted_at", DbType.Date, asOfDate}
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND posted_at <= @posted_at {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -296,14 +295,13 @@ namespace ACC.Data
             if (taxYear == null) taxYearQuery = string.Empty;
             else taxYearQuery = $"AND year = {taxYear}";
 
-
             var parameters = new object[][]
             {
                 new object[] { "@barangay_name", DbType.String, barangayName},
                 new object[] { "@posted_at", DbType.Date, asOfDate.Date }
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND posted_at <= @posted_at {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE barangay_name = @barangay_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -315,14 +313,13 @@ namespace ACC.Data
             if (taxYear == null) taxYearQuery = string.Empty;
             else taxYearQuery = $"AND year = {taxYear}";
 
-
             var parameters = new object[][]
             {
                 new object[] { "@municipality_name", DbType.String, municipalityName},
                 new object[] { "@posted_at", DbType.Date, asOfDate.Date }
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE municipality_name = @municipality_name AND posted_at <= @posted_at {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE municipality_name = @municipality_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }

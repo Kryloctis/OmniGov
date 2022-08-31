@@ -45,13 +45,15 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.taxPayerStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblTaxPayerName = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTaxYear)).BeginInit();
-            this.statusStrip2.SuspendLayout();
+            this.taxPayerStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -111,8 +113,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.cmbxLoadBy.Items.AddRange(new object[] {
             "Taxpayer",
             "Municipality",
-            "Barangay",
-            "Section"});
+            "Barangay"});
             this.cmbxLoadBy.Location = new System.Drawing.Point(58, 3);
             this.cmbxLoadBy.Name = "cmbxLoadBy";
             this.cmbxLoadBy.Size = new System.Drawing.Size(137, 23);
@@ -129,6 +130,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.btnFindTaxPayer.TabIndex = 15;
             this.btnFindTaxPayer.UseVisualStyleBackColor = true;
             this.btnFindTaxPayer.Visible = false;
+            this.btnFindTaxPayer.Click += new System.EventHandler(this.btnFindTaxPayer_Click);
             // 
             // cmbxMunicipality
             // 
@@ -211,28 +213,19 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 64);
+            this.panel2.Location = new System.Drawing.Point(0, 86);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(1141, 553);
+            this.panel2.Size = new System.Drawing.Size(1141, 531);
             this.panel2.TabIndex = 1;
             // 
             // statusStrip2
             // 
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel3});
             this.statusStrip2.Location = new System.Drawing.Point(0, 617);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(1141, 22);
             this.statusStrip2.TabIndex = 2;
             this.statusStrip2.Text = "statusStrip2";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(86, 17);
-            this.toolStripStatusLabel3.Text = "Report Status...";
             // 
             // backgroundWorker1
             // 
@@ -241,6 +234,32 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // taxPayerStatusStrip
+            // 
+            this.taxPayerStatusStrip.BackColor = System.Drawing.Color.Transparent;
+            this.taxPayerStatusStrip.Dock = System.Windows.Forms.DockStyle.Top;
+            this.taxPayerStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblTaxPayerName});
+            this.taxPayerStatusStrip.Location = new System.Drawing.Point(0, 64);
+            this.taxPayerStatusStrip.Name = "taxPayerStatusStrip";
+            this.taxPayerStatusStrip.Size = new System.Drawing.Size(1141, 22);
+            this.taxPayerStatusStrip.SizingGrip = false;
+            this.taxPayerStatusStrip.TabIndex = 3;
+            this.taxPayerStatusStrip.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(91, 17);
+            this.toolStripStatusLabel1.Text = "Taxpayer Name:";
+            // 
+            // lblTaxPayerName
+            // 
+            this.lblTaxPayerName.Name = "lblTaxPayerName";
+            this.lblTaxPayerName.Size = new System.Drawing.Size(17, 17);
+            this.lblTaxPayerName.Text = "--";
+            // 
             // frmListOfRealPropertyTaxDelinquenciesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -248,6 +267,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1141, 639);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.taxPayerStatusStrip);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(1157, 678);
@@ -260,8 +280,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.groupBox1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTaxYear)).EndInit();
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
+            this.taxPayerStatusStrip.ResumeLayout(false);
+            this.taxPayerStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,7 +292,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         internal System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -287,5 +306,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ComboBox cmbxMunicipality;
         private System.Windows.Forms.ComboBox cmbxBarangay;
+        private System.Windows.Forms.StatusStrip taxPayerStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblTaxPayerName;
     }
 }
