@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1253, 654);
             this.Controls.Add(this.panel1);
+            this.MinimizeBox = false;
             this.Name = "frmRptTaxDueBillReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

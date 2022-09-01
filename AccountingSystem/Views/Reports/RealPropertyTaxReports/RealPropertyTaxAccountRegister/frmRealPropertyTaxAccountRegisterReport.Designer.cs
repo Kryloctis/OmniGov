@@ -174,6 +174,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1157, 678);
             this.Name = "frmRealPropertyTaxAccountRegisterReport";
             this.ShowInTaskbar = false;

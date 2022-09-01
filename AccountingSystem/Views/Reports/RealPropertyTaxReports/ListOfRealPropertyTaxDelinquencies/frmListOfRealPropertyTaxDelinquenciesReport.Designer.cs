@@ -270,6 +270,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.Controls.Add(this.taxPayerStatusStrip);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.panel1);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1157, 678);
             this.Name = "frmListOfRealPropertyTaxDelinquenciesReport";
             this.ShowInTaskbar = false;

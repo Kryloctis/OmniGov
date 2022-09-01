@@ -51,6 +51,7 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRealPropeties = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -250,6 +251,7 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
+            this.menuRealPropeties,
             this.toolStripSeparator1,
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
@@ -374,6 +376,13 @@ namespace AccountingSystem
             this.menuReceipts.Size = new System.Drawing.Size(214, 22);
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
+            // 
+            // menuRealPropeties
+            // 
+            this.menuRealPropeties.Name = "menuRealPropeties";
+            this.menuRealPropeties.Size = new System.Drawing.Size(214, 22);
+            this.menuRealPropeties.Text = "Real Properties";
+            this.menuRealPropeties.Click += new System.EventHandler(this.menuRealPropeties_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1804,6 +1813,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem menuRealPropeties;
     }
 }
 

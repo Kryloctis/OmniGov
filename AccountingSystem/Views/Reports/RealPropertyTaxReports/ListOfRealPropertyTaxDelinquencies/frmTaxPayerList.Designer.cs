@@ -134,6 +134,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MinimizeBox = false;
             this.Name = "frmTaxPayerList";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
