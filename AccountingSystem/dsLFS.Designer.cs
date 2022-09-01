@@ -14801,18 +14801,18 @@ namespace AccountingSystem {
                         string owner_name, 
                         string owner_address, 
                         string classification, 
-                        string land_assessed_value, 
-                        string other_improvement_assessed_value, 
-                        string machinery_assessed_value, 
-                        string annual_tax, 
-                        string year, 
-                        string basic_tax, 
-                        string basic_penalty, 
-                        string basic_total, 
-                        string sef_tax, 
-                        string sef_penalty, 
-                        string sef_total, 
-                        string grand_total, 
+                        decimal land_assessed_value, 
+                        decimal other_improvement_assessed_value, 
+                        decimal machinery_assessed_value, 
+                        decimal annual_tax, 
+                        int year, 
+                        decimal basic_tax, 
+                        decimal basic_penalty, 
+                        decimal basic_total, 
+                        decimal sef_tax, 
+                        decimal sef_penalty, 
+                        decimal sef_total, 
+                        decimal grand_total, 
                         string remarks) {
                 dtCertListOfAllRptDelinquencesRow rowdtCertListOfAllRptDelinquencesRow = ((dtCertListOfAllRptDelinquencesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -14885,29 +14885,29 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnowner_address);
                 this.columnclassification = new global::System.Data.DataColumn("classification", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnclassification);
-                this.columnland_assessed_value = new global::System.Data.DataColumn("land_assessed_value", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnland_assessed_value = new global::System.Data.DataColumn("land_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnland_assessed_value);
-                this.columnother_improvement_assessed_value = new global::System.Data.DataColumn("other_improvement_assessed_value", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnother_improvement_assessed_value = new global::System.Data.DataColumn("other_improvement_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnother_improvement_assessed_value);
-                this.columnmachinery_assessed_value = new global::System.Data.DataColumn("machinery_assessed_value", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnmachinery_assessed_value = new global::System.Data.DataColumn("machinery_assessed_value", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmachinery_assessed_value);
-                this.columnannual_tax = new global::System.Data.DataColumn("annual_tax", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnannual_tax = new global::System.Data.DataColumn("annual_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnannual_tax);
-                this.columnyear = new global::System.Data.DataColumn("year", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnyear = new global::System.Data.DataColumn("year", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnyear);
-                this.columnbasic_tax = new global::System.Data.DataColumn("basic_tax", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnbasic_tax = new global::System.Data.DataColumn("basic_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasic_tax);
-                this.columnbasic_penalty = new global::System.Data.DataColumn("basic_penalty", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnbasic_penalty = new global::System.Data.DataColumn("basic_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasic_penalty);
-                this.columnbasic_total = new global::System.Data.DataColumn("basic_total", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnbasic_total = new global::System.Data.DataColumn("basic_total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasic_total);
-                this.columnsef_tax = new global::System.Data.DataColumn("sef_tax", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsef_tax = new global::System.Data.DataColumn("sef_tax", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_tax);
-                this.columnsef_penalty = new global::System.Data.DataColumn("sef_penalty", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsef_penalty = new global::System.Data.DataColumn("sef_penalty", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_penalty);
-                this.columnsef_total = new global::System.Data.DataColumn("sef_total", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsef_total = new global::System.Data.DataColumn("sef_total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsef_total);
-                this.columngrand_total = new global::System.Data.DataColumn("grand_total", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columngrand_total = new global::System.Data.DataColumn("grand_total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngrand_total);
                 this.columnremarks = new global::System.Data.DataColumn("remarks", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnremarks);
@@ -26346,10 +26346,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string land_assessed_value {
+            public decimal land_assessed_value {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.land_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'land_assessed_value\' in table \'dtCertListOfAllRptDelinquenc" +
@@ -26363,10 +26363,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string other_improvement_assessed_value {
+            public decimal other_improvement_assessed_value {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.other_improvement_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'other_improvement_assessed_value\' in table \'dtCertListOfAll" +
@@ -26380,10 +26380,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string machinery_assessed_value {
+            public decimal machinery_assessed_value {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.machinery_assessed_valueColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'machinery_assessed_value\' in table \'dtCertListOfAllRptDelin" +
@@ -26397,10 +26397,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string annual_tax {
+            public decimal annual_tax {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.annual_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.annual_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'annual_tax\' in table \'dtCertListOfAllRptDelinquences\' is DB" +
@@ -26414,10 +26414,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string year {
+            public int year {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.yearColumn]));
+                        return ((int)(this[this.tabledtCertListOfAllRptDelinquences.yearColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'year\' in table \'dtCertListOfAllRptDelinquences\' is DBNull.", e);
@@ -26430,10 +26430,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string basic_tax {
+            public decimal basic_tax {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.basic_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'basic_tax\' in table \'dtCertListOfAllRptDelinquences\' is DBN" +
@@ -26447,10 +26447,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string basic_penalty {
+            public decimal basic_penalty {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'basic_penalty\' in table \'dtCertListOfAllRptDelinquences\' is" +
@@ -26464,10 +26464,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string basic_total {
+            public decimal basic_total {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.basic_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.basic_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'basic_total\' in table \'dtCertListOfAllRptDelinquences\' is D" +
@@ -26481,10 +26481,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sef_tax {
+            public decimal sef_tax {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.sef_taxColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_taxColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'sef_tax\' in table \'dtCertListOfAllRptDelinquences\' is DBNul" +
@@ -26498,10 +26498,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sef_penalty {
+            public decimal sef_penalty {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_penaltyColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'sef_penalty\' in table \'dtCertListOfAllRptDelinquences\' is D" +
@@ -26515,10 +26515,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string sef_total {
+            public decimal sef_total {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.sef_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.sef_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'sef_total\' in table \'dtCertListOfAllRptDelinquences\' is DBN" +
@@ -26532,10 +26532,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string grand_total {
+            public decimal grand_total {
                 get {
                     try {
-                        return ((string)(this[this.tabledtCertListOfAllRptDelinquences.grand_totalColumn]));
+                        return ((decimal)(this[this.tabledtCertListOfAllRptDelinquences.grand_totalColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'grand_total\' in table \'dtCertListOfAllRptDelinquences\' is D" +
