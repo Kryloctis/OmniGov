@@ -37,7 +37,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -102,6 +105,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblRecordCount});
             this.statusStrip1.Location = new System.Drawing.Point(0, 446);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(879, 22);
@@ -128,6 +134,18 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.dataGridView1.Size = new System.Drawing.Size(871, 382);
             this.dataGridView1.TabIndex = 0;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel1.Text = "Record:";
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
+            // 
             // frmRealProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -144,6 +162,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.Load += new System.EventHandler(this.frmRealProperties_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -161,5 +181,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnSynchronize;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
     }
 }

@@ -10,12 +10,17 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
 {
-    public partial class frmAddRealProperties : Form
+    public partial class frmEditRealProperties : Form
     {
-        public frmAddRealProperties()
+        public frmEditRealProperties()
         {
             Helper.LoadFormIcon(this);
             InitializeComponent();
+        }
+
+        private void ucRealProperties1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
