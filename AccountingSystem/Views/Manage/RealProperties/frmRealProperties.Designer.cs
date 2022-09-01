@@ -136,7 +136,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
+            this.MinimizeBox = false;
             this.Name = "frmRealProperties";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Real Properties";
             this.Load += new System.EventHandler(this.frmRealProperties_Load);
             this.toolStrip1.ResumeLayout(false);
