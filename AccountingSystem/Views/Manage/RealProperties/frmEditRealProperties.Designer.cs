@@ -77,8 +77,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
             // 
             // frmEditRealProperties
             // 
+            this.AcceptButton = this.btnUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(715, 462);
             this.Controls.Add(this.ucRealProperties1);
             this.Controls.Add(this.flowLayoutPanel1);

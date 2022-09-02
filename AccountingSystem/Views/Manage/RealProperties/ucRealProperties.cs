@@ -16,5 +16,21 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             InitializeComponent();
         }
+
+        private void LoadPropertyKind() 
+        {
+            var dict = new Dictionary<string, string>();
+
+            dict.Add("1", "Land");
+            dict.Add("2", "Building");
+            dict.Add("3", "Machinery");
+
+            cmbxPropertyKind.DataSource = new BindingSource(dict.Values, null);
+        }
+
+        private void ucRealProperties_Load(object sender, EventArgs e)
+        {
+            LoadPropertyKind();
+        }
     }
 }
