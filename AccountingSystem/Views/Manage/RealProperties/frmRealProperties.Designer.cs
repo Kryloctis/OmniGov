@@ -35,10 +35,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.btnSynchronize = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -71,6 +71,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnAdd.Size = new System.Drawing.Size(33, 47);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -81,6 +82,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnEdit.Size = new System.Drawing.Size(32, 47);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -91,6 +93,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnDelete.Size = new System.Drawing.Size(44, 47);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSynchronize
             // 
@@ -102,6 +105,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnSynchronize.Size = new System.Drawing.Size(102, 47);
             this.btnSynchronize.Text = "Synchronize Data";
             this.btnSynchronize.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSynchronize.Click += new System.EventHandler(this.btnSynchronize_Click);
             // 
             // statusStrip1
             // 
@@ -113,6 +117,18 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.statusStrip1.Size = new System.Drawing.Size(879, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
+            this.toolStripStatusLabel1.Text = "Record:";
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
             // 
             // panel1
             // 
@@ -133,18 +149,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(871, 382);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(47, 17);
-            this.toolStripStatusLabel1.Text = "Record:";
-            // 
-            // lblRecordCount
-            // 
-            this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            this.lblRecordCount.Text = "0";
             // 
             // frmRealProperties
             // 
