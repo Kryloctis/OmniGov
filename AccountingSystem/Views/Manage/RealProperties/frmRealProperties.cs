@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void frmRealProperties_Load(object sender, EventArgs e)
         {
-
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
