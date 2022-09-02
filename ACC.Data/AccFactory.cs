@@ -9,6 +9,7 @@ namespace AccountingSystem
     {
         private static MySqlGenericCommands mySqlGenericCommandsLFS = new MySqlGenericCommands("LocalFinanceInstance");
         public static byte UserId = 2;
+
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -67,7 +68,6 @@ namespace AccountingSystem
 
         public static ISubFPPRepository SubFPPRepository() => new SubFPPRepository(mySqlGenericCommandsLFS);
 
-
         //A part of Budget System
         public static IBudgetAppropriationsRepository BudgetAppropriationsRepository() => new BudgetAppropriationsRepository(mySqlGenericCommandsLFS, SupplementalAppropriationsRepository());
 
@@ -114,8 +114,11 @@ namespace AccountingSystem
         public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(mySqlGenericCommandsLFS);
 
         public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(mySqlGenericCommandsLFS);
+
         public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(mySqlGenericCommandsLFS);
+
         public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(mySqlGenericCommandsLFS);
+
         public static IFaceValueRepository FaceValueRepository() => new FaceValueRepository(mySqlGenericCommandsLFS);
 
         public static ISignatories SignatoriesRepository() => new SignatoriesRepository(mySqlGenericCommandsLFS, SignatoriesHasReferencesRepository());
@@ -143,5 +146,7 @@ namespace AccountingSystem
         public static IRptTaxDuesRepository RptTaxDuesRepository() => new RptTaxDuesRepository(mySqlGenericCommandsLFS);
 
         public static IRptPaymentPostsRepository RptPaymentPostsRepository() => new RptPaymentPostsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());
+
+        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS);
     }
 }

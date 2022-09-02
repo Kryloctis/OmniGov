@@ -7,5 +7,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRealPropertiesRepository : IRepository<RealPropertiesModel>
     {
+        bool CompleteArpNoExist(string completeArpNo);
+        bool CompleteArpNoExist(string completeArpNo, int Id);
     }
 }
