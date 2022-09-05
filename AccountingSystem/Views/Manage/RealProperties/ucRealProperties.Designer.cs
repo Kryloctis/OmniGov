@@ -419,6 +419,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.cmbxPropertyKind.Name = "cmbxPropertyKind";
             this.cmbxPropertyKind.Size = new System.Drawing.Size(216, 23);
             this.cmbxPropertyKind.TabIndex = 7;
+            this.cmbxPropertyKind.SelectedValueChanged += new System.EventHandler(this.cmbxPropertyKind_SelectedValueChanged);
             // 
             // label13
             // 

@@ -43,16 +43,29 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         internal void ResetForm()
         {
-            foreach (Control control in Controls.OfType<TextBox>())
-            {
-                control.Text = string.Empty;
-            }
+            if (isEdit)
+                realPropertiesId = 0;
 
-            foreach (NumericUpDown control in Controls.OfType<NumericUpDown>())
-            {
-                control.Value = decimal.MinValue;
-            }
-
+            txtArpNo.Clear();
+            txtPropertyPin.Clear();
+            txtBarangay.Clear();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
+            nudEffectivityQuarter.Value = 1;
+            nudEffectivityYear.Value = Helper.GetCurrentDate().Year;
+            nudAssessedValue.Value = 0;
+            nudGrYear.Value = 0;
+            nudOtherImprv.Value = 0;
+            nudArea.Value = 0;
+            txtLotNo.Clear();
+            txtOwnerName.Clear();
+            txtOwnerTin.Clear();
+            txtOwnerAddress.Clear();
+            txtOwnerContact.Clear();
+            txtClassificationCode.Clear();
+            txtClassificationName.Clear();
+            txtActualUseCode.Clear();
+            txtActualUseName.Clear();
             cmbxPropertyKind.SelectedIndex = 0;
             chckTaxable.Checked = false;
             chckCancelled.Checked = false;
@@ -249,5 +262,30 @@ namespace AccountingSystem.Views.Manage.RealProperties
         }
 
         #endregion Validations
+
+        private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string propertyKind = cmbxPropertyKind.Text;
+
+            switch (propertyKind)
+            {
+                case "Land":
+                    nudOtherImprv.Enabled = true;
+                    txtLotNo.Enabled = true;
+                    nudArea.Enabled = true;
+                    break;
+                case "Building":
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = true;
+                    break;
+
+                default:
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = false;
+                    break;
+            }
+        }
     }
 }
