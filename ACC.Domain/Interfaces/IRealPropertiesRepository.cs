@@ -9,5 +9,7 @@ namespace ACC.Domain.Interfaces
     {
         bool CompleteArpNoExist(string completeArpNo);
         bool CompleteArpNoExist(string completeArpNo, int Id);
+        bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels);
+        string GetLastInsertedId();
     }
 }
