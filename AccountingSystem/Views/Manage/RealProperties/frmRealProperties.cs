@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
                 HelperLoadRecords.RealPropertiesDatagridView(dataGridView1, dtRealProperties);
                 lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dataGridView1).ToString();
+                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
@@ -51,8 +52,48 @@ namespace AccountingSystem.Views.Manage.RealProperties
             ShowEditRealPropertiesForm();
         }
 
+        private bool Delete() 
+        {
+            try
+            {
+                var realPropertiesModelList = new List<RealPropertiesModel>();
+                int rowCount = dataGridView1.SelectedRows.Count;
+
+                if(Helper.MessageBoxConfirmDelete(rowCount))
+                {               
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        int realPropertiesId = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new RealPropertiesModel() { Id = realPropertiesId };
+                        realPropertiesModelList.Add(model);
+                    }
+
+                    return AccFactory.RealPropertiesRepository().Delete(realPropertiesModelList);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (Delete())
+            {
+                Helper.MessageBoxSuccess("Real Properties has been deleted.");
+                LoadRealProperties();
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Delete())
+            {
+                Helper.MessageBoxSuccess("Real Properties has been deleted.");
+                LoadRealProperties();
+            }
         }
 
         #region  Synchronize
@@ -185,11 +226,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowEditRealPropertiesForm();
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

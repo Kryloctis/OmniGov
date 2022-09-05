@@ -24,7 +24,22 @@ namespace ACC.Data
 
         public bool Delete(List<RealPropertiesModel> entityList)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (RealPropertiesModel realPropertiesModel in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                        new object[] { "@id", DbType.Int32, realPropertiesModel.Id}
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
