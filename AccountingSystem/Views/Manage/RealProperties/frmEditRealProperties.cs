@@ -21,14 +21,38 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             Helper.LoadFormIcon(this);
             _frmRealProperties = frmRealProperties;
-            _realPropertiesId = realPropertiesId;
-            uc = ucRealProperties1;
+            _realPropertiesId = realPropertiesId;           
             InitializeComponent();
+            uc = ucRealProperties1;
         }
 
-        private void ucRealProperties1_Load(object sender, EventArgs e)
+        private void LoadSelectedRealProperties() 
         {
-            uc.isEdit = true;
+            var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(_realPropertiesId);
+
+            uc.txtArpNo.Text = dictRealProperties["complete_arp_no"];
+            uc.txtPropertyPin.Text = dictRealProperties["property_pin"];
+            uc.txtBarangay.Text = dictRealProperties["barangay_name"];
+            uc.txtMunicipality.Text = dictRealProperties["municipality_name"];
+            uc.txtProvince.Text = dictRealProperties["province_name"];
+            uc.cmbxPropertyKind.SelectedText = dictRealProperties["property_kind"];
+            uc.nudEffectivityQuarter.Value = Convert.ToInt32(dictRealProperties["effectivity_quarter"]);
+            uc.nudEffectivityYear.Value = Convert.ToInt32(dictRealProperties["effectivity_year"]);
+            uc.nudAssessedValue.Value = Convert.ToDecimal(dictRealProperties["assessed_value"]);
+            uc.nudGrYear.Value = Convert.ToDecimal(dictRealProperties["gr_year"]);
+            uc.nudOtherImprv.Value = Convert.ToDecimal(dictRealProperties["other_improvements"]);
+            uc.nudArea.Value = Convert.ToDecimal(dictRealProperties["area"]);
+            uc.txtLotNo.Text = dictRealProperties["lot_no"];
+            uc.txtOwnerName.Text = dictRealProperties["owner_name"];
+            uc.txtOwnerTin.Text = dictRealProperties["owner_tin"];
+            uc.txtOwnerAddress.Text = dictRealProperties["owner_address"];
+            uc.txtOwnerContact.Text = dictRealProperties["owner_contact"];
+            uc.txtClassificationCode.Text = dictRealProperties["classification_code"];
+            uc.txtClassificationName.Text = dictRealProperties["classification_name"];
+            uc.txtActualUseCode.Text = dictRealProperties["actual_use_code"];
+            uc.txtActualUseName.Text = dictRealProperties["actual_use_name"];
+            uc.chckTaxable.Checked = Convert.ToBoolean(Convert.ToByte(dictRealProperties["is_taxable"]));
+            uc.chckCancelled.Checked = Convert.ToBoolean(Convert.ToByte(dictRealProperties["is_cancelled"]));
         }
 
         private bool Save() 
@@ -87,6 +111,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 _frmRealProperties.LoadRealProperties();
                 Close();
             }
+        }
+
+        private void frmEditRealProperties_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = true;
+            LoadSelectedRealProperties();
         }
     }
 }

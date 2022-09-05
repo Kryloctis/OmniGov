@@ -35,12 +35,20 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRealProperties().ShowDialog();
+            _ = new frmAddRealProperties(this).ShowDialog();
+        }
+
+        private void ShowEditRealPropertiesForm() 
+        {
+            int rowIndex = dataGridView1.CurrentRow.Index;
+            int realPropertiesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
+
+            _ = new frmEditRealProperties(realPropertiesId, this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmEditRealProperties().ShowDialog();
+            ShowEditRealPropertiesForm();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -176,7 +184,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmEditRealProperties().ShowDialog();
+            ShowEditRealPropertiesForm();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)

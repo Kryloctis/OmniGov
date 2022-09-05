@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.ucRealProperties1.Name = "ucRealProperties1";
             this.ucRealProperties1.Size = new System.Drawing.Size(715, 433);
             this.ucRealProperties1.TabIndex = 0;
-            this.ucRealProperties1.Load += new System.EventHandler(this.ucRealProperties1_Load);
             // 
             // flowLayoutPanel1
             // 
@@ -92,6 +91,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Real Properties";
+            this.Load += new System.EventHandler(this.frmEditRealProperties_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
