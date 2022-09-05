@@ -258,5 +258,12 @@ namespace RPT.Data
 
             return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
+
+        public DataTable GetViewPropertyAssessmentPostingRecords()
+        {
+            string query = $"SELECT * FROM {viewPropertAssessmentPosting}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsRPT.Fill(query, dataTable);
+        }
     }
 }

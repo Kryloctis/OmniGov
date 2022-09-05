@@ -9,6 +9,39 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region Real Properties
+
+        public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        {
+            var selectedColumns = new string[]{"id", "property_identifier", "complete_arp_no", "property_kind", "property_pin", "owner_name", "owner_tin", "owner_address", "owner_contact", "barangay_name", "municipality_name", "province_name", "assessed_value"};
+
+            var dataView = new DataView(dataTable);
+
+            dataGridView.DataSource = dataView.ToTable(false, selectedColumns);
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["property_identifier"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["property_pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["owner_tin"].HeaderText = "Owner TIN";
+            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["owner_contact"].Visible = false;
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
+            dataGridView.Columns["province_name"].HeaderText = "Province";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        #endregion
+
         #region Payment History
 
         public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable) 
