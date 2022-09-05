@@ -10,6 +10,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
     public partial class ucRealProperties : UserControl
     {
         internal bool isEdit = false;
+        internal int realPropertiesId = 0;
 
         public ucRealProperties()
         {
@@ -75,9 +76,39 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         #region Validations
 
+        private bool ArpNoValidated() 
+        {
+            try
+            {
+                string arpNo = txtArpNo.Text.Trim();
+                bool arpNoExist;
+
+                if (isEdit)
+                    arpNoExist = AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo, realPropertiesId);
+                else
+                    arpNoExist = AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
+
+                if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No."))
+                    return false;
+                else if (arpNoExist)
+                {
+                    errorProvider1.SetError(txtArpNo, "ARP No. already exist.");
+                    return false;
+                }
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+
         private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No.");
+            e.Cancel = !ArpNoValidated();
         }
 
         private void txtArpNo_Validated(object sender, EventArgs e)

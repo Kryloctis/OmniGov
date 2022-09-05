@@ -116,6 +116,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private void frmEditRealProperties_Load(object sender, EventArgs e)
         {
             uc.isEdit = true;
+            uc.realPropertiesId = _realPropertiesId;
             LoadSelectedRealProperties();
         }
     }

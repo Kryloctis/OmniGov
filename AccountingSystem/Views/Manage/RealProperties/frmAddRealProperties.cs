@@ -69,8 +69,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real Property has been saved.");
-                _frmRealProperties.LoadRealProperties();
                 uc.ResetForm();
+                _frmRealProperties.LoadRealProperties();          
             }
         }
 
