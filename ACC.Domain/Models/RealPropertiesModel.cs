@@ -28,7 +28,7 @@ namespace ACC.Domain.Models
         public string ClassificationName { get; set; }
         public string  ActualUseCode { get; set; }
         public string ActualUseName { get; set; }
-        public decimal GrYear { get; set; }
+        public int GrYear { get; set; }
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
     }

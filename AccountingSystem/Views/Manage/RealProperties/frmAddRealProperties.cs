@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -23,7 +24,36 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     Helper.MessageBoxError(uc.GetFormError());
                     return false;
                 }
-                return true;
+
+                var realPropertiesModel = new RealPropertiesModel()
+                {
+                    PropertyIdentifier = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
+                    CompleteArpNo = uc.txtArpNo.Text.Trim(),
+                    Pin = uc.txtPropertyPin.Text.Trim(),
+                    OwnerName = uc.txtOwnerName.Text.Trim(),
+                    OwnerTin = uc.txtOwnerTin.Text.Trim(),
+                    OwnerAddress = uc.txtOwnerAddress.Text.Trim(),
+                    OwnerContact = uc.txtOwnerContact.Text.Trim(),
+                    BarangayName = uc.txtBarangay.Text.Trim(),
+                    MunicipalityName = uc.txtMunicipality.Text.Trim(),
+                    ProvinceName = uc.txtProvince.Text.Trim(),
+                    PropertyKind = uc.cmbxPropertyKind.Text.Trim(),
+                    EffectivityQuarter = (int)uc.nudEffectivityQuarter.Value,
+                    EffectivityYear = (int)uc.nudEffectivityYear.Value,
+                    OtherImprovements = uc.nudOtherImprv.Value,
+                    AssessedValue = uc.nudAssessedValue.Value,
+                    Area = uc.nudArea.Value,
+                    LotNo = uc.txtLotNo.Text.Trim(),
+                    ClassificationCode = uc.txtClassificationCode.Text.Trim(),
+                    ClassificationName = uc.txtClassificationName.Text.Trim(),
+                    ActualUseCode = uc.txtActualUseCode.Text.Trim(),
+                    ActualUseName = uc.txtActualUseName.Text.Trim(),
+                    GrYear = (int)uc.nudGrYear.Value,
+                    IsTaxable = uc.chckTaxable.Checked,
+                    IsCancelled = uc.chckCancelled.Checked
+                };
+
+               return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
             }
             catch (Exception ex)
             {

@@ -77,7 +77,7 @@ namespace ACC.Data
                 new object[] { "@gr_year", DbType.Int32, entity.GrYear},
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable},
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled}
-            };
+            };    
 
             string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled)";
 
