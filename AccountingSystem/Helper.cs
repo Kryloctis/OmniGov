@@ -824,6 +824,30 @@ namespace AccountingSystem
             }
         }
 
+        public static void EnableDisableToolStripMenuItems(DataGridView dgv, ToolStripMenuItem tsBtnEdit, ToolStripMenuItem tsBtnDelete)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                tsBtnEdit.Enabled = true;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+
+            }
+            else if (SelectedRows > 1)
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+            }
+            else
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = false;
+                tsBtnDelete.Text = "Delete";
+            }
+        }
+
         #endregion
 
         public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)

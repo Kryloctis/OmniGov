@@ -47,9 +47,7 @@ namespace ACC.Data
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
-        }
-
-        
+        }      
 
         public bool Insert(RealPropertiesModel entity)
         {

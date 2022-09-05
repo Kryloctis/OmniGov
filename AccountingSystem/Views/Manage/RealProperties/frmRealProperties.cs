@@ -16,9 +16,21 @@ namespace AccountingSystem.Views.Manage.RealProperties
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
+        internal void LoadRealProperties() 
+        {
+            try
+            {
+                var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
+                HelperLoadRecords.RealPropertiesDatagridView(dataGridView1, dtRealProperties);
+                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dataGridView1).ToString();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
         private void frmRealProperties_Load(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            LoadRealProperties();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -35,11 +47,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
         }
 
+        #region  Synchronize
+
         private void btnSynchronize_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync();
         }
-
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -132,11 +145,43 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             if (toolStripProgressBar1.Value == 100)
             {
+                LoadRealProperties();
                 lblProgressStatus.Text = "Done.";
                 Helper.MessageBoxSuccess("Real Properties has been synchronized");
                 lblProgressStatus.Visible = false;
                 toolStripProgressBar1.Visible = false;
             }
+        }
+
+        #endregion
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dataGridView1, btnEdit, btnDelete);
+            Helper.EnableDisableToolStripMenuItems(dataGridView1, updateToolStripMenuItem, deleteToolStripMenuItem);
+        }
+
+        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex > -1 && e.Button == MouseButtons.Right)
+            {
+                contextMenuStrip1.Show(MousePosition);
+            }
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadRealProperties();
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmEditRealProperties().ShowDialog();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
