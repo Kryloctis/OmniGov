@@ -7,12 +7,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
     public partial class frmAddRealProperties : Form
     {
         private ucRealProperties uc;
+        private readonly frmRealProperties _frmRealProperties;
 
-        public frmAddRealProperties()
+        public frmAddRealProperties(frmRealProperties frmRealProperties)
         {
             Helper.LoadFormIcon(this);
             InitializeComponent();
             uc = ucRealProperties1;
+            _frmRealProperties = frmRealProperties;
         }
 
         private bool Save()
@@ -67,7 +69,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real Property has been saved.");
+                _frmRealProperties.LoadRealProperties();
+                uc.ResetForm();
             }
+        }
+
+        private void frmAddRealProperties_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = false;
         }
     }
 }
