@@ -552,16 +552,20 @@ namespace AccountingSystem
             datagrid.Columns.Clear();
 
             datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
-            datagrid.Columns.Add("accountable_form", "Accountable Form");
+
+            datagrid.Columns.Add("acc_form_no", "Form Code");
+            datagrid.Columns.Add("acc_form_desc", "Form Description");
             datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
             datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
-            datagrid.Columns.Add("date_issued", "Date Issued");
             datagrid.Columns.Add("quantity", "Quantity");
-            datagrid.Columns.Add("last_issued", "Last Issued No.");
+            datagrid.Columns.Add("date_issued", "Date Issued");
+            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
+            datagrid.Columns.Add("issued_by", "User/Officer");
+
             datagrid.Columns.Add("returned", "Returned");
             datagrid.Columns.Add("returned_date", "Returned Date");
-            datagrid.Columns.Add("issued_by", "User/Officer");
+
+            datagrid.Columns.Add("last_issued", "Last Issued No.");
 
 
             datagrid.Columns["id"].Visible = false;
@@ -584,7 +588,6 @@ namespace AccountingSystem
 
             datagrid.Columns["collecting_officer"].Width = 150;
             datagrid.Columns["quantity"].Width = 80;
-            datagrid.Columns["accountable_form"].Width = 300;
             datagrid.Columns["issued_by"].Width = 150;
 
             string collectingOfficer;
@@ -609,7 +612,7 @@ namespace AccountingSystem
                     row["date_issued"],
                     row["quantity"],
                     row["last_issued"],
-                    row["returned"],
+                    row["is_returned"],
                     row["returned_date"],
                     row["issued_by"]
                 });

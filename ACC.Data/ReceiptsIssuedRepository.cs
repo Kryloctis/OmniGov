@@ -111,14 +111,16 @@ namespace ACC.Data
                             $"job_orders_mid_initial, " +
                             $"job_orders_last_name, " +
                             $"job_orders_suffix, " +
+                            $"acc_form_no, " +
+                            $"acc_form_desc, " +
                             $"accountable_forms, " +
                             $"receipt_issued_from, " +
                             $"receipt_issued_to, " +
-                            $"date_issued,  " +
-                            $"quantity,  " +
-                            $"last_issued,  " +
-                            $"IF(IFNULL(is_returned,0) > 0, 'Yes', 'No') AS returned,  " +
-                            $"returned_date,  " +
+                            $"date_issued, " +
+                            $"quantity, " +
+                            $"last_issued, " +
+                            $"is_returned, " +
+                            $"returned_date, " +
                             $"issued_by  " +
                             $"FROM {viewTableName} " +
                             $"WHERE is_returned = false " +
