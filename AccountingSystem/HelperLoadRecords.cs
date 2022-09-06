@@ -550,9 +550,11 @@ namespace AccountingSystem
         {
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
+            DataGridViewCheckBoxColumn col = new DataGridViewCheckBoxColumn();
+            col.HeaderText = "Returned";
+            col.Name = "Returned";
 
             datagrid.Columns.Add("id", "ID");
-
             datagrid.Columns.Add("acc_form_no", "Form Code");
             datagrid.Columns.Add("acc_form_desc", "Form Description");
             datagrid.Columns.Add("serial_number_from", "Serial Number From");
@@ -562,7 +564,7 @@ namespace AccountingSystem
             datagrid.Columns.Add("date_issued", "Date Issued");
             datagrid.Columns.Add("collecting_officer", "Issued To");
             datagrid.Columns.Add("issued_by", "Issued By");
-            datagrid.Columns.Add("returned", "Returned");
+            datagrid.Columns.Add(col);
             datagrid.Columns.Add("returned_date", "Returned Date");
 
 
@@ -573,7 +575,7 @@ namespace AccountingSystem
             datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMM  dd, yyyy";
             datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
 
-            datagrid.Columns["acc_form_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["acc_form_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns["acc_form_desc"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -597,15 +599,11 @@ namespace AccountingSystem
             datagrid.Columns["serial_number_from"].Width = 150;
             datagrid.Columns["serial_number_to"].Width = 150;
             datagrid.Columns["last_issued"].Width = 85;
-
-
             datagrid.Columns["returned_date"].Width = 150;
             datagrid.Columns["returned_date"].Width = 150;
             datagrid.Columns["collecting_officer"].Width = 150;
             datagrid.Columns["quantity"].Width = 60;
             datagrid.Columns["returned"].Width = 85;
-
-
             datagrid.Columns["issued_by"].Width = 150;
 
             datagrid.EnableHeadersVisualStyles = false;
@@ -635,7 +633,7 @@ namespace AccountingSystem
                     row["date_issued"],
                     collectingOfficer,
                     row["issued_by"],
-                    row["is_returned"],
+                    Convert.ToBoolean(row["is_returned"]),
                     row["returned_date"],
                 });
             }

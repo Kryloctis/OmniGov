@@ -119,7 +119,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-            
             int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
             string lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? string.Empty : dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString();
           

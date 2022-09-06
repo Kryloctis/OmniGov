@@ -122,14 +122,13 @@ namespace ACC.Data
                             $"is_returned, " +
                             $"returned_date, " +
                             $"issued_by  " +
-                            $"FROM {viewTableName} " +
-                            $"WHERE is_returned = false " +
+                            $"FROM {viewTableName} " +  
                             $"ORDER BY date_issued DESC";
 
-                
             var dtri = new DataTable();
             return _dbGenericCommands.Fill(query, dtri);
         }
+
 
         public DataTable GetIssuedReceiptToCollector(int collectorId, int accountableFormId)
         {
