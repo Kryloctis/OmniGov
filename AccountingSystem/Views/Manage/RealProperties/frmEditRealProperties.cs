@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -21,12 +14,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             Helper.LoadFormIcon(this);
             _frmRealProperties = frmRealProperties;
-            _realPropertiesId = realPropertiesId;           
+            _realPropertiesId = realPropertiesId;
             InitializeComponent();
             uc = ucRealProperties1;
         }
 
-        private void LoadSelectedRealProperties() 
+        private void LoadSelectedRealProperties()
         {
             var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(_realPropertiesId);
 
@@ -55,7 +48,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             uc.chckCancelled.Checked = Convert.ToBoolean(Convert.ToByte(dictRealProperties["is_cancelled"]));
         }
 
-        private string GetPropertyKind() 
+        private string GetPropertyKind()
         {
             string propertyKind = uc.cmbxPropertyKind.Text.Trim();
 
@@ -63,16 +56,19 @@ namespace AccountingSystem.Views.Manage.RealProperties
             {
                 case "Land":
                     return "L";
+
                 case "Building":
                     return "B";
+
                 case "Machinery":
                     return "M";
+
                 default:
                     return string.Empty;
             }
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {
@@ -122,7 +118,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(Save())
+            if (Save())
             {
                 Helper.MessageBoxSuccess("Real Property has been updated.");
                 _frmRealProperties.LoadRealProperties();

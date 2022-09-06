@@ -1,13 +1,8 @@
 ﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies
@@ -29,21 +24,21 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             nudTaxYear.Value = Helper.GetCurrentDate().Year;
         }
 
-        private void LoadBarangays() 
+        private void LoadBarangays()
         {
             var dtBarangays = AccFactory.RptAssessmentPostsRepository().Get_Grouped_Barangay_Records();
             cmbxBarangay.DataSource = dtBarangays;
             cmbxBarangay.DisplayMember = "barangay_name";
         }
 
-        private void LoadMunicipalities() 
+        private void LoadMunicipalities()
         {
             var dtMunicipalities = AccFactory.RptAssessmentPostsRepository().Get_Grouped_Municipality_Records();
             cmbxMunicipality.DataSource = dtMunicipalities;
             cmbxMunicipality.DisplayMember = "municipality_name";
         }
 
-        private void ShowHideButtons() 
+        private void ShowHideButtons()
         {
             string selectedLoadBy = cmbxLoadBy.Text.Trim();
 
@@ -85,10 +80,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             }
         }
 
-        private void chkbxTaxYear_CheckedChanged(object sender, EventArgs e) => nudTaxYear.Enabled = chkbxTaxYear.Checked; 
+        private void chkbxTaxYear_CheckedChanged(object sender, EventArgs e) => nudTaxYear.Enabled = chkbxTaxYear.Checked;
 
-        private void cmbxLoadBy_SelectedValueChanged(object sender, EventArgs e) =>  ShowHideButtons();
-   
+        private void cmbxLoadBy_SelectedValueChanged(object sender, EventArgs e) => ShowHideButtons();
+
         private void frmListOfRealPropertyTaxDelinquenciesReport_Load(object sender, EventArgs e)
         {
             nudTaxYear.Enabled = chkbxTaxYear.Checked;
@@ -96,7 +91,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         #region LoadReport
 
-        private bool LoadReport(LocalReport localReport) 
+        private bool LoadReport(LocalReport localReport)
         {
             try
             {
@@ -209,7 +204,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
                     decimal basicPenalty = 0;
                     decimal sefPenalty = 0;
-      
+
                     string rowClassificationCode = row["classification_code"].ToString();
 
                     #region Tax Due
@@ -219,7 +214,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                     decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
                     decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
-                    #endregion
+                    #endregion Tax Due
 
                     decimal total = basicTaxDueAmount + sefTaxDueAmount + basicPenalty + sefPenalty;
 
@@ -233,9 +228,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
                         basicPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                         sefPenalty = GetPenalty(rowArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
 
-                        #endregion
+                        #endregion Penalty
                     }
-
 
                     newRow["declarant"] = rowOwnerName;
                     newRow["lot_no"] = rowLotNo;
@@ -267,7 +261,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             LoadReport(reportViewer.LocalReport);
         }
 
-        #endregion
+        #endregion LoadReport
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
@@ -275,7 +269,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         }
 
         private void dtAsOf_ValueChanged(object sender, EventArgs e)
-        {         
+        {
             nudTaxYear.Maximum = dtAsOf.Value.Year;
             nudTaxYear.Value = dtAsOf.Value.Year;
         }

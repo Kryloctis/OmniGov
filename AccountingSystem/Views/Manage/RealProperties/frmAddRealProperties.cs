@@ -25,10 +25,13 @@ namespace AccountingSystem.Views.Manage.RealProperties
             {
                 case "Land":
                     return "L";
+
                 case "Building":
                     return "B";
+
                 case "Machinery":
                     return "M";
+
                 default:
                     return string.Empty;
             }
@@ -72,7 +75,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     IsCancelled = uc.chckCancelled.Checked
                 };
 
-               return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
+                return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
             }
             catch (Exception ex)
             {
@@ -87,7 +90,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             {
                 Helper.MessageBoxSuccess("Real Property has been saved.");
                 uc.ResetForm();
-                _frmRealProperties.LoadRealProperties();          
+                _frmRealProperties.LoadRealProperties();
             }
         }
 

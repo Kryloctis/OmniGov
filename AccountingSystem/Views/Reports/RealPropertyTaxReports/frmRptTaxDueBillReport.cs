@@ -1,16 +1,9 @@
-﻿using AccountingSystem.Views.Transactions.PaymentPosting;
-using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+﻿using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting.frmPropertyTaxDue;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 {
@@ -31,7 +24,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             _dtRPTDueBill = dtRPTDueBill;
         }
 
-        private string GetSignatories(Dictionary<string, string> keyValuePairs) 
+        private string GetSignatories(Dictionary<string, string> keyValuePairs)
         {
             if (keyValuePairs.Values.Count < 1)
                 return string.Empty;
@@ -39,7 +32,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             return keyValuePairs["signatories_full_name"];
         }
 
-        private void LoadReport(LocalReport report) 
+        private void LoadReport(LocalReport report)
         {
             try
             {

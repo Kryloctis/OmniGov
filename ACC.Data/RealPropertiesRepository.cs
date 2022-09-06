@@ -93,7 +93,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName} ORDER BY owner_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -287,7 +287,7 @@ namespace ACC.Data
                     return "AND barangay_name = @barangay_name";
             }
 
-            string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayQuery()}";
+            string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY owner_name ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
