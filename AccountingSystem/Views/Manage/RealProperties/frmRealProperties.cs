@@ -16,16 +16,77 @@ namespace AccountingSystem.Views.Manage.RealProperties
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
         }
 
-        internal void LoadRealProperties() 
+        private DataTable RealPropertiesDataTable()
+        {
+            var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
+            var dataTable = new DataTable();
+            var selectedColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("property_identifier", typeof(string)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("property_kind", typeof(string)),
+                new DataColumn("property_pin", typeof(string)),
+                new DataColumn("owner_name", typeof(string)),
+                new DataColumn("owner_tin", typeof(string)),
+                new DataColumn("owner_address", typeof(string)),
+                new DataColumn("owner_contact", typeof(string)),
+                new DataColumn("barangay_name", typeof(string)),
+                new DataColumn("municipality_name", typeof(string)),
+                new DataColumn("province_name", typeof(string)),
+                new DataColumn("assessed_value", typeof(decimal)),
+                new DataColumn("is_cancelled", typeof(bool))
+            };
+            dataTable.Columns.AddRange(selectedColumns);
+
+            foreach (DataRow row in dtRealProperties.Rows)
+            {
+                int rowId = Convert.ToInt32(row["id"]);
+
+                var newRow = dataTable.NewRow();
+                string rowPropertyIdentifier = row["property_identifier"].ToString();
+                string rowCompleteArpNo = row["complete_arp_no"].ToString();
+                string rowPropertyKind = row["property_kind"].ToString();
+                string rowPropertyPin = row["property_pin"].ToString();
+                string rowOwnerName = row["owner_name"].ToString();
+                string rowOwnerTin = row["owner_tin"].ToString();
+                string rowOwnerAddress = row["owner_address"].ToString();
+                string rowOwnerContact = row["owner_contact"].ToString();
+                string rowBarangayName = row["barangay_name"].ToString();
+                string rowMunicipalityName = row["municipality_name"].ToString();
+                string rowProvinceName = row["province_name"].ToString();
+                decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
+                bool rowIsCancelled = Convert.ToBoolean(row["is_cancelled"]);
+
+                newRow["property_identifier"] = rowPropertyIdentifier;
+                newRow["complete_arp_no"] = rowCompleteArpNo;
+                newRow["property_kind"] = rowPropertyKind;
+                newRow["property_pin"] = rowPropertyPin;
+                newRow["owner_name"] = rowOwnerName;
+                newRow["owner_tin"] = rowOwnerTin;
+                newRow["owner_address"] = rowOwnerAddress;
+                newRow["owner_contact"] = rowOwnerContact;
+                newRow["barangay_name"] = rowBarangayName;
+                newRow["municipality_name"] = rowMunicipalityName;
+                newRow["province_name"] = rowProvinceName;
+                newRow["assessed_value"] = rowAssessedValue;
+                newRow["is_cancelled"] = rowIsCancelled;
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        internal void LoadRealProperties()
         {
             try
             {
-                var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
-                HelperLoadRecords.RealPropertiesDatagridView(dataGridView1, dtRealProperties);
+                HelperLoadRecords.RealPropertiesDatagridView(dataGridView1, RealPropertiesDataTable());
                 lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dataGridView1).ToString();
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmRealProperties_Load(object sender, EventArgs e)
@@ -39,7 +100,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             _ = new frmAddRealProperties(this).ShowDialog();
         }
 
-        private void ShowEditRealPropertiesForm() 
+        private void ShowEditRealPropertiesForm()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
             int realPropertiesId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
@@ -52,15 +113,15 @@ namespace AccountingSystem.Views.Manage.RealProperties
             ShowEditRealPropertiesForm();
         }
 
-        private bool Delete() 
+        private bool Delete()
         {
             try
             {
                 var realPropertiesModelList = new List<RealPropertiesModel>();
                 int rowCount = dataGridView1.SelectedRows.Count;
 
-                if(Helper.MessageBoxConfirmDelete(rowCount))
-                {               
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
                     foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                     {
                         int realPropertiesId = Convert.ToInt32(row.Cells["id"].Value);
@@ -96,7 +157,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
         }
 
-        #region  Synchronize
+        #region Synchronize
 
         private void btnSynchronize_Click(object sender, EventArgs e)
         {
@@ -202,7 +263,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
         }
 
-        #endregion
+        #endregion Synchronize
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -226,6 +287,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowEditRealPropertiesForm();
+        }
+
+        private void dataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
         }
     }
 }

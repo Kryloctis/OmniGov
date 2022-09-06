@@ -33,6 +33,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.chckBxAll = new System.Windows.Forms.CheckBox();
             this.dgProperties = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtBarangay = new System.Windows.Forms.TextBox();
             this.txtYear = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -116,6 +116,15 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1031, 31);
             this.panel1.TabIndex = 17;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(804, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(219, 15);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Note: Make sure to post previous year/s.";
             // 
             // label1
             // 
@@ -334,17 +343,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.bgwLoadAsessmentPosts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwLoadAsessmentPosts_ProgressChanged);
             this.bgwLoadAsessmentPosts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwLoadAsessmentPosts_RunWorkerCompleted);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(804, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 15);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Note: Make sure to post previous year/s.";
-            // 
             // frmAssessmentPosting
             // 
+            this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;

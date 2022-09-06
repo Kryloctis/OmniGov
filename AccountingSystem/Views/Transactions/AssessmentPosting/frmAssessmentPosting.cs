@@ -4,11 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.AssessmentPosting
@@ -24,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Helper.LoadFormIcon(this);
             lblPostedAt.Text = string.Empty;
             lblPostingAssessments.Visible = false;
-            prgrsBarPostingAssessments.Visible = false;        
+            prgrsBarPostingAssessments.Visible = false;
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
@@ -50,17 +46,24 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Load AssessmentPosts
 
-        private DataColumn[] AssessmentPostsDataColumns() 
+        private DataColumn[] AssessmentPostsDataColumns()
         {
             var dataColumns = new DataColumn[]
             {
                 new DataColumn("is_checked", typeof(bool)),
                 new DataColumn("posting_status", typeof(string)),
                 new DataColumn("real_properties_id", typeof(int)),
+                new DataColumn("property_identifier", typeof(string)),     
+                new DataColumn("pin", typeof(string)),             
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("owner_name", typeof(string)),
+                new DataColumn("owner_tin", typeof(string)),
+                new DataColumn("owner_contact", typeof(string)),
                 new DataColumn("owner_address", typeof(string)),
                 new DataColumn("property_kind", typeof(string)),
+                new DataColumn("barangay_name", typeof(string)),
+                new DataColumn("municipality_name", typeof(string)),
+                new DataColumn("province_name", typeof(string)),
                 new DataColumn("effectivity_quarter", typeof(int)),
                 new DataColumn("effectivity_year", typeof(int)),
                 new DataColumn("assessed_value", typeof(decimal)),
@@ -73,6 +76,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("actual_use_name", typeof(string)),
                 new DataColumn("gr_year", typeof(int)),
                 new DataColumn("is_taxable", typeof(bool)),
+                new DataColumn("is_cancelled", typeof(bool)),
                 new DataColumn("penalty_rate", typeof(decimal)),
                 new DataColumn("penalty_frequency", typeof(string)),
                 new DataColumn("basic_rate", typeof(decimal)),
@@ -119,10 +123,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
         }
 
-        private void GetParameters(ref int year, ref int barangayId, ref string searchText)
+        private void GetParameters(ref int year, ref string barangayName, ref string searchText)
         {
+            lblRecordCount.Text = "0";
             year = (int)nudYear.Value;
-            barangayId = Convert.ToInt32(cmbxBarangays.SelectedValue);
+            barangayName = cmbxBarangays.Text;
             searchText = txtSearch.Text.Trim();
         }
 
@@ -143,7 +148,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 int totalRowCount = 0;
                 int rowCount = 0;
                 int year = 0;
-                int barangayId = 0;
+                string barangayName = string.Empty;
                 string searchText = string.Empty;
 
                 assessmentPostsDataTable = new DataTable();
@@ -151,10 +156,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                 Invoke((MethodInvoker)delegate
                 {
-                    GetParameters(ref year, ref barangayId, ref searchText);
+                    GetParameters(ref year, ref barangayName, ref searchText);
                 });
 
-                var dtViewRealProperties = RptFactory.RealPropertiesRepository().GetPropertiesBy_Quarter_Year_BarangayId_Search(year, barangayId, searchText);
+                var dtViewRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(year, barangayName, searchText);
 
                 foreach (DataRow row in dtViewRealProperties.Rows)
                 {
@@ -166,38 +171,42 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     totalRowCount += 1;
                 }
 
-
                 foreach (DataRow row in dtViewRealProperties.Rows)
                 {
                     var newRow = assessmentPostsDataTable.NewRow();
 
-                    int rowId = Convert.ToInt32(row["real_properties_id"]);
                     string rowCompleteArpNo = row["complete_arp_no"].ToString();
                     int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
                     if (leastAssessedYear > year && leastAssessedYear != 0)
                         continue;
-
+                    string rowPin = row["property_pin"].ToString();
+                    string rowPropertyIdentifier = row["property_identifier"].ToString();
+                    int rowRealPropertiesId = Convert.ToInt32(row["id"]);
                     string rowOwnerName = row["owner_name"].ToString();
+                    string rowOwnerTin = row["owner_tin"].ToString();
+                    string rowOwnerContact = row["owner_contact"].ToString();
                     string rowOwnerAddress = row["owner_address"].ToString();
+                    string rowBarangayName = row["barangay_name"].ToString();
+                    string rowMunicipalityName = row["municipality_name"].ToString();
+                    string rowProvinceName = row["province_name"].ToString();
                     string rowPropertyKind = row["property_kind"].ToString();
-                    int landBldgMachPropertiesId = Convert.ToInt32(row["land_bldg_mach_properties_id"]);
                     int rowEffectivityQuarter = Convert.ToInt32(row["effectivity_quarter"]);
                     int rowEffectivityYear = Convert.ToInt32(row["effectivity_year"]);
                     bool rowIsTaxable = Convert.ToBoolean(row["is_taxable"]);
+                    bool rowIsCancelled = Convert.ToBoolean(row["is_cancelled"]);
                     decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
-                    decimal area = Convert.ToDecimal(row["land_area"]);
-                    string lotNo = row["land_lot_no"].ToString();
-                    decimal otherImprovements = Convert.ToDecimal(row["other_improvements"]);
+                    decimal rowArea = Convert.ToDecimal(row["area"]);
+                    string rowLotNo = row["lot_no"].ToString();
+                    decimal rowOtherImprovements = Convert.ToDecimal(row["other_improvements"]);
                     string rowClassificationCode = row["classification_code"].ToString();
                     string rowClassificationName = row["classification_name"].ToString();
                     string rowActualCode = row["actual_use_code"].ToString();
                     string rowActualName = row["actual_use_name"].ToString();
-                    int rowGrYear = Convert.ToInt32(row["gryear"]);
+                    int rowGrYear = Convert.ToInt32(row["gr_year"]);
 
                     var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
                     string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : string.Empty;
                     string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, year, "posted_at");
-
 
                     decimal rowPenaltyRate = 0;
                     string rowPenaltyFrequency = string.Empty;
@@ -205,25 +214,33 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     decimal rowSefRate = 0;
                     string rowPostedBy = PostedBy(rowCompleteArpNo);
 
+                    newRow["real_properties_id"] = rowRealPropertiesId;
                     newRow["is_checked"] = false;
                     newRow["posting_status"] = rowPostingStatus;
-                    newRow["real_properties_id"] = rowId;
+                    newRow["pin"] = rowPin;
                     newRow["complete_arp_no"] = rowCompleteArpNo;
+                    newRow["property_identifier"] = rowPropertyIdentifier;
                     newRow["owner_name"] = rowOwnerName;
+                    newRow["owner_tin"] = rowOwnerTin;
+                    newRow["owner_contact"] = rowOwnerContact;
                     newRow["owner_address"] = rowOwnerAddress;
                     newRow["property_kind"] = rowPropertyKind;
+                    newRow["barangay_name"] = rowBarangayName;
+                    newRow["municipality_name"] = rowMunicipalityName;
+                    newRow["province_name"] = rowProvinceName;
                     newRow["effectivity_quarter"] = rowEffectivityQuarter;
                     newRow["effectivity_year"] = rowEffectivityYear;
                     newRow["assessed_value"] = rowAssessedValue;
-                    newRow["area"] = area;
-                    newRow["lot_no"] = lotNo;
-                    newRow["other_improvements"] = otherImprovements;
+                    newRow["area"] = rowArea;
+                    newRow["lot_no"] = rowLotNo;
+                    newRow["other_improvements"] = rowOtherImprovements;
                     newRow["classification_code"] = rowClassificationCode;
                     newRow["classification_name"] = rowClassificationName;
                     newRow["actual_use_code"] = rowActualCode;
                     newRow["actual_use_name"] = rowActualName;
                     newRow["gr_year"] = rowGrYear;
                     newRow["is_taxable"] = rowIsTaxable;
+                    newRow["is_cancelled"] = rowIsCancelled;
                     newRow["penalty_rate"] = rowPenaltyRate;
                     newRow["penalty_frequency"] = rowPenaltyFrequency;
                     newRow["basic_rate"] = rowBasicRate;
@@ -260,7 +277,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Cursor = Cursors.Default;
         }
 
-        #endregion
+        #endregion Load AssessmentPosts
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
@@ -295,7 +312,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return dataGridView.Rows[rowIndex].Cells[columnName].Value;
         }
 
-        private decimal GetTaxRate(string description) 
+        private decimal GetTaxRate(string description)
         {
             var dicTaxRate = AccFactory.RptTaxRatesRepository().GetRecordByDescription(description);
             decimal taxRate = 0;
@@ -306,7 +323,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return taxRate;
         }
 
-        private void EnableDisableToolStripButton(DataGridView dataGridView, ToolStripButton post) 
+        private void EnableDisableToolStripButton(DataGridView dataGridView, ToolStripButton post)
         {
             try
             {
@@ -325,7 +342,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         postedCount += 1;
                     else
                         unpostedCount += 1;
-
                 }
 
                 if (unpostedCount > 0)
@@ -341,7 +357,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);    
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -354,26 +370,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
         #region Posting
-
-        private string GetViewRealPropertyRecord(int realPropertiesId, string parameter)
-        {
-            var dictViewRealProperty = RptFactory.RealPropertiesRepository().GetViewRealPropertiesById(realPropertiesId);
-
-            if (dictViewRealProperty.Values.Count == 0)
-                return string.Empty;
-
-            return dictViewRealProperty[parameter];
-        }
-
-        private string GetRealPropertyRecord(int realPropertiesId, string parameter)
-        {
-            var dictRealProperties = RptFactory.RealPropertiesRepository().GetRecordByID(realPropertiesId);
-
-            if (dictRealProperties.Values.Count == 0)
-                return string.Empty;
-
-            return dictRealProperties[parameter];
-        }
 
         private string GetPenaltyRecord(string description, string parameters)
         {
@@ -409,28 +405,34 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     string postingStatus = dgvRow.Cells["posting_status"].Value.ToString();
                     if (isChecked && string.IsNullOrEmpty(postingStatus))
                     {
-                        int realPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
-                        string completeArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
-                        string ownerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_name");
-                        string ownerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_address");
-                        string propertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
-                        int effectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
-                        int effectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
-                        decimal otherImprovements = GetDatagridViewValue(dgProperties, dgvRow.Index, "other_improvements");
-                        decimal assessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
-                        decimal totalArea = GetDatagridViewValue(dgProperties, dgvRow.Index, "area");
-                        string LotNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "lot_no");
-                        string classificationCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_code");
-                        string classificationName = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_name");
-                        string actualUseCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_code");
-                        string actualUseName = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_name");
-                        int grYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "gr_year");
-                        bool isTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
-                        int year = Convert.ToInt32(txtYear.Text);
+                        int rowRealPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
+                        string rowPropertyIdentifier = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_identifier");
+                        string rowCompleteArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
+                        string rowPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
+                        string rowOwnerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_name");
+                        string rowOwnerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_tin");
+                        string rowOwnerContact = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_contact");
+                        string rowOwnerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_address");
+                        string rowBarangayName = GetDatagridViewValue(dgProperties, dgvRow.Index, "barangay_name");
+                        string rowMunicipalityName = GetDatagridViewValue(dgProperties, dgvRow.Index, "municipality_name");
+                        string rowProvinceName = GetDatagridViewValue(dgProperties, dgvRow.Index, "province_name");
+                        string rowPropertyKind = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_kind");
+                        int rowEffectiviyQuarter = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_quarter");
+                        int rowEffectivityYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "effectivity_year");
+                        decimal rowOtherImprovements = GetDatagridViewValue(dgProperties, dgvRow.Index, "other_improvements");
+                        decimal rowAssessedValue = GetDatagridViewValue(dgProperties, dgvRow.Index, "assessed_value");
+                        decimal rowTotalArea = GetDatagridViewValue(dgProperties, dgvRow.Index, "area");
+                        string rowLotNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "lot_no");
+                        string rowClassificationCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_code");
+                        string rowClassificationName = GetDatagridViewValue(dgProperties, dgvRow.Index, "classification_name");
+                        string rowActualUseCode = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_code");
+                        string rowActualUseName = GetDatagridViewValue(dgProperties, dgvRow.Index, "actual_use_name");
+                        int rowGrYear = GetDatagridViewValue(dgProperties, dgvRow.Index, "gr_year");
+                        bool rowIsTaxable = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_taxable");
+                        int rowYear = Convert.ToInt32(txtYear.Text);
 
                         //Get Penalty and Tax Rates
                         var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
-
 
                         decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate")) ? 0 :
                                                                    Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
@@ -438,39 +440,39 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         decimal basicRate = GetTaxRate("Basic");
                         decimal sefRate = GetTaxRate("Special Educational Fund");
                         DateTime postedAt = DateTime.Now;
-                        bool isCancelled = Convert.ToBoolean(Convert.ToInt32((GetRealPropertyRecord(realPropertiesId, "is_cancelled"))));
+                        bool rowIsCancelled = GetDatagridViewValue(dgProperties, dgvRow.Index, "is_cancelled");
 
                         var assessmentPostingModel = new RptAssessmentPostsModel()
                         {
-                            propertyIdentifier = GetRealPropertyRecord(realPropertiesId, "property_identifier"),
-                            CompleteArpNo = completeArpNo,
-                            PropertyPin = GetViewRealPropertyRecord(realPropertiesId, "pin"),
-                            OwnerName = ownerName,
-                            OwnerTin = GetRealPropertyRecord(realPropertiesId, "owner_tin"),
-                            OwnerAddress = ownerAddress,
-                            OwnerContact = GetRealPropertyRecord(realPropertiesId, "owner_contact"),
-                            BarangayName = GetViewRealPropertyRecord(realPropertiesId, "barangay_name"),
-                            MunicipalityName = GetViewRealPropertyRecord(realPropertiesId, "municipality_name"),
-                            ProvinceName = GetViewRealPropertyRecord(realPropertiesId, "province_name"),
-                            PropertyKind = propertyKind,
-                            EffectivityQuarter = effectiviyQuarter,
-                            EffectivityYear = effectivityYear,
-                            AssessedValue = assessedValue,
-                            Area = totalArea,
-                            LotNo = LotNo,
-                            OtherImprovements = otherImprovements,
-                            ClassificationCode = classificationCode,
-                            ClassificationName = classificationName,
-                            ActualUseCode = actualUseCode,
-                            ActualUseName = actualUseName,
-                            GrYear = grYear,
-                            IsTaxable = isTaxable,
-                            IsCancelled = isCancelled,
+                            propertyIdentifier =rowPropertyIdentifier,
+                            CompleteArpNo = rowCompleteArpNo,
+                            PropertyPin = rowPin,
+                            OwnerName = rowOwnerName,
+                            OwnerTin = rowOwnerTin,
+                            OwnerAddress = rowOwnerAddress,
+                            OwnerContact = rowOwnerContact,
+                            BarangayName = rowBarangayName,
+                            MunicipalityName = rowMunicipalityName,
+                            ProvinceName = rowProvinceName,
+                            PropertyKind = rowPropertyKind,
+                            EffectivityQuarter = rowEffectiviyQuarter,
+                            EffectivityYear = rowEffectivityYear,
+                            AssessedValue = rowAssessedValue,
+                            Area = rowTotalArea,
+                            LotNo = rowLotNo,
+                            OtherImprovements = rowOtherImprovements,
+                            ClassificationCode = rowClassificationCode,
+                            ClassificationName = rowClassificationName,
+                            ActualUseCode = rowActualUseCode,
+                            ActualUseName = rowActualUseName,
+                            GrYear = rowGrYear,
+                            IsTaxable = rowIsTaxable,
+                            IsCancelled = rowIsCancelled,
                             PenaltyRate = penaltyRate,
                             PenaltyFrequency = penaltyFrequency,
                             BasicRate = basicRate,
                             SefRate = sefRate,
-                            Year = year,
+                            Year = rowYear,
                             PostedAt = postedAt,
                             PostedBy = Helper.UserId
                         };
@@ -511,10 +513,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 lblPostingAssessments.Visible = false;
                 prgrsBarPostingAssessments.Visible = false;
             }
+        }
 
-        } 
-
-        #endregion
+        #endregion Posting
 
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
@@ -540,7 +541,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
-        {         
+        {
             LoadProperties();
         }
     }

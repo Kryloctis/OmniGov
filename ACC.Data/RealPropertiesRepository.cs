@@ -93,7 +93,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName} ORDER BY owner_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -268,6 +268,29 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, owner_name = @owner_name, owner_tin = @owner_tin, owner_address = @owner_address, owner_contact = @owner_contact, barangay_name = @barangay_name, municipality_name = @municipality_name, province_name = @province_name, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, classification_code = @classification_code, classification_name = @classification_name, actual_use_code = @actual_use_code, actual_use_name = @actual_use_name, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled WHERE complete_arp_no = @complete_arp_no";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@effectivity_year", DbType.Int32, effectivityYear},
+                new object[] { "@barangay_name", DbType.String, barangay},
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string BarangayQuery() 
+            {
+                if (barangay == "All")
+                    return string.Empty;
+                else
+                    return "AND barangay_name = @barangay_name";
+            }
+
+            string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY owner_name ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

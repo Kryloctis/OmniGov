@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -89,7 +88,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         #region Validations
 
-        private bool ArpNoValidated() 
+        private bool ArpNoValidated()
         {
             try
             {
@@ -117,7 +116,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
             return false;
         }
-
 
         private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
@@ -274,6 +272,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     txtLotNo.Enabled = true;
                     nudArea.Enabled = true;
                     break;
+
                 case "Building":
                     nudOtherImprv.Enabled = false;
                     txtLotNo.Enabled = false;
