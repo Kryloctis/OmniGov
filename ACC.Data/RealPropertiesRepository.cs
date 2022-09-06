@@ -269,5 +269,28 @@ namespace ACC.Data
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@effectivity_year", DbType.Int32, effectivityYear},
+                new object[] { "@barangay_name", DbType.String, barangay},
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string BarangayQuery() 
+            {
+                if (barangay == "All")
+                    return string.Empty;
+                else
+                    return "AND barangay_name = @barangay_name";
+            }
+
+            string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayQuery()}";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
     }
 }
