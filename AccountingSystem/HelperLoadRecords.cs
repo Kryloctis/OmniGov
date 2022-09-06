@@ -555,40 +555,61 @@ namespace AccountingSystem
 
             datagrid.Columns.Add("acc_form_no", "Form Code");
             datagrid.Columns.Add("acc_form_desc", "Form Description");
-            datagrid.Columns.Add("receipt_number_from", "Receipt No. From");
-            datagrid.Columns.Add("receipt_number_to", "Receipt No. To");
+            datagrid.Columns.Add("serial_number_from", "Serial Number From");
+            datagrid.Columns.Add("serial_number_to", "Serial Number To");
+            datagrid.Columns.Add("last_issued", "Last Used");
             datagrid.Columns.Add("quantity", "Quantity");
             datagrid.Columns.Add("date_issued", "Date Issued");
-            datagrid.Columns.Add("collecting_officer", "Collecting Officer");
-            datagrid.Columns.Add("issued_by", "User/Officer");
-
+            datagrid.Columns.Add("collecting_officer", "Issued To");
+            datagrid.Columns.Add("issued_by", "Issued By");
             datagrid.Columns.Add("returned", "Returned");
             datagrid.Columns.Add("returned_date", "Returned Date");
 
-            datagrid.Columns.Add("last_issued", "Last Issued No.");
-
 
             datagrid.Columns["id"].Visible = false;
-
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Format = "D7";
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["serial_number_to"].DefaultCellStyle.Format = "D7";
             datagrid.Columns["last_issued"].DefaultCellStyle.Format = "D7";
+            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMM  dd, yyyy";
+            datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMM dd, yyyy";
 
+            datagrid.Columns["acc_form_no"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["acc_form_desc"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_from"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_to"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["serial_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            datagrid.Columns["date_issued"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-            datagrid.Columns["returned_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
-            datagrid.Columns["receipt_number_from"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            datagrid.Columns["receipt_number_to"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["date_issued"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["date_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["quantity"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["last_issued"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["returned"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["returned_date"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["returned_date"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            datagrid.Columns["acc_form_no"].Width = 45;
+            datagrid.Columns["acc_form_desc"].Width = 250;
+            datagrid.Columns["serial_number_from"].Width = 150;
+            datagrid.Columns["serial_number_to"].Width = 150;
+            datagrid.Columns["last_issued"].Width = 85;
+
+
+            datagrid.Columns["returned_date"].Width = 150;
+            datagrid.Columns["returned_date"].Width = 150;
             datagrid.Columns["collecting_officer"].Width = 150;
-            datagrid.Columns["quantity"].Width = 80;
+            datagrid.Columns["quantity"].Width = 60;
+            datagrid.Columns["returned"].Width = 85;
+
+
             datagrid.Columns["issued_by"].Width = 150;
+
+            datagrid.EnableHeadersVisualStyles = false;
+            datagrid.ColumnHeadersHeight = 35;
 
             string collectingOfficer;
 
@@ -605,16 +626,17 @@ namespace AccountingSystem
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
-                    collectingOfficer,
-                    row["accountable_forms"],
+                    row["acc_form_no"],
+                    row["acc_form_desc"],
                     issuedSerialNumberFrom,
                     issuedSerialNumberTo,
-                    row["date_issued"],
-                    row["quantity"],
                     row["last_issued"],
+                    row["quantity"],
+                    row["date_issued"],
+                    collectingOfficer,
+                    row["issued_by"],
                     row["is_returned"],
                     row["returned_date"],
-                    row["issued_by"]
                 });
             }
 
