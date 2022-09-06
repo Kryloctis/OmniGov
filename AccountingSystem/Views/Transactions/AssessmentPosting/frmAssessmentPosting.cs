@@ -4,11 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.AssessmentPosting
@@ -24,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Helper.LoadFormIcon(this);
             lblPostedAt.Text = string.Empty;
             lblPostingAssessments.Visible = false;
-            prgrsBarPostingAssessments.Visible = false;        
+            prgrsBarPostingAssessments.Visible = false;
         }
 
         private void frmAssessmentPosting_Load(object sender, EventArgs e)
@@ -50,7 +45,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Load AssessmentPosts
 
-        private DataColumn[] AssessmentPostsDataColumns() 
+        private DataColumn[] AssessmentPostsDataColumns()
         {
             var dataColumns = new DataColumn[]
             {
@@ -166,7 +161,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     totalRowCount += 1;
                 }
 
-
                 foreach (DataRow row in dtViewRealProperties.Rows)
                 {
                     var newRow = assessmentPostsDataTable.NewRow();
@@ -197,7 +191,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
                     string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : string.Empty;
                     string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, year, "posted_at");
-
 
                     decimal rowPenaltyRate = 0;
                     string rowPenaltyFrequency = string.Empty;
@@ -260,7 +253,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             Cursor = Cursors.Default;
         }
 
-        #endregion
+        #endregion Load AssessmentPosts
 
         private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
@@ -295,7 +288,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return dataGridView.Rows[rowIndex].Cells[columnName].Value;
         }
 
-        private decimal GetTaxRate(string description) 
+        private decimal GetTaxRate(string description)
         {
             var dicTaxRate = AccFactory.RptTaxRatesRepository().GetRecordByDescription(description);
             decimal taxRate = 0;
@@ -306,7 +299,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             return taxRate;
         }
 
-        private void EnableDisableToolStripButton(DataGridView dataGridView, ToolStripButton post) 
+        private void EnableDisableToolStripButton(DataGridView dataGridView, ToolStripButton post)
         {
             try
             {
@@ -325,7 +318,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         postedCount += 1;
                     else
                         unpostedCount += 1;
-
                 }
 
                 if (unpostedCount > 0)
@@ -341,7 +333,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);    
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -431,7 +423,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         //Get Penalty and Tax Rates
                         var dictRptPenalties = AccFactory.RptPenaltiesRepository().GetRecordByID(9);
 
-
                         decimal penaltyRate = string.IsNullOrEmpty(GetPenaltyRecord("RPT monthly penalty", "rate")) ? 0 :
                                                                    Convert.ToDecimal(GetPenaltyRecord("RPT monthly penalty", "rate"));
                         string penaltyFrequency = GetPenaltyRecord("RPT monthly penalty", "frequency");
@@ -511,10 +502,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 lblPostingAssessments.Visible = false;
                 prgrsBarPostingAssessments.Visible = false;
             }
+        }
 
-        } 
-
-        #endregion
+        #endregion Posting
 
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
@@ -540,7 +530,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
-        {         
+        {
             LoadProperties();
         }
     }

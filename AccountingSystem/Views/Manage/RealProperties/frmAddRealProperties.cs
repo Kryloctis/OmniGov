@@ -17,6 +17,23 @@ namespace AccountingSystem.Views.Manage.RealProperties
             _frmRealProperties = frmRealProperties;
         }
 
+        private string GetPropertyKind()
+        {
+            string propertyKind = uc.cmbxPropertyKind.Text.Trim();
+
+            switch (propertyKind)
+            {
+                case "Land":
+                    return "L";
+                case "Building":
+                    return "B";
+                case "Machinery":
+                    return "M";
+                default:
+                    return string.Empty;
+            }
+        }
+
         private bool Save()
         {
             try
@@ -39,7 +56,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     BarangayName = uc.txtBarangay.Text.Trim(),
                     MunicipalityName = uc.txtMunicipality.Text.Trim(),
                     ProvinceName = uc.txtProvince.Text.Trim(),
-                    PropertyKind = uc.cmbxPropertyKind.Text.Trim(),
+                    PropertyKind = GetPropertyKind(),
                     EffectivityQuarter = (int)uc.nudEffectivityQuarter.Value,
                     EffectivityYear = (int)uc.nudEffectivityYear.Value,
                     OtherImprovements = uc.nudOtherImprv.Value,
