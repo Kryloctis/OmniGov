@@ -42,7 +42,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dtpEndingDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -191,16 +191,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.label2.TabIndex = 31;
             this.label2.Text = "Date Issued";
             // 
-            // dtpEndingDate
+            // dtpDateIssued
             // 
-            this.dtpEndingDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpEndingDate.CustomFormat = "MMMM dd, yyyy";
-            this.dtpEndingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEndingDate.Location = new System.Drawing.Point(637, 23);
-            this.dtpEndingDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpEndingDate.Name = "dtpEndingDate";
-            this.dtpEndingDate.Size = new System.Drawing.Size(148, 23);
-            this.dtpEndingDate.TabIndex = 30;
+            this.dtpDateIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpDateIssued.CustomFormat = "MMMM dd, yyyy";
+            this.dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateIssued.Location = new System.Drawing.Point(637, 23);
+            this.dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpDateIssued.Name = "dtpDateIssued";
+            this.dtpDateIssued.Size = new System.Drawing.Size(148, 23);
+            this.dtpDateIssued.TabIndex = 30;
+            this.dtpDateIssued.ValueChanged += new System.EventHandler(this.dtpEndingDate_ValueChanged);
             // 
             // frmReceiptsIssued
             // 
@@ -208,7 +209,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dtpEndingDate);
+            this.Controls.Add(this.dtpDateIssued);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
@@ -249,6 +250,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtpEndingDate;
+        private System.Windows.Forms.DateTimePicker dtpDateIssued;
     }
 }

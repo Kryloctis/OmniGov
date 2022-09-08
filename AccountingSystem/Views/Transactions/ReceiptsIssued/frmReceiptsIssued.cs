@@ -23,8 +23,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
+                var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd");
+                var searchText = txtsearch.Text.Trim();
+
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                var receiptIssuedDt = receiptIssuedRepository.GetRecords();
+                var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
@@ -41,8 +44,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 try
                 {
+                    var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd"); ;
+                    var txtSearch = txtsearch.Text.Trim();
                     var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                    var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(txtsearch.Text.Trim());
+                    var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, txtSearch);
 
                     HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
 
@@ -128,6 +133,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             int returnSerialNoTo = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_to"].Value);
 
             _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
+        }
+
+        private void dtpEndingDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadRecords();
         }
     }
 }

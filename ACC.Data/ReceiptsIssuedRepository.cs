@@ -167,15 +167,16 @@ namespace ACC.Data
             string columnFilter = collectorIsJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
 
             string query = $"SELECT accountable_form_id, accountable_forms, quantity, receipt_issued_from, receipt_issued_to, last_issued FROM {viewTableName} WHERE is_returned = false AND {columnFilter} = @collecting_officer_id";
-
+            
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
 
-        public DataTable GetRecordsBySearch(string searchText)
+        public DataTable GetRecordsBySearch(string dateIssued, string searchText)
         {
             var parameter = new object[][] { 
                 new object[]{"@searchKey", DbType.String, $"%{searchText}%"},
+                new object[]{"@date_issued", DbType.String, dateIssued },
             };
 
             string query = $"SELECT  " +
@@ -192,13 +193,15 @@ namespace ACC.Data
                             $"job_orders_mid_initial, " +
                             $"job_orders_last_name, " +
                             $"job_orders_suffix, " +
+                            $"acc_form_no, " +
+                            $"acc_form_desc, " +
                             $"accountable_forms, " +
                             $"receipt_issued_from, " +
                             $"receipt_issued_to,  " +
                             $"date_issued,  " +
-                            $"quantity,  " +
-                            $"last_issued,  " +
-                            $"IF(IFNULL(is_returned,0) > 0,'Yes','No') AS returned,  " +
+                            $"quantity, " +
+                            $"last_issued, " +
+                            $"is_returned, " +
                             $"returned_date,  " +
                             $"issued_by  " +
                             $"FROM {viewTableName} " +
@@ -208,6 +211,7 @@ namespace ACC.Data
                             $"job_orders_first_name LIKE @searchKey OR " +
                             $"job_orders_last_name LIKE @searchKey OR " +
                             $"accountable_forms LIKE @searchKey " +
+                            $"OR date_issued = @date_issued " +
                             $"ORDER BY date_issued DESC ";
 
             var dtri = new DataTable();
@@ -468,6 +472,11 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public DataTable GetRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
         }
     }
 }
