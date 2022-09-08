@@ -29,8 +29,6 @@ namespace AccountingSystem.Views.Manage.Realignment
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRealignment));
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -45,18 +43,21 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgRealignment = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTotalRealignmentAppropriation = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.dgRealignment = new System.Windows.Forms.DataGridView();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip2
             // 
-            this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip2.BackColor = System.Drawing.Color.White;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
@@ -64,7 +65,8 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnDelete});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(818, 50);
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0, 3, 1, 3);
+            this.toolStrip2.Size = new System.Drawing.Size(1058, 56);
             this.toolStrip2.TabIndex = 8;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -106,6 +108,7 @@ namespace AccountingSystem.Views.Manage.Realignment
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.White;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblDateEntryPlaceHolder,
@@ -116,9 +119,9 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.toolStripStatusLabel2,
             this.lblUpdatedAtPlaceHolder,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 415);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 582);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(818, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1058, 22);
             this.statusStrip1.TabIndex = 9;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -177,53 +180,68 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgRealignment);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 56);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1058, 483);
+            this.panel1.TabIndex = 13;
+            // 
+            // dgRealignment
+            // 
+            this.dgRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgRealignment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRealignment.Location = new System.Drawing.Point(4, 4);
+            this.dgRealignment.Name = "dgRealignment";
+            this.dgRealignment.RowTemplate.Height = 25;
+            this.dgRealignment.Size = new System.Drawing.Size(1050, 475);
+            this.dgRealignment.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.txtTotalRealignmentAppropriation);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 539);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.panel2.Size = new System.Drawing.Size(1058, 43);
+            this.panel2.TabIndex = 14;
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(442, 388);
+            this.label1.Location = new System.Drawing.Point(687, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 15);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 14;
             this.label1.Text = "Total Realignment Appropriation";
             // 
             // txtTotalRealignmentAppropriation
             // 
             this.txtTotalRealignmentAppropriation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotalRealignmentAppropriation.Location = new System.Drawing.Point(627, 385);
+            this.txtTotalRealignmentAppropriation.BackColor = System.Drawing.Color.White;
+            this.txtTotalRealignmentAppropriation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalRealignmentAppropriation.Location = new System.Drawing.Point(875, 7);
             this.txtTotalRealignmentAppropriation.Name = "txtTotalRealignmentAppropriation";
             this.txtTotalRealignmentAppropriation.ReadOnly = true;
             this.txtTotalRealignmentAppropriation.Size = new System.Drawing.Size(179, 23);
-            this.txtTotalRealignmentAppropriation.TabIndex = 11;
+            this.txtTotalRealignmentAppropriation.TabIndex = 13;
             this.txtTotalRealignmentAppropriation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "arrow-up@18px.png");
-            this.imageList1.Images.SetKeyName(1, "arrow-down@18px.png");
-            // 
-            // dgRealignment
-            // 
-            this.dgRealignment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealignment.Location = new System.Drawing.Point(12, 53);
-            this.dgRealignment.Name = "dgRealignment";
-            this.dgRealignment.RowTemplate.Height = 25;
-            this.dgRealignment.Size = new System.Drawing.Size(794, 330);
-            this.dgRealignment.TabIndex = 13;
-            this.dgRealignment.SelectionChanged += new System.EventHandler(this.dgRealignment_SelectionChanged);
             // 
             // frmRealignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(818, 437);
-            this.Controls.Add(this.dgRealignment);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTotalRealignmentAppropriation);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1058, 604);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -238,7 +256,10 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.toolStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgRealignment)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,11 +278,12 @@ namespace AccountingSystem.Views.Manage.Realignment
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
         internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox txtTotalRealignmentAppropriation;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.DataGridView dgRealignment;
         internal System.Windows.Forms.ToolStripButton btnEdit;
         internal System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgRealignment;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtTotalRealignmentAppropriation;
     }
 }
