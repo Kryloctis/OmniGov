@@ -2,13 +2,8 @@
 using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
@@ -34,7 +29,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         private void frmRealPropertyTaxAccountRegisterReport_Load(object sender, EventArgs e)
         {
             nudYearFrom.Value = Helper.GetCurrentDate().Year;
-            nudYearTo.Value = Helper.GetCurrentDate().Year;      
+            nudYearTo.Value = Helper.GetCurrentDate().Year;
         }
 
         private decimal GetPenalty(string completeArpNo, int assessmentYear, DateTime assessmentPostedAt, DateTime paymentPostedAt, int effectivityYear, decimal penaltyRate, decimal taxDueAmount)
@@ -79,7 +74,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message);    
+                Helper.MessageBoxError(ex.Message);
             }
             return false;
         }
@@ -138,14 +133,14 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                 decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
                 decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
-                #endregion
+                #endregion Tax Due
 
                 #region Discount
 
                 decimal basicDiscount = taxDueComputations.GetDiscount(rowDiscountRate, basicTaxDueAmount);
                 decimal sefDiscount = taxDueComputations.GetDiscount(rowDiscountRate, sefTaxDueAmount);
 
-                #endregion
+                #endregion Discount
 
                 //If there's a payment
                 if (!string.IsNullOrEmpty(rowRptPaymentPostId))
@@ -157,13 +152,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                     basicPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                     sefPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
 
-                    #endregion
+                    #endregion Penalty
 
                     //collection date
                     var collectionDate = Convert.ToDateTime(row["payment_collections_payment_date"]);
                     basicNewRow["date"] = collectionDate;
                     sefRow["date"] = DBNull.Value;
-
 
                     //BASIC
                     basicNewRow["regular_tax_collected"] = basicTaxDueAmount;

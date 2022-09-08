@@ -1,13 +1,8 @@
 ﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences
@@ -33,15 +28,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             cmbxBarangays.DisplayMember = "barangay_name";
         }
 
-
-
         private void frmCertifiedListOfTaxDelinquences_Load(object sender, EventArgs e)
         {
             LoadBarangays();
             dtAsOf.Value = Helper.GetCurrentDate();
         }
 
-        private bool LoadReport(LocalReport localReport) 
+        private bool LoadReport(LocalReport localReport)
         {
             try
             {
@@ -86,10 +79,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             return taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
         }
 
-        private void GetParameters(out string barangayName, out DateTime asOfDate) 
+        private void GetParameters(out string barangayName, out DateTime asOfDate)
         {
             barangayName = cmbxBarangays.Text.Trim();
-            asOfDate = dtAsOf.Value;                 
+            asOfDate = dtAsOf.Value;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -99,10 +92,10 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             string barangayName = string.Empty;
             DateTime asOfDate = DateTime.Now;
 
-            Invoke((MethodInvoker) delegate 
-            {
-                GetParameters(out barangayName, out asOfDate);
-            });
+            Invoke((MethodInvoker)delegate
+           {
+               GetParameters(out barangayName, out asOfDate);
+           });
 
             var referenceDataTable = AccFactory.RptAssessmentPostsRepository().Get_View_CertListOfAllRptDelinquences_By_BarangayName_AsOfDate(barangayName, asOfDate);
 
@@ -123,9 +116,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 string remarks = string.Empty;
                 int rowYear = Convert.ToInt32(row["year"]);
 
-                decimal basicPenalty = 0;       
-                decimal sefPenalty = 0;            
-                           
+                decimal basicPenalty = 0;
+                decimal sefPenalty = 0;
+
                 #region Tax Due
 
                 decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
@@ -133,7 +126,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
                 decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
-                #endregion
+                #endregion Tax Due
 
                 #region Penalty
 
@@ -142,14 +135,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                 {
                     var rowPaymentPostsDate = Convert.ToDateTime(row["rpt_payment_posts_posted_at"]);
 
-
                     basicPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, basicTaxDueAmount);
                     sefPenalty = GetPenalty(rowCompleteArpNo, rowYear, rowPostedAt, rowPaymentPostsDate, rowEffectivityYear, rowPenaltyRate, sefTaxDueAmount);
-
-                   
                 }
 
-                #endregion
+                #endregion Penalty
 
                 #region Assesses Values
 
@@ -166,7 +156,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
                         break;
                 }
 
-                #endregion
+                #endregion Assesses Values
 
                 decimal basicTotal = basicTaxDueAmount + basicPenalty;
                 decimal sefTotal = sefTaxDueAmount + sefPenalty;
@@ -197,7 +187,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -207,7 +196,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
-            if(!backgroundWorker1.IsBusy)
+            if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
     }

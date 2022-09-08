@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies
@@ -13,7 +7,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
     public partial class frmTaxPayerList : Form
     {
         private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
-        
+
         public frmTaxPayerList(frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport)
         {
             InitializeComponent();
@@ -72,7 +66,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
             EnableDisableSelectButton();
         }
 
-        private void InitializeReport() 
+        private void InitializeReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
             _frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();

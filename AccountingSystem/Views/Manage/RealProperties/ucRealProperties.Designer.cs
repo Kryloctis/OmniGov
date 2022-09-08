@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtArpNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPropertyPin = new System.Windows.Forms.TextBox();
@@ -81,6 +82,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.label21 = new System.Windows.Forms.Label();
             this.chckTaxable = new System.Windows.Forms.CheckBox();
             this.chckCancelled = new System.Windows.Forms.CheckBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,6 +97,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.panel3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtArpNo
@@ -103,6 +106,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtArpNo.Name = "txtArpNo";
             this.txtArpNo.Size = new System.Drawing.Size(216, 23);
             this.txtArpNo.TabIndex = 2;
+            this.txtArpNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtArpNo_Validating);
+            this.txtArpNo.Validated += new System.EventHandler(this.txtArpNo_Validated);
             // 
             // label1
             // 
@@ -220,6 +225,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtOwnerName.Name = "txtOwnerName";
             this.txtOwnerName.Size = new System.Drawing.Size(261, 23);
             this.txtOwnerName.TabIndex = 15;
+            this.txtOwnerName.Validating += new System.ComponentModel.CancelEventHandler(this.txtOwnerName_Validating);
+            this.txtOwnerName.Validated += new System.EventHandler(this.txtOwnerName_Validated);
             // 
             // groupBox2
             // 
@@ -278,6 +285,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.nudArea.Name = "nudArea";
             this.nudArea.Size = new System.Drawing.Size(216, 23);
             this.nudArea.TabIndex = 13;
+            this.nudArea.Validating += new System.ComponentModel.CancelEventHandler(this.nudArea_Validating);
+            this.nudArea.Validated += new System.EventHandler(this.nudArea_Validated);
             // 
             // nudGrYear
             // 
@@ -290,6 +299,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.nudGrYear.Name = "nudGrYear";
             this.nudGrYear.Size = new System.Drawing.Size(216, 23);
             this.nudGrYear.TabIndex = 11;
+            this.nudGrYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudGrYear_Validating);
+            this.nudGrYear.Validated += new System.EventHandler(this.nudGrYear_Validated);
             // 
             // nudOtherImprv
             // 
@@ -314,6 +325,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.nudAssessedValue.Name = "nudAssessedValue";
             this.nudAssessedValue.Size = new System.Drawing.Size(216, 23);
             this.nudAssessedValue.TabIndex = 10;
+            this.nudAssessedValue.Validating += new System.ComponentModel.CancelEventHandler(this.nudAssessedValue_Validating);
+            this.nudAssessedValue.Validated += new System.EventHandler(this.nudAssessedValue_Validated);
             // 
             // label16
             // 
@@ -345,6 +358,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             0,
             0,
             0});
+            this.nudEffectivityYear.Validating += new System.ComponentModel.CancelEventHandler(this.nudEffectivityYear_Validating);
+            this.nudEffectivityYear.Validated += new System.EventHandler(this.nudEffectivityYear_Validated);
             // 
             // label15
             // 
@@ -378,6 +393,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             0,
             0});
             this.nudEffectivityQuarter.Name = "nudEffectivityQuarter";
+            this.nudEffectivityQuarter.ReadOnly = true;
             this.nudEffectivityQuarter.Size = new System.Drawing.Size(216, 23);
             this.nudEffectivityQuarter.TabIndex = 8;
             this.nudEffectivityQuarter.Value = new decimal(new int[] {
@@ -403,6 +419,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.cmbxPropertyKind.Name = "cmbxPropertyKind";
             this.cmbxPropertyKind.Size = new System.Drawing.Size(216, 23);
             this.cmbxPropertyKind.TabIndex = 7;
+            this.cmbxPropertyKind.SelectedValueChanged += new System.EventHandler(this.cmbxPropertyKind_SelectedValueChanged);
             // 
             // label13
             // 
@@ -428,6 +445,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(216, 23);
             this.txtLotNo.TabIndex = 14;
+            this.txtLotNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtLotNo_Validating);
+            this.txtLotNo.Validated += new System.EventHandler(this.txtLotNo_Validated);
             // 
             // label11
             // 
@@ -462,6 +481,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.Size = new System.Drawing.Size(216, 23);
             this.txtProvince.TabIndex = 6;
+            this.txtProvince.Validating += new System.ComponentModel.CancelEventHandler(this.txtProvince_Validating);
+            this.txtProvince.Validated += new System.EventHandler(this.txtProvince_Validated);
             // 
             // txtMunicipality
             // 
@@ -469,6 +490,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.Size = new System.Drawing.Size(216, 23);
             this.txtMunicipality.TabIndex = 5;
+            this.txtMunicipality.Validating += new System.ComponentModel.CancelEventHandler(this.txtMunicipality_Validating);
+            this.txtMunicipality.Validated += new System.EventHandler(this.txtMunicipality_Validated);
             // 
             // label8
             // 
@@ -485,6 +508,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.Size = new System.Drawing.Size(216, 23);
             this.txtBarangay.TabIndex = 4;
+            this.txtBarangay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBarangay_Validating);
+            this.txtBarangay.Validated += new System.EventHandler(this.txtBarangay_Validated);
             // 
             // label7
             // 
@@ -525,6 +550,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtClassificationName.Name = "txtClassificationName";
             this.txtClassificationName.Size = new System.Drawing.Size(261, 23);
             this.txtClassificationName.TabIndex = 20;
+            this.txtClassificationName.Validating += new System.ComponentModel.CancelEventHandler(this.txtClassificationName_Validating);
+            this.txtClassificationName.Validated += new System.EventHandler(this.txtClassificationName_Validated);
             // 
             // label19
             // 
@@ -541,6 +568,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtClassificationCode.Name = "txtClassificationCode";
             this.txtClassificationCode.Size = new System.Drawing.Size(261, 23);
             this.txtClassificationCode.TabIndex = 19;
+            this.txtClassificationCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtClassificationCode_Validating);
+            this.txtClassificationCode.Validated += new System.EventHandler(this.txtClassificationCode_Validated);
             // 
             // label18
             // 
@@ -581,6 +610,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtActualUseName.Name = "txtActualUseName";
             this.txtActualUseName.Size = new System.Drawing.Size(261, 23);
             this.txtActualUseName.TabIndex = 22;
+            this.txtActualUseName.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
+            this.txtActualUseName.Validated += new System.EventHandler(this.txtActualUseName_Validated);
             // 
             // label20
             // 
@@ -597,6 +628,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.txtActualUseCode.Name = "txtActualUseCode";
             this.txtActualUseCode.Size = new System.Drawing.Size(261, 23);
             this.txtActualUseCode.TabIndex = 21;
+            this.txtActualUseCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseCode_Validating);
+            this.txtActualUseCode.Validated += new System.EventHandler(this.txtActualUseCode_Validated);
             // 
             // label21
             // 
@@ -626,6 +659,11 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.chckCancelled.TabIndex = 4;
             this.chckCancelled.Text = "Cancelled";
             this.chckCancelled.UseVisualStyleBackColor = true;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // ucRealProperties
             // 
@@ -658,6 +696,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.groupBox4.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -665,57 +704,58 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtArpNo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPropertyPin;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtOwnerContact;
-        private System.Windows.Forms.TextBox txtOwnerAddress;
-        private System.Windows.Forms.TextBox txtOwnerTin;
-        private System.Windows.Forms.TextBox txtOwnerName;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtLotNo;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtMunicipality;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtBarangay;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbxPropertyKind;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown nudEffectivityQuarter;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown nudEffectivityYear;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown nudAssessedValue;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown nudOtherImprv;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown nudArea;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtProvince;
-        private System.Windows.Forms.NumericUpDown nudGrYear;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtClassificationCode;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox txtClassificationName;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox txtActualUseName;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox txtActualUseCode;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.CheckBox chckTaxable;
-        private System.Windows.Forms.CheckBox chckCancelled;
+        internal System.Windows.Forms.TextBox txtArpNo;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtPropertyPin;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox txtOwnerContact;
+        internal System.Windows.Forms.TextBox txtOwnerAddress;
+        internal System.Windows.Forms.TextBox txtOwnerTin;
+        internal System.Windows.Forms.TextBox txtOwnerName;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.TextBox txtLotNo;
+        internal System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.TextBox txtMunicipality;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.TextBox txtBarangay;
+        internal System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.ComboBox cmbxPropertyKind;
+        internal System.Windows.Forms.Label label10;
+        internal System.Windows.Forms.NumericUpDown nudEffectivityQuarter;
+        internal System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.NumericUpDown nudEffectivityYear;
+        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.NumericUpDown nudAssessedValue;
+        internal System.Windows.Forms.Label label13;
+        internal System.Windows.Forms.NumericUpDown nudOtherImprv;
+        internal System.Windows.Forms.Label label14;
+        internal System.Windows.Forms.NumericUpDown nudArea;
+        internal System.Windows.Forms.Label label15;
+        internal System.Windows.Forms.Label label16;
+        internal System.Windows.Forms.TextBox txtProvince;
+        internal System.Windows.Forms.NumericUpDown nudGrYear;
+        internal System.Windows.Forms.Label label17;
+        internal System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.TextBox txtClassificationCode;
+        internal System.Windows.Forms.Label label18;
+        internal System.Windows.Forms.TextBox txtClassificationName;
+        internal System.Windows.Forms.Label label19;
+        internal System.Windows.Forms.GroupBox groupBox4;
+        internal System.Windows.Forms.Panel panel4;
+        internal System.Windows.Forms.TextBox txtActualUseName;
+        internal System.Windows.Forms.Label label20;
+        internal System.Windows.Forms.TextBox txtActualUseCode;
+        internal System.Windows.Forms.Label label21;
+        internal System.Windows.Forms.CheckBox chckTaxable;
+        internal System.Windows.Forms.CheckBox chckCancelled;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

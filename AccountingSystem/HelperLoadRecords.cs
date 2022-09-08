@@ -9,6 +9,37 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region Real Properties
+
+        public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["property_identifier"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["property_pin"].MinimumWidth = 100;
+            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
+            dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["owner_tin"].HeaderText = "Owner TIN";
+            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["owner_contact"].Visible = false;
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
+            dataGridView.Columns["province_name"].HeaderText = "Province";
+            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        #endregion
+
         #region Payment History
 
         public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable) 
@@ -190,14 +221,26 @@ namespace AccountingSystem
             dataGridView.Columns["is_checked"].MinimumWidth = 20;
             dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
-            dataGridView.Columns["real_properties_id"].Visible = false;
+            dataGridView.Columns["pin"].Visible = false;
             dataGridView.Columns["posting_status"].HeaderText = "Posting Status";
+            dataGridView.Columns["posting_status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;         
+            dataGridView.Columns["real_properties_id"].Visible = false;
+            dataGridView.Columns["property_identifier"].Visible = false;
             dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["complete_arp_no"].MinimumWidth = 100;            
             dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["owner_name"].MinimumWidth = 200;
+            dataGridView.Columns["owner_tin"].Visible = false;
+            dataGridView.Columns["owner_contact"].Visible = false;
+            dataGridView.Columns["is_cancelled"].Visible = false;
             dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["owner_address"].MinimumWidth = 400;
             dataGridView.Columns["property_kind"].Visible = false;
+            dataGridView.Columns["barangay_name"].Visible = false;
+            dataGridView.Columns["municipality_name"].Visible = false;
+            dataGridView.Columns["province_name"].Visible = false;
             dataGridView.Columns["effectivity_quarter"].Visible = false;
             dataGridView.Columns["effectivity_year"].Visible = false;
             dataGridView.Columns["assessed_value"].Visible = false;

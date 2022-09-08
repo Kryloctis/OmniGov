@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddRealProperties
             // 
@@ -91,6 +92,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Real Properties";
+            this.Load += new System.EventHandler(this.frmAddRealProperties_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
