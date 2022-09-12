@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
-        internal void LoadRecords()
+        internal void LoadRecords() 
         {
             try
             {
@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
-            }   
+            }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message); 
@@ -141,3 +141,4 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         }
     }
 }
+    

@@ -206,12 +206,10 @@ namespace ACC.Data
                             $"issued_by  " +
                             $"FROM {viewTableName} " +
                             $"WHERE " +
-                            $"collecting_officers_last_name LIKE @searchKey OR " +
-                            $"collecting_officers_first_name LIKE @searchKey OR " +
-                            $"job_orders_first_name LIKE @searchKey OR " +
-                            $"job_orders_last_name LIKE @searchKey OR " +
-                            $"accountable_forms LIKE @searchKey " +
-                            $"OR date_issued = @date_issued " +
+                            $"(collecting_officers_last_name LIKE @searchKey AND " +
+                            $"job_orders_last_name LIKE @searchKey) OR " +
+                            $"accountable_forms LIKE @searchKey AND " +
+                            $"date_issued = @date_issued " +
                             $"ORDER BY date_issued DESC ";
 
             var dtri = new DataTable();
