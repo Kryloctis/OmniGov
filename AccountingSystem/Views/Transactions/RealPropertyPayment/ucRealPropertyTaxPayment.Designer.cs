@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.PropertyPayment
 {
-    partial class ucPropertyTaxPayment
+    partial class ucRealPropertyTaxPayment
     {
         /// <summary> 
         /// Required designer variable.

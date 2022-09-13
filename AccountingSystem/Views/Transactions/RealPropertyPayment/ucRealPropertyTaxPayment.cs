@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PropertyPayment
 {
-    public partial class ucPropertyTaxPayment : UserControl
+    public partial class ucRealPropertyTaxPayment : UserControl
     {
         private readonly string accountableFormNo = "56";
         internal readonly int accountableFormNoId = 9;
         internal bool isReadOnly = false;
 
 
-        public ucPropertyTaxPayment()
+        public ucRealPropertyTaxPayment()
         {
             InitializeComponent();
         }
