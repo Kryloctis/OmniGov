@@ -194,8 +194,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel4.Text = "Records:";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(49, 17);
+            this.toolStripStatusLabel4.Text = "Records";
             // 
             // lblRecords
             // 
@@ -205,7 +205,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // springLbl
             // 
             this.springLbl.Name = "springLbl";
-            this.springLbl.Size = new System.Drawing.Size(913, 17);
+            this.springLbl.Size = new System.Drawing.Size(916, 17);
             this.springLbl.Spring = true;
             // 
             // toolStripStatusLabel6
@@ -327,6 +327,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             // btnRealignment
             // 
+            this.btnRealignment.Enabled = false;
             this.btnRealignment.Image = global::AccountingSystem.Properties.Resources.modify_object_align_vertical_center_28px;
             this.btnRealignment.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnRealignment.ImageTransparentColor = System.Drawing.Color.Magenta;
