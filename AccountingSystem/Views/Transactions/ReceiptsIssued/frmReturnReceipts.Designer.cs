@@ -47,16 +47,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 103);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 118);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(444, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(297, 27);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(359, 2);
+            this.btnCancel.Location = new System.Drawing.Point(212, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // btnSave
             // 
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(271, 2);
+            this.btnSave.Location = new System.Drawing.Point(124, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -91,10 +91,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dtpreturn
             // 
-            this.dtpreturn.Location = new System.Drawing.Point(149, 68);
+            this.dtpreturn.CustomFormat = "MMMM dd, yyyy";
+            this.dtpreturn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpreturn.Location = new System.Drawing.Point(135, 69);
             this.dtpreturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpreturn.Name = "dtpreturn";
-            this.dtpreturn.Size = new System.Drawing.Size(285, 23);
+            this.dtpreturn.Size = new System.Drawing.Size(149, 23);
             this.dtpreturn.TabIndex = 9;
             // 
             // label2
@@ -117,18 +119,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // txtReceiptNumberFrom
             // 
-            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(149, 9);
+            this.txtReceiptNumberFrom.Location = new System.Drawing.Point(135, 10);
             this.txtReceiptNumberFrom.Name = "txtReceiptNumberFrom";
             this.txtReceiptNumberFrom.ReadOnly = true;
-            this.txtReceiptNumberFrom.Size = new System.Drawing.Size(284, 23);
+            this.txtReceiptNumberFrom.Size = new System.Drawing.Size(148, 23);
             this.txtReceiptNumberFrom.TabIndex = 11;
             // 
             // txtReceiptNumberTo
             // 
-            this.txtReceiptNumberTo.Location = new System.Drawing.Point(149, 38);
+            this.txtReceiptNumberTo.Location = new System.Drawing.Point(135, 39);
             this.txtReceiptNumberTo.Name = "txtReceiptNumberTo";
             this.txtReceiptNumberTo.ReadOnly = true;
-            this.txtReceiptNumberTo.Size = new System.Drawing.Size(284, 23);
+            this.txtReceiptNumberTo.Size = new System.Drawing.Size(148, 23);
             this.txtReceiptNumberTo.TabIndex = 11;
             // 
             // frmReturnReceipts
@@ -137,7 +139,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(444, 130);
+            this.ClientSize = new System.Drawing.Size(297, 145);
             this.Controls.Add(this.txtReceiptNumberTo);
             this.Controls.Add(this.txtReceiptNumberFrom);
             this.Controls.Add(this.label3);
