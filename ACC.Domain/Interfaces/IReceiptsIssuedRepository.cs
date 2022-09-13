@@ -18,5 +18,9 @@ namespace ACC.Domain.Interfaces
         int GetTotalIssuedReceiptByReceiptId(int receiptId);
         bool CollectingOfficerHasReceiptAssigned(int id);
         bool ReceiptIsUsed(int receiptId);
+
+        DataTable GetRecordsBySearch(string dateIssued, string searchText);
+
+
     }
 }

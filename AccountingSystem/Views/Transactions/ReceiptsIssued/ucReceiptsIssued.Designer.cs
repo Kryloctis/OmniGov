@@ -127,9 +127,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cbCollector.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cbCollector.Location = new System.Drawing.Point(165, 11);
             this.cbCollector.Name = "cbCollector";
-            this.cbCollector.Size = new System.Drawing.Size(163, 17);
+            this.cbCollector.Size = new System.Drawing.Size(82, 17);
             this.cbCollector.TabIndex = 14;
-            this.cbCollector.Text = "Show Job Order Collectors";
+            this.cbCollector.Text = "Job Orders";
             this.cbCollector.UseVisualStyleBackColor = true;
             this.cbCollector.CheckedChanged += new System.EventHandler(this.cbCollector_CheckedChanged);
             // 

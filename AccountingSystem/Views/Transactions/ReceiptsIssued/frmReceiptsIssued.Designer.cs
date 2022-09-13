@@ -41,6 +41,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -161,10 +163,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(785, 23);
+            this.txtsearch.Location = new System.Drawing.Point(852, 23);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(263, 23);
+            this.txtsearch.Size = new System.Drawing.Size(196, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
@@ -173,17 +175,41 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(737, 26);
+            this.label1.Location = new System.Drawing.Point(804, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 12;
             this.label1.Text = "Search";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(564, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Date Issued";
+            // 
+            // dtpDateIssued
+            // 
+            this.dtpDateIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpDateIssued.CustomFormat = "MMMM dd, yyyy";
+            this.dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDateIssued.Location = new System.Drawing.Point(637, 23);
+            this.dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpDateIssued.Name = "dtpDateIssued";
+            this.dtpDateIssued.Size = new System.Drawing.Size(148, 23);
+            this.dtpDateIssued.TabIndex = 30;
+            this.dtpDateIssued.ValueChanged += new System.EventHandler(this.dtpEndingDate_ValueChanged);
             // 
             // frmReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dtpDateIssued);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
@@ -223,5 +249,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtpDateIssued;
     }
 }

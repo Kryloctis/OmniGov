@@ -46,10 +46,12 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // 
             // dtpEndingDate
             // 
+            this.dtpEndingDate.CustomFormat = "MMMM dd, yyyy";
+            this.dtpEndingDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndingDate.Location = new System.Drawing.Point(102, 10);
             this.dtpEndingDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpEndingDate.Name = "dtpEndingDate";
-            this.dtpEndingDate.Size = new System.Drawing.Size(196, 23);
+            this.dtpEndingDate.Size = new System.Drawing.Size(148, 23);
             this.dtpEndingDate.TabIndex = 27;
             // 
             // panel1
@@ -64,7 +66,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(303, 10);
+            this.btnRetrieve.Location = new System.Drawing.Point(256, 10);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
             this.btnRetrieve.TabIndex = 23;
