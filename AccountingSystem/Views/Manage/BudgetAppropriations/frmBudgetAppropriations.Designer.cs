@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.cmbxFPP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxFPP.FormattingEnabled = true;
-            this.cmbxFPP.Location = new System.Drawing.Point(474, 12);
+            this.cmbxFPP.Location = new System.Drawing.Point(474, 18);
             this.cmbxFPP.Name = "cmbxFPP";
             this.cmbxFPP.Size = new System.Drawing.Size(259, 23);
             this.cmbxFPP.TabIndex = 10;
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudYear.BackColor = System.Drawing.Color.White;
-            this.nudYear.Location = new System.Drawing.Point(1043, 12);
+            this.nudYear.Location = new System.Drawing.Point(1043, 18);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -123,7 +123,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(891, 12);
+            this.cmbxFunds.Location = new System.Drawing.Point(891, 18);
             this.cmbxFunds.Name = "cmbxFunds";
             this.cmbxFunds.Size = new System.Drawing.Size(146, 23);
             this.cmbxFunds.TabIndex = 8;
@@ -136,7 +136,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.cmbxAllotmentClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbxAllotmentClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxAllotmentClass.FormattingEnabled = true;
-            this.cmbxAllotmentClass.Location = new System.Drawing.Point(739, 12);
+            this.cmbxAllotmentClass.Location = new System.Drawing.Point(739, 18);
             this.cmbxAllotmentClass.Name = "cmbxAllotmentClass";
             this.cmbxAllotmentClass.Size = new System.Drawing.Size(146, 23);
             this.cmbxAllotmentClass.TabIndex = 6;
@@ -147,10 +147,10 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // txtTotal
             // 
             this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.BackColor = System.Drawing.Color.White;
+            this.txtTotal.BackColor = System.Drawing.SystemColors.Control;
             this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTotal.Location = new System.Drawing.Point(1057, 490);
+            this.txtTotal.Location = new System.Drawing.Point(1057, 489);
             this.txtTotal.MaxLength = 999999;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -164,7 +164,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(942, 492);
+            this.label1.Location = new System.Drawing.Point(942, 493);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 3;
@@ -194,8 +194,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel4.Text = "Records:";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(49, 17);
+            this.toolStripStatusLabel4.Text = "Records";
             // 
             // lblRecords
             // 
@@ -205,7 +205,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // springLbl
             // 
             this.springLbl.Name = "springLbl";
-            this.springLbl.Size = new System.Drawing.Size(913, 17);
+            this.springLbl.Size = new System.Drawing.Size(916, 17);
             this.springLbl.Spring = true;
             // 
             // toolStripStatusLabel6

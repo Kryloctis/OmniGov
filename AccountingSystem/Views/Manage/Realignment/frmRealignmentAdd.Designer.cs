@@ -64,7 +64,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.btnSave.Size = new System.Drawing.Size(35, 47);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
             // 
             // frmRealignmentAdd
             // 
@@ -81,7 +80,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Realignment";
-            this.Load += new System.EventHandler(this.frmRealignmentAdd_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

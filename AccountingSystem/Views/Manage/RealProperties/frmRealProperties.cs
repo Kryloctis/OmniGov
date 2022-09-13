@@ -40,10 +40,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
             dataTable.Columns.AddRange(selectedColumns);
 
             foreach (DataRow row in dtRealProperties.Rows)
-            {
-                int rowId = Convert.ToInt32(row["id"]);
-
+            {             
                 var newRow = dataTable.NewRow();
+                int rowId = Convert.ToInt32(row["id"]);
                 string rowPropertyIdentifier = row["property_identifier"].ToString();
                 string rowCompleteArpNo = row["complete_arp_no"].ToString();
                 string rowPropertyKind = row["property_kind"].ToString();
@@ -58,6 +57,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 decimal rowAssessedValue = Convert.ToDecimal(row["assessed_value"]);
                 bool rowIsCancelled = Convert.ToBoolean(row["is_cancelled"]);
 
+                newRow["id"] = rowId;
                 newRow["property_identifier"] = rowPropertyIdentifier;
                 newRow["complete_arp_no"] = rowCompleteArpNo;
                 newRow["property_kind"] = rowPropertyKind;
