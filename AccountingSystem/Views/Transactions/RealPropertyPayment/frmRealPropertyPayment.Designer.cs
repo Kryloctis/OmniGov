@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
-    partial class frmPropertyPayment
+    partial class frmRealPropertyPayment
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ucPropertyTaxPayment1 = new AccountingSystem.Views.Transactions.PropertyPayment.ucPropertyTaxPayment();
+            this.ucPropertyTaxPayment1 = new AccountingSystem.Views.Transactions.PropertyPayment.ucRealPropertyTaxPayment();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -563,7 +563,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private System.Windows.Forms.TextBox txtMunicipality;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private PropertyPayment.ucPropertyTaxPayment ucPropertyTaxPayment1;
+        private PropertyPayment.ucRealPropertyTaxPayment ucPropertyTaxPayment1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton btnGetTaxDue;

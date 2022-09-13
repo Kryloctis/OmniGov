@@ -17,15 +17,15 @@ using System.Windows.Forms;
  
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
-    public partial class frmPropertyPayment : Form
+    public partial class frmRealPropertyPayment : Form
     {
-        private ucPropertyTaxPayment ucPaymentInfo;
+        private ucRealPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
         internal List<RptTaxDuesModel> rptTaxDuesModels;
         internal bool isReadonly = false;
         internal rptPropertyPaymentTaxPayerInfoModel paymentTaxPayerInfoModel;
 
-        public frmPropertyPayment(MainForm mainForm)
+        public frmRealPropertyPayment(MainForm mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;

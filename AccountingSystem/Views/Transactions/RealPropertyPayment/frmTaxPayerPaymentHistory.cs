@@ -11,19 +11,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerPaymentHistory : Form
     {
-        private readonly frmPropertyPayment _frmPropertyPayment;
+        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
         private readonly string _taxPayerName;
 
-        public frmTaxPayerPaymentHistory(frmPropertyPayment frmPaymentPosting, string TaxPayerName)
+        public frmTaxPayerPaymentHistory(frmRealPropertyPayment frmPaymentPosting, string TaxPayerName)
         {
             InitializeComponent();
-            _frmPropertyPayment = frmPaymentPosting;
+            _frmRealPropertyPayment = frmPaymentPosting;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
             _taxPayerName = TaxPayerName;
@@ -181,8 +181,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             int rowIndex = dataGridView1.CurrentRow.Index;
             int paymentPostsId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["rpt_payment_posts_id"].Value);
 
-            _frmPropertyPayment.CancelTransaction();
-            _frmPropertyPayment.LoadSelectedDetailedTaxDues(GetSelectedDetailedTaxDues(paymentPostsId), paymentPostsId);
+            _frmRealPropertyPayment.CancelTransaction();
+            _frmRealPropertyPayment.LoadSelectedDetailedTaxDues(GetSelectedDetailedTaxDues(paymentPostsId), paymentPostsId);
 
             Close();
         }
