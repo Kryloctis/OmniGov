@@ -113,8 +113,6 @@ namespace AccountingSystem
 
         public static IJournalsDefaultAccountsRepository JournalsDefaultAccountsRepository() => new JournalsDefaultAccountsRepository(mySqlGenericCommandsLFS);
 
-        public static IBudgetRealignmentRepository BudgetRealignmentRepository() => new BudgetRealignmentRepository(mySqlGenericCommandsLFS);
-
         public static IAmortizationRepository AmortizationRepository() => new AmortizationRepository(mySqlGenericCommandsLFS);
 
         public static IAmortizationScheduleRepository AmortizationScheduleRepository() => new AmortizationScheduleRepository(mySqlGenericCommandsLFS);

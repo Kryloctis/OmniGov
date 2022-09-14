@@ -155,6 +155,17 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
+                toolStripMenuItemrealPropertyTaxAccountRegister.Enabled = false;
+
+            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
+                toolStripMenuItemConsolidatedRealPropertyTaxDues.Enabled = false;
+
+            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
+                toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
+
+
         }
 
         private bool IsUserCollector() 
@@ -189,7 +200,13 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
-            if(!IsUserCollector())
+            if (!Helper.HasPermission("Transaction Real Property Tax Payment"))
+                toolStripMenuPaymentPostings.Enabled = false;
+
+            if (!Helper.HasPermission("Transaction Assessment Posting"))
+                toolStripMenuAssessmentPosting.Enabled = false;
+
+            if (!IsUserCollector())
                 toolStripMenuPaymentPostings.Enabled = false;
 
         }
@@ -276,6 +293,9 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
+
+            if (!Helper.HasPermission("Manage Real Properties"))
+                menuRealPropeties.Enabled = false;
 
             #region Receipts
 
@@ -512,21 +532,12 @@ namespace AccountingSystem
             _ = new frmFunctionProgramProject().ShowDialog();
         }
 
-        private void menuCollectingOfficer_Click(object sender, EventArgs e)
-        {
-            _ = new frmCollectingOfficer().ShowDialog();
-        }
-
         private void menuBanks_Click(object sender, EventArgs e)
         {
             _ = new frmBanks().ShowDialog();
         }
 
-        private void MenuDisbursingOffice_Click(object sender, EventArgs e)
-        {
-            _ = new frmDisbursingOfficer().ShowDialog();
-        }
-
+   
         private void menuAccForm_Click(object sender, EventArgs e)
         {
             _ = new frmAccountable().ShowDialog();
@@ -546,16 +557,16 @@ namespace AccountingSystem
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             loginForm.Show();
-        }
-
-        private void menureceipts_Click(object sender, EventArgs e)
-        {
-            _ = new frmReceipts().ShowDialog();
-        }
+        }    
 
         private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmAmortization().ShowDialog();
+        }
+
+        private void signatoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmSignatories().ShowDialog();
         }
 
         #region Budget Module
@@ -693,63 +704,31 @@ namespace AccountingSystem
 
         #endregion
 
-        private void signatoriesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmSignatories().ShowDialog();
-        }
-
-        private void menuReturnReceipts_Click(object sender, EventArgs e)
-        {
-            _ = new frmReturnedReceipts().ShowDialog();
-        }
-
         #region Treasury
+
+        private void menuCollectingOfficer_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectingOfficer().ShowDialog();
+        }
+
+        private void MenuDisbursingOffice_Click(object sender, EventArgs e)
+        {
+            _ = new frmDisbursingOfficer().ShowDialog();
+        }
+
+        private void menureceipts_Click(object sender, EventArgs e)
+        {
+            _ = new frmReceipts().ShowDialog();
+        }
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
         {
             _ = new frmReceiptsIssued().ShowDialog();  
         }
 
-        #endregion
-
-        private void discountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuRealPropeties_Click(object sender, EventArgs e)
         {
-            _ = new frmRptDiscounts(this).ShowDialog();
-        }
-
-        private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRptPenalties(this).ShowDialog();
-        }
-
-        private void taxRateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRptTaxRates(this).ShowDialog();
-        }
-
-        private void checkIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCI().ShowDialog();
-        }
-
-        private void bankDepositToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmBankDeposits().ShowDialog();
-        }
-
-        private void collectorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmCollectorsRCD().ShowDialog();
-        }
-
-        private void liquidatorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmRCD().ShowDialog();
-        }
-
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            _ = new frmAssessmentPosting().ShowDialog();
+            _ = new frmRealProperties().ShowDialog();
         }
 
         private void paymentCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -789,27 +768,69 @@ namespace AccountingSystem
 
         private void toolStripMenuPaymentPostings_Click(object sender, EventArgs e)
         {
-            _ = new frmPropertyPayment(this).ShowDialog();
+            _ = new frmRealPropertyPayment(this).ShowDialog();
         }
 
-        private void listOfToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuItemListOfDelinquentAccounts_Click(object sender, EventArgs e)
         {
             _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
         }
 
-        private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuItemrealPropertyTaxAccountRegister_Click(object sender, EventArgs e)
         {
             _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
         }
 
-        private void consolidatedRealPropertyTaxDuesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuItemConsolidatedRealPropertyTaxDues_Click(object sender, EventArgs e)
         {
             _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
         }
 
-        private void menuRealPropeties_Click(object sender, EventArgs e)
+        private void menuReturnReceipts_Click(object sender, EventArgs e)
         {
-            _ = new frmRealProperties().ShowDialog();
+            _ = new frmReturnedReceipts().ShowDialog();
         }
+
+        private void discountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptDiscounts(this).ShowDialog();
+        }
+
+        private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptPenalties(this).ShowDialog();
+        }
+
+        private void taxRateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptTaxRates(this).ShowDialog();
+        }
+
+        private void checkIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCI().ShowDialog();
+        }
+
+        private void bankDepositToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankDeposits().ShowDialog();
+        }
+
+        private void collectorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmCollectorsRCD().ShowDialog();
+        }
+
+        private void liquidatorsRCDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmRCD().ShowDialog();
+        }
+
+        private void toolStripMenuAssessmentPosting_Click(object sender, EventArgs e)
+        {
+            _ = new frmAssessmentPosting().ShowDialog();
+        }
+
+        #endregion
     }
 }

@@ -12,27 +12,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
 
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
     public partial class frmPropertyTaxDue : Form
     {
-        private readonly frmPropertyPayment _frmPropertyPayment;
+        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
         private readonly string _ownerName;
-        public frmPropertyTaxDue(string ownerName, frmPropertyPayment frmPropertyPayment)
+        public frmPropertyTaxDue(string ownerName, frmRealPropertyPayment frmPropertyPayment)
         {
             InitializeComponent();
             _ownerName = ownerName;
-            _frmPropertyPayment = frmPropertyPayment;
+            _frmRealPropertyPayment = frmPropertyPayment;
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true, false);
             Helper.DatagridFullRowSelectStyle(dataGridView2, true, false);
         }
 
+        private void ValidatePermissions() 
+        {
+            if (!Helper.HasPermission("Report Tax Due Bill"))
+                btnPrintTaxBill.Enabled = false;
+        }
+
         private void frmRptTaxDue_Load(object sender, EventArgs e)
         {
             LoadProperties();
+            ValidatePermissions();
         }
 
         #region Properties
@@ -498,7 +505,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                         list.AddRange(GetCurrentDetailedTaxDues(completeArpNo, year));
                 }
 
-                _frmPropertyPayment.LoadRptDetailedTaxDues(list);
+                _frmRealPropertyPayment.LoadRptDetailedTaxDues(list);
             }
             catch (Exception ex)
             {
@@ -532,7 +539,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                     rptTaxDuesModelList.Add(rptTaxDuesModel);
             }
 
-            _frmPropertyPayment.rptTaxDuesModels = rptTaxDuesModelList;
+            _frmRealPropertyPayment.rptTaxDuesModels = rptTaxDuesModelList;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -660,7 +667,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
         private void btnPrintTaxBill_Click(object sender, EventArgs e)
         {
 
-            _ = new frmRptTaxDueBillReport(RptTaxDueBillDataTable(), _frmPropertyPayment.paymentTaxPayerInfoModel).ShowDialog();
+            _ = new frmRptTaxDueBillReport(RptTaxDueBillDataTable(), _frmRealPropertyPayment.paymentTaxPayerInfoModel).ShowDialog();
         }
         
         #endregion

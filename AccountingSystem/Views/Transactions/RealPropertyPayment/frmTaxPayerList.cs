@@ -8,20 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerList : Form
     {
-        private readonly frmPropertyPayment _frmPropertyPayment;
+        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
 
-        public frmTaxPayerList(frmPropertyPayment frmPropertyPayment)
+        public frmTaxPayerList(frmRealPropertyPayment frmPropertyPayment)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
-            _frmPropertyPayment = frmPropertyPayment;
+            _frmRealPropertyPayment = frmPropertyPayment;
         }
 
         private DataTable DataTableAssessmentPost(string searchText) 
@@ -74,8 +74,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                         ProvinceName = provinceName
                     };
 
-                    _frmPropertyPayment.paymentTaxPayerInfoModel = paymentPostingFields;
-                    _frmPropertyPayment.GetSelectedTaxPayerInfo();
+                    _frmRealPropertyPayment.paymentTaxPayerInfoModel = paymentPostingFields;
+                    _frmRealPropertyPayment.GetSelectedTaxPayerInfo();
                 }
 
                 Close();
