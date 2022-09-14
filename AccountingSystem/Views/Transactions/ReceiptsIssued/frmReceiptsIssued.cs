@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -23,11 +24,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             try
             {
+
                 var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd");
                 var searchText = txtsearch.Text.Trim();
-
+                var receiptIssuedDt = new DataTable();
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
+
+                if (cbAll.Checked)
+                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(searchText);
+                else
+                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
@@ -38,30 +44,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
+
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 3)
-            {
-                try
-                {
-                    var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd"); ;
-                    var txtSearch = txtsearch.Text.Trim();
-                    var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                    var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, txtSearch);
-
-                    HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
-
-                    lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
-                }
-                catch (Exception ex) 
-                { 
-                    Helper.MessageBoxError(ex.Message); 
-                }
-            }
-            else
-            {
-                LoadRecords();
-            }
+            
+            LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -84,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                         if (row.Cells[7].Value.ToString().Equals(string.Empty))
                         {
                             receiptModel.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
-                        }                                                 
+                        }
                     }
                     _ = receiptIssuedRepo.Delete(receiptModel);
                     LoadRecords();
@@ -94,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
             }
         }
-
+        
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
@@ -139,6 +126,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             LoadRecords();
         }
+
+        private void cbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAll.Checked)
+                dtpDateIssued.Enabled = false;
+            else
+                dtpDateIssued.Enabled = true;
+
+            LoadRecords();
+        }
+
     }
 }
     

@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
         }
 
-        internal void LoadCollectorsWithReceiptIssued(int receiptId)
+        internal void LoadCollectorsWithReceiptIssued(int receiptId)    
         {
             try
             {
