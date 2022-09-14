@@ -29,6 +29,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -43,6 +44,8 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDateIssued = new System.Windows.Forms.DateTimePicker();
+            this.cbAll = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -185,7 +188,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(564, 26);
+            this.label2.Location = new System.Drawing.Point(557, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 31;
@@ -196,18 +199,31 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dtpDateIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDateIssued.CustomFormat = "MMMM dd, yyyy";
             this.dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateIssued.Location = new System.Drawing.Point(637, 23);
+            this.dtpDateIssued.Location = new System.Drawing.Point(630, 23);
             this.dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpDateIssued.Name = "dtpDateIssued";
             this.dtpDateIssued.Size = new System.Drawing.Size(148, 23);
             this.dtpDateIssued.TabIndex = 30;
             this.dtpDateIssued.ValueChanged += new System.EventHandler(this.dtpEndingDate_ValueChanged);
             // 
+            // cbAll
+            // 
+            this.cbAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbAll.AutoSize = true;
+            this.cbAll.Location = new System.Drawing.Point(784, 27);
+            this.cbAll.Name = "cbAll";
+            this.cbAll.Size = new System.Drawing.Size(15, 14);
+            this.cbAll.TabIndex = 32;
+            this.toolTip1.SetToolTip(this.cbAll, "Disable date filter");
+            this.cbAll.UseVisualStyleBackColor = true;
+            this.cbAll.CheckedChanged += new System.EventHandler(this.cbAll_CheckedChanged);
+            // 
             // frmReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.cbAll);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpDateIssued);
             this.Controls.Add(this.label1);
@@ -251,5 +267,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpDateIssued;
+        private System.Windows.Forms.CheckBox cbAll;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

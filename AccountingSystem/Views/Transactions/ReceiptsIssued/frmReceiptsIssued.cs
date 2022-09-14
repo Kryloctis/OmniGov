@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -19,49 +20,35 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
-        internal void LoadRecords()
+        internal void LoadRecords() 
         {
             try
             {
+
                 var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd");
                 var searchText = txtsearch.Text.Trim();
-
+                var receiptIssuedDt = new DataTable();
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
+
+                if (cbAll.Checked)
+                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(searchText);
+                else
+                    receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, searchText);
 
                 HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
                 lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
-            }   
+            }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message); 
             }
         }
 
+
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 3)
-            {
-                try
-                {
-                    var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd"); ;
-                    var txtSearch = txtsearch.Text.Trim();
-                    var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
-                    var receiptIssuedDt = receiptIssuedRepository.GetRecordsBySearch(dateIssued, txtSearch);
-
-                    HelperLoadRecords.ReceiptsIssuedDatagridView(receiptIssuedDt, dgReceiptIssued);
-
-                    lblRecordCount.Text = dgReceiptIssued.Rows.Count.ToString();
-                }
-                catch (Exception ex) 
-                { 
-                    Helper.MessageBoxError(ex.Message); 
-                }
-            }
-            else
-            {
-                LoadRecords();
-            }
+            
+            LoadRecords();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -84,7 +71,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                         if (row.Cells[7].Value.ToString().Equals(string.Empty))
                         {
                             receiptModel.Add(new ReceiptsIssuedModel() { Id = receiptIssuedId });
-                        }                                                 
+                        }
                     }
                     _ = receiptIssuedRepo.Delete(receiptModel);
                     LoadRecords();
@@ -94,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 }
             }
         }
-
+        
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
@@ -125,12 +112,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void btnReturn_Click(object sender, EventArgs e)
         {
             int issuanceId = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["id"].Value);
-            string lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? string.Empty : dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString();
-          
-            int issuedSerialNoFrom = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_from"].Value);
-            
-            int returnSerialNoFrom = string.IsNullOrEmpty(lastIssued.ToString()) ? issuedSerialNoFrom : Convert.ToInt32(lastIssued) + 1;
-            int returnSerialNoTo = Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["receipt_number_to"].Value);
+            int lastIssued = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value.ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["last_issued"].Value);
+
+            int issuedSerialNoFrom = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_from"].Value);
+
+            int returnSerialNoFrom = lastIssued == 0 ? issuedSerialNoFrom : lastIssued + 1;
+            int returnSerialNoTo = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].ToString()) ? 0 : Convert.ToInt32(dgReceiptIssued.CurrentRow.Cells["serial_number_to"].Value);
 
             _ = new frmReturnReceipts(this, issuanceId, returnSerialNoFrom, returnSerialNoTo).ShowDialog();
         }
@@ -139,5 +126,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             LoadRecords();
         }
+
+        private void cbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAll.Checked)
+                dtpDateIssued.Enabled = false;
+            else
+                dtpDateIssued.Enabled = true;
+
+            LoadRecords();
+        }
+
     }
 }
+    

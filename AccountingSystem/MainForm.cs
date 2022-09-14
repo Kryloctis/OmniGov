@@ -129,7 +129,6 @@ namespace AccountingSystem
 
         private void ValidateReportPermissions()
         {
-
             if (!Helper.HasPermission("Report of Checks Issued"))
                 rCIToolStripMenuItem.Enabled = false;
 
