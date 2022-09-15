@@ -71,6 +71,18 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
+        private decimal GetTotalApproprations() 
+        {
+            decimal total = 0;
+
+            foreach (DataGridViewRow row in dgBudgetAppropriations.Rows)
+            {
+                if(row.Cells["fpp_id"].Value != DBNull.Value)
+                    total += Convert.ToDecimal(row.Cells["amount"].Value);
+            }
+
+            return total;
+        }
 
         private int rowCount()
         {
@@ -275,6 +287,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 dgBudgetAppropriations.CurrentCell = dgBudgetAppropriations.FirstDisplayedCell;
                 HighLightHeaders(dgBudgetAppropriations);
                 EnableDisableButtonsLocal(dgBudgetAppropriations);
+                txtTotal.Text = GetTotalApproprations().ToString("N2");
                 lblRecords.Text = rowCount().ToString();
                 lblDateEntry.Text = string.Empty;
                 lblCreatedAt.Text = string.Empty;
