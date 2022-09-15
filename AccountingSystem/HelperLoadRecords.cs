@@ -205,8 +205,7 @@ namespace AccountingSystem
         internal static void BarangaysCombobox(DataTable dataTable, ComboBox  comboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
-            dr["id"] = "0";
-            dr["name"] = "All";
+            dr["barangay_name"] = "All";
             dataTable.Rows.InsertAt(dr, 0);
 
             comboBox.DataSource = dataTable;
