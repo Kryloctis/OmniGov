@@ -35,12 +35,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             try
             {
-                var dtBarangays = RptFactory.RealPropertiesRepository().GetBarangays();
-                HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangays, "name", "id");
+                var dtBarangays = AccFactory.RealPropertiesRepository().GetRecords();
+                HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangays, "barangay_name", null);
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
