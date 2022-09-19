@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 
         private void btnFindOwner_Click(object sender, EventArgs e)
         {
-            _ = new frmRptOwnerList(this).ShowDialog();
+            _ = new frmRptTaxPayerList(this, null, null, null).ShowDialog();
         }
 
         private void btnReload_Click(object sender, EventArgs e)

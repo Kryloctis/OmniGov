@@ -1,19 +1,40 @@
-﻿using System;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
+using AccountingSystem.Views.Transactions.PaymentPosting;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister
 {
-    public partial class frmRptOwnerList : Form
+    public partial class frmRptTaxPayerList : Form
     {
         private readonly frmRealPropertyTaxAccountRegisterReport _frmRealPropertyTaxAccountRegisterReport;
+        private readonly frmRealPropertyTaxStatementOfAccount _frmRealPropertyTaxStatementOfAccount;
+        private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
+        private frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount;
+        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private object p;
 
-        public frmRptOwnerList(frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport)
+        public frmRptTaxPayerList(
+            frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport, 
+            frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
+            frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
+            frmRealPropertyPayment frmRealPropertyPayment)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dataGridView1, true);
             _frmRealPropertyTaxAccountRegisterReport = frmRealPropertyTaxAccountRegisterReport;
+            _frmRealPropertyTaxStatementOfAccount = frmRealPropertyTaxStatementOfAccount;
+            _frmListOfRealPropertyTaxDelinquenciesReport = frmListOfRealPropertyTaxDelinquenciesReport;
+            _frmRealPropertyPayment = frmRealPropertyPayment;
+        }
+
+        public frmRptTaxPayerList(object p, frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount)
+        {
+            this.p = p;
+            this.frmRealPropertyTaxStatementOfAccount = frmRealPropertyTaxStatementOfAccount;
         }
 
         private DataTable DataTableAssessmentPost(string searchText)
@@ -80,6 +101,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
             _frmRealPropertyTaxAccountRegisterReport.backgroundWorker1.RunWorkerAsync();
             _frmRealPropertyTaxAccountRegisterReport.btnReload.Enabled = true;
+
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

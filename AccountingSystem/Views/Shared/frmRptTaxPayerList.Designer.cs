@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister
 {
-    partial class frmRptOwnerList
+    partial class frmRptTaxPayerList
     {
         /// <summary>
         /// Required designer variable.

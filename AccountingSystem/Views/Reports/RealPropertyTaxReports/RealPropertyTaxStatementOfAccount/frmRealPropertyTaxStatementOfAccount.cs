@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
         public frmRealPropertyTaxStatementOfAccount()
         {
             InitializeComponent();
+        }
+
+        private void btnFindOwner_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptTaxPayerList(null, this, null, null).ShowDialog();
         }
     }
 }
