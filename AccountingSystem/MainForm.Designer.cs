@@ -1618,6 +1618,7 @@ namespace AccountingSystem
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Name = "toolStripMenuItemRealPropertyTaxStatementOfAccount";
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Size = new System.Drawing.Size(304, 22);
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Text = "Real Property Tax Statement of Account";
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Click += new System.EventHandler(this.toolStripMenuItemRealPropertyTaxStatementOfAccount_Click);
             // 
             // MainForm
             // 
