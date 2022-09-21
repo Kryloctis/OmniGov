@@ -15079,19 +15079,17 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtRPTStamentOfAccountsDataTable : global::System.Data.TypedTableBase<dtRPTStamentOfAccountsRow> {
             
-            private global::System.Data.DataColumn columnarp_no;
-            
             private global::System.Data.DataColumn columnno_of_years;
             
             private global::System.Data.DataColumn columntax_due;
             
-            private global::System.Data.DataColumn columnbasic_tax_due;
+            private global::System.Data.DataColumn columntotal_tax_due_basic;
             
-            private global::System.Data.DataColumn columnbasic_sef_tax_due;
+            private global::System.Data.DataColumn columntotal_tax_due_sef;
             
             private global::System.Data.DataColumn columnpercentage;
             
-            private global::System.Data.DataColumn columnpenalty_discount;
+            private global::System.Data.DataColumn columnpenalty_discount_basic;
             
             private global::System.Data.DataColumn columntotal_basic;
             
@@ -15140,14 +15138,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn arp_noColumn {
-                get {
-                    return this.columnarp_no;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn no_of_yearsColumn {
                 get {
                     return this.columnno_of_years;
@@ -15164,17 +15154,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn basic_tax_dueColumn {
+            public global::System.Data.DataColumn total_tax_due_basicColumn {
                 get {
-                    return this.columnbasic_tax_due;
+                    return this.columntotal_tax_due_basic;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn basic_sef_tax_dueColumn {
+            public global::System.Data.DataColumn total_tax_due_sefColumn {
                 get {
-                    return this.columnbasic_sef_tax_due;
+                    return this.columntotal_tax_due_sef;
                 }
             }
             
@@ -15188,9 +15178,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn penalty_discountColumn {
+            public global::System.Data.DataColumn penalty_discount_basicColumn {
                 get {
-                    return this.columnpenalty_discount;
+                    return this.columnpenalty_discount_basic;
                 }
             }
             
@@ -15279,16 +15269,15 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTStamentOfAccountsRow AdddtRPTStamentOfAccountsRow(string arp_no, int no_of_years, decimal tax_due, decimal basic_tax_due, decimal basic_sef_tax_due, decimal percentage, decimal penalty_discount, decimal total_basic, decimal penalty_discount_sef, decimal total_sef, decimal total_due, decimal total_paid, decimal unpaid_balance) {
+            public dtRPTStamentOfAccountsRow AdddtRPTStamentOfAccountsRow(int no_of_years, decimal tax_due, decimal total_tax_due_basic, decimal total_tax_due_sef, decimal percentage, decimal penalty_discount_basic, decimal total_basic, decimal penalty_discount_sef, decimal total_sef, decimal total_due, decimal total_paid, decimal unpaid_balance) {
                 dtRPTStamentOfAccountsRow rowdtRPTStamentOfAccountsRow = ((dtRPTStamentOfAccountsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        arp_no,
                         no_of_years,
                         tax_due,
-                        basic_tax_due,
-                        basic_sef_tax_due,
+                        total_tax_due_basic,
+                        total_tax_due_sef,
                         percentage,
-                        penalty_discount,
+                        penalty_discount_basic,
                         total_basic,
                         penalty_discount_sef,
                         total_sef,
@@ -15317,13 +15306,12 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnarp_no = base.Columns["arp_no"];
                 this.columnno_of_years = base.Columns["no_of_years"];
                 this.columntax_due = base.Columns["tax_due"];
-                this.columnbasic_tax_due = base.Columns["basic_tax_due"];
-                this.columnbasic_sef_tax_due = base.Columns["basic_sef_tax_due"];
+                this.columntotal_tax_due_basic = base.Columns["total_tax_due_basic"];
+                this.columntotal_tax_due_sef = base.Columns["total_tax_due_sef"];
                 this.columnpercentage = base.Columns["percentage"];
-                this.columnpenalty_discount = base.Columns["penalty_discount"];
+                this.columnpenalty_discount_basic = base.Columns["penalty_discount_basic"];
                 this.columntotal_basic = base.Columns["total_basic"];
                 this.columnpenalty_discount_sef = base.Columns["penalty_discount_sef"];
                 this.columntotal_sef = base.Columns["total_sef"];
@@ -15335,20 +15323,18 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnarp_no = new global::System.Data.DataColumn("arp_no", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnarp_no);
                 this.columnno_of_years = new global::System.Data.DataColumn("no_of_years", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnno_of_years);
                 this.columntax_due = new global::System.Data.DataColumn("tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_due);
-                this.columnbasic_tax_due = new global::System.Data.DataColumn("basic_tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbasic_tax_due);
-                this.columnbasic_sef_tax_due = new global::System.Data.DataColumn("basic_sef_tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnbasic_sef_tax_due);
+                this.columntotal_tax_due_basic = new global::System.Data.DataColumn("total_tax_due_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_tax_due_basic);
+                this.columntotal_tax_due_sef = new global::System.Data.DataColumn("total_tax_due_sef", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal_tax_due_sef);
                 this.columnpercentage = new global::System.Data.DataColumn("percentage", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpercentage);
-                this.columnpenalty_discount = new global::System.Data.DataColumn("penalty_discount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpenalty_discount);
+                this.columnpenalty_discount_basic = new global::System.Data.DataColumn("penalty_discount_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpenalty_discount_basic);
                 this.columntotal_basic = new global::System.Data.DataColumn("total_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_basic);
                 this.columnpenalty_discount_sef = new global::System.Data.DataColumn("penalty_discount_sef", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -27235,22 +27221,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string arp_no {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtRPTStamentOfAccounts.arp_noColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'arp_no\' in table \'dtRPTStamentOfAccounts\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtRPTStamentOfAccounts.arp_noColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public int no_of_years {
                 get {
                     try {
@@ -27283,35 +27253,35 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal basic_tax_due {
+            public decimal total_tax_due_basic {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.basic_tax_dueColumn]));
+                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.total_tax_due_basicColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_tax_due\' in table \'dtRPTStamentOfAccounts\' is DBNull." +
-                                "", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_tax_due_basic\' in table \'dtRPTStamentOfAccounts\' is D" +
+                                "BNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTStamentOfAccounts.basic_tax_dueColumn] = value;
+                    this[this.tabledtRPTStamentOfAccounts.total_tax_due_basicColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal basic_sef_tax_due {
+            public decimal total_tax_due_sef {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.basic_sef_tax_dueColumn]));
+                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.total_tax_due_sefColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'basic_sef_tax_due\' in table \'dtRPTStamentOfAccounts\' is DBN" +
+                        throw new global::System.Data.StrongTypingException("The value for column \'total_tax_due_sef\' in table \'dtRPTStamentOfAccounts\' is DBN" +
                                 "ull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTStamentOfAccounts.basic_sef_tax_dueColumn] = value;
+                    this[this.tabledtRPTStamentOfAccounts.total_tax_due_sefColumn] = value;
                 }
             }
             
@@ -27333,18 +27303,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal penalty_discount {
+            public decimal penalty_discount_basic {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.penalty_discountColumn]));
+                        return ((decimal)(this[this.tabledtRPTStamentOfAccounts.penalty_discount_basicColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'penalty_discount\' in table \'dtRPTStamentOfAccounts\' is DBNu" +
-                                "ll.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'penalty_discount_basic\' in table \'dtRPTStamentOfAccounts\' i" +
+                                "s DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTStamentOfAccounts.penalty_discountColumn] = value;
+                    this[this.tabledtRPTStamentOfAccounts.penalty_discount_basicColumn] = value;
                 }
             }
             
@@ -27448,18 +27418,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isarp_noNull() {
-                return this.IsNull(this.tabledtRPTStamentOfAccounts.arp_noColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setarp_noNull() {
-                this[this.tabledtRPTStamentOfAccounts.arp_noColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Isno_of_yearsNull() {
                 return this.IsNull(this.tabledtRPTStamentOfAccounts.no_of_yearsColumn);
             }
@@ -27484,26 +27442,26 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbasic_tax_dueNull() {
-                return this.IsNull(this.tabledtRPTStamentOfAccounts.basic_tax_dueColumn);
+            public bool Istotal_tax_due_basicNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.total_tax_due_basicColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbasic_tax_dueNull() {
-                this[this.tabledtRPTStamentOfAccounts.basic_tax_dueColumn] = global::System.Convert.DBNull;
+            public void Settotal_tax_due_basicNull() {
+                this[this.tabledtRPTStamentOfAccounts.total_tax_due_basicColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isbasic_sef_tax_dueNull() {
-                return this.IsNull(this.tabledtRPTStamentOfAccounts.basic_sef_tax_dueColumn);
+            public bool Istotal_tax_due_sefNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.total_tax_due_sefColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setbasic_sef_tax_dueNull() {
-                this[this.tabledtRPTStamentOfAccounts.basic_sef_tax_dueColumn] = global::System.Convert.DBNull;
+            public void Settotal_tax_due_sefNull() {
+                this[this.tabledtRPTStamentOfAccounts.total_tax_due_sefColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -27520,14 +27478,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Ispenalty_discountNull() {
-                return this.IsNull(this.tabledtRPTStamentOfAccounts.penalty_discountColumn);
+            public bool Ispenalty_discount_basicNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.penalty_discount_basicColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setpenalty_discountNull() {
-                this[this.tabledtRPTStamentOfAccounts.penalty_discountColumn] = global::System.Convert.DBNull;
+            public void Setpenalty_discount_basicNull() {
+                this[this.tabledtRPTStamentOfAccounts.penalty_discount_basicColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

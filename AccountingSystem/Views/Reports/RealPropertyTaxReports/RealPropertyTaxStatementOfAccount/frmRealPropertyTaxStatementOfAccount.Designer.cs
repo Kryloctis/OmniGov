@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnFindOwner = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,6 +72,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             this.panel1.Size = new System.Drawing.Size(1141, 581);
             this.panel1.TabIndex = 2;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // frmRealPropertyTaxStatementOfAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -78,9 +86,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             this.ClientSize = new System.Drawing.Size(1141, 639);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.MinimizeBox = false;
             this.Name = "frmRealPropertyTaxStatementOfAccount";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Collection/Payment > Real Property Tax Statement of Account";
+            this.Load += new System.EventHandler(this.frmRealPropertyTaxStatementOfAccount_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -93,5 +104,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnFindOwner;
         private System.Windows.Forms.Panel panel1;
+        internal System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

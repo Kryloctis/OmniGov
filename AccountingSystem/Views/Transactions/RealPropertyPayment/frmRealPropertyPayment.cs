@@ -39,6 +39,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             try
             {
+
                 var dictViewPaymentPost = AccFactory.RptPaymentPostsRepository().GetViewRecordById(paymentPostsId);
 
                 string payee = dictViewPaymentPost["payment_collections_payee"];
@@ -79,7 +80,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 new DataColumn("total_sef_basic", typeof(decimal))
             };
             dataTable.Columns.AddRange(columns);
-
 
             //Populate data table
             if (realPropertyPaymentTaxDueModelList != null)
@@ -227,7 +227,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 Helper.DisposePrintToPrinter();
                 Cursor.Current = Cursors.Default;
                 return true;
-                
             }
             catch (Exception ex)
             {
