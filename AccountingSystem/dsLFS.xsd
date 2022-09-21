@@ -610,6 +610,24 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="dtRPTStamentOfAccounts" msprop:Generator_TableClassName="dtRPTStamentOfAccountsDataTable" msprop:Generator_TableVarName="tabledtRPTStamentOfAccounts" msprop:Generator_RowChangedName="dtRPTStamentOfAccountsRowChanged" msprop:Generator_TablePropName="dtRPTStamentOfAccounts" msprop:Generator_RowDeletingName="dtRPTStamentOfAccountsRowDeleting" msprop:Generator_RowChangingName="dtRPTStamentOfAccountsRowChanging" msprop:Generator_RowEvHandlerName="dtRPTStamentOfAccountsRowChangeEventHandler" msprop:Generator_RowDeletedName="dtRPTStamentOfAccountsRowDeleted" msprop:Generator_RowClassName="dtRPTStamentOfAccountsRow" msprop:Generator_UserTableName="dtRPTStamentOfAccounts" msprop:Generator_RowEvArgName="dtRPTStamentOfAccountsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="no_of_years" msprop:Generator_ColumnVarNameInTable="columnno_of_years" msprop:Generator_ColumnPropNameInRow="no_of_years" msprop:Generator_ColumnPropNameInTable="no_of_yearsColumn" msprop:Generator_UserColumnName="no_of_years" type="xs:int" minOccurs="0" />
+              <xs:element name="tax_due" msprop:Generator_ColumnVarNameInTable="columntax_due" msprop:Generator_ColumnPropNameInRow="tax_due" msprop:Generator_ColumnPropNameInTable="tax_dueColumn" msprop:Generator_UserColumnName="tax_due" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_tax_due_basic" msprop:Generator_ColumnVarNameInTable="columntotal_tax_due_basic" msprop:Generator_ColumnPropNameInRow="total_tax_due_basic" msprop:Generator_ColumnPropNameInTable="total_tax_due_basicColumn" msprop:Generator_UserColumnName="total_tax_due_basic" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_tax_due_sef" msprop:Generator_ColumnVarNameInTable="columntotal_tax_due_sef" msprop:Generator_ColumnPropNameInRow="total_tax_due_sef" msprop:Generator_ColumnPropNameInTable="total_tax_due_sefColumn" msprop:Generator_UserColumnName="total_tax_due_sef" type="xs:decimal" minOccurs="0" />
+              <xs:element name="percentage" msprop:Generator_ColumnVarNameInTable="columnpercentage" msprop:Generator_ColumnPropNameInRow="percentage" msprop:Generator_ColumnPropNameInTable="percentageColumn" msprop:Generator_UserColumnName="percentage" type="xs:decimal" minOccurs="0" />
+              <xs:element name="penalty_discount_basic" msprop:Generator_ColumnVarNameInTable="columnpenalty_discount_basic" msprop:Generator_ColumnPropNameInRow="penalty_discount_basic" msprop:Generator_ColumnPropNameInTable="penalty_discount_basicColumn" msprop:Generator_UserColumnName="penalty_discount_basic" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_basic" msprop:Generator_ColumnVarNameInTable="columntotal_basic" msprop:Generator_ColumnPropNameInRow="total_basic" msprop:Generator_ColumnPropNameInTable="total_basicColumn" msprop:Generator_UserColumnName="total_basic" type="xs:decimal" minOccurs="0" />
+              <xs:element name="penalty_discount_sef" msprop:Generator_ColumnVarNameInTable="columnpenalty_discount_sef" msprop:Generator_ColumnPropNameInRow="penalty_discount_sef" msprop:Generator_ColumnPropNameInTable="penalty_discount_sefColumn" msprop:Generator_UserColumnName="penalty_discount_sef" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_sef" msprop:Generator_ColumnVarNameInTable="columntotal_sef" msprop:Generator_ColumnPropNameInRow="total_sef" msprop:Generator_ColumnPropNameInTable="total_sefColumn" msprop:Generator_UserColumnName="total_sef" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_due" msprop:Generator_ColumnVarNameInTable="columntotal_due" msprop:Generator_ColumnPropNameInRow="total_due" msprop:Generator_ColumnPropNameInTable="total_dueColumn" msprop:Generator_UserColumnName="total_due" type="xs:decimal" minOccurs="0" />
+              <xs:element name="total_paid" msprop:Generator_ColumnVarNameInTable="columntotal_paid" msprop:Generator_ColumnPropNameInRow="total_paid" msprop:Generator_ColumnPropNameInTable="total_paidColumn" msprop:Generator_UserColumnName="total_paid" type="xs:decimal" minOccurs="0" />
+              <xs:element name="unpaid_balance" msprop:Generator_ColumnVarNameInTable="columnunpaid_balance" msprop:Generator_ColumnPropNameInRow="unpaid_balance" msprop:Generator_ColumnPropNameInTable="unpaid_balanceColumn" msprop:Generator_UserColumnName="unpaid_balance" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
@@ -38,6 +39,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             try
             {
+
                 var dictViewPaymentPost = AccFactory.RptPaymentPostsRepository().GetViewRecordById(paymentPostsId);
 
                 string payee = dictViewPaymentPost["payment_collections_payee"];
@@ -78,7 +80,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 new DataColumn("total_sef_basic", typeof(decimal))
             };
             dataTable.Columns.AddRange(columns);
-
 
             //Populate data table
             if (realPropertyPaymentTaxDueModelList != null)
@@ -155,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerList(this).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, null, this).ShowDialog();
             LoadRptDetailedTaxDues(null);
         }
 
@@ -226,7 +227,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 Helper.DisposePrintToPrinter();
                 Cursor.Current = Cursors.Default;
                 return true;
-                
             }
             catch (Exception ex)
             {

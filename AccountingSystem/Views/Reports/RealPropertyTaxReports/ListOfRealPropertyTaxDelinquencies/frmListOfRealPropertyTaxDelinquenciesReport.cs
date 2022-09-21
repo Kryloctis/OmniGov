@@ -1,4 +1,6 @@
-﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using AccountingSystem.Views.Transactions.PaymentPosting;
+using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -276,7 +278,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayerList(this).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, this, null ).ShowDialog();
         }
     }
 }

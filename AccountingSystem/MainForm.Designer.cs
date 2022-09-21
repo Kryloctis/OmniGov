@@ -157,6 +157,7 @@ namespace AccountingSystem
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -1526,6 +1527,7 @@ namespace AccountingSystem
             this.abstractOfGeneralCollectionsToolStripMenuItem,
             this.toolStripSeparator8,
             this.toolStripMenuItemrealPropertyTaxAccountRegister,
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount,
             this.toolStripSeparator7,
             this.toolStripMenuItemConsolidatedRealPropertyTaxDues,
             this.toolStripMenuItemListOfDelinquentAccounts});
@@ -1610,6 +1612,13 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemRealPropertyTaxStatementOfAccount
+            // 
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Name = "toolStripMenuItemRealPropertyTaxStatementOfAccount";
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Size = new System.Drawing.Size(304, 22);
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Text = "Real Property Tax Statement of Account";
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Click += new System.EventHandler(this.toolStripMenuItemRealPropertyTaxStatementOfAccount_Click);
             // 
             // MainForm
             // 
@@ -1814,6 +1823,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem menuRealPropeties;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRealPropertyTaxStatementOfAccount;
     }
 }
 
