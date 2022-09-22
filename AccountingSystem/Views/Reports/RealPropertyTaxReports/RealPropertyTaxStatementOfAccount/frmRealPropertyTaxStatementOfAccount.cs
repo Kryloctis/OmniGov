@@ -42,6 +42,42 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
         }
 
+        private DataColumn[] Sample()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("amount", typeof(decimal)),
+                new DataColumn("tax_type", typeof(string)),
+            };
+        }
+
+        private DataTable SapleDT()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(Sample());
+            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecords();
+            var newRowBasic = dataTable.NewRow();
+            var newRowSEF = dataTable.NewRow();
+
+            #region Basic
+            newRowBasic["id"] = null;
+            newRowBasic["amount"] = null;
+            newRowBasic["tax_type"] = null;
+            #endregion
+
+            #region SEF
+            newRowSEF["id"] = null;
+            newRowSEF["amount"] = null;
+            newRowSEF["tax_type"] = null;
+            #endregion
+
+            dataTable.Rows.Add(newRowBasic);
+            dataTable.Rows.Add(newRowSEF);
+
+            return dataTable;
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             dtRealPropertyTaxStatementOfAccounts = new dsLFS.dtRPTStamentOfAccountsDataTable();
@@ -195,7 +231,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
 
             localReport.DataSources.Clear();
-            localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", dtRealPropertyTaxStatementOfAccounts));
+            localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", SapleDT()));
 
             localReport.SetParameters(parameter);
 
