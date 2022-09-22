@@ -350,5 +350,19 @@ namespace ACC.Data
 
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
+
+        public DataTable GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(string completeArpNo, string ownerName)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+                new object[] { "@owner_name", DbType.String, ownerName}
+            };
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND owner_name = @owner_name ORDER BY complete_arp_no ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
     }
 }
