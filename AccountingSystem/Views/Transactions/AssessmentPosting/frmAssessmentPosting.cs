@@ -27,7 +27,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             LoadBarangays();
             nudYear.Value = Helper.GetCurrentDate().Year;
-            LoadProperties();
             EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
 
@@ -116,6 +115,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
                 EnableDisableToolStripButton(dgProperties, btnPostSelected);
                 Miscellaneous();
+                this.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -275,6 +275,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
             HelperLoadRecords.RealPropertiesSearchDatagridView(assessmentPostsDataTable, dgProperties);
             Cursor = Cursors.Default;
+            this.Enabled = true;
         }
 
         #endregion Load AssessmentPosts
@@ -540,7 +541,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnRetrieve_Click(object sender, EventArgs e)
         {
             LoadProperties();
         }
