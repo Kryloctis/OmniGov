@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {
-        public string OwnerTin { get; set; }
+        public string completeARPNumber { get; set; }
         public string OwnerName { get; set; }
         public string OwnerAddress { get; set; }
 
@@ -52,30 +52,41 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             };
         }
 
-        private DataTable SapleDT()
+        private DataTable GetRPTStatementOfAccountsDt()
         {
+            dtRealPropertyTaxStatementOfAccounts = new dsLFS.dtRPTStamentOfAccountsDataTable();
+
             var dataTable = new DataTable();
-            dataTable.Columns.AddRange(Sample());
-            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecords();
-            var newRowBasic = dataTable.NewRow();
-            var newRowSEF = dataTable.NewRow();
+            //dataTable.Columns.AddRange(Sample());
+            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName("02-0010-00053", OwnerName);
 
-            #region Basic
-            newRowBasic["id"] = null;
-            newRowBasic["amount"] = null;
-            newRowBasic["tax_type"] = null;
-            #endregion
+       
+            foreach (DataRow row in dtAssessmentPost.Rows)
+            {
+                var newRowBasic = dtRealPropertyTaxStatementOfAccounts.NewRow();
+                var newRowSEF = dtRealPropertyTaxStatementOfAccounts.NewRow();
 
-            #region SEF
-            newRowSEF["id"] = null;
-            newRowSEF["amount"] = null;
-            newRowSEF["tax_type"] = null;
-            #endregion
 
-            dataTable.Rows.Add(newRowBasic);
-            dataTable.Rows.Add(newRowSEF);
+                byte noOfyears = 0;
+                decimal taxDue = 0.0m;
 
-            return dataTable;
+
+                #region Basic
+                newRowBasic["total_tax_due_basic"] = 121245;
+                newRowBasic["total_basic"] = 2141;
+                #endregion
+
+                #region SEF
+                newRowSEF["total_tax_due_sef"] = 6865;
+                newRowSEF["total_sef"] = 12245;
+                #endregion
+
+                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
+                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
+
+            }
+
+            return dtRealPropertyTaxStatementOfAccounts;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -216,36 +227,33 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
         private bool LoadReport()
         {
-            var localReport = reportViewer.LocalReport;
-            var lguDetails = Helper.LGUDetails();
-
-            var parameter = new ReportParameter[]
-            {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramOwner", OwnerName),
-                new ReportParameter("paramOwerTin", OwnerTin),
-                new ReportParameter("paramOwnerAddress", OwnerAddress),
-                new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
-            };
-
-            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
-
-            localReport.DataSources.Clear();
-            localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", SapleDT()));
-
-            localReport.SetParameters(parameter);
-
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.ZoomPercent = 100;
-
-            reportViewer.RefreshReport();
-
-            return true;
-
             try
             {
+                var localReport = reportViewer.LocalReport;
+                var lguDetails = Helper.LGUDetails();
 
+                var parameter = new ReportParameter[]
+                {
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramOwner", OwnerName),
+                new ReportParameter("paramOwnerAddress", OwnerAddress),
+                new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
+                };
+
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
+
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", GetRPTStatementOfAccountsDt()));
+
+                localReport.SetParameters(parameter);
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -253,5 +261,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             }
             return false;
         }
+
     }
 }

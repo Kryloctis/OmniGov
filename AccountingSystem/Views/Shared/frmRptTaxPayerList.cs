@@ -113,10 +113,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            string arpNumber = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+            string completeARPNumber = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
             string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
             string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
 
+            _frmRealPropertyTaxStatementOfAccount.completeARPNumber = completeARPNumber;
             _frmRealPropertyTaxStatementOfAccount.OwnerName = ownerName;
             _frmRealPropertyTaxStatementOfAccount.OwnerAddress = ownerAddress;
 
