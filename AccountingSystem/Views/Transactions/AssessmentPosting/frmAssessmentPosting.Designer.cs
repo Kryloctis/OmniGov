@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnRetrieve = new System.Windows.Forms.Button();
             this.bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
@@ -325,16 +325,16 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.txtSearch.Size = new System.Drawing.Size(221, 23);
             this.txtSearch.TabIndex = 17;
             // 
-            // btnSearch
+            // btnRetrieve
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(960, 19);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 18;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnRetrieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRetrieve.Location = new System.Drawing.Point(960, 19);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 18;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // bgwLoadAsessmentPosts
             // 
@@ -345,12 +345,12 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // 
             // frmAssessmentPosting
             // 
-            this.AcceptButton = this.btnSearch;
+            this.AcceptButton = this.btnRetrieve;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(1039, 505);
-            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.nudYear);
             this.Controls.Add(this.cmbxBarangays);
@@ -395,7 +395,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox cmbxBarangays;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtBarangay;
         private System.Windows.Forms.TextBox txtYear;
