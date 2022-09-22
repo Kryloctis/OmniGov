@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -60,30 +61,43 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             //dataTable.Columns.AddRange(Sample());
             var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName("02-0010-00053", OwnerName);
 
-       
             foreach (DataRow row in dtAssessmentPost.Rows)
             {
                 var newRowBasic = dtRealPropertyTaxStatementOfAccounts.NewRow();
                 var newRowSEF = dtRealPropertyTaxStatementOfAccounts.NewRow();
 
+                decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
 
-                byte noOfyears = 0;
-                decimal taxDue = 0.0m;
+                decimal discountRate = Convert.ToDecimal(row["discount_rate"]);
+                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
 
+                decimal basicTaxRate = Convert.ToDecimal(row["basic_rate"]);
+                decimal sefTaxRate = Convert.ToDecimal(row["sef_rate"]);
+                decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(basicTaxRate, assessedValue);
+                decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefTaxRate, assessedValue);
+
+                #region Discount
+                decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
+                decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
+                #endregion Discount
 
                 #region Basic
-                newRowBasic["total_tax_due_basic"] = 121245;
-                newRowBasic["total_basic"] = 2141;
+                newRowBasic["total_tax_due_basic"] = basicTaxDueAmount;
+                newRowBasic["total_tax_due_sef"] = sefTaxDueAmount;
                 #endregion
 
                 #region SEF
-                newRowSEF["total_tax_due_sef"] = 6865;
-                newRowSEF["total_sef"] = 12245;
+                newRowSEF["total_tax_due_sef"] = sefTaxDueAmount;
+                newRowSEF["total_sef"] = sefTaxDueAmount;
                 #endregion
 
+
+
+
+
+      
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
-
             }
 
             return dtRealPropertyTaxStatementOfAccounts;

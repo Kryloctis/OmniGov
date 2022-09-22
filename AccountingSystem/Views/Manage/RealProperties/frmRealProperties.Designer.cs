@@ -108,7 +108,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             // btnSynchronize
             // 
             this.btnSynchronize.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSynchronize.Enabled = false;
             this.btnSynchronize.Image = global::AccountingSystem.Properties.Resources.button_update_24px;
             this.btnSynchronize.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSynchronize.ImageTransparentColor = System.Drawing.Color.Magenta;

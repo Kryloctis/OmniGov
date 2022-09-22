@@ -1,5 +1,5 @@
 ﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
-using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -36,9 +36,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
             int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, assessmentYear);
-            int delinquentMonths = taxDueComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
+            int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
 
-            return taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
+            return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
         }
 
         private bool LoadReport()
@@ -130,15 +130,15 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 
                 decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
                 decimal rowSefRate = Convert.ToDecimal(row["sef_rate"]);
-                decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
-                decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+                decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
+                decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
                 #endregion Tax Due
 
                 #region Discount
 
-                decimal basicDiscount = taxDueComputations.GetDiscount(rowDiscountRate, basicTaxDueAmount);
-                decimal sefDiscount = taxDueComputations.GetDiscount(rowDiscountRate, sefTaxDueAmount);
+                decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(rowDiscountRate, basicTaxDueAmount);
+                decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(rowDiscountRate, sefTaxDueAmount);
 
                 #endregion Discount
 
