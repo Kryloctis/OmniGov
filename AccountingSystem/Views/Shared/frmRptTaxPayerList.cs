@@ -87,12 +87,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private void frmRptOwnerList_Load(object sender, EventArgs e)
         {
-            //EnableDisableSelectButton();
+            EnableDisableSelectButton();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            //EnableDisableSelectButton();
+            EnableDisableSelectButton();
         }
 
         private void InitializeRealPropertyTaxAccountngRegisterReport()
@@ -179,7 +179,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         {
             LoadMethods();
         }
-
 
         private void LoadMethods()
         {

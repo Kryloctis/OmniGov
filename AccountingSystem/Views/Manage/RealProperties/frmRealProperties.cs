@@ -161,7 +161,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnSynchronize_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
