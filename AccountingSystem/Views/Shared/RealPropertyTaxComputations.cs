@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
+namespace AccountingSystem.Views.Shared
 {
-    public static class taxDueComputations
+    public static class RealPropertyTaxComputations
     {
         public static int GetMonthsBetweenYears(int fromYear, int toYear)
-        {        
+        {
             int years = toYear - fromYear;
             int months = 12 * years;
 
@@ -30,11 +30,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             //If previous assessements are paid
             else if (assessmentYear < currentYear && previousAssessmentCount > 0)
-                months = (GetMonthsBetweenYears(assessmentYear, currentYear)) + currentMonth;
+                months = GetMonthsBetweenYears(assessmentYear, currentYear) + currentMonth;
 
             //If no previous years of assessments
             else if (previousAssessmentCount < 1)
-                months = (GetMonthsBetweenYears(effectivityYear, currentYear) + currentMonth);
+                months = GetMonthsBetweenYears(effectivityYear, currentYear) + currentMonth;
             else
                 months = 0;
 
@@ -55,11 +55,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             //If previous assessements are paid
             else if (assessmentYear < paymentPostsYear && previousAssessmentCount > 0)
-                months = (GetMonthsBetweenYears(assessmentYear, paymentPostsYear)) + paymentPostsMonth;
+                months = GetMonthsBetweenYears(assessmentYear, paymentPostsYear) + paymentPostsMonth;
 
             //If no previous years of assessments
             else if (previousAssessmentCount < 1)
-                months = (GetMonthsBetweenYears(effectivityYear, paymentPostsYear) + paymentPostsMonth);
+                months = GetMonthsBetweenYears(effectivityYear, paymentPostsYear) + paymentPostsMonth;
             else
                 months = 0;
 
@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             decimal discountRate;
             DateTime currentDate = DateTime.Now;
             int postYear = postedDate.Year;
-            int postMonth = postedDate.Month; 
+            int postMonth = postedDate.Month;
             var annualDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(10, true);
             var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(postMonth, false);
 
@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 isAdvance = true;
             }
 
-            else if ((postYear == currentDate.Year && year == postYear) && (postMonth == 1 || postMonth == 2 || postMonth == 3))
+            else if (postYear == currentDate.Year && year == postYear && (postMonth == 1 || postMonth == 2 || postMonth == 3))
             {
                 discountRate = monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
                 isAdvance = false;

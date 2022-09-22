@@ -1,4 +1,4 @@
-﻿using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
+﻿using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.ComponentModel;
@@ -74,9 +74,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
             int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, assessmentYear);
-            int delinquentMonths = taxDueComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
+            int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
 
-            return taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
+            return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
         }
         
         private void GetParameters(out string barangayName, out DateTime asOfDate)
@@ -123,8 +123,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
                 decimal rowBasicRate = Convert.ToDecimal(row["basic_rate"]);
                 decimal rowSefRate = Convert.ToDecimal(row["sef_rate"]);
-                decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
-                decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+                decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
+                decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
 
                 #endregion Tax Due
 

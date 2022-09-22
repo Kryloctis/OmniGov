@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports;
+using AccountingSystem.Views.Shared;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using System;
@@ -192,22 +193,22 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
                 decimal basicRate = Convert.ToDecimal(row["basic_rate"]);
 
                 decimal sefRate = Convert.ToDecimal(row["sef_rate"]);
-                decimal basicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(basicRate, sefRate, assessedValue);
+                decimal basicSefTotalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue(basicRate, sefRate, assessedValue);
 
                 #region Getting Discount
 
                 bool discountIsAdvance = false;
-                decimal discountRate = taxDueComputations.GetCurrentDiscountRate(assessmentPostsDate, assessmentYear, ref discountIsAdvance);
-                decimal discountAmount = taxDueComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
+                decimal discountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(assessmentPostsDate, assessmentYear, ref discountIsAdvance);
+                decimal discountAmount = RealPropertyTaxComputations.GetDiscount(discountRate, basicSefTotalTaxDue);
 
                 #endregion
 
                 #region Getting Penalties
 
                 int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, assessmentYear);
-                int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(assessmentYear, assessmentPostsDate, effectivityYear, previousAssessmentCount);
+                int delinquentMonths = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(assessmentYear, assessmentPostsDate, effectivityYear, previousAssessmentCount);
                 decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
-                decimal penaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
+                decimal penaltyAmount = RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, basicSefTotalTaxDue);
 
                 #endregion
 
@@ -423,30 +424,30 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             decimal basicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
             decimal sefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
-            decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(basicRate, rowAssessedValue);
-            decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(sefRate, rowAssessedValue);
+            decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, rowAssessedValue);
+            decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefRate, rowAssessedValue);
 
             #endregion
 
             #region Discount
 
             bool discountIsAdvance = false;
-            decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
+            decimal discountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
 
-            decimal basicDiscountAmount = taxDueComputations.GetDiscount(discountRate, basicTaxDueAmount);
-            decimal sefDiscountAmount = taxDueComputations.GetDiscount(discountRate, sefTaxDueAmount);
+            decimal basicDiscountAmount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
+            decimal sefDiscountAmount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
 
             #endregion
 
             #region  Penalty
 
             int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
-            int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
+            int delinquentMonths = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
             decimal penaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
 
 
-            decimal basicPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDueAmount);
-            decimal sefPenaltyAmount = taxDueComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDueAmount);
+            decimal basicPenaltyAmount = RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, basicTaxDueAmount);
+            decimal sefPenaltyAmount = RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, sefTaxDueAmount);
 
             #endregion
 
@@ -579,26 +580,26 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
             decimal rowBasicRate = Convert.ToDecimal(dictAssessmentPosts["basic_rate"]);
             decimal rowSefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
-            decimal basicTaxDueAmount = taxDueComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
-            decimal sefTaxDueAmount = taxDueComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
-            decimal rowBasicSefTotalTaxDue = taxDueComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue); 
+            decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
+            decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
+            decimal rowBasicSefTotalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue); 
 
             #endregion
 
             #region Getting Discount
 
             bool discountIsAdvance = false;
-            decimal discountRate = taxDueComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
-            decimal discountAmount = taxDueComputations.GetDiscount(discountRate, rowBasicSefTotalTaxDue);
+            decimal discountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(rowAssessmentPostsDate, rowAssessmentYear, ref discountIsAdvance);
+            decimal discountAmount = RealPropertyTaxComputations.GetDiscount(discountRate, rowBasicSefTotalTaxDue);
 
             #endregion
 
             #region Getting Penalties
 
             int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(rowCompleteArpNo, rowAssessmentYear);
-            int delinquentMonths = taxDueComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
+            int delinquentMonths = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(rowAssessmentYear, rowAssessmentPostsDate, rowEffectivityYear, previousAssessmentCount);
             decimal rowPenaltyRate = Convert.ToDecimal(dictAssessmentPosts["penalty_rate"]);
-            decimal penaltyAmount = taxDueComputations.GetPenalty(rowPenaltyRate, delinquentMonths, rowBasicSefTotalTaxDue);
+            decimal penaltyAmount = RealPropertyTaxComputations.GetPenalty(rowPenaltyRate, delinquentMonths, rowBasicSefTotalTaxDue);
 
             #endregion
 
