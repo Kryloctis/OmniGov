@@ -98,17 +98,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private void InitializeRealPropertyTaxAccountngRegisterReport()
         {
-            int rowIndex = dataGridView1.CurrentRow.Index;
-            string ownerTin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
-            string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
-            string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
-
-            _frmRealPropertyTaxAccountRegisterReport.OwnerName = ownerName;
-            _frmRealPropertyTaxAccountRegisterReport.OwnerAddress = ownerAddress;
-            _frmRealPropertyTaxAccountRegisterReport.OwnerTin = ownerTin;
-
-            _frmRealPropertyTaxAccountRegisterReport.backgroundWorker1.RunWorkerAsync();
-            _frmRealPropertyTaxAccountRegisterReport.btnReload.Enabled = true;
+ 
         }
 
         private void InitializeRealPropertyTaxStatementOfAccountReport()

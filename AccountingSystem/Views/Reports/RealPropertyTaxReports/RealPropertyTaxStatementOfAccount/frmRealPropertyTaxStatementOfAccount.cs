@@ -1,6 +1,7 @@
 ﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
+using RPT.Data;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -70,19 +71,24 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
                 decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(basicTaxRate, assessedValue);
                 decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefTaxRate, assessedValue);
 
+                string year = row["year"].ToString();
                 #region Discount
                 decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
                 decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
                 #endregion Discount
-
+                    
                 #region Basic
+                newRowBasic["tax_type"] = "Basic";
+                newRowBasic["previous_year"] = "2010";
+                newRowBasic["next_year"] = year;
+
                 newRowBasic["total_tax_due_basic"] = basicTaxDueAmount;
-                newRowBasic["total_tax_due_sef"] = sefTaxDueAmount;
                 #endregion
 
                 #region SEF
+                newRowSEF["tax_type"] = "SEF";
+
                 newRowSEF["total_tax_due_sef"] = sefTaxDueAmount;
-                newRowSEF["total_sef"] = sefTaxDueAmount;
                 #endregion
 
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
@@ -235,9 +241,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
                 var localReport = reportViewer.LocalReport;
                 var lguDetails = Helper.LGUDetails();
 
+                var assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeARPNumber).ToString("N2");
+
                 var parameter = new ReportParameter[]
                 {
                 new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramAssessedValue", assessedValue),
+                new ReportParameter("paramARPNo", completeARPNumber),
                 new ReportParameter("paramOwner", OwnerName),
                 new ReportParameter("paramOwnerAddress", OwnerAddress),
                 new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
