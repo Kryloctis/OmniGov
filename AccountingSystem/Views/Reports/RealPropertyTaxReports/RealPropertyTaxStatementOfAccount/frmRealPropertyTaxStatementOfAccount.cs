@@ -1,15 +1,9 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount
@@ -59,7 +53,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
             var dataTable = new DataTable();
             //dataTable.Columns.AddRange(Sample());
-            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName("02-0010-00053", OwnerName);
+            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(completeARPNumber, OwnerName);
 
             foreach (DataRow row in dtAssessmentPost.Rows)
             {
@@ -91,11 +85,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
                 newRowSEF["total_sef"] = sefTaxDueAmount;
                 #endregion
 
-
-
-
-
-      
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
             }

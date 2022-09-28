@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using RPT.Data;
 using System;
 using System.Data;
 using System.Reflection;
@@ -113,8 +114,8 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            string completeARPNumber = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
             string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+            string completeARPNumber = RptFactory.RealPropertiesRepository().GetArpNumberByOwnerName(ownerName);
             string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
 
             _frmRealPropertyTaxStatementOfAccount.completeARPNumber = completeARPNumber;
