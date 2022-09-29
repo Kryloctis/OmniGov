@@ -51,7 +51,7 @@ namespace AccountingSystem
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuRealPropeties = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,6 +149,7 @@ namespace AccountingSystem
             this.abstractOfGeneralCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemrealPropertyTaxAccountRegister = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemConsolidatedRealPropertyTaxDues = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemListOfDelinquentAccounts = new System.Windows.Forms.ToolStripMenuItem();
@@ -157,7 +158,8 @@ namespace AccountingSystem
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemRealPropertyTaxStatementOfAccount = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -252,11 +254,13 @@ namespace AccountingSystem
             this.menuBanks,
             this.menuAccForm,
             this.menuReceipts,
-            this.menuRealPropeties,
+            this.menuTaxPayers,
             this.toolStripSeparator1,
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
-            this.taxRateToolStripMenuItem});
+            this.taxRateToolStripMenuItem,
+            this.toolStripSeparator9,
+            this.menuDatabaseSynchronization});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 24);
             this.menuManage.Text = "Manage";
@@ -378,12 +382,11 @@ namespace AccountingSystem
             this.menuReceipts.Text = "Receipts";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
             // 
-            // menuRealPropeties
+            // menuTaxPayers
             // 
-            this.menuRealPropeties.Name = "menuRealPropeties";
-            this.menuRealPropeties.Size = new System.Drawing.Size(214, 22);
-            this.menuRealPropeties.Text = "Real Properties";
-            this.menuRealPropeties.Click += new System.EventHandler(this.menuRealPropeties_Click);
+            this.menuTaxPayers.Name = "menuTaxPayers";
+            this.menuTaxPayers.Size = new System.Drawing.Size(214, 22);
+            this.menuTaxPayers.Text = "Taxpayers";
             // 
             // toolStripSeparator1
             // 
@@ -1561,6 +1564,13 @@ namespace AccountingSystem
             this.toolStripMenuItemrealPropertyTaxAccountRegister.Text = "Real Property Tax Account Register (RPTAR)";
             this.toolStripMenuItemrealPropertyTaxAccountRegister.Click += new System.EventHandler(this.toolStripMenuItemrealPropertyTaxAccountRegister_Click);
             // 
+            // toolStripMenuItemRealPropertyTaxStatementOfAccount
+            // 
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Name = "toolStripMenuItemRealPropertyTaxStatementOfAccount";
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Size = new System.Drawing.Size(304, 22);
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Text = "Real Property Tax Statement of Account";
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Click += new System.EventHandler(this.toolStripMenuItemRealPropertyTaxStatementOfAccount_Click);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
@@ -1613,12 +1623,16 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
             // 
-            // toolStripMenuItemRealPropertyTaxStatementOfAccount
+            // toolStripSeparator9
             // 
-            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Name = "toolStripMenuItemRealPropertyTaxStatementOfAccount";
-            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Size = new System.Drawing.Size(304, 22);
-            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Text = "Real Property Tax Statement of Account";
-            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Click += new System.EventHandler(this.toolStripMenuItemRealPropertyTaxStatementOfAccount_Click);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
+            // 
+            // menuDatabaseSynchronization
+            // 
+            this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
+            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
+            this.menuDatabaseSynchronization.Text = "Database Synchronization";
             // 
             // MainForm
             // 
@@ -1822,8 +1836,10 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem abstractOfGeneralCollectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem menuRealPropeties;
+        private System.Windows.Forms.ToolStripMenuItem menuTaxPayers;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRealPropertyTaxStatementOfAccount;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem menuDatabaseSynchronization;
     }
 }
 
