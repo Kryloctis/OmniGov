@@ -34,16 +34,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label1 = new System.Windows.Forms.Label();
             this.txtPropertyPin = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtOwnerContact = new System.Windows.Forms.TextBox();
-            this.txtOwnerAddress = new System.Windows.Forms.TextBox();
-            this.txtOwnerTin = new System.Windows.Forms.TextBox();
-            this.txtOwnerName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.nudArea = new System.Windows.Forms.NumericUpDown();
@@ -83,8 +73,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.chckTaxable = new System.Windows.Forms.CheckBox();
             this.chckCancelled = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudArea)).BeginInit();
@@ -133,100 +121,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Property PIN";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(361, 28);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(348, 143);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Owner";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txtOwnerContact);
-            this.panel1.Controls.Add(this.txtOwnerAddress);
-            this.panel1.Controls.Add(this.txtOwnerTin);
-            this.panel1.Controls.Add(this.txtOwnerName);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel1.Location = new System.Drawing.Point(3, 19);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(342, 121);
-            this.panel1.TabIndex = 0;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 95);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 15);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Contact";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 65);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 15);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Address";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "TIN";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Name";
-            // 
-            // txtOwnerContact
-            // 
-            this.txtOwnerContact.Location = new System.Drawing.Point(66, 91);
-            this.txtOwnerContact.Name = "txtOwnerContact";
-            this.txtOwnerContact.Size = new System.Drawing.Size(261, 23);
-            this.txtOwnerContact.TabIndex = 18;
-            // 
-            // txtOwnerAddress
-            // 
-            this.txtOwnerAddress.Location = new System.Drawing.Point(66, 61);
-            this.txtOwnerAddress.Name = "txtOwnerAddress";
-            this.txtOwnerAddress.Size = new System.Drawing.Size(261, 23);
-            this.txtOwnerAddress.TabIndex = 17;
-            // 
-            // txtOwnerTin
-            // 
-            this.txtOwnerTin.Location = new System.Drawing.Point(66, 32);
-            this.txtOwnerTin.Name = "txtOwnerTin";
-            this.txtOwnerTin.Size = new System.Drawing.Size(261, 23);
-            this.txtOwnerTin.TabIndex = 16;
-            // 
-            // txtOwnerName
-            // 
-            this.txtOwnerName.Location = new System.Drawing.Point(66, 3);
-            this.txtOwnerName.Name = "txtOwnerName";
-            this.txtOwnerName.Size = new System.Drawing.Size(261, 23);
-            this.txtOwnerName.TabIndex = 15;
-            this.txtOwnerName.Validating += new System.ComponentModel.CancelEventHandler(this.txtOwnerName_Validating);
-            this.txtOwnerName.Validated += new System.EventHandler(this.txtOwnerName_Validated);
             // 
             // groupBox2
             // 
@@ -524,7 +418,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(361, 177);
+            this.groupBox3.Location = new System.Drawing.Point(361, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(348, 82);
             this.groupBox3.TabIndex = 2;
@@ -584,7 +478,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox4.Controls.Add(this.panel4);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox4.Location = new System.Drawing.Point(361, 265);
+            this.groupBox4.Location = new System.Drawing.Point(361, 116);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(348, 82);
             this.groupBox4.TabIndex = 3;
@@ -643,7 +537,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // chckTaxable
             // 
             this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(546, 6);
+            this.chckTaxable.Location = new System.Drawing.Point(529, 204);
             this.chckTaxable.Name = "chckTaxable";
             this.chckTaxable.Size = new System.Drawing.Size(65, 19);
             this.chckTaxable.TabIndex = 1;
@@ -653,7 +547,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // chckCancelled
             // 
             this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(630, 6);
+            this.chckCancelled.Location = new System.Drawing.Point(613, 204);
             this.chckCancelled.Name = "chckCancelled";
             this.chckCancelled.Size = new System.Drawing.Size(78, 19);
             this.chckCancelled.TabIndex = 4;
@@ -674,13 +568,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Name = "ucRealProperties";
             this.Size = new System.Drawing.Size(712, 433);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -708,16 +598,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtPropertyPin;
         internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.GroupBox groupBox1;
-        internal System.Windows.Forms.Panel panel1;
-        internal System.Windows.Forms.Label label6;
-        internal System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox txtOwnerContact;
-        internal System.Windows.Forms.TextBox txtOwnerAddress;
-        internal System.Windows.Forms.TextBox txtOwnerTin;
-        internal System.Windows.Forms.TextBox txtOwnerName;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.TextBox txtLotNo;

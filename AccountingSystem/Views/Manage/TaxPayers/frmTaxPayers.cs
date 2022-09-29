@@ -58,5 +58,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 uc.ResetForm();
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

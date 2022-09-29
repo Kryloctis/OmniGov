@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 errorProvider1.GetError(nudGrYear),
                 errorProvider1.GetError(nudArea),
                 errorProvider1.GetError(txtLotNo),
-                errorProvider1.GetError(txtOwnerName),
                 errorProvider1.GetError(txtClassificationCode),
                 errorProvider1.GetError(txtClassificationName),
                 errorProvider1.GetError(txtActualUseCode),
@@ -57,10 +56,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             nudOtherImprv.Value = 0;
             nudArea.Value = 0;
             txtLotNo.Clear();
-            txtOwnerName.Clear();
-            txtOwnerTin.Clear();
-            txtOwnerAddress.Clear();
-            txtOwnerContact.Clear();
             txtClassificationCode.Clear();
             txtClassificationName.Clear();
             txtActualUseCode.Clear();
@@ -207,16 +202,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void txtLotNo_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtLotNo);
-        }
-
-        private void txtOwnerName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtOwnerName, "Owner Name");
-        }
-
-        private void txtOwnerName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtOwnerName);
         }
 
         private void txtClassificationCode_Validating(object sender, CancelEventArgs e)

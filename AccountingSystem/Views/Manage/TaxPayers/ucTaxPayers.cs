@@ -155,6 +155,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtProvince);
         }
 
-   
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddRealProperties().ShowDialog();
+        }
     }
 }

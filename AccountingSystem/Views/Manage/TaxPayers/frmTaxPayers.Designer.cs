@@ -85,6 +85,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnSearch.Size = new System.Drawing.Size(46, 47);
             this.btnSearch.Text = "Search";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // ucTaxPayers1
             // 
