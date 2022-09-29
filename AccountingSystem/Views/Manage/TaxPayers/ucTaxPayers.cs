@@ -95,6 +95,16 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
 
+        private void cmbxTaxPayerType_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxTaxPayerType, "Type");
+        }
+
+        private void cmbxTaxPayerType_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxTaxPayerType);
+        }
+
         private void txtContact_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "Contact");
@@ -144,5 +154,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtProvince);
         }
+
+   
     }
 }

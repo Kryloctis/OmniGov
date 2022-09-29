@@ -88,6 +88,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // ucTaxPayers1
             // 
+            this.ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTaxPayers1.Location = new System.Drawing.Point(0, 56);
             this.ucTaxPayers1.Name = "ucTaxPayers1";
@@ -103,6 +104,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
             this.Name = "frmTaxPayers";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Taxpayers";
             this.Load += new System.EventHandler(this.frmTaxPayers_Load);

@@ -134,12 +134,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.cmbxTaxPayerType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxTaxPayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxTaxPayerType.FormattingEnabled = true;
             this.cmbxTaxPayerType.Location = new System.Drawing.Point(93, 76);
             this.cmbxTaxPayerType.Name = "cmbxTaxPayerType";
             this.cmbxTaxPayerType.Size = new System.Drawing.Size(191, 23);
-            this.cmbxTaxPayerType.TabIndex = 7;
+            this.cmbxTaxPayerType.TabIndex = 2;
+            this.cmbxTaxPayerType.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxTaxPayerType_Validating);
+            this.cmbxTaxPayerType.Validated += new System.EventHandler(this.cmbxTaxPayerType_Validated);
             // 
             // txtTIN
             // 
@@ -148,7 +149,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtTIN.Location = new System.Drawing.Point(93, 17);
             this.txtTIN.Name = "txtTIN";
             this.txtTIN.Size = new System.Drawing.Size(191, 23);
-            this.txtTIN.TabIndex = 2;
+            this.txtTIN.TabIndex = 0;
             this.txtTIN.Validating += new System.ComponentModel.CancelEventHandler(this.txtTIN_Validating);
             this.txtTIN.Validated += new System.EventHandler(this.txtTIN_Validated);
             // 
@@ -195,7 +196,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtProvince.Location = new System.Drawing.Point(93, 220);
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.Size = new System.Drawing.Size(191, 23);
-            this.txtProvince.TabIndex = 6;
+            this.txtProvince.TabIndex = 7;
             this.txtProvince.Validating += new System.ComponentModel.CancelEventHandler(this.txtProvince_Validating);
             this.txtProvince.Validated += new System.EventHandler(this.txtProvince_Validated);
             // 
@@ -217,7 +218,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtBarangay.Location = new System.Drawing.Point(93, 163);
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.Size = new System.Drawing.Size(191, 23);
-            this.txtBarangay.TabIndex = 6;
+            this.txtBarangay.TabIndex = 5;
             this.txtBarangay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBarangay_Validating);
             this.txtBarangay.Validated += new System.EventHandler(this.txtBarangay_Validated);
             // 
@@ -228,7 +229,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtStreet.Location = new System.Drawing.Point(93, 133);
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(191, 23);
-            this.txtStreet.TabIndex = 6;
+            this.txtStreet.TabIndex = 4;
             this.txtStreet.Validating += new System.ComponentModel.CancelEventHandler(this.txtStreet_Validating);
             this.txtStreet.Validated += new System.EventHandler(this.txtStreet_Validated);
             // 
@@ -239,7 +240,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtContact.Location = new System.Drawing.Point(93, 104);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(191, 23);
-            this.txtContact.TabIndex = 5;
+            this.txtContact.TabIndex = 3;
             this.txtContact.Validating += new System.ComponentModel.CancelEventHandler(this.txtContact_Validating);
             this.txtContact.Validated += new System.EventHandler(this.txtContact_Validated);
             // 
@@ -268,7 +269,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtName.Location = new System.Drawing.Point(93, 46);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(191, 23);
-            this.txtName.TabIndex = 3;
+            this.txtName.TabIndex = 1;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
             // 
@@ -371,6 +372,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.splitContainer1);
             this.Name = "ucTaxPayers";
             this.Size = new System.Drawing.Size(731, 292);

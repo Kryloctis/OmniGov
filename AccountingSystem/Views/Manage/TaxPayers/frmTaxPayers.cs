@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +35,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 return false;
             }
 
-            return true;
+            var taxPayersModel = new TaxpayersModel()
+            {
+                Tin = uc.txtTIN.Text,
+                Name = uc.Name,
+                Type = uc.cmbxTaxPayerType.Text,
+                ContactInfo = uc.txtContact.Text,
+                Street = uc.txtStreet.Text,
+                Barangay = uc.txtBarangay.Text,
+                Municipality = uc.txtMunicipality.Text,
+                Province = uc.txtMunicipality.Text
+            };
+
+            return AccFactory.TaxpayersRepository().Insert(taxPayersModel);
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)
