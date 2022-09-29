@@ -269,9 +269,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(6, 268);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 15);
+            this.label17.Size = new System.Drawing.Size(47, 15);
             this.label17.TabIndex = 1;
-            this.label17.Text = "gr year";
+            this.label17.Text = "GR year";
             // 
             // nudEffectivityQuarter
             // 

@@ -18,8 +18,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         public frmTaxPayers()
         {
             InitializeComponent();
-            Helper.LoadFormIcon(this);
             uc = ucTaxPayers1;
+            Helper.LoadFormIcon(this);
+            Helper.DatagridDefaultStyle(uc.dgProperties);
         }
 
         private void frmTaxPayers_Load(object sender, EventArgs e)
@@ -38,7 +39,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var taxPayersModel = new TaxpayersModel()
             {
                 Tin = uc.txtTIN.Text,
-                Name = uc.Name,
+                Name = uc.txtName.Text,
                 Type = uc.cmbxTaxPayerType.Text,
                 ContactInfo = uc.txtContact.Text,
                 Street = uc.txtStreet.Text,
@@ -61,7 +62,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            _ = new frmTaxPayersSearch().ShowDialog();
         }
+
+
     }
 }

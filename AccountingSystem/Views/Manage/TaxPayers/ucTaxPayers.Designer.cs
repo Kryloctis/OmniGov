@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgProperties = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -304,7 +304,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dgProperties);
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
@@ -314,15 +314,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.tabPage1.Text = "Real Properties";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgProperties
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 33);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(390, 220);
-            this.dataGridView1.TabIndex = 0;
+            this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgProperties.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgProperties.Location = new System.Drawing.Point(3, 33);
+            this.dgProperties.Name = "dgProperties";
+            this.dgProperties.RowTemplate.Height = 25;
+            this.dgProperties.Size = new System.Drawing.Size(390, 220);
+            this.dgProperties.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -387,7 +387,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -417,11 +417,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         internal System.Windows.Forms.TextBox txtBarangay;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.DataGridView dgProperties;
     }
 }

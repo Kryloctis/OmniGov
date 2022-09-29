@@ -38,6 +38,22 @@ namespace AccountingSystem
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
+        public static void TaxpayerDatagridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["tin"].HeaderText = "TIN";
+            dataGridView.Columns["name"].HeaderText = "Owner Name";
+            dataGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["type"].HeaderText = "Owner Type";
+            dataGridView.Columns["contact_info"].HeaderText = "Contact";
+            dataGridView.Columns["street"].HeaderText = "Street";
+            dataGridView.Columns["barangay"].HeaderText = "Barangay";
+            dataGridView.Columns["municipality"].HeaderText = "Municipality";
+            dataGridView.Columns["province"].HeaderText = "Province";
+        }
+
         #endregion
 
         #region Payment History
