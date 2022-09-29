@@ -1,21 +1,17 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using AccountingSystem.Views.Shared;
 using Microsoft.Reporting.WinForms;
+using RPT.Data;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount
 {
     public partial class frmRealPropertyTaxStatementOfAccount : Form
     {
-        public string OwnerTin { get; set; }
+        public string completeARPNumber { get; set; }
         public string OwnerName { get; set; }
         public string OwnerAddress { get; set; }
 
@@ -40,6 +36,66 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
         private void frmRealPropertyTaxStatementOfAccount_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private DataColumn[] Sample()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("amount", typeof(decimal)),
+                new DataColumn("tax_type", typeof(string)),
+            };
+        }
+
+        private DataTable GetRPTStatementOfAccountsDt()
+        {
+            dtRealPropertyTaxStatementOfAccounts = new dsLFS.dtRPTStamentOfAccountsDataTable();
+
+            var dataTable = new DataTable();
+            //dataTable.Columns.AddRange(Sample());
+            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(completeARPNumber, OwnerName);
+
+            foreach (DataRow row in dtAssessmentPost.Rows)
+            {
+                var newRowBasic = dtRealPropertyTaxStatementOfAccounts.NewRow();
+                var newRowSEF = dtRealPropertyTaxStatementOfAccounts.NewRow();
+
+                decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
+
+                decimal discountRate = Convert.ToDecimal(row["discount_rate"]);
+                decimal penaltyRate = Convert.ToDecimal(row["penalty_rate"]);
+
+                decimal basicTaxRate = Convert.ToDecimal(row["basic_rate"]);
+                decimal sefTaxRate = Convert.ToDecimal(row["sef_rate"]);
+                decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(basicTaxRate, assessedValue);
+                decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefTaxRate, assessedValue);
+
+                string year = row["year"].ToString();
+                #region Discount
+                decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
+                decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
+                #endregion Discount
+                    
+                #region Basic
+                newRowBasic["tax_type"] = "Basic";
+                newRowBasic["previous_year"] = "2010";
+                newRowBasic["next_year"] = year;
+
+                newRowBasic["total_tax_due_basic"] = basicTaxDueAmount;
+                #endregion
+
+                #region SEF
+                newRowSEF["tax_type"] = "SEF";
+
+                newRowSEF["total_tax_due_sef"] = sefTaxDueAmount;
+                #endregion
+
+                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
+                dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
+            }
+
+            return dtRealPropertyTaxStatementOfAccounts;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -180,36 +236,37 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
         private bool LoadReport()
         {
-            var localReport = reportViewer.LocalReport;
-            var lguDetails = Helper.LGUDetails();
-
-            var parameter = new ReportParameter[]
-            {
-                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                new ReportParameter("paramOwner", OwnerName),
-                new ReportParameter("paramOwerTin", OwnerTin),
-                new ReportParameter("paramOwnerAddress", OwnerAddress),
-                new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
-            };
-
-            localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
-
-            localReport.DataSources.Clear();
-            localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", dtRealPropertyTaxStatementOfAccounts));
-
-            localReport.SetParameters(parameter);
-
-            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.PageWidth;
-            reportViewer.ZoomPercent = 100;
-
-            reportViewer.RefreshReport();
-
-            return true;
-
             try
             {
+                var localReport = reportViewer.LocalReport;
+                var lguDetails = Helper.LGUDetails();
 
+                var assessedValue = RptFactory.RealPropertiesRepository().GetAssessedValueByARPNo(completeARPNumber).ToString("N2");
+
+                var parameter = new ReportParameter[]
+                {
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramAssessedValue", assessedValue),
+                new ReportParameter("paramARPNo", completeARPNumber),
+                new ReportParameter("paramOwner", OwnerName),
+                new ReportParameter("paramOwnerAddress", OwnerAddress),
+                new ReportParameter("paramDate", Helper.GetCurrentDate().ToShortDateString())
+                };
+
+                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-tax-statement-of-accounts.rdlc";
+
+                localReport.DataSources.Clear();
+                localReport.DataSources.Add(new ReportDataSource("dtRPTStamentOfAccounts", GetRPTStatementOfAccountsDt()));
+
+                localReport.SetParameters(parameter);
+
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
+
+                reportViewer.RefreshReport();
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -217,5 +274,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             }
             return false;
         }
+
     }
 }

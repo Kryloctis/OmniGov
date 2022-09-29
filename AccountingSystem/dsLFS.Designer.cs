@@ -15079,7 +15079,11 @@ namespace AccountingSystem {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class dtRPTStamentOfAccountsDataTable : global::System.Data.TypedTableBase<dtRPTStamentOfAccountsRow> {
             
-            private global::System.Data.DataColumn columnno_of_years;
+            private global::System.Data.DataColumn columntax_type;
+            
+            private global::System.Data.DataColumn columnprevious_year;
+            
+            private global::System.Data.DataColumn columnnext_year;
             
             private global::System.Data.DataColumn columntax_due;
             
@@ -15138,9 +15142,25 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn no_of_yearsColumn {
+            public global::System.Data.DataColumn tax_typeColumn {
                 get {
-                    return this.columnno_of_years;
+                    return this.columntax_type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn previous_yearColumn {
+                get {
+                    return this.columnprevious_year;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn next_yearColumn {
+                get {
+                    return this.columnnext_year;
                 }
             }
             
@@ -15269,10 +15289,12 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dtRPTStamentOfAccountsRow AdddtRPTStamentOfAccountsRow(int no_of_years, decimal tax_due, decimal total_tax_due_basic, decimal total_tax_due_sef, decimal percentage, decimal penalty_discount_basic, decimal total_basic, decimal penalty_discount_sef, decimal total_sef, decimal total_due, decimal total_paid, decimal unpaid_balance) {
+            public dtRPTStamentOfAccountsRow AdddtRPTStamentOfAccountsRow(string tax_type, string previous_year, string next_year, decimal tax_due, decimal total_tax_due_basic, decimal total_tax_due_sef, decimal percentage, decimal penalty_discount_basic, decimal total_basic, decimal penalty_discount_sef, decimal total_sef, decimal total_due, decimal total_paid, decimal unpaid_balance) {
                 dtRPTStamentOfAccountsRow rowdtRPTStamentOfAccountsRow = ((dtRPTStamentOfAccountsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        no_of_years,
+                        tax_type,
+                        previous_year,
+                        next_year,
                         tax_due,
                         total_tax_due_basic,
                         total_tax_due_sef,
@@ -15306,7 +15328,9 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
-                this.columnno_of_years = base.Columns["no_of_years"];
+                this.columntax_type = base.Columns["tax_type"];
+                this.columnprevious_year = base.Columns["previous_year"];
+                this.columnnext_year = base.Columns["next_year"];
                 this.columntax_due = base.Columns["tax_due"];
                 this.columntotal_tax_due_basic = base.Columns["total_tax_due_basic"];
                 this.columntotal_tax_due_sef = base.Columns["total_tax_due_sef"];
@@ -15323,8 +15347,12 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             private void InitClass() {
-                this.columnno_of_years = new global::System.Data.DataColumn("no_of_years", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnno_of_years);
+                this.columntax_type = new global::System.Data.DataColumn("tax_type", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntax_type);
+                this.columnprevious_year = new global::System.Data.DataColumn("previous_year", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprevious_year);
+                this.columnnext_year = new global::System.Data.DataColumn("next_year", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnext_year);
                 this.columntax_due = new global::System.Data.DataColumn("tax_due", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntax_due);
                 this.columntotal_tax_due_basic = new global::System.Data.DataColumn("total_tax_due_basic", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -27221,17 +27249,50 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int no_of_years {
+            public string tax_type {
                 get {
                     try {
-                        return ((int)(this[this.tabledtRPTStamentOfAccounts.no_of_yearsColumn]));
+                        return ((string)(this[this.tabledtRPTStamentOfAccounts.tax_typeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'no_of_years\' in table \'dtRPTStamentOfAccounts\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'tax_type\' in table \'dtRPTStamentOfAccounts\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRPTStamentOfAccounts.no_of_yearsColumn] = value;
+                    this[this.tabledtRPTStamentOfAccounts.tax_typeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string previous_year {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRPTStamentOfAccounts.previous_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'previous_year\' in table \'dtRPTStamentOfAccounts\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRPTStamentOfAccounts.previous_yearColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string next_year {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRPTStamentOfAccounts.next_yearColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'next_year\' in table \'dtRPTStamentOfAccounts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRPTStamentOfAccounts.next_yearColumn] = value;
                 }
             }
             
@@ -27418,14 +27479,38 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool Isno_of_yearsNull() {
-                return this.IsNull(this.tabledtRPTStamentOfAccounts.no_of_yearsColumn);
+            public bool Istax_typeNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.tax_typeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void Setno_of_yearsNull() {
-                this[this.tabledtRPTStamentOfAccounts.no_of_yearsColumn] = global::System.Convert.DBNull;
+            public void Settax_typeNull() {
+                this[this.tabledtRPTStamentOfAccounts.tax_typeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isprevious_yearNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.previous_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setprevious_yearNull() {
+                this[this.tabledtRPTStamentOfAccounts.previous_yearColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Isnext_yearNull() {
+                return this.IsNull(this.tabledtRPTStamentOfAccounts.next_yearColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setnext_yearNull() {
+                this[this.tabledtRPTStamentOfAccounts.next_yearColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

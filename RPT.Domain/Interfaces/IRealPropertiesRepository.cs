@@ -17,6 +17,8 @@ namespace RPT.Domain.Interfaces
 
         DataTable GetViewPropertyAssessmentPostingRecords();
 
+        string GetArpNumberByOwnerName(string ownerName);
+
         decimal GetAssessedValueByARPNo(string arpNo);
 
         decimal GetOtherImprovementsAssessedValueBy_ArpNo_ActualUseCode(string arpNo);

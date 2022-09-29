@@ -265,5 +265,16 @@ namespace RPT.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommandsRPT.Fill(query, dataTable);
         }
+
+        public string GetArpNumberByOwnerName(string ownerName)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@owner_name", DbType.String, ownerName }
+            };
+
+            string query = $"SELECT complete_arp_no FROM {viewRealProperties} WHERE owner_name = @owner_name";
+            return _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+        }
     }
 }

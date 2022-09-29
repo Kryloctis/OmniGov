@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using RPT.Data;
 using System;
 using System.Data;
 using System.Reflection;
@@ -97,26 +98,17 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private void InitializeRealPropertyTaxAccountngRegisterReport()
         {
-            int rowIndex = dataGridView1.CurrentRow.Index;
-            string ownerTin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
-            string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
-            string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
-
-            _frmRealPropertyTaxAccountRegisterReport.OwnerName = ownerName;
-            _frmRealPropertyTaxAccountRegisterReport.OwnerAddress = ownerAddress;
-            _frmRealPropertyTaxAccountRegisterReport.OwnerTin = ownerTin;
-
-            _frmRealPropertyTaxAccountRegisterReport.backgroundWorker1.RunWorkerAsync();
-            _frmRealPropertyTaxAccountRegisterReport.btnReload.Enabled = true;
+ 
         }
 
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            string arpNumber = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
             string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+            string completeARPNumber = RptFactory.RealPropertiesRepository().GetArpNumberByOwnerName(ownerName);
             string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
 
+            _frmRealPropertyTaxStatementOfAccount.completeARPNumber = completeARPNumber;
             _frmRealPropertyTaxStatementOfAccount.OwnerName = ownerName;
             _frmRealPropertyTaxStatementOfAccount.OwnerAddress = ownerAddress;
 
