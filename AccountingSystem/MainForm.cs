@@ -1,5 +1,4 @@
-﻿using AccountingSystem.Views;
-using AccountingSystem.Views.Manage.AccountableForm;
+﻿using AccountingSystem.Views.Manage.AccountableForm;
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
@@ -11,7 +10,6 @@ using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
-using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
 using AccountingSystem.Views.Manage.RptDiscount;
@@ -169,7 +167,7 @@ namespace AccountingSystem
 
         }
 
-        private bool IsUserCollector() 
+        private bool IsUserCollector()
         {
             var dictJobOrderRepo = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecordByJobOrderUserId(Helper.UserId);
             var dictCollectingOfficerRepo = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
@@ -178,7 +176,7 @@ namespace AccountingSystem
             if (dictJobOrderRepo.Values.Count < 1 && dictCollectingOfficerRepo.Values.Count < 1)
                 return false;
 
-            return true;        
+            return true;
         }
 
         private void ValidateTransactionPermissions()
@@ -254,7 +252,7 @@ namespace AccountingSystem
                 menuAccForm.Enabled = false;
 
             if (!Helper.HasPermission("Manage Disbursing Officer"))
-                menuDisbursingOfficer.Enabled = false;          
+                menuDisbursingOfficer.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
@@ -296,7 +294,7 @@ namespace AccountingSystem
                 signatoriesToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage Real Properties"))
-                menuRealPropeties.Enabled = false;
+                menuTaxPayers.Enabled = false;
 
             #region Receipts
 
@@ -538,7 +536,7 @@ namespace AccountingSystem
             _ = new frmBanks().ShowDialog();
         }
 
-   
+
         private void menuAccForm_Click(object sender, EventArgs e)
         {
             _ = new frmAccountable().ShowDialog();
@@ -558,7 +556,7 @@ namespace AccountingSystem
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             loginForm.Show();
-        }    
+        }
 
         private void amortiaztionToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -724,12 +722,7 @@ namespace AccountingSystem
 
         private void btnIssueReceipt_Click(object sender, EventArgs e)
         {
-            _ = new frmReceiptsIssued().ShowDialog();  
-        }
-
-        private void menuRealPropeties_Click(object sender, EventArgs e)
-        {
-            _ = new frmRealProperties().ShowDialog();
+            _ = new frmReceiptsIssued().ShowDialog();
         }
 
         private void paymentCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -838,7 +831,5 @@ namespace AccountingSystem
         }
 
         #endregion
-
-     
     }
 }
