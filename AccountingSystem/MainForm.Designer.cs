@@ -56,6 +56,8 @@ namespace AccountingSystem
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblUserFullName = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUserRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -158,8 +160,6 @@ namespace AccountingSystem
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -413,6 +413,18 @@ namespace AccountingSystem
             this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.taxRateToolStripMenuItem.Text = "Tax Rates";
             this.taxRateToolStripMenuItem.Click += new System.EventHandler(this.taxRateToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
+            // 
+            // menuDatabaseSynchronization
+            // 
+            this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
+            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
+            this.menuDatabaseSynchronization.Text = "Database Synchronization";
+            this.menuDatabaseSynchronization.Click += new System.EventHandler(this.menuDatabaseSynchronization_Click);
             // 
             // statusStrip1
             // 
@@ -1622,17 +1634,6 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
-            // 
-            // menuDatabaseSynchronization
-            // 
-            this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
-            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
-            this.menuDatabaseSynchronization.Text = "Database Synchronization";
             // 
             // MainForm
             // 

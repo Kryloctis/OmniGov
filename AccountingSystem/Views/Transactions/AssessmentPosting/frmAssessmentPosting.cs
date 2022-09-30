@@ -1,10 +1,8 @@
-﻿using RPT.Data;
-using RPT.Domain.Models;
+﻿using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.AssessmentPosting
@@ -52,8 +50,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("is_checked", typeof(bool)),
                 new DataColumn("posting_status", typeof(string)),
                 new DataColumn("real_properties_id", typeof(int)),
-                new DataColumn("property_identifier", typeof(string)),     
-                new DataColumn("pin", typeof(string)),             
+                new DataColumn("property_identifier", typeof(string)),
+                new DataColumn("pin", typeof(string)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("owner_name", typeof(string)),
                 new DataColumn("owner_tin", typeof(string)),
@@ -445,7 +443,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                         var assessmentPostingModel = new RptAssessmentPostsModel()
                         {
-                            propertyIdentifier =rowPropertyIdentifier,
+                            propertyIdentifier = rowPropertyIdentifier,
                             CompleteArpNo = rowCompleteArpNo,
                             PropertyPin = rowPin,
                             OwnerName = rowOwnerName,
