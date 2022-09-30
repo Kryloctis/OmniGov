@@ -31,7 +31,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgTaxpayers = new System.Windows.Forms.DataGridView();
-            this.txtArpNo = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -60,12 +60,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.dgTaxpayers.Size = new System.Drawing.Size(826, 363);
             this.dgTaxpayers.TabIndex = 1;
             // 
-            // txtArpNo
+            // txtSearch
             // 
-            this.txtArpNo.Location = new System.Drawing.Point(621, 20);
-            this.txtArpNo.Name = "txtArpNo";
-            this.txtArpNo.Size = new System.Drawing.Size(207, 23);
-            this.txtArpNo.TabIndex = 4;
+            this.txtSearch.Location = new System.Drawing.Point(621, 20);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(207, 23);
+            this.txtSearch.TabIndex = 4;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // label1
             // 
@@ -108,7 +109,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.txtArpNo);
+            this.panel2.Controls.Add(this.txtSearch);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -126,6 +127,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.panel2);
             this.MaximizeBox = false;
             this.Name = "frmTaxPayersSearch";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Taxpayers";
             this.Load += new System.EventHandler(this.frmTaxPayersSearch_Load);
@@ -142,7 +144,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgTaxpayers;
-        internal System.Windows.Forms.TextBox txtArpNo;
+        internal System.Windows.Forms.TextBox txtSearch;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;

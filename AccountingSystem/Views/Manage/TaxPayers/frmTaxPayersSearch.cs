@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgTaxpayers);
+            Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
         }
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
@@ -28,15 +28,31 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable());
+                var dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetRecords();
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayersRecords));
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable TaxpayerDataTable()
+        internal void LoadTaxpayersBySearch()
         {
-            var dtRealProperties = AccFactory.TaxpayersRepository().GetRecords();
+            if (txtSearch.Text.Length < 2)
+                return;
+            
+
+            try
+            {
+                var textSearch = txtSearch.Text.Trim();
+                var dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetRecordsBySearch(textSearch);
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayersRecords));
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private DataTable TaxpayerDataTable(DataTable dtTaxpayersRecords)
+        {
             var dataTable = new DataTable();
             var selectedColumns = new DataColumn[]
             {
@@ -52,7 +68,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             };
             dataTable.Columns.AddRange(selectedColumns);
 
-            foreach (DataRow row in dtRealProperties.Rows)
+            foreach (DataRow row in dtTaxpayersRecords.Rows)
             {
                 var newRow = dataTable.NewRow();
                 int rowId = Convert.ToInt32(row["id"]);
@@ -79,6 +95,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
 
             return dataTable;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                LoadTaxpayer();
+                return;
+            }
+            
+            LoadTaxpayersBySearch();
         }
     }
 }

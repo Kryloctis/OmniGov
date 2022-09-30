@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             InitializeComponent();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
