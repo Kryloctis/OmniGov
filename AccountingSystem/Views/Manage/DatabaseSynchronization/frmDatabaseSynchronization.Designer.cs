@@ -33,8 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSync = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.btnSync = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,14 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Choose what to sync:";
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
@@ -77,15 +85,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 32);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
-            // btnSync
-            // 
-            this.btnSync.Location = new System.Drawing.Point(252, 3);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(51, 23);
-            this.btnSync.TabIndex = 0;
-            this.btnSync.Text = "Sync";
-            this.btnSync.UseVisualStyleBackColor = true;
-            // 
             // btnStop
             // 
             this.btnStop.Location = new System.Drawing.Point(309, 3);
@@ -94,6 +93,16 @@
             this.btnStop.TabIndex = 0;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
+            // 
+            // btnSync
+            // 
+            this.btnSync.Location = new System.Drawing.Point(252, 3);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Size = new System.Drawing.Size(51, 23);
+            this.btnSync.TabIndex = 0;
+            this.btnSync.Text = "Sync";
+            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // frmDatabaseSynchronization
             // 

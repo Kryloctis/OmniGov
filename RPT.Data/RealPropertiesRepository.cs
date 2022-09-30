@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using ACC.Data;
+﻿using ACC.Data;
 using RPT.Domain.Interfaces;
 using RPT.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace RPT.Data
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
-        private readonly string viewPropertyAssessmentGrouped  = "view_property_assessment_grouped";
-        private readonly string viewPropertAssessmentPosting = "view_property_assessment_posting";
+        private readonly string viewPropertyAssessmentGrouped = "view_property_assessment_grouped";
+        private readonly string viewLfsRealProperties = "view_lfs_real_properties";
         private readonly string viewPropertyAssessessment = "view_property_assessment";
         private readonly string viewRealProperties = "view_real_properties";
         private readonly string tableName = "real_properties";
@@ -146,15 +146,14 @@ namespace RPT.Data
 
         public DataTable GetPropertiesBy_Quarter_Year_BarangayId_Search(int effectivityYear, int barangayId, string searchText)
         {
-
-            var parameters = new object[][] 
-            { 
+            var parameters = new object[][]
+            {
                 new object[] { "@effectivity_year", DbType.Int32, effectivityYear },
                 new object[] { "@barangays_id", DbType.Int32, barangayId },
                 new object[] { "@search_text", DbType.String, $"%{searchText}%" }
             };
 
-            string BarangayId() 
+            string BarangayId()
             {
                 if (barangayId == 0)
                     return string.Empty;
@@ -162,7 +161,7 @@ namespace RPT.Data
                     return "AND barangays_id = @barangays_id";
             }
 
-            string query = $"SELECT * FROM {viewPropertAssessmentPosting} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
+            string query = $"SELECT * FROM {viewLfsRealProperties} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text)  AND effectivity_year <= @effectivity_year {BarangayId()} ";
 
             var dtProperties = new DataTable();
             return _mySqlGenericCommandsRPT.FillBySearch(query, dtProperties, parameters);
@@ -190,7 +189,7 @@ namespace RPT.Data
                 if (reader.Rows.Count < 1)
                     return dict;
 
-                foreach (DataRow row  in reader.Rows)
+                foreach (DataRow row in reader.Rows)
                 {
 
                     dict.Add("transaction_codes_id", row["transaction_codes_id"].ToString());
@@ -259,22 +258,9 @@ namespace RPT.Data
             return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
 
-        public DataTable GetViewPropertyAssessmentPostingRecords()
+        public bool SychronizeData()
         {
-            string query = $"SELECT * FROM {viewPropertAssessmentPosting}";
-            var dataTable = new DataTable();
-            return _mySqlGenericCommandsRPT.Fill(query, dataTable);
-        }
-
-        public string GetArpNumberByOwnerName(string ownerName)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@owner_name", DbType.String, ownerName }
-            };
-
-            string query = $"SELECT complete_arp_no FROM {viewRealProperties} WHERE owner_name = @owner_name";
-            return _mySqlGenericCommandsRPT.ExecuteScalar(query, parameters);
+            throw new NotImplementedException();
         }
     }
 }
