@@ -2,10 +2,8 @@
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
-using RPT.Data;
 using System;
 using System.Data;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister
@@ -18,7 +16,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private readonly frmRealPropertyPayment _frmRealPropertyPayment;
 
         public frmRptTaxPayerList(
-            frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport, 
+            frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
             frmRealPropertyPayment frmRealPropertyPayment)
@@ -98,14 +96,14 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private void InitializeRealPropertyTaxAccountngRegisterReport()
         {
- 
+
         }
 
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
             string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
-            string completeARPNumber = RptFactory.RealPropertiesRepository().GetArpNumberByOwnerName(ownerName);
+            string completeARPNumber = string.Empty;
             string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
 
             _frmRealPropertyTaxStatementOfAccount.completeARPNumber = completeARPNumber;

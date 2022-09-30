@@ -6,6 +6,7 @@ using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
+using AccountingSystem.Views.Manage.DatabaseSynchronization;
 using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
@@ -832,6 +833,11 @@ namespace AccountingSystem
         }
 
         #endregion
+
+        private void menuDatabaseSynchronization_Click(object sender, EventArgs e)
+        {
+            _ = new frmDatabaseSynchronization().ShowDialog();
+        }
 
         private void menuTaxPayers_Click(object sender, EventArgs e)
         {
