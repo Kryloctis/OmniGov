@@ -135,7 +135,10 @@ namespace ACC.Data
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled}
             };
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled) VALUES (@property_identifier, @complete_arp_no, @property_pin, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled)";
+            string query = $"INSERT INTO {tableName} (taxpayers_id, property_identifier, complete_arp_no, property_pin, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled) VALUES (@taxpayers_id, @property_identifier, @complete_arp_no, @property_pin, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled)";
+
+
+
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -265,6 +268,30 @@ namespace ACC.Data
             }
 
             string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY owner_name ASC";
+
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public string GetPropertyIdentifierByCompleteArpNumber(string completeArpNumber)
+        {
+            var parameters = new object[][] { new object[] {"@complete_arp_no", DbType.String, completeArpNumber} };
+
+            string query = $"SELECT COALESCE(property_identifier, 0) FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+
+
+            return _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+        }
+
+        public DataTable GetPropertiesByTaxpayerId(int taxPayerId)
+        {
+
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayer_id", DbType.Int32, taxPayerId }
+            };
+
+            string query = $"SELECT id, property_identifier, complete_arp_no, property_pin, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE taxpayers_id = @taxpayer_id";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);

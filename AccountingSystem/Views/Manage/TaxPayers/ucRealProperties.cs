@@ -39,6 +39,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             return error.GenerateErrorMessage();
         }
 
+        internal void LoadProperties()
+        {
+           
+        }
+
         internal void ResetForm()
         {
             if (isEdit)
@@ -114,7 +119,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !ArpNoValidated();
+            //e.Cancel = !ArpNoValidated();
+            e.Cancel = false;
         }
 
         private void txtArpNo_Validated(object sender, EventArgs e)
@@ -271,5 +277,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     break;
             }
         }
+
+ 
+
     }
 }

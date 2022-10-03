@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
@@ -59,6 +59,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.dgTaxpayers.RowTemplate.Height = 25;
             this.dgTaxpayers.Size = new System.Drawing.Size(826, 363);
             this.dgTaxpayers.TabIndex = 1;
+            this.dgTaxpayers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgTaxpayers_MouseDoubleClick);
             // 
             // txtSearch
             // 
@@ -81,7 +82,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
+            this.flowLayoutPanel1.Controls.Add(this.btnSelect);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 420);
@@ -98,14 +99,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // btnSelect
             // 
-            this.btnSave.Location = new System.Drawing.Point(674, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Select";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSelect.Location = new System.Drawing.Point(674, 3);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.TabIndex = 0;
+            this.btnSelect.Text = "Select";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // panel2
             // 
@@ -121,6 +123,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(833, 449);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -148,7 +151,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Panel panel2;
     }
 }

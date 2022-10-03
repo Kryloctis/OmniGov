@@ -13,9 +13,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class ucTaxPayers : UserControl
     {
+        internal int taxPayerId = 0;
+        internal bool isEdit;
+
         public ucTaxPayers()
         {
             InitializeComponent();
+            Helper.DatagridFullRowSelectStyle(dgProperties, true);
         }
 
 
@@ -41,6 +45,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dict = new Dictionary<string, string>();
 
+            dict.Add("0", string.Empty);
             dict.Add("1", "Association");
             dict.Add("2", "Charitable");
             dict.Add("3", "Cooperative");
@@ -52,7 +57,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dict.Add("9", "Partnership");
             dict.Add("10", "Religious");
 
-            cmbxTaxPayerType.DataSource = new BindingSource(dict.Values, null);
+            cmbxTaxPayerType.DataSource = new BindingSource(dict.Values, null);  
         }
 
 
@@ -65,6 +70,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtStreet.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
+            cmbxTaxPayerType.SelectedIndex = 0;
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)
@@ -157,7 +163,75 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRealProperties().ShowDialog();
+            if (taxPayerId == 0)
+                Helper.MessageBoxSuccess("No Taxpayer found.");
+            else
+                _ = new frmAddRealProperties(this).ShowDialog();
         }
+
+
+
+
+        #region Properties
+        internal void LoadProperties()
+        {
+            try
+            {
+                var dtRealProperties = AccFactory.RealPropertiesRepository().GetPropertiesByTaxpayerId(taxPayerId);
+
+                HelperLoadRecords.RealPropertiesDatagridView(dgProperties, RealPropertiesDataTable(dtRealProperties));
+                //dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private DataTable RealPropertiesDataTable(DataTable dtRealProperties)
+        {
+            var dataTable = new DataTable();
+            var selectedColumns = new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("property_identifier", typeof(string)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("property_pin", typeof(string)),
+                new DataColumn("barangay_name", typeof(string)),
+                new DataColumn("property_kind", typeof(string)),
+                new DataColumn("assessed_value", typeof(string)),
+                new DataColumn("municipality_name", typeof(string)),
+                new DataColumn("province_name", typeof(string)),
+            };
+            dataTable.Columns.AddRange(selectedColumns);
+
+            foreach (DataRow row in dtRealProperties.Rows)
+            {
+
+                var newRow = dataTable.NewRow();
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowPropertyIdentifier = row["property_identifier"].ToString();
+                string completeArpNumber = row["complete_arp_no"].ToString();
+                string propertyPin = row["property_pin"].ToString();
+                string barangayName = row["barangay_name"].ToString();
+                string propertyKind = row["property_kind"].ToString();
+                string assessedValue = row["assessed_value"].ToString();
+                string municipalityName = row["municipality_name"].ToString();
+                string provinceName = row["province_name"].ToString();
+
+                newRow["id"] = rowId;
+                newRow["property_identifier"] = rowPropertyIdentifier;
+                newRow["complete_arp_no"] = completeArpNumber;
+                newRow["property_pin"] = propertyPin;
+                newRow["barangay_name"] = barangayName;
+                newRow["property_kind"] = propertyKind;
+                newRow["assessed_value"] = assessedValue;
+                newRow["municipality_name"] = municipalityName;
+                newRow["province_name"] = provinceName;
+
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        #endregion
     }
 }

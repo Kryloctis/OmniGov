@@ -83,7 +83,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ucvRealProperties1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddRealProperties";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Real Properties";
             this.flowLayoutPanel1.ResumeLayout(false);

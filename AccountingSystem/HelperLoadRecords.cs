@@ -24,13 +24,9 @@ namespace AccountingSystem
             dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
             dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
-            dataGridView.Columns["owner_tin"].HeaderText = "Owner TIN";
-            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
-            dataGridView.Columns["owner_contact"].Visible = false;
             dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            //dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
             dataGridView.Columns["province_name"].HeaderText = "Province";
             dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";

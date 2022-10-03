@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmTaxPayers : Form
     {
-        private ucTaxPayers uc;
+        internal  ucTaxPayers uc;
 
         public frmTaxPayers()
         {
@@ -25,9 +25,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmTaxPayers_Load(object sender, EventArgs e)
         {
-
+            
         }
 
+      
         private bool SaveTaxPayers()
         {
             if (!uc.ValidateChildren())
@@ -53,18 +54,30 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {
-            if (SaveTaxPayers())
+            if (!uc.isEdit)
             {
-                Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
-                uc.ResetForm();
+                if (SaveTaxPayers())
+                {
+                    Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
+                    uc.ResetForm();
+                }
             }
+
+            else 
+            {
+                
+            }
+           
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayersSearch().ShowDialog();
+            _ = new frmTaxPayersSearch(this).ShowDialog();
         }
 
-
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+        
+        }
     }
 }

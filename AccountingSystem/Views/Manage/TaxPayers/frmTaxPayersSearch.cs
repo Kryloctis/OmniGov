@@ -12,11 +12,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmTaxPayersSearch : Form
     {
-        public frmTaxPayersSearch()
+        private frmTaxPayers _frmTaxPayers;
+
+        public frmTaxPayersSearch(frmTaxPayers frmTaxPayers)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
+            _frmTaxPayers = frmTaxPayers;
         }
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
@@ -106,6 +109,47 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
             
             LoadTaxpayersBySearch();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            SelectTaxPayer();
+        }
+
+        private void dgTaxpayers_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SelectTaxPayer();
+        }
+
+        private void SelectTaxPayer()
+        {
+            int rowIndex = dgTaxpayers.CurrentCell.RowIndex;
+            var ucTaxPayers = _frmTaxPayers.uc;
+
+            ucTaxPayers.taxPayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
+            var tin = dgTaxpayers.Rows[rowIndex].Cells["tin"].Value.ToString();
+            var name = dgTaxpayers.Rows[rowIndex].Cells["name"].Value.ToString();
+            var type = dgTaxpayers.Rows[rowIndex].Cells["type"].Value.ToString();
+            var contactInfo = dgTaxpayers.Rows[rowIndex].Cells["contact_info"].Value.ToString();
+            var street = dgTaxpayers.Rows[rowIndex].Cells["street"].Value.ToString();
+            var barangay = dgTaxpayers.Rows[rowIndex].Cells["barangay"].Value.ToString();
+            var municipality = dgTaxpayers.Rows[rowIndex].Cells["municipality"].Value.ToString();
+            var province = dgTaxpayers.Rows[rowIndex].Cells["province"].Value.ToString();
+
+            ucTaxPayers.txtTIN.Text = tin;
+            ucTaxPayers.txtName.Text = name;
+            ucTaxPayers.cmbxTaxPayerType.SelectedText = type;
+            ucTaxPayers.txtContact.Text = contactInfo;
+            ucTaxPayers.txtStreet.Text = street;
+            ucTaxPayers.txtBarangay.Text = barangay;
+            ucTaxPayers.txtMunicipality.Text = municipality;
+            ucTaxPayers.txtProvince.Text = province;
+
+            _frmTaxPayers.btnSave.Text = "Update";
+            _frmTaxPayers.uc.isEdit = true;
+
+            _frmTaxPayers.uc.LoadProperties();
+            Close();
         }
     }
 }

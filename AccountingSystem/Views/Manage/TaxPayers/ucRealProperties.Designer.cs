@@ -170,6 +170,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudArea
             // 
+            this.nudArea.DecimalPlaces = 2;
             this.nudArea.Location = new System.Drawing.Point(111, 322);
             this.nudArea.Maximum = new decimal(new int[] {
             999999999,
@@ -184,6 +185,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudGrYear
             // 
+            this.nudGrYear.DecimalPlaces = 2;
             this.nudGrYear.Location = new System.Drawing.Point(111, 264);
             this.nudGrYear.Maximum = new decimal(new int[] {
             999999999,
@@ -198,6 +200,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudOtherImprv
             // 
+            this.nudOtherImprv.DecimalPlaces = 2;
             this.nudOtherImprv.Location = new System.Drawing.Point(111, 293);
             this.nudOtherImprv.Maximum = new decimal(new int[] {
             999999999,
@@ -210,6 +213,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudAssessedValue
             // 
+            this.nudAssessedValue.DecimalPlaces = 2;
             this.nudAssessedValue.Location = new System.Drawing.Point(111, 235);
             this.nudAssessedValue.Maximum = new decimal(new int[] {
             999999999,
@@ -275,6 +279,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudEffectivityQuarter
             // 
+            this.nudEffectivityQuarter.BackColor = System.Drawing.SystemColors.Window;
             this.nudEffectivityQuarter.Location = new System.Drawing.Point(111, 177);
             this.nudEffectivityQuarter.Maximum = new decimal(new int[] {
             4,
@@ -537,7 +542,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // chckTaxable
             // 
             this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(529, 204);
+            this.chckTaxable.Location = new System.Drawing.Point(529, 12);
             this.chckTaxable.Name = "chckTaxable";
             this.chckTaxable.Size = new System.Drawing.Size(65, 19);
             this.chckTaxable.TabIndex = 1;
@@ -547,7 +552,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // chckCancelled
             // 
             this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(613, 204);
+            this.chckCancelled.Location = new System.Drawing.Point(613, 12);
             this.chckCancelled.Name = "chckCancelled";
             this.chckCancelled.Size = new System.Drawing.Size(78, 19);
             this.chckCancelled.TabIndex = 4;
