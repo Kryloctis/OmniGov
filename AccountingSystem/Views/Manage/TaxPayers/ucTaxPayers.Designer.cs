@@ -74,6 +74,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -149,8 +151,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtTIN.Name = "txtTIN";
             this.txtTIN.Size = new System.Drawing.Size(191, 23);
             this.txtTIN.TabIndex = 0;
-            this.txtTIN.Validating += new System.ComponentModel.CancelEventHandler(this.txtTIN_Validating);
-            this.txtTIN.Validated += new System.EventHandler(this.txtTIN_Validated);
             // 
             // label10
             // 
@@ -197,8 +197,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtProvince.Name = "txtProvince";
             this.txtProvince.Size = new System.Drawing.Size(191, 23);
             this.txtProvince.TabIndex = 7;
-            this.txtProvince.Validating += new System.ComponentModel.CancelEventHandler(this.txtProvince_Validating);
-            this.txtProvince.Validated += new System.EventHandler(this.txtProvince_Validated);
             // 
             // txtMunicipality
             // 
@@ -209,8 +207,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtMunicipality.Name = "txtMunicipality";
             this.txtMunicipality.Size = new System.Drawing.Size(191, 23);
             this.txtMunicipality.TabIndex = 6;
-            this.txtMunicipality.Validating += new System.ComponentModel.CancelEventHandler(this.txtMunicipality_Validating);
-            this.txtMunicipality.Validated += new System.EventHandler(this.txtMunicipality_Validated);
             // 
             // txtBarangay
             // 
@@ -221,8 +217,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.Size = new System.Drawing.Size(191, 23);
             this.txtBarangay.TabIndex = 5;
-            this.txtBarangay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBarangay_Validating);
-            this.txtBarangay.Validated += new System.EventHandler(this.txtBarangay_Validated);
             // 
             // txtStreet
             // 
@@ -233,8 +227,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtStreet.Name = "txtStreet";
             this.txtStreet.Size = new System.Drawing.Size(191, 23);
             this.txtStreet.TabIndex = 4;
-            this.txtStreet.Validating += new System.ComponentModel.CancelEventHandler(this.txtStreet_Validating);
-            this.txtStreet.Validated += new System.EventHandler(this.txtStreet_Validated);
             // 
             // txtContact
             // 
@@ -245,8 +237,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(191, 23);
             this.txtContact.TabIndex = 3;
-            this.txtContact.Validating += new System.ComponentModel.CancelEventHandler(this.txtContact_Validating);
-            this.txtContact.Validated += new System.EventHandler(this.txtContact_Validated);
             // 
             // label8
             // 
@@ -425,7 +415,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
@@ -433,5 +422,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.TextBox txtBarangay;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.DataGridView dgProperties;
+        internal System.Windows.Forms.TabPage tabPage1;
     }
 }

@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmTaxPayers_Load(object sender, EventArgs e)
         {
-            
+            uc.ResetForm();
         }
 
       
