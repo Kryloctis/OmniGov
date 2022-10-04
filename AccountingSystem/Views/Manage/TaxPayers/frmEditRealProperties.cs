@@ -1,4 +1,6 @@
-﻿using RPT.Data;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.RptTaxRates;
+using RPT.Data;
 using System;
 using System.Windows.Forms;
 
@@ -48,7 +50,61 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             _ucRealProperties.txtActualUseCode.Text = dictRealProperties["actual_use_code"];
             _ucRealProperties.txtActualUseName.Text = dictRealProperties["actual_use_name"];
+        }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Save())
+            {
+                Helper.MessageBoxSuccess("Real property has been updated.");
+                _ucTaxpayers.LoadProperties();
+                Close();
+            }
+        }
+
+        private bool Save()
+        {
+            try
+            {
+                if (!_ucTaxpayers.ValidateChildren())
+                {
+                    Helper.MessageBoxError(_ucTaxpayers.GetFormErrors());
+                    return false;
+                }
+
+                var realPropertiesModel = new RealPropertiesModel()
+                {
+                    Id = _propertyId,
+                    CompleteArpNo = _ucRealProperties.txtArpNo.Text,
+                    TaxpayersId = _ucTaxpayers.taxPayerId,
+                    Pin = _ucRealProperties.txtPropertyPin.Text,
+                    BarangayName = _ucRealProperties.txtBarangay.Text,
+                    MunicipalityName = _ucRealProperties.txtMunicipality.Text,
+                    ProvinceName = _ucRealProperties.txtProvince.Text,
+                    PropertyKind = _ucRealProperties.cmbxPropertyKind.Text,
+                    EffectivityQuarter = Convert.ToInt32(_ucRealProperties.nudEffectivityQuarter.Value),
+                    EffectivityYear = Convert.ToInt32(_ucRealProperties.nudEffectivityYear.Value),
+                    AssessedValue = _ucRealProperties.nudAssessedValue.Value,
+                    GrYear = Convert.ToInt32(_ucRealProperties.nudGrYear.Value),
+                    OtherImprovements = _ucRealProperties.nudOtherImprv.Value,
+                    Area = Convert.ToDecimal(_ucRealProperties.nudArea.Value),
+                    LotNo = _ucRealProperties.txtLotNo.Text,
+                    ClassificationCode = _ucRealProperties.txtClassificationCode.Text,
+                    ClassificationName = _ucRealProperties.txtClassificationName.Text,
+                    ActualUseCode = _ucRealProperties.txtActualUseCode.Text,
+                    ActualUseName = _ucRealProperties.txtActualUseName.Text,
+                    IsTaxable = _ucRealProperties.chckTaxable.Checked,
+                    IsCancelled = _ucRealProperties.chckCancelled.Checked,
+                };
+
+
+                return AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
 
