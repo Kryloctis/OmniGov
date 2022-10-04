@@ -273,7 +273,7 @@ namespace ACC.Data
         {
             var parameters = new object[][] { new object[] {"@complete_arp_no", DbType.String, completeArpNumber} };
 
-            string query = $"SELECT COALESCE(property_identifier, 0) FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+            string query = $"SELECT COALESCE(id, 0) FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
 
 
             return _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);

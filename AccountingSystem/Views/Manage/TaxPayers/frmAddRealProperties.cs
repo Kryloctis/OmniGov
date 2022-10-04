@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             {
                 Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
                 _ucTaxpayer.LoadProperties();
+                Close();
             }
         }
 
@@ -47,6 +48,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             {
                 CompleteArpNo = uc.txtArpNo.Text,
                 TaxpayersId = _ucTaxpayer.taxPayerId,
+                PropertyIdentifier = AccFactory.RealPropertiesRepository().GetPropertyIdentifierByCompleteArpNumber(uc.txtArpNo.Text),
                 Pin = uc.txtPropertyPin.Text,
                 BarangayName = uc.txtBarangay.Text,
                 MunicipalityName = uc.txtMunicipality.Text,
@@ -70,5 +72,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
                 
         }
+
     }
 }
