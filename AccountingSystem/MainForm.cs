@@ -136,8 +136,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report of Collections and Deposits"))
                 reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Reports of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Reports of General Collections"))
+            //    abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Bank Cashbook"))
                 bankCashbookToolStripMenuItem.Enabled = false;
@@ -157,14 +157,14 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
-                toolStripMenuItemrealPropertyTaxAccountRegister.Enabled = false;
+            //if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
+            //    toolStripMenuItemrealPropertyTaxAccountRegister.Enabled = false;
 
-            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
-                toolStripMenuItemConsolidatedRealPropertyTaxDues.Enabled = false;
+            //if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
+            //    toolStripMenuItemConsolidatedRealPropertyTaxDues.Enabled = false;
 
-            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
-                toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
+            //if (!Helper.HasPermission("Report List of Delinquent Accounts"))
+            //    toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
 
 
         }
@@ -207,8 +207,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Assessment Posting"))
                 toolStripMenuAssessmentPosting.Enabled = false;
 
-            if (!IsUserCollector())
-                toolStripMenuPaymentPostings.Enabled = false;
+            //if (!IsUserCollector())
+            //    toolStripMenuPaymentPostings.Enabled = false;
 
         }
 
@@ -295,7 +295,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Manage Real Properties"))
+            if (!Helper.HasPermission("Manage Taxpayers"))
                 menuTaxPayers.Enabled = false;
 
             #region Receipts
@@ -308,10 +308,14 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Manage Receipts") && !Helper.HasPermission("Manage Returned Receipts"))
                 toolStripMenuItemReceipts.Enabled = false;
-
-
-
             #endregion
+
+            if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
+            {
+                discountToolStripMenuItem.Enabled = false;
+                penaltyToolStripMenuItem.Enabled = false;
+                taxRateToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void ValidateAccountingControlPermissions()

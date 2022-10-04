@@ -63,7 +63,7 @@ namespace AccountingSystem
                Metafile(m_streams[m_currentPageIndex]);
 
             // Adjust rectangular area with printer margins.
-            Rectangle adjustedRect = new Rectangle(               
+            Rectangle adjustedRect = new Rectangle(
                 ev.PageBounds.Left - (int)ev.PageSettings.HardMarginX,
                 ev.PageBounds.Top - (int)ev.PageSettings.HardMarginY,
                 ev.PageBounds.Width,
@@ -90,7 +90,7 @@ namespace AccountingSystem
                 throw new Exception("Error: cannot find the default printer.");
             }
             else
-            {          
+            {
                 printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
                 m_currentPageIndex = 0;
                 printDoc.Print();
@@ -487,7 +487,7 @@ namespace AccountingSystem
             return dataGridView.Rows.Count;
         }
 
-        public static DateTime GetCurrentDate() 
+        public static DateTime GetCurrentDate()
         {
             return DateTime.Now;
         }
@@ -496,7 +496,7 @@ namespace AccountingSystem
 
         #region Get User Data
 
-        public static string GenerateFullName(string prefix, string firstName, string MiddleName, string LastName, string suffix) 
+        public static string GenerateFullName(string prefix, string firstName, string MiddleName, string LastName, string suffix)
         {
             string fullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {firstName} {MiddleName.Substring(0, 1)}. {LastName} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
 
@@ -535,7 +535,6 @@ namespace AccountingSystem
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
 
-
                 string userFullName = $" {(string.IsNullOrWhiteSpace(prefix) ? string.Empty : $"{prefix}.")} {dictUser["first_name"]} {dictUser["mid_initial"]}. {dictUser["last_name"]} {(string.IsNullOrWhiteSpace(suffix) ? string.Empty : $", {suffix}")}";
                 dictUser.Add("user_full_name", userFullName);
 
@@ -548,7 +547,7 @@ namespace AccountingSystem
             }
 
             return dictUser;
-        } 
+        }
 
         #endregion
 

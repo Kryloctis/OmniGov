@@ -209,7 +209,7 @@ namespace AccountingSystem
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(1078, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1229, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -422,21 +422,11 @@ namespace AccountingSystem
             // 
             // menuDatabaseSynchronization
             // 
+            this.menuDatabaseSynchronization.Enabled = false;
             this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
             this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
             this.menuDatabaseSynchronization.Text = "Database Synchronization";
             this.menuDatabaseSynchronization.Click += new System.EventHandler(this.menuDatabaseSynchronization_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
-            // 
-            // menuDatabaseSynchronization
-            // 
-            this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
-            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
-            this.menuDatabaseSynchronization.Text = "Database Synchronization";
             // 
             // statusStrip1
             // 
@@ -444,10 +434,10 @@ namespace AccountingSystem
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblUserFullName,
             this.lblUserRole});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 519);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 680);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 11, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1078, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1229, 24);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -475,7 +465,7 @@ namespace AccountingSystem
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1078, 37);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1229, 37);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // radBtnBudget
@@ -539,7 +529,7 @@ namespace AccountingSystem
             this.tabControlDashboard.Name = "tabControlDashboard";
             this.tabControlDashboard.Padding = new System.Drawing.Point(0, 0);
             this.tabControlDashboard.SelectedIndex = 0;
-            this.tabControlDashboard.Size = new System.Drawing.Size(1078, 458);
+            this.tabControlDashboard.Size = new System.Drawing.Size(1229, 619);
             this.tabControlDashboard.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlDashboard.TabIndex = 9;
             // 
@@ -552,7 +542,7 @@ namespace AccountingSystem
             this.tabPageBudget.Location = new System.Drawing.Point(4, 5);
             this.tabPageBudget.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageBudget.Name = "tabPageBudget";
-            this.tabPageBudget.Size = new System.Drawing.Size(1070, 449);
+            this.tabPageBudget.Size = new System.Drawing.Size(1221, 610);
             this.tabPageBudget.TabIndex = 0;
             this.tabPageBudget.Text = "Budget";
             // 
@@ -569,7 +559,7 @@ namespace AccountingSystem
             this.tabControlBudget.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlBudget.Name = "tabControlBudget";
             this.tabControlBudget.SelectedIndex = 0;
-            this.tabControlBudget.Size = new System.Drawing.Size(1071, 392);
+            this.tabControlBudget.Size = new System.Drawing.Size(1222, 553);
             this.tabControlBudget.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlBudget.TabIndex = 8;
             // 
@@ -584,7 +574,7 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             this.tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPageBudgetSummary.Size = new System.Drawing.Size(1063, 383);
+            this.tabPageBudgetSummary.Size = new System.Drawing.Size(1214, 544);
             this.tabPageBudgetSummary.TabIndex = 0;
             this.tabPageBudgetSummary.Text = "Budget Summary";
             // 
@@ -595,7 +585,7 @@ namespace AccountingSystem
             this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
             this.ucBudgetSummary1.MinimumSize = new System.Drawing.Size(973, 401);
             this.ucBudgetSummary1.Name = "ucBudgetSummary1";
-            this.ucBudgetSummary1.Size = new System.Drawing.Size(1118, 535);
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1210, 538);
             this.ucBudgetSummary1.TabIndex = 0;
             // 
             // tabPageBudgetDetailed
@@ -644,7 +634,7 @@ namespace AccountingSystem
             this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(1070, 32);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(1221, 32);
             this.flowLayoutPanel6.TabIndex = 9;
             // 
             // btnBudgetAppropriations
@@ -1396,7 +1386,7 @@ namespace AccountingSystem
             this.tabPageTreasury.Location = new System.Drawing.Point(4, 5);
             this.tabPageTreasury.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageTreasury.Name = "tabPageTreasury";
-            this.tabPageTreasury.Size = new System.Drawing.Size(1070, 449);
+            this.tabPageTreasury.Size = new System.Drawing.Size(1221, 610);
             this.tabPageTreasury.TabIndex = 2;
             this.tabPageTreasury.Text = "Treasury";
             this.tabPageTreasury.UseVisualStyleBackColor = true;
@@ -1407,7 +1397,7 @@ namespace AccountingSystem
             this.ucrcdSummary1.Location = new System.Drawing.Point(0, 28);
             this.ucrcdSummary1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ucrcdSummary1.Name = "ucrcdSummary1";
-            this.ucrcdSummary1.Size = new System.Drawing.Size(1070, 421);
+            this.ucrcdSummary1.Size = new System.Drawing.Size(1221, 582);
             this.ucrcdSummary1.TabIndex = 4;
             // 
             // menuStrip2
@@ -1422,7 +1412,7 @@ namespace AccountingSystem
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip2.Size = new System.Drawing.Size(1070, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(1221, 28);
             this.menuStrip2.TabIndex = 5;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -1497,6 +1487,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuAssessmentPosting
             // 
+            this.toolStripMenuAssessmentPosting.Enabled = false;
             this.toolStripMenuAssessmentPosting.Name = "toolStripMenuAssessmentPosting";
             this.toolStripMenuAssessmentPosting.Size = new System.Drawing.Size(183, 22);
             this.toolStripMenuAssessmentPosting.Text = "Assessment Posting";
@@ -1504,6 +1495,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuPaymentPostings
             // 
+            this.toolStripMenuPaymentPostings.Enabled = false;
             this.toolStripMenuPaymentPostings.Name = "toolStripMenuPaymentPostings";
             this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(183, 22);
             this.toolStripMenuPaymentPostings.Text = "RPT Payment";
@@ -1571,6 +1563,7 @@ namespace AccountingSystem
             // 
             // abstractOfGeneralCollectionsToolStripMenuItem
             // 
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
             this.abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
             this.abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections";
@@ -1583,6 +1576,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuItemrealPropertyTaxAccountRegister
             // 
+            this.toolStripMenuItemrealPropertyTaxAccountRegister.Enabled = false;
             this.toolStripMenuItemrealPropertyTaxAccountRegister.Name = "toolStripMenuItemrealPropertyTaxAccountRegister";
             this.toolStripMenuItemrealPropertyTaxAccountRegister.Size = new System.Drawing.Size(304, 22);
             this.toolStripMenuItemrealPropertyTaxAccountRegister.Text = "Real Property Tax Account Register (RPTAR)";
@@ -1590,6 +1584,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuItemRealPropertyTaxStatementOfAccount
             // 
+            this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Enabled = false;
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Name = "toolStripMenuItemRealPropertyTaxStatementOfAccount";
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Size = new System.Drawing.Size(304, 22);
             this.toolStripMenuItemRealPropertyTaxStatementOfAccount.Text = "Real Property Tax Statement of Account";
@@ -1602,6 +1597,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuItemConsolidatedRealPropertyTaxDues
             // 
+            this.toolStripMenuItemConsolidatedRealPropertyTaxDues.Enabled = false;
             this.toolStripMenuItemConsolidatedRealPropertyTaxDues.Name = "toolStripMenuItemConsolidatedRealPropertyTaxDues";
             this.toolStripMenuItemConsolidatedRealPropertyTaxDues.Size = new System.Drawing.Size(304, 22);
             this.toolStripMenuItemConsolidatedRealPropertyTaxDues.Text = "Consolidated Real Property Tax Deliquences";
@@ -1609,6 +1605,7 @@ namespace AccountingSystem
             // 
             // toolStripMenuItemListOfDelinquentAccounts
             // 
+            this.toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
             this.toolStripMenuItemListOfDelinquentAccounts.Name = "toolStripMenuItemListOfDelinquentAccounts";
             this.toolStripMenuItemListOfDelinquentAccounts.Size = new System.Drawing.Size(304, 22);
             this.toolStripMenuItemListOfDelinquentAccounts.Text = "List of Delinquent Accounts";
@@ -1653,7 +1650,7 @@ namespace AccountingSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1078, 543);
+            this.ClientSize = new System.Drawing.Size(1229, 704);
             this.Controls.Add(this.tabControlDashboard);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
@@ -1661,7 +1658,7 @@ namespace AccountingSystem
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1094, 546);
+            this.MinimumSize = new System.Drawing.Size(1245, 743);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
