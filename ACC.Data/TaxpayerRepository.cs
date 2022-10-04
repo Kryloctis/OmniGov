@@ -83,9 +83,9 @@ namespace ACC.Data
                 new object[] {"@search_text", DbType.String, searchText }
             };
 
-            string query = $"SELECT * FROM {tableName} WHERE tin LIKE @tin OR name LIKE @name";
+            string query = $"SELECT * FROM {tableName} WHERE tin LIKE @search_text OR name LIKE @search_text";
             var dataTable = new DataTable();
-            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)

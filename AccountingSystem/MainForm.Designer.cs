@@ -387,6 +387,7 @@ namespace AccountingSystem
             this.menuTaxPayers.Name = "menuTaxPayers";
             this.menuTaxPayers.Size = new System.Drawing.Size(214, 22);
             this.menuTaxPayers.Text = "Taxpayers";
+            this.menuTaxPayers.Click += new System.EventHandler(this.menuTaxPayers_Click);
             // 
             // toolStripSeparator1
             // 
@@ -425,6 +426,17 @@ namespace AccountingSystem
             this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
             this.menuDatabaseSynchronization.Text = "Database Synchronization";
             this.menuDatabaseSynchronization.Click += new System.EventHandler(this.menuDatabaseSynchronization_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
+            // 
+            // menuDatabaseSynchronization
+            // 
+            this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
+            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
+            this.menuDatabaseSynchronization.Text = "Database Synchronization";
             // 
             // statusStrip1
             // 

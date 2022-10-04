@@ -24,18 +24,30 @@ namespace AccountingSystem
             dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
             dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
-            dataGridView.Columns["owner_tin"].HeaderText = "Owner TIN";
-            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
-            dataGridView.Columns["owner_contact"].Visible = false;
             dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            //dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
+            //dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
             dataGridView.Columns["province_name"].HeaderText = "Province";
             dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        public static void TaxpayerDatagridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["tin"].HeaderText = "TIN";
+            dataGridView.Columns["name"].HeaderText = "Owner Name";
+            dataGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["type"].HeaderText = "Owner Type";
+            dataGridView.Columns["contact_info"].HeaderText = "Contact";
+            dataGridView.Columns["street"].HeaderText = "Street";
+            dataGridView.Columns["barangay"].HeaderText = "Barangay";
+            dataGridView.Columns["municipality"].HeaderText = "Municipality";
+            dataGridView.Columns["province"].HeaderText = "Province";
         }
 
         #endregion

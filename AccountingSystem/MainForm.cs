@@ -17,6 +17,7 @@ using AccountingSystem.Views.Manage.RptDiscount;
 using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
+using AccountingSystem.Views.Manage.TaxPayers;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
@@ -836,6 +837,11 @@ namespace AccountingSystem
         private void menuDatabaseSynchronization_Click(object sender, EventArgs e)
         {
             _ = new frmDatabaseSynchronization().ShowDialog();
+        }
+
+        private void menuTaxPayers_Click(object sender, EventArgs e)
+        {
+            _ = new frmTaxPayers().ShowDialog();
         }
     }
 }
