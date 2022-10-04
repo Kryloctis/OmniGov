@@ -147,6 +147,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             _frmTaxPayers.btnSave.Text = "Update";
             _frmTaxPayers.uc.isEdit = true;
+            _frmTaxPayers.btnCancel.Enabled = true;
 
             _frmTaxPayers.uc.LoadProperties();
             Close();

@@ -180,12 +180,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.nudArea.Name = "nudArea";
             this.nudArea.Size = new System.Drawing.Size(216, 23);
             this.nudArea.TabIndex = 13;
+            this.nudArea.ThousandsSeparator = true;
             this.nudArea.Validating += new System.ComponentModel.CancelEventHandler(this.nudArea_Validating);
             this.nudArea.Validated += new System.EventHandler(this.nudArea_Validated);
             // 
             // nudGrYear
             // 
-            this.nudGrYear.DecimalPlaces = 2;
             this.nudGrYear.Location = new System.Drawing.Point(111, 264);
             this.nudGrYear.Maximum = new decimal(new int[] {
             999999999,
@@ -210,6 +210,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.nudOtherImprv.Name = "nudOtherImprv";
             this.nudOtherImprv.Size = new System.Drawing.Size(216, 23);
             this.nudOtherImprv.TabIndex = 12;
+            this.nudOtherImprv.ThousandsSeparator = true;
             // 
             // nudAssessedValue
             // 
@@ -223,6 +224,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.nudAssessedValue.Name = "nudAssessedValue";
             this.nudAssessedValue.Size = new System.Drawing.Size(216, 23);
             this.nudAssessedValue.TabIndex = 10;
+            this.nudAssessedValue.ThousandsSeparator = true;
             this.nudAssessedValue.Validating += new System.ComponentModel.CancelEventHandler(this.nudAssessedValue_Validating);
             this.nudAssessedValue.Validated += new System.EventHandler(this.nudAssessedValue_Validated);
             // 

@@ -1,10 +1,13 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.RptTaxRates;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,6 +66,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void ResetForm()
         {
+
+            //Tax payer
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
@@ -71,6 +76,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtMunicipality.Clear();
             txtProvince.Clear();
             cmbxTaxPayerType.SelectedIndex = 0;
+            taxPayerId = 0;
+            isEdit = false;
+
+            //Properties
+            dgProperties.DataSource = null;
+            dgProperties.Rows.Clear();
+            dgProperties.Refresh();
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)
@@ -169,9 +181,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 _ = new frmAddRealProperties(this).ShowDialog();
         }
 
-
-
-
         #region Properties
         internal void LoadProperties()
         {
@@ -180,7 +189,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 var dtRealProperties = AccFactory.RealPropertiesRepository().GetPropertiesByTaxpayerId(taxPayerId);
 
                 HelperLoadRecords.RealPropertiesDatagridView(dgProperties, RealPropertiesDataTable(dtRealProperties));
-                //dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+                dgProperties.CurrentCell = dgProperties.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -233,5 +242,72 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         }
 
         #endregion
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount;
+
+            if (Delete(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadProperties();
+            }
+        }
+
+        private bool Delete(out int deletedCount)
+        {
+            try
+            {
+                var realPropertiesModelList = new List<RealPropertiesModel>();
+                int rowCount = dgProperties.SelectedRows.Count;
+
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
+                    foreach (DataGridViewRow row in dgProperties.SelectedRows)
+                    {
+                        int id = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new RealPropertiesModel() { Id = id };
+                        realPropertiesModelList.Add(model);
+                    }
+
+                    deletedCount = rowCount;
+                    return AccFactory.RealPropertiesRepository().Delete(realPropertiesModelList);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            deletedCount = 0;
+            return false;
+        }
+
+        private void dgProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            btnDelete.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
+            btnEdit.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ShowEditForm();
+        }
+
+        private void ShowEditForm()
+        {
+            try
+            {
+                int rowIndex = dgProperties.CurrentCell.RowIndex;
+                int propertyId = Convert.ToInt32(dgProperties.Rows[rowIndex].Cells["id"].Value);
+
+                _ = new frmEditRealProperties(propertyId, this).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
     }
 }

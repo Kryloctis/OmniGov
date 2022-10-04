@@ -1,7 +1,6 @@
-﻿
-namespace AccountingSystem.Views.Manage.TaxPayers
+﻿namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    partial class frmAddRealProperties
+    partial class frmEditRealProperties
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +28,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucvRealProperties1 = new AccountingSystem.Views.Manage.TaxPayers.ucRealProperties();
+            this.ucRealProperties1 = new AccountingSystem.Views.Manage.TaxPayers.ucRealProperties();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucvRealProperties1
+            // ucRealProperties1
             // 
-            this.ucvRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucvRealProperties1.Location = new System.Drawing.Point(0, 0);
-            this.ucvRealProperties1.Name = "ucvRealProperties1";
-            this.ucvRealProperties1.Size = new System.Drawing.Size(719, 464);
-            this.ucvRealProperties1.TabIndex = 0;
+            this.ucRealProperties1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucRealProperties1.Location = new System.Drawing.Point(0, 0);
+            this.ucRealProperties1.Name = "ucRealProperties1";
+            this.ucRealProperties1.Size = new System.Drawing.Size(719, 464);
+            this.ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 435);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(719, 29);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
@@ -73,23 +73,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // frmAddRealProperties
+            // frmEditRealProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(719, 464);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucvRealProperties1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
+            this.Controls.Add(this.ucRealProperties1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimizeBox = false;
-            this.Name = "frmAddRealProperties";
+            this.Name = "frmEditRealProperties";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Real Properties";
+            this.Text = "Edit Real Properties";
+            this.Load += new System.EventHandler(this.frmEditRealProperties_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -97,7 +95,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         #endregion
 
-        private ucRealProperties ucvRealProperties1;
+        private ucRealProperties ucRealProperties1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;

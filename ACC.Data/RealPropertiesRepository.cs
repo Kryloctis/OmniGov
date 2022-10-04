@@ -51,7 +51,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE id = @id";
+            string query = $"SELECT property_identifier, complete_arp_no, property_pin, barangay_name, municipality_name, province_name, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE id = @id";
 
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
@@ -64,10 +64,6 @@ namespace ACC.Data
                     dict.Add("property_identifier", row["property_identifier"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());
-                    dict.Add("owner_name", row["owner_name"].ToString());
-                    dict.Add("owner_tin", row["owner_tin"].ToString());
-                    dict.Add("owner_address", row["owner_address"].ToString());
-                    dict.Add("owner_contact", row["owner_contact"].ToString());
                     dict.Add("barangay_name", row["barangay_name"].ToString());
                     dict.Add("municipality_name", row["municipality_name"].ToString());
                     dict.Add("province_name", row["province_name"].ToString());
