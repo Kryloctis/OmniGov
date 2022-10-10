@@ -36,7 +36,6 @@ using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
-using AccountingSystem.Views.Transactions.PaymentCollection;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
@@ -198,8 +197,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction Payment Portal"))
-                MenuPaymentPortal.Enabled = false;
+            //if (!Helper.HasPermission("Transaction Payment Portal"))
+            //    MenuPaymentPortal.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Assessment Posting"))
                 toolStripMenuAssessmentPosting.Enabled = false;
@@ -730,7 +729,7 @@ namespace AccountingSystem
 
         private void MenuPaymentPortal_Click(object sender, EventArgs e)
         {
-            _ = new frmPaymentCollection().ShowDialog();
+
         }
 
         private void rCIToolStripMenuItem_Click(object sender, EventArgs e)
