@@ -147,8 +147,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.cmbxTaxPayerType.Name = "cmbxTaxPayerType";
             this.cmbxTaxPayerType.Size = new System.Drawing.Size(173, 28);
             this.cmbxTaxPayerType.TabIndex = 2;
-            this.cmbxTaxPayerType.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxTaxPayerType_Validating);
-            this.cmbxTaxPayerType.Validated += new System.EventHandler(this.cmbxTaxPayerType_Validated);
             // 
             // txtTIN
             // 
