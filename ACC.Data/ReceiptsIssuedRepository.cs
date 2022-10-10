@@ -344,7 +344,7 @@ namespace ACC.Data
                            $"accountable_form_id, " +
                            $"accountable_forms, " +
                            $"collecting_officer_id, " +
-                           $"collecting_officer, " +
+                           $"CONCAT(collecting_officers_first_name, ' ', collecting_officers_mid_initial, '. ', collecting_officers_last_name) AS collecting_officer, " +
                            $"date_issued, " +
                            $"IF(receipt_issued_from = 0 AND receipt_issued_from = 0, NULL, LPAD(receipt_issued_from, 7, 0)) AS receipt_issued_from, " +
                            $"IF(receipt_issued_to = 0 AND receipt_issued_to = 0, NULL, LPAD(receipt_issued_to, 7, 0)) AS receipt_issued_to, " +
@@ -371,7 +371,7 @@ namespace ACC.Data
                   $"accountable_form_id, " +
                   $"accountable_forms, " +
                   $"collecting_officer_id, " +
-                  $"collecting_officer, " +
+                  $"CONCAT(collecting_officers_first_name, ' ', collecting_officers_mid_initial, '. ', collecting_officers_last_name) AS collecting_officer, " +
                   $"date_issued, " +
                   $"receipt_issued_from, " +
                   $"receipt_issued_to, " +
@@ -382,7 +382,8 @@ namespace ACC.Data
                   $"FROM " +
                   $"{viewTableName} " +
                   $"WHERE is_returned = 1 AND " +
-                  $"collecting_officer LIKE @searchKey OR " +
+                  $"collecting_officers_first_name LIKE @searchKey OR " +
+                  $"collecting_officers_last_name LIKE @searchKey OR " +
                   $"accountable_forms LIKE @searchkey";
                 
             var dt = new DataTable();
