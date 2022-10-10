@@ -138,10 +138,9 @@ namespace AccountingSystem
             this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.paymentCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuPaymentPortal = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuAssessmentPosting = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuPaymentPostings = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -596,7 +595,7 @@ namespace AccountingSystem
             this.tabPageBudgetDetailed.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             this.tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPageBudgetDetailed.Size = new System.Drawing.Size(1063, 383);
+            this.tabPageBudgetDetailed.Size = new System.Drawing.Size(1214, 544);
             this.tabPageBudgetDetailed.TabIndex = 1;
             this.tabPageBudgetDetailed.Text = "Budget Detailed";
             // 
@@ -606,7 +605,7 @@ namespace AccountingSystem
             this.ucBudgetDetailed1.Location = new System.Drawing.Point(2, 3);
             this.ucBudgetDetailed1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
-            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1059, 377);
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1210, 538);
             this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // chkbxDetailed
@@ -726,7 +725,7 @@ namespace AccountingSystem
             this.tabPageAccounting.Location = new System.Drawing.Point(4, 5);
             this.tabPageAccounting.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageAccounting.Name = "tabPageAccounting";
-            this.tabPageAccounting.Size = new System.Drawing.Size(1070, 449);
+            this.tabPageAccounting.Size = new System.Drawing.Size(1221, 610);
             this.tabPageAccounting.TabIndex = 1;
             this.tabPageAccounting.Text = "Accounting";
             this.tabPageAccounting.UseVisualStyleBackColor = true;
@@ -746,7 +745,7 @@ namespace AccountingSystem
             this.tabControlAccounting.Name = "tabControlAccounting";
             this.tabControlAccounting.Padding = new System.Drawing.Point(0, 0);
             this.tabControlAccounting.SelectedIndex = 0;
-            this.tabControlAccounting.Size = new System.Drawing.Size(1070, 411);
+            this.tabControlAccounting.Size = new System.Drawing.Size(1221, 572);
             this.tabControlAccounting.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlAccounting.TabIndex = 0;
             // 
@@ -757,7 +756,7 @@ namespace AccountingSystem
             this.tabPageJournalEntryVoucher.Margin = new System.Windows.Forms.Padding(0);
             this.tabPageJournalEntryVoucher.Name = "tabPageJournalEntryVoucher";
             this.tabPageJournalEntryVoucher.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1062, 402);
+            this.tabPageJournalEntryVoucher.Size = new System.Drawing.Size(1213, 563);
             this.tabPageJournalEntryVoucher.TabIndex = 0;
             this.tabPageJournalEntryVoucher.Text = "Journal Entry Voucher";
             this.tabPageJournalEntryVoucher.UseVisualStyleBackColor = true;
@@ -770,7 +769,7 @@ namespace AccountingSystem
             this.ucjevDashboard1.Margin = new System.Windows.Forms.Padding(0);
             this.ucjevDashboard1.MinimumSize = new System.Drawing.Size(715, 170);
             this.ucjevDashboard1.Name = "ucjevDashboard1";
-            this.ucjevDashboard1.Size = new System.Drawing.Size(1058, 170);
+            this.ucjevDashboard1.Size = new System.Drawing.Size(1209, 170);
             this.ucjevDashboard1.TabIndex = 0;
             // 
             // tabPageJournals
@@ -1286,7 +1285,7 @@ namespace AccountingSystem
             this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1070, 38);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1221, 38);
             this.flowLayoutPanel5.TabIndex = 1;
             // 
             // radJournalEntryVoucher
@@ -1463,43 +1462,34 @@ namespace AccountingSystem
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.paymentCollectionsToolStripMenuItem,
+            this.MenuPaymentPortal,
             this.toolStripSeparator4,
-            this.toolStripMenuAssessmentPosting,
-            this.toolStripMenuPaymentPostings});
+            this.toolStripMenuAssessmentPosting});
             this.paymentsToolStripMenuItem.Image = global::AccountingSystem.Properties.Resources.money_banknote_filled_archive_24px;
             this.paymentsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(95, 28);
             this.paymentsToolStripMenuItem.Text = "Payments";
             // 
-            // paymentCollectionsToolStripMenuItem
+            // MenuPaymentPortal
             // 
-            this.paymentCollectionsToolStripMenuItem.Name = "paymentCollectionsToolStripMenuItem";
-            this.paymentCollectionsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.paymentCollectionsToolStripMenuItem.Text = "Payment Collections";
-            this.paymentCollectionsToolStripMenuItem.Click += new System.EventHandler(this.paymentCollectionsToolStripMenuItem_Click);
+            this.MenuPaymentPortal.Name = "MenuPaymentPortal";
+            this.MenuPaymentPortal.Size = new System.Drawing.Size(180, 22);
+            this.MenuPaymentPortal.Text = "Payment Portal";
+            this.MenuPaymentPortal.Click += new System.EventHandler(this.MenuPaymentPortal_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripMenuAssessmentPosting
             // 
             this.toolStripMenuAssessmentPosting.Enabled = false;
             this.toolStripMenuAssessmentPosting.Name = "toolStripMenuAssessmentPosting";
-            this.toolStripMenuAssessmentPosting.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuAssessmentPosting.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuAssessmentPosting.Text = "Assessment Posting";
             this.toolStripMenuAssessmentPosting.Click += new System.EventHandler(this.toolStripMenuAssessmentPosting_Click);
-            // 
-            // toolStripMenuPaymentPostings
-            // 
-            this.toolStripMenuPaymentPostings.Enabled = false;
-            this.toolStripMenuPaymentPostings.Name = "toolStripMenuPaymentPostings";
-            this.toolStripMenuPaymentPostings.Size = new System.Drawing.Size(183, 22);
-            this.toolStripMenuPaymentPostings.Text = "RPT Payment";
-            this.toolStripMenuPaymentPostings.Click += new System.EventHandler(this.toolStripMenuPaymentPostings_Click);
             // 
             // reportsToolStripMenuItem
             // 
@@ -1823,10 +1813,9 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem checkIssuanceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankDepositToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paymentCollectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuPaymentPortal;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAssessmentPosting;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuPaymentPostings;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collectorsRCDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem liquidatorsRCDToolStripMenuItem;

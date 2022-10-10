@@ -192,17 +192,14 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Bank Deposits"))
                 bankDepositToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction Payments"))
-                paymentCollectionsToolStripMenuItem.Enabled = false;
-
             if (!Helper.HasPermission("Transaction Issue Receipt"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction Real Property Tax Payment"))
-                toolStripMenuPaymentPostings.Enabled = false;
+            if (!Helper.HasPermission("Transaction Payment Portal"))
+                MenuPaymentPortal.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Assessment Posting"))
                 toolStripMenuAssessmentPosting.Enabled = false;
@@ -731,7 +728,7 @@ namespace AccountingSystem
             _ = new frmReceiptsIssued().ShowDialog();
         }
 
-        private void paymentCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MenuPaymentPortal_Click(object sender, EventArgs e)
         {
             _ = new frmPaymentCollection().ShowDialog();
         }
