@@ -40,6 +40,8 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblQuantity = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.dtpReceivedDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceipts)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -56,7 +58,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5);
             this.toolStrip1.Size = new System.Drawing.Size(1211, 65);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
@@ -102,12 +104,12 @@ namespace AccountingSystem.Views.Manage.Receipts
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReceipts.Location = new System.Drawing.Point(11, 80);
+            this.dgReceipts.Location = new System.Drawing.Point(11, 68);
             this.dgReceipts.Name = "dgReceipts";
             this.dgReceipts.RowHeadersWidth = 51;
             this.dgReceipts.RowTemplate.Height = 29;
             this.dgReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReceipts.Size = new System.Drawing.Size(1187, 632);
+            this.dgReceipts.Size = new System.Drawing.Size(1187, 644);
             this.dgReceipts.TabIndex = 7;
             this.dgReceipts.SelectionChanged += new System.EventHandler(this.dgreceipts_SelectionChanged);
             // 
@@ -152,17 +154,40 @@ namespace AccountingSystem.Views.Manage.Receipts
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(936, 29);
+            this.txtSearch.Location = new System.Drawing.Point(937, 21);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(261, 27);
-            this.txtSearch.TabIndex = 10;
+            this.txtSearch.TabIndex = 11;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
+            // 
+            // dtpReceivedDate
+            // 
+            this.dtpReceivedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpReceivedDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpReceivedDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpReceivedDate.Location = new System.Drawing.Point(780, 21);
+            this.dtpReceivedDate.Name = "dtpReceivedDate";
+            this.dtpReceivedDate.Size = new System.Drawing.Size(151, 27);
+            this.dtpReceivedDate.TabIndex = 12;
+            this.dtpReceivedDate.ValueChanged += new System.EventHandler(this.dtpReceivedDate_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(665, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 20);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Received Date ";
             // 
             // frmReceipts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 749);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dtpReceivedDate);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgReceipts);
@@ -194,8 +219,10 @@ namespace AccountingSystem.Views.Manage.Receipts
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
-        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblQuantity;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.DateTimePicker dtpReceivedDate;
+        private System.Windows.Forms.Label label1;
     }
 }
