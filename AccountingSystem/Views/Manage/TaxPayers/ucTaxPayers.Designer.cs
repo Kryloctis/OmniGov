@@ -201,6 +201,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtProvince.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtProvince.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProvince.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtProvince.Location = new System.Drawing.Point(106, 293);
             this.txtProvince.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -212,6 +213,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtMunicipality.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMunicipality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMunicipality.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtMunicipality.Location = new System.Drawing.Point(106, 256);
             this.txtMunicipality.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -223,6 +225,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtBarangay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBarangay.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBarangay.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtBarangay.Location = new System.Drawing.Point(106, 217);
             this.txtBarangay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -234,6 +237,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtStreet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtStreet.Location = new System.Drawing.Point(106, 177);
             this.txtStreet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -274,6 +278,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtName.Location = new System.Drawing.Point(106, 61);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
