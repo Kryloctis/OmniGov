@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.dgBudgetAppropriations.Location = new System.Drawing.Point(12, 84);
             this.dgBudgetAppropriations.Name = "dgBudgetAppropriations";
             this.dgBudgetAppropriations.RowTemplate.Height = 25;
-            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 399);
+            this.dgBudgetAppropriations.Size = new System.Drawing.Size(1177, 444);
             this.dgBudgetAppropriations.TabIndex = 1;
             this.dgBudgetAppropriations.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView_ColumnAdded);
             this.dgBudgetAppropriations.SelectionChanged += new System.EventHandler(this.dgBudgetAppropriations_SelectionChanged);
@@ -150,7 +150,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.txtTotal.BackColor = System.Drawing.SystemColors.Control;
             this.txtTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTotal.Location = new System.Drawing.Point(1057, 489);
+            this.txtTotal.Location = new System.Drawing.Point(1057, 534);
             this.txtTotal.MaxLength = 999999;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
@@ -164,7 +164,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(942, 493);
+            this.label1.Location = new System.Drawing.Point(942, 538);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(109, 15);
             this.label1.TabIndex = 3;
@@ -184,7 +184,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 518);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 563);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1201, 22);
             this.statusStrip1.TabIndex = 8;
@@ -383,7 +383,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1201, 540);
+            this.ClientSize = new System.Drawing.Size(1201, 585);
             this.Controls.Add(this.lnkClearSelection);
             this.Controls.Add(this.lnkSelectAll);
             this.Controls.Add(this.label1);
@@ -396,12 +396,11 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1217, 579);
+            this.MinimumSize = new System.Drawing.Size(1217, 624);
             this.Name = "frmBudgetAppropriations";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Budget Appropriations";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmBudgetAppropriations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgBudgetAppropriations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();

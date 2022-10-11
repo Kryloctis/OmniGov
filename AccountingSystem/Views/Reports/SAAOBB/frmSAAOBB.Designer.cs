@@ -135,7 +135,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Statement of Appropriations, Allotments, Obligations and Balances (SAAOBB)";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSAAOBB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

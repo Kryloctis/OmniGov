@@ -19,7 +19,7 @@ namespace AccountingSystem.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -816,6 +816,46 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap document_type_drawing_28px {
             get {
                 object obj = ResourceManager.GetObject("document_type_drawing_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap documents_3_16px {
+            get {
+                object obj = ResourceManager.GetObject("documents-3@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap documents_3_20px {
+            get {
+                object obj = ResourceManager.GetObject("documents-3@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap documents_3_24px {
+            get {
+                object obj = ResourceManager.GetObject("documents-3@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap documents_3_32px {
+            get {
+                object obj = ResourceManager.GetObject("documents-3@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1736,6 +1776,56 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap symbol_refresh_28px {
             get {
                 object obj = ResourceManager.GetObject("symbol_refresh_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_update_money_banknotes_14px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-update-money-banknotes@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_update_money_banknotes_16px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-update-money-banknotes@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_update_money_banknotes_20px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-update-money-banknotes@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_update_money_banknotes_24px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-update-money-banknotes@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_update_money_banknotes_32px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-update-money-banknotes@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

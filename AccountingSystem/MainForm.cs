@@ -53,6 +53,7 @@ namespace AccountingSystem
         public MainForm(LoginForm _loginForm)
         {
             InitializeComponent();
+            tabControlBudget.SelectedTab = tabControlBudget.TabPages[1];
             Helper.LoadFormIcon(this);
             tabControlDashboard.TabPages.Clear();
             tabControlAccounting.TabPages.Clear();
@@ -99,30 +100,18 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Budget Dashboard"))
             {
-                radBtnBudget.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageBudget);
             }
 
             if (Helper.HasPermission("Accounting Dashboard"))
             {
-                radBtnAccounting.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageAccounting);
             }
 
             if (Helper.HasPermission("Treasury Dashboard"))
             {
-                radBtnTreasury.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageTreasury);
             }
-
-
-            if (Helper.HasPermission("Budget Dashboard"))
-                radBtnBudget.Checked = true;
-            else if (Helper.HasPermission("Accounting Dashboard"))
-                radBtnAccounting.Checked = true;
-            else if (Helper.HasPermission("Treasury Dashboard"))
-                radBtnTreasury.Checked = true;
-
 
             #endregion
         }
@@ -148,10 +137,10 @@ namespace AccountingSystem
                 dailyCashPositionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                btnSAAOB.Enabled = false;
+                sAAOBToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                btnSAAOBB.Enabled = false;
+                sAAOBBToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
@@ -183,7 +172,7 @@ namespace AccountingSystem
         private void ValidateTransactionPermissions()
         {
             if (!Helper.HasPermission("Transaction Obligation Request"))
-                btnObligationRequest.Enabled = false;
+                toolStripButtonObligation.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
                 issueReceiptsToolStripMenuItem.Enabled = false;
@@ -214,10 +203,10 @@ namespace AccountingSystem
                 menuAllotmentClasses.Enabled = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations"))
-                btnBudgetAppropriations.Enabled = false;
+                toolStripButtonBudgetAppropriations.Enabled = false;
 
             if (!Helper.HasPermission("Manage Allotment Releases"))
-                btnAllotmentRelease.Enabled = false;
+                toolStripButtonAllotmentRelease.Enabled = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Enabled = false;
@@ -280,10 +269,10 @@ namespace AccountingSystem
                 dailyCashPositionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                btnSAAOB.Visible = false;
+                sAAOBToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                btnSAAOBB.Visible = false;
+                sAAOBBToolStripMenuItem.Visible = false;
 
             if (!Helper.HasPermission("Manage Amortization"))
                 amortiaztionToolStripMenuItem.Enabled = false;
@@ -483,21 +472,6 @@ namespace AccountingSystem
 
         #endregion
 
-        private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageBudget;
-        }
-
-        private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageAccounting;
-        }
-
-        private void radBtnTreasury_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageTreasury;
-        }
-
         private void menuJournals_Click(object sender, EventArgs e)
         {
             _ = new frmJournals().ShowDialog();
@@ -572,37 +546,29 @@ namespace AccountingSystem
 
         #region Budget Module
 
-        private void chkbxDetailed_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkbxDetailed.Checked)
-                tabControlBudget.SelectedTab = tabPageBudgetDetailed;
-            else
-                tabControlBudget.SelectedTab = tabPageBudgetSummary;
-        }
-
-        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
+        private void toolStripButtonBudgetAppropriations_Click(object sender, EventArgs e)
         {
             _ = new frmBudgetAppropriations().ShowDialog();
         }
 
-        private void btnAllotmentRelease_Click(object sender, EventArgs e)
+        private void toolStripButtonAllotmentRelease_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentReleaseMain().ShowDialog();
         }
 
-        private void btnObligationRequest_Click(object sender, EventArgs e)
+        private void toolStripButtonObligation_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestMain().ShowDialog();
         }
 
         #region SAAOB and SAAOBB report
 
-        private void btnSAAOB_Click(object sender, EventArgs e)
+        private void sAAOBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOB().ShowDialog();
         }
 
-        private void btnSAAOBB_Click(object sender, EventArgs e)
+        private void sAAOBBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOBB().ShowDialog();
         }
