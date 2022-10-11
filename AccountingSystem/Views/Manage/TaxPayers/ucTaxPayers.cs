@@ -210,8 +210,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
-            btnEdit.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
+            Helper.EnableDisableButtons(dgProperties, btnEdit, btnDelete);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
