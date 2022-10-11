@@ -141,7 +141,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtReceiptIssuedFrom.Name = "txtReceiptIssuedFrom";
             this.txtReceiptIssuedFrom.Size = new System.Drawing.Size(398, 23);
             this.txtReceiptIssuedFrom.TabIndex = 3;
-            this.txtReceiptIssuedFrom.Text = "0";
             this.txtReceiptIssuedFrom.TextChanged += new System.EventHandler(this.txtReceiptIssuedFrom_TextChanged);
             this.txtReceiptIssuedFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceiptIssuedFrom_KeyPress);
             this.txtReceiptIssuedFrom.Validating += new System.ComponentModel.CancelEventHandler(this.txtReceiptNumberFrom_Validating);
@@ -155,7 +154,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.txtReceiptIssuedTo.Name = "txtReceiptIssuedTo";
             this.txtReceiptIssuedTo.Size = new System.Drawing.Size(398, 23);
             this.txtReceiptIssuedTo.TabIndex = 4;
-            this.txtReceiptIssuedTo.Text = "0";
             this.txtReceiptIssuedTo.TextChanged += new System.EventHandler(this.txtReceiptIssuedTo_TextChanged);
             this.txtReceiptIssuedTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceiptIssuedTo_KeyPress);
             this.txtReceiptIssuedTo.Validating += new System.ComponentModel.CancelEventHandler(this.txtReceiptNumberTo_Validating);

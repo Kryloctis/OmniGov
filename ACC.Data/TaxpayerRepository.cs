@@ -161,5 +161,18 @@ namespace ACC.Data
                 return true;
             return false;
         }
+
+        public int LastInsertedId()
+        {
+            try
+            {
+                string query = $"SELECT MAX(id) FROM {tableName}";
+                return int.Parse(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

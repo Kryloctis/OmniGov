@@ -41,14 +41,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDateIssued = new System.Windows.Forms.DateTimePicker();
             this.cbAll = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -63,6 +65,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStripSeparator1,
             this.btnReturn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Margin = new System.Windows.Forms.Padding(4);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip1.Size = new System.Drawing.Size(1060, 58);
@@ -124,17 +127,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // dgReceiptIssued
             // 
-            this.dgReceiptIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgReceiptIssued.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgReceiptIssued.Location = new System.Drawing.Point(10, 60);
+            this.dgReceiptIssued.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgReceiptIssued.Location = new System.Drawing.Point(4, 4);
             this.dgReceiptIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgReceiptIssued.Name = "dgReceiptIssued";
             this.dgReceiptIssued.RowHeadersWidth = 51;
             this.dgReceiptIssued.RowTemplate.Height = 29;
             this.dgReceiptIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReceiptIssued.Size = new System.Drawing.Size(1039, 474);
+            this.dgReceiptIssued.Size = new System.Drawing.Size(1028, 461);
             this.dgReceiptIssued.TabIndex = 8;
             this.dgReceiptIssued.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
             // 
@@ -166,23 +167,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(852, 23);
+            this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtsearch.Location = new System.Drawing.Point(805, 23);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(196, 23);
+            this.txtsearch.Size = new System.Drawing.Size(158, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(804, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Search";
             // 
             // label2
             // 
@@ -218,19 +209,41 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.cbAll.UseVisualStyleBackColor = true;
             this.cbAll.CheckedChanged += new System.EventHandler(this.cbAll_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.dgReceiptIssued);
+            this.panel1.Location = new System.Drawing.Point(12, 65);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1036, 469);
+            this.panel1.TabIndex = 33;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(969, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // frmReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cbAll);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpDateIssued);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.dgReceiptIssued);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
@@ -246,6 +259,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,10 +278,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpDateIssued;
         private System.Windows.Forms.CheckBox cbAll;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button1;
     }
 }

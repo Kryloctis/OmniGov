@@ -77,22 +77,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.splitContainer1.Size = new System.Drawing.Size(835, 389);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Size = new System.Drawing.Size(731, 292);
             this.splitContainer1.SplitterDistance = 315;
-            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 5;
             // 
             // groupBox2
@@ -100,11 +98,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(5, 5);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Location = new System.Drawing.Point(4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(305, 379);
+            this.groupBox2.Size = new System.Drawing.Size(307, 284);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Taxpayers Details";
@@ -129,10 +125,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel2.Location = new System.Drawing.Point(3, 24);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel2.Location = new System.Drawing.Point(3, 19);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(299, 351);
+            this.panel2.Size = new System.Drawing.Size(301, 262);
             this.panel2.TabIndex = 0;
             // 
             // cmbxTaxPayerType
@@ -142,10 +137,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.cmbxTaxPayerType.Cursor = System.Windows.Forms.Cursors.Default;
             this.cmbxTaxPayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxTaxPayerType.FormattingEnabled = true;
-            this.cmbxTaxPayerType.Location = new System.Drawing.Point(106, 101);
-            this.cmbxTaxPayerType.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbxTaxPayerType.Location = new System.Drawing.Point(93, 76);
             this.cmbxTaxPayerType.Name = "cmbxTaxPayerType";
-            this.cmbxTaxPayerType.Size = new System.Drawing.Size(173, 28);
+            this.cmbxTaxPayerType.Size = new System.Drawing.Size(191, 23);
             this.cmbxTaxPayerType.TabIndex = 2;
             // 
             // txtTIN
@@ -153,45 +147,44 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtTIN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTIN.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTIN.Location = new System.Drawing.Point(106, 23);
-            this.txtTIN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTIN.Location = new System.Drawing.Point(93, 17);
             this.txtTIN.Name = "txtTIN";
-            this.txtTIN.Size = new System.Drawing.Size(173, 27);
+            this.txtTIN.Size = new System.Drawing.Size(191, 23);
             this.txtTIN.TabIndex = 0;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 221);
+            this.label10.Location = new System.Drawing.Point(14, 166);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 20);
+            this.label10.Size = new System.Drawing.Size(56, 15);
             this.label10.TabIndex = 1;
             this.label10.Text = "Barangay";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 299);
+            this.label4.Location = new System.Drawing.Point(14, 224);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 20);
+            this.label4.Size = new System.Drawing.Size(53, 15);
             this.label4.TabIndex = 1;
             this.label4.Text = "Province";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 261);
+            this.label3.Location = new System.Drawing.Point(14, 196);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 20);
+            this.label3.Size = new System.Drawing.Size(73, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "Municipality";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 183);
+            this.label9.Location = new System.Drawing.Point(14, 137);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 20);
+            this.label9.Size = new System.Drawing.Size(37, 15);
             this.label9.TabIndex = 1;
             this.label9.Text = "Street";
             // 
@@ -201,10 +194,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProvince.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtProvince.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtProvince.Location = new System.Drawing.Point(106, 293);
-            this.txtProvince.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProvince.Location = new System.Drawing.Point(93, 220);
             this.txtProvince.Name = "txtProvince";
-            this.txtProvince.Size = new System.Drawing.Size(173, 27);
+            this.txtProvince.Size = new System.Drawing.Size(191, 23);
             this.txtProvince.TabIndex = 7;
             // 
             // txtMunicipality
@@ -213,10 +205,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMunicipality.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMunicipality.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMunicipality.Location = new System.Drawing.Point(106, 256);
-            this.txtMunicipality.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtMunicipality.Location = new System.Drawing.Point(93, 192);
             this.txtMunicipality.Name = "txtMunicipality";
-            this.txtMunicipality.Size = new System.Drawing.Size(173, 27);
+            this.txtMunicipality.Size = new System.Drawing.Size(191, 23);
             this.txtMunicipality.TabIndex = 6;
             // 
             // txtBarangay
@@ -225,10 +216,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBarangay.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtBarangay.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBarangay.Location = new System.Drawing.Point(106, 217);
-            this.txtBarangay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtBarangay.Location = new System.Drawing.Point(93, 163);
             this.txtBarangay.Name = "txtBarangay";
-            this.txtBarangay.Size = new System.Drawing.Size(173, 27);
+            this.txtBarangay.Size = new System.Drawing.Size(191, 23);
             this.txtBarangay.TabIndex = 5;
             // 
             // txtStreet
@@ -237,10 +227,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtStreet.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtStreet.Location = new System.Drawing.Point(106, 177);
-            this.txtStreet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtStreet.Location = new System.Drawing.Point(93, 133);
             this.txtStreet.Name = "txtStreet";
-            this.txtStreet.Size = new System.Drawing.Size(173, 27);
+            this.txtStreet.Size = new System.Drawing.Size(191, 23);
             this.txtStreet.TabIndex = 4;
             // 
             // txtContact
@@ -248,27 +237,26 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtContact.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtContact.Location = new System.Drawing.Point(106, 139);
-            this.txtContact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtContact.Location = new System.Drawing.Point(93, 104);
             this.txtContact.Name = "txtContact";
-            this.txtContact.Size = new System.Drawing.Size(173, 27);
+            this.txtContact.Size = new System.Drawing.Size(191, 23);
             this.txtContact.TabIndex = 3;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 144);
+            this.label8.Location = new System.Drawing.Point(14, 108);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 20);
+            this.label8.Size = new System.Drawing.Size(49, 15);
             this.label8.TabIndex = 1;
             this.label8.Text = "Contact";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 105);
+            this.label7.Location = new System.Drawing.Point(14, 79);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 20);
+            this.label7.Size = new System.Drawing.Size(31, 15);
             this.label7.TabIndex = 1;
             this.label7.Text = "Type";
             // 
@@ -278,10 +266,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtName.Location = new System.Drawing.Point(106, 61);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtName.Location = new System.Drawing.Point(93, 46);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(173, 27);
+            this.txtName.Size = new System.Drawing.Size(191, 23);
             this.txtName.TabIndex = 1;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
@@ -289,18 +276,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 67);
+            this.label2.Location = new System.Drawing.Point(14, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
+            this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Name";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 27);
+            this.label1.Location = new System.Drawing.Point(14, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 20);
+            this.label1.Size = new System.Drawing.Size(25, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "TIN";
             // 
@@ -308,22 +295,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(5, 5);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabControl1.Location = new System.Drawing.Point(4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(505, 379);
+            this.tabControl1.Size = new System.Drawing.Size(404, 284);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgProperties);
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(497, 346);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(396, 256);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Real Properties";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -332,12 +317,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.dgProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgProperties.Location = new System.Drawing.Point(3, 44);
-            this.dgProperties.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgProperties.Location = new System.Drawing.Point(3, 33);
             this.dgProperties.Name = "dgProperties";
             this.dgProperties.RowHeadersWidth = 51;
             this.dgProperties.RowTemplate.Height = 25;
-            this.dgProperties.Size = new System.Drawing.Size(491, 298);
+            this.dgProperties.Size = new System.Drawing.Size(390, 220);
             this.dgProperties.TabIndex = 0;
             this.dgProperties.SelectionChanged += new System.EventHandler(this.dgProperties_SelectionChanged);
             // 
@@ -347,18 +331,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.flowLayoutPanel1.Controls.Add(this.btnEdit);
             this.flowLayoutPanel1.Controls.Add(this.btnDelete);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 4);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(491, 40);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(390, 30);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(0, 4);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(0, 4, 3, 4);
+            this.btnAdd.Enabled = false;
+            this.btnAdd.Location = new System.Drawing.Point(0, 3);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(55, 31);
+            this.btnAdd.Size = new System.Drawing.Size(48, 23);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -367,10 +351,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(58, 4);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            this.btnEdit.Location = new System.Drawing.Point(51, 3);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(55, 31);
+            this.btnEdit.Size = new System.Drawing.Size(48, 23);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -379,10 +363,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(116, 4);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Location = new System.Drawing.Point(102, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(55, 31);
+            this.btnDelete.Size = new System.Drawing.Size(48, 23);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -395,13 +378,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // ucTaxPayers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ucTaxPayers";
-            this.Size = new System.Drawing.Size(835, 389);
+            this.Size = new System.Drawing.Size(731, 292);
             this.Load += new System.EventHandler(this.ucTaxPayers_Load_1);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

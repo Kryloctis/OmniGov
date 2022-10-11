@@ -6,5 +6,6 @@ namespace ACC.Domain.Interfaces
     {
         bool ITaxpayerNameExist(string name);
         bool ITaxpayerNameExist(int id, string name);
+        int LastInsertedId();
     }
 }

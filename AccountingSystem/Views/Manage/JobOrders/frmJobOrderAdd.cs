@@ -35,14 +35,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             try
             {
                 using (var scope = new TransactionScope())
-                {
-                    // if error occurs, show messagebox error
-                    //if (!_uc.ValidateChildren())
-                    //{
-                    //    //Helper.MessageBoxError(_uc.GetFormErrors());
-                    //    return false;
-                    //}
-
+                { 
                     if (InsertJobOrder() == true && AssignJOTORegularCollector() == true)
                     {
                         scope.Complete();

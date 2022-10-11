@@ -61,6 +61,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 {
                     Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
                     uc.ResetForm();
+                    uc.taxPayerId = Convert.ToInt32(AccFactory.TaxpayersRepository().LastInsertedId());
+                    
                 }
             }
 
