@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class PaymentCollectionsRepository:IPaymentCollectionsRepository
+    public class PaymentCollectionsRepository : IPaymentCollectionsRepository
     {
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
@@ -15,8 +15,8 @@ namespace ACC.Data
         private IGeneralPaymentsRepository _generalPaymentsRepository;
         private IRptPaymentPostsRepository _rptPaymentPostsRepository;
 
-        public PaymentCollectionsRepository(MySqlGenericCommands mySqlGenericCommandsLFS, 
-                                            IGeneralPaymentsRepository generalPaymentsRepository, 
+        public PaymentCollectionsRepository(MySqlGenericCommands mySqlGenericCommandsLFS,
+                                            IGeneralPaymentsRepository generalPaymentsRepository,
                                             IRptPaymentPostsRepository rptPaymentPostsRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
@@ -48,7 +48,7 @@ namespace ACC.Data
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("receipt_no", reader.Rows[0]["receipt_no"].ToString());
                     record.Add("payment_date", reader.Rows[0]["payment_date"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());                    
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
                 }
             }
             catch (Exception)
@@ -64,8 +64,8 @@ namespace ACC.Data
             var parameter = new object[][] {
                 new object[] {"@collectorId", DbType.Int32, collectorId}
             };
-             
-            string query =  $"SELECT " +
+
+            string query = $"SELECT " +
                             $"id, " +
                             $"funds_id, " +
                             $"fund_name, " +
@@ -90,7 +90,7 @@ namespace ACC.Data
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
-                
+
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dtPaymentCollection);
         }
@@ -102,7 +102,7 @@ namespace ACC.Data
                 new object[]{"@date", DbType.DateTime2, date}
             };
 
-            string query  = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
+            string query = $"SELECT * FROM {viewTableName} WHERE payment_date = @date";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
@@ -119,12 +119,12 @@ namespace ACC.Data
 
             string columnFilter = collectingOfficerJO ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
 
-            string query =  $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date ORDER BY accountable_forms_id";
+            string query = $"SELECT id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date = @payment_date ORDER BY accountable_forms_id";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameter);
         }
-        
+
         public bool Insert(PaymentCollectionsModel entity)
         {
             try
@@ -172,13 +172,14 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-              
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
 
         public bool Update(PaymentCollectionsModel entity)
         {
@@ -196,9 +197,9 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
                     new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy}
                 };
-                 
-                string query =  $"UPDATE {tableName} SET funds_id = @funds_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, updated_by = @updated_by WHERE id = @id";
-                            
+
+                string query = $"UPDATE {tableName} SET funds_id = @funds_id, payee = @payee, receipt_no = @receipt_no, payment_date = @payment_date, amount = @amount, updated_by = @updated_by WHERE id = @id";
+
                 return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -206,6 +207,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public bool Delete(List<PaymentCollectionsModel> entityList)
         {
             try
@@ -259,11 +261,11 @@ namespace ACC.Data
 
             if (!string.IsNullOrEmpty(queryResult))
                 return true;
-         
+
             return false;
         }
 
-        public bool ReceiptExist(string receipt,int formid)
+        public bool ReceiptExist(string receipt, int formid)
         {
             var parameters = new object[][]
             {
@@ -274,9 +276,9 @@ namespace ACC.Data
             string query = $"SELECT id FROM {tableName} WHERE receipt_no = @receipt_no AND accountable_forms_id = @accountable_forms_id";
             string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
-            if (!string.IsNullOrEmpty(queryResult)) 
+            if (!string.IsNullOrEmpty(queryResult))
                 return true;
-            
+
             return false;
         }
 
@@ -306,11 +308,11 @@ namespace ACC.Data
         {
             var parameter = new object[][] {
                 new object[] { "@searchText", DbType.String, $"%{searchText}%" }
-            }; 
+            };
 
             string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
-               
+
             var dtpc = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
         }
@@ -328,7 +330,7 @@ namespace ACC.Data
 
             string columnFilter = Convert.ToBoolean(parameter[4]) ? "job_orders_id" : "ISNULL(job_orders_id) AND collecting_officer_id";
 
-            string query =  $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date BETWEEN @collection_from AND @collection_to ";
+            string query = $"SELECT id AS payment_collections_id, funds_id, fund_name, accountable_forms_id, accountable_forms_no, accountable_forms_desc, payee, receipt_no, payment_date, amount FROM {viewTableName} WHERE {columnFilter} = @collecting_officer_id AND payment_date BETWEEN @collection_from AND @collection_to ";
 
             var dtPaymentCollection = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
@@ -435,7 +437,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameter = new object[][] { 
+                var parameter = new object[][] {
                     new object[]{"@collecting_officers_id", DbType.Int32, collectingOfficerID},
                     new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
                 };
@@ -452,7 +454,7 @@ namespace ACC.Data
 
         public bool InsertWithPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
-            using (var scope = new TransactionScope()) 
+            using (var scope = new TransactionScope())
             {
                 var parameters = new object[][]
                    {
