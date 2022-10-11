@@ -36,39 +36,42 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.dtpreturn = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgReturnedReceipts
             // 
-            this.dgReturnedReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgReturnedReceipts.Location = new System.Drawing.Point(12, 44);
-            this.dgReturnedReceipts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgReturnedReceipts.ColumnHeadersHeight = 29;
+            this.dgReturnedReceipts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgReturnedReceipts.Location = new System.Drawing.Point(4, 4);
             this.dgReturnedReceipts.Name = "dgReturnedReceipts";
             this.dgReturnedReceipts.RowHeadersWidth = 51;
             this.dgReturnedReceipts.RowTemplate.Height = 29;
             this.dgReturnedReceipts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReturnedReceipts.Size = new System.Drawing.Size(814, 353);
+            this.dgReturnedReceipts.Size = new System.Drawing.Size(942, 475);
             this.dgReturnedReceipts.TabIndex = 9;
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lblRecordCounts,
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
             this.lblUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 399);
+            this.statusStrip1.Location = new System.Drawing.Point(4, 535);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(838, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(950, 26);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -76,86 +79,95 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             // 
             this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(10, 3, 0, 2);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 21);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCounts
             // 
             this.lblRecordCounts.Name = "lblRecordCounts";
-            this.lblRecordCounts.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCounts.Size = new System.Drawing.Size(17, 20);
             this.lblRecordCounts.Text = "0";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(748, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(841, 20);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             this.lblUpdatedAt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(576, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 15);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Search ";
             // 
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(625, 15);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Location = new System.Drawing.Point(706, 14);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(201, 23);
+            this.txtSearch.Size = new System.Drawing.Size(229, 27);
             this.txtSearch.TabIndex = 12;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // dtpreturn
             // 
             this.dtpreturn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpreturn.Location = new System.Drawing.Point(366, 15);
-            this.dtpreturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpreturn.Location = new System.Drawing.Point(471, 14);
             this.dtpreturn.Name = "dtpreturn";
-            this.dtpreturn.Size = new System.Drawing.Size(201, 23);
+            this.dtpreturn.Size = new System.Drawing.Size(229, 27);
             this.dtpreturn.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(278, 17);
+            this.label2.Location = new System.Drawing.Point(360, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.Size = new System.Drawing.Size(105, 20);
             this.label2.TabIndex = 14;
             this.label2.Text = "Date Returned";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgReturnedReceipts);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(4, 52);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(950, 483);
+            this.panel1.TabIndex = 16;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.dtpreturn);
+            this.panel2.Controls.Add(this.txtSearch);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(4, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(950, 52);
+            this.panel2.TabIndex = 17;
+            // 
             // frmReturnedReceipts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(838, 421);
-            this.Controls.Add(this.dtpreturn);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtSearch);
+            this.ClientSize = new System.Drawing.Size(958, 561);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.dgReturnedReceipts);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimizeBox = false;
             this.Name = "frmReturnedReceipts";
+            this.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Returned Receipts";
@@ -164,6 +176,9 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             ((System.ComponentModel.ISupportInitialize)(this.dgReturnedReceipts)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,9 +193,10 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DateTimePicker dtpreturn;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

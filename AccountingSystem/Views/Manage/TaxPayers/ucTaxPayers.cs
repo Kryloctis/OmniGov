@@ -30,8 +30,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var errorArray = new string[]
            {
-                errorProvider1.GetError(txtName),
-                errorProvider1.GetError(cmbxTaxPayerType)
+                errorProvider1.GetError(txtName)
            };
 
             IError error = AccFactory.CreateErrors(errorArray);
@@ -97,17 +96,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
-
-        private void cmbxTaxPayerType_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxTaxPayerType, "Type");
-        }
-
-        private void cmbxTaxPayerType_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxTaxPayerType);
-        }
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {

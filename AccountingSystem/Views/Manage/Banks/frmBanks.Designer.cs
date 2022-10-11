@@ -43,7 +43,6 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.dgBanks = new System.Windows.Forms.DataGridView();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBanks)).BeginInit();
@@ -60,10 +59,9 @@ namespace AccountingSystem.Views.Manage.Banks
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip.Location = new System.Drawing.Point(0, 375);
+            this.statusStrip.Location = new System.Drawing.Point(0, 503);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip.Size = new System.Drawing.Size(907, 26);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.Stretch = false;
             this.statusStrip.TabIndex = 7;
@@ -72,42 +70,42 @@ namespace AccountingSystem.Views.Manage.Banks
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 20);
             this.toolStripStatusLabel1.Text = "Records:";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Size = new System.Drawing.Size(17, 20);
             this.lblRecordCount.Text = "0";
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(584, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(642, 20);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(81, 20);
             this.toolStripStatusLabel2.Text = "Created at:";
             // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
-            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 20);
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(87, 20);
             this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
             this.lblUpdatedAt.Name = "lblUpdatedAt";
-            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 20);
             // 
             // toolStrip
             // 
@@ -120,8 +118,8 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(794, 58);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.toolStrip.Size = new System.Drawing.Size(907, 65);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -131,7 +129,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Size = new System.Drawing.Size(41, 52);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.ToolTipText = "Add";
@@ -144,7 +142,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Size = new System.Drawing.Size(39, 52);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -156,7 +154,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Size = new System.Drawing.Size(57, 52);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -167,13 +165,12 @@ namespace AccountingSystem.Views.Manage.Banks
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgBanks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBanks.Location = new System.Drawing.Point(10, 60);
-            this.dgBanks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgBanks.Location = new System.Drawing.Point(11, 80);
             this.dgBanks.Name = "dgBanks";
             this.dgBanks.RowHeadersWidth = 51;
             this.dgBanks.RowTemplate.Height = 29;
             this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBanks.Size = new System.Drawing.Size(773, 313);
+            this.dgBanks.Size = new System.Drawing.Size(883, 417);
             this.dgBanks.TabIndex = 8;
             this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
@@ -181,36 +178,23 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(529, 33);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtsearch.Location = new System.Drawing.Point(605, 44);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(254, 23);
+            this.txtsearch.Size = new System.Drawing.Size(290, 27);
             this.txtsearch.TabIndex = 9;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(481, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Search";
-            // 
             // frmBanks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(794, 397);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(907, 529);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.dgBanks);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmBanks";
@@ -245,6 +229,5 @@ namespace AccountingSystem.Views.Manage.Banks
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBanks;
         private System.Windows.Forms.TextBox txtsearch;
-        private System.Windows.Forms.Label label1;
     }
 }
