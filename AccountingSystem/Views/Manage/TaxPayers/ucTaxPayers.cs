@@ -58,7 +58,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void ResetForm()
         {
-
             //Tax payer
             txtTIN.Clear();
             txtName.Clear();
@@ -75,8 +74,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dgProperties.DataSource = null;
             dgProperties.Rows.Clear();
             dgProperties.Refresh();
-
-            tabPage1.Enabled = false;
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)
@@ -99,7 +96,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (taxPayerId == 0)
+            if (taxPayerId == 0 && string.IsNullOrEmpty(txtName.Text.Trim()))
                 Helper.MessageBoxSuccess("No Taxpayer found.");
             else
                 _ = new frmAddRealProperties(this).ShowDialog();

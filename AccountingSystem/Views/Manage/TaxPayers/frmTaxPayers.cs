@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmTaxPayers : Form
     {
-        internal  ucTaxPayers uc;
+        internal readonly ucTaxPayers uc;
 
         public frmTaxPayers()
         {
