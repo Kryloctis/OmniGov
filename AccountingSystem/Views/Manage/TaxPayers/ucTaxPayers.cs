@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         public ucTaxPayers()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgProperties, true);
+            Helper.DatagridFullRowSelectStyle(dgProperties, false);
         }
 
 
@@ -30,14 +30,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var errorArray = new string[]
            {
-                errorProvider1.GetError(txtTIN),
-                errorProvider1.GetError(txtName),
-                errorProvider1.GetError(cmbxTaxPayerType),
-                errorProvider1.GetError(txtContact),
-                errorProvider1.GetError(txtStreet),
-                errorProvider1.GetError(txtBarangay),
-                errorProvider1.GetError(txtMunicipality),
-                errorProvider1.GetError(txtProvince),
+                errorProvider1.GetError(txtName)
            };
 
             IError error = AccFactory.CreateErrors(errorArray);
@@ -48,7 +41,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dict = new Dictionary<string, string>();
 
-            dict.Add("0", string.Empty);
             dict.Add("1", "Association");
             dict.Add("2", "Charitable");
             dict.Add("3", "Cooperative");
@@ -83,6 +75,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             dgProperties.DataSource = null;
             dgProperties.Rows.Clear();
             dgProperties.Refresh();
+
+            tabPage1.Enabled = false;
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)
@@ -93,16 +87,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
         }
 
-        private void txtTIN_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtTIN, "TIN");
-        }
-
-        private void txtTIN_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtTIN);
-        }
-
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Name");
@@ -111,66 +95,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void txtName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
-        }
-
-        private void cmbxTaxPayerType_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxTaxPayerType, "Type");
-        }
-
-        private void cmbxTaxPayerType_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(errorProvider1, cmbxTaxPayerType);
-        }
-
-        private void txtContact_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "Contact");
-        }
-
-        private void txtContact_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtContact);
-        }
-
-        private void txtStreet_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtStreet, "Street");
-        }
-
-        private void txtStreet_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtStreet);
-        }
-
-        private void txtBarangay_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBarangay, "Barangay");
-        }
-
-        private void txtBarangay_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtBarangay);
-        }
-
-        private void txtMunicipality_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMunicipality, "Municipality");
-        }
-
-        private void txtMunicipality_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtMunicipality);
-        }
-
-        private void txtProvince_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtProvince, "Province");
-        }
-
-        private void txtProvince_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtProvince);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -309,5 +233,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
     }
 }

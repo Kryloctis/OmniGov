@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(3);
-            this.toolStrip1.Size = new System.Drawing.Size(730, 56);
+            this.toolStrip1.Size = new System.Drawing.Size(822, 56);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -115,14 +115,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTaxPayers1.Location = new System.Drawing.Point(0, 56);
             this.ucTaxPayers1.Name = "ucTaxPayers1";
-            this.ucTaxPayers1.Size = new System.Drawing.Size(730, 294);
+            this.ucTaxPayers1.Size = new System.Drawing.Size(822, 368);
             this.ucTaxPayers1.TabIndex = 2;
             // 
             // frmTaxPayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 350);
+            this.ClientSize = new System.Drawing.Size(822, 424);
             this.Controls.Add(this.ucTaxPayers1);
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
@@ -10,7 +11,7 @@ namespace ACC.Domain.Interfaces
         int GetReceiptNumberFromByReceiptId(int receiptId);
         bool IsReceiptBetweenFromAndTo(int receiptId, int receiptNumberFrom, int receiptNumberTo);
 
-
+        DataTable GetRecordsByDateAndText(string dateReceived, string txtSearch);
        
     }
 }

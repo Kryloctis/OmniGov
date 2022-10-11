@@ -18,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void frmAccForms_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            LoadRecordsBySearch();
             SetToolStripStatusData();
         }
 
@@ -35,18 +35,28 @@ namespace AccountingSystem.Views.Manage.Receipts
             }
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        internal void LoadRecordsBySearch() 
         {
             try
             {
-                var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsBySearch(txtSearch.Text.Trim());
+                var dateReceived = dtpReceivedDate.Value.ToString("yyyy-MM-dd");
+                var searchKey = txtSearch.Text.Trim();
+
+                var dtReceipts = AccFactory.ReceiptsRepository().GetRecordsByDateAndText(dateReceived, searchKey);
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
-                
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Length > 3 || txtSearch.Text.Length == 0)
+                LoadRecordsBySearch();
+
+            return;
         }
 
         private void SetToolStripStatusData()
@@ -66,7 +76,6 @@ namespace AccountingSystem.Views.Manage.Receipts
             int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells[0].Value);
             bool hasIssueance = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
             
-            btnDelete.Enabled = !hasIssueance;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -99,9 +108,15 @@ namespace AccountingSystem.Views.Manage.Receipts
                 }
                 _ = receiptsRepository.Delete(receiptModel);
 
-                LoadRecords();
+
+                LoadRecordsBySearch();
+                Helper.MessageBoxSuccess("Receipt successfullt deleted.");
             }
         }
 
+        private void dtpReceivedDate_ValueChanged(object sender, EventArgs e)
+        {
+            LoadRecordsBySearch();
+        }
     }
 }

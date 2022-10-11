@@ -138,7 +138,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             ucTaxPayers.txtTIN.Text = tin;
             ucTaxPayers.txtName.Text = name;
-            ucTaxPayers.cmbxTaxPayerType.SelectedText = type;
+            ucTaxPayers.cmbxTaxPayerType.Text = type;
             ucTaxPayers.txtContact.Text = contactInfo;
             ucTaxPayers.txtStreet.Text = street;
             ucTaxPayers.txtBarangay.Text = barangay;
@@ -147,6 +147,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             _frmTaxPayers.btnSave.Text = "Update";
             _frmTaxPayers.uc.isEdit = true;
+            _frmTaxPayers.uc.tabPage1.Enabled = true;
             _frmTaxPayers.btnCancel.Enabled = true;
 
             _frmTaxPayers.uc.LoadProperties();

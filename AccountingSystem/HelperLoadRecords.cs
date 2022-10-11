@@ -711,8 +711,8 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Collecting Officer ID ";
             datagrid.Columns[4].HeaderText = "Collecting Officer";
             datagrid.Columns[5].HeaderText = "Date Issued";
-            datagrid.Columns[6].HeaderText = "Receipt Number From";
-            datagrid.Columns[7].HeaderText = "Receipt Number To";
+            datagrid.Columns[6].HeaderText = "Receipt No. From";
+            datagrid.Columns[7].HeaderText = "Receipt No. To";
             datagrid.Columns[8].HeaderText = "Quantity";
             datagrid.Columns[9].HeaderText = "Last Issued";
             datagrid.Columns[10].HeaderText = "Returned Quantity";

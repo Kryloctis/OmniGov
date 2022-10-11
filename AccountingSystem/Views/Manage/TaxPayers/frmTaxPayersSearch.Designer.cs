@@ -32,7 +32,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgTaxpayers = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -46,37 +45,37 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // panel1
             // 
             this.panel1.Controls.Add(this.dgTaxpayers);
-            this.panel1.Location = new System.Drawing.Point(0, 52);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 44);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(833, 370);
+            this.panel1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Size = new System.Drawing.Size(719, 365);
             this.panel1.TabIndex = 1;
             // 
             // dgTaxpayers
             // 
             this.dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTaxpayers.Location = new System.Drawing.Point(3, 3);
+            this.dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgTaxpayers.Location = new System.Drawing.Point(5, 5);
+            this.dgTaxpayers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgTaxpayers.Name = "dgTaxpayers";
+            this.dgTaxpayers.RowHeadersWidth = 51;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(826, 363);
+            this.dgTaxpayers.Size = new System.Drawing.Size(709, 355);
             this.dgTaxpayers.TabIndex = 1;
             this.dgTaxpayers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgTaxpayers_MouseDoubleClick);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(621, 20);
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(478, 9);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(207, 23);
+            this.txtSearch.Size = new System.Drawing.Size(236, 27);
             this.txtSearch.TabIndex = 4;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(573, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Search";
             // 
             // flowLayoutPanel1
             // 
@@ -85,25 +84,28 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.flowLayoutPanel1.Controls.Add(this.btnSelect);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 420);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 409);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(833, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(719, 39);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(755, 3);
+            this.btnCancel.Location = new System.Drawing.Point(630, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(86, 31);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(674, 3);
+            this.btnSelect.Location = new System.Drawing.Point(538, 4);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.Size = new System.Drawing.Size(86, 31);
             this.btnSelect.TabIndex = 0;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -111,23 +113,25 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.txtSearch);
-            this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(833, 52);
+            this.panel2.Size = new System.Drawing.Size(719, 44);
             this.panel2.TabIndex = 6;
             // 
             // frmTaxPayersSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(833, 449);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(719, 448);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "frmTaxPayersSearch";
             this.ShowInTaskbar = false;
@@ -148,7 +152,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgTaxpayers;
         internal System.Windows.Forms.TextBox txtSearch;
-        internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSelect;
