@@ -54,6 +54,7 @@ namespace AccountingSystem
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.barangayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,12 +85,12 @@ namespace AccountingSystem
             this.ucJournalsDashboard2 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
             this.tabPageLedgers = new System.Windows.Forms.TabPage();
             this.tabControlLedgers = new System.Windows.Forms.TabControl();
-            this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
-            this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
-            this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
-            this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
             this.tabPageTransactionLog = new System.Windows.Forms.TabPage();
             this.ucTransactionLog1 = new AccountingSystem.Views.Reports.Ledgers.ucTransactionLog();
+            this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
+            this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
+            this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
+            this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
             this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
             this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
             this.tabPagePostTrial = new System.Windows.Forms.TabPage();
@@ -140,6 +141,7 @@ namespace AccountingSystem
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.taxTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -154,9 +156,9 @@ namespace AccountingSystem
             this.tabPageJournals.SuspendLayout();
             this.tabPageLedgers.SuspendLayout();
             this.tabControlLedgers.SuspendLayout();
-            this.tabPageGeneralLedger.SuspendLayout();
-            this.tabPageSubsidiaryLedger.SuspendLayout();
             this.tabPageTransactionLog.SuspendLayout();
+            this.tabPageSubsidiaryLedger.SuspendLayout();
+            this.tabPageGeneralLedger.SuspendLayout();
             this.tabPageTrialBalance.SuspendLayout();
             this.tabControlTrialBalance.SuspendLayout();
             this.tabPagePostTrial.SuspendLayout();
@@ -232,6 +234,8 @@ namespace AccountingSystem
             this.menuReceipts,
             this.menuTaxPayers,
             this.toolStripSeparator1,
+            this.taxTypeToolStripMenuItem,
+            this.barangayToolStripMenuItem,
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
             this.taxRateToolStripMenuItem,
@@ -369,6 +373,12 @@ namespace AccountingSystem
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            // 
+            // barangayToolStripMenuItem
+            // 
+            this.barangayToolStripMenuItem.Name = "barangayToolStripMenuItem";
+            this.barangayToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.barangayToolStripMenuItem.Text = "Barangay";
             // 
             // discountToolStripMenuItem
             // 
@@ -702,26 +712,25 @@ namespace AccountingSystem
             this.tabControlLedgers.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControlLedgers.TabIndex = 0;
             // 
-            // tabPageGeneralLedger
+            // tabPageTransactionLog
             // 
-            this.tabPageGeneralLedger.Controls.Add(this.ucGeneralLedger1);
-            this.tabPageGeneralLedger.Location = new System.Drawing.Point(4, 24);
-            this.tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageGeneralLedger.Name = "tabPageGeneralLedger";
-            this.tabPageGeneralLedger.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tabPageGeneralLedger.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageGeneralLedger.TabIndex = 0;
-            this.tabPageGeneralLedger.Text = "General Ledger";
-            this.tabPageGeneralLedger.UseVisualStyleBackColor = true;
+            this.tabPageTransactionLog.Controls.Add(this.ucTransactionLog1);
+            this.tabPageTransactionLog.Location = new System.Drawing.Point(4, 24);
+            this.tabPageTransactionLog.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageTransactionLog.Name = "tabPageTransactionLog";
+            this.tabPageTransactionLog.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageTransactionLog.TabIndex = 2;
+            this.tabPageTransactionLog.Text = "Transaction Log";
+            this.tabPageTransactionLog.UseVisualStyleBackColor = true;
             // 
-            // ucGeneralLedger1
+            // ucTransactionLog1
             // 
-            this.ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucGeneralLedger1.Location = new System.Drawing.Point(0, 5);
-            this.ucGeneralLedger1.Name = "ucGeneralLedger1";
-            this.ucGeneralLedger1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucGeneralLedger1.Size = new System.Drawing.Size(1205, 545);
-            this.ucGeneralLedger1.TabIndex = 0;
+            this.ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
+            this.ucTransactionLog1.Name = "ucTransactionLog1";
+            this.ucTransactionLog1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucTransactionLog1.Size = new System.Drawing.Size(1205, 550);
+            this.ucTransactionLog1.TabIndex = 0;
             // 
             // tabPageSubsidiaryLedger
             // 
@@ -744,25 +753,26 @@ namespace AccountingSystem
             this.ucSubsidiaryLedger1.Size = new System.Drawing.Size(1205, 545);
             this.ucSubsidiaryLedger1.TabIndex = 0;
             // 
-            // tabPageTransactionLog
+            // tabPageGeneralLedger
             // 
-            this.tabPageTransactionLog.Controls.Add(this.ucTransactionLog1);
-            this.tabPageTransactionLog.Location = new System.Drawing.Point(4, 24);
-            this.tabPageTransactionLog.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tabPageTransactionLog.Name = "tabPageTransactionLog";
-            this.tabPageTransactionLog.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageTransactionLog.TabIndex = 2;
-            this.tabPageTransactionLog.Text = "Transaction Log";
-            this.tabPageTransactionLog.UseVisualStyleBackColor = true;
+            this.tabPageGeneralLedger.Controls.Add(this.ucGeneralLedger1);
+            this.tabPageGeneralLedger.Location = new System.Drawing.Point(4, 24);
+            this.tabPageGeneralLedger.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageGeneralLedger.Name = "tabPageGeneralLedger";
+            this.tabPageGeneralLedger.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageGeneralLedger.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageGeneralLedger.TabIndex = 0;
+            this.tabPageGeneralLedger.Text = "General Ledger";
+            this.tabPageGeneralLedger.UseVisualStyleBackColor = true;
             // 
-            // ucTransactionLog1
+            // ucGeneralLedger1
             // 
-            this.ucTransactionLog1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTransactionLog1.Location = new System.Drawing.Point(0, 0);
-            this.ucTransactionLog1.Name = "ucTransactionLog1";
-            this.ucTransactionLog1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucTransactionLog1.Size = new System.Drawing.Size(1205, 550);
-            this.ucTransactionLog1.TabIndex = 0;
+            this.ucGeneralLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucGeneralLedger1.Location = new System.Drawing.Point(0, 5);
+            this.ucGeneralLedger1.Name = "ucGeneralLedger1";
+            this.ucGeneralLedger1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucGeneralLedger1.Size = new System.Drawing.Size(1205, 545);
+            this.ucGeneralLedger1.TabIndex = 0;
             // 
             // tabPageTrialBalance
             // 
@@ -1225,6 +1235,12 @@ namespace AccountingSystem
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // taxTypeToolStripMenuItem
+            // 
+            this.taxTypeToolStripMenuItem.Name = "taxTypeToolStripMenuItem";
+            this.taxTypeToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.taxTypeToolStripMenuItem.Text = "Taxpayer type";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1238,7 +1254,7 @@ namespace AccountingSystem
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1244, 741);
+            this.MinimumSize = new System.Drawing.Size(1244, 718);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
@@ -1265,9 +1281,9 @@ namespace AccountingSystem
             this.tabPageJournals.PerformLayout();
             this.tabPageLedgers.ResumeLayout(false);
             this.tabControlLedgers.ResumeLayout(false);
-            this.tabPageGeneralLedger.ResumeLayout(false);
-            this.tabPageSubsidiaryLedger.ResumeLayout(false);
             this.tabPageTransactionLog.ResumeLayout(false);
+            this.tabPageSubsidiaryLedger.ResumeLayout(false);
+            this.tabPageGeneralLedger.ResumeLayout(false);
             this.tabPageTrialBalance.ResumeLayout(false);
             this.tabControlTrialBalance.ResumeLayout(false);
             this.tabPagePostTrial.ResumeLayout(false);
@@ -1404,6 +1420,8 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem listOfDelinquentAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem issueRecieptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barangayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxTypeToolStripMenuItem;
     }
 }
 
