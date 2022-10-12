@@ -766,4 +766,64 @@
   <data name="money-2@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\money-2@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="briefcase_business_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\briefcase-business@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="briefcase_business_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\briefcase-business@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="briefcase_business_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\briefcase-business@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="briefcase_business_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\briefcase-business@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="briefcase_business_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\briefcase-business@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_add_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-add@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_add_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-add@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_add_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-add@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_add_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-add@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_add_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-add@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_edit_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-edit@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_edit_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-edit@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_edit_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-edit@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_edit_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-edit@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_edit_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-edit@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_remove_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-remove@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_remove_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-remove@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_remove_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-remove@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_remove_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-remove@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="button_rounded_remove_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\button-rounded-remove@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
