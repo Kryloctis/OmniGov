@@ -236,7 +236,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Status of Appropriations, Allotments and Obligation (SAAOB)";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmSAAOB_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

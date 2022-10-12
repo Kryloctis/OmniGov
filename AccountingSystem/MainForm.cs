@@ -53,6 +53,7 @@ namespace AccountingSystem
         public MainForm(LoginForm _loginForm)
         {
             InitializeComponent();
+            tabControlBudget.SelectedTab = tabControlBudget.TabPages[1];
             Helper.LoadFormIcon(this);
             tabControlDashboard.TabPages.Clear();
             tabControlAccounting.TabPages.Clear();
@@ -99,30 +100,18 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Budget Dashboard"))
             {
-                radBtnBudget.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageBudget);
             }
 
             if (Helper.HasPermission("Accounting Dashboard"))
             {
-                radBtnAccounting.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageAccounting);
             }
 
             if (Helper.HasPermission("Treasury Dashboard"))
             {
-                radBtnTreasury.Visible = true;
                 tabControlDashboard.TabPages.Add(tabPageTreasury);
             }
-
-
-            if (Helper.HasPermission("Budget Dashboard"))
-                radBtnBudget.Checked = true;
-            else if (Helper.HasPermission("Accounting Dashboard"))
-                radBtnAccounting.Checked = true;
-            else if (Helper.HasPermission("Treasury Dashboard"))
-                radBtnTreasury.Checked = true;
-
 
             #endregion
         }
@@ -130,7 +119,7 @@ namespace AccountingSystem
         private void ValidateReportPermissions()
         {
             if (!Helper.HasPermission("Report of Checks Issued"))
-                rCIToolStripMenuItem.Enabled = false;
+                reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report of Collections and Deposits"))
                 reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
@@ -142,16 +131,16 @@ namespace AccountingSystem
                 bankCashbookToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Consolidated Receipts"))
-                consolidatedReceiptsToolStripMenuItem.Enabled = false;
+                consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Daily Cash Position"))
                 dailyCashPositionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOB"))
-                btnSAAOB.Enabled = false;
+                sAAOBToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report SAAOBB"))
-                btnSAAOBB.Enabled = false;
+                sAAOBBToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
@@ -168,31 +157,19 @@ namespace AccountingSystem
 
         }
 
-        private bool IsUserCollector()
-        {
-            var dictJobOrderRepo = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecordByJobOrderUserId(Helper.UserId);
-            var dictCollectingOfficerRepo = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
-
-
-            if (dictJobOrderRepo.Values.Count < 1 && dictCollectingOfficerRepo.Values.Count < 1)
-                return false;
-
-            return true;
-        }
-
         private void ValidateTransactionPermissions()
         {
             if (!Helper.HasPermission("Transaction Obligation Request"))
-                btnObligationRequest.Enabled = false;
+                toolStripButtonObligation.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
-                issueReceiptsToolStripMenuItem.Enabled = false;
+                checkIssuanceToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Bank Deposits"))
                 bankDepositToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Receipt"))
-                issueReceiptsToolStripMenuItem.Enabled = false;
+                issueRecieptsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
@@ -201,7 +178,7 @@ namespace AccountingSystem
             //    MenuPaymentPortal.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Assessment Posting"))
-                toolStripMenuAssessmentPosting.Enabled = false;
+                assessmentPostingToolStripMenuItem.Enabled = false;
 
             //if (!IsUserCollector())
             //    toolStripMenuPaymentPostings.Enabled = false;
@@ -214,10 +191,10 @@ namespace AccountingSystem
                 menuAllotmentClasses.Enabled = false;
 
             if (!Helper.HasPermission("Manage Budget Appropriations"))
-                btnBudgetAppropriations.Enabled = false;
+                toolStripButtonBudgetAppropriations.Enabled = false;
 
             if (!Helper.HasPermission("Manage Allotment Releases"))
-                btnAllotmentRelease.Enabled = false;
+                toolStripButtonAllotmentRelease.Enabled = false;
 
             if (!Helper.HasPermission("Manage Chart of Accounts"))
                 menuChartOfAccounts.Enabled = false;
@@ -252,8 +229,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Disbursing Officer"))
                 menuDisbursingOfficer.Enabled = false;
 
-            if (!Helper.HasPermission("Transaction Issue Receipt"))
-                issueReceiptsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Manage Receipts"))
+                menuReceipts.Enabled = false;
 
             if (!Helper.HasPermission("Transaction Issue Check"))
                 checkIssuanceToolStripMenuItem.Enabled = false;
@@ -261,32 +238,6 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction Generate RCD"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
-            if (!Helper.HasPermission("Report of Checks Issued"))
-                rCIToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report of Collections and Deposits"))
-                reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Reports of General Collections"))
-                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report Bank Cashbook"))
-                bankCashbookToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report Consolidated Receipts"))
-                consolidatedReceiptsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report Daily Cash Position"))
-                dailyCashPositionsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Report SAAOB"))
-                btnSAAOB.Visible = false;
-
-            if (!Helper.HasPermission("Report SAAOBB"))
-                btnSAAOBB.Visible = false;
-
-            if (!Helper.HasPermission("Manage Amortization"))
-                amortiaztionToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Manage Signatories"))
                 signatoriesToolStripMenuItem.Enabled = false;
@@ -294,17 +245,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Manage Taxpayers"))
                 menuTaxPayers.Enabled = false;
 
-            #region Receipts
-
-            if (!Helper.HasPermission("Manage Receipts"))
-                menuReceipts.Enabled = false;
-
             if (!Helper.HasPermission("Manage Returned Receipts"))
                 returnedReceiptsToolStripMenuItem.Enabled = false;
-
-            if (!Helper.HasPermission("Manage Receipts") && !Helper.HasPermission("Manage Returned Receipts"))
-                toolStripMenuItemReceipts.Enabled = false;
-            #endregion
 
             if (Helper.LoggedInUserData()["role_name"] != "System Administrator")
             {
@@ -320,7 +262,6 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
             {
-                radJournalEntryVoucher.Visible = true;
                 tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
             }
 
@@ -335,7 +276,6 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report General Journal") || Helper.HasPermission("Report Cash Receipts Journal") || Helper.HasPermission("Report Procurement Received Journal") || Helper.HasPermission("Report Cash Disbursements Journal") || Helper.HasPermission("Report Check Disbursements Journal") || Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
             {
-                radJournals.Visible = true;
                 tabControlAccounting.TabPages.Add(tabPageJournals);
             }
 
@@ -364,34 +304,24 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
             {
-                radLedgers.Visible = true;
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
             }
 
 
             if (Helper.HasPermission("Report General Ledger"))
             {
-                radioGeneralLedger.Enabled = true;
                 tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
             }
 
             if (Helper.HasPermission("Report Subsidiary Ledger"))
             {
-                radioSubsidiaryLedger.Enabled = true;
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
             }
 
             if (Helper.HasPermission("Report Transaction Log"))
             {
-                radioTransactionLog.Enabled = true;
                 tabControlLedgers.TabPages.Add(tabPageTransactionLog);
             }
-
-
-            if (Helper.HasPermission("Report General Ledger"))
-                radioGeneralLedger.Checked = true;
-            else if (Helper.HasPermission("Report Subsidiary Ledger"))
-                radioSubsidiaryLedger.Checked = true;
 
             #endregion
 
@@ -399,27 +329,19 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report Pre Trial Balance") || Helper.HasPermission("Report Post Trial Balance"))
             {
-                radTrialBalance.Visible = true;
                 tabControlAccounting.TabPages.Add(tabPageTrialBalance);
             }
 
 
             if (Helper.HasPermission("Report Pre Trial Balance"))
             {
-                radioPreTB.Enabled = true;
                 tabControlTrialBalance.TabPages.Add(tabPagePreTrial);
             }
 
             if (Helper.HasPermission("Report Post Trial Balance"))
             {
-                radioPostTB.Enabled = true;
                 tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
             }
-
-            if (Helper.HasPermission("Report Pre Trial Balance"))
-                radioPreTB.Checked = true;
-            else if (Helper.HasPermission("Report Post Trial Balance"))
-                radioPostTB.Checked = true;
 
             #endregion
 
@@ -427,76 +349,33 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report Statement of Financial Performance"))
             {
-                radFinancialStatements.Visible = true;
                 tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
             }
 
 
             if (Helper.HasPermission("Report Statement of Financial Performance"))
             {
-                radSFPerformance.Enabled = true;
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPerformance);
             }
 
             if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
             {
-                radSCNAE.Enabled = true;
                 tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
             }
 
             if (Helper.HasPermission("Report Statement of Financial Position"))
             {
-                radSFPosition.Enabled = true;
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
             }
 
             if (Helper.HasPermission("Report Statement of Cash Flows"))
             {
-                radSCF.Enabled = true;
                 tabControlFinancialStatements.TabPages.Add(tabPageSCF);
             }
-
-
-            if (Helper.HasPermission("Report Statement of Financial Position"))
-                radSFPosition.Checked = true;
-            else if (Helper.HasPermission("Report Statement of Financial Performance"))
-                radSFPerformance.Checked = true;
-            else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
-                radSCNAE.Checked = true;
-
-
-
             #endregion
-
-
-            if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
-                radJournalEntryVoucher.Checked = true;
-            else if (Helper.HasPermission("Report General Journal") || Helper.HasPermission("Report Cash Receipts Journal") || Helper.HasPermission("Report Procurement Received Journal") || Helper.HasPermission("Report Cash Disbursements Journal") || Helper.HasPermission("Report Check Disbursements Journal") || Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-                radJournals.Checked = true;
-            else if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
-                radLedgers.Checked = true;
-            else if (Helper.HasPermission("Report Pre Trial Balance") || Helper.HasPermission("Report Post Trial Balance"))
-                radTrialBalance.Checked = true;
-            else if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report Statement of Financial Performance"))
-                radFinancialStatements.Checked = true;
         }
 
         #endregion
-
-        private void radBtnBudget_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageBudget;
-        }
-
-        private void radBtnAccounting_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageAccounting;
-        }
-
-        private void radBtnTreasury_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlDashboard.SelectedTab = tabPageTreasury;
-        }
 
         private void menuJournals_Click(object sender, EventArgs e)
         {
@@ -572,37 +451,29 @@ namespace AccountingSystem
 
         #region Budget Module
 
-        private void chkbxDetailed_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkbxDetailed.Checked)
-                tabControlBudget.SelectedTab = tabPageBudgetDetailed;
-            else
-                tabControlBudget.SelectedTab = tabPageBudgetSummary;
-        }
-
-        private void btnBudgetAppropriations_Click(object sender, EventArgs e)
+        private void toolStripButtonBudgetAppropriations_Click(object sender, EventArgs e)
         {
             _ = new frmBudgetAppropriations().ShowDialog();
         }
 
-        private void btnAllotmentRelease_Click(object sender, EventArgs e)
+        private void toolStripButtonAllotmentRelease_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentReleaseMain().ShowDialog();
         }
 
-        private void btnObligationRequest_Click(object sender, EventArgs e)
+        private void toolStripButtonObligation_Click(object sender, EventArgs e)
         {
             _ = new frmObligationRequestMain().ShowDialog();
         }
 
         #region SAAOB and SAAOBB report
 
-        private void btnSAAOB_Click(object sender, EventArgs e)
+        private void sAAOBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOB().ShowDialog();
         }
 
-        private void btnSAAOBB_Click(object sender, EventArgs e)
+        private void sAAOBBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmSAAOBB().ShowDialog();
         }
@@ -722,17 +593,12 @@ namespace AccountingSystem
             _ = new frmReceipts().ShowDialog();
         }
 
-        private void btnIssueReceipt_Click(object sender, EventArgs e)
+        private void issueRecieptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmReceiptsIssued().ShowDialog();
         }
 
-        private void MenuPaymentPortal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rCIToolStripMenuItem_Click(object sender, EventArgs e)
+        private void reportOfCheckIssuedRCIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRCIReport().ShowDialog();
         }
@@ -752,7 +618,7 @@ namespace AccountingSystem
             _ = new frmCashbook().ShowDialog();
         }
 
-        private void consolidatedReceiptsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmConsolidatedReceipts().ShowDialog();
         }
@@ -772,22 +638,22 @@ namespace AccountingSystem
             _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
         }
 
-        private void toolStripMenuItemrealPropertyTaxAccountRegister_Click(object sender, EventArgs e)
+        private void realPropertyTaxAccountRegisterRPTARToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRealPropertyTaxAccountRegisterReport().ShowDialog();
         }
 
-        private void toolStripMenuItemRealPropertyTaxStatementOfAccount_Click(object sender, EventArgs e)
+        private void realPropertyTaxStatementOfAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRealPropertyTaxStatementOfAccount().ShowDialog();
         }
 
-        private void toolStripMenuItemConsolidatedRealPropertyTaxDues_Click(object sender, EventArgs e)
+        private void consolidatedRealPropertyTaxDeliquencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmCertifiedListOfTaxDelinquences().ShowDialog();
         }
 
-        private void menuReturnReceipts_Click(object sender, EventArgs e)
+        private void returnedReceiptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmReturnedReceipts().ShowDialog();
         }
@@ -807,7 +673,7 @@ namespace AccountingSystem
             _ = new frmRptTaxRates(this).ShowDialog();
         }
 
-        private void checkIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CheckIssuanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmRCI().ShowDialog();
         }
@@ -827,7 +693,7 @@ namespace AccountingSystem
             _ = new frmRCD().ShowDialog();
         }
 
-        private void toolStripMenuAssessmentPosting_Click(object sender, EventArgs e)
+        private void assessmentPostingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmAssessmentPosting().ShowDialog();
         }

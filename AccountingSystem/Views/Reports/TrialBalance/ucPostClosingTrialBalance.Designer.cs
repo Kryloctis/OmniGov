@@ -44,14 +44,13 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.panelReport.BackColor = System.Drawing.Color.Transparent;
             this.panelReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelReport.Location = new System.Drawing.Point(0, 28);
+            this.panelReport.Location = new System.Drawing.Point(0, 32);
             this.panelReport.Name = "panelReport";
-            this.panelReport.Size = new System.Drawing.Size(1037, 541);
+            this.panelReport.Size = new System.Drawing.Size(1037, 537);
             this.panelReport.TabIndex = 6;
             // 
             // panel1
             // 
-            this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.cbHideZeroBalance);
             this.panel1.Controls.Add(this.dtAsOf);
@@ -62,14 +61,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1037, 28);
+            this.panel1.Size = new System.Drawing.Size(1037, 32);
             this.panel1.TabIndex = 5;
             // 
             // cbHideZeroBalance
             // 
             this.cbHideZeroBalance.AutoSize = true;
             this.cbHideZeroBalance.Enabled = false;
-            this.cbHideZeroBalance.Location = new System.Drawing.Point(543, 5);
+            this.cbHideZeroBalance.Location = new System.Drawing.Point(545, 8);
             this.cbHideZeroBalance.Name = "cbHideZeroBalance";
             this.cbHideZeroBalance.Size = new System.Drawing.Size(127, 19);
             this.cbHideZeroBalance.TabIndex = 9;
@@ -79,7 +78,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             // dtAsOf
             // 
-            this.dtAsOf.Location = new System.Drawing.Point(312, 0);
+            this.dtAsOf.Location = new System.Drawing.Point(314, 3);
             this.dtAsOf.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.dtAsOf.Name = "dtAsOf";
             this.dtAsOf.Size = new System.Drawing.Size(208, 23);
@@ -89,14 +88,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.cmbFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFund.FormattingEnabled = true;
-            this.cmbFund.Location = new System.Drawing.Point(40, 0);
+            this.cmbFund.Location = new System.Drawing.Point(42, 3);
             this.cmbFund.Name = "cmbFund";
             this.cmbFund.Size = new System.Drawing.Size(216, 23);
             this.cmbFund.TabIndex = 5;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(693, 1);
+            this.btnRetrieve.Location = new System.Drawing.Point(695, 4);
             this.btnRetrieve.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(96, 24);
@@ -108,7 +107,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(272, 6);
+            this.label2.Location = new System.Drawing.Point(274, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(20, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 15);
@@ -118,7 +117,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 3);
+            this.label1.Location = new System.Drawing.Point(2, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 15);
             this.label1.TabIndex = 0;
@@ -128,7 +127,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.panelReport);
             this.Controls.Add(this.panel1);
             this.Name = "ucPostClosingTrialBalance";
@@ -137,7 +135,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

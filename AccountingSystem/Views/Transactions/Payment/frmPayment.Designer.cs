@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.PaymentPortal
 {
-    partial class frmPaymentPortal
+    partial class frmPayment
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1092, 29);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
-            // frmPaymentPortal
+            // frmPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -48,10 +48,10 @@
             this.ClientSize = new System.Drawing.Size(1092, 600);
             this.Controls.Add(this.flowLayoutPanel1);
             this.MinimizeBox = false;
-            this.Name = "frmPaymentPortal";
+            this.Name = "frmPayment";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Payment Portal";
+            this.Text = "Payment";
             this.ResumeLayout(false);
 
         }

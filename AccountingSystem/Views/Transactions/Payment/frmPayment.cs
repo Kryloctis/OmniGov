@@ -2,9 +2,9 @@
 
 namespace AccountingSystem.Views.Transactions.PaymentPortal
 {
-    public partial class frmPaymentPortal : Form
+    public partial class frmPayment : Form
     {
-        public frmPaymentPortal()
+        public frmPayment()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
