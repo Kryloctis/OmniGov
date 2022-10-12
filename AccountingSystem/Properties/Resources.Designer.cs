@@ -613,9 +613,49 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_14px {
+            get {
+                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_16px {
+            get {
+                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_20px {
+            get {
+                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_24px {
             get {
                 object obj = ResourceManager.GetObject("document_delivery_receipt_signed_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_delivery_receipt_signed_32px {
+            get {
+                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1156,6 +1196,56 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap modify_object_align_vertical_center_28px {
             get {
                 object obj = ResourceManager.GetObject("modify_object_align_vertical_center_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_2_14px {
+            get {
+                object obj = ResourceManager.GetObject("money-2@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_2_16px {
+            get {
+                object obj = ResourceManager.GetObject("money-2@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_2_20px {
+            get {
+                object obj = ResourceManager.GetObject("money-2@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_2_24px {
+            get {
+                object obj = ResourceManager.GetObject("money-2@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_2_32px {
+            get {
+                object obj = ResourceManager.GetObject("money-2@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

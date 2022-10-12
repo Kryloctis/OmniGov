@@ -446,6 +446,7 @@ namespace AccountingSystem.Views.Dashboard
             // nudYear
             // 
             this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudYear.BackColor = System.Drawing.Color.White;
             this.nudYear.Location = new System.Drawing.Point(746, 3);
             this.nudYear.Maximum = new decimal(new int[] {
             9999,
