@@ -173,6 +173,56 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap briefcase_business_14px {
+            get {
+                object obj = ResourceManager.GetObject("briefcase_business_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap briefcase_business_16px {
+            get {
+                object obj = ResourceManager.GetObject("briefcase_business_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap briefcase_business_20px {
+            get {
+                object obj = ResourceManager.GetObject("briefcase_business_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap briefcase_business_24px {
+            get {
+                object obj = ResourceManager.GetObject("briefcase_business_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap briefcase_business_32px {
+            get {
+                object obj = ResourceManager.GetObject("briefcase_business_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap building_1_filled_browse_large_1x {
             get {
                 object obj = ResourceManager.GetObject("building_1_filled_browse_large_1x", resourceCulture);
@@ -256,6 +306,156 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap button_info_32px {
             get {
                 object obj = ResourceManager.GetObject("button_info_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_add_14px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_add_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_add_16px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_add_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_add_20px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_add_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_add_24px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_add_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_add_32px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_add_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_edit_14px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_edit_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_edit_16px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_edit_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_edit_20px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_edit_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_edit_24px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_edit_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_edit_32px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_edit_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_remove_14px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_remove_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_remove_16px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_remove_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_remove_20px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_remove_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_remove_24px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_remove_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap button_rounded_remove_32px {
+            get {
+                object obj = ResourceManager.GetObject("button_rounded_remove_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
