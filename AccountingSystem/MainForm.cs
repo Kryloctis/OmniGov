@@ -709,5 +709,10 @@ namespace AccountingSystem
         {
             _ = new frmTaxPayers().ShowDialog();
         }
+
+        private void barangayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

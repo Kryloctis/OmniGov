@@ -54,6 +54,7 @@ namespace AccountingSystem
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.taxTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barangayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,7 +142,6 @@ namespace AccountingSystem
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.taxTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -374,11 +374,18 @@ namespace AccountingSystem
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
             // 
+            // taxTypeToolStripMenuItem
+            // 
+            this.taxTypeToolStripMenuItem.Name = "taxTypeToolStripMenuItem";
+            this.taxTypeToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.taxTypeToolStripMenuItem.Text = "Taxpayer type";
+            // 
             // barangayToolStripMenuItem
             // 
             this.barangayToolStripMenuItem.Name = "barangayToolStripMenuItem";
             this.barangayToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.barangayToolStripMenuItem.Text = "Barangay";
+            this.barangayToolStripMenuItem.Click += new System.EventHandler(this.barangayToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
@@ -1234,12 +1241,6 @@ namespace AccountingSystem
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // taxTypeToolStripMenuItem
-            // 
-            this.taxTypeToolStripMenuItem.Name = "taxTypeToolStripMenuItem";
-            this.taxTypeToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.taxTypeToolStripMenuItem.Text = "Taxpayer type";
             // 
             // MainForm
             // 
