@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 31);
+            this.label1.Location = new System.Drawing.Point(0, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 15);
             this.label1.TabIndex = 3;
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(45, 28);
+            this.txtName.Location = new System.Drawing.Point(45, 32);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.MaxLength = 99;
             this.txtName.Name = "txtName";
@@ -80,7 +80,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.cmbOffice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOffice.FormattingEnabled = true;
-            this.cmbOffice.Location = new System.Drawing.Point(45, 0);
+            this.cmbOffice.Location = new System.Drawing.Point(45, 4);
             this.cmbOffice.Name = "cmbOffice";
             this.cmbOffice.Size = new System.Drawing.Size(721, 23);
             this.cmbOffice.TabIndex = 4;
@@ -88,7 +88,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 3);
+            this.label2.Location = new System.Drawing.Point(0, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 5;
@@ -98,10 +98,10 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(3, 63);
+            this.groupBox1.Location = new System.Drawing.Point(3, 67);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(763, 427);
+            this.groupBox1.Size = new System.Drawing.Size(763, 361);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Permissions";
@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(3, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(757, 405);
+            this.panel1.Size = new System.Drawing.Size(757, 339);
             this.panel1.TabIndex = 0;
             // 
             // label4
@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnDenyPermission
             // 
-            this.btnDenyPermission.Location = new System.Drawing.Point(344, 208);
+            this.btnDenyPermission.Location = new System.Drawing.Point(344, 174);
             this.btnDenyPermission.Name = "btnDenyPermission";
             this.btnDenyPermission.Size = new System.Drawing.Size(57, 23);
             this.btnDenyPermission.TabIndex = 19;
@@ -153,7 +153,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnGrantPermission
             // 
-            this.btnGrantPermission.Location = new System.Drawing.Point(344, 179);
+            this.btnGrantPermission.Location = new System.Drawing.Point(344, 145);
             this.btnGrantPermission.Name = "btnGrantPermission";
             this.btnGrantPermission.Size = new System.Drawing.Size(57, 23);
             this.btnGrantPermission.TabIndex = 18;
@@ -163,7 +163,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnDenyAllPermissions
             // 
-            this.btnDenyAllPermissions.Location = new System.Drawing.Point(344, 237);
+            this.btnDenyAllPermissions.Location = new System.Drawing.Point(344, 203);
             this.btnDenyAllPermissions.Name = "btnDenyAllPermissions";
             this.btnDenyAllPermissions.Size = new System.Drawing.Size(57, 23);
             this.btnDenyAllPermissions.TabIndex = 17;
@@ -173,7 +173,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             // btnGrantAllPermissions
             // 
-            this.btnGrantAllPermissions.Location = new System.Drawing.Point(344, 150);
+            this.btnGrantAllPermissions.Location = new System.Drawing.Point(344, 116);
             this.btnGrantAllPermissions.Name = "btnGrantAllPermissions";
             this.btnGrantAllPermissions.Size = new System.Drawing.Size(57, 23);
             this.btnGrantAllPermissions.TabIndex = 16;
@@ -187,7 +187,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.dgPermissionGranted.Location = new System.Drawing.Point(407, 18);
             this.dgPermissionGranted.Name = "dgPermissionGranted";
             this.dgPermissionGranted.RowTemplate.Height = 25;
-            this.dgPermissionGranted.Size = new System.Drawing.Size(335, 384);
+            this.dgPermissionGranted.Size = new System.Drawing.Size(335, 318);
             this.dgPermissionGranted.TabIndex = 15;
             this.dgPermissionGranted.SelectionChanged += new System.EventHandler(this.dgPermissionGranted_SelectionChanged);
             // 
@@ -197,7 +197,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.dgPermissions.Location = new System.Drawing.Point(3, 18);
             this.dgPermissions.Name = "dgPermissions";
             this.dgPermissions.RowTemplate.Height = 25;
-            this.dgPermissions.Size = new System.Drawing.Size(335, 384);
+            this.dgPermissions.Size = new System.Drawing.Size(335, 318);
             this.dgPermissions.TabIndex = 13;
             this.dgPermissions.SelectionChanged += new System.EventHandler(this.dgPermissions_SelectionChanged);
             // 
@@ -205,7 +205,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbOffice);
@@ -213,7 +212,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.Controls.Add(this.txtName);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ucRoles";
-            this.Size = new System.Drawing.Size(789, 493);
+            this.Size = new System.Drawing.Size(785, 432);
             this.Load += new System.EventHandler(this.ucRoles_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
             this.groupBox1.ResumeLayout(false);

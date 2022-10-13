@@ -42,17 +42,17 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 510);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 431);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(797, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(787, 27);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancel
             // 
             this.btnCancel.CausesValidation = false;
-            this.btnCancel.Location = new System.Drawing.Point(712, 2);
+            this.btnCancel.Location = new System.Drawing.Point(702, 2);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // 
             this.btnSave.CausesValidation = false;
             this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
-            this.btnSave.Location = new System.Drawing.Point(624, 2);
+            this.btnSave.Location = new System.Drawing.Point(614, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -81,11 +81,12 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             // ucRoles1
             // 
             this.ucRoles1.AutoSize = true;
-            this.ucRoles1.Location = new System.Drawing.Point(9, 9);
+            this.ucRoles1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucRoles1.Location = new System.Drawing.Point(0, 0);
             this.ucRoles1.Margin = new System.Windows.Forms.Padding(0);
             this.ucRoles1.Name = "ucRoles1";
-            this.ucRoles1.Size = new System.Drawing.Size(788, 493);
-            this.ucRoles1.TabIndex = 3;
+            this.ucRoles1.Size = new System.Drawing.Size(787, 431);
+            this.ucRoles1.TabIndex = 5;
             // 
             // frmRolesAdd
             // 
@@ -94,14 +95,13 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(797, 537);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(787, 458);
             this.Controls.Add(this.ucRoles1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(813, 576);
             this.Name = "frmRolesAdd";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
