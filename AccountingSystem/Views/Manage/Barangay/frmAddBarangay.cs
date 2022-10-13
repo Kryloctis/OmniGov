@@ -45,14 +45,13 @@ namespace AccountingSystem.Views.Manage.Barangay
                 return false;
             }
 
-            var barangayCode = uc.txtCode.Text;
-
-            var municipalityID = Helper.LGUDetails();
+            var barangayCode = uc.txtCode.Text.Trim();
+            var barangayName = uc.txtBarangay.Text.Trim();
 
 
             var barangayModel = new BarangayModel() {
-                Code = uc.txtCode.Text,
-                Name = uc.txtBarangay.Text,
+                Code = barangayCode,
+                Name = barangayName,
                 MunicipalityID = 1
             };
 

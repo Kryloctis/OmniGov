@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,6 +39,45 @@ namespace AccountingSystem.Views.Manage.Barangay
             uc.txtCode.Text = dictBarangay["code"];
             uc.txtBarangay.Text = dictBarangay["name"];
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (UpdateBarangay())
+            {
+                Helper.MessageBoxSuccess("Barangay has been updated.");
+                _frmBarangay.LoadRecords();
+                Close();
+            }
+        }
+
+        private bool UpdateBarangay()
+        {
+            try
+            {
+                if (!uc.ValidateChildren())
+                {
+                    Helper.MessageBoxError(uc.GetFormErrors());
+                    return false;
+                }
+
+                var barangayCode = uc.txtCode.Text.Trim();
+                var barangayName = uc.txtBarangay.Text.Trim(); 
+
+                var barangayModel = new BarangayModel()
+                {
+                    Id = _barangayId,
+                    Code = barangayCode,
+                    Name = barangayName
+                };
+
+                return AccFactory.BarangayRepository().Update(barangayModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
