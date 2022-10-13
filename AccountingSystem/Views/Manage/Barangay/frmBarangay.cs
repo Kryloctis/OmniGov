@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -64,6 +65,48 @@ namespace AccountingSystem.Views.Manage.Barangay
         private void dgBarangay_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgBarangay, btnEdit, btnDelete);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount;
+
+            if (DeleteBarangay(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadRecords();
+            }
+        }
+
+        private bool DeleteBarangay(out int deletedCount)
+        {
+            try
+            {
+                var barangayModelList = new List<BarangayModel>();
+                int rowCount = dgBarangay.SelectedRows.Count;
+
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
+                    foreach (DataGridViewRow row in dgBarangay.SelectedRows)
+                    {
+                        int barangayId = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new BarangayModel() { Id = barangayId };
+                        barangayModelList.Add(model);
+                    }
+
+                    deletedCount = rowCount;
+                    return AccFactory.BarangayRepository().Delete(barangayModelList);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            deletedCount = 0;
+            return false;
         }
     }
 }
