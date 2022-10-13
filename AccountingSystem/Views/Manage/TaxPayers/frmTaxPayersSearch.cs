@@ -59,40 +59,38 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dataTable = new DataTable();
             var selectedColumns = new DataColumn[]
             {
-                new DataColumn("id", typeof(int)),
+                new DataColumn("tax_payer_id", typeof(int)),
+                new DataColumn("barangays_id", typeof(string)),
+                new DataColumn("barangays_name", typeof(string)),
+                new DataColumn("taxpayer_type_id", typeof(string)),
+                new DataColumn("taxpayer_type", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
                 new DataColumn("tin", typeof(string)),
-                new DataColumn("name", typeof(string)),
-                new DataColumn("type", typeof(string)),
                 new DataColumn("contact_info", typeof(string)),
-                new DataColumn("street", typeof(string)),
-                new DataColumn("barangay", typeof(string)),
-                new DataColumn("municipality", typeof(string)),
-                new DataColumn("province", typeof(string)),
             };
+
             dataTable.Columns.AddRange(selectedColumns);
 
             foreach (DataRow row in dtTaxpayersRecords.Rows)
             {
                 var newRow = dataTable.NewRow();
-                int rowId = Convert.ToInt32(row["id"]);
+                int rowTaxPayerId = Convert.ToInt32(row["tax_payer_id"]);
+                string rowBarangayId = row["barangays_id"].ToString();
+                string rowBarangay = row["barangays_name"].ToString();
+                string rowTaxpayerTypeId = row["taxpayer_type_id"].ToString();
+                string rowTaxpayerType = row["taxpayer_type"].ToString();
                 string rowTIN = row["tin"].ToString();
-                string rowName = row["name"].ToString();
-                string rowType = row["type"].ToString();
+                string rowName = row["taxpayers_name"].ToString();
                 string rowContact = row["contact_info"].ToString();
-                string rowStreet = row["street"].ToString();
-                string rowBarangay = row["barangay"].ToString();
-                string rowMunicipality = row["municipality"].ToString();
-                string rowProvince = row["province"].ToString();
 
-                newRow["id"] = rowId;
+                newRow["tax_payer_id"] = rowTaxPayerId;
+                newRow["barangays_id"] = rowBarangayId;
+                newRow["barangays_name"] = rowBarangay;
+                newRow["taxpayer_type_id"] = rowTaxpayerTypeId;
+                newRow["taxpayer_type"] = rowTaxpayerType;
                 newRow["tin"] = rowTIN;
-                newRow["name"] = rowName;
-                newRow["type"] = rowType;
+                newRow["taxpayers_name"] = rowName;
                 newRow["contact_info"] = rowContact;
-                newRow["street"] = rowStreet;
-                newRow["barangay"] = rowBarangay;
-                newRow["municipality"] = rowMunicipality;
-                newRow["province"] = rowProvince;
              
                 dataTable.Rows.Add(newRow);
             }
@@ -126,7 +124,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             int rowIndex = dgTaxpayers.CurrentCell.RowIndex;
             var ucTaxPayers = _frmTaxPayers.uc;
 
-            ucTaxPayers.taxPayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
+            ucTaxPayers.taxPayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["tax_payer_id"].Value);
             var tin = dgTaxpayers.Rows[rowIndex].Cells["tin"].Value.ToString();
             var name = dgTaxpayers.Rows[rowIndex].Cells["name"].Value.ToString();
             var type = dgTaxpayers.Rows[rowIndex].Cells["type"].Value.ToString();

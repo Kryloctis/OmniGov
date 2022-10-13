@@ -38,16 +38,15 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
 
-            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["tax_payer_id"].Visible = false;
+            dataGridView.Columns["barangays_id"].Visible = false;
+            dataGridView.Columns["barangays_name"].HeaderText = "Barangay";
+            dataGridView.Columns["taxpayer_type_id"].Visible = false;
+            dataGridView.Columns["taxpayer_type"].HeaderText = "Owner Type";
             dataGridView.Columns["tin"].HeaderText = "TIN";
-            dataGridView.Columns["name"].HeaderText = "Owner Name";
-            dataGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["type"].HeaderText = "Owner Type";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["taxpayers_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["contact_info"].HeaderText = "Contact";
-            dataGridView.Columns["street"].HeaderText = "Street";
-            dataGridView.Columns["barangay"].HeaderText = "Barangay";
-            dataGridView.Columns["municipality"].HeaderText = "Municipality";
-            dataGridView.Columns["province"].HeaderText = "Province";
         }
 
         #endregion
