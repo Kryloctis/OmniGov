@@ -49,11 +49,13 @@
             // txtBarangay
             // 
             this.txtBarangay.AcceptsReturn = true;
+            this.txtBarangay.AcceptsTab = true;
             this.txtBarangay.Location = new System.Drawing.Point(87, 31);
             this.txtBarangay.MaxLength = 45;
             this.txtBarangay.Name = "txtBarangay";
             this.txtBarangay.Size = new System.Drawing.Size(218, 23);
             this.txtBarangay.TabIndex = 1;
+            this.txtBarangay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBarangay_Validating);
             // 
             // label1
             // 
@@ -67,26 +69,31 @@
             // txtCode
             // 
             this.txtCode.AcceptsReturn = true;
+            this.txtCode.AcceptsTab = true;
             this.txtCode.Location = new System.Drawing.Point(87, 3);
             this.txtCode.MaxLength = 4;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(218, 23);
             this.txtCode.TabIndex = 0;
+            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
+            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
             // ucBarangay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtBarangay);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCode);
+            this.Controls.Add(this.txtBarangay);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Name = "ucBarangay";
             this.Size = new System.Drawing.Size(326, 59);
+            this.Load += new System.EventHandler(this.ucBarangay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

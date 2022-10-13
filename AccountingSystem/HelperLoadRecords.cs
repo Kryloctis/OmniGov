@@ -2659,6 +2659,17 @@ namespace AccountingSystem
             dataGridView.Columns["grt_amount"].HeaderText = "GRT";
         }
 
+        internal static void BarangaysDatagridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["name"].HeaderText = "Barangay";
+            dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+        }
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACC.Data;
+using RPT.Domain;
 using RPT.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace RPT.Data
         public static IBuildingDetailsRepository BuildingDetailsRepository() => new BuildingDetailsRepository(mySqlGenericCommandsRPT);
 
         public static ILandPropertiesRepository LandPropertiesRepository() => new LandPropertiesRepository(mySqlGenericCommandsRPT);
+
 
     }
 }
