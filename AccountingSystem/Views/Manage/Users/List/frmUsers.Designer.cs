@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Manage.Users.List
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 13, 0);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(300, 46);
+            this.txtSearch.Size = new System.Drawing.Size(200, 46);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // statusStrip1
