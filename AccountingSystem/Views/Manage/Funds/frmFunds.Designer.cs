@@ -41,10 +41,12 @@ namespace AccountingSystem.Views.Manage.Funds
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dgFunds = new System.Windows.Forms.DataGridView();
-            this.txtsearch = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFunds)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,7 +84,7 @@ namespace AccountingSystem.Views.Manage.Funds
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(458, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(489, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -115,76 +117,82 @@ namespace AccountingSystem.Views.Manage.Funds
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
             this.btnEdit,
-            this.btnDelete});
+            this.btnDelete,
+            this.toolStripTextBoxSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(10, 2, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(699, 52);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(699, 54);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(33, 47);
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Size = new System.Drawing.Size(42, 43);
+            this.btnAdd.Text = "Add...";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
-            this.btnEdit.Text = "Edit";
+            this.btnEdit.Size = new System.Drawing.Size(40, 43);
+            this.btnEdit.Text = "Edit...";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Size = new System.Drawing.Size(44, 43);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // toolStripTextBoxSearch
+            // 
+            this.toolStripTextBoxSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
+            this.toolStripTextBoxSearch.Size = new System.Drawing.Size(200, 46);
+            this.toolStripTextBoxSearch.TextChanged += new System.EventHandler(this.toolStripTextBoxSearch_TextChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgFunds);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(699, 325);
+            this.panel1.TabIndex = 12;
+            // 
             // dgFunds
             // 
-            this.dgFunds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgFunds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFunds.Location = new System.Drawing.Point(12, 54);
+            this.dgFunds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgFunds.Location = new System.Drawing.Point(4, 4);
             this.dgFunds.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgFunds.Name = "dgFunds";
             this.dgFunds.RowHeadersWidth = 51;
             this.dgFunds.RowTemplate.Height = 29;
             this.dgFunds.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFunds.Size = new System.Drawing.Size(675, 323);
-            this.dgFunds.TabIndex = 6;
+            this.dgFunds.Size = new System.Drawing.Size(691, 317);
+            this.dgFunds.TabIndex = 7;
             this.dgFunds.SelectionChanged += new System.EventHandler(this.dgFunds_SelectionChanged);
-            // 
-            // txtsearch
-            // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(395, 18);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(294, 23);
-            this.txtsearch.TabIndex = 11;
-            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // frmFunds
             // 
@@ -192,8 +200,7 @@ namespace AccountingSystem.Views.Manage.Funds
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(699, 401);
-            this.Controls.Add(this.txtsearch);
-            this.Controls.Add(this.dgFunds);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -209,6 +216,7 @@ namespace AccountingSystem.Views.Manage.Funds
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgFunds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -229,7 +237,8 @@ namespace AccountingSystem.Views.Manage.Funds
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-		private System.Windows.Forms.DataGridView dgFunds;
-        private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgFunds;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxSearch;
     }
 }

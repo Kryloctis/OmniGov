@@ -32,20 +32,22 @@ namespace AccountingSystem
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.referencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.barangaysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFunds = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuJournals = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFunctionProgramProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuChartOfAccounts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAllotmentClasses = new System.Windows.Forms.ToolStripMenuItem();
             this.amortiaztionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.signatoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +55,9 @@ namespace AccountingSystem
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessAddoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.taxTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barangayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,9 +73,9 @@ namespace AccountingSystem
             this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.tabControlBudget = new System.Windows.Forms.TabControl();
             this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
-            this.ucBudgetDetailed2 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
+            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
-            this.ucBudgetSummary2 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -83,7 +88,7 @@ namespace AccountingSystem
             this.tabPageJournalEntryVoucher = new System.Windows.Forms.TabPage();
             this.ucjevDashboard1 = new AccountingSystem.Views.Dashboard.ucJEVDashboard();
             this.tabPageJournals = new System.Windows.Forms.TabPage();
-            this.ucJournalsDashboard2 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
+            this.ucJournalsDashboard1 = new AccountingSystem.Views.Dashboard.AccountingDashboard.ucJournalsDashboard();
             this.tabPageLedgers = new System.Windows.Forms.TabPage();
             this.tabControlLedgers = new System.Windows.Forms.TabControl();
             this.tabPageTransactionLog = new System.Windows.Forms.TabPage();
@@ -116,6 +121,7 @@ namespace AccountingSystem
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonBpl = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -194,38 +200,46 @@ namespace AccountingSystem
             // menuFile
             // 
             this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.referencesToolStripMenuItem,
             this.menuLogout,
             this.menuExitApp});
             this.menuFile.Name = "menuFile";
             this.menuFile.Size = new System.Drawing.Size(37, 24);
-            this.menuFile.Text = "&File";
+            this.menuFile.Text = "File";
+            // 
+            // referencesToolStripMenuItem
+            // 
+            this.referencesToolStripMenuItem.Name = "referencesToolStripMenuItem";
+            this.referencesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.referencesToolStripMenuItem.Text = "Preferences...";
             // 
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(157, 22);
+            this.menuLogout.Size = new System.Drawing.Size(144, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(157, 22);
-            this.menuExitApp.Text = "Exit Application";
+            this.menuExitApp.Size = new System.Drawing.Size(144, 22);
+            this.menuExitApp.Text = "Exit";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
             // menuManage
             // 
             this.menuManage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUsers,
-            this.toolStripSeparator2,
+            this.barangaysToolStripMenuItem,
+            this.signatoriesToolStripMenuItem,
             this.menuFunds,
+            this.toolStripSeparator2,
             this.menuJournals,
             this.menuFunctionProgramProject,
             this.menuChartOfAccounts,
             this.menuAllotmentClasses,
             this.amortiaztionToolStripMenuItem,
-            this.signatoriesToolStripMenuItem,
             this.toolStripSeparator3,
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
@@ -233,6 +247,7 @@ namespace AccountingSystem
             this.menuAccForm,
             this.menuReceipts,
             this.menuTaxPayers,
+            this.businessToolStripMenuItem,
             this.toolStripSeparator1,
             this.taxTypeToolStripMenuItem,
             this.barangayToolStripMenuItem,
@@ -251,7 +266,7 @@ namespace AccountingSystem
             this.menuUserList,
             this.menuRoles});
             this.menuUsers.Name = "menuUsers";
-            this.menuUsers.Size = new System.Drawing.Size(214, 22);
+            this.menuUsers.Size = new System.Drawing.Size(223, 22);
             this.menuUsers.Text = "Users";
             // 
             // menuUserList
@@ -268,111 +283,139 @@ namespace AccountingSystem
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
-            // toolStripSeparator2
+            // barangaysToolStripMenuItem
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            this.barangaysToolStripMenuItem.Name = "barangaysToolStripMenuItem";
+            this.barangaysToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.barangaysToolStripMenuItem.Text = "Barangays...";
+            // 
+            // signatoriesToolStripMenuItem
+            // 
+            this.signatoriesToolStripMenuItem.Name = "signatoriesToolStripMenuItem";
+            this.signatoriesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.signatoriesToolStripMenuItem.Text = "Signatories...";
+            this.signatoriesToolStripMenuItem.Click += new System.EventHandler(this.signatoriesToolStripMenuItem_Click);
             // 
             // menuFunds
             // 
             this.menuFunds.Name = "menuFunds";
-            this.menuFunds.Size = new System.Drawing.Size(214, 22);
-            this.menuFunds.Text = "Funds";
+            this.menuFunds.Size = new System.Drawing.Size(223, 22);
+            this.menuFunds.Text = "Funds...";
             this.menuFunds.Click += new System.EventHandler(this.menuFunds_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // menuJournals
             // 
             this.menuJournals.Name = "menuJournals";
-            this.menuJournals.Size = new System.Drawing.Size(214, 22);
-            this.menuJournals.Text = "Journals";
+            this.menuJournals.Size = new System.Drawing.Size(223, 22);
+            this.menuJournals.Text = "Journals...";
             this.menuJournals.Click += new System.EventHandler(this.menuJournals_Click);
             // 
             // menuFunctionProgramProject
             // 
             this.menuFunctionProgramProject.Name = "menuFunctionProgramProject";
-            this.menuFunctionProgramProject.Size = new System.Drawing.Size(214, 22);
-            this.menuFunctionProgramProject.Text = "Function/Program/Project";
+            this.menuFunctionProgramProject.Size = new System.Drawing.Size(223, 22);
+            this.menuFunctionProgramProject.Text = "Function/Program/Project...";
             this.menuFunctionProgramProject.Click += new System.EventHandler(this.menuFunctionProgramProject_Click);
             // 
             // menuChartOfAccounts
             // 
             this.menuChartOfAccounts.Name = "menuChartOfAccounts";
-            this.menuChartOfAccounts.Size = new System.Drawing.Size(214, 22);
-            this.menuChartOfAccounts.Text = "Chart of Accounts";
+            this.menuChartOfAccounts.Size = new System.Drawing.Size(223, 22);
+            this.menuChartOfAccounts.Text = "Chart of Accounts...";
             this.menuChartOfAccounts.Click += new System.EventHandler(this.menuChartOfAccounts_Click);
             // 
             // menuAllotmentClasses
             // 
             this.menuAllotmentClasses.Name = "menuAllotmentClasses";
-            this.menuAllotmentClasses.Size = new System.Drawing.Size(214, 22);
-            this.menuAllotmentClasses.Text = "Allotment Classes";
+            this.menuAllotmentClasses.Size = new System.Drawing.Size(223, 22);
+            this.menuAllotmentClasses.Text = "Allotment Classes...";
             this.menuAllotmentClasses.Click += new System.EventHandler(this.menuAllotmentClasses_Click);
             // 
             // amortiaztionToolStripMenuItem
             // 
+            this.amortiaztionToolStripMenuItem.Enabled = false;
             this.amortiaztionToolStripMenuItem.Name = "amortiaztionToolStripMenuItem";
-            this.amortiaztionToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.amortiaztionToolStripMenuItem.Text = "Amortization";
+            this.amortiaztionToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.amortiaztionToolStripMenuItem.Text = "Amortization...";
             this.amortiaztionToolStripMenuItem.Click += new System.EventHandler(this.amortiaztionToolStripMenuItem_Click);
-            // 
-            // signatoriesToolStripMenuItem
-            // 
-            this.signatoriesToolStripMenuItem.Name = "signatoriesToolStripMenuItem";
-            this.signatoriesToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.signatoriesToolStripMenuItem.Text = "Signatories";
-            this.signatoriesToolStripMenuItem.Click += new System.EventHandler(this.signatoriesToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(220, 6);
             // 
             // menuCollectingOfficer
             // 
             this.menuCollectingOfficer.Name = "menuCollectingOfficer";
-            this.menuCollectingOfficer.Size = new System.Drawing.Size(214, 22);
-            this.menuCollectingOfficer.Text = "Collecting Officers";
+            this.menuCollectingOfficer.Size = new System.Drawing.Size(223, 22);
+            this.menuCollectingOfficer.Text = "Collecting Officers...";
             this.menuCollectingOfficer.Click += new System.EventHandler(this.menuCollectingOfficer_Click);
             // 
             // menuDisbursingOfficer
             // 
             this.menuDisbursingOfficer.Name = "menuDisbursingOfficer";
-            this.menuDisbursingOfficer.Size = new System.Drawing.Size(214, 22);
-            this.menuDisbursingOfficer.Text = "Disbursing Officers";
+            this.menuDisbursingOfficer.Size = new System.Drawing.Size(223, 22);
+            this.menuDisbursingOfficer.Text = "Disbursing Officers...";
             this.menuDisbursingOfficer.Click += new System.EventHandler(this.MenuDisbursingOffice_Click);
             // 
             // menuBanks
             // 
             this.menuBanks.Name = "menuBanks";
-            this.menuBanks.Size = new System.Drawing.Size(214, 22);
-            this.menuBanks.Text = "Banks";
+            this.menuBanks.Size = new System.Drawing.Size(223, 22);
+            this.menuBanks.Text = "Banks...";
             this.menuBanks.Click += new System.EventHandler(this.menuBanks_Click);
             // 
             // menuAccForm
             // 
             this.menuAccForm.Name = "menuAccForm";
-            this.menuAccForm.Size = new System.Drawing.Size(214, 22);
-            this.menuAccForm.Text = "Accountable Form";
+            this.menuAccForm.Size = new System.Drawing.Size(223, 22);
+            this.menuAccForm.Text = "Accountable Form...";
             this.menuAccForm.Click += new System.EventHandler(this.menuAccForm_Click);
             // 
             // menuReceipts
             // 
             this.menuReceipts.Name = "menuReceipts";
-            this.menuReceipts.Size = new System.Drawing.Size(214, 22);
-            this.menuReceipts.Text = "Receipts";
+            this.menuReceipts.Size = new System.Drawing.Size(223, 22);
+            this.menuReceipts.Text = "Receipts...";
             this.menuReceipts.Click += new System.EventHandler(this.menureceipts_Click);
             // 
             // menuTaxPayers
             // 
             this.menuTaxPayers.Name = "menuTaxPayers";
-            this.menuTaxPayers.Size = new System.Drawing.Size(214, 22);
-            this.menuTaxPayers.Text = "Taxpayers";
+            this.menuTaxPayers.Size = new System.Drawing.Size(223, 22);
+            this.menuTaxPayers.Text = "Taxpayers...";
             this.menuTaxPayers.Click += new System.EventHandler(this.menuTaxPayers_Click);
+            // 
+            // businessToolStripMenuItem
+            // 
+            this.businessToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.businessCategoriesToolStripMenuItem,
+            this.businessAddoToolStripMenuItem});
+            this.businessToolStripMenuItem.Name = "businessToolStripMenuItem";
+            this.businessToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.businessToolStripMenuItem.Text = "Business";
+            // 
+            // businessCategoriesToolStripMenuItem
+            // 
+            this.businessCategoriesToolStripMenuItem.Name = "businessCategoriesToolStripMenuItem";
+            this.businessCategoriesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.businessCategoriesToolStripMenuItem.Text = "Business Categories";
+            // 
+            // businessAddoToolStripMenuItem
+            // 
+            this.businessAddoToolStripMenuItem.Name = "businessAddoToolStripMenuItem";
+            this.businessAddoToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.businessAddoToolStripMenuItem.Text = "Business Add-on Charges";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // taxTypeToolStripMenuItem
             // 
@@ -390,35 +433,35 @@ namespace AccountingSystem
             // discountToolStripMenuItem
             // 
             this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            this.discountToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.discountToolStripMenuItem.Text = "Discounts";
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.discountToolStripMenuItem.Text = "Discounts...";
             this.discountToolStripMenuItem.Click += new System.EventHandler(this.discountToolStripMenuItem_Click);
             // 
             // penaltyToolStripMenuItem
             // 
             this.penaltyToolStripMenuItem.Name = "penaltyToolStripMenuItem";
-            this.penaltyToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.penaltyToolStripMenuItem.Text = "Penalties";
+            this.penaltyToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.penaltyToolStripMenuItem.Text = "Penalties...";
             this.penaltyToolStripMenuItem.Click += new System.EventHandler(this.penaltyToolStripMenuItem_Click);
             // 
             // taxRateToolStripMenuItem
             // 
             this.taxRateToolStripMenuItem.Name = "taxRateToolStripMenuItem";
-            this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.taxRateToolStripMenuItem.Text = "Tax Rates";
+            this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.taxRateToolStripMenuItem.Text = "Tax Rates...";
             this.taxRateToolStripMenuItem.Click += new System.EventHandler(this.taxRateToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(220, 6);
             // 
             // menuDatabaseSynchronization
             // 
             this.menuDatabaseSynchronization.Enabled = false;
             this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
-            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(214, 22);
-            this.menuDatabaseSynchronization.Text = "Database Synchronization";
+            this.menuDatabaseSynchronization.Size = new System.Drawing.Size(223, 22);
+            this.menuDatabaseSynchronization.Text = "Database Synchronization...";
             this.menuDatabaseSynchronization.Click += new System.EventHandler(this.menuDatabaseSynchronization_Click);
             // 
             // statusStrip1
@@ -497,7 +540,7 @@ namespace AccountingSystem
             // 
             // tabPageBudgetDetailed
             // 
-            this.tabPageBudgetDetailed.Controls.Add(this.ucBudgetDetailed2);
+            this.tabPageBudgetDetailed.Controls.Add(this.ucBudgetDetailed1);
             this.tabPageBudgetDetailed.Location = new System.Drawing.Point(4, 24);
             this.tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             this.tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(3);
@@ -506,19 +549,19 @@ namespace AccountingSystem
             this.tabPageBudgetDetailed.Text = "Detailed";
             this.tabPageBudgetDetailed.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetDetailed2
+            // ucBudgetDetailed1
             // 
-            this.ucBudgetDetailed2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetDetailed2.Location = new System.Drawing.Point(3, 3);
-            this.ucBudgetDetailed2.Name = "ucBudgetDetailed2";
-            this.ucBudgetDetailed2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucBudgetDetailed2.Size = new System.Drawing.Size(1201, 545);
-            this.ucBudgetDetailed2.TabIndex = 0;
+            this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetDetailed1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
+            this.ucBudgetDetailed1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1201, 545);
+            this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // tabPageBudgetSummary
             // 
             this.tabPageBudgetSummary.AutoScroll = true;
-            this.tabPageBudgetSummary.Controls.Add(this.ucBudgetSummary2);
+            this.tabPageBudgetSummary.Controls.Add(this.ucBudgetSummary1);
             this.tabPageBudgetSummary.Location = new System.Drawing.Point(4, 24);
             this.tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             this.tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(3);
@@ -527,15 +570,15 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.Text = "Summary";
             this.tabPageBudgetSummary.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetSummary2
+            // ucBudgetSummary1
             // 
-            this.ucBudgetSummary2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetSummary2.Location = new System.Drawing.Point(3, 3);
-            this.ucBudgetSummary2.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetSummary2.Name = "ucBudgetSummary2";
-            this.ucBudgetSummary2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucBudgetSummary2.Size = new System.Drawing.Size(1201, 545);
-            this.ucBudgetSummary2.TabIndex = 0;
+            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetSummary1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
+            this.ucBudgetSummary1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1201, 545);
+            this.ucBudgetSummary1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -668,7 +711,7 @@ namespace AccountingSystem
             // 
             // tabPageJournals
             // 
-            this.tabPageJournals.Controls.Add(this.ucJournalsDashboard2);
+            this.tabPageJournals.Controls.Add(this.ucJournalsDashboard1);
             this.tabPageJournals.Location = new System.Drawing.Point(4, 30);
             this.tabPageJournals.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPageJournals.Name = "tabPageJournals";
@@ -678,16 +721,16 @@ namespace AccountingSystem
             this.tabPageJournals.Text = "Journals";
             this.tabPageJournals.UseVisualStyleBackColor = true;
             // 
-            // ucJournalsDashboard2
+            // ucJournalsDashboard1
             // 
-            this.ucJournalsDashboard2.AutoSize = true;
-            this.ucJournalsDashboard2.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucJournalsDashboard2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucJournalsDashboard2.Location = new System.Drawing.Point(0, 5);
-            this.ucJournalsDashboard2.MinimumSize = new System.Drawing.Size(941, 160);
-            this.ucJournalsDashboard2.Name = "ucJournalsDashboard2";
-            this.ucJournalsDashboard2.Size = new System.Drawing.Size(1213, 578);
-            this.ucJournalsDashboard2.TabIndex = 0;
+            this.ucJournalsDashboard1.AutoSize = true;
+            this.ucJournalsDashboard1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucJournalsDashboard1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucJournalsDashboard1.Location = new System.Drawing.Point(0, 5);
+            this.ucJournalsDashboard1.MinimumSize = new System.Drawing.Size(941, 160);
+            this.ucJournalsDashboard1.Name = "ucJournalsDashboard1";
+            this.ucJournalsDashboard1.Size = new System.Drawing.Size(1213, 578);
+            this.ucJournalsDashboard1.TabIndex = 0;
             // 
             // tabPageLedgers
             // 
@@ -1011,6 +1054,7 @@ namespace AccountingSystem
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton2,
+            this.toolStripButtonBpl,
             this.toolStripSplitButton3,
             this.toolStripSplitButton4});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
@@ -1045,6 +1089,16 @@ namespace AccountingSystem
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.returnedReceiptsToolStripMenuItem_Click);
             // 
+            // toolStripButtonBpl
+            // 
+            this.toolStripButtonBpl.Image = global::AccountingSystem.Properties.Resources.briefcase_business_20px;
+            this.toolStripButtonBpl.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonBpl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonBpl.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBpl.Name = "toolStripButtonBpl";
+            this.toolStripButtonBpl.Size = new System.Drawing.Size(51, 28);
+            this.toolStripButtonBpl.Text = "BPL";
+            // 
             // toolStripSplitButton3
             // 
             this.toolStripSplitButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1063,6 +1117,7 @@ namespace AccountingSystem
             // 
             // paymentsToolStripMenuItem
             // 
+            this.paymentsToolStripMenuItem.Enabled = false;
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
@@ -1074,6 +1129,7 @@ namespace AccountingSystem
             // 
             // assessmentPostingToolStripMenuItem
             // 
+            this.assessmentPostingToolStripMenuItem.Enabled = false;
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
             this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
@@ -1160,6 +1216,7 @@ namespace AccountingSystem
             // 
             // abstractOfGeneralCollectionsToolStripMenuItem
             // 
+            this.abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
             this.abstractOfGeneralCollectionsToolStripMenuItem.Name = "abstractOfGeneralCollectionsToolStripMenuItem";
             this.abstractOfGeneralCollectionsToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.abstractOfGeneralCollectionsToolStripMenuItem.Text = "Abstract of General Collections";
@@ -1172,6 +1229,7 @@ namespace AccountingSystem
             // 
             // realPropertyTaxAccountRegisterRPTARToolStripMenuItem
             // 
+            this.realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
             this.realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Name = "realPropertyTaxAccountRegisterRPTARToolStripMenuItem";
             this.realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Text = "Real Property Tax Account Register (RPTAR)";
@@ -1179,6 +1237,7 @@ namespace AccountingSystem
             // 
             // realPropertyTaxStatementOfAccountToolStripMenuItem
             // 
+            this.realPropertyTaxStatementOfAccountToolStripMenuItem.Enabled = false;
             this.realPropertyTaxStatementOfAccountToolStripMenuItem.Name = "realPropertyTaxStatementOfAccountToolStripMenuItem";
             this.realPropertyTaxStatementOfAccountToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.realPropertyTaxStatementOfAccountToolStripMenuItem.Text = "Real Property Tax Statement of Account";
@@ -1191,6 +1250,7 @@ namespace AccountingSystem
             // 
             // consolidatedRealPropertyTaxDeliquencesToolStripMenuItem
             // 
+            this.consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
             this.consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Name = "consolidatedRealPropertyTaxDeliquencesToolStripMenuItem";
             this.consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Text = "Consolidated Real Property Tax Deliquences";
@@ -1198,6 +1258,7 @@ namespace AccountingSystem
             // 
             // listOfDelinquentAccountsToolStripMenuItem
             // 
+            this.listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
             this.listOfDelinquentAccountsToolStripMenuItem.Name = "listOfDelinquentAccountsToolStripMenuItem";
             this.listOfDelinquentAccountsToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.listOfDelinquentAccountsToolStripMenuItem.Text = "List of Delinquent Accounts";
@@ -1352,7 +1413,6 @@ namespace AccountingSystem
         private System.Windows.Forms.TabPage tabPageSFPerformance;
         private Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance ucStatementOfFinancialPerformance1;
         private System.Windows.Forms.TabPage tabPageSCNAE;
-        private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsquity1;
         private System.Windows.Forms.TabPage tabPageSCF;
         private System.Windows.Forms.TabPage tabPageSCBAA;
         private System.Windows.Forms.ToolStripMenuItem amortiaztionToolStripMenuItem;
@@ -1374,9 +1434,7 @@ namespace AccountingSystem
         private System.Windows.Forms.TabPage tabPageBudget;
         private System.Windows.Forms.TabControl tabControlBudget;
         private System.Windows.Forms.TabPage tabPageBudgetSummary;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.TabPage tabPageBudgetDetailed;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButtonBudgetAppropriations;
         private System.Windows.Forms.ToolStripButton toolStripButtonAllotmentRelease;
@@ -1384,10 +1442,9 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem sAAOBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sAAOBBToolStripMenuItem;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary2;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed2;
+        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
+        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.TabPage tabPageJournalEntryVoucher;
-        private Views.Dashboard.AccountingDashboard.ucJournalsDashboard ucJournalsDashboard2;
         private System.Windows.Forms.ImageList imageList1;
         private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsEquity1;
         private System.Windows.Forms.TabPage tabPageTreasury;
@@ -1421,6 +1478,14 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem listOfDelinquentAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem issueRecieptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem referencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem businessToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem businessCategoriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem businessAddoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem amortizationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
         private System.Windows.Forms.ToolStripMenuItem barangayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxTypeToolStripMenuItem;
     }

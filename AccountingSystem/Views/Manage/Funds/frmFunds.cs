@@ -90,14 +90,15 @@ namespace AccountingSystem.Views.Manage.Funds
             Helper.EnableDisableToolStripButtons(dgFunds, btnEdit, btnDelete);
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
+            string searchText = toolStripTextBoxSearch.Text.Trim();
+
+            if (searchText.Length > 0)
             {
                 try
                 {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtFunds = AccFactory.FundsRepository().GetRecordsBySearch(searchkey);
+                    var dtFunds = AccFactory.FundsRepository().GetRecordsBySearch(searchText);
                     HelperLoadRecords.FundsDatagridView(dtFunds, dgFunds);
 
                     lblRecordCount.Text = dgFunds.Rows.Count.ToString();

@@ -75,6 +75,7 @@
             // 
             // ucBarangay1
             // 
+            this.ucBarangay1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBarangay1.Location = new System.Drawing.Point(1, 7);
             this.ucBarangay1.Name = "ucBarangay1";
             this.ucBarangay1.Size = new System.Drawing.Size(326, 59);
