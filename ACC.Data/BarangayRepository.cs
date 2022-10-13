@@ -42,7 +42,15 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT id, code, name FROM {tableName} WHERE code LIKE @search_text OR name LIKE @search_text";
+
+            var dtBarangay = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dtBarangay, parameters);
         }
 
         public bool IdExist(int id)

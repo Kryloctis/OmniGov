@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code");
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void txtBarangay_Validating(object sender, CancelEventArgs e)
         {
-            Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBarangay, "Barangay Name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBarangay, "Barangay Name");
         }
 
         private void ucBarangay_Load(object sender, EventArgs e)

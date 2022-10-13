@@ -32,7 +32,7 @@
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.txtsearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgBarangay = new System.Windows.Forms.DataGridView();
             this.toolStrip.SuspendLayout();
@@ -92,16 +92,17 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // txtsearch
+            // txtSearch
             // 
-            this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtsearch.Location = new System.Drawing.Point(424, 19);
-            this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(184, 23);
-            this.txtsearch.TabIndex = 10;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Location = new System.Drawing.Point(424, 19);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(184, 23);
+            this.txtSearch.TabIndex = 10;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // panel1
             // 
@@ -132,7 +133,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 385);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtsearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
@@ -156,7 +157,7 @@
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.TextBox txtsearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgBarangay;
     }
