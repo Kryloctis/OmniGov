@@ -122,7 +122,7 @@ namespace AccountingSystem.Views.Manage.Signatories
         {
             Helper.DatagridFullRowSelectStyle(dgSignatories, true);
             LoadSignatories();
-            EnableDisableButtons();          
+            EnableDisableButtons();
         }
 
         private void DeleteRealignment()
