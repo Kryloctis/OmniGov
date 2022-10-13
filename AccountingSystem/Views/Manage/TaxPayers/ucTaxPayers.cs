@@ -41,9 +41,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                var dtTaxpayerType = AccFactory.TaxpayersRepository().GetRecords();
+                var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
              
-                dtTaxpayerType.Columns.Add("taxpayer_type", typeof(string), "taxpayer_type");
                 cmbxTaxPayerType.DataSource = dtTaxpayerType;
                 cmbxTaxPayerType.ValueMember = "id";
                 cmbxTaxPayerType.DisplayMember = "taxpayer_type";

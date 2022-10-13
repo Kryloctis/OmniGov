@@ -150,7 +150,7 @@ namespace AccountingSystem
 
         public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
 
-        public static ITaxpayerTypeRepository ITaxpayerTypeRepository() => new TaxpayerTypeRepository(mySqlGenericCommandsLFS);
+        public static ITaxpayerTypeRepository TaxpayerTypeRepository() => new TaxpayerTypeRepository(mySqlGenericCommandsLFS);
 
         public static IBarangayRepository BarangayRepository() => new BarangayRepository(mySqlGenericCommandsLFS);
     }

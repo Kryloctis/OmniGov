@@ -23,7 +23,9 @@ namespace AccountingSystem
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            string query = $"SELECT * FROM {tableName}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
