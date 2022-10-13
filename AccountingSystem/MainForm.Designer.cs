@@ -893,15 +893,17 @@ namespace AccountingSystem
             // 
             // tabControlFinancialStatements
             // 
-            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPosition);
-            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPerformance);
-            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCNAE);
-            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCF);
             this.tabControlFinancialStatements.Controls.Add(this.tabPageSCBAA);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCF);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSCNAE);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPerformance);
+            this.tabControlFinancialStatements.Controls.Add(this.tabPageSFPosition);
             this.tabControlFinancialStatements.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlFinancialStatements.Location = new System.Drawing.Point(0, 5);
             this.tabControlFinancialStatements.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlFinancialStatements.Name = "tabControlFinancialStatements";
+            this.tabControlFinancialStatements.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tabControlFinancialStatements.RightToLeftLayout = true;
             this.tabControlFinancialStatements.SelectedIndex = 0;
             this.tabControlFinancialStatements.Size = new System.Drawing.Size(1213, 578);
             this.tabControlFinancialStatements.TabIndex = 4;
@@ -924,6 +926,7 @@ namespace AccountingSystem
             this.ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 5);
             this.ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
+            this.ucStatementOfFinancialPosition1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1205, 545);
             this.ucStatementOfFinancialPosition1.TabIndex = 0;
             // 
@@ -945,6 +948,7 @@ namespace AccountingSystem
             this.ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 5);
             this.ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
+            this.ucStatementOfFinancialPerformance1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1205, 545);
             this.ucStatementOfFinancialPerformance1.TabIndex = 0;
             // 
@@ -966,6 +970,7 @@ namespace AccountingSystem
             this.ucStatementOfChangesInNetAssetsEquity1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfChangesInNetAssetsEquity1.Location = new System.Drawing.Point(0, 5);
             this.ucStatementOfChangesInNetAssetsEquity1.Name = "ucStatementOfChangesInNetAssetsEquity1";
+            this.ucStatementOfChangesInNetAssetsEquity1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucStatementOfChangesInNetAssetsEquity1.Size = new System.Drawing.Size(1205, 545);
             this.ucStatementOfChangesInNetAssetsEquity1.TabIndex = 0;
             // 
@@ -986,6 +991,7 @@ namespace AccountingSystem
             this.ucStatementOfCashFlows1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucStatementOfCashFlows1.Location = new System.Drawing.Point(0, 5);
             this.ucStatementOfCashFlows1.Name = "ucStatementOfCashFlows1";
+            this.ucStatementOfCashFlows1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucStatementOfCashFlows1.Size = new System.Drawing.Size(1205, 545);
             this.ucStatementOfCashFlows1.TabIndex = 0;
             // 

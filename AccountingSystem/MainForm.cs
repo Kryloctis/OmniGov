@@ -53,15 +53,40 @@ namespace AccountingSystem
         public MainForm(LoginForm _loginForm)
         {
             InitializeComponent();
-            tabControlBudget.SelectedTab = tabControlBudget.TabPages[1];
             Helper.LoadFormIcon(this);
+            ClearTabPages();
+            userDict = Helper.LoggedInUserData();
+            loginForm = _loginForm;
+        }
+
+
+        private void ClearTabPages()
+        {
             tabControlDashboard.TabPages.Clear();
             tabControlAccounting.TabPages.Clear();
             tabControlLedgers.TabPages.Clear();
             tabControlTrialBalance.TabPages.Clear();
             tabControlFinancialStatements.TabPages.Clear();
-            userDict = Helper.LoggedInUserData();
-            loginForm = _loginForm;
+        }
+
+        private void FocusLasTabPages()
+        {
+            int budgetTabPageCount = tabControlBudget.TabPages.Count;
+            int ledgersTabPageCount = tabControlLedgers.TabPages.Count;
+            int trialBalanceTabPageCount = tabControlTrialBalance.TabPages.Count;
+            int financialStatementsTabPageCount = tabControlFinancialStatements.TabPages.Count;
+
+            if (budgetTabPageCount > 1)
+                tabControlBudget.SelectedTab = tabControlBudget.TabPages[budgetTabPageCount - 1];
+
+            if (ledgersTabPageCount > 1)
+                tabControlLedgers.SelectedTab = tabControlLedgers.TabPages[ledgersTabPageCount - 1];
+
+            if (trialBalanceTabPageCount > 1)
+                tabControlTrialBalance.SelectedTab = tabControlTrialBalance.TabPages[trialBalanceTabPageCount - 1];
+
+            if (financialStatementsTabPageCount > 1)
+                tabControlFinancialStatements.SelectedTab = tabControlFinancialStatements.TabPages[financialStatementsTabPageCount - 1];
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -70,6 +95,7 @@ namespace AccountingSystem
             {
                 LoadLoggedInUser();
                 ValidatePermissions();
+                FocusLasTabPages();
             }
         }
 
@@ -96,24 +122,14 @@ namespace AccountingSystem
 
         private void ValidateDashboadPermissions()
         {
-            #region Dashboard
-
             if (Helper.HasPermission("Budget Dashboard"))
-            {
                 tabControlDashboard.TabPages.Add(tabPageBudget);
-            }
 
             if (Helper.HasPermission("Accounting Dashboard"))
-            {
                 tabControlDashboard.TabPages.Add(tabPageAccounting);
-            }
 
             if (Helper.HasPermission("Treasury Dashboard"))
-            {
                 tabControlDashboard.TabPages.Add(tabPageTreasury);
-            }
-
-            #endregion
         }
 
         private void ValidateReportPermissions()
@@ -261,23 +277,17 @@ namespace AccountingSystem
             #region Journal Entry Voucher
 
             if (Helper.HasPermission("Transaction JEV") || Helper.HasPermission("Report JEVs"))
-            {
                 tabControlAccounting.TabPages.Add(tabPageJournalEntryVoucher);
-            }
 
             if (!Helper.HasPermission("Transaction JEV"))
-            {
                 ucjevDashboard1.btnAddJEV.Enabled = false;
-            }
 
             #endregion
 
             #region Journals
 
             if (Helper.HasPermission("Report General Journal") || Helper.HasPermission("Report Cash Receipts Journal") || Helper.HasPermission("Report Procurement Received Journal") || Helper.HasPermission("Report Cash Disbursements Journal") || Helper.HasPermission("Report Check Disbursements Journal") || Helper.HasPermission("Report Authority to Debit Account Disbursements Journal"))
-            {
                 tabControlAccounting.TabPages.Add(tabPageJournals);
-            }
 
 
             if (!Helper.HasPermission("Report General Journal"))
@@ -302,76 +312,54 @@ namespace AccountingSystem
 
             #region Ledgers
 
-            if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
-            {
-                tabControlAccounting.TabPages.Add(tabPageLedgers);
-            }
-
-
-            if (Helper.HasPermission("Report General Ledger"))
-            {
-                tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
-            }
+            if (Helper.HasPermission("Report Transaction Log"))
+                tabControlLedgers.TabPages.Add(tabPageTransactionLog);
 
             if (Helper.HasPermission("Report Subsidiary Ledger"))
-            {
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
-            }
 
-            if (Helper.HasPermission("Report Transaction Log"))
-            {
-                tabControlLedgers.TabPages.Add(tabPageTransactionLog);
-            }
+            if (Helper.HasPermission("Report General Ledger"))
+                tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
+
+            if (Helper.HasPermission("Report General Ledger") || Helper.HasPermission("Report Subsidiary Ledger"))
+                tabControlAccounting.TabPages.Add(tabPageLedgers);
 
             #endregion
 
             #region Trial Balance
 
             if (Helper.HasPermission("Report Pre Trial Balance") || Helper.HasPermission("Report Post Trial Balance"))
-            {
                 tabControlAccounting.TabPages.Add(tabPageTrialBalance);
-            }
+
+
+            if (Helper.HasPermission("Report Post Trial Balance"))
+                tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
 
 
             if (Helper.HasPermission("Report Pre Trial Balance"))
-            {
                 tabControlTrialBalance.TabPages.Add(tabPagePreTrial);
-            }
-
-            if (Helper.HasPermission("Report Post Trial Balance"))
-            {
-                tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
-            }
 
             #endregion
 
             #region Financial Statements
 
             if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity") || Helper.HasPermission("Report Statement of Financial Performance"))
-            {
                 tabControlAccounting.TabPages.Add(tabPageFinancialStatements);
-            }
 
-
-            if (Helper.HasPermission("Report Statement of Financial Performance"))
-            {
-                tabControlFinancialStatements.TabPages.Add(tabPageSFPerformance);
-            }
-
-            if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
-            {
-                tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
-            }
-
-            if (Helper.HasPermission("Report Statement of Financial Position"))
-            {
-                tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
-            }
+            if (Helper.HasPermission("Statement of Comparison of Budget and Actual Amounts"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSCBAA);
 
             if (Helper.HasPermission("Report Statement of Cash Flows"))
-            {
                 tabControlFinancialStatements.TabPages.Add(tabPageSCF);
-            }
+
+            if (Helper.HasPermission("Report Statement of Changes in Net Assets Equity"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSCNAE);
+
+            if (Helper.HasPermission("Report Statement of Financial Performance"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSFPerformance);
+
+            if (Helper.HasPermission("Report Statement of Financial Position"))
+                tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
             #endregion
         }
 
