@@ -264,7 +264,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // btnAdd
             // 
-            this.btnAdd.Enabled = false;
             this.btnAdd.Location = new System.Drawing.Point(0, 3);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnAdd.Name = "btnAdd";
