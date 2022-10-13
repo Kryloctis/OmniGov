@@ -114,15 +114,15 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@tax_payer_id", DbType.Int32, entity.Id},
+                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
+                new object[] { "@taxpayer_type_id", DbType.String, entity.TaxpayerTypeId },
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
-                new object[] { "@taxpayer_type_id", DbType.String, entity.TaxpayerTypeId },
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
             };
 
-            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE id = @id";
+            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE tax_payer_id = @tax_payer_id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 

@@ -126,16 +126,16 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             ucTaxPayers.taxPayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["tax_payer_id"].Value);
             var tin = dgTaxpayers.Rows[rowIndex].Cells["tin"].Value.ToString();
-            var name = dgTaxpayers.Rows[rowIndex].Cells["name"].Value.ToString();
-            var type = dgTaxpayers.Rows[rowIndex].Cells["type"].Value.ToString();
+            var name = dgTaxpayers.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+            var taxpayerTypeId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["taxpayer_type_id"].Value); 
             var contactInfo = dgTaxpayers.Rows[rowIndex].Cells["contact_info"].Value.ToString();
-            var barangay = dgTaxpayers.Rows[rowIndex].Cells["barangay"].Value.ToString();
+            var barangayId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["barangays_id"].Value);
 
             ucTaxPayers.txtTIN.Text = tin;
             ucTaxPayers.txtName.Text = name;
-            ucTaxPayers.cmbxTaxPayerType.Text = type;
+            ucTaxPayers.cmbxTaxPayerType.SelectedValue = taxpayerTypeId;
             ucTaxPayers.txtContact.Text = contactInfo;
-            ucTaxPayers.cmbxBarangay.SelectedValue = barangay;
+            ucTaxPayers.cmbxBarangay.SelectedValue = barangayId;
 
             _frmTaxPayers.btnSave.Text = "Update";
             _frmTaxPayers.uc.isEdit = true;
