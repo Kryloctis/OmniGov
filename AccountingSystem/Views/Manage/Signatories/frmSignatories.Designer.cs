@@ -254,6 +254,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             this.dgSignatories.RowTemplate.Height = 25;
             this.dgSignatories.Size = new System.Drawing.Size(565, 356);
             this.dgSignatories.TabIndex = 3;
+            this.dgSignatories.SelectionChanged += new System.EventHandler(this.dgSignatories_SelectionChanged);
             // 
             // groupBox1
             // 
