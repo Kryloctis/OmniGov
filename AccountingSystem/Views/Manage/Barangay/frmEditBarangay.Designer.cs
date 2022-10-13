@@ -74,6 +74,7 @@
             // 
             // ucBarangay1
             // 
+            this.ucBarangay1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBarangay1.Location = new System.Drawing.Point(1, 8);
             this.ucBarangay1.Name = "ucBarangay1";
             this.ucBarangay1.Size = new System.Drawing.Size(326, 59);
@@ -94,6 +95,7 @@
             this.Name = "frmEditBarangay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Barangay";
+            this.Load += new System.EventHandler(this.frmEditBarangay_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

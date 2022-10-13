@@ -26,7 +26,9 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmEditBarangay().ShowDialog();
+            int barangayId = Convert.ToInt32(dgBarangay.SelectedRows[0].Cells[0].Value);
+
+            _ = new frmEditBarangay(barangayId, this).ShowDialog();
         }
 
         private void frmBarangay_Load(object sender, EventArgs e)
@@ -57,6 +59,11 @@ namespace AccountingSystem.Views.Manage.Barangay
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecords();
+        }
+
+        private void dgBarangay_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgBarangay, btnEdit, btnDelete);
         }
     }
 }

@@ -12,9 +12,32 @@ namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class frmEditBarangay : Form
     {
-        public frmEditBarangay()
+        private int _barangayId;
+        private frmBarangay _frmBarangay;
+        private ucBarangay uc;
+
+
+        public frmEditBarangay(int barangayId, frmBarangay frmBarangay)
         {
             InitializeComponent();
+            uc = ucBarangay1;
+
+            _barangayId = barangayId;
+           _frmBarangay = frmBarangay;
+        }
+
+        private void frmEditBarangay_Load(object sender, EventArgs e)
+        {
+            LoadSelectedBarangay();
+        }
+
+        private void LoadSelectedBarangay()
+        {
+            var dictBarangay = AccFactory.BarangayRepository().GetRecordByID(_barangayId);
+
+            uc.txtCode.Text = dictBarangay["code"];
+            uc.txtBarangay.Text = dictBarangay["name"];
+
         }
     }
 }

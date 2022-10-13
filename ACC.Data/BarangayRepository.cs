@@ -29,7 +29,26 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var dict = new Dictionary<string, string>();
+
+            var parameter = new object[][] { 
+                new object[]{"@barangay_id", DbType.Int32, Id}
+            };
+            string query = $"SELECT name, code FROM {tableName} WHERE id = @barangay_id";
+
+            using (var items = _mySqlGenericCommandsLFS.ExecuteReader(query, parameter))
+            {
+                if (items.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow item in items.Rows)
+                {
+                    dict.Add("code", item["code"].ToString());
+                    dict.Add("name", item["name"].ToString());
+                }
+
+                return dict;
+            }
         }
 
         public DataTable GetRecords()

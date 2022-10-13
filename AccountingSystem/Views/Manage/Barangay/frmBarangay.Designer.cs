@@ -126,6 +126,7 @@
             this.dgBarangay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgBarangay.Size = new System.Drawing.Size(604, 319);
             this.dgBarangay.TabIndex = 9;
+            this.dgBarangay.SelectionChanged += new System.EventHandler(this.dgBarangay_SelectionChanged);
             // 
             // frmBarangay
             // 
