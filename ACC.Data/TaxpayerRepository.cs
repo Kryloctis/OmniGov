@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class TaxpayerRepository : ITaxpayers
+    public class TaxpayerRepository : ITaxpayersRepository
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "Taxpayers";
@@ -173,6 +173,11 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public DataTable GetTaxpayerType()
+        {
+            throw new NotImplementedException();
         }
     }
 }

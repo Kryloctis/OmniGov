@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using RPT.Domain.Interfaces;
 using System;
 
@@ -147,7 +148,9 @@ namespace AccountingSystem
 
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS);
 
-        public static ITaxpayers TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
+        public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
+
+        public static ITaxpayerTypeRepository ITaxpayerTypeRepository() => new TaxpayerTypeRepository(mySqlGenericCommandsLFS);
 
         public static IBarangayRepository BarangayRepository() => new BarangayRepository(mySqlGenericCommandsLFS);
     }

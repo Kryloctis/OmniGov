@@ -72,7 +72,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.IsSplitterFixed = true;
@@ -82,13 +81,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Size = new System.Drawing.Size(731, 292);
             this.splitContainer1.SplitterDistance = 315;
             this.splitContainer1.TabIndex = 5;
@@ -134,7 +133,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.cmbxTaxPayerType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbxTaxPayerType.Cursor = System.Windows.Forms.Cursors.Default;
             this.cmbxTaxPayerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxTaxPayerType.FormattingEnabled = true;
             this.cmbxTaxPayerType.Location = new System.Drawing.Point(93, 76);
@@ -307,7 +305,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(396, 256);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Real Properties";
@@ -398,6 +396,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
+            this.txtTIN.Focus();
 
         }
 

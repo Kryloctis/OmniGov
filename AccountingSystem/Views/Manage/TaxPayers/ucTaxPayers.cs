@@ -39,26 +39,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadTaxPayersType()
         {
-            var dict = new Dictionary<string, string>();
-
-            dict.Add("1", "Association");
-            dict.Add("2", "Charitable");
-            dict.Add("3", "Cooperative");
-            dict.Add("4", "Corporation");
-            dict.Add("5", "Educational");
-            dict.Add("6", "Government");
-            dict.Add("7", "Individual");
-            dict.Add("8", "Multiple Owners");
-            dict.Add("9", "Partnership");
-            dict.Add("10", "Religious");
-
-            cmbxTaxPayerType.DataSource = new BindingSource(dict.Values, null);  
+            try
+            {
+                var dtTaxpayerType = AccFactory.TaxpayersRepository().GetRecords();
+             
+                dtTaxpayerType.Columns.Add("taxpayer_type", typeof(string), "taxpayer_type");
+                cmbxTaxPayerType.DataSource = dtTaxpayerType;
+                cmbxTaxPayerType.ValueMember = "id";
+                cmbxTaxPayerType.DisplayMember = "taxpayer_type";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
 
         internal void ResetForm()
         {
-            //Tax payer
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
@@ -66,11 +61,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtStreet.Clear();
             txtMunicipality.Clear();
             txtProvince.Clear();
-            cmbxTaxPayerType.SelectedIndex = 0;
+            //cmbxTaxPayerType.SelectedIndex = 0;
             taxPayerId = 0;
             isEdit = false;
 
-            //Properties
             dgProperties.DataSource = null;
             dgProperties.Rows.Clear();
             dgProperties.Refresh();
