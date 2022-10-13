@@ -131,19 +131,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var name = dgTaxpayers.Rows[rowIndex].Cells["name"].Value.ToString();
             var type = dgTaxpayers.Rows[rowIndex].Cells["type"].Value.ToString();
             var contactInfo = dgTaxpayers.Rows[rowIndex].Cells["contact_info"].Value.ToString();
-            var street = dgTaxpayers.Rows[rowIndex].Cells["street"].Value.ToString();
             var barangay = dgTaxpayers.Rows[rowIndex].Cells["barangay"].Value.ToString();
-            var municipality = dgTaxpayers.Rows[rowIndex].Cells["municipality"].Value.ToString();
-            var province = dgTaxpayers.Rows[rowIndex].Cells["province"].Value.ToString();
 
             ucTaxPayers.txtTIN.Text = tin;
             ucTaxPayers.txtName.Text = name;
             ucTaxPayers.cmbxTaxPayerType.Text = type;
             ucTaxPayers.txtContact.Text = contactInfo;
-            ucTaxPayers.txtStreet.Text = street;
-            ucTaxPayers.txtBarangay.Text = barangay;
-            ucTaxPayers.txtMunicipality.Text = municipality;
-            ucTaxPayers.txtProvince.Text = province;
+            ucTaxPayers.cmbxBarangay.SelectedValue = barangay;
 
             _frmTaxPayers.btnSave.Text = "Update";
             _frmTaxPayers.uc.isEdit = true;

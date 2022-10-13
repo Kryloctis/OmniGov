@@ -99,15 +99,12 @@ namespace ACC.Data
             {
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
-                new object[] { "@type", DbType.String, entity.Type },
+                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@barangay", DbType.String, entity.Barangay },
-                new object[] { "@municipality", DbType.String, entity.Municipality },
-                new object[] { "@province", DbType.String, entity.Province }
+                new object[] { "@barangays_id", DbType.String, entity.BarangayId }
             };
 
-            string query = $"INSERT INTO {tableName} (tin, name, type, contact_info, street, barangay, municipality, province) VALUES (@tin, @name, @type, @contact_info, @street, @barangay, @municipality, @province)";
+            string query = $"INSERT INTO {tableName} (tin, name, taxpayer_type_id, contact_info, barangays_id) VALUES (@tin, @name, @taxpayer_type_id, @contact_info, @barangays_id)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -118,15 +115,12 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
-                new object[] { "@type", DbType.String, entity.Type },
+                new object[] { "@taxpayer_type_id", DbType.String, entity.TaxpayerTypeId },
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@barangay", DbType.String, entity.Barangay },
-                new object[] { "@municipality", DbType.String, entity.Municipality },
-                new object[] { "@province", DbType.String, entity.Province }
+                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
             };
 
-            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, type = @type, contact_info = @contact_info, street = @street, barangay = @barangay, municipality = @municipality, province = @province WHERE id = @id";
+            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -166,7 +160,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT MAX(id) FROM {tableName}";
+                string query = $"SELECT MAX(tax_payer_id) FROM {tableName}";
                 return int.Parse(_mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
