@@ -28,12 +28,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveRealProperties())
-            {
-                Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
-                _ucTaxpayer.LoadProperties();
-                Close();
-            }
+            //if (SaveRealProperties())
+            //{
+            //    Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
+            //    _ucTaxpayer.LoadProperties();
+            //    Close();
+            //}
         }
 
         private bool SaveRealProperties()
