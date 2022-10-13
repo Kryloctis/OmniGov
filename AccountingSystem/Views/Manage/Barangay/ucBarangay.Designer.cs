@@ -56,6 +56,7 @@
             this.txtBarangay.Size = new System.Drawing.Size(218, 23);
             this.txtBarangay.TabIndex = 1;
             this.txtBarangay.Validating += new System.ComponentModel.CancelEventHandler(this.txtBarangay_Validating);
+            this.txtBarangay.Validated += new System.EventHandler(this.txtBarangay_Validated);
             // 
             // label1
             // 

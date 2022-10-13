@@ -18,6 +18,53 @@ namespace ACC.Data
             _mySqlGenericCommandsLFS = mySqlGenericCommandsRPT;
         }
 
+        public bool CodeExist(string code)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@code", DbType.String, code },
+                };
+
+                string query = $"SELECT code FROM {tableName} WHERE code = @code";
+                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool CodeExist(string code, int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int16, id },
+                    new object[] { "@code", DbType.String, code },
+                };
+
+                string query = $"SELECT code FROM {tableName} WHERE id <> @id AND code = @code";
+                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
         public int CountRecords()
         {
             throw new System.NotImplementedException();
@@ -104,6 +151,54 @@ namespace ACC.Data
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
+        }
+
+        public bool NameExist(string name)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@name", DbType.String, name },
+                };
+
+                string query = $"SELECT name FROM {tableName} WHERE name = @name";
+
+                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
+        }
+
+        public bool NameExist(string name, int id)
+        {
+            try
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.String, id },
+                    new object[] { "@name", DbType.String, name },
+                };
+
+                string query = $"SELECT name FROM {tableName} WHERE id <> @id AND name = @name";
+                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+                // if query is not null, means found some record, so true
+                if (!string.IsNullOrEmpty(queryResult)) return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+
+            return false;
         }
 
         public bool Update(BarangayModel entity)
