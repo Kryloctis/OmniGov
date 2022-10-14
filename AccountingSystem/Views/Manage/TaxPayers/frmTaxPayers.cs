@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    public partial class frmTaxpayers : Form
+    public partial class frmTaxPayers : Form
     {
-        public frmTaxpayers()
+        public frmTaxPayers()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -107,7 +107,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRealProperties().ShowDialog();
+            _ = new frmAddTaxpayers().ShowDialog();
         }
     }
 }

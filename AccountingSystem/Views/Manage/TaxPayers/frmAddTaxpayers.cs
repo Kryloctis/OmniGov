@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    public partial class frmAddTaxpayer : Form
+    public partial class frmAddTaxpayers : Form
     {
-        public frmAddTaxpayer()
+        public frmAddTaxpayers()
         {
             InitializeComponent();
         }

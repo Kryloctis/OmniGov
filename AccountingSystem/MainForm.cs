@@ -696,7 +696,7 @@ namespace AccountingSystem
 
         private void menuTaxPayers_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxpayers().ShowDialog();
+            _ = new frmTaxPayers().ShowDialog();
         }
 
         private void barangaysToolStripMenuItem_Click(object sender, EventArgs e)

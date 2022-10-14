@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    partial class frmAddTaxpayer
+    partial class frmAddTaxpayers
     {
         /// <summary>
         /// Required designer variable.
