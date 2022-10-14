@@ -40,6 +40,7 @@ namespace AccountingSystem
 
             dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["taxpayer_type"].HeaderText = "Taxpayer Type";
             dataGridView.Columns["barangays_id"].HeaderText = "Barangay Id";
             dataGridView.Columns["barangays_id"].Visible = false;
@@ -65,7 +66,6 @@ namespace AccountingSystem
             dataGridView.Columns["contact_info"].HeaderText = "Contact";
             dataGridView.Columns["is_active"].HeaderText = "Is Active";
             dataGridView.Columns["is_active"].Visible = false;
-
         }
 
         #endregion
