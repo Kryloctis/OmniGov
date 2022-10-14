@@ -105,6 +105,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             LoadTaxpayersBySearch();
         }
 
-
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddRealProperties().ShowDialog();
+        }
     }
 }

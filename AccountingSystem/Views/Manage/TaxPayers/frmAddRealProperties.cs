@@ -18,11 +18,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal readonly ucTaxPayers _ucTaxpayer;
         internal int _taxPayerId = 0;
 
-        public frmAddRealProperties(ucTaxPayers ucTaxPayer)
+        public frmAddRealProperties()
         {
             InitializeComponent();
-            uc = ucvRealProperties1;
-            _ucTaxpayer = ucTaxPayer;
             
         }
 
@@ -31,7 +29,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             if (SaveRealProperties())
             {
                 Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
-                _ucTaxpayer.LoadProperties();
                 Close();
             }
         }

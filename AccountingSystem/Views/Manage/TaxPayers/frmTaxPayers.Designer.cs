@@ -84,6 +84,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnAdd.Size = new System.Drawing.Size(33, 43);
             this.btnAdd.Text = "&Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtSearch
             // 
@@ -94,7 +95,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtSearch.Size = new System.Drawing.Size(202, 46);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
-            // frmTaxPayersSearch
+            // frmTaxpayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,7 +103,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.MaximizeBox = false;
-            this.Name = "frmTaxPayersSearch";
+            this.Name = "frmTaxpayers";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Taxpayers";
