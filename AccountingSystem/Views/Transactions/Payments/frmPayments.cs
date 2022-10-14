@@ -1,38 +1,27 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
-using AccountingSystem.Views.Transactions.PropertyPayment;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
-using Microsoft.Reporting.WinForms;
-using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
- 
+
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
-    public partial class frmRealPropertyPayment : Form
+    public partial class frmPayments : Form
     {
-        private ucRealPropertyTaxPayment ucPaymentInfo;
         private readonly MainForm _mainForm;
         internal List<RptTaxDuesModel> rptTaxDuesModels;
         internal bool isReadonly = false;
         internal rptPropertyPaymentTaxPayerInfoModel paymentTaxPayerInfoModel;
 
-        public frmRealPropertyPayment(MainForm mainForm)
+        public frmPayments(MainForm mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            ucPaymentInfo = ucPropertyTaxPayment1;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            Helper.DatagridFullRowSelectStyle(dataGridView1, false);
         }
 
         internal void LoadSelectedDetailedTaxDues(List<RptDetailedTaxDuesModel> realPropertyPaymentTaxDueModels, int paymentPostsId)
@@ -48,11 +37,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 int collectingOfficerId = Convert.ToInt32(dictViewPaymentPost["payment_collections_collecting_officers_id"]);
                 string jobOrderId = dictViewPaymentPost["payment_collections_job_orders_id"];
 
-                ucPaymentInfo.txtPayee.Text = payee;
-                ucPaymentInfo.dtPaymentDate.Value = paymentDate;
-                ucPaymentInfo.txtReceipts.Text = receiptNo;
+                //ucPaymentInfo.txtPayee.Text = payee;
+                //ucPaymentInfo.dtPaymentDate.Value = paymentDate;
+                //ucPaymentInfo.txtReceipts.Text = receiptNo;
 
-                ucPaymentInfo.LoadCollectorInfoById(collectingOfficerId, jobOrderId);         
+                //ucPaymentInfo.LoadCollectorInfoById(collectingOfficerId, jobOrderId);
                 FormIsReadOnly(true);
 
                 LoadRptDetailedTaxDues(realPropertyPaymentTaxDueModels);
@@ -135,11 +124,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         {
             txtTin.Text = paymentTaxPayerInfoModel.TIN;
             txtTaxpayer.Text = paymentTaxPayerInfoModel.TaxPayerName;
-            txtBarangay.Text = paymentTaxPayerInfoModel.BarangayName;
-            txtMunicipality.Text = paymentTaxPayerInfoModel.MunicipalityName;
-            txtProvince.Text = paymentTaxPayerInfoModel.ProvinceName;
             txtAddress.Text = paymentTaxPayerInfoModel.Address;
-            btnGetTaxDue.Enabled = true;
+            btnRptGetTaxDue.Enabled = true;
             btnPaymentHistory.Enabled = true;
         }
 
@@ -182,7 +168,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         internal void CancelTransaction()
         {
             LoadRptDetailedTaxDues(null);
-            ucPaymentInfo.ResetForm();
         }
 
         private void btnCancelTransaction_Click(object sender, EventArgs e)
@@ -194,46 +179,46 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         #region Payment Methods
 
-        private bool PrintReceipt() 
+        private bool PrintReceipt()
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;   
-                var localReport = new LocalReport();
-                var dictLguDetails = Helper.LGUDetails();
-                var amountToWords = new Helper.AmountToWords();
-                string amount = txtTotalDue.Text.Trim();
+            //try
+            //{
+            //    Cursor.Current = Cursors.WaitCursor;
+            //    var localReport = new LocalReport();
+            //    var dictLguDetails = Helper.LGUDetails();
+            //    var amountToWords = new Helper.AmountToWords();
+            //    string amount = txtTotalDue.Text.Trim();
 
-                var parameters = new[]
-                {
-                new ReportParameter("paramMunicipality", dictLguDetails["lgu_name"]),
-                new ReportParameter("paramReceiptNo", ucPaymentInfo.txtReceipts.Text.Trim()),
-                new ReportParameter("paramPaymentDate", ucPaymentInfo.dtPaymentDate.Value.ToString()),
-                new ReportParameter("paramAmount", amount),
-                new ReportParameter("paramPayee", ucPaymentInfo.txtPayee.Text.Trim()),
-                new ReportParameter("paramCollectorName", ucPaymentInfo.txtCollectingOfficer.Text.Trim()),
-                new ReportParameter("paramAmountInWord", amountToWords.ConvertAmountToWords(amount))
-                };            
+            //    var parameters = new[]
+            //    {
+            //    new ReportParameter("paramMunicipality", dictLguDetails["lgu_name"]),
+            //    new ReportParameter("paramReceiptNo", ucPaymentInfo.txtReceipts.Text.Trim()),
+            //    new ReportParameter("paramPaymentDate", ucPaymentInfo.dtPaymentDate.Value.ToString()),
+            //    new ReportParameter("paramAmount", amount),
+            //    new ReportParameter("paramPayee", ucPaymentInfo.txtPayee.Text.Trim()),
+            //    new ReportParameter("paramCollectorName", ucPaymentInfo.txtCollectingOfficer.Text.Trim()),
+            //    new ReportParameter("paramAmountInWord", amountToWords.ConvertAmountToWords(amount))
+            //    };
 
-                localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-payment-receipt.rdlc";
-                localReport.SetParameters(parameters);
+            //    localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-payment-receipt.rdlc";
+            //    localReport.SetParameters(parameters);
 
-                //Set page settings for receipt printing
-                var localReportDefaultSetting = localReport.GetDefaultPageSettings();
-                var pageSettings = new PageSettings();
-                pageSettings.PaperSize = localReportDefaultSetting.PaperSize;
+            //    //Set page settings for receipt printing
+            //    var localReportDefaultSetting = localReport.GetDefaultPageSettings();
+            //    var pageSettings = new PageSettings();
+            //    pageSettings.PaperSize = localReportDefaultSetting.PaperSize;
 
-                Helper.PrintToPrinter(localReport, pageSettings);
-                Helper.DisposePrintToPrinter();
-                Cursor.Current = Cursors.Default;
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            Cursor.Current = Cursors.Default;
-            return false;       
+            //    Helper.PrintToPrinter(localReport, pageSettings);
+            //    Helper.DisposePrintToPrinter();
+            //    Cursor.Current = Cursors.Default;
+            //    return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Helper.MessageBoxError(ex.Message);
+            //}
+            //Cursor.Current = Cursors.Default;
+            return false;
         }
 
         private bool ValidatePayment()
@@ -246,55 +231,55 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             return true;
         }
 
-        private bool SavePayment() 
+        private bool SavePayment()
         {
-            try
-            {
-                if (!ValidateChildren())
-                {
-                    Helper.MessageBoxError(ucPaymentInfo.GetFormErrors());
-                    return false;
-                }
+            //try
+            //{
+            //    if (!ValidateChildren())
+            //    {
+            //        Helper.MessageBoxError(ucPaymentInfo.GetFormErrors());
+            //        return false;
+            //    }
 
-                if(!Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-                    return false;
+            //    if (!Helper.MessageBoxConfirmCancel("Confirm Payment?"))
+            //        return false;
 
-                //Payment Collections
-                int accountableFormId = ucPaymentInfo.accountableFormNoId;
-                decimal amount = Convert.ToDecimal(txtTotalDue.Text.Trim());
-                string receiptNo = ucPaymentInfo.txtReceipts.Text.Trim();
-                string payee = ucPaymentInfo.txtPayee.Text.Trim();
-                DateTime paymentDate = ucPaymentInfo.dtPaymentDate.Value;
-                var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
-                var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
-                int collectingOfficerId = dictCollectingOfficer.Values.Count < 1 ? 0 : Convert.ToInt32(dictCollectingOfficer["id"]);
-                int? jobOrderId = dictJobOrder.Values.Count < 1 ? null : Convert.ToInt32(dictJobOrder["id"]);
+            //    //Payment Collections
+            //    int accountableFormId = ucPaymentInfo.accountableFormNoId;
+            //    decimal amount = Convert.ToDecimal(txtTotalDue.Text.Trim());
+            //    string receiptNo = ucPaymentInfo.txtReceipts.Text.Trim();
+            //    string payee = ucPaymentInfo.txtPayee.Text.Trim();
+            //    DateTime paymentDate = ucPaymentInfo.dtPaymentDate.Value;
+            //    var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+            //    var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+            //    int collectingOfficerId = dictCollectingOfficer.Values.Count < 1 ? 0 : Convert.ToInt32(dictCollectingOfficer["id"]);
+            //    int? jobOrderId = dictJobOrder.Values.Count < 1 ? null : Convert.ToInt32(dictJobOrder["id"]);
 
-                var paymentCollectionsModel = new PaymentCollectionsModel()
-                {
-                    AccountableFormId = accountableFormId,
-                    CollectingOfficerId = collectingOfficerId,
-                    JobOrderId = jobOrderId,
-                    Amount = amount,
-                    FundId = 1,
-                    ReceiptNo = receiptNo,
-                    Payee = payee,
-                    PaymentDate = paymentDate,
-                    IsCancelled = false,
-                    CreatedBy = Helper.UserId
-                };
+            //    var paymentCollectionsModel = new PaymentCollectionsModel()
+            //    {
+            //        AccountableFormId = accountableFormId,
+            //        CollectingOfficerId = collectingOfficerId,
+            //        JobOrderId = jobOrderId,
+            //        Amount = amount,
+            //        FundId = 1,
+            //        ReceiptNo = receiptNo,
+            //        Payee = payee,
+            //        PaymentDate = paymentDate,
+            //        IsCancelled = false,
+            //        CreatedBy = Helper.UserId
+            //    };
 
-                var rptPaymentPostsModel = new RptPaymentPostsModel()
-                {
-                    PostedBy = Helper.UserId
-                };
+            //    var rptPaymentPostsModel = new RptPaymentPostsModel()
+            //    {
+            //        PostedBy = Helper.UserId
+            //    };
 
-                return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, rptPaymentPostsModel, rptTaxDuesModels);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            //    return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, rptPaymentPostsModel, rptTaxDuesModels);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Helper.MessageBoxError(ex.Message);
+            //}
             return false;
         }
 
@@ -306,38 +291,38 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
                 Helper.MessageBoxSuccess("Payment Confirmed.");
                 LoadRptDetailedTaxDues(null);
                 rptTaxDuesModels.Clear();
-                ucPaymentInfo.ResetForm();
-            }   
+                //ucPaymentInfo.ResetForm();
+            }
         }
 
         #endregion
 
-        private void FormIsReadOnly(bool isReadOnly) 
+        private void FormIsReadOnly(bool isReadOnly)
         {
-            ucPaymentInfo.isReadOnly = isReadOnly;
-            isReadonly = isReadOnly;
-            btnGetTaxDue.Enabled = !isReadOnly;
-            btnPay.Enabled = !isReadOnly;
-            btnPay.Text = "Paid";
-            ucPaymentInfo.txtReceipts.ReadOnly = isReadOnly;
-            ucPaymentInfo.txtPayee.ReadOnly = isReadOnly;
-            btnCancelTransaction.Enabled = !isReadOnly;
-            ucPaymentInfo.dtPaymentDate.Enabled = !isReadOnly;
-            btnNew.Enabled = isReadOnly;
+            //ucPaymentInfo.isReadOnly = isReadOnly;
+            //isReadonly = isReadOnly;
+            //btnGetTaxDue.Enabled = !isReadOnly;
+            //btnPay.Enabled = !isReadOnly;
+            //btnPay.Text = "Paid";
+            //ucPaymentInfo.txtReceipts.ReadOnly = isReadOnly;
+            //ucPaymentInfo.txtPayee.ReadOnly = isReadOnly;
+            //btnCancelTransaction.Enabled = !isReadOnly;
+            //ucPaymentInfo.dtPaymentDate.Enabled = !isReadOnly;
+            //btnNew.Enabled = isReadOnly;
 
-            if (!isReadOnly)
-            {
-                LoadRptDetailedTaxDues(null);
-                EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
-                btnPay.Text = "Pay";
-                ucPaymentInfo.LoadCollectorInfoByUserId();
-                ucPaymentInfo.loadReceiptNos();
-                ucPaymentInfo.txtPayee.Clear();
-                ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
-            }
+            //if (!isReadOnly)
+            //{
+            //    LoadRptDetailedTaxDues(null);
+            //    EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+            //    btnPay.Text = "Pay";
+            //    ucPaymentInfo.LoadCollectorInfoByUserId();
+            //    ucPaymentInfo.loadReceiptNos();
+            //    ucPaymentInfo.txtPayee.Clear();
+            //    ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
+            //}
         }
 
-        private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel) 
+        private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel)
         {
             if (isReadonly || !ValidatePayment())
             {
@@ -355,6 +340,31 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private void txtTotalDue_TextChanged(object sender, EventArgs e)
         {
             EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void txtAccountableForm_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCollectingOfficer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }
