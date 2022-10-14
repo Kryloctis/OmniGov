@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    partial class frmAddTaxpayers
+    partial class frmEditTaxpayers
     {
         /// <summary>
         /// Required designer variable.
@@ -53,7 +53,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 172);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(358, 29);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
@@ -73,7 +73,7 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
-            // frmAddTaxpayers
+            // frmEditTaxpayers
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -85,12 +85,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAddTaxpayers";
+            this.Name = "frmEditTaxpayers";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Taxpayers";
+            this.Text = "Edit Taxpayers";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -206,7 +206,7 @@
     <Compile Update="Views\Manage\BudgetAppropriations\ucBudgetAppropriations.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\Manage\TaxPayers\ucRealProperties.cs">
+    <Compile Update="Views\Manage\RealProperties\ucRealProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
