@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.Barangay;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -139,6 +140,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddTaxpayers().ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ShowEditForm();
+        }
+
+        private void ShowEditForm()
+        {
+            var taxpayerId = Convert.ToInt32(dgTaxpayers.SelectedRows[0].Cells["id"].Value);
+            _ = new frmEditTaxpayers(taxpayerId, this).ShowDialog();
+
         }
     }
 }
