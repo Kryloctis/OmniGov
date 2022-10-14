@@ -1553,6 +1553,56 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap modify_object_align_vertical_center_money_coins_14px {
+            get {
+                object obj = ResourceManager.GetObject("modify_object_align_vertical_center_money_coins_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap modify_object_align_vertical_center_money_coins_16px {
+            get {
+                object obj = ResourceManager.GetObject("modify_object_align_vertical_center_money_coins_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap modify_object_align_vertical_center_money_coins_20px {
+            get {
+                object obj = ResourceManager.GetObject("modify_object_align_vertical_center_money_coins_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap modify_object_align_vertical_center_money_coins_24px {
+            get {
+                object obj = ResourceManager.GetObject("modify_object_align_vertical_center_money_coins_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap modify_object_align_vertical_center_money_coins_32px {
+            get {
+                object obj = ResourceManager.GetObject("modify_object_align_vertical_center_money_coins_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap money_2_14px {
             get {
                 object obj = ResourceManager.GetObject("money-2@14px", resourceCulture);
@@ -1636,6 +1686,56 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap money_banknote_filled_archive_24px {
             get {
                 object obj = ResourceManager.GetObject("money_banknote_filled_archive_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_money_coins_14px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_money_coins_14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_money_coins_16px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_money_coins_16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_money_coins_20px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_money_coins_20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_money_coins_24px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_money_coins_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap money_banknote_filled_money_coins_32px {
+            get {
+                object obj = ResourceManager.GetObject("money_banknote_filled_money_coins_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
