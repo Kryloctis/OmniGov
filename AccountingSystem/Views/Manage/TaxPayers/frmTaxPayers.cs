@@ -1,6 +1,4 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.RptTaxRates;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,105 +10,101 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    public partial class frmTaxPayers : Form
+    public partial class frmTaxpayers : Form
     {
-        internal readonly ucTaxPayers uc;
-
-        public frmTaxPayers()
+        public frmTaxpayers()
         {
             InitializeComponent();
-            uc = ucTaxPayers1;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(uc.dgProperties);
+            Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
         }
 
-        private void frmTaxPayers_Load(object sender, EventArgs e)
+        private void frmTaxPayersSearch_Load(object sender, EventArgs e)
         {
-            //uc.ResetForm();
+            LoadTaxpayer();
         }
 
-
-        private bool SaveTaxPayers()
+        internal void LoadTaxpayer()
         {
-            if (!uc.ValidateChildren())
+            try
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                var dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetRecords();
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayersRecords));
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
 
-            var taxPayersModel = new TaxpayersModel()
+        internal void LoadTaxpayersBySearch()
+        {
+            if (txtSearch.Text.Length < 2)
+                return;
+            
+            try
             {
-                Tin = uc.txtTIN.Text,
-                Name = uc.txtName.Text,
-                TaxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue),
-                ContactInfo = uc.txtContact.Text,
-                BarangayId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue),
+                var textSearch = txtSearch.Text.Trim();
+                var dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetRecordsBySearch(textSearch);
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayersRecords));
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private DataTable TaxpayerDataTable(DataTable dtTaxpayersRecords)
+        {
+            var dataTable = new DataTable();
+            var selectedColumns = new DataColumn[]
+            {
+                new DataColumn("tax_payer_id", typeof(int)),
+                new DataColumn("barangays_id", typeof(string)),
+                new DataColumn("barangays_name", typeof(string)),
+                new DataColumn("taxpayer_type_id", typeof(string)),
+                new DataColumn("taxpayer_type", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("tin", typeof(string)),
+                new DataColumn("contact_info", typeof(string)),
             };
 
-            return AccFactory.TaxpayersRepository().Insert(taxPayersModel);
-        }
+            dataTable.Columns.AddRange(selectedColumns);
 
-        private void btnSave_Click_1(object sender, EventArgs e)
-        {
-            if (!uc.isEdit)
+            foreach (DataRow row in dtTaxpayersRecords.Rows)
             {
-                if (SaveTaxPayers())
-                {
-                    Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
-                    uc.ResetForm();
-                    uc.taxPayerId = Convert.ToInt32(AccFactory.TaxpayersRepository().LastInsertedId());
-                }
+                var newRow = dataTable.NewRow();
+                int rowTaxPayerId = Convert.ToInt32(row["tax_payer_id"]);
+                string rowBarangayId = row["barangays_id"].ToString();
+                string rowBarangay = row["barangays_name"].ToString();
+                string rowTaxpayerTypeId = row["taxpayer_type_id"].ToString();
+                string rowTaxpayerType = row["taxpayer_type"].ToString();
+                string rowTIN = row["tin"].ToString();
+                string rowName = row["taxpayers_name"].ToString();
+                string rowContact = row["contact_info"].ToString();
+
+                newRow["tax_payer_id"] = rowTaxPayerId;
+                newRow["barangays_id"] = rowBarangayId;
+                newRow["barangays_name"] = rowBarangay;
+                newRow["taxpayer_type_id"] = rowTaxpayerTypeId;
+                newRow["taxpayer_type"] = rowTaxpayerType;
+                newRow["tin"] = rowTIN;
+                newRow["taxpayers_name"] = rowName;
+                newRow["contact_info"] = rowContact;
+             
+                dataTable.Rows.Add(newRow);
             }
 
-            else 
-            {
-                if (UpdateTaxpayer())
-                {
-                    Helper.MessageBoxSuccess("Taxpayer Property has been updated.");
-                    uc.ResetForm();
-
-                    btnSave.Text = "Save";
-                    btnCancel.Enabled = false;
-                }
-            }  
+            return dataTable;
         }
 
-        private bool UpdateTaxpayer()
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (!uc.ValidateChildren()) 
+            if (string.IsNullOrEmpty(txtSearch.Text))
             {
-                Helper.MessageBoxError(uc.GetFormErrors());
-                return false;
+                LoadTaxpayer();
+                return;
             }
-
-            var taxPayersModel = new TaxpayersModel() 
-            {
-                Id = uc.taxPayerId,
-                Tin = uc.txtTIN.Text,
-                Name = uc.txtName.Text,
-                TaxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue),
-                ContactInfo = uc.txtContact.Text,
-                BarangayId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue)
-            };
-
-            return AccFactory.TaxpayersRepository().Update(taxPayersModel);
+            
+            LoadTaxpayersBySearch();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            _ = new frmTaxPayersSearch(this).ShowDialog();
-        }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-        
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            uc.ResetForm();
-            btnCancel.Enabled = false;
-            btnSave.Text = "Save";
-        }
     }
 }
