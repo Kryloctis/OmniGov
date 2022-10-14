@@ -37,6 +37,7 @@
             // 
             // ucRealProperties1
             // 
+            this.ucRealProperties1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucRealProperties1.Location = new System.Drawing.Point(0, 0);
             this.ucRealProperties1.Name = "ucRealProperties1";
@@ -72,6 +73,7 @@
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmAddRealProperties
             // 
