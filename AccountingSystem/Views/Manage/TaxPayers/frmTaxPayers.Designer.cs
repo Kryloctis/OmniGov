@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    partial class frmTaxPayers
+    partial class frmTaxpayers
     {
         /// <summary>
         /// Required designer variable.
@@ -102,7 +102,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.ClientSize = new System.Drawing.Size(822, 424);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmTaxpayers";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

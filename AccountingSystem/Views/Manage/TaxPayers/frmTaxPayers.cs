@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    public partial class frmTaxPayers : Form
+    public partial class frmTaxpayers : Form
     {
-        public frmTaxPayers()
+        public frmTaxpayers()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
         {
-            LoadTaxpayer();
+            //LoadTaxpayer();
         }
 
         internal void LoadTaxpayer()
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dataTable = new DataTable();
             var selectedColumns = new DataColumn[]
             {
-                new DataColumn("tax_payer_id", typeof(int)),
+                new DataColumn("id", typeof(int)),
                 new DataColumn("barangays_id", typeof(string)),
                 new DataColumn("barangays_name", typeof(string)),
                 new DataColumn("taxpayer_type_id", typeof(string)),

@@ -71,7 +71,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }

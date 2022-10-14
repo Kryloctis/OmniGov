@@ -38,10 +38,10 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
 
-            dataGridView.Columns["tax_payer_id"].Visible = false;
+            dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["barangays_id"].Visible = false;
             dataGridView.Columns["barangays_name"].HeaderText = "Barangay";
-            dataGridView.Columns["taxpayer_type_id"].Visible = false;
+            //dataGridView.Columns["taxpayer_type_id"].Visible = false;
             dataGridView.Columns["taxpayer_type"].HeaderText = "Owner Type";
             dataGridView.Columns["tin"].HeaderText = "TIN";
             dataGridView.Columns["taxpayers_name"].HeaderText = "Owner Name";
