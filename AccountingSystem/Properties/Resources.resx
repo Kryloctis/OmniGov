@@ -841,4 +841,19 @@
   <data name="account_book_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\account-book@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="building_9_archive_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\building-9-archive@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="building_9_archive_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\building-9-archive@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="building_9_archive_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\building-9-archive@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="building_9_archive_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\building-9-archive@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="building_9_archive_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\building-9-archive@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

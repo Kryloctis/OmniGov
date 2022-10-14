@@ -103,15 +103,15 @@ namespace AccountingSystem
             this.ucPreClosingTrialBalance1 = new AccountingSystem.Views.Reports.TrialBalance.ucPreClosingTrialBalance();
             this.tabPageFinancialStatements = new System.Windows.Forms.TabPage();
             this.tabControlFinancialStatements = new System.Windows.Forms.TabControl();
-            this.tabPageSFPosition = new System.Windows.Forms.TabPage();
-            this.ucStatementOfFinancialPosition1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
-            this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
-            this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
-            this.tabPageSCNAE = new System.Windows.Forms.TabPage();
-            this.ucStatementOfChangesInNetAssetsEquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
+            this.tabPageSCBAA = new System.Windows.Forms.TabPage();
             this.tabPageSCF = new System.Windows.Forms.TabPage();
             this.ucStatementOfCashFlows1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfCashFlows();
-            this.tabPageSCBAA = new System.Windows.Forms.TabPage();
+            this.tabPageSCNAE = new System.Windows.Forms.TabPage();
+            this.ucStatementOfChangesInNetAssetsEquity1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity();
+            this.tabPageSFPerformance = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPerformance1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPerformance();
+            this.tabPageSFPosition = new System.Windows.Forms.TabPage();
+            this.ucStatementOfFinancialPosition1 = new AccountingSystem.Views.Reports.Financial_Statements.ucStatementOfFinancialPosition();
             this.tabPageTreasury = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ucrcdSummary1 = new AccountingSystem.Views.Dashboard.TreasuryDashboard.ucRCDSummary();
@@ -145,6 +145,7 @@ namespace AccountingSystem
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonRpt = new System.Windows.Forms.ToolStripButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -169,10 +170,10 @@ namespace AccountingSystem
             this.tabPagePreTrial.SuspendLayout();
             this.tabPageFinancialStatements.SuspendLayout();
             this.tabControlFinancialStatements.SuspendLayout();
-            this.tabPageSFPosition.SuspendLayout();
-            this.tabPageSFPerformance.SuspendLayout();
-            this.tabPageSCNAE.SuspendLayout();
             this.tabPageSCF.SuspendLayout();
+            this.tabPageSCNAE.SuspendLayout();
+            this.tabPageSFPerformance.SuspendLayout();
+            this.tabPageSFPosition.SuspendLayout();
             this.tabPageTreasury.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -908,49 +909,36 @@ namespace AccountingSystem
             this.tabControlFinancialStatements.Size = new System.Drawing.Size(1213, 578);
             this.tabControlFinancialStatements.TabIndex = 4;
             // 
-            // tabPageSFPosition
+            // tabPageSCBAA
             // 
-            this.tabPageSFPosition.Controls.Add(this.ucStatementOfFinancialPosition1);
-            this.tabPageSFPosition.Location = new System.Drawing.Point(4, 24);
-            this.tabPageSFPosition.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageSFPosition.Name = "tabPageSFPosition";
-            this.tabPageSFPosition.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tabPageSFPosition.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageSFPosition.TabIndex = 0;
-            this.tabPageSFPosition.Text = "Statement of Financial Position";
-            this.tabPageSFPosition.UseVisualStyleBackColor = true;
+            this.tabPageSCBAA.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSCBAA.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSCBAA.Name = "tabPageSCBAA";
+            this.tabPageSCBAA.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSCBAA.TabIndex = 4;
+            this.tabPageSCBAA.Text = "Statement of Comparison of Budget and Actual Amounts";
+            this.tabPageSCBAA.UseVisualStyleBackColor = true;
             // 
-            // ucStatementOfFinancialPosition1
+            // tabPageSCF
             // 
-            this.ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
-            this.ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 5);
-            this.ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
-            this.ucStatementOfFinancialPosition1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1205, 545);
-            this.ucStatementOfFinancialPosition1.TabIndex = 0;
+            this.tabPageSCF.Controls.Add(this.ucStatementOfCashFlows1);
+            this.tabPageSCF.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSCF.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSCF.Name = "tabPageSCF";
+            this.tabPageSCF.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageSCF.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSCF.TabIndex = 3;
+            this.tabPageSCF.Text = "Statement of Cash Flows";
+            this.tabPageSCF.UseVisualStyleBackColor = true;
             // 
-            // tabPageSFPerformance
+            // ucStatementOfCashFlows1
             // 
-            this.tabPageSFPerformance.Controls.Add(this.ucStatementOfFinancialPerformance1);
-            this.tabPageSFPerformance.Location = new System.Drawing.Point(4, 24);
-            this.tabPageSFPerformance.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageSFPerformance.Name = "tabPageSFPerformance";
-            this.tabPageSFPerformance.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tabPageSFPerformance.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageSFPerformance.TabIndex = 1;
-            this.tabPageSFPerformance.Text = "Statement of Financial Performance";
-            this.tabPageSFPerformance.UseVisualStyleBackColor = true;
-            // 
-            // ucStatementOfFinancialPerformance1
-            // 
-            this.ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
-            this.ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 5);
-            this.ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
-            this.ucStatementOfFinancialPerformance1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1205, 545);
-            this.ucStatementOfFinancialPerformance1.TabIndex = 0;
+            this.ucStatementOfCashFlows1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfCashFlows1.Location = new System.Drawing.Point(0, 5);
+            this.ucStatementOfCashFlows1.Name = "ucStatementOfCashFlows1";
+            this.ucStatementOfCashFlows1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucStatementOfCashFlows1.Size = new System.Drawing.Size(1205, 545);
+            this.ucStatementOfCashFlows1.TabIndex = 0;
             // 
             // tabPageSCNAE
             // 
@@ -974,36 +962,49 @@ namespace AccountingSystem
             this.ucStatementOfChangesInNetAssetsEquity1.Size = new System.Drawing.Size(1205, 545);
             this.ucStatementOfChangesInNetAssetsEquity1.TabIndex = 0;
             // 
-            // tabPageSCF
+            // tabPageSFPerformance
             // 
-            this.tabPageSCF.Controls.Add(this.ucStatementOfCashFlows1);
-            this.tabPageSCF.Location = new System.Drawing.Point(4, 24);
-            this.tabPageSCF.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageSCF.Name = "tabPageSCF";
-            this.tabPageSCF.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.tabPageSCF.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageSCF.TabIndex = 3;
-            this.tabPageSCF.Text = "Statement of Cash Flows";
-            this.tabPageSCF.UseVisualStyleBackColor = true;
+            this.tabPageSFPerformance.Controls.Add(this.ucStatementOfFinancialPerformance1);
+            this.tabPageSFPerformance.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSFPerformance.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSFPerformance.Name = "tabPageSFPerformance";
+            this.tabPageSFPerformance.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageSFPerformance.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSFPerformance.TabIndex = 1;
+            this.tabPageSFPerformance.Text = "Statement of Financial Performance";
+            this.tabPageSFPerformance.UseVisualStyleBackColor = true;
             // 
-            // ucStatementOfCashFlows1
+            // ucStatementOfFinancialPerformance1
             // 
-            this.ucStatementOfCashFlows1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStatementOfCashFlows1.Location = new System.Drawing.Point(0, 5);
-            this.ucStatementOfCashFlows1.Name = "ucStatementOfCashFlows1";
-            this.ucStatementOfCashFlows1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucStatementOfCashFlows1.Size = new System.Drawing.Size(1205, 545);
-            this.ucStatementOfCashFlows1.TabIndex = 0;
+            this.ucStatementOfFinancialPerformance1.BackColor = System.Drawing.Color.Transparent;
+            this.ucStatementOfFinancialPerformance1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfFinancialPerformance1.Location = new System.Drawing.Point(0, 5);
+            this.ucStatementOfFinancialPerformance1.Name = "ucStatementOfFinancialPerformance1";
+            this.ucStatementOfFinancialPerformance1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucStatementOfFinancialPerformance1.Size = new System.Drawing.Size(1205, 545);
+            this.ucStatementOfFinancialPerformance1.TabIndex = 0;
             // 
-            // tabPageSCBAA
+            // tabPageSFPosition
             // 
-            this.tabPageSCBAA.Location = new System.Drawing.Point(4, 24);
-            this.tabPageSCBAA.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPageSCBAA.Name = "tabPageSCBAA";
-            this.tabPageSCBAA.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageSCBAA.TabIndex = 4;
-            this.tabPageSCBAA.Text = "Statement of Comparison of Budget and Actual Amounts";
-            this.tabPageSCBAA.UseVisualStyleBackColor = true;
+            this.tabPageSFPosition.Controls.Add(this.ucStatementOfFinancialPosition1);
+            this.tabPageSFPosition.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSFPosition.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSFPosition.Name = "tabPageSFPosition";
+            this.tabPageSFPosition.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.tabPageSFPosition.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSFPosition.TabIndex = 0;
+            this.tabPageSFPosition.Text = "Statement of Financial Position";
+            this.tabPageSFPosition.UseVisualStyleBackColor = true;
+            // 
+            // ucStatementOfFinancialPosition1
+            // 
+            this.ucStatementOfFinancialPosition1.BackColor = System.Drawing.Color.Transparent;
+            this.ucStatementOfFinancialPosition1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStatementOfFinancialPosition1.Location = new System.Drawing.Point(0, 5);
+            this.ucStatementOfFinancialPosition1.Name = "ucStatementOfFinancialPosition1";
+            this.ucStatementOfFinancialPosition1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucStatementOfFinancialPosition1.Size = new System.Drawing.Size(1205, 545);
+            this.ucStatementOfFinancialPosition1.TabIndex = 0;
             // 
             // tabPageTreasury
             // 
@@ -1043,6 +1044,7 @@ namespace AccountingSystem
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSplitButton2,
+            this.toolStripButtonRpt,
             this.toolStripButtonBpl,
             this.toolStripSplitButton3,
             this.toolStripSplitButton4});
@@ -1286,6 +1288,14 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
             // 
+            // toolStripButtonRpt
+            // 
+            this.toolStripButtonRpt.Image = global::AccountingSystem.Properties.Resources.building_9_archive_24px;
+            this.toolStripButtonRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRpt.Name = "toolStripButtonRpt";
+            this.toolStripButtonRpt.Size = new System.Drawing.Size(55, 28);
+            this.toolStripButtonRpt.Text = "RPT";
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -1341,10 +1351,10 @@ namespace AccountingSystem
             this.tabPagePreTrial.ResumeLayout(false);
             this.tabPageFinancialStatements.ResumeLayout(false);
             this.tabControlFinancialStatements.ResumeLayout(false);
-            this.tabPageSFPosition.ResumeLayout(false);
-            this.tabPageSFPerformance.ResumeLayout(false);
-            this.tabPageSCNAE.ResumeLayout(false);
             this.tabPageSCF.ResumeLayout(false);
+            this.tabPageSCNAE.ResumeLayout(false);
+            this.tabPageSFPerformance.ResumeLayout(false);
+            this.tabPageSFPosition.ResumeLayout(false);
             this.tabPageTreasury.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1475,6 +1485,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem amortizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRpt;
     }
 }
 
