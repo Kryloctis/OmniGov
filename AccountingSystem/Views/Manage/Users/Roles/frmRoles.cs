@@ -11,6 +11,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
         public frmRoles()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgRoles, true);
         }
 
         internal void LoadRoles()
@@ -28,8 +30,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void frmRoles_Load(object sender, EventArgs e)
         {
-            Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgRoles, true);
             LoadRoles();
             Helper.EnableDisableToolStripButtons(dgRoles, btnEdit, btnDelete);
         }

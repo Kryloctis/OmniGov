@@ -14,6 +14,9 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         public frmDefaultAccounts()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+            Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
             btnRemoveDefaultAccount.Enabled = false;
             btnSetDefaultAccount.Enabled = false;
         }
@@ -157,8 +160,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         {
             if (!DesignMode)
             {
-                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-                Helper.DatagridFullRowSelectStyle(dgDefaultAccounts, true);
                 var dtJournals = AccFactory.JournalsRepository().GetRecordByID(journalId);
                 lblJournalName.Text = dtJournals["journal_name"].ToString();
                 LoadFunds();

@@ -1,5 +1,4 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -94,7 +93,7 @@ namespace ACC.Data
         {
             var dict = new Dictionary<string, string>();
 
-            var parameter = new object[][] { 
+            var parameter = new object[][] {
                 new object[]{"@barangay_id", DbType.Int32, Id}
             };
             string query = $"SELECT name, code FROM {tableName} WHERE id = @barangay_id";
@@ -203,7 +202,7 @@ namespace ACC.Data
 
         public bool Update(BarangayModel entity)
         {
-            var parameters = new object[][] { 
+            var parameters = new object[][] {
                 new object[]{"@barangay_id", DbType.Int32, entity.Id},
                 new object[]{"@barangay_code", DbType.String, entity.Code},
                 new object[]{"@barangay_name", DbType.String, entity.Name }
