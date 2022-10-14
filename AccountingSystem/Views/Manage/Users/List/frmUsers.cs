@@ -13,13 +13,14 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgUsers, true);
         }
 
         private DataTable UsersDataTable()
         {
             string searchkey = txtSearch.Text.Trim();
             string userOffice = Helper.LoggedInUserData()["office"];
-            var dataTable = new DataTable();
+            DataTable dataTable;
 
             if (string.IsNullOrEmpty(searchkey))
                 dataTable = AccFactory.UsersRepository().GetViewRecordsByOffice(userOffice);
@@ -55,7 +56,6 @@ namespace AccountingSystem.Views.Manage.Users.List
 
         private void frmUsers_Load(object sender, EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgUsers, true);
             LoadRecords();
         }
 

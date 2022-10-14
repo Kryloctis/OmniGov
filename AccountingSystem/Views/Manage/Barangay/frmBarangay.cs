@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Barangay
@@ -42,13 +37,13 @@ namespace AccountingSystem.Views.Manage.Barangay
             try
             {
                 var dtBarangay = new DataTable();
-                var searchText = txtSearch.Text.Trim();
+                var searchText = toolStripTextBoxSearch.Text.Trim();
 
                 if (searchText.Length > 2)
                     dtBarangay = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
                 else
                     dtBarangay = AccFactory.BarangayRepository().GetRecords();
-                
+
                 HelperLoadRecords.BarangaysDatagridView(dgBarangay, dtBarangay);
             }
             catch (Exception)
