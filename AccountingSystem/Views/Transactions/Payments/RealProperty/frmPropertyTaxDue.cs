@@ -13,15 +13,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPayments;
 
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
     public partial class frmPropertyTaxDue : Form
     {
-        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private readonly frmPayments _frmRealPropertyPayment;
         private readonly string _ownerName;
-        public frmPropertyTaxDue(string ownerName, frmRealPropertyPayment frmPropertyPayment)
+        public frmPropertyTaxDue(string ownerName, frmPayments frmPropertyPayment)
         {
             InitializeComponent();
             _ownerName = ownerName;

@@ -618,11 +618,6 @@ namespace AccountingSystem
             _ = new frmDailyCash().ShowDialog();
         }
 
-        private void toolStripMenuPaymentPostings_Click(object sender, EventArgs e)
-        {
-            _ = new frmRealPropertyPayment(this).ShowDialog();
-        }
-
         private void toolStripMenuItemListOfDelinquentAccounts_Click(object sender, EventArgs e)
         {
             _ = new frmListOfRealPropertyTaxDelinquenciesReport().ShowDialog();
@@ -703,6 +698,11 @@ namespace AccountingSystem
         private void barangaysToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmBarangay().ShowDialog();
+        }
+
+        private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmPayments(this).ShowDialog();
         }
 
         private void toolStripButtonRpt_Click(object sender, EventArgs e)

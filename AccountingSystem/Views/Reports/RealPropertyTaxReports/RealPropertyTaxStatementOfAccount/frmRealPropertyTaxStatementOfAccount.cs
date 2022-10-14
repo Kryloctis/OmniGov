@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
         private void btnFindOwner_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, this, null, null, null).ShowDialog();
+            _ = new frmRptTaxPayerList(null, this, null, null).ShowDialog();
         }
 
         private void frmRealPropertyTaxStatementOfAccount_Load(object sender, EventArgs e)

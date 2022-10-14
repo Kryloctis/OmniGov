@@ -11,16 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPayments;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerPaymentHistory : Form
     {
-        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private readonly frmPayments _frmRealPropertyPayment;
         private readonly string _taxPayerName;
 
-        public frmTaxPayerPaymentHistory(frmRealPropertyPayment frmPaymentPosting, string TaxPayerName)
+        public frmTaxPayerPaymentHistory(frmPayments frmPaymentPosting, string TaxPayerName)
         {
             InitializeComponent();
             _frmRealPropertyPayment = frmPaymentPosting;

@@ -1,12 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.PropertyPayment
@@ -17,26 +13,25 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         internal readonly int accountableFormNoId = 9;
         internal bool isReadOnly = false;
 
-
         public ucRealPropertyTaxPayment()
         {
             InitializeComponent();
         }
 
-        internal string GetFormErrors() 
+        internal string GetFormErrors()
         {
             var errorArray = new string[]
             {
                 errorProvider1.GetError(txtReceipts),
                 errorProvider1.GetError(txtPayee)
             };
-          
+
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             loadReceiptNos();
             txtPayee.Clear();
@@ -53,7 +48,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             return dictAccForm[columName];
         }
 
-        internal void LoadAccountableForm() 
+        internal void LoadAccountableForm()
         {
             try
             {
@@ -65,7 +60,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             }
         }
 
-        private DataTable DataTableRecieptNos() 
+        private DataTable DataTableRecieptNos()
         {
             var dataTable = new DataTable();
             dataTable.Columns.Add("receipt_no");
@@ -92,8 +87,8 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 for (int i = receiptIssuedFrom; i <= receiptIssuedTo; i++)
                 {
                     bool receiptNoExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(i.ToString(), accountableFormNoId);
-                   
-                    if(!receiptNoExist)
+
+                    if (!receiptNoExist)
                         dataTable.Rows.Add(i);
                 }
             }
@@ -115,7 +110,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 }
 
                 //Get Least OR Number
-                if(DataTableRecieptNos().Rows.Count > 1)
+                if (DataTableRecieptNos().Rows.Count > 1)
                     txtReceipts.Text = DataTableRecieptNos().Rows[0]["receipt_no"].ToString();
 
                 //Apply autocomplete source
@@ -127,7 +122,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             }
         }
 
-        internal void LoadCollectorInfoById(int collectingOfficerId, string jobOrder) 
+        internal void LoadCollectorInfoById(int collectingOfficerId, string jobOrder)
         {
             bool isJobOrder = AccFactory.JobOrderRepository().IsUserJobOrder(collectingOfficerId);
             chckBxJobOrder.Checked = isJobOrder;
@@ -152,7 +147,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             }
         }
 
-        internal void LoadCollectorInfoByUserId() 
+        internal void LoadCollectorInfoByUserId()
         {
             try
             {
@@ -178,7 +173,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
         }
 
 
-        private bool ValidateReceipts(ErrorProvider errorProvider, TextBox textBox) 
+        private bool ValidateReceipts(ErrorProvider errorProvider, TextBox textBox)
         {
             try
             {
