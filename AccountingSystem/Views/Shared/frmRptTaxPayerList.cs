@@ -13,13 +13,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private readonly frmRealPropertyTaxAccountRegisterReport _frmRealPropertyTaxAccountRegisterReport;
         private readonly frmRealPropertyTaxStatementOfAccount _frmRealPropertyTaxStatementOfAccount;
         private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
-        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private readonly frmPayments _frmRealPropertyPayment;
 
         public frmRptTaxPayerList(
             frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
-            frmRealPropertyPayment frmRealPropertyPayment)
+            frmPayments frmRealPropertyPayment)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                     InitializeRealPropertyTaxStatementOfAccountReport();
                     break;
 
-                case frmRealPropertyPayment:
+                case frmPayments:
                     GetSelectedRealPropertyTaxPayer();
                     break;
 

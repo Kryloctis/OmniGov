@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmRealPropertyPayment;
+using static AccountingSystem.Views.Transactions.PaymentPosting.frmPayments;
 
 namespace AccountingSystem.Views.Transactions.PaymentPosting
 {
     public partial class frmTaxPayerList : Form
     {
-        private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private readonly frmPayments _frmRealPropertyPayment;
 
-        public frmTaxPayerList(frmRealPropertyPayment frmPropertyPayment)
+        public frmTaxPayerList(frmPayments frmPropertyPayment)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
