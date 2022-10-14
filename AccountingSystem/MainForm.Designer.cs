@@ -59,6 +59,8 @@ namespace AccountingSystem
             this.businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.businessAddoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.taxTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barangayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -247,6 +249,8 @@ namespace AccountingSystem
             this.menuTaxPayers,
             this.businessToolStripMenuItem,
             this.toolStripSeparator1,
+            this.taxTypeToolStripMenuItem,
+            this.barangayToolStripMenuItem,
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
             this.taxRateToolStripMenuItem,
@@ -412,6 +416,19 @@ namespace AccountingSystem
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
+            // 
+            // taxTypeToolStripMenuItem
+            // 
+            this.taxTypeToolStripMenuItem.Name = "taxTypeToolStripMenuItem";
+            this.taxTypeToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.taxTypeToolStripMenuItem.Text = "Taxpayer type";
+            // 
+            // barangayToolStripMenuItem
+            // 
+            this.barangayToolStripMenuItem.Name = "barangayToolStripMenuItem";
+            this.barangayToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.barangayToolStripMenuItem.Text = "Barangay";
+            this.barangayToolStripMenuItem.Click += new System.EventHandler(this.barangayToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
@@ -1299,7 +1316,7 @@ namespace AccountingSystem
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1244, 741);
+            this.MinimumSize = new System.Drawing.Size(1244, 718);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";
@@ -1469,6 +1486,8 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem amortizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
+        private System.Windows.Forms.ToolStripMenuItem barangayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxTypeToolStripMenuItem;
     }
 }
 
