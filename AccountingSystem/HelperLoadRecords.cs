@@ -39,14 +39,33 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["taxpayer_type"].HeaderText = "Taxpayer Type";
+            dataGridView.Columns["barangays_id"].HeaderText = "Barangay Id";
             dataGridView.Columns["barangays_id"].Visible = false;
-            dataGridView.Columns["barangays_name"].HeaderText = "Barangay";
-            //dataGridView.Columns["taxpayer_type_id"].Visible = false;
-            dataGridView.Columns["taxpayer_type"].HeaderText = "Owner Type";
-            dataGridView.Columns["tin"].HeaderText = "TIN";
-            dataGridView.Columns["taxpayers_name"].HeaderText = "Owner Name";
-            dataGridView.Columns["taxpayers_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["barangay_code"].Visible = false;
+            dataGridView.Columns["barangay_code"].HeaderText = "Barangay Code";
+            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
+            dataGridView.Columns["barangay_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["municipalities_id"].HeaderText = "Municipalities Id";
+            dataGridView.Columns["municipalities_id"].Visible = false;
+            dataGridView.Columns["municipalities_code"].HeaderText = "Municipalities Code";
+            dataGridView.Columns["municipalities_code"].Visible = false;
+            dataGridView.Columns["municipalities_name"].HeaderText = "Municipality";
+            dataGridView.Columns["provinces_id"].HeaderText = "Province Id";
+            dataGridView.Columns["provinces_id"].Visible = false;
+            dataGridView.Columns["provinces_code"].HeaderText = "Province Code";
+            dataGridView.Columns["provinces_code"].Visible = false;
+            dataGridView.Columns["provinces_name"].HeaderText = "Province";
+            dataGridView.Columns["taxpayer_type_id"].HeaderText = "Taxpayer Type Id";
+            dataGridView.Columns["taxpayer_type_id"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Taxpayer Type Code";
+            dataGridView.Columns["taxpayer_type_code"].Visible = false;
+            dataGridView.Columns["tin"].HeaderText = "Tin";
             dataGridView.Columns["contact_info"].HeaderText = "Contact";
+            dataGridView.Columns["is_active"].HeaderText = "Is Active";
+            dataGridView.Columns["is_active"].Visible = false;
+
         }
 
         #endregion

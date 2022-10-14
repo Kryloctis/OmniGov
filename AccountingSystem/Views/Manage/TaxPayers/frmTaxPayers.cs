@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
         {
-            //LoadTaxpayer();
+            LoadTaxpayer();
         }
 
         internal void LoadTaxpayer()
@@ -37,57 +37,88 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal void LoadTaxpayersBySearch()
         {
-            if (txtSearch.Text.Length < 2)
-                return;
-            
             try
             {
+                DataTable dtTaxpayers;
                 var textSearch = txtSearch.Text.Trim();
-                var dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetRecordsBySearch(textSearch);
-                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayersRecords));
+
+                if (txtSearch.Text.Length < 2)
+                    dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+                else
+                    dtTaxpayers = AccFactory.TaxpayersRepository().GetRecordsBySearch(textSearch);
+
+                HelperLoadRecords.TaxpayerDatagridView(dgTaxpayers, TaxpayerDataTable(dtTaxpayers));
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
+
+
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable TaxpayerDataTable(DataTable dtTaxpayersRecords)
+        private DataTable TaxpayerDataTable(DataTable dtTaxpayers)
         {
             var dataTable = new DataTable();
             var selectedColumns = new DataColumn[]
             {
                 new DataColumn("id", typeof(int)),
-                new DataColumn("barangays_id", typeof(string)),
-                new DataColumn("barangays_name", typeof(string)),
-                new DataColumn("taxpayer_type_id", typeof(string)),
+                new DataColumn("name", typeof(string)),
                 new DataColumn("taxpayer_type", typeof(string)),
-                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("barangays_id", typeof(int)),
+                new DataColumn("barangay_code", typeof(string)),
+                new DataColumn("barangay_name", typeof(string)),
+                new DataColumn("municipalities_id", typeof(int)),
+                new DataColumn("municipalities_code", typeof(string)),
+                new DataColumn("municipalities_name", typeof(string)),
+                new DataColumn("provinces_id", typeof(int)),
+                new DataColumn("provinces_code", typeof(string)),
+                new DataColumn("provinces_name", typeof(string)),
+                new DataColumn("taxpayer_type_id", typeof(int)),
+                new DataColumn("taxpayer_type_code", typeof(string)),
                 new DataColumn("tin", typeof(string)),
                 new DataColumn("contact_info", typeof(string)),
+                new DataColumn("is_active", typeof(bool)),
             };
 
             dataTable.Columns.AddRange(selectedColumns);
 
-            foreach (DataRow row in dtTaxpayersRecords.Rows)
+            foreach (DataRow row in dtTaxpayers.Rows)
             {
                 var newRow = dataTable.NewRow();
-                int rowTaxPayerId = Convert.ToInt32(row["tax_payer_id"]);
-                string rowBarangayId = row["barangays_id"].ToString();
-                string rowBarangay = row["barangays_name"].ToString();
-                string rowTaxpayerTypeId = row["taxpayer_type_id"].ToString();
-                string rowTaxpayerType = row["taxpayer_type"].ToString();
-                string rowTIN = row["tin"].ToString();
-                string rowName = row["taxpayers_name"].ToString();
-                string rowContact = row["contact_info"].ToString();
 
-                newRow["tax_payer_id"] = rowTaxPayerId;
-                newRow["barangays_id"] = rowBarangayId;
-                newRow["barangays_name"] = rowBarangay;
-                newRow["taxpayer_type_id"] = rowTaxpayerTypeId;
+                int rowTaxpayerId = Convert.ToInt32(row["id"]);
+                string rowName = row["name"].ToString();
+                string rowTaxpayerType = row["taxpayer_type"].ToString();
+                int rowBarangaysId = Convert.ToInt32(row["barangays_id"]);
+                string rowBarangaCode = row["barangay_code"].ToString();
+                string rowBarangayName = row["barangay_name"].ToString();
+                int rowMunicipalitiesId = Convert.ToInt32(row["municipalities_id"]);
+                string rowMunicipalitiesCode = row["municipalities_code"].ToString();
+                string rowMunicipalitiesName = row["municipalities_name"].ToString();
+                int rowProvincesId = Convert.ToInt32(row["provinces_id"]);
+                string rowProvincesName = row["provinces_name"].ToString();
+                int rowTaxpayerTypeId = Convert.ToInt32(row["taxpayer_type_id"]);
+                string rowTaxpayerTypeCode = row["taxpayer_type_code"].ToString();
+                string rowTin = row["tin"].ToString();
+                string rowContactInfo = row["contact_info"].ToString();
+                bool rowIsActive = Convert.ToBoolean(row["is_active"]);
+
+                newRow["id"] = rowTaxpayerId;
+                newRow["name"] = rowName;
                 newRow["taxpayer_type"] = rowTaxpayerType;
-                newRow["tin"] = rowTIN;
-                newRow["taxpayers_name"] = rowName;
-                newRow["contact_info"] = rowContact;
-             
+                newRow["barangays_id"] = rowBarangaysId;
+                newRow["barangay_code"] = rowBarangaCode;
+                newRow["barangay_name"] = rowBarangayName;
+                newRow["municipalities_id"] = rowMunicipalitiesId;
+                newRow["municipalities_code"] = rowMunicipalitiesCode;
+                newRow["municipalities_name"] = rowMunicipalitiesName;
+                newRow["provinces_id"] = rowProvincesId;
+                newRow["provinces_name"] = rowProvincesName;
+                newRow["taxpayer_type_id"] = rowTaxpayerTypeId;
+                newRow["taxpayer_type_code"] = rowTaxpayerTypeCode;
+                newRow["tin"] = rowTin;
+                newRow["contact_info"] = rowContactInfo;
+                newRow["is_active"] = rowIsActive;
+
                 dataTable.Rows.Add(newRow);
             }
 
