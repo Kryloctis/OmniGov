@@ -1088,6 +1088,7 @@ namespace AccountingSystem
             this.toolStripButtonRpt.Name = "toolStripButtonRpt";
             this.toolStripButtonRpt.Size = new System.Drawing.Size(55, 28);
             this.toolStripButtonRpt.Text = "RPT";
+            this.toolStripButtonRpt.Click += new System.EventHandler(this.toolStripButtonRpt_Click);
             // 
             // toolStripButtonBpl
             // 
