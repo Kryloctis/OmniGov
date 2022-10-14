@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -278,7 +279,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
         }
 
- 
-
+        private void btnSelectTaxpayer_Click(object sender, EventArgs e)
+        {
+            _ = new frmRptTaxPayerList(null, null, null, null, this).ShowDialog();
+        }
     }
 }

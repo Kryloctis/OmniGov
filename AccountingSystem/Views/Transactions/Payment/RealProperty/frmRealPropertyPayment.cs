@@ -156,7 +156,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, this).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, null, this, null).ShowDialog();
             LoadRptDetailedTaxDues(null);
         }
 

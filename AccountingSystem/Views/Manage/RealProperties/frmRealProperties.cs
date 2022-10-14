@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAddRealProperties().ShowDialog();
+            _ = new frmAddRealProperties(this).ShowDialog();
         }
 
         private void frmRealProperties_Load(object sender, EventArgs e)

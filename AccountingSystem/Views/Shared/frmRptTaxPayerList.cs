@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+﻿using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
@@ -14,12 +15,15 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private readonly frmRealPropertyTaxStatementOfAccount _frmRealPropertyTaxStatementOfAccount;
         private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
         private readonly frmRealPropertyPayment _frmRealPropertyPayment;
+        private readonly ucRealProperties _ucRealProperties;
+        
 
         public frmRptTaxPayerList(
             frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
-            frmRealPropertyPayment frmRealPropertyPayment)
+            frmRealPropertyPayment frmRealPropertyPayment,
+            ucRealProperties ucRealProperties)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -28,6 +32,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             _frmRealPropertyTaxStatementOfAccount = frmRealPropertyTaxStatementOfAccount;
             _frmListOfRealPropertyTaxDelinquenciesReport = frmListOfRealPropertyTaxDelinquenciesReport;
             _frmRealPropertyPayment = frmRealPropertyPayment;
+            _ucRealProperties = ucRealProperties;
             btnSelect.Enabled = true;
         }
 
