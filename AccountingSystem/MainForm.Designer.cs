@@ -119,6 +119,7 @@ namespace AccountingSystem
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.issueRecieptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returnedReceiptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonRpt = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBpl = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,7 +146,6 @@ namespace AccountingSystem
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonRpt = new System.Windows.Forms.ToolStripButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -285,6 +285,7 @@ namespace AccountingSystem
             this.barangaysToolStripMenuItem.Name = "barangaysToolStripMenuItem";
             this.barangaysToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.barangaysToolStripMenuItem.Text = "Barangays...";
+            this.barangaysToolStripMenuItem.Click += new System.EventHandler(this.barangaysToolStripMenuItem_Click);
             // 
             // signatoriesToolStripMenuItem
             // 
@@ -1080,6 +1081,14 @@ namespace AccountingSystem
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.returnedReceiptsToolStripMenuItem_Click);
             // 
+            // toolStripButtonRpt
+            // 
+            this.toolStripButtonRpt.Image = global::AccountingSystem.Properties.Resources.building_9_archive_24px;
+            this.toolStripButtonRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRpt.Name = "toolStripButtonRpt";
+            this.toolStripButtonRpt.Size = new System.Drawing.Size(55, 28);
+            this.toolStripButtonRpt.Text = "RPT";
+            // 
             // toolStripButtonBpl
             // 
             this.toolStripButtonBpl.Image = global::AccountingSystem.Properties.Resources.briefcase_business_20px;
@@ -1288,14 +1297,6 @@ namespace AccountingSystem
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
             this.dailyCashPositionsToolStripMenuItem.Click += new System.EventHandler(this.dailyCashPositionsToolStripMenuItem_Click);
             // 
-            // toolStripButtonRpt
-            // 
-            this.toolStripButtonRpt.Image = global::AccountingSystem.Properties.Resources.building_9_archive_24px;
-            this.toolStripButtonRpt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonRpt.Name = "toolStripButtonRpt";
-            this.toolStripButtonRpt.Size = new System.Drawing.Size(55, 28);
-            this.toolStripButtonRpt.Text = "RPT";
-            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -1315,7 +1316,7 @@ namespace AccountingSystem
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1244, 741);
+            this.MinimumSize = new System.Drawing.Size(1244, 718);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Finance System";

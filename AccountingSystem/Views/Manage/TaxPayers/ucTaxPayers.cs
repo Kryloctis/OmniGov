@@ -39,53 +39,56 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadTaxPayersType()
         {
-            var dict = new Dictionary<string, string>();
+            try
+            {
+                var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
+             
+                cmbxTaxPayerType.DataSource = dtTaxpayerType;
+                cmbxTaxPayerType.ValueMember = "id";
+                cmbxTaxPayerType.DisplayMember = "taxpayer_type";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+        private void LoadBarangay()
+        {
+            try
+            {
+                var dtBarangay = AccFactory.BarangayRepository().GetRecords();
 
-            dict.Add("1", "Association");
-            dict.Add("2", "Charitable");
-            dict.Add("3", "Cooperative");
-            dict.Add("4", "Corporation");
-            dict.Add("5", "Educational");
-            dict.Add("6", "Government");
-            dict.Add("7", "Individual");
-            dict.Add("8", "Multiple Owners");
-            dict.Add("9", "Partnership");
-            dict.Add("10", "Religious");
-
-            cmbxTaxPayerType.DataSource = new BindingSource(dict.Values, null);  
+                cmbxBarangay.DataSource = dtBarangay;
+                cmbxBarangay.ValueMember = "id";
+                cmbxBarangay.DisplayMember = "name";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
 
         internal void ResetForm()
         {
-
-            //Tax payer
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
-            txtBarangay.Clear();
-            txtStreet.Clear();
-            txtMunicipality.Clear();
-            txtProvince.Clear();
+            cmbxBarangay.SelectedIndex = 0;
             cmbxTaxPayerType.SelectedIndex = 0;
             taxPayerId = 0;
             isEdit = false;
 
-            //Properties
             dgProperties.DataSource = null;
             dgProperties.Rows.Clear();
             dgProperties.Refresh();
 
-            tabPage1.Enabled = false;
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
+                LoadBarangay();
                 LoadTaxPayersType();
             }
         }
+
+
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
@@ -99,7 +102,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (taxPayerId == 0)
+            if (taxPayerId == 0 && string.IsNullOrEmpty(txtName.Text.Trim()))
                 Helper.MessageBoxSuccess("No Taxpayer found.");
             else
                 _ = new frmAddRealProperties(this).ShowDialog();
@@ -210,8 +213,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgProperties_SelectionChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
-            btnEdit.Enabled = dgProperties.SelectedRows.Count == 0 ? false : true; 
+            Helper.EnableDisableButtons(dgProperties, btnEdit, btnDelete);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (InsertRealProperties())
+            if (SaveRealProperties())
             {
                 Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
                 _ucTaxpayer.LoadProperties();
@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
         }
 
-        private bool InsertRealProperties()
+        private bool SaveRealProperties()
         {
             if (!uc.ValidateChildren())
             {
@@ -73,5 +73,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 
         }
 
+        private void frmAddRealProperties_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

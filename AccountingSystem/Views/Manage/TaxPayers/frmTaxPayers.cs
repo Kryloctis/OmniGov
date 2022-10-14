@@ -14,7 +14,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmTaxPayers : Form
     {
-        internal  ucTaxPayers uc;
+        internal readonly ucTaxPayers uc;
 
         public frmTaxPayers()
         {
@@ -26,10 +26,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void frmTaxPayers_Load(object sender, EventArgs e)
         {
-            uc.ResetForm();
+            //uc.ResetForm();
         }
 
-      
+
         private bool SaveTaxPayers()
         {
             if (!uc.ValidateChildren())
@@ -42,12 +42,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             {
                 Tin = uc.txtTIN.Text,
                 Name = uc.txtName.Text,
-                Type = uc.cmbxTaxPayerType.Text,
+                TaxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue),
                 ContactInfo = uc.txtContact.Text,
-                Street = uc.txtStreet.Text,
-                Barangay = uc.txtBarangay.Text,
-                Municipality = uc.txtMunicipality.Text,
-                Province = uc.txtMunicipality.Text
+                BarangayId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue),
             };
 
             return AccFactory.TaxpayersRepository().Insert(taxPayersModel);
@@ -61,6 +58,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 {
                     Helper.MessageBoxSuccess("Taxpayer Property has been saved.");
                     uc.ResetForm();
+                    uc.taxPayerId = Convert.ToInt32(AccFactory.TaxpayersRepository().LastInsertedId());
                 }
             }
 
@@ -70,7 +68,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 {
                     Helper.MessageBoxSuccess("Taxpayer Property has been updated.");
                     uc.ResetForm();
-
 
                     btnSave.Text = "Save";
                     btnCancel.Enabled = false;
@@ -91,12 +88,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 Id = uc.taxPayerId,
                 Tin = uc.txtTIN.Text,
                 Name = uc.txtName.Text,
-                Type = uc.cmbxTaxPayerType.Text,
+                TaxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue),
                 ContactInfo = uc.txtContact.Text,
-                Street = uc.txtStreet.Text,
-                Barangay = uc.txtBarangay.Text,
-                Municipality = uc.txtMunicipality.Text,
-                Province = uc.txtProvince.Text
+                BarangayId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue)
             };
 
             return AccFactory.TaxpayersRepository().Update(taxPayersModel);

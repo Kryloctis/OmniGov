@@ -3,6 +3,7 @@ using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
 using AccountingSystem.Views.Manage.Banks;
+using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
@@ -696,6 +697,11 @@ namespace AccountingSystem
         private void menuTaxPayers_Click(object sender, EventArgs e)
         {
             _ = new frmTaxPayers().ShowDialog();
+        }
+
+        private void barangaysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBarangay().ShowDialog();
         }
     }
 }

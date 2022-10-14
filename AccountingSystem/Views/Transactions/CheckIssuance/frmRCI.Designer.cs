@@ -43,10 +43,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgRCI = new System.Windows.Forms.DataGridView();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -61,7 +62,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(1060, 58);
+            this.toolStrip.Size = new System.Drawing.Size(874, 58);
             this.toolStrip.TabIndex = 7;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -111,10 +112,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
-            this.statusStrip.Location = new System.Drawing.Point(0, 540);
+            this.statusStrip.Location = new System.Drawing.Point(0, 406);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1060, 22);
+            this.statusStrip.Size = new System.Drawing.Size(874, 22);
             this.statusStrip.TabIndex = 8;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -133,7 +134,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(850, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -160,50 +161,49 @@ namespace AccountingSystem.Views.Transactions.RCI
             // 
             // dgRCI
             // 
-            this.dgRCI.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRCI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRCI.Location = new System.Drawing.Point(10, 60);
+            this.dgRCI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgRCI.Location = new System.Drawing.Point(4, 4);
             this.dgRCI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgRCI.Name = "dgRCI";
             this.dgRCI.RowHeadersWidth = 51;
             this.dgRCI.RowTemplate.Height = 29;
-            this.dgRCI.Size = new System.Drawing.Size(1040, 474);
+            this.dgRCI.Size = new System.Drawing.Size(866, 340);
             this.dgRCI.TabIndex = 9;
             this.dgRCI.SelectionChanged += new System.EventHandler(this.dgRCI_SelectionChanged);
             // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(774, 16);
+            this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtsearch.Location = new System.Drawing.Point(652, 18);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(277, 23);
-            this.txtsearch.TabIndex = 10;
+            this.txtsearch.Size = new System.Drawing.Size(218, 23);
+            this.txtsearch.TabIndex = 0;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // label1
+            // panel1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(729, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Search";
+            this.panel1.Controls.Add(this.dgRCI);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 58);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(874, 348);
+            this.panel1.TabIndex = 11;
             // 
             // frmRCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 562);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(874, 428);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtsearch);
-            this.Controls.Add(this.dgRCI);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
             this.Name = "frmRCI";
@@ -217,6 +217,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,6 +239,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgRCI;
         private System.Windows.Forms.TextBox txtsearch;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

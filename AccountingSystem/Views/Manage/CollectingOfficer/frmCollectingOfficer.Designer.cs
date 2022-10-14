@@ -49,10 +49,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -69,8 +70,8 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.btnJobOrder});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(794, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(794, 54);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -128,17 +129,15 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // dgCollectingOfficer
             // 
-            this.dgCollectingOfficer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgCollectingOfficer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCollectingOfficer.Location = new System.Drawing.Point(9, 52);
+            this.dgCollectingOfficer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCollectingOfficer.Location = new System.Drawing.Point(4, 4);
             this.dgCollectingOfficer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgCollectingOfficer.Name = "dgCollectingOfficer";
             this.dgCollectingOfficer.RowHeadersWidth = 51;
             this.dgCollectingOfficer.RowTemplate.Height = 29;
             this.dgCollectingOfficer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCollectingOfficer.Size = new System.Drawing.Size(775, 323);
+            this.dgCollectingOfficer.Size = new System.Drawing.Size(786, 315);
             this.dgCollectingOfficer.TabIndex = 7;
             this.dgCollectingOfficer.SelectionChanged += new System.EventHandler(this.dgCollectingOfficer_SelectionChanged);
             // 
@@ -227,20 +226,22 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtsearch.Location = new System.Drawing.Point(530, 24);
+            this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtsearch.Location = new System.Drawing.Point(589, 14);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(254, 23);
+            this.txtsearch.Size = new System.Drawing.Size(200, 23);
             this.txtsearch.TabIndex = 11;
             this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
-            // label6
+            // panel1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(482, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 15);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Search";
+            this.panel1.Controls.Add(this.dgCollectingOfficer);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(794, 323);
+            this.panel1.TabIndex = 12;
             // 
             // frmCollectingOfficer
             // 
@@ -248,8 +249,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(794, 399);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.dgCollectingOfficer);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -267,6 +267,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             ((System.ComponentModel.ISupportInitialize)(this.dgCollectingOfficer)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,12 +288,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.ToolStripButton btnJobOrder;
         private System.Windows.Forms.TextBox txtsearch;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel lblJOCount;
         private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.Panel panel1;
     }
 }
