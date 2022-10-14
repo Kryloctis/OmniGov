@@ -10,7 +10,8 @@ namespace ACC.Data
     public class TaxpayerRepository : ITaxpayersRepository
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
-        private readonly string tableName = "Taxpayers";
+        private readonly string tableName = "taxpayers";
+        private readonly string viewTableName = "view_taxpayers";
 
         public TaxpayerRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
@@ -29,8 +30,8 @@ namespace ACC.Data
 
                 foreach (TaxpayersModel taxpayersModel in entityList)
                 {
-                    var parameters = new object[][] { new object[] { "@tax_payer_id", DbType.Int32, taxpayersModel.Id } };
-                    string query = $"DELETE FROM {tableName} WHERE tax_payer_id = @tax_payer_id";
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, taxpayersModel.Id } };
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
 
@@ -44,10 +45,10 @@ namespace ACC.Data
             var dict = new Dictionary<string, string>();
             var parameters = new object[][]
             {
-                new object[] { "@tax_payer_id", DbType.Int32, Id}
+                new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT tax_payer_id, tin, name, type, contact_info,  barangays_id, taxpayer_type_id FROM {tableName} WHERE tax_payer_id = @tax_payer_id";
+            string query = $"SELECT id, tin, name, type, contact_info,  barangays_id, taxpayer_type_id FROM {tableName} WHERE id = @tax_pidayer_id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -56,7 +57,7 @@ namespace ACC.Data
 
                 foreach (DataRow row in reader.Rows)
                 {
-                    dict.Add("tax_payer_id", row["tax_payer_id"].ToString());
+                    dict.Add("id", row["id"].ToString());
                     dict.Add("tin", row["tin"].ToString());
                     dict.Add("name", row["name"].ToString());
                     dict.Add("type", row["type"].ToString());
@@ -70,10 +71,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            //string query = $"SELECT * FROM {tableName}";
-
-            string query = $"SELECT taxpayers.tax_payer_id, taxpayers.barangays_id, taxpayers.taxpayer_type_id, taxpayers.tin,    taxpayers.name  taxpayers_name, taxpayers.contact_info, taxpayers.is_active, taxpayer_type.taxpayer_type_code,    taxpayer_type.taxpayer_type, barangays.id  barangays_id, barangays.code barangays_code, barangays.name barangays_name,    municipalities.id municipalities_id, municipalities.code municipalities_code, municipalities.name municipalities_name,    provinces.id  provinces_id, provinces.code  provinces_code, provinces.name provinces_name FROM lfsdb.taxpayers INNER JOIN taxpayer_type ON taxpayers.taxpayer_type_id = taxpayer_type.id INNER JOIN barangays ON taxpayers.barangays_id = barangays.id INNER JOIN municipalities ON barangays.municipalities_id = municipalities.id INNER JOIN provinces ON  municipalities.id = provinces.id";
-
+            string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -114,7 +112,7 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@tax_payer_id", DbType.Int32, entity.Id},
+                new object[] { "@id", DbType.Int32, entity.Id},
                 new object[] { "@barangays_id", DbType.String, entity.BarangayId },
                 new object[] { "@taxpayer_type_id", DbType.String, entity.TaxpayerTypeId },
                 new object[] { "@tin", DbType.String, entity.Tin },
@@ -122,7 +120,7 @@ namespace ACC.Data
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
             };
 
-            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE tax_payer_id = @tax_payer_id";
+            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -171,9 +169,11 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetTaxpayerType()
+        public DataTable GetViewTaxpayerRecords()
         {
-            throw new NotImplementedException();
+            var query = $"SELECT * FROM {viewTableName}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
     }
 }

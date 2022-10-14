@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Barangay
             }
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecords();
         }
