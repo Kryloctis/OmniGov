@@ -89,7 +89,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName} ORDER BY owner_name";
+            string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }

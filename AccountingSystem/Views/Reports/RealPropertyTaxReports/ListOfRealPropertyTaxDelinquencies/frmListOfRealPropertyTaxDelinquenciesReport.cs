@@ -278,7 +278,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
 
         private void btnFindTaxPayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, this, null ).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, this, null).ShowDialog();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT id, tin, name, type, contact_info,  barangays_id, taxpayer_type_id FROM {tableName} WHERE id = @tax_pidayer_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -58,12 +58,11 @@ namespace ACC.Data
                 foreach (DataRow row in reader.Rows)
                 {
                     dict.Add("id", row["id"].ToString());
-                    dict.Add("tin", row["tin"].ToString());
-                    dict.Add("name", row["name"].ToString());
-                    dict.Add("type", row["type"].ToString());
-                    dict.Add("contact_info", row["contact_info"].ToString());
                     dict.Add("barangays_id", row["barangays_id"].ToString());
                     dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
+                    dict.Add("tin", row["tin"].ToString());
+                    dict.Add("name", row["name"].ToString());
+                    dict.Add("contact_info", row["contact_info"].ToString());
                 }
                 return dict;
             }
@@ -71,7 +70,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
