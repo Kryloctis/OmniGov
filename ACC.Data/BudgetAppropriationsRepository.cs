@@ -650,43 +650,7 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int16, entity.Year}
             };
 
-            string query = $"SELECT " +
-                $"id, " +
-                $"funds_id, " +
-                $"fund_code, " +
-                $"fund_name, " +
-                $"fpp_id, " +
-                $"fpp_code, " +
-                $"fpp_name, " +
-                $"fpp_is_special, " +
-                $"functional_classification_service_id, " +
-                $"functional_classification_service_name, " +
-                $"functional_classification_id, " +
-                $"functional_classification_sector_code, " +
-                $"functional_classification_sector_name, " +
-                $"others_fpp_id, " +
-                $"others_fpp_code, " +
-                $"others_fpp_name, " +
-                $"allotment_class_id, " +
-                $"allotment_class_code, " +
-                $"allotment_class_name, " +
-                $"general_ledger_accounts_id, " +
-                $"general_ledger_accounts_code, " +
-                $"general_ledger_accounts_name, " +
-                $"account_code, " +
-                $"date_entry, " +
-                $"year, " +
-                $"amount, " +
-                $"continuing, " +
-                $"remarks, " +
-                $"created_at, " +
-                $"updated_at " +
-                $"FROM {viewTableName} " +
-                $"WHERE fpp_id = @fpp_id " +
-                $"AND allotment_class_id = @allotment_class_id " +
-                $"AND others_fpp_id <=> @others_fpp_id " +
-                $"AND funds_id = @funds_id " +
-                $"AND year = @year ORDER BY general_ledger_accounts_code";
+            string query = $"SELECT id, funds_id, fund_code, fund_name, fpp_id, fpp_code, fpp_name, fpp_is_special, functional_classification_service_id, functional_classification_service_name, functional_classification_id, functional_classification_sector_code, functional_classification_sector_name, others_fpp_id, others_fpp_code, others_fpp_name, allotment_class_id, allotment_class_code, allotment_class_name, general_ledger_accounts_id, general_ledger_accounts_code, general_ledger_accounts_name, account_code, date_entry, year, amount, continuing, remarks, created_at, updated_at FROM {viewTableName} WHERE fpp_id = @fpp_id AND allotment_class_id = @allotment_class_id AND others_fpp_id <=> @others_fpp_id AND funds_id = @funds_id AND year = @year ORDER BY general_ledger_accounts_code";
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -708,7 +672,6 @@ namespace ACC.Data
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        //change//
         public Dictionary<string, string> GetViewRecordByID(int budgetAppID)
         {
             var record = new Dictionary<string, string>();
@@ -879,7 +842,6 @@ namespace ACC.Data
             }
             return record;
         }
-
 
         #region Validations
 
@@ -1055,7 +1017,6 @@ namespace ACC.Data
 
 
         #endregion Validations
-
 
         public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id)
         {

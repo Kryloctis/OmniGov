@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Realignment;
 using AccountingSystem.Views.Manage.SupplementalAppropriations;
 using BudgetSystem.Views.BudgetAppropriations;
 using BudgetSystem.Views.Manage.BudgetAppropriations;
@@ -71,13 +70,13 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             EnableDisableButtonsLocal(dgBudgetAppropriations);
         }
 
-        private decimal GetTotalApproprations() 
+        private decimal GetTotalApproprations()
         {
             decimal total = 0;
 
             foreach (DataGridViewRow row in dgBudgetAppropriations.Rows)
             {
-                if(row.Cells["fpp_id"].Value != DBNull.Value)
+                if (row.Cells["fpp_id"].Value != DBNull.Value)
                     total += Convert.ToDecimal(row.Cells["amount"].Value);
             }
 
@@ -97,7 +96,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             return recordCount;
         }
 
-        private void HighLightHeaders(DataGridView dataGridView) 
+        private void HighLightHeaders(DataGridView dataGridView)
         {
             foreach (DataGridViewRow row in dataGridView.Rows)
             {
@@ -130,7 +129,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             };
         }
 
-        private DataTable BudgetAppropriationsDataTable(int fppId, int allotmentClassId, int fundId, short year) 
+        private DataTable BudgetAppropriationsDataTable(int fppId, int allotmentClassId, int fundId, short year)
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(BudgetAppropriationsDataColumns());
@@ -154,7 +153,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
             {
                 FieldData(dataTable, drGetViewRecordsByIds);
-            } 
+            }
 
             #endregion
 
@@ -182,7 +181,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 {
                     FieldData(dataTable, drGetViewRecordsByIds);
                 }
-            } 
+            }
 
             #endregion
 
@@ -239,8 +238,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 newRow["obligations"] = totalObligations;
                 newRow["unobligated_balance"] = unobligatedBalance;
                 newRow["year"] = rowYear;
-                newRow["continuing"] = rowContinuing? Properties.Resources.ok14px : null;
-                newRow["realigned"] = rowRealignment? Properties.Resources.ok14px : null;
+                newRow["continuing"] = rowContinuing ? Properties.Resources.ok14px : null;
+                newRow["realigned"] = rowRealignment ? Properties.Resources.ok14px : null;
                 newRow["created_at"] = dataRow["created_at"];
                 newRow["updated_at"] = dataRow["updated_at"];
                 dataTable.Rows.Add(newRow);
@@ -296,7 +295,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 ShowRecordTimeStamp(dgBudgetAppropriations);
                 Cursor.Current = Cursors.Default;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
 
@@ -496,7 +495,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             LoadComboboxes();
         }
 
-        private void dataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void dgBudgetAppropriations_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             dgBudgetAppropriations.Columns[e.Column.Index].SortMode = DataGridViewColumnSortMode.NotSortable;
         }
@@ -575,7 +574,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
         {
             var frmSupplementalAppropriationsMain = new frmSupplementalAppropriationsMain(this);
 
-            if (!ValidateChildren()) 
+            if (!ValidateChildren())
             {
                 Helper.MessageBoxError(GetFormErrors());
                 return;
@@ -608,9 +607,8 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnRealignment_Click(object sender, EventArgs e)
         {
-         
-        }
 
+        }
 
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

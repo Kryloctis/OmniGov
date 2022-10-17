@@ -15,6 +15,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
         public frmBudgetAppropriationsAdd(frmBudgetAppropriations frmBudgetAppropriationsNew)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmBudgetAppropriations = frmBudgetAppropriationsNew;
             uc = ucBudgetAppropriations1;
         }
