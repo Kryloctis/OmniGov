@@ -75,10 +75,7 @@ namespace ACC.Data
             {
                 foreach (var entity in entityList)
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { @"id", DbType.Int32, entity.Id}
-                    };
+                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.Id } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
@@ -154,49 +151,30 @@ namespace ACC.Data
 
         public bool NameExist(string name)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@name", DbType.String, name },
-                };
-
-                string query = $"SELECT name FROM {tableName} WHERE name = @name";
-
-                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@name", DbType.String, name }
             };
 
+            string query = $"SELECT name FROM {tableName} WHERE name = @name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(result)) return true;
             return false;
         }
 
         public bool NameExist(string name, int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.String, id },
-                    new object[] { "@name", DbType.String, name },
-                };
-
-                string query = $"SELECT name FROM {tableName} WHERE id <> @id AND name = @name";
-                string queryResult = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.String, id },
+                new object[] { "@name", DbType.String, name }
             };
 
+            string query = $"SELECT name FROM {tableName} WHERE id <> @id AND name = @name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(result)) return true;
             return false;
         }
 

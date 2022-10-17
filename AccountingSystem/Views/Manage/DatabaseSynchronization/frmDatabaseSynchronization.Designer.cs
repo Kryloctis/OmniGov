@@ -31,7 +31,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.cmbxSyncType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerRptSync = new System.ComponentModel.BackgroundWorker();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
@@ -65,13 +65,13 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Choose what to sync:";
             // 
-            // backgroundWorker1
+            // backgroundWorkerRptSync
             // 
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.backgroundWorkerRptSync.WorkerReportsProgress = true;
+            this.backgroundWorkerRptSync.WorkerSupportsCancellation = true;
+            this.backgroundWorkerRptSync.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerRptSync_DoWork);
+            this.backgroundWorkerRptSync.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerRptSync_ProgressChanged);
+            this.backgroundWorkerRptSync.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerRptSync_RunWorkerCompleted);
             // 
             // flowLayoutPanel1
             // 
@@ -131,7 +131,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ComboBox cmbxSyncType;
         private System.Windows.Forms.Label label1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerRptSync;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnSync;
         private System.Windows.Forms.Button btnStop;

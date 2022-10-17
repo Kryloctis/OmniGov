@@ -34,8 +34,8 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
         {
             try
             {
-                if (!backgroundWorker1.IsBusy)
-                    backgroundWorker1.RunWorkerAsync();
+                if (!backgroundWorkerRptSync.IsBusy)
+                    backgroundWorkerRptSync.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -43,19 +43,25 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             }
         }
 
-        #region Database Sync Progress
+        #region Database Sync Progresses
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+
+
+
+
+
+
+        private void backgroundWorkerRptSync_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void backgroundWorkerRptSync_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void backgroundWorkerRptSync_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             if (progressBar1.Value == 100)
             {
