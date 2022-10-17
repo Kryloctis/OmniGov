@@ -12,6 +12,7 @@ using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
 using AccountingSystem.Views.Manage.RptDiscount;
@@ -691,7 +692,7 @@ namespace AccountingSystem
 
         private void menuTaxPayers_Click(object sender, EventArgs e)
         {
-            _ = new frmTaxPayers().ShowDialog();
+            _ = new frmTaxpayers().ShowDialog();
         }
 
         private void barangaysToolStripMenuItem_Click(object sender, EventArgs e)
@@ -702,6 +703,11 @@ namespace AccountingSystem
         private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmPayments(this).ShowDialog();
+        }
+
+        private void toolStripButtonRpt_Click(object sender, EventArgs e)
+        {
+            _ = new frmRealProperties().ShowDialog();
         }
     }
 }

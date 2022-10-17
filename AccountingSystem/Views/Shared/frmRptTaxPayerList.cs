@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
+﻿using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
 using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;

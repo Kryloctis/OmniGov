@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.TaxPayers
 {
-    partial class frmTaxPayers
+    partial class frmTaxpayers
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,37 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgTaxpayers = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.ucTaxPayers1 = new AccountingSystem.Views.Manage.TaxPayers.ucTaxPayers();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
+            this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgTaxpayers);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(822, 370);
+            this.panel1.TabIndex = 1;
+            // 
+            // dgTaxpayers
+            // 
+            this.dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgTaxpayers.Location = new System.Drawing.Point(4, 4);
+            this.dgTaxpayers.Name = "dgTaxpayers";
+            this.dgTaxpayers.RowHeadersWidth = 51;
+            this.dgTaxpayers.RowTemplate.Height = 25;
+            this.dgTaxpayers.Size = new System.Drawing.Size(814, 362);
+            this.dgTaxpayers.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -43,73 +67,62 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave,
-            this.btnCancel,
-            this.btnSearch});
+            this.btnAdd,
+            this.btnEdit,
+            this.txtSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(3);
-            this.toolStrip1.Size = new System.Drawing.Size(822, 56);
-            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(822, 54);
+            this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnSave
+            // btnAdd
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 47);
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click_1);
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
+            this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(33, 43);
+            this.btnAdd.Text = "&Add";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnCancel
+            // btnEdit
             // 
-            this.btnCancel.Enabled = false;
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(31, 43);
+            this.btnEdit.Text = "&Edit";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnSearch
+            // txtSearch
             // 
-            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find;
-            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(46, 47);
-            this.btnSearch.Text = "Search";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtSearch.Size = new System.Drawing.Size(202, 46);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
-            // ucTaxPayers1
-            // 
-            this.ucTaxPayers1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTaxPayers1.Location = new System.Drawing.Point(0, 56);
-            this.ucTaxPayers1.Name = "ucTaxPayers1";
-            this.ucTaxPayers1.Size = new System.Drawing.Size(822, 368);
-            this.ucTaxPayers1.TabIndex = 2;
-            // 
-            // frmTaxPayers
+            // frmTaxpayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 424);
-            this.Controls.Add(this.ucTaxPayers1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
-            this.Name = "frmTaxPayers";
+            this.Name = "frmTaxpayers";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Taxpayers";
-            this.Load += new System.EventHandler(this.frmTaxPayers_Load);
+            this.Load += new System.EventHandler(this.frmTaxPayersSearch_Load);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -119,10 +132,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         #endregion
 
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgTaxpayers;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnSearch;
-        private ucTaxPayers ucTaxPayers1;
-        internal System.Windows.Forms.ToolStripButton btnSave;
-        internal System.Windows.Forms.ToolStripButton btnCancel;
+        internal System.Windows.Forms.ToolStripButton btnAdd;
+        private System.Windows.Forms.ToolStripTextBox txtSearch;
+        private System.Windows.Forms.ToolStripButton btnEdit;
     }
 }

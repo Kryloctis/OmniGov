@@ -73,6 +73,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.chckTaxable = new System.Windows.Forms.CheckBox();
             this.chckCancelled = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSelectTaxpayer = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudArea)).BeginInit();
@@ -86,6 +100,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox4.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtArpNo
@@ -116,7 +132,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 36);
+            this.label2.Location = new System.Drawing.Point(6, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 1;
@@ -126,7 +142,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(4, 28);
+            this.groupBox2.Location = new System.Drawing.Point(4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(351, 402);
             this.groupBox2.TabIndex = 0;
@@ -186,6 +202,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // nudGrYear
             // 
+            this.nudGrYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudGrYear.Location = new System.Drawing.Point(111, 264);
             this.nudGrYear.Maximum = new decimal(new int[] {
             999999999,
@@ -231,7 +248,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 355);
+            this.label16.Location = new System.Drawing.Point(6, 354);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(43, 15);
             this.label16.TabIndex = 1;
@@ -264,7 +281,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 326);
+            this.label15.Location = new System.Drawing.Point(6, 325);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(31, 15);
             this.label15.TabIndex = 1;
@@ -273,7 +290,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(6, 268);
+            this.label17.Location = new System.Drawing.Point(6, 267);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(47, 15);
             this.label17.TabIndex = 1;
@@ -306,7 +323,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 297);
+            this.label14.Location = new System.Drawing.Point(6, 296);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 15);
             this.label14.TabIndex = 1;
@@ -325,7 +342,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 239);
+            this.label13.Location = new System.Drawing.Point(6, 238);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(85, 15);
             this.label13.TabIndex = 1;
@@ -334,7 +351,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 210);
+            this.label12.Location = new System.Drawing.Point(6, 209);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(84, 15);
             this.label12.TabIndex = 1;
@@ -352,7 +369,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 181);
+            this.label11.Location = new System.Drawing.Point(6, 180);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 15);
             this.label11.TabIndex = 1;
@@ -361,7 +378,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 152);
+            this.label10.Location = new System.Drawing.Point(6, 151);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(79, 15);
             this.label10.TabIndex = 1;
@@ -370,7 +387,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 123);
+            this.label9.Location = new System.Drawing.Point(6, 122);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(53, 15);
             this.label9.TabIndex = 1;
@@ -397,7 +414,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 94);
+            this.label8.Location = new System.Drawing.Point(6, 93);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 15);
             this.label8.TabIndex = 1;
@@ -415,7 +432,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 65);
+            this.label7.Location = new System.Drawing.Point(6, 64);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 1;
@@ -425,9 +442,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(361, 28);
+            this.groupBox3.Location = new System.Drawing.Point(361, 208);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(348, 82);
+            this.groupBox3.Size = new System.Drawing.Size(329, 82);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Classification";
@@ -442,14 +459,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel3.Location = new System.Drawing.Point(3, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(342, 60);
+            this.panel3.Size = new System.Drawing.Size(323, 60);
             this.panel3.TabIndex = 0;
             // 
             // txtClassificationName
             // 
             this.txtClassificationName.Location = new System.Drawing.Point(66, 32);
             this.txtClassificationName.Name = "txtClassificationName";
-            this.txtClassificationName.Size = new System.Drawing.Size(261, 23);
+            this.txtClassificationName.Size = new System.Drawing.Size(216, 23);
             this.txtClassificationName.TabIndex = 20;
             this.txtClassificationName.Validating += new System.ComponentModel.CancelEventHandler(this.txtClassificationName_Validating);
             this.txtClassificationName.Validated += new System.EventHandler(this.txtClassificationName_Validated);
@@ -457,7 +474,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(8, 36);
+            this.label19.Location = new System.Drawing.Point(8, 35);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(39, 15);
             this.label19.TabIndex = 9;
@@ -467,7 +484,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtClassificationCode.Location = new System.Drawing.Point(66, 3);
             this.txtClassificationCode.Name = "txtClassificationCode";
-            this.txtClassificationCode.Size = new System.Drawing.Size(261, 23);
+            this.txtClassificationCode.Size = new System.Drawing.Size(216, 23);
             this.txtClassificationCode.TabIndex = 19;
             this.txtClassificationCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtClassificationCode_Validating);
             this.txtClassificationCode.Validated += new System.EventHandler(this.txtClassificationCode_Validated);
@@ -485,9 +502,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox4.Controls.Add(this.panel4);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox4.Location = new System.Drawing.Point(361, 116);
+            this.groupBox4.Location = new System.Drawing.Point(361, 296);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(348, 82);
+            this.groupBox4.Size = new System.Drawing.Size(326, 82);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Actual Use";
@@ -502,14 +519,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel4.Location = new System.Drawing.Point(3, 19);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(342, 60);
+            this.panel4.Size = new System.Drawing.Size(320, 60);
             this.panel4.TabIndex = 0;
             // 
             // txtActualUseName
             // 
-            this.txtActualUseName.Location = new System.Drawing.Point(66, 32);
+            this.txtActualUseName.Location = new System.Drawing.Point(66, 31);
             this.txtActualUseName.Name = "txtActualUseName";
-            this.txtActualUseName.Size = new System.Drawing.Size(261, 23);
+            this.txtActualUseName.Size = new System.Drawing.Size(216, 23);
             this.txtActualUseName.TabIndex = 22;
             this.txtActualUseName.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
             this.txtActualUseName.Validated += new System.EventHandler(this.txtActualUseName_Validated);
@@ -517,7 +534,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(8, 36);
+            this.label20.Location = new System.Drawing.Point(8, 34);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(39, 15);
             this.label20.TabIndex = 9;
@@ -527,7 +544,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.txtActualUseCode.Location = new System.Drawing.Point(66, 3);
             this.txtActualUseCode.Name = "txtActualUseCode";
-            this.txtActualUseCode.Size = new System.Drawing.Size(261, 23);
+            this.txtActualUseCode.Size = new System.Drawing.Size(216, 23);
             this.txtActualUseCode.TabIndex = 21;
             this.txtActualUseCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseCode_Validating);
             this.txtActualUseCode.Validated += new System.EventHandler(this.txtActualUseCode_Validated);
@@ -535,7 +552,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 7);
+            this.label21.Location = new System.Drawing.Point(8, 6);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(35, 15);
             this.label21.TabIndex = 9;
@@ -543,8 +560,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // chckTaxable
             // 
+            this.chckTaxable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(529, 12);
+            this.chckTaxable.Location = new System.Drawing.Point(524, 386);
             this.chckTaxable.Name = "chckTaxable";
             this.chckTaxable.Size = new System.Drawing.Size(65, 19);
             this.chckTaxable.TabIndex = 1;
@@ -553,8 +571,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // chckCancelled
             // 
+            this.chckCancelled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(613, 12);
+            this.chckCancelled.Location = new System.Drawing.Point(606, 386);
             this.chckCancelled.Name = "chckCancelled";
             this.chckCancelled.Size = new System.Drawing.Size(78, 19);
             this.chckCancelled.TabIndex = 4;
@@ -566,17 +585,154 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSelectTaxpayer);
+            this.panel1.Controls.Add(this.textBox5);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.panel1.Location = new System.Drawing.Point(3, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(320, 177);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnSelectTaxpayer
+            // 
+            this.btnSelectTaxpayer.BackgroundImage = global::AccountingSystem.Properties.Resources.others;
+            this.btnSelectTaxpayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSelectTaxpayer.Location = new System.Drawing.Point(285, 2);
+            this.btnSelectTaxpayer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSelectTaxpayer.Name = "btnSelectTaxpayer";
+            this.btnSelectTaxpayer.Size = new System.Drawing.Size(25, 24);
+            this.btnSelectTaxpayer.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btnSelectTaxpayer, "Select taxpayer");
+            this.btnSelectTaxpayer.UseVisualStyleBackColor = true;
+            this.btnSelectTaxpayer.Click += new System.EventHandler(this.btnSelectTaxpayer_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(66, 122);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(216, 49);
+            this.textBox5.TabIndex = 22;
+            this.textBox5.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
+            this.textBox5.Validated += new System.EventHandler(this.txtActualUseName_Validated);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(8, 125);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(49, 15);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Address";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(66, 90);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(216, 23);
+            this.textBox4.TabIndex = 22;
+            this.textBox4.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
+            this.textBox4.Validated += new System.EventHandler(this.txtActualUseName_Validated);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 93);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 15);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Contact";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(66, 60);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(216, 23);
+            this.textBox3.TabIndex = 22;
+            this.textBox3.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
+            this.textBox3.Validated += new System.EventHandler(this.txtActualUseName_Validated);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 63);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(25, 15);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "TIN";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(66, 31);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(216, 23);
+            this.textBox1.TabIndex = 22;
+            this.textBox1.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseName_Validating);
+            this.textBox1.Validated += new System.EventHandler(this.txtActualUseName_Validated);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 15);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Type";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(66, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(216, 23);
+            this.textBox2.TabIndex = 21;
+            this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.txtActualUseCode_Validating);
+            this.textBox2.Validated += new System.EventHandler(this.txtActualUseCode_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 15);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Taxpayer";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.Location = new System.Drawing.Point(361, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(326, 199);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Taxpayer Details";
+            // 
             // ucRealProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.chckCancelled);
             this.Controls.Add(this.chckTaxable);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Name = "ucRealProperties";
-            this.Size = new System.Drawing.Size(712, 433);
+            this.Size = new System.Drawing.Size(692, 411);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -594,6 +750,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -644,5 +803,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.CheckBox chckTaxable;
         internal System.Windows.Forms.CheckBox chckCancelled;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox textBox3;
+        internal System.Windows.Forms.TextBox textBox4;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.TextBox textBox5;
+        internal System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnSelectTaxpayer;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
