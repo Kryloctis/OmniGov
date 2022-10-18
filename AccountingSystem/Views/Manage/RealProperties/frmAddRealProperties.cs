@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     //Id = _propertyId,
                     CompleteArpNo = uc.txtArpNo.Text,
                     //TaxpayersId = uc.taxPayerId,
-                    Pin = uc.txtPropertyPin.Text,
+                    PropertyPin = uc.txtPropertyPin.Text,
                     BarangayName = uc.txtBarangay.Text,
                     MunicipalityName = uc.txtMunicipality.Text,
                     ProvinceName = uc.txtProvince.Text,

@@ -77,7 +77,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     Id = _propertyId,
                     CompleteArpNo = _ucRealProperties.txtArpNo.Text,
                     TaxpayersId = _ucTaxpayers.taxPayerId,
-                    Pin = _ucRealProperties.txtPropertyPin.Text,
+                    PropertyPin = _ucRealProperties.txtPropertyPin.Text,
                     BarangayName = _ucRealProperties.txtBarangay.Text,
                     MunicipalityName = _ucRealProperties.txtMunicipality.Text,
                     ProvinceName = _ucRealProperties.txtProvince.Text,
