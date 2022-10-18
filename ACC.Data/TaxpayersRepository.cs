@@ -48,7 +48,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT id, barangays_id, taxpayer_type_id, street, tin, name, contact_info, is_active, created_at, updated_at  FROM {viewTableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -60,9 +60,13 @@ namespace ACC.Data
                     dict.Add("id", row["id"].ToString());
                     dict.Add("barangays_id", row["barangays_id"].ToString());
                     dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
+                    dict.Add("street", row["street"].ToString());
                     dict.Add("tin", row["tin"].ToString());
                     dict.Add("name", row["name"].ToString());
                     dict.Add("contact_info", row["contact_info"].ToString());
+                    dict.Add("is_active", row["is_active"].ToString());
+                    dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("updated_at", row["updated_at"].ToString());
                 }
                 return dict;
             }
@@ -70,7 +74,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {viewTableName}";
+            string query = $"SELECT * FROM {tableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -96,14 +100,16 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
+                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
+                new object[] { "@street", DbType.String, entity.Street },
+                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
-                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@barangays_id", DbType.String, entity.BarangayId }
+                new object[] { "@is_active", DbType.Boolean, entity.IsActive }
             };
 
-            string query = $"INSERT INTO {tableName} (tin, name, taxpayer_type_id, contact_info, barangays_id) VALUES (@tin, @name, @taxpayer_type_id, @contact_info, @barangays_id)";
+            string query = $"INSERT INTO {tableName} (tin, name, taxpayer_type_id, contact_info, barangays_id, street, is_active) VALUES (@tin, @name, @taxpayer_type_id, @contact_info, @barangays_id, @street, @is_active)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -112,14 +118,16 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
+                new object[] { "@street", DbType.String, entity.Street },
                 new object[] { "@barangays_id", DbType.String, entity.BarangayId },
-                new object[] { "@taxpayer_type_id", DbType.String, entity.TaxpayerTypeId },
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
+                new object[] { "@is_active", DbType.Boolean, entity.IsActive }
             };
 
-            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id WHERE id = @id";
+            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id, street = @street, is_active = @is_active WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -159,7 +167,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT MAX(tax_payer_id) FROM {tableName}";
+                string query = $"SELECT MAX(id) FROM {tableName}";
                 return int.Parse(_mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
