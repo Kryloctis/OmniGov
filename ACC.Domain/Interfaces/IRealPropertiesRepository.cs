@@ -1,8 +1,6 @@
 ﻿using ACC.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
@@ -10,12 +8,11 @@ namespace ACC.Domain.Interfaces
     {
         bool CompleteArpNoExist(string completeArpNo);
         bool CompleteArpNoExist(string completeArpNo, int Id);
-        bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels);
+        bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels, List<ProvincesModel> provincesModels);
         bool UpdateByArpNo(RealPropertiesModel realPropertiesModel);
-        DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);   
+        DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);
         string GetLastInsertedId();
         string GetPropertyIdentifierByCompleteArpNumber(string completeArpNumber);
-
         DataTable GetPropertiesByTaxpayerId(int taxPayerId);
     }
 }

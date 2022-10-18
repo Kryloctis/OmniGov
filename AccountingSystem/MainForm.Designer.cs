@@ -443,7 +443,6 @@ namespace AccountingSystem
             // 
             // menuDatabaseSynchronization
             // 
-            this.menuDatabaseSynchronization.Enabled = false;
             this.menuDatabaseSynchronization.Name = "menuDatabaseSynchronization";
             this.menuDatabaseSynchronization.Size = new System.Drawing.Size(223, 22);
             this.menuDatabaseSynchronization.Text = "Database Synchronization...";
@@ -1119,39 +1118,39 @@ namespace AccountingSystem
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(176, 6);
             // 
             // assessmentPostingToolStripMenuItem
             // 
             this.assessmentPostingToolStripMenuItem.Enabled = false;
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
-            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
             this.assessmentPostingToolStripMenuItem.Click += new System.EventHandler(this.assessmentPostingToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(176, 6);
             // 
             // checkIssuanceToolStripMenuItem
             // 
             this.checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
-            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.CheckIssuanceToolStripMenuItem_Click);
             // 
             // bankDepositToolStripMenuItem
             // 
             this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
             this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
             // 
