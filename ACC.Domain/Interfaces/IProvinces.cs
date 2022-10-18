@@ -4,7 +4,9 @@ namespace ACC.Domain.Interfaces
 {
     public interface IProvinces : IRepository<ProvincesModel>
     {
-        bool nameExist(string name);
-        bool nameExist(int id, string name);
+        bool NameExist(string name);
+        bool NameExist(int id, string name);
+        int GetLastInsertedId();
+        int GetIdByName(string name);
     }
 }

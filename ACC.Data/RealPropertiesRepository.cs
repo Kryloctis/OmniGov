@@ -10,11 +10,19 @@ namespace ACC.Data
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private IProvinces _provinces;
+        private IMunicipalities _municipalities;
+        private IBarangayRepository _barangayRepository;
+        private ITaxpayersRepository _taxpayersRepository;
         private readonly string tableName = "real_properties";
 
-        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS, ITaxpayersRepository taxpayersRepository, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository)
         {
+            _municipalities = municipalities;
+            _barangayRepository = barangayRepository;
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            _provinces = provinces;
+            _taxpayersRepository = taxpayersRepository;
         }
 
         public int CountRecords()
@@ -203,9 +211,67 @@ namespace ACC.Data
             return false;
         }
 
-        public bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels)
+        public bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels, List<ProvincesModel> provincesModels)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var provincesModel in provincesModels)
+                {
+                    int provincesId;
+                    string provincesName = provincesModel.Name;
+
+                    //Province
+
+                    if (!_provinces.NameExist(provincesName))
+                    {
+                        _provinces.Insert(provincesModel);
+                        provincesId = _provinces.GetLastInsertedId();
+                    }
+                    else
+                    {
+                        provincesId = _provinces.GetIdByName(provincesName);
+                    }
+
+                    //Municipality
+                    int municipalitiesId;
+                    string municipalitiesName = provincesModel.MunicipalitiesModel.Name;
+                    provincesModel.MunicipalitiesModel.ProvincesId = provincesId;
+
+                    if (!_municipalities.NameExistByProvinceName(municipalitiesName, provincesName))
+                    {
+                        _municipalities.Insert(provincesModel.MunicipalitiesModel);
+                        municipalitiesId = _municipalities.GetLastInsertedId();
+                    }
+                    else
+                    {
+                        municipalitiesId = _municipalities.GetIdByNameProvinceName(municipalitiesName, provincesName);
+                    }
+
+                    //Barangay
+                    string barangaysName = provincesModel.MunicipalitiesModel.BarangayModel.Name;
+                    provincesModel.MunicipalitiesModel.BarangayModel.MunicipalityID = municipalitiesId;
+
+                    if (!_barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangaysName, municipalitiesName, provincesName))
+                        _barangayRepository.Insert(provincesModel.MunicipalitiesModel.BarangayModel);
+                    continue;
+                }
+
+
+                foreach (var realPropertiesModel in realPropertiesModels)
+                {
+                    string completeArpNo = realPropertiesModel.CompleteArpNo;
+
+
+                    if (!CompleteArpNoExist(completeArpNo))
+                        Insert(realPropertiesModel);
+                    else
+                        Update(realPropertiesModel);
+                }
+
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public string GetLastInsertedId()
@@ -271,7 +337,7 @@ namespace ACC.Data
 
         public string GetPropertyIdentifierByCompleteArpNumber(string completeArpNumber)
         {
-            var parameters = new object[][] { new object[] {"@complete_arp_no", DbType.String, completeArpNumber} };
+            var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeArpNumber } };
 
             string query = $"SELECT COALESCE(id, 0) FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
 

@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "barangays";
+        private readonly string viewTableName = "view_barangays";
 
         public BarangayRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
         {
@@ -149,6 +150,63 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
         }
 
+        public bool Update(BarangayModel entity)
+        {
+            var parameters = new object[][] {
+                new object[]{"@barangay_id", DbType.Int32, entity.Id},
+                new object[]{"@barangay_code", DbType.String, entity.Code},
+                new object[]{"@barangay_name", DbType.String, entity.Name }
+            };
+
+            string query = $"UPDATE {tableName} SET code = @barangay_code, name = @barangay_name WHERE id = @barangay_id";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public int GetIdByName_MunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@barangays_name", DbType.String, name },
+                new object[] { "@municipalities_name", DbType.String, municipalityName},
+                new object[] { "@provinces_name", DbType.String, provinceName}
+            };
+            string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
+
+        public bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@barangays_name", DbType.String, name },
+                new object[] { "@municipalities_name", DbType.String, municipalityName },
+                new object[] { "@provinces_name", DbType.String, provinceName}
+            };
+
+            string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(result)) return true;
+            return false;
+        }
+
+        public bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName, int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@barangays_id", DbType.String, id },
+                new object[] { "@barangays_name", DbType.String, name },
+                new object[] { "@municipalities_name", DbType.String, municipalityName },
+                new object[] { "@provinces_name", DbType.String, provinceName }
+            };
+
+            string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_id <> @barangays_id AND barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            if (!string.IsNullOrEmpty(result)) return true;
+            return false;
+        }
+
         public bool NameExist(string name)
         {
             var parameters = new object[][]
@@ -156,7 +214,7 @@ namespace ACC.Data
                 new object[] { "@name", DbType.String, name }
             };
 
-            string query = $"SELECT name FROM {tableName} WHERE name = @name";
+            string query = $"SELECT name FROM {viewTableName} WHERE name = @name";
             string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(result)) return true;
@@ -176,18 +234,6 @@ namespace ACC.Data
 
             if (!string.IsNullOrEmpty(result)) return true;
             return false;
-        }
-
-        public bool Update(BarangayModel entity)
-        {
-            var parameters = new object[][] {
-                new object[]{"@barangay_id", DbType.Int32, entity.Id},
-                new object[]{"@barangay_code", DbType.String, entity.Code},
-                new object[]{"@barangay_name", DbType.String, entity.Name }
-            };
-
-            string query = $"UPDATE {tableName} SET code = @barangay_code, name = @barangay_name WHERE id = @barangay_id";
-            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

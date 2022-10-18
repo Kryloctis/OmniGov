@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
@@ -10,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "municipalities";
+        private readonly string viewTableName = "view_municipalities";
 
         public MunicipalitiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
@@ -104,24 +106,51 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool NameExist(string name)
+        public bool NameExistByProvinceName(string name, string provinceName)
         {
-            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
-            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            var parameters = new object[][]
+            {
+                new object[] { "@municipalities_name", DbType.String, name },
+                new object[] { "@provinces_name", DbType.String, provinceName}
+            };
+
+            string query = $"SELECT municipalities_name FROM {viewTableName} WHERE municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
             string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
         }
 
-        public bool NameExist(int id, string name)
+        public bool NameExistByProvinceName(int id, string name, string provinceName)
         {
-            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
-            string query = $"SELECT id FROM {tableName} WHERE name = @name AND id <> @id";
+            var parameters = new object[][]
+            {
+                new object[] { "@municipalities_id", DbType.Int32, id},
+                new object[] { "@municipalities_name", DbType.String, name },
+                new object[] { "@provinces_name", DbType.String, provinceName}
+            };
+
+            string query = $"SELECT municipalities_name FROM {viewTableName} WHERE municipalities_name = @municipalities_name AND provinces_name = @provinces_name AND municipalities_id <> @municipalities_id";
             string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
+        }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"Select COALESCE(MAX(id), 0) AS id FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
+
+        public int GetIdByNameProvinceName(string name, string provinceName)
+        {
+            var parameters = new object[][] {
+                new object[] { "@municipalities_name", DbType.String, name },
+                new object[] { "@provinces_name", DbType.String, provinceName}
+            };
+            string query = $"SELECT municipalities_id FROM {viewTableName} WHERE municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
     }
 }

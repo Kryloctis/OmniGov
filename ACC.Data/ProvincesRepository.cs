@@ -103,7 +103,7 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool nameExist(string name)
+        public bool NameExist(string name)
         {
             var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
@@ -114,7 +114,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool nameExist(int id, string name)
+        public bool NameExist(int id, string name)
         {
             var parameters = new object[][]
             {
@@ -127,6 +127,19 @@ namespace ACC.Data
             if (!string.IsNullOrEmpty(result))
                 return true;
             return false;
+        }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT COALESCE(MAX(id),0) AS id FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
+
+        public int GetIdByName(string name)
+        {
+            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
     }
 }

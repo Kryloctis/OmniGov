@@ -133,7 +133,7 @@ namespace RPT.Data
         {
             try
             {
-                string query = $"SELECT id, code, name, is_poblacion FROM barangays ORDER BY code";
+                string query = $"SELECT id, code, name, is_poblacion FROM {tableName} ORDER BY code";
 
                 var dtBarangay = new DataTable();
                 return _mySqlGenericCommandsRPT.Fill(query, dtBarangay);
@@ -258,9 +258,11 @@ namespace RPT.Data
             return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
 
-        public bool SychronizeData()
+        public DataTable GetViewLFSRealPropertiesRecords()
         {
-            throw new NotImplementedException();
+            string query = $"SELECT * FROM {viewLfsRealProperties}";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsRPT.Fill(query, dataTable);
         }
     }
 }
