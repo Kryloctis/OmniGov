@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -17,10 +10,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private int _taxpayerId;
         private frmTaxpayers _frmTaxpayers;
 
-        
+
         public frmEditTaxpayers(int taxpayerId, frmTaxpayers frmTaxpayers)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _taxpayerId = taxpayerId;
             _frmTaxpayers = frmTaxpayers;
             uc = ucTaxPayers1;
@@ -37,9 +31,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             uc.txtTIN.Text = dictTaxpayer["tin"];
             uc.txtName.Text = dictTaxpayer["name"];
+            uc.txtStreet.Text = dictTaxpayer["street"];
             uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
             uc.txtContact.Text = dictTaxpayer["contact_info"];
             uc.cmbxBarangay.SelectedValue = Convert.ToInt32(dictTaxpayer["barangays_id"]);
+            uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -47,7 +43,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             if (UpdateTaxpayer())
             {
                 Helper.MessageBoxSuccess("Taxpayer has been updated.");
-                _frmTaxpayers.LoadTaxpayer();
+                _frmTaxpayers.LoadTaxpayers();
                 Close();
             }
         }
@@ -60,11 +56,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 return false;
             }
 
-            var barangaysId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue);
-            var taxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue);
-            var tin = uc.txtTIN.Text.Trim();
-            var name = uc.txtName.Text.Trim();
-            var contactInfo = uc.txtContact.Text.Trim();
+            int barangaysId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue);
+            int taxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue);
+            string tin = uc.txtTIN.Text.Trim();
+            string name = uc.txtName.Text.Trim();
+            string street = uc.txtStreet.Text.Trim();
+            string contactInfo = uc.txtContact.Text.Trim();
+            bool isActive = uc.chckIsActive.Checked;
 
             var taxpayersModel = new TaxpayersModel()
             {
@@ -73,7 +71,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 TaxpayerTypeId = taxpayerTypeId,
                 Tin = tin,
                 Name = name,
-                ContactInfo = contactInfo
+                Street = street,
+                ContactInfo = contactInfo,
+                IsActive = isActive
             };
 
             var taxpayersRepo = AccFactory.TaxpayersRepository();

@@ -35,9 +35,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -47,7 +57,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1.Location = new System.Drawing.Point(0, 54);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(822, 370);
+            this.panel1.Size = new System.Drawing.Size(822, 348);
             this.panel1.TabIndex = 1;
             // 
             // dgTaxpayers
@@ -58,12 +68,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.dgTaxpayers.Name = "dgTaxpayers";
             this.dgTaxpayers.RowHeadersWidth = 51;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(814, 362);
+            this.dgTaxpayers.Size = new System.Drawing.Size(814, 340);
             this.dgTaxpayers.TabIndex = 1;
+            this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dgTaxpayers_SelectionChanged);
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.White;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -108,6 +119,73 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtSearch.Size = new System.Drawing.Size(202, 46);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelRecordCount,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabelCreatedAt,
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabelUpdatedAt});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 402);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(822, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
+            this.toolStripStatusLabel1.Text = "Records: ";
+            // 
+            // toolStripStatusLabelRecordCount
+            // 
+            this.toolStripStatusLabelRecordCount.Name = "toolStripStatusLabelRecordCount";
+            this.toolStripStatusLabelRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.toolStripStatusLabelRecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(536, 17);
+            this.toolStripStatusLabel2.Spring = true;
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel3.Text = "Created at: ";
+            // 
+            // toolStripStatusLabelCreatedAt
+            // 
+            this.toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            this.toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabelCreatedAt.Text = "-";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
+            this.toolStripStatusLabel6.Text = "Updated at: ";
+            // 
+            // toolStripStatusLabelUpdatedAt
+            // 
+            this.toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
+            this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabelUpdatedAt.Text = "-";
+            // 
             // frmTaxpayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -115,6 +193,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.ClientSize = new System.Drawing.Size(822, 424);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.statusStrip1);
             this.MinimizeBox = false;
             this.Name = "frmTaxpayers";
             this.ShowInTaskbar = false;
@@ -125,6 +204,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +219,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRecordCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
     }
 }
