@@ -1,13 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -46,13 +39,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 var realPropertiesModel = new RealPropertiesModel()
                 {
-                    //Id = _propertyId,
                     CompleteArpNo = uc.txtArpNo.Text,
-                    //TaxpayersId = uc.taxPayerId,
+                    ClassificationCodesId = 0,
+                    ActualUseCodesId = 0,
+                    BarangaysId = 0,
                     PropertyPin = uc.txtPropertyPin.Text,
-                    BarangayName = uc.txtBarangay.Text,
-                    MunicipalityName = uc.txtMunicipality.Text,
-                    ProvinceName = uc.txtProvince.Text,
+
                     PropertyKind = uc.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
                     EffectivityYear = Convert.ToInt32(uc.nudEffectivityYear.Value),
@@ -61,10 +53,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     OtherImprovements = uc.nudOtherImprv.Value,
                     Area = Convert.ToDecimal(uc.nudArea.Value),
                     LotNo = uc.txtLotNo.Text,
-                    ClassificationCode = uc.txtClassificationCode.Text,
-                    ClassificationName = uc.txtClassificationName.Text,
-                    ActualUseCode = uc.txtActualUseCode.Text,
-                    ActualUseName = uc.txtActualUseName.Text,
                     IsTaxable = uc.chckTaxable.Checked,
                     IsCancelled = uc.chckCancelled.Checked,
                 };

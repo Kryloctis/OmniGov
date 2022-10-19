@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -11,7 +10,7 @@ namespace AccountingSystem
     {
         #region Real Properties
 
-        public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
 
@@ -38,43 +37,23 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
 
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["name"].HeaderText = "Name";
-            dataGridView.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["taxpayer_type"].HeaderText = "Taxpayer Type";
-            dataGridView.Columns["barangays_id"].HeaderText = "Barangay Id";
-            dataGridView.Columns["barangays_id"].Visible = false;
-            dataGridView.Columns["barangay_code"].Visible = false;
-            dataGridView.Columns["barangay_code"].HeaderText = "Barangay Code";
-            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["barangay_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["municipalities_id"].HeaderText = "Municipalities Id";
-            dataGridView.Columns["municipalities_id"].Visible = false;
-            dataGridView.Columns["municipalities_code"].HeaderText = "Municipalities Code";
-            dataGridView.Columns["municipalities_code"].Visible = false;
-            dataGridView.Columns["municipalities_name"].HeaderText = "Municipality";
-            dataGridView.Columns["provinces_id"].HeaderText = "Province Id";
-            dataGridView.Columns["provinces_id"].Visible = false;
-            dataGridView.Columns["provinces_code"].HeaderText = "Province Code";
-            dataGridView.Columns["provinces_code"].Visible = false;
-            dataGridView.Columns["provinces_name"].HeaderText = "Province";
-            dataGridView.Columns["taxpayer_type_id"].HeaderText = "Taxpayer Type Id";
-            dataGridView.Columns["taxpayer_type_id"].Visible = false;
-            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Taxpayer Type Code";
-            dataGridView.Columns["taxpayer_type_code"].Visible = false;
-            dataGridView.Columns["tin"].HeaderText = "Tin";
-            dataGridView.Columns["contact_info"].HeaderText = "Contact";
-            dataGridView.Columns["is_active"].HeaderText = "Is Active";
-            dataGridView.Columns["is_active"].Visible = false;
+            dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
+            dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
+            dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
+            dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
+
         }
 
         #endregion
 
         #region Payment History
 
-        public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable) 
+        public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable)
         {
-            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_collecting_officers_id", "payment_collections_job_orders_id",  "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
+            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_collecting_officers_id", "payment_collections_job_orders_id", "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
             var dataView = new DataView(dataTable);
             var _dataTable = dataView.ToTable(false, columns);
 
@@ -99,7 +78,7 @@ namespace AccountingSystem
 
         #region Property Payment 
 
-        public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
@@ -111,7 +90,7 @@ namespace AccountingSystem
             dataGridView.Columns["owner_address"].HeaderText = "Address";
         }
 
-        public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable) 
+        public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["id"].Visible = false;
@@ -131,7 +110,7 @@ namespace AccountingSystem
             dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
-        public static void PropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        public static void PropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
 
@@ -156,7 +135,7 @@ namespace AccountingSystem
             dataGridView.Columns["total_tax_due"].DefaultCellStyle.Format = "N2";
         }
 
-        public static void PropertyPaymentPropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView) 
+        public static void PropertyPaymentPropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
 
@@ -200,7 +179,7 @@ namespace AccountingSystem
         {
             dataGridView.DataSource = dataTable;
 
-            dataGridView.Columns["id"].Visible = false;   
+            dataGridView.Columns["id"].Visible = false;
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["rate"].HeaderText = "Rate";
             dataGridView.Columns["rate"].DefaultCellStyle.Format = "P";
@@ -211,7 +190,7 @@ namespace AccountingSystem
 
         #region RPT Discounts
 
-        public static void DiscountsDatagridView(DataGridView dataGridView, DataTable dataTable) 
+        public static void DiscountsDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
 
@@ -232,7 +211,7 @@ namespace AccountingSystem
         #endregion
 
         #region RPT Assessment Posting
-        internal static void BarangaysCombobox(DataTable dataTable, ComboBox  comboBox, string displayMember, string valueMember)
+        internal static void BarangaysCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
             dr["barangay_name"] = "All";
@@ -252,13 +231,13 @@ namespace AccountingSystem
             dataGridView.Columns["is_checked"].HeaderText = string.Empty;
             dataGridView.Columns["pin"].Visible = false;
             dataGridView.Columns["posting_status"].HeaderText = "Posting Status";
-            dataGridView.Columns["posting_status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;         
+            dataGridView.Columns["posting_status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["property_identifier"].Visible = false;
             dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            dataGridView.Columns["complete_arp_no"].MinimumWidth = 100;            
+            dataGridView.Columns["complete_arp_no"].MinimumWidth = 100;
             dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
             dataGridView.Columns["owner_name"].MinimumWidth = 200;
             dataGridView.Columns["owner_tin"].Visible = false;
@@ -899,10 +878,10 @@ namespace AccountingSystem
             {
                 datagrid.Rows.Add(new object[]
                 {
-                    row["banks_id"], 
-                    row["account_no"], 
-                    row["bank_name"], 
-                    row["amount"], 
+                    row["banks_id"],
+                    row["account_no"],
+                    row["bank_name"],
+                    row["amount"],
                 });
             }
 
@@ -1524,7 +1503,7 @@ namespace AccountingSystem
                 }
 
                 var accountableFOrms = $"{row["accountable_forms_no"]} - {row["accountable_forms_desc"]}";
-          
+
                 datagrid.Rows.Add(new object[]
                 {
                     row["id"],
@@ -1605,7 +1584,7 @@ namespace AccountingSystem
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
                 var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(drPaymentCollection["payment_collections_id"]));
-            
+
                 var quantity = 1;
                 var generalLedgerAccountsID = 0;
                 var abstractOfGeneralCollection = string.Empty;

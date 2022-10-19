@@ -1,15 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.RptTaxRates;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -28,9 +19,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal string GetFormErrors()
         {
             var errorArray = new string[]
-           {
+            {
                 errorProvider1.GetError(txtName)
-           };
+            };
 
             IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
@@ -41,13 +32,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             try
             {
                 var dtTaxpayerType = AccFactory.TaxpayerTypeRepository().GetRecords();
-             
+
                 cmbxTaxPayerType.DataSource = dtTaxpayerType;
                 cmbxTaxPayerType.ValueMember = "id";
                 cmbxTaxPayerType.DisplayMember = "taxpayer_type";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void LoadBarangay()
         {
             try
@@ -61,16 +53,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         internal void ResetForm()
         {
+            if (isEdit)
+            {
+                taxPayerId = 0;
+                isEdit = false;
+            }
+
             txtTIN.Clear();
             txtName.Clear();
             txtContact.Clear();
-            cmbxBarangay.SelectedIndex = 0;
-            cmbxTaxPayerType.SelectedIndex = 0;
-            taxPayerId = 0;
-            isEdit = false;
+            txtStreet.Clear();
+            chckIsActive.Checked = true;
+            LoadBarangay();
+            LoadTaxPayersType();
         }
 
         private void ucTaxPayers_Load_1(object sender, EventArgs e)

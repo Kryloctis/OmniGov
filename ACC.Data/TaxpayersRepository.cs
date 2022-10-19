@@ -48,7 +48,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT id, barangays_id, taxpayer_type_id, street, tin, name, contact_info, is_active, created_at, updated_at  FROM {viewTableName} WHERE id = @id";
+            string query = $"SELECT id, barangays_id, taxpayer_type_id, street, tin, name, contact_info, is_active, created_at, updated_at  FROM {tableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -181,6 +181,14 @@ namespace ACC.Data
             var query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
+        }
+
+        public DataTable GetViewTaxpayerRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
+            string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }
