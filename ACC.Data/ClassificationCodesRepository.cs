@@ -7,12 +7,12 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class ActualUseCodesRepository : IActualUseCodes
+    public class ClassificationCodesRepository : IClassificationCodes
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
-        private readonly string tableName = "actual_use_codes";
+        private readonly string tableName = "classification_codes";
 
-        public ActualUseCodesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public ClassificationCodesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
@@ -22,16 +22,13 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<ActualUseCodesModel> entityList)
+        public bool Delete(List<ClassificationCodesModel> entityList)
         {
             using (var scope = new TransactionScope())
             {
                 foreach (var model in entityList)
                 {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@id", DbType.Int32, model.Id}
-                    };
+                    var parameters = new object[][] { new object[] { "@id", DbType.Int32, model.Id } };
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
@@ -44,23 +41,19 @@ namespace ACC.Data
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var dictionary = new Dictionary<string, string>();
-            var parameters = new object[][]
-            {
-                new object[] { "@id", DbType.Int32, Id}
-            };
-
-            string query = $"SELECT code, name, is_government FROM {tableName} WHERE id = @id";
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+            string query = $"SELECT code, name, is_special FROM {tableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dictionary;
 
-                foreach (DataRow item in reader.Rows)
+                foreach (DataRow row in reader.Rows)
                 {
-                    dictionary.Add("code", item["code"].ToString());
-                    dictionary.Add("name", item["name"].ToString());
-                    dictionary.Add("is_government", item["is_government"].ToString());
+                    dictionary.Add("code", row["code"].ToString());
+                    dictionary.Add("name", row["name"].ToString());
+                    dictionary.Add("is_special", row["is_special"].ToString());
                 }
 
                 return dictionary;
@@ -76,12 +69,8 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            var parameters = new object[][]
-            {
-                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
-            };
-
-            string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR name LIKE @search_text";
+            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
+            string query = $"SELECT * FROM {tableName} WHERE code LIKE @code OR name LIKE @name";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
@@ -91,30 +80,30 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(ActualUseCodesModel entity)
+        public bool Insert(ClassificationCodesModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@name", DbType.String, entity.Name},
-                new object[] { "@is_government", DbType.Boolean, entity.IsGovernment}
+                new object[] { "@is_special", DbType.Boolean, entity.IsSpecial}
             };
 
-            string query = $"INSERT INTO {tableName} (code, name, is_government) VALUES (code, name, is_government)";
+            string query = $"INSERT INTO {tableName} (code, name, is_special) VALUES (@code, @name, @is_special)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(ActualUseCodesModel entity)
+        public bool Update(ClassificationCodesModel entity)
         {
             var parameters = new object[][]
             {
-                new object[] { "@id", DbType.Int32, entity.Id},
+                new object[] { "@id", DbType.Int32, entity.Id },
                 new object[] { "@code", DbType.String, entity.Code},
                 new object[] { "@name", DbType.String, entity.Name},
-                new object[] { "@is_government", DbType.Boolean, entity.IsGovernment}
+                new object[] { "@is_special", DbType.Boolean, entity.IsSpecial}
             };
 
-            string query = $"UPDATE {tableName} SET code = @code, name = @name, is_government = @is_government WHERE id = @id";
+            string query = $"UPDATE {tableName} SET code = @code, name = @name, is_special = @is_special WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
