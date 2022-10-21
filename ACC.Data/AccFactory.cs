@@ -159,5 +159,6 @@ namespace AccountingSystem
 
         public static IProvinces ProvincesRepository() => new ProvincesRepository(mySqlGenericCommandsLFS);
         public static IMunicipalities MunicipalitiesRepository() => new MunicipalitiesRepository(mySqlGenericCommandsLFS);
+        public static IActualUseCodes ActualUseCodes() => new ActualUseCodesRepository(mySqlGenericCommandsLFS);
     }
 }
