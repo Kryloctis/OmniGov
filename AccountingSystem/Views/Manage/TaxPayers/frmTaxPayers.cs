@@ -18,12 +18,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             return new DataColumn[]
             {
                 new DataColumn("taxpayers_id", typeof (int)),
-                new DataColumn("taxpayers_tin", typeof (string)),
-                new DataColumn("taxpayers_name", typeof (string)),
-                new DataColumn("taxpayers_address", typeof (string)),
+                new DataColumn("taxpayer_type_code", typeof(string)),
+                new DataColumn("taxpayers_tin", typeof(string)),
+                new DataColumn("taxpayers_name", typeof(string)),
+                new DataColumn("taxpayers_address", typeof(string)),
                 new DataColumn("taxpayers_contact_info", typeof(string)),
-                new DataColumn("created_at", typeof (string)),
-                new DataColumn("updated_at", typeof (string))
+                new DataColumn("is_active", typeof(bool)),
+                new DataColumn("created_at", typeof(string)),
+                new DataColumn("updated_at", typeof(string))
             };
         }
 
@@ -45,16 +47,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
                 string taxpayerTin = row["taxpayers_tin"].ToString();
                 string taxpayerName = row["taxpayers_name"].ToString();
-                string taxpayerAddress = $"{row["taxpayers_street"]}, {row["barangay_name"]}, {row["municipalities_name"]}, {row["provinces_name"]}";
+                string taxpayerTypeCode = row["taxpayer_type_code"].ToString();
+                string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
+                string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
+                string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
+                string province = string.IsNullOrEmpty(row["taxpayers_province"].ToString()) ? string.Empty : $"{row["taxpayers_province"]},";
+                string taxpayerAddress = $"{street} {barangay} {municipality} {province}";
                 string taxpayerContactInfo = row["taxpayers_contact_info"].ToString();
+                bool isActive = Convert.ToBoolean(Convert.ToByte(row["is_active"]));
                 string createdAt = row["created_at"].ToString();
                 string updatedAt = row["updated_at"].ToString();
 
                 newRow["taxpayers_id"] = taxpayerId;
+                newRow["taxpayer_type_code"] = taxpayerTypeCode;
                 newRow["taxpayers_tin"] = taxpayerTin;
                 newRow["taxpayers_name"] = taxpayerName;
                 newRow["taxpayers_address"] = taxpayerAddress;
                 newRow["taxpayers_contact_info"] = taxpayerContactInfo;
+                newRow["is_active"] = isActive;
                 newRow["created_at"] = createdAt;
                 newRow["updated_at"] = updatedAt;
 
@@ -72,7 +82,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
                 toolStripStatusLabelRecordCount.Text = dgTaxpayers.Rows.Count.ToString();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmTaxPayersSearch_Load(object sender, EventArgs e)
@@ -116,9 +126,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgTaxpayers_SelectionChanged(object sender, EventArgs e)
         {
-            var indexes = new byte[] { 5, 6 };
-            EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
-            Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+            try
+            {
+                if (dgTaxpayers.Columns.Count < 1)
+                    return;
+
+                byte createdByIndex = (byte)dgTaxpayers.Columns["created_at"].Index;
+                byte updatedByIndex = (byte)dgTaxpayers.Columns["updated_at"].Index;
+                var indexes = new byte[] { createdByIndex, updatedByIndex };
+                EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
+                Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }

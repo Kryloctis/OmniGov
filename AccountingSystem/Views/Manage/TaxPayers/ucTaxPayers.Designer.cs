@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.cmbxBarangay = new System.Windows.Forms.ComboBox();
             this.cmbxTaxPayerType = new System.Windows.Forms.ComboBox();
             this.txtTIN = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -44,17 +43,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.chckIsActive = new System.Windows.Forms.CheckBox();
             this.txtStreet = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtBarangay = new System.Windows.Forms.TextBox();
+            this.txtMunicipality = new System.Windows.Forms.TextBox();
+            this.txtProvince = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // cmbxBarangay
-            // 
-            this.cmbxBarangay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxBarangay.FormattingEnabled = true;
-            this.cmbxBarangay.Location = new System.Drawing.Point(93, 145);
-            this.cmbxBarangay.Name = "cmbxBarangay";
-            this.cmbxBarangay.Size = new System.Drawing.Size(299, 23);
-            this.cmbxBarangay.TabIndex = 4;
             // 
             // cmbxTaxPayerType
             // 
@@ -85,7 +80,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtContact
             // 
             this.txtContact.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtContact.Location = new System.Drawing.Point(93, 174);
+            this.txtContact.Location = new System.Drawing.Point(93, 232);
             this.txtContact.MaxLength = 13;
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(299, 23);
@@ -94,7 +89,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 178);
+            this.label8.Location = new System.Drawing.Point(3, 236);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 15);
             this.label8.TabIndex = 1;
@@ -171,17 +166,60 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label3.TabIndex = 1;
             this.label3.Text = "Street/Address";
             // 
+            // txtBarangay
+            // 
+            this.txtBarangay.Location = new System.Drawing.Point(93, 145);
+            this.txtBarangay.Name = "txtBarangay";
+            this.txtBarangay.Size = new System.Drawing.Size(299, 23);
+            this.txtBarangay.TabIndex = 7;
+            // 
+            // txtMunicipality
+            // 
+            this.txtMunicipality.Location = new System.Drawing.Point(93, 174);
+            this.txtMunicipality.Name = "txtMunicipality";
+            this.txtMunicipality.Size = new System.Drawing.Size(299, 23);
+            this.txtMunicipality.TabIndex = 7;
+            // 
+            // txtProvince
+            // 
+            this.txtProvince.Location = new System.Drawing.Point(93, 203);
+            this.txtProvince.Name = "txtProvince";
+            this.txtProvince.Size = new System.Drawing.Size(299, 23);
+            this.txtProvince.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 178);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 15);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Municipality";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 207);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 15);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Province";
+            // 
             // ucTaxPayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.Controls.Add(this.txtProvince);
+            this.Controls.Add(this.txtMunicipality);
+            this.Controls.Add(this.txtBarangay);
             this.Controls.Add(this.txtStreet);
             this.Controls.Add(this.chckIsActive);
-            this.Controls.Add(this.cmbxBarangay);
             this.Controls.Add(this.cmbxTaxPayerType);
             this.Controls.Add(this.txtTIN);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtContact);
@@ -190,8 +228,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label7);
             this.Name = "ucTaxPayers";
-            this.Size = new System.Drawing.Size(414, 201);
-            this.Load += new System.EventHandler(this.ucTaxPayers_Load_1);
+            this.Size = new System.Drawing.Size(414, 261);
+            this.Load += new System.EventHandler(this.ucTaxPayers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -208,10 +246,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.TextBox txtName;
         internal System.Windows.Forms.Label label2;
         internal System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.ComboBox cmbxBarangay;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtStreet;
         internal System.Windows.Forms.ErrorProvider errorProvider1;
         internal System.Windows.Forms.CheckBox chckIsActive;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox txtProvince;
+        internal System.Windows.Forms.TextBox txtMunicipality;
+        internal System.Windows.Forms.TextBox txtBarangay;
     }
 }

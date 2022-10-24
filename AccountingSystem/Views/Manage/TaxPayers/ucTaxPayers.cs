@@ -40,19 +40,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void LoadBarangay()
-        {
-            try
-            {
-                var dtBarangay = AccFactory.BarangayRepository().GetRecords();
-
-                cmbxBarangay.DataSource = dtBarangay;
-                cmbxBarangay.ValueMember = "id";
-                cmbxBarangay.DisplayMember = "name";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         internal void ResetForm()
         {
             if (isEdit)
@@ -65,16 +52,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtName.Clear();
             txtContact.Clear();
             txtStreet.Clear();
+            txtBarangay.Clear();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
             chckIsActive.Checked = true;
-            LoadBarangay();
             LoadTaxPayersType();
         }
 
-        private void ucTaxPayers_Load_1(object sender, EventArgs e)
+        private void ucTaxPayers_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadBarangay();
                 LoadTaxPayersType();
             }
         }

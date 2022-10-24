@@ -48,7 +48,7 @@ namespace ACC.Data
                 new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT id, barangays_id, taxpayer_type_id, street, tin, name, contact_info, is_active, created_at, updated_at  FROM {tableName} WHERE id = @id";
+            string query = $"SELECT id, tin, name, street, barangay, municipality, province, taxpayer_type_id, contact_info, is_active, created_at, created_by, updated_at, updated_by  FROM {tableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -58,15 +58,19 @@ namespace ACC.Data
                 foreach (DataRow row in reader.Rows)
                 {
                     dict.Add("id", row["id"].ToString());
-                    dict.Add("barangays_id", row["barangays_id"].ToString());
-                    dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
-                    dict.Add("street", row["street"].ToString());
                     dict.Add("tin", row["tin"].ToString());
                     dict.Add("name", row["name"].ToString());
+                    dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("barangay", row["barangay"].ToString());
+                    dict.Add("municipality", row["municipality"].ToString());
+                    dict.Add("province", row["province"].ToString());
                     dict.Add("contact_info", row["contact_info"].ToString());
                     dict.Add("is_active", row["is_active"].ToString());
                     dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("created_by", row["created_by"].ToString());
                     dict.Add("updated_at", row["updated_at"].ToString());
+                    dict.Add("updated_by", row["updated_by"].ToString());
                 }
                 return dict;
             }
@@ -101,15 +105,18 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
-                new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
+                new object[] { "@street", DbType.String, entity.Street },
+                new object[] { "@barangay", DbType.String, entity.Barangay},
+                new object[] { "@municipality", DbType.String, entity.Municipality},
+                new object[] { "@province", DbType.String, entity.Province},
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@is_active", DbType.Boolean, entity.IsActive }
+                new object[] { "@is_active", DbType.Boolean, entity.IsActive },
+                new object[] { "@created_by", DbType.Int32, entity.CreatedBy}
             };
 
-            string query = $"INSERT INTO {tableName} (tin, name, taxpayer_type_id, contact_info, barangays_id, street, is_active) VALUES (@tin, @name, @taxpayer_type_id, @contact_info, @barangays_id, @street, @is_active)";
+            string query = $"INSERT INTO {tableName} (tin, name, taxpayer_type_id, contact_info, street, barangay, municipality, province, is_active, created_by) VALUES (@tin, @name, @taxpayer_type_id, @contact_info, @street, @barangay, @municipality, @province, @is_active, @created_by)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -118,16 +125,19 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.Id},
-                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
-                new object[] { "@street", DbType.String, entity.Street },
-                new object[] { "@barangays_id", DbType.String, entity.BarangayId },
                 new object[] { "@tin", DbType.String, entity.Tin },
                 new object[] { "@name", DbType.String, entity.Name },
+                new object[] { "@taxpayer_type_id", DbType.Int32, entity.TaxpayerTypeId },
+                new object[] { "@street", DbType.String, entity.Street },
+                new object[] { "@barangay", DbType.String, entity.Barangay},
+                new object[] { "@municipality", DbType.String, entity.Municipality},
+                new object[] { "@province", DbType.String, entity.Province},
                 new object[] { "@contact_info", DbType.String, entity.ContactInfo },
-                new object[] { "@is_active", DbType.Boolean, entity.IsActive }
+                new object[] { "@is_active", DbType.Boolean, entity.IsActive },
+                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy }
             };
 
-            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, barangays_id = @barangays_id, street = @street, is_active = @is_active WHERE id = @id";
+            string query = $"UPDATE {tableName} SET tin = @tin, name = @name, taxpayer_type_id = @taxpayer_type_id, contact_info = @contact_info, street = @street, barangay = @barangay, municipality = @municipality, province = @province, is_active = @is_active, updated_by = @updated_by WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
