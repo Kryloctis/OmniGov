@@ -100,7 +100,7 @@ namespace ACC.Data
                 new object[] { "@is_government", DbType.Boolean, entity.IsGovernment}
             };
 
-            string query = $"INSERT INTO {tableName} (code, name, is_government) VALUES (code, name, is_government)";
+            string query = $"INSERT INTO {tableName} (code, name, is_government) VALUES (@code, @name, @is_government)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -116,6 +116,30 @@ namespace ACC.Data
 
             string query = $"UPDATE {tableName} SET code = @code, name = @name, is_government = @is_government WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool NameExist(string name)
+        {
+            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(result))
+                return true;
+            return false;
+        }
+
+        public bool NameExist(string name, int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id},
+                new object[] { "@name", DbType.String, name }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name AND id = @id";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(result))
+                return true;
+            return false;
         }
     }
 }

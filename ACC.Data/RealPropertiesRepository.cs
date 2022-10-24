@@ -13,16 +13,22 @@ namespace ACC.Data
         private IProvinces _provinces;
         private IMunicipalities _municipalities;
         private IBarangayRepository _barangayRepository;
+        private IActualUseCodes _actualUseCodes;
+        private IClassificationCodes _classificationCodes;
+        private ITaxpayerTypeRepository _taxpayerTypeRepository;
         private ITaxpayersRepository _taxpayersRepository;
         private readonly string tableName = "real_properties";
 
-        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS, ITaxpayersRepository taxpayersRepository, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository)
+        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS, ITaxpayersRepository taxpayersRepository, ITaxpayerTypeRepository taxpayerTypeRepository, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository, IActualUseCodes actualUseCodes, IClassificationCodes classificationCodes)
         {
             _municipalities = municipalities;
             _barangayRepository = barangayRepository;
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _provinces = provinces;
+            _taxpayerTypeRepository = taxpayerTypeRepository;
             _taxpayersRepository = taxpayersRepository;
+            _actualUseCodes = actualUseCodes;
+            _classificationCodes = classificationCodes;
         }
 
         public int CountRecords()
@@ -118,6 +124,10 @@ namespace ACC.Data
                 new object[] { "@barangays_id", DbType.Int32, entity.BarangaysId },
                 new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesId },
                 new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesId },
+                new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin},
+                new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName},
+                new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo},
+                new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress},
                 new object[] { "@street", DbType.String, entity.Street },
                 new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
@@ -134,7 +144,7 @@ namespace ACC.Data
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled }
             };
 
-            string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @street, @property_identifier, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled)";
+            string query = $"INSERT INTO {tableName} (taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled) VALUES (@taxpayers_id, @barangays_id, @classification_codes_id, @actual_use_codes_id, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @property_identifier, @complete_arp_no, @property_pin, @property_kind, @effectivity_quarter, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @gr_year, @is_taxable, @is_cancelled)";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -148,6 +158,10 @@ namespace ACC.Data
                 new object[] { "@barangays_id", DbType.Int32, entity.BarangaysId },
                 new object[] { "@classification_codes_id", DbType.Int32, entity.ClassificationCodesId },
                 new object[] { "@actual_use_codes_id", DbType.Int32, entity.ActualUseCodesId },
+                new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin},
+                new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName},
+                new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo},
+                new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress},
                 new object[] { "@street", DbType.String, entity.Street },
                 new object[] { "@property_identifier", DbType.String, entity.PropertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
@@ -164,7 +178,7 @@ namespace ACC.Data
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled }
             };
 
-            string query = $"UPDATE {tableName} SET taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled WHERE id = @id";
+            string query = $"UPDATE {tableName} SET taxpayers_id = @taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled WHERE id = @id";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -200,10 +214,11 @@ namespace ACC.Data
             return false;
         }
 
-        public bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels, List<ProvincesModel> provincesModels)
+        public bool SynchronizeData(List<RealPropertiesModel> realPropertiesModels, List<ActualUseCodesModel> actualUseCodesModels, List<ClassificationCodesModel> classificationCodesModels, List<ProvincesModel> provincesModels, List<TaxpayerTypeModel> taxpayerTypeModels, List<TaxpayersModel> taxpayersModels)
         {
             using (var scope = new TransactionScope())
             {
+                //Location
                 foreach (var provincesModel in provincesModels)
                 {
                     int provincesId;
@@ -245,16 +260,32 @@ namespace ACC.Data
                     continue;
                 }
 
-
-                foreach (var realPropertiesModel in realPropertiesModels)
+                //Actual Use Codes
+                foreach (var actualUseCodesModel in actualUseCodesModels)
                 {
-                    string completeArpNo = realPropertiesModel.CompleteArpNo;
+                    if (!_actualUseCodes.NameExist(actualUseCodesModel.Name))
+                        _actualUseCodes.Insert(actualUseCodesModel);
+                }
 
+                //Classification Codes
+                foreach (var classificationCodesModel in classificationCodesModels)
+                {
+                    if (!_classificationCodes.NameExist(classificationCodesModel.Name))
+                        _classificationCodes.Insert(classificationCodesModel);
+                }
 
-                    if (!CompleteArpNoExist(completeArpNo))
-                        Insert(realPropertiesModel);
-                    else
-                        Update(realPropertiesModel);
+                //Taxpayer Type
+                foreach (var taxpayerTypeModel in taxpayerTypeModels)
+                {
+                    if (!_taxpayerTypeRepository.NameExist(taxpayerTypeModel.taxpayerType))
+                        _taxpayerTypeRepository.Insert(taxpayerTypeModel);
+                }
+
+                //Taxpayer
+                foreach (var taxpayersModel in taxpayersModels)
+                {
+                    if (!_taxpayersRepository.ITaxpayerNameExist(taxpayersModel.Name))
+                        _taxpayersRepository.Insert(taxpayersModel);
                 }
 
 

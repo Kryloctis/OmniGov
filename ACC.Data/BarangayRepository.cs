@@ -170,7 +170,7 @@ namespace ACC.Data
                 new object[] { "@municipalities_name", DbType.String, municipalityName},
                 new object[] { "@provinces_name", DbType.String, provinceName}
             };
-            string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
+            string query = $"SELECT barangays_id FROM {viewTableName} WHERE barangays_name = @barangays_name AND municipalities_name = @municipalities_name AND provinces_name = @provinces_name";
             return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
 

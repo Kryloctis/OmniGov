@@ -106,5 +106,29 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET code = @code, name = @name, is_special = @is_special WHERE id = @id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
+
+        public bool NameExist(string name)
+        {
+            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(result))
+                return true;
+            return false;
+        }
+
+        public bool NameExist(string name, int id)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id },
+                new object[] { "@name", DbType.String, name }
+            };
+            string query = $"SELECT id FROM {tableName} WHERE id <> id AND name = @name";
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(result))
+                return true;
+            return false;
+        }
     }
 }
