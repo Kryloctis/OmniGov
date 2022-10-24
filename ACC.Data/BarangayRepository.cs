@@ -235,5 +235,32 @@ namespace ACC.Data
             if (!string.IsNullOrEmpty(result)) return true;
             return false;
         }
+
+        public Dictionary<string, string> GetViewRecordById(int id)
+        {
+            var dictionary = new Dictionary<string, string>();
+            var parameters = new object[][] { new object[] { "@barangays_id", DbType.Int32, id } };
+
+            string query = $"SELECT barangays_code, barangays_name, municipalities_id, municipalities_code, municipalities_name, provinces_id, provinces_code, provinces_name FROM {viewTableName} WHERE barangays_id = @barangays_id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dictionary;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dictionary.Add("barangays_code", row["barangays_code"].ToString());
+                    dictionary.Add("barangays_name", row["barangays_name"].ToString());
+                    dictionary.Add("municipalities_id", row["municipalities_id"].ToString());
+                    dictionary.Add("municipalities_code", row["municipalities_code"].ToString());
+                    dictionary.Add("municipalities_name", row["municipalities_name"].ToString());
+                    dictionary.Add("provinces_id", row["provinces_id"].ToString());
+                    dictionary.Add("provinces_code", row["provinces_code"].ToString());
+                    dictionary.Add("provinces_name", row["provinces_name"].ToString());
+                }
+                return dictionary;
+            }
+        }
     }
 }

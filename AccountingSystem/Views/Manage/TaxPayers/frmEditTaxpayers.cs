@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private int _taxpayerId;
         private frmTaxpayers _frmTaxpayers;
 
-
         public frmEditTaxpayers(int taxpayerId, frmTaxpayers frmTaxpayers)
         {
             InitializeComponent();
@@ -32,9 +31,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             uc.txtTIN.Text = dictTaxpayer["tin"];
             uc.txtName.Text = dictTaxpayer["name"];
             uc.txtStreet.Text = dictTaxpayer["street"];
+            uc.txtBarangay.Text = dictTaxpayer["barangay"];
+            uc.txtMunicipality.Text = dictTaxpayer["municipality"];
+            uc.txtProvince.Text = dictTaxpayer["province"];
             uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
             uc.txtContact.Text = dictTaxpayer["contact_info"];
-            uc.cmbxBarangay.SelectedValue = Convert.ToInt32(dictTaxpayer["barangays_id"]);
             uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
         }
 
@@ -56,24 +57,29 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 return false;
             }
 
-            int barangaysId = Convert.ToInt32(uc.cmbxBarangay.SelectedValue);
             int taxpayerTypeId = Convert.ToInt32(uc.cmbxTaxPayerType.SelectedValue);
             string tin = uc.txtTIN.Text.Trim();
             string name = uc.txtName.Text.Trim();
             string street = uc.txtStreet.Text.Trim();
+            string barangay = uc.txtBarangay.Text.Trim();
+            string municipality = uc.txtMunicipality.Text.Trim();
+            string province = uc.txtProvince.Text.Trim();
             string contactInfo = uc.txtContact.Text.Trim();
             bool isActive = uc.chckIsActive.Checked;
 
             var taxpayersModel = new TaxpayersModel()
             {
                 Id = _taxpayerId,
-                BarangayId = barangaysId,
                 TaxpayerTypeId = taxpayerTypeId,
                 Tin = tin,
                 Name = name,
                 Street = street,
+                Barangay = barangay,
+                Municipality = municipality,
+                Province = province,
                 ContactInfo = contactInfo,
-                IsActive = isActive
+                IsActive = isActive,
+                UpdatedBy = Helper.UserId
             };
 
             var taxpayersRepo = AccFactory.TaxpayersRepository();

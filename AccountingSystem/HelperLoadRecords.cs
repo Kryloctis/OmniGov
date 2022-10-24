@@ -8,7 +8,7 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
-        #region Real Properties
+        #region Taxpayers
 
         public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
@@ -38,10 +38,15 @@ namespace AccountingSystem
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["taxpayers_id"].Visible = false;
+            dataGridView.Columns["taxpayer_type_code"].HeaderText = "Type";
+            dataGridView.Columns["taxpayer_type_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["taxpayer_type_code"].MinimumWidth = 30;
             dataGridView.Columns["taxpayers_tin"].HeaderText = "TIN";
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
             dataGridView.Columns["taxpayers_address"].HeaderText = "Address";
             dataGridView.Columns["taxpayers_contact_info"].HeaderText = "Contact Info.";
+            dataGridView.Columns["is_active"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_active"].HeaderText = "Active";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
 

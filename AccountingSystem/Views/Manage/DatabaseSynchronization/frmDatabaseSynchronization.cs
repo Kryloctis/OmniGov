@@ -137,8 +137,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         ContactInfo = taxpayerContactInfo,
                         Street = taxpayerStreet,
                         Tin = taxpayerTin,
-                        BarangayId = AccFactory.BarangayRepository().GetIdByName_MunicipalitiesName_ProvincesName(barangaysName, municipalitiesName, provinceName),
-                        TaxpayerTypeId = AccFactory.TaxpayerTypeRepository().GetIdByName(taxpayerType),
                     };
 
                     provincesModels.Add(provincesModel);
@@ -149,7 +147,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
                 }
 
-                AccFactory.RealPropertiesRepository().SynchronizeData(realPropertiesModels, actualUseCodeModels, classificationCodeModels, provincesModels, taxpayerTypeModels, taxpayersModels);
+                //AccFactory.RealPropertiesRepository().SynchronizeData(realPropertiesModels, actualUseCodeModels, classificationCodeModels, provincesModels, taxpayerTypeModels, taxpayersModels);
             }
             catch (Exception ex)
             {

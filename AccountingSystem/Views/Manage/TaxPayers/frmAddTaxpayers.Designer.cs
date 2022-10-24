@@ -44,7 +44,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 213);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 269);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(425, 29);
             this.flowLayoutPanel1.TabIndex = 3;
@@ -75,7 +75,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 4, 4, 4);
-            this.panel1.Size = new System.Drawing.Size(425, 213);
+            this.panel1.Size = new System.Drawing.Size(425, 269);
             this.panel1.TabIndex = 4;
             // 
             // ucTaxPayers1
@@ -85,7 +85,7 @@
             this.ucTaxPayers1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTaxPayers1.Location = new System.Drawing.Point(10, 4);
             this.ucTaxPayers1.Name = "ucTaxPayers1";
-            this.ucTaxPayers1.Size = new System.Drawing.Size(411, 205);
+            this.ucTaxPayers1.Size = new System.Drawing.Size(411, 261);
             this.ucTaxPayers1.TabIndex = 1;
             // 
             // frmAddTaxpayers
@@ -94,7 +94,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(425, 242);
+            this.ClientSize = new System.Drawing.Size(425, 298);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
