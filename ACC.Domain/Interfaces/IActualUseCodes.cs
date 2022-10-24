@@ -2,10 +2,9 @@
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ITaxpayerTypeRepository : IRepository<TaxpayerTypeModel>
+    public interface IActualUseCodes : IRepository<ActualUseCodesModel>
     {
         bool NameExist(string name);
         bool NameExist(string name, int id);
-        int GetIdByName(string name);
     }
 }

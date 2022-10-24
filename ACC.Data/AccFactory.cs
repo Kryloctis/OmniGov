@@ -147,9 +147,12 @@ namespace AccountingSystem
 
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS,
                                                                                                             TaxpayersRepository(),
+                                                                                                            TaxpayerTypeRepository(),
                                                                                                             ProvincesRepository(),
                                                                                                             MunicipalitiesRepository(),
-                                                                                                            BarangayRepository());
+                                                                                                            BarangayRepository(),
+                                                                                                            ActualUseCodesRepository(),
+                                                                                                            ClassificationCodesRepository());
 
         public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
 
@@ -159,5 +162,7 @@ namespace AccountingSystem
 
         public static IProvinces ProvincesRepository() => new ProvincesRepository(mySqlGenericCommandsLFS);
         public static IMunicipalities MunicipalitiesRepository() => new MunicipalitiesRepository(mySqlGenericCommandsLFS);
+        public static IActualUseCodes ActualUseCodesRepository() => new ActualUseCodesRepository(mySqlGenericCommandsLFS);
+        public static IClassificationCodes ClassificationCodesRepository() => new ClassificationCodesRepository(mySqlGenericCommandsLFS);
     }
 }

@@ -7,6 +7,10 @@
         public int BarangaysId { get; set; }
         public int ClassificationCodesId { get; set; }
         public int ActualUseCodesId { get; set; }
+        public string TaxpayerTin { get; set; }
+        public string TaxpayerName { get; set; }
+        public string TaxpayerContactInfo { get; set; }
+        public string TaxpayerAddress { get; set; }
         public string Street { get; set; }
         public string PropertyIdentifier { get; set; }
         public string CompleteArpNo { get; set; }
