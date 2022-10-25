@@ -35,9 +35,19 @@
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgRealProperties = new System.Windows.Forms.DataGridView();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.s = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRealProperties)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -106,7 +116,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 50);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(969, 441);
+            this.panel1.Size = new System.Drawing.Size(969, 479);
             this.panel1.TabIndex = 12;
             // 
             // dgRealProperties
@@ -119,16 +129,84 @@
             this.dgRealProperties.RowHeadersWidth = 51;
             this.dgRealProperties.RowTemplate.Height = 29;
             this.dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRealProperties.Size = new System.Drawing.Size(961, 433);
+            this.dgRealProperties.Size = new System.Drawing.Size(961, 471);
             this.dgRealProperties.TabIndex = 9;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.lblRecordCount,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabelCreatedAt,
+            this.toolStripStatusLabel5,
+            this.s,
+            this.toolStripStatusLabel7});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 529);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(969, 22);
+            this.statusStrip1.TabIndex = 13;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
+            this.toolStripStatusLabel1.Text = "Records: ";
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(683, 17);
+            this.toolStripStatusLabel2.Spring = true;
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel3.Text = "Created at: ";
+            // 
+            // toolStripStatusLabelCreatedAt
+            // 
+            this.toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            this.toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabelCreatedAt.Text = "-";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // s
+            // 
+            this.s.Name = "s";
+            this.s.Size = new System.Drawing.Size(71, 17);
+            this.s.Text = "Updated at: ";
+            // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(12, 17);
+            this.toolStripStatusLabel7.Text = "-";
             // 
             // frmRealProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 491);
+            this.ClientSize = new System.Drawing.Size(969, 551);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.statusStrip1);
             this.MinimizeBox = false;
             this.Name = "frmRealProperties";
             this.ShowInTaskbar = false;
@@ -140,6 +218,8 @@
             this.toolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgRealProperties)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +234,14 @@
         private System.Windows.Forms.ToolStripTextBox txtSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgRealProperties;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel s;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
     }
 }
