@@ -9,6 +9,7 @@ namespace ACC.Domain.Interfaces
         bool CodeExist(string code, int id);
         bool NameExist(string name);
         bool NameExist(string name, int id);
+        int GetLastInsertedId();
         Dictionary<string, string> GetViewRecordById(int id);
         bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName);
         bool NameExistByMunicipalitiesName_ProvincesName(string name, string municipalityName, string provinceName, int id);

@@ -145,14 +145,7 @@ namespace AccountingSystem
 
         public static IRptPaymentPostsRepository RptPaymentPostsRepository() => new RptPaymentPostsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());
 
-        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS,
-                                                                                                            TaxpayersRepository(),
-                                                                                                            TaxpayerTypeRepository(),
-                                                                                                            ProvincesRepository(),
-                                                                                                            MunicipalitiesRepository(),
-                                                                                                            BarangayRepository(),
-                                                                                                            ActualUseCodesRepository(),
-                                                                                                            ClassificationCodesRepository());
+        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS);
 
         public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
 

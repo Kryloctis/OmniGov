@@ -262,5 +262,11 @@ namespace ACC.Data
                 return dictionary;
             }
         }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
     }
 }

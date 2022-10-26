@@ -108,7 +108,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void ShowEditForm()
         {
             int rowIndex = dgTaxpayers.CurrentCell.RowIndex;
-            var taxpayerId = Convert.ToInt32(dgTaxpayers.SelectedRows[rowIndex].Cells["taxpayers_id"].Value);
+            var taxpayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["taxpayers_id"].Value);
             _ = new frmEditTaxpayers(taxpayerId, this).ShowDialog();
 
         }

@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 {
                     Id = _propertyId,
                     CompleteArpNo = _ucRealProperties.txtArpNo.Text,
-                    TaxpayersId = _ucTaxpayers.taxPayerId,
+                    RealTaxpayersId = _ucTaxpayers.taxPayerId,
                     PropertyPin = _ucRealProperties.txtPropertyPin.Text,
                     PropertyKind = _ucRealProperties.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(_ucRealProperties.nudEffectivityQuarter.Value),

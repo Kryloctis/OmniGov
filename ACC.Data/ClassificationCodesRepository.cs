@@ -130,5 +130,18 @@ namespace ACC.Data
                 return true;
             return false;
         }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
+
+        public int GetIdByName(string name)
+        {
+            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
     }
 }
