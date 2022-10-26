@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal string GetFormError()
         {
             var errorArray = new string[]
-            {
+            {   
                 errorProvider1.GetError(txtArpNo),
                 errorProvider1.GetError(cmbxBarangays),
                 errorProvider1.GetError(cmbxPropertyKind),
@@ -74,7 +74,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
             LoadPropertyKind();
+            LoadClassificationCodes();
+            LoadActualUseCodes();
         }
+
+        private void LoadActualUseCodes()
+        {
+            var dt = AccFactory.ActualUseCodesRepository().GetRecords();
+
+            cmbxActualUse.DataSource = dt;
+            cmbxActualUse.ValueMember = "";
+            cmbxActualUse.DisplayMember = "";
+        }
+
+        private void LoadClassificationCodes()
+        {
+
+        }
+
 
         #region Validations
 

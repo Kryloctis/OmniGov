@@ -41,7 +41,7 @@
             this.ucRealProperties1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucRealProperties1.Location = new System.Drawing.Point(0, 0);
             this.ucRealProperties1.Name = "ucRealProperties1";
-            this.ucRealProperties1.Size = new System.Drawing.Size(694, 409);
+            this.ucRealProperties1.Size = new System.Drawing.Size(718, 435);
             this.ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -51,14 +51,14 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 409);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 435);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(694, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(718, 29);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(616, 3);
+            this.btnCancel.Location = new System.Drawing.Point(640, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -67,7 +67,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(535, 3);
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(559, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -79,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 438);
+            this.ClientSize = new System.Drawing.Size(718, 464);
             this.Controls.Add(this.ucRealProperties1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
