@@ -6,5 +6,7 @@ namespace ACC.Domain.Interfaces
     {
         bool NameExist(string name);
         bool NameExist(string name, int id);
+        int GetLastInsertedId();
+        int GetIdByName(string name);
     }
 }
