@@ -5,9 +5,10 @@ namespace ACC.Domain.Interfaces
 {
     public interface ITaxpayersRepository : IRepository<TaxpayersModel>
     {
-        bool ITaxpayerNameExist(string name);
-        bool ITaxpayerNameExist(int id, string name);
-        int LastInsertedId();
+        bool TaxpayerNameExist(string name);
+        bool TaxpayerNameExist(int id, string name);
+        int GetLastInsertedId();
+        int GetIdByName(string name);
         DataTable GetViewTaxpayerRecords();
         DataTable GetViewTaxpayerRecordsBySearch(string searchText);
     }

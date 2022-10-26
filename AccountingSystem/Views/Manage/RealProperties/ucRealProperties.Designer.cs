@@ -530,9 +530,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(11, 148);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(84, 15);
+            this.label22.Size = new System.Drawing.Size(49, 15);
             this.label22.TabIndex = 9;
-            this.label22.Text = "Street/Address";
+            this.label22.Text = "Address";
             // 
             // textBox5
             // 

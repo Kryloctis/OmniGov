@@ -100,5 +100,11 @@ namespace AccountingSystem
             string query = $"SELECT id FROM {tableName} WHERE taxpayer_type = @taxpayer_type";
             return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
+        }
     }
 }

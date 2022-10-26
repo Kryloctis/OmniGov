@@ -142,7 +142,7 @@ namespace ACC.Data
         }
 
         //VALIDATIONS   
-        public bool ITaxpayerNameExist(string name)
+        public bool TaxpayerNameExist(string name)
         {
             var parameters = new object[][]
             {
@@ -157,7 +157,7 @@ namespace ACC.Data
             return false;
         }
 
-        public bool ITaxpayerNameExist(int id, string name)
+        public bool TaxpayerNameExist(int id, string name)
         {
             var parameters = new object[][]
             {
@@ -173,7 +173,7 @@ namespace ACC.Data
             return false;
         }
 
-        public int LastInsertedId()
+        public int GetLastInsertedId()
         {
             try
             {
@@ -199,6 +199,13 @@ namespace ACC.Data
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        public int GetIdByName(string name)
+        {
+            var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
+            string query = $"SELECT id FROM {tableName} WHERE name = @name";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
         }
     }
 }
