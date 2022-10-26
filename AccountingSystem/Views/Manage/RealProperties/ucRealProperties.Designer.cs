@@ -36,18 +36,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cmbxActualUseCodes = new System.Windows.Forms.ComboBox();
-            this.cmbxClassificationCodes = new System.Windows.Forms.ComboBox();
             this.cmbxActualUse = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbxClassification = new System.Windows.Forms.ComboBox();
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.nudArea = new System.Windows.Forms.NumericUpDown();
             this.nudGrYear = new System.Windows.Forms.NumericUpDown();
             this.nudOtherImprv = new System.Windows.Forms.NumericUpDown();
             this.nudAssessedValue = new System.Windows.Forms.NumericUpDown();
-            this.label24 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.nudEffectivityYear = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -69,14 +65,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnSelectTaxpayer = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtTaxpayerAddress = new System.Windows.Forms.TextBox();
+            this.txtTaxpayerContact = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtTaxpayerTIN = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTaxpayerType = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTaxpayers = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
@@ -133,25 +129,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox2.Location = new System.Drawing.Point(0, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(356, 466);
+            this.groupBox2.Size = new System.Drawing.Size(356, 405);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Property Details";
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.cmbxActualUseCodes);
-            this.panel2.Controls.Add(this.cmbxClassificationCodes);
             this.panel2.Controls.Add(this.cmbxActualUse);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.cmbxClassification);
             this.panel2.Controls.Add(this.cmbxBarangays);
             this.panel2.Controls.Add(this.nudArea);
             this.panel2.Controls.Add(this.nudGrYear);
             this.panel2.Controls.Add(this.nudOtherImprv);
             this.panel2.Controls.Add(this.nudAssessedValue);
-            this.panel2.Controls.Add(this.label24);
             this.panel2.Controls.Add(this.label16);
-            this.panel2.Controls.Add(this.label23);
             this.panel2.Controls.Add(this.nudEffectivityYear);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.label17);
@@ -174,26 +166,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(4, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(348, 442);
+            this.panel2.Size = new System.Drawing.Size(348, 381);
             this.panel2.TabIndex = 0;
-            // 
-            // cmbxActualUseCodes
-            // 
-            this.cmbxActualUseCodes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxActualUseCodes.FormattingEnabled = true;
-            this.cmbxActualUseCodes.Location = new System.Drawing.Point(111, 406);
-            this.cmbxActualUseCodes.Name = "cmbxActualUseCodes";
-            this.cmbxActualUseCodes.Size = new System.Drawing.Size(216, 23);
-            this.cmbxActualUseCodes.TabIndex = 1;
-            // 
-            // cmbxClassificationCodes
-            // 
-            this.cmbxClassificationCodes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxClassificationCodes.FormattingEnabled = true;
-            this.cmbxClassificationCodes.Location = new System.Drawing.Point(111, 379);
-            this.cmbxClassificationCodes.Name = "cmbxClassificationCodes";
-            this.cmbxClassificationCodes.Size = new System.Drawing.Size(216, 23);
-            this.cmbxClassificationCodes.TabIndex = 1;
             // 
             // cmbxActualUse
             // 
@@ -203,13 +177,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.cmbxActualUse.Size = new System.Drawing.Size(216, 23);
             this.cmbxActualUse.TabIndex = 15;
             // 
-            // comboBox1
+            // cmbxClassification
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(111, 90);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(216, 23);
-            this.comboBox1.TabIndex = 15;
+            this.cmbxClassification.FormattingEnabled = true;
+            this.cmbxClassification.Location = new System.Drawing.Point(111, 90);
+            this.cmbxClassification.Name = "cmbxClassification";
+            this.cmbxClassification.Size = new System.Drawing.Size(216, 23);
+            this.cmbxClassification.TabIndex = 15;
             // 
             // cmbxBarangays
             // 
@@ -280,15 +254,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.nudAssessedValue.Validating += new System.ComponentModel.CancelEventHandler(this.nudAssessedValue_Validating);
             this.nudAssessedValue.Validated += new System.EventHandler(this.nudAssessedValue_Validated);
             // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 409);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(43, 15);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "Lot No";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -297,15 +262,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label16.Size = new System.Drawing.Size(43, 15);
             this.label16.TabIndex = 1;
             this.label16.Text = "Lot No";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(6, 382);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(31, 15);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "Area";
             // 
             // nudEffectivityYear
             // 
@@ -468,7 +424,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.chckTaxable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(500, -67);
+            this.chckTaxable.Location = new System.Drawing.Point(500, -131);
             this.chckTaxable.Name = "chckTaxable";
             this.chckTaxable.Size = new System.Drawing.Size(65, 19);
             this.chckTaxable.TabIndex = 1;
@@ -479,7 +435,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.chckCancelled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(582, -67);
+            this.chckCancelled.Location = new System.Drawing.Point(582, -131);
             this.chckCancelled.Name = "chckCancelled";
             this.chckCancelled.Size = new System.Drawing.Size(78, 19);
             this.chckCancelled.TabIndex = 4;
@@ -508,21 +464,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.panel1.Controls.Add(this.btnSelectTaxpayer);
             this.panel1.Controls.Add(this.label22);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.txtTaxpayerAddress);
+            this.panel1.Controls.Add(this.txtTaxpayerContact);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.txtTaxpayerTIN);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtTaxpayerType);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.txtTaxpayers);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel1.Location = new System.Drawing.Point(4, 20);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(332, 203);
+            this.panel1.Size = new System.Drawing.Size(332, 200);
             this.panel1.TabIndex = 0;
             // 
             // label22
@@ -534,24 +490,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label22.TabIndex = 9;
             this.label22.Text = "Address";
             // 
-            // textBox5
+            // txtTaxpayerAddress
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Location = new System.Drawing.Point(101, 144);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(216, 49);
-            this.textBox5.TabIndex = 22;
+            this.txtTaxpayerAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerAddress.Location = new System.Drawing.Point(101, 144);
+            this.txtTaxpayerAddress.Multiline = true;
+            this.txtTaxpayerAddress.Name = "txtTaxpayerAddress";
+            this.txtTaxpayerAddress.ReadOnly = true;
+            this.txtTaxpayerAddress.Size = new System.Drawing.Size(216, 49);
+            this.txtTaxpayerAddress.TabIndex = 22;
             // 
-            // textBox4
+            // txtTaxpayerContact
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(101, 115);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(216, 23);
-            this.textBox4.TabIndex = 22;
+            this.txtTaxpayerContact.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerContact.Location = new System.Drawing.Point(101, 115);
+            this.txtTaxpayerContact.Name = "txtTaxpayerContact";
+            this.txtTaxpayerContact.ReadOnly = true;
+            this.txtTaxpayerContact.Size = new System.Drawing.Size(216, 23);
+            this.txtTaxpayerContact.TabIndex = 22;
             // 
             // label6
             // 
@@ -562,14 +518,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label6.TabIndex = 9;
             this.label6.Text = "Contact";
             // 
-            // textBox3
+            // txtTaxpayerTIN
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Location = new System.Drawing.Point(101, 86);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(216, 23);
-            this.textBox3.TabIndex = 22;
+            this.txtTaxpayerTIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerTIN.Location = new System.Drawing.Point(101, 86);
+            this.txtTaxpayerTIN.Name = "txtTaxpayerTIN";
+            this.txtTaxpayerTIN.ReadOnly = true;
+            this.txtTaxpayerTIN.Size = new System.Drawing.Size(216, 23);
+            this.txtTaxpayerTIN.TabIndex = 22;
             // 
             // label5
             // 
@@ -580,14 +536,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label5.TabIndex = 9;
             this.label5.Text = "TIN";
             // 
-            // textBox1
+            // txtTaxpayerType
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(101, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(216, 23);
-            this.textBox1.TabIndex = 22;
+            this.txtTaxpayerType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerType.Location = new System.Drawing.Point(101, 57);
+            this.txtTaxpayerType.Name = "txtTaxpayerType";
+            this.txtTaxpayerType.ReadOnly = true;
+            this.txtTaxpayerType.Size = new System.Drawing.Size(216, 23);
+            this.txtTaxpayerType.TabIndex = 22;
             // 
             // label3
             // 
@@ -598,14 +554,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label3.TabIndex = 9;
             this.label3.Text = "Type";
             // 
-            // textBox2
+            // txtTaxpayers
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(101, 28);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(216, 23);
-            this.textBox2.TabIndex = 21;
+            this.txtTaxpayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayers.Location = new System.Drawing.Point(101, 28);
+            this.txtTaxpayers.Name = "txtTaxpayers";
+            this.txtTaxpayers.ReadOnly = true;
+            this.txtTaxpayers.Size = new System.Drawing.Size(216, 23);
+            this.txtTaxpayers.TabIndex = 21;
             // 
             // label4
             // 
@@ -626,7 +582,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox1.Location = new System.Drawing.Point(363, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(340, 227);
+            this.groupBox1.Size = new System.Drawing.Size(340, 224);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Taxpayer Details";
@@ -641,7 +597,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "ucRealProperties";
-            this.Size = new System.Drawing.Size(722, 475);
+            this.Size = new System.Drawing.Size(722, 411);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -692,25 +648,21 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.ComboBox cmbxBarangays;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.ComboBox cmbxActualUse;
-        internal System.Windows.Forms.ComboBox comboBox1;
+        internal System.Windows.Forms.ComboBox cmbxClassification;
         internal System.Windows.Forms.Label label9;
         internal System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbxClassificationCodes;
-        private System.Windows.Forms.ComboBox cmbxActualUseCodes;
-        internal System.Windows.Forms.Label label24;
-        internal System.Windows.Forms.Label label23;
         internal System.Windows.Forms.GroupBox groupBox1;
         internal System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSelectTaxpayer;
         internal System.Windows.Forms.Label label22;
-        internal System.Windows.Forms.TextBox textBox5;
-        internal System.Windows.Forms.TextBox textBox4;
         internal System.Windows.Forms.Label label6;
-        internal System.Windows.Forms.TextBox textBox3;
         internal System.Windows.Forms.Label label5;
-        internal System.Windows.Forms.TextBox textBox1;
         internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.TextBox textBox2;
         internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox txtTaxpayerAddress;
+        internal System.Windows.Forms.TextBox txtTaxpayerContact;
+        internal System.Windows.Forms.TextBox txtTaxpayerTIN;
+        internal System.Windows.Forms.TextBox txtTaxpayerType;
+        internal System.Windows.Forms.TextBox txtTaxpayers;
     }
 }

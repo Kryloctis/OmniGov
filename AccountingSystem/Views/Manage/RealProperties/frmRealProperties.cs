@@ -30,6 +30,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
 
                 HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, RealPropertiesDataTable(dtRealProperties));
+                //HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -40,15 +41,18 @@ namespace AccountingSystem.Views.Manage.RealProperties
             var dataTable = new DataTable();
             var selectedColumns = new DataColumn[]
             {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("property_identifier", typeof(string)),
+                new DataColumn("real_properties_id", typeof(int)),
+                new DataColumn("property_identifier", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
-                new DataColumn("property_pin", typeof(string)),
-                new DataColumn("barangay_name", typeof(string)),
-                new DataColumn("property_kind", typeof(string)),
+                new DataColumn("taxpayer_name", typeof(string)),
+                new DataColumn("real_properties_municipalities_name", typeof(string)),
+                new DataColumn("real_properties_provinces_name", typeof(string)),
+                new DataColumn("classification_codes_name", typeof(string)),
+                new DataColumn("actual_use_codes_name", typeof(string)),
+                new DataColumn("other_improvements", typeof(string)),
                 new DataColumn("assessed_value", typeof(string)),
-                new DataColumn("municipality_name", typeof(string)),
-                new DataColumn("province_name", typeof(string)),
+                new DataColumn("is_taxable", typeof(bool)),
+                new DataColumn("is_cancelled", typeof(bool)),
             };
             dataTable.Columns.AddRange(selectedColumns);
 
@@ -56,7 +60,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             {
 
                 var newRow = dataTable.NewRow();
-                int rowId = Convert.ToInt32(row["id"]);
+                int rowId = Convert.ToInt32(row["real_properties_id"]);
                 string rowPropertyIdentifier = row["property_identifier"].ToString();
                 string completeArpNumber = row["complete_arp_no"].ToString();
                 string propertyPin = row["property_pin"].ToString();
@@ -66,20 +70,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 string municipalityName = row["municipality_name"].ToString();
                 string provinceName = row["province_name"].ToString();
 
-                newRow["id"] = rowId;
-                newRow["property_identifier"] = rowPropertyIdentifier;
-                newRow["complete_arp_no"] = completeArpNumber;
-                newRow["property_pin"] = propertyPin;
-                newRow["barangay_name"] = barangayName;
-                newRow["property_kind"] = propertyKind;
-                newRow["assessed_value"] = assessedValue;
-                newRow["municipality_name"] = municipalityName;
-                newRow["province_name"] = provinceName;
+                bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
+                bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
 
                 dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
         }
+
     }
 }

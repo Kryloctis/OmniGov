@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
     {
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
+        internal int taxpayerID;
 
         public ucRealProperties()
         {
@@ -20,7 +22,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal string GetFormError()
         {
             var errorArray = new string[]
-            {   
+            {
                 errorProvider1.GetError(txtArpNo),
                 errorProvider1.GetError(cmbxBarangays),
                 errorProvider1.GetError(cmbxPropertyKind),
@@ -76,6 +78,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             LoadPropertyKind();
             LoadClassificationCodes();
             LoadActualUseCodes();
+            LoadBarangay();
+        }
+        private void LoadBarangay()
+        {
+            var dt = AccFactory.BarangayRepository().GetRecords();
+
+            cmbxBarangays.DataSource = dt;
+            cmbxBarangays.ValueMember = "id";
+            cmbxBarangays.DisplayMember = "name";
         }
 
         private void LoadActualUseCodes()
@@ -83,13 +94,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             var dt = AccFactory.ActualUseCodesRepository().GetRecords();
 
             cmbxActualUse.DataSource = dt;
-            cmbxActualUse.ValueMember = "";
-            cmbxActualUse.DisplayMember = "";
+            cmbxActualUse.ValueMember = "id";
+            cmbxActualUse.DisplayMember = "name";
         }
 
         private void LoadClassificationCodes()
         {
+            var dt = AccFactory.ClassificationCodesRepository().GetRecords();
 
+            cmbxClassification.DataSource = dt;
+            cmbxClassification.ValueMember = "id";
+            cmbxClassification.DisplayMember = "name";
         }
 
 
@@ -218,7 +233,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, null).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, null, null, (frmAddRealProperties)this.Parent).ShowDialog();
         }
     }
 }

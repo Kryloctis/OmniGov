@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "real_properties";
+        private readonly string viewTableName = "view_real_properties";
 
         public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
@@ -84,7 +85,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
