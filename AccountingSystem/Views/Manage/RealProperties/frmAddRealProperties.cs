@@ -43,6 +43,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
                     ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
                     BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
+                    PropertyIdentifier = uc.propertyIdentifier.ToString(),
+                    RealTaxpayersId = uc.taxpayerID,
+                    TaxpayerName = uc.txtTaxpayers.Text,
+                    TaxpayerAddress = uc.txtTaxpayerAddress.Text, 
                     PropertyPin = uc.txtPropertyPin.Text,
                     PropertyKind = uc.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
@@ -54,6 +58,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     LotNo = uc.txtLotNo.Text,
                     IsTaxable = uc.chckTaxable.Checked,
                     IsCancelled = uc.chckCancelled.Checked,
+                    CreatedBy  = Helper.UserId
                 };
 
 

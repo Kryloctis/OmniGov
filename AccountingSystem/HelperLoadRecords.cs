@@ -18,14 +18,19 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["property_identifier"].Visible = false;
             dataGridView.Columns["complete_arp_no"].HeaderText = "Complete ARP No.";
+            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["real_taxpayers_street"].HeaderText = "Street";
+            dataGridView.Columns["real_taxpayers_street"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_pin"].Visible = false;
             dataGridView.Columns["real_taxpayers_id"].Visible = false;
             dataGridView.Columns["real_taxpayers_tin"].Visible = false;
             dataGridView.Columns["real_taxpayers_name"].Visible = false;
+            dataGridView.Columns["real_taxpayers_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["real_taxpayers_contact_info"].Visible = false;
             dataGridView.Columns["real_taxpayers_is_active"].Visible = false;
             dataGridView.Columns["taxpayer_tin"].Visible = false;
             dataGridView.Columns["taxpayer_name"].HeaderText = "Taxpayer";
+            dataGridView.Columns["taxpayer_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["taxpayer_contact_info"].Visible = false;
             dataGridView.Columns["taxpayer_address"].Visible = false;
             dataGridView.Columns["real_properties_street"].Visible = false;
@@ -51,29 +56,14 @@ namespace AccountingSystem
             dataGridView.Columns["effectivity_year"].Visible = false;
             dataGridView.Columns["other_improvements"].HeaderText = "Other Improvements";
             dataGridView.Columns["assessed_value"].HeaderText = "Assess Value";
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
+            dataGridView.Columns["assessed_value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["area"].HeaderText = "Area";
             dataGridView.Columns["lot_no"].Visible = false;
             dataGridView.Columns["gr_year"].Visible = false;
             dataGridView.Columns["is_taxable"].HeaderText = "Taxable";
             dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
 
-
-
-            //dataGridView.Columns["property_identifier"].Visible = false;
-            //dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dataGridView.Columns["property_pin"].HeaderText = "PIN";
-            //dataGridView.Columns["property_pin"].MinimumWidth = 100;
-            //dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
-            //dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            //dataGridView.Columns["property_kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            //dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            ////dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            ////dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            //dataGridView.Columns["municipality_name"].HeaderText = "Municipality";
-            //dataGridView.Columns["province_name"].HeaderText = "Province";
-            //dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
-            //dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-            //dataGridView.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         public static void TaxpayerDatagridView(DataGridView dataGridView, DataTable dataTable)
@@ -92,7 +82,6 @@ namespace AccountingSystem
             dataGridView.Columns["is_active"].HeaderText = "Active";
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
-
         }
 
         #endregion

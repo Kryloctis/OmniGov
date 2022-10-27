@@ -79,8 +79,10 @@
             // 
             // frmAddRealProperties
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(718, 464);
             this.Controls.Add(this.ucRealProperties1);
             this.Controls.Add(this.flowLayoutPanel1);

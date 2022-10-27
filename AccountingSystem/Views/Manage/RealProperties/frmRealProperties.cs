@@ -28,9 +28,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
             try
             {
                 var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
-
-                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, RealPropertiesDataTable(dtRealProperties));
-                //HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
+                //HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, RealPropertiesDataTable(dtRealProperties));
+                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
