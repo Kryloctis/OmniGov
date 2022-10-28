@@ -27,56 +27,28 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             try
             {
-                var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
-                //HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, RealPropertiesDataTable(dtRealProperties));
+                string searchValue = txtSearch.Text.Trim();
+                var dtRealProperties = new DataTable();
+
+                if (searchValue.Length < 2)
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
+                else
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBySearch(searchValue);
+
                 HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable RealPropertiesDataTable(DataTable dtRealProperties)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            var dataTable = new DataTable();
-            var selectedColumns = new DataColumn[]
-            {
-                new DataColumn("real_properties_id", typeof(int)),
-                new DataColumn("property_identifier", typeof(int)),
-                new DataColumn("complete_arp_no", typeof(string)),
-                new DataColumn("taxpayer_name", typeof(string)),
-                new DataColumn("real_properties_municipalities_name", typeof(string)),
-                new DataColumn("real_properties_provinces_name", typeof(string)),
-                new DataColumn("classification_codes_name", typeof(string)),
-                new DataColumn("actual_use_codes_name", typeof(string)),
-                new DataColumn("other_improvements", typeof(string)),
-                new DataColumn("assessed_value", typeof(string)),
-                new DataColumn("is_taxable", typeof(bool)),
-                new DataColumn("is_cancelled", typeof(bool)),
-            };
-            dataTable.Columns.AddRange(selectedColumns);
-
-            foreach (DataRow row in dtRealProperties.Rows)
-            {
-
-                var newRow = dataTable.NewRow();
-                int rowId = Convert.ToInt32(row["real_properties_id"]);
-                string rowPropertyIdentifier = row["property_identifier"].ToString();
-                string completeArpNumber = row["complete_arp_no"].ToString();
-                string propertyPin = row["property_pin"].ToString();
-                string barangayName = row["barangay_name"].ToString();
-                string propertyKind = row["property_kind"].ToString();
-                string assessedValue = row["assessed_value"].ToString();
-                string municipalityName = row["municipality_name"].ToString();
-                string provinceName = row["province_name"].ToString();
-
-                bool isTaxable = Convert.ToBoolean(row["is_taxable"]);
-                bool isCancelled = Convert.ToBoolean(row["is_cancelled"]);
-
-                dataTable.Rows.Add(newRow);
-            }
-
-            return dataTable;
+            LoadProperties();
         }
 
+        private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgRealProperties, btnEdit, btnDelete);
+        }
     }
 }
