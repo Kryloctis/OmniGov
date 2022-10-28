@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Receipts;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -49,6 +52,31 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgRealProperties, btnEdit, btnDelete);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmDelete(dgRealProperties.SelectedRows.Count))
+            {
+                var realPropertiesRepository = AccFactory.RealPropertiesRepository();
+                var realPropertiesModels = new List<RealPropertiesModel>();
+
+                foreach (DataGridViewRow row in dgRealProperties.SelectedRows)
+                {
+                    int realPropertiesID = int.Parse(row.Cells[0].Value.ToString());
+
+                    var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(realPropertiesID);
+
+                    if (!receiptIsUsed)
+                        realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
+
+                }
+                _ = realPropertiesRepository.Delete(realPropertiesModels);
+
+
+                LoadProperties();
+                Helper.MessageBoxSuccess("Real properties has been deleted.");
+            }
         }
     }
 }
