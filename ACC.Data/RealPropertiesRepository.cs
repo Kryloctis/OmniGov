@@ -11,6 +11,7 @@ namespace ACC.Data
     {
         private MySqlGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "real_properties";
+        private readonly string viewTableName = "view_real_properties";
 
         public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
         {
@@ -50,7 +51,6 @@ namespace ACC.Data
 
             string query = $"SELECT real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE id = @id";
 
-
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
@@ -84,7 +84,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
@@ -92,7 +92,7 @@ namespace ACC.Data
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
-            string query = $"SELECT * FROM {tableName} WHERE street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
+            string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }

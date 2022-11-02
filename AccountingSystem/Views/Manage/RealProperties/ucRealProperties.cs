@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
     {
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
+        internal int taxpayerID;
+        internal int propertyIdentifier = 1;
 
         public ucRealProperties()
         {
@@ -74,7 +77,37 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
             LoadPropertyKind();
+            LoadClassificationCodes();
+            LoadActualUseCodes();
+            LoadBarangay();
         }
+        private void LoadBarangay()
+        {
+            var dt = AccFactory.BarangayRepository().GetRecords();
+
+            cmbxBarangays.DataSource = dt;
+            cmbxBarangays.ValueMember = "id";
+            cmbxBarangays.DisplayMember = "name";
+        }
+
+        private void LoadActualUseCodes()
+        {
+            var dt = AccFactory.ActualUseCodesRepository().GetRecords();
+
+            cmbxActualUse.DataSource = dt;
+            cmbxActualUse.ValueMember = "id";
+            cmbxActualUse.DisplayMember = "name";
+        }
+
+        private void LoadClassificationCodes()
+        {
+            var dt = AccFactory.ClassificationCodesRepository().GetRecords();
+
+            cmbxClassification.DataSource = dt;
+            cmbxClassification.ValueMember = "id";
+            cmbxClassification.DisplayMember = "name";
+        }
+
 
         #region Validations
 
@@ -201,7 +234,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, null).ShowDialog();
+            _ = new frmRptTaxPayerList(null, null, null, null, (frmAddRealProperties)this.Parent).ShowDialog();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Receipts;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -27,59 +30,53 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             try
             {
-                var dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
+                string searchValue = txtSearch.Text.Trim();
+                var dtRealProperties = new DataTable();
 
-                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, RealPropertiesDataTable(dtRealProperties));
+                if (searchValue.Length < 2)
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetRecords();
+                else
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBySearch(searchValue);
+
+                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataTable RealPropertiesDataTable(DataTable dtRealProperties)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            var dataTable = new DataTable();
-            var selectedColumns = new DataColumn[]
+            LoadProperties();
+        }
+
+        private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgRealProperties, btnEdit, btnDelete);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Helper.MessageBoxConfirmDelete(dgRealProperties.SelectedRows.Count))
             {
-                new DataColumn("id", typeof(int)),
-                new DataColumn("property_identifier", typeof(string)),
-                new DataColumn("complete_arp_no", typeof(string)),
-                new DataColumn("property_pin", typeof(string)),
-                new DataColumn("barangay_name", typeof(string)),
-                new DataColumn("property_kind", typeof(string)),
-                new DataColumn("assessed_value", typeof(string)),
-                new DataColumn("municipality_name", typeof(string)),
-                new DataColumn("province_name", typeof(string)),
-            };
-            dataTable.Columns.AddRange(selectedColumns);
+                var realPropertiesRepository = AccFactory.RealPropertiesRepository();
+                var realPropertiesModels = new List<RealPropertiesModel>();
 
-            foreach (DataRow row in dtRealProperties.Rows)
-            {
+                foreach (DataGridViewRow row in dgRealProperties.SelectedRows)
+                {
+                    int realPropertiesID = int.Parse(row.Cells[0].Value.ToString());
 
-                var newRow = dataTable.NewRow();
-                int rowId = Convert.ToInt32(row["id"]);
-                string rowPropertyIdentifier = row["property_identifier"].ToString();
-                string completeArpNumber = row["complete_arp_no"].ToString();
-                string propertyPin = row["property_pin"].ToString();
-                string barangayName = row["barangay_name"].ToString();
-                string propertyKind = row["property_kind"].ToString();
-                string assessedValue = row["assessed_value"].ToString();
-                string municipalityName = row["municipality_name"].ToString();
-                string provinceName = row["province_name"].ToString();
+                    var receiptIsUsed = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(realPropertiesID);
 
-                newRow["id"] = rowId;
-                newRow["property_identifier"] = rowPropertyIdentifier;
-                newRow["complete_arp_no"] = completeArpNumber;
-                newRow["property_pin"] = propertyPin;
-                newRow["barangay_name"] = barangayName;
-                newRow["property_kind"] = propertyKind;
-                newRow["assessed_value"] = assessedValue;
-                newRow["municipality_name"] = municipalityName;
-                newRow["province_name"] = provinceName;
+                    if (!receiptIsUsed)
+                        realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
 
-                dataTable.Rows.Add(newRow);
+                }
+                _ = realPropertiesRepository.Delete(realPropertiesModels);
+
+
+                LoadProperties();
+                Helper.MessageBoxSuccess("Real properties has been deleted.");
             }
-
-            return dataTable;
         }
     }
 }

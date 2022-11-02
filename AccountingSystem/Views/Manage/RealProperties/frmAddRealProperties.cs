@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
     public partial class frmAddRealProperties : Form
     {
         private frmRealProperties _frmRealProperties;
-        private ucRealProperties uc;
+        internal ucRealProperties uc;
 
         public frmAddRealProperties(frmRealProperties frmRealProperties)
         {
@@ -40,11 +40,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 var realPropertiesModel = new RealPropertiesModel()
                 {
                     CompleteArpNo = uc.txtArpNo.Text,
-                    ClassificationCodesId = 0,
-                    ActualUseCodesId = 0,
-                    BarangaysId = 0,
+                    ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
+                    ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
+                    BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
+                    PropertyIdentifier = uc.propertyIdentifier.ToString(),
+                    RealTaxpayersId = uc.taxpayerID,
+                    TaxpayerName = uc.txtTaxpayers.Text,
+                    TaxpayerAddress = uc.txtTaxpayerAddress.Text, 
                     PropertyPin = uc.txtPropertyPin.Text,
-
                     PropertyKind = uc.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
                     EffectivityYear = Convert.ToInt32(uc.nudEffectivityYear.Value),
@@ -55,10 +58,11 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     LotNo = uc.txtLotNo.Text,
                     IsTaxable = uc.chckTaxable.Checked,
                     IsCancelled = uc.chckCancelled.Checked,
+                    CreatedBy  = Helper.UserId
                 };
 
 
-                return AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
+                return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
             }
             catch (Exception ex)
             {

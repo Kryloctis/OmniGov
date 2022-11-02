@@ -7,6 +7,7 @@
         public int BarangaysId { get; set; }
         public int ClassificationCodesId { get; set; }
         public int ActualUseCodesId { get; set; }
+        public int TaxpayerID { get; set; }
         public string TaxpayerTin { get; set; }
         public string TaxpayerName { get; set; }
         public string TaxpayerContactInfo { get; set; }
