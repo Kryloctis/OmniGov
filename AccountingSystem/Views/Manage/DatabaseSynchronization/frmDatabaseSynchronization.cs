@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     }
 
                     string realTaxpayerTin = row["real_owner_tin"].ToString();
-                    string realTaxpayerName = row["real_owner_name"].ToString();
+                    string realTaxpayerName = row["real_owner_name"].ToString().ToUpper();
                     string realTaxpayerStreet = row["real_owner_street"].ToString();
                     string realTaxpayerBarangay = row["real_owner_barangay"].ToString();
                     string realTaxpayerMunicipality = row["real_owner_municipality"].ToString();

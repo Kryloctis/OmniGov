@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using AccountingSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -346,13 +347,16 @@ namespace ACC.Data
                     if (_taxpayersRepository.TaxpayerNameExist(taxpayerName))
                     {
                         taxpayerId = _taxpayersRepository.GetIdByName(taxpayerName);
+                        var dictTaxpayers = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
                         taxpayersModel.Id = taxpayerId;
                         taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                        taxpayersModel.IsActive = Convert.ToBoolean(Convert.ToByte(dictTaxpayers["is_active"]));
                         _taxpayersRepository.Update(taxpayersModel);
                     }
                     else
                     {
                         taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                        taxpayersModel.IsActive = true;
                         _ = _taxpayersRepository.Insert(taxpayersModel);
                         taxpayerId = _taxpayersRepository.GetLastInsertedId();
                     }
