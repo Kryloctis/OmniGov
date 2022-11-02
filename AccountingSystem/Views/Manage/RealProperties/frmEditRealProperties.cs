@@ -29,18 +29,23 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(_propertyId);
 
+    
             _ucRealProperties.txtArpNo.Text = dictRealProperties["complete_arp_no"];
             _ucRealProperties.txtPropertyPin.Text = dictRealProperties["property_pin"];
+            _ucRealProperties.cmbxBarangays.SelectedValue = dictRealProperties["real_properties_barangays_id"];
+            _ucRealProperties.cmbxClassification.SelectedValue = dictRealProperties["classification_codes_id"];
+            _ucRealProperties.cmbxActualUse.SelectedValue = dictRealProperties["actual_use_codes_id"];
             _ucRealProperties.txtPropertyPin.Text = dictRealProperties["property_kind"];
             _ucRealProperties.nudEffectivityQuarter.Text = dictRealProperties["effectivity_quarter"];
             _ucRealProperties.nudEffectivityYear.Text = dictRealProperties["effectivity_year"];
+            _ucRealProperties.nudAssessedValue.Value = Convert.ToDecimal(dictRealProperties["assessed_value"]);
             _ucRealProperties.nudGrYear.Text = dictRealProperties["gr_year"];
             _ucRealProperties.nudOtherImprv.Text = dictRealProperties["other_improvements"];
             _ucRealProperties.nudArea.Text = dictRealProperties["area"];
             _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
-            _ucRealProperties.chckTaxable.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_taxable"]));
-            _ucRealProperties.chckCancelled.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_cancelled"]));
 
+            //_ucRealProperties.chckTaxable.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_taxable"]));
+            //_ucRealProperties.chckCancelled.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_cancelled"]));
 
 
         }
