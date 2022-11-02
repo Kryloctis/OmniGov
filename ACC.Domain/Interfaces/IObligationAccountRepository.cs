@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IObligationAccountRepository : IRepository<ObligationAccountModel>
+    public interface IObligationAccountRepository : IAccRepository<ObligationAccountModel>
     {
         bool DeleteByObligationRequestId(int ObligationRequestId);
 

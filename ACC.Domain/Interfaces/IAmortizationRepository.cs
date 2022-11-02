@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAmortizationRepository: IRepository<AmortizationModel>
+    public interface IAmortizationRepository: IAccRepository<AmortizationModel>
     {
     }
 }

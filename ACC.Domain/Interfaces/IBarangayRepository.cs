@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IBarangayRepository : IRepository<BarangayModel>
+    public interface IBarangayRepository : IAccRepository<BarangayModel>
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);

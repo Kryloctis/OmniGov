@@ -10,11 +10,11 @@ namespace ACC.Data
 {
     public class SupplementalAppropriationsRepository : ISupplementalAppropriationsRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "supplemental_appropriations";
         private readonly string viewTableName = "view_supplemental_appropriations";
 
-        public SupplementalAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SupplementalAppropriationsRepository(AccGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }

@@ -11,12 +11,12 @@ namespace ACC.Data
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
 
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
         private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
         private readonly IAllotmentAccountRepository _allotmentAccountRepository;
 
-        public AllotmentReleaseRepository(MySqlGenericCommands mySqlGenericCommands, IAllotmentAccountRepository allotmentAccountRepository)
+        public AllotmentReleaseRepository(AccGenericCommands mySqlGenericCommands, IAllotmentAccountRepository allotmentAccountRepository)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
             _allotmentAccountRepository = allotmentAccountRepository;

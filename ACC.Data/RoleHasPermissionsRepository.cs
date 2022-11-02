@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class RoleHasPermissionsRepository : IRoleHasPermissionsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "role_has_permissions";
         private readonly string viewTableName = "view_role_has_permissions";
 
-        public RoleHasPermissionsRepository(IDbGenericCommands dbGenericCommands)
+        public RoleHasPermissionsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

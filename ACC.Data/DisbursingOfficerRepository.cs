@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class DisbursingOfficerRepository : IDisbursingOfficerRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "disbursing_officers";
 
-        public DisbursingOfficerRepository(IDbGenericCommands dbGenericCommands)
+        public DisbursingOfficerRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

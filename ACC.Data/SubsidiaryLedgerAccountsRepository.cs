@@ -10,10 +10,10 @@ namespace ACC.Data
 {
     public class SubsidiaryLedgerAccountsRepository : ISubsidiaryLedgerAccountsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "subsidiary_ledger_accounts";
 
-        public SubsidiaryLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
+        public SubsidiaryLedgerAccountsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

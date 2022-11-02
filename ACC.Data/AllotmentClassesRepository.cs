@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class AllotmentClassesRepository : IAllotmentClassesRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
 
         private readonly string tableName = "allotment_classes";
         
-        public AllotmentClassesRepository(IDbGenericCommands dbGenericCommands)
+        public AllotmentClassesRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

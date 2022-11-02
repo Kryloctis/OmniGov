@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IDocumentReferences : IRepository<DocumentReferencesModel>
+    public interface IDocumentReferences : IAccRepository<DocumentReferencesModel>
     {
         DataTable GetViewRecords();
 

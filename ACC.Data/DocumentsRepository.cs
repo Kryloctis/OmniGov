@@ -7,9 +7,9 @@ namespace ACC.Data
 {
     public class DocumentsRepository : IDocuments
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
 
-        public DocumentsRepository(MySqlGenericCommands mySqlGenericCommands)
+        public DocumentsRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

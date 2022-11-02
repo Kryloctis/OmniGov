@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
+﻿using System.Data;
 
-namespace ACC.Domain.Interfaces
+namespace RPT.Domain.Interfaces
 {
-    public interface IDbGenericCommands
+    public interface IRPTGenericCommands
     {
         DataTable Fill(string query, DataTable dataTable);
         DataTable FillBySearch(string query, DataTable dataTable, params object[][] parameters);

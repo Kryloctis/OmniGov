@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     class CashReceiptsJournalRepository : ICashReceiptsJournalRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "cash_receipts_journal";
         private const string viewTableName = "view_cash_receipts_journal";
 
-        public CashReceiptsJournalRepository(IDbGenericCommands dbGenericCommands)
+        public CashReceiptsJournalRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

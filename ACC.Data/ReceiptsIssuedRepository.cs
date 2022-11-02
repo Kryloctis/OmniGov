@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class ReceiptsIssuedRepository:IReceiptsIssuedRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "receipts_issued";
         private readonly string viewTableName = "view_receipts_issued";
 
-        public ReceiptsIssuedRepository(IDbGenericCommands dbGenericCommands)
+        public ReceiptsIssuedRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

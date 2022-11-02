@@ -9,10 +9,10 @@ namespace AccountingSystem
 {
     internal class TaxpayerTypeRepository : ITaxpayerTypeRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "taxpayer_type";
 
-        public TaxpayerTypeRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public TaxpayerTypeRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

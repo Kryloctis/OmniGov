@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAllotmentReleaseRepository : IRepository<AllotmentReleaseModel>
+    public interface IAllotmentReleaseRepository : IAccRepository<AllotmentReleaseModel>
     {
 
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);

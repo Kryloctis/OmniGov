@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IActualUseCodes : IRepository<ActualUseCodesModel>
+    public interface IActualUseCodes : IAccRepository<ActualUseCodesModel>
     {
         bool NameExist(string name);
         bool NameExist(string name, int id);

@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IProvinces : IRepository<ProvincesModel>
+    public interface IProvinces : IAccRepository<ProvincesModel>
     {
         bool NameExist(string name);
         bool NameExist(int id, string name);

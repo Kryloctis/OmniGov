@@ -9,29 +9,20 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 {
     public partial class frmDatabaseSynchronization : Form
     {
+        private ucDatabaseSynchronization uc;
+
         public frmDatabaseSynchronization()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            progressBar1.Visible = false;
-        }
-
-        private void LoadSyncOptions()
-        {
-            var dict = new Dictionary<string, string>()
-            {
-                { "RPT", "0"}
-            };
-
-            var bindingSource = new BindingSource(dict, null);
-            cmbxSyncType.DataSource = bindingSource;
-            cmbxSyncType.DisplayMember = "Key";
-            cmbxSyncType.ValueMember = "Value";
+            uc = ucDatabaseSynchronization1;
+            uc.lblProgressStatus.Text = string.Empty;
+            uc.lblProgressStatus.Visible = false;
+            uc.progressBar1.Visible = false;
         }
 
         private void frmDatabaseSynchronization_Load(object sender, EventArgs e)
         {
-            LoadSyncOptions();
         }
 
         private void btnSync_Click(object sender, EventArgs e)
@@ -40,6 +31,8 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             {
                 if (!backgroundWorkerRptSync.IsBusy)
                 {
+                    uc.lblProgressStatus.Visible = true;
+                    uc.progressBar1.Visible = true;
                     backgroundWorkerRptSync.RunWorkerAsync();
                 }
             }
@@ -49,23 +42,26 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             }
         }
 
-
         #region Database Sync Progresses
 
         private void backgroundWorkerRptSync_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
+                var realPropertiesModelList = new List<RealPropertiesModel>();
+
                 var dtRealProperties = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecords();
-                var realPropertiesModels = new List<RealPropertiesModel>();
-                var provincesModels = new List<ProvincesModel>();
-                var taxpayerTypeModels = new List<TaxpayerTypeModel>();
-                var actualUseCodeModels = new List<ActualUseCodesModel>();
-                var classificationCodeModels = new List<ClassificationCodesModel>();
-                var taxpayersModels = new List<TaxpayersModel>();
+                int totalRecordCount = dtRealProperties.Rows.Count;
+                int progressCount = 0;
 
                 foreach (DataRow row in dtRealProperties.Rows)
                 {
+                    if (backgroundWorkerRptSync.CancellationPending)
+                    {
+                        e.Result = "cancelled";
+                        break;
+                    }
+
                     string realTaxpayerTin = row["real_owner_tin"].ToString();
                     string realTaxpayerName = row["real_owner_name"].ToString();
                     string realTaxpayerStreet = row["real_owner_street"].ToString();
@@ -109,244 +105,153 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     bool actualUseIsGovernment = Convert.ToBoolean(Convert.ToByte(row["actual_use_is_government"]));
                     bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classfication_is_special"]));
 
-                    int provinceId;
-                    int municipalityId;
-                    int barangayId;
-                    int actualUseId;
-                    int classificationId;
-                    int realTaxpayersId;
-                    int realTaxpayerTypeId;
+                    #region Location
 
-                    #region PROVINCE
-                    if (AccFactory.ProvincesRepository().NameExist(provinceName))
-                        provinceId = AccFactory.ProvincesRepository().GetIdByName(provinceName);
-                    else
+                    var actualUseCodesModel = new ActualUseCodesModel()
                     {
-                        var provincesModel = new ProvincesModel()
-                        {
-                            Code = provinceCode,
-                            Name = provinceName
-                        };
+                        Code = actualUseCode,
+                        Name = actualUseName,
+                        IsGovernment = actualUseIsGovernment
+                    };
 
-                        _ = AccFactory.ProvincesRepository().Insert(provincesModel);
-                        provinceId = AccFactory.ProvincesRepository().GetLastInsertedId();
-                    }
+                    var classificationCodesModel = new ClassificationCodesModel()
+                    {
+                        Code = classificationCode,
+                        Name = classificationName,
+                        IsSpecial = classificationIsSpecial
+                    };
+
+                    var taxpayerTypeModel = new TaxpayerTypeModel()
+                    {
+                        Code = realTaxpayerTypeCode,
+                        taxpayerType = realTaxpayerType
+                    };
+
+                    var taxpayersModel = new TaxpayersModel()
+                    {
+                        Name = realTaxpayerName,
+                        Tin = realTaxpayerTin,
+                        Street = realTaxpayerStreet,
+                        Barangay = realTaxpayerBarangay,
+                        Municipality = realTaxpayerMunicipality,
+                        Province = realTaxpayerProvince,
+                        ContactInfo = realTaxpayerContactInfo,
+                        CreatedBy = Helper.UserId,
+                        UpdatedBy = Helper.UserId
+                    };
+
+                    var barangayModel = new BarangayModel()
+                    {
+                        Code = barangaysCode,
+                        Name = barangaysName,
+                    };
+
+                    var municipalitiesModel = new MunicipalitiesModel()
+                    {
+                        Code = municipalitiesCode,
+                        Name = municipalitiesName,
+                    };
+
+                    var provincesModel = new ProvincesModel()
+                    {
+                        Code = provinceCode,
+                        Name = provinceName,
+                    };
+
+
+                    var realPropertiesModel = new RealPropertiesModel()
+                    {
+                        CompleteArpNo = completeArpNo,
+                        PropertyPin = propertyPin,
+                        Street = propertyStreet,
+                        TaxpayerTin = taxpayerTin,
+                        TaxpayerName = taxpayerName,
+                        TaxpayerAddress = taxpayerAddress,
+                        TaxpayerContactInfo = taxpayerContactInfo,
+                        PropertyKind = propertyKind,
+                        OtherImprovements = propertyOtherImprovements,
+                        Area = propertyLandArea,
+                        AssessedValue = propertyAssessedValue,
+                        EffectivityQuarter = propertyEffectivityQuarter,
+                        EffectivityYear = propertyEffectivityYear,
+                        LotNo = propertyLotNo,
+                        GrYear = propertyGrYear,
+                        IsCancelled = propertyIsCancelled,
+                        IsTaxable = propertyIsTaxable,
+                        CreatedBy = Helper.UserId,
+                        UpdatedBy = Helper.UserId,
+                        TaxpayerTypeModel = taxpayerTypeModel,
+                        TaxpayersModel = taxpayersModel,
+                        ProvincesModel = provincesModel,
+                        MunicipalitiesModel = municipalitiesModel,
+                        BarangayModel = barangayModel,
+                        ActualUseCodesModel = actualUseCodesModel,
+                        ClassificationCodesModel = classificationCodesModel,
+                    };
+
+                    realPropertiesModelList.Add(realPropertiesModel);
 
                     #endregion
 
-                    #region MUNICIPALITY
-                    if (AccFactory.MunicipalitiesRepository().NameExistByProvinceName(municipalitiesName, provinceName))
-                        municipalityId = AccFactory.MunicipalitiesRepository().GetIdByNameProvinceName(municipalitiesName, provinceName);
-                    else
-                    {
-                        var municipalitiesModel = new MunicipalitiesModel()
-                        {
-                            ProvincesId = provinceId,
-                            Code = municipalitiesCode,
-                            Name = municipalitiesName,
-                        };
+                    progressCount++;
+                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, completeArpNo);
 
-                        _ = AccFactory.MunicipalitiesRepository().Insert(municipalitiesModel);
-                        municipalityId = AccFactory.MunicipalitiesRepository().GetLastInsertedId();
-                    }
-                    #endregion
-
-                    #region BARANGAY
-                    if (AccFactory.BarangayRepository().NameExistByMunicipalitiesName_ProvincesName(barangaysName, municipalitiesName, provinceName))
-                        barangayId = AccFactory.BarangayRepository().GetIdByName_MunicipalitiesName_ProvincesName(barangaysName, municipalitiesName, provinceName);
-                    else
-                    {
-                        var barangaysModel = new BarangayModel()
-                        {
-                            MunicipalityID = municipalityId,
-                            Code = row["barangays_code"].ToString(),
-                            Name = row["barangays_name"].ToString()
-                        };
-
-                        _ = AccFactory.BarangayRepository().Insert(barangaysModel);
-                        barangayId = AccFactory.BarangayRepository().GetLastInsertedId();
-                    }
-                    #endregion
-
-                    #region ACTUAL USE
-                    if (AccFactory.ActualUseCodesRepository().NameExist(actualUseName))
-                        actualUseId = AccFactory.ActualUseCodesRepository().GetIdByName(actualUseName);
-                    else
-                    {
-                        var actualUseCodesModel = new ActualUseCodesModel()
-                        {
-                            Code = actualUseCode,
-                            Name = actualUseName,
-                            IsGovernment = actualUseIsGovernment
-                        };
-
-                        _ = AccFactory.ActualUseCodesRepository().Insert(actualUseCodesModel);
-                        actualUseId = AccFactory.ActualUseCodesRepository().GetLastInsertedId();
-                    }
-                    #endregion
-
-                    #region CLASSIFICATION
-                    if (AccFactory.ClassificationCodesRepository().NameExist(classificationName))
-                        classificationId = AccFactory.ClassificationCodesRepository().GetIdByName(classificationName);
-                    else
-                    {
-                        var classificationCodesModel = new ClassificationCodesModel()
-                        {
-                            Code = classificationCode,
-                            Name = classificationName,
-                            IsSpecial = classificationIsSpecial
-                        };
-
-                        _ = AccFactory.ClassificationCodesRepository().Insert(classificationCodesModel);
-                        classificationId = AccFactory.ClassificationCodesRepository().GetLastInsertedId();
-                    }
-                    #endregion
-
-                    #region TAXPAYER TYPE
-                    if (AccFactory.TaxpayerTypeRepository().NameExist(realTaxpayerType))
-                        realTaxpayerTypeId = Convert.ToInt32(AccFactory.TaxpayerTypeRepository().GetIdByName(realTaxpayerType));
-                    else
-                    {
-                        var taxpayerTypeModel = new TaxpayerTypeModel()
-                        {
-                            Code = realTaxpayerTypeCode,
-                            taxpayerType = realTaxpayerType
-                        };
-
-                        _ = AccFactory.TaxpayerTypeRepository().Insert(taxpayerTypeModel);
-                        realTaxpayerTypeId = AccFactory.TaxpayerTypeRepository().GetLastInsertedId();
-                    }
-                    #endregion
-
-                    #region REAL PROPERTIES
-
-                    if (AccFactory.RealPropertiesRepository().CompleteArpNoExist(completeArpNo))
-                    {
-                        int realPropertiesId = AccFactory.RealPropertiesRepository().GetIdByCompleteArpNo(completeArpNo);
-                        var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(realPropertiesId);
-                        realTaxpayersId = Convert.ToInt32(dictRealProperties["real_taxpayers_id"]);
-
-
-                        //UPDATE TAXPAYER 
-                        var taxpayersModel = new TaxpayersModel()
-                        {
-                            Id = realTaxpayersId,
-                            Name = realTaxpayerName,
-                            Tin = realTaxpayerTin,
-                            Street = realTaxpayerStreet,
-                            Barangay = realTaxpayerBarangay,
-                            Municipality = realTaxpayerMunicipality,
-                            Province = realTaxpayerProvince,
-                            ContactInfo = realTaxpayerContactInfo,
-                            TaxpayerTypeId = realTaxpayerTypeId,
-                            UpdatedBy = Helper.UserId
-                        };
-
-                        _ = AccFactory.TaxpayersRepository().Update(taxpayersModel);
-
-                        //UPDATE REAL PROPERTY
-                        var realPropertiesModel = new RealPropertiesModel()
-                        {
-                            Id = realPropertiesId,
-                            CompleteArpNo = completeArpNo,
-                            PropertyPin = propertyPin,
-                            Street = propertyStreet,
-                            TaxpayerTin = taxpayerTin,
-                            TaxpayerName = taxpayerName,
-                            TaxpayerAddress = taxpayerAddress,
-                            TaxpayerContactInfo = taxpayerContactInfo,
-                            PropertyKind = propertyKind,
-                            OtherImprovements = propertyOtherImprovements,
-                            Area = propertyLandArea,
-                            AssessedValue = propertyAssessedValue,
-                            EffectivityQuarter = propertyEffectivityQuarter,
-                            EffectivityYear = propertyEffectivityYear,
-                            LotNo = propertyLotNo,
-                            GrYear = propertyGrYear,
-                            IsCancelled = propertyIsCancelled,
-                            IsTaxable = propertyIsTaxable,
-                            ActualUseCodesId = actualUseId,
-                            ClassificationCodesId = classificationId,
-                            BarangaysId = barangayId,
-                            RealTaxpayersId = realTaxpayersId,
-                            UpdatedBy = Helper.UserId
-                        };
-                        _ = AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
-                    }
-                    else
-                    {
-                        //CHECK TAXPAYER NAME EXIST
-                        if (AccFactory.TaxpayersRepository().TaxpayerNameExist(realTaxpayerName))
-                            realTaxpayersId = AccFactory.TaxpayersRepository().GetIdByName(realTaxpayerName);
-                        else
-                        {
-                            var taxpayersModel = new TaxpayersModel()
-                            {
-                                Tin = realTaxpayerTin,
-                                Name = realTaxpayerName,
-                                Street = realTaxpayerStreet,
-                                Barangay = realTaxpayerBarangay,
-                                Municipality = realTaxpayerMunicipality,
-                                Province = realTaxpayerProvince,
-                                ContactInfo = realTaxpayerContactInfo,
-                                TaxpayerTypeId = realTaxpayerTypeId,
-                                IsActive = true,
-                                CreatedBy = Helper.UserId,
-                            };
-
-                            _ = AccFactory.TaxpayersRepository().Insert(taxpayersModel);
-                            realTaxpayersId = AccFactory.TaxpayersRepository().GetLastInsertedId();
-                        }
-
-                        //INSERT REAL PROPERTIES
-                        var realPropertiesModel = new RealPropertiesModel()
-                        {
-                            CompleteArpNo = completeArpNo,
-                            PropertyPin = propertyPin,
-                            Street = propertyStreet,
-                            TaxpayerTin = taxpayerTin,
-                            TaxpayerName = taxpayerName,
-                            TaxpayerAddress = taxpayerAddress,
-                            TaxpayerContactInfo = taxpayerContactInfo,
-                            PropertyKind = propertyKind,
-                            OtherImprovements = propertyOtherImprovements,
-                            Area = propertyLandArea,
-                            AssessedValue = propertyAssessedValue,
-                            EffectivityQuarter = propertyEffectivityQuarter,
-                            EffectivityYear = propertyEffectivityYear,
-                            LotNo = propertyLotNo,
-                            GrYear = propertyGrYear,
-                            IsCancelled = propertyIsCancelled,
-                            IsTaxable = propertyIsTaxable,
-                            ActualUseCodesId = actualUseId,
-                            ClassificationCodesId = classificationId,
-                            BarangaysId = barangayId,
-                            RealTaxpayersId = realTaxpayersId,
-                            CreatedBy = Helper.UserId
-                        };
-
-                        _ = AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
-                    }
-
-                    #endregion
                 }
+
+                if (backgroundWorkerRptSync.CancellationPending)
+                {
+                    e.Result = "cancelled";
+                    return;
+                }
+
+                AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModelList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Helper.MessageBoxError(ex.Message);
+                e.Result = "error";
             }
         }
 
         private void backgroundWorkerRptSync_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
+            uc.progressBar1.Value = e.ProgressPercentage;
+            btnSync.Enabled = false;
+            uc.cmbxSyncType.Enabled = false;
+
+            if (e.ProgressPercentage == 100)
+            {
+                uc.lblProgressStatus.Text = "Finishing Sync...";
+                btnStop.Enabled = false;
+                ControlBox = false;
+            }
+            else
+                uc.lblProgressStatus.Text = $"{e.ProgressPercentage}% {e.UserState}";
         }
 
         private void backgroundWorkerRptSync_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            Helper.MessageBoxSuccess("RPT synced successfuly.");
+            if (e.Result == null)
+                Helper.MessageBoxSuccess("RPT synced successfully.");
+            else if (e.Result.ToString() == "error")
+                Helper.MessageBoxError("RPT Sychronization Failed");
+            else if (e.Result.ToString() == "cancelled")
+                Helper.MessageBoxError("Sychronization Cancelled");
+
+            uc.lblProgressStatus.Text = string.Empty;
+            uc.progressBar1.Value = 0;
+            uc.lblProgressStatus.Visible = false;
+            uc.progressBar1.Visible = false;
+            ControlBox = true;
+            uc.cmbxSyncType.Enabled = true;
+            btnStop.Enabled = true;
+            btnSync.Enabled = true;
         }
 
         #endregion
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            backgroundWorkerRptSync.CancelAsync();
+        }
     }
 }

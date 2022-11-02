@@ -10,12 +10,12 @@ namespace ACC.Data
 {
     class GeneralCollectionsPaymentsRepository:IGeneralCollectionsPaymentsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_collections_payment";
         private readonly string viewTableName = "view_general_collections_payment";
 
 
-        public GeneralCollectionsPaymentsRepository(IDbGenericCommands dbGenericCommands)
+        public GeneralCollectionsPaymentsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

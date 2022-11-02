@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class ClassificationCodesRepository : IClassificationCodes
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "classification_codes";
 
-        public ClassificationCodesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public ClassificationCodesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

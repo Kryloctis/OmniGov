@@ -5,7 +5,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IADADisbursementsJournalRepository : IRepository<ADADisbursementsJournalModel>
+    public interface IADADisbursementsJournalRepository : IAccRepository<ADADisbursementsJournalModel>
     {
         Dictionary<string, string> GetRecordByJevID(int jevId);
 

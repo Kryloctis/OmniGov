@@ -16,9 +16,9 @@ namespace ACC.Data
         private readonly string tableName = "rpt_assessment_posts";
         private readonly string rptTaxDues = "rpt_tax_dues";
         private readonly string viewRptPropertyAssessments = "view_rpt_property_assessments";
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
-        public RptAssessmentPostsRepository(MySqlGenericCommands mySqlGenericCommands)
+        public RptAssessmentPostsRepository(AccGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }

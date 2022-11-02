@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class ProvincesRepository : IProvinces
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "provinces";
 
-        public ProvincesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public ProvincesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

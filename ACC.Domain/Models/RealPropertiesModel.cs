@@ -28,5 +28,13 @@
         public bool IsCancelled { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
+
+        public TaxpayerTypeModel TaxpayerTypeModel { get; set; }
+        public TaxpayersModel TaxpayersModel { get; set; }
+        public ProvincesModel ProvincesModel { get; set; }
+        public MunicipalitiesModel MunicipalitiesModel { get; set; }
+        public BarangayModel BarangayModel { get; set; }
+        public ActualUseCodesModel ActualUseCodesModel { get; set; }
+        public ClassificationCodesModel ClassificationCodesModel { get; set; }
     }
 }

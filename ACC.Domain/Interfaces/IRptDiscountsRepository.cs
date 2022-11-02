@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptDiscountsRepository : IRepository<RptDiscountsModel>
+    public interface IRptDiscountsRepository : IAccRepository<RptDiscountsModel>
     {
         bool DescriptionExist(string description);
 

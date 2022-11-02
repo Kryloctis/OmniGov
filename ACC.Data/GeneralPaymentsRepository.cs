@@ -10,11 +10,11 @@ namespace ACC.Data
 {
     public class GeneralPaymentsRepository : IGeneralPaymentsRepository
     {
-        private MySqlGenericCommands mySqlGenericCommandsLFS;
+        private AccGenericCommands mySqlGenericCommandsLFS;
         private string tableName = "general_payments";
         private string viewTableName = "view_general_payments";
 
-        public GeneralPaymentsRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public GeneralPaymentsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

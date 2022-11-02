@@ -11,11 +11,11 @@ namespace ACC.Data
     {
         private readonly string tableName = "payment_collections";
         private readonly string viewTableName = "view_payment_collections";
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private IGeneralPaymentsRepository _generalPaymentsRepository;
         private IRptPaymentPostsRepository _rptPaymentPostsRepository;
 
-        public PaymentCollectionsRepository(MySqlGenericCommands mySqlGenericCommandsLFS,
+        public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFS,
                                             IGeneralPaymentsRepository generalPaymentsRepository,
                                             IRptPaymentPostsRepository rptPaymentPostsRepository)
         {

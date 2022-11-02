@@ -11,7 +11,7 @@ namespace RPT.Data
 {
     public class RptFactory
     {
-        private static MySqlGenericCommands mySqlGenericCommandsRPT = new MySqlGenericCommands("RealPropertyTaxInstance");
+        private static RptGenericCommands mySqlGenericCommandsRPT = new RptGenericCommands("RealPropertyTaxInstance");
 
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsRPT);
 

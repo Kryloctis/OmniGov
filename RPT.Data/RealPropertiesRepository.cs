@@ -14,9 +14,9 @@ namespace RPT.Data
         private readonly string viewPropertyAssessessment = "view_property_assessment";
         private readonly string viewRealProperties = "view_real_properties";
         private readonly string tableName = "real_properties";
-        private MySqlGenericCommands _mySqlGenericCommandsRPT;
+        private RptGenericCommands _mySqlGenericCommandsRPT;
 
-        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public RealPropertiesRepository(RptGenericCommands mySqlGenericCommandsRPT)
         {
             _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }

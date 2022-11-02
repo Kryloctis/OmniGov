@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRolesRepository : IRepository<RolesModel>
+    public interface IRolesRepository : IAccRepository<RolesModel>
     {
         DataTable GetRecordsByOffice(string office);
 

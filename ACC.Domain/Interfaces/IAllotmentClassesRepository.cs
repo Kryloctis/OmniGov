@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAllotmentClassesRepository : IRepository<AllotmentClassesModel>
+    public interface IAllotmentClassesRepository : IAccRepository<AllotmentClassesModel>
     {
 
         bool NameExist(string name);

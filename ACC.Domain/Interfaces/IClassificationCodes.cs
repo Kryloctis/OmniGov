@@ -2,7 +2,7 @@
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IClassificationCodes : IRepository<ClassificationCodesModel>
+    public interface IClassificationCodes : IAccRepository<ClassificationCodesModel>
     {
         bool NameExist(string name);
         bool NameExist(string name, int id);

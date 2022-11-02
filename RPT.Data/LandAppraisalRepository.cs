@@ -12,11 +12,11 @@ namespace RPT.Data
 {
     public class LandAppraisalRepository : ILandAppraisalRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsRPT;
+        private RptGenericCommands _mySqlGenericCommandsRPT;
         private readonly string tableName = "land_appraisal";
         private readonly string viewTableName = "view_land_appraisal";
 
-        public LandAppraisalRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public LandAppraisalRepository(RptGenericCommands mySqlGenericCommandsRPT)
         {
             _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }

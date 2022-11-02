@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     public class SubMajorAccountGroupRepository : ISubMajorAccountGroupRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "sub_major_account_group";
         private readonly string viewTableName = "view_sub_major_account_group";
 
-        public SubMajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
+        public SubMajorAccountGroupRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

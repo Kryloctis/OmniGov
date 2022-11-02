@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IBeginningBalancesRepository : IRepository<BeginningBalancesModel>
+    public interface IBeginningBalancesRepository : IAccRepository<BeginningBalancesModel>
     {
         decimal GetSumBalancesBy_FundId_Year_Availablility(int fundsId, short year, bool isDebit);
 

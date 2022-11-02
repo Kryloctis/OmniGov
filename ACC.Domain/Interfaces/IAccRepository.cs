@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IAccRepository<T> where T : class
     {
         bool IdExist(int id);
         DataTable GetRecords();
@@ -15,6 +13,5 @@ namespace ACC.Domain.Interfaces
         bool Insert(T entity);
         bool Update(T entity);
         bool Delete(List<T> entityList);
-
     }
 }

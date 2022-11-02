@@ -5,7 +5,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ICashReceiptsJournalRepository : IRepository<CashReceiptsJournalModel>
+    public interface ICashReceiptsJournalRepository : IAccRepository<CashReceiptsJournalModel>
     {
         Dictionary<string, string> GetViewRecordByJevID(int jevId);
 

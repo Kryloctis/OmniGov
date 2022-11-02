@@ -8,10 +8,10 @@ namespace ACC.Data
 {
     public class PermissionsRepository : IPermissionsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "permissions";
 
-        public PermissionsRepository(IDbGenericCommands dbGenericCommands)
+        public PermissionsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

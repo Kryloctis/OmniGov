@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ICollectorReportRepository : IRepository<CollectorReportModel>
+    public interface ICollectorReportRepository : IAccRepository<CollectorReportModel>
     {
         Dictionary<string, string> GetRecordByID(string reportNo);
 

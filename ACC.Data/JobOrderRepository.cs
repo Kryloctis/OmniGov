@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class JobOrderRepository : IJobOrder
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
         private string tableName = "job_orders";
 
-        public JobOrderRepository(MySqlGenericCommands mySqlGenericCommands)
+        public JobOrderRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

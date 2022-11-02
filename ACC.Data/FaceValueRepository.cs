@@ -10,9 +10,9 @@ namespace ACC.Data
 {
     public class FaceValueRepository : IFaceValueRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "face_values";
-        public FaceValueRepository(IDbGenericCommands dbGenericCommands)
+        public FaceValueRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

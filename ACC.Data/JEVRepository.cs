@@ -11,7 +11,7 @@ namespace ACC.Data
 
     public class JEVRepository : IJEVRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly IJEVAccountsRepository _jevAccountsRepository;
         private readonly ICheckDisbursementsJournalRepository _checkDisbursementsJournalRepository;
         private readonly ICashReceiptsJournalRepository _cashReceiptsJournalRepository;
@@ -22,7 +22,7 @@ namespace ACC.Data
         private const string viewTableName = "view_jev";
 
         public JEVRepository(
-            IDbGenericCommands dbGenericCommands,
+            IAccGenericCommands dbGenericCommands,
             IJEVAccountsRepository jevAccountsRepository,
             ICheckDisbursementsJournalRepository checkDisbursementsJournalRepository,
             ICashReceiptsJournalRepository cashReceiptsJournalRepository,

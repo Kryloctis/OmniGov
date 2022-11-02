@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IFundsRepository : IRepository<FundsModel>
+    public interface IFundsRepository : IAccRepository<FundsModel>
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);
