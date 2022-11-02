@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ucRealProperties.cmbxBarangays.SelectedValue = dictRealProperties["real_properties_barangays_id"];
             _ucRealProperties.cmbxClassification.SelectedValue = dictRealProperties["classification_codes_id"];
             _ucRealProperties.cmbxActualUse.SelectedValue = dictRealProperties["actual_use_codes_id"];
-            _ucRealProperties.txtPropertyPin.Text = dictRealProperties["property_kind"];
+            _ucRealProperties.cmbxPropertyKind.SelectedText = dictRealProperties["property_kind"];
             _ucRealProperties.nudEffectivityQuarter.Text = dictRealProperties["effectivity_quarter"];
             _ucRealProperties.nudEffectivityYear.Text = dictRealProperties["effectivity_year"];
             _ucRealProperties.nudAssessedValue.Value = Convert.ToDecimal(dictRealProperties["assessed_value"]);

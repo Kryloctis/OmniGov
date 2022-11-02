@@ -41,6 +41,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
+                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -52,7 +53,32 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgRealProperties, btnEdit, btnDelete);
+            try
+            {
+                if (dgRealProperties.Columns.Count < 1)
+                    return;
+
+                byte createdByIndex = (byte)dgRealProperties.Columns["created_at"].Index;
+                byte updatedByIndex = (byte)dgRealProperties.Columns["updated_at"].Index;
+                var indexes = new byte[] { createdByIndex, updatedByIndex };
+                EnableDisableToolStripButtons(dgRealProperties, btnEdit);
+                Helper.ShowRecordTimestamp(dgRealProperties, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        public static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+                tsBtnEdit.Enabled = true;
+            else if (SelectedRows > 1)
+                tsBtnEdit.Enabled = false;
+            else
+                tsBtnEdit.Enabled = false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

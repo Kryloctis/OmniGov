@@ -131,7 +131,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 if (dgTaxpayers.Columns.Count < 1)
                     return;
 
-                byte createdByIndex = (byte)dgTaxpayers.Columns["created_at"].Index;
+                byte createdByIndex = (byte)dgTaxpayers.Columns["created_by"].Index;
                 byte updatedByIndex = (byte)dgTaxpayers.Columns["updated_at"].Index;
                 var indexes = new byte[] { createdByIndex, updatedByIndex };
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
