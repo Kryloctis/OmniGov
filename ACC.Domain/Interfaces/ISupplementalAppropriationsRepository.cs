@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ISupplementalAppropriationsRepository : IRepository<SupplementalAppropriationsModel>
+    public interface ISupplementalAppropriationsRepository : IAccRepository<SupplementalAppropriationsModel>
     {
         bool Insert(List<SupplementalAppropriationsModel> supplementalAppropriationsModelList, int budgetAppropriationId);
 

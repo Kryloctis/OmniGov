@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "cash_disbursement_journal";
         private const string viewTableName = "view_cash_disbursement_journal";
 
-        public CashDisbursementsJournalRepository(IDbGenericCommands dbGenericCommands)
+        public CashDisbursementsJournalRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

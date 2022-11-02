@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IPermissionsRepository : IRepository<PermissionsModel>
+    public interface IPermissionsRepository : IAccRepository<PermissionsModel>
     {
         bool idExist(int id);
         bool NameExist(string name);

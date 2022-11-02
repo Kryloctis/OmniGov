@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ISignatoriesHasReferences : IRepository<SignatoriesHasReferencesModel>
+    public interface ISignatoriesHasReferences : IAccRepository<SignatoriesHasReferencesModel>
     {
         DataTable GetRecordsBySignatoryId(int signatoryId);
 

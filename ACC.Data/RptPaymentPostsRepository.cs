@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class RptPaymentPostsRepository : IRptPaymentPostsRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private IRptTaxDuesRepository _rptTaxDuesRepository;
         private readonly string tableName = "rpt_payment_posts";
         private readonly string viewTableName = "view_rpt_payment_posts";
 
-        public RptPaymentPostsRepository(MySqlGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
+        public RptPaymentPostsRepository(AccGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _rptTaxDuesRepository = rptTaxDuesRepository;

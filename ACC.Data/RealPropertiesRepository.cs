@@ -9,12 +9,26 @@ namespace ACC.Data
 {
     public class RealPropertiesRepository : IRealPropertiesRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "real_properties";
+        private IProvinces _provinces;
+        private IMunicipalities _municipalities;
+        private IBarangayRepository _barangayRepository;
+        private IActualUseCodes _actualUseCodes;
+        private IClassificationCodes _classificationCodes;
+        private ITaxpayerTypeRepository _taxpayerTypeRepository;
+        private ITaxpayersRepository _taxpayersRepository;
 
-        public RealPropertiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public RealPropertiesRepository(AccGenericCommands mySqlGenericCommandsLFS, IProvinces provinces, IMunicipalities municipalities, IBarangayRepository barangayRepository, IActualUseCodes actualUseCodes, IClassificationCodes classificationCodes, ITaxpayerTypeRepository taxpayerTypeRepository, ITaxpayersRepository taxpayersRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            _provinces = provinces;
+            _municipalities = municipalities;
+            _barangayRepository = barangayRepository;
+            _actualUseCodes = actualUseCodes;
+            _classificationCodes = classificationCodes;
+            _taxpayerTypeRepository = taxpayerTypeRepository;
+            _taxpayersRepository = taxpayersRepository;
         }
 
         public int CountRecords()
@@ -236,6 +250,137 @@ namespace ACC.Data
             var parameters = new object[][] { new object[] { "@complete_arp_no", DbType.String, completeArpNo } };
             string query = $"SELECT id FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
             return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
+
+        public bool Synchronize(List<RealPropertiesModel> realPropertiesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (RealPropertiesModel realPropertiesModel in realPropertiesModels)
+                {
+                    int provinceId;
+                    int municipalityId;
+                    int barangayId;
+                    int taxpayerTypeId;
+                    int taxpayerId;
+                    int actualUseId;
+                    int classificationId;
+
+
+                    ProvincesModel provinceModel = realPropertiesModel.ProvincesModel;
+                    MunicipalitiesModel municipalityModel = realPropertiesModel.MunicipalitiesModel;
+                    BarangayModel barangayModel = realPropertiesModel.BarangayModel;
+                    TaxpayerTypeModel taxpayerTypeModel = realPropertiesModel.TaxpayerTypeModel;
+                    TaxpayersModel taxpayersModel = realPropertiesModel.TaxpayersModel;
+                    ActualUseCodesModel actualUseModel = realPropertiesModel.ActualUseCodesModel;
+                    ClassificationCodesModel classificationModel = realPropertiesModel.ClassificationCodesModel;
+
+                    string provinceName = provinceModel.Name;
+                    string municipallityName = municipalityModel.Name;
+                    string barangayName = barangayModel.Name;
+                    string actualUseName = actualUseModel.Name;
+                    string classificationName = classificationModel.Name;
+                    string taxpayerType = taxpayerTypeModel.taxpayerType;
+                    string taxpayerName = taxpayersModel.Name;
+                    string completeArpNo = realPropertiesModel.CompleteArpNo;
+
+
+                    //Actual Use
+                    if (_actualUseCodes.NameExist(actualUseName))
+                        actualUseId = _actualUseCodes.GetIdByName(actualUseName);
+                    else
+                    {
+                        _ = _actualUseCodes.Insert(actualUseModel);
+                        actualUseId = _actualUseCodes.GetLastInsertedId();
+                    }
+
+                    //Classification
+                    if (_classificationCodes.NameExist(classificationName))
+                        classificationId = _classificationCodes.GetIdByName(classificationName);
+                    else
+                    {
+                        _ = _classificationCodes.Insert(classificationModel);
+                        classificationId = _classificationCodes.GetLastInsertedId();
+                    }
+
+                    //Taxpayer Type
+                    if (_taxpayerTypeRepository.NameExist(taxpayerType))
+                        taxpayerTypeId = _taxpayerTypeRepository.GetIdByName(taxpayerType);
+                    else
+                    {
+                        _ = _taxpayerTypeRepository.Insert(taxpayerTypeModel);
+                        taxpayerTypeId = _taxpayerTypeRepository.GetLastInsertedId();
+                    }
+
+
+                    //Province
+                    if (_provinces.NameExist(provinceName))
+                        provinceId = _provinces.GetIdByName(provinceName);
+                    else
+                    {
+                        _ = _provinces.Insert(provinceModel);
+                        provinceId = _provinces.GetLastInsertedId();
+                    }
+
+                    //Municipality
+                    if (_municipalities.NameExistByProvinceName(municipallityName, provinceName))
+                        municipalityId = _municipalities.GetIdByNameProvinceName(municipallityName, provinceName);
+                    else
+                    {
+                        municipalityModel.ProvincesId = provinceId;
+                        _ = _municipalities.Insert(municipalityModel);
+                        municipalityId = _municipalities.GetLastInsertedId();
+                    }
+
+                    //Barangay
+                    if (_barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName))
+                        barangayId = _barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
+                    else
+                    {
+                        barangayModel.MunicipalityID = municipalityId;
+                        _ = _barangayRepository.Insert(barangayModel);
+                        barangayId = _barangayRepository.GetLastInsertedId();
+                    }
+
+                    //Taxpayers
+                    if (_taxpayersRepository.TaxpayerNameExist(taxpayerName))
+                    {
+                        taxpayerId = _taxpayersRepository.GetIdByName(taxpayerName);
+                        taxpayersModel.Id = taxpayerId;
+                        taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                        _taxpayersRepository.Update(taxpayersModel);
+                    }
+                    else
+                    {
+                        taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                        _ = _taxpayersRepository.Insert(taxpayersModel);
+                        taxpayerId = _taxpayersRepository.GetLastInsertedId();
+                    }
+
+
+                    //Real Properties
+                    if (CompleteArpNoExist(completeArpNo))
+                    {
+                        realPropertiesModel.Id = GetIdByCompleteArpNo(completeArpNo);
+                        realPropertiesModel.ActualUseCodesId = actualUseId;
+                        realPropertiesModel.BarangaysId = barangayId;
+                        realPropertiesModel.ClassificationCodesId = classificationId;
+                        realPropertiesModel.RealTaxpayersId = taxpayerId;
+                        Update(realPropertiesModel);
+                    }
+                    else
+                    {
+                        realPropertiesModel.ActualUseCodesId = actualUseId;
+                        realPropertiesModel.BarangaysId = barangayId;
+                        realPropertiesModel.ClassificationCodesId = classificationId;
+                        realPropertiesModel.RealTaxpayersId = taxpayerId;
+                        Insert(realPropertiesModel);
+                    }
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }

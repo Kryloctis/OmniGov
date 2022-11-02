@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IBankDepositsRepository : IRepository<BankDepositsModel>
+    public interface IBankDepositsRepository : IAccRepository<BankDepositsModel>
     {
         int Deposits(BankDepositsModel entity);
         DataTable GetRecordsBySearch(int id);

@@ -9,13 +9,13 @@ namespace ACC.Data
 {
     public class RolesRepository : IRolesRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
 
 
         public RolesRepository(
-            IDbGenericCommands dbGenericCommands,
+            IAccGenericCommands dbGenericCommands,
             IRoleHasPermissionsRepository _roleHasPermissionsRepository
             )
         {

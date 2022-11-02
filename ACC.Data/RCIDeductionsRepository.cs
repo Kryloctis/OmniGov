@@ -10,10 +10,10 @@ namespace ACC.Data
     public class RCIDeductionsRepository : IRCIDeductionsRepository
     {
 
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "rci_deductions";
 
-        public RCIDeductionsRepository(IDbGenericCommands dbGenericCommands)
+        public RCIDeductionsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

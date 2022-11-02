@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IGeneralCollectionsPaymentsRepository:IRepository<GeneralCollectionPaymentsModel>
+    public interface IGeneralCollectionsPaymentsRepository:IAccRepository<GeneralCollectionPaymentsModel>
     {
         bool Append(List<GeneralCollectionPaymentsModel> entityList);
 

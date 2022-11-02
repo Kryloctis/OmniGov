@@ -10,10 +10,10 @@ namespace ACC.Data
 
     public class CollectingOfficerHasJobOrdersRepository : ICollectingOfficerHasJobOrders
     {
-        private readonly MySqlGenericCommands mySqlGenericCommands;
+        private readonly AccGenericCommands mySqlGenericCommands;
         private readonly string tableName = "collecting_officers_has_job_orders";
         private readonly string viewTableName = "view_collecting_officers_has_job_orders";
-        public CollectingOfficerHasJobOrdersRepository(MySqlGenericCommands mySqlGenericCommands)
+        public CollectingOfficerHasJobOrdersRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

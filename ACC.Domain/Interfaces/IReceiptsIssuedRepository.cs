@@ -4,7 +4,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IReceiptsIssuedRepository : IRepository<ReceiptsIssuedModel>
+    public interface IReceiptsIssuedRepository : IAccRepository<ReceiptsIssuedModel>
     {
         bool UpdateReturnedReceipt(ReceiptsIssuedModel entity);
         bool UpdateLastIssued(ReceiptsIssuedModel entity);

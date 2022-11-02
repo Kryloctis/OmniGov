@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class TaxpayerRepository : ITaxpayersRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "taxpayers";
         private readonly string viewTableName = "view_taxpayers";
 
-        public TaxpayerRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public TaxpayerRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

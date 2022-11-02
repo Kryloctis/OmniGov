@@ -10,10 +10,10 @@ namespace ACC.Data
     public class AllotmentAccountRepository : IAllotmentAccountRepository
     {
 
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "allotment_account";
 
-        public AllotmentAccountRepository(MySqlGenericCommands mySqlGenericCommands)
+        public AllotmentAccountRepository(AccGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }

@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     public class DocumentReferencesRepository : IDocumentReferences
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
         private const string tableName = "document_references";
         private const string viewTableName = "view_document_references";
 
-        public DocumentReferencesRepository(MySqlGenericCommands mySqlGenericCommands)
+        public DocumentReferencesRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

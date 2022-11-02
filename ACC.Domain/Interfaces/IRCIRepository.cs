@@ -3,7 +3,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRCIRepository:IRepository<RCIModel>
+    public interface IRCIRepository:IAccRepository<RCIModel>
     {
         DataTable GetRecordsByBankIdAndMonth(int Id,string month);
         DataTable GetRecords(int id);

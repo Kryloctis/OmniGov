@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class RCIObligationsRepository : IRCIObligationsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "rci_obligations";
 
-        public RCIObligationsRepository(IDbGenericCommands dbGenericCommands)
+        public RCIObligationsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

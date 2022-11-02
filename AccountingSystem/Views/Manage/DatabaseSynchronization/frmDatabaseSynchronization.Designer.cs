@@ -28,43 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.cmbxSyncType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorkerRptSync = new System.ComponentModel.BackgroundWorker();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.ucDatabaseSynchronization1 = new AccountingSystem.Views.Manage.DatabaseSynchronization.ucDatabaseSynchronization();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 65);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(363, 13);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar1.TabIndex = 1;
-            // 
-            // cmbxSyncType
-            // 
-            this.cmbxSyncType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxSyncType.FormattingEnabled = true;
-            this.cmbxSyncType.Location = new System.Drawing.Point(19, 36);
-            this.cmbxSyncType.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.cmbxSyncType.Name = "cmbxSyncType";
-            this.cmbxSyncType.Size = new System.Drawing.Size(325, 23);
-            this.cmbxSyncType.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Choose what to sync:";
             // 
             // backgroundWorkerRptSync
             // 
@@ -74,46 +44,62 @@
             this.backgroundWorkerRptSync.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerRptSync_ProgressChanged);
             this.backgroundWorkerRptSync.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerRptSync_RunWorkerCompleted);
             // 
-            // flowLayoutPanel1
+            // panel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnStop);
-            this.flowLayoutPanel1.Controls.Add(this.btnSync);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 78);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 32);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.btnStop);
+            this.panel1.Controls.Add(this.btnSync);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 37);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(450, 29);
+            this.panel1.TabIndex = 18;
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(309, 3);
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.Location = new System.Drawing.Point(380, 3);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(51, 23);
-            this.btnStop.TabIndex = 0;
+            this.btnStop.Size = new System.Drawing.Size(67, 23);
+            this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
+            this.btnStop.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnSync
             // 
-            this.btnSync.Location = new System.Drawing.Point(252, 3);
+            this.btnSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSync.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnSync.Location = new System.Drawing.Point(307, 3);
             this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(51, 23);
-            this.btnSync.TabIndex = 0;
+            this.btnSync.Size = new System.Drawing.Size(67, 23);
+            this.btnSync.TabIndex = 2;
             this.btnSync.Text = "Sync";
+            this.btnSync.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSync.UseVisualStyleBackColor = true;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
+            // 
+            // ucDatabaseSynchronization1
+            // 
+            this.ucDatabaseSynchronization1.AutoSize = true;
+            this.ucDatabaseSynchronization1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ucDatabaseSynchronization1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDatabaseSynchronization1.Location = new System.Drawing.Point(0, 0);
+            this.ucDatabaseSynchronization1.Name = "ucDatabaseSynchronization1";
+            this.ucDatabaseSynchronization1.Padding = new System.Windows.Forms.Padding(4);
+            this.ucDatabaseSynchronization1.Size = new System.Drawing.Size(450, 37);
+            this.ucDatabaseSynchronization1.TabIndex = 19;
             // 
             // frmDatabaseSynchronization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 110);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbxSyncType);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(450, 66);
+            this.Controls.Add(this.ucDatabaseSynchronization1);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -122,19 +108,17 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Database Synchronization";
             this.Load += new System.EventHandler(this.frmDatabaseSynchronization_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ComboBox cmbxSyncType;
-        private System.Windows.Forms.Label label1;
         private System.ComponentModel.BackgroundWorker backgroundWorkerRptSync;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnSync;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnSync;
+        private ucDatabaseSynchronization ucDatabaseSynchronization1;
     }
 }

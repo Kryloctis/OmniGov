@@ -6,7 +6,7 @@ using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface IRptAssessmentPostingRepository : IRepository<RptAssessmentPostsModel>
+    public interface IRptAssessmentPostingRepository : IAccRepository<RptAssessmentPostsModel>
     {
         bool IsPropertyPosted(string arpNo);
 

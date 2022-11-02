@@ -11,7 +11,7 @@ namespace ACC.Data
 {
     public class RCIRepository:IRCIRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableRCI = "rci";
         private readonly string tblBanks = "banks";
         private readonly string tblFunds = "funds";
@@ -25,7 +25,7 @@ namespace ACC.Data
         private readonly string viewTableName = "view_rci";
 
 
-        public RCIRepository(IDbGenericCommands dbGenericCommands)
+        public RCIRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

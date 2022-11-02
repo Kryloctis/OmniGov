@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     class CollectorReportPaymentsRepository:ICollectorReportPaymentsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "collector_report_payments";
         private readonly string viewTableName = "view_collector_report_payments";
 
-        public CollectorReportPaymentsRepository(IDbGenericCommands dbGenericCommands)
+        public CollectorReportPaymentsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

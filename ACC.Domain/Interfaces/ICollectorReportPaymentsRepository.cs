@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ICollectorReportPaymentsRepository : IRepository<CollectorReportPaymentModel>
+    public interface ICollectorReportPaymentsRepository : IAccRepository<CollectorReportPaymentModel>
     {
         bool Delete(CollectorReportPaymentModel entity);
         DataTable GetRecordsByReportNo(string reportNo);

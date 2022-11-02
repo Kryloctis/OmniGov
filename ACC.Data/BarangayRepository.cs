@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class BarangayRepository : IBarangayRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "barangays";
         private readonly string viewTableName = "view_barangays";
 
-        public BarangayRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public BarangayRepository(AccGenericCommands mySqlGenericCommandsRPT)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsRPT;
         }

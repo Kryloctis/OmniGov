@@ -7,7 +7,7 @@ namespace AccountingSystem
 {
     public static class AccFactory
     {
-        private static MySqlGenericCommands mySqlGenericCommandsLFS = new MySqlGenericCommands("LocalFinanceInstance");
+        private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
         public static byte UserId = 2;
 
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
@@ -145,7 +145,7 @@ namespace AccountingSystem
 
         public static IRptPaymentPostsRepository RptPaymentPostsRepository() => new RptPaymentPostsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());
 
-        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS);
+        public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS, ProvincesRepository(), MunicipalitiesRepository(), BarangayRepository(), ActualUseCodesRepository(), ClassificationCodesRepository(), TaxpayerTypeRepository(), TaxpayersRepository());
 
         public static ITaxpayersRepository TaxpayersRepository() => new TaxpayerRepository(mySqlGenericCommandsLFS);
 

@@ -10,12 +10,12 @@ namespace ACC.Data
 {
     public class BudgetAppropriationsRepository : IBudgetAppropriationsRepository
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
         private ISupplementalAppropriationsRepository _ISupplementalAppropriationsRepository;
         private readonly string tableName = "budget_appropriations";
         private readonly string viewTableName = "view_budget_appropriations";
 
-        public BudgetAppropriationsRepository(MySqlGenericCommands mySqlGenericCommands, ISupplementalAppropriationsRepository iSupplementalAppropriationsRepository)
+        public BudgetAppropriationsRepository(AccGenericCommands mySqlGenericCommands, ISupplementalAppropriationsRepository iSupplementalAppropriationsRepository)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
             _ISupplementalAppropriationsRepository = iSupplementalAppropriationsRepository;

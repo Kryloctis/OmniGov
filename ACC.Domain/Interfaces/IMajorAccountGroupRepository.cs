@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IMajorAccountGroupRepository : IRepository<MajorAccountGroupModel>
+    public interface IMajorAccountGroupRepository : IAccRepository<MajorAccountGroupModel>
     {
         DataTable GetViewRecords();
         DataTable GetViewRecordsByAccountGroupId(byte id);

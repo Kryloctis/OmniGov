@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class MajorAccountGroupRepository : IMajorAccountGroupRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "major_account_group";
         private readonly string viewTableName = "view_major_account_group";
 
 
-        public MajorAccountGroupRepository(IDbGenericCommands dbGenericCommands)
+        public MajorAccountGroupRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

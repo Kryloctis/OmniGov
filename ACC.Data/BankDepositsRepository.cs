@@ -11,12 +11,12 @@ namespace ACC.Data
     public class BankDepositsRepository : IBankDepositsRepository
     {
 
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "bank_deposits";
         private readonly string tableName2 = "banks";
         private readonly string tableName3 = "users";
 
-        public BankDepositsRepository(IDbGenericCommands dbGenericCommands)
+        public BankDepositsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

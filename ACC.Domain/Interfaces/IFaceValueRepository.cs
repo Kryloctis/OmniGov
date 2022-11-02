@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IFaceValueRepository:IRepository<FaceValueModel>
+    public interface IFaceValueRepository:IAccRepository<FaceValueModel>
     {
         DataTable GetRecordsByAccountableFormId(int accountableFormId);
         decimal GetFaceValueByAccountableFormId(int id);

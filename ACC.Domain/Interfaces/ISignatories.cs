@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ISignatories : IRepository<SignatoriesModel>
+    public interface ISignatories : IAccRepository<SignatoriesModel>
     {
         bool Insert(SignatoriesModel signatoriesModel, List<SignatoriesHasReferencesModel> signatoriesHasReferencesModelList);
 

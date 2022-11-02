@@ -9,14 +9,14 @@ namespace ACC.Data
 {
     public class UsersRepository : IUsersRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "users";
         private readonly string tableCollectionsOfficers = "collecting_officers";
         private readonly string tableName3 = "disbursing_officers";
         private readonly string tableName4 = "roles";
         private readonly string viewTableName = "view_users";
 
-        public UsersRepository(IDbGenericCommands dbGenericCommands)
+        public UsersRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

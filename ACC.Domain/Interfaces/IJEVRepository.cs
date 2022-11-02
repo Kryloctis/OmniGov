@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IJEVRepository : IRepository<JEVModel>
+    public interface IJEVRepository : IAccRepository<JEVModel>
     {
         bool InsertWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel);
 

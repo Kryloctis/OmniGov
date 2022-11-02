@@ -1,14 +1,8 @@
-﻿using ACC.Domain.Interfaces;
-using RPT.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface IBuildingDetailsRepository : IRepository<BuildingDetailsModel>
+    public interface IBuildingDetailsRepository : IRptRepository<BuildingDetailsModel>
     {
         public decimal GetTotalAreaByBuildingPropertiesId(int buildingPropertiesId);
 

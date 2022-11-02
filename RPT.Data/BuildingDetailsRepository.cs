@@ -12,9 +12,9 @@ namespace RPT.Data
 {
     public class BuildingDetailsRepository : IBuildingDetailsRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsRPT;
+        private RptGenericCommands _mySqlGenericCommandsRPT;
 
-        public BuildingDetailsRepository(MySqlGenericCommands mySqlGenericCommandsRPT)
+        public BuildingDetailsRepository(RptGenericCommands mySqlGenericCommandsRPT)
         {
             _mySqlGenericCommandsRPT = mySqlGenericCommandsRPT;
         }

@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRoleHasPermissionsRepository : IRepository<RoleHasPermissionsModel>
+    public interface IRoleHasPermissionsRepository : IAccRepository<RoleHasPermissionsModel>
     {
         DataTable GetRecordsByRoleId(byte roleId);
 

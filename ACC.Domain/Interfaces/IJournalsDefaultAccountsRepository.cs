@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IJournalsDefaultAccountsRepository : IRepository<JournalsDefaultAccountsModel>
+    public interface IJournalsDefaultAccountsRepository : IAccRepository<JournalsDefaultAccountsModel>
     {
         bool Insert(int journalId, int fundId, bool isDebit, List<JournalsDefaultAccountsModel> entityList);
 

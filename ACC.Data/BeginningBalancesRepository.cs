@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     class BeginningBalancesRepository : IBeginningBalancesRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "beginning_balances";
         private readonly string viewTableName = "view_beginning_balances";
 
-        public BeginningBalancesRepository(IDbGenericCommands dbGenericCommands)
+        public BeginningBalancesRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

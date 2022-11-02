@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IGeneralCollectionsRepository : IRepository<GeneralCollectionsModel>
+    public interface IGeneralCollectionsRepository : IAccRepository<GeneralCollectionsModel>
     {
         bool CodeExist(string id);
         Dictionary<string, string> GetRecordByID(string Id);
