@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IGeneralJournalRepository : IRepository<GeneralJournalModel>
+    public interface IGeneralJournalRepository : IAccRepository<GeneralJournalModel>
     {
         bool UpdateByJevId(GeneralJournalModel entity);
 

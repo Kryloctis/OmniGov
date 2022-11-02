@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptPaymentPostsRepository : IRepository<RptPaymentPostsModel>
+    public interface IRptPaymentPostsRepository : IAccRepository<RptPaymentPostsModel>
     {
         bool InsertWithRptTaxDues(RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
 

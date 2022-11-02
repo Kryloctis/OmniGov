@@ -9,12 +9,12 @@ namespace ACC.Data
 {
     public class FunctionProgramProjectRepository : IFunctionProgramProjectRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "function_program_project";
         private readonly string viewTableName = "view_function_program_project";
 
 
-        public FunctionProgramProjectRepository(IDbGenericCommands dbGenericCommands)
+        public FunctionProgramProjectRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

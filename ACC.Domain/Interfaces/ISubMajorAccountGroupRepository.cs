@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ISubMajorAccountGroupRepository : IRepository<SubMajorAccountGroupModel>
+    public interface ISubMajorAccountGroupRepository : IAccRepository<SubMajorAccountGroupModel>
     {
         DataTable GetRecordsByMajorAccountId(short majorAccountId);
 

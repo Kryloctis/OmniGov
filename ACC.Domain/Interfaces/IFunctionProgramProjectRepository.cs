@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IFunctionProgramProjectRepository : IRepository<FunctionProgramProjectModel>
+    public interface IFunctionProgramProjectRepository : IAccRepository<FunctionProgramProjectModel>
     {
         DataTable GetViewRecords();
         DataTable GetViewRecordsByService_And_Search_And_IsSpecial(int serviceId, string searchText, bool isSpecial);

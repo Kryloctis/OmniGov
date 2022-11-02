@@ -4,7 +4,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IGeneralLedgerAccountsRepository : IRepository<GeneralLedgerAccountsModal>
+    public interface IGeneralLedgerAccountsRepository : IAccRepository<GeneralLedgerAccountsModal>
     {
         DataTable GetViewRecords();
 

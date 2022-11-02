@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class JournalsRepository : IJournalsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "journals";
 
 
-        public JournalsRepository(IDbGenericCommands dbGenericCommands)
+        public JournalsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

@@ -10,11 +10,11 @@ namespace ACC.Data
 {
     public class AmortizationRepository : IAmortizationRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
         private readonly string tableName = "amortization";
 
-        public AmortizationRepository(MySqlGenericCommands mySqlGenericCommands)
+        public AmortizationRepository(AccGenericCommands mySqlGenericCommands)
         {
             this._mySqlGenericCommands = mySqlGenericCommands;
         }

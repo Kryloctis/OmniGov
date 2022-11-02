@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class AccountGroupRepository : IAccountGroupRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "account_group";
 
-        public AccountGroupRepository(IDbGenericCommands dbGenericCommands)
+        public AccountGroupRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

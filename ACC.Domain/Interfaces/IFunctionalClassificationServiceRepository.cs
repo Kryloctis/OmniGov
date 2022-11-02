@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IFunctionalClassificationServiceRepository : IRepository<FunctionalClassificationServiceModel>
+    public interface IFunctionalClassificationServiceRepository : IAccRepository<FunctionalClassificationServiceModel>
     {
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch_And_Sector(string searchText, int sectorId);

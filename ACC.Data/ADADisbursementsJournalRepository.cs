@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "ada_disbursement_journal";
 
-        public ADADisbursementsJournalRepository(IDbGenericCommands dbGenericCommands)
+        public ADADisbursementsJournalRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

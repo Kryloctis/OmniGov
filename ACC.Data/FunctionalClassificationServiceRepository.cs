@@ -10,11 +10,11 @@ namespace ACC.Data
 {
     public class FunctionalClassificationServiceRepository : IFunctionalClassificationServiceRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "functional_classification_services";
         private readonly string viewTableName = "view_function_classification_services";
 
-        public FunctionalClassificationServiceRepository(IDbGenericCommands dbGenericCommands)
+        public FunctionalClassificationServiceRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

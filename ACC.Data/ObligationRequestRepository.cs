@@ -15,10 +15,10 @@ namespace ACC.Data
 
         private readonly IObligationAccountRepository _obligationAccountRepository;
 
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
         public ObligationRequestRepository(
-            MySqlGenericCommands mySqlGenericCommands,
+            AccGenericCommands mySqlGenericCommands,
             IObligationAccountRepository obligationAccountRepository)
         {
             _mySqlGenericCommands = mySqlGenericCommands;

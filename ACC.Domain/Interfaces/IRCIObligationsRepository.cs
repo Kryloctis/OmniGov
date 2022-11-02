@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRCIObligationsRepository:IRepository<RCIObligationsModel>
+    public interface IRCIObligationsRepository:IAccRepository<RCIObligationsModel>
     {
 
         DataTable GetRecordsByRCIId(int rciId);

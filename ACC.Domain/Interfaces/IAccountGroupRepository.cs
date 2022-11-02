@@ -5,7 +5,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAccountGroupRepository : IRepository<AccountGroupModel>
+    public interface IAccountGroupRepository : IAccRepository<AccountGroupModel>
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);

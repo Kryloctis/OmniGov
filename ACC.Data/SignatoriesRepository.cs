@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class SignatoriesRepository : ISignatories
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
         private readonly string tableName = "signatories";
         private readonly ISignatoriesHasReferences _signatoriesHasReferences;
 
-        public SignatoriesRepository(MySqlGenericCommands mySqlGenericCommands, ISignatoriesHasReferences signatoriesHasReferences)
+        public SignatoriesRepository(AccGenericCommands mySqlGenericCommands, ISignatoriesHasReferences signatoriesHasReferences)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
             _signatoriesHasReferences = signatoriesHasReferences;

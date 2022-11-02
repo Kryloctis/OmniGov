@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ISubsidiaryLedgerAccountsRepository : IRepository<SubsidiaryLedgerAccountsModel>
+    public interface ISubsidiaryLedgerAccountsRepository : IAccRepository<SubsidiaryLedgerAccountsModel>
     {
         DataTable GetRecordsByReference(int Id);
         DataTable GetRecordsBySearchByReference(string srchtxt, int Id);

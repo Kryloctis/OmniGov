@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class CollectingOfficerRepository : ICollectingOfficerRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "collecting_officers";
         private readonly string tableName3 = "receipts_issued";
 
-        public CollectingOfficerRepository(IDbGenericCommands dbGenericCommands)
+        public CollectingOfficerRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

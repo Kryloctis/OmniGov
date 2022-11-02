@@ -9,10 +9,10 @@ namespace ACC.Data
 {
     public class ActualUseCodesRepository : IActualUseCodes
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "actual_use_codes";
 
-        public ActualUseCodesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public ActualUseCodesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

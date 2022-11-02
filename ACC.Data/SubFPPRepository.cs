@@ -12,9 +12,9 @@ namespace ACC.Data
     {
         private readonly string tableName = "others_fpp";
 
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
-        public SubFPPRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SubFPPRepository(AccGenericCommands mySqlGenericCommands)
         {
             this._mySqlGenericCommands = mySqlGenericCommands;
         }

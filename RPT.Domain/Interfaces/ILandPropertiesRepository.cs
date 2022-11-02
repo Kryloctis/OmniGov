@@ -1,14 +1,9 @@
-﻿using ACC.Domain.Interfaces;
-using RPT.Domain.Models;
-using System;
+﻿using RPT.Domain.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface ILandPropertiesRepository : IRepository<LandPropertiesModel>
+    public interface ILandPropertiesRepository : IRptRepository<LandPropertiesModel>
     {
         public Dictionary<string, string> GetViewRecordByArpNo(string arpNo);
     }

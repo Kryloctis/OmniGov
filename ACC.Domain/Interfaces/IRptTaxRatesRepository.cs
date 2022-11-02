@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptTaxRatesRepository : IRepository<RptTaxRatesModel>
+    public interface IRptTaxRatesRepository : IAccRepository<RptTaxRatesModel>
     {
         Dictionary<string, string> GetRecordByDescription(string description);
     }

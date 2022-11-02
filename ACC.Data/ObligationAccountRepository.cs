@@ -11,9 +11,9 @@ namespace ACC.Data
     {
         private readonly string tableName = "obligation_account";
 
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
-        public ObligationAccountRepository(MySqlGenericCommands mySqlGenericCommands)
+        public ObligationAccountRepository(AccGenericCommands mySqlGenericCommands)
         {
             _mySqlGenericCommands = mySqlGenericCommands;
         }

@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     public class JEVAccountsRepository : IJEVAccountsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "jev_accounts";
         private const string viewTableName = "view_jev_accounts";
 
-        public JEVAccountsRepository(IDbGenericCommands dbGenericCommands)
+        public JEVAccountsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

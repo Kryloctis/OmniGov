@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAmortizationScheduleRepository:IRepository<AmortizationScheduleModel>
+    public interface IAmortizationScheduleRepository:IAccRepository<AmortizationScheduleModel>
     {
         DataTable GetRecordsByAmortizationId(int amortizationId);
 

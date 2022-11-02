@@ -5,7 +5,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ICashDisbursementsJournalRepository : IRepository<CashDisbursementsJournalModel>
+    public interface ICashDisbursementsJournalRepository : IAccRepository<CashDisbursementsJournalModel>
     {
         bool UpdateByJevId(CashDisbursementsJournalModel entity);
 

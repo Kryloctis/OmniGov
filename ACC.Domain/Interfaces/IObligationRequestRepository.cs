@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IObligationRequestRepository : IRepository<ObligationRequestModel>
+    public interface IObligationRequestRepository : IAccRepository<ObligationRequestModel>
     {
         bool ObligationRequestNoExist(string obligationNo);
 

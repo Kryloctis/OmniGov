@@ -3,7 +3,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ITaxpayersRepository : IRepository<TaxpayersModel>
+    public interface ITaxpayersRepository : IAccRepository<TaxpayersModel>
     {
         bool TaxpayerNameExist(string name);
         bool TaxpayerNameExist(int id, string name);

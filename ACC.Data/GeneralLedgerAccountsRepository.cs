@@ -8,14 +8,14 @@ namespace ACC.Data
 {
     public class GeneralLedgerAccountsRepository : IGeneralLedgerAccountsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_ledger_accounts";
         private readonly string tableName2 = "account_group";
         private readonly string tableName3 = "major_account_group";
         private readonly string tableName4 = "sub_major_account_group";
         private readonly string viewTableName = "view_general_ledger_accounts";
 
-        public GeneralLedgerAccountsRepository(IDbGenericCommands dbGenericCommands)
+        public GeneralLedgerAccountsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

@@ -10,10 +10,10 @@ namespace ACC.Data
 {
     public class RptDiscountsRepository : IRptDiscountsRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_discounts";
 
-        public RptDiscountsRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public RptDiscountsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

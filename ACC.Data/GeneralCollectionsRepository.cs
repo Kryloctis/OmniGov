@@ -9,7 +9,7 @@ namespace ACC.Data
 {
     class GeneralCollectionsRepository:IGeneralCollectionsRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableGeneralCollections = "general_collections";
         private readonly string tableUsers = "users";
         private readonly string tableGeneralCollectionsPayment = "general_collections_payment";
@@ -29,7 +29,7 @@ namespace ACC.Data
 
         private readonly string viewTableName = "view_general_collections";
 
-        public GeneralCollectionsRepository(IDbGenericCommands dbGenericCommands)
+        public GeneralCollectionsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

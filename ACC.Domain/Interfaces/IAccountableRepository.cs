@@ -6,7 +6,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAccountableRepository : IRepository<AccountableModel>
+    public interface IAccountableRepository : IAccRepository<AccountableModel>
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);

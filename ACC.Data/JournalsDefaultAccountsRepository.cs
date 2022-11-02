@@ -12,9 +12,9 @@ namespace ACC.Data
 
         private readonly string tableName = "journals_default_accounts";
         private readonly string viewTableName = "view_journals_default_accounts";
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
 
-        public JournalsDefaultAccountsRepository(MySqlGenericCommands mySqlGenericCommands)
+        public JournalsDefaultAccountsRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

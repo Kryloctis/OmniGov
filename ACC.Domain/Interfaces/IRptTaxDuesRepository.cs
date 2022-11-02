@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptTaxDuesRepository : IRepository<RptTaxDuesModel>
+    public interface IRptTaxDuesRepository : IAccRepository<RptTaxDuesModel>
     {
         DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentPostsId);
     }

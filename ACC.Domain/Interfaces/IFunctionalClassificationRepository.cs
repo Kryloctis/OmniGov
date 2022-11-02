@@ -5,7 +5,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IFunctionalClassificationRepository :IRepository<FunctionalClassificationModel>
+    public interface IFunctionalClassificationRepository :IAccRepository<FunctionalClassificationModel>
     {
         bool CodeExist(string code);
         bool CodeExist(string code, int id);

@@ -10,9 +10,9 @@ namespace ACC.Data
 {
     public class RptPenaltiesRepository : IRptPenaltiesRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_penalties";
-        public RptPenaltiesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public RptPenaltiesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }

@@ -10,10 +10,10 @@ namespace ACC.Data
 {
     public class BanksRepository : IBanksRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
 
         private readonly string tableName = "banks";
-        public BanksRepository(IDbGenericCommands dbGenericCommands)
+        public BanksRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

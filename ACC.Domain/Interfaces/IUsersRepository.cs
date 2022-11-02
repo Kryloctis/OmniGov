@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 namespace ACC.Domain.Interfaces
 {
-    public interface IUsersRepository : IRepository<UsersModel>
+    public interface IUsersRepository : IAccRepository<UsersModel>
     {
         bool HasPermission(byte userId, string permissionName);
         bool NameExist(string name);

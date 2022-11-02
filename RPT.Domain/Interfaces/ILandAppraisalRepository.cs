@@ -1,14 +1,8 @@
-﻿using ACC.Domain.Interfaces;
-using RPT.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RPT.Domain.Models;
 
 namespace RPT.Domain.Interfaces
 {
-    public interface ILandAppraisalRepository : IRepository<LandAppraisalModel>
+    public interface ILandAppraisalRepository : IRptRepository<LandAppraisalModel>
     {
         decimal GetTotalAreaByLandPropertiesId(int landPropertiesId);
     }

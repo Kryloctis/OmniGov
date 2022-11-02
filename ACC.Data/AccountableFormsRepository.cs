@@ -9,11 +9,11 @@ namespace ACC.Data
 {
     public class AccountableFormsRepository:IAccountableRepository
     {
-        private readonly IDbGenericCommands _dbGenericCommands;
+        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
         private readonly string viewTableName = "view_accountable_forms";
 
-        public AccountableFormsRepository(IDbGenericCommands dbGenericCommands)
+        public AccountableFormsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }

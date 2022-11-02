@@ -4,7 +4,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IPaymentCollectionsRepository : IRepository<PaymentCollectionsModel>
+    public interface IPaymentCollectionsRepository : IAccRepository<PaymentCollectionsModel>
     {
         DataTable GetRecordsByCollectingOfficerId(int collectorId);
         DataTable GetRecordsByUserId(int userId);

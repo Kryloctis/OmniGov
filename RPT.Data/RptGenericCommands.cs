@@ -1,16 +1,16 @@
-﻿using ACC.Domain.Interfaces;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using RPT.Domain.Interfaces;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
 
-namespace ACC.Data
+namespace RPT.Data
 {
-    public class MySqlGenericCommands : IDbGenericCommands
+    public class RptGenericCommands : IRPTGenericCommands
     {
         private readonly string connectionString;
 
-        public MySqlGenericCommands(string connectionName)
+        public RptGenericCommands(string connectionName)
         {
             connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
         }

@@ -11,9 +11,9 @@ namespace ACC.Data
     public class AmortizationScheduleRepository : IAmortizationScheduleRepository
     {
         readonly string tableName = "amortization_sched";
-        private MySqlGenericCommands _mySqlGenericCommands;
+        private AccGenericCommands _mySqlGenericCommands;
 
-        public AmortizationScheduleRepository(MySqlGenericCommands mySqlGenericCommands)
+        public AmortizationScheduleRepository(AccGenericCommands mySqlGenericCommands)
         {
             this._mySqlGenericCommands = mySqlGenericCommands;
         }

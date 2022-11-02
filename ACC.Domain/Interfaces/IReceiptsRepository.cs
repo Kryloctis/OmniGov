@@ -4,7 +4,7 @@ using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IReceiptsRepository : IRepository<ReceiptsModel>
+    public interface IReceiptsRepository : IAccRepository<ReceiptsModel>
     {
         int GetMaxReceiptNumberByAccountableFormId(int accountableFormId);
         int GetMinReceiptNumberByAccountableFormId(int accountableFormId);

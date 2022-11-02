@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IJEVAccountsRepository : IRepository<JEVAccountsModel>
+    public interface IJEVAccountsRepository : IAccRepository<JEVAccountsModel>
     {
         DataTable GetViewRecordsByLedgerAccounts();
 

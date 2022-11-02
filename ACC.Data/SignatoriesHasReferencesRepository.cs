@@ -8,11 +8,11 @@ namespace ACC.Data
 {
     public class SignatoriesHasReferencesRepository : ISignatoriesHasReferences
     {
-        private MySqlGenericCommands mySqlGenericCommands;
+        private AccGenericCommands mySqlGenericCommands;
         private const string tableName = "signatories_has_document_references";
         private const string viewTableName = "view_signatories_has_document_references";
 
-        public SignatoriesHasReferencesRepository(MySqlGenericCommands mySqlGenericCommands)
+        public SignatoriesHasReferencesRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
         }

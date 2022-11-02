@@ -10,10 +10,10 @@ namespace ACC.Data
 {
     public class RptTaxRatesRepository : IRptTaxRatesRepository
     {
-        private MySqlGenericCommands _mySqlGenericCommandsLFS;
+        private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_tax_rates";
 
-        public RptTaxRatesRepository(MySqlGenericCommands mySqlGenericCommandsLFS)
+        public RptTaxRatesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
