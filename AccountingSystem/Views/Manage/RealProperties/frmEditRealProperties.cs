@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.RealProperties;
 using System;
 using System.Windows.Forms;
 
@@ -9,12 +10,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal ucRealProperties _ucRealProperties;
         internal ucTaxPayers _ucTaxpayers;
         private int _propertyId;
+        private int _taxpayerId;
 
-        public frmEditRealProperties(int propertyId, ucTaxPayers ucTaxpayers)
+        public frmEditRealProperties(int propertyId, int taxpayerId)
         {
             InitializeComponent();
-            _ucTaxpayers = ucTaxpayers;
             _propertyId = propertyId;
+            _taxpayerId = taxpayerId;
             _ucRealProperties = ucRealProperties1;
         }
 
@@ -38,6 +40,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
             _ucRealProperties.chckTaxable.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_taxable"]));
             _ucRealProperties.chckCancelled.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_cancelled"]));
+
+
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)

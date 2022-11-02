@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -77,6 +78,14 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 LoadProperties();
                 Helper.MessageBoxSuccess("Real properties has been deleted.");
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgRealProperties.CurrentCell.RowIndex;
+            var realPropertiesID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_properties_id"].Value);
+            var taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
+            _ = new frmEditRealProperties(realPropertiesID, taxpayerID).ShowDialog();
         }
     }
 }

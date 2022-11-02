@@ -17,7 +17,6 @@ namespace AccountingSystem
 
 
             dataGridView.Columns["real_properties_id"].Visible = false;
-            dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["property_identifier"].Visible = false;
             dataGridView.Columns["complete_arp_no"].HeaderText = "Complete ARP No.";
             dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
