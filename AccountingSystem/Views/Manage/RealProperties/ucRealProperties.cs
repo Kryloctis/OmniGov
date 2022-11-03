@@ -234,7 +234,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, null, (frmAddRealProperties)this.Parent).ShowDialog();
+            _ = new frmTaxpayersList(this).ShowDialog();
         }
     }
 }

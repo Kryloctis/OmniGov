@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.RealProperties;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 using System;
 using System.Windows.Forms;
 
@@ -18,18 +19,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _propertyId = propertyId;
             _taxpayerId = taxpayerId;
             _ucRealProperties = ucRealProperties1;
+             
         }
 
         private void frmEditRealProperties_Load(object sender, EventArgs e)
         {
             LoadSelectedProperty();
+            LoadTaxpayer();
         }
 
         private void LoadSelectedProperty()
         {
             var dictRealProperties = AccFactory.RealPropertiesRepository().GetRecordByID(_propertyId);
 
-    
             _ucRealProperties.txtArpNo.Text = dictRealProperties["complete_arp_no"];
             _ucRealProperties.txtPropertyPin.Text = dictRealProperties["property_pin"];
             _ucRealProperties.cmbxBarangays.SelectedValue = dictRealProperties["real_properties_barangays_id"];
@@ -44,10 +46,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ucRealProperties.nudArea.Text = dictRealProperties["area"];
             _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
 
-            //_ucRealProperties.chckTaxable.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_taxable"]));
-            //_ucRealProperties.chckCancelled.Checked = Convert.ToBoolean(int.Parse(dictRealProperties["is_cancelled"]));
+        }
 
+        private void LoadTaxpayer()
+        {
+            var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
+            var address = $"{dictRealProperties["taxpayers_street"]}, {dictRealProperties["taxpayers_barangay"]}, {dictRealProperties["taxpayers_municipality"]} {dictRealProperties["taxpayers_province"]}";
+
+            _ucRealProperties.txtTaxpayers.Text = dictRealProperties["taxpayers_name"];
+            _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type"];
+            _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["taxpayers_tin"];
+            _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["taxpayers_contact_info"];
+            _ucRealProperties.txtTaxpayerAddress.Text = address;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -64,9 +75,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                if (!_ucTaxpayers.ValidateChildren())
+                if (!_ucRealProperties.ValidateChildren())
                 {
-                    Helper.MessageBoxError(_ucTaxpayers.GetFormErrors());
+                    Helper.MessageBoxError(_ucRealProperties.GetFormError());
                     return false;
                 }
 

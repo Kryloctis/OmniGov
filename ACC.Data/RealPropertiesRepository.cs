@@ -63,8 +63,6 @@ namespace ACC.Data
 
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
 
-            //string query = $"SELECT real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE id = @id";
-
             string query = $"SELECT complete_arp_no, property_pin, real_properties_barangays_id, real_properties_barangays_name, classification_codes_id, actual_use_codes_id, property_kind, effectivity_quarter, effectivity_year, assessed_value, gr_year, other_improvements, area, lot_no FROM {viewTableName} WHERE real_properties_id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
@@ -88,7 +86,6 @@ namespace ACC.Data
                     dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("area", row["area"].ToString());
                     dict.Add("lot_no", row["lot_no"].ToString());
-
                 }
 
                 return dict;
