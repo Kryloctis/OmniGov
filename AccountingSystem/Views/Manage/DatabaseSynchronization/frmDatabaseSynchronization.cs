@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             }
         }
 
+
         #region Database Sync Progresses
 
         private void backgroundWorkerRptSync_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -62,6 +63,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         break;
                     }
 
+                    int realPropertiesId = Convert.ToInt32(row["real_properties_id"]);
                     string realTaxpayerTin = row["real_owner_tin"].ToString();
                     string realTaxpayerName = row["real_owner_name"].ToString().ToUpper();
                     string realTaxpayerStreet = row["real_owner_street"].ToString();
@@ -104,6 +106,8 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string classificationName = row["classification_name"].ToString();
                     bool actualUseIsGovernment = Convert.ToBoolean(Convert.ToByte(row["actual_use_is_government"]));
                     bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classfication_is_special"]));
+
+                    var dictPreviousAssessment = RptFactory.PreviousAssessmentRepository().GetRecordByRealPropertiesId(realPropertiesId);
 
                     #region Location
 
@@ -195,7 +199,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
                     progressCount++;
                     backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, completeArpNo);
-
                 }
 
                 if (backgroundWorkerRptSync.CancellationPending)
@@ -216,6 +219,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
         {
             uc.progressBar1.Value = e.ProgressPercentage;
             btnSync.Enabled = false;
+            btnStop.Enabled = true;
             uc.cmbxSyncType.Enabled = false;
 
             if (e.ProgressPercentage == 100)
@@ -243,7 +247,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             uc.progressBar1.Visible = false;
             ControlBox = true;
             uc.cmbxSyncType.Enabled = true;
-            btnStop.Enabled = true;
+            btnStop.Enabled = false;
             btnSync.Enabled = true;
         }
 

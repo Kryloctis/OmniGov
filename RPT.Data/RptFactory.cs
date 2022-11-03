@@ -1,11 +1,4 @@
-﻿using ACC.Data;
-using RPT.Domain;
-using RPT.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RPT.Domain.Interfaces;
 
 namespace RPT.Data
 {
@@ -21,6 +14,6 @@ namespace RPT.Data
 
         public static ILandPropertiesRepository LandPropertiesRepository() => new LandPropertiesRepository(mySqlGenericCommandsRPT);
 
-
+        public static IPreviousAssessment PreviousAssessmentRepository() => new PreviousAssessmentRepository(mySqlGenericCommandsRPT);
     }
 }
