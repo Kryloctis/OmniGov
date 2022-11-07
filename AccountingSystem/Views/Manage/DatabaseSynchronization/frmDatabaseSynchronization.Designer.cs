@@ -58,6 +58,7 @@
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.Enabled = false;
             this.btnStop.Location = new System.Drawing.Point(380, 3);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(67, 23);
