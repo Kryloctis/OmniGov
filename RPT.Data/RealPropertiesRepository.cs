@@ -265,5 +265,72 @@ namespace RPT.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommandsRPT.Fill(query, dataTable);
         }
+
+        public Dictionary<string, string> GetViewLFSRealPropertiesRecordById(int Id)
+        {
+            var dict = new Dictionary<string, string>();
+            var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, Id } };
+            string query = $"SELECT real_properties_id, real_properties_identifier, land_bldg_mach_properties_id, transaction_codes_id, transaction_code, pin, property_kind, barangays_id, barangays_code, barangays_name, municipalities_code, municipality_name, provinces_code, provinces_name, gryear, complete_arp_no, is_taxable, is_cancelled, owner_tin, owner_name, owner_address, owner_contact, real_owners_id, real_owner_tin, real_owner_name, real_owner_street, real_owner_barangay, real_owner_municipality, real_owner_province, real_owner_contact_info, real_owner_type_code, real_owner_type, effectivity_quarter, effectivity_year, date_of_entry, street, classification_codes_id, classification_code, classification_name, classification_is_special, actual_use_codes_id, actual_use_code, actual_use_name, actual_use_is_government, land_lot_no, land_area, other_improvements, assessed_value FROM {viewLfsRealProperties} WHERE real_properties_id = @real_properties_id";
+
+            using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("real_properties_id", row["real_properties_id"].ToString());
+                    dict.Add("real_properties_identifier", row["real_properties_identifier"].ToString());
+                    dict.Add("land_bldg_mach_properties_id", row["land_bldg_mach_properties_id"].ToString());
+                    dict.Add("transaction_codes_id", row["transaction_codes_id"].ToString());
+                    dict.Add("transaction_code", row["transaction_code"].ToString());
+                    dict.Add("pin", row["pin"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("barangays_id", row["barangays_id"].ToString());
+                    dict.Add("barangays_code", row["barangays_code"].ToString());
+                    dict.Add("barangays_name", row["barangays_name"].ToString());
+                    dict.Add("municipalities_code", row["municipalities_code"].ToString());
+                    dict.Add("municipality_name", row["municipality_name"].ToString());
+                    dict.Add("provinces_code", row["provinces_code"].ToString());
+                    dict.Add("provinces_name", row["provinces_name"].ToString());
+                    dict.Add("gryear", row["gryear"].ToString());
+                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("owner_tin", row["owner_tin"].ToString());
+                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("owner_address", row["owner_address"].ToString());
+                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("real_owners_id", row["real_owners_id"].ToString());
+                    dict.Add("real_owner_tin", row["real_owner_tin"].ToString());
+                    dict.Add("real_owner_name", row["real_owner_name"].ToString());
+                    dict.Add("real_owner_street", row["real_owner_street"].ToString());
+                    dict.Add("real_owner_barangay", row["real_owner_barangay"].ToString());
+                    dict.Add("real_owner_municipality", row["real_owner_municipality"].ToString());
+                    dict.Add("real_owner_province", row["real_owner_province"].ToString());
+                    dict.Add("real_owner_contact_info", row["real_owner_contact_info"].ToString());
+                    dict.Add("real_owner_type_code", row["real_owner_type_code"].ToString());
+                    dict.Add("real_owner_type", row["real_owner_type"].ToString());
+                    dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("date_of_entry", row["date_of_entry"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("classification_codes_id", row["classification_codes_id"].ToString());
+                    dict.Add("classification_code", row["classification_code"].ToString());
+                    dict.Add("classification_name", row["classification_name"].ToString());
+                    dict.Add("classification_is_special", row["classification_is_special"].ToString());
+                    dict.Add("actual_use_codes_id", row["actual_use_codes_id"].ToString());
+                    dict.Add("actual_use_code", row["actual_use_code"].ToString());
+                    dict.Add("actual_use_name", row["actual_use_name"].ToString());
+                    dict.Add("actual_use_is_government", row["actual_use_is_government"].ToString());
+                    dict.Add("land_lot_no", row["land_lot_no"].ToString());
+                    dict.Add("land_area", row["land_area"].ToString());
+                    dict.Add("other_improvements", row["other_improvements"].ToString());
+                    dict.Add("assessed_value", row["assessed_value"].ToString());
+                }
+
+                return dict;
+            }
+        }
     }
 }

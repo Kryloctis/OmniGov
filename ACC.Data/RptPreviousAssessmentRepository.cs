@@ -39,6 +39,13 @@ namespace ACC.Data
             }
         }
 
+        public bool DeleteByRealPropertyId(int realPropertyId)
+        {
+            var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, realPropertyId } };
+            string query = $"DELETE FROM {tableName} WHERE real_properties_id = @real_properties_id";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var dict = new Dictionary<string, string>();

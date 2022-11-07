@@ -11,6 +11,6 @@ namespace ACC.Domain.Models
         public decimal AssessedValue { get; set; }
         public string PreviousOwner { get; set; }
         public string EffectivityAssessment { get; set; }
-        public DateTime DateRecorded { get; set; }
+        public DateTime? DateRecorded { get; set; }
     }
 }

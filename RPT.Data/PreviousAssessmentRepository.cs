@@ -35,7 +35,7 @@ namespace RPT.Data
         {
             var dict = new Dictionary<string, string>();
             var parameters = new object[][] { new object[] { "@real_properties_id", DbType.Int32, realPropertiesId } };
-            string query = $"SELECT id, pin, arp_no, assessed_value, previous_owner, effectivity_assessment, recording_person, date_recorded FROM {tableName} WHERE real_properties_id = @real_properties_id";
+            string query = $"SELECT id, pin, arp_no, assessed_value, previous_owner, effectivity_assessment, recording_person, date_recorded FROM {tableName} WHERE real_properties_id = @real_properties_id LIMIT 1";
 
             using (var reader = _mySqlGenericCommandsRPT.ExecuteReader(query, parameters))
             {
