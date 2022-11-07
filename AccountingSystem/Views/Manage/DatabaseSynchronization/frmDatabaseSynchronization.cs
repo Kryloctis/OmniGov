@@ -42,7 +42,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             }
         }
 
-
         #region Database Sync Progresses
 
         private void backgroundWorkerRptSync_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -105,11 +104,10 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string classificationCode = row["classification_code"].ToString();
                     string classificationName = row["classification_name"].ToString();
                     bool actualUseIsGovernment = Convert.ToBoolean(Convert.ToByte(row["actual_use_is_government"]));
-                    bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classfication_is_special"]));
+                    bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classification_is_special"]));
 
                     var dictPreviousAssessment = RptFactory.PreviousAssessmentRepository().GetRecordByRealPropertiesId(realPropertiesId);
 
-                    #region Location
 
                     var actualUseCodesModel = new ActualUseCodesModel()
                     {
@@ -162,7 +160,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         Name = provinceName,
                     };
 
-
                     var realPropertiesModel = new RealPropertiesModel()
                     {
                         CompleteArpNo = completeArpNo,
@@ -195,7 +192,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
                     realPropertiesModelList.Add(realPropertiesModel);
 
-                    #endregion
 
                     progressCount++;
                     backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, completeArpNo);

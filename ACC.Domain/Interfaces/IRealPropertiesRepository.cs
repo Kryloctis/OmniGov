@@ -10,7 +10,7 @@ namespace ACC.Domain.Interfaces
         bool CompleteArpNoExist(string completeArpNo, int Id);
         int GetIdByCompleteArpNo(string completeArpNo);
         DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);
-        string GetLastInsertedId();
+        int GetLastInsertedId();
         bool Synchronize(List<RealPropertiesModel> realPropertiesModels);
     }
 }

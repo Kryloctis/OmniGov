@@ -8,8 +8,8 @@ namespace AccountingSystem
     public static class AccFactory
     {
         private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
-        public static byte UserId = 2;
 
+        public static byte UserId = 2;
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -157,5 +157,7 @@ namespace AccountingSystem
         public static IMunicipalities MunicipalitiesRepository() => new MunicipalitiesRepository(mySqlGenericCommandsLFS);
         public static IActualUseCodes ActualUseCodesRepository() => new ActualUseCodesRepository(mySqlGenericCommandsLFS);
         public static IClassificationCodes ClassificationCodesRepository() => new ClassificationCodesRepository(mySqlGenericCommandsLFS);
+
+        public static IRptPreviousAssessment RptPreviousAssessmentRepository() => new RptPreviousAssessmentRepository(mySqlGenericCommandsLFS);
     }
 }

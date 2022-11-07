@@ -36,5 +36,6 @@
         public BarangayModel BarangayModel { get; set; }
         public ActualUseCodesModel ActualUseCodesModel { get; set; }
         public ClassificationCodesModel ClassificationCodesModel { get; set; }
+        public RptPreviousAssessmentModel RptPreviousAssessmentModel { get; set; }
     }
 }

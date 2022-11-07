@@ -217,10 +217,10 @@ namespace ACC.Data
             return false;
         }
 
-        public string GetLastInsertedId()
+        public int GetLastInsertedId()
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
-            return _mySqlGenericCommandsLFS.ExecuteScalar(query).ToString();
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText)
@@ -266,6 +266,7 @@ namespace ACC.Data
                     int taxpayerId;
                     int actualUseId;
                     int classificationId;
+                    int realPropertiesId;
 
 
                     ProvincesModel provinceModel = realPropertiesModel.ProvincesModel;
@@ -275,6 +276,7 @@ namespace ACC.Data
                     TaxpayersModel taxpayersModel = realPropertiesModel.TaxpayersModel;
                     ActualUseCodesModel actualUseModel = realPropertiesModel.ActualUseCodesModel;
                     ClassificationCodesModel classificationModel = realPropertiesModel.ClassificationCodesModel;
+                    RptPreviousAssessmentModel rptPreviousAssessmentModel = realPropertiesModel.RptPreviousAssessmentModel;
 
                     string provinceName = provinceModel.Name;
                     string municipallityName = municipalityModel.Name;
@@ -365,7 +367,8 @@ namespace ACC.Data
                     //Real Properties
                     if (CompleteArpNoExist(completeArpNo))
                     {
-                        realPropertiesModel.Id = GetIdByCompleteArpNo(completeArpNo);
+                        realPropertiesId = GetIdByCompleteArpNo(completeArpNo);
+                        realPropertiesModel.Id = realPropertiesId;
                         realPropertiesModel.ActualUseCodesId = actualUseId;
                         realPropertiesModel.BarangaysId = barangayId;
                         realPropertiesModel.ClassificationCodesId = classificationId;
@@ -379,7 +382,10 @@ namespace ACC.Data
                         realPropertiesModel.ClassificationCodesId = classificationId;
                         realPropertiesModel.RealTaxpayersId = taxpayerId;
                         Insert(realPropertiesModel);
+                        realPropertiesId = GetLastInsertedId();
                     }
+
+
                 }
 
                 scope.Complete();
