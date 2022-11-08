@@ -180,10 +180,11 @@ namespace ACC.Data
                 new object[] { "@gr_year", DbType.Int32, entity.GrYear },
                 new object[] { "@is_taxable", DbType.Boolean, entity.IsTaxable },
                 new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled },
-                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy}
+                new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy},
+                new object[] { "@updated_at", DbType.DateTime, entity.UpdatedAt}
             };
 
-            string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by WHERE id = @id";
+            string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by, updated_at = @updated_at WHERE id = @id";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -417,6 +418,7 @@ namespace ACC.Data
                         realPropertiesModel.BarangaysId = barangayId;
                         realPropertiesModel.ClassificationCodesId = classificationId;
                         realPropertiesModel.RealTaxpayersId = taxpayerId;
+                        realPropertiesModel.UpdatedAt = DateTime.Now;
                         Update(realPropertiesModel);
 
 
@@ -428,14 +430,21 @@ namespace ACC.Data
                     }
                     else
                     {
-                        var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
-                        realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? string.Empty : dictRealProperty["id"];
+
                         realPropertiesModel.ActualUseCodesId = actualUseId;
                         realPropertiesModel.BarangaysId = barangayId;
                         realPropertiesModel.ClassificationCodesId = classificationId;
                         realPropertiesModel.RealTaxpayersId = taxpayerId;
                         Insert(realPropertiesModel);
                         realPropertiesId = GetLastInsertedId();
+
+                        //Update property identifier
+                        var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
+                        realPropertiesModel.Id = realPropertiesId;
+                        realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? realPropertiesId.ToString() : dictRealProperty["id"];
+                        realPropertiesModel.UpdatedBy = null;
+                        realPropertiesModel.UpdatedAt = null;
+                        Update(realPropertiesModel);
 
                         //Insert RPT previous assessment
                         rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;

@@ -222,7 +222,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     realPropertiesModelList.Add(realPropertiesModel);
 
                     progressCount++;
-                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, completeArpNo);
+                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, $"ARP No. {completeArpNo}, Property Kind {propertyKind}");
                 }
 
                 if (backgroundWorkerRptSync.CancellationPending)
