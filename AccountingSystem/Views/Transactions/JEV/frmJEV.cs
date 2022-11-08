@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
 
-                        if (Helper.HasPermission("Transaction Edit Approved JEV") && jevStatus == "approved")
+                        if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
                         {
                             btnSave.Enabled = true;
                             uc.isReadOnly = false;
@@ -65,18 +65,21 @@ namespace AccountingSystem.Views.Transactions.JEV
                 }
 
 
-                if (!Helper.HasPermission("JEV Approval"))
+                if (!Helper.HasPermission("Transaction > JEV Approval"))
                 {
                     btnApprove.Visible = false;
                     btnDisapprove.Visible = false;
                     btnCancelJEV.Visible = false;
                     toolStripSeparator2.Visible = false;
                 }
+                else
+                    lblShowMessage.Enabled = true;
 
-                if (!Helper.HasPermission("Report JEVs"))
+
+                if (!Helper.HasPermission("Report > JEVs"))
                     btnPrint.Enabled = false;
 
-                if (!Helper.HasPermission("Transaction JEV"))
+                if (!Helper.HasPermission("Transaction > JEV"))
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
@@ -93,9 +96,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 if (createdById != Helper.UserId)
                     lblShowMessage.Enabled = false;
-
-                if (Helper.HasPermission("JEV Approval"))
-                    lblShowMessage.Enabled = true;
 
                 HasPermissionToEditApprovedJEV();
             }
@@ -151,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             jevModel.Explanation = uc.txtExplanation.Text.Trim();
             jevModel.IsEdited = jevStatus == "approved" && uc.isEdit ? true : false;
 
-            if (!Helper.HasPermission("Transaction JEV Approved"))
+            if (!Helper.HasPermission("Transaction > JEV Approved"))
                 jevModel.IsApproved = false;
             else
                 jevModel.IsApproved = true;

@@ -193,7 +193,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void VerifyPermissions()
         {
-            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            if (!Helper.HasPermission("Transaction > Obligation Request Approval"))
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
@@ -284,7 +284,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     CreatedBy = Helper.UserId
                 };
 
-                if (Helper.HasPermission("Transaction Obligation Request Approved"))
+                if (Helper.HasPermission("Transaction > Obligation Request Approved"))
                 {
                     obligationRequestModel.IsApproved = true;
                     obligationRequestModel.IsDisapproved = false;

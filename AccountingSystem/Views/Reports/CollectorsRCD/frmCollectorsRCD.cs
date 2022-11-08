@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void ValidateLocalPermission()
         {
-            if (!Helper.HasPermission("Transaction RCD Approval"))
+            if (!Helper.HasPermission("Transaction > RCD Approval"))
             {
                 btnApprove.Visible = false;
                 btnDisapprove.Visible = false;
@@ -41,9 +41,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+
             if (uc.isSaveFunction)
-             {
+            {
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Collector's report has been created.");
@@ -169,7 +169,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             return false;
         }
 
-        private List <CollectorReportPaymentModel> CollectorReportPaymentModelData()
+        private List<CollectorReportPaymentModel> CollectorReportPaymentModelData()
         {
             collectorPaymentReportList = new List<CollectorReportPaymentModel>();
             collectorPaymentReportList.Clear();
@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             {
                 var PaymentCollectionsId = Convert.ToInt16(item.Cells["payment_collections_id"].Value.ToString());
 
-                var collectorReportPaymentModel = new CollectorReportPaymentModel() 
+                var collectorReportPaymentModel = new CollectorReportPaymentModel()
                 {
                     PaymentCollectionsId = PaymentCollectionsId
                 };
@@ -220,7 +220,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
                 if (uc.jobOrderId != 0)
                 {
-                    uc.cbJOCollector.Checked =  true;
+                    uc.cbJOCollector.Checked = true;
                     uc.cmbCollector.SelectedValue = rcdData["job_orders_id"];
                 }
                 else
@@ -228,15 +228,15 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     uc.cbJOCollector.Checked = false;
                     uc.cmbCollector.SelectedValue = rcdData["collecting_officers_id"];
                 }
-                
+
                 var collectionOfPaymentReportsRepo = AccFactory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
 
             }
             catch (Exception ex)
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -318,7 +318,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
                 if (MessageBox.Show("Are you sure you want to approved this Collector's Report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (SetRCDStatus(1, reportNo))  
+                    if (SetRCDStatus(1, reportNo))
                     {
                         Helper.MessageBoxSuccess("Collector's Report has been approved.");
                         CheckRCDStatus(reportNo);
@@ -378,9 +378,9 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     int reportId = uc.reportId;
                     string reportNo = uc.txtReport.Text.Trim();
 
-                    var collectorReportPaymentModel = new CollectorReportPaymentModel() {CollectorsReportId = reportId };
+                    var collectorReportPaymentModel = new CollectorReportPaymentModel() { CollectorsReportId = reportId };
                     var collectorReportPaymentRepo = AccFactory.CollectorReportPaymentsRepository();
-                    bool isDeleteSuccess =  collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
+                    bool isDeleteSuccess = collectorReportPaymentRepo.Delete(collectorReportPaymentModel);
 
                     if (isDeleteSuccess)
                     {

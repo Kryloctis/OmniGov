@@ -106,7 +106,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
         private void VerifyPermissions()
         {
-            if (!Helper.HasPermission("Transaction Obligation Request Approval"))
+            if (!Helper.HasPermission("Transaction > Obligation Request Approval"))
             {
                 btnSaveMessage.Visible = false;
                 txtDissaprovalMessage.SelectionStart = 0;
