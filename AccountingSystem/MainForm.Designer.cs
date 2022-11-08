@@ -57,7 +57,7 @@ namespace AccountingSystem
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
             this.businessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.businessCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.businessAddoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessAddOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -393,7 +393,7 @@ namespace AccountingSystem
             // 
             this.businessToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.businessCategoriesToolStripMenuItem,
-            this.businessAddoToolStripMenuItem});
+            this.businessAddOnToolStripMenuItem});
             this.businessToolStripMenuItem.Name = "businessToolStripMenuItem";
             this.businessToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.businessToolStripMenuItem.Text = "Business";
@@ -404,11 +404,11 @@ namespace AccountingSystem
             this.businessCategoriesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.businessCategoriesToolStripMenuItem.Text = "Business Categories";
             // 
-            // businessAddoToolStripMenuItem
+            // businessAddOnToolStripMenuItem
             // 
-            this.businessAddoToolStripMenuItem.Name = "businessAddoToolStripMenuItem";
-            this.businessAddoToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.businessAddoToolStripMenuItem.Text = "Business Add-on Charges";
+            this.businessAddOnToolStripMenuItem.Name = "businessAddOnToolStripMenuItem";
+            this.businessAddOnToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.businessAddOnToolStripMenuItem.Text = "Business Add-on Charges";
             // 
             // toolStripSeparator1
             // 
@@ -1479,14 +1479,12 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripMenuItem issueRecieptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem returnedReceiptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem referencesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem businessToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem businessToolStripMenuItem; 
         private System.Windows.Forms.ToolStripMenuItem businessCategoriesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem businessAddoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barangaysToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem amortizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
         private System.Windows.Forms.ToolStripButton toolStripButtonRpt;
+        private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
     }
 }
 

@@ -95,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void ValidatePermissions()
         {
-            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+            if (!Helper.HasPermission("Manage > Subsidiary Ledger Account"))
                 btnSubsidiaryLedger.Visible = false;
         }
 
