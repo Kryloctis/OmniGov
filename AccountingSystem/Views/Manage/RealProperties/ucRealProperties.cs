@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

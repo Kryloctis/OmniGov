@@ -8,18 +8,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class frmEditRealProperties : Form
     {
-        internal ucRealProperties _ucRealProperties;
-        internal ucTaxPayers _ucTaxpayers;
+        private ucRealProperties _ucRealProperties;
         private int _propertyId;
         private int _taxpayerId;
+        private frmRealProperties _frmRealProperties;
 
-        public frmEditRealProperties(int propertyId, int taxpayerId)
+        public frmEditRealProperties(frmRealProperties frmRealProperties)
         {
             InitializeComponent();
-            _propertyId = propertyId;
-            _taxpayerId = taxpayerId;
+            _frmRealProperties = frmRealProperties;
+            _propertyId = frmRealProperties.realPropertiesID;
+            _taxpayerId = frmRealProperties.taxpayerID;
             _ucRealProperties = ucRealProperties1;
-             
         }
 
         private void frmEditRealProperties_Load(object sender, EventArgs e)
@@ -45,28 +45,27 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ucRealProperties.nudOtherImprv.Text = dictRealProperties["other_improvements"];
             _ucRealProperties.nudArea.Text = dictRealProperties["area"];
             _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
-
         }
 
-        private void LoadTaxpayer()
-        {
-            var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
+            private void LoadTaxpayer()
+            {
+                var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
-            var address = $"{dictRealProperties["taxpayers_street"]}, {dictRealProperties["taxpayers_barangay"]}, {dictRealProperties["taxpayers_municipality"]} {dictRealProperties["taxpayers_province"]}";
+                var address = $"{dictRealProperties["taxpayers_street"]}, {dictRealProperties["taxpayers_barangay"]}, {dictRealProperties["taxpayers_municipality"]} {dictRealProperties["taxpayers_province"]}";
 
-            _ucRealProperties.txtTaxpayers.Text = dictRealProperties["taxpayers_name"];
-            _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type"];
-            _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["taxpayers_tin"];
-            _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["taxpayers_contact_info"];
-            _ucRealProperties.txtTaxpayerAddress.Text = address;
-        }
+                _ucRealProperties.txtTaxpayers.Text = dictRealProperties["taxpayers_name"];
+                _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type"];
+                _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["taxpayers_tin"];
+                _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["taxpayers_contact_info"];
+                _ucRealProperties.txtTaxpayerAddress.Text = address;
+            }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real property has been updated.");
-                _ucRealProperties.LoadProperties();
+                _frmRealProperties.LoadProperties();
                 Close();
             }
         }
@@ -84,8 +83,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 var realPropertiesModel = new RealPropertiesModel()
                 {
                     Id = _propertyId,
+                    RealTaxpayersId = _taxpayerId,
                     CompleteArpNo = _ucRealProperties.txtArpNo.Text,
-                    RealTaxpayersId = _ucTaxpayers.taxPayerId,
+                    ClassificationCodesId = Convert.ToInt32(_ucRealProperties.cmbxClassification.SelectedValue),
+                    ActualUseCodesId = Convert.ToInt32(_ucRealProperties.cmbxActualUse.SelectedValue),
+                    BarangaysId = Convert.ToInt32(_ucRealProperties.cmbxBarangays.SelectedValue),
+                    PropertyIdentifier = _ucRealProperties.propertyIdentifier,
+                    TaxpayerName = _ucRealProperties.txtTaxpayers.Text,
+                    TaxpayerAddress = _ucRealProperties.txtTaxpayerAddress.Text,
                     PropertyPin = _ucRealProperties.txtPropertyPin.Text,
                     PropertyKind = _ucRealProperties.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(_ucRealProperties.nudEffectivityQuarter.Value),
@@ -95,10 +100,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     OtherImprovements = _ucRealProperties.nudOtherImprv.Value,
                     Area = Convert.ToDecimal(_ucRealProperties.nudArea.Value),
                     LotNo = _ucRealProperties.txtLotNo.Text,
-
+                    IsTaxable = _ucRealProperties.chckTaxable.Checked,
                     IsCancelled = _ucRealProperties.chckCancelled.Checked,
+                    CreatedBy = Helper.UserId
                 };
-
 
                 return AccFactory.RealPropertiesRepository().Update(realPropertiesModel);
             }

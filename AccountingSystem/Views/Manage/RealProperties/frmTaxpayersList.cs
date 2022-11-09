@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private readonly ucRealProperties _ucRealProperties;
         public frmTaxpayersList(ucRealProperties ucRealProperties)
         {
-            InitializeComponent();
+            InitializeComponent();  
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
             _ucRealProperties = ucRealProperties; 
         }

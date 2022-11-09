@@ -10,6 +10,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
 {
     public partial class frmRealProperties : Form
     {
+        internal int realPropertiesID;
+        internal int taxpayerID;
+
         public frmRealProperties()
         {
             InitializeComponent();
@@ -41,7 +44,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
-                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
+                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();  
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -110,9 +113,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int rowIndex = dgRealProperties.CurrentCell.RowIndex;
-            var realPropertiesID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_properties_id"].Value);
-            var taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
-            _ = new frmEditRealProperties(realPropertiesID, taxpayerID).ShowDialog();
+            realPropertiesID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_properties_id"].Value);
+            taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
+            _ = new frmEditRealProperties(this).ShowDialog();
         }
+
     }
 }
