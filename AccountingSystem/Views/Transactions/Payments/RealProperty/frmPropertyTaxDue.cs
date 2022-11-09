@@ -5,15 +5,10 @@ using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static AccountingSystem.Views.Transactions.PaymentPosting.frmPayments;
 
 namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 {
@@ -31,9 +26,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             Helper.DatagridFullRowSelectStyle(dataGridView2, true, false);
         }
 
-        private void ValidatePermissions() 
+        private void ValidatePermissions()
         {
-            if (!Helper.HasPermission("Report Tax Due Bill"))
+            if (!Helper.HasPermission("Report > Tax Due Bill"))
                 btnPrintTaxBill.Enabled = false;
         }
 
@@ -558,7 +553,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
 
         #region Report Tax Dues
 
-        private rptTaxDueBillReportModel GetRptTaxDueBillData(string completeArpNo, int assessmentYear) 
+        private rptTaxDueBillReportModel GetRptTaxDueBillData(string completeArpNo, int assessmentYear)
         {
             var rptTaxDueBillReport = new List<rptTaxDueBillReportModel>();
             var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(completeArpNo, assessmentYear);
@@ -582,7 +577,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             decimal rowSefRate = Convert.ToDecimal(dictAssessmentPosts["sef_rate"]);
             decimal basicTaxDueAmount = RealPropertyTaxComputations.GetBasicTaxDue(rowBasicRate, rowAssessedValue);
             decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(rowSefRate, rowAssessedValue);
-            decimal rowBasicSefTotalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue); 
+            decimal rowBasicSefTotalTaxDue = RealPropertyTaxComputations.GetSefBasicTotalTaxDue(rowBasicRate, rowSefRate, rowAssessedValue);
 
             #endregion
 
@@ -630,7 +625,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             return model;
         }
 
-        private DataTable RptTaxDueBillDataTable() 
+        private DataTable RptTaxDueBillDataTable()
         {
             var dataTable = new dsLFS.dtRPTDueBillDataTable();
 
@@ -663,14 +658,14 @@ namespace AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting
             }
 
             return dataTable;
-        }        
+        }
 
         private void btnPrintTaxBill_Click(object sender, EventArgs e)
         {
 
             _ = new frmRptTaxDueBillReport(RptTaxDueBillDataTable(), _frmRealPropertyPayment.paymentTaxPayerInfoModel).ShowDialog();
         }
-        
+
         #endregion
     }
 }

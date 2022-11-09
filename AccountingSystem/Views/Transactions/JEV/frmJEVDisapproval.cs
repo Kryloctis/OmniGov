@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (_frmJEV.createdById != Helper.UserId)
                 btnAccept.Enabled = false;
 
-            if (!Helper.HasPermission("JEV Approval"))
+            if (!Helper.HasPermission("Transaction > JEV Approval"))
             {
                 txtRemarks.ReadOnly = true;
                 btnSaveMessage.Enabled = false;

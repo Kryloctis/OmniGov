@@ -1,4 +1,6 @@
-﻿namespace ACC.Domain.Models
+﻿using System;
+
+namespace ACC.Domain.Models
 {
     public class RealPropertiesModel
     {
@@ -27,7 +29,9 @@
         public bool IsTaxable { get; set; }
         public bool IsCancelled { get; set; }
         public int CreatedBy { get; set; }
-        public int UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
 
         public TaxpayerTypeModel TaxpayerTypeModel { get; set; }
         public TaxpayersModel TaxpayersModel { get; set; }
@@ -36,5 +40,6 @@
         public BarangayModel BarangayModel { get; set; }
         public ActualUseCodesModel ActualUseCodesModel { get; set; }
         public ClassificationCodesModel ClassificationCodesModel { get; set; }
+        public RptPreviousAssessmentModel RptPreviousAssessmentModel { get; set; }
     }
 }

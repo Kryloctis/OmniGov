@@ -62,8 +62,10 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         break;
                     }
 
+                    int realPropertiesId = Convert.ToInt32(row["real_properties_id"]);
+                    string realPropertiesIdentifier = row["real_properties_identifier"].ToString();
                     string realTaxpayerTin = row["real_owner_tin"].ToString();
-                    string realTaxpayerName = row["real_owner_name"].ToString();
+                    string realTaxpayerName = row["real_owner_name"].ToString().ToUpper();
                     string realTaxpayerStreet = row["real_owner_street"].ToString();
                     string realTaxpayerBarangay = row["real_owner_barangay"].ToString();
                     string realTaxpayerMunicipality = row["real_owner_municipality"].ToString();
@@ -103,9 +105,26 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string classificationCode = row["classification_code"].ToString();
                     string classificationName = row["classification_name"].ToString();
                     bool actualUseIsGovernment = Convert.ToBoolean(Convert.ToByte(row["actual_use_is_government"]));
-                    bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classfication_is_special"]));
+                    bool classificationIsSpecial = Convert.ToBoolean(Convert.ToByte(row["classification_is_special"]));
 
-                    #region Location
+                    //RPT Previous Assessment
+                    var dictPreviousAssessment = RptFactory.PreviousAssessmentRepository().GetRecordByRealPropertiesId(realPropertiesId);
+                    string prevAssessmentCompleteArpNo = dictPreviousAssessment["arp_no"].ToString();
+                    string prevAssessmentPin = dictPreviousAssessment["pin"].ToString();
+                    string prevAssessmentOwner = dictPreviousAssessment["previous_owner"].ToString();
+                    string prevAssessmentEffectivity = dictPreviousAssessment["effectivity_assessment"].ToString();
+                    string prevAssessmentRecordingPerson = dictPreviousAssessment["recording_person"].ToString();
+                    decimal prevAssessmentAssessedValue = Convert.ToDecimal(dictPreviousAssessment["assessed_value"]);
+                    string prevAssessmentDateRecorded = dictPreviousAssessment["date_recorded"].ToString();
+
+                    //RPT Property Identifier
+                    string propertyIdentifierCompleteArpNo = string.Empty;
+
+                    if (!string.IsNullOrEmpty(realPropertiesIdentifier))
+                    {
+                        var dictFindPropertyIdentifier = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecordById(Convert.ToInt32(realPropertiesIdentifier));
+                        propertyIdentifierCompleteArpNo = dictFindPropertyIdentifier["complete_arp_no"];
+                    }
 
                     var actualUseCodesModel = new ActualUseCodesModel()
                     {
@@ -158,9 +177,19 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         Name = provinceName,
                     };
 
+                    var rptPreviousAssessmentModel = new RptPreviousAssessmentModel()
+                    {
+                        CompleteArpNo = prevAssessmentCompleteArpNo,
+                        PropertyPin = prevAssessmentPin,
+                        PreviousOwner = prevAssessmentOwner,
+                        EffectivityAssessment = prevAssessmentEffectivity,
+                        AssessedValue = prevAssessmentAssessedValue,
+                        DateRecorded = string.IsNullOrEmpty(prevAssessmentDateRecorded) ? null : DateTime.Parse(prevAssessmentDateRecorded)
+                    };
 
                     var realPropertiesModel = new RealPropertiesModel()
                     {
+                        PropertyIdentifier = propertyIdentifierCompleteArpNo,
                         CompleteArpNo = completeArpNo,
                         PropertyPin = propertyPin,
                         Street = propertyStreet,
@@ -187,28 +216,26 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         BarangayModel = barangayModel,
                         ActualUseCodesModel = actualUseCodesModel,
                         ClassificationCodesModel = classificationCodesModel,
+                        RptPreviousAssessmentModel = rptPreviousAssessmentModel
                     };
 
                     realPropertiesModelList.Add(realPropertiesModel);
 
-                    #endregion
-
                     progressCount++;
-                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, completeArpNo);
-
+                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, $"ARP No. {completeArpNo}, Property Kind {propertyKind}");
                 }
 
                 if (backgroundWorkerRptSync.CancellationPending)
                 {
-                    e.Result = "cancelled";
+                    e.Result = "Sync Cancelled";
                     return;
                 }
 
                 AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModelList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                e.Result = "error";
+                e.Result = $"RPT Sync Failed...\n\nCause:\n{ex.Message}";
             }
         }
 
@@ -216,6 +243,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
         {
             uc.progressBar1.Value = e.ProgressPercentage;
             btnSync.Enabled = false;
+            btnStop.Enabled = true;
             uc.cmbxSyncType.Enabled = false;
 
             if (e.ProgressPercentage == 100)
@@ -230,12 +258,11 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
         private void backgroundWorkerRptSync_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+
             if (e.Result == null)
                 Helper.MessageBoxSuccess("RPT synced successfully.");
-            else if (e.Result.ToString() == "error")
-                Helper.MessageBoxError("RPT Sychronization Failed");
-            else if (e.Result.ToString() == "cancelled")
-                Helper.MessageBoxError("Sychronization Cancelled");
+            else
+                Helper.MessageBoxError(e.Result.ToString());
 
             uc.lblProgressStatus.Text = string.Empty;
             uc.progressBar1.Value = 0;
@@ -243,7 +270,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             uc.progressBar1.Visible = false;
             ControlBox = true;
             uc.cmbxSyncType.Enabled = true;
-            btnStop.Enabled = true;
+            btnStop.Enabled = false;
             btnSync.Enabled = true;
         }
 

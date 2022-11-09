@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             Helper.LoadFormIcon(this);
 
             // validate if it has permission
-            if (!Helper.HasPermission("Manage Subsidiary Ledger Account"))
+            if (!Helper.HasPermission("Manage > Subsidiary Ledger Account"))
                 BtnSubsidiary.Visible = false;
 
             btnAdd.Enabled = false;
