@@ -23,16 +23,20 @@ namespace AccountingSystem
             dgvIsCancelledCheckBoxCol.HeaderText = "Cancelled";
             dgvIsCancelledCheckBoxCol.Name = "is_cancelled.";
 
-    
-            dataGridView.Columns.Add("real_properties_id", "ID");
+            dataGridView.Columns.Add("real_properties_id", "Real Properties ID");
             dataGridView.Columns.Add("property_identifier", "Property Identifier");
             dataGridView.Columns.Add("complete_arp_no", "Complete ARP No.");
-            dataGridView.Columns.Add("real_taxpayers_street", "Street");
             dataGridView.Columns.Add("property_pin", "PIN");
+            dataGridView.Columns.Add("real_taxpayers_street", "Street");
             dataGridView.Columns.Add("real_taxpayers_id", "Real Taxpayer ID");
-            dataGridView.Columns.Add("real_taxpayers_tin", "TIN");
-            dataGridView.Columns.Add("real_taxpayers_name", "Taxpayer");
-            dataGridView.Columns.Add("taxpayer_contact_info", "Contact Info.");
+            dataGridView.Columns.Add("real_taxpayers_tin", "Real Taxpayer TIN");
+            dataGridView.Columns.Add("real_taxpayers_name", "Real Taxpayer Name");
+            dataGridView.Columns.Add("taxpayer_contact_info", "Real Taxpayer Contact Info.");
+            dataGridView.Columns.Add("real_taxpayers_street", "Real Taxpayer Street");
+            dataGridView.Columns.Add("real_taxpayers_is_active", "Real Taxpayer Is Active");
+            dataGridView.Columns.Add("taxpayer_tin", "Taxpayer TIN");
+            dataGridView.Columns.Add("taxpayer_name", "Taxpayer Name");
+            dataGridView.Columns.Add("taxpayer_contact_info", "Taxpayer Contact Info");
             dataGridView.Columns.Add("taxpayer_address", "Taxpayer Address");
             dataGridView.Columns.Add("real_properties_street", "Street");
             dataGridView.Columns.Add("real_properties_barangays_id", "Real Property Barangays Name");
@@ -41,11 +45,34 @@ namespace AccountingSystem
             dataGridView.Columns.Add("real_properties_municipalities_id", "Real Property Municipality ID");
             dataGridView.Columns.Add("real_properties_municipalities_code", "Municipality Code");
             dataGridView.Columns.Add("real_properties_municipalities_name", "Municipality");
+            dataGridView.Columns.Add("classification_codes_id", "Classfication Codes ID");
+            dataGridView.Columns.Add("classification_codes", "Classfication Codes");
+            dataGridView.Columns.Add("classification_codes_name", "Classfication Codes Name");
+            dataGridView.Columns.Add("classification_codes_is_special", "Classfication Codes Is Special");
+            dataGridView.Columns.Add("actual_use_codes_id", "Actual Use Codes ID");
+            dataGridView.Columns.Add("actual_use_codes", "Actual Use Codes");
+            dataGridView.Columns.Add("actual_use_codes_name", "Actual Use Codes Name");
+            dataGridView.Columns.Add("actual_use_codes_is_government", "Actual Use Codes Is Government");
+            dataGridView.Columns.Add("property_kind", "Property Kind");
+            dataGridView.Columns.Add("effectivity_quarter", "Effectivity Quarter");
+            dataGridView.Columns.Add("effectivity_year", "Effectivity Year");
+            dataGridView.Columns.Add("other_improvements", "Other Improvements");
+            dataGridView.Columns.Add("assessed_value", "Assessed Value");
+            dataGridView.Columns.Add("area", "Area");
+            dataGridView.Columns.Add("lot_no", "Lot No");
+            dataGridView.Columns.Add("gr_year", "GR Year");
             dataGridView.Columns.Add(dgvIsTaxableCheckBoxCol);
             dataGridView.Columns.Add(dgvIsCancelledCheckBoxCol);
             dataGridView.Columns.Add("created_at", "Created At");
             dataGridView.Columns.Add("updated_at", "Updated At");
 
+
+            dataGridView.Columns["real_taxpayers_id"].Visible = false;
+            dataGridView.Columns["real_taxpayers_is_active"].Visible = false;
+            dataGridView.Columns["taxpayer_tin"].Visible = false;
+            dataGridView.Columns["taxpayer_name"].Visible = false;
+            dataGridView.Columns["taxpayer_contact_info"].Visible = false;
+            dataGridView.Columns["taxpayer_address"].Visible = false;
 
             dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["property_identifier"].Visible = false;
@@ -54,6 +81,18 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_barangays_code"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_id"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_code"].Visible = false;
+
+            dataGridView.Columns["real_taxpayers_is_active"].Visible = false;
+            dataGridView.Columns["real_properties_barangays_id"].Visible = false;
+            dataGridView.Columns["real_properties_barangays_code"].Visible = false;
+            dataGridView.Columns["real_properties_municipalities_id"].Visible = false;
+            dataGridView.Columns["real_properties_municipalities_code"].Visible = false;
+            dataGridView.Columns["classification_codes_id"].Visible = false;
+            dataGridView.Columns["classification_codes_name"].Visible = false;
+            dataGridView.Columns["classification_codes_is_special"].Visible = false;
+            dataGridView.Columns["actual_use_codes_id"].Visible = false;
+            dataGridView.Columns["actual_use_codes_name"].Visible = false;
+            dataGridView.Columns["actual_use_codes_is_government"].Visible = false;
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
 

@@ -60,9 +60,11 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 byte createdByIndex = (byte)dgRealProperties.Columns["created_at"].Index;
                 byte updatedByIndex = (byte)dgRealProperties.Columns["updated_at"].Index;
+
+                MessageBox.Show("Test " + createdByIndex);
                 var indexes = new byte[] { createdByIndex, updatedByIndex };
                 EnableDisableToolStripButtons(dgRealProperties, btnEdit);
-                Helper.ShowRecordTimestamp(dgRealProperties, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+                //Helper.ShowRecordTimestamp(dgRealProperties, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
             catch (Exception ex)
             {
