@@ -94,7 +94,6 @@ namespace AccountingSystem
             dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
-       
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
             dataGridView.Columns["real_taxpayers_tin"].Visible = false;

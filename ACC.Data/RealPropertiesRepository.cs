@@ -446,13 +446,24 @@ namespace ACC.Data
                         rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
                         _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
                     }
-
-
+                
                 }
-
+                    
                 scope.Complete();
                 return true;
             }
         }
+
+        public bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                Insert(realPropertiesModel);
+                _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                scope.Complete();
+                return true;
+            }
+        }
+
     }
 }

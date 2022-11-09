@@ -65,7 +65,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSelectTaxpayer = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.txtTaxpayerAddress = new System.Windows.Forms.TextBox();
@@ -81,14 +80,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPreviousEffectivityAssessment = new System.Windows.Forms.TextBox();
+            this.txtPreviousOwner = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtPreviousAssessedValue = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtPreviousCompleteARP = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtPreviousPin = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -146,7 +145,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox2.Location = new System.Drawing.Point(7, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(356, 446);
+            this.groupBox2.Size = new System.Drawing.Size(356, 429);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Property Details";
@@ -185,13 +184,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(4, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(348, 422);
+            this.panel2.Size = new System.Drawing.Size(348, 405);
             this.panel2.TabIndex = 0;
             // 
             // cbxIsCancelled
             // 
             this.cbxIsCancelled.AutoSize = true;
-            this.cbxIsCancelled.Location = new System.Drawing.Point(249, 385);
+            this.cbxIsCancelled.Location = new System.Drawing.Point(249, 379);
             this.cbxIsCancelled.Name = "cbxIsCancelled";
             this.cbxIsCancelled.Size = new System.Drawing.Size(78, 19);
             this.cbxIsCancelled.TabIndex = 16;
@@ -201,7 +200,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // cbxIsTaxable
             // 
             this.cbxIsTaxable.AutoSize = true;
-            this.cbxIsTaxable.Location = new System.Drawing.Point(178, 385);
+            this.cbxIsTaxable.Location = new System.Drawing.Point(178, 379);
             this.cbxIsTaxable.Name = "cbxIsTaxable";
             this.cbxIsTaxable.Size = new System.Drawing.Size(65, 19);
             this.cbxIsTaxable.TabIndex = 16;
@@ -463,7 +462,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.chckTaxable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(533, -86);
+            this.chckTaxable.Location = new System.Drawing.Point(533, -102);
             this.chckTaxable.Name = "chckTaxable";
             this.chckTaxable.Size = new System.Drawing.Size(65, 19);
             this.chckTaxable.TabIndex = 1;
@@ -474,7 +473,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.chckCancelled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(615, -86);
+            this.chckCancelled.Location = new System.Drawing.Point(615, -102);
             this.chckCancelled.Name = "chckCancelled";
             this.chckCancelled.Size = new System.Drawing.Size(78, 19);
             this.chckCancelled.TabIndex = 4;
@@ -499,18 +498,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnSelectTaxpayer.UseVisualStyleBackColor = true;
             this.btnSelectTaxpayer.Click += new System.EventHandler(this.btnSelectTaxpayer_Click);
             // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::AccountingSystem.Properties.Resources.others;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Location = new System.Drawing.Point(335, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(25, 24);
-            this.button1.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.button1, "Select taxpayer");
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnSelectTaxpayer);
@@ -529,7 +516,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1.Location = new System.Drawing.Point(4, 20);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(371, 212);
+            this.panel1.Size = new System.Drawing.Size(371, 220);
             this.panel1.TabIndex = 0;
             // 
             // label22
@@ -548,7 +535,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtTaxpayerAddress.Multiline = true;
             this.txtTaxpayerAddress.Name = "txtTaxpayerAddress";
             this.txtTaxpayerAddress.ReadOnly = true;
-            this.txtTaxpayerAddress.Size = new System.Drawing.Size(216, 49);
+            this.txtTaxpayerAddress.Size = new System.Drawing.Size(216, 58);
             this.txtTaxpayerAddress.TabIndex = 22;
             // 
             // txtTaxpayerContact
@@ -628,10 +615,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(369, 217);
+            this.groupBox1.Location = new System.Drawing.Point(369, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(379, 236);
+            this.groupBox1.Size = new System.Drawing.Size(379, 244);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Taxpayer Details";
@@ -641,121 +628,115 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(369, 7);
+            this.groupBox3.Location = new System.Drawing.Point(369, 257);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(379, 204);
+            this.groupBox3.Size = new System.Drawing.Size(379, 179);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Previous Assessment";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.label18);
-            this.panel3.Controls.Add(this.textBox1);
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.txtPreviousEffectivityAssessment);
+            this.panel3.Controls.Add(this.txtPreviousOwner);
             this.panel3.Controls.Add(this.label19);
-            this.panel3.Controls.Add(this.textBox3);
+            this.panel3.Controls.Add(this.txtPreviousAssessedValue);
             this.panel3.Controls.Add(this.label20);
-            this.panel3.Controls.Add(this.textBox4);
+            this.panel3.Controls.Add(this.txtPreviousCompleteARP);
             this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.txtPreviousPin);
             this.panel3.Controls.Add(this.label23);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel3.Location = new System.Drawing.Point(4, 20);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(4);
-            this.panel3.Size = new System.Drawing.Size(371, 180);
+            this.panel3.Size = new System.Drawing.Size(371, 155);
             this.panel3.TabIndex = 0;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 32);
+            this.label18.Location = new System.Drawing.Point(7, 5);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(26, 15);
             this.label18.TabIndex = 9;
             this.label18.Text = "PIN";
             // 
-            // textBox1
+            // txtPreviousEffectivityAssessment
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(144, 146);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(216, 23);
-            this.textBox1.TabIndex = 22;
+            this.txtPreviousEffectivityAssessment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousEffectivityAssessment.Location = new System.Drawing.Point(144, 119);
+            this.txtPreviousEffectivityAssessment.Multiline = true;
+            this.txtPreviousEffectivityAssessment.Name = "txtPreviousEffectivityAssessment";
+            this.txtPreviousEffectivityAssessment.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousEffectivityAssessment.TabIndex = 22;
             // 
-            // textBox2
+            // txtPreviousOwner
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(144, 117);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(216, 23);
-            this.textBox2.TabIndex = 22;
+            this.txtPreviousOwner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousOwner.Location = new System.Drawing.Point(144, 90);
+            this.txtPreviousOwner.Name = "txtPreviousOwner";
+            this.txtPreviousOwner.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousOwner.TabIndex = 22;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(7, 148);
+            this.label19.Location = new System.Drawing.Point(7, 121);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(124, 15);
             this.label19.TabIndex = 9;
             this.label19.Text = "Effectivity Assessment";
             // 
-            // textBox3
+            // txtPreviousAssessedValue
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Location = new System.Drawing.Point(144, 88);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(216, 23);
-            this.textBox3.TabIndex = 22;
+            this.txtPreviousAssessedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousAssessedValue.Location = new System.Drawing.Point(144, 61);
+            this.txtPreviousAssessedValue.Name = "txtPreviousAssessedValue";
+            this.txtPreviousAssessedValue.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousAssessedValue.TabIndex = 22;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 90);
+            this.label20.Location = new System.Drawing.Point(7, 63);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(85, 15);
             this.label20.TabIndex = 9;
             this.label20.Text = "Assessed Value";
             // 
-            // textBox4
+            // txtPreviousCompleteARP
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.Location = new System.Drawing.Point(144, 59);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(216, 23);
-            this.textBox4.TabIndex = 22;
+            this.txtPreviousCompleteARP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousCompleteARP.Location = new System.Drawing.Point(144, 32);
+            this.txtPreviousCompleteARP.Name = "txtPreviousCompleteARP";
+            this.txtPreviousCompleteARP.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousCompleteARP.TabIndex = 22;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 119);
+            this.label21.Location = new System.Drawing.Point(7, 92);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(90, 15);
             this.label21.TabIndex = 9;
             this.label21.Text = "Previous Owner";
             // 
-            // textBox5
+            // txtPreviousPin
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.Location = new System.Drawing.Point(144, 30);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(216, 23);
-            this.textBox5.TabIndex = 21;
+            this.txtPreviousPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousPin.Location = new System.Drawing.Point(144, 3);
+            this.txtPreviousPin.Name = "txtPreviousPin";
+            this.txtPreviousPin.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousPin.TabIndex = 21;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 61);
+            this.label23.Location = new System.Drawing.Point(7, 34);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(84, 15);
             this.label23.TabIndex = 9;
@@ -773,7 +754,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.groupBox2);
             this.Name = "ucRealProperties";
             this.Padding = new System.Windows.Forms.Padding(4);
-            this.Size = new System.Drawing.Size(759, 460);
+            this.Size = new System.Drawing.Size(759, 444);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -845,16 +826,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.TextBox txtTaxpayers;
         internal System.Windows.Forms.GroupBox groupBox3;
         internal System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Label label18;
-        internal System.Windows.Forms.TextBox textBox1;
-        internal System.Windows.Forms.TextBox textBox2;
+        internal System.Windows.Forms.TextBox txtPreviousEffectivityAssessment;
+        internal System.Windows.Forms.TextBox txtPreviousOwner;
         internal System.Windows.Forms.Label label19;
-        internal System.Windows.Forms.TextBox textBox3;
+        internal System.Windows.Forms.TextBox txtPreviousAssessedValue;
         internal System.Windows.Forms.Label label20;
-        internal System.Windows.Forms.TextBox textBox4;
+        internal System.Windows.Forms.TextBox txtPreviousCompleteARP;
         internal System.Windows.Forms.Label label21;
-        internal System.Windows.Forms.TextBox textBox5;
+        internal System.Windows.Forms.TextBox txtPreviousPin;
         internal System.Windows.Forms.Label label23;
         private System.Windows.Forms.CheckBox cbxIsCancelled;
         private System.Windows.Forms.CheckBox cbxIsTaxable;

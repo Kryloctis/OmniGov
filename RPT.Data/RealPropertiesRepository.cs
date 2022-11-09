@@ -23,7 +23,7 @@ namespace RPT.Data
         public int CountRecords()
         {
             throw new NotImplementedException();
-        }
+        }   
 
         public bool Delete(List<RealPropertiesModel> entityList)
         {

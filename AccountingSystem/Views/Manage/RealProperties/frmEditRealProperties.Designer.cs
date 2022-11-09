@@ -42,7 +42,7 @@
             this.ucRealProperties1.Location = new System.Drawing.Point(0, 0);
             this.ucRealProperties1.Name = "ucRealProperties1";
             this.ucRealProperties1.Padding = new System.Windows.Forms.Padding(4);
-            this.ucRealProperties1.Size = new System.Drawing.Size(761, 489);
+            this.ucRealProperties1.Size = new System.Drawing.Size(761, 444);
             this.ucRealProperties1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -52,7 +52,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 460);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 444);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(761, 29);
             this.flowLayoutPanel1.TabIndex = 3;
@@ -68,6 +68,8 @@
             // 
             // btnSave
             // 
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(602, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -82,9 +84,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(761, 489);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(761, 473);
             this.Controls.Add(this.ucRealProperties1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimizeBox = false;
             this.Name = "frmEditRealProperties";

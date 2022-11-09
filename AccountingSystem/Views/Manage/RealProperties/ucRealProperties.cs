@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
         internal int taxpayerID;
-        internal int propertyIdentifier = 1;
+        internal  string propertyIdentifier = "1";
 
         public ucRealProperties()
         {
