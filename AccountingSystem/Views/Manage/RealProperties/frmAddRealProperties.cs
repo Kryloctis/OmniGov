@@ -72,7 +72,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text    
                 };
 
-                
                 return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
             }
             catch (Exception ex)
@@ -81,8 +80,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
             return false;
         }
-
-
 
     }
 }

@@ -172,7 +172,7 @@ namespace AccountingSystem
                     row["is_taxable"],
                     row["is_cancelled"],
                     row["created_at"],
-                    row["updated_at"],
+                    row["updated_at"],  
                 });
             }
 

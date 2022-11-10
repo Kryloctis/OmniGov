@@ -63,7 +63,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSelectTaxpayer = new System.Windows.Forms.Button();
-            this.btnSelectProperty = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.txtTaxpayerAddress = new System.Windows.Forms.TextBox();
@@ -477,18 +476,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.btnSelectTaxpayer.UseVisualStyleBackColor = true;
             this.btnSelectTaxpayer.Click += new System.EventHandler(this.btnSelectTaxpayer_Click);
             // 
-            // btnSelectProperty
-            // 
-            this.btnSelectProperty.BackgroundImage = global::AccountingSystem.Properties.Resources.others;
-            this.btnSelectProperty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSelectProperty.Location = new System.Drawing.Point(335, 2);
-            this.btnSelectProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSelectProperty.Name = "btnSelectProperty";
-            this.btnSelectProperty.Size = new System.Drawing.Size(25, 24);
-            this.btnSelectProperty.TabIndex = 23;
-            this.toolTip1.SetToolTip(this.btnSelectProperty, "Select taxpayer");
-            this.btnSelectProperty.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnSelectTaxpayer);
@@ -507,7 +494,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1.Location = new System.Drawing.Point(4, 20);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(368, 203);
+            this.panel1.Size = new System.Drawing.Size(376, 203);
             this.panel1.TabIndex = 0;
             // 
             // label22
@@ -608,7 +595,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox1.Location = new System.Drawing.Point(367, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(376, 227);
+            this.groupBox1.Size = new System.Drawing.Size(384, 227);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Taxpayer Details";
@@ -620,14 +607,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox3.Location = new System.Drawing.Point(367, 240);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(376, 195);
+            this.groupBox3.Size = new System.Drawing.Size(384, 195);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Previous Assessment";
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.btnSelectProperty);
             this.panel3.Controls.Add(this.label18);
             this.panel3.Controls.Add(this.txtPreviousEffectivityAssessment);
             this.panel3.Controls.Add(this.txtPreviousOwner);
@@ -643,13 +629,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel3.Location = new System.Drawing.Point(4, 20);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(4);
-            this.panel3.Size = new System.Drawing.Size(368, 171);
+            this.panel3.Size = new System.Drawing.Size(376, 171);
             this.panel3.TabIndex = 0;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 30);
+            this.label18.Location = new System.Drawing.Point(7, 9);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(26, 15);
             this.label18.TabIndex = 9;
@@ -658,7 +644,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousEffectivityAssessment
             // 
             this.txtPreviousEffectivityAssessment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousEffectivityAssessment.Location = new System.Drawing.Point(144, 144);
+            this.txtPreviousEffectivityAssessment.Location = new System.Drawing.Point(144, 123);
             this.txtPreviousEffectivityAssessment.Multiline = true;
             this.txtPreviousEffectivityAssessment.Name = "txtPreviousEffectivityAssessment";
             this.txtPreviousEffectivityAssessment.Size = new System.Drawing.Size(216, 23);
@@ -667,7 +653,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousOwner
             // 
             this.txtPreviousOwner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousOwner.Location = new System.Drawing.Point(144, 115);
+            this.txtPreviousOwner.Location = new System.Drawing.Point(144, 94);
             this.txtPreviousOwner.Name = "txtPreviousOwner";
             this.txtPreviousOwner.Size = new System.Drawing.Size(216, 23);
             this.txtPreviousOwner.TabIndex = 22;
@@ -675,7 +661,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(7, 146);
+            this.label19.Location = new System.Drawing.Point(7, 125);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(124, 15);
             this.label19.TabIndex = 9;
@@ -684,7 +670,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousAssessedValue
             // 
             this.txtPreviousAssessedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousAssessedValue.Location = new System.Drawing.Point(144, 86);
+            this.txtPreviousAssessedValue.Location = new System.Drawing.Point(144, 65);
             this.txtPreviousAssessedValue.Name = "txtPreviousAssessedValue";
             this.txtPreviousAssessedValue.Size = new System.Drawing.Size(216, 23);
             this.txtPreviousAssessedValue.TabIndex = 22;
@@ -692,7 +678,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(7, 88);
+            this.label20.Location = new System.Drawing.Point(7, 67);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(85, 15);
             this.label20.TabIndex = 9;
@@ -701,15 +687,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousCompleteARP
             // 
             this.txtPreviousCompleteARP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousCompleteARP.Location = new System.Drawing.Point(144, 57);
+            this.txtPreviousCompleteARP.Location = new System.Drawing.Point(144, 36);
             this.txtPreviousCompleteARP.Name = "txtPreviousCompleteARP";
             this.txtPreviousCompleteARP.Size = new System.Drawing.Size(216, 23);
             this.txtPreviousCompleteARP.TabIndex = 22;
+            this.txtPreviousCompleteARP.Validating += new System.ComponentModel.CancelEventHandler(this.txtPreviousCompleteARP_Validating);
+            this.txtPreviousCompleteARP.Validated += new System.EventHandler(this.txtPreviousCompleteARP_Validated);
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 117);
+            this.label21.Location = new System.Drawing.Point(7, 96);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(90, 15);
             this.label21.TabIndex = 9;
@@ -718,7 +706,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousPin
             // 
             this.txtPreviousPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousPin.Location = new System.Drawing.Point(144, 28);
+            this.txtPreviousPin.Location = new System.Drawing.Point(144, 7);
             this.txtPreviousPin.Name = "txtPreviousPin";
             this.txtPreviousPin.Size = new System.Drawing.Size(216, 23);
             this.txtPreviousPin.TabIndex = 21;
@@ -726,7 +714,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 59);
+            this.label23.Location = new System.Drawing.Point(7, 38);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(84, 15);
             this.label23.TabIndex = 9;
@@ -742,7 +730,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.Controls.Add(this.groupBox2);
             this.Name = "ucRealProperties";
             this.Padding = new System.Windows.Forms.Padding(4);
-            this.Size = new System.Drawing.Size(752, 441);
+            this.Size = new System.Drawing.Size(757, 441);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
