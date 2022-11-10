@@ -92,13 +92,13 @@
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnDelete
+            // tsBtnDelete
             // 
             this.btnDelete.Enabled = false;
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Name = "tsBtnDelete";
             this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
