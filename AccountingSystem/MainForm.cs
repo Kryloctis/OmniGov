@@ -5,6 +5,8 @@ using AccountingSystem.Views.Manage.Amortization;
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
+using AccountingSystem.Views.Manage.BusinessAdOnCharges;
+using AccountingSystem.Views.Manage.BusinessCategories;
 using AccountingSystem.Views.Manage.ChartOfAccounts;
 using AccountingSystem.Views.Manage.CollectingOfficer;
 using AccountingSystem.Views.Manage.DatabaseSynchronization;
@@ -718,6 +720,16 @@ namespace AccountingSystem
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
         {
             _ = new frmRealProperties().ShowDialog();
+        }
+
+        private void businessCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBusinessCategories().ShowDialog();
+        }
+
+        private void businessAddOnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBusinessAddOnCharges().ShowDialog();
         }
     }
 }
