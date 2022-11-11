@@ -52,6 +52,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 Code = code,
                 Description = description,
                 AppliedEachBusiness = appliedEachBusiness, 
+
                 CreatedBy = Helper.UserId
             };
 

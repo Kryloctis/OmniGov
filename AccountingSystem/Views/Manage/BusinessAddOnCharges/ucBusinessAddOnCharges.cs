@@ -43,5 +43,22 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             cbxAppliedToEachBusiness.Checked = false;
         }
 
+        private void txtDescription_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
+
+            var description = txtDescription.Text.Trim();
+
+            if (AccFactory.BusinessAddOnChargesRepository().DescriptionExist(description))
+            {
+                errorProvider1.SetError(txtDescription, "Description already exist in your records.");
+                e.Cancel = true;
+            }
+        }
+
+        private void txtDescription_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDescription);
+        }
     }
 }

@@ -43,11 +43,11 @@
             this.s = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgBusinessCategories = new System.Windows.Forms.DataGridView();
+            this.dgBusinessAddOnCharges = new System.Windows.Forms.DataGridView();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBusinessCategories)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBusinessAddOnCharges)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -102,6 +102,7 @@
             this.btnDelete.Size = new System.Drawing.Size(44, 43);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStripTextBoxSearch
             // 
@@ -109,6 +110,7 @@
             this.toolStripTextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.toolStripTextBoxSearch.Name = "toolStripTextBoxSearch";
             this.toolStripTextBoxSearch.Size = new System.Drawing.Size(200, 46);
+            this.toolStripTextBoxSearch.TextChanged += new System.EventHandler(this.toolStripTextBoxSearch_TextChanged);
             // 
             // statusStrip1
             // 
@@ -179,7 +181,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dgBusinessCategories);
+            this.panel1.Controls.Add(this.dgBusinessAddOnCharges);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 54);
             this.panel1.Name = "panel1";
@@ -187,18 +189,19 @@
             this.panel1.Size = new System.Drawing.Size(800, 374);
             this.panel1.TabIndex = 16;
             // 
-            // dgBusinessCategories
+            // dgBusinessAddOnCharges
             // 
-            this.dgBusinessCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBusinessCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgBusinessCategories.Location = new System.Drawing.Point(4, 4);
-            this.dgBusinessCategories.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgBusinessCategories.Name = "dgBusinessCategories";
-            this.dgBusinessCategories.RowHeadersWidth = 51;
-            this.dgBusinessCategories.RowTemplate.Height = 29;
-            this.dgBusinessCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBusinessCategories.Size = new System.Drawing.Size(792, 366);
-            this.dgBusinessCategories.TabIndex = 9;
+            this.dgBusinessAddOnCharges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBusinessAddOnCharges.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgBusinessAddOnCharges.Location = new System.Drawing.Point(4, 4);
+            this.dgBusinessAddOnCharges.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgBusinessAddOnCharges.Name = "dgBusinessAddOnCharges";
+            this.dgBusinessAddOnCharges.RowHeadersWidth = 51;
+            this.dgBusinessAddOnCharges.RowTemplate.Height = 29;
+            this.dgBusinessAddOnCharges.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgBusinessAddOnCharges.Size = new System.Drawing.Size(792, 366);
+            this.dgBusinessAddOnCharges.TabIndex = 9;
+            this.dgBusinessAddOnCharges.SelectionChanged += new System.EventHandler(this.dgBusinessCategories_SelectionChanged);
             // 
             // frmBusinessAddOnCharges
             // 
@@ -208,15 +211,18 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
+            this.MinimizeBox = false;
             this.Name = "frmBusinessAddOnCharges";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Business Add-on Charges";
+            this.Load += new System.EventHandler(this.frmBusinessAddOnCharges_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgBusinessCategories)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBusinessAddOnCharges)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +245,6 @@
         private System.Windows.Forms.ToolStripStatusLabel s;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgBusinessCategories;
+        private System.Windows.Forms.DataGridView dgBusinessAddOnCharges;
     }
 }

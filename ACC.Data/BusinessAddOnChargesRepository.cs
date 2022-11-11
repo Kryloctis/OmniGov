@@ -1,8 +1,10 @@
 ﻿using ACC.Data;
 using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace AccountingSystem
 {
@@ -24,7 +26,36 @@ namespace AccountingSystem
 
         public bool Delete(List<BusinessAdOnChargesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.BusinessAdOnChargesID } };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool DescriptionExist(string description)
+        {
+
+            var parameters = new object[][]
+            {
+                new object[] { "@description", DbType.String, description },
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE description = @description";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
+           
+            return false;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -42,7 +73,15 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR description LIKE @search_text";
+
+            var dtBarangay = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBarangay, parameters);
         }
 
         public bool IdExist(int id)

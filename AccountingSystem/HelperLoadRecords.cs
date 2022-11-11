@@ -2718,7 +2718,7 @@ namespace AccountingSystem
             datagrid.ClearSelection();
         }
 
-        internal static void BusinessAdOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
+        internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
         {
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
@@ -2730,12 +2730,17 @@ namespace AccountingSystem
             datagrid.Columns.Add("id", "ID");
             datagrid.Columns.Add("code", "Code");
             datagrid.Columns.Add("description", "Description");
+            datagrid.Columns.Add(dgvCheckBox);
+
+            datagrid.Columns.Add("created_at", "Created At");
+            datagrid.Columns.Add("created_by", "Created By");
+            datagrid.Columns.Add("updated_at", "Updated At");
+            datagrid.Columns.Add("updated_by", "Updated By");
+
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
-
-            datagrid.Columns.Add(dgvCheckBox);
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["is_applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -2747,14 +2752,17 @@ namespace AccountingSystem
                     row["id"],
                     row["code"],
                     row["description"],
-                    Convert.ToBoolean(row["is_applied_each_business"])
+                    Convert.ToBoolean(row["is_applied_each_business"]),
+                    row["created_at"],
+                    row["created_by"],
+                    row["updated_at"],
+                    row["updated_by"]
                 });
             }
 
             datagrid.ClearSelection();
         }
 
-        
 
         internal static void JEVDatagridView(DataGridView datagrid)
         {

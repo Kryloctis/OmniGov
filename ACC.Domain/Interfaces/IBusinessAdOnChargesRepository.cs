@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBusinessAdOnChargesRepository:IAccRepository<BusinessAdOnChargesModel>
     {
-
+        bool DescriptionExist(string name);
     }
 }

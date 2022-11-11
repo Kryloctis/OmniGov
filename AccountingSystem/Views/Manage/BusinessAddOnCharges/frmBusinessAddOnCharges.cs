@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.BusinessCategories;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BusinessCategories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgBusinessCategories, true);
+            Helper.DatagridFullRowSelectStyle(dgBusinessAddOnCharges, true);
         }
 
         internal void LoadBusinessAddOnCharges()
@@ -32,7 +33,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 else
                     dt = AccFactory.BusinessAddOnChargesRepository().GetRecords();
 
-                HelperLoadRecords.BusinessAdOnChargesDataGridView(dgBusinessCategories, dt);
+                HelperLoadRecords.BusinessAddOnChargesDataGridView(dgBusinessAddOnCharges, dt);
             }
             catch (Exception)
             {
@@ -47,9 +48,64 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int businessAddOnChargesID = Convert.ToInt32(dgBusinessCategories.SelectedRows[0].Cells[0].Value);
+            int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
 
             _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
+        }
+
+        private void frmBusinessAddOnCharges_Load(object sender, EventArgs e)
+        {
+            LoadBusinessAddOnCharges();
+        }
+
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadBusinessAddOnCharges();
+        }
+
+        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount;
+
+            if (DeleteBusinessAddOnCharges(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadBusinessAddOnCharges();
+            }
+        }
+
+        private bool DeleteBusinessAddOnCharges(out int deletedCount)
+        {
+            try
+            {
+                var businessAdOnChargesModelList = new List<BusinessAdOnChargesModel>();
+                int rowCount = dgBusinessAddOnCharges.SelectedRows.Count;
+
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
+                    foreach (DataGridViewRow row in dgBusinessAddOnCharges.SelectedRows)
+                    {
+                        int businessAddOnID = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new BusinessAdOnChargesModel() { BusinessAdOnChargesID = businessAddOnID };
+                        businessAdOnChargesModelList.Add(model);
+                    }
+
+                    deletedCount = rowCount;
+                    return AccFactory.BusinessAddOnChargesRepository().Delete(businessAdOnChargesModelList);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            deletedCount = 0;
+            return false;
         }
     }
 }

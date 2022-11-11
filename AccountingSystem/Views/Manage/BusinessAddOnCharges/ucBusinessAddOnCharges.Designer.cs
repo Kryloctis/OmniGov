@@ -53,6 +53,8 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(244, 23);
             this.txtDescription.TabIndex = 7;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // cbxAppliedToEachBusiness
             // 
@@ -87,7 +89,7 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
-            // ucBusinessAdOnCharges
+            // ucBusinessAddOnCharges
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,7 +98,7 @@
             this.Controls.Add(this.cbxAppliedToEachBusiness);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ucBusinessAdOnCharges";
+            this.Name = "ucBusinessAddOnCharges";
             this.Size = new System.Drawing.Size(344, 97);
             this.Load += new System.EventHandler(this.ucBusinessAdOnCharges_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
