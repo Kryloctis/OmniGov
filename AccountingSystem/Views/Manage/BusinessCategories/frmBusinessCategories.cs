@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.Barangay;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,12 +27,27 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
-
+            LoadBusinessCategories();
         }
 
         internal void LoadBusinessCategories()
         {
+            try
+            {
+                var dt = new DataTable();
+                var searchText = toolStripTextBoxSearch.Text.Trim();
 
+                if (searchText.Length > 2)
+                    dt = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
+                else
+                    dt = AccFactory.BusinessCategoriesRepository().GetRecords();
+
+                HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dt);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }
