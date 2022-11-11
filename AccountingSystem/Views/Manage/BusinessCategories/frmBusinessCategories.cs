@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.Barangay;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Barangay;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,7 +53,47 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
+            Helper.EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete);
+        }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int deletedRecordCount;
+
+            if (DeleteBusinessCategories(out deletedRecordCount))
+            {
+                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                LoadBusinessCategories();
+            }
+        }
+
+        private bool DeleteBusinessCategories(out int deletedCount)
+        {
+            try
+            {
+                var businessCategoriesModelList = new List<BusinessCategoriesModel>();
+                int rowCount = dgBusinessCategories.SelectedRows.Count;
+
+                if (Helper.MessageBoxConfirmDelete(rowCount))
+                {
+                    foreach (DataGridViewRow row in dgBusinessCategories.SelectedRows)
+                    {
+                        int businessCategoriesID = Convert.ToInt32(row.Cells["id"].Value);
+                        var model = new BusinessCategoriesModel() { BusinessCategoryID = businessCategoriesID };
+                        businessCategoriesModelList.Add(model);
+                    }
+
+                    deletedCount = rowCount;
+                    return AccFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            deletedCount = 0;
+            return false;
         }
     }
 }

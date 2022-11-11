@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace AccountingSystem
 {
@@ -66,7 +67,19 @@ namespace AccountingSystem
 
         public bool Delete(List<BusinessCategoriesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.BusinessCategoryID } };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
     }
 }
