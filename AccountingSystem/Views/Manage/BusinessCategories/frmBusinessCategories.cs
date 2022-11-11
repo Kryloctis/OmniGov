@@ -15,6 +15,13 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         public frmBusinessCategories()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgBusinessCategories, true);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddBusinessCategories(this).ShowDialog();
         }
     }
 }

@@ -12,9 +12,16 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 {
     public partial class frmAddBusinessCategories : Form
     {
-        public frmAddBusinessCategories()
+        private readonly frmBusinessCategories _frmBusinessCategories;
+        private readonly ucBusinessCategories _ucBusinessCategories;
+
+        public frmAddBusinessCategories(frmBusinessCategories frmBusinessCategories)
         {
             InitializeComponent();
+            _frmBusinessCategories = frmBusinessCategories;
+            _ucBusinessCategories = ucBusinessCategories1;
         }
+
+
     }
 }
