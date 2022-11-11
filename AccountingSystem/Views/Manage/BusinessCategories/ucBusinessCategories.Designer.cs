@@ -69,6 +69,8 @@
             // 
             // txtCode
             // 
+            this.txtCode.AcceptsTab = true;
+            this.txtCode.AllowDrop = true;
             this.txtCode.Location = new System.Drawing.Point(153, 7);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(244, 23);
@@ -76,6 +78,8 @@
             // 
             // txtOrdinanceReferenceNo
             // 
+            this.txtOrdinanceReferenceNo.AcceptsTab = true;
+            this.txtOrdinanceReferenceNo.AllowDrop = true;
             this.txtOrdinanceReferenceNo.Location = new System.Drawing.Point(153, 38);
             this.txtOrdinanceReferenceNo.Name = "txtOrdinanceReferenceNo";
             this.txtOrdinanceReferenceNo.Size = new System.Drawing.Size(244, 23);
@@ -83,11 +87,15 @@
             // 
             // txtDescription
             // 
+            this.txtDescription.AcceptsTab = true;
+            this.txtDescription.AllowDrop = true;
             this.txtDescription.Location = new System.Drawing.Point(153, 67);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(244, 23);
             this.txtDescription.TabIndex = 2;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
+            this.txtDescription.Validated += new System.EventHandler(this.txtDescription_Validated);
             // 
             // cbxLineOfBusiness
             // 
@@ -101,22 +109,25 @@
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
             // ucBusinessCategories
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cbxLineOfBusiness);
-            this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.txtOrdinanceReferenceNo);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.txtCode);
+            this.Controls.Add(this.txtOrdinanceReferenceNo);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.cbxLineOfBusiness);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucBusinessCategories";
             this.Padding = new System.Windows.Forms.Padding(4);
             this.Size = new System.Drawing.Size(415, 120);
+            this.Load += new System.EventHandler(this.ucBusinessCategories_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

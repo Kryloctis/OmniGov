@@ -50,5 +50,9 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             }
         }
 
+        private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

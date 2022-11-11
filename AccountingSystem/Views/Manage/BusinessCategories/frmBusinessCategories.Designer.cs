@@ -198,6 +198,7 @@
             this.dgBusinessCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgBusinessCategories.Size = new System.Drawing.Size(792, 366);
             this.dgBusinessCategories.TabIndex = 9;
+            this.dgBusinessCategories.SelectionChanged += new System.EventHandler(this.dgBusinessCategories_SelectionChanged);
             // 
             // frmBusinessCategories
             // 
