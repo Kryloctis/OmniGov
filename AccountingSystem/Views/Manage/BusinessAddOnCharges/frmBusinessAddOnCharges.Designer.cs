@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    partial class frmBusinessAdOnCharges
+    partial class frmBusinessAddOnCharges
     {
         /// <summary>
         /// Required designer variable.
@@ -142,7 +142,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(514, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(545, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -200,7 +200,7 @@
             this.dgBusinessCategories.Size = new System.Drawing.Size(792, 366);
             this.dgBusinessCategories.TabIndex = 9;
             // 
-            // frmBusinessAdOnCharges
+            // frmBusinessAddOnCharges
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,9 +208,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
-            this.Name = "frmBusinessAdOnCharges";
+            this.Name = "frmBusinessAddOnCharges";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Manage > Business Ad-on Charges";
+            this.Text = "Manage > Business Add-on Charges";
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

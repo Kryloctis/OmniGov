@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    public partial class ucBusinessAdOnCharges : UserControl
+    public partial class ucBusinessAddOnCharges : UserControl
     {
-        public ucBusinessAdOnCharges()
+        public ucBusinessAddOnCharges()
         {
             InitializeComponent();
         }

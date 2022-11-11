@@ -2725,7 +2725,7 @@ namespace AccountingSystem
 
             DataGridViewCheckBoxColumn dgvCheckBox = new DataGridViewCheckBoxColumn();
             dgvCheckBox.HeaderText = "Applied each business";
-            dgvCheckBox.Name = "applied_each_business";
+            dgvCheckBox.Name = "is_applied_each_business";
 
             datagrid.Columns.Add("id", "ID");
             datagrid.Columns.Add("code", "Code");
@@ -2738,7 +2738,7 @@ namespace AccountingSystem
             datagrid.Columns.Add(dgvCheckBox);
 
             datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            datagrid.Columns["is_applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -2747,7 +2747,7 @@ namespace AccountingSystem
                     row["id"],
                     row["code"],
                     row["description"],
-                    Convert.ToBoolean(row["applied_each_business"])
+                    Convert.ToBoolean(row["is_applied_each_business"])
                 });
             }
 

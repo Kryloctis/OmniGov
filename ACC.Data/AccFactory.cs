@@ -9,7 +9,7 @@ namespace AccountingSystem
     {
         private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
 
-        public static byte UserId = 2;
+        public static byte UserId = 1;
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -168,7 +168,7 @@ namespace AccountingSystem
         public static IRptPreviousAssessment RptPreviousAssessmentRepository() => new RptPreviousAssessmentRepository(mySqlGenericCommandsLFS);
         public static IBusinessCategoriesRepository BusinessCategoriesRepository() => new BusinessCategoriesRepository(mySqlGenericCommandsLFS);
 
-        public static IBusinessAdOnChargesRepository BusinessAdOnChargesRepository() => new BusinessAdOnChargesRepository(mySqlGenericCommandsLFS);
+        public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
 
         
         

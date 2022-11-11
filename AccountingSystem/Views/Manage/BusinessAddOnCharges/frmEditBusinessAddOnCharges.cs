@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    public partial class frmEditBusinessAdOnCharges : Form
+    public partial class frmEditBusinessAddOnCharges : Form
     {
         private int _businessAddOnChargesID;
-        private frmBusinessAdOnCharges _frmBusinessAdOnCharges;
+        private frmBusinessAddOnCharges _frmBusinessAdOnCharges;
        
-        public frmEditBusinessAdOnCharges()
+        public frmEditBusinessAddOnCharges()
         {
             InitializeComponent();
         }
 
-        public frmEditBusinessAdOnCharges(int businessAddOnChargesID, frmBusinessAdOnCharges frmBusinessAdOnCharges)
+        public frmEditBusinessAddOnCharges(int businessAddOnChargesID, frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
            _businessAddOnChargesID = businessAddOnChargesID;
            _frmBusinessAdOnCharges = frmBusinessAdOnCharges;

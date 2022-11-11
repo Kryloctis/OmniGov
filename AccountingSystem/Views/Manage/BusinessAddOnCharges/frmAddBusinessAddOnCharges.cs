@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    public partial class frmAddBusinessAdOnCharges : Form
+    public partial class frmAddBusinessAddOnCharges : Form
     {
-        private readonly frmBusinessAdOnCharges _frmBusinessAdOnCharges;
-        private readonly ucBusinessAdOnCharges _ucBusinessAdOnCharges;
+        private readonly frmBusinessAddOnCharges _frmBusinessAdOnCharges;
+        private readonly ucBusinessAddOnCharges _ucBusinessAdOnCharges;
 
 
-        public frmAddBusinessAdOnCharges(frmBusinessAdOnCharges frmBusinessAdOnCharges)
+        public frmAddBusinessAddOnCharges(frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
             _frmBusinessAdOnCharges = frmBusinessAdOnCharges;
@@ -30,7 +30,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Business Ad-on has been saved.");
-                _frmBusinessAdOnCharges.LoadBusinessAdOnCharges();
+                _frmBusinessAdOnCharges.LoadBusinessAddOnCharges();
                 _ucBusinessAdOnCharges.ResetForm();
             }
         }
@@ -52,10 +52,10 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 Code = code,
                 Description = description,
                 AppliedEachBusiness = appliedEachBusiness, 
-                CreatedBy = AccFactory.UserId
+                CreatedBy = Helper.UserId
             };
 
-            return AccFactory.BusinessAdOnChargesRepository().Insert(businessAdOnChargesModel);
+            return AccFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);
         }
 
 

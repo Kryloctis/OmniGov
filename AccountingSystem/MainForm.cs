@@ -729,7 +729,7 @@ namespace AccountingSystem
 
         private void businessAddOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmBusinessAdOnCharges().ShowDialog();
+            _ = new frmBusinessAddOnCharges().ShowDialog();
         }
     }
 }

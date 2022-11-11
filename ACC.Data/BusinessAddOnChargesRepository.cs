@@ -6,13 +6,13 @@ using System.Data;
 
 namespace AccountingSystem
 {
-    internal class BusinessAdOnChargesRepository : IBusinessAdOnChargesRepository
+    internal class BusinessAddOnChargesRepository : IBusinessAdOnChargesRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
-        private readonly string tableName = "account_group";
+        private readonly string tableName = "business_add_on_charges";
 
 
-        public BusinessAdOnChargesRepository(IAccGenericCommands dbGenericCommands)
+        public BusinessAddOnChargesRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
@@ -52,7 +52,17 @@ namespace AccountingSystem
 
         public bool Insert(BusinessAdOnChargesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] {"@code", DbType.String, entity.Code},
+                new object[] {"@description", DbType.String, entity.Description},
+                new object[] {"@is_applied_each_business", DbType.Boolean, entity.AppliedEachBusiness },
+                new object[] {"@created_by", DbType.Int32, entity.CreatedBy },
+            };
+
+            string query = $"INSERT INTO {tableName} (code, description, is_applied_each_business, created_by) VALUES (@code, @description, @is_applied_each_business, @created_by)";
+
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BusinessAdOnChargesModel entity)

@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    partial class frmAddBusinessAdOnCharges
+    partial class frmAddBusinessAddOnCharges
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ucBusinessAdOnCharges1 = new AccountingSystem.Views.Manage.BusinessAdOnCharges.ucBusinessAdOnCharges();
+            this.ucBusinessAdOnCharges1 = new AccountingSystem.Views.Manage.BusinessAdOnCharges.ucBusinessAddOnCharges();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,22 +76,24 @@
             this.ucBusinessAdOnCharges1.Size = new System.Drawing.Size(344, 97);
             this.ucBusinessAdOnCharges1.TabIndex = 4;
             // 
-            // frmAddBusinessAdOnCharges
+            // frmAddBusinessAddOnCharges
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(351, 139);
             this.Controls.Add(this.ucBusinessAdOnCharges1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmAddBusinessAdOnCharges";
+            this.Name = "frmAddBusinessAddOnCharges";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Business Ad-On Charges";
+            this.Text = "Add Business Add-On Charges";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -102,6 +104,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private ucBusinessAdOnCharges ucBusinessAdOnCharges1;
+        private ucBusinessAddOnCharges ucBusinessAdOnCharges1;
     }
 }

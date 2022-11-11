@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    partial class ucBusinessAdOnCharges
+    partial class ucBusinessAddOnCharges
     {
         /// <summary> 
         /// Required designer variable.
