@@ -37,6 +37,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmbxActualUse = new System.Windows.Forms.ComboBox();
+            this.chckCancelled = new System.Windows.Forms.CheckBox();
+            this.chckTaxable = new System.Windows.Forms.CheckBox();
             this.cmbxClassification = new System.Windows.Forms.ComboBox();
             this.cmbxBarangays = new System.Windows.Forms.ComboBox();
             this.nudArea = new System.Windows.Forms.NumericUpDown();
@@ -58,8 +60,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.chckTaxable = new System.Windows.Forms.CheckBox();
-            this.chckCancelled = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnSelectTaxpayer = new System.Windows.Forms.Button();
@@ -75,6 +75,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtTaxpayers = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtPreviousEffectivityAssessment = new System.Windows.Forms.TextBox();
+            this.txtPreviousOwner = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtPreviousAssessedValue = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtPreviousCompleteARP = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtPreviousPin = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudArea)).BeginInit();
@@ -86,6 +98,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtArpNo
@@ -126,10 +140,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(0, 3);
+            this.groupBox2.Location = new System.Drawing.Point(7, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(356, 405);
+            this.groupBox2.Size = new System.Drawing.Size(354, 428);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Property Details";
@@ -137,6 +151,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // panel2
             // 
             this.panel2.Controls.Add(this.cmbxActualUse);
+            this.panel2.Controls.Add(this.chckCancelled);
+            this.panel2.Controls.Add(this.chckTaxable);
             this.panel2.Controls.Add(this.cmbxClassification);
             this.panel2.Controls.Add(this.cmbxBarangays);
             this.panel2.Controls.Add(this.nudArea);
@@ -166,7 +182,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.panel2.Location = new System.Drawing.Point(4, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(348, 381);
+            this.panel2.Size = new System.Drawing.Size(346, 404);
             this.panel2.TabIndex = 0;
             // 
             // cmbxActualUse
@@ -176,6 +192,28 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.cmbxActualUse.Name = "cmbxActualUse";
             this.cmbxActualUse.Size = new System.Drawing.Size(216, 23);
             this.cmbxActualUse.TabIndex = 15;
+            // 
+            // chckCancelled
+            // 
+            this.chckCancelled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chckCancelled.AutoSize = true;
+            this.chckCancelled.Location = new System.Drawing.Point(249, 379);
+            this.chckCancelled.Name = "chckCancelled";
+            this.chckCancelled.Size = new System.Drawing.Size(78, 19);
+            this.chckCancelled.TabIndex = 4;
+            this.chckCancelled.Text = "Cancelled";
+            this.chckCancelled.UseVisualStyleBackColor = true;
+            // 
+            // chckTaxable
+            // 
+            this.chckTaxable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chckTaxable.AutoSize = true;
+            this.chckTaxable.Location = new System.Drawing.Point(178, 379);
+            this.chckTaxable.Name = "chckTaxable";
+            this.chckTaxable.Size = new System.Drawing.Size(65, 19);
+            this.chckTaxable.TabIndex = 1;
+            this.chckTaxable.Text = "Taxable";
+            this.chckTaxable.UseVisualStyleBackColor = true;
             // 
             // cmbxClassification
             // 
@@ -420,28 +458,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label7.TabIndex = 1;
             this.label7.Text = "Barangay";
             // 
-            // chckTaxable
-            // 
-            this.chckTaxable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chckTaxable.AutoSize = true;
-            this.chckTaxable.Location = new System.Drawing.Point(500, -131);
-            this.chckTaxable.Name = "chckTaxable";
-            this.chckTaxable.Size = new System.Drawing.Size(65, 19);
-            this.chckTaxable.TabIndex = 1;
-            this.chckTaxable.Text = "Taxable";
-            this.chckTaxable.UseVisualStyleBackColor = true;
-            // 
-            // chckCancelled
-            // 
-            this.chckCancelled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chckCancelled.AutoSize = true;
-            this.chckCancelled.Location = new System.Drawing.Point(582, -131);
-            this.chckCancelled.Name = "chckCancelled";
-            this.chckCancelled.Size = new System.Drawing.Size(78, 19);
-            this.chckCancelled.TabIndex = 4;
-            this.chckCancelled.Text = "Cancelled";
-            this.chckCancelled.UseVisualStyleBackColor = true;
-            // 
             // errorProvider1
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
@@ -451,7 +467,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             this.btnSelectTaxpayer.BackgroundImage = global::AccountingSystem.Properties.Resources.others;
             this.btnSelectTaxpayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSelectTaxpayer.Location = new System.Drawing.Point(292, 2);
+            this.btnSelectTaxpayer.Location = new System.Drawing.Point(335, 0);
             this.btnSelectTaxpayer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelectTaxpayer.Name = "btnSelectTaxpayer";
             this.btnSelectTaxpayer.Size = new System.Drawing.Size(25, 24);
@@ -478,7 +494,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1.Location = new System.Drawing.Point(4, 20);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(332, 200);
+            this.panel1.Size = new System.Drawing.Size(376, 203);
             this.panel1.TabIndex = 0;
             // 
             // label22
@@ -493,17 +509,17 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtTaxpayerAddress
             // 
             this.txtTaxpayerAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayerAddress.Location = new System.Drawing.Point(101, 144);
+            this.txtTaxpayerAddress.Location = new System.Drawing.Point(144, 142);
             this.txtTaxpayerAddress.Multiline = true;
             this.txtTaxpayerAddress.Name = "txtTaxpayerAddress";
             this.txtTaxpayerAddress.ReadOnly = true;
-            this.txtTaxpayerAddress.Size = new System.Drawing.Size(216, 49);
+            this.txtTaxpayerAddress.Size = new System.Drawing.Size(216, 53);
             this.txtTaxpayerAddress.TabIndex = 22;
             // 
             // txtTaxpayerContact
             // 
             this.txtTaxpayerContact.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayerContact.Location = new System.Drawing.Point(101, 115);
+            this.txtTaxpayerContact.Location = new System.Drawing.Point(144, 113);
             this.txtTaxpayerContact.Name = "txtTaxpayerContact";
             this.txtTaxpayerContact.ReadOnly = true;
             this.txtTaxpayerContact.Size = new System.Drawing.Size(216, 23);
@@ -521,7 +537,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtTaxpayerTIN
             // 
             this.txtTaxpayerTIN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayerTIN.Location = new System.Drawing.Point(101, 86);
+            this.txtTaxpayerTIN.Location = new System.Drawing.Point(144, 84);
             this.txtTaxpayerTIN.Name = "txtTaxpayerTIN";
             this.txtTaxpayerTIN.ReadOnly = true;
             this.txtTaxpayerTIN.Size = new System.Drawing.Size(216, 23);
@@ -539,7 +555,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtTaxpayerType
             // 
             this.txtTaxpayerType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayerType.Location = new System.Drawing.Point(101, 57);
+            this.txtTaxpayerType.Location = new System.Drawing.Point(144, 55);
             this.txtTaxpayerType.Name = "txtTaxpayerType";
             this.txtTaxpayerType.ReadOnly = true;
             this.txtTaxpayerType.Size = new System.Drawing.Size(216, 23);
@@ -557,7 +573,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtTaxpayers
             // 
             this.txtTaxpayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayers.Location = new System.Drawing.Point(101, 28);
+            this.txtTaxpayers.Location = new System.Drawing.Point(144, 26);
             this.txtTaxpayers.Name = "txtTaxpayers";
             this.txtTaxpayers.ReadOnly = true;
             this.txtTaxpayers.Size = new System.Drawing.Size(216, 23);
@@ -574,30 +590,147 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(363, 3);
+            this.groupBox1.Location = new System.Drawing.Point(367, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(340, 224);
+            this.groupBox1.Size = new System.Drawing.Size(384, 227);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Taxpayer Details";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.panel3);
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox3.Location = new System.Drawing.Point(367, 240);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(384, 195);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Previous Assessment";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label18);
+            this.panel3.Controls.Add(this.txtPreviousEffectivityAssessment);
+            this.panel3.Controls.Add(this.txtPreviousOwner);
+            this.panel3.Controls.Add(this.label19);
+            this.panel3.Controls.Add(this.txtPreviousAssessedValue);
+            this.panel3.Controls.Add(this.label20);
+            this.panel3.Controls.Add(this.txtPreviousCompleteARP);
+            this.panel3.Controls.Add(this.label21);
+            this.panel3.Controls.Add(this.txtPreviousPin);
+            this.panel3.Controls.Add(this.label23);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.panel3.Location = new System.Drawing.Point(4, 20);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(4);
+            this.panel3.Size = new System.Drawing.Size(376, 171);
+            this.panel3.TabIndex = 0;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 9);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(26, 15);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "PIN";
+            // 
+            // txtPreviousEffectivityAssessment
+            // 
+            this.txtPreviousEffectivityAssessment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousEffectivityAssessment.Location = new System.Drawing.Point(144, 123);
+            this.txtPreviousEffectivityAssessment.Multiline = true;
+            this.txtPreviousEffectivityAssessment.Name = "txtPreviousEffectivityAssessment";
+            this.txtPreviousEffectivityAssessment.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousEffectivityAssessment.TabIndex = 22;
+            // 
+            // txtPreviousOwner
+            // 
+            this.txtPreviousOwner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousOwner.Location = new System.Drawing.Point(144, 94);
+            this.txtPreviousOwner.Name = "txtPreviousOwner";
+            this.txtPreviousOwner.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousOwner.TabIndex = 22;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(7, 125);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(124, 15);
+            this.label19.TabIndex = 9;
+            this.label19.Text = "Effectivity Assessment";
+            // 
+            // txtPreviousAssessedValue
+            // 
+            this.txtPreviousAssessedValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousAssessedValue.Location = new System.Drawing.Point(144, 65);
+            this.txtPreviousAssessedValue.Name = "txtPreviousAssessedValue";
+            this.txtPreviousAssessedValue.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousAssessedValue.TabIndex = 22;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(7, 67);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(85, 15);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Assessed Value";
+            // 
+            // txtPreviousCompleteARP
+            // 
+            this.txtPreviousCompleteARP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousCompleteARP.Location = new System.Drawing.Point(144, 36);
+            this.txtPreviousCompleteARP.Name = "txtPreviousCompleteARP";
+            this.txtPreviousCompleteARP.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousCompleteARP.TabIndex = 22;
+            this.txtPreviousCompleteARP.Validating += new System.ComponentModel.CancelEventHandler(this.txtPreviousCompleteARP_Validating);
+            this.txtPreviousCompleteARP.Validated += new System.EventHandler(this.txtPreviousCompleteARP_Validated);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 96);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(90, 15);
+            this.label21.TabIndex = 9;
+            this.label21.Text = "Previous Owner";
+            // 
+            // txtPreviousPin
+            // 
+            this.txtPreviousPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPreviousPin.Location = new System.Drawing.Point(144, 7);
+            this.txtPreviousPin.Name = "txtPreviousPin";
+            this.txtPreviousPin.Size = new System.Drawing.Size(216, 23);
+            this.txtPreviousPin.TabIndex = 21;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(7, 38);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(84, 15);
+            this.label23.TabIndex = 9;
+            this.label23.Text = "Complete ARP";
             // 
             // ucRealProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.chckCancelled);
-            this.Controls.Add(this.chckTaxable);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Name = "ucRealProperties";
-            this.Size = new System.Drawing.Size(722, 411);
+            this.Padding = new System.Windows.Forms.Padding(4);
+            this.Size = new System.Drawing.Size(757, 441);
             this.Load += new System.EventHandler(this.ucRealProperties_Load);
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -612,8 +745,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -664,5 +799,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.TextBox txtTaxpayerTIN;
         internal System.Windows.Forms.TextBox txtTaxpayerType;
         internal System.Windows.Forms.TextBox txtTaxpayers;
+        internal System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.Label label18;
+        internal System.Windows.Forms.TextBox txtPreviousEffectivityAssessment;
+        internal System.Windows.Forms.TextBox txtPreviousOwner;
+        internal System.Windows.Forms.Label label19;
+        internal System.Windows.Forms.TextBox txtPreviousAssessedValue;
+        internal System.Windows.Forms.Label label20;
+        internal System.Windows.Forms.TextBox txtPreviousCompleteARP;
+        internal System.Windows.Forms.Label label21;
+        internal System.Windows.Forms.TextBox txtPreviousPin;
+        internal System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnSelectProperty;
     }
 }

@@ -66,7 +66,7 @@ namespace ACC.Data
 
             var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
 
-            string query = $"SELECT real_taxpayers_id, barangays_id, classification_codes_id, actual_use_codes_id, street, property_identifier, complete_arp_no, property_pin, property_kind, effectivity_quarter, effectivity_year, other_improvements, assessed_value, area, lot_no, gr_year, is_taxable, is_cancelled FROM {tableName} WHERE id = @id";
+            string query = $"SELECT complete_arp_no, property_pin, real_properties_barangays_id, real_properties_barangays_name, classification_codes_id, actual_use_codes_id, property_kind, effectivity_quarter, effectivity_year, assessed_value, gr_year, other_improvements, area, lot_no FROM {viewTableName} WHERE real_properties_id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -75,24 +75,20 @@ namespace ACC.Data
 
                 foreach (DataRow row in reader.Rows)
                 {
-                    dict.Add("real_taxpayers_id", row["real_taxpayers_id"].ToString());
-                    dict.Add("barangays_id", row["barangays_id"].ToString());
-                    dict.Add("classification_codes_id", row["classification_codes_id"].ToString());
-                    dict.Add("actual_use_codes_id", row["actual_use_codes_id"].ToString());
-                    dict.Add("street", row["street"].ToString());
-                    dict.Add("property_identifier", row["property_identifier"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());
+                    dict.Add("real_properties_barangays_id", row["real_properties_barangays_id"].ToString());
+                    dict.Add("real_properties_barangays_name", row["real_properties_barangays_name"].ToString());
+                    dict.Add("classification_codes_id", row["classification_codes_id"].ToString());
+                    dict.Add("actual_use_codes_id", row["actual_use_codes_id"].ToString());
                     dict.Add("property_kind", row["property_kind"].ToString());
                     dict.Add("effectivity_quarter", row["effectivity_quarter"].ToString());
                     dict.Add("effectivity_year", row["effectivity_year"].ToString());
-                    dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("assessed_value", row["assessed_value"].ToString());
+                    dict.Add("gr_year", row["gr_year"].ToString());
+                    dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("area", row["area"].ToString());
                     dict.Add("lot_no", row["lot_no"].ToString());
-                    dict.Add("gr_year", row["gr_year"].ToString());
-                    dict.Add("is_taxable", row["is_taxable"].ToString());
-                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
                 }
 
                 return dict;
@@ -184,7 +180,7 @@ namespace ACC.Data
                 new object[] { "@updated_at", DbType.DateTime, entity.UpdatedAt}
             };
 
-            string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by, updated_at = @updated_at WHERE id = @id";
+            string query = $"UPDATE {tableName} SET real_taxpayers_id = @real_taxpayers_id, real_taxpayers_id = @real_taxpayers_id, barangays_id = @barangays_id, classification_codes_id = @classification_codes_id, actual_use_codes_id = @actual_use_codes_id, taxpayer_tin = @taxpayer_tin, taxpayer_name = @taxpayer_name, taxpayer_contact_info = @taxpayer_contact_info, taxpayer_address = @taxpayer_address, street = @street, property_identifier = @property_identifier, complete_arp_no = @complete_arp_no, property_pin = @property_pin, property_kind = @property_kind, effectivity_quarter = @effectivity_quarter, effectivity_year = @effectivity_year, other_improvements = @other_improvements, assessed_value = @assessed_value, area = @area, lot_no = @lot_no, gr_year = @gr_year, is_taxable = @is_taxable, is_cancelled = @is_cancelled, updated_by = @updated_by, updated_at = @updated_at WHERE id = @id";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
@@ -450,13 +446,24 @@ namespace ACC.Data
                         rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
                         _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
                     }
-
-
+                
                 }
-
+                    
                 scope.Complete();
                 return true;
             }
         }
+
+        public bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                Insert(realPropertiesModel);
+                _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                scope.Complete();
+                return true;
+            }
+        }
+
     }
 }

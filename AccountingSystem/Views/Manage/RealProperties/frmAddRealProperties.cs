@@ -21,7 +21,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             if (Save())
             {
-                Helper.MessageBoxSuccess("Real property has been updated.");
+                Helper.MessageBoxSuccess("Real property has been saved.");
                 _frmRealProperties.LoadProperties();
                 Close();
             }
@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     ClassificationCodesId = Convert.ToInt32(uc.cmbxClassification.SelectedValue),
                     ActualUseCodesId = Convert.ToInt32(uc.cmbxActualUse.SelectedValue),
                     BarangaysId = Convert.ToInt32(uc.cmbxBarangays.SelectedValue),
-                    PropertyIdentifier = uc.propertyIdentifier.ToString(),
+                    PropertyIdentifier = uc.propertyIdentifier,
                     RealTaxpayersId = uc.taxpayerID,
                     TaxpayerName = uc.txtTaxpayers.Text,
                     TaxpayerAddress = uc.txtTaxpayerAddress.Text, 
@@ -59,10 +59,20 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     IsTaxable = uc.chckTaxable.Checked,
                     IsCancelled = uc.chckCancelled.Checked,
                     CreatedBy  = Helper.UserId
+
                 };
 
+                var previousAssessment = new RptPreviousAssessmentModel()
+                {
+                    RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
+                    PropertyPin = uc.txtPreviousPin.Text,
+                    CompleteArpNo = uc.txtPreviousCompleteARP.Text,
+                    AssessedValue = Convert.ToInt32(uc.txtPreviousAssessedValue.Text),
+                    PreviousOwner = uc.txtPreviousOwner.Text,
+                    EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text    
+                };
 
-                return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
+                return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
             }
             catch (Exception ex)
             {
@@ -70,8 +80,6 @@ namespace AccountingSystem.Views.Manage.RealProperties
             }
             return false;
         }
-
-
 
     }
 }

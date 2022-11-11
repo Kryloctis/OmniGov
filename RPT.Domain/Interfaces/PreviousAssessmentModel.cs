@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RPT.Domain.Models
+namespace RPT.Domain.Interfaces
 {
     public class PreviousAssessmentModel
     {

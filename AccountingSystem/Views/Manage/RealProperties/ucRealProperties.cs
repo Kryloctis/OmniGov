@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +12,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
         internal int taxpayerID;
-        internal int propertyIdentifier = 1;
+        internal  string propertyIdentifier = "1";
 
         public ucRealProperties()
         {
@@ -22,19 +21,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         internal string GetFormError()
         {
-            var errorArray = new string[]
-            {
-                errorProvider1.GetError(txtArpNo),
-                errorProvider1.GetError(cmbxBarangays),
-                errorProvider1.GetError(cmbxPropertyKind),
-                errorProvider1.GetError(cmbxActualUse),
-                errorProvider1.GetError(nudEffectivityYear),
-                errorProvider1.GetError(nudAssessedValue),
-                errorProvider1.GetError(nudGrYear),
-                errorProvider1.GetError(nudArea),
-                errorProvider1.GetError(txtLotNo),
-            };
-
+            var errorArray = new string[9];
+           
+            errorArray[0] = errorProvider1.GetError(txtArpNo);
+            errorArray[1] = errorProvider1.GetError(cmbxBarangays);
+            errorArray[2] = errorProvider1.GetError(cmbxPropertyKind);
+            errorArray[3] = errorProvider1.GetError(cmbxActualUse);
+            errorArray[4] = errorProvider1.GetError(nudEffectivityYear);
+            errorArray[5] = errorProvider1.GetError(nudAssessedValue);
+            errorArray[6] = errorProvider1.GetError(nudGrYear);
+            errorArray[7] = errorProvider1.GetError(nudArea);
+            errorArray[8] = errorProvider1.GetError(txtLotNo);
+           
             IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
         }
@@ -108,10 +106,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxClassification.DisplayMember = "name";
         }
 
-
         #region Validations
 
-        private bool ArpNoValidated()
+        private void txtArpNo_Validating(object sender, CancelEventArgs e)
         {
             try
             {
@@ -124,26 +121,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                     arpNoExist = AccFactory.RealPropertiesRepository().CompleteArpNoExist(arpNo);
 
                 if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtArpNo, "ARP No."))
-                    return false;
+                    return;
                 else if (arpNoExist)
                 {
                     errorProvider1.SetError(txtArpNo, "ARP No. already exist.");
-                    return false;
+                    return;
                 }
                 else
-                    return true;
+                    return;
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;
-        }
-
-        private void txtArpNo_Validating(object sender, CancelEventArgs e)
-        {
-            //e.Cancel = !ArpNoValidated();
-            e.Cancel = false;
+            return;
         }
 
         private void txtArpNo_Validated(object sender, EventArgs e)
@@ -204,6 +195,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtLotNo);
         }
 
+
+        private void txtPreviousCompleteARP_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPreviousCompleteARP, "Previous ARP Number.");
+
+            string completeARPNumber = txtPreviousCompleteARP.Text;
+            if (!AccFactory.RealPropertiesRepository().CompleteArpNoExist(completeARPNumber))
+            {
+                errorProvider1.SetError(txtPreviousCompleteARP, "Previous ARP Number doesnt exist.");
+                e.Cancel = true; return;
+            }
+        }
+
+        private void txtPreviousCompleteARP_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPreviousCompleteARP);
+        }
+
         #endregion Validations
 
         private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
@@ -234,7 +243,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void btnSelectTaxpayer_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, null, null, null, (frmAddRealProperties)this.Parent).ShowDialog();
+            _ = new frmTaxpayersList(this).ShowDialog();
         }
+
+
     }
 }
