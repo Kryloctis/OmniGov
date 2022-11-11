@@ -10,19 +10,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
-    public partial class ucBusinessAdOnCharges : UserControl
+    public partial class frmAddBusinessAdOnCharges : Form
     {
-        public ucBusinessAdOnCharges()
+        public frmAddBusinessAdOnCharges()
         {
             InitializeComponent();
-        }
-
-        private void ucBusinessAdOnCharges_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-
-            }
         }
     }
 }

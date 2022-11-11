@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.txtCode = new System.Windows.Forms.TextBox();
-            this.txtOrdinanceReferenceNo = new System.Windows.Forms.TextBox();
-            this.cbxLineOfBusiness = new System.Windows.Forms.CheckBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.cbxAppliedToEachBusiness = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -43,23 +43,23 @@
             this.txtCode.Size = new System.Drawing.Size(244, 23);
             this.txtCode.TabIndex = 3;
             // 
-            // txtOrdinanceReferenceNo
+            // txtDescription
             // 
-            this.txtOrdinanceReferenceNo.AllowDrop = true;
-            this.txtOrdinanceReferenceNo.Location = new System.Drawing.Point(85, 40);
-            this.txtOrdinanceReferenceNo.Name = "txtOrdinanceReferenceNo";
-            this.txtOrdinanceReferenceNo.Size = new System.Drawing.Size(244, 23);
-            this.txtOrdinanceReferenceNo.TabIndex = 7;
+            this.txtDescription.AllowDrop = true;
+            this.txtDescription.Location = new System.Drawing.Point(85, 40);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(244, 23);
+            this.txtDescription.TabIndex = 7;
             // 
-            // cbxLineOfBusiness
+            // cbxAppliedToEachBusiness
             // 
-            this.cbxLineOfBusiness.AutoSize = true;
-            this.cbxLineOfBusiness.Location = new System.Drawing.Point(169, 69);
-            this.cbxLineOfBusiness.Name = "cbxLineOfBusiness";
-            this.cbxLineOfBusiness.Size = new System.Drawing.Size(160, 19);
-            this.cbxLineOfBusiness.TabIndex = 9;
-            this.cbxLineOfBusiness.Text = "Applied on each business";
-            this.cbxLineOfBusiness.UseVisualStyleBackColor = true;
+            this.cbxAppliedToEachBusiness.AutoSize = true;
+            this.cbxAppliedToEachBusiness.Location = new System.Drawing.Point(169, 69);
+            this.cbxAppliedToEachBusiness.Name = "cbxAppliedToEachBusiness";
+            this.cbxAppliedToEachBusiness.Size = new System.Drawing.Size(160, 19);
+            this.cbxAppliedToEachBusiness.TabIndex = 9;
+            this.cbxAppliedToEachBusiness.Text = "Applied on each business";
+            this.cbxAppliedToEachBusiness.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -84,12 +84,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.txtOrdinanceReferenceNo);
-            this.Controls.Add(this.cbxLineOfBusiness);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.cbxAppliedToEachBusiness);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucBusinessAdOnCharges";
             this.Size = new System.Drawing.Size(344, 97);
+            this.Load += new System.EventHandler(this.ucBusinessAdOnCharges_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,8 +99,8 @@
         #endregion
 
         internal System.Windows.Forms.TextBox txtCode;
-        internal System.Windows.Forms.TextBox txtOrdinanceReferenceNo;
-        internal System.Windows.Forms.CheckBox cbxLineOfBusiness;
+        internal System.Windows.Forms.TextBox txtDescription;
+        internal System.Windows.Forms.CheckBox cbxAppliedToEachBusiness;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
     }
