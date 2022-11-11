@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.BusinessCategories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,21 +14,29 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
     public partial class frmEditBusinessAddOnCharges : Form
     {
         private int _businessAddOnChargesID;
-        private frmBusinessAddOnCharges _frmBusinessAdOnCharges;
+        private readonly frmBusinessAddOnCharges _frmBusinessAdOnCharges;
+        private readonly ucBusinessAddOnCharges _ucBusinessAddOnCharges;
        
-        public frmEditBusinessAddOnCharges()
-        {
-            InitializeComponent();
-        }
-
         public frmEditBusinessAddOnCharges(int businessAddOnChargesID, frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
-           _businessAddOnChargesID = businessAddOnChargesID;
+            InitializeComponent();
+            _ucBusinessAddOnCharges = ucBusinessAddOnCharges1;
+            _businessAddOnChargesID = businessAddOnChargesID;
            _frmBusinessAdOnCharges = frmBusinessAdOnCharges;
         }
 
+        private void frmEditBusinessAddOnCharges_Load(object sender, EventArgs e)
+        {
+            LoadSelectedRecord();
+        }
+        private void LoadSelectedRecord()
+        {
+            var dictBusinessAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecordByID(_businessAddOnChargesID);
 
-
-
+            var appliedEachBusiness = Convert.ToInt16(dictBusinessAddOnCharges["is_applied_each_business"]);
+            _ucBusinessAddOnCharges.txtCode.Text = dictBusinessAddOnCharges["code"];
+            _ucBusinessAddOnCharges.txtDescription.Text = dictBusinessAddOnCharges["description"];
+            _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked = Convert.ToBoolean(appliedEachBusiness);
+        }
     }
 }

@@ -60,7 +60,27 @@ namespace AccountingSystem
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var dict = new Dictionary<string, string>();
+
+            var parameter = new object[][] {
+                new object[]{"@business_add_on_charges_id", DbType.Int32, Id}
+            };
+            string query = $"SELECT code, description, is_applied_each_business FROM {tableName} WHERE id = @business_add_on_charges_id";
+
+            using (var items = _dbGenericCommands.ExecuteReader(query, parameter))
+            {
+                if (items.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow item in items.Rows)
+                {
+                    dict.Add("code", item["code"].ToString());
+                    dict.Add("description", item["description"].ToString());
+                    dict.Add("is_applied_each_business", item["is_applied_each_business"].ToString());
+                }
+
+                return dict;
+            }
         }
 
         public DataTable GetRecords()

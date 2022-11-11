@@ -26,7 +26,6 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             }
         }
 
-
         internal string GetFormErrors()
         {
             var errorArray = new string[1];

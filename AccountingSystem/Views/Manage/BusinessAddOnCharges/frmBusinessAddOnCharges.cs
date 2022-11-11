@@ -49,7 +49,6 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int businessAddOnChargesID = Convert.ToInt32(dgBusinessAddOnCharges.SelectedRows[0].Cells[0].Value);
-
             _ = new frmEditBusinessAddOnCharges(businessAddOnChargesID, this).ShowDialog();
         }
 

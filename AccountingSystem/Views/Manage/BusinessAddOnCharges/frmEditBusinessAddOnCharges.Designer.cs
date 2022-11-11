@@ -89,6 +89,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Business Add-On Charges";
+            this.Load += new System.EventHandler(this.frmEditBusinessAddOnCharges_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

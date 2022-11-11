@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Business Ad-on has been saved.");
+                Helper.MessageBoxSuccess("Business Add-on has been saved.");
                 _frmBusinessAdOnCharges.LoadBusinessAddOnCharges();
                 _ucBusinessAdOnCharges.ResetForm();
             }
