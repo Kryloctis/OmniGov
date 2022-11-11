@@ -23,5 +23,16 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             _ = new frmAddBusinessCategories(this).ShowDialog();
         }
+
+        private void frmBusinessCategories_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        internal void LoadBusinessCategories()
+        {
+
+        }
+
     }
 }

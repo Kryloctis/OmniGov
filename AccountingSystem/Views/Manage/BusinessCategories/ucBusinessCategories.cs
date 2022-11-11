@@ -16,5 +16,20 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             InitializeComponent();
         }
+
+        internal string GetFormErrors()
+        {
+            return string.Empty;
+        }
+
+        internal void ResetForm()
+        {
+            txtCode.Clear();
+            txtOrdinanceReferenceNo.Clear();
+            txtDescription.Clear();
+            cbxLineOfBusiness.Checked = false;
+        }
+
+
     }
 }

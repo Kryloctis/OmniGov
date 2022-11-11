@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             InitializeComponent();
         }
+
+        private void frmEditBusinessCategories_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

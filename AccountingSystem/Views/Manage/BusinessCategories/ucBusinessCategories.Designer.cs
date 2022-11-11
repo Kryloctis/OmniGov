@@ -32,10 +32,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.txtOrdinanceReferenceNo = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.cbxLineOfBusiness = new System.Windows.Forms.CheckBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -67,37 +67,37 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Description";
             // 
-            // textBox1
+            // txtCode
             // 
-            this.textBox1.Location = new System.Drawing.Point(153, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(244, 23);
-            this.textBox1.TabIndex = 1;
+            this.txtCode.Location = new System.Drawing.Point(153, 7);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(244, 23);
+            this.txtCode.TabIndex = 0;
             // 
-            // textBox2
+            // txtOrdinanceReferenceNo
             // 
-            this.textBox2.Location = new System.Drawing.Point(153, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(244, 23);
-            this.textBox2.TabIndex = 1;
+            this.txtOrdinanceReferenceNo.Location = new System.Drawing.Point(153, 38);
+            this.txtOrdinanceReferenceNo.Name = "txtOrdinanceReferenceNo";
+            this.txtOrdinanceReferenceNo.Size = new System.Drawing.Size(244, 23);
+            this.txtOrdinanceReferenceNo.TabIndex = 1;
             // 
-            // textBox3
+            // txtDescription
             // 
-            this.textBox3.Location = new System.Drawing.Point(153, 67);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(244, 23);
-            this.textBox3.TabIndex = 1;
+            this.txtDescription.Location = new System.Drawing.Point(153, 67);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(244, 23);
+            this.txtDescription.TabIndex = 2;
             // 
-            // checkBox1
+            // cbxLineOfBusiness
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(287, 96);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(110, 19);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Line of Business";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbxLineOfBusiness.AutoSize = true;
+            this.cbxLineOfBusiness.Location = new System.Drawing.Point(287, 96);
+            this.cbxLineOfBusiness.Name = "cbxLineOfBusiness";
+            this.cbxLineOfBusiness.Size = new System.Drawing.Size(110, 19);
+            this.cbxLineOfBusiness.TabIndex = 2;
+            this.cbxLineOfBusiness.Text = "Line of Business";
+            this.cbxLineOfBusiness.UseVisualStyleBackColor = true;
             // 
             // errorProvider1
             // 
@@ -107,10 +107,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cbxLineOfBusiness);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.txtOrdinanceReferenceNo);
+            this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -128,10 +128,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.TextBox txtCode;
+        internal System.Windows.Forms.TextBox txtOrdinanceReferenceNo;
+        internal System.Windows.Forms.TextBox txtDescription;
+        internal System.Windows.Forms.CheckBox cbxLineOfBusiness;
     }
 }

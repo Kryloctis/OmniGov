@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -43,7 +44,17 @@ namespace AccountingSystem
 
         public bool Insert(BusinessCategoriesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@code", DbType.String, entity.Code},
+                new object[] { "@ordinance_ref_no", DbType.String, entity.OrdinanceReferenceNumber},
+                new object[] { "@description", DbType.String, entity.Description},
+                new object[] { "@is_line_of_business", DbType.Boolean, entity.LineOfBusiness},
+            };
+
+            string query = $"INSERT INTO {tableName} (code, ordinance_ref_no, description, is_line_of_business) VALUES (@code, @ordinance_ref_no, @description, @is_line_of_business)";
+
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(BusinessCategoriesModel entity)

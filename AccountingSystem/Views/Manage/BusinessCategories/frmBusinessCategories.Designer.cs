@@ -212,6 +212,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage > Business Categories";
+            this.Load += new System.EventHandler(this.frmBusinessCategories_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
