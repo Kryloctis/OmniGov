@@ -12,9 +12,12 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
     public partial class frmAddBusinessAdOnCharges : Form
     {
-        public frmAddBusinessAdOnCharges()
+        private frmBusinessAdOnCharges _frmBusinessAdOnCharges;
+
+        public frmAddBusinessAdOnCharges(frmBusinessAdOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
+            frmBusinessAdOnCharges = frmBusinessAdOnCharges;
         }
     }
 }
