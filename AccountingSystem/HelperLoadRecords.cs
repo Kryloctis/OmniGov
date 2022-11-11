@@ -2718,6 +2718,44 @@ namespace AccountingSystem
             datagrid.ClearSelection();
         }
 
+        internal static void BusinessAdOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            DataGridViewCheckBoxColumn dgvCheckBox = new DataGridViewCheckBoxColumn();
+            dgvCheckBox.HeaderText = "Applied each business";
+            dgvCheckBox.Name = "applied_each_business";
+
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("code", "Code");
+            datagrid.Columns.Add("description", "Description");
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+
+            datagrid.Columns.Add(dgvCheckBox);
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["id"],
+                    row["code"],
+                    row["description"],
+                    Convert.ToBoolean(row["applied_each_business"])
+                });
+            }
+
+            datagrid.ClearSelection();
+        }
+
+        
+
         internal static void JEVDatagridView(DataGridView datagrid)
         {
             datagrid.Columns.Clear();

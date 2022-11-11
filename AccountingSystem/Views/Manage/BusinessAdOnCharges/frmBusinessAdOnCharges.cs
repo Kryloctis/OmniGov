@@ -20,6 +20,26 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             Helper.DatagridFullRowSelectStyle(dgBusinessCategories, true);
         }
 
+        internal void LoadBusinessAdOnCharges()
+        {
+            try
+            {
+                var dt = new DataTable();
+                var searchText = toolStripTextBoxSearch.Text.Trim();
+
+                if (searchText.Length > 2)
+                    dt = AccFactory.BusinessAdOnChargesRepository().GetRecordsBySearch(searchText);
+                else
+                    dt = AccFactory.BusinessAdOnChargesRepository().GetRecords();
+
+                HelperLoadRecords.BusinessAdOnChargesDataGridView(dgBusinessCategories, dt);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddBusinessAdOnCharges(this).ShowDialog();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BusinessCategories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +14,52 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
     public partial class frmAddBusinessAdOnCharges : Form
     {
-        private frmBusinessAdOnCharges _frmBusinessAdOnCharges;
+        private readonly frmBusinessAdOnCharges _frmBusinessAdOnCharges;
+        private readonly ucBusinessAdOnCharges _ucBusinessAdOnCharges;
+
 
         public frmAddBusinessAdOnCharges(frmBusinessAdOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
-            frmBusinessAdOnCharges = frmBusinessAdOnCharges;
+            _frmBusinessAdOnCharges = frmBusinessAdOnCharges;
+            _ucBusinessAdOnCharges = ucBusinessAdOnCharges1;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Business Ad-on has been saved.");
+                _frmBusinessAdOnCharges.LoadBusinessAdOnCharges();
+                _ucBusinessAdOnCharges.ResetForm();
+            }
+        }
+
+        private bool SaveData()
+        {
+            if (!_ucBusinessAdOnCharges.ValidateChildren())
+            {
+                Helper.MessageBoxError(_ucBusinessAdOnCharges.GetFormErrors());
+                return false;
+            }
+
+            var code = _ucBusinessAdOnCharges.txtCode.Text.Trim();
+            var description = _ucBusinessAdOnCharges.txtDescription.Text.Trim();
+            var appliedEachBusiness = _ucBusinessAdOnCharges.cbxAppliedToEachBusiness.Checked;
+
+            var businessAdOnChargesModel = new BusinessAdOnChargesModel()
+            {
+                Code = code,
+                Description = description,
+                AppliedEachBusiness = appliedEachBusiness, 
+                CreatedBy = AccFactory.UserId
+            };
+
+            return AccFactory.BusinessAdOnChargesRepository().Insert(businessAdOnChargesModel);
+        }
+
+
+
+
     }
 }

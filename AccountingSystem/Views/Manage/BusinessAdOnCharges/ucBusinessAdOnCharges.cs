@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,5 +25,23 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
             }
         }
+
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[1];
+            errorArray[0] = errorProvider1.GetError(txtDescription);
+
+            IError _errors = AccFactory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
+        internal void ResetForm()
+        {
+            txtCode.Clear();
+            txtDescription.Clear();
+            cbxAppliedToEachBusiness.Checked = false;
+        }
+
     }
 }
