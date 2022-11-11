@@ -403,6 +403,7 @@ namespace AccountingSystem
             this.businessCategoriesToolStripMenuItem.Name = "businessCategoriesToolStripMenuItem";
             this.businessCategoriesToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.businessCategoriesToolStripMenuItem.Text = "Business Categories";
+            this.businessCategoriesToolStripMenuItem.Click += new System.EventHandler(this.businessCategoriesToolStripMenuItem_Click);
             // 
             // businessAddOnToolStripMenuItem
             // 
