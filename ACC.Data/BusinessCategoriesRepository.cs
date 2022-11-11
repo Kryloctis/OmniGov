@@ -32,7 +32,15 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR ordinance_ref_no LIKE @search_text OR description LIKE @search_text";
+
+            var dtBarangay = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBarangay, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

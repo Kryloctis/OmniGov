@@ -71,12 +71,12 @@
             // 
             // ucBusinessCategories1
             // 
+            this.ucBusinessCategories1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBusinessCategories1.Location = new System.Drawing.Point(0, 2);
             this.ucBusinessCategories1.Name = "ucBusinessCategories1";
             this.ucBusinessCategories1.Padding = new System.Windows.Forms.Padding(4);
             this.ucBusinessCategories1.Size = new System.Drawing.Size(415, 118);
             this.ucBusinessCategories1.TabIndex = 3;
-            this.ucBusinessCategories1.TabStop = false;
             // 
             // frmAddBusinessCategories
             // 

@@ -102,5 +102,10 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
             _ = new frmEditBusinessCategories(businessCategoriesID, this).ShowDialog();
         }
+
+        private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadBusinessCategories();
+        }
     }
 }
