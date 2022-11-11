@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.BusinessCategories;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.BusinessCategories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,48 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             _ucBusinessAddOnCharges.txtCode.Text = dictBusinessAddOnCharges["code"];
             _ucBusinessAddOnCharges.txtDescription.Text = dictBusinessAddOnCharges["description"];
             _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked = Convert.ToBoolean(appliedEachBusiness);
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (UpdateBusinessAddOnCharges())
+            {
+                Helper.MessageBoxSuccess("Business Add-on has been updated.");
+                _frmBusinessAdOnCharges.LoadBusinessAddOnCharges();
+                Close();
+            }
+        }
+
+        private bool UpdateBusinessAddOnCharges()
+        {
+            try
+            {
+                if (!_ucBusinessAddOnCharges.ValidateChildren())
+                {
+                    Helper.MessageBoxError(_ucBusinessAddOnCharges.GetFormErrors());
+                    return false;
+                }
+
+                var code = _ucBusinessAddOnCharges.txtCode.Text.Trim();
+                var description = _ucBusinessAddOnCharges.txtDescription.Text.Trim();
+                var appliedEachBusiness = _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked;
+
+                var businessAdOnChargesModel = new BusinessAdOnChargesModel()
+                {
+                    BusinessAdOnChargesID = _businessAddOnChargesID,
+                    Code = code,
+                    Description = description,
+                    AppliedEachBusiness = appliedEachBusiness, 
+                    CreatedBy = Helper.UserId
+                };
+
+                return AccFactory.BusinessAddOnChargesRepository().Update(businessAdOnChargesModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

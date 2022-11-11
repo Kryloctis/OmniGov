@@ -126,7 +126,15 @@ namespace AccountingSystem
 
         public bool Update(BusinessAdOnChargesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][] {
+                new object[]{ "@id", DbType.Int32, entity.BusinessAdOnChargesID},
+                new object[]{ "@code", DbType.String, entity.Code},
+                new object[]{ "@description", DbType.String, entity.Description},
+                new object[]{ "@is_applied_each_business", DbType.Boolean, entity.AppliedEachBusiness }
+            };
+
+            string query = $"UPDATE {tableName} SET code = @code, description= @description, is_applied_each_business = @is_applied_each_business  WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
