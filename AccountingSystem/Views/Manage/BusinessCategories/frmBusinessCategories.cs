@@ -95,5 +95,12 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             deletedCount = 0;
             return false;
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int businessCategoriesID = Convert.ToInt32(dgBusinessCategories.SelectedRows[0].Cells[0].Value);
+
+            _ = new frmEditBusinessCategories(businessCategoriesID, this).ShowDialog();
+        }
     }
 }

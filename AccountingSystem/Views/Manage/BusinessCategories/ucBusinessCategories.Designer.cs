@@ -69,7 +69,6 @@
             // 
             // txtCode
             // 
-            this.txtCode.AcceptsTab = true;
             this.txtCode.AllowDrop = true;
             this.txtCode.Location = new System.Drawing.Point(153, 7);
             this.txtCode.Name = "txtCode";
@@ -78,7 +77,6 @@
             // 
             // txtOrdinanceReferenceNo
             // 
-            this.txtOrdinanceReferenceNo.AcceptsTab = true;
             this.txtOrdinanceReferenceNo.AllowDrop = true;
             this.txtOrdinanceReferenceNo.Location = new System.Drawing.Point(153, 38);
             this.txtOrdinanceReferenceNo.Name = "txtOrdinanceReferenceNo";
@@ -87,7 +85,6 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.AcceptsTab = true;
             this.txtDescription.AllowDrop = true;
             this.txtDescription.Location = new System.Drawing.Point(153, 67);
             this.txtDescription.Multiline = true;

@@ -67,9 +67,11 @@
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucBusinessCategories1
             // 
+            this.ucBusinessCategories1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBusinessCategories1.Location = new System.Drawing.Point(0, 1);
             this.ucBusinessCategories1.Name = "ucBusinessCategories1";
             this.ucBusinessCategories1.Padding = new System.Windows.Forms.Padding(4);
