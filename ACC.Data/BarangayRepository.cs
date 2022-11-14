@@ -154,11 +154,11 @@ namespace ACC.Data
         {
             var parameters = new object[][] {
                 new object[]{"@barangay_id", DbType.Int32, entity.Id},
-                new object[]{"@barangay_code", DbType.String, entity.Code},
-                new object[]{"@barangay_name", DbType.String, entity.Name }
+                new object[]{"@code", DbType.String, entity.Code},
+                new object[]{"@name", DbType.String, entity.Name }
             };
 
-            string query = $"UPDATE {tableName} SET code = @barangay_code, name = @barangay_name WHERE id = @barangay_id";
+            string query = $"UPDATE {tableName} SET code = @code, name = @name WHERE id = @barangay_id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 

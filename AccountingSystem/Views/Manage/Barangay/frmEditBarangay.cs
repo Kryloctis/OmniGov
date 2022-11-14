@@ -73,11 +73,11 @@ namespace AccountingSystem.Views.Manage.Barangay
 
                 return AccFactory.BarangayRepository().Update(barangayModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Helper.MessageBoxError(ex.Message);
             }
+            return false;
         }
     }
 }
