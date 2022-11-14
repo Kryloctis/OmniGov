@@ -1,15 +1,5 @@
 ﻿using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Wordprocessing;
-using ACC.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Barangay
@@ -49,16 +39,14 @@ namespace AccountingSystem.Views.Manage.Barangay
             var barangayName = uc.txtBarangay.Text.Trim();
 
 
-            var barangayModel = new BarangayModel() {
+            var barangayModel = new BarangayModel()
+            {
                 Code = barangayCode,
                 Name = barangayName,
                 MunicipalityID = 1
             };
 
-            var barangayRepository = AccFactory.BarangayRepository();
-
-            return barangayRepository.Insert(barangayModel);
-
+            return AccFactory.BarangayRepository().Insert(barangayModel);
         }
     }
 }
