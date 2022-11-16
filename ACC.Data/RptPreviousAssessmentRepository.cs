@@ -89,7 +89,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-
+                    
                 using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)

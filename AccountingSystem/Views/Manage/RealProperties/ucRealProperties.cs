@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
         internal int taxpayerID;
-        internal  string propertyIdentifier = "1";
+        internal string propertyIdentifier = "0";
 
         public ucRealProperties()
         {
@@ -277,13 +277,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            //string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
-            //var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetCancelledProperties(completeARPNo);
+            string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
+            var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
 
-            //txtPreviousPin.Text = previousAssessmentDict["property_pin"];
-            //txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
-            //txtPreviousOwner.Text = previousAssessmentDict["previous_owner_name"];
-            //txtPreviousEffectivityAssessment.Text = previousAssessmentDict["effectivity_assessment"];
+            propertyIdentifier = previousAssessmentDict["property_identifier"];
+            txtPreviousPin.Text = previousAssessmentDict["property_pin"];
+            txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
+            txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
+            txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
         }
 
     }
