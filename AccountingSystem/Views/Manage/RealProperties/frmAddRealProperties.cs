@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 {
                     RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
                     PropertyPin = uc.txtPreviousPin.Text,
-                    CompleteArpNo = uc.txtPreviousCompleteARP.Text,
+                    CompleteArpNo = uc.cmbxCompletePreviousARPNumber.Text,
                     AssessedValue = Convert.ToInt32(uc.txtPreviousAssessedValue.Text),
                     PreviousOwner = uc.txtPreviousOwner.Text,
                     EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text    
