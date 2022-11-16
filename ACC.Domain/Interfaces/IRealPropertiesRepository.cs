@@ -12,6 +12,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsBy_EffectivivtyYear_Barangay_Search(int effectivityYear, string barangay, string searchText);
 
         DataTable GetRecordsByCompleteARP(string completeARPNo);
+        DataTable GetCancelledProperties();
 
         int GetLastInsertedId();
         bool Synchronize(List<RealPropertiesModel> realPropertiesModels);

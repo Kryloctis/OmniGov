@@ -473,5 +473,12 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
+
+        public DataTable GetCancelledProperties()
+        {
+            string query = $"SELECT id, complete_arp_no, is_cancelled FROM {tableName} WHERE is_cancelled = 1";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
+        }
     }
 }
