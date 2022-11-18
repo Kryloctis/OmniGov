@@ -237,10 +237,10 @@ namespace ACC.Data
                 if (barangay == "All")
                     return string.Empty;
                 else
-                    return "AND barangay_name = @barangay_name";
+                    return "AND real_properties_barangays_name = @barangay_name";
             }
 
-            string query = $"SELECT * FROM {tableName} WHERE (owner_name LIKE @search_text OR complete_arp_no LIKE @search_text OR owner_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY owner_name ASC";
+            string query = $"SELECT * FROM {viewTableName} WHERE (taxpayer_name LIKE @search_text OR complete_arp_no LIKE @search_text OR taxpayer_address LIKE @search_text) AND is_cancelled = 0 AND effectivity_year <= @effectivity_year {BarangayQuery()} ORDER BY taxpayer_name ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
