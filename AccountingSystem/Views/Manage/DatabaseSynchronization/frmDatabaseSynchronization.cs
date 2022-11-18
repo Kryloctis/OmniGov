@@ -72,8 +72,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string realTaxpayerProvince = row["real_owner_province"].ToString();
                     string realTaxpayerContactInfo = row["real_owner_contact_info"].ToString();
                     string realTaxpayerTypeCode = row["real_owner_type_code"].ToString();
-                    string realTaxpayerType = row["real_owner_type"].ToString();
-                    int taxpayerTypeId = AccFactory.TaxpayerTypeRepository().GetIdByName(realTaxpayerType);
+                    string realTaxpayerType = row["real_owner_type"].ToString();                
 
                     string taxpayerTin = row["owner_tin"].ToString();
                     string taxpayerName = row["owner_name"].ToString();
