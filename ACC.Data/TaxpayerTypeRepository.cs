@@ -52,7 +52,7 @@ namespace AccountingSystem
                 new object[] { "@taxpayer_type", DbType.String, entity.taxpayerType}
             };
 
-            string query = $"INSERT INTO {tableName} (id, code, taxpayer_type) VALUES (@id, @code, @taxpayer_type)";
+            string query = $"INSERT INTO {tableName} (code, taxpayer_type) VALUES (@code, @taxpayer_type)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
