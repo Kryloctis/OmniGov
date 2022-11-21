@@ -64,12 +64,12 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 var description = _ucBusinessAddOnCharges.txtDescription.Text.Trim();
                 var appliedEachBusiness = _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked;
 
-                var businessAdOnChargesModel = new BusinessAdOnChargesModel()
+                var businessAdOnChargesModel = new BusinessAddOnChargesModel()
                 {
-                    BusinessAdOnChargesID = _businessAddOnChargesID,
+                    BusinessAddOnChargesID = _businessAddOnChargesID,
                     Code = code,
                     Description = description,
-                    AppliedEachBusiness = appliedEachBusiness, 
+                    IsAppliedEachBusiness = appliedEachBusiness, 
                     CreatedBy = Helper.UserId
                 };
 

@@ -47,11 +47,11 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             var description = _ucBusinessAdOnCharges.txtDescription.Text.Trim();
             var appliedEachBusiness = _ucBusinessAdOnCharges.cbxAppliedToEachBusiness.Checked;
 
-            var businessAdOnChargesModel = new BusinessAdOnChargesModel()
+            var businessAdOnChargesModel = new BusinessAddOnChargesModel()
             {
                 Code = code,
                 Description = description,
-                AppliedEachBusiness = appliedEachBusiness, 
+                IsAppliedEachBusiness = appliedEachBusiness, 
                 CreatedBy = Helper.UserId
             };
 
