@@ -99,6 +99,20 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
+        public bool Insert(List<BusinessCategoriesHasAddOnChargesModel> businessCategoriesHasAddOnChargesModels)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (BusinessCategoriesHasAddOnChargesModel model in businessCategoriesHasAddOnChargesModels)
+                {
+                    _ = Insert(model);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
         public bool Update(BusinessCategoriesHasAddOnChargesModel entity)
         {
             throw new NotImplementedException();

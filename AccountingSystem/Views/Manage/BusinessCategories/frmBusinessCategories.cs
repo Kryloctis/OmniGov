@@ -1,5 +1,7 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Barangay;
+using AccountingSystem.Views.Manage.BusinessAdOnCharges;
+using AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,16 +28,42 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ = new frmAddBusinessCategories(this).ShowDialog();
         }
 
+        private void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete, ToolStripButton tsBtnAddOnCharges)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                tsBtnEdit.Enabled = true;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+                tsBtnAddOnCharges.Enabled = true;
+            }
+            else if (SelectedRows > 1)
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+                tsBtnAddOnCharges.Enabled = false;
+            }
+            else
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = false;
+                tsBtnDelete.Text = "Delete";
+                tsBtnAddOnCharges.Enabled = false;
+            }
+        }
+
         private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
-            LoadBusinessCategories();
+            LoadBusinessCategories();         
         }
 
         internal void LoadBusinessCategories()
         {
             try
             {
-                var dt = new DataTable();
+                var dt = new DataTable();   
                 var searchText = toolStripTextBoxSearch.Text.Trim();
 
                 if (searchText.Length > 2)
@@ -44,16 +72,15 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                     dt = AccFactory.BusinessCategoriesRepository().GetRecords();
 
                 HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dt);
+                dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
+                EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete);
+            EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -106,6 +133,23 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
             LoadBusinessCategories();
+        }
+
+        private void ShowAddOnCharges() 
+        {
+            try
+            {
+                int rowIndex = dgBusinessCategories.CurrentCell.RowIndex;
+                int categoriesId = Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
+
+                _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void btnAddOnCharges_Click(object sender, EventArgs e)
+        {
+            ShowAddOnCharges();
         }
     }
 }
