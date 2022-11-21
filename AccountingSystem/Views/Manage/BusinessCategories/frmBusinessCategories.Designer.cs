@@ -131,6 +131,7 @@
             // 
             // btnAddOnCharges
             // 
+            this.btnAddOnCharges.Image = global::AccountingSystem.Properties.Resources.archive_box_add_filled_20px;
             this.btnAddOnCharges.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddOnCharges.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddOnCharges.Name = "btnAddOnCharges";
