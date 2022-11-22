@@ -59,37 +59,14 @@ namespace AccountingSystem
 
         #region BusinessCategories
 
-        internal static void BusinessCategoriesDataGridView(DataGridView datagrid, DataTable dataTable)
+        internal static void BusinessCategoriesDataGridView(DataGridView dataGridView, DataTable dataTable)
         {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            DataGridViewCheckBoxColumn dgvLineOfBusinessCheckBoxCol = new DataGridViewCheckBoxColumn();
-            dgvLineOfBusinessCheckBoxCol.HeaderText = "Line of Business";
-            dgvLineOfBusinessCheckBoxCol.Name = "is_line_of_business";
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("code", "Code");
-            datagrid.Columns.Add("ordinance_ref_no", "Ordinance Reference No.");
-            datagrid.Columns.Add("description", "Description");
-            datagrid.Columns.Add(dgvLineOfBusinessCheckBoxCol);
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["is_line_of_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["code"],
-                    row["ordinance_ref_no"],
-                    row["description"],
-                    Convert.ToBoolean(row["is_line_of_business"])
-                });
-            }
-
-            datagrid.ClearSelection();
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["ordinance_ref_no"].HeaderText = "Ordinance ref no.";
+            dataGridView.Columns["description"].HeaderText = "Description";
+            dataGridView.Columns["is_line_of_business"].HeaderText = "Line of Business";
         }
 
         internal static void BusinessCategorissAddOnsDatagridView(DataGridView dataGridView1, DataTable dataTable)

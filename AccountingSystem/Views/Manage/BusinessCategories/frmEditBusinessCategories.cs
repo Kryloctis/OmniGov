@@ -44,16 +44,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (UpdateBusinessCategories())
-            {
-                Helper.MessageBoxSuccess("Business Categories has been updated.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                Close();
-            }
-        }
-
         private bool UpdateBusinessCategories()
         {
             try
@@ -80,10 +70,18 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
                 return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            return false;
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (UpdateBusinessCategories())
+            {
+                Helper.MessageBoxSuccess("Business Categories has been updated.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                Close();
+            }
+        }    
     }
 }

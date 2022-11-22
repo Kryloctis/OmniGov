@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Transactions;
 
 namespace AccountingSystem
@@ -38,9 +39,7 @@ namespace AccountingSystem
             };
 
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR ordinance_ref_no LIKE @search_text OR description LIKE @search_text";
-
-            var dtBarangay = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtBarangay, parameters);
+            return _dbGenericCommands.FillBySearch(query, new DataTable(), parameters); ;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

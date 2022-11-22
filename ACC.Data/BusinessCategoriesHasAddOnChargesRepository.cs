@@ -48,27 +48,12 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(int businesCategoriesId, List<int> businessAddOnChargesIds)
+        public bool Delete(int businessCategoriesId)
         {
-            using (var scope = new TransactionScope())
-            {
-                foreach (int businessAddOnChargesId in businessAddOnChargesIds)
-                {
-                    var parameters = new object[][]
-                    {
-                        new object[] { "@business_categories_id", DbType.Int32, businesCategoriesId},
-                        new object[] { "@business_add_on_charges_id", DbType.Int32, businessAddOnChargesId}
-                    };
+            var parameters = new object[][]{new object[] { "@business_categories_id", DbType.Int32, businessCategoriesId},};
 
-                    string query = $"DELETE FROM {tableName} WHERE business_categories_id = @business_categories_id AND business_add_on_charges_id = @business_add_on_charges_id";
-
-                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
-                }
-
-
-                scope.Complete();
-                return true;
-            }
+            string query = $"DELETE FROM {tableName} WHERE business_categories_id = @business_categories_id";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -115,14 +100,13 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Insert(List<BusinessCategoriesHasAddOnChargesModel> businessCategoriesHasAddOnChargesModels)
+        public bool Insert(int businessCategoriesId, List<BusinessCategoriesHasAddOnChargesModel> businessCategoriesHasAddOnChargesModels)
         {
             using (var scope = new TransactionScope())
             {
+                _ = Delete(businessCategoriesId);
                 foreach (BusinessCategoriesHasAddOnChargesModel model in businessCategoriesHasAddOnChargesModels)
-                {
                     _ = Insert(model);
-                }
 
                 scope.Complete();
                 return true;

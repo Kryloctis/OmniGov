@@ -103,6 +103,9 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
+                    if (!Convert.ToBoolean(row.Cells["is_selected"].Value))
+                        continue;
+
                     var model = new BusinessCategoriesHasAddOnChargesModel()
                     {
                         businessCategoriesId = _businessCategoriesId,
@@ -111,7 +114,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
                     modeList.Add(model);
                 }
-                return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(modeList);            
+                return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);            
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
             return false;
@@ -122,6 +125,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             if (Save())
             {
                 Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
             }
         }
 
