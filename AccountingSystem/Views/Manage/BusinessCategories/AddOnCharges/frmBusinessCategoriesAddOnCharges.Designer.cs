@@ -32,7 +32,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chckBxAll = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -72,7 +72,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.chckBxAll);
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -81,16 +81,15 @@
             this.panel1.Size = new System.Drawing.Size(475, 370);
             this.panel1.TabIndex = 2;
             // 
-            // chckBxAll
+            // checkBox1
             // 
-            this.chckBxAll.AutoSize = true;
-            this.chckBxAll.BackColor = System.Drawing.Color.Transparent;
-            this.chckBxAll.Location = new System.Drawing.Point(8, 9);
-            this.chckBxAll.Name = "chckBxAll";
-            this.chckBxAll.Size = new System.Drawing.Size(15, 14);
-            this.chckBxAll.TabIndex = 3;
-            this.chckBxAll.UseVisualStyleBackColor = false;
-            this.chckBxAll.CheckedChanged += new System.EventHandler(this.chckBxAll_CheckedChanged);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 9);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.checkBox1_MouseClick);
             // 
             // dataGridView1
             // 
@@ -137,6 +136,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.CheckBox chckBxAll;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
