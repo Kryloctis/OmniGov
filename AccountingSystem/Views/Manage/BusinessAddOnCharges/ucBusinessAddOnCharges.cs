@@ -13,6 +13,9 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
     public partial class ucBusinessAddOnCharges : UserControl
     {
+        internal bool isEdit = false;
+        internal int id;
+
         public ucBusinessAddOnCharges()
         {
             InitializeComponent();
@@ -20,10 +23,6 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 
         private void ucBusinessAdOnCharges_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-
-            }
         }
 
         internal string GetFormErrors()
@@ -42,17 +41,32 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             cbxAppliedToEachBusiness.Checked = false;
         }
 
+        private bool IsDescriptionValidated(ErrorProvider errorProvider, TextBox textBox) 
+        {
+            try
+            {
+                bool descriptionExist = isEdit? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
+
+                if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
+                    return false;
+                else if (descriptionExist)
+                {
+                    errorProvider.SetError(textBox, "Description exist in your records.");
+                    return false;
+                }
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
-
-            var description = txtDescription.Text.Trim();
-
-            if (AccFactory.BusinessAddOnChargesRepository().DescriptionExist(description))
-            {
-                errorProvider1.SetError(txtDescription, "Description already exist in your records.");
-                e.Cancel = true;
-            }
+            e.Cancel = !IsDescriptionValidated(errorProvider1, txtDescription);
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)

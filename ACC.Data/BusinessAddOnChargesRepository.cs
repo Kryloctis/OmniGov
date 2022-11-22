@@ -43,7 +43,6 @@ namespace AccountingSystem
 
         public bool DescriptionExist(string description)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@description", DbType.String, description },
@@ -51,10 +50,26 @@ namespace AccountingSystem
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            
+            if (!string.IsNullOrEmpty(queryResult)) 
+                return true;     
+            
+            return false;
+        }
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-           
+        public bool DescriptionExist(int id, string name)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@id", DbType.Int32, id },
+                new object[] {"@description", DbType.String, name}
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND description = @description";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
             return false;
         }
 

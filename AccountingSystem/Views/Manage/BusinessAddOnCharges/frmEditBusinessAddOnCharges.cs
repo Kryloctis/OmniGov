@@ -15,21 +15,24 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
     public partial class frmEditBusinessAddOnCharges : Form
     {
         private int _businessAddOnChargesID;
-        private readonly frmBusinessAddOnCharges _frmBusinessAdOnCharges;
+        private readonly frmBusinessAddOnCharges _frmBusinessAddOnCharges;
         private readonly ucBusinessAddOnCharges _ucBusinessAddOnCharges;
        
         public frmEditBusinessAddOnCharges(int businessAddOnChargesID, frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
             _ucBusinessAddOnCharges = ucBusinessAddOnCharges1;
+            _ucBusinessAddOnCharges.id = businessAddOnChargesID;
             _businessAddOnChargesID = businessAddOnChargesID;
-           _frmBusinessAdOnCharges = frmBusinessAdOnCharges;
+           _frmBusinessAddOnCharges = frmBusinessAdOnCharges;
+            _ucBusinessAddOnCharges.isEdit = true;
         }
 
         private void frmEditBusinessAddOnCharges_Load(object sender, EventArgs e)
         {
             LoadSelectedRecord();
         }
+
         private void LoadSelectedRecord()
         {
             var dictBusinessAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecordByID(_businessAddOnChargesID);
@@ -45,7 +48,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             if (UpdateBusinessAddOnCharges())
             {
                 Helper.MessageBoxSuccess("Business Add-on has been updated.");
-                _frmBusinessAdOnCharges.LoadBusinessAddOnCharges();
+                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
                 Close();
             }
         }
