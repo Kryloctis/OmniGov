@@ -85,7 +85,7 @@
             // 
             this.chckBxAll.AutoSize = true;
             this.chckBxAll.BackColor = System.Drawing.Color.Transparent;
-            this.chckBxAll.Location = new System.Drawing.Point(7, 9);
+            this.chckBxAll.Location = new System.Drawing.Point(8, 9);
             this.chckBxAll.Name = "chckBxAll";
             this.chckBxAll.Size = new System.Drawing.Size(15, 14);
             this.chckBxAll.TabIndex = 3;
@@ -101,7 +101,10 @@
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(467, 362);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded);
+            this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             // 
             // frmBusinessCategoriesAddOnCharges
             // 

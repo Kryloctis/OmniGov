@@ -22,6 +22,22 @@ namespace ACC.Data
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
+        public bool BusinessCategoriesHasAddOnCharges(int businessCategoriesId, int addOnChargesId)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@business_categories_id", DbType.Int32, businessCategoriesId },
+                new object[] { "@business_add_on_charges_id", DbType.Int32, addOnChargesId }
+            };
+
+            string query = $"SELECT business_categories_id FROM {tableName} WHERE business_categories_id = @business_categories_id AND business_add_on_charges_id = @business_add_on_charges_id";
+
+            string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+            if(string.IsNullOrEmpty(result))
+                return false;
+            return true;
+        }
+
         public int CountRecords()
         {
             throw new NotImplementedException();
@@ -70,7 +86,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsById(int id)
+        public DataTable GetViewRecordsByBusinessCategoriesId(int id)
         {
             var parameters = new object[][]
             {
