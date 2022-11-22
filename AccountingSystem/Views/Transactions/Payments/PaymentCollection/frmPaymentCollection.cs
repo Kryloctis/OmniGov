@@ -143,7 +143,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                     LoadPaymentCollections();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Helper.MessageBoxError("Record cannot be deleted.");
             }

@@ -32,16 +32,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private DataTable TaxpayersDataTable()
         {
             string searchText = txtSearch.Text.Trim();
-            DataTable dtTaxpayersRecords;
+            bool showInactive = chckBxInactiveTaxpayers.Checked;
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText, showInactive);
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(TaxpayersColumns());
 
-            if (txtSearch.Text.Length < 2)
-                dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetViewTaxpayerRecords();
-            else
-                dtTaxpayersRecords = AccFactory.TaxpayersRepository().GetViewTaxpayerRecordsBySearch(searchText);
-
-            foreach (DataRow row in dtTaxpayersRecords.Rows)
+            foreach (DataRow row in dtTaxpayers.Rows)
             {
                 var newRow = dataTable.NewRow();
                 int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
@@ -70,7 +66,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 dataTable.Rows.Add(newRow);
             }
-
             return dataTable;
         }
 
@@ -126,14 +121,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgTaxpayers_SelectionChanged(object sender, EventArgs e)
         {
-            try
+              try
             {
-                if (dgTaxpayers.Columns.Count < 1)
-                    return;
-
-                byte createdByIndex = (byte)dgTaxpayers.Columns["created_by"].Index;
-                byte updatedByIndex = (byte)dgTaxpayers.Columns["updated_at"].Index;
-                var indexes = new byte[] { createdByIndex, updatedByIndex };
+                var indexes = new byte[] { 7, 8 };
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
                 Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
@@ -141,6 +131,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             {
                 Helper.MessageBoxError(ex.Message);
             }
+        }
+
+        private void chckBxInactiveTaxpayers_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadTaxpayers();
         }
     }
 }

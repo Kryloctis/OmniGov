@@ -7,14 +7,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 {
     public partial class ucTaxPayers : UserControl
     {
-        internal int taxPayerId = 0;
+        internal int taxPayerId;
         internal bool isEdit;
 
         public ucTaxPayers()
         {
             InitializeComponent();
         }
-
 
         internal string GetFormErrors()
         {
@@ -76,6 +75,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
         }
-
     }
 }

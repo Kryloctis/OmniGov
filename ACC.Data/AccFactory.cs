@@ -167,10 +167,7 @@ namespace AccountingSystem
         public static IClassificationCodes ClassificationCodesRepository() => new ClassificationCodesRepository(mySqlGenericCommandsLFS);
         public static IRptPreviousAssessment RptPreviousAssessmentRepository() => new RptPreviousAssessmentRepository(mySqlGenericCommandsLFS);
         public static IBusinessCategoriesRepository BusinessCategoriesRepository() => new BusinessCategoriesRepository(mySqlGenericCommandsLFS);
-
         public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
-
-        
-        
+        public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
     }
 }

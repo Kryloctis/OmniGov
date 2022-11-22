@@ -25,16 +25,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ucBusinessCategories = ucBusinessCategories1;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Business category has been saved.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                _ucBusinessCategories.ResetForm();
-            }
-        }
-
         private bool SaveData()
         {
             if (!_ucBusinessCategories.ValidateChildren())
@@ -58,5 +48,15 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
             return AccFactory.BusinessCategoriesRepository().Insert(businessCategoriesModel);
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Business category has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
+                _ucBusinessCategories.ResetForm();
+            }
+        }  
     }
 }
