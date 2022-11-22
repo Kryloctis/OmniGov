@@ -185,20 +185,19 @@ namespace ACC.Data
                 new object[] { "@property_identifier", DbType.String, entity.propertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
-                new object[] { "@owner_name", DbType.String, entity.OwnerName },
-                new object[] { "@owner_tin", DbType.String, entity.OwnerTin },
-                new object[] { "@owner_address", DbType.String, entity.OwnerAddress },
-                new object[] { "@owner_contact", DbType.String, entity.OwnerContact },
-                new object[] { "@barangay_name", DbType.String, entity.BarangayName },
-                new object[] { "@municipality_name", DbType.String, entity.MunicipalityName },
-                new object[] { "@province_name", DbType.String, entity.ProvinceName },
+                new object[] { "@taxpayer_name", DbType.String, entity.OwnerName },
+                new object[] { "@taxpayer_tin", DbType.String, entity.OwnerTin },
+                new object[] { "@taxpayer_contact_info", DbType.String, entity.OwnerContact },
+                new object[] { "@taxpayer_barangay", DbType.String, entity.BarangayName },
+                new object[] { "@taxpayer_municipality", DbType.String, entity.MunicipalityName },
+                new object[] { "@taxpayer_province", DbType.String, entity.ProvinceName },
                 new object[] { "@property_kind", DbType.String, entity.PropertyKind },
                 new object[] { "@effectivity_quarterly", DbType.Int32, entity.EffectivityQuarter },
                 new object[] { "@effectivity_year", DbType.Int32, entity.EffectivityYear },
+                new object[] { "@other_improvements",DbType.Decimal, entity.OtherImprovements},
                 new object[] { "@assessed_value", DbType.Decimal, entity.AssessedValue },
                 new object[] { "@area", DbType.Decimal, entity.Area},
                 new object[] { "@lot_no", DbType.String, entity.LotNo},
-                new object[] { "@other_improvements",DbType.Decimal, entity.OtherImprovements},
                 new object[] { "@classification_code", DbType.String, entity.ClassificationCode},
                 new object[] { "@classification_name", DbType.String, entity.ClassificationName},
                 new object[] { "@actual_use_code", DbType.String, entity.ActualUseCode},
@@ -215,7 +214,8 @@ namespace ACC.Data
                 new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, owner_name, owner_tin, owner_address, owner_contact, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, assessed_value, area, lot_no, other_improvements, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES (@property_identifier, @complete_arp_no, @property_pin, @owner_name, @owner_tin, @owner_address, @owner_contact, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @assessed_value, @area, @lot_no,  @other_improvements, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by)";
+
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_barangay, taxpayer_municipality, taxpayer_province, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_barangay, @taxpayer_municipality, @taxpayer_province, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
