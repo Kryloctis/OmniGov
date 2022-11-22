@@ -55,8 +55,9 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             foreach (DataRow item in dtAddOnCharges.Rows)
             {
                 var newRow = dt.NewRow();
-                newRow["is_selected"] = false;
-                newRow["id"] = item["id"];
+                int businessAddOnChargesId = Convert.ToInt32(item["id"]);
+                newRow["is_selected"] = AccFactory.BusinessCategoriesHasAddOnCharges().BusinessCategoriesHasAddOnCharges(_businessCategoriesId, businessAddOnChargesId);
+                newRow["id"] = businessAddOnChargesId;
                 newRow["code"] = item["code"];
                 newRow["description"] = item["description"];
                 dt.Rows.Add(newRow);
@@ -102,6 +103,9 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
+                    if (!Convert.ToBoolean(row.Cells["is_selected"].Value))
+                        continue;
+
                     var model = new BusinessCategoriesHasAddOnChargesModel()
                     {
                         businessCategoriesId = _businessCategoriesId,
@@ -110,7 +114,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
                     modeList.Add(model);
                 }
-                return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(modeList);            
+                return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);            
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
             return false;
@@ -121,7 +125,33 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             if (Save())
             {
                 Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
+                _frmBusinessCategories.LoadBusinessCategories();
             }
+        }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentCell is DataGridViewCheckBoxCell)
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", chckBxAll);
+                btnSave.Enabled = CheckValidated();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
         }
     }
 }
