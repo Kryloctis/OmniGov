@@ -126,14 +126,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgTaxpayers_SelectionChanged(object sender, EventArgs e)
         {
-            try
+              try
             {
-                if (dgTaxpayers.Columns.Count < 1)
-                    return;
-
-                byte createdByIndex = (byte)dgTaxpayers.Columns["created_by"].Index;
-                byte updatedByIndex = (byte)dgTaxpayers.Columns["updated_at"].Index;
-                var indexes = new byte[] { createdByIndex, updatedByIndex };
+                var indexes = new byte[] { 7, 8 };
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);
                 Helper.ShowRecordTimestamp(dgTaxpayers, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }

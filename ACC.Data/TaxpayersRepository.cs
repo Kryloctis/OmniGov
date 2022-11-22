@@ -45,10 +45,10 @@ namespace ACC.Data
             var dict = new Dictionary<string, string>();
             var parameters = new object[][]
             {
-                new object[] { "@taxpayers_id", DbType.Int32, Id}
+                new object[] { "@id", DbType.Int32, Id}
             };
 
-            string query = $"SELECT taxpayers_id, taxpayers_tin, taxpayers_name, taxpayers_street, taxpayers_barangay, taxpayers_municipality, taxpayers_province, taxpayer_type_id, taxpayer_type_code, taxpayer_type, taxpayers_contact_info, is_active, created_at, updated_at  FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id";
+            string query = $"SELECT taxpayer_type_id, tin, name, street, barangay, municipality, province, contact_info, is_active, created_by, created_at, updated_by, updated_at FROM {tableName} WHERE id = @id";
 
             using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
@@ -57,19 +57,18 @@ namespace ACC.Data
 
                 foreach (DataRow row in reader.Rows)
                 {
-                    dict.Add("taxpayers_id", row["taxpayers_id"].ToString());
-                    dict.Add("taxpayers_tin", row["taxpayers_tin"].ToString());
-                    dict.Add("taxpayers_name", row["taxpayers_name"].ToString());
-                    dict.Add("taxpayers_street", row["taxpayers_street"].ToString());
-                    dict.Add("taxpayers_barangay", row["taxpayers_barangay"].ToString());
-                    dict.Add("taxpayers_municipality", row["taxpayers_municipality"].ToString());
-                    dict.Add("taxpayers_province", row["taxpayers_province"].ToString());
                     dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
-                    dict.Add("taxpayer_type_code", row["taxpayer_type_code"].ToString());
-                    dict.Add("taxpayer_type", row["taxpayer_type"].ToString());
-                    dict.Add("taxpayers_contact_info", row["taxpayers_contact_info"].ToString());
+                    dict.Add("tin", row["tin"].ToString());
+                    dict.Add("name", row["name"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("barangay", row["barangay"].ToString());
+                    dict.Add("municipality", row["municipality"].ToString());
+                    dict.Add("province", row["province"].ToString());
+                    dict.Add("contact_info", row["contact_info"].ToString());
                     dict.Add("is_active", row["is_active"].ToString());
+                    dict.Add("created_by", row["created_by"].ToString());
                     dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("updated_by", row["updated_by"].ToString());
                     dict.Add("updated_at", row["updated_at"].ToString());
                 }
                 return dict;
@@ -206,6 +205,42 @@ namespace ACC.Data
             var parameters = new object[][] { new object[] { "@name", DbType.String, name } };
             string query = $"SELECT id FROM {tableName} WHERE name = @name";
             return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameters));
+        }
+
+        public Dictionary<string, string> GetViewRecordById(int id)
+        {
+            var dict = new Dictionary<string, string>();
+            var parameters = new object[][]
+            {
+                new object[] { "@taxpayers_id", DbType.Int32, id}
+            };
+
+            string query = $"SELECT taxpayers_id, taxpayers_tin, taxpayers_name, taxpayers_street, taxpayers_barangay, taxpayers_municipality, taxpayers_province, taxpayer_type_id, taxpayer_type_code, taxpayer_type, taxpayers_contact_info, is_active, created_at, updated_at  FROM {viewTableName} WHERE taxpayers_id = @taxpayers_id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("taxpayers_id", row["taxpayers_id"].ToString());
+                    dict.Add("taxpayers_tin", row["taxpayers_tin"].ToString());
+                    dict.Add("taxpayers_name", row["taxpayers_name"].ToString());
+                    dict.Add("taxpayers_street", row["taxpayers_street"].ToString());
+                    dict.Add("taxpayers_barangay", row["taxpayers_barangay"].ToString());
+                    dict.Add("taxpayers_municipality", row["taxpayers_municipality"].ToString());
+                    dict.Add("taxpayers_province", row["taxpayers_province"].ToString());
+                    dict.Add("taxpayer_type_id", row["taxpayer_type_id"].ToString());
+                    dict.Add("taxpayer_type_code", row["taxpayer_type_code"].ToString());
+                    dict.Add("taxpayer_type", row["taxpayer_type"].ToString());
+                    dict.Add("taxpayers_contact_info", row["taxpayers_contact_info"].ToString());
+                    dict.Add("is_active", row["is_active"].ToString());
+                    dict.Add("created_at", row["created_at"].ToString());
+                    dict.Add("updated_at", row["updated_at"].ToString());
+                }
+                return dict;
+            }
         }
     }
 }

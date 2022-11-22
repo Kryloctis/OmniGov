@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -11,5 +12,6 @@ namespace ACC.Domain.Interfaces
         int GetIdByName(string name);
         DataTable GetViewTaxpayerRecords();
         DataTable GetViewTaxpayerRecordsBySearch(string searchText);
+        Dictionary<string, string> GetViewRecordById(int id);
     }
 }

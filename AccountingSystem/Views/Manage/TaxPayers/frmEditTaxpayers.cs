@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _taxpayerId = taxpayerId;
             _frmTaxpayers = frmTaxpayers;
             uc = ucTaxPayers1;
+            uc.isEdit = true;
         }
 
         private void frmEditTaxpayers_Load(object sender, EventArgs e)
@@ -26,17 +27,24 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadSelectedRecord()
         {
-            var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
+            try
+            {
+                var dictTaxpayer = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
-            uc.txtTIN.Text = dictTaxpayer["tin"];
-            uc.txtName.Text = dictTaxpayer["name"];
-            uc.txtStreet.Text = dictTaxpayer["street"];
-            uc.txtBarangay.Text = dictTaxpayer["barangay"];
-            uc.txtMunicipality.Text = dictTaxpayer["municipality"];
-            uc.txtProvince.Text = dictTaxpayer["province"];
-            uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
-            uc.txtContact.Text = dictTaxpayer["contact_info"];
-            uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
+                uc.txtTIN.Text = dictTaxpayer["tin"];
+                uc.txtName.Text = dictTaxpayer["name"];
+                uc.txtStreet.Text = dictTaxpayer["street"];
+                uc.txtBarangay.Text = dictTaxpayer["barangay"];
+                uc.txtMunicipality.Text = dictTaxpayer["municipality"];
+                uc.txtProvince.Text = dictTaxpayer["province"];
+                uc.cmbxTaxPayerType.SelectedValue = Convert.ToInt32(dictTaxpayer["taxpayer_type_id"]);
+                uc.txtContact.Text = dictTaxpayer["contact_info"];
+                uc.chckIsActive.Checked = Convert.ToBoolean(Convert.ToByte(dictTaxpayer["is_active"]));
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
