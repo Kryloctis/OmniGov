@@ -44,20 +44,23 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chckBxInactiveTaxpayers = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.dgTaxpayers);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 54);
+            this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(822, 348);
+            this.panel1.Size = new System.Drawing.Size(822, 382);
             this.panel1.TabIndex = 1;
             // 
             // dgTaxpayers
@@ -68,7 +71,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.dgTaxpayers.Name = "dgTaxpayers";
             this.dgTaxpayers.RowHeadersWidth = 51;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(814, 340);
+            this.dgTaxpayers.Size = new System.Drawing.Size(814, 374);
             this.dgTaxpayers.TabIndex = 1;
             this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dgTaxpayers_SelectionChanged);
             // 
@@ -130,7 +133,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStripStatusLabel5,
             this.toolStripStatusLabel6,
             this.toolStripStatusLabelUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 402);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 459);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(822, 22);
             this.statusStrip1.TabIndex = 7;
@@ -151,7 +154,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(536, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(567, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -186,12 +189,34 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
             this.toolStripStatusLabelUpdatedAt.Text = "-";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.chckBxInactiveTaxpayers);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 54);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(822, 23);
+            this.flowLayoutPanel1.TabIndex = 8;
+            // 
+            // chckBxInactiveTaxpayers
+            // 
+            this.chckBxInactiveTaxpayers.AutoSize = true;
+            this.chckBxInactiveTaxpayers.Location = new System.Drawing.Point(667, 3);
+            this.chckBxInactiveTaxpayers.Name = "chckBxInactiveTaxpayers";
+            this.chckBxInactiveTaxpayers.Size = new System.Drawing.Size(152, 19);
+            this.chckBxInactiveTaxpayers.TabIndex = 0;
+            this.chckBxInactiveTaxpayers.Text = "Show Inactive taxpayers";
+            this.chckBxInactiveTaxpayers.UseVisualStyleBackColor = true;
+            this.chckBxInactiveTaxpayers.CheckedChanged += new System.EventHandler(this.chckBxInactiveTaxpayers_CheckedChanged);
+            // 
             // frmTaxpayers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 424);
+            this.ClientSize = new System.Drawing.Size(822, 481);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.MinimizeBox = false;
@@ -206,6 +231,8 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,5 +255,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox chckBxInactiveTaxpayers;
     }
 }

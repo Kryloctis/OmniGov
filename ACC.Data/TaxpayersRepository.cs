@@ -185,14 +185,14 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetViewTaxpayerRecords()
+        public DataTable GetViewRecords()
         {
             var query = $"SELECT * FROM {viewTableName}";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
-        public DataTable GetViewTaxpayerRecordsBySearch(string searchText)
+        public DataTable GetViewRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
             string query = $"SELECT * FROM {viewTableName} WHERE taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text";
@@ -241,6 +241,17 @@ namespace ACC.Data
                 }
                 return dict;
             }
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchText, bool showInactiveTaxpayers)
+        {
+            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
+
+            string subQuery = showInactiveTaxpayers ? string.Empty : "is_active = 1 AND";
+
+            string query = $"SELECT * FROM {viewTableName} WHERE {subQuery} (taxpayers_tin LIKE @search_text OR taxpayers_name LIKE @search_text)";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

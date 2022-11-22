@@ -10,8 +10,9 @@ namespace ACC.Domain.Interfaces
         bool TaxpayerNameExist(int id, string name);
         int GetLastInsertedId();
         int GetIdByName(string name);
-        DataTable GetViewTaxpayerRecords();
-        DataTable GetViewTaxpayerRecordsBySearch(string searchText);
+        DataTable GetViewRecords();
+        DataTable GetViewRecordsBySearch(string searchText, bool showInactiveTaxpayers);
+        DataTable GetViewRecordsBySearch(string searchText);
         Dictionary<string, string> GetViewRecordById(int id);
     }
 }
