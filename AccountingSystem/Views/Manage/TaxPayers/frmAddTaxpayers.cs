@@ -7,11 +7,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
     public partial class frmAddTaxpayers : Form
     {
         internal readonly ucTaxPayers uc;
+
         public frmAddTaxpayers()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
             uc = ucTaxPayers1;
+            uc.isEdit = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)

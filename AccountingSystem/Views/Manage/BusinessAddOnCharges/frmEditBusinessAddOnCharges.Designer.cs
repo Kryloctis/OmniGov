@@ -58,19 +58,18 @@
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.Location = new System.Drawing.Point(192, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ucBusinessAddOnCharges1
             // 
+            this.ucBusinessAddOnCharges1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBusinessAddOnCharges1.Location = new System.Drawing.Point(3, 9);
             this.ucBusinessAddOnCharges1.Name = "ucBusinessAddOnCharges1";
             this.ucBusinessAddOnCharges1.Size = new System.Drawing.Size(344, 97);

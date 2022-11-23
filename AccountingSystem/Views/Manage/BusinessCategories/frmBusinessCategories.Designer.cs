@@ -33,6 +33,8 @@
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBoxSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAddOnCharges = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -42,12 +44,20 @@
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.s = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgBusinessCategories = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.toolStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBusinessCategories)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -59,12 +69,14 @@
             this.btnAdd,
             this.btnEdit,
             this.btnDelete,
-            this.toolStripTextBoxSearch});
+            this.toolStripTextBoxSearch,
+            this.toolStripSeparator1,
+            this.btnAddOnCharges});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip.Size = new System.Drawing.Size(800, 54);
+            this.toolStrip.Size = new System.Drawing.Size(968, 54);
             this.toolStrip.TabIndex = 8;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -112,6 +124,22 @@
             this.toolStripTextBoxSearch.Size = new System.Drawing.Size(200, 46);
             this.toolStripTextBoxSearch.TextChanged += new System.EventHandler(this.toolStripTextBoxSearch_TextChanged);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            // 
+            // btnAddOnCharges
+            // 
+            this.btnAddOnCharges.Image = global::AccountingSystem.Properties.Resources.archive_box_add_filled_20px;
+            this.btnAddOnCharges.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAddOnCharges.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddOnCharges.Name = "btnAddOnCharges";
+            this.btnAddOnCharges.Size = new System.Drawing.Size(98, 43);
+            this.btnAddOnCharges.Text = "Add-on Charges";
+            this.btnAddOnCharges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAddOnCharges.Click += new System.EventHandler(this.btnAddOnCharges_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -123,9 +151,9 @@
             this.toolStripStatusLabel5,
             this.s,
             this.toolStripStatusLabelUpdatedAt});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(968, 22);
             this.statusStrip1.TabIndex = 14;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -144,7 +172,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(545, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(713, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -179,50 +207,99 @@
             this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
             this.toolStripStatusLabelUpdatedAt.Text = "-";
             // 
-            // panel1
+            // splitContainer1
             // 
-            this.panel1.Controls.Add(this.dgBusinessCategories);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 54);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(800, 374);
-            this.panel1.TabIndex = 15;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 54);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.splitContainer1.Size = new System.Drawing.Size(968, 416);
+            this.splitContainer1.SplitterDistance = 645;
+            this.splitContainer1.TabIndex = 15;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgBusinessCategories);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(4, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(637, 408);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "List";
             // 
             // dgBusinessCategories
             // 
             this.dgBusinessCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgBusinessCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgBusinessCategories.Location = new System.Drawing.Point(4, 4);
+            this.dgBusinessCategories.Location = new System.Drawing.Point(3, 19);
             this.dgBusinessCategories.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgBusinessCategories.Name = "dgBusinessCategories";
             this.dgBusinessCategories.RowHeadersWidth = 51;
             this.dgBusinessCategories.RowTemplate.Height = 29;
             this.dgBusinessCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBusinessCategories.Size = new System.Drawing.Size(792, 366);
-            this.dgBusinessCategories.TabIndex = 9;
+            this.dgBusinessCategories.Size = new System.Drawing.Size(631, 386);
+            this.dgBusinessCategories.TabIndex = 11;
             this.dgBusinessCategories.SelectionChanged += new System.EventHandler(this.dgBusinessCategories_SelectionChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(4, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(311, 408);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Add-on Charges";
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
+            this.listBox1.IntegralHeight = false;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(3, 19);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(305, 386);
+            this.listBox1.TabIndex = 0;
             // 
             // frmBusinessCategories
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(968, 492);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip);
             this.MinimizeBox = false;
             this.Name = "frmBusinessCategories";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Manage > Business Categories";
+            this.Text = "Business Categories > Add-on Charges";
             this.Load += new System.EventHandler(this.frmBusinessCategories_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgBusinessCategories)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,7 +321,12 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel s;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgBusinessCategories;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnAddOnCharges;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox listBox1;
+        internal System.Windows.Forms.DataGridView dgBusinessCategories;
     }
 }

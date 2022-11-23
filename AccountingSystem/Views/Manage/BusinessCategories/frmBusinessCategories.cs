@@ -1,5 +1,7 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.Barangay;
+using AccountingSystem.Views.Manage.BusinessAdOnCharges;
+using AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +28,32 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ = new frmAddBusinessCategories(this).ShowDialog();
         }
 
+        private void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete, ToolStripButton tsBtnAddOnCharges)
+        {
+            int SelectedRows = dgv.SelectedRows.Count;
+            if (SelectedRows == 1)
+            {
+                tsBtnEdit.Enabled = true;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+                tsBtnAddOnCharges.Enabled = true;
+            }
+            else if (SelectedRows > 1)
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = true;
+                tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
+                tsBtnAddOnCharges.Enabled = false;
+            }
+            else
+            {
+                tsBtnEdit.Enabled = false;
+                tsBtnDelete.Enabled = false;
+                tsBtnDelete.Text = "Delete";
+                tsBtnAddOnCharges.Enabled = false;
+            }
+        }
+
         private void frmBusinessCategories_Load(object sender, EventArgs e)
         {
             LoadBusinessCategories();
@@ -35,25 +63,42 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             try
             {
-                var dt = new DataTable();
                 var searchText = toolStripTextBoxSearch.Text.Trim();
-
-                if (searchText.Length > 2)
-                    dt = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
-                else
-                    dt = AccFactory.BusinessCategoriesRepository().GetRecords();
-
-                HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dt);
+                var dtBusinessCategories = AccFactory.BusinessCategoriesRepository().GetRecordsBySearch(searchText);
+                var dataTable = dtBusinessCategories.Clone();
+                dataTable.Columns["is_line_of_business"].DataType = typeof(bool);
+                foreach (DataRow row in dtBusinessCategories.Rows) { dataTable.Rows.Add(row.ItemArray); }
+                HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
+                dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
+                EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private int GetCurrentCellId()
+        {
+            int rowIndex = dgBusinessCategories.CurrentCell.RowIndex;
+            return Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
+        }
+
+        private void LoadBusinessCategoriesAddons(int businessCategoriesId) 
+        {
+            listBox1.Items.Clear();
+            var dtBusinessAddons = AccFactory.BusinessCategoriesHasAddOnCharges().GetViewRecordsByBusinessCategoriesId(businessCategoriesId);
+            foreach (DataRow item in dtBusinessAddons.Rows) { listBox1.Items.Add($"{item["business_add_on_charges_code"]}-{item["business_add_on_charges_description"]}");}
         }
 
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete);
+            try
+            {
+                if (dgBusinessCategories.SelectedRows.Count < 1)
+                    return;
+
+                EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+                LoadBusinessCategoriesAddons(GetCurrentCellId());
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -98,14 +143,33 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int businessCategoriesID = Convert.ToInt32(dgBusinessCategories.SelectedRows[0].Cells[0].Value);
-
-            _ = new frmEditBusinessCategories(businessCategoriesID, this).ShowDialog();
+            try
+            {
+                _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}         
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
             LoadBusinessCategories();
+        }
+
+        private void ShowAddOnCharges() 
+        {
+            try
+            {
+                int rowIndex = dgBusinessCategories.CurrentCell.RowIndex;
+                int categoriesId = Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
+
+                _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void btnAddOnCharges_Click(object sender, EventArgs e)
+        {
+            ShowAddOnCharges();
         }
     }
 }

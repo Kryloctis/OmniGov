@@ -14,15 +14,38 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
 {
     public partial class frmAddBusinessAddOnCharges : Form
     {
-        private readonly frmBusinessAddOnCharges _frmBusinessAdOnCharges;
-        private readonly ucBusinessAddOnCharges _ucBusinessAdOnCharges;
-
+        private readonly frmBusinessAddOnCharges _frmBusinessAddOnCharges;
+        private readonly ucBusinessAddOnCharges _ucBusinessAddOnCharges;
 
         public frmAddBusinessAddOnCharges(frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
-            _frmBusinessAdOnCharges = frmBusinessAdOnCharges;
-            _ucBusinessAdOnCharges = ucBusinessAdOnCharges1;
+            _frmBusinessAddOnCharges = frmBusinessAdOnCharges;
+            _ucBusinessAddOnCharges = ucBusinessAdOnCharges1;
+            _ucBusinessAddOnCharges.isEdit = false;
+        }
+
+        private bool SaveData()
+        {
+            if (!_ucBusinessAddOnCharges.ValidateChildren())
+            {
+                Helper.MessageBoxError(_ucBusinessAddOnCharges.GetFormErrors());
+                return false;
+            }
+
+            var code = _ucBusinessAddOnCharges.txtCode.Text.Trim();
+            var description = _ucBusinessAddOnCharges.txtDescription.Text.Trim();
+            var appliedEachBusiness = _ucBusinessAddOnCharges.cbxAppliedToEachBusiness.Checked;
+
+            var businessAdOnChargesModel = new BusinessAddOnChargesModel()
+            {
+                Code = code,
+                Description = description,
+                IsAppliedEachBusiness = appliedEachBusiness,
+                CreatedBy = Helper.UserId
+            };
+
+            return AccFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -30,36 +53,9 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("Business Add-on has been saved.");
-                _frmBusinessAdOnCharges.LoadBusinessAddOnCharges();
-                _ucBusinessAdOnCharges.ResetForm();
+                _frmBusinessAddOnCharges.LoadBusinessAddOnCharges();
+                _ucBusinessAddOnCharges.ResetForm();
             }
         }
-
-        private bool SaveData()
-        {
-            if (!_ucBusinessAdOnCharges.ValidateChildren())
-            {
-                Helper.MessageBoxError(_ucBusinessAdOnCharges.GetFormErrors());
-                return false;
-            }
-
-            var code = _ucBusinessAdOnCharges.txtCode.Text.Trim();
-            var description = _ucBusinessAdOnCharges.txtDescription.Text.Trim();
-            var appliedEachBusiness = _ucBusinessAdOnCharges.cbxAppliedToEachBusiness.Checked;
-
-            var businessAdOnChargesModel = new BusinessAdOnChargesModel()
-            {
-                Code = code,
-                Description = description,
-                AppliedEachBusiness = appliedEachBusiness, 
-                CreatedBy = Helper.UserId
-            };
-
-            return AccFactory.BusinessAddOnChargesRepository().Insert(businessAdOnChargesModel);
-        }
-
-
-
-
     }
 }

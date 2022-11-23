@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ACC.Domain.Models
 {
-    public class BusinessAdOnChargesModel
+    public class BusinessAddOnChargesModel
     {
-        public int BusinessAdOnChargesID  { get; set; }
+        public int BusinessAddOnChargesID  { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public bool AppliedEachBusiness { get; set; }
+        public bool IsAppliedEachBusiness { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
     }

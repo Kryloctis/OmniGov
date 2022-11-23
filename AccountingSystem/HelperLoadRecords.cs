@@ -8,6 +8,80 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region Business Addons
+
+        internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
+        {
+            datagrid.Rows.Clear();
+            datagrid.Columns.Clear();
+
+            DataGridViewCheckBoxColumn dgvCheckBox = new DataGridViewCheckBoxColumn();
+            dgvCheckBox.HeaderText = "Applied each business";
+            dgvCheckBox.Name = "is_applied_each_business";
+
+            datagrid.Columns.Add("id", "ID");
+            datagrid.Columns.Add("code", "Code");
+            datagrid.Columns.Add("description", "Description");
+            datagrid.Columns.Add(dgvCheckBox);
+
+            datagrid.Columns.Add("created_at", "Created At");
+            datagrid.Columns.Add("created_by", "Created By");
+            datagrid.Columns.Add("updated_at", "Updated At");
+            datagrid.Columns.Add("updated_by", "Updated By");
+
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["is_applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                datagrid.Rows.Add(new object[]
+                {
+                    row["id"],
+                    row["code"],
+                    row["description"],
+                    Convert.ToBoolean(row["is_applied_each_business"]),
+                    row["created_at"],
+                    row["created_by"],
+                    row["updated_at"],
+                    row["updated_by"]
+                });
+            }
+
+            datagrid.ClearSelection();
+
+        } 
+        #endregion
+
+        #region BusinessCategories
+
+        internal static void BusinessCategoriesDataGridView(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["code"].HeaderText = "Code";
+            dataGridView.Columns["ordinance_ref_no"].HeaderText = "Ordinance ref no.";
+            dataGridView.Columns["description"].HeaderText = "Description";
+            dataGridView.Columns["is_line_of_business"].HeaderText = "Line of Business";
+        }
+
+        internal static void BusinessCategorissAddOnsDatagridView(DataGridView dataGridView1, DataTable dataTable)
+        {
+            dataGridView1.DataSource = dataTable;
+            dataGridView1.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView1.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView1.Columns["is_selected"].HeaderText = string.Empty;
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns["code"].HeaderText = "Code";
+            dataGridView1.Columns["description"].HeaderText = "Description";
+        }
+
+        #endregion
+
         #region Taxpayers
 
         public static void RealPropertiesDatagridView(DataGridView dataGridView, DataTable dataTable)
@@ -2684,85 +2758,6 @@ namespace AccountingSystem
             datagrid.Columns["funds_id"].Visible = false;
             datagrid.Columns["journals_id"].Visible = false;
         }
-
-        internal static void BusinessCategoriesDataGridView(DataGridView datagrid, DataTable dataTable)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            DataGridViewCheckBoxColumn dgvLineOfBusinessCheckBoxCol = new DataGridViewCheckBoxColumn();
-            dgvLineOfBusinessCheckBoxCol.HeaderText = "Line of Business";
-            dgvLineOfBusinessCheckBoxCol.Name = "is_line_of_business";
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("code", "Code");
-            datagrid.Columns.Add("ordinance_ref_no", "Ordinance Reference No.");
-            datagrid.Columns.Add("description", "Description");
-            datagrid.Columns.Add(dgvLineOfBusinessCheckBoxCol);
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["is_line_of_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["code"],
-                    row["ordinance_ref_no"],
-                    row["description"],
-                    Convert.ToBoolean(row["is_line_of_business"])
-                });
-            }
-
-            datagrid.ClearSelection();
-        }
-
-        internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
-        {
-            datagrid.Rows.Clear();
-            datagrid.Columns.Clear();
-
-            DataGridViewCheckBoxColumn dgvCheckBox = new DataGridViewCheckBoxColumn();
-            dgvCheckBox.HeaderText = "Applied each business";
-            dgvCheckBox.Name = "is_applied_each_business";
-
-            datagrid.Columns.Add("id", "ID");
-            datagrid.Columns.Add("code", "Code");
-            datagrid.Columns.Add("description", "Description");
-            datagrid.Columns.Add(dgvCheckBox);
-
-            datagrid.Columns.Add("created_at", "Created At");
-            datagrid.Columns.Add("created_by", "Created By");
-            datagrid.Columns.Add("updated_at", "Updated At");
-            datagrid.Columns.Add("updated_by", "Updated By");
-
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["created_by"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
-            datagrid.Columns["updated_by"].Visible = false;
-
-            datagrid.Columns["id"].Visible = false;
-            datagrid.Columns["is_applied_each_business"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                datagrid.Rows.Add(new object[]
-                {
-                    row["id"],
-                    row["code"],
-                    row["description"],
-                    Convert.ToBoolean(row["is_applied_each_business"]),
-                    row["created_at"],
-                    row["created_by"],
-                    row["updated_at"],
-                    row["updated_by"]
-                });
-            }
-
-            datagrid.ClearSelection();
-        }
-
 
         internal static void JEVDatagridView(DataGridView datagrid)
         {

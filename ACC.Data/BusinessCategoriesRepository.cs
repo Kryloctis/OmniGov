@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Transactions;
 
 namespace AccountingSystem
@@ -38,9 +39,7 @@ namespace AccountingSystem
             };
 
             string query = $"SELECT * FROM {tableName} WHERE code LIKE @search_text OR ordinance_ref_no LIKE @search_text OR description LIKE @search_text";
-
-            var dtBarangay = new DataTable();
-            return _dbGenericCommands.FillBySearch(query, dtBarangay, parameters);
+            return _dbGenericCommands.FillBySearch(query, new DataTable(), parameters); ;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -93,7 +92,7 @@ namespace AccountingSystem
         {
             var parameters = new object[][] {
                 new object[]{ "@business_categories_id", DbType.Int32, entity.BusinessCategoryID},
-                new object[]{ "@code", DbType.Int32, entity.Code},
+                new object[]{ "@code", DbType.String, entity.Code},
                 new object[]{ "@ordinance_ref_no", DbType.String, entity.OrdinanceReferenceNumber},
                 new object[]{ "@description", DbType.String, entity.Description },
                 new object[]{ "@is_line_of_business", DbType.Boolean, entity.LineOfBusiness }
@@ -118,6 +117,12 @@ namespace AccountingSystem
                 scope.Complete();
                 return true;
             }
+        }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT COALESCE(MAX(id), 0) FROM {tableName}";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
         }
     }
 }

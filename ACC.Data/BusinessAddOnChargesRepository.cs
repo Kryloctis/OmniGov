@@ -24,13 +24,13 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(List<BusinessAdOnChargesModel> entityList)
+        public bool Delete(List<BusinessAddOnChargesModel> entityList)
         {
             using (var scope = new TransactionScope())
             {
                 foreach (var entity in entityList)
                 {
-                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.BusinessAdOnChargesID } };
+                    var parameters = new object[][] { new object[] { @"id", DbType.Int32, entity.BusinessAddOnChargesID } };
 
                     string query = $"DELETE FROM {tableName} WHERE id = @id";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
@@ -43,7 +43,6 @@ namespace AccountingSystem
 
         public bool DescriptionExist(string description)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@description", DbType.String, description },
@@ -51,10 +50,26 @@ namespace AccountingSystem
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            
+            if (!string.IsNullOrEmpty(queryResult)) 
+                return true;     
+            
+            return false;
+        }
 
-            // if query is not null, means found some record, so true
-            if (!string.IsNullOrEmpty(queryResult)) return true;
-           
+        public bool DescriptionExist(int id, string name)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@id", DbType.Int32, id },
+                new object[] {"@description", DbType.String, name}
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND description = @description";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
             return false;
         }
 
@@ -109,13 +124,13 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
-        public bool Insert(BusinessAdOnChargesModel entity)
+        public bool Insert(BusinessAddOnChargesModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] {"@code", DbType.String, entity.Code},
                 new object[] {"@description", DbType.String, entity.Description},
-                new object[] {"@is_applied_each_business", DbType.Boolean, entity.AppliedEachBusiness },
+                new object[] {"@is_applied_each_business", DbType.Boolean, entity.IsAppliedEachBusiness },
                 new object[] {"@created_by", DbType.Int32, entity.CreatedBy },
             };
 
@@ -124,13 +139,13 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(BusinessAdOnChargesModel entity)
+        public bool Update(BusinessAddOnChargesModel entity)
         {
             var parameters = new object[][] {
-                new object[]{ "@id", DbType.Int32, entity.BusinessAdOnChargesID},
+                new object[]{ "@id", DbType.Int32, entity.BusinessAddOnChargesID},
                 new object[]{ "@code", DbType.String, entity.Code},
                 new object[]{ "@description", DbType.String, entity.Description},
-                new object[]{ "@is_applied_each_business", DbType.Boolean, entity.AppliedEachBusiness }
+                new object[]{ "@is_applied_each_business", DbType.Boolean, entity.IsAppliedEachBusiness }
             };
 
             string query = $"UPDATE {tableName} SET code = @code, description= @description, is_applied_each_business = @is_applied_each_business  WHERE id = @id";

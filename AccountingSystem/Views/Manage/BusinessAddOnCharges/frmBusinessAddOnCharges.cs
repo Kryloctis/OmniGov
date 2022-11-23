@@ -82,7 +82,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         {
             try
             {
-                var businessAdOnChargesModelList = new List<BusinessAdOnChargesModel>();
+                var businessAdOnChargesModelList = new List<BusinessAddOnChargesModel>();
                 int rowCount = dgBusinessAddOnCharges.SelectedRows.Count;
 
                 if (Helper.MessageBoxConfirmDelete(rowCount))
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                     foreach (DataGridViewRow row in dgBusinessAddOnCharges.SelectedRows)
                     {
                         int businessAddOnID = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new BusinessAdOnChargesModel() { BusinessAdOnChargesID = businessAddOnID };
+                        var model = new BusinessAddOnChargesModel() { BusinessAddOnChargesID = businessAddOnID };
                         businessAdOnChargesModelList.Add(model);
                     }
 

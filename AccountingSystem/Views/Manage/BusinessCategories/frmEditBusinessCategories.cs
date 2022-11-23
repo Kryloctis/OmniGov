@@ -44,46 +44,45 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private bool UpdateBusinessCategories()
         {
-            if (UpdateBusinessCategories())
+            if (!_ucBusinessCategories.ValidateChildren())
             {
-                Helper.MessageBoxSuccess("Business Categories has been updated.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                Close();
+                Helper.MessageBoxError(_ucBusinessCategories.GetFormErrors());
+                return false;
             }
+
+            var code = _ucBusinessCategories.txtCode.Text.Trim();
+            var ordinanceReferenceNo = _ucBusinessCategories.txtOrdinanceReferenceNo.Text.Trim();
+            var description = _ucBusinessCategories.txtDescription.Text.Trim();
+            var lineInBusiness = _ucBusinessCategories.cbxLineOfBusiness.Checked;
+
+            var businessCategoriesModel = new BusinessCategoriesModel()
+            {
+                BusinessCategoryID = _businessCategoriesID,
+                Code = code,
+                OrdinanceReferenceNumber = ordinanceReferenceNo,
+                Description = description,
+                LineOfBusiness = lineInBusiness
+            };
+
+            return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
+            
         }
 
-        private bool UpdateBusinessCategories()
+        private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!_ucBusinessCategories.ValidateChildren())
+                if (UpdateBusinessCategories())
                 {
-                    Helper.MessageBoxError(_ucBusinessCategories.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxSuccess("Business Categories has been updated.");
+                    _frmBusinessCategories.LoadBusinessCategories();
+                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
+                    Close();
                 }
-
-                var code = _ucBusinessCategories.txtCode.Text.Trim();
-                var ordinanceReferenceNo = _ucBusinessCategories.txtOrdinanceReferenceNo.Text.Trim();
-                var description = _ucBusinessCategories.txtDescription.Text.Trim();
-                var lineInBusiness = _ucBusinessCategories.cbxLineOfBusiness.Checked;
-
-                var businessCategoriesModel = new BusinessCategoriesModel()
-                {
-                    BusinessCategoryID = _businessCategoriesID,
-                    Code = code,
-                    OrdinanceReferenceNumber = ordinanceReferenceNo,
-                    Description = description,
-                    LineOfBusiness = lineInBusiness
-                };
-
-                return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
             }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }    
     }
 }

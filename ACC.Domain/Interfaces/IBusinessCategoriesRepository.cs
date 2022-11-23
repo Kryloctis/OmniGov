@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBusinessCategoriesRepository: IAccRepository<BusinessCategoriesModel>
     {
+        int GetLastInsertedId();
     }
 }
