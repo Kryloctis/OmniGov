@@ -74,7 +74,7 @@ namespace ACC.Data
                     dict.Add("property_identifier", row["property_identifier"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());
-                    dict.Add("owner_name", row["owner_name"].ToString());
+                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
                     dict.Add("owner_tin", row["owner_tin"].ToString());
                     dict.Add("owner_address", row["owner_address"].ToString());
                     dict.Add("owner_contact", row["owner_contact"].ToString());
@@ -131,16 +131,16 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@owner_name", DbType.String, ownerName},
+                new object[] { "@taxpayer_name", DbType.String, ownerName},
             };
 
             string isCancelledQuery = $"AND is_cancelled = 0";
             string query;
 
             if (isCancelled)
-                query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
+                query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             else
-               query = $"SELECT * FROM {tableName} WHERE owner_name = @owner_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
+               query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -153,8 +153,9 @@ namespace ACC.Data
                 new object [] { "@search_text", DbType.String, $"%{searchText}%"}
             };
 
-            //string query = $"SELECT * FROM {tableName} WHERE complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR owner_name LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text OR owner_contact LIKE @search_text OR barangay_name LIKE @search_text OR municipality_name LIKE @search_text OR province_name LIKE @search_text GROUP BY owner_name";
-            string query = $"SELECT * FROM {tableName}";
+            //string query = $"SELECT * FROM {tableName} WHERE complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR taxpayer_name LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text OR owner_contact LIKE @search_text OR barangay_name LIKE @search_text OR municipality_name LIKE @search_text OR province_name LIKE @search_text GROUP BY taxpayer_name";
+
+            string query = $"SELECT * FROM {tableName} GROUP BY taxpayer_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -185,12 +186,14 @@ namespace ACC.Data
                 new object[] { "@property_identifier", DbType.String, entity.propertyIdentifier },
                 new object[] { "@complete_arp_no", DbType.String, entity.CompleteArpNo },
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
-                new object[] { "@taxpayer_name", DbType.String, entity.OwnerName },
-                new object[] { "@taxpayer_tin", DbType.String, entity.OwnerTin },
-                new object[] { "@taxpayer_contact_info", DbType.String, entity.OwnerContact },
-                new object[] { "@taxpayer_barangay", DbType.String, entity.BarangayName },
-                new object[] { "@taxpayer_municipality", DbType.String, entity.MunicipalityName },
-                new object[] { "@taxpayer_province", DbType.String, entity.ProvinceName },
+                new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin },
+                new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName },
+                new object[] { "@taxpayer_type", DbType.String, entity.TaxpayerType },
+                new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo },
+                new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress },
+                new object[] { "@barangay_name", DbType.String, entity.BarangayName },
+                new object[] { "@municipality_name", DbType.String, entity.MunicipalityName },
+                new object[] { "@province_name", DbType.String, entity.ProvinceName },
                 new object[] { "@property_kind", DbType.String, entity.PropertyKind },
                 new object[] { "@effectivity_quarterly", DbType.Int32, entity.EffectivityQuarter },
                 new object[] { "@effectivity_year", DbType.Int32, entity.EffectivityYear },
@@ -215,7 +218,7 @@ namespace ACC.Data
             };
 
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_barangay, taxpayer_municipality, taxpayer_province, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_barangay, @taxpayer_municipality, @taxpayer_province, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_type, taxpayer_contact_info, taxpayer_address, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_type, @taxpayer_contact_info, @taxpayer_address,  @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -258,12 +261,12 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@owner_name", DbType.String, ownerName},
+                new object[] { "@taxpayer_name", DbType.String, ownerName},
                 new object[] { "@year_from", DbType.Int32, yearFrom},
                 new object[] { "@year_to", DbType.Int32, yearTo}
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND (year >= @year_to AND year <= @year_from) ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND (year >= @year_to AND year <= @year_from) ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -279,11 +282,11 @@ namespace ACC.Data
 
             var parameters = new object[][]
             {
-                new object[] { "@owner_name", DbType.String, ownerName},
+                new object[] { "@taxpayer_name", DbType.String, ownerName},
                 new object[] { "@posted_at", DbType.Date, asOfDate}
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE owner_name = @owner_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE taxpayer_name = @taxpayer_name AND (DATE(posted_at) <= @posted_at && MONTH(posted_at) > 3) {taxYearQuery}";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
@@ -357,10 +360,10 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@owner_name", DbType.String, ownerName}
+                new object[] { "@taxpayer_name", DbType.String, ownerName}
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND owner_name = @owner_name ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND taxpayer_name = @taxpayer_name ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
