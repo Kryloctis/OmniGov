@@ -492,6 +492,37 @@ namespace AccountingSystem
             return DateTime.Now;
         }
 
+        public static void DatagridViewRecordFinder(DataGridView dataGridView, string columnName, string value)
+        {
+            int visibleColumCount = 0;
+            var visibleColumn = new DataGridViewColumn();
+
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                if (column.Visible)
+                {
+                    visibleColumn = column;
+                    visibleColumCount++;
+                    break;
+                }
+            }
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.Cells[columnName].Value == null && visibleColumCount == 0)
+                    continue;
+
+                string currentRowValue = row.Cells[columnName].Value.ToString();
+
+                if (currentRowValue == value)
+                {
+                    dataGridView.CurrentCell = row.Cells[visibleColumn.Name];
+                    row.Selected = true;
+                    break;
+                }
+            }
+        }
+
         #endregion
 
         #region Get User Data
@@ -940,20 +971,6 @@ namespace AccountingSystem
             }
 
             return false;
-        }
-
-        public static void DatagridViewRecordFinder(DataGridView dataGridView, string columnName, string value)
-        {
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                // 0 is the column index
-                if (row.Cells[columnName].Value.ToString().StartsWith(value) && row.Cells[columnName].Value.ToString().EndsWith(value))
-                {
-                    dataGridView.CurrentCell = row.Cells[columnName];
-                    row.Selected = true;
-                    break;
-                }
-            }
         }
 
         public static bool IsJobOrder(int userId)
