@@ -325,8 +325,8 @@
         private System.Windows.Forms.ToolStripButton btnAddOnCharges;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgBusinessCategories;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox listBox1;
+        internal System.Windows.Forms.DataGridView dgBusinessCategories;
     }
 }

@@ -46,42 +46,43 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
         private bool UpdateBusinessCategories()
         {
-            try
+            if (!_ucBusinessCategories.ValidateChildren())
             {
-                if (!_ucBusinessCategories.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucBusinessCategories.GetFormErrors());
-                    return false;
-                }
-
-                var code = _ucBusinessCategories.txtCode.Text.Trim();
-                var ordinanceReferenceNo = _ucBusinessCategories.txtOrdinanceReferenceNo.Text.Trim();
-                var description = _ucBusinessCategories.txtDescription.Text.Trim();
-                var lineInBusiness = _ucBusinessCategories.cbxLineOfBusiness.Checked;
-
-                var businessCategoriesModel = new BusinessCategoriesModel()
-                {
-                    BusinessCategoryID = _businessCategoriesID,
-                    Code = code,
-                    OrdinanceReferenceNumber = ordinanceReferenceNo,
-                    Description = description,
-                    LineOfBusiness = lineInBusiness
-                };
-
-                return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
+                Helper.MessageBoxError(_ucBusinessCategories.GetFormErrors());
+                return false;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-            return false;
+
+            var code = _ucBusinessCategories.txtCode.Text.Trim();
+            var ordinanceReferenceNo = _ucBusinessCategories.txtOrdinanceReferenceNo.Text.Trim();
+            var description = _ucBusinessCategories.txtDescription.Text.Trim();
+            var lineInBusiness = _ucBusinessCategories.cbxLineOfBusiness.Checked;
+
+            var businessCategoriesModel = new BusinessCategoriesModel()
+            {
+                BusinessCategoryID = _businessCategoriesID,
+                Code = code,
+                OrdinanceReferenceNumber = ordinanceReferenceNo,
+                Description = description,
+                LineOfBusiness = lineInBusiness
+            };
+
+            return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateBusinessCategories())
+            try
             {
-                Helper.MessageBoxSuccess("Business Categories has been updated.");
-                _frmBusinessCategories.LoadBusinessCategories();
-                Close();
+                if (UpdateBusinessCategories())
+                {
+                    Helper.MessageBoxSuccess("Business Categories has been updated.");
+                    _frmBusinessCategories.LoadBusinessCategories();
+                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesID.ToString());
+                    Close();
+                }
             }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }    
     }
 }

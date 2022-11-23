@@ -679,7 +679,5 @@ namespace ACC.Data
             }
             return record;
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,16 +37,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             };
         }
 
-        private bool CheckValidated()
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (Convert.ToBoolean(row.Cells["is_selected"].Value) == true)
-                    return true;
-            }
-            return false;
-        }
-
         private DataTable DataTableAddOnCharges() 
         {
             var dtAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecords();
@@ -71,12 +62,8 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             {
                 HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
-                btnSave.Enabled = CheckValidated();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void frmBusinessCategoriesAddOnCharges_Load(object sender, EventArgs e)
@@ -90,43 +77,39 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
                 e.Column.ReadOnly = true;
         }
 
-        private void chckBxAll_CheckedChanged(object sender, EventArgs e)
-        {
-            Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", chckBxAll);
-        }
-
         private bool Save() 
         {
-            try
+            var modeList = new List<BusinessCategoriesHasAddOnChargesModel>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                var modeList = new List<BusinessCategoriesHasAddOnChargesModel>();
+                if (!Convert.ToBoolean(row.Cells["is_selected"].Value))
+                    continue;
 
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                var model = new BusinessCategoriesHasAddOnChargesModel()
                 {
-                    if (!Convert.ToBoolean(row.Cells["is_selected"].Value))
-                        continue;
+                    businessCategoriesId = _businessCategoriesId,
+                    businessAddOnChargesId = Convert.ToInt32(row.Cells["id"].Value)
+                };
 
-                    var model = new BusinessCategoriesHasAddOnChargesModel()
-                    {
-                        businessCategoriesId = _businessCategoriesId,
-                        businessAddOnChargesId = Convert.ToInt32(row.Cells["id"].Value)
-                    };
-
-                    modeList.Add(model);
-                }
-                return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);            
+                modeList.Add(model);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-            return false;
+            return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);            
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Save())
+            try
             {
-                Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
-                _frmBusinessCategories.LoadBusinessCategories();
+                if (Save())
+                {
+                    Helper.MessageBoxSuccess("Business Categories Add-on Charges has been saved.");
+                    _frmBusinessCategories.LoadBusinessCategories();
+                    Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
+                }
             }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -144,14 +127,18 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
         {
             try
             {
-                Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", chckBxAll);
-                btnSave.Enabled = CheckValidated();
+                Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
 
+        private void checkBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
     }
 }
