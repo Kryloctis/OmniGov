@@ -36,6 +36,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             txtOrdinanceReferenceNo.Clear();
             txtDescription.Clear();
             cbxLineOfBusiness.Checked = false;
+            txtCode.Focus();
         }
 
         private void ucBusinessCategories_Load(object sender, EventArgs e)
@@ -55,8 +56,5 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
-
-
-
     }
 }

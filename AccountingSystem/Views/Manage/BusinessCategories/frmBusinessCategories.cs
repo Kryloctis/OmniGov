@@ -98,10 +98,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                 EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
                 LoadBusinessCategoriesAddons(GetCurrentCellId());
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
