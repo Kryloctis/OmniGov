@@ -74,6 +74,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                 HelperLoadRecords.BusinessCategoriesDataGridView(dgBusinessCategories, dataTable);
                 dgBusinessCategories.CurrentCell = dgBusinessCategories.FirstDisplayedCell;
                 EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+                toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
@@ -91,6 +92,15 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             foreach (DataRow item in dtBusinessAddons.Rows) { listBox1.Items.Add($"{item["business_add_on_charges_code"]}-{item["business_add_on_charges_description"]}");}
         }
 
+        private void LoadRecordTimestamp(DataGridView dataGridView)
+        {
+            var createdAtColumnIndex = dataGridView.Columns["created_at"].Index;
+            var updatedAtColumnIndex = dataGridView.Columns["updated_at"].Index;
+
+            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex };
+            Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+        }
+
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -99,6 +109,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                     return;
 
                 EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
+                LoadRecordTimestamp(dgBusinessCategories);
                 LoadBusinessCategoriesAddons(GetCurrentCellId());
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}

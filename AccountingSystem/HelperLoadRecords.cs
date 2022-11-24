@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2013.Drawing.Chart;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -67,6 +68,8 @@ namespace AccountingSystem
             dataGridView.Columns["ordinance_ref_no"].HeaderText = "Ordinance ref no.";
             dataGridView.Columns["description"].HeaderText = "Description";
             dataGridView.Columns["is_line_of_business"].HeaderText = "Line of Business";
+            dataGridView.Columns["created_at"].Visible = false;
+            dataGridView.Columns["updated_at"].Visible = false;
         }
 
         internal static void BusinessCategorissAddOnsDatagridView(DataGridView dataGridView1, DataTable dataTable)
