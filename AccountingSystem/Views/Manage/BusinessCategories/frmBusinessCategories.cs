@@ -2,10 +2,13 @@
 using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.BusinessAdOnCharges;
 using AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges;
+using Microsoft.ReportingServices.Diagnostics.Utilities;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -101,44 +104,42 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private bool DeleteBusinessCategories(ref int deletedCount)
         {
-            int deletedRecordCount;
+            var businessCategoriesModelList = new List<BusinessCategoriesModel>();
+            int rowCount = dgBusinessCategories.SelectedRows.Count;
 
-            if (DeleteBusinessCategories(out deletedRecordCount))
+            if (Helper.MessageBoxConfirmDelete(rowCount))
             {
-                Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
-                LoadBusinessCategories();
+                foreach (DataGridViewRow row in dgBusinessCategories.SelectedRows)
+                {
+                    int businessCategoriesID = Convert.ToInt32(row.Cells["id"].Value);
+                    var model = new BusinessCategoriesModel() { BusinessCategoryID = businessCategoriesID };
+                    businessCategoriesModelList.Add(model);
+                }
+
+                deletedCount = rowCount;
+                return AccFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
             }
+            return false;
         }
 
-        private bool DeleteBusinessCategories(out int deletedCount)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                var businessCategoriesModelList = new List<BusinessCategoriesModel>();
-                int rowCount = dgBusinessCategories.SelectedRows.Count;
+                int deletedRecordCount = 0;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount))
+                if (DeleteBusinessCategories(ref deletedRecordCount))
                 {
-                    foreach (DataGridViewRow row in dgBusinessCategories.SelectedRows)
-                    {
-                        int businessCategoriesID = Convert.ToInt32(row.Cells["id"].Value);
-                        var model = new BusinessCategoriesModel() { BusinessCategoryID = businessCategoriesID };
-                        businessCategoriesModelList.Add(model);
-                    }
-
-                    deletedCount = rowCount;
-                    return AccFactory.BusinessCategoriesRepository().Delete(businessCategoriesModelList);
+                    Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
+                    LoadBusinessCategories();
                 }
             }
+            catch (MySqlException sqlEx)
+            { Debug.WriteLine(sqlEx.ErrorCode); }
             catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            deletedCount = 0;
-            return false;
+            { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

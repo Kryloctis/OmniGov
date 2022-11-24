@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             InitializeComponent();
             _frmBusinessCategories = frmBusinessCategories;
             _ucBusinessCategories = ucBusinessCategories1;
+            _ucBusinessCategories.isEdit = false;
         }
 
         private bool SaveData()

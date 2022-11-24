@@ -24,6 +24,8 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ucBusinessCategories = ucBusinessCategories1;
             _businessCategoriesID = businessCategoriesID;
             _frmBusinessCategories = frmBusinessCategories;
+            _ucBusinessCategories.businessCategoryID = businessCategoriesID;
+            _ucBusinessCategories.isEdit = true;
         }
 
         private void frmEditBusinessCategories_Load(object sender, EventArgs e)
