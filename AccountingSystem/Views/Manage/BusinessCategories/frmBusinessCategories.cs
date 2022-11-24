@@ -105,9 +105,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             try
             {
-                if (dgBusinessCategories.SelectedRows.Count < 1)
-                    return;
-
                 EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
                 LoadRecordTimestamp(dgBusinessCategories);
                 LoadBusinessCategoriesAddons(GetCurrentCellId());
