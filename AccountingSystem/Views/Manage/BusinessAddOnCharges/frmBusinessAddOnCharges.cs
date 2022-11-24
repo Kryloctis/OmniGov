@@ -25,20 +25,13 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         {
             try
             {
-                var dt = new DataTable();
                 var searchText = toolStripTextBoxSearch.Text.Trim();
-
-                if (searchText.Length > 2)
-                    dt = AccFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
-                else
-                    dt = AccFactory.BusinessAddOnChargesRepository().GetRecords();
-
+                var dt = AccFactory.BusinessAddOnChargesRepository().GetRecordsBySearch(searchText);
                 HelperLoadRecords.BusinessAddOnChargesDataGridView(dgBusinessAddOnCharges, dt);
+                dgBusinessAddOnCharges.CurrentCell = dgBusinessAddOnCharges.FirstDisplayedCell;
+                toolStripStatusLabelRecordCount.Text = dgBusinessAddOnCharges.Rows.Count.ToString();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -62,9 +55,23 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             LoadBusinessAddOnCharges();
         }
 
+        private void LoadRecordTimeStamp(DataGridView dataGridView) 
+        {         
+            var createdAtColumnIndex = dataGridView.Columns["created_at"].Index;
+            var updatedAtColumnIndex = dataGridView.Columns["updated_at"].Index;
+
+            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex};
+            Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+        }
+
         private void dgBusinessCategories_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
+            try
+            {
+                Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
+                LoadRecordTimeStamp(dgBusinessAddOnCharges);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

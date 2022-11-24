@@ -42,7 +42,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 110);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 96);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(351, 29);
             this.flowLayoutPanel1.TabIndex = 4;
@@ -70,9 +70,10 @@
             // ucBusinessAddOnCharges1
             // 
             this.ucBusinessAddOnCharges1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucBusinessAddOnCharges1.Location = new System.Drawing.Point(3, 9);
+            this.ucBusinessAddOnCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBusinessAddOnCharges1.Location = new System.Drawing.Point(0, 0);
             this.ucBusinessAddOnCharges1.Name = "ucBusinessAddOnCharges1";
-            this.ucBusinessAddOnCharges1.Size = new System.Drawing.Size(344, 97);
+            this.ucBusinessAddOnCharges1.Size = new System.Drawing.Size(351, 96);
             this.ucBusinessAddOnCharges1.TabIndex = 5;
             // 
             // frmEditBusinessAddOnCharges
@@ -81,7 +82,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(351, 139);
+            this.ClientSize = new System.Drawing.Size(351, 125);
             this.Controls.Add(this.ucBusinessAddOnCharges1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

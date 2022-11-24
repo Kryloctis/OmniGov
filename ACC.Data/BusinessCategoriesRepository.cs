@@ -124,5 +124,27 @@ namespace AccountingSystem
             string query = $"SELECT COALESCE(MAX(id), 0) FROM {tableName}";
             return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
         }
+
+        public bool DescriptionExist(int id, string description)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id},
+                new object[] { "@description", DbType.String, description}
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE id <> @id AND description = @description";
+            string result = _dbGenericCommands.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
+        }
+
+        public bool DescriptionExist(string description)
+        {
+            var parameters = new object[][]{new object[] { "@description", DbType.String, description}};
+
+            string query = $"SELECT id FROM {tableName} WHERE description = @description";
+            string result = _dbGenericCommands.ExecuteScalar(query, parameters);
+            return !string.IsNullOrEmpty(result);
+        }
     }
 }

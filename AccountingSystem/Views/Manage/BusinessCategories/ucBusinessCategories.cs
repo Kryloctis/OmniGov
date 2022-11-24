@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,9 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 {
     public partial class ucBusinessCategories : UserControl
     {
+        internal bool isEdit;
+        internal int businessCategoryID;
 
-
-        internal int businessCategoryID = 0;
         public ucBusinessCategories()
         {
             InitializeComponent();
@@ -47,9 +48,29 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             }
         }
 
+        private bool DescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
+        { 
+            bool descriptionExist;
+            descriptionExist = isEdit? AccFactory.BusinessCategoriesRepository().DescriptionExist(businessCategoryID, textBox.Text.Trim()) : AccFactory.BusinessCategoriesRepository().DescriptionExist(textBox.Text.Trim());
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
+                return false;
+            else if (descriptionExist)
+            {
+                errorProvider.SetError(textBox, "Description exist on your record");
+                return false;
+            }
+            else
+                return true;
+        }
+
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
-           e.Cancel=   Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
+            try
+            {
+                e.Cancel = !DescriptionValidated(errorProvider1, txtDescription);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)
