@@ -47,14 +47,14 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 126);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(423, 29);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(345, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -63,7 +63,7 @@
             this.btnSave.Location = new System.Drawing.Point(264, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;

@@ -379,9 +379,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             mskYear.Text = dtDateIssued.Value.Year.ToString();
         }
 
-        private void ucAllotmentReleaseMain_Load(object sender, EventArgs e)
+        private void OnLoad() 
         {
-            if (!DesignMode)
+            try
             {
                 LoadFunds();
                 LoadAllotmentClasses();
@@ -403,6 +403,18 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 AutoGenerateSeriesNo();
                 DisplayTotalAllotmentRelease();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void ucAllotmentReleaseMain_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                OnLoad();
             }
         }
 
