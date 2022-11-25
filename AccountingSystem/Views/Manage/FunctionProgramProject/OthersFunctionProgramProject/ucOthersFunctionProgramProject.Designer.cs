@@ -32,12 +32,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.components = new System.ComponentModel.Container();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
             this.txtCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.epCode = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).BeginInit();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtName
@@ -46,7 +44,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.txtName.MaxLength = 150;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(359, 23);
-            this.txtName.TabIndex = 0;
+            this.txtName.TabIndex = 1;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
             // 
@@ -59,17 +57,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.label1.TabIndex = 1;
             this.label1.Text = "Name";
             // 
-            // epName
-            // 
-            this.epName.ContainerControl = this;
-            // 
             // txtCode
             // 
             this.txtCode.Location = new System.Drawing.Point(45, 0);
             this.txtCode.MaxLength = 45;
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(359, 23);
-            this.txtCode.TabIndex = 2;
+            this.txtCode.TabIndex = 0;
             this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
             this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
@@ -82,9 +76,10 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.label2.TabIndex = 1;
             this.label2.Text = "Code";
             // 
-            // epCode
+            // errorProvider1
             // 
-            this.epCode.ContainerControl = this;
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
             // 
             // ucOthersFunctionProgramProject
             // 
@@ -96,8 +91,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.Controls.Add(this.txtName);
             this.Name = "ucOthersFunctionProgramProject";
             this.Size = new System.Drawing.Size(430, 56);
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,10 +99,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ErrorProvider epName;
         internal System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.ErrorProvider epCode;
         internal System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
