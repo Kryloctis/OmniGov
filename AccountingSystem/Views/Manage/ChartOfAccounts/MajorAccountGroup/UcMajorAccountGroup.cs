@@ -23,8 +23,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
                 epName.GetError(txtName)
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadAccountGroup()

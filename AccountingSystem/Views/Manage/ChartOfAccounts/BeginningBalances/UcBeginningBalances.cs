@@ -26,13 +26,7 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 epAmount.GetError(nudAmount)
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            nudAmount.Value = 0;
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadSelectedGeneralLedger()
@@ -65,15 +59,19 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             }
         }
 
-
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
+        internal void ResetForm()
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+            nudAmount.Value = 0;
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+        }
+
+        private void nudAmount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
         }
 
         private void OnLoad()

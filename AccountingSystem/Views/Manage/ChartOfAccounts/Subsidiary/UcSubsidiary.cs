@@ -16,9 +16,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = errorProvider1.GetError(txtCode);
-            errorArray[1] = errorProvider1.GetError(txtName);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtCode),
+                errorProvider1.GetError(txtName)
+            };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -30,31 +32,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             txtName.Clear();
         }
 
-        private void UcSubsidiary_Load(object sender, EventArgs e)
+        private void txtAddress_Validated(object sender, EventArgs e)
         {
-
-        }
-
-        #region Validations
-
-        private void txtCode_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "code");
-        }
-
-        private void txtCode_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtCode);
-        }
-
-        private void txtName_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "name");
-        }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtName);
+            Helper.ClearErrorTextBox(errorProvider1, txtAddress);
         }
 
         private void txtAddress_Validating(object sender, CancelEventArgs e)
@@ -62,24 +42,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtAddress, "address");
         }
 
-        private void txtAddress_Validated(object sender, EventArgs e)
+        private void txtCode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtAddress);
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
 
-        private void txtContactPerson_Validating(object sender, CancelEventArgs e)
+        private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContactPerson, "address");
-        }
-
-        private void txtContactPerson_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtContactPerson);
-        }
-
-        private void txtContact_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "address");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "code");
         }
 
         private void txtContact_Validated(object sender, EventArgs e)
@@ -87,6 +57,33 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             Helper.ClearErrorTextBox(errorProvider1, txtContact);
         }
 
-        #endregion
+        private void txtContact_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "address");
+        }
+
+        private void txtContactPerson_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtContactPerson);
+        }
+
+        private void txtContactPerson_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContactPerson, "address");
+        }
+
+        private void txtName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "name");
+        }
+
+        private void UcSubsidiary_Load(object sender, EventArgs e)
+        {
+        }
     }
 }
