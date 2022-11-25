@@ -30,10 +30,5 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                 LoadSyncOptions();
             }
         }
-
-        private void lblProgressStatus_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

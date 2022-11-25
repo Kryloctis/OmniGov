@@ -35,27 +35,33 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             Helper.ClearErrorComboBox(epAccount, cmbGeneralLedgerAccount);
         }
 
-        private void cmbGeneralLedgerAccount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private bool GeneralLedgerAccountValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbGeneralLedgerAccount, "account");
+            int generalLedgerId = Convert.ToInt32(comboBox.SelectedValue);
+            var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
 
-            if (!string.IsNullOrWhiteSpace(cmbGeneralLedgerAccount.Text))
+            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "account"))
+                return false;
+            else if (!idExist)
             {
-                int generalLedgerId = Convert.ToInt32(cmbGeneralLedgerAccount.SelectedValue);
-
-                var idExist = AccFactory.GeneralLedgerAccountsRepository().IdExist(generalLedgerId);
-
-                if (!idExist)
-                {
-                    epAccount.SetError(cmbGeneralLedgerAccount, "Account does not exist.");
-                    e.Cancel = true;
-                }
+                errorProvider.SetError(comboBox, "Account does not exist.");
+                return false;
             }
+            return true;
         }
 
         private void cmbGeneralLedgerAccount_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorComboBox(epAccount, cmbGeneralLedgerAccount);
+        }
+
+        private void cmbGeneralLedgerAccount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                GeneralLedgerAccountValidated(epAccount, cmbGeneralLedgerAccount);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

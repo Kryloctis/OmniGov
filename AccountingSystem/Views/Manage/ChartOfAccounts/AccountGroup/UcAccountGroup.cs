@@ -23,8 +23,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
                 epName.GetError(txtName)
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -33,7 +32,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             txtName.Clear();
         }
 
-        private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox) 
+        private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             _accountGroupRepository = AccFactory.AccountGroupRepository();
             string accountGroupCode = txtCode.Text.Trim();
@@ -47,20 +46,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
                 return false;
             }
             return true;
-        }
-
-        private void txtCode_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                e.Cancel = !CodeValidated(epCode, txtCode);
-            }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-        }
-
-        private void txtCode_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epCode, txtCode);
         }
 
         private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
@@ -79,18 +64,32 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             return true;
         }
 
+        private void txtCode_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epCode, txtCode);
+        }
+
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !CodeValidated(epCode, txtCode);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epName, txtName);
+        }
+
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
             try
             {
                 e.Cancel = !NameValidated(epName, txtName);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-        }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epName, txtName);
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
