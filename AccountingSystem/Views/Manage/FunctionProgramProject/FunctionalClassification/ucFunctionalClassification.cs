@@ -3,13 +3,13 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassification
 {
     public partial class ucFunctionalClassification : UserControl
     {
         internal byte functionalClassificationId = 0;
-        IFunctionalClassificationRepository _functionalClassificationRepository;
+        private IFunctionalClassificationRepository _functionalClassificationRepository;
+
         public ucFunctionalClassification()
         {
             InitializeComponent();
@@ -17,12 +17,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epCode.GetError(txtCode);
-            errorArray[1] = epName.GetError(txtName);
+            var errorArray = new string[]
+            {
+                epCode.GetError(txtCode),
+                epName.GetError(txtName)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -31,18 +32,22 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             txtName.Clear();
         }
 
+        private void txtCode_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(epCode, txtCode);
+        }
+
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
 
-            _functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
             string functionalClassificationCode = txtCode.Text.Trim();
             bool codeExist;
 
             if (functionalClassificationId == 0)
-                codeExist = _functionalClassificationRepository.CodeExist(functionalClassificationCode);
+                codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode);
             else
-                codeExist = _functionalClassificationRepository.CodeExist(functionalClassificationCode, functionalClassificationId);
+                codeExist = AccFactory.FunctionalClassificationRepository().CodeExist(functionalClassificationCode, functionalClassificationId);
 
             if (codeExist)
             {
@@ -51,34 +56,28 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
             }
         }
 
-        private void txtCode_Validated(object sender, EventArgs e)
+        private void txtName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCode, txtCode);
+            Helper.ClearErrorTextBox(epName, txtName);
         }
 
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
 
-            _functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
             string functionalClassificationName = txtName.Text.Trim();
             bool nameExist;
 
             if (functionalClassificationId == 0)
-                nameExist = _functionalClassificationRepository.NameExist(functionalClassificationName);
+                nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName);
             else
-                nameExist = _functionalClassificationRepository.NameExist(functionalClassificationName, functionalClassificationId);
+                nameExist = AccFactory.FunctionalClassificationRepository().NameExist(functionalClassificationName, functionalClassificationId);
 
             if (nameExist)
             {
                 epName.SetError(txtName, $"Name you entered is not allowed. Already exist in your record.");
                 e.Cancel = true;
             }
-        }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epName, txtName);
         }
     }
 }
