@@ -29,62 +29,54 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgOthersFPP = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtnAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripTxtSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgOthersFPP = new System.Windows.Forms.DataGridView();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgOthersFPP
-            // 
-            this.dgOthersFPP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgOthersFPP.Location = new System.Drawing.Point(12, 53);
-            this.dgOthersFPP.Name = "dgOthersFPP";
-            this.dgOthersFPP.RowTemplate.Height = 25;
-            this.dgOthersFPP.Size = new System.Drawing.Size(776, 368);
-            this.dgOthersFPP.TabIndex = 0;
-            this.dgOthersFPP.SelectionChanged += new System.EventHandler(this.dgOthersFPP_SelectionChanged);
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripBtnAdd,
             this.toolStripBtnEdit,
             this.toolStripBtnDelete,
-            this.toolStripTxtSearch,
-            this.toolStripLabel1});
+            this.toolStripTxtSearch});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 54);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripBtnAdd
             // 
-            this.toolStripBtnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.toolStripBtnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
             this.toolStripBtnAdd.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripBtnAdd.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
             this.toolStripBtnAdd.Name = "toolStripBtnAdd";
-            this.toolStripBtnAdd.Size = new System.Drawing.Size(42, 47);
+            this.toolStripBtnAdd.Size = new System.Drawing.Size(42, 43);
             this.toolStripBtnAdd.Text = "Add...";
             this.toolStripBtnAdd.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -92,12 +84,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             // 
             // toolStripBtnEdit
             // 
-            this.toolStripBtnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.toolStripBtnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
             this.toolStripBtnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnEdit.Name = "toolStripBtnEdit";
-            this.toolStripBtnEdit.Size = new System.Drawing.Size(40, 47);
+            this.toolStripBtnEdit.Size = new System.Drawing.Size(40, 43);
             this.toolStripBtnEdit.Text = "Edit...";
             this.toolStripBtnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -105,12 +97,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             // 
             // toolStripBtnDelete
             // 
-            this.toolStripBtnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.toolStripBtnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
             this.toolStripBtnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripBtnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripBtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtnDelete.Name = "toolStripBtnDelete";
-            this.toolStripBtnDelete.Size = new System.Drawing.Size(44, 47);
+            this.toolStripBtnDelete.Size = new System.Drawing.Size(44, 43);
             this.toolStripBtnDelete.Text = "Delete";
             this.toolStripBtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.toolStripBtnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -123,16 +115,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripTxtSearch.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
             this.toolStripTxtSearch.MaxLength = 100000000;
             this.toolStripTxtSearch.Name = "toolStripTxtSearch";
-            this.toolStripTxtSearch.Size = new System.Drawing.Size(200, 50);
+            this.toolStripTxtSearch.Size = new System.Drawing.Size(200, 46);
             this.toolStripTxtSearch.TextChanged += new System.EventHandler(this.toolStripTxtSearch_TextChanged);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripLabel1.Size = new System.Drawing.Size(42, 47);
-            this.toolStripLabel1.Text = "Search";
             // 
             // statusStrip1
             // 
@@ -143,6 +127,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel2,
             this.lblCreatedAt,
+            this.toolStripStatusLabel5,
             this.toolStripStatusLabel3,
             this.lblUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 424);
@@ -168,7 +153,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(590, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(580, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -182,6 +167,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.lblCreatedAt.Name = "lblCreatedAt";
             this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
+            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
@@ -193,14 +186,35 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.lblUpdatedAt.Name = "lblUpdatedAt";
             this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgOthersFPP);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 54);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(800, 370);
+            this.panel1.TabIndex = 11;
+            // 
+            // dgOthersFPP
+            // 
+            this.dgOthersFPP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgOthersFPP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgOthersFPP.Location = new System.Drawing.Point(4, 4);
+            this.dgOthersFPP.Name = "dgOthersFPP";
+            this.dgOthersFPP.RowTemplate.Height = 25;
+            this.dgOthersFPP.Size = new System.Drawing.Size(792, 362);
+            this.dgOthersFPP.TabIndex = 1;
+            this.dgOthersFPP.SelectionChanged += new System.EventHandler(this.dgOthersFPP_SelectionChanged);
+            // 
             // frmOthersFunctionProgramProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 446);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dgOthersFPP);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.Name = "frmOthersFunctionProgramProject";
@@ -208,24 +222,22 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage> Function, Program, Project> Sub Function, Program & Project";
             this.Load += new System.EventHandler(this.frmOthersFunctionProgramProject_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgOthersFPP)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgOthersFPP;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripBtnAdd;
         private System.Windows.Forms.ToolStripButton toolStripBtnEdit;
         private System.Windows.Forms.ToolStripButton toolStripBtnDelete;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
@@ -235,5 +247,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         internal System.Windows.Forms.ToolStripTextBox toolStripTxtSearch;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgOthersFPP;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
     }
 }
