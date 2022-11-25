@@ -42,7 +42,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.s = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -92,13 +92,13 @@
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // tsBtnDelete
+            // btnDelete
             // 
             this.btnDelete.Enabled = false;
             this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "tsBtnDelete";
+            this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -145,7 +145,7 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabelCreatedAt,
             this.toolStripStatusLabel5,
-            this.s,
+            this.toolStripStatusLabel6,
             this.toolStripStatusLabelUpdatedAt});
             this.statusStrip1.Location = new System.Drawing.Point(0, 562);
             this.statusStrip1.Name = "statusStrip1";
@@ -168,7 +168,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(761, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(730, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -191,11 +191,11 @@
             this.toolStripStatusLabel5.Text = "|";
             this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // s
+            // toolStripStatusLabel6
             // 
-            this.s.Name = "s";
-            this.s.Size = new System.Drawing.Size(71, 17);
-            this.s.Text = "Updated at: ";
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
+            this.toolStripStatusLabel6.Text = "Updated at: ";
             // 
             // toolStripStatusLabelUpdatedAt
             // 
@@ -245,8 +245,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
-        private System.Windows.Forms.ToolStripStatusLabel s;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
     }
 }

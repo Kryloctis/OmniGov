@@ -95,7 +95,6 @@
 
         internal System.Windows.Forms.Label lblProgressStatus;
         internal System.Windows.Forms.ProgressBar progressBar1;
-        internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.Label label1;
         internal System.Windows.Forms.ComboBox cmbxSyncType;
     }

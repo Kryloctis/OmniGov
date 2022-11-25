@@ -811,6 +811,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label21;
         internal System.Windows.Forms.TextBox txtPreviousPin;
         internal System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Button btnSelectProperty;
     }
 }

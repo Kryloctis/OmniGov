@@ -231,8 +231,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         #endregion Validations
 
-
-
         #region General Ledgers Accounts
 
         private DataTable DatatableAccounts()

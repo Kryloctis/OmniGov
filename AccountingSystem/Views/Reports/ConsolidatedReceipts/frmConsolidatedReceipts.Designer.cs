@@ -96,7 +96,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dtto;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.DateTimePicker dtpEndingDate;

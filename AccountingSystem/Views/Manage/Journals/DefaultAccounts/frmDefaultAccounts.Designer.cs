@@ -387,7 +387,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnRemoveDefaultAccount;
         private System.Windows.Forms.Button btnSetDefaultAccount;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblJournalName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnCancel;
@@ -399,8 +398,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
         private System.Windows.Forms.RadioButton radCredit;
         private System.Windows.Forms.RadioButton radDebit;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgAccounts;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
