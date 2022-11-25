@@ -1,35 +1,16 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
-
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     public partial class ucFunctionalClassificationServices : UserControl
     {
         internal byte serviceID = 0;
+
         public ucFunctionalClassificationServices()
         {
             InitializeComponent();
-        }
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[]
-            {
-                epSectorName.GetError(cmbSectorName),
-            epName.GetError(txtName)
-            };
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            LoadSectorNameComboBox();
-            txtName.Clear();
         }
 
         public void LoadSectorNameComboBox()
@@ -40,16 +21,27 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 HelperLoadRecords.SectorNameComboBox(dtSectorName, cmbSectorName, "sector_name", "id");
                 byte id = Convert.ToByte(cmbSectorName.SelectedValue);
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
             {
-                Helper.MessageBoxError(ex.Message);
-            }
+                epSectorName.GetError(cmbSectorName),
+                epName.GetError(txtName)
+            };
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void ResetForm()
+        {
+            LoadSectorNameComboBox();
+            txtName.Clear();
         }
 
         private void cmbSectorName_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
         }
 
         private void ucFunctonalClassificationServices_Load(object sender, EventArgs e)
@@ -60,7 +52,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             }
         }
 
-        #region  Validations
+        private void cmbSectorName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epSectorName, cmbSectorName);
+        }
+
+        private void cmbSectorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epSectorName, cmbSectorName, "sector name");
+        }
 
         private bool ServicesNameValidated(ErrorProvider errorProvider, TextBox textBox)
         {
@@ -82,26 +82,8 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
 
                 return true;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
-        }
-
-        private void cmbSectorName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epSectorName, cmbSectorName, "sector name");
-        }
-
-        private void cmbSectorName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epSectorName, cmbSectorName);
-        }
-
-        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = !ServicesNameValidated(epName, txtName);
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -109,6 +91,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-        #endregion
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !ServicesNameValidated(epName, txtName);
+        }
     }
 }
