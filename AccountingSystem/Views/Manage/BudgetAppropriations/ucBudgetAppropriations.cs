@@ -18,7 +18,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
         internal short year;
         internal decimal totalAllotmentRelease;
 
-
         public ucBudgetAppropriations()
         {
             InitializeComponent();
@@ -26,7 +25,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 
         private void SetAppropriationInfoToolTip()
         {
-
             decimal totalSupplementalApprorpriationAmount = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(budgetAppropriationId);
 
             if (totalSupplementalApprorpriationAmount == 0)
@@ -58,7 +56,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             cmbxOthersFPP.Enabled = true;
         }
 
-        #region VALIDATIONS
+        #region Validations
 
         #region Sub FPP Validation
 
@@ -89,7 +87,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epOthersFunctionProgramProject, cmbxOthersFPP);
         }
 
-        #endregion
+        #endregion Sub FPP Validation
 
         #region Account Validation
 
@@ -129,7 +127,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     epGeneralLedgerAcc.SetError(cmbxAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -161,14 +158,13 @@ namespace BudgetSystem.Views.BudgetAppropriations
                     return true;
                 }
 
-                #endregion
+                #endregion Validation of Budget Appropriation Record
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-
         }
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
@@ -188,7 +184,7 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorComboBox(epGeneralLedgerAcc, cmbxAccount);
         }
 
-        #endregion
+        #endregion Account Validation
 
         #region Amount Validation
 
@@ -222,7 +218,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
             }
         }
@@ -232,9 +227,11 @@ namespace BudgetSystem.Views.BudgetAppropriations
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        #endregion
+        #endregion Amount Validation
 
-        #endregion VALIDATIONS
+        #endregion Validations
+
+
 
         #region General Ledgers Accounts
 
@@ -291,7 +288,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
@@ -314,36 +310,38 @@ namespace BudgetSystem.Views.BudgetAppropriations
             }
         }
 
-        #endregion
+        #endregion General Ledgers Accounts
 
-        private void ucBudgetAppropriations_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             try
             {
-                if (!DesignMode)
-                {
-                    var fppRepo = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
-                    var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
-                    var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
+                var fppRepo = AccFactory.FunctionProgramProjectRepository().GetRecordByID(fppId);
+                var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
+                var allotmentClassRepo = AccFactory.AllotmentClassesRepository().GetRecordByID(allotmentClassId);
 
-                    txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
-                    txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
-                    txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
-                    txtYear.Text = year.ToString();
-                    dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
-                    dtDateEntry.MinDate = new DateTime(year, 1, 1);
+                txtFPP.Text = $"{fppRepo["fpp_code"]} - {fppRepo["fpp_name"]}";
+                txtFund.Text = $"{fundRepo["fund_code"]} - {fundRepo["fund_name"]}";
+                txtAllotmentClass.Text = $"{allotmentClassRepo["allotment_code"]} - {allotmentClassRepo["allotment_name"]}";
+                txtYear.Text = year.ToString();
+                dtDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
+                dtDateEntry.MinDate = new DateTime(year, 1, 1);
 
-
-                    LoadSubFPPByFPPIdCombobox(fppId);
-                    LoadAccounts();
-                    SetAppropriationInfoToolTip();
-                    cmbxAccount.SelectedIndex = -1;
-                    cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                }
+                LoadSubFPPByFPPIdCombobox(fppId);
+                LoadAccounts();
+                SetAppropriationInfoToolTip();
+                cmbxAccount.SelectedIndex = -1;
+                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
             }
             catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void ucBudgetAppropriations_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
             {
-                Helper.MessageBoxError(ex.Message);
+                OnLoad();
             }
         }
     }
