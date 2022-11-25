@@ -14,6 +14,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             InitializeComponent();
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                epAccountGroup.GetError(cmbAccountGroup),
+                epCode.GetError(txtCode),
+                epName.GetError(txtName)
+            };
+
+            IError _errors = AccFactory.CreateErrors(errorArray);
+            return _errors.GenerateErrorMessage();
+        }
+
         internal void LoadAccountGroup()
         {
             try
@@ -27,17 +40,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             }
         }
 
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[3];
-            errorArray[0] = epAccountGroup.GetError(cmbAccountGroup);
-            errorArray[1] = epCode.GetError(txtCode);
-            errorArray[2] = epName.GetError(txtName);
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
         internal void ResetForm()
         {
             cmbAccountGroup.SelectedIndex = -1;
@@ -45,18 +47,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             txtName.Clear();
         }
 
-        private void cmbAccountGroup_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private bool AccountGroupValidated(ErrorProvider errorProvider, ComboBox comboBox)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccountGroup, cmbAccountGroup, "account group");
-
-            int accountGroupId = Convert.ToByte(cmbAccountGroup.SelectedValue);
+            int accountGroupId = Convert.ToByte(comboBox.SelectedValue);
             bool idExist = AccFactory.AccountGroupRepository().IdExist(accountGroupId);
 
-            if (!idExist)
+            if (Helper.ShowErrorComboBoxEmpty(errorProvider, comboBox, "account group"))
+                return false;
+            else if (!idExist)
             {
-                epAccountGroup.SetError(cmbAccountGroup, "Invalid account group. Please select on the list.");
-                e.Cancel = true;
+                errorProvider.SetError(comboBox, "Invalid account group. Please select on the list.");
+                return false;
             }
+            return true;
         }
 
         private void cmbAccountGroup_Validated(object sender, EventArgs e)
@@ -64,9 +67,13 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             Helper.ClearErrorComboBox(epAccountGroup, cmbAccountGroup);
         }
 
-        private void txtCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void cmbAccountGroup_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
+            try
+            {
+                e.Cancel = !AccountGroupValidated(epAccountGroup, cmbAccountGroup);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -74,9 +81,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             Helper.ClearErrorTextBox(epCode, txtCode);
         }
 
-        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -84,6 +91,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.MajorAccountGroup
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
+        }
     }
 }
