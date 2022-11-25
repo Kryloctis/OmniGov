@@ -1,5 +1,5 @@
-﻿using ACC.Domain.Interfaces;
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -7,39 +7,11 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 {
     public partial class ucFunctionProgramProject : UserControl
     {
-        internal byte FppID = 0;
+        internal byte fppId = 0;
+
         public ucFunctionProgramProject()
         {
             InitializeComponent();
-        }
-
-
-        internal string GetFormErrors()
-        {
-            var errorArray = new string[3];
-            errorArray[0] = epCode.GetError(txtCode);
-            errorArray[1] = epName.GetError(txtName);
-            errorArray[2] = epServiceName.GetError(cmbFunctionalClassificationService);
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            //  cmbSectorName.SelectedIndex = -1;
-            txtCode.Clear();
-            txtName.Clear();
-        }
-
-        private void cmbFunctionalClassificationService_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epServiceName, cmbFunctionalClassificationService, "Functional Classification Service");
-        }
-
-        private void cmbFunctionalClassificationService_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorComboBox(epServiceName, cmbFunctionalClassificationService);
         }
 
         public void LoadServiceNameComboBox()
@@ -66,15 +38,36 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
                 HelperLoadRecords.ServicesNameComboBox(dtServiceName, cmbFunctionalClassificationService, "service_name", "id");
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void ucFunctionProgramProject_Load(object sender, EventArgs e)
+        internal string GetFormErrors()
         {
+            var errorArray = new string[]
+            {
+                epCode.GetError(txtCode),
+                epName.GetError(txtName),
+                epServiceName.GetError(cmbFunctionalClassificationService)
+            };
 
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
+        }
+
+        internal void ResetForm()
+        {
+            //  cmbSectorName.SelectedIndex = -1;
+            txtCode.Clear();
+            txtName.Clear();
+        }
+
+        private void cmbFunctionalClassificationService_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(epServiceName, cmbFunctionalClassificationService);
+        }
+
+        private void cmbFunctionalClassificationService_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epServiceName, cmbFunctionalClassificationService, "Functional Classification Service");
         }
 
         private void cmbServiceName_SelectionChangeCommitted(object sender, EventArgs e)
@@ -83,76 +76,21 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             {
                 byte id = Convert.ToByte(cmbFunctionalClassificationService.SelectedValue);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-        #region Validations
 
         private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            try
+            bool codeExist = fppId == 0 ? AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) : AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), fppId);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Code"))
+                return false;
+            else if (codeExist)
             {
-                if (string.IsNullOrWhiteSpace(textBox.Text.Trim()))
-                {
-                    errorProvider.SetError(textBox, Helper.ErrorMessage("Code"));
-                    return false;
-                }
-
-                bool codeExist = FppID == 0 ? AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim()) :
-                                              AccFactory.FunctionProgramProjectRepository().CodeExist(textBox.Text.Trim(), FppID);
-
-                if (codeExist)
-                {
-                    errorProvider.SetError(textBox, "Code already exist.");
-                    return false;
-                }
-
-                return true;
+                errorProvider.SetError(textBox, "Code already exist.");
+                return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool NameValidated(ErrorProvider errorProvider)
-        {
-            try
-            {
-                int serviceId = Convert.ToInt32(cmbFunctionalClassificationService.SelectedValue);
-                string fppName = txtName.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(fppName))
-                {
-                    errorProvider.SetError(txtName, Helper.ErrorMessage("Name"));
-                    return false;
-                }
-
-                bool nameExist = FppID == 0 ? AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) :
-                                              AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, FppID);
-
-                if (nameExist)
-                {
-                    errorProvider.SetError(txtName, "Name already exist.");
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void txtCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = !CodeValidated(epCode, txtCode);
+            return true;
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -160,9 +98,29 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             Helper.ClearErrorTextBox(epCode, txtCode);
         }
 
-        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = !NameValidated(epName);
+            try
+            {
+                e.Cancel = !CodeValidated(epCode, txtCode);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            int serviceId = Convert.ToInt32(cmbFunctionalClassificationService.SelectedValue);
+            string fppName = txtName.Text.Trim();
+            bool nameExist = fppId == 0 ? AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId) : AccFactory.FunctionProgramProjectRepository().NameExist(fppName, serviceId, fppId);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
+                return false;
+            else if (nameExist)
+            {
+                errorProvider.SetError(txtName, "Name already exist.");
+                return false;
+            }
+            return true;
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -170,7 +128,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             Helper.ClearErrorTextBox(epName, txtName);
         }
 
-        #endregion
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !NameValidated(epName, txtName);
+        }
 
+        private void ucFunctionProgramProject_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             InitializeComponent();
             Helper.LoadFormIcon(this);
             _frmFunctionProgramProject = frmFunctionProgramProject;
-            ucFunctionProgramProject1.FppID = fppID;
+            ucFunctionProgramProject1.fppId = fppID;
             uc = ucFunctionProgramProject1;
         }
 
@@ -24,7 +24,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
             try
             {
                 var functionProgramProjectRepository = AccFactory.FunctionProgramProjectRepository();
-                Dictionary<string, string> dicfunctionProgramProject = functionProgramProjectRepository.GetRecordByID(uc.FppID);
+                Dictionary<string, string> dicfunctionProgramProject = functionProgramProjectRepository.GetRecordByID(uc.fppId);
 
                 uc.cmbFunctionalClassificationService.SelectedValue = dicfunctionProgramProject["functional_classification_services_id"];
                 uc.txtCode.Text = dicfunctionProgramProject["fpp_code"];
@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
 
                 var functionProgramProjectModel = new FunctionProgramProjectModel()
                 {
-                    Id = ucFunctionProgramProject1.FppID,
+                    Id = ucFunctionProgramProject1.fppId,
                     functionalClassificationServiceId = functionalClassificationServiceId,
                     FppName = uc.txtName.Text.Trim(),
                     FppCode = uc.txtCode.Text.Trim(),
