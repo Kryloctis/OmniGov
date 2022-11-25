@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
     public partial class UcAccountGroup : UserControl
     {
         internal byte accountGroupId = 0;
-        IAccountGroupRepository _accountGroupRepository;
+        private IAccountGroupRepository _accountGroupRepository;
 
         public UcAccountGroup()
         {
@@ -17,9 +17,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epCode.GetError(txtCode);
-            errorArray[1] = epName.GetError(txtName);
+            var errorArray = new string[]
+            {
+                epCode.GetError(txtCode),
+                epName.GetError(txtName)
+            };
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
@@ -31,24 +33,29 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             txtName.Clear();
         }
 
-        private void txtCode_Validating(object sender, CancelEventArgs e)
+        private bool CodeValidated(ErrorProvider errorProvider, TextBox textBox) 
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "code");
-
             _accountGroupRepository = AccFactory.AccountGroupRepository();
             string accountGroupCode = txtCode.Text.Trim();
-            bool codeExist;
+            bool codeExist = accountGroupId == 0 ? _accountGroupRepository.CodeExist(accountGroupCode) : _accountGroupRepository.CodeExist(accountGroupCode, accountGroupId);
 
-            if (accountGroupId == 0)
-                codeExist = _accountGroupRepository.CodeExist(accountGroupCode);
-            else
-                codeExist = _accountGroupRepository.CodeExist(accountGroupCode, accountGroupId);
-
-            if (codeExist)
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "code"))
+                return false;
+            else if (codeExist)
             {
                 epCode.SetError(txtCode, $"Code you entered is not allowed. Already exist in your record.");
-                e.Cancel = true;
+                return false;
             }
+            return true;
+        }
+
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !CodeValidated(epCode, txtCode);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -56,24 +63,29 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
             Helper.ClearErrorTextBox(epCode, txtCode);
         }
 
+        private bool NameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            _accountGroupRepository = AccFactory.AccountGroupRepository();
+            string accountGroupName = textBox.Text.Trim();
+            bool nameExist = accountGroupId == 0 ? _accountGroupRepository.NameExist(accountGroupName) : _accountGroupRepository.NameExist(accountGroupName, accountGroupId);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "name"))
+                return false;
+            else if (nameExist)
+            {
+                errorProvider.SetError(textBox, $"Name you entered is not allowed. Already exist in your record.");
+                return false;
+            }
+            return true;
+        }
+
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "name");
-
-            _accountGroupRepository = AccFactory.AccountGroupRepository();
-            string accountGroupName = txtName.Text.Trim();
-            bool nameExist;
-
-            if (accountGroupId == 0)
-                nameExist = _accountGroupRepository.NameExist(accountGroupName);
-            else
-                nameExist = _accountGroupRepository.NameExist(accountGroupName, accountGroupId);
-
-            if (nameExist)
+            try
             {
-                epName.SetError(txtName, $"Name you entered is not allowed. Already exist in your record.");
-                e.Cancel = true;
+                e.Cancel = !NameValidated(epName, txtName);
             }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void txtName_Validated(object sender, EventArgs e)
