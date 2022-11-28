@@ -443,7 +443,7 @@ namespace AccountingSystem
         internal static void BarangaysCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
-            dr["barangay_name"] = "All";
+            dr["name"] = "All";
             dataTable.Rows.InsertAt(dr, 0);
 
             comboBox.DataSource = dataTable;
@@ -467,13 +467,13 @@ namespace AccountingSystem
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             dataGridView.Columns["complete_arp_no"].MinimumWidth = 100;
-            dataGridView.Columns["owner_name"].HeaderText = "Owner Name";
-            dataGridView.Columns["owner_name"].MinimumWidth = 200;
-            dataGridView.Columns["owner_tin"].Visible = false;
-            dataGridView.Columns["owner_contact"].Visible = false;
+            dataGridView.Columns["taxpayer_name"].HeaderText = "Owner Name";
+            dataGridView.Columns["taxpayer_name"].MinimumWidth = 200;
+            dataGridView.Columns["taxpayer_tin"].Visible = false;
+            dataGridView.Columns["taxpayer_contact_info"].Visible = false;
             dataGridView.Columns["is_cancelled"].Visible = false;
-            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
-            dataGridView.Columns["owner_address"].MinimumWidth = 400;
+            dataGridView.Columns["taxpayer_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["taxpayer_address"].MinimumWidth = 400;
             dataGridView.Columns["property_kind"].Visible = false;
             dataGridView.Columns["barangay_name"].Visible = false;
             dataGridView.Columns["municipality_name"].Visible = false;

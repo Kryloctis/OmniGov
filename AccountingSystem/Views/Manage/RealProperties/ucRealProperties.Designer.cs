@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem.Views.Manage.TaxPayers
+﻿namespace AccountingSystem.Views.Manage.TaxPayers
 {
     partial class ucRealProperties
     {
@@ -77,13 +76,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cmbxCompletePreviousARPNumber = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtPreviousEffectivityAssessment = new System.Windows.Forms.TextBox();
             this.txtPreviousOwner = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.txtPreviousAssessedValue = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.txtPreviousCompleteARP = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtPreviousPin = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -104,6 +103,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtArpNo
             // 
+            this.txtArpNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtArpNo.Location = new System.Drawing.Point(111, 3);
             this.txtArpNo.Name = "txtArpNo";
             this.txtArpNo.Size = new System.Drawing.Size(216, 23);
@@ -122,6 +122,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtPropertyPin
             // 
+            this.txtPropertyPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPropertyPin.Location = new System.Drawing.Point(111, 32);
             this.txtPropertyPin.Name = "txtPropertyPin";
             this.txtPropertyPin.Size = new System.Drawing.Size(216, 23);
@@ -406,6 +407,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // txtLotNo
             // 
+            this.txtLotNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLotNo.Location = new System.Drawing.Point(111, 351);
             this.txtLotNo.Name = "txtLotNo";
             this.txtLotNo.Size = new System.Drawing.Size(216, 23);
@@ -614,13 +616,13 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.cmbxCompletePreviousARPNumber);
             this.panel3.Controls.Add(this.label18);
             this.panel3.Controls.Add(this.txtPreviousEffectivityAssessment);
             this.panel3.Controls.Add(this.txtPreviousOwner);
             this.panel3.Controls.Add(this.label19);
             this.panel3.Controls.Add(this.txtPreviousAssessedValue);
             this.panel3.Controls.Add(this.label20);
-            this.panel3.Controls.Add(this.txtPreviousCompleteARP);
             this.panel3.Controls.Add(this.label21);
             this.panel3.Controls.Add(this.txtPreviousPin);
             this.panel3.Controls.Add(this.label23);
@@ -632,10 +634,20 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.panel3.Size = new System.Drawing.Size(376, 171);
             this.panel3.TabIndex = 0;
             // 
+            // cmbxCompletePreviousARPNumber
+            // 
+            this.cmbxCompletePreviousARPNumber.FormattingEnabled = true;
+            this.cmbxCompletePreviousARPNumber.Location = new System.Drawing.Point(144, 9);
+            this.cmbxCompletePreviousARPNumber.Name = "cmbxCompletePreviousARPNumber";
+            this.cmbxCompletePreviousARPNumber.Size = new System.Drawing.Size(216, 23);
+            this.cmbxCompletePreviousARPNumber.TabIndex = 0;
+            this.cmbxCompletePreviousARPNumber.SelectionChangeCommitted += new System.EventHandler(this.cmbxCompletePreviousARPNumber_SelectionChangeCommitted);
+            this.cmbxCompletePreviousARPNumber.TextChanged += new System.EventHandler(this.cmbxCompletePreviousARPNumber_TextChanged);
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 9);
+            this.label18.Location = new System.Drawing.Point(7, 39);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(26, 15);
             this.label18.TabIndex = 9;
@@ -648,7 +660,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtPreviousEffectivityAssessment.Multiline = true;
             this.txtPreviousEffectivityAssessment.Name = "txtPreviousEffectivityAssessment";
             this.txtPreviousEffectivityAssessment.Size = new System.Drawing.Size(216, 23);
-            this.txtPreviousEffectivityAssessment.TabIndex = 22;
+            this.txtPreviousEffectivityAssessment.TabIndex = 4;
             // 
             // txtPreviousOwner
             // 
@@ -656,7 +668,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtPreviousOwner.Location = new System.Drawing.Point(144, 94);
             this.txtPreviousOwner.Name = "txtPreviousOwner";
             this.txtPreviousOwner.Size = new System.Drawing.Size(216, 23);
-            this.txtPreviousOwner.TabIndex = 22;
+            this.txtPreviousOwner.TabIndex = 3;
             // 
             // label19
             // 
@@ -673,7 +685,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.txtPreviousAssessedValue.Location = new System.Drawing.Point(144, 65);
             this.txtPreviousAssessedValue.Name = "txtPreviousAssessedValue";
             this.txtPreviousAssessedValue.Size = new System.Drawing.Size(216, 23);
-            this.txtPreviousAssessedValue.TabIndex = 22;
+            this.txtPreviousAssessedValue.TabIndex = 2;
             // 
             // label20
             // 
@@ -683,16 +695,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             this.label20.Size = new System.Drawing.Size(85, 15);
             this.label20.TabIndex = 9;
             this.label20.Text = "Assessed Value";
-            // 
-            // txtPreviousCompleteARP
-            // 
-            this.txtPreviousCompleteARP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousCompleteARP.Location = new System.Drawing.Point(144, 36);
-            this.txtPreviousCompleteARP.Name = "txtPreviousCompleteARP";
-            this.txtPreviousCompleteARP.Size = new System.Drawing.Size(216, 23);
-            this.txtPreviousCompleteARP.TabIndex = 22;
-            this.txtPreviousCompleteARP.Validating += new System.ComponentModel.CancelEventHandler(this.txtPreviousCompleteARP_Validating);
-            this.txtPreviousCompleteARP.Validated += new System.EventHandler(this.txtPreviousCompleteARP_Validated);
             // 
             // label21
             // 
@@ -706,15 +708,15 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             // txtPreviousPin
             // 
             this.txtPreviousPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtPreviousPin.Location = new System.Drawing.Point(144, 7);
+            this.txtPreviousPin.Location = new System.Drawing.Point(144, 37);
             this.txtPreviousPin.Name = "txtPreviousPin";
             this.txtPreviousPin.Size = new System.Drawing.Size(216, 23);
-            this.txtPreviousPin.TabIndex = 21;
+            this.txtPreviousPin.TabIndex = 1;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 38);
+            this.label23.Location = new System.Drawing.Point(7, 12);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(84, 15);
             this.label23.TabIndex = 9;
@@ -807,9 +809,10 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal System.Windows.Forms.Label label19;
         internal System.Windows.Forms.TextBox txtPreviousAssessedValue;
         internal System.Windows.Forms.Label label20;
-        internal System.Windows.Forms.TextBox txtPreviousCompleteARP;
         internal System.Windows.Forms.Label label21;
         internal System.Windows.Forms.TextBox txtPreviousPin;
         internal System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnSelectProperty;
+        internal System.Windows.Forms.ComboBox cmbxCompletePreviousARPNumber;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
+using RPT.Domain.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -62,17 +63,24 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 };
 
-                var previousAssessment = new RptPreviousAssessmentModel()
+                if (uc.propertyIdentifier != "0")
                 {
-                    RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
-                    PropertyPin = uc.txtPreviousPin.Text,
-                    CompleteArpNo = uc.txtPreviousCompleteARP.Text,
-                    AssessedValue = Convert.ToInt32(uc.txtPreviousAssessedValue.Text),
-                    PreviousOwner = uc.txtPreviousOwner.Text,
-                    EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text    
-                };
+                    var previousAssessment = new RptPreviousAssessmentModel()
+                    {
+                        RealPropertiesId = AccFactory.RealPropertiesRepository().GetLastInsertedId(),
+                        PropertyPin = uc.txtPreviousPin.Text,
+                        CompleteArpNo = uc.cmbxCompletePreviousARPNumber.Text,
+                        AssessedValue = Convert.ToDecimal(uc.txtPreviousAssessedValue.Text),
+                        PreviousOwner = uc.txtPreviousOwner.Text,
+                        EffectivityAssessment = uc.txtPreviousEffectivityAssessment.Text
+                    };
 
-                return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
+                    return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
+
+                }
+                else
+                    return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
+
             }
             catch (Exception ex)
             {

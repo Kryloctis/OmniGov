@@ -408,5 +408,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.ComponentModel.BackgroundWorker bgwLoadAsessmentPosts;
         private System.Windows.Forms.ToolStripProgressBar progressBarLoadRecords;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

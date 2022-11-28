@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem
+﻿namespace AccountingSystem
 {
     partial class MainForm
     {
@@ -1129,7 +1128,6 @@ namespace AccountingSystem
             // 
             // assessmentPostingToolStripMenuItem
             // 
-            this.assessmentPostingToolStripMenuItem.Enabled = false;
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
             this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
@@ -1487,4 +1485,3 @@ namespace AccountingSystem
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
     }
 }
-
