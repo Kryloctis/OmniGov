@@ -75,9 +75,9 @@ namespace ACC.Data
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());
                     dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
-                    dict.Add("owner_tin", row["owner_tin"].ToString());
-                    dict.Add("owner_address", row["owner_address"].ToString());
-                    dict.Add("owner_contact", row["owner_contact"].ToString());
+                    dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
+                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
+                    dict.Add("taxpayer_contact_info", row["taxpayer_contact_info"].ToString());
                     dict.Add("barangay_name", row["barangay_name"].ToString());
                     dict.Add("municipality_name", row["municipality_name"].ToString());
                     dict.Add("province_name", row["province_name"].ToString());

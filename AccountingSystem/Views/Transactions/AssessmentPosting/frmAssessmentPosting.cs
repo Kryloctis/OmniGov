@@ -54,9 +54,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("pin", typeof(string)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("taxpayer_name", typeof(string)),
-                new DataColumn("owner_tin", typeof(string)),
-                new DataColumn("owner_contact", typeof(string)),
-                new DataColumn("owner_address", typeof(string)),
+                new DataColumn("taxpayer_tin", typeof(string)),
+                new DataColumn("taxpayer_contact_info", typeof(string)),
+                new DataColumn("taxpayer_address", typeof(string)),
                 new DataColumn("property_kind", typeof(string)),
                 new DataColumn("barangay_name", typeof(string)),
                 new DataColumn("municipality_name", typeof(string)),
@@ -151,7 +151,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                 assessmentPostsDataTable = new DataTable();
                 assessmentPostsDataTable.Columns.AddRange(AssessmentPostsDataColumns());
-
                 Invoke((MethodInvoker)delegate
                 {
                     GetParameters(ref year, ref barangayName, ref searchText);
@@ -220,9 +219,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     newRow["complete_arp_no"] = rowCompleteArpNo;
                     newRow["property_identifier"] = rowPropertyIdentifier;
                     newRow["taxpayer_name"] = rowOwnerName;
-                    newRow["owner_tin"] = rowOwnerTin;
-                    newRow["owner_contact"] = rowOwnerContact;
-                    newRow["owner_address"] = rowOwnerAddress;
+                    newRow["taxpayer_tin"] = rowOwnerTin;
+                    newRow["taxpayer_contact_info"] = rowOwnerContact;
+                    newRow["taxpayer_address"] = rowOwnerAddress;
                     newRow["property_kind"] = rowPropertyKind;
                     newRow["barangay_name"] = rowBarangayName;
                     newRow["municipality_name"] = rowMunicipalityName;
@@ -408,9 +407,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     string rowCompleteArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
                     string rowPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
                     string rowTaxpayerName = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_name");
-                    string rowTaxpayerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_tin");
-                    string rowTaxpayerContactInfo = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_contact");
-                    string rowTaxpeyerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "owner_address");
+                    string rowTaxpayerTin = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_tin");
+                    string rowTaxpayerContactInfo = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_contact_info");
+                    string rowTaxpeyerAddress = GetDatagridViewValue(dgProperties, dgvRow.Index, "taxpayer_address");
                     string rowBarangayName = GetDatagridViewValue(dgProperties, dgvRow.Index, "barangay_name");
                     string rowMunicipalityName = GetDatagridViewValue(dgProperties, dgvRow.Index, "municipality_name");
                     string rowProvinceName = GetDatagridViewValue(dgProperties, dgvRow.Index, "province_name");
@@ -446,6 +445,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         CompleteArpNo = rowCompleteArpNo,
                         PropertyPin = rowPin,
                         TaxpayerName = rowTaxpayerName,
+                        TaxpayerType = "1",
                         TaxpayerTin = rowTaxpayerTin,
                         TaxpayerAddress = rowTaxpeyerAddress,
                         TaxpayerContactInfo = rowTaxpayerContactInfo,

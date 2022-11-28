@@ -466,11 +466,11 @@ namespace AccountingSystem
             dataGridView.Columns["complete_arp_no"].MinimumWidth = 100;
             dataGridView.Columns["taxpayer_name"].HeaderText = "Owner Name";
             dataGridView.Columns["taxpayer_name"].MinimumWidth = 200;
-            dataGridView.Columns["owner_tin"].Visible = false;
-            dataGridView.Columns["owner_contact"].Visible = false;
+            dataGridView.Columns["taxpayer_tin"].Visible = false;
+            dataGridView.Columns["taxpayer_contact_info"].Visible = false;
             dataGridView.Columns["is_cancelled"].Visible = false;
-            dataGridView.Columns["owner_address"].HeaderText = "Owner Address";
-            dataGridView.Columns["owner_address"].MinimumWidth = 400;
+            dataGridView.Columns["taxpayer_address"].HeaderText = "Owner Address";
+            dataGridView.Columns["taxpayer_address"].MinimumWidth = 400;
             dataGridView.Columns["property_kind"].Visible = false;
             dataGridView.Columns["barangay_name"].Visible = false;
             dataGridView.Columns["municipality_name"].Visible = false;
