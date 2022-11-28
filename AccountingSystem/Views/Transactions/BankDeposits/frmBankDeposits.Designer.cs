@@ -239,7 +239,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgbankdeposits;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
     }
 }

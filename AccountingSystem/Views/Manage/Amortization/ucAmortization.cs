@@ -116,11 +116,20 @@ namespace AccountingSystem.Views.Manage.Amortization
             Helper.ClearErrorNumericUpDown(epAmountRelease, nudAmountRelease);
         }
 
+        private void OnLoad() 
+        {
+            try
+            {
+                cmbxTerm.SelectedIndex = 0;
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
         private void ucAmortization_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                cmbxTerm.SelectedIndex = 0;
+               
             }
         }
 

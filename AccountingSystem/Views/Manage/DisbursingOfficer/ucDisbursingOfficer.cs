@@ -10,6 +10,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
     {
         internal int disbursingOfficerId = 0;
         internal int UserId = 0;
+
         public ucDisbursingOfficer()
         {
             InitializeComponent();
@@ -17,14 +18,15 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epFirstName.GetError(txtFirstName);
-            errorArray[1] = epMidInitial.GetError(txtMidInitial);
-            errorArray[2] = epLastName.GetError(txtLastName);
-            errorArray[3] = epJobTitle.GetError(txtJobTitle);
+            var errorArray = new string[]
+            {
+                epFirstName.GetError(txtFirstName),
+                epMidInitial.GetError(txtMidInitial),
+                epLastName.GetError(txtLastName),
+                epJobTitle.GetError(txtJobTitle)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -100,15 +102,13 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     }
                 }
             }
-
         }
 
         internal void LoadLink(int id)
         {
             try
             {
-                var userRepository = AccFactory.UsersRepository();
-                var data = userRepository.GetUserByID(id);
+                var data = AccFactory.UsersRepository().GetUserByID(id);
                 if (data.Count > 0)
                 {
                     UserId = id;
@@ -119,12 +119,8 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                     UserId = 0;
                     linkuser.Text = "+ Link User";
                 }
-
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
