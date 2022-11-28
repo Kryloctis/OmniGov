@@ -3,6 +3,7 @@ using AccountingSystem.Views.Manage.RealProperties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.TaxPayers
@@ -12,7 +13,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal bool isEdit = false;
         internal int realPropertiesId = 0;
         internal int taxpayerID;
-        internal  string propertyIdentifier = "1";
+        internal string propertyIdentifier = "0";
 
         public ucRealProperties()
         {
@@ -22,7 +23,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         internal string GetFormError()
         {
             var errorArray = new string[9];
-           
+
             errorArray[0] = errorProvider1.GetError(txtArpNo);
             errorArray[1] = errorProvider1.GetError(cmbxBarangays);
             errorArray[2] = errorProvider1.GetError(cmbxPropertyKind);
@@ -32,14 +33,9 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             errorArray[6] = errorProvider1.GetError(nudGrYear);
             errorArray[7] = errorProvider1.GetError(nudArea);
             errorArray[8] = errorProvider1.GetError(txtLotNo);
-           
+
             IError error = AccFactory.CreateErrors(errorArray);
             return error.GenerateErrorMessage();
-        }
-
-        internal void LoadProperties()
-        {
-
         }
 
         internal void ResetForm()
@@ -72,13 +68,41 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxPropertyKind.DataSource = new BindingSource(dict.Values, null);
         }
 
+        private void LoadPropertiesPreviousARPNumber()
+        {
+            try
+            {
+                var dt =  AccFactory.RealPropertiesRepository().GetCancelledProperties();
+
+                cmbxCompletePreviousARPNumber.DataSource = dt;
+                cmbxCompletePreviousARPNumber.DisplayMember = "complete_arp_no";
+                cmbxCompletePreviousARPNumber.ValueMember = "id";
+                cmbxCompletePreviousARPNumber.DropDownHeight = 200;
+
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private DataTable DatatableAccounts()
+        {
+            if (string.IsNullOrEmpty(cmbxCompletePreviousARPNumber.Text))
+                return AccFactory.RealPropertiesRepository().GetRecords();
+            else
+                return AccFactory.RealPropertiesRepository().GetRecordsByCompleteARP(cmbxCompletePreviousARPNumber.Text);
+        }
+
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
             LoadPropertyKind();
             LoadClassificationCodes();
             LoadActualUseCodes();
             LoadBarangay();
+            LoadPropertiesPreviousARPNumber();
         }
+
         private void LoadBarangay()
         {
             var dt = AccFactory.BarangayRepository().GetRecords();
@@ -198,19 +222,19 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void txtPreviousCompleteARP_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPreviousCompleteARP, "Previous ARP Number.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxCompletePreviousARPNumber, "Previous ARP Number.");
 
-            string completeARPNumber = txtPreviousCompleteARP.Text;
+            string completeARPNumber = cmbxCompletePreviousARPNumber.Text;
             if (!AccFactory.RealPropertiesRepository().CompleteArpNoExist(completeARPNumber))
             {
-                errorProvider1.SetError(txtPreviousCompleteARP, "Previous ARP Number doesnt exist.");
+                errorProvider1.SetError(cmbxCompletePreviousARPNumber, "Previous ARP Number doesnt exist.");
                 e.Cancel = true; return;
             }
         }
 
         private void txtPreviousCompleteARP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(errorProvider1, txtPreviousCompleteARP);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxCompletePreviousARPNumber);
         }
 
         #endregion Validations
@@ -246,6 +270,22 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ = new frmTaxpayersList(this).ShowDialog();
         }
 
+        private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)
+        {
+            //LoadPropertiesPreviousARPNumber();
+        }
+
+        private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
+            var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
+
+            propertyIdentifier = previousAssessmentDict["property_identifier"];
+            txtPreviousPin.Text = previousAssessmentDict["property_pin"];
+            txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
+            txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
+            txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
+        }
 
     }
 }

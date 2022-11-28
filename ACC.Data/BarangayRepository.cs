@@ -148,6 +148,7 @@ namespace ACC.Data
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
+
         }
 
         public bool Update(BarangayModel entity)
@@ -211,10 +212,10 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@name", DbType.String, name }
+                new object[] { "@barangays_name", DbType.String, name }
             };
 
-            string query = $"SELECT name FROM {viewTableName} WHERE name = @name";
+            string query = $"SELECT barangays_name FROM {viewTableName} WHERE barangays_name = @barangays_name";
             string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(result)) return true;

@@ -78,6 +78,41 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
+        public Dictionary<string, string> GetRecordsByARPNo(string ARPNo)
+        {
+            try
+            {
+                var record = new Dictionary<string, string>();
+                var parameters = new object[][]
+                {
+                    new object[] { "@complete_arp_no", DbType.String, ARPNo},
+                };
+
+                string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
+                    
+                using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+                {
+                    if (reader.Rows.Count < 1)
+                        return record;
+
+                    record.Add("id", reader.Rows[0]["id"].ToString());
+                    record.Add("real_properties_id", reader.Rows[0]["real_properties_id"].ToString());
+                    record.Add("property_pin", reader.Rows[0]["property_pin"].ToString());
+                    record.Add("complete_arp_no", reader.Rows[0]["complete_arp_no"].ToString());
+                    record.Add("assessed_value", reader.Rows[0]["assessed_value"].ToString());
+                    record.Add("previous_owner_name", reader.Rows[0]["previous_owner_name"].ToString());
+                    record.Add("effectivity_assessment", reader.Rows[0]["effectivity_assessment"].ToString());
+                    record.Add("date_recorded", reader.Rows[0]["date_recorded"].ToString());
+                }
+
+                return record;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();
