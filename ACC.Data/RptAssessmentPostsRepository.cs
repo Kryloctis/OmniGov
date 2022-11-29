@@ -188,7 +188,6 @@ namespace ACC.Data
                 new object[] { "@property_pin", DbType.String, entity.PropertyPin },
                 new object[] { "@taxpayer_tin", DbType.String, entity.TaxpayerTin },
                 new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName },
-                new object[] { "@taxpayer_type", DbType.String, entity.TaxpayerType },
                 new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo },
                 new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress },
                 new object[] { "@barangay_name", DbType.String, entity.BarangayName },
@@ -218,7 +217,7 @@ namespace ACC.Data
             };
 
 
-            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_type, taxpayer_contact_info, taxpayer_address, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_type, @taxpayer_contact_info, @taxpayer_address,  @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
+            string query = $"INSERT INTO {tableName} (property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address,  @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }

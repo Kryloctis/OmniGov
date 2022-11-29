@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     totalRowCount += 1;
                 }
 
-                foreach (DataRow row in dtViewRealProperties.Rows)
+                foreach (DataRow row in dtViewRealProperties.Rows)  
                 {
                     var newRow = assessmentPostsDataTable.NewRow();
                             
@@ -445,7 +445,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                         CompleteArpNo = rowCompleteArpNo,
                         PropertyPin = rowPin,
                         TaxpayerName = rowTaxpayerName,
-                        TaxpayerType = "1",
                         TaxpayerTin = rowTaxpayerTin,
                         TaxpayerAddress = rowTaxpeyerAddress,
                         TaxpayerContactInfo = rowTaxpayerContactInfo,
