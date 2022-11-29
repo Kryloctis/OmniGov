@@ -259,6 +259,16 @@ namespace AccountingSystem
             //dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
         }
 
+        public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["tin"].HeaderText = "TIN";
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["full_address"].HeaderText = "Address";
+            dataGridView.Columns["contact_info"].HeaderText = "Contact Info.";
+        }
+
         public static void TaxpayerDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
