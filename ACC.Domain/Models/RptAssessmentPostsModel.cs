@@ -6,7 +6,7 @@ namespace RPT.Domain.Models
     {
         public int Id { get; set; }
         public int RealTaxPayerID { get; set; }
-        public string propertyIdentifier { get; set; }
+        public string PropertyIdentifier { get; set; }
         public string CompleteArpNo  { get; set; }
         public string PropertyPin { get; set; }
         public string TaxpayerTin { get; set; }
