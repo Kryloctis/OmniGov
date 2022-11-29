@@ -38,13 +38,13 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmBankAdd(this).ShowDialog();
+            _ = new frmAddBanks(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int bankId = int.Parse(dgBanks.SelectedCells[0].Value.ToString());
-            _ = new frmBankEdit(this, bankId).ShowDialog();
+            _ = new frmEditBank(this, bankId).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

@@ -64,32 +64,28 @@ namespace ACC.Data
         }
         public bool Insert(BanksModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_no", DbType.String, entity.AccountNo},
-                      new object[] { "@bank_name", DbType.String, entity.BankName},
-                };
+                new object[] { "@bank_code", DbType.String, entity.BankCode},
+                new object[] { "@bank_name", DbType.String, entity.BankName},
+                new object[] { "@bank_branch", DbType.String, entity.BankBranch}
+            };
 
-                string query = $"INSERT INTO {tableName} (account_no,bank_name) VALUES (@account_no,@bank_name)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (bank_code, bank_name, bank_branch) VALUES (@bank_code, @bank_name, @bank_branch)";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+           
         }
         public bool Update(BanksModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] {"@id", DbType.Int16, entity.Id},
-                new object[] {"@account_no", DbType.String, entity.AccountNo},
+                new object[] {"@bank_code", DbType.String, entity.BankCode},
                 new object[] {"@bank_name", DbType.String, entity.BankName},
+                new object[] {"@bank_branch", DbType.String, entity.BankBranch},
             };
 
-            string query = $"UPDATE {tableName} SET account_no = @account_no, bank_name = @bank_name WHERE id = @id";
+            string query = $"UPDATE {tableName} SET bank_code = @bank_code, bank_name = @bank_name, bank_branch = @bank_branch WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
         public bool Delete(List<BanksModel> entityList)
