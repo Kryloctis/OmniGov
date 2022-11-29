@@ -23,12 +23,20 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var banksRepository = AccFactory.BanksRepository();
-                var dtBanks = banksRepository.GetRecords();
-                HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
+                var searchKey = txtsearch.Text.Trim();
+                DataTable dtBanks;
 
-                lblRecordCount.Text = banksRepository.CountRecords().ToString();
+                if (!string.IsNullOrEmpty(searchKey))
+                    dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchKey);
+
+                else
+                    dtBanks = AccFactory.BanksRepository().GetRecords();
+
+
+                HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
+                lblRecordCount.Text = AccFactory.BanksRepository().CountRecords().ToString();
             }
+
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
         private void frmBanks_Load(object sender, EventArgs e)
@@ -85,22 +93,7 @@ namespace AccountingSystem.Views.Manage.Banks
        
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-           if(txtsearch.Text.Length > 0)
-           {
-               try
-               {
-                   string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                   var dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchkey);
-                   HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
-
-                   lblRecordCount.Text = dgBanks.Rows.Count.ToString();
-               }
-               catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-           }
-           else
-           {
-               LoadRecords();
-           }
+            LoadRecords();
         }
     }
 }

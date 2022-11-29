@@ -13,9 +13,8 @@ namespace AccountingSystem.Views.Manage.Banks
         public frmEditBank(frmBanks frmbanks, int bankId)
         {
             InitializeComponent();
-
             _frmbanks = frmbanks;
-            //_ucBanks = ucBanks1;
+            _ucBanks = ucBanks1;
             _ucBanks.bankId = bankId;
         }
         private void LoadSelectedRecord()
@@ -24,8 +23,9 @@ namespace AccountingSystem.Views.Manage.Banks
             {
                 var banksRepository = AccFactory.BanksRepository();
                 var bankData = banksRepository.GetRecordByID(_ucBanks.bankId);
-                _ucBanks.txtBankBranch.Text = bankData["account_no"];
+                _ucBanks.txtBankCode.Text = bankData["bank_code"];
                 _ucBanks.txtBankName.Text = bankData["bank_name"];
+                _ucBanks.txtBankBranch.Text = bankData["bank_branch"];
             }
             catch (Exception ex) 
             {
@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Manage.Banks
 
                 var banksModel = new BanksModel()
                 {
+                    Id = _ucBanks.bankId,
                     BankCode = _ucBanks.txtBankCode.Text.Trim(),
                     BankName = _ucBanks.txtBankName.Text.Trim(),
                     BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
@@ -70,9 +71,10 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Account has been updated.");
+                Helper.MessageBoxSuccess("Bank has been updated.");
                 _frmbanks.LoadRecords();
                 _ucBanks.ResetForm();
+                Close();
             }
         }
     }
