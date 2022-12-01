@@ -331,7 +331,18 @@ namespace AccountingSystem
 
         public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 
         {
-
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView.Columns["is_selected"].HeaderText = string.Empty;
+            dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["real_taxpayers_id"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "APR No.";
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["full_address"].HeaderText = "Address";
+            dataGridView.Columns["kind"].HeaderText = "Kind";
+            dataGridView.Columns["kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
         public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)

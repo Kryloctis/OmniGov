@@ -119,12 +119,13 @@
             this.chckBoxProperties.BackColor = System.Drawing.Color.Transparent;
             this.chckBoxProperties.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chckBoxProperties.FlatAppearance.BorderSize = 0;
-            this.chckBoxProperties.Location = new System.Drawing.Point(5, 36);
+            this.chckBoxProperties.Location = new System.Drawing.Point(4, 36);
             this.chckBoxProperties.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chckBoxProperties.Name = "chckBoxProperties";
             this.chckBoxProperties.Size = new System.Drawing.Size(15, 14);
             this.chckBoxProperties.TabIndex = 3;
             this.chckBoxProperties.UseVisualStyleBackColor = false;
+            this.chckBoxProperties.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBoxProperties_MouseClick);
             // 
             // dgProperties
             // 
@@ -160,6 +161,9 @@
             this.dgProperties.RowTemplate.Height = 25;
             this.dgProperties.Size = new System.Drawing.Size(352, 345);
             this.dgProperties.TabIndex = 3;
+            this.dgProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProperties_CellValueChanged);
+            this.dgProperties.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgProperties_ColumnAdded);
+            this.dgProperties.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgProperties_CurrentCellDirtyStateChanged);
             // 
             // flowLayoutPanel4
             // 

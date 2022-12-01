@@ -25,11 +25,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             {
                 new DataColumn("is_selected", typeof(bool)),
                 new DataColumn("id", typeof(int)),
-                new DataColumn("real_taxpayers_id", typeof(int)),
+                 new DataColumn("kind", typeof(string)),
+                new DataColumn("real_taxpayers_id", typeof(int)),   
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("property_pin", typeof(string)),
-                new DataColumn("address", typeof(string)),
-                new DataColumn("kind", typeof(string)),
+                new DataColumn("full_address", typeof(string))             
             }; 
         }
 
@@ -38,6 +38,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             bool showCancelled = chckBxCancelled.Checked;
             var dtAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordsByRealTaxpayersId(TaxpayersId, showCancelled);
             var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsPostedProperties());
 
             foreach (DataRow row in dtAssessmentPosts.Rows)
             {
@@ -47,20 +48,26 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 newRow["id"] = row["id"];
                 newRow["real_taxpayers_id"] = row["real_taxpayers_id"];
                 newRow["complete_arp_no"] = row["complete_arp_no"];
-                newRow["property_pin"] = row["property_ping"];
-                newRow["full_address"] = Helper.GenerateFullAddress(row["street"].ToString(),row["barangay"].ToString(), row["municipality"].ToString(), row["province"].ToString());
+                newRow["property_pin"] = row["property_pin"];
+                newRow["full_address"] = Helper.GenerateFullAddress(row["street"].ToString(),row["barangay_name"].ToString(), row["municipality_name"].ToString(), row["province_name"].ToString());
+                newRow["kind"] = row["property_kind"];
+                dataTable.Rows.Add(newRow);
             }
+            return dataTable;
         }
 
         internal void LoadPostedProperties() 
         {
-
-            dgProperties.DataSource = dtAssessmentPosts;
+            try
+            {
+                HelperLoadRecords.DatagridViewPaymentTaxpayerProperties(dgProperties, DataTablePostedProperties());
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void OnLoad() 
         {
-            Helper.DatagridFullRowSelectStyle(dgProperties, true, false);
+            Helper.DatagridFullRowSelectStyle(dgProperties, false, false);
             Helper.DatagridFullRowSelectStyle(dgTaxDues, true, false);
         }
 
@@ -69,6 +76,41 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             try
             {
                 OnLoad();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void chckBoxProperties_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                bool isChecked = chckBoxProperties.Checked;
+                Helper.CheckUncheckCheckBoxRows(dgProperties, "is_selected", isChecked);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dgProperties.CurrentCell is DataGridViewCheckBoxCell)
+                dgProperties.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void dgProperties_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            try
+            {
+                if (e.Column.Name != "is_selected")
+                    e.Column.ReadOnly = true;
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }

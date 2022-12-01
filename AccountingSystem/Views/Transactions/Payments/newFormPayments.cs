@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 new DataColumn("contact_info", typeof(string))
             };
         }
-
         private DataTable DataTableTaxpayers() 
         {
             var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
