@@ -329,6 +329,11 @@ namespace AccountingSystem
             dataGridView.Columns["taxpayers_province"].HeaderText = "Province";
         }
 
+        public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 
+        {
+
+        }
+
         public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;

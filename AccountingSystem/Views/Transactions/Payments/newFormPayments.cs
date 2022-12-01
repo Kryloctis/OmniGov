@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SpreadsheetLight.Drawing;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,15 @@ namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class newFormPayments : Form
     {
+        private ucRptTaxDues ucRptTaxDues;
+
         public newFormPayments()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, true);
+            Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
             Helper.DatagridFullRowSelectStyle(dgCheques, false, false);
+            ucRptTaxDues = ucRptTaxDues1;
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -59,16 +63,26 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             try
             {
-                HelperLoadRecords.DataGridViewPaymentTaxpayers(dataGridView1, DataTableTaxpayers());
-                dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
+                HelperLoadRecords.DataGridViewPaymentTaxpayers(dgTaxpayers, DataTableTaxpayers());
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private int GetRealTaxpayersId() 
+        {
+            int rowIndex = dgTaxpayers.CurrentRow.Index;
+            return Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == tabPageTaxpayer)
+            {
                 tabControl1.SelectedTab = tabPageTaxDues;
+                ucRptTaxDues.TaxpayersId = GetRealTaxpayersId();
+                ucRptTaxDues.LoadPostedProperties();
+            }
             else if (tabControl1.SelectedTab == tabPageTaxDues)
                 tabControl1.SelectedTab = tabPagePayment;
             else if (tabControl1.SelectedTab == tabPagePayment)
@@ -120,7 +134,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 1)
+            if (dgTaxpayers.SelectedRows.Count == 1)
                 btnNext.Enabled = true;
             else
                 btnNext.Enabled = false;

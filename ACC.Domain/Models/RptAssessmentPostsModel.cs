@@ -13,6 +13,8 @@ namespace RPT.Domain.Models
         public string TaxpayerName { get; set; }
         public string TaxpayerContactInfo { get; set; }
         public string TaxpayerAddress { get; set; }
+
+        public string Street { get;set; }
         public string BarangayName { get; set; }
         public string MunicipalityName { get; set; }
         public string ProvinceName { get; set; }

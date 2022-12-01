@@ -34,5 +34,7 @@ namespace RPT.Domain.Interfaces
         DataTable Get_Grouped_Municipality_Records();
 
         DataTable GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(string completeArpNo, string ownerName);
+
+        DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
     }
 }
