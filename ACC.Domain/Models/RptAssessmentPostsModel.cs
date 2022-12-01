@@ -5,12 +5,12 @@ namespace RPT.Domain.Models
     public class RptAssessmentPostsModel
     {
         public int Id { get; set; }
-        public string propertyIdentifier { get; set; }
+        public int RealTaxPayerID { get; set; }
+        public string PropertyIdentifier { get; set; }
         public string CompleteArpNo  { get; set; }
         public string PropertyPin { get; set; }
         public string TaxpayerTin { get; set; }
         public string TaxpayerName { get; set; }
-        public string TaxpayerType { get; set; }
         public string TaxpayerContactInfo { get; set; }
         public string TaxpayerAddress { get; set; }
         public string BarangayName { get; set; }

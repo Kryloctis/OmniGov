@@ -51,12 +51,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             {
                 var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
-                var address = $"{dictRealProperties["taxpayers_street"]}, {dictRealProperties["taxpayers_barangay"]}, {dictRealProperties["taxpayers_municipality"]} {dictRealProperties["taxpayers_province"]}";
+                var address = $"{dictRealProperties["street"]}, {dictRealProperties["barangay"]}, {dictRealProperties["municipality"]} {dictRealProperties["province"]}";
 
-                _ucRealProperties.txtTaxpayers.Text = dictRealProperties["taxpayers_name"];
-                _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type"];
-                _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["taxpayers_tin"];
-                _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["taxpayers_contact_info"];
+                _ucRealProperties.txtTaxpayers.Text = dictRealProperties["name"];
+                _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type_id"];
+                _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["tin"];
+                _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["contact_info"];
                 _ucRealProperties.txtTaxpayerAddress.Text = address;
             }
 

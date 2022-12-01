@@ -53,6 +53,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 new DataColumn("property_identifier", typeof(string)),
                 new DataColumn("pin", typeof(string)),
                 new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("real_taxpayers_id", typeof(int)),
                 new DataColumn("taxpayer_name", typeof(string)),
                 new DataColumn("taxpayer_tin", typeof(string)),
                 new DataColumn("taxpayer_contact_info", typeof(string)),
@@ -168,7 +169,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     totalRowCount += 1;
                 }
 
-                foreach (DataRow row in dtViewRealProperties.Rows)
+                foreach (DataRow row in dtViewRealProperties.Rows)  
                 {
                     var newRow = assessmentPostsDataTable.NewRow();
                             
@@ -179,11 +180,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     string rowPin = row["property_pin"].ToString();
                     string rowPropertyIdentifier = row["property_identifier"].ToString();
                     int rowRealPropertiesId = Convert.ToInt32(row["real_properties_id"]);
-                    string rowOwnerName = row["taxpayer_name"].ToString();
-
-                    string rowOwnerTin = row["taxpayer_tin"].ToString();    
-                    string rowOwnerContact = row["taxpayer_contact_info"].ToString();
-                    string rowOwnerAddress = row["taxpayer_address"].ToString();
+                    int rowTaxpayerId = Convert.ToInt32(row["real_taxpayers_id"]);
+                    string rowTaxpayerName = row["taxpayer_name"].ToString();
+                    string rowTaxpayerTin = row["taxpayer_tin"].ToString();    
+                    string rowTaxpayerContact = row["taxpayer_contact_info"].ToString();
+                    string rowTaxpayerAddress = row["taxpayer_address"].ToString();
                     string rowBarangayName = row["real_properties_barangays_name"].ToString();
                     string rowMunicipalityName = row["real_properties_municipalities_name"].ToString();
                     string rowProvinceName = row["real_properties_provinces_name"].ToString();
@@ -218,10 +219,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     newRow["pin"] = rowPin;
                     newRow["complete_arp_no"] = rowCompleteArpNo;
                     newRow["property_identifier"] = rowPropertyIdentifier;
-                    newRow["taxpayer_name"] = rowOwnerName;
-                    newRow["taxpayer_tin"] = rowOwnerTin;
-                    newRow["taxpayer_contact_info"] = rowOwnerContact;
-                    newRow["taxpayer_address"] = rowOwnerAddress;
+                    newRow["real_taxpayers_id"] = rowTaxpayerId;
+                    newRow["taxpayer_name"] = rowTaxpayerName;
+                    newRow["taxpayer_tin"] = rowTaxpayerTin;
+                    newRow["taxpayer_contact_info"] = rowTaxpayerContact;
+                    newRow["taxpayer_address"] = rowTaxpayerAddress;
                     newRow["property_kind"] = rowPropertyKind;
                     newRow["barangay_name"] = rowBarangayName;
                     newRow["municipality_name"] = rowMunicipalityName;
@@ -403,6 +405,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 if (isChecked && string.IsNullOrEmpty(postingStatus))
                 {
                     int rowRealPropertiesId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_properties_id");
+                    int rowRealTaxpayerId = GetDatagridViewValue(dgProperties, dgvRow.Index, "real_taxpayers_id");
                     string rowPropertyIdentifier = GetDatagridViewValue(dgProperties, dgvRow.Index, "property_identifier");
                     string rowCompleteArpNo = GetDatagridViewValue(dgProperties, dgvRow.Index, "complete_arp_no");
                     string rowPin = GetDatagridViewValue(dgProperties, dgvRow.Index, "pin");
@@ -441,11 +444,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                     var assessmentPostingModel = new RptAssessmentPostsModel()
                     {
-                        propertyIdentifier = rowPropertyIdentifier,
+                        PropertyIdentifier = rowPropertyIdentifier,
                         CompleteArpNo = rowCompleteArpNo,
                         PropertyPin = rowPin,
+                        RealTaxPayerID = rowRealTaxpayerId,
                         TaxpayerName = rowTaxpayerName,
-                        TaxpayerType = "1",
                         TaxpayerTin = rowTaxpayerTin,
                         TaxpayerAddress = rowTaxpeyerAddress,
                         TaxpayerContactInfo = rowTaxpayerContactInfo,
