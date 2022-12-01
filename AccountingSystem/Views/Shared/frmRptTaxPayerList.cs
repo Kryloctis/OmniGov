@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private DataTable DataTableAssessmentPost(string searchText)
         {
-            var columns = new string[] { "id", "owner_tin", "owner_name", "barangay_name", "municipality_name", "province_name", "owner_address" };
+            var columns = new string[] { "id", "taxpayer_tin", "taxpayer_name", "barangay_name", "municipality_name", "province_name", "owner_address" };
             var dtAssessmentPostin = AccFactory.RptAssessmentPostsRepository().GetRecordsBySearch(searchText);
             var dtView = new DataView(dtAssessmentPostin);
             return dtView.ToTable(false, columns);
@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            string ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+            string ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayer_name"].Value.ToString();
             string completeARPNumber = string.Empty;
             string ownerAddress = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
 
@@ -146,12 +146,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                 if (dataGridView1.SelectedRows.Count == 1)
                 {
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                    string tin = dataGridView1.Rows[rowIndex].Cells["owner_tin"].Value.ToString();
-                    string taxPayerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
-                    string address = dataGridView1.Rows[rowIndex].Cells["owner_address"].Value.ToString();
-                    string barangayName = dataGridView1.Rows[rowIndex].Cells["barangay_name"].Value.ToString();
-                    string municipalityName = dataGridView1.Rows[rowIndex].Cells["municipality_name"].Value.ToString();
-                    string provinceName = dataGridView1.Rows[rowIndex].Cells["province_name"].Value.ToString();
+                    string tin = dataGridView1.Rows[rowIndex].Cells["taxpayers_tin"].Value.ToString();
+                    string taxPayerName = dataGridView1.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+                    string address = dataGridView1.Rows[rowIndex].Cells["taxpayers_street"].Value.ToString();
+                    string barangayName = dataGridView1.Rows[rowIndex].Cells["taxpayers_barangay"].Value.ToString();
+                    string municipalityName = dataGridView1.Rows[rowIndex].Cells["taxpayers_municipality"].Value.ToString();
+                    string provinceName = dataGridView1.Rows[rowIndex].Cells["taxpayers_province"].Value.ToString();
 
                     var paymentPostingFields = new rptPropertyPaymentTaxPayerInfoModel()
                     {
@@ -190,7 +190,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private void InitializeListOfDeliquentAccountsReport()
         {
             int rowIndex = dataGridView1.CurrentRow.Index;
-            _frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["owner_name"].Value.ToString();
+            _frmListOfRealPropertyTaxDelinquenciesReport._ownerName = dataGridView1.Rows[rowIndex].Cells["taxpayer_name"].Value.ToString();
             _frmListOfRealPropertyTaxDelinquenciesReport.backgroundWorker1.RunWorkerAsync();
         }
 
