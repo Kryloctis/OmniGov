@@ -11,12 +11,13 @@ namespace ACC.Data
     public class BanksRepository : IBanksRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
-
         private readonly string tableName = "banks";
+
         public BanksRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();

@@ -1134,6 +1134,20 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static void DatagridViewBankAccounts(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Account Number";
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false;
+          
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+        }
+
+
 
         #endregion
 
@@ -2895,6 +2909,7 @@ namespace AccountingSystem
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
         }
+
 
         #endregion
     }

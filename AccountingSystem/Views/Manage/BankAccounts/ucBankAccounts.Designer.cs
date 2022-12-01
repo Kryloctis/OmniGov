@@ -32,8 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cmbxBank = new System.Windows.Forms.ComboBox();
+            this.txtAccountNo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,9 +42,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(10, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
+            this.label1.Size = new System.Drawing.Size(68, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Bank";
+            this.label1.Text = "Bank Name";
             // 
             // label2
             // 
@@ -59,27 +59,27 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // comboBox1
+            // cmbxBank
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(89, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(259, 23);
-            this.comboBox1.TabIndex = 1;
+            this.cmbxBank.FormattingEnabled = true;
+            this.cmbxBank.Location = new System.Drawing.Point(89, 7);
+            this.cmbxBank.Name = "cmbxBank";
+            this.cmbxBank.Size = new System.Drawing.Size(259, 23);
+            this.cmbxBank.TabIndex = 1;
             // 
-            // textBox1
+            // txtAccountNo
             // 
-            this.textBox1.Location = new System.Drawing.Point(89, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 23);
-            this.textBox1.TabIndex = 2;
+            this.txtAccountNo.Location = new System.Drawing.Point(89, 36);
+            this.txtAccountNo.Name = "txtAccountNo";
+            this.txtAccountNo.Size = new System.Drawing.Size(260, 23);
+            this.txtAccountNo.TabIndex = 0;
             // 
             // ucBankAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.txtAccountNo);
+            this.Controls.Add(this.cmbxBank);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ucBankAccounts";
@@ -96,7 +96,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        internal System.Windows.Forms.TextBox txtAccountNo;
+        internal System.Windows.Forms.ComboBox cmbxBank;
     }
 }

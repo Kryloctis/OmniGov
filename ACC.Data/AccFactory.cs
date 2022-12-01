@@ -85,6 +85,8 @@ namespace AccountingSystem
 
         public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
+        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS);
+
         public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
         public static IRCIDeductionsRepository RCIDeductionsRepository() => new RCIDeductionsRepository(mySqlGenericCommandsLFS);
@@ -170,4 +172,5 @@ namespace AccountingSystem
         public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
         public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
     }
+
 }

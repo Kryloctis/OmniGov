@@ -22,6 +22,11 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void frmBankAdd_Load(object sender, EventArgs e)
         {
+            LoadBanks();
+        }
+
+        private void LoadBanks() 
+        {
             
         }
 

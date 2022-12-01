@@ -34,7 +34,7 @@
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgBankAccounts = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,7 +46,7 @@
             this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBankAccounts)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +76,7 @@
             this.btnAdd.Size = new System.Drawing.Size(33, 43);
             this.btnAdd.Text = "&Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -107,7 +108,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.dgBankAccounts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 54);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -116,17 +117,17 @@
             this.panel1.Size = new System.Drawing.Size(500, 275);
             this.panel1.TabIndex = 16;
             // 
-            // dataGridView1
+            // dgBankAccounts
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 4);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(492, 267);
-            this.dataGridView1.TabIndex = 4;
+            this.dgBankAccounts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgBankAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgBankAccounts.Location = new System.Drawing.Point(4, 4);
+            this.dgBankAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgBankAccounts.Name = "dgBankAccounts";
+            this.dgBankAccounts.RowHeadersWidth = 51;
+            this.dgBankAccounts.RowTemplate.Height = 29;
+            this.dgBankAccounts.Size = new System.Drawing.Size(492, 267);
+            this.dgBankAccounts.TabIndex = 4;
             // 
             // statusStrip1
             // 
@@ -206,13 +207,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
             this.Name = "frmBankAccounts";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manage > Bank Accounts";
             this.Load += new System.EventHandler(this.frmBankAccounts_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgBankAccounts)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -238,5 +240,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridView dgBankAccounts;
     }
 }

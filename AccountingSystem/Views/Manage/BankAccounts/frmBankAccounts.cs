@@ -16,12 +16,24 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
+            Helper.DatagridFullRowSelectStyle(dgBankAccounts, true, true);
         }
 
-   
         private void frmBankAccounts_Load(object sender, EventArgs e)
         {
-
+            var dtBankAccount = AccFactory.BankAccountsRepository().GetRecords();
+            HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
         }
+
+        internal void LoadBankAccounts()
+        { 
+            
+        }
+         
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddBankAccounts(this).ShowDialog();
+        }
+
     }
 }
