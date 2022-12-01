@@ -157,12 +157,21 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
         }
 
+        private void OnLoad()
+        {
+            try
+            {
+                var dtFunds = AccFactory.FundsRepository().GetRecords();
+                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
         private void ucPreClosingTrialBalance_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                var dtFunds = AccFactory.FundsRepository().GetRecords();
-                HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+                OnLoad();
             }
 
         }

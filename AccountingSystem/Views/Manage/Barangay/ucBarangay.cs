@@ -1,20 +1,14 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class ucBarangay : UserControl
     {
-
         internal int barangayId = 0;
+
         public ucBarangay()
         {
             InitializeComponent();
@@ -39,7 +33,6 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code");
 
             var barangayRepo = AccFactory.BarangayRepository();
@@ -47,16 +40,15 @@ namespace AccountingSystem.Views.Manage.Barangay
             bool resBrgy;
 
             if (barangayId == 0)
-                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim()); 
+                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim());
             else
-                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim(), barangayId); 
+                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim(), barangayId);
 
             if (resBrgy)
             {
                 errorProvider1.SetError(txtCode, "Code already exist in your records.");
                 e.Cancel = true;
             }
-            
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -91,9 +83,6 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void ucBarangay_Load(object sender, EventArgs e)
         {
-  
         }
-
-
     }
 }

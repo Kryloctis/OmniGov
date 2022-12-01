@@ -151,14 +151,23 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+        private void OnLoad() 
         {
-            if (!DesignMode)
+            try
             {
                 nudYear.Maximum = dateIssued.Year;
                 nudYear.Value = dateIssued.Year;
                 LoadBudgetAppropriations();
                 txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void ucAllotmentRelease_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                OnLoad();
             }
         }
 

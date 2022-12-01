@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Manage.Banks
 {
@@ -23,7 +17,6 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void ucBanks_Load(object sender, EventArgs e)
         {
-
         }
 
         internal void ResetForm()
@@ -34,6 +27,7 @@ namespace AccountingSystem.Views.Manage.Banks
         }
 
         #region Validations
+
         internal string GetFormErrors()
         {
             var errorArray = new string[3];
@@ -73,7 +67,6 @@ namespace AccountingSystem.Views.Manage.Banks
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epProvider1, txtBankName, "bank name.");
-
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
@@ -81,13 +74,6 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.ClearErrorTextBox(epProvider1, txtBankName);
         }
 
-        #endregion
-
-
-        
-
-
-
-
+        #endregion Validations
     }
 }

@@ -20,17 +20,13 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epYear.GetError(dtpDateEntry);
-            errorArray[1] = epAmount.GetError(nudAmount);
+            var errorArray = new string[]
+            {
+                epYear.GetError(dtpDateEntry),
+                epAmount.GetError(nudAmount)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
-        }
-
-        internal void ResetForm()
-        {
-            nudAmount.Value = 0;
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void LoadSelectedGeneralLedger()
@@ -43,31 +39,29 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
                 txtAccountName.Text = generalLedgerAccount["ledger_name"];
             }
             catch (Exception ex)
+            { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadSelectedSubsidiaryAccount()
+        {
+            try
+            {
+                if (subsidiaryLedgerId != 0)
+                {
+                    var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+                    txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
+                    txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
+                }
+            }
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void LoadSelectedSubsidiaryAccount()
+        internal void ResetForm()
         {
-            if (subsidiaryLedgerId != 0)
-            {
-                var subsidiaryDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
-                txtSubsidiaryCode.Text = subsidiaryDict["sub_code"];
-                txtSubsidiaryName.Text = subsidiaryDict["sub_name"];
-
-            }
-        }
-
-        private void nudAmount_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
-
-            if (nudAmount.Value == 0)
-            {
-                epAmount.SetError(nudAmount, "Please enter a non-zero balance.");
-                e.Cancel = true;
-            }
+            nudAmount.Value = 0;
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
@@ -75,15 +69,32 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        private void UcBeginningBalances_Load(object sender, EventArgs e)
+        private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            if (!DesignMode)
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount") || Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "amount");
+        }
+
+        private void OnLoad()
+        {
+            try
             {
                 var dtFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 txtFunName.Text = dtFund["fund_name"];
                 txtYear.Text = year.ToString();
                 dtpDateEntry.MaxDate = new DateTime(year, 12, DateTime.DaysInMonth(year, 12));
                 dtpDateEntry.MinDate = new DateTime(year, 1, 1);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void UcBeginningBalances_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                OnLoad();
             }
         }
     }

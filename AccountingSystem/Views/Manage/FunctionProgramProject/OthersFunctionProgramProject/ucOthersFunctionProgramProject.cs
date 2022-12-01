@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
@@ -14,103 +8,81 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
     {
         internal int functionProgramProjectID = 0;
         internal int othersFPPID = 0;
+
         public ucOthersFunctionProgramProject()
         {
             InitializeComponent();
         }
 
-        internal string GetFormErrors() 
+        internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epCode.GetError(txtCode);
-            errorArray[1] = epName.GetError(txtName);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtCode),
+                errorProvider1.GetError(txtName)
+            };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             txtName.Clear();
             txtCode.Clear();
         }
 
-        private bool OthersFPPNameExsit() 
+        private bool OthersFPPCodeValidated(ErrorProvider errorProvider, TextBox textBox)
         {
-            try
+            string othersFPPCode = textBox.Text;
+            bool codeExist = othersFPPID == 0 ? AccFactory.SubFPPRepository().CodeExist(othersFPPCode) : AccFactory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Others FPP Code"))
+                return false;
+            else if (codeExist)
             {
-                string name = txtName.Text.Trim();
-                bool nameExist;
-
-                if (othersFPPID == 0)
-                    nameExist = AccFactory.SubFPPRepository().NameExist(name);
-                else
-                    nameExist = AccFactory.SubFPPRepository().NameExist(othersFPPID, name);
-
-                if (nameExist)
-                {
-                    epName.SetError(txtName, "Other FPP Name you entered already exist on your record.");
-                    return true;
-                }
+                errorProvider.SetError(textBox, "Others FPP Code you entered already exist on you record.");
+                return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-
-        private void txtName_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtName.Text))
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epName, txtName, "Name");
-            else if (OthersFPPNameExsit())
-                e.Cancel = OthersFPPNameExsit();
-        }
-
-        private void txtName_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(epName, txtName);
-        }
-
-
-        private bool OthersFPPCodeExist() 
-        {
-            try
-            {
-                string othersFPPCode = txtCode.Text;
-                bool codeExist;
-
-                if (othersFPPID == 0)
-                    codeExist = AccFactory.SubFPPRepository().CodeExist(othersFPPCode);
-                else
-                    codeExist = AccFactory.SubFPPRepository().CodeExist(othersFPPID, othersFPPCode);
-
-                if (codeExist)
-                {
-                    epCode.SetError(txtCode, "Others FPP Code you entered already exist on you record.");
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void txtCode_Validating(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtCode.Text))
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "Others FPP Code");
-            else if (OthersFPPCodeExist())
-                e.Cancel = OthersFPPCodeExist();
-            
+            return true;
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCode, txtCode);
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
+        }
+
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !OthersFPPCodeValidated(errorProvider1, txtCode);
+        }
+
+        private bool OthersFPPNameValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            string name = textBox.Text.Trim();
+            bool nameExist = othersFPPID == 0 ? AccFactory.SubFPPRepository().NameExist(name) : AccFactory.SubFPPRepository().NameExist(othersFPPID, name);
+
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Name"))
+                return false;
+            else if (nameExist)
+            {
+                errorProvider.SetError(textBox, "Other FPP Name you entered already exist on your record.");
+                return false;
+            }
+            return true;
+        }
+
+        private void txtName_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !OthersFPPNameValidated(errorProvider1, txtName);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

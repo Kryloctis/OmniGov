@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem.Views.Manage.TaxPayers
+﻿namespace AccountingSystem.Views.Manage.TaxPayers
 {
     partial class ucRealProperties
     {

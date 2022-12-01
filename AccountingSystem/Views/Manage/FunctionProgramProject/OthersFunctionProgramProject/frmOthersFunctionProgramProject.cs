@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
@@ -14,12 +9,13 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
     public partial class frmOthersFunctionProgramProject : Form
     {
         internal int functionProgramProjectID = 0;
+
         public frmOthersFunctionProgramProject()
         {
             InitializeComponent();
         }
 
-        internal void LoadRecords() 
+        internal void LoadRecords()
         {
             DataTable dtOthersFPP;
             string searchTxt = toolStripTxtSearch.Text.Trim();
@@ -30,7 +26,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 {
                     dtOthersFPP = AccFactory.SubFPPRepository().GetRecorsByIDSearchCode(functionProgramProjectID, searchTxt);
                 }
-                else 
+                else
                 {
                     dtOthersFPP = AccFactory.SubFPPRepository().GetRecordsByFPPId(functionProgramProjectID);
                 }
@@ -38,13 +34,32 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                 HelperLoadRecords.OthersFPPDatagridView(dtOthersFPP, dgOthersFPP);
                 lblRecordCount.Text = dgOthersFPP.Rows.Count.ToString();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
 
-        private void ShowOthersFunctionProgramProjectEdit() 
+        private void dgOthersFPP_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 4, 5 };
+            Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete);
+        }
+
+        private void frmOthersFunctionProgramProject_Load(object sender, EventArgs e)
+        {
+            LoadRecords();
+        }
+
+        private void ShowOthersFunctionProgramProjectAdd()
+        {
+            var frmOthersFunctionProgramProjectAdd = new frmOthersFunctionProgramProjectAdd(this);
+            frmOthersFunctionProgramProjectAdd.ucOthersFunctionProgramProject1.functionProgramProjectID = functionProgramProjectID;
+            frmOthersFunctionProgramProjectAdd.ShowDialog();
+        }
+
+        private void ShowOthersFunctionProgramProjectEdit()
         {
             int rowIndex = dgOthersFPP.CurrentCell.RowIndex;
             var frmOthersFunctionProgramProjectEdit = new frmOthersFunctionProgramProjectEdit(this);
@@ -55,27 +70,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             frmOthersFunctionProgramProjectEdit.ShowDialog();
         }
 
-        private void ShowOthersFunctionProgramProjectAdd() 
-        {
-            var frmOthersFunctionProgramProjectAdd = new frmOthersFunctionProgramProjectAdd(this);
-            frmOthersFunctionProgramProjectAdd.ucOthersFunctionProgramProject1.functionProgramProjectID = functionProgramProjectID;
-            frmOthersFunctionProgramProjectAdd.ShowDialog();
-        }
-
-        private void toolStripBtnAdd_Click(object sender, EventArgs e) 
+        private void toolStripBtnAdd_Click(object sender, EventArgs e)
         {
             ShowOthersFunctionProgramProjectAdd();
         }
 
-        private void toolStripBtnEdit_Click(object sender, EventArgs e) 
-        {
-            ShowOthersFunctionProgramProjectEdit();
-        }
-
-        private void toolStripBtnDelete_Click(object sender, EventArgs e) 
+        private void toolStripBtnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowsCount = dgOthersFPP.SelectedRows.Count;
-           
+
             var otherFPPModelList = new List<SubFPPModel>();
 
             try
@@ -86,7 +89,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
                     {
                         foreach (DataGridViewRow row in dgOthersFPP.SelectedRows)
                         {
-                            int otherFPPId= int.Parse(row.Cells[0].Value.ToString());
+                            int otherFPPId = int.Parse(row.Cells[0].Value.ToString());
                             var otherFPPModel = new SubFPPModel()
                             {
                                 Id = otherFPPId
@@ -106,21 +109,14 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             }
         }
 
-        private void toolStripTxtSearch_TextChanged(object sender, EventArgs e) 
+        private void toolStripBtnEdit_Click(object sender, EventArgs e)
         {
-            LoadRecords();
+            ShowOthersFunctionProgramProjectEdit();
         }
 
-        private void frmOthersFunctionProgramProject_Load(object sender, EventArgs e)
+        private void toolStripTxtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecords();
-        }
-
-        private void dgOthersFPP_SelectionChanged(object sender, EventArgs e)
-        {
-            byte[] columnIndexTimestamp = {4, 5};
-            Helper.ShowRecordTimestamp(dgOthersFPP, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgOthersFPP, toolStripBtnEdit, toolStripBtnDelete); 
         }
     }
 }

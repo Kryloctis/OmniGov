@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem
+﻿namespace AccountingSystem
 {
     partial class MainForm
     {
@@ -71,9 +70,9 @@ namespace AccountingSystem
             this.tabPageBudget = new System.Windows.Forms.TabPage();
             this.tabControlBudget = new System.Windows.Forms.TabControl();
             this.tabPageBudgetDetailed = new System.Windows.Forms.TabPage();
-            this.ucBudgetDetailed2 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
+            this.ucBudgetDetailed1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed();
             this.tabPageBudgetSummary = new System.Windows.Forms.TabPage();
-            this.ucBudgetSummary2 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
+            this.ucBudgetSummary1 = new AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonBudgetAppropriations = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAllotmentRelease = new System.Windows.Forms.ToolStripButton();
@@ -526,7 +525,7 @@ namespace AccountingSystem
             // 
             // tabPageBudgetDetailed
             // 
-            this.tabPageBudgetDetailed.Controls.Add(this.ucBudgetDetailed2);
+            this.tabPageBudgetDetailed.Controls.Add(this.ucBudgetDetailed1);
             this.tabPageBudgetDetailed.Location = new System.Drawing.Point(4, 24);
             this.tabPageBudgetDetailed.Name = "tabPageBudgetDetailed";
             this.tabPageBudgetDetailed.Padding = new System.Windows.Forms.Padding(3);
@@ -535,19 +534,19 @@ namespace AccountingSystem
             this.tabPageBudgetDetailed.Text = "Detailed";
             this.tabPageBudgetDetailed.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetDetailed2
+            // ucBudgetDetailed1
             // 
-            this.ucBudgetDetailed2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetDetailed2.Location = new System.Drawing.Point(3, 3);
-            this.ucBudgetDetailed2.Name = "ucBudgetDetailed2";
-            this.ucBudgetDetailed2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucBudgetDetailed2.Size = new System.Drawing.Size(1201, 545);
-            this.ucBudgetDetailed2.TabIndex = 0;
+            this.ucBudgetDetailed1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetDetailed1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetDetailed1.Name = "ucBudgetDetailed1";
+            this.ucBudgetDetailed1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucBudgetDetailed1.Size = new System.Drawing.Size(1201, 545);
+            this.ucBudgetDetailed1.TabIndex = 0;
             // 
             // tabPageBudgetSummary
             // 
             this.tabPageBudgetSummary.AutoScroll = true;
-            this.tabPageBudgetSummary.Controls.Add(this.ucBudgetSummary2);
+            this.tabPageBudgetSummary.Controls.Add(this.ucBudgetSummary1);
             this.tabPageBudgetSummary.Location = new System.Drawing.Point(4, 24);
             this.tabPageBudgetSummary.Name = "tabPageBudgetSummary";
             this.tabPageBudgetSummary.Padding = new System.Windows.Forms.Padding(3);
@@ -556,15 +555,15 @@ namespace AccountingSystem
             this.tabPageBudgetSummary.Text = "Summary";
             this.tabPageBudgetSummary.UseVisualStyleBackColor = true;
             // 
-            // ucBudgetSummary2
+            // ucBudgetSummary1
             // 
-            this.ucBudgetSummary2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBudgetSummary2.Location = new System.Drawing.Point(3, 3);
-            this.ucBudgetSummary2.Margin = new System.Windows.Forms.Padding(0);
-            this.ucBudgetSummary2.Name = "ucBudgetSummary2";
-            this.ucBudgetSummary2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ucBudgetSummary2.Size = new System.Drawing.Size(1201, 545);
-            this.ucBudgetSummary2.TabIndex = 0;
+            this.ucBudgetSummary1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBudgetSummary1.Location = new System.Drawing.Point(3, 3);
+            this.ucBudgetSummary1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBudgetSummary1.Name = "ucBudgetSummary1";
+            this.ucBudgetSummary1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.ucBudgetSummary1.Size = new System.Drawing.Size(1201, 545);
+            this.ucBudgetSummary1.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -1441,8 +1440,6 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem sAAOBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sAAOBBToolStripMenuItem;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private System.Windows.Forms.TabPage tabPageJournalEntryVoucher;
         private System.Windows.Forms.ImageList imageList1;
         private Views.Reports.Financial_Statements.ucStatementOfChangesInNetAssetsEquity ucStatementOfChangesInNetAssetsEquity1;
@@ -1484,8 +1481,7 @@ namespace AccountingSystem
         private System.Windows.Forms.ToolStripButton toolStripButtonBpl;
         private System.Windows.Forms.ToolStripButton toolStripButtonRpt;
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed2;
-        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary2;
+        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
+        private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
     }
 }
-
