@@ -32,7 +32,7 @@
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgBankAccounts = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -59,7 +59,7 @@
             this.btnAdd,
             this.btnEdit,
             this.txtSearch,
-            this.toolStripButton1});
+            this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
@@ -95,16 +95,17 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtSearch.Size = new System.Drawing.Size(202, 46);
+            this.txtSearch.Click += new System.EventHandler(this.txtSearch_Click);
             // 
-            // toolStripButton1
+            // btnDelete
             // 
-            this.toolStripButton1.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
-            this.toolStripButton1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(44, 43);
-            this.toolStripButton1.Text = "&Delete";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(44, 43);
+            this.btnDelete.Text = "&Delete";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // panel1
             // 
@@ -128,6 +129,7 @@
             this.dgBankAccounts.RowTemplate.Height = 29;
             this.dgBankAccounts.Size = new System.Drawing.Size(492, 267);
             this.dgBankAccounts.TabIndex = 4;
+            this.dgBankAccounts.SelectionChanged += new System.EventHandler(this.dgBankAccounts_SelectionChanged);
             // 
             // statusStrip1
             // 
@@ -239,7 +241,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.DataGridView dgBankAccounts;
     }
 }

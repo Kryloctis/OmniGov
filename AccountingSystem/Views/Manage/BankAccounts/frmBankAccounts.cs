@@ -21,13 +21,18 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void frmBankAccounts_Load(object sender, EventArgs e)
         {
-            var dtBankAccount = AccFactory.BankAccountsRepository().GetRecords();
-            HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
+            LoadBankAccounts();
         }
 
         internal void LoadBankAccounts()
-        { 
-            
+        {
+            var keySearch = txtSearch.Text.Trim();
+
+            if (string.IsNullOrEmpty(keySearch))
+                return; 
+
+            var dtBankAccount = AccFactory.BankAccountsRepository().GetRecords();
+            HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
         }
          
         private void btnAdd_Click(object sender, EventArgs e)
@@ -35,5 +40,14 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             _ = new frmAddBankAccounts(this).ShowDialog();
         }
 
+        private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
+        {
+            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);   
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
     }
 }
