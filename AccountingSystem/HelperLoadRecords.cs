@@ -343,6 +343,7 @@ namespace AccountingSystem
             dataGridView.Columns["full_address"].HeaderText = "Address";
             dataGridView.Columns["kind"].HeaderText = "Kind";
             dataGridView.Columns["kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)

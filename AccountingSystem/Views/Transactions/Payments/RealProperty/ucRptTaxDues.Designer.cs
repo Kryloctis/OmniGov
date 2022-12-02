@@ -185,6 +185,7 @@
             this.chckBxCancelled.TabIndex = 0;
             this.chckBxCancelled.Text = "Show Cancelled";
             this.chckBxCancelled.UseVisualStyleBackColor = true;
+            this.chckBxCancelled.CheckedChanged += new System.EventHandler(this.chckBxCancelled_CheckedChanged);
             // 
             // groupBox3
             // 

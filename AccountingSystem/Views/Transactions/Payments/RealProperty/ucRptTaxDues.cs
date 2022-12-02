@@ -61,6 +61,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             try
             {
                 HelperLoadRecords.DatagridViewPaymentTaxpayerProperties(dgProperties, DataTablePostedProperties());
+                chckBoxProperties.Checked = false;
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
@@ -113,6 +114,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     e.Column.ReadOnly = true;
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void chckBxCancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadPostedProperties();
         }
     }
 }
