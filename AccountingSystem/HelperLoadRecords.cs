@@ -1152,15 +1152,17 @@ namespace AccountingSystem
         internal static void BanksDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["bank_code"].HeaderText = "Bank Code";
+            datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["bank_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            datagrid.Columns["bank_branch"].HeaderText = "Branch";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
 
         #endregion
 

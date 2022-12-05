@@ -11,13 +11,16 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
 {
-    public partial class frmBankAdd : Form
+    public partial class frmAddBanks : Form
     {
-        private frmBanks _frmBanks;
-        public frmBankAdd(frmBanks frmBanks)
+        private readonly frmBanks _frmBanks;
+        private readonly ucBanks _ucBanks;
+
+        public frmAddBanks(frmBanks frmBanks)
         {
             InitializeComponent();
             _frmBanks = frmBanks;
+            _ucBanks = ucBanks1;
         }
 
         private void frmBankAdd_Load(object sender, EventArgs e)
@@ -29,30 +32,20 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                var uc = ucBanks1;
-                if (!uc.ValidateChildren())
+                if (!_ucBanks.ValidateChildren())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
+                    Helper.MessageBoxError(_ucBanks.GetFormErrors());
                     return false;
                 }
 
                 var banksModel = new BanksModel()
                 {
-                    AccountNo = uc.txtacode.Text.Trim(),
-                    BankName = uc.txtbankname.Text.Trim()
-
+                    BankCode = _ucBanks.txtBankCode.Text.Trim(),
+                    BankName = _ucBanks.txtBankName.Text.Trim(),
+                    BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
                 };
 
-                var banksrepository = AccFactory.BanksRepository();
-                if (!banksrepository.CodeExist(uc.txtacode.Text.Trim()))
-                {
-                    return banksrepository.Insert(banksModel);
-                }
-                else
-                {
-                    Helper.ErrorMessage("Account Number already exists!");
-                    uc.txtacode.Focus();
-                }
+                return AccFactory.BanksRepository().Insert(banksModel);
             }
             catch (Exception ex)
             {
@@ -65,15 +58,11 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Account has been saved.");
+                Helper.MessageBoxSuccess("Bank has been saved.");
                 _frmBanks.LoadRecords();
                 ucBanks1.ResetForm();
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-           
-        }
     }
 }
