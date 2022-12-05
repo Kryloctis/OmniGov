@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Receipts;
 using System;
@@ -76,6 +77,12 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 }
             }
          
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int bankAccountID = int.Parse(dgBankAccounts.SelectedCells[0].Value.ToString());
+            _ = new frmEditBankAccounts(this, bankAccountID).ShowDialog();
         }
     }
 }
