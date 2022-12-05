@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.Funds;
+using AccountingSystem.Views.Manage.Receipts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,6 +53,29 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadBankAccounts();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgBankAccounts.SelectedRows.Count;
+          
+            if (selectedRowsCount > 0)
+            {
+                if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                {
+                    var bankAccountsModelList = new List<BankAccountsModel>();
+                    foreach (DataGridViewRow row in dgBankAccounts.SelectedRows)
+                    {
+                        int bankAccountID = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        bankAccountsModelList.Add(new BankAccountsModel() { ID = bankAccountID });
+                    }
+
+                    var bankAccountsRepository = AccFactory.BankAccountsRepository();
+                    _ = bankAccountsRepository.Delete(bankAccountsModelList);
+                    LoadBankAccounts();
+                }
+            }
+         
         }
     }
 }
