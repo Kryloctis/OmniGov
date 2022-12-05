@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Receipts;
+using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,8 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecords();
 
             HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
+
+            toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
         }
          
         private void btnAdd_Click(object sender, EventArgs e)
@@ -48,7 +51,17 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);   
+            Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
+
+            try
+            {
+                var indexes = new byte[] { 3, 4 };
+                Helper.ShowRecordTimestamp(dgBankAccounts, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

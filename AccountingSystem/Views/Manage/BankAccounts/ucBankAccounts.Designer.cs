@@ -61,11 +61,14 @@
             // 
             // cmbxBank
             // 
+            this.cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxBank.FormattingEnabled = true;
             this.cmbxBank.Location = new System.Drawing.Point(89, 7);
             this.cmbxBank.Name = "cmbxBank";
             this.cmbxBank.Size = new System.Drawing.Size(259, 23);
             this.cmbxBank.TabIndex = 1;
+            this.cmbxBank.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxBank_Validating);
+            this.cmbxBank.Validated += new System.EventHandler(this.cmbxBank_Validated);
             // 
             // txtAccountNo
             // 
@@ -73,6 +76,8 @@
             this.txtAccountNo.Name = "txtAccountNo";
             this.txtAccountNo.Size = new System.Drawing.Size(260, 23);
             this.txtAccountNo.TabIndex = 0;
+            this.txtAccountNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtAccountNo_Validating);
+            this.txtAccountNo.Validated += new System.EventHandler(this.txtAccountNo_Validated);
             // 
             // ucBankAccounts
             // 

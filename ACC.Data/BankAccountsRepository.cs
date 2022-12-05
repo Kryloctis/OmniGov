@@ -42,7 +42,28 @@ namespace AccountingSystem
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("banks_id", reader.Rows[0]["banks_id"].ToString());
+                record.Add("account_no", reader.Rows[0]["account_no"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()
@@ -108,7 +129,14 @@ namespace AccountingSystem
 
         public bool Update(BankAccountsModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][] {
+                new object[]{"@id", DbType.Int32, entity.ID},
+                new object[]{"@banks_id", DbType.Int32, entity.BankID},
+                new object[]{"@account_no", DbType.String, entity.AccountNumber},
+            };
+
+            string query = $"UPDATE {tableName} SET banks_id = @banks_id, account_no = @account_no WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
