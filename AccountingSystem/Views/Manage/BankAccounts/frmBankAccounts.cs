@@ -26,12 +26,14 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         internal void LoadBankAccounts()
         {
-            var keySearch = txtSearch.Text.Trim();
+            var searchKey = txtSearch.Text.Trim();
+            DataTable dtBankAccount;
 
-            if (string.IsNullOrEmpty(keySearch))
-                return; 
+            if (searchKey.Length > 2)
+                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(searchKey);
+            else
+                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecords();
 
-            var dtBankAccount = AccFactory.BankAccountsRepository().GetRecords();
             HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
         }
          
@@ -45,7 +47,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);   
         }
 
-        private void txtSearch_Click(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadBankAccounts();
         }

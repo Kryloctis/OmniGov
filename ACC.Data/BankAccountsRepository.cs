@@ -10,6 +10,7 @@ namespace AccountingSystem
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "bank_accounts";
+        private readonly string viewTableName = "view_bank_accounts";
 
         public BankAccountsRepository(IAccGenericCommands dbGenericCommands)
         {
@@ -41,7 +42,31 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new System.NotImplementedException();
+            string query = $"SELECT * FROM {tableName}";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+        }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {tableName}";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchKey)
+        {
+            var parameters = new object[][]
+            {
+                new object[]{"@searchText", DbType.String, $"%{searchKey}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE account_no LIKE @searchText";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt, parameters);
         }
 
         public bool IdExist(int id)

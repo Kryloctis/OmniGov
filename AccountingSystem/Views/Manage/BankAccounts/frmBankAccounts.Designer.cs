@@ -95,7 +95,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtSearch.Size = new System.Drawing.Size(202, 46);
-            this.txtSearch.Click += new System.EventHandler(this.txtSearch_Click);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnDelete
             // 
