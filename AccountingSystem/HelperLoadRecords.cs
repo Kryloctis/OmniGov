@@ -329,6 +329,20 @@ namespace AccountingSystem
             dataGridView.Columns["taxpayers_province"].HeaderText = "Province";
         }
 
+        public static void DatagridViewPaymentTaxpayerTaxDues(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["is_selected"].HeaderText = string.Empty;
+            dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView.Columns["year"].HeaderText = "Year";
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["type"].HeaderText = "Type";
+            dataGridView.Columns["tax_due_amount"].HeaderText = "Tax Due";
+            dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/Discount";
+            dataGridView.Columns["total_payment"].HeaderText = "Total Payment";
+        }
+
         public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 
         {
             dataGridView.DataSource = dataTable;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Agreement;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,36 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         public ucRptTaxDues()
         {
             InitializeComponent();
+        }
+
+        private DataColumn[] DataColumnsTaxDues() 
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("is_selected", typeof(bool)),
+                new DataColumn("year", typeof(int)),
+                new DataColumn("complete_arp_no", typeof(string)),
+                new DataColumn("type", typeof(string)),
+                new DataColumn("tax_due_amount", typeof(decimal)),
+                new DataColumn("penalty_discount", typeof(decimal)),
+                new DataColumn("total_payment", typeof(decimal))
+            };
+        }
+
+        private DataTable DataTableTaxDues() 
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsTaxDues());
+            return dataTable;
+        }
+
+        private void LoadTaxDues(DataGridView dataGridView, DataTable dataTable)
+        {
+            try
+            {
+                HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, dataTable);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private DataColumn[] DataColumnsPostedProperties() 
@@ -70,6 +101,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         {
             Helper.DatagridFullRowSelectStyle(dgProperties, false, false);
             Helper.DatagridFullRowSelectStyle(dgTaxDues, true, false);
+            LoadTaxDues(dgTaxDues, DataTableTaxDues());
         }
 
         private void ucRptTaxDues_Load(object sender, EventArgs e)
@@ -102,6 +134,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             try
             {
                 Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_selected", chckBoxProperties);
+
             }
             catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
