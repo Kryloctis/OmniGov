@@ -54,9 +54,9 @@ namespace AccountingSystem.Views.Manage.Banks
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 15);
+            this.label2.Size = new System.Drawing.Size(39, 15);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Bank Name";
+            this.label2.Text = "Name";
             // 
             // txtBankBranch
             // 
@@ -66,8 +66,6 @@ namespace AccountingSystem.Views.Manage.Banks
             this.txtBankBranch.Name = "txtBankBranch";
             this.txtBankBranch.Size = new System.Drawing.Size(262, 23);
             this.txtBankBranch.TabIndex = 2;
-            this.txtBankBranch.Validating += new System.ComponentModel.CancelEventHandler(this.txtBankCode_Validating);
-            this.txtBankBranch.Validated += new System.EventHandler(this.txtacode_Validated);
             // 
             // txtBankName
             // 
@@ -90,9 +88,9 @@ namespace AccountingSystem.Views.Manage.Banks
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 15);
+            this.label3.Size = new System.Drawing.Size(35, 15);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Bank Code";
+            this.label3.Text = "Code";
             // 
             // txtBankCode
             // 
@@ -102,8 +100,6 @@ namespace AccountingSystem.Views.Manage.Banks
             this.txtBankCode.Name = "txtBankCode";
             this.txtBankCode.Size = new System.Drawing.Size(262, 23);
             this.txtBankCode.TabIndex = 0;
-            this.txtBankCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtbankname_Validating);
-            this.txtBankCode.Validated += new System.EventHandler(this.txtbankname_Validated);
             // 
             // ucBanks
             // 

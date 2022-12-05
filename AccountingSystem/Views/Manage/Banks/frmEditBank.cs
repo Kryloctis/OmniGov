@@ -17,6 +17,7 @@ namespace AccountingSystem.Views.Manage.Banks
             _ucBanks = ucBanks1;
             _ucBanks.bankId = bankId;
         }
+        
         private void LoadSelectedRecord()
         { 
             try
