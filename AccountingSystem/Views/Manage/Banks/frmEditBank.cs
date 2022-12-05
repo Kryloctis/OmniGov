@@ -4,28 +4,28 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
 {
-    public partial class frmBankEdit : Form
+    public partial class frmEditBank : Form
     {
 
         private readonly frmBanks _frmbanks;
-        private readonly ucBanks uc;
+        private readonly ucBanks _ucBanks;
 
-        public frmBankEdit(frmBanks frmbanks, int bankId)
+        public frmEditBank(frmBanks frmbanks, int bankId)
         {
             InitializeComponent();
-
             _frmbanks = frmbanks;
-            uc = ucBanks1;
-            uc.bankId = bankId;
+            _ucBanks = ucBanks1;
+            _ucBanks.bankId = bankId;
         }
         private void LoadSelectedRecord()
         { 
             try
             {
                 var banksRepository = AccFactory.BanksRepository();
-                var bankData = banksRepository.GetRecordByID(uc.bankId);
-                uc.txtacode.Text = bankData["account_no"];
-                uc.txtbankname.Text = bankData["bank_name"];
+                var bankData = banksRepository.GetRecordByID(_ucBanks.bankId);
+                _ucBanks.txtBankCode.Text = bankData["bank_code"];
+                _ucBanks.txtBankName.Text = bankData["bank_name"];
+                _ucBanks.txtBankBranch.Text = bankData["bank_branch"];
             }
             catch (Exception ex) 
             {
@@ -42,18 +42,20 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             try
             {
-                if (!uc.ValidateChildren())
+                if (!_ucBanks.ValidateChildren())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
+                    Helper.MessageBoxError(_ucBanks.GetFormErrors());
                     return false;
                 }
 
                 var banksModel = new BanksModel()
                 {
-                    Id = uc.bankId,
-                    AccountNo = uc.txtacode.Text.Trim(),
-                    BankName = uc.txtbankname.Text.Trim()
+                    Id = _ucBanks.bankId,
+                    BankCode = _ucBanks.txtBankCode.Text.Trim(),
+                    BankName = _ucBanks.txtBankName.Text.Trim(),
+                    BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
                 };
+
                 var banksrepository = AccFactory.BanksRepository();
                 return banksrepository.Update(banksModel);
               
@@ -69,9 +71,10 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             if (SaveData())
             {
-                Helper.MessageBoxSuccess("Account has been updated.");
+                Helper.MessageBoxSuccess("Bank has been updated.");
                 _frmbanks.LoadRecords();
-                uc.ResetForm();
+                _ucBanks.ResetForm();
+                Close();
             }
         }
     }

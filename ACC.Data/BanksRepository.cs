@@ -21,31 +21,24 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+        
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT account_no, bank_name, created_at, updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT bank_code, bank_name, bank_branch FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("account_no", reader.Rows[0]["account_no"].ToString());
-                    record.Add("bank_name",  reader.Rows[0]["bank_name"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
-            }
+                if (reader.Rows.Count < 1)
+                    return record;
 
+                record.Add("bank_code", reader.Rows[0]["bank_code"].ToString());
+                record.Add("bank_name",  reader.Rows[0]["bank_name"].ToString());
+                record.Add("bank_branch", reader.Rows[0]["bank_branch"].ToString());
+            }
+        
             return record;
         }
         public DataTable GetRecords()
@@ -64,32 +57,28 @@ namespace ACC.Data
         }
         public bool Insert(BanksModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_no", DbType.String, entity.AccountNo},
-                      new object[] { "@bank_name", DbType.String, entity.BankName},
-                };
+                new object[] { "@bank_code", DbType.String, entity.BankCode},
+                new object[] { "@bank_name", DbType.String, entity.BankName},
+                new object[] { "@bank_branch", DbType.String, entity.BankBranch}
+            };
 
-                string query = $"INSERT INTO {tableName} (account_no,bank_name) VALUES (@account_no,@bank_name)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (bank_code, bank_name, bank_branch) VALUES (@bank_code, @bank_name, @bank_branch)";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+           
         }
         public bool Update(BanksModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] {"@id", DbType.Int16, entity.Id},
-                new object[] {"@account_no", DbType.String, entity.AccountNo},
+                new object[] {"@bank_code", DbType.String, entity.BankCode},
                 new object[] {"@bank_name", DbType.String, entity.BankName},
+                new object[] {"@bank_branch", DbType.String, entity.BankBranch},
             };
 
-            string query = $"UPDATE {tableName} SET account_no = @account_no, bank_name = @bank_name WHERE id = @id";
+            string query = $"UPDATE {tableName} SET bank_code = @bank_code, bank_name = @bank_name, bank_branch = @bank_branch WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
         public bool Delete(List<BanksModel> entityList)
@@ -193,19 +182,12 @@ namespace ACC.Data
         }
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
-            {
-                var srchtxt = searchText;
+            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
 
-                string query = $"SELECT * FROM {tableName} WHERE account_no  LIKE'%" + srchtxt + "%' OR bank_name  LIKE'%" + srchtxt + "%'";
+            string query = $"SELECT * FROM {tableName} WHERE bank_code LIKE @search_text OR bank_name LIKE @search_text OR bank_branch LIKE @search_text";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtBanks = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBanks, parameters);
         }
     }
 }
