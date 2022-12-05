@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
+using AccountingSystem.Views.Manage.BankAccounts;
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
@@ -731,5 +732,11 @@ namespace AccountingSystem
         {
             _ = new frmBusinessAddOnCharges().ShowDialog();
         }
+
+        private void baToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankAccounts().ShowDialog();
+        }
+
     }
 }
