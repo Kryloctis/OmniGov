@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.Banks
         public ucBanks()
         {
             InitializeComponent();
+
         }
 
         private void ucBanks_Load(object sender, EventArgs e)
@@ -20,55 +21,57 @@ namespace AccountingSystem.Views.Manage.Banks
 
         internal void ResetForm()
         {
-            txtacode.Clear();
-            txtbankname.Clear();
-            txtacode.Focus();
+            txtBankCode.Focus();
+            txtBankBranch.Clear();
+            txtBankName.Clear();
         }
 
         #region Validations
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epAccountNumber.GetError(txtacode);
-            errorArray[1] = epBankName.GetError(txtbankname);
+            var errorArray = new string[3];
+            errorArray[0] = epProvider1.GetError(txtBankCode);
+            errorArray[1] = epProvider1.GetError(txtBankName);
+            errorArray[2] = epProvider1.GetError(txtBankBranch);
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
 
-        private void txtacode_Validating(object sender, CancelEventArgs e)
+        private void txtBankCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epAccountNumber, txtacode, "account no.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epProvider1, txtBankCode, "Bank Code.");
 
-            var banksrepository = AccFactory.BanksRepository();
-            string accountno = txtacode.Text.Trim();
-            bool accountNoexist;
+            //var banksRepository = AccFactory.BanksRepository();
+            //string accountno = txtBankBranch.Text.Trim();
+            //bool bankCodeExist;
 
-            if (bankId == 0)
-                accountNoexist = banksrepository.CodeExist(accountno);
-            else
-                accountNoexist = banksrepository.CodeExist(accountno, bankId);
-            if (accountNoexist)
-            {
-                epAccountNumber.SetError(txtacode, "Account Number already exist in your records!");
-                e.Cancel = true;
-            }
+            //if (bankId == 0)
+            //    bankCodeExist = banksRepository.CodeExist(accountno);
+
+            //bankCodeExist = banksRepository.CodeExist(accountno, bankId);
+
+            //if (bankCodeExist)
+            //{
+            //    epProvider1.SetError(txtBankBranch, "Bank code already exist in your records.");
+            //    e.Cancel = true;
+            //}
         }
 
         private void txtacode_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epAccountNumber, txtacode);
+            Helper.ClearErrorTextBox(epProvider1, txtBankBranch);
         }
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epBankName, txtbankname, "bank name.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epProvider1, txtBankName, "bank name.");
         }
 
         private void txtbankname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epBankName, txtbankname);
+            Helper.ClearErrorTextBox(epProvider1, txtBankName);
         }
 
         #endregion Validations
