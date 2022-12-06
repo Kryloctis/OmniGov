@@ -335,12 +335,20 @@ namespace AccountingSystem
             dataGridView.Columns["is_selected"].HeaderText = string.Empty;
             dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView.Columns["is_selected"].Frozen = true;
             dataGridView.Columns["year"].HeaderText = "Year";
+            dataGridView.Columns["year"].Frozen = true;
+            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["complete_arp_no"].Frozen = true;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
             dataGridView.Columns["type"].HeaderText = "Type";
+            dataGridView.Columns["type"].MinimumWidth = 50;
+            dataGridView.Columns["type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["tax_due_amount"].HeaderText = "Tax Due";
             dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/Discount";
             dataGridView.Columns["total_payment"].HeaderText = "Total Payment";
+            dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;   
         }
 
         public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 

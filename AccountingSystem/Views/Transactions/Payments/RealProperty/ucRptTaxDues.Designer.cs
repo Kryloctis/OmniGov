@@ -224,6 +224,7 @@
             this.chckBxTaxDues.Size = new System.Drawing.Size(15, 14);
             this.chckBxTaxDues.TabIndex = 3;
             this.chckBxTaxDues.UseVisualStyleBackColor = false;
+            this.chckBxTaxDues.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chckBxTaxDues_MouseClick);
             // 
             // dgTaxDues
             // 
@@ -259,6 +260,9 @@
             this.dgTaxDues.RowTemplate.Height = 25;
             this.dgTaxDues.Size = new System.Drawing.Size(587, 345);
             this.dgTaxDues.TabIndex = 2;
+            this.dgTaxDues.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTaxDues_CellValueChanged);
+            this.dgTaxDues.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgTaxDues_ColumnAdded);
+            this.dgTaxDues.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgTaxDues_CurrentCellDirtyStateChanged);
             // 
             // flowLayoutPanel5
             // 

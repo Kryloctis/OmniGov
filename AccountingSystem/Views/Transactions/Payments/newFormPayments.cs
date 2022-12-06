@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             if (tabControl1.SelectedTab == tabPageTaxpayer)
             {
                 tabControl1.SelectedTab = tabPageTaxDues;
-                ucRptTaxDues.TaxpayersId = GetRealTaxpayersId();
+                ucRptTaxDues.taxpayersId = GetRealTaxpayersId();
                 ucRptTaxDues.LoadPostedProperties();
             }
             else if (tabControl1.SelectedTab == tabPageTaxDues)

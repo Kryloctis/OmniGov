@@ -356,15 +356,15 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(string completeArpNo, string ownerName)
+        public DataTable GetViewRptPropertyAssessmentsRecords_By_RealTaxpayersId_CompleteArpNo(int realTaxpayersId, string completeArpNo)
         {
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@taxpayer_name", DbType.String, ownerName}
+                new object[] { "@real_taxpayers_id", DbType.Int32, realTaxpayersId },
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo }
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND taxpayer_name = @taxpayer_name ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);

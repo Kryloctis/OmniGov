@@ -33,7 +33,7 @@ namespace RPT.Domain.Interfaces
         DataTable Get_Grouped_Barangay_Records();
         DataTable Get_Grouped_Municipality_Records();
 
-        DataTable GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(string completeArpNo, string ownerName);
+        DataTable GetViewRptPropertyAssessmentsRecords_By_RealTaxpayersId_CompleteArpNo(int realTaxpayersId, string completeArpNo);
 
         DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled);
     }
