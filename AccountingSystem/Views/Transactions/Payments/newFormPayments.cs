@@ -177,5 +177,13 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             EnableDisableChequeForm();
         }
+
+        private void ucRptTaxDues1_Validating(object sender, CancelEventArgs e)
+        {
+            if (!ucRptTaxDues.ValidateChildren())
+                btnNext.Enabled = true;
+            else
+                btnNext.Enabled = false;
+        }
     }
 }

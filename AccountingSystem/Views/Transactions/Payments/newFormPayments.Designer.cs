@@ -246,11 +246,13 @@
             // 
             // ucRptTaxDues1
             // 
+            this.ucRptTaxDues1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucRptTaxDues1.Location = new System.Drawing.Point(0, 0);
             this.ucRptTaxDues1.Name = "ucRptTaxDues1";
             this.ucRptTaxDues1.Size = new System.Drawing.Size(851, 481);
             this.ucRptTaxDues1.TabIndex = 0;
+            this.ucRptTaxDues1.Validating += new System.ComponentModel.CancelEventHandler(this.ucRptTaxDues1_Validating);
             // 
             // tabPageBpl
             // 

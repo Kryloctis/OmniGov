@@ -49,7 +49,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTotalDue = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -263,6 +263,7 @@
             this.dgTaxDues.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTaxDues_CellValueChanged);
             this.dgTaxDues.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgTaxDues_ColumnAdded);
             this.dgTaxDues.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgTaxDues_CurrentCellDirtyStateChanged);
+            this.dgTaxDues.Validating += new System.ComponentModel.CancelEventHandler(this.dgTaxDues_Validating);
             // 
             // flowLayoutPanel5
             // 
@@ -291,7 +292,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtTotalDue);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 407);
             this.panel1.Name = "panel1";
@@ -308,16 +309,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Total Due";
             // 
-            // textBox1
+            // txtTotalDue
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(759, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(208, 23);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "0.00";
+            this.txtTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotalDue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalDue.Location = new System.Drawing.Point(759, 6);
+            this.txtTotalDue.Name = "txtTotalDue";
+            this.txtTotalDue.ReadOnly = true;
+            this.txtTotalDue.Size = new System.Drawing.Size(208, 23);
+            this.txtTotalDue.TabIndex = 0;
+            this.txtTotalDue.Text = "0.00";
             // 
             // ucRptTaxDues
             // 
@@ -350,21 +351,21 @@
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.CheckBox chckBoxProperties;
-        private System.Windows.Forms.DataGridView dgProperties;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.CheckBox chckBxCancelled;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.CheckBox chckBxTaxDues;
-        private System.Windows.Forms.DataGridView dgTaxDues;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        internal System.Windows.Forms.SplitContainer splitContainer1;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.CheckBox chckBoxProperties;
+        internal System.Windows.Forms.DataGridView dgProperties;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        internal System.Windows.Forms.CheckBox chckBxCancelled;
+        internal System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.Panel panel4;
+        internal System.Windows.Forms.CheckBox chckBxTaxDues;
+        internal System.Windows.Forms.DataGridView dgTaxDues;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtTotalDue;
+        internal System.Windows.Forms.Button button1;
     }
 }
