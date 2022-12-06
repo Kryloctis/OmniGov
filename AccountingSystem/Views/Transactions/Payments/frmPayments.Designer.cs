@@ -57,21 +57,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.cmbxAccountableForm = new System.Windows.Forms.ComboBox();
-            this.txtReceipts = new System.Windows.Forms.TextBox();
-            this.txtCollectingOfficer = new System.Windows.Forms.TextBox();
-            this.txtPayee = new System.Windows.Forms.TextBox();
-            this.dtPaymentDate = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancelTransaction = new System.Windows.Forms.Button();
@@ -88,12 +73,9 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -110,7 +92,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(903, 50);
+            this.toolStrip1.Size = new System.Drawing.Size(1064, 50);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -171,8 +153,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel4);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.splitContainer1.Size = new System.Drawing.Size(903, 362);
-            this.splitContainer1.SplitterDistance = 565;
+            this.splitContainer1.Size = new System.Drawing.Size(1064, 492);
+            this.splitContainer1.SplitterDistance = 726;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -186,7 +168,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(565, 362);
+            this.tabControl1.Size = new System.Drawing.Size(726, 492);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -197,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(557, 334);
+            this.tabPage1.Size = new System.Drawing.Size(718, 464);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "RPT";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -233,7 +215,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(551, 299);
+            this.dataGridView1.Size = new System.Drawing.Size(712, 429);
             this.dataGridView1.TabIndex = 16;
             // 
             // panel3
@@ -242,15 +224,15 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel3.Controls.Add(this.txtTotalDue);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(3, 302);
+            this.panel3.Location = new System.Drawing.Point(3, 432);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(551, 29);
+            this.panel3.Size = new System.Drawing.Size(712, 29);
             this.panel3.TabIndex = 20;
             // 
             // btnRptGetTaxDue
             // 
             this.btnRptGetTaxDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRptGetTaxDue.Location = new System.Drawing.Point(445, 3);
+            this.btnRptGetTaxDue.Location = new System.Drawing.Point(606, 3);
             this.btnRptGetTaxDue.Name = "btnRptGetTaxDue";
             this.btnRptGetTaxDue.Size = new System.Drawing.Size(103, 23);
             this.btnRptGetTaxDue.TabIndex = 0;
@@ -286,7 +268,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(557, 334);
+            this.tabPage2.Size = new System.Drawing.Size(718, 464);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "BPL";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -296,7 +278,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(557, 334);
+            this.tabPage3.Size = new System.Drawing.Size(718, 464);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Other";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -307,7 +289,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 15);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(334, 347);
+            this.panel4.Size = new System.Drawing.Size(334, 477);
             this.panel4.TabIndex = 1;
             // 
             // splitContainer2
@@ -322,11 +304,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.groupBox3);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(334, 347);
+            this.splitContainer2.Size = new System.Drawing.Size(334, 477);
             this.splitContainer2.SplitterDistance = 112;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -416,161 +394,6 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.label5.TabIndex = 3;
             this.label5.Text = "TIN";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.panel5);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(334, 231);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Payment Details";
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.radioButton2);
-            this.panel5.Controls.Add(this.radioButton1);
-            this.panel5.Controls.Add(this.cmbxAccountableForm);
-            this.panel5.Controls.Add(this.txtReceipts);
-            this.panel5.Controls.Add(this.txtCollectingOfficer);
-            this.panel5.Controls.Add(this.txtPayee);
-            this.panel5.Controls.Add(this.dtPaymentDate);
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.label9);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.label6);
-            this.panel5.Controls.Add(this.label7);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel5.Location = new System.Drawing.Point(3, 19);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(328, 209);
-            this.panel5.TabIndex = 0;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(170, 63);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(58, 19);
-            this.radioButton2.TabIndex = 30;
-            this.radioButton2.Text = "Check";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(113, 63);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(51, 19);
-            this.radioButton1.TabIndex = 30;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Cash";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // cmbxAccountableForm
-            // 
-            this.cmbxAccountableForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxAccountableForm.FormattingEnabled = true;
-            this.cmbxAccountableForm.Location = new System.Drawing.Point(113, 32);
-            this.cmbxAccountableForm.Name = "cmbxAccountableForm";
-            this.cmbxAccountableForm.Size = new System.Drawing.Size(196, 23);
-            this.cmbxAccountableForm.TabIndex = 29;
-            // 
-            // txtReceipts
-            // 
-            this.txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtReceipts.Location = new System.Drawing.Point(113, 119);
-            this.txtReceipts.Name = "txtReceipts";
-            this.txtReceipts.Size = new System.Drawing.Size(196, 23);
-            this.txtReceipts.TabIndex = 28;
-            this.txtReceipts.WordWrap = false;
-            // 
-            // txtCollectingOfficer
-            // 
-            this.txtCollectingOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCollectingOfficer.Location = new System.Drawing.Point(113, 3);
-            this.txtCollectingOfficer.Name = "txtCollectingOfficer";
-            this.txtCollectingOfficer.ReadOnly = true;
-            this.txtCollectingOfficer.Size = new System.Drawing.Size(196, 23);
-            this.txtCollectingOfficer.TabIndex = 27;
-            this.txtCollectingOfficer.WordWrap = false;
-            // 
-            // txtPayee
-            // 
-            this.txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPayee.Location = new System.Drawing.Point(113, 148);
-            this.txtPayee.Name = "txtPayee";
-            this.txtPayee.Size = new System.Drawing.Size(196, 23);
-            this.txtPayee.TabIndex = 26;
-            this.txtPayee.WordWrap = false;
-            // 
-            // dtPaymentDate
-            // 
-            this.dtPaymentDate.Location = new System.Drawing.Point(113, 90);
-            this.dtPaymentDate.Name = "dtPaymentDate";
-            this.dtPaymentDate.Size = new System.Drawing.Size(196, 23);
-            this.dtPaymentDate.TabIndex = 25;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Payee";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 15);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Payment Date";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(2, 65);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(99, 15);
-            this.label9.TabIndex = 22;
-            this.label9.Text = "Payment Method";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 15);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Receipt No.";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(2, 36);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 15);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Accountable Form";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(2, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 15);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Collecting Officer";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
@@ -578,7 +401,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(903, 392);
+            this.panel1.Size = new System.Drawing.Size(1064, 522);
             this.panel1.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -589,15 +412,15 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 362);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 492);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(903, 30);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1064, 30);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnCancelTransaction
             // 
             this.btnCancelTransaction.Enabled = false;
-            this.btnCancelTransaction.Location = new System.Drawing.Point(779, 3);
+            this.btnCancelTransaction.Location = new System.Drawing.Point(940, 3);
             this.btnCancelTransaction.Name = "btnCancelTransaction";
             this.btnCancelTransaction.Size = new System.Drawing.Size(121, 23);
             this.btnCancelTransaction.TabIndex = 1;
@@ -608,7 +431,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             // btnPay
             // 
             this.btnPay.Enabled = false;
-            this.btnPay.Location = new System.Drawing.Point(652, 3);
+            this.btnPay.Location = new System.Drawing.Point(813, 3);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(121, 23);
             this.btnPay.TabIndex = 1;
@@ -621,7 +444,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(903, 442);
+            this.ClientSize = new System.Drawing.Size(1064, 572);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.MinimizeBox = false;
@@ -644,15 +467,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -686,22 +505,7 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel5;
-        internal System.Windows.Forms.TextBox txtReceipts;
-        internal System.Windows.Forms.TextBox txtCollectingOfficer;
-        internal System.Windows.Forms.TextBox txtPayee;
-        internal System.Windows.Forms.DateTimePicker dtPaymentDate;
-        internal System.Windows.Forms.Label label4;
-        internal System.Windows.Forms.Label label2;
-        internal System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.Label label6;
-        internal System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnRptGetTaxDue;
-        private System.Windows.Forms.ComboBox cmbxAccountableForm;
-        internal System.Windows.Forms.Label label9;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancelTransaction;
         private System.Windows.Forms.Button btnPay;

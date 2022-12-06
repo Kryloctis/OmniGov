@@ -185,7 +185,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(525, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(556, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2

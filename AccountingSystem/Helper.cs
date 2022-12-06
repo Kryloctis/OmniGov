@@ -16,6 +16,55 @@ namespace AccountingSystem
     {
         internal static byte UserId = AccFactory.UserId;
 
+        public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
+        {
+            var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
+
+            dictSignatoriesReferencedDocument = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+
+            if (dictSignatoriesReferencedDocument.Count < 1)
+                return dictSignatoriesReferencedDocument;
+
+            string prefix = dictSignatoriesReferencedDocument["signatories_prefix"].ToString();
+            string firstName = dictSignatoriesReferencedDocument["signatories_first_name"].ToString();
+            string middleInitial = dictSignatoriesReferencedDocument["signatories_middle_initial"].ToString();
+            string lastName = dictSignatoriesReferencedDocument["signatories_last_name"].ToString();
+            string suffix = dictSignatoriesReferencedDocument["signatories_suffix"].ToString();
+
+            string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+
+            dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
+
+            return dictSignatoriesReferencedDocument;
+        }
+
+        public static bool HasPermission(string permissionName)
+        {
+            try
+            {
+                return AccFactory.UsersRepository().HasPermission(UserId, permissionName);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxError(ex.Message);
+            }
+
+            return false;
+        }
+
+        public static bool IsJobOrder(int userId)
+        {
+            try
+            {
+                var jobOrderRepo = AccFactory.JobOrderRepository();
+                return jobOrderRepo.IsUserJobOrder(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static void LoadFormIcon(Form form)
         {
             form.Icon = Properties.Resources.accounting;
@@ -25,6 +74,24 @@ namespace AccountingSystem
 
         private static int m_currentPageIndex;
         private static IList<Stream> m_streams;
+
+        public static void DisposePrintToPrinter()
+        {
+            if (m_streams != null)
+            {
+                foreach (Stream stream in m_streams)
+                    stream.Close();
+                m_streams = null;
+            }
+        }
+
+        // Create a local report for Report.rdlc, load the data,
+        //    export the report to an .emf file, and print it.
+        internal static void PrintToPrinter(LocalReport report, PageSettings pageSettings)
+        {
+            Export(report, pageSettings);
+            Print();
+        }
 
         // Routine to provide to the report renderer, in order to
         //    save an image for each page of the report.
@@ -36,6 +103,7 @@ namespace AccountingSystem
             m_streams.Add(stream);
             return stream;
         }
+
         // Export the given report as an EMF (Enhanced Metafile) file.
         private static void Export(LocalReport report, PageSettings pageSettings)
         {
@@ -56,6 +124,25 @@ namespace AccountingSystem
             foreach (Stream stream in m_streams)
                 stream.Position = 0;
         }
+
+        private static void Print()
+        {
+            if (m_streams == null || m_streams.Count == 0)
+                throw new Exception("Error: no stream to print.");
+            PrintDocument printDoc = new PrintDocument();
+            if (!printDoc.PrinterSettings.IsValid)
+            {
+                throw new Exception("Error: cannot find the default printer.");
+            }
+            else
+            {
+                printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
+                m_currentPageIndex = 0;
+                printDoc.Print();
+                MessageBoxSuccess("Printing Receipt...");
+            }
+        }
+
         // Handler for PrintPageEvents
         private static void PrintPage(object sender, PrintPageEventArgs ev)
         {
@@ -80,56 +167,9 @@ namespace AccountingSystem
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
-        private static void Print()
-        {
-            if (m_streams == null || m_streams.Count == 0)
-                throw new Exception("Error: no stream to print.");
-            PrintDocument printDoc = new PrintDocument();
-            if (!printDoc.PrinterSettings.IsValid)
-            {
-                throw new Exception("Error: cannot find the default printer.");
-            }
-            else
-            {
-                printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
-                m_currentPageIndex = 0;
-                printDoc.Print();
-                MessageBoxSuccess("Printing Receipt...");
-            }
-        }
-        // Create a local report for Report.rdlc, load the data,
-        //    export the report to an .emf file, and print it.
-        internal static void PrintToPrinter(LocalReport report, PageSettings pageSettings)
-        {
-            Export(report, pageSettings);
-            Print();
-        }
-
-        public static void DisposePrintToPrinter()
-        {
-            if (m_streams != null)
-            {
-                foreach (Stream stream in m_streams)
-                    stream.Close();
-                m_streams = null;
-            }
-        }
-
-        #endregion
+        #endregion Print RDLC
 
         #region Amount to Words
-
-        public class UtilConst
-        {
-            public static readonly string[] BelowTen = { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" };
-            public static readonly string[] BelowTwenty = { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
-            public static readonly string[] BelowHundred = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
-
-            public const string IllegalMsgEmpty = "Input is empty";
-            public const string IllegalMsgOutOfRange = "Illegal input, amount must between 0 and 2147483647.99";
-            public const string IllegalMsgCommon = "Illegal input, please input amount like '123', '123.0', '123.00'";
-            public const string IllegalMsgDecimal = "Illegal decimal";
-        }
 
         public class AmountToWords
         {
@@ -211,29 +251,25 @@ namespace AccountingSystem
 
                 // tidy and combine the result
                 return TidyAndCombineWords(strIntegerWords, strDecimalWords);
-
             }
 
             /// <summary>
-            /// Use regular expression to validate input
-            /// positive number, up to 2 decimal
+            /// Logic to convert decimal part [0,99] to words
+            /// recursive
             /// </summary>
-            /// <param name="input">the amount to be validate</param>
-            /// return the validate result, true or false
-            private bool ValidateFormat(string input)
+            /// <param name="num">the number to be converted</param>
+            /// return the convert result - string
+            private string ConvertDecimalPartToWords(int num)
             {
-                Regex reg = new Regex("^[0-9,]+([.][0-9]{1,2})?$");
-                if (string.IsNullOrEmpty(input))
-                {
-                    return false;
-                }
-                if (reg.Match(input).Success)
-                {
-                    return true;
-                }
-                return false;
-            }
+                string result;
+                if (num == 0) result = "";
+                else if (num < 10) result = UtilConst.BelowTen[num];
+                else if (num < 20) result = UtilConst.BelowTwenty[num - 10];
+                else if (num < 100) result = UtilConst.BelowHundred[num / 10] + " " + ConvertDecimalPartToWords(num % 10);
+                else throw new ArgumentException(UtilConst.IllegalMsgDecimal);
 
+                return result.Trim();
+            }
 
             /// <summary>
             /// Logic to convert integer part [0,2147483647] to words
@@ -252,24 +288,6 @@ namespace AccountingSystem
                 else if (num < 1000000) result = ConvertIntegerPartToWords(num / 1000) + " Thousand " + ConvertIntegerPartToWords(num % 1000);
                 else if (num < 1000000000) result = ConvertIntegerPartToWords(num / 1000000) + " Million " + ConvertIntegerPartToWords(num % 1000000);
                 else result = ConvertIntegerPartToWords(num / 1000000000) + " Billion " + ConvertIntegerPartToWords(num % 1000000000);
-
-                return result.Trim();
-            }
-
-            /// <summary>
-            /// Logic to convert decimal part [0,99] to words
-            /// recursive
-            /// </summary>
-            /// <param name="num">the number to be converted</param>
-            /// return the convert result - string
-            private string ConvertDecimalPartToWords(int num)
-            {
-                string result;
-                if (num == 0) result = "";
-                else if (num < 10) result = UtilConst.BelowTen[num];
-                else if (num < 20) result = UtilConst.BelowTwenty[num - 10];
-                else if (num < 100) result = UtilConst.BelowHundred[num / 10] + " " + ConvertDecimalPartToWords(num % 10);
-                else throw new ArgumentException(UtilConst.IllegalMsgDecimal);
 
                 return result.Trim();
             }
@@ -318,9 +336,40 @@ namespace AccountingSystem
 
                 return result.Trim();
             }
+
+            /// <summary>
+            /// Use regular expression to validate input
+            /// positive number, up to 2 decimal
+            /// </summary>
+            /// <param name="input">the amount to be validate</param>
+            /// return the validate result, true or false
+            private bool ValidateFormat(string input)
+            {
+                Regex reg = new Regex("^[0-9,]+([.][0-9]{1,2})?$");
+                if (string.IsNullOrEmpty(input))
+                {
+                    return false;
+                }
+                if (reg.Match(input).Success)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
-        #endregion
+        public class UtilConst
+        {
+            public const string IllegalMsgCommon = "Illegal input, please input amount like '123', '123.0', '123.00'";
+            public const string IllegalMsgDecimal = "Illegal decimal";
+            public const string IllegalMsgEmpty = "Input is empty";
+            public const string IllegalMsgOutOfRange = "Illegal input, amount must between 0 and 2147483647.99";
+            public static readonly string[] BelowHundred = { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+            public static readonly string[] BelowTen = { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" };
+            public static readonly string[] BelowTwenty = { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+        }
+
+        #endregion Amount to Words
 
         #region DataGrid Default Styles
 
@@ -342,39 +391,6 @@ namespace AccountingSystem
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             //dgv.ColumnHeadersHeight = 30;
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
-            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-
-            if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true)
-        {
-            dgv.RowHeadersVisible = false;
-            dgv.EnableHeadersVisualStyles = false;
-            dgv.AllowUserToAddRows = false;
-            dgv.AllowUserToDeleteRows = false;
-            dgv.AllowUserToOrderColumns = false;
-            dgv.AllowUserToResizeColumns = true;
-            dgv.BackgroundColor = Color.White;
-            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
-            dgv.BorderStyle = BorderStyle.FixedSingle;
-            dgv.ReadOnly = isReadOnly;
-            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.AllowUserToResizeRows = false;
-            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
-            dgv.RowTemplate.Height = 20;
-            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
-            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgv.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.GradientInactiveCaption);
-            dgv.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
-            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dgv.RowHeadersWidth = 25;
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            dgv.AdvancedColumnHeadersBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
             dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -414,7 +430,40 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        #endregion
+        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true)
+        {
+            dgv.RowHeadersVisible = false;
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = true;
+            dgv.BackgroundColor = Color.White;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.GridColor = Color.FromKnownColor(KnownColor.Control);
+            dgv.BorderStyle = BorderStyle.FixedSingle;
+            dgv.ReadOnly = isReadOnly;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.RowTemplate.Height = 20;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromKnownColor(KnownColor.GradientInactiveCaption);
+            dgv.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.White);
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.RowHeadersWidth = 25;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dgv.AdvancedColumnHeadersBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue;
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        #endregion DataGrid Default Styles
 
         #region Check Box Column Utility Datagrid
 
@@ -446,50 +495,18 @@ namespace AccountingSystem
             }
         }
 
-        #endregion 
+        #endregion Check Box Column Utility Datagrid
 
-        #region  Miscellaneous
-        public static Color StatusColor(string status)
+        #region Miscellaneous
+
+        public static string GenerateFullAddress(string address, string barangay, string municipality, string province)
         {
-            switch (status)
-            {
-                case "Approved":
-                    return Color.FromArgb(201, 228, 197);
+            string _address = string.IsNullOrEmpty(address)? string.Empty : $"{address}, ";
+            string _barangay = string.IsNullOrEmpty(barangay)? string.Empty : $"{barangay}, ";
+            string _municipality = string.IsNullOrEmpty(municipality) ? string.Empty : $"{municipality}, ";
+            string _province = string.IsNullOrEmpty(province) ? string.Empty : $"{province}";
 
-                case "Disapproved":
-                    return Color.FromArgb(246, 169, 169);
-
-
-                case "Cancelled":
-                    return Color.FromArgb(200, 198, 198);
-
-                case "Pending":
-                    return Color.FromArgb(255, 230, 153);
-
-                default:
-                    return Color.Black;
-            }
-        }
-
-        public static Dictionary<string, string> LGUDetails()
-        {
-            var lguDict = new Dictionary<string, string>
-            {
-                { "lgu_name", "Municipality of Buug" },
-                { "lgu_province", "Zamboanga Sibugay"}
-            };
-
-            return lguDict;
-        }
-
-        public static int GetDatagridViewRecordCount(DataGridView dataGridView)
-        {
-            return dataGridView.Rows.Count;
-        }
-
-        public static DateTime GetCurrentDate()
-        {
-            return DateTime.Now;
+            return $"{_address}{_barangay}{_municipality}{_province}";
         }
 
         public static void DatagridViewRecordFinder(DataGridView dataGridView, string columnName, string value)
@@ -523,7 +540,49 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        public static DateTime GetCurrentDate()
+        {
+            return DateTime.Now;
+        }
+
+        public static int GetDatagridViewRecordCount(DataGridView dataGridView)
+        {
+            return dataGridView.Rows.Count;
+        }
+
+        public static Dictionary<string, string> LGUDetails()
+        {
+            var lguDict = new Dictionary<string, string>
+            {
+                { "lgu_name", "Municipality of Buug" },
+                { "lgu_province", "Zamboanga Sibugay"}
+            };
+
+            return lguDict;
+        }
+
+        public static Color StatusColor(string status)
+        {
+            switch (status)
+            {
+                case "Approved":
+                    return Color.FromArgb(201, 228, 197);
+
+                case "Disapproved":
+                    return Color.FromArgb(246, 169, 169);
+
+                case "Cancelled":
+                    return Color.FromArgb(200, 198, 198);
+
+                case "Pending":
+                    return Color.FromArgb(255, 230, 153);
+
+                default:
+                    return Color.Black;
+            }
+        }
+
+        #endregion Miscellaneous
 
         #region Get User Data
 
@@ -561,7 +620,6 @@ namespace AccountingSystem
             var dictUser = new Dictionary<string, dynamic>();
             try
             {
-
                 dictUser = AccFactory.UsersRepository().GetViewRecordById(UserId);
                 string prefix = dictUser["prefix"];
                 string suffix = dictUser["suffix"];
@@ -570,7 +628,6 @@ namespace AccountingSystem
                 dictUser.Add("user_full_name", userFullName);
 
                 return dictUser;
-
             }
             catch (Exception ex)
             {
@@ -580,22 +637,53 @@ namespace AccountingSystem
             return dictUser;
         }
 
-        #endregion
+        #endregion Get User Data
 
         #region ErrorProviders on Controls
 
-        private static string GetFirstLetter(string word)
+        public static void ClearErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox)
         {
-            return word.Substring(0, 1);
+            ep.SetError(chklstBox, string.Empty);
         }
 
-        private static string ErrorMessageForEmpty(string fieldName)
+        public static void ClearErrorComboBox(ErrorProvider ep, ComboBox cmbBox)
         {
+            ep.SetError(cmbBox, string.Empty);
+        }
 
-            if (GetFirstLetter(fieldName) == "A" || GetFirstLetter(fieldName) == "a")
-                return $"Please enter an {fieldName.ToLower()}";
-            else
-                return $"Please enter a {fieldName.ToLower()}";
+        public static void ClearErrorDatagridView(ErrorProvider ep, DataGridView dgView)
+        {
+            ep.SetError(dgView, string.Empty);
+        }
+
+        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, DateTimePicker dtpDateRange)
+        {
+            ep.SetError(dtpDateRange, string.Empty);
+        }
+
+        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, NumericUpDown numUpDown)
+        {
+            ep.SetError(numUpDown, string.Empty);
+        }
+
+        public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
+        {
+            ep.SetError(numUpDown, string.Empty);
+        }
+
+        public static void ClearErrorRichTextBox(ErrorProvider ep, RichTextBox richtxtBox)
+        {
+            ep.SetError(richtxtBox, string.Empty);
+        }
+
+        public static void ClearErrorTextBox(ErrorProvider ep, TextBox txtBox)
+        {
+            ep.SetError(txtBox, string.Empty);
+        }
+
+        public static void ClearMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox)
+        {
+            ep.SetError(maskedTextBox, string.Empty);
         }
 
         public static string ErrorMessage(string fieldName)
@@ -606,23 +694,11 @@ namespace AccountingSystem
                 return $"Please enter a {fieldName}.";
         }
 
-        public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")
+        public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
         {
-            if (string.IsNullOrWhiteSpace(txtBox.Text.Trim()))
+            if (chklstBox.CheckedIndices.Count == 0)
             {
-                ep.SetError(txtBox, $"{ErrorMessageForEmpty(fieldName)}");
-                return true;
-
-            }
-
-            return false;
-        }
-
-        public static bool ShowErrorRichTextBoxEmpty(ErrorProvider ep, RichTextBox richTxtBox, string fieldName = "Field")
-        {
-            if (string.IsNullOrWhiteSpace(richTxtBox.Text.Trim()))
-            {
-                ep.SetError(richTxtBox, $"{ErrorMessageForEmpty(fieldName)}");
+                ep.SetError(chklstBox, $"{fieldName} is required");
                 return true;
             }
 
@@ -634,39 +710,6 @@ namespace AccountingSystem
             if (string.IsNullOrWhiteSpace(cmbBox.Text))
             {
                 ep.SetError(cmbBox, $"{ErrorMessageForEmpty(fieldName)}");
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool ShowErrorNumericUpDownEmpty(ErrorProvider ep, NumericUpDown numUpDown, string fieldName = "Field")
-        {
-            if (string.IsNullOrWhiteSpace(numUpDown.Text.ToString()))
-            {
-                ep.SetError(numUpDown, $"{ErrorMessageForEmpty(fieldName)}.");
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool ShowErrorNumericUpDownZero(ErrorProvider ep, NumericUpDown numericUpDown, string fieldName = "Field")
-        {
-            if (numericUpDown.Value == 0)
-            {
-                ep.SetError(numericUpDown, $"{ErrorMessageForEmpty(fieldName)}");
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool ShowErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox, string fieldName = "Field")
-        {
-            if (chklstBox.CheckedIndices.Count == 0)
-            {
-                ep.SetError(chklstBox, $"{fieldName} is required");
                 return true;
             }
 
@@ -695,16 +738,50 @@ namespace AccountingSystem
             }
             return false;
         }
-        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, DateTimePicker dtpDateRange)
+
+        public static bool ShowErrorNumericUpDownEmpty(ErrorProvider ep, NumericUpDown numUpDown, string fieldName = "Field")
         {
-            ep.SetError(dtpDateRange, string.Empty);
+            if (string.IsNullOrWhiteSpace(numUpDown.Text.ToString()))
+            {
+                ep.SetError(numUpDown, $"{ErrorMessageForEmpty(fieldName)}.");
+                return true;
+            }
+
+            return false;
         }
 
-        public static void ClearErrorNumericUpDown(ErrorProvider ep, NumericUpDown numUpDown)
+        public static bool ShowErrorNumericUpDownZero(ErrorProvider ep, NumericUpDown numericUpDown, string fieldName = "Field")
         {
-            ep.SetError(numUpDown, string.Empty);
+            if (numericUpDown.Value == 0)
+            {
+                ep.SetError(numericUpDown, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
         }
 
+        public static bool ShowErrorRichTextBoxEmpty(ErrorProvider ep, RichTextBox richTxtBox, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(richTxtBox.Text.Trim()))
+            {
+                ep.SetError(richTxtBox, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool ShowErrorTextBoxEmpty(ErrorProvider ep, TextBox txtBox, string fieldName = "Field")
+        {
+            if (string.IsNullOrWhiteSpace(txtBox.Text.Trim()))
+            {
+                ep.SetError(txtBox, $"{ErrorMessageForEmpty(fieldName)}");
+                return true;
+            }
+
+            return false;
+        }
 
         public static bool ShowMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox, string fieldName)
         {
@@ -716,61 +793,33 @@ namespace AccountingSystem
             return false;
         }
 
-        public static void ClearErrorDateTimePickerRange(ErrorProvider ep, NumericUpDown numUpDown)
+        private static string ErrorMessageForEmpty(string fieldName)
         {
-            ep.SetError(numUpDown, string.Empty);
+            if (GetFirstLetter(fieldName) == "A" || GetFirstLetter(fieldName) == "a")
+                return $"Please enter an {fieldName.ToLower()}";
+            else
+                return $"Please enter a {fieldName.ToLower()}";
         }
 
-        public static void ClearErrorComboBox(ErrorProvider ep, ComboBox cmbBox)
+        private static string GetFirstLetter(string word)
         {
-            ep.SetError(cmbBox, string.Empty);
+            return word.Substring(0, 1);
         }
 
-        public static void ClearErrorTextBox(ErrorProvider ep, TextBox txtBox)
-        {
-            ep.SetError(txtBox, string.Empty);
-        }
-
-        public static void ClearErrorRichTextBox(ErrorProvider ep, RichTextBox richtxtBox)
-        {
-            ep.SetError(richtxtBox, string.Empty);
-        }
-
-        public static void ClearErrorCheckedListBox(ErrorProvider ep, CheckedListBox chklstBox)
-        {
-            ep.SetError(chklstBox, string.Empty);
-        }
-
-        public static void ClearErrorDatagridView(ErrorProvider ep, DataGridView dgView)
-        {
-            ep.SetError(dgView, string.Empty);
-        }
-
-        public static void ClearMaskedTextboxError(ErrorProvider ep, MaskedTextBox maskedTextBox)
-        {
-            ep.SetError(maskedTextBox, string.Empty);
-        }
-
-
-        #endregion
+        #endregion ErrorProviders on Controls
 
         #region MessageBoxes
+
         // prompt a success messagebox
 
-        public static void MessageBoxWarning(string message)
+        public static bool MessageBoxConfirmCancel(string confirmMessage)
         {
-            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
+            string message = confirmMessage;
 
-        public static void MessageBoxSuccess(string message)
-        {
-            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                return true;
 
-        // prompt an error messagebox
-        public static void MessageBoxError(string message)
-        {
-            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
 
         public static bool MessageBoxConfirmDelete(int rowCount)
@@ -788,24 +837,26 @@ namespace AccountingSystem
             return false;
         }
 
-        public static bool MessageBoxConfirmCancel(string confirmMessage)
+        // prompt an error messagebox
+        public static void MessageBoxError(string message)
         {
-            string message = confirmMessage;
-
-            if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                return true;
-
-            return false;
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public static void MessageBoxSuccess(string message)
+        {
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-        #endregion
+        public static void MessageBoxWarning(string message)
+        {
+            _ = MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
 
-        #region HideEditDeleteButtons
-
-        #endregion
+        #endregion MessageBoxes
 
         #region EnableDisableButtons
+
         public static void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
@@ -814,7 +865,6 @@ namespace AccountingSystem
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Delete (" + SelectedRows + ")";
-
             }
             else if (SelectedRows > 1)
             {
@@ -838,7 +888,6 @@ namespace AccountingSystem
                 tsBtnEdit.Enabled = true;
                 tsBtnDelete.Enabled = true;
                 tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
-
             }
             else if (SelectedRows > 1)
             {
@@ -862,7 +911,6 @@ namespace AccountingSystem
                 tsBtnEdit.Enabled = true;
                 tsBtnDelete.Enabled = true;
                 tsBtnDelete.Text = "Delete (" + SelectedRows + ")";
-
             }
             else if (SelectedRows > 1)
             {
@@ -878,29 +926,55 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        #endregion EnableDisableButtons
 
-        public static Dictionary<string, string> GetSignatoryDataBy_Reference_DocumentName(string reference, string documentName)
+        public static Dictionary<int, string> MonthsDatasource()
         {
-            var dictSignatoriesReferencedDocument = new Dictionary<string, string>();
+            var month = new Dictionary<int, string>();
+            month.Add(1, "January");
+            month.Add(2, "February");
+            month.Add(3, "March");
+            month.Add(4, "April");
+            month.Add(5, "May");
+            month.Add(6, "June");
+            month.Add(7, "July");
+            month.Add(8, "August");
+            month.Add(9, "September");
+            month.Add(10, "October");
+            month.Add(11, "November");
+            month.Add(12, "December");
 
-            dictSignatoriesReferencedDocument = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName(reference, documentName);
+            return month;
+        }
 
-            if (dictSignatoriesReferencedDocument.Count < 1)
-                return dictSignatoriesReferencedDocument;
+        public static DataTable QuarterDataTable()
+        {
+            var dtQuarter = new DataTable();
+            dtQuarter.Columns.Add("id");
+            dtQuarter.Columns.Add("quarter");
 
-            string prefix = dictSignatoriesReferencedDocument["signatories_prefix"].ToString();
-            string firstName = dictSignatoriesReferencedDocument["signatories_first_name"].ToString();
-            string middleInitial = dictSignatoriesReferencedDocument["signatories_middle_initial"].ToString();
-            string lastName = dictSignatoriesReferencedDocument["signatories_last_name"].ToString();
-            string suffix = dictSignatoriesReferencedDocument["signatories_suffix"].ToString();
+            DataRow row1 = dtQuarter.NewRow();
+            row1["id"] = 1;
+            row1["quarter"] = "1st";
+            dtQuarter.Rows.Add(row1);
 
-            string signatoryName = $"{(string.IsNullOrEmpty(prefix) ? string.Empty : $"{prefix}.")} {firstName} {middleInitial}. {lastName}{(string.IsNullOrEmpty(suffix) ? string.Empty : $", {suffix}")}";
+            DataRow row2 = dtQuarter.NewRow();
+            row2["id"] = 2;
 
+            row2["quarter"] = "2nd";
+            dtQuarter.Rows.Add(row2);
 
-            dictSignatoriesReferencedDocument.Add("signatories_full_name", signatoryName);
+            DataRow row3 = dtQuarter.NewRow();
+            row3["id"] = 3;
+            row3["quarter"] = "3rd";
+            dtQuarter.Rows.Add(row3);
 
-            return dictSignatoriesReferencedDocument;
+            DataRow row4 = dtQuarter.NewRow();
+            row4["id"] = 4;
+            row4["quarter"] = "4th";
+            dtQuarter.Rows.Add(row4);
+
+            return dtQuarter;
         }
 
         public static void ShowRecordTimestamp(DataGridView dataGridView, byte[] index, ToolStripStatusLabel lblCreatedAt, ToolStripStatusLabel lblUpdatedAt)
@@ -938,82 +1012,6 @@ namespace AccountingSystem
         public static string TruncateString(string myString, int maxLength)
         {
             return myString.Length > maxLength ? $"{myString.Substring(0, 20)}..." : $"{myString}";
-        }
-
-        public static Dictionary<int, string> MonthsDatasource()
-        {
-            var month = new Dictionary<int, string>();
-            month.Add(1, "January");
-            month.Add(2, "February");
-            month.Add(3, "March");
-            month.Add(4, "April");
-            month.Add(5, "May");
-            month.Add(6, "June");
-            month.Add(7, "July");
-            month.Add(8, "August");
-            month.Add(9, "September");
-            month.Add(10, "October");
-            month.Add(11, "November");
-            month.Add(12, "December");
-
-            return month;
-        }
-
-        public static bool HasPermission(string permissionName)
-        {
-            try
-            {
-                return AccFactory.UsersRepository().HasPermission(UserId, permissionName);
-            }
-            catch (Exception ex)
-            {
-                MessageBoxError(ex.Message);
-            }
-
-            return false;
-        }
-
-        public static bool IsJobOrder(int userId)
-        {
-            try
-            {
-                var jobOrderRepo = AccFactory.JobOrderRepository();
-                return jobOrderRepo.IsUserJobOrder(userId);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public static DataTable QuarterDataTable()
-        {
-            var dtQuarter = new DataTable();
-            dtQuarter.Columns.Add("id");
-            dtQuarter.Columns.Add("quarter");
-
-            DataRow row1 = dtQuarter.NewRow();
-            row1["id"] = 1;
-            row1["quarter"] = "1st";
-            dtQuarter.Rows.Add(row1);
-
-            DataRow row2 = dtQuarter.NewRow();
-            row2["id"] = 2;
-
-            row2["quarter"] = "2nd";
-            dtQuarter.Rows.Add(row2);
-
-            DataRow row3 = dtQuarter.NewRow();
-            row3["id"] = 3;
-            row3["quarter"] = "3rd";
-            dtQuarter.Rows.Add(row3);
-
-            DataRow row4 = dtQuarter.NewRow();
-            row4["id"] = 4;
-            row4["quarter"] = "4th";
-            dtQuarter.Rows.Add(row4);
-
-            return dtQuarter;
         }
     }
 }

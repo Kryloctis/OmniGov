@@ -2293,9 +2293,109 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap symbol_add_16px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-add@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_add_20px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-add@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_add_24px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-add@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_add_28px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-add@28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_add_32px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-add@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_cancel_14px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-cancel@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_cancel_16px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-cancel@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_cancel_20px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-cancel@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_cancel_24px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-cancel@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_28px {
             get {
-                object obj = ResourceManager.GetObject("symbol_cancel_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol-cancel@28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap symbol_cancel_32px {
+            get {
+                object obj = ResourceManager.GetObject("symbol-cancel@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2493,6 +2593,56 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tool_pencil_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("tool-pencil-filled@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_pencil_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("tool-pencil-filled@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_pencil_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("tool-pencil-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_pencil_filled_28px {
+            get {
+                object obj = ResourceManager.GetObject("tool-pencil-filled@28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tool_pencil_filled_32px {
+            get {
+                object obj = ResourceManager.GetObject("tool-pencil-filled@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap user_browse_14px {
             get {
                 object obj = ResourceManager.GetObject("user_browse_14px", resourceCulture);
@@ -2676,6 +2826,66 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap warning_sign_filled_18px {
             get {
                 object obj = ResourceManager.GetObject("warning_sign_filled_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_14px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@14px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_28px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap waste_bin_filled_32px {
+            get {
+                object obj = ResourceManager.GetObject("waste-bin-filled@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -27,10 +27,6 @@
     <EmbeddedResource Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
     <None Remove="Views\Manage\AllotmentReleaseDetails\**" />
     <None Remove="Views\Manage\ChartOfAccounts\SubMajorAccountGroup\**" />
-    <None Include="Resources\accounting.ico">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -161,6 +157,7 @@
     <Content Include="Reports\transaction_log.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\accounting.ico" />
   </ItemGroup>
 
   <ItemGroup>
