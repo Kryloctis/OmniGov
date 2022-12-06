@@ -146,6 +146,8 @@
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.baToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -242,6 +244,7 @@
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
             this.menuBanks,
+            this.baToolStripMenuItem,
             this.menuAccForm,
             this.menuReceipts,
             this.menuTaxPayers,
@@ -251,7 +254,8 @@
             this.penaltyToolStripMenuItem,
             this.taxRateToolStripMenuItem,
             this.toolStripSeparator9,
-            this.menuDatabaseSynchronization});
+            this.menuDatabaseSynchronization,
+            this.manageToolStripMenuItem});
             this.menuManage.Name = "menuManage";
             this.menuManage.Size = new System.Drawing.Size(62, 24);
             this.menuManage.Text = "Manage";
@@ -1068,14 +1072,14 @@
             // issueRecieptsToolStripMenuItem
             // 
             this.issueRecieptsToolStripMenuItem.Name = "issueRecieptsToolStripMenuItem";
-            this.issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.issueRecieptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.issueRecieptsToolStripMenuItem.Text = "Issue Reciepts";
             this.issueRecieptsToolStripMenuItem.Click += new System.EventHandler(this.issueRecieptsToolStripMenuItem_Click);
             // 
             // returnedReceiptsToolStripMenuItem
             // 
             this.returnedReceiptsToolStripMenuItem.Name = "returnedReceiptsToolStripMenuItem";
-            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.returnedReceiptsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.returnedReceiptsToolStripMenuItem.Text = "Returned Receipts";
             this.returnedReceiptsToolStripMenuItem.Click += new System.EventHandler(this.returnedReceiptsToolStripMenuItem_Click);
             // 
@@ -1117,38 +1121,38 @@
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
             // 
             // assessmentPostingToolStripMenuItem
             // 
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
-            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
             this.assessmentPostingToolStripMenuItem.Click += new System.EventHandler(this.assessmentPostingToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
             // 
             // checkIssuanceToolStripMenuItem
             // 
             this.checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
-            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.CheckIssuanceToolStripMenuItem_Click);
             // 
             // bankDepositToolStripMenuItem
             // 
             this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
             this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
             // 
@@ -1300,6 +1304,19 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // manageToolStripMenuItem
+            // 
+            this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.manageToolStripMenuItem.Text = "Manage";
+            // 
+            // baToolStripMenuItem
+            // 
+            this.baToolStripMenuItem.Name = "baToolStripMenuItem";
+            this.baToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.baToolStripMenuItem.Text = "Bank Accounts...";
+            this.baToolStripMenuItem.Click += new System.EventHandler(this.baToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1483,5 +1500,7 @@
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
+        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
     }
 }
