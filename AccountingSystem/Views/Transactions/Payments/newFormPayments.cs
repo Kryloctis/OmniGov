@@ -23,7 +23,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             InitializeComponent();
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
-            Helper.DatagridFullRowSelectStyle(dgCheques, false, false);
             ucRptTaxDues = ucRptTaxDues1;
         }
 
@@ -91,7 +90,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void newFormPayments_Load(object sender, EventArgs e)
         {
             LoadTaxpayers();
-            EnableDisableChequeForm();
         }
 
         private void tabPageTaxpayer_Enter(object sender, EventArgs e)
@@ -152,30 +150,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void radOthers_CheckedChanged(object sender, EventArgs e)
         {
             tabControl2.SelectedTab = tabPageOthers;
-        }
-
-
-        private void EnableDisableChequeForm() 
-        {
-            if (radPaymentCash.Checked)
-                gpBxChequeDetails.Enabled = false;
-            else
-                gpBxChequeDetails.Enabled = true;
-        }
-
-        private void radPaymentCheque_CheckedChanged(object sender, EventArgs e)
-        {
-            EnableDisableChequeForm();
-        }
-
-        private void radPaymentCashCheque_CheckedChanged(object sender, EventArgs e)
-        {
-            EnableDisableChequeForm();
-        }
-
-        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
-        {
-            EnableDisableChequeForm();
         }
 
         private void ucRptTaxDues1_Validating(object sender, CancelEventArgs e)
