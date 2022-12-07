@@ -347,6 +347,7 @@ namespace AccountingSystem
             dataGridView.Columns["tax_due_amount"].HeaderText = "Tax Due";
             dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/Discount";
             dataGridView.Columns["total_payment"].HeaderText = "Total Payment";
+            dataGridView.Columns["total_payment_consolidated"].Visible = false;
             dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;   
         }

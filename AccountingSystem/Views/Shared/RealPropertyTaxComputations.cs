@@ -74,14 +74,6 @@ namespace AccountingSystem.Views.Shared
             return penalty;
         }
 
-        public static decimal GetDiscountPenaltyRate(decimal penaltyRate, decimal discountRate, int monthOfDelinquent)
-        {
-            if (discountRate > 0)
-                return discountRate;
-            else
-                return penaltyRate * monthOfDelinquent;
-        }
-
         public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, ref bool isAdvance)
         {
             decimal discountRate;
