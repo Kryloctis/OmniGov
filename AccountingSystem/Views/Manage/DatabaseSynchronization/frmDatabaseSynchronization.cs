@@ -48,11 +48,10 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
         {
             try
             {
-                var realPropertiesModelList = new List<RealPropertiesModel>();
-
                 var dtRealProperties = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecords();
                 int totalRecordCount = dtRealProperties.Rows.Count;
                 int progressCount = 0;
+                int remainingItems = dtRealProperties.Rows.Count;
 
                 foreach (DataRow row in dtRealProperties.Rows)
                 {
@@ -119,11 +118,11 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     //RPT Property Identifier
                     string propertyIdentifierCompleteArpNo = string.Empty;
 
-                    if (!string.IsNullOrEmpty(realPropertiesIdentifier))
-                    {
-                        var dictFindPropertyIdentifier = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecordById(Convert.ToInt32(realPropertiesIdentifier));
-                        propertyIdentifierCompleteArpNo = dictFindPropertyIdentifier["complete_arp_no"];
-                    }
+                    //if (!string.IsNullOrEmpty(realPropertiesIdentifier))
+                    //{
+                    //    var dictFindPropertyIdentifier = RptFactory.RealPropertiesRepository().GetViewLFSRealPropertiesRecordById(Convert.ToInt32(realPropertiesIdentifier));
+                    //    propertyIdentifierCompleteArpNo = dictFindPropertyIdentifier["complete_arp_no"];
+                    //}
 
                     var actualUseCodesModel = new ActualUseCodesModel()
                     {
@@ -218,10 +217,11 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                         RptPreviousAssessmentModel = rptPreviousAssessmentModel
                     };
 
-                    realPropertiesModelList.Add(realPropertiesModel);
+                    AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModel);
 
                     progressCount++;
-                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, $"ARP No. {completeArpNo}, Property Kind {propertyKind}");
+                    remainingItems--;
+                    backgroundWorkerRptSync.ReportProgress((progressCount * 100) / totalRecordCount, $"Importing ARP No. {completeArpNo} | Remaining Items {remainingItems}");
                 }
 
                 if (backgroundWorkerRptSync.CancellationPending)
@@ -229,8 +229,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     e.Result = "Sync Cancelled";
                     return;
                 }
-
-                AccFactory.RealPropertiesRepository().Synchronize(realPropertiesModelList);
             }
             catch (Exception ex)
             {
