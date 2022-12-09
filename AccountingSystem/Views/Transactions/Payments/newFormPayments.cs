@@ -39,7 +39,8 @@ namespace AccountingSystem.Views.Transactions.Payments
         }
         private DataTable DataTableTaxpayers() 
         {
-            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecords();
+            string searchText = txtTaxpayerSearch.Text.Trim();
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecordsBySearch(searchText);
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(TaxpayersColumns());
 

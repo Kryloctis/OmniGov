@@ -36,6 +36,8 @@
             this.tabPageTaxpayer = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgTaxpayers = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtTaxpayerSearch = new System.Windows.Forms.TextBox();
             this.tabPageTaxDues = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageRpt = new System.Windows.Forms.TabPage();
@@ -47,6 +49,7 @@
             this.radBpl = new System.Windows.Forms.RadioButton();
             this.radRpt = new System.Windows.Forms.RadioButton();
             this.tabPagePayment = new System.Windows.Forms.TabPage();
+            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -55,12 +58,12 @@
             this.radTaxpayer = new System.Windows.Forms.RadioButton();
             this.radTaxDues = new System.Windows.Forms.RadioButton();
             this.radPayment = new System.Windows.Forms.RadioButton();
-            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTaxpayer.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
             this.tabPageTaxDues.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageRpt.SuspendLayout();
@@ -117,6 +120,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.dgTaxpayers);
+            this.panel2.Controls.Add(this.flowLayoutPanel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -145,7 +149,7 @@
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgTaxpayers.Location = new System.Drawing.Point(4, 3);
+            this.dgTaxpayers.Location = new System.Drawing.Point(4, 32);
             this.dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgTaxpayers.Name = "dgTaxpayers";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -157,9 +161,27 @@
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(851, 511);
+            this.dgTaxpayers.Size = new System.Drawing.Size(851, 482);
             this.dgTaxpayers.TabIndex = 2;
             this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.txtTaxpayerSearch);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 3);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(851, 29);
+            this.flowLayoutPanel4.TabIndex = 3;
+            // 
+            // txtTaxpayerSearch
+            // 
+            this.txtTaxpayerSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerSearch.Location = new System.Drawing.Point(648, 3);
+            this.txtTaxpayerSearch.Name = "txtTaxpayerSearch";
+            this.txtTaxpayerSearch.Size = new System.Drawing.Size(200, 23);
+            this.txtTaxpayerSearch.TabIndex = 0;
             // 
             // tabPageTaxDues
             // 
@@ -302,6 +324,14 @@
             this.tabPagePayment.UseVisualStyleBackColor = true;
             this.tabPagePayment.Enter += new System.EventHandler(this.tabPagePayment_Enter);
             // 
+            // ucPayment1
+            // 
+            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPayment1.Location = new System.Drawing.Point(4, 3);
+            this.ucPayment1.Name = "ucPayment1";
+            this.ucPayment1.Size = new System.Drawing.Size(851, 511);
+            this.ucPayment1.TabIndex = 0;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
@@ -405,14 +435,6 @@
             this.radPayment.Text = "Payment";
             this.radPayment.UseVisualStyleBackColor = true;
             // 
-            // ucPayment1
-            // 
-            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucPayment1.Location = new System.Drawing.Point(4, 3);
-            this.ucPayment1.Name = "ucPayment1";
-            this.ucPayment1.Size = new System.Drawing.Size(851, 511);
-            this.ucPayment1.TabIndex = 0;
-            // 
             // newFormPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -434,6 +456,8 @@
             this.tabPageTaxpayer.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.tabPageTaxDues.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPageRpt.ResumeLayout(false);
@@ -472,5 +496,7 @@
         private System.Windows.Forms.RadioButton radRpt;
         private RealProperty.ucRptTaxDues ucRptTaxDues1;
         private ucPayment ucPayment1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.TextBox txtTaxpayerSearch;
     }
 }
