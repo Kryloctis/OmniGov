@@ -204,8 +204,8 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(currentDiscountRate, basicTaxDue);
                     decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(currentDiscountRate, sefTaxDue);
 
-                    decimal basicPenaltyDiscount = basicDiscount < 1 ? -basicPenalty : basicDiscount;
-                    decimal sefPenaltyDiscount = sefDiscount < 1 ? -sefPenalty : sefDiscount;
+                    decimal basicPenaltyDiscount = basicDiscount < 1 ? basicPenalty : -basicDiscount;
+                    decimal sefPenaltyDiscount = sefDiscount < 1 ? sefPenalty : -sefDiscount;
                     decimal totalBasicPayment = (basicTaxDue + basicPenalty) - basicDiscount;
                     decimal totalSefPayment = (sefTaxDue + sefPenalty) - sefDiscount;
                    
