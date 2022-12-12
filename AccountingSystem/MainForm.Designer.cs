@@ -51,6 +51,7 @@
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
+            this.baToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
@@ -242,6 +243,7 @@
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
             this.menuBanks,
+            this.baToolStripMenuItem,
             this.menuAccForm,
             this.menuReceipts,
             this.menuTaxPayers,
@@ -268,14 +270,14 @@
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(111, 22);
+            this.menuUserList.Size = new System.Drawing.Size(180, 22);
             this.menuUserList.Text = "List...";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(111, 22);
+            this.menuRoles.Size = new System.Drawing.Size(180, 22);
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
@@ -366,6 +368,13 @@
             this.menuBanks.Size = new System.Drawing.Size(223, 22);
             this.menuBanks.Text = "Banks...";
             this.menuBanks.Click += new System.EventHandler(this.menuBanks_Click);
+            // 
+            // baToolStripMenuItem
+            // 
+            this.baToolStripMenuItem.Name = "baToolStripMenuItem";
+            this.baToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.baToolStripMenuItem.Text = "Bank Accounts...";
+            this.baToolStripMenuItem.Click += new System.EventHandler(this.baToolStripMenuItem_Click);
             // 
             // menuAccForm
             // 
@@ -1483,5 +1492,7 @@
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
+        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
     }
 }

@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Manage.AllotmentClasses;
 using AccountingSystem.Views.Manage.AllotmentRelease;
 using AccountingSystem.Views.Manage.Amortization;
+using AccountingSystem.Views.Manage.BankAccounts;
 using AccountingSystem.Views.Manage.Banks;
 using AccountingSystem.Views.Manage.Barangay;
 using AccountingSystem.Views.Manage.BudgetAppropriations;
@@ -41,6 +42,7 @@ using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.PaymentPosting;
+using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using System;
@@ -108,7 +110,7 @@ namespace AccountingSystem
             lblUserRole.Text = userDict["role_name"];
         }
 
-        #region  Permission Validations
+        #region Permission Validations
 
         private void ValidatePermissions()
         {
@@ -172,8 +174,6 @@ namespace AccountingSystem
 
             //if (!Helper.HasPermission("Report List of Delinquent Accounts"))
             //    toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
-
-
         }
 
         private void ValidateTransactionPermissions()
@@ -201,7 +201,6 @@ namespace AccountingSystem
 
             //if (!IsUserCollector())
             //    toolStripMenuPaymentPostings.Enabled = false;
-
         }
 
         private void ValidateManagePermissions()
@@ -296,13 +295,12 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction > JEV"))
                 ucjevDashboard1.btnAddJEV.Enabled = false;
 
-            #endregion
+            #endregion Journal Entry Voucher
 
             #region Journals
 
             if (Helper.HasPermission("Report > General Journal") || Helper.HasPermission("Report > Cash Receipts Journal") || Helper.HasPermission("Report > Procurement Received Journal") || Helper.HasPermission("Report > Cash Disbursements Journal") || Helper.HasPermission("Report > Check Disbursements Journal") || Helper.HasPermission("Report > Authority to Debit Account Disbursements Journal"))
                 tabControlAccounting.TabPages.Add(tabPageJournals);
-
 
             if (!Helper.HasPermission("Report > General Journal"))
                 ucJournalsDashboard1.lnkGeneralJournal.Enabled = false;
@@ -322,7 +320,7 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report > Authority to Debit Account Disbursements Journal"))
                 ucJournalsDashboard1.lnkADAdisbursementsJournal.Enabled = false;
 
-            #endregion
+            #endregion Journals
 
             #region Ledgers
 
@@ -338,22 +336,20 @@ namespace AccountingSystem
             if (Helper.HasPermission("Report > General Ledger") || Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
 
-            #endregion
+            #endregion Ledgers
 
             #region Trial Balance
 
             if (Helper.HasPermission("Report > Pre Trial Balance") || Helper.HasPermission("Report > Post Trial Balance"))
                 tabControlAccounting.TabPages.Add(tabPageTrialBalance);
 
-
             if (Helper.HasPermission("Report > Post Trial Balance"))
                 tabControlTrialBalance.TabPages.Add(tabPagePostTrial);
-
 
             if (Helper.HasPermission("Report > Pre Trial Balance"))
                 tabControlTrialBalance.TabPages.Add(tabPagePreTrial);
 
-            #endregion
+            #endregion Trial Balance
 
             #region Financial Statements
 
@@ -374,10 +370,11 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report > Statement of Financial Position"))
                 tabControlFinancialStatements.TabPages.Add(tabPageSFPosition);
-            #endregion
+
+            #endregion Financial Statements
         }
 
-        #endregion
+        #endregion Permission Validations
 
         private void menuJournals_Click(object sender, EventArgs e)
         {
@@ -418,7 +415,6 @@ namespace AccountingSystem
         {
             _ = new frmBanks().ShowDialog();
         }
-
 
         private void menuAccForm_Click(object sender, EventArgs e)
         {
@@ -480,9 +476,9 @@ namespace AccountingSystem
             _ = new frmSAAOBB().ShowDialog();
         }
 
-        #endregion
+        #endregion SAAOB and SAAOBB report
 
-        #endregion
+        #endregion Budget Module
 
         #region Accounting Module
 
@@ -511,7 +507,7 @@ namespace AccountingSystem
             tabControlAccounting.SelectedTab = tabPageFinancialStatements;
         }
 
-        //Reports   
+        //Reports
 
         #region Ledger Reports
 
@@ -530,7 +526,7 @@ namespace AccountingSystem
             tabControlLedgers.SelectedTab = tabPageTransactionLog;
         }
 
-        #endregion
+        #endregion Ledger Reports
 
         #region Trial Balance Reports
 
@@ -544,7 +540,7 @@ namespace AccountingSystem
             tabControlTrialBalance.SelectedTab = tabPagePostTrial;
         }
 
-        #endregion
+        #endregion Trial Balance Reports
 
         #region Financial Statement Reports
 
@@ -573,10 +569,9 @@ namespace AccountingSystem
             tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
         }
 
-        #endregion
+        #endregion Financial Statement Reports
 
-
-        #endregion
+        #endregion Accounting Module
 
         #region Treasury
 
@@ -695,7 +690,7 @@ namespace AccountingSystem
             _ = new frmAssessmentPosting().ShowDialog();
         }
 
-        #endregion
+        #endregion Treasury
 
         private void menuDatabaseSynchronization_Click(object sender, EventArgs e)
         {
@@ -714,7 +709,7 @@ namespace AccountingSystem
 
         private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmPayments(this).ShowDialog();
+            _ = new newFormPayments().ShowDialog();
         }
 
         private void toolStripButtonRpt_Click(object sender, EventArgs e)
@@ -731,5 +726,11 @@ namespace AccountingSystem
         {
             _ = new frmBusinessAddOnCharges().ShowDialog();
         }
+
+        private void baToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankAccounts().ShowDialog();
+        }
+
     }
 }

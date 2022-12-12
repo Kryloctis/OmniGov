@@ -292,12 +292,10 @@ namespace ACC.Data
             }
         }
 
-        public bool Synchronize(List<RealPropertiesModel> realPropertiesModels)
+        public bool Synchronize(RealPropertiesModel realPropertiesModel)
         {
             using (var scope = new TransactionScope())
             {
-                foreach (RealPropertiesModel realPropertiesModel in realPropertiesModels)
-                {
                     int provinceId;
                     int municipalityId;
                     int barangayId;
@@ -447,9 +445,7 @@ namespace ACC.Data
                         rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
                         _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
                     }
-                
-                }
-                    
+ 
                 scope.Complete();
                 return true;
             }

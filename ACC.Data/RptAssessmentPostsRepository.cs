@@ -71,23 +71,25 @@ namespace ACC.Data
                 foreach (DataRow row in reader.Rows)
                 {
                     dict.Add("id", row["id"].ToString());
+                    dict.Add("real_taxpayers_id", row["real_taxpayers_id"].ToString());
                     dict.Add("property_identifier", row["property_identifier"].ToString());
                     dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
                     dict.Add("property_pin", row["property_pin"].ToString());
-                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
                     dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
-                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
+                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
                     dict.Add("taxpayer_contact_info", row["taxpayer_contact_info"].ToString());
+                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
+                    dict.Add("street", row["street"].ToString());
                     dict.Add("barangay_name", row["barangay_name"].ToString());
                     dict.Add("municipality_name", row["municipality_name"].ToString());
                     dict.Add("province_name", row["province_name"].ToString());
                     dict.Add("property_kind", row["property_kind"].ToString());
                     dict.Add("effectivity_quarterly", row["effectivity_quarterly"].ToString());
                     dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("assessed_value", row["assessed_value"].ToString());
                     dict.Add("area", row["area"].ToString());
                     dict.Add("lot_no", row["lot_no"].ToString());
-                    dict.Add("other_improvements", row["other_improvements"].ToString());
                     dict.Add("classification_code", row["classification_code"].ToString());
                     dict.Add("classification_name", row["classification_name"].ToString());
                     dict.Add("actual_use_code", row["actual_use_code"].ToString());
@@ -153,8 +155,6 @@ namespace ACC.Data
                 new object [] { "@search_text", DbType.String, $"%{searchText}%"}
             };
 
-            //string query = $"SELECT * FROM {tableName} WHERE complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR taxpayer_name LIKE @search_text OR owner_tin LIKE @search_text OR owner_address LIKE @search_text OR owner_contact LIKE @search_text OR barangay_name LIKE @search_text OR municipality_name LIKE @search_text OR province_name LIKE @search_text GROUP BY taxpayer_name";
-
             string query = $"SELECT * FROM {tableName} GROUP BY taxpayer_name";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -191,6 +191,7 @@ namespace ACC.Data
                 new object[] { "@taxpayer_name", DbType.String, entity.TaxpayerName },
                 new object[] { "@taxpayer_contact_info", DbType.String, entity.TaxpayerContactInfo },
                 new object[] { "@taxpayer_address", DbType.String, entity.TaxpayerAddress },
+                new object[] { "@street", DbType.String, entity.Street},
                 new object[] { "@barangay_name", DbType.String, entity.BarangayName },
                 new object[] { "@municipality_name", DbType.String, entity.MunicipalityName },
                 new object[] { "@province_name", DbType.String, entity.ProvinceName },
@@ -218,7 +219,7 @@ namespace ACC.Data
             };
 
 
-            string query = $"INSERT INTO {tableName} (property_identifier, real_taxpayers_id, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @real_taxpayers_id,  @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address,  @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
+            string query = $"INSERT INTO {tableName} (property_identifier, real_taxpayers_id, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @real_taxpayers_id,  @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -355,16 +356,29 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(string completeArpNo, string ownerName)
+        public DataTable GetViewRptPropertyAssessmentsRecords_By_RealTaxpayersId_CompleteArpNo(int realTaxpayersId, string completeArpNo)
         {
             var parameters = new object[][]
             {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@taxpayer_name", DbType.String, ownerName}
+                new object[] { "@real_taxpayers_id", DbType.Int32, realTaxpayersId },
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo }
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND taxpayer_name = @taxpayer_name ORDER BY complete_arp_no ASC";
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
 
+            var dataTable = new DataTable();
+            return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public DataTable GetRecordsByRealTaxpayersId(int realTaxpayersId, bool showIsCancelled)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@real_taxpayers_id", DbType.Int32, realTaxpayersId}
+            };
+
+            string subQuery = showIsCancelled ? string.Empty : " AND is_cancelled = 0";
+            string query = $"SELECT * FROM {tableName} WHERE real_taxpayers_id = @real_taxpayers_id AND is_taxable = 1{subQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }

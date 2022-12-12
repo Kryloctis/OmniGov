@@ -15,7 +15,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetCancelledProperties();
 
         int GetLastInsertedId();
-        bool Synchronize(List<RealPropertiesModel> realPropertiesModels);
+        bool Synchronize(RealPropertiesModel realPropertiesModel);
         bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel);
     }
 }

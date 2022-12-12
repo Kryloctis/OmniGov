@@ -54,7 +54,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
             var dataTable = new DataTable();
             //dataTable.Columns.AddRange(Sample());
-            var dtAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecordsBy_CompleteARPNo_OwnerName(completeARPNumber, OwnerName);
+            var dtAssessmentPost = new DataTable();
 
             foreach (DataRow row in dtAssessmentPost.Rows)
             {

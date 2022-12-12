@@ -259,6 +259,16 @@ namespace AccountingSystem
             //dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
         }
 
+        public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["tin"].HeaderText = "TIN";
+            dataGridView.Columns["name"].HeaderText = "Name";
+            dataGridView.Columns["full_address"].HeaderText = "Address";
+            dataGridView.Columns["contact_info"].HeaderText = "Contact Info.";
+        }
+
         public static void TaxpayerDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
@@ -317,6 +327,46 @@ namespace AccountingSystem
             dataGridView.Columns["taxpayers_name"].HeaderText = "Name";
             dataGridView.Columns["taxpayers_municipality"].HeaderText = "Municipality";
             dataGridView.Columns["taxpayers_province"].HeaderText = "Province";
+        }
+
+        public static void DatagridViewPaymentTaxpayerTaxDues(DataGridView dataGridView, DataTable dataTable)
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["is_selected"].HeaderText = string.Empty;
+            dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["year"].HeaderText = "Year";
+            dataGridView.Columns["year"].Frozen = true;
+            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["complete_arp_no"].Frozen = true;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
+            dataGridView.Columns["type"].HeaderText = "Type";
+            dataGridView.Columns["type"].MinimumWidth = 50;
+            dataGridView.Columns["type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["tax_due_amount"].HeaderText = "Tax Due";
+            dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/Discount";
+            dataGridView.Columns["total_payment"].HeaderText = "Total Payment";
+            dataGridView.Columns["total_payment_consolidated"].Visible = false;
+            dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;   
+        }
+
+        public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 
+        {
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["is_selected"].MinimumWidth = 20;
+            dataGridView.Columns["is_selected"].HeaderText = string.Empty;
+            dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["real_taxpayers_id"].Visible = false;
+            dataGridView.Columns["complete_arp_no"].HeaderText = "APR No.";
+            dataGridView.Columns["property_pin"].HeaderText = "PIN";
+            dataGridView.Columns["full_address"].HeaderText = "Address";
+            dataGridView.Columns["kind"].HeaderText = "Kind";
+            dataGridView.Columns["kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
         public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)
@@ -1136,6 +1186,21 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+        internal static void DatagridViewBankAccounts(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+            datagrid.Columns[0].Visible = false;
+            datagrid.Columns[1].Visible = false;
+            datagrid.Columns[2].HeaderText = "Account Number";
+            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[4].Visible = false;
+          
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+        }
+
+
 
         #endregion
 
@@ -2897,6 +2962,7 @@ namespace AccountingSystem
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
         }
+
 
         #endregion
     }
