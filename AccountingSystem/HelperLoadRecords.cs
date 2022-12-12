@@ -102,7 +102,7 @@ namespace AccountingSystem
 
             dataGridView.Columns.Add("real_properties_id", "Real Properties ID");
             dataGridView.Columns.Add("property_identifier", "Property Identifier");
-            dataGridView.Columns.Add("complete_arp_no", "Complete ARP No.");
+            dataGridView.Columns.Add("complete_arp_no", "ARP No.");
             dataGridView.Columns.Add("property_pin", "PIN");
             dataGridView.Columns.Add("real_taxpayers_id", "Real Taxpayer ID");
             dataGridView.Columns.Add("real_taxpayers_tin", "Real Taxpayer TIN");
@@ -124,6 +124,7 @@ namespace AccountingSystem
             dataGridView.Columns.Add("real_properties_provinces_id", "Real Properties Province ID");
             dataGridView.Columns.Add("real_properties_provinces_code", "Real Properties Province Code");
             dataGridView.Columns.Add("real_properties_provinces_name", "Real Properties Province Name");
+            dataGridView.Columns.Add("real_properties_location", "Location");
             dataGridView.Columns.Add("classification_codes_id", "Classfication Codes ID");
             dataGridView.Columns.Add("classification_codes", "Classfication Codes");
             dataGridView.Columns.Add("classification_codes_name", "Classfication Codes Name");
@@ -157,6 +158,7 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_barangays_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["real_properties_municipalities_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["real_properties_provinces_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["real_properties_location"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["property_pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["classification_codes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["actual_use_codes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -202,8 +204,16 @@ namespace AccountingSystem
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
 
+            dataGridView.Columns["real_properties_street"].Visible = false;
+            dataGridView.Columns["real_properties_barangays_name"].Visible = false;
+            dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
+            dataGridView.Columns["real_properties_provinces_name"].Visible = false;
+
+
             foreach (DataRow row in dataTable.Rows)
             {
+                var location = $"{row["real_properties_street"]} {row["real_properties_barangays_name"]} {row["real_properties_municipalities_name"]} {row["real_properties_provinces_name"]}";
+
                 dataGridView.Rows.Add(new object[]
                 {
                     row["real_properties_id"],
@@ -230,6 +240,7 @@ namespace AccountingSystem
                     row["real_properties_provinces_id"],
                     row["real_properties_provinces_code"],
                     row["real_properties_provinces_name"],
+                    location,
                     row["classification_codes_id"],
                     row["classification_codes"],
                     row["classification_codes_name"],
