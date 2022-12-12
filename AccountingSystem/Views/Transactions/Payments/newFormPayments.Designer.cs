@@ -444,10 +444,10 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1062, 557);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(1078, 596);
             this.Name = "newFormPayments";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transaction > Payments";

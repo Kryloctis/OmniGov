@@ -214,7 +214,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         #endregion
 
-
         private DataColumn[] DataColumnsTaxDues()
         {
             return new DataColumn[]
@@ -354,6 +353,15 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void txtTotalDue_Validating(object sender, CancelEventArgs e)
         {
+        }
+
+        private void btnPrintTaxDue_Click(object sender, EventArgs e)
+        {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return;
+            }
         }
     }
 }
