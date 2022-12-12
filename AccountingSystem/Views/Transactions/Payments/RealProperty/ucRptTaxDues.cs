@@ -1,5 +1,7 @@
-﻿using AccountingSystem.Views.Shared;
+﻿using ACC.Domain.Interfaces;
+using AccountingSystem.Views.Shared;
 using Org.BouncyCastle.Crypto.Agreement;
+using Org.BouncyCastle.Crypto.Tls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +17,22 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
     public partial class ucRptTaxDues : UserControl
     {
         internal int taxpayersId;
-        private readonly string decimalFormat = "#,###,###,###.00;(#,###,###,###.00)";
+        private readonly string decimalFormat = "#,###,###,###.00 ;(#,###,###,###.00)";
 
         public ucRptTaxDues()
         {
             InitializeComponent();
+        }
+
+        internal string GetFormErrors()
+        {
+            var errorStrings = new string[]
+            {
+                dgTaxDues.Tag.ToString(),
+            };
+
+            IError errors = AccFactory.CreateErrors(errorStrings);
+            return errors.GenerateErrorMessage();
         }
 
         private void OnLoad()
@@ -129,37 +142,79 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             LoadPostedProperties();
         }
 
-        //Validate Skipped Year
-        private int GetGreatestCheckedYear(DataGridView dataGridView)
+        #region Validations
+
+        private bool TaxDuesValidated()
         {
-            var years = new List<int>();
+            var skippedTaxDues = new List<string>();
+            int selectedTaxDuesCount = 0;
+            List<string> completeArpNoList = new List<string>();
 
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            //ArpNos
+            foreach (DataGridViewRow row in dgProperties.Rows)
             {
-                bool isChecked = Convert.ToBoolean(row.Cells["is_selected"].Value);
-
-                if (isChecked)
-                    years.Add(Convert.ToInt32(row.Cells["year"].Value));
+                bool isSelected = Convert.ToBoolean(row.Cells["is_selected"].Value);
+                string completeArpNo = row.Cells["complete_arp_no"].Value.ToString();
+                if (isSelected)
+                    completeArpNoList.Add(completeArpNo);
             }
 
-            return years.Max();
-        }
-
-        private bool ValidateSkipped(DataGridView dataGridView)
-        {
-            foreach (DataGridViewRow row in dataGridView.Rows)
+            //Check for skipped Years
+            foreach (string completeArpNo in completeArpNoList)
             {
-                bool isChecked = Convert.ToBoolean(row.Cells["is_selected"].Value);
-                int year = Convert.ToInt32(row.Cells["year"].Value);
+                var selectedYears = new List<int>();
+                var notSelectedYears = new List<int>();
 
-                if (!isChecked && (year < GetGreatestCheckedYear(dataGridView)))
-                    return false;
+                foreach (DataGridViewRow row in dgTaxDues.Rows)
+                {
+                    int year = Convert.ToInt32(row.Cells["year"].Value);
+                    bool isSelected = Convert.ToBoolean(row.Cells["is_selected"].Value);
+                    string rowcompleteArpNo = row.Cells["complete_arp_no"].Value.ToString();
+                    if (rowcompleteArpNo == completeArpNo)
+                    {
+                        if (isSelected)
+                        {
+                            selectedYears.Add(year);
+                            selectedTaxDuesCount++;
+                        }
+                        else
+                            notSelectedYears.Add(year);
+                    }
+                }
+
+                foreach(int notSelectedYear in notSelectedYears)
+                {
+                    foreach (int selectedYear in selectedYears)
+                    {
+                        if (notSelectedYear < selectedYear)
+                            skippedTaxDues.Add(completeArpNo);
+                    }
+                }
             }
+
+            if (selectedTaxDuesCount < 1)
+            {
+                dgTaxDues.Tag = "No tax due/s has been selected";
+                return false;
+            }
+
+            if (skippedTaxDues.Count > 0)
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine("Skipped tax due years of properties:");
+                skippedTaxDues.Distinct();
+                skippedTaxDues.ForEach(x => sb.AppendLine($"  {x}"));
+                dgTaxDues.Tag = sb;
+                return false;               
+            }
+
+            dgTaxDues.Tag = string.Empty;
             return true;
         }
 
+        #endregion
 
-        //Tax Dues DatagridView
+
         private DataColumn[] DataColumnsTaxDues()
         {
             return new DataColumn[]
@@ -239,12 +294,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
                 HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayersId, completeArpNoList));
                 chckBxTaxDues.Checked = false;
-                GetTotalTaxDue();
+                txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void GetTotalTaxDue() 
+        private decimal GetTotalTaxDue() 
         {
             decimal totalPayment = 0;
             foreach (DataGridViewRow row in dgTaxDues.Rows)
@@ -253,7 +308,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 if (isSelected)
                     totalPayment += Convert.ToDecimal(row.Cells["total_payment_consolidated"].Value);
             }
-            txtTotalDue.Text = totalPayment.ToString(decimalFormat);
+            return totalPayment;
         }
 
         private void dgTaxDues_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -273,7 +328,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             try
             {
                 Helper.CheckUncheckCheckBoxHeader(dgTaxDues, "is_selected", chckBxTaxDues);
-                GetTotalTaxDue();
+                txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -290,11 +345,15 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void dgTaxDues_Validating(object sender, CancelEventArgs e)
         {
-            //try
-            //{
-            //    e.Cancel = ValidateSkipped(dgTaxDues);
-            //}
-            //catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            try
+            {          
+                e.Cancel = !TaxDuesValidated();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtTotalDue_Validating(object sender, CancelEventArgs e)
+        {
         }
     }
 }

@@ -83,7 +83,15 @@ namespace AccountingSystem.Views.Transactions.Payments
                 ucRptTaxDues.LoadPostedProperties();
             }
             else if (tabControl1.SelectedTab == tabPageTaxDues)
+            {             
+                if (!ucRptTaxDues.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucRptTaxDues.GetFormErrors());
+                    return;
+                }
+
                 tabControl1.SelectedTab = tabPagePayment;
+            }
             else if (tabControl1.SelectedTab == tabPagePayment)
                 Helper.MessageBoxSuccess("Payment Confirmed");
         }
@@ -151,11 +159,6 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void radOthers_CheckedChanged(object sender, EventArgs e)
         {
             tabControl2.SelectedTab = tabPageOthers;
-        }
-
-        private void ucRptTaxDues1_Validating(object sender, CancelEventArgs e)
-        {
-            
         }
 
         private void txtTaxpayerSearch_TextChanged(object sender, EventArgs e)

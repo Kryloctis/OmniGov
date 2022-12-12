@@ -102,7 +102,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(867, 526);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPageTaxpayer
             // 
@@ -173,7 +173,7 @@
             this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 3);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(851, 33);
-            this.flowLayoutPanel4.TabIndex = 3;
+            this.flowLayoutPanel4.TabIndex = 0;
             // 
             // txtTaxpayerSearch
             // 
@@ -181,7 +181,7 @@
             this.txtTaxpayerSearch.Location = new System.Drawing.Point(648, 3);
             this.txtTaxpayerSearch.Name = "txtTaxpayerSearch";
             this.txtTaxpayerSearch.Size = new System.Drawing.Size(200, 23);
-            this.txtTaxpayerSearch.TabIndex = 0;
+            this.txtTaxpayerSearch.TabIndex = 1;
             this.txtTaxpayerSearch.TextChanged += new System.EventHandler(this.txtTaxpayerSearch_TextChanged);
             // 
             // tabPageTaxDues
@@ -236,7 +236,6 @@
             this.ucRptTaxDues1.Name = "ucRptTaxDues1";
             this.ucRptTaxDues1.Size = new System.Drawing.Size(851, 481);
             this.ucRptTaxDues1.TabIndex = 0;
-            this.ucRptTaxDues1.Validating += new System.ComponentModel.CancelEventHandler(this.ucRptTaxDues1_Validating);
             // 
             // tabPageBpl
             // 
@@ -385,6 +384,7 @@
             this.flowLayoutPanel2.Controls.Add(this.radTaxDues);
             this.flowLayoutPanel2.Controls.Add(this.radPayment);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Enabled = false;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -403,7 +403,7 @@
             this.radTaxpayer.Margin = new System.Windows.Forms.Padding(0);
             this.radTaxpayer.Name = "radTaxpayer";
             this.radTaxpayer.Size = new System.Drawing.Size(195, 37);
-            this.radTaxpayer.TabIndex = 0;
+            this.radTaxpayer.TabIndex = 5;
             this.radTaxpayer.TabStop = true;
             this.radTaxpayer.Text = "Taxpayer";
             this.radTaxpayer.UseVisualStyleBackColor = true;
@@ -418,7 +418,7 @@
             this.radTaxDues.Margin = new System.Windows.Forms.Padding(0);
             this.radTaxDues.Name = "radTaxDues";
             this.radTaxDues.Size = new System.Drawing.Size(195, 37);
-            this.radTaxDues.TabIndex = 1;
+            this.radTaxDues.TabIndex = 5;
             this.radTaxDues.Text = "Tax Dues";
             this.radTaxDues.UseVisualStyleBackColor = true;
             // 

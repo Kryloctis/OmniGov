@@ -319,6 +319,7 @@
             this.txtTotalDue.Size = new System.Drawing.Size(208, 23);
             this.txtTotalDue.TabIndex = 0;
             this.txtTotalDue.Text = "0.00";
+            this.txtTotalDue.Validating += new System.ComponentModel.CancelEventHandler(this.txtTotalDue_Validating);
             // 
             // ucRptTaxDues
             // 
