@@ -1191,10 +1191,11 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[2].HeaderText = "Account Number";
-            datagrid.Columns[3].Visible = false;
+            datagrid.Columns[1].HeaderText = "Bank Name";
+            datagrid.Columns[2].Visible = false;
+            datagrid.Columns[3].HeaderText = "Account Number";
             datagrid.Columns[4].Visible = false;
+            datagrid.Columns[5].Visible = false;
           
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 

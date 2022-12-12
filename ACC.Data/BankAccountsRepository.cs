@@ -84,7 +84,8 @@ namespace AccountingSystem
 
         public DataTable GetViewRecords()
         {
-            string query = $"SELECT * FROM {tableName}";
+
+            string query = $"SELECT banks.id, banks.bank_name, bank_accounts.id, bank_accounts.account_no, bank_accounts.created_at, bank_accounts.updated_at FROM {tableName} INNER JOIN banks ON banks.id = bank_accounts.banks_id";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);
@@ -96,8 +97,8 @@ namespace AccountingSystem
             {
                 new object[]{"@searchText", DbType.String, $"%{searchKey}%"},
             };
-
-            string query = $"SELECT * FROM {tableName} WHERE account_no LIKE @searchText";
+            //change this if viewTable is available.
+            string query = $"SELECT banks.id, banks.bank_name, bank_accounts.id, bank_accounts.account_no, bank_accounts.created_at, bank_accounts.updated_at FROM {tableName} INNER JOIN banks ON banks.id = bank_accounts.banks_id WHERE account_no LIKE @searchText OR bank_name LIKE @searchText";
 
             var dt = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dt, parameters);
