@@ -219,6 +219,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return new DataColumn[]
             {
                 new DataColumn("is_selected", typeof(bool)),
+                new DataColumn("assessment_posts_id", typeof(int)),
                 new DataColumn("year", typeof(int)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("type", typeof(string)),
@@ -265,6 +266,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                    
                     var newRow = dataTable.NewRow();
                     newRow["is_selected"] = false;
+                    newRow["assessment_posts_id"] = row["rpt_assessment_posts_id"];
                     newRow["year"] = row["year"];
                     newRow["complete_arp_no"] = completeArpNo;
                     newRow["type"] = "BSC\nSEF";
@@ -298,7 +300,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private decimal GetTotalTaxDue() 
+        internal decimal GetTotalTaxDue() 
         {
             decimal totalPayment = 0;
             foreach (DataGridViewRow row in dgTaxDues.Rows)

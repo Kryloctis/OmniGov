@@ -336,6 +336,7 @@ namespace AccountingSystem
             dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_selected"].MinimumWidth = 20;
             dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["assessment_posts_id"].Visible = false;
             dataGridView.Columns["year"].HeaderText = "Year";
             dataGridView.Columns["year"].Frozen = true;
             dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
