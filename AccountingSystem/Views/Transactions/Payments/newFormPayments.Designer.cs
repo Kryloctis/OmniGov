@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTaxpayer = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgTaxpayers = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtTaxpayerSearch = new System.Windows.Forms.TextBox();
             this.tabPageTaxDues = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageRpt = new System.Windows.Forms.TabPage();
@@ -47,6 +49,7 @@
             this.radBpl = new System.Windows.Forms.RadioButton();
             this.radRpt = new System.Windows.Forms.RadioButton();
             this.tabPagePayment = new System.Windows.Forms.TabPage();
+            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -55,12 +58,12 @@
             this.radTaxpayer = new System.Windows.Forms.RadioButton();
             this.radTaxDues = new System.Windows.Forms.RadioButton();
             this.radPayment = new System.Windows.Forms.RadioButton();
-            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTaxpayer.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
             this.tabPageTaxDues.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPageRpt.SuspendLayout();
@@ -99,7 +102,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(867, 526);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPageTaxpayer
             // 
@@ -117,6 +120,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.dgTaxpayers);
+            this.panel2.Controls.Add(this.flowLayoutPanel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -127,39 +131,58 @@
             // 
             // dgTaxpayers
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgTaxpayers.Location = new System.Drawing.Point(4, 3);
+            this.dgTaxpayers.Location = new System.Drawing.Point(4, 36);
             this.dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgTaxpayers.Name = "dgTaxpayers";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgTaxpayers.RowTemplate.Height = 25;
-            this.dgTaxpayers.Size = new System.Drawing.Size(851, 511);
+            this.dgTaxpayers.Size = new System.Drawing.Size(851, 478);
             this.dgTaxpayers.TabIndex = 2;
             this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.txtTaxpayerSearch);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 3);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(851, 33);
+            this.flowLayoutPanel4.TabIndex = 0;
+            // 
+            // txtTaxpayerSearch
+            // 
+            this.txtTaxpayerSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerSearch.Location = new System.Drawing.Point(648, 3);
+            this.txtTaxpayerSearch.Name = "txtTaxpayerSearch";
+            this.txtTaxpayerSearch.Size = new System.Drawing.Size(200, 23);
+            this.txtTaxpayerSearch.TabIndex = 1;
+            this.txtTaxpayerSearch.TextChanged += new System.EventHandler(this.txtTaxpayerSearch_TextChanged);
             // 
             // tabPageTaxDues
             // 
@@ -213,7 +236,6 @@
             this.ucRptTaxDues1.Name = "ucRptTaxDues1";
             this.ucRptTaxDues1.Size = new System.Drawing.Size(851, 481);
             this.ucRptTaxDues1.TabIndex = 0;
-            this.ucRptTaxDues1.Validating += new System.ComponentModel.CancelEventHandler(this.ucRptTaxDues1_Validating);
             // 
             // tabPageBpl
             // 
@@ -302,6 +324,14 @@
             this.tabPagePayment.UseVisualStyleBackColor = true;
             this.tabPagePayment.Enter += new System.EventHandler(this.tabPagePayment_Enter);
             // 
+            // ucPayment1
+            // 
+            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPayment1.Location = new System.Drawing.Point(4, 3);
+            this.ucPayment1.Name = "ucPayment1";
+            this.ucPayment1.Size = new System.Drawing.Size(851, 511);
+            this.ucPayment1.TabIndex = 0;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
@@ -354,6 +384,7 @@
             this.flowLayoutPanel2.Controls.Add(this.radTaxDues);
             this.flowLayoutPanel2.Controls.Add(this.radPayment);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Enabled = false;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -372,7 +403,7 @@
             this.radTaxpayer.Margin = new System.Windows.Forms.Padding(0);
             this.radTaxpayer.Name = "radTaxpayer";
             this.radTaxpayer.Size = new System.Drawing.Size(195, 37);
-            this.radTaxpayer.TabIndex = 0;
+            this.radTaxpayer.TabIndex = 5;
             this.radTaxpayer.TabStop = true;
             this.radTaxpayer.Text = "Taxpayer";
             this.radTaxpayer.UseVisualStyleBackColor = true;
@@ -387,7 +418,7 @@
             this.radTaxDues.Margin = new System.Windows.Forms.Padding(0);
             this.radTaxDues.Name = "radTaxDues";
             this.radTaxDues.Size = new System.Drawing.Size(195, 37);
-            this.radTaxDues.TabIndex = 1;
+            this.radTaxDues.TabIndex = 5;
             this.radTaxDues.Text = "Tax Dues";
             this.radTaxDues.UseVisualStyleBackColor = true;
             // 
@@ -405,14 +436,6 @@
             this.radPayment.Text = "Payment";
             this.radPayment.UseVisualStyleBackColor = true;
             // 
-            // ucPayment1
-            // 
-            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucPayment1.Location = new System.Drawing.Point(4, 3);
-            this.ucPayment1.Name = "ucPayment1";
-            this.ucPayment1.Size = new System.Drawing.Size(851, 511);
-            this.ucPayment1.TabIndex = 0;
-            // 
             // newFormPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -421,10 +444,10 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1062, 557);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MinimumSize = new System.Drawing.Size(1078, 596);
             this.Name = "newFormPayments";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Transaction > Payments";
@@ -434,6 +457,8 @@
             this.tabPageTaxpayer.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.tabPageTaxDues.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPageRpt.ResumeLayout(false);
@@ -472,5 +497,7 @@
         private System.Windows.Forms.RadioButton radRpt;
         private RealProperty.ucRptTaxDues ucRptTaxDues1;
         private ucPayment ucPayment1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.TextBox txtTaxpayerSearch;
     }
 }

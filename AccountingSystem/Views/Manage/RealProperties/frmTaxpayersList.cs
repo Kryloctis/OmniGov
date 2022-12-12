@@ -48,7 +48,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {   
             var columns = new string[] {"taxpayers_id", "taxpayers_name", "taxpayer_type", "taxpayers_tin", "taxpayers_contact_info", "taxpayers_barangay", "taxpayers_street", "taxpayers_municipality", "taxpayers_province"};
 
-            var dtTaxpayer = AccFactory.TaxpayersRepository().GetRecordsBySearch(searchText);
+            var dtTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText);
             var dtView = new DataView(dtTaxpayer);
             return dtView.ToTable(false, columns);
         }

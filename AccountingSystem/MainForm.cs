@@ -731,6 +731,5 @@ namespace AccountingSystem
         {
             _ = new frmBankAccounts().ShowDialog();
         }
-
     }
 }
