@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real property has been saved.");
-                _frmRealProperties.LoadProperties();
+                _frmRealProperties.LoadAllProperties();
                 Close();
             }
         }

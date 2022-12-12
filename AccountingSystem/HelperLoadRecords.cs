@@ -96,10 +96,6 @@ namespace AccountingSystem
             dgvIsTaxableCheckBoxCol.HeaderText = "Taxable";
             dgvIsTaxableCheckBoxCol.Name = "is_taxable";
 
-            DataGridViewCheckBoxColumn dgvIsCancelledCheckBoxCol = new DataGridViewCheckBoxColumn();
-            dgvIsCancelledCheckBoxCol.HeaderText = "Cancelled";
-            dgvIsCancelledCheckBoxCol.Name = "is_cancelled";
-
             dataGridView.Columns.Add("real_properties_id", "Real Properties ID");
             dataGridView.Columns.Add("property_identifier", "Property Identifier");
             dataGridView.Columns.Add("complete_arp_no", "ARP No.");
@@ -143,38 +139,9 @@ namespace AccountingSystem
             dataGridView.Columns.Add("lot_no", "Lot No");
             dataGridView.Columns.Add("gr_year", "GR Year");
             dataGridView.Columns.Add(dgvIsTaxableCheckBoxCol);
-            dataGridView.Columns.Add(dgvIsCancelledCheckBoxCol);
             dataGridView.Columns.Add("created_at", "Created At");
             dataGridView.Columns.Add("updated_at", "Updated At");
             dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-
-            dataGridView.Columns["real_taxpayers_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["real_taxpayers_contact_info"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["real_taxpayers_street"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["taxpayer_tin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["taxpayer_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["taxpayer_contact_info"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["taxpayer_address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["real_properties_street"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["real_properties_barangays_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["real_properties_municipalities_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["real_properties_provinces_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["real_properties_location"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["property_pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["classification_codes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["actual_use_codes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["effectivity_quarter"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["effectivity_quarter_and_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["other_improvements"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["assessed_value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["area"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["lot_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["gr_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["is_taxable"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
 
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
             dataGridView.Columns["real_taxpayers_street"].Visible = false;
@@ -206,10 +173,8 @@ namespace AccountingSystem
             dataGridView.Columns["actual_use_codes_is_government"].Visible = false;
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
-
             dataGridView.Columns["effectivity_quarter"].Visible = false;
             dataGridView.Columns["effectivity_year"].Visible = false;
-
             dataGridView.Columns["real_properties_street"].Visible = false;
             dataGridView.Columns["real_properties_barangays_name"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
@@ -266,7 +231,6 @@ namespace AccountingSystem
                     row["lot_no"],
                     row["gr_year"],
                     row["is_taxable"],
-                    row["is_cancelled"],
                     row["created_at"],
                     row["updated_at"],  
                 });
@@ -532,6 +496,7 @@ namespace AccountingSystem
             dataGridView.Columns["posting_status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["real_properties_id"].Visible = false;
             dataGridView.Columns["property_identifier"].Visible = false;
+            dataGridView.Columns["real_taxpayers_id"].Visible = false;
             dataGridView.Columns["posting_status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["posting_status"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";

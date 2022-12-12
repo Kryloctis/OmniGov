@@ -95,6 +95,17 @@ namespace ACC.Data
             }
         }
 
+
+        public DataTable GetCancelledRecordsBySearch(string searchText)
+        {
+            var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };
+            string query = $"SELECT * FROM {viewTableName} WHERE real_taxpayers_name LIKE @search_text OR real_taxpayers_street LIKE @search_text OR complete_arp_no LIKE @search_text OR property_pin LIKE @search_text OR lot_no LIKE @search_text AND is_cancelled = 1";
+            var dataTable = new DataTable();
+            return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
+        }
+
+        
+
         public DataTable GetRecords()
         {
             string query = $"SELECT * FROM {viewTableName}";
@@ -472,7 +483,7 @@ namespace ACC.Data
 
         public DataTable GetCancelledProperties()
         {
-            string query = $"SELECT id, complete_arp_no, is_cancelled FROM {tableName} WHERE is_cancelled = 1";
+            string query = $"SELECT * FROM {viewTableName} WHERE is_cancelled = 1";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable);
         }

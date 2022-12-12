@@ -65,7 +65,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real property has been updated.");
-                _frmRealProperties.LoadProperties();
+                _frmRealProperties.LoadAllProperties();
                 Close();
             }
         }

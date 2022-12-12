@@ -34,6 +34,7 @@
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.txtSearch = new System.Windows.Forms.ToolStripTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbxShowCanclled = new System.Windows.Forms.CheckBox();
             this.dgRealProperties = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -114,6 +115,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbxShowCanclled);
             this.panel1.Controls.Add(this.dgRealProperties);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 50);
@@ -122,17 +124,31 @@
             this.panel1.Size = new System.Drawing.Size(1016, 512);
             this.panel1.TabIndex = 12;
             // 
+            // cbxShowCanclled
+            // 
+            this.cbxShowCanclled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxShowCanclled.AutoSize = true;
+            this.cbxShowCanclled.Location = new System.Drawing.Point(906, 1);
+            this.cbxShowCanclled.Name = "cbxShowCanclled";
+            this.cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
+            this.cbxShowCanclled.TabIndex = 10;
+            this.cbxShowCanclled.Text = "Show cancelled";
+            this.cbxShowCanclled.UseVisualStyleBackColor = true;
+            this.cbxShowCanclled.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // dgRealProperties
             // 
+            this.dgRealProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgRealProperties.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRealProperties.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRealProperties.Location = new System.Drawing.Point(4, 4);
+            this.dgRealProperties.Location = new System.Drawing.Point(4, 20);
             this.dgRealProperties.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgRealProperties.Name = "dgRealProperties";
             this.dgRealProperties.RowHeadersWidth = 51;
             this.dgRealProperties.RowTemplate.Height = 29;
             this.dgRealProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRealProperties.Size = new System.Drawing.Size(1008, 504);
+            this.dgRealProperties.Size = new System.Drawing.Size(1008, 488);
             this.dgRealProperties.TabIndex = 9;
             this.dgRealProperties.SelectionChanged += new System.EventHandler(this.dgRealProperties_SelectionChanged);
             // 
@@ -168,7 +184,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(730, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(761, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripStatusLabel3
@@ -221,6 +237,7 @@
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRealProperties)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -247,5 +264,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
+        private System.Windows.Forms.CheckBox cbxShowCanclled;
     }
 }

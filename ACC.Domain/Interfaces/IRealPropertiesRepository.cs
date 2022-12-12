@@ -14,6 +14,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByCompleteARP(string completeARPNo);
         DataTable GetCancelledProperties();
 
+        DataTable GetCancelledRecordsBySearch(string searchText);
+
         int GetLastInsertedId();
         bool Synchronize(RealPropertiesModel realPropertiesModel);
         bool InsertWithPreviousAssessment(RealPropertiesModel realPropertiesModel, RptPreviousAssessmentModel rptPreviousAssessmentModel);
