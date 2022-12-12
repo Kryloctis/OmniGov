@@ -62,7 +62,6 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(198, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -74,12 +73,12 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ucBanks2
+            // ucBanks1
             // 
             this.ucBanks1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ucBanks1.Location = new System.Drawing.Point(12, 11);
             this.ucBanks1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ucBanks1.Name = "ucBanks2";
+            this.ucBanks1.Name = "ucBanks1";
             this.ucBanks1.Size = new System.Drawing.Size(358, 81);
             this.ucBanks1.TabIndex = 0;
             // 
