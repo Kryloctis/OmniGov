@@ -104,12 +104,12 @@ namespace AccountingSystem
             dataGridView.Columns.Add("property_identifier", "Property Identifier");
             dataGridView.Columns.Add("complete_arp_no", "ARP No.");
             dataGridView.Columns.Add("property_pin", "PIN");
-            dataGridView.Columns.Add("real_taxpayers_id", "Real Taxpayer ID");
-            dataGridView.Columns.Add("real_taxpayers_tin", "Real Taxpayer TIN");
-            dataGridView.Columns.Add("real_taxpayers_name", "Real Taxpayer Name");
-            dataGridView.Columns.Add("real_taxpayers_contact_info", "Real Taxpayer Contact Info.");
-            dataGridView.Columns.Add("real_taxpayers_street", "Real Taxpayer Street");
-            dataGridView.Columns.Add("real_taxpayers_is_active", "Real Taxpayer Is Active");
+            dataGridView.Columns.Add("real_taxpayers_id", "Owner ID");
+            dataGridView.Columns.Add("real_taxpayers_tin", "Owner TIN");
+            dataGridView.Columns.Add("real_taxpayers_name", "Owner Name");
+            dataGridView.Columns.Add("real_taxpayers_contact_info", "Owner Contact Info.");
+            dataGridView.Columns.Add("real_taxpayers_street", "Owner Street");
+            dataGridView.Columns.Add("real_taxpayers_is_active", "Owner Is Active");
             dataGridView.Columns.Add("taxpayer_tin", "Taxpayer TIN");
             dataGridView.Columns.Add("taxpayer_name", "Taxpayer Name");
             dataGridView.Columns.Add("taxpayer_contact_info", "Taxpayer Contact Info");
@@ -126,16 +126,17 @@ namespace AccountingSystem
             dataGridView.Columns.Add("real_properties_provinces_name", "Real Properties Province Name");
             dataGridView.Columns.Add("real_properties_location", "Location");
             dataGridView.Columns.Add("classification_codes_id", "Classfication Codes ID");
-            dataGridView.Columns.Add("classification_codes", "Classfication Codes");
+            dataGridView.Columns.Add("classification_codes", "Classfication");    
             dataGridView.Columns.Add("classification_codes_name", "Classfication Codes Name");
             dataGridView.Columns.Add("classification_codes_is_special", "Classfication Codes Is Special");
             dataGridView.Columns.Add("actual_use_codes_id", "Actual Use Codes ID");
-            dataGridView.Columns.Add("actual_use_codes", "Actual Use Codes");
+            dataGridView.Columns.Add("actual_use_codes", "Actual Use");
             dataGridView.Columns.Add("actual_use_codes_name", "Actual Use Codes Name");
             dataGridView.Columns.Add("actual_use_codes_is_government", "Actual Use Codes Is Government");
             dataGridView.Columns.Add("property_kind", "Property Kind");
             dataGridView.Columns.Add("effectivity_quarter", "Effectivity Quarter");
             dataGridView.Columns.Add("effectivity_year", "Effectivity Year");
+            dataGridView.Columns.Add("effectivity_quarter_and_year", "Effectivity Quarter and Year");
             dataGridView.Columns.Add("other_improvements", "Other Improvements");
             dataGridView.Columns.Add("assessed_value", "Assessed Value");
             dataGridView.Columns.Add("area", "Area");
@@ -145,6 +146,7 @@ namespace AccountingSystem
             dataGridView.Columns.Add(dgvIsCancelledCheckBoxCol);
             dataGridView.Columns.Add("created_at", "Created At");
             dataGridView.Columns.Add("updated_at", "Updated At");
+            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
 
             dataGridView.Columns["real_taxpayers_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["real_taxpayers_contact_info"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -165,6 +167,7 @@ namespace AccountingSystem
             dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["effectivity_quarter"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["effectivity_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.Columns["effectivity_quarter_and_year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["other_improvements"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["assessed_value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             dataGridView.Columns["area"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -204,6 +207,9 @@ namespace AccountingSystem
             dataGridView.Columns["created_at"].Visible = false;
             dataGridView.Columns["updated_at"].Visible = false;
 
+            dataGridView.Columns["effectivity_quarter"].Visible = false;
+            dataGridView.Columns["effectivity_year"].Visible = false;
+
             dataGridView.Columns["real_properties_street"].Visible = false;
             dataGridView.Columns["real_properties_barangays_name"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
@@ -213,6 +219,7 @@ namespace AccountingSystem
             foreach (DataRow row in dataTable.Rows)
             {
                 var location = $"{row["real_properties_street"]} {row["real_properties_barangays_name"]} {row["real_properties_municipalities_name"]} {row["real_properties_provinces_name"]}";
+                var effectivityQuarterAndYear = $"{row["effectivity_quarter"]}/{row["effectivity_year"]}";
 
                 dataGridView.Rows.Add(new object[]
                 {
@@ -252,6 +259,7 @@ namespace AccountingSystem
                     row["property_kind"],
                     row["effectivity_quarter"],
                     row["effectivity_year"],
+                    effectivityQuarterAndYear,
                     row["other_improvements"],
                     row["assessed_value"],
                     row["area"],
