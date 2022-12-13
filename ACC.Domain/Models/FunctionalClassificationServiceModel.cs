@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
-   public class FunctionalClassificationServiceModel
+    public class FunctionalClassificationServiceModel
     {
         public int Id { get; set; }
         public int functionalClassificationId { get; set; }
@@ -12,6 +10,5 @@ namespace ACC.Domain.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
 }

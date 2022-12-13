@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
     {
         private readonly frmRptPenalties _frmRptPenalties;
         private ucRptPenalties uc;
+
         public frmEditRptPenalties(int rptPenaltiesId, frmRptPenalties frmRptPenalties)
         {
             InitializeComponent();
@@ -24,7 +18,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             Helper.LoadFormIcon(this);
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {
@@ -54,7 +48,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         private void LoadRecord()
         {
             var dictRptDiscounts = AccFactory.RptPenaltiesRepository().GetRecordByID(uc.rptPenaltiesId);
-           
+
             uc.txtDescription.Text = dictRptDiscounts["description"];
             uc.nudRate.Value = Convert.ToDecimal(dictRptDiscounts["rate"]);
             uc.cmbxFrequency.Text = dictRptDiscounts["frequency"];

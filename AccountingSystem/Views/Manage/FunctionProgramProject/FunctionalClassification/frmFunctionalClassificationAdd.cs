@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
     public partial class frmFunctionalClassificationAdd : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
-        ucFunctionalClassification uc;
+        private ucFunctionalClassification uc;
 
         public frmFunctionalClassificationAdd(frmFunctionProgramProject frmFunctionProgramProject)
         {

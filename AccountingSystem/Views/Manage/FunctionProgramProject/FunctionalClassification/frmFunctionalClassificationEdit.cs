@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
     public partial class frmFunctionalClassificationEdit : Form
     {
         private frmFunctionProgramProject _frmFunctionProgramProject;
-        ucFunctionalClassification uc;
+        private ucFunctionalClassification uc;
 
         public frmFunctionalClassificationEdit(frmFunctionProgramProject frmFunctionProgramProject, byte functionalClassificationId)
         {
@@ -27,11 +27,9 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
                 uc.txtCode.Text = functionalClassificationData["sector_code"];
                 uc.txtName.Text = functionalClassificationData["sector_name"];
-
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
             }
         }
@@ -55,7 +53,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionalClassif
 
                 var functionalClassificationRepository = AccFactory.FunctionalClassificationRepository();
                 return functionalClassificationRepository.Update(functionalClassificationModel);
-
             }
             catch (Exception ex)
             {

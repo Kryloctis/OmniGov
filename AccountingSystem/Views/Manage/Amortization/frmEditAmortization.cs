@@ -49,7 +49,7 @@ namespace AccountingSystem.Views.Manage.Amortization
                 _frmAmortization.LoadAmortizationRecords();
             }
         }
-            
+
         private void frmEditAmortization_Load(object sender, EventArgs e)
         {
             LoadSelectedAmortization();

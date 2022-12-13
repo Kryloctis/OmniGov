@@ -20,16 +20,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
-            if(_receiptId != 0)
+            if (_receiptId != 0)
             {
                 uc.LoadCollectorsWithReceiptIssued(_receiptId);
                 uc.cmbReceipt.SelectedValue = _receiptId;
                 uc.cmbReceipt.Enabled = false;
             }
             else
-               uc.LoadCollectors();
+                uc.LoadCollectors();
         }
-
 
         private bool SaveData()
         {
@@ -60,22 +59,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     IssuedByUserId = userId
                 };
 
-                if (uc.isCollectorJO == true) 
+                if (uc.isCollectorJO == true)
                 {
                     receiptIssuedModel.JobOrderId = collectorId;
-                    receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);   
+                    receiptIssuedModel.CollectorId = AccFactory.CollectingOfficerHasJobOrdersRepository().GetCollectingOfficerIDByJobOrderId(collectorId);
                 }
-
-
 
                 var receiptIssuedRepository = AccFactory.ReceiptsIssuedRepository();
                 return receiptIssuedRepository.Insert(receiptIssuedModel);
-            
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
         }
-
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -91,6 +86,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             _frmReceiptIssued.LoadRecords();
         }
-
     }
 }

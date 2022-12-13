@@ -12,7 +12,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true );
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true);
         }
 
         private void frmReceipts_Load(object sender, EventArgs e)
@@ -20,11 +20,10 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadRecords();
         }
 
-        internal void LoadRecords() 
+        internal void LoadRecords()
         {
             try
             {
-
                 var dateIssued = dtpDateIssued.Value.ToString("yyyy-MM-dd");
                 var searchText = txtsearch.Text.Trim();
                 var receiptIssuedDt = new DataTable();
@@ -40,14 +39,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             }
             catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            
             LoadRecords();
         }
 
@@ -57,7 +54,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
-        {              
+        {
             if (Helper.MessageBoxConfirmDelete(dgReceiptIssued.SelectedRows.Count))
             {
                 try
@@ -76,12 +73,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     _ = receiptIssuedRepo.Delete(receiptModel);
                     LoadRecords();
                 }
-                catch (Exception ex) { 
-                    Helper.MessageBoxError(ex.Message); 
+                catch (Exception ex)
+                {
+                    Helper.MessageBoxError(ex.Message);
                 }
             }
         }
-        
+
         private void dgissue_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgReceiptIssued, btnEdit, btnDelete);
@@ -136,7 +134,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             LoadRecords();
         }
-
     }
 }
-    

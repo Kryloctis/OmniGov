@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.LinkUser
@@ -34,7 +33,8 @@ namespace AccountingSystem.Views.Manage.LinkUser
             {
                 if (!string.IsNullOrEmpty(userType))
                 {
-                    if (userType.Equals("collector")) {
+                    if (userType.Equals("collector"))
+                    {
                         var userRepository = AccFactory.UsersRepository();
                         var dtusers = userRepository.GetLinksCollectingOfficers();
 
@@ -70,7 +70,6 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
                         HelperLoadRecords.UsersDatagridView(dtusers, dgvusers);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -81,7 +80,7 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
         private void dgvusers_SelectionChanged(object sender, EventArgs e)
         {
-            if(dgvusers.SelectedRows.Count != 0)
+            if (dgvusers.SelectedRows.Count != 0)
             {
                 UserId = int.Parse(dgvusers.CurrentRow.Cells[0].Value.ToString());
                 Username = dgvusers.CurrentRow.Cells["username"].Value.ToString();
@@ -103,7 +102,6 @@ namespace AccountingSystem.Views.Manage.LinkUser
 
         private void dgvusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
     }
 }

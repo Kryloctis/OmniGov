@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
         private readonly ucRptDiscounts uc;
+
         public frmEditRptDiscount(int rptDiscountId, frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
@@ -52,7 +46,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             return false;
         }
 
-        private void LoadRecord() 
+        private void LoadRecord()
         {
             var dictRptDiscounts = AccFactory.RptDiscountRepository().GetRecordByID(uc.rptDiscountId);
 

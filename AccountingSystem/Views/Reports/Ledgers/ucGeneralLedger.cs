@@ -61,7 +61,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
@@ -93,14 +92,19 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 case "General Journal":
                     return "GJ";
+
                 case "Cash Receipts Journal":
                     return "CRJ";
+
                 case "Procurement Received Journal":
                     return "PRJ";
+
                 case "Cash Disbursements Journal":
                     return "CsDJ";
+
                 case "Check Disbursements Journal":
                     return "CkDJ";
+
                 case "Advice to Debit Account Disbursement Journal":
                     return "ADADJ";
             }
@@ -111,7 +115,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void ValidateDebitCreditRow(int fundId, int generalLedgerId, short year, string particulars, DataRow item, DataRow row, ref decimal balance)
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
-
 
             if (Convert.ToBoolean(item["is_debit"]))
             {

@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.RealProperties;
-using Microsoft.Reporting.Map.WebForms.BingMaps;
 using System;
 using System.Windows.Forms;
 
@@ -47,18 +46,18 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             _ucRealProperties.txtLotNo.Text = dictRealProperties["lot_no"];
         }
 
-            private void LoadTaxpayer()
-            {
-                var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
+        private void LoadTaxpayer()
+        {
+            var dictRealProperties = AccFactory.TaxpayersRepository().GetRecordByID(_taxpayerId);
 
-                var address = $"{dictRealProperties["street"]}, {dictRealProperties["barangay"]}, {dictRealProperties["municipality"]} {dictRealProperties["province"]}";
+            var address = $"{dictRealProperties["street"]}, {dictRealProperties["barangay"]}, {dictRealProperties["municipality"]} {dictRealProperties["province"]}";
 
-                _ucRealProperties.txtTaxpayers.Text = dictRealProperties["name"];
-                _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type_id"];
-                _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["tin"];
-                _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["contact_info"];
-                _ucRealProperties.txtTaxpayerAddress.Text = address;
-            }
+            _ucRealProperties.txtTaxpayers.Text = dictRealProperties["name"];
+            _ucRealProperties.txtTaxpayerType.Text = dictRealProperties["taxpayer_type_id"];
+            _ucRealProperties.txtTaxpayerTIN.Text = dictRealProperties["tin"];
+            _ucRealProperties.txtTaxpayerContact.Text = dictRealProperties["contact_info"];
+            _ucRealProperties.txtTaxpayerAddress.Text = address;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -113,7 +112,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             }
             return false;
         }
-
-
     }
 }

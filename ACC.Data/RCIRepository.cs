@@ -1,15 +1,13 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
-
 
 namespace ACC.Data
 {
-    public class RCIRepository:IRCIRepository
+    public class RCIRepository : IRCIRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableRCI = "rci";
@@ -21,9 +19,7 @@ namespace ACC.Data
         private readonly string tableRCIObligations = "rci_obligations";
         private readonly string tableRCIDeductions = "rci_deductions";
 
-
         private readonly string viewTableName = "view_rci";
-
 
         public RCIRepository(IAccGenericCommands dbGenericCommands)
         {
@@ -40,7 +36,6 @@ namespace ACC.Data
                 {
                     new object[] { "@id", DbType.Int32, Id},
                 };
-
 
                 string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
@@ -88,13 +83,13 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecordsByBankIdAndMonth(int bankId,string month)
+        public DataTable GetRecordsByBankIdAndMonth(int bankId, string month)
         {
-           var parameters = new object[][]
-            {
+            var parameters = new object[][]
+             {
                 new object[] { "@bankId", DbType.Int32, bankId},
                 new object[] { "@month", DbType.String, month},
-            };
+             };
 
             string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bankId AND MONTH(check_date) = @month";
             return _dbGenericCommands.ExecuteReader(query, parameters);
@@ -117,7 +112,7 @@ namespace ACC.Data
                     new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
-                string query =  $"INSERT INTO {tableRCI} " +
+                string query = $"INSERT INTO {tableRCI} " +
                                 $"(banks_id, funds_id, function_program_project_id, check_date, check_no, dv_no, payee, nature_of_payment, amount) " +
                                 $"VALUES(" +
                                 $"@banks_id, " +
@@ -130,7 +125,6 @@ namespace ACC.Data
                                 $"@nature_of_payment, " +
                                 $"@amount)";
 
-
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -138,7 +132,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Update(RCIModel entity)
         {
@@ -173,7 +166,7 @@ namespace ACC.Data
 
                 //string query = $"UPDATE {tableName } SET " +
                 //    $"ban";
-                
+
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -181,7 +174,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Delete(List<RCIModel> entityList)
         {
@@ -224,7 +216,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool IdExist(int id)
         {
             try
@@ -258,7 +249,7 @@ namespace ACC.Data
 
                 string query = $"SELECT * FROM {viewTableName} " +
                                $"WHERE payee LIKE @searchText " +
-                               $"OR bank_name LIKE @searchText " + 
+                               $"OR bank_name LIKE @searchText " +
                                $"OR account_no LIKE @searchText " +
                                $"OR obligation_no LIKE @searchText";
 
@@ -310,7 +301,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool SaveRCIDVObligations(short rciId, string obligationNo)
         {
             var parameters = new object[][]
@@ -347,7 +337,6 @@ namespace ACC.Data
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-
         public string GetRecentRCIId()
         {
             try
@@ -361,7 +350,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
-       
     }
 }

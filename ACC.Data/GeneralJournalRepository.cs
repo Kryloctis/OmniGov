@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using ACC.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Data
@@ -164,7 +163,6 @@ namespace ACC.Data
 
         public bool DeleteGeneralJournalByJevID(int jevId)
         {
-
             try
             {
                 var parameters = new object[][]

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.ChartOfAccounts.AccountGroup
 {

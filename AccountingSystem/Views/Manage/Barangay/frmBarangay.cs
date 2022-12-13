@@ -92,8 +92,6 @@ namespace AccountingSystem.Views.Manage.Barangay
                     deletedCount = rowCount;
                     return AccFactory.BarangayRepository().Delete(barangayModelList);
                 }
-
-
             }
             catch (Exception ex)
             {

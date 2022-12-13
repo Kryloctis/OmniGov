@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctionProgramPr
         {
             Helper.LoadFormIcon(this);
             ucFunctionProgramProject1.LoadServiceNameComboBox();
-
         }
 
         private bool SaveData()

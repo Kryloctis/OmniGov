@@ -5,8 +5,8 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
     public partial class frmCollectorsRCDRemarks : Form
     {
-
         private readonly frmCollectorsRCD _frmCollectorsRCD;
+
         public frmCollectorsRCDRemarks(frmCollectorsRCD frmCollectorsRCD)
         {
             InitializeComponent();
@@ -42,9 +42,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                     _frmCollectorsRCD.CheckRCDStatus(reportNo);
                     this.Close();
                 }
-             
             }
-           
         }
 
         private bool SetRemarks()
@@ -75,6 +73,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             txtRemarks.Text = AccFactory.CollectorReportRepository().GetRemarks(reportNo);
             txtRemarks.SelectionStart = 0;
         }
-
     }
 }

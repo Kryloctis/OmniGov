@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
     public partial class frmDailyCash : Form
     {
         private readonly ReportViewer reportViewer = new ReportViewer();
+
         public frmDailyCash()
         {
             InitializeComponent();
@@ -75,7 +76,6 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
             {
                 Cursor = Cursors.WaitCursor;
 
-
                 static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatory, ref string signatoryTitle)
                 {
                     if (dictSignatory.Count > 0)
@@ -98,12 +98,10 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                 string certifiedCorrectSignatoryTitle = string.Empty;
                 ParseSignatory(dictCertifiedCorrectSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-
                 var dictNotedSignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Noted", "Daily Cash Position Report");
                 string notedSignatory = string.Empty;
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);
-
 
                 string date = String.Format("{0:yyyy-MM-dd}", dtdate.Value);
                 var lguDetails = Helper.LGUDetails();
@@ -133,14 +131,11 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                 reportViewer.RefreshReport();
 
                 Cursor = Cursors.Default;
-
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
-
         }
     }
 }

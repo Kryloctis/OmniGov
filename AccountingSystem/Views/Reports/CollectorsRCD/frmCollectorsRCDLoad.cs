@@ -7,7 +7,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
     public partial class frmCollectorsRCDLoad : Form
     {
-
         private readonly byte _fundId;
         private readonly ushort _collectorId;
         private readonly ucCollectorsRCD _uc;
@@ -16,7 +15,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
         private DataTable dtPaymentCollection;
 
         public frmCollectorsRCDLoad(byte fundId, ushort collectorId, ucCollectorsRCD uc)
-        { 
+        {
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
@@ -53,7 +52,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
             if (dtPaymentCollection.Rows.Count == 0)
                 Helper.MessageBoxSuccess("No records found. You might have already created a report of collections for the selected date range.\n\n\nPlease select another date.");
-
         }
 
         private void PaymentCollectionChecker()

@@ -1,16 +1,6 @@
 ﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
-using AccountingSystem.Views.Transactions.PropertyPayment;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SpreadsheetLight.Drawing;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -41,7 +31,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             };
         }
 
-        private DataTable DataTableTaxpayers() 
+        private DataTable DataTableTaxpayers()
         {
             string searchText = txtTaxpayerSearch.Text.Trim();
             var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecordsBySearch(searchText);
@@ -62,7 +52,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             return dataTable;
         }
 
-
         private void LoadTaxpayers()
         {
             try
@@ -70,11 +59,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                 HelperLoadRecords.DataGridViewPaymentTaxpayers(dgTaxpayers, DataTableTaxpayers());
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-     
-        private void LoadPaymentTab() 
+        private void LoadPaymentTab()
         {
             if (!ucRptTaxDues.ValidateChildren())
             {
@@ -87,20 +75,18 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-
         private int GetRealTaxpayersId()
         {
             int rowIndex = dgTaxpayers.CurrentRow.Index;
             return Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
         }
 
-        private void LoadTaxDuesTab() 
+        private void LoadTaxDuesTab()
         {
             tabControl1.SelectedTab = tabPageTaxDues;
             ucRptTaxDues.taxpayersId = GetRealTaxpayersId();
             ucRptTaxDues.LoadPostedProperties();
         }
-
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -113,9 +99,8 @@ namespace AccountingSystem.Views.Transactions.Payments
                 else if (tabControl1.SelectedTab == tabPagePayment)
                     Helper.MessageBoxSuccess("Payment Confirmed");
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         private void newFormPayments_Load(object sender, EventArgs e)
         {

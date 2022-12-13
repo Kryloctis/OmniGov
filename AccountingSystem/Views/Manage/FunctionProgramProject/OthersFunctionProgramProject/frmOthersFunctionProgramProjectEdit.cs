@@ -1,20 +1,13 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionProgramProject
 {
     public partial class frmOthersFunctionProgramProjectEdit : Form
     {
-
         private frmOthersFunctionProgramProject _frmOthersFunctionProgramProject;
+
         public frmOthersFunctionProgramProjectEdit(frmOthersFunctionProgramProject frmOthersFunctionProgramProject)
         {
             InitializeComponent();
@@ -34,16 +27,15 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
-        private bool UpdateData() 
+        private bool UpdateData()
         {
             try
             {
                 var uc = ucOthersFunctionProgramProject1;
 
-                if (!uc.ValidateChildren()) 
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;
@@ -67,7 +59,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (UpdateData()) 
+            if (UpdateData())
             {
                 _frmOthersFunctionProgramProject.LoadRecords();
                 Helper.MessageBoxSuccess("Update has been saved.");
@@ -79,6 +71,5 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.OthersFunctionPro
         {
             LoadSelected();
         }
-
     }
 }

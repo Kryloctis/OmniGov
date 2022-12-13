@@ -5,8 +5,8 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
 {
     public partial class frmSupplementalAppropriationsEdit : Form
     {
-        ucSupplementalAppropriations uc;
-        frmSupplementalAppropriationsMain _FrmSupplementalAppropriationsMain;
+        private ucSupplementalAppropriations uc;
+        private frmSupplementalAppropriationsMain _FrmSupplementalAppropriationsMain;
         internal int rowIndex;
 
         public frmSupplementalAppropriationsEdit(frmSupplementalAppropriationsMain frmSupplementalAppropriationsMain)

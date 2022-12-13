@@ -67,7 +67,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 var dtAllotmentReleaseSearch = AccFactory.AllotmentReleaseRepository().GetViewRecordsBySearch(fundId, allotmentClassId, dateIssued, searchTxt);
 
-
                 foreach (DataRow row in dtAllotmentReleaseSearch.Rows)
                 {
                     int rowAllotmentReleaseId = Convert.ToInt32(row["allotment_release_id"]);
@@ -76,7 +75,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     string rowPurpose = row["purpose"].ToString();
                     bool rowIsContinuing = Convert.ToBoolean(row["continuing"]);
                     string rowTotalAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetTotalAllotmentReleaseById(rowAllotmentReleaseId).ToString("N2");
-
 
                     var item = new dynamic[] { rowAllotmentReleaseId, rowFullAroNo, rowDateIssued.ToString("MMM dd, yyyy"), rowPurpose, rowTotalAllotmentRelease, rowIsContinuing ? Properties.Resources.ok14px : null };
 
@@ -145,7 +143,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private void cmbxAllotmentClasses_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadAllotmentRelease();
-
         }
 
         private void dtDateIssued_ValueChanged(object sender, EventArgs e)
@@ -155,7 +152,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private void dgAllotmentRelease_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex > -1)
+            if (e.RowIndex > -1)
                 LoadSearched();
         }
     }

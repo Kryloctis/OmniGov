@@ -21,7 +21,6 @@ namespace ACC.Domain.Interfaces
         //SUBSIDIARY LEDGER
         DataTable GetViewRecords(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
 
-
         //TRIAL BALANCE
         Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime date);
 
@@ -30,7 +29,6 @@ namespace ACC.Domain.Interfaces
         Dictionary<string, decimal> GetSumTransactionsBySubMajAccGrpId(int fundId, int SubMajAccGrpId, DateTime date);
 
         Dictionary<string, decimal> GetSumTransactionsByGenLedgerId(int fundsId, int generalLedgerId, DateTime date);
-
 
         bool DeleteByJevId(int jevId);
 

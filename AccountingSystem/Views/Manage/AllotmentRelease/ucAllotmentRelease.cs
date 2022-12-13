@@ -24,13 +24,13 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             InitializeComponent();
         }
 
-        private decimal GetRemainingBalance() 
+        private decimal GetRemainingBalance()
         {
             decimal unreleasedBal = Convert.ToDecimal(txtUnreleasedBal.Text);
             decimal amount = nudAmount.Value;
 
             decimal remainingBalance = unreleasedBal - amount;
-            return remainingBalance < 0? 0: remainingBalance;
+            return remainingBalance < 0 ? 0 : remainingBalance;
         }
 
         internal void LoadReference(ucAllotmentReleaseMain ucAllotmentReleaseMain)
@@ -57,7 +57,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
             else
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
-
 
             return dtBudgetAppropriation;
         }
@@ -88,13 +87,12 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
                 cmbxBudgetAppropriations.DataSource = accountDict.Count == 0 ? null : new BindingSource(accountDict, null);
                 cmbxBudgetAppropriations.DisplayMember = "value";
-                cmbxBudgetAppropriations.ValueMember = "key";              
+                cmbxBudgetAppropriations.ValueMember = "key";
 
                 cmbxBudgetAppropriations.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
                 cmbxBudgetAppropriations.SelectedValue = _budgetAppropriationId;
                 cmbxBudgetAppropriations.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
                 cmbxBudgetAppropriations.SelectedValueChanged += new EventHandler(cmbxBudgetAppropriations_SelectedValueChanged);
-
             }
             catch (Exception ex)
             {
@@ -146,12 +144,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 errorProvider1.GetError(cmbxBudgetAppropriations),
                 errorProvider1.GetError(nudAmount)
             };
-       
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void OnLoad() 
+        private void OnLoad()
         {
             try
             {
@@ -160,7 +157,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadBudgetAppropriations();
                 txtUnreleasedBal.Text = GetBudgetAppropriationBalance().ToString("N2");
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucAllotmentRelease_Load(object sender, EventArgs e)
@@ -199,7 +196,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId_DateEntry(budgetAppropriationId, dateIssued);
 
                     appropriationBalance = ((budgetAppropriation + totalSupplementalAppropriation) - totalAllotmentRelease) + (budgetAppropriationId == _budgetAppropriationId ? _amount : 0);
-
                 }
             }
             catch (Exception ex)
@@ -229,7 +225,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
 
         private bool AmountExceeds()
         {
-
             if (nudAmount.Value > GetBudgetAppropriationBalance())
             {
                 errorProvider1.SetError(nudAmount, "Amount you entered exceeds to the appropriate balance.");
@@ -278,7 +273,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         {
             try
             {
-
                 bool allotmentReleaseExist;
                 int allotmentReleaseId = _ucAllotmentMain.allotmentReleaseId;
                 int budgetAppropriationId = Convert.ToInt32(cmbxBudgetAppropriations.SelectedValue);
@@ -357,6 +351,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(errorProvider1, cmbxBudgetAppropriations);
         }
 
-        #endregion
+        #endregion VALIDATIONS
     }
 }

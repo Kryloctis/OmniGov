@@ -8,7 +8,6 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-
     public class JEVRepository : IJEVRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
@@ -57,7 +56,6 @@ namespace ACC.Data
         {
             try
             {
-
                 var parameters = new object[][]
                 {
                     new object[] { "@month", DbType.Int16, month},
@@ -169,7 +167,6 @@ namespace ACC.Data
                     }
                 }
             }
-
             catch (Exception)
             {
                 throw;
@@ -240,7 +237,6 @@ namespace ACC.Data
             {
                 throw;
             }
-
         }
 
         public DataTable GetRecordsBySearch(string searchText)
@@ -310,7 +306,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -335,7 +330,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -360,7 +354,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -385,7 +378,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -410,7 +402,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -453,7 +444,6 @@ namespace ACC.Data
 
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -480,7 +470,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -503,7 +492,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -526,7 +514,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -547,7 +534,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -568,7 +554,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -615,7 +600,6 @@ namespace ACC.Data
 
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -651,7 +635,6 @@ namespace ACC.Data
             string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
             return _dbGenericCommands.ExecuteScalar(query, parameters);
         }
-
 
         public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
         {
@@ -716,7 +699,6 @@ namespace ACC.Data
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                     record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
                     record.Add("updated_by_name", reader.Rows[0]["updated_by_name"].ToString());
-
                 }
             }
             catch (Exception)
@@ -758,8 +740,7 @@ namespace ACC.Data
             };
         }
 
-
-        #region  Validations 
+        #region Validations
 
         public bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year)
         {
@@ -812,8 +793,7 @@ namespace ACC.Data
             return false;
         }
 
-        #endregion
-
+        #endregion Validations
 
         public int GetJEVCount(string status, string journalName, string fundName, short month, short year)
         {
@@ -938,7 +918,6 @@ namespace ACC.Data
                 string query = $"SELECT COUNT(*) FROM {tableName} WHERE is_approved=1 AND is_disapproved=0 AND is_cancelled=1 AND MONTH(date_entry)<=@month AND YEAR(date_entry)=@year";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
-
             }
             catch (Exception)
             {
@@ -957,7 +936,6 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int16, year}
             };
 
-
             string journalQuery = journalName == "All" ? string.Empty : "journal_name = @journal_name AND";
             string fundQuery = fundName == "All" ? string.Empty : "fund_name = @fund_name AND";
             string jevStatusQuery;
@@ -967,19 +945,22 @@ namespace ACC.Data
                 case "pending":
                     jevStatusQuery = $"is_approved = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                     break;
+
                 case "approved":
                     jevStatusQuery = $"is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND ";
                     break;
+
                 case "disapproved":
                     jevStatusQuery = $"is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND ";
                     break;
+
                 case "cancelled":
                     jevStatusQuery = $"is_cancelled = 1 AND ";
                     break;
+
                 default:
                     jevStatusQuery = string.Empty;
                     break;
-
             }
             string query = $"SELECT * FROM {viewTableName} WHERE {jevStatusQuery} {journalQuery} {fundQuery} MONTH(date_entry) <= @month AND YEAR(date_entry) = @year AND (full_jev_no LIKE @searchTxt OR fund_name LIKE @searchTxt OR ref_no LIKE @searchTxt OR payee LIKE @searchTxt OR explanation LIKE @searchTxt) ORDER BY full_jev_no";
 
@@ -1044,12 +1025,16 @@ namespace ACC.Data
                 {
                     case "approve":
                         return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+
                     case "disapprove":
                         return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
+
                     case "cancel":
                         return "is_cancelled = 1";
+
                     case "pending":
                         return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+
                     default:
                         return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
                 }
@@ -1074,7 +1059,6 @@ namespace ACC.Data
                 bool isApproved = Convert.ToBoolean(reader.Rows[0]["is_approved"]);
                 bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
                 bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
-
 
                 if (isCancelled)
                     return "Cancelled";

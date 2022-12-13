@@ -1,14 +1,13 @@
 ﻿using AccountingSystem.Views.Transactions.RCI;
 using System;
-using System.Data;
 using System.Windows.Forms;
+
 namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
 {
     public partial class frmObligations : Form
     {
         private readonly ucRCI _uc;
-
 
         public frmObligations(ucRCI uc)
         {

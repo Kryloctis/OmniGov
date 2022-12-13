@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
             uc = ucFunctonalClassificationServices1;
             _frmFunctionProgramProject = frmFunctionProgramProject;
             ucFunctonalClassificationServices1.serviceID = serviceID;
-
         }
 
         private void LoadSelectedRecord()

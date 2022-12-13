@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Journals
@@ -35,7 +28,6 @@ namespace AccountingSystem.Views.Manage.Journals
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
             }
         }
@@ -45,7 +37,6 @@ namespace AccountingSystem.Views.Manage.Journals
             try
             {
                 var uc = ucJournals1;
-                
 
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
@@ -90,7 +81,6 @@ namespace AccountingSystem.Views.Manage.Journals
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-          
         }
     }
 }

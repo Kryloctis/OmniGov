@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Reports.RCD
     {
         internal int Id = 0;
 
-        internal int fundId=1;
+        internal int fundId = 1;
         internal string reportNo;
         internal string rcdNo;
         internal string rcdId;
@@ -55,7 +55,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
             this.Close();
         }
-       
+
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
         {
             if (dgRCDSearch.Rows.Count > 0 && dgRCDSearch.SelectedRows.Count > 0)

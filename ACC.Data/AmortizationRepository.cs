@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -57,7 +56,7 @@ namespace ACC.Data
 
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, Id}
                 };
@@ -149,7 +148,7 @@ namespace ACC.Data
 
                 string query = $"UPDATE {tableName} SET bank_name = @bank_name, amortization_term = @amortization_term, interest = @interest, amount_released = @amount_released WHERE id = @id ";
 
-                return _mySqlGenericCommands.ExecuteNonQuery(query,parameters);
+                return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {

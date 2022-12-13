@@ -1,13 +1,7 @@
 ﻿using ACC.Domain.Models;
-using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
@@ -37,7 +31,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             };
         }
 
-        private DataTable DataTableAddOnCharges() 
+        private DataTable DataTableAddOnCharges()
         {
             var dtAddOnCharges = AccFactory.BusinessAddOnChargesRepository().GetRecords();
             DataTable dt = new DataTable();
@@ -56,14 +50,14 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             return dt;
         }
 
-        internal void LoadRecords() 
+        internal void LoadRecords()
         {
             try
             {
                 HelperLoadRecords.BusinessCategorissAddOnsDatagridView(dataGridView1, DataTableAddOnCharges());
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmBusinessCategoriesAddOnCharges_Load(object sender, EventArgs e)
@@ -77,7 +71,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
                 e.Column.ReadOnly = true;
         }
 
-        private bool Save() 
+        private bool Save()
         {
             var modeList = new List<BusinessCategoriesHasAddOnChargesModel>();
 
@@ -94,8 +88,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
 
                 modeList.Add(model);
             }
-            return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);            
-            
+            return AccFactory.BusinessCategoriesHasAddOnCharges().Insert(_businessCategoriesId, modeList);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -109,7 +102,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
                     Helper.DatagridViewRecordFinder(_frmBusinessCategories.dgBusinessCategories, "id", _businessCategoriesId.ToString());
                 }
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -129,7 +122,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             {
                 Helper.CheckUncheckCheckBoxHeader(dataGridView1, "is_selected", checkBox1);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void checkBox1_MouseClick(object sender, MouseEventArgs e)
@@ -138,7 +131,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges
             {
                 Helper.CheckUncheckCheckBoxRows(dataGridView1, "is_selected", checkBox1.Checked);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

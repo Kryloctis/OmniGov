@@ -27,7 +27,6 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-
                 foreach (TaxpayersModel taxpayersModel in entityList)
                 {
                     var parameters = new object[][] { new object[] { "@id", DbType.Int32, taxpayersModel.Id } };
@@ -140,7 +139,7 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        //VALIDATIONS   
+        //VALIDATIONS
         public bool TaxpayerNameExist(string name)
         {
             var parameters = new object[][]

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
 {
@@ -20,7 +20,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             _frmBankDeposits = frmBankDeposits;
             _referenceNumber = referenceNumber;
             _amount = amount;
-
 
             uc = ucBankDeposit1;
             uc.userid = Helper.UserId;
@@ -48,7 +47,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bankDepositModel = new BankDepositsModel()
                 {
                     bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
-                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),                     
+                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),
                     Reference = uc.txtReferenceNumber.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.nudAmount.Value),
@@ -96,7 +95,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             if (SaveData())
             {
-                if(generalCollectionId > 0)
+                if (generalCollectionId > 0)
                 {
                     Helper.MessageBoxSuccess("General Collection Deposits has been saved.");
                     this.DialogResult = DialogResult.OK;
@@ -108,7 +107,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                     _frmBankDeposits.LoadRecords();
                     ucBankDeposit1.ResetForm();
                 }
-                
             }
         }
     }

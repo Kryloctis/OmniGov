@@ -1,15 +1,11 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Shared;
-using Org.BouncyCastle.Crypto.Agreement;
-using Org.BouncyCastle.Crypto.Tls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments.RealProperty
@@ -49,7 +45,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         //Properties DatagridView
 
@@ -182,7 +177,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     }
                 }
 
-                foreach(int notSelectedYear in notSelectedYears)
+                foreach (int notSelectedYear in notSelectedYears)
                 {
                     foreach (int selectedYear in selectedYears)
                     {
@@ -205,14 +200,14 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 skippedTaxDues.Distinct();
                 skippedTaxDues.ForEach(x => sb.AppendLine($"  {x}"));
                 dgTaxDues.Tag = sb;
-                return false;               
+                return false;
             }
 
             dgTaxDues.Tag = string.Empty;
             return true;
         }
 
-        #endregion
+        #endregion Validations
 
         private DataColumn[] DataColumnsTaxDues()
         {
@@ -263,7 +258,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     decimal sefPenaltyDiscount = sefDiscount < 1 ? sefPenalty : -sefDiscount;
                     decimal totalBasicPayment = (basicTaxDue + basicPenalty) - basicDiscount;
                     decimal totalSefPayment = (sefTaxDue + sefPenalty) - sefDiscount;
-                   
+
                     var newRow = dataTable.NewRow();
                     newRow["is_selected"] = false;
                     newRow["assessment_posts_id"] = row["rpt_assessment_posts_id"];
@@ -300,7 +295,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        internal decimal GetTotalTaxDue() 
+        internal decimal GetTotalTaxDue()
         {
             decimal totalPayment = 0;
             foreach (DataGridViewRow row in dgTaxDues.Rows)
@@ -347,7 +342,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         private void dgTaxDues_Validating(object sender, CancelEventArgs e)
         {
             try
-            {          
+            {
                 e.Cancel = !TaxDuesValidated();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

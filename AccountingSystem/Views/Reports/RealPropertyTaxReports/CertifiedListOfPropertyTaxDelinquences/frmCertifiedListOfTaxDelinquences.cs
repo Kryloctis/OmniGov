@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
             {
                 string lguName = Helper.LGUDetails()["lgu_name"];
                 string barangayName = cmbxBarangays.Text.Trim();
-                var asOfDate = dtAsOf.Value;    
+                var asOfDate = dtAsOf.Value;
 
                 var reportParameters = new ReportParameter[]
                 {
@@ -78,7 +78,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfP
 
             return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);
         }
-        
+
         private void GetParameters(out string barangayName, out DateTime asOfDate)
         {
             barangayName = cmbxBarangays.Text.Trim();

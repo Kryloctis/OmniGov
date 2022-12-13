@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Funds
@@ -14,6 +8,7 @@ namespace AccountingSystem.Views.Manage.Funds
     public partial class ucFunds : UserControl
     {
         internal int fundId = 0;
+
         public ucFunds()
         {
             InitializeComponent();
@@ -28,7 +23,6 @@ namespace AccountingSystem.Views.Manage.Funds
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
-
 
         internal void ResetForm()
         {
@@ -54,7 +48,6 @@ namespace AccountingSystem.Views.Manage.Funds
                 epName.SetError(txtName, "Fund name already exist in your records.");
                 e.Cancel = true;
             }
-
         }
 
         private void txtName_Validated(object sender, EventArgs e)
@@ -64,11 +57,10 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void ucFunds_Load(object sender, EventArgs e)
         {
-
         }
 
-		private void txtCode_Validating(object sender, CancelEventArgs e)
-		{
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epCode, txtCode, "fund code");
 
             var fundsRepository = AccFactory.FundsRepository();
@@ -87,9 +79,9 @@ namespace AccountingSystem.Views.Manage.Funds
             }
         }
 
-		private void txtCode_Validated(object sender, EventArgs e)
-		{
+        private void txtCode_Validated(object sender, EventArgs e)
+        {
             Helper.ClearErrorTextBox(epCode, txtCode);
         }
-	}
+    }
 }

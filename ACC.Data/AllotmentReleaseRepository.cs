@@ -10,7 +10,6 @@ namespace ACC.Data
 {
     public class AllotmentReleaseRepository : IAllotmentReleaseRepository
     {
-
         private AccGenericCommands _mySqlGenericCommands;
         private readonly string viewTableName = "view_allotment_release";
         private readonly string tableName = "allotment_release";
@@ -242,11 +241,9 @@ namespace ACC.Data
                         _ = _allotmentAccountRepository.Insert(allotmentAccount);
                     }
 
-
                     scope.Complete();
                     return true;
                 };
-
             }
             catch (Exception)
             {
@@ -269,11 +266,9 @@ namespace ACC.Data
                     _ = _allotmentAccountRepository.DeleteByAllotmentReleaseId(allotmentReleaseId);
                     _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
-
                     scope.Complete();
                     return true;
                 };
-
             }
             catch (Exception)
             {
@@ -345,7 +340,6 @@ namespace ACC.Data
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -370,7 +364,6 @@ namespace ACC.Data
                 string queryResult = _mySqlGenericCommands.ExecuteScalar(query, parameters);
 
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -387,7 +380,6 @@ namespace ACC.Data
                 new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId },
                 new object[] { "@date_issued", DbType.Date, dateIssued.Date}
             };
-
 
             string query = $"SELECT " +
                 $"allotment_release_id, " +
@@ -425,7 +417,6 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-
         }
 
         public DataTable GetViewRecordsByBudgetAppropriationId(int budgetAppropriationId)
@@ -434,7 +425,6 @@ namespace ACC.Data
             {
                 new object[] { "@budget_appropriations_id", DbType.Int32, budgetAppropriationId }
             };
-
 
             string query = $"SELECT " +
                 $"allotment_release_id, " +
@@ -551,10 +541,10 @@ namespace ACC.Data
         }
 
         #region BUDGET DASHBOARD METHODS
+
         //SUMMARY
         public decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@function_program_project_id", DbType.String, fppId },
@@ -579,7 +569,6 @@ namespace ACC.Data
             else
                 subFPPQuery = "others_fpp_id = @others_fpp_id AND";
 
-
             string query = $"SELECT COALESCE(SUM(amount), 0) AS amount " +
                 $"FROM {viewTableName} " +
                 $"WHERE {fppWhereQuery} " +
@@ -594,7 +583,7 @@ namespace ACC.Data
             return allotments;
         }
 
-        //DETAILED 
+        //DETAILED
         public decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued)
         {
             var parameters = new object[][]
@@ -611,7 +600,7 @@ namespace ACC.Data
             return allotments;
         }
 
-        #endregion
+        #endregion BUDGET DASHBOARD METHODS
 
         public string GetLeastAllotmentReleaseNumber()
         {

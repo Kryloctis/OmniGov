@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Funds
@@ -18,7 +11,7 @@ namespace AccountingSystem.Views.Manage.Funds
         public frmFundAdd(frmFunds frmFunds)
         {
             InitializeComponent();
-            _frmFunds = frmFunds;            
+            _frmFunds = frmFunds;
         }
 
         private bool SaveData()
@@ -38,7 +31,6 @@ namespace AccountingSystem.Views.Manage.Funds
                 {
                     FundCode = uc.txtCode.Text.Trim(),
                     FundName = uc.txtName.Text.Trim()
-                    
                 };
 
                 var fundsRepository = AccFactory.FundsRepository();
@@ -52,10 +44,8 @@ namespace AccountingSystem.Views.Manage.Funds
             return false;
         }
 
-
         private void frmFundAdd_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)
@@ -70,7 +60,6 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            
         }
     }
 }

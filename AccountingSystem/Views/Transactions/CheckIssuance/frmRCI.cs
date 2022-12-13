@@ -14,11 +14,11 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.DatagridFullRowSelectStyle(dgRCI, false);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)                                                                                          
-        {   
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
             _ = new frmRCIAdd(this).ShowDialog();
         }
-        
+
         private void frmRCI_Load(object sender, EventArgs e)
         {
             LoadRecords();
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 lblRecordCount.Text = rciRepository.CountRecords().ToString();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
@@ -100,6 +100,5 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ShowRecordTimestamp(dgRCI, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgRCI, btnEdit, btnDelete);
         }
-
     }
 }

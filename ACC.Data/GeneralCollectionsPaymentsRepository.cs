@@ -3,17 +3,15 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
 {
-    class GeneralCollectionsPaymentsRepository:IGeneralCollectionsPaymentsRepository
+    internal class GeneralCollectionsPaymentsRepository : IGeneralCollectionsPaymentsRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_collections_payment";
         private readonly string viewTableName = "view_general_collections_payment";
-
 
         public GeneralCollectionsPaymentsRepository(IAccGenericCommands dbGenericCommands)
         {
@@ -61,9 +59,8 @@ namespace ACC.Data
                 };
 
                 string query = $"INSERT INTO {tableName} (collector_report_id, general_collections_id) VALUES (@collector_report_id, @general_collections_id)";
-             
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
+                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
             {
@@ -92,7 +89,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
@@ -137,7 +133,6 @@ namespace ACC.Data
                     {
                         if (entity.Id > 0)
                         {
-
                             var parameters = new object[][]
                            {
                                 new object[] { "@id", DbType.Int16, entity.Id},
@@ -168,7 +163,6 @@ namespace ACC.Data
             {
                 throw;
             }
-
         }
 
         public bool IdExist(int id)
@@ -213,8 +207,7 @@ namespace ACC.Data
         {
             try
             {
-
-                var parameter = new object[][] { 
+                var parameter = new object[][] {
                     new object[] {"@rcdNo", DbType.String, rcdNo}
                 };
 
@@ -225,11 +218,9 @@ namespace ACC.Data
             }
             catch (Exception)
             {
-
                 throw;
-            }   
+            }
         }
-
 
         public DataTable GetRecordsByRCDNO(string RCDNo)
         {
@@ -265,8 +256,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
-
         public bool Update(GeneralCollectionPaymentsModel entity)
         {
             throw new NotImplementedException();
@@ -276,7 +265,5 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

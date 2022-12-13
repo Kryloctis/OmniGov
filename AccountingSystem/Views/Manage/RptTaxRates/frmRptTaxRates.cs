@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptTaxRates
@@ -14,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
     public partial class frmRptTaxRates : Form
     {
         private readonly MainForm _mainForm;
+
         public frmRptTaxRates(MainForm mainForm)
         {
             InitializeComponent();
@@ -28,7 +23,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             lblRecordCount.Text = recordCount.ToString();
         }
 
-        internal void LoadTaxRates() 
+        internal void LoadTaxRates()
         {
             string searchText = txtSearch.Text.Trim();
 
@@ -51,7 +46,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             _ = new frmAddRptTaxRate(this).ShowDialog();
         }
 
-        private void ShowEditForm() 
+        private void ShowEditForm()
         {
             try
             {
@@ -90,7 +85,6 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
                     deletedCount = rowCount;
                     return AccFactory.RptTaxRatesRepository().Delete(rptTaxRatesModelList);
                 }
-
             }
             catch (Exception ex)
             {

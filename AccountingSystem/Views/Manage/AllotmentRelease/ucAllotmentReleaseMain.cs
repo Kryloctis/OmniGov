@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         }
 
         #region FPP Combobox
+
         private DataTable DataTableFPP()
         {
             DataTable dtFPP;
@@ -109,7 +110,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             LoadSubFPPCombobox();
         }
 
-        #endregion
+        #endregion FPP Combobox
 
         #region Sub FPP Combobox
 
@@ -179,7 +180,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             }
         }
 
-        #endregion
+        #endregion Sub FPP Combobox
 
         internal void ClearErrors()
         {
@@ -263,7 +264,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     ShowCheckIcon(radFund);
                 }
 
-
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
                 radFund.Click += new EventHandler(radioFunds_Click);
@@ -334,7 +334,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 dgAllotmentRelease.Columns["allotment_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgAllotmentRelease.Columns["allotment_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dgAllotmentRelease.Columns["allotment_amount"].DefaultCellStyle.Format = "N2";
-
             }
             catch (Exception ex)
             {
@@ -379,7 +378,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             mskYear.Text = dtDateIssued.Value.Year.ToString();
         }
 
-        private void OnLoad() 
+        private void OnLoad()
         {
             try
             {
@@ -387,7 +386,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 LoadAllotmentClasses();
                 mskYear.Text = dtDateIssued.Value.Year.ToString();
                 Helper.DatagridFullRowSelectStyle(dgAllotmentRelease, true);
-
 
                 //FPP
                 LoadFPP();
@@ -417,7 +415,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 OnLoad();
             }
         }
-
 
         private void EnableDisableButtons()
         {
@@ -461,7 +458,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 dtDateIssued.Enabled = true;
             }
         }
-
 
         //VALIDATIONS BEFORE SHOWING ADD WINDOW
         private string GetFormErrorsOnAdd()
@@ -517,7 +513,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -525,8 +520,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             ShowAllotmentReleaseAdd();
         }
 
-
-        //VALIDATIONS BEFORE SHOWING EDIT WINDOW 
+        //VALIDATIONS BEFORE SHOWING EDIT WINDOW
 
         private bool ShowAllotmentReleaseEdit()
         {
@@ -537,7 +531,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 short year = Convert.ToInt16(dgAllotmentRelease.Rows[rowIndex].Cells["year"].Value);
                 int budgetAppropriationId = Convert.ToInt32(dgAllotmentRelease.Rows[rowIndex].Cells["budget_appropriation_id"].Value);
                 decimal amount = Convert.ToDecimal(dgAllotmentRelease.Rows[rowIndex].Cells["allotment_amount"].Value);
-
 
                 if (Validation())
                 {
@@ -623,7 +616,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             Helper.ClearErrorComboBox(epFPP, cmbxFPP);
         }
 
-
         private bool ShowErrorOtherFPPNameNotExist(ErrorProvider ep, ComboBox comboBox)
         {
             try
@@ -664,13 +656,11 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 else
                     allotmentReleaseNoExist = AccFactory.AllotmentReleaseRepository().AllotmentReleaseNoExist(allotmentReleaseId, allotmentReleaseNo, dateIssued);
 
-
                 if (allotmentReleaseNoExist)
                 {
                     epARONo.SetError(mskYear, "ARO No. is already exist.");
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -737,6 +727,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             dgAllotmentRelease.Tag = string.Empty;
         }
 
-        #endregion
+        #endregion Validations
     }
 }

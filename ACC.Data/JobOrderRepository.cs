@@ -46,7 +46,6 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-
             var parameters = new object[][]
             {
                 new object[] { "@users_id", DbType.Int32, Id},
@@ -74,7 +73,7 @@ namespace ACC.Data
                 }
 
                 return record;
-            }            
+            }
         }
 
         public DataTable GetRecords()
@@ -105,7 +104,7 @@ namespace ACC.Data
                 new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
             };
 
-            string query =  $"INSERT INTO " +
+            string query = $"INSERT INTO " +
                             $"{tableName} (users_id, prefix, first_name, mid_initial, last_name, suffix, job_title)" +
                             $"VALUES (@users_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title)";
 
@@ -114,7 +113,7 @@ namespace ACC.Data
 
         public bool IsUserJobOrder(int userId)
         {
-            var parameter = new object[][] { 
+            var parameter = new object[][] {
                 new object[]{"@users_id", DbType.Int32, userId}
             };
 

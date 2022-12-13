@@ -16,8 +16,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             InitializeComponent();
         }
 
-
-
         internal void LoadOffice()
         {
             cmbOffice.SelectedValueChanged -= new EventHandler(CmbxOffice_SelectedValueChanged);
@@ -28,6 +26,7 @@ namespace AccountingSystem.Views.Manage.Users.List
                 case "SysAdmin":
                     cmbOffice.Items.AddRange(new string[] { "Budget", "Accounting", "Treasury" });
                     break;
+
                 default:
                     cmbOffice.Items.Add(userDict["office"]);
                     break;
@@ -52,7 +51,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void CmbxOffice_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -162,7 +160,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             Helper.ClearErrorTextBox(epLastName, txtLastname);
         }
 
-
         private bool textBoxIsEmpty(TextBox textBox, string field)
         {
             if (string.IsNullOrWhiteSpace(textBox.Text))
@@ -186,7 +183,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         {
             Helper.ClearErrorTextBox(epPassword, txtPassword);
         }
-
 
         private bool PasswordDoesNotMatch(TextBox txtBox)
         {

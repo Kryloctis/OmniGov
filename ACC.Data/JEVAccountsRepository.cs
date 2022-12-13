@@ -147,7 +147,6 @@ namespace ACC.Data
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -256,7 +255,6 @@ namespace ACC.Data
             }
         }
 
-
         //Where general ledger report gets data for display
         public DataTable GetViewRecords(int fundId, int generalLedgerId, short year)
         {
@@ -289,7 +287,6 @@ namespace ACC.Data
             var dtGeneralLedgers = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers, parameters);
         }
-
 
         //Where trial balances and financial statements report gets data for display
         public Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime date)

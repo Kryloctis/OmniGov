@@ -1,17 +1,18 @@
 ﻿using ACC.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
     public interface IFundsRepository : IAccRepository<FundsModel>
     {
         bool CodeExist(string code);
+
         bool CodeExist(string code, int id);
+
         bool NameExist(string name);
+
         bool NameExist(string name, int id);
+
         DataTable GetRecordsPrintCashposition(string date);
     }
 }

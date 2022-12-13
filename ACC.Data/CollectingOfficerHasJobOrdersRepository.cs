@@ -7,12 +7,12 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-
     public class CollectingOfficerHasJobOrdersRepository : ICollectingOfficerHasJobOrders
     {
         private readonly AccGenericCommands mySqlGenericCommands;
         private readonly string tableName = "collecting_officers_has_job_orders";
         private readonly string viewTableName = "view_collecting_officers_has_job_orders";
+
         public CollectingOfficerHasJobOrdersRepository(AccGenericCommands mySqlGenericCommands)
         {
             this.mySqlGenericCommands = mySqlGenericCommands;
@@ -172,7 +172,7 @@ namespace ACC.Data
                 new object[] { "@job_orders_id", DbType.Int32, entity.JobOrdersId}
             };
 
-            string query =  $"INSERT INTO " +
+            string query = $"INSERT INTO " +
                             $"{tableName} " +
                             $"VALUES (@collecting_officers_id, @job_orders_id)";
 

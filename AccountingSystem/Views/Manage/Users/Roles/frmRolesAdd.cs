@@ -79,7 +79,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

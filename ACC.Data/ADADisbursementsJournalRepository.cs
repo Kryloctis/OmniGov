@@ -1,13 +1,12 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
+    public class ADADisbursementsJournalRepository : IADADisbursementsJournalRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "ada_disbursement_journal";

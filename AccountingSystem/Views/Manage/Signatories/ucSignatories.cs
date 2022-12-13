@@ -54,10 +54,12 @@ namespace AccountingSystem.Views.Manage.Signatories
                     cmbxOfficeFilter.Text = "Budget";
                     cmbxOfficeFilter.Enabled = false;
                     break;
+
                 case "Accounting":
                     cmbxOfficeFilter.Text = "Accounting";
                     cmbxOfficeFilter.Enabled = false;
                     break;
+
                 case "Treasury":
                     cmbxOfficeFilter.Text = "Treasury";
                     cmbxOfficeFilter.Enabled = false;
@@ -84,7 +86,7 @@ namespace AccountingSystem.Views.Manage.Signatories
                         row.ReadOnly = true;
                         row.DefaultCellStyle.BackColor = Color.LightGray;
                         row.DefaultCellStyle.SelectionBackColor = Color.LightGray;
-                        row.DefaultCellStyle.ForeColor =  Color.Gray;
+                        row.DefaultCellStyle.ForeColor = Color.Gray;
                         row.DefaultCellStyle.SelectionForeColor = Color.Gray;
                     }
                 }
@@ -123,7 +125,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             ValidateReferenced();
         }
 
-        #endregion
+        #endregion References
 
         #region Validation
 
@@ -167,7 +169,6 @@ namespace AccountingSystem.Views.Manage.Signatories
             Helper.ClearErrorTextBox(errorProvider1, txtTitle);
         }
 
-
         private List<int> SelectedReferences()
         {
             List<int> referencesIdList = new List<int>();
@@ -192,7 +193,7 @@ namespace AccountingSystem.Views.Manage.Signatories
             return false;
         }
 
-        #endregion
+        #endregion Validation
 
         private void ucSignatories_Load(object sender, System.EventArgs e)
         {

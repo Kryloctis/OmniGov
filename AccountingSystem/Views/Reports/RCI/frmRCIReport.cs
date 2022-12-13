@@ -47,14 +47,12 @@ namespace AccountingSystem.Views.Reports.RCI
             int bankId = (int)cmbBanks.SelectedValue;
             var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
 
-
             var dtRCI = new dsLFS.dtRCIDataTable();
             var dt = AccFactory.RCIRepository().GetRecordsByBankIdAndMonth(bankId, dateYearMonth);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
-
                     DataRow row = dtRCI.NewRow();
                     row["account_no"] = item["account_no"];
                     row["bank_name"] = item["bank_name"];
@@ -109,7 +107,6 @@ namespace AccountingSystem.Views.Reports.RCI
                 string departmentHeadSignatoryTitle = string.Empty;
                 ParseSignatory(dictDepartmentHeadSignatory, ref departmentHeadSignatory, ref departmentHeadSignatoryTitle);
 
-
                 var dictAdministrativeOfficer = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Administrative Officer", "Report of Check Issued");
                 string administrativeOfficerSignatory = string.Empty;
                 string administrativeOfficerSignatoryTitle = string.Empty;
@@ -120,7 +117,6 @@ namespace AccountingSystem.Views.Reports.RCI
                 var bankrepo = AccFactory.BanksRepository();
                 var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
                 var fund = fundName;
-
 
                 string bankDetails = string.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
                 var parameters = new[] {

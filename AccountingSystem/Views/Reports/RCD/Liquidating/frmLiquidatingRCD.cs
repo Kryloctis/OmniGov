@@ -63,7 +63,6 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
                 var lguDetails = Helper.LGUDetails();
                 var totalChecksAmount = 0;
 
-
                 var parameters = new[]
                 {
                     new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
@@ -117,6 +116,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
 
             return dtFromDataSource;
         }
+
         private DataTable RemittanceAndDeposits()
         {
             DataTable dtFromDataSource = new dsLFS.dtRemittanceDepositsDataTable();
@@ -136,6 +136,7 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
 
             return dtFromDataSource;
         }
+
         private DataTable CollectorsReports()
         {
             DataTable dtFromDataSource = new dsLFS.dtCollectorsReportsDataTable();
@@ -266,7 +267,6 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
 
         private DataTable DataTableReceipts(int id)
         {
-
             var dtRC = new dsLFS.dtReceiptsDataTable();
             var dt = AccFactory.GeneralCollectionsRepository().GetRecordByReceipts(id);
             if (dt.Rows.Count > 0)
@@ -287,7 +287,5 @@ namespace AccountingSystem.Views.Reports.RCD.Liquidating
 
             return dtRC;
         }
-
-
     }
 }

@@ -110,7 +110,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool Update(FundsModel entity)
         {
             try
@@ -130,7 +129,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Delete(List<FundsModel> entityList)
         {
@@ -173,7 +171,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool IdExist(int id)
         {
             try
@@ -197,7 +194,6 @@ namespace ACC.Data
             return false;
         }
 
-
         public bool NameExist(string fundName)
         {
             try
@@ -220,7 +216,6 @@ namespace ACC.Data
 
             return false;
         }
-
 
         public bool NameExist(string fundName, int fundId)
         {
@@ -292,6 +287,5 @@ namespace ACC.Data
 
             return false;
         }
-
     }
 }

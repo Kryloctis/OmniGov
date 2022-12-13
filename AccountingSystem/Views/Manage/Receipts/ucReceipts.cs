@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         internal int receiptId;
         internal int accountableFormId;
         internal bool isCashTicket;
-        
+
         public ucReceipts()
         {
             InitializeComponent();
@@ -64,7 +64,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void txtfrom_Validating(object sender, CancelEventArgs e)
         {
             if (!isCashTicket)
-                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");            
+                e.Cancel = Helper.ShowErrorTextBoxEmpty(epReceiptNumberFrom, txtReceiptNumberFrom, "Receipt Number From.");
         }
 
         private void txtfrom_Validated(object sender, EventArgs e)
@@ -99,7 +99,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             Helper.ClearErrorTextBox(epQuantity, txtQuantity);
         }
-        #endregion
+
+        #endregion Validations
 
         private void txtfrom_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -173,8 +174,7 @@ namespace AccountingSystem.Views.Manage.Receipts
             if (!DesignMode)
             {
                 LoadAccountableForms();
-            }   
+            }
         }
-
     }
 }

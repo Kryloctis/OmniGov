@@ -1,12 +1,4 @@
-﻿using AccountingSystem.Views.Reports.Financial_Statements;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -26,10 +18,9 @@ namespace AccountingSystem.Views.Transactions.Payments
             HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, dtAccountableForm);
         }
 
-        private void ResetForm() 
+        private void ResetForm()
         {
             amountPayment = 0;
-
         }
 
         private void LoadCollectingOfficer()
@@ -49,13 +40,11 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private void LoadReceipts(int collectorId, bool isCollectorJO) 
+        private void LoadReceipts(int collectorId, bool isCollectorJO)
         {
-
-
         }
 
-        internal void OnLoad() 
+        internal void OnLoad()
         {
             try
             {
@@ -64,7 +53,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 LoadAccountableForms();
                 dtPaymentDate.Value = Helper.GetCurrentDate();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucPayment_Load(object sender, EventArgs e)
@@ -75,7 +64,6 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-
         }
     }
 }

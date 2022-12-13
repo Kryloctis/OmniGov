@@ -41,7 +41,6 @@ using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
 using AccountingSystem.Views.Transactions.BankDeposits;
 using AccountingSystem.Views.Transactions.ObligationRequest;
-using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;

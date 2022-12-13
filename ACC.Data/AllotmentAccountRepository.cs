@@ -3,13 +3,11 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Data
 {
     public class AllotmentAccountRepository : IAllotmentAccountRepository
     {
-
         private AccGenericCommands _mySqlGenericCommands;
         private readonly string tableName = "allotment_account";
 
@@ -52,7 +50,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@budget_appropriations_id", DbType.Int32, entity.BudgetAppropriationsID },
                     new object[] { "@allotment_release_id", DbType.Int32, entity.AllotmentReleaseID },

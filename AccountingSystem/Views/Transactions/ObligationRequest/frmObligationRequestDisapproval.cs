@@ -7,7 +7,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class frmObligationRequestDisapproval : Form
     {
-        frmObligationRequestMain _frmObligationRequestMain;
+        private frmObligationRequestMain _frmObligationRequestMain;
 
         public frmObligationRequestDisapproval(frmObligationRequestMain frmObligationRequestMain)
         {
@@ -64,7 +64,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             int obligationrequestId = _frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId;
             string disapprovalMessage = AccFactory.ObligationRequestRepository().GetRecordByID(obligationrequestId)["disapproval_message"];
 
-
             return disapprovalMessage;
         }
 
@@ -72,7 +71,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             if (MessageBox.Show("Confirm Disapproval of obligation request.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, defaultButton: MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-
                 if (DisapproveObligationRequest())
                 {
                     Helper.MessageBoxSuccess("Obligation Request has been disapproved.");
@@ -112,7 +110,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 txtDissaprovalMessage.SelectionStart = 0;
                 txtDissaprovalMessage.ReadOnly = true;
             }
-
 
             var dictObligationRequest = AccFactory.ObligationRequestRepository().GetViewRecordById(_frmObligationRequestMain.ucObligationRequestMain1.obligationRequestId);
 

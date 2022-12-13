@@ -1,7 +1,5 @@
-﻿using ACC.Data;
-using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
@@ -12,7 +10,6 @@ namespace AccountingSystem
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "business_add_on_charges";
-
 
         public BusinessAddOnChargesRepository(IAccGenericCommands dbGenericCommands)
         {
@@ -50,10 +47,10 @@ namespace AccountingSystem
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-            
-            if (!string.IsNullOrEmpty(queryResult)) 
-                return true;     
-            
+
+            if (!string.IsNullOrEmpty(queryResult))
+                return true;
+
             return false;
         }
 

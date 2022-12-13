@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -71,14 +71,14 @@ namespace ACC.Data
                 record.Add("updated_at", reader.Rows[0][7].ToString());
                 record.Add("users_id", reader.Rows[0][8].ToString());
             }
-          
+
             return record;
         }
 
         public Dictionary<string, string> GetRecordByUserID(int Id)
         {
             var record = new Dictionary<string, string>();
-      
+
             var parameters = new object[][]
             {
                 new object[] { "@users_id", DbType.Int32, Id},
@@ -115,14 +115,13 @@ namespace ACC.Data
 
             var dtFunds = new DataTable();
             return _dbGenericCommands.Fill(query, dtFunds);
-         
         }
 
         public DataTable GetCollectorsWithReceiptsIssuedByReceiptId(int receiptsId)
         {
-            var parameters = new object[][] {new object[]{ "@receipts_id", DbType.Int32, receiptsId }};
+            var parameters = new object[][] { new object[] { "@receipts_id", DbType.Int32, receiptsId } };
 
-            string query =  $"SELECT id, " +
+            string query = $"SELECT id, " +
                             $"CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname " +
                             $"FROM {tableName} " +
                             $"WHERE id NOT IN(SELECT collecting_officers_id " +
@@ -152,13 +151,12 @@ namespace ACC.Data
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
-           
+
             return false;
         }
 
-
         public bool Insert(CollectingOfficerModel entity)
-        { 
+        {
             var parameters = new object[][]
             {
                 new object[] { "@prefix", DbType.String, entity.Prefix},
@@ -170,15 +168,15 @@ namespace ACC.Data
                 new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value: entity.UserId}
             };
 
-            string query  = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
+            string query = $"INSERT INTO {tableName} (prefix, first_name, mid_initial, last_name, suffix, job_title, users_id) VALUES (@prefix, @first_name, @mid_initial, @last_name, @suffix, @job_title, @users_id)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(CollectingOfficerModel entity)
         {
-                var parameters = new object[][]
-                {
+            var parameters = new object[][]
+            {
                     new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@prefix", DbType.String, entity.Prefix},
                     new object[] { "@first_name", DbType.String, entity.FirstName},
@@ -187,11 +185,11 @@ namespace ACC.Data
                     new object[] { "@suffix", DbType.String, entity.Suffix},
                     new object[] { "@job_title", DbType.String, entity.JobTitle},
                     new object[] { "@users_id", DbType.Int16, entity.UserId <= 0 ? (object)DBNull.Value : entity.UserId }
-                };
+            };
 
-                string query = $"UPDATE {tableName} " +
-                $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =             @job_title,users_id=@users_id WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            string query = $"UPDATE {tableName} " +
+            $"SET prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, job_title =             @job_title,users_id=@users_id WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool FullNameExist(string firstName, string middleInitial, string lastName, int id)

@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
@@ -41,11 +35,11 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             cbxAppliedToEachBusiness.Checked = false;
         }
 
-        private bool IsDescriptionValidated(ErrorProvider errorProvider, TextBox textBox) 
+        private bool IsDescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
         {
             try
             {
-                bool descriptionExist = isEdit? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
+                bool descriptionExist = isEdit ? AccFactory.BusinessAddOnChargesRepository().DescriptionExist(id, textBox.Text.Trim()) : AccFactory.BusinessAddOnChargesRepository().DescriptionExist(textBox.Text.Trim());
 
                 if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
                     return false;

@@ -256,6 +256,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         //SUMMARY
         public decimal GetSumObligations(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing)
         {
@@ -299,7 +300,7 @@ namespace ACC.Data
             return obligations;
         }
 
-        #endregion
+        #endregion DASHBOARD BUDGET
 
         private int GetLastInsertedID()
         {
@@ -363,7 +364,6 @@ namespace ACC.Data
 
                 string query = $"UPDATE {tableName} SET obligation_no = @obligation_no, payee = @payee, explanation = @explanation, reference_no = @reference_no, date_requested = @date_requested, updated_by = @updated_by WHERE id = @id";
 
-
                 _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
 
                 _ = _obligationAccountRepository.DeleteByObligationRequestId(entity.Id);
@@ -373,7 +373,6 @@ namespace ACC.Data
                     obligationAccounts.ObligationRequestId = entity.Id;
                     _ = _obligationAccountRepository.Insert(obligationAccounts);
                 }
-
 
                 scope.Complete();
 
@@ -395,7 +394,6 @@ namespace ACC.Data
                 string query = $"DELETE FROM {tableName} WHERE id = @id";
 
                 _ = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
 
                 scope.Complete();
                 return true;
@@ -449,17 +447,15 @@ namespace ACC.Data
             return false;
         }
 
-        #endregion
+        #endregion Validations
 
         public bool SetObligationRequestStatus(int obligationRequestId, string status, string disapprovalMessage = null)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, obligationRequestId},
                 new object[] { "@disapproval_message", DbType.String, disapprovalMessage}
             };
-
 
             string Status()
             {
@@ -467,12 +463,16 @@ namespace ACC.Data
                 {
                     case "approve":
                         return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
+
                     case "disapprove":
                         return "is_approved = 0, is_disapproved = 1, is_cancelled = 0 , disapproval_message = @disapproval_message";
+
                     case "cancel":
                         return "is_cancelled = 1";
+
                     case "pending":
                         return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
+
                     default:
                         return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
                 }
@@ -501,7 +501,6 @@ namespace ACC.Data
                 bool isDisapproved = Convert.ToBoolean(reader.Rows[0]["is_disapproved"]);
                 bool isCancelled = Convert.ToBoolean(reader.Rows[0]["is_cancelled"]);
 
-
                 if (isCancelled)
                     return "Cancelled";
                 else if (isDisapproved && !isApproved)
@@ -516,19 +515,22 @@ namespace ACC.Data
 
         public DataTable GetViewRecordsBySearchAndStatus(string searchText, string status, int fundId, int allotmentClassId, DateTime dateOfRequest)
         {
-
             string Status()
             {
                 switch (status)
                 {
                     case "approved":
                         return "is_approved = 1 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+
                     case "disapproved":
                         return "is_approved = 0 AND is_disapproved = 1 AND is_cancelled = 0 AND";
+
                     case "cancelled":
                         return "is_cancelled = 1 AND";
+
                     case "pending":
                         return "is_approved  = 0 AND is_disapproved = 0 AND is_cancelled = 0 AND";
+
                     default:
                         return string.Empty;
                 }

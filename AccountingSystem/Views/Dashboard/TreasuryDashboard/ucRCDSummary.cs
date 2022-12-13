@@ -22,7 +22,6 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
                 LoadFunds();
                 LoadDashboardData();
             }
-
         }
 
         private void LoadMonths()
@@ -89,15 +88,15 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             LoadDashboardData();
         }
 
-
         #region Bank Deposit Summary
+
         private void LoadBanksDepositsSummary()
         {
             var bankDepositSummaryDT = AccFactory.BankDepositsRepository().GetBankDepositsSummary();
             HelperLoadRecords.BanksDepositsSummaryDatagridView(bankDepositSummaryDT, dgBankDeposit);
         }
 
-        #endregion
+        #endregion Bank Deposit Summary
 
         #region Payment Collection Summary
 
@@ -107,7 +106,7 @@ namespace AccountingSystem.Views.Dashboard.TreasuryDashboard
             HelperLoadRecords.PaymentSummaryDatagridView(collectorsCollectionDT, dgCollectorsCollection);
         }
 
-        #endregion
+        #endregion Payment Collection Summary
 
         private void cmbFunds_SelectionChangeCommitted(object sender, EventArgs e)
         {

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
@@ -14,12 +9,13 @@ namespace AccountingSystem.Views.Manage.RptDiscount
     {
         internal int rptDiscountId;
         internal bool isEdit = false;
+
         public ucRptDiscounts()
         {
             InitializeComponent();
         }
 
-        private DataTable Months() 
+        private DataTable Months()
         {
             var dataTable = new DataTable();
             dataTable.Columns.Add("month", typeof(int));
@@ -41,7 +37,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             return dataTable;
         }
 
-        private void LoadMonths() 
+        private void LoadMonths()
         {
             try
             {
@@ -55,7 +51,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             }
         }
 
-        internal void ResetForm() 
+        internal void ResetForm()
         {
             if (isEdit)
                 rptDiscountId = 0;
@@ -77,6 +73,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         }
 
         #region Validations
+
         private void txtDescription_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
@@ -87,7 +84,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             Helper.ClearErrorTextBox(errorProvider1, txtDescription);
         }
 
-        private bool RateValidated() 
+        private bool RateValidated()
         {
             bool isValidated;
 
@@ -111,7 +108,8 @@ namespace AccountingSystem.Views.Manage.RptDiscount
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         }
-        #endregion
+
+        #endregion Validations
 
         private void ucRptDiscounts_Load(object sender, EventArgs e)
         {

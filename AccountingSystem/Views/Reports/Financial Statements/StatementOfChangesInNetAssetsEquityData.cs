@@ -5,7 +5,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 {
     public partial class StatementOfChangesInNetAssetsEquityData
     {
-
         internal decimal GetSurplusDeficitForThePeriod(byte fundId, DateTime date)
         {
             decimal statementOfFinancialPerformanceData = new StatementOfFinancialPerformanceData().SurplusDeficitPeriod(fundId, date);

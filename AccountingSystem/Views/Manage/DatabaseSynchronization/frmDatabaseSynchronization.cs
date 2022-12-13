@@ -1,7 +1,6 @@
 ﻿using ACC.Domain.Models;
 using RPT.Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -71,7 +70,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
                     string realTaxpayerProvince = row["real_owner_province"].ToString();
                     string realTaxpayerContactInfo = row["real_owner_contact_info"].ToString();
                     string realTaxpayerTypeCode = row["real_owner_type_code"].ToString();
-                    string realTaxpayerType = row["real_owner_type"].ToString();                
+                    string realTaxpayerType = row["real_owner_type"].ToString();
 
                     string taxpayerTin = row["owner_tin"].ToString();
                     string taxpayerName = row["owner_name"].ToString();
@@ -255,7 +254,6 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
 
         private void backgroundWorkerRptSync_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-
             if (e.Result == null)
                 Helper.MessageBoxSuccess("RPT synced successfully.");
             else
@@ -271,7 +269,7 @@ namespace AccountingSystem.Views.Manage.DatabaseSynchronization
             btnSync.Enabled = true;
         }
 
-        #endregion
+        #endregion Database Sync Progresses
 
         private void btnStop_Click(object sender, EventArgs e)
         {

@@ -13,7 +13,6 @@ namespace ACC.Data
         private readonly string tableName = "function_program_project";
         private readonly string viewTableName = "view_function_program_project";
 
-
         public FunctionProgramProjectRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;

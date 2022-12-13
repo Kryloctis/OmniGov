@@ -20,10 +20,8 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
 
         private DataTable DataTableAbstractOfGeneralCollection(string from, string to)
         {
-
             var dtPC = new dsLFS.dtPCDataTable();
             var dt = AccFactory.GeneralCollectionsRepository().GetRecordOfGeneralCollectionByDateRange(from, to);
-
 
             foreach (DataRow item in dt.Rows)
             {
@@ -92,7 +90,6 @@ namespace AccountingSystem.Views.Reports.GeneralCollection
                 }
 
                 ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-
 
                 var parameters = new[]
                     {

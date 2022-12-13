@@ -72,13 +72,12 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             try
             {
-                var dt =  AccFactory.RealPropertiesRepository().GetCancelledProperties();
+                var dt = AccFactory.RealPropertiesRepository().GetCancelledProperties();
 
                 cmbxCompletePreviousARPNumber.DataSource = dt;
                 cmbxCompletePreviousARPNumber.DisplayMember = "complete_arp_no";
                 cmbxCompletePreviousARPNumber.ValueMember = "id";
                 cmbxCompletePreviousARPNumber.DropDownHeight = 200;
-
             }
             catch (Exception ex)
             {
@@ -166,7 +165,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtArpNo);
         }
 
-
         private void nudEffectivityYear_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudEffectivityYear, "Effectivity Year");
@@ -218,7 +216,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtLotNo);
         }
-
 
         private void txtPreviousCompleteARP_Validating(object sender, CancelEventArgs e)
         {
@@ -286,6 +283,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
             txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
         }
-
     }
 }

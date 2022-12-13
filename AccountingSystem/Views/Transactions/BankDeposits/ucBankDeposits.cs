@@ -28,6 +28,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
+
         private void ucBD_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -55,9 +56,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 cmbBank.ValueMember = "id";
                 cmbBank.DisplayMember = "bankdetails";
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -75,8 +76,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         #region Validations
+
         private void cmbbanks_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbBank, "Banks.");
@@ -117,9 +118,6 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-
-        #endregion
-
-
+        #endregion Validations
     }
 }

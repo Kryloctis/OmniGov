@@ -23,7 +23,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             try
             {
-
                 if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());

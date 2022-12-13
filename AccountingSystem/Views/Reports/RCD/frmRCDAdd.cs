@@ -6,7 +6,6 @@ namespace AccountingSystem.Views.Reports.RCD
 {
     public partial class frmRCDAdd : Form
     {
-
         private readonly frmRCD _frmRCD;
         private string reportNo;
         private string collectorsReportId;
@@ -67,16 +66,13 @@ namespace AccountingSystem.Views.Reports.RCD
                 byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
                 string keySearch = txtsearch.Text;
 
-
                 var colectorRepository = AccFactory.CollectorReportRepository();
-
 
                 var dtrcd = new DataTable();
                 if (cmbCollector.Text == "All")
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
                 else
                     dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
-
 
                 HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
             }
@@ -109,13 +105,11 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnOkay_Click(object sender, EventArgs e)
         {
-
             string reportId;
             string collectingOfficer;
             string reportNo;
             string reportNoChecker;
             decimal amount;
-
 
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
             {
@@ -149,18 +143,16 @@ namespace AccountingSystem.Views.Reports.RCD
             //this.Close();
         }
 
-
         private void dgCollectorsReport_SelectionChanged(object sender, EventArgs e)
         {
             btnSelect.Enabled = dgCollectorsReport.SelectedRows.Count != 0;
-            
+
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
             {
                 collectorsReportId = row.Cells[0].Value.ToString();
                 reportNo = row.Cells[1].Value.ToString();
                 collector = row.Cells[3].Value.ToString();
             }
-          
         }
 
         private void cmbCollector_SelectedValueChanged(object sender, EventArgs e)
@@ -170,7 +162,6 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgCollectorsReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void dgCollectorsReport_DoubleClick(object sender, EventArgs e)

@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[] 
+            var errorArray = new string[]
             {
                 errorProvider1.GetError(cmbFPP),
                 errorProvider1.GetError(cmbAllotmentClass),
@@ -30,8 +30,6 @@ namespace AccountingSystem.Views.Manage.Realignment
                 errorProvider1.GetError(nudAmount),
                 errorProvider1.GetError(txtRemarks),
             };
-
-           
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
@@ -151,6 +149,7 @@ namespace AccountingSystem.Views.Manage.Realignment
         }
 
         #region Form Events
+
         private void ucRealignment_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -180,14 +179,12 @@ namespace AccountingSystem.Views.Manage.Realignment
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-       
         }
 
         private string GetBudgetIdByGeneralLedgerAccountId(string generalLedgerId)
         {
             return AccFactory.BudgetAppropriationsRepository().GetBudgetIdByGeneralLedgerId(generalLedgerId);
         }
-
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
         {
@@ -224,21 +221,26 @@ namespace AccountingSystem.Views.Manage.Realignment
             LoadOthersFPPByFPPIdCombobox();
             FilterSearchDetails();
         }
+
         private void cmbFunds_DropDownClosed(object sender, EventArgs e)
         {
             FilterSearchDetails();
         }
+
         private void cmbOthersFPP_DropDownClosed(object sender, EventArgs e)
         {
             FilterSearchDetails();
         }
+
         private void cmbAllotmentClass_DropDownClosed(object sender, EventArgs e)
         {
             FilterSearchDetails();
         }
-        #endregion
+
+        #endregion Form Events
 
         #region Validations
+
         private void cmbAllotmentClass_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbAllotmentClass, "allotment class");
@@ -292,13 +294,11 @@ namespace AccountingSystem.Views.Manage.Realignment
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "amount");
 
-
             decimal appropriationBalance = Convert.ToDecimal(txtAppropriationBalance.Text);
             decimal realignmentAmount = nudAmount.Value;
             decimal remainingBalance = appropriationBalance - realignmentAmount;
 
             bool isBudgetNotEnough = remainingBalance < 0;
-
 
             if (isBudgetNotEnough)
             {
@@ -312,6 +312,6 @@ namespace AccountingSystem.Views.Manage.Realignment
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
-        #endregion
+        #endregion Validations
     }
 }

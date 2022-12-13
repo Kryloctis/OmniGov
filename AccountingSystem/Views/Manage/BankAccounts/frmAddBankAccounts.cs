@@ -1,14 +1,5 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Banks;
-using DocumentFormat.OpenXml.Wordprocessing;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
@@ -53,7 +44,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
                 var bankAccountRepository = AccFactory.BankAccountsRepository();
                 return bankAccountRepository.Insert(bankAccountsModel);
-             
             }
             catch (Exception ex)
             {
@@ -61,6 +51,5 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             }
             return false;
         }
-
     }
 }

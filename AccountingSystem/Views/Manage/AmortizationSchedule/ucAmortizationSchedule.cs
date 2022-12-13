@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Amortization
@@ -20,10 +13,10 @@ namespace AccountingSystem.Views.Manage.Amortization
 
         public ucAmortizationSchedule()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
-        internal void SetAmortizationTerm() 
+        internal void SetAmortizationTerm()
         {
             string dateFormat;
 
@@ -58,11 +51,10 @@ namespace AccountingSystem.Views.Manage.Amortization
             nudGRT.Value = 0;
         }
 
-        internal bool SaveData() 
+        internal bool SaveData()
         {
             try
             {
-
                 DateTime date = dtDate.Value;
                 decimal principalAmount = nudPrincipal.Value;
                 decimal interestAmount = nudInterest.Value;
@@ -96,7 +88,6 @@ namespace AccountingSystem.Views.Manage.Amortization
         {
             if (!DesignMode)
             {
-                
             }
         }
     }

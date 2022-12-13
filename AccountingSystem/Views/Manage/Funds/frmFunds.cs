@@ -47,7 +47,6 @@ namespace AccountingSystem.Views.Manage.Funds
                 int fundId = int.Parse(dgFunds.SelectedCells[0].Value.ToString());
                 _ = new frmFundEdit(this, fundId).ShowDialog();
             }
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -80,7 +79,6 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
 
         private void dgFunds_SelectionChanged(object sender, EventArgs e)

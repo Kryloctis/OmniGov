@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -12,7 +12,7 @@ namespace ACC.Data
         private readonly IAccGenericCommands _dbGenericCommands;
 
         private readonly string tableName = "allotment_classes";
-        
+
         public AllotmentClassesRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -78,7 +78,6 @@ namespace ACC.Data
                 {
                     new object[] { "@allotment_name", DbType.String, entity.AllotmentName},
                     new object[] { "@allotment_code", DbType.String, entity.AllotmentCode},
-
                 };
 
                 string query = $"INSERT INTO {tableName} (allotment_code, allotment_name) VALUES (@allotment_code, @allotment_name)";
@@ -99,7 +98,6 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, entity.Id},
                     new object[] { "@allotment_name", DbType.String, entity.AllotmentName},
                     new object[] { "@allotment_code", DbType.String, entity.AllotmentCode},
-
                 };
 
                 string query = $"UPDATE {tableName} SET allotment_name = @allotment_name, allotment_code = @allotment_code WHERE id = @id";

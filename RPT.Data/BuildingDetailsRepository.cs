@@ -1,12 +1,8 @@
-﻿using ACC.Data;
-using RPT.Domain.Interfaces;
+﻿using RPT.Domain.Interfaces;
 using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPT.Data
 {

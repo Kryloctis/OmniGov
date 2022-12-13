@@ -26,7 +26,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 errorProvider1.GetError(txtPayee)
             };
 
-
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
@@ -75,9 +74,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
             else
                 collectorId = Convert.ToInt32(dictCollectingOfficerRepo["id"]);
 
-
             var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetViewIssuedReceiptToCollector(collectorId, accountableFormNoId);
-
 
             foreach (DataRow row in dtReceiptsIssued.Rows)
             {
@@ -171,7 +168,6 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 loadReceiptNos();
             }
         }
-
 
         private bool ValidateReceipts(ErrorProvider errorProvider, TextBox textBox)
         {

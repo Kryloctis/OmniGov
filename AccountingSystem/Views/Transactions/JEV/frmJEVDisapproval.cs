@@ -5,8 +5,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 {
     public partial class frmJEVDisapproval : Form
     {
-
-        frmJEV _frmJEV;
+        private frmJEV _frmJEV;
 
         public frmJEVDisapproval(frmJEV frmjev)
         {
@@ -69,7 +68,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 var isDisapproved = AccFactory.JEVRepository().SetJEVStatus(jevId, "disapprove");
 
                 return isDisapproved;
-
             }
             catch (Exception ex)
             {
@@ -101,7 +99,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-
                     if (SetJEVToDisapproved() && SetRemarks())
                     {
                         Helper.MessageBoxSuccess("JEV has been disapproved.");

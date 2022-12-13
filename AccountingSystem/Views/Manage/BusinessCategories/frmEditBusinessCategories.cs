@@ -1,13 +1,5 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Barangay;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessCategories
@@ -43,7 +35,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             _ucBusinessCategories.txtOrdinanceReferenceNo.Text = dictBusinessCategories["ordinance_ref_no"];
             _ucBusinessCategories.txtDescription.Text = dictBusinessCategories["description"];
             _ucBusinessCategories.cbxLineOfBusiness.Checked = Convert.ToBoolean(isLineOfBusiness);
-
         }
 
         private bool UpdateBusinessCategories()
@@ -69,7 +60,6 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             };
 
             return AccFactory.BusinessCategoriesRepository().Update(businessCategoriesModel);
-            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -84,7 +74,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                     Close();
                 }
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-        }    
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

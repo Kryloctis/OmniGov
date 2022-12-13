@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -12,6 +11,7 @@ namespace ACC.Data
     {
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private readonly string tableName = "rpt_penalties";
+
         public RptPenaltiesRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
