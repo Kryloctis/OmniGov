@@ -128,7 +128,7 @@
             // 
             this.cbxShowCanclled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbxShowCanclled.AutoSize = true;
-            this.cbxShowCanclled.Location = new System.Drawing.Point(906, 1);
+            this.cbxShowCanclled.Location = new System.Drawing.Point(906, -2);
             this.cbxShowCanclled.Name = "cbxShowCanclled";
             this.cbxShowCanclled.Size = new System.Drawing.Size(108, 19);
             this.cbxShowCanclled.TabIndex = 10;

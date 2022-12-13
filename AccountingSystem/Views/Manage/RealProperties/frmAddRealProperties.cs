@@ -89,5 +89,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
             return false;
         }
 
+        private void frmAddRealProperties_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

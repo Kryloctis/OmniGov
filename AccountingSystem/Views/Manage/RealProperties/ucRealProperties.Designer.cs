@@ -193,6 +193,8 @@
             this.cmbxActualUse.Name = "cmbxActualUse";
             this.cmbxActualUse.Size = new System.Drawing.Size(216, 23);
             this.cmbxActualUse.TabIndex = 15;
+            this.cmbxActualUse.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxActualUse_Validating);
+            this.cmbxActualUse.Validated += new System.EventHandler(this.cmbxActualUse_Validated);
             // 
             // chckCancelled
             // 
@@ -223,6 +225,8 @@
             this.cmbxClassification.Name = "cmbxClassification";
             this.cmbxClassification.Size = new System.Drawing.Size(216, 23);
             this.cmbxClassification.TabIndex = 15;
+            this.cmbxClassification.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxClassification_Validating);
+            this.cmbxClassification.Validated += new System.EventHandler(this.cmbxClassification_Validated);
             // 
             // cmbxBarangays
             // 
@@ -231,6 +235,8 @@
             this.cmbxBarangays.Name = "cmbxBarangays";
             this.cmbxBarangays.Size = new System.Drawing.Size(216, 23);
             this.cmbxBarangays.TabIndex = 15;
+            this.cmbxBarangays.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxBarangays_Validating);
+            this.cmbxBarangays.Validated += new System.EventHandler(this.cmbxBarangays_Validated);
             // 
             // nudArea
             // 
@@ -580,6 +586,8 @@
             this.txtTaxpayers.ReadOnly = true;
             this.txtTaxpayers.Size = new System.Drawing.Size(216, 23);
             this.txtTaxpayers.TabIndex = 21;
+            this.txtTaxpayers.Validating += new System.ComponentModel.CancelEventHandler(this.txtTaxpayers_Validating);
+            this.txtTaxpayers.Validated += new System.EventHandler(this.txtTaxpayers_Validated);
             // 
             // label4
             // 
@@ -643,6 +651,8 @@
             this.cmbxCompletePreviousARPNumber.TabIndex = 0;
             this.cmbxCompletePreviousARPNumber.SelectionChangeCommitted += new System.EventHandler(this.cmbxCompletePreviousARPNumber_SelectionChangeCommitted);
             this.cmbxCompletePreviousARPNumber.TextChanged += new System.EventHandler(this.cmbxCompletePreviousARPNumber_TextChanged);
+            this.cmbxCompletePreviousARPNumber.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxCompletePreviousARPNumber_Validating);
+            this.cmbxCompletePreviousARPNumber.Validated += new System.EventHandler(this.cmbxCompletePreviousARPNumber_Validated);
             // 
             // label18
             // 
