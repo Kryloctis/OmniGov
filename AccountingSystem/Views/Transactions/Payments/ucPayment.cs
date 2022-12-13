@@ -14,6 +14,7 @@ namespace AccountingSystem.Views.Transactions.Payments
     public partial class ucPayment : UserControl
     {
         internal decimal amountPayment = 0;
+
         public ucPayment()
         {
             InitializeComponent();
@@ -31,8 +32,26 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         }
 
-        private void LoadReceipts() 
+        private void LoadCollectingOfficer()
         {
+            var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
+            var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
+
+            if (dictJobOrder.Count > 0)
+            {
+                string jobOrderFullName = Helper.GenerateFullName(dictJobOrder["prefix"], dictJobOrder["first_name"], dictJobOrder["mid_initial"], dictJobOrder["last_name"], dictJobOrder["suffix"]);
+                txtCollectingOfficer.Text = jobOrderFullName;
+            }
+            else if (dictCollectingOfficer.Count > 0)
+            {
+                string collectingOfficerName = Helper.GenerateFullName(dictCollectingOfficer["prefix"], dictCollectingOfficer["first_name"], dictCollectingOfficer["mid_initial"], dictCollectingOfficer["last_name"], dictCollectingOfficer["suffix"]);
+                txtCollectingOfficer.Text = collectingOfficerName;
+            }
+        }
+
+        private void LoadReceipts(int collectorId, bool isCollectorJO) 
+        {
+
 
         }
 
@@ -41,6 +60,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             try
             {
                 lblTotalPayment.Text = amountPayment.ToString("N2");
+                LoadCollectingOfficer();
                 LoadAccountableForms();
                 dtPaymentDate.Value = Helper.GetCurrentDate();
             }

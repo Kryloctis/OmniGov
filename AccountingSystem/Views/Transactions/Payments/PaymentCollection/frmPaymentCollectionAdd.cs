@@ -135,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 var accountableFormId = Convert.ToInt32(uc.cmbAccountableForms.SelectedValue);
                 var receiptsIssuedRepo = AccFactory.ReceiptsIssuedRepository();
 
-                var dtReceiptIssued = receiptsIssuedRepo.GetIssuedReceiptToCollector(collectorId, accountableFormId);
+                var dtReceiptIssued = receiptsIssuedRepo.GetViewIssuedReceiptToCollector(collectorId, accountableFormId);
                 var receiptIssuedCount = dtReceiptIssued.Rows.Count;
 
                 if (receiptIssuedCount == 0)

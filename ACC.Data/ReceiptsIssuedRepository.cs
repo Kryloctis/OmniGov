@@ -130,35 +130,20 @@ namespace ACC.Data
         }
 
 
-        public DataTable GetIssuedReceiptToCollector(int collectorId, int accountableFormId)
+        public DataTable GetViewIssuedReceiptToCollector(int collectorId, int accountableFormId)
         {
             var parameter = new object[][] {
                 new object[]{"@collecting_officer_id", DbType.Int32, collectorId },
                 new object[]{"@accountable_form_id", DbType.Int32, accountableFormId }
             };
 
-            string query = $"SELECT " +  
-                           $"id, " +
-                           $"accountable_forms, " +
-                           $"receipt_issued_from, " +
-                           $"receipt_issued_to, " +
-                           $"date_issued, " +
-                           $"quantity, " +
-                           $"last_issued, " +
-                           $"is_returned, " +
-                           $"returned_date " +
-                           $"FROM {viewTableName} " +
-                           $"WHERE " +
-                           $"(collecting_officer_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id) " +
-                           $"AND " +
-                           $"accountable_form_id = @accountable_form_id AND " +
-                           $"IF(receipt_issued_to = last_issued, true, false) = false";
+            string query = "SELECT id, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date FROM {viewTableName} WHERE (collecting_officer_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id) AND accountable_form_id = @accountable_form_id AND IF(receipt_issued_to = last_issued, true, false) = false";
 
             var dtReceiptIssued = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);
         }
 
-        public DataTable GetCollectorsAccountbleForms(int collectingOfficerID, bool collectorIsJO)
+        public DataTable GetViewCollectorsAccountbleForms(int collectingOfficerID, bool collectorIsJO)
         {
             var parameter = new object[][] {
                 new object[]{"@collecting_officer_id", DbType.Int32, collectingOfficerID }
@@ -171,6 +156,7 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
         }
+
 
         public DataTable GetRecordsBySearch(string dateIssued, string searchText)
         {
@@ -397,12 +383,9 @@ namespace ACC.Data
                 new object[]{ "@receipt_id", DbType.Int32, receiptId}
             };
 
-            string query = $"SELECT " +
-                           $"COALESCE(SUM(quantity), 0) AS total_issued " +
-                           $"FROM {tableName} " +
-                           $"WHERE receipts_id = @receipt_id";
+            string query = "SELECT COALESCE(SUM(quantity), 0) AS total_issued FROM {tableName} WHERE receipts_id = @receipt_id";
 
-            return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
         }
 
         public bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity)

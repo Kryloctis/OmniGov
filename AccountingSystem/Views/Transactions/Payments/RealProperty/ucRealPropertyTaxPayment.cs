@@ -76,7 +76,7 @@ namespace AccountingSystem.Views.Transactions.PropertyPayment
                 collectorId = Convert.ToInt32(dictCollectingOfficerRepo["id"]);
 
 
-            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectorId, accountableFormNoId);
+            var dtReceiptsIssued = AccFactory.ReceiptsIssuedRepository().GetViewIssuedReceiptToCollector(collectorId, accountableFormNoId);
 
 
             foreach (DataRow row in dtReceiptsIssued.Rows)

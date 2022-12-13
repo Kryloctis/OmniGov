@@ -86,7 +86,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
                 bool collectingOfficerIsJO = cbJOCollector.Checked;
 
                 var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
-                var dtAccountableForms = receiptIssuedRepo.GetCollectorsAccountbleForms(collectingOfficerID, collectingOfficerIsJO);
+                var dtAccountableForms = receiptIssuedRepo.GetViewCollectorsAccountbleForms(collectingOfficerID, collectingOfficerIsJO);
 
                 foreach (DataRow row in dtAccountableForms.Rows)
                 {
@@ -193,7 +193,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
             var collectingOfficerId = Convert.ToInt32(cmbCollector.SelectedValue);
             var accountableFormId = Convert.ToInt32(cmbAccountableForms.SelectedValue);
 
-            var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerId, accountableFormId);
+            var dtReceiptIssued = AccFactory.ReceiptsIssuedRepository().GetViewIssuedReceiptToCollector(collectingOfficerId, accountableFormId);
             if (dtReceiptIssued.Rows.Count != 0)
             {
                 receiptNumberFrom = Convert.ToInt32(dtReceiptIssued.Rows[0]["receipt_issued_from"]);
@@ -574,7 +574,7 @@ namespace AccountingSystem.Views.Transactions.PaymentCollection
         {
             var collectingOfficerID = Convert.ToInt32(cmbCollector.SelectedValue);
             var accountableFormID = Convert.ToInt32(cmbAccountableForms.SelectedValue);
-            var dtReceiptsOfCollector = AccFactory.ReceiptsIssuedRepository().GetIssuedReceiptToCollector(collectingOfficerID, accountableFormID);
+            var dtReceiptsOfCollector = AccFactory.ReceiptsIssuedRepository().GetViewIssuedReceiptToCollector(collectingOfficerID, accountableFormID);
 
             receiptNumberFrom = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_from"]);
             receiptlNumberTo = Convert.ToInt32(dtReceiptsOfCollector.Rows[0]["receipt_issued_to"]);
