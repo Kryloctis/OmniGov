@@ -131,14 +131,16 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtri);
         }
 
-        public DataTable GetViewIssuedReceiptToCollector(int collectorId, int accountableFormId)
+        public DataTable GetViewRecordsByCollectorId_IsCollectorJo_AccountableFormId(int collectorId, bool isCollectorJO, int accountableFormId)
         {
             var parameter = new object[][] {
-                new object[]{"@collecting_officer_id", DbType.Int32, collectorId },
+                new object[]{"@collector_id", DbType.Int32, collectorId },
                 new object[]{"@accountable_form_id", DbType.Int32, accountableFormId }
             };
 
-            string query = "SELECT id, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date FROM {viewTableName} WHERE (collecting_officer_id = @collecting_officer_id OR job_orders_id = @collecting_officer_id) AND accountable_form_id = @accountable_form_id AND IF(receipt_issued_to = last_issued, true, false) = false";
+            string subQuery = isCollectorJO ? "job_orders_id = @collector_id AND" : "collecting_officer_id = @collector_id AND";
+
+            string query = $"SELECT id, accountable_forms, receipt_issued_from, receipt_issued_to, date_issued, quantity, last_issued, is_returned, returned_date FROM {viewTableName} WHERE {subQuery} accountable_form_id = @accountable_form_id AND is_returned = false";
 
             var dtReceiptIssued = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtReceiptIssued, parameter);

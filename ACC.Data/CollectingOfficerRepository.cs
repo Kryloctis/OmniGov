@@ -88,7 +88,7 @@ namespace ACC.Data
 
             using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                if (reader.Rows.Count == 0)
+                if (reader.Rows.Count < 1)
                     return record;
 
                 foreach (DataRow row in reader.Rows)

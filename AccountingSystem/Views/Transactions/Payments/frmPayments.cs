@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
-    public partial class newFormPayments : Form
+    public partial class frmPayments : Form
     {
         private ucRptTaxDues ucRptTaxDues;
         private ucPayment ucPayment;
 
-        public newFormPayments()
+        public frmPayments()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

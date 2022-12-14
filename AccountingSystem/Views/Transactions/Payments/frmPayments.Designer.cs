@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Transactions.Payments
 {
-    partial class newFormPayments
+    partial class frmPayments
     {
         /// <summary>
         /// Required designer variable.

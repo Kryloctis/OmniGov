@@ -708,7 +708,7 @@ namespace AccountingSystem
 
         private void paymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new newFormPayments().ShowDialog();
+            _ = new frmPayments().ShowDialog();
         }
 
         private void toolStripButtonRpt_Click(object sender, EventArgs e)

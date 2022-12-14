@@ -12,7 +12,7 @@ namespace ACC.Domain.Interfaces
 
         bool ReceiptAvailabilityByQuantity(int receiptId, int receiptQuantity);
 
-        DataTable GetViewIssuedReceiptToCollector(int collectingOfficerID, int accountableFormID);
+        DataTable GetViewRecordsByCollectorId_IsCollectorJo_AccountableFormId(int collectingOfficerId, bool isCollectorJO, int accountableFormID);
 
         DataTable GetViewCollectorsAccountbleForms(int collectorId, bool collectorIsJO);
 
