@@ -26,8 +26,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetViewRecordsByMajorAccGroupNameSearch(string majAccGroupName, string searchText);
 
-
-
         DataTable GetViewRecordsByAccountGroupName(string accountGroupName);
 
         DataTable GetViewRecordsByAccountGroupNameSearch(string accountGroupName, string searchText);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPT.Domain.Models
 {
@@ -21,7 +17,7 @@ namespace RPT.Domain.Models
         public decimal PercentageCompletion { get; set; }
         public DateTime DateCompleted { get; set; }
         public DateTime DateOccupied { get; set; }
-        public decimal UnitValue {get; set;}
+        public decimal UnitValue { get; set; }
         public decimal MarketValue { get; set; }
     }
 }

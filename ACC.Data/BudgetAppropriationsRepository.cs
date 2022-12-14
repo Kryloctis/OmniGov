@@ -74,14 +74,12 @@ namespace ACC.Data
             {
                 throw;
             }
-
         }
 
         public bool Insert(BudgetAppropriationsModel budgetAppropriationsModel, List<SupplementalAppropriationsModel> supplementalAppropriationsModelList)
         {
             using (var scope = new TransactionScope())
             {
-
                 _ = Insert(budgetAppropriationsModel);
 
                 int lastInsertedBudgetApppropriationId = GetLastInsertedID();
@@ -250,7 +248,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
         //SAAOBB
         public DataTable GetViewRecords(int fundId, DateTime dateEntry, byte isSpecial)
         {
@@ -262,7 +259,6 @@ namespace ACC.Data
                     new object[] { "@date_entry", DbType.Date, dateEntry.Date},
                     new object[] { "@fpp_is_special", DbType.Byte, isSpecial}
                 };
-
 
                 string query = $"SELECT " +
                      $"id, " +
@@ -327,7 +323,6 @@ namespace ACC.Data
                     new object[] { "@continuing", DbType.Byte, isContinuing},
                     new object[] { "@fpp_is_special", DbType.Byte, isSpecial}
                 };
-
 
                 string query = $"SELECT " +
                      $"id, " +
@@ -400,7 +395,6 @@ namespace ACC.Data
 
             string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
 
-
             string query = $"SELECT " +
                    $"id, " +
                    $"funds_id, " +
@@ -442,12 +436,10 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-
         }
 
         public DataTable GetHeaderOthersFPP(string fppId, int allotment_classes_id, int funds_id, short year)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@fpp_id", DbType.String, fppId },
@@ -467,7 +459,6 @@ namespace ACC.Data
 
             var dataTable = new DataTable();
             return mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
-
         }
 
         //SUMMARY
@@ -495,7 +486,6 @@ namespace ACC.Data
             {
                 if (subFPPId == "all")
                     subFPPQuery = "others_fpp_id IS NOT NULL AND";
-
                 else if (string.IsNullOrEmpty(subFPPId))
                     subFPPQuery = "others_fpp_id IS NULL AND";
                 else
@@ -513,13 +503,12 @@ namespace ACC.Data
                     $"AND continuing = @continuing " +
                     $"AND {isContinuingQuery}";
 
-
             decimal budgetAppropriations = Convert.ToDecimal(mySqlGenericCommands.ExecuteScalar(query, parameters));
 
             return budgetAppropriations;
         }
 
-        #endregion
+        #endregion BUDGET DASHBOARD
 
         public DataTable GetViewRecordsByIds(BudgetAppropriationsModel entity)
         {
@@ -874,7 +863,6 @@ namespace ACC.Data
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -913,7 +901,6 @@ namespace ACC.Data
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -949,7 +936,6 @@ namespace ACC.Data
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -987,7 +973,6 @@ namespace ACC.Data
 
                 // if query is not null, means found some record, so true
                 if (!string.IsNullOrEmpty(queryResult)) return true;
-
             }
             catch (Exception)
             {
@@ -1014,8 +999,6 @@ namespace ACC.Data
             }
         }
 
-
-
         #endregion Validations
 
         public DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id)
@@ -1034,7 +1017,6 @@ namespace ACC.Data
                 };
 
                 string fppWhereQuery = fppId == "all" ? string.Empty : "fpp_id = @fpp_id AND";
-
 
                 string query = $"SELECT " +
                        $"id, " +

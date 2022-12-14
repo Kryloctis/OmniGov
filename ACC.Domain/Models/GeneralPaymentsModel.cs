@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class GeneralPaymentsModel
     {
@@ -15,6 +11,5 @@ namespace ACC.Domain.Models
         public int SubsidiaryLedgerAccountsId { get; set; }
 
         public int Quantity { get; set; }
-
     }
 }

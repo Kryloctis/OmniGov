@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {

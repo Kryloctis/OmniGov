@@ -1,5 +1,4 @@
-﻿using ACC.Domain.Interfaces;
-using AccountingSystem.Views.Manage.LinkUser;
+﻿using AccountingSystem.Views.Manage.LinkUser;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;

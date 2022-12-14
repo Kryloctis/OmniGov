@@ -35,7 +35,6 @@ namespace ACC.Data
                         return record;
 
                     record.Add("permission_name", reader.Rows[0][0].ToString());
-
                 }
             }
             catch (Exception)
@@ -227,4 +226,3 @@ namespace ACC.Data
         }
     }
 }
-

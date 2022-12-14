@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class RptDiscountsModel
     {
@@ -11,7 +7,7 @@ namespace ACC.Domain.Models
         public int Month { get; set; }
 
         public string Description { get; set; }
-        
+
         public decimal Rate { get; set; }
 
         public bool IsAdvance { get; set; }

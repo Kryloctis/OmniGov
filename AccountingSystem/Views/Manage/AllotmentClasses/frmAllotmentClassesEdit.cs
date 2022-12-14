@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
@@ -14,12 +7,14 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
     public partial class frmAllotmentClassesEdit : Form
     {
         private frmAllotmentClasses _frmAllotmentClasses;
+
         public frmAllotmentClassesEdit(frmAllotmentClasses frmAllotmentClasses, int allotmentId)
         {
             InitializeComponent();
             _frmAllotmentClasses = frmAllotmentClasses;
             ucAllotmentClasses1.allotmentId = allotmentId;
         }
+
         private void LoadSelectedRecord()
         {
             try
@@ -30,11 +25,9 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
                 uc.txtName.Text = allotmentData["allotment_name"];
                 uc.txtCode.Text = allotmentData["allotment_code"];
-
             }
             catch (Exception ex)
             {
-
                 Helper.MessageBoxError(ex.Message);
             }
         }
@@ -44,7 +37,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             try
             {
                 var uc = ucAllotmentClasses1;
-
 
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
@@ -59,7 +51,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                     Id = uc.allotmentId,
                     AllotmentName = uc.txtName.Text.Trim(),
                     AllotmentCode = uc.txtCode.Text.Trim(),
-
                 };
 
                 var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
@@ -78,10 +69,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             this.Visible = true;
             Helper.LoadFormIcon(this);
             LoadSelectedRecord();
-
         }
-
-     
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {

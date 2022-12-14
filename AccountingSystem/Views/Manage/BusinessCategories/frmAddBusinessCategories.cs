@@ -1,14 +1,5 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Barangay;
-using DocumentFormat.OpenXml.Wordprocessing;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessCategories
@@ -63,7 +54,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                     _ucBusinessCategories.ResetForm();
                 }
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
-        }  
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

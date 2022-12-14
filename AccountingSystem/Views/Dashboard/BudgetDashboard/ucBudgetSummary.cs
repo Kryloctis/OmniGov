@@ -7,7 +7,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
 {
     public partial class ucBudgetSummary : UserControl
     {
-
         internal string fppId;
         internal string subFPPId;
         internal int fundId;
@@ -202,9 +201,10 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             }
         }
 
-        #endregion
+        #endregion COMBOBOXES
 
         #region DASHBOARD BUDGET SUMMARY
+
         private decimal GetAppropriations(int allotmentClassId, byte isContinuing)
         {
             try
@@ -288,13 +288,11 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
                 lblCYAppropriationBalancePS.Text = (GetAppropriations(1, 0) - GetSumObligations(1, 0)).ToString("N2");
                 lblCYAllotmentBalancePS.Text = (GetAllotments(1, 0) - GetSumObligations(1, 0)).ToString("N2");
 
-
                 lblCYAppropriationsMOOE.Text = GetAppropriations(2, 0).ToString("N2");
                 lblCYAllotmentsMOOE.Text = GetAllotments(2, 0).ToString("N2");
                 lblCYObligationsMOOE.Text = GetSumObligations(2, 0).ToString("N2");
                 lblCYAppropriationBalanceMOOE.Text = (GetAppropriations(2, 0) - GetSumObligations(2, 0)).ToString("N2");
                 lblCYAllotmentBalanceMOOE.Text = (GetAllotments(2, 0) - GetSumObligations(2, 0)).ToString("N2");
-
 
                 lblCYAppropriationsFE.Text = GetAppropriations(3, 0).ToString("N2");
                 lblCYAllotmentsFE.Text = GetAllotments(3, 0).ToString("N2");
@@ -307,7 +305,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
                 lblCYObligationsCO.Text = GetSumObligations(4, 0).ToString("N2");
                 lblCYAppropriationBalanceCO.Text = (GetAppropriations(4, 0) - GetSumObligations(4, 0)).ToString("N2");
                 lblCYAllotmentBalanceCO.Text = (GetAllotments(4, 0) - GetSumObligations(4, 0)).ToString("N2");
-
             }
             catch (Exception ex)
             {
@@ -319,7 +316,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             try
             {
-
                 lblCONAppropriationsPS.Text = GetAppropriations(1, 1).ToString("N2");
                 lblCONAllotmentsPS.Text = GetAllotments(1, 1).ToString("N2");
                 lblCONObligationsPS.Text = GetSumObligations(1, 1).ToString("N2");
@@ -331,7 +327,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
                 lblCONObligationsMOOE.Text = GetSumObligations(2, 1).ToString("N2");
                 lblCONAppropriationBalanceMOOE.Text = (GetAppropriations(2, 1) - GetSumObligations(2, 1)).ToString("N2");
                 lblCONAllotmentBalanceMOOE.Text = (GetAllotments(2, 1) - GetSumObligations(2, 1)).ToString("N2");
-
 
                 lblCONAppropriationsFE.Text = GetAppropriations(3, 1).ToString("N2");
                 lblCONAllotmentsFE.Text = GetAllotments(3, 1).ToString("N2");
@@ -359,7 +354,8 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             lblGrandTotalAppropriationBalance.Text = (GetGrandTotalAppropriations() - GetGrandTotalObligations()).ToString("N2");
             lblGrandTotalAllotmentBalance.Text = (GetGrandTotalAllotments() - GetGrandTotalObligations()).ToString("N2");
         }
-        #endregion
+
+        #endregion DASHBOARD BUDGET SUMMARY
 
         private void cmbxFPP_TextChanged(object sender, EventArgs e)
         {
@@ -376,7 +372,6 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
         {
             if (!DesignMode)
             {
-
                 LoadBudgetDashboardComboboxes();
                 LoadBudgetDashboardContents();
                 cmbxFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);

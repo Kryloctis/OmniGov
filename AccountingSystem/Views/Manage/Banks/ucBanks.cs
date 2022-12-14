@@ -12,7 +12,6 @@ namespace AccountingSystem.Views.Manage.Banks
         public ucBanks()
         {
             InitializeComponent();
-
         }
 
         private void ucBanks_Load(object sender, EventArgs e)

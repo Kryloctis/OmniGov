@@ -1,12 +1,8 @@
-﻿using ACC.Data;
-using RPT.Domain.Interfaces;
+﻿using RPT.Domain.Interfaces;
 using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace ACC.Data
@@ -27,14 +23,14 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-                foreach (RptAssessmentPostsModel assessmentPostingModel in assessmentPostingModels) 
+                foreach (RptAssessmentPostsModel assessmentPostingModel in assessmentPostingModels)
                 {
                     _ = Insert(assessmentPostingModel);
                 }
 
                 scope.Complete();
                 return true;
-            }           
+            }
         }
 
         public int CountRecords()
@@ -142,7 +138,7 @@ namespace ACC.Data
             if (isCancelled)
                 query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             else
-               query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
+                query = $"SELECT * FROM {tableName} WHERE taxpayer_name = @taxpayer_name {isCancelledQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
@@ -218,7 +214,6 @@ namespace ACC.Data
                 new object[] { "@posted_by", DbType.Int32, entity.PostedBy },
             };
 
-
             string query = $"INSERT INTO {tableName} (property_identifier, real_taxpayers_id, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly,  effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by) VALUES(@property_identifier, @real_taxpayers_id,  @complete_arp_no, @property_pin, @taxpayer_tin, @taxpayer_name, @taxpayer_contact_info, @taxpayer_address, @street, @barangay_name, @municipality_name, @province_name, @property_kind, @effectivity_quarterly, @effectivity_year, @other_improvements, @assessed_value, @area, @lot_no, @classification_code, @classification_name, @actual_use_code, @actual_use_name, @gr_year, @is_taxable, @is_cancelled, @penalty_rate, @penalty_frequency, @basic_rate, @sef_rate, @year, @posted_at, @posted_by) ";
 
             return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
@@ -272,7 +267,6 @@ namespace ACC.Data
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
-
 
         public DataTable Get_View_List_Of_Real_Property_Tax_Delinquences_By_Taxpayer_AsOfDate_TaxYear(string ownerName, DateTime asOfDate, int? taxYear)
         {

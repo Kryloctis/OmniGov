@@ -1,18 +1,9 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Banks;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
 {
-
     public partial class frmEditBankAccounts : Form
     {
         private frmBankAccounts _frmBankAccounts;
@@ -82,7 +73,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
                 var bankAccountsRepository = AccFactory.BankAccountsRepository();
                 return bankAccountsRepository.Update(bankAccountsModel);
-
             }
             catch (Exception ex)
             {

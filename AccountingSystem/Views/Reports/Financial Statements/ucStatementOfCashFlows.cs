@@ -57,7 +57,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 dict["cash_at_the_end_of_month"]
             };
 
-
             dataTable.Rows.Add(records);
 
             return dataTable;
@@ -119,7 +118,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-
             }
             catch (Exception ex)
             {

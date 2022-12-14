@@ -117,7 +117,7 @@ namespace AccountingSystem.Views.Dashboard.BudgetDashboard.BudgetSummary
             }
         }
 
-        #endregion
+        #endregion COMBOBOXES
 
         private void LoadDetailed()
         {

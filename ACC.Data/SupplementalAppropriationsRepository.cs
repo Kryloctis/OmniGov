@@ -301,5 +301,4 @@ namespace ACC.Data
             return supplementalAmount;
         }
     }
-
 }

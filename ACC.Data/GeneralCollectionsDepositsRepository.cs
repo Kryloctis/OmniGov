@@ -3,18 +3,15 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
 {
-    class GeneralCollectionsDepositsRepository:IGeneralCollectionsDepositsRepository
+    internal class GeneralCollectionsDepositsRepository : IGeneralCollectionsDepositsRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "general_collections_deposits";
         private readonly string viewTableName = "view_general_collections_deposits";
-
-
 
         public GeneralCollectionsDepositsRepository(IAccGenericCommands dbGenericCommands)
         {

@@ -1,5 +1,4 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
@@ -73,7 +72,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                 HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
                 dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
-                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();  
+                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -140,12 +139,10 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
                         if (!receiptIsUsed)
                             realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
-
                     }
                     _ = realPropertiesRepository.Delete(realPropertiesModels);
-
-
                     LoadAllProperties();
+                    
                     Helper.MessageBoxSuccess("Real properties has been deleted.");
                 }
                 catch (Exception)
@@ -162,7 +159,5 @@ namespace AccountingSystem.Views.Manage.RealProperties
             taxpayerID = Convert.ToInt32(dgRealProperties.Rows[rowIndex].Cells["real_taxpayers_id"].Value);
             _ = new frmEditRealProperties(this).ShowDialog();
         }
-
-
     }
 }

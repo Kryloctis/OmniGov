@@ -79,8 +79,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 cmbxCompletePreviousARPNumber.DisplayMember = "complete_arp_no";
                 cmbxCompletePreviousARPNumber.ValueMember = "real_properties_id";
                 cmbxCompletePreviousARPNumber.DropDownHeight = 200;
-
-
             }
             catch (Exception ex)
             {
@@ -218,7 +216,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorTextBox(errorProvider1, txtArpNo);
         }
 
-
         private void nudEffectivityYear_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudEffectivityYear, "Effectivity Year");
@@ -270,7 +267,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         {
             Helper.ClearErrorTextBox(errorProvider1, txtLotNo);
         }
-
 
         private void txtPreviousCompleteARP_Validating(object sender, CancelEventArgs e)
         {
@@ -341,7 +337,5 @@ namespace AccountingSystem.Views.Manage.TaxPayers
         }
 
         #endregion Validations
-
-
     }
 }

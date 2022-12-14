@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptTaxRates
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
     {
         private readonly frmRptTaxRates _frmRptTaxRates;
         private ucRptTaxRates uc;
+
         public frmAddRptTaxRate(frmRptTaxRates frmRptTaxRates)
         {
             InitializeComponent();
@@ -22,11 +16,11 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             _frmRptTaxRates = frmRptTaxRates;
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {
-                if(!uc.ValidateChildren())
+                if (!uc.ValidateChildren())
                 {
                     Helper.MessageBoxError(uc.GetFormErrors());
                     return false;

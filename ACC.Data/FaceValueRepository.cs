@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -12,10 +11,12 @@ namespace ACC.Data
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "face_values";
+
         public FaceValueRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
         }
+
         public int CountRecords()
         {
             try
@@ -106,7 +107,7 @@ namespace ACC.Data
 
         public DataTable GetRecordsByAccountableFormId(int accountableFormId)
         {
-            var parameter = new object[][] { 
+            var parameter = new object[][] {
                 new object[] {"@accountableFormId", DbType.Int32, accountableFormId}
             };
             string query = $"SELECT * FROM {tableName} WHERE accountable_forms_id= @accountableFormId ORDER BY id DESC";
@@ -191,6 +192,5 @@ namespace ACC.Data
             else
                 return Convert.ToDecimal(queryResult);
         }
-
     }
 }

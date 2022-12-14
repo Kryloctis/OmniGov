@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Transactions.RCI
         internal int fundsId = 0;
         internal int functionId = 0;
 
-
         internal short obligationNumberCount = 0;
         internal decimal totalDeduction = 0;
 
@@ -148,7 +147,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                         cmbFPP.Text = String.Format("{0} - {1}", functionData["fpp_code"], functionData["fpp_name"]);
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -204,6 +202,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
         #region Validations
+
         internal string GetFormErrors()
         {
             var errorArray = new string[7];
@@ -269,7 +268,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ClearErrorTextBox(epPayee, txtpayee);
         }
 
-
         private void txtnature_Validating(object sender, CancelEventArgs e)
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtnature, "Nature of Payment");
@@ -290,10 +288,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             Helper.ClearErrorNumericUpDown(epNetAmount, nudNetAmount);
         }
 
-
-
-        #endregion
-
-
+        #endregion Validations
     }
 }

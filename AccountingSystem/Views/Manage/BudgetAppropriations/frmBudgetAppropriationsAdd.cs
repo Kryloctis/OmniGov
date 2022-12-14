@@ -8,7 +8,6 @@ namespace BudgetSystem.Views.BudgetAppropriations
 {
     public partial class frmBudgetAppropriationsAdd : Form
     {
-
         private frmBudgetAppropriations _frmBudgetAppropriations;
         private ucBudgetAppropriations uc;
 

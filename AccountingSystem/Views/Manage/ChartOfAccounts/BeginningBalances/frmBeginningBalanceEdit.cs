@@ -12,8 +12,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.BeginningBalances
         private readonly UcBeginningBalances uc;
         private readonly byte fundId;
         private readonly short year;
-        frmSubsidiary _frmSubsidiary;
-        frmChartOfAccounts _frmChartOfAccounts;
+        private frmSubsidiary _frmSubsidiary;
+        private frmChartOfAccounts _frmChartOfAccounts;
 
         public frmBeginningBalanceEdit(frmChartOfAccounts frmChartOfAccounts, frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {

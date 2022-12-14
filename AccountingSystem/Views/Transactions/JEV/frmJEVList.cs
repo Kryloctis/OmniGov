@@ -71,7 +71,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             int index = cmbxFunds.FindString(_fundName);
             cmbxFunds.SelectedIndex = index;
-
         }
 
         private void LoadJournals()
@@ -219,7 +218,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     rowItem.Cells["updated_by_name"].Value = rowUpdatedByName;
                     rowItem.Cells["status"].Value = rowStatus;
                 }
-
 
                 dgJEV.CurrentCell = dgJEV.FirstDisplayedCell;
                 LoadStatusColors();

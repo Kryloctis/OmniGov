@@ -140,7 +140,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 string ObligationRequestStatus = AccFactory.ObligationRequestRepository().GetObligationRequestStatus(uc.obligationRequestId);
 
-
                 switch (ObligationRequestStatus.ToLower())
                 {
                     case "approved":
@@ -152,6 +151,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         lblStatus.ForeColor = Color.FromArgb(78, 159, 61);
                         uc.SetFieldsReadOnly(true);
                         break;
+
                     case "disapproved":
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
@@ -161,6 +161,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         lblStatus.ForeColor = Color.FromArgb(149, 1, 1);
                         uc.SetFieldsReadOnly(true);
                         break;
+
                     case "cancelled":
                         btnApprove.Enabled = false;
                         btnDisapprove.Enabled = false;
@@ -171,6 +172,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         lblStatus.ForeColor = Color.FromArgb(66, 63, 62);
                         uc.SetFieldsReadOnly(true);
                         break;
+
                     case "pending":
                         btnApprove.Enabled = true;
                         btnDisapprove.Enabled = true;
@@ -179,6 +181,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         linkShowMessage.Visible = false;
                         lblStatus.ForeColor = Color.FromArgb(216, 146, 22);
                         break;
+
                     default:
                         break;
                 }
@@ -247,7 +250,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 lblCreatedBy.Text = "--";
                 lblStatus.ForeColor = Color.Black;
             }
-
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)

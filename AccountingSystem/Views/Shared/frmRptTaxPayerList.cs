@@ -1,9 +1,6 @@
-﻿using AccountingSystem.Views.Manage.Realignment;
-using AccountingSystem.Views.Manage.RealProperties;
-using AccountingSystem.Views.Manage.TaxPayers;
+﻿using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
-using AccountingSystem.Views.Transactions.PaymentPosting;
 using AccountingSystem.Views.Transactions.PropertyPayment.Models;
 using System;
 using System.Data;
@@ -16,14 +13,12 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private readonly frmRealPropertyTaxAccountRegisterReport _frmRealPropertyTaxAccountRegisterReport;
         private readonly frmRealPropertyTaxStatementOfAccount _frmRealPropertyTaxStatementOfAccount;
         private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
-        private readonly frmPayments _frmRealPropertyPayment;
         private readonly frmAddRealProperties _frmAddRealProperties;
 
         public frmRptTaxPayerList(
             frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
-            frmPayments frmRealPropertyPayment,
             frmAddRealProperties frmAddRealProperties
             )
         {
@@ -33,14 +28,13 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             _frmRealPropertyTaxAccountRegisterReport = frmRealPropertyTaxAccountRegisterReport;
             _frmRealPropertyTaxStatementOfAccount = frmRealPropertyTaxStatementOfAccount;
             _frmListOfRealPropertyTaxDelinquenciesReport = frmListOfRealPropertyTaxDelinquenciesReport;
-            _frmRealPropertyPayment = frmRealPropertyPayment;
             _frmAddRealProperties = frmAddRealProperties;
             btnSelect.Enabled = true;
         }
 
         private Form ParentIdentifier()
         {
-            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmRealPropertyPayment, _frmAddRealProperties };
+            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmAddRealProperties };
 
             foreach (Form form in forms)
             {
@@ -62,7 +56,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         {
             var columns = new string[] { "taxpayers_id", "taxpayers_name", "taxpayer_type", "taxpayers_tin", "taxpayers_contact_info", "taxpayers_barangay", "taxpayers_street", "taxpayers_municipality", "taxpayers_province" };
 
-            var dtTaxpayer = AccFactory.TaxpayersRepository().GetRecordsBySearch(searchText);
+            var dtTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText);
             var dtView = new DataView(dtTaxpayer);
             return dtView.ToTable(false, columns);
         }
@@ -112,9 +106,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
         private void InitializeRealPropertyTaxAccountngRegisterReport()
         {
-
         }
-
 
         private void InitializeRealPropertyTaxStatementOfAccountReport()
         {
@@ -137,43 +129,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                 LoadMethods();
                 Close();
             }
-        }
-
-        private void GetSelectedRealPropertyTaxPayer()
-        {
-            try
-            {
-                if (dataGridView1.SelectedRows.Count == 1)
-                {
-                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
-                    string tin = dataGridView1.Rows[rowIndex].Cells["taxpayers_tin"].Value.ToString();
-                    string taxPayerName = dataGridView1.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
-                    string address = dataGridView1.Rows[rowIndex].Cells["taxpayers_street"].Value.ToString();
-                    string barangayName = dataGridView1.Rows[rowIndex].Cells["taxpayers_barangay"].Value.ToString();
-                    string municipalityName = dataGridView1.Rows[rowIndex].Cells["taxpayers_municipality"].Value.ToString();
-                    string provinceName = dataGridView1.Rows[rowIndex].Cells["taxpayers_province"].Value.ToString();
-
-                    var paymentPostingFields = new rptPropertyPaymentTaxPayerInfoModel()
-                    {
-                        TIN = tin,
-                        TaxPayerName = taxPayerName,
-                        Address = address,
-                        BarangayName = barangayName,
-                        MunicipalityName = municipalityName,
-                        ProvinceName = provinceName
-                    };
-
-                    _frmRealPropertyPayment.paymentTaxPayerInfoModel = paymentPostingFields;
-                    _frmRealPropertyPayment.GetSelectedTaxPayerInfo();
-                }
-
-                Close();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
+        }  
 
         private void GetSelectedTaxpayer()
         {
@@ -232,10 +188,6 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
                 case frmRealPropertyTaxStatementOfAccount:
                     InitializeRealPropertyTaxStatementOfAccountReport();
-                    break;
-
-                case frmPayments:
-                    GetSelectedRealPropertyTaxPayer();
                     break;
 
                 case frmListOfRealPropertyTaxDelinquenciesReport:

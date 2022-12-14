@@ -281,9 +281,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     radFund.Checked = true;
                     fundId = Convert.ToByte(fund["id"]);
                     ShowCheckIcon(radFund);
-
                 }
-
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
@@ -326,9 +324,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     radAllotment.Checked = true;
                     allotmentClassId = Convert.ToByte(allotmentClass["id"]);
                     ShowCheckIcon(radAllotment);
-
                 }
-
 
                 flowLayoutPanelAllotmentClass.Controls.Add(radAllotment);
 
@@ -436,13 +432,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 var ucObligationRequestEdit = _frmObligationRequestEdit.ucObligationRequest1;
                 int rowIndex = dgObligationRequests.CurrentCell.RowIndex;
 
-
                 int budgetAppropriationId = Convert.ToInt32(dgObligationRequests.Rows[rowIndex].Cells["budget_appropriation_id"].Value);
                 var budgetAppropriationsDict = AccFactory.BudgetAppropriationsRepository().GetRecordByID(budgetAppropriationId);
 
                 var subFPP = budgetAppropriationsDict["others_fpp_id"];
                 decimal amount = Convert.ToDecimal(dgObligationRequests.Rows[rowIndex].Cells["obligation_amount"].Value);
-
 
                 ucObligationRequestEdit.fppId = Convert.ToInt32(cmbxFPP.SelectedValue);
                 ucObligationRequestEdit.fundId = fundId;
@@ -463,7 +457,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #region VALIDATIONS
-
 
         //OBLIGATION LIST EMPTY
         internal bool ShowErrorObligationRequestsListEmpty()
@@ -493,8 +486,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             dgObligationRequests.Tag = string.Empty;
         }
 
-
-
         //FPP
         private bool ShowErrorFPPNameNotExist()
         {
@@ -507,7 +498,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                     epFPP.SetError(cmbxFPP, "FPP you entered doesn't exist on your record.");
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -528,7 +518,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorComboBox(epFPP, cmbxFPP);
         }
-
 
         //OBLIGATION NO.
         private bool ShowErrorObligationRequestNoEmpty()
@@ -555,7 +544,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 else
                     obligationRequestNoExist = AccFactory.ObligationRequestRepository().ObligationRequestNoExist(obligationRequestId, obligationNo);
 
-
                 if (obligationRequestNoExist)
                 {
                     epObligationNo.SetError(mskTxtObligationNoTemplate, "Obligation request no. is already exist on your record.");
@@ -575,14 +563,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 e.Cancel = ShowErrorObligationRequestNoEmpty();
             else if (ShowErrorObligationRequestNoExist())
                 e.Cancel = ShowErrorObligationRequestNoExist();
-
         }
 
         private void mskTxtObligationNoSeries_Validated(object sender, EventArgs e)
         {
             Helper.ClearMaskedTextboxError(epObligationNo, mskTxtObligationNoTemplate);
         }
-
 
         //REFERENCE NO.
         private void txtReferenceNo_Validating(object sender, CancelEventArgs e)
@@ -595,7 +581,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             Helper.ClearErrorTextBox(epReferenceNo, txtReferenceNo);
         }
 
-
         //PAYEE
         private void txtPayee_Validating(object sender, CancelEventArgs e)
         {
@@ -606,7 +591,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorTextBox(epPayee, txtPayee);
         }
-
 
         //EXPLANATION
         private void txtExplanation_Validating(object sender, CancelEventArgs e)

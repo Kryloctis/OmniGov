@@ -1,14 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
@@ -16,6 +8,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
     {
         private frmCollectingOfficer _frmCollectingOfficer;
         private ucCollectingOfficer _uc;
+
         public frmCollectingOfficerEdit(frmCollectingOfficer frmCollectingOfficer, int OfficerId)
         {
             InitializeComponent();
@@ -38,14 +31,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 uc.txtLastName.Text = data["last_name"];
                 uc.txtSuffix.Text = data["suffix"];
                 uc.txtJobtitle.Text = data["job_title"];
-                uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);                
+                uc.UserId = data["users_id"] == string.Empty ? 0 : Convert.ToInt16(data["users_id"]);
                 uc.LoadLink(uc.UserId);
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
-
 
         private bool SaveData()
         {
@@ -71,7 +61,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
                 var collectingrepository = AccFactory.CollectingOfficerRepository();
                 return collectingrepository.Update(collectingmodel);
-
             }
             catch (Exception ex)
             {

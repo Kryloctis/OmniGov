@@ -8,6 +8,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetRecordsByOffice(string office);
 
         bool NameExist(string name, string office);
+
         bool NameExist(string name, string office, int id);
     }
 }

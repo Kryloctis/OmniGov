@@ -9,7 +9,7 @@ namespace AccountingSystem.Views.Reports.JEV
     public partial class frmJEVReport : Form
     {
         private ReportViewer reportViewer;
-        Dictionary<string, string> journalDict;
+        private Dictionary<string, string> journalDict;
 
         private int _jevId;
         private string _jevNo;
@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Reports.JEV
 
         public frmJEVReport(int jevId, string jevNo, byte journalId)
         {
-
             InitializeComponent();
             Helper.LoadFormIcon(this);
             reportViewer = new ReportViewer();
@@ -62,9 +61,9 @@ namespace AccountingSystem.Views.Reports.JEV
                     paramDVNo = journalDict["dv_no"];
                     SetJournalData("", "Check No. :", "OR No. :", "DV No. :", "");
                     return;
+
                 case 2:
                     journalDict = AccFactory.CashReceiptsJournalRepository().GetViewRecordByJevID(_jevId);
-
 
                     paramCheckDate = Convert.ToDateTime(journalDict["or_date"]).ToString("MM/dd/yy");
                     paramORNo = journalDict["or_no"];
@@ -76,6 +75,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
                 case 3:     //NO OTHER FIELDS ASIDE FROM DATE OF ENTRY
                     return;
+
                 case 4:
                     journalDict = AccFactory.CashDisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
                     paramCheckDate = Convert.ToDateTime(journalDict["date_paid"]).ToString("MM/dd/yy");
@@ -87,6 +87,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     SetJournalData("Date Paid:", "", "", "DV No. ", "Disburse officer: ");
 
                     return;
+
                 case 5:
                     journalDict = AccFactory.CheckDisbursementsJournalRepository().GetRecordByJevID(_jevId);
 
@@ -102,6 +103,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     journalDict = AccFactory.ADADisbursementsJournalRepository().GetViewRecordByJevID(_jevId);
                     SetJournalData("", "", "ADA No. :", "DV No. :", "");
                     return;
+
                 default:
                     break;
             }
@@ -138,7 +140,6 @@ namespace AccountingSystem.Views.Reports.JEV
 
                     var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
-
                     var dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
                     var dictUser = AccFactory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
 
@@ -164,7 +165,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramAsTextOR", orNo),
                     new ReportParameter("paramAsTextDV", dv),
                     new ReportParameter("paramAsTextOfficer", officer),
-                    
+
                     //for fields values
                     new ReportParameter("paramCheckDate", paramCheckDate),
                     new ReportParameter("paramCheckNo", paramCheckNo),
@@ -173,11 +174,8 @@ namespace AccountingSystem.Views.Reports.JEV
                     new ReportParameter("paramDisbursementOfficer", paramOfficer)
                     };
 
-
-
                     report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
                     report.DataSources.Clear();
-
 
                     report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
                     report.SetParameters(parameters);
@@ -212,7 +210,6 @@ namespace AccountingSystem.Views.Reports.JEV
                 row["fpp"] = item["fpp_code"];
                 row["account_and_explanation"] = item["general_ledger_accounts_name"];
                 row["account_code"] = item["account_code"];
-
 
                 if (Convert.ToBoolean(item["is_debit"]))
                     row["debit"] = item["amount"];

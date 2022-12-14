@@ -11,6 +11,5 @@
         public string LastName { get; set; }
         public string Suffix { get; set; }
         public string Password { get; set; }
-
     }
 }

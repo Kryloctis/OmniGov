@@ -59,7 +59,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             string filterStatus = cmbxStatus.Text.Trim().ToLower();
             var dtObligationRequests = AccFactory.ObligationRequestRepository().GetViewRecordsBySearchAndStatus(searchTxt, filterStatus, fundId, allotmentClassId, dateRequestedCoverage);
 
-
             foreach (DataRow row in dtObligationRequests.Rows)
             {
                 var id = row["obligation_request_id"].ToString();
@@ -182,8 +181,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 
             Close();
         }
-
-
 
         private void btnSelect_Click(object sender, EventArgs e)
         {

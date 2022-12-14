@@ -22,7 +22,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
 
         private DataTable DatatableSAAOBB()
         {
-
             var dataSet = new dsLFS();
             DataTable dtSAAOBB = dataSet.dtSAAOBB;
 
@@ -99,7 +98,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 //BALANCES OF ALLOTMENTS
                 decimal balancesOfAllotments = allotmentReleaseAmount - obligationRequestAmount;
 
-
                 var items = new object[]
                 {
                     rowFundId,
@@ -166,7 +164,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 var fundRepo = AccFactory.FundsRepository().GetRecordByID(fundId);
 
                 var parameters = new[] {
-
                     new ReportParameter("paramFundName", fundRepo["fund_name"]),
                     new ReportParameter("paramFundCode", fundRepo["fund_code"]),
                     new ReportParameter("paramDate", AsOf.ToString("MMMM dd, yyyy")),
@@ -201,7 +198,6 @@ namespace AccountingSystem.Views.Reports.SAAOBB
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
-
             }
             catch (Exception ex)
             {

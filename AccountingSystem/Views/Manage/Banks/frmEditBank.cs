@@ -6,7 +6,6 @@ namespace AccountingSystem.Views.Manage.Banks
 {
     public partial class frmEditBank : Form
     {
-
         private readonly frmBanks _frmbanks;
         private readonly ucBanks _ucBanks;
 
@@ -17,9 +16,9 @@ namespace AccountingSystem.Views.Manage.Banks
             _ucBanks = ucBanks1;
             _ucBanks.bankId = bankId;
         }
-        
+
         private void LoadSelectedRecord()
-        { 
+        {
             try
             {
                 var banksRepository = AccFactory.BanksRepository();
@@ -28,14 +27,14 @@ namespace AccountingSystem.Views.Manage.Banks
                 _ucBanks.txtBankName.Text = bankData["bank_name"];
                 _ucBanks.txtBankBranch.Text = bankData["bank_branch"];
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
         private void frmBankEdit_Load(object sender, EventArgs e)
-        {            
+        {
             LoadSelectedRecord();
         }
 
@@ -59,7 +58,6 @@ namespace AccountingSystem.Views.Manage.Banks
 
                 var banksrepository = AccFactory.BanksRepository();
                 return banksrepository.Update(banksModel);
-              
             }
             catch (Exception ex)
             {

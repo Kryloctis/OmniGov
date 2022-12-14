@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -90,7 +90,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query  = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} ORDER BY accountable_forms_id ";
+            string query = $"SELECT id, accountable_forms_id, acc_form_no, acc_form_desc, receipt_number_from, receipt_number_to, received_date, quantity, user AS officer FROM {viewTableName} ORDER BY accountable_forms_id ";
 
             var dtri = new DataTable();
             return _dbGenericCommands.Fill(query, dtri);
@@ -102,7 +102,7 @@ namespace ACC.Data
                 new object[]{"@searchText", DbType.String, $"%{searchText}%"},
             };
 
-            string query =      $"SELECT " +
+            string query = $"SELECT " +
                                 $"id, " +
                                 $"CONCAT(acc_form_no, ' ', acc_form_desc) AS accountable_forms, " +
                                 $"receipt_number_from, " +
@@ -117,7 +117,6 @@ namespace ACC.Data
 
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
-       
         }
 
         public bool IdExist(int id)
@@ -145,27 +144,27 @@ namespace ACC.Data
 
         public int GetMaxReceiptNumberByAccountableFormId(int accountableFormId)
         {
-            int value = 0;          
+            int value = 0;
 
             string query = $"SELECT IFNULL(MAX(receipt_number_to), 0) AS receiptno " +
                            $"FROM {tableName} " +
                            $"WHERE accountable_forms_id = {accountableFormId}";
 
-            DataTable dt = _dbGenericCommands.Fill(query,new DataTable());
-            if(dt.Rows.Count > 0)
+            DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
+            if (dt.Rows.Count > 0)
             {
-                for(int i=0;i < dt.Rows.Count; i++)
+                for (int i = 0; i < dt.Rows.Count; i++)
                     value = int.Parse(dt.Rows[i]["receiptno"].ToString());
             }
-         
+
             return value;
         }
 
         public int GetMinReceiptNumberByAccountableFormId(int accountableFormId)
         {
             int value = 0;
-           
-            string query  = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno " +
+
+            string query = $"SELECT IFNULL(MAX(receipt_number_from), 0) AS receiptno " +
                             $"FROM {tableName} " +
                             $"WHERE accountable_forms_id = {accountableFormId}";
             DataTable dt = _dbGenericCommands.Fill(query, new DataTable());
@@ -174,7 +173,7 @@ namespace ACC.Data
                 for (int i = 0; i < dt.Rows.Count; i++)
                     value = int.Parse(dt.Rows[i]["receiptno"].ToString());
             }
-            
+
             return value;
         }
 
@@ -193,7 +192,7 @@ namespace ACC.Data
                     new object[] { "@remarks", DbType.String, entity.Remarks}
                 };
 
-                string query =  $"INSERT INTO {tableName} " +
+                string query = $"INSERT INTO {tableName} " +
                                 $"(users_id, " +
                                 $"accountable_forms_id, " +
                                 $"receipt_number_from, " +
@@ -231,7 +230,7 @@ namespace ACC.Data
                 new object[] { "@remarks", DbType.String, entity.Remarks}
             };
 
-            string query =  $"UPDATE {tableName} SET " +
+            string query = $"UPDATE {tableName} SET " +
                             $"users_id = @users_id, " +
                             $"accountable_forms_id = @accountable_forms_id, " +
                             $"receipt_number_from = @receipt_number_from, " +
@@ -272,7 +271,7 @@ namespace ACC.Data
 
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
-            if (string.IsNullOrEmpty(queryResult)) 
+            if (string.IsNullOrEmpty(queryResult))
                 return false;
 
             return true;
@@ -290,6 +289,5 @@ namespace ACC.Data
             var dtri = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtri, parameter);
         }
-
     }
 }

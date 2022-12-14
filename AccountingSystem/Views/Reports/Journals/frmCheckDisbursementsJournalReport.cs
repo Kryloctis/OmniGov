@@ -87,7 +87,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
-
                 //Debit default Accounts
 
                 dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
@@ -102,7 +101,6 @@ namespace AccountingSystem.Views.Reports.Journals
                     return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
                 }
 
-
                 dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
                 dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
                 dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
@@ -114,7 +112,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                     return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
                 }
-
 
                 //Credit default Accounts
 
@@ -130,7 +127,6 @@ namespace AccountingSystem.Views.Reports.Journals
                     return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
                 }
 
-
                 dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
                 dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
                 dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
@@ -142,7 +138,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                     return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
                 }
-
             }
             catch (Exception ex)
             {
@@ -174,7 +169,6 @@ namespace AccountingSystem.Views.Reports.Journals
                 var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
                 ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-
                 var parameters = new[] {
                     new ReportParameter("paramDate", date.ToString()),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
@@ -197,8 +191,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\check-disbursements-journal.rdlc";
                 report.DataSources.Clear();
-
-
 
                 report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
                 report.SetParameters(parameters);

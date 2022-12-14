@@ -29,13 +29,13 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var dtReceipts = AccFactory.ReceiptsRepository().GetRecords();
                 HelperLoadRecords.ReceiptsDatagridView(dtReceipts, dgReceipts);
             }
-            catch (Exception ex) 
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void LoadRecordsBySearch() 
+        internal void LoadRecordsBySearch()
         {
             try
             {
@@ -62,8 +62,8 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void SetToolStripStatusData()
         {
             var quantity = (from DataGridViewRow row in dgReceipts.Rows
-                          where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
-                          select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
+                            where !String.IsNullOrEmpty(row.Cells["quantity"].FormattedValue.ToString())
+                            select Convert.ToDecimal(row.Cells["quantity"].FormattedValue)).Sum().ToString();
 
             lblRecordCount.Text = dgReceipts.Rows.Count.ToString();
             lblQuantity.Text = quantity;
@@ -75,7 +75,6 @@ namespace AccountingSystem.Views.Manage.Receipts
 
             int receiptId = Convert.ToInt32(dgReceipts.CurrentRow.Cells[0].Value);
             bool hasIssueance = AccFactory.ReceiptsIssuedRepository().ReceiptIsUsed(receiptId);
-            
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -86,7 +85,7 @@ namespace AccountingSystem.Views.Manage.Receipts
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int receiptId = int.Parse(dgReceipts.CurrentRow.Cells[0].Value.ToString());
-            _ = new frmReceiptsEdit(this, receiptId).ShowDialog();                
+            _ = new frmReceiptsEdit(this, receiptId).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -104,10 +103,8 @@ namespace AccountingSystem.Views.Manage.Receipts
 
                     if (!receiptIsUsed)
                         receiptModel.Add(new ReceiptsModel() { Id = receiptId });
-                        
                 }
                 _ = receiptsRepository.Delete(receiptModel);
-
 
                 LoadRecordsBySearch();
                 Helper.MessageBoxSuccess("Receipt successfullt deleted.");

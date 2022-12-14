@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    class CollectorReportRepository : ICollectorReportRepository
+    internal class CollectorReportRepository : ICollectorReportRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly ICollectorReportPaymentsRepository _collectorReportPaymentsRepository;
@@ -75,7 +75,7 @@ namespace ACC.Data
                 record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
                 record.Add("remarks", reader.Rows[0]["remarks"].ToString());
             }
-       
+
             return record;
         }
 
@@ -85,7 +85,7 @@ namespace ACC.Data
                 new object[]{"@reportNo", DbType.String, reportNumber},
             };
 
-            string query =  $"SELECT " +
+            string query = $"SELECT " +
                             $"collecting_officers_id, " +
                             $"collecting_officers_first_name, " +
                             $"collecting_officers_mid_initial, " +
@@ -117,8 +117,8 @@ namespace ACC.Data
 
         public bool Insert(CollectorReportModel entity)
         {
-             var parameters = new object[][]
-             {
+            var parameters = new object[][]
+            {
                 new object[] {"@collecting_officers_id", DbType.Int32, entity.CollectorId},
                 new object[] {"@job_orders_id", DbType.Int32, entity.JobOrderId},
                 new object[] {"@report_no", DbType.String, entity.ReportNo},
@@ -127,7 +127,7 @@ namespace ACC.Data
                 new object[] {"@is_disapproved", DbType.Int16, entity.IsDisapproved},
                 new object[] {"@funds_id", DbType.Int16, entity.FundId},
                 new object[] {"@remarks", DbType.String, entity.Remarks}
-            };
+           };
 
             string query = $"INSERT INTO {tableName} " +
                            $"VALUES (" +
@@ -142,10 +142,8 @@ namespace ACC.Data
                            $"@remarks)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-           
         }
 
-       
         public bool Update(CollectorReportModel entity)
         {
             var parameters = new object[][]
@@ -161,7 +159,7 @@ namespace ACC.Data
                 new object[] { "@remarks", DbType.String, entity.Remarks}
             };
 
-            string query =  $"UPDATE {tableName} " +
+            string query = $"UPDATE {tableName} " +
                             $"SET " +
                             $"collecting_officers_id = @collecting_officers_id, " +
                             $"job_orders_id          = @job_orders_id, " +
@@ -180,7 +178,6 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-               
                 var parameters = new object[][]
                 {
                         new object[] { "@id", DbType.Int32, entity.Id},
@@ -189,7 +186,7 @@ namespace ACC.Data
 
                 string query = $"DELETE FROM {tableName} WHERE id = @id AND report_no = @report_no";
                 _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-               
+
                 scope.Complete();
                 return true;
             }
@@ -222,10 +219,8 @@ namespace ACC.Data
             return int.Parse(_dbGenericCommands.ExecuteScalar(query));
         }
 
-
         public bool ReportNumberExist(int reportId, string reporNo)
         {
-            
             var parameters = new object[][]
             {
                 new object[] { "@report_id", DbType.String, reportId },
@@ -236,9 +231,10 @@ namespace ACC.Data
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
-            
+
             return false;
         }
+
         public bool ReportNumberExist(string reporNo)
         {
             var parameters = new object[][]
@@ -250,7 +246,7 @@ namespace ACC.Data
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
-            
+
             return false;
         }
 
@@ -265,20 +261,17 @@ namespace ACC.Data
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
-        
 
             return false;
         }
 
         public int GetReportID(int collectorId, string collectorReportNumber, bool isJO)
         {
-
             var parameter = new object[][] {
                 new object[] {"@collectorId", DbType.Int32, collectorId},
                 new object[] {"@collectorReportNumber", DbType.String, collectorReportNumber}
             };
 
-            
             string filter;
             if (isJO)
                 filter = $"job_orders_id";
@@ -293,7 +286,6 @@ namespace ACC.Data
                            $"report_no = @collectorReportNumber ";
 
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameter));
-
         }
 
         public DataTable FilterRecords(string status, byte fundId, string keySearch)
@@ -326,7 +318,7 @@ namespace ACC.Data
                     new object[] {"@fundId", DbType.Byte, fundId }
                 };
 
-                string query =  $"SELECT id, fund_id, fund_name, date, report_no, collecting_officers_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, amount, is_approved, is_disapproved  FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId";
+                string query = $"SELECT id, fund_id, fund_name, date, report_no, collecting_officers_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, amount, is_approved, is_disapproved  FROM {viewTableName} WHERE {statusQuery} fund_id = @fundId";
 
                 var dtCollectorReport = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
@@ -368,7 +360,7 @@ namespace ACC.Data
                     new object[] {"@collectingOfficerId", DbType.Byte, collectingOfficerId }
                 };
 
-                string query =  $"SELECT * FROM {viewTableName} " +
+                string query = $"SELECT * FROM {viewTableName} " +
                                 $"WHERE {statusQuery} " +
                                 $"fund_id = @fundId AND " +
                                 $"(collecting_officers_id = @collectingOfficerId AND ISNULL(job_orders_id)) OR " +
@@ -401,13 +393,12 @@ namespace ACC.Data
 
             var dtCollectorReport = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtCollectorReport, parameter);
-          
         }
 
         public string GetRCDStatus(string reportNo)
         {
             var record = new Dictionary<string, byte>();
-          
+
             var parameters = new object[][]
             {
                 new object[] { "@report_no", DbType.String, reportNo }
@@ -429,7 +420,6 @@ namespace ACC.Data
                 return "disapproved";
             else
                 return "pending";
-         
         }
 
         public bool SetRCDStatus(byte status, string reportNo)
@@ -497,7 +487,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-       
+
         public bool HasGenerated(int paymentCollectionsId)
         {
             var parameters = new object[][]
@@ -509,7 +499,7 @@ namespace ACC.Data
             string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
             if (!string.IsNullOrEmpty(queryResult)) return true;
-        
+
             return false;
         }
 
@@ -520,8 +510,8 @@ namespace ACC.Data
 
         public bool InsertWithCollectorReportPayments(CollectorReportModel collectorReportModel, List<CollectorReportPaymentModel> collectorReportPaymentModelList)
         {
-            using (var scope = new TransactionScope()) {
-
+            using (var scope = new TransactionScope())
+            {
                 var parameters = new object[][]
                {
                 new object[] {"@collecting_officers_id", DbType.Int32, collectorReportModel.CollectorId},
@@ -538,7 +528,6 @@ namespace ACC.Data
 
                 _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
-
                 foreach (var collectorsPayments in collectorReportPaymentModelList)
                 {
                     collectorsPayments.CollectorsReportId = GetReportID(collectorReportModel.CollectorId, collectorReportModel.ReportNo, collectorReportModel.IsJO);
@@ -546,14 +535,11 @@ namespace ACC.Data
 
                     _collectorReportPaymentsRepository.Insert(collectorsPayments);
                 }
-                
 
                 scope.Complete();
                 return true;
             }
-
         }
-
 
         #region RCD DashBoard Counter
 
@@ -581,7 +567,6 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int16, year}
             };
 
-
             string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
 
             string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 0 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
@@ -597,12 +582,10 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int16, year}
             };
 
-
             string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
 
             string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_disapproved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
-
         }
 
         public int GetCancelledRCDCount(int fundId, short month, short year)
@@ -614,14 +597,12 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int16, year}
             };
 
-
             string fundQuery = fundId == 0 ? string.Empty : "funds_id = @fund_id AND";
 
             string query = $"SELECT COUNT(id) FROM {tableName} WHERE is_approved = 1 AND is_disapproved = 1 AND {fundQuery} MONTH(date)<=@month AND YEAR(date)=@year";
             return int.Parse(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
 
-       
-        #endregion
+        #endregion RCD DashBoard Counter
     }
 }

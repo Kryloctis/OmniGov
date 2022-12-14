@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -23,7 +22,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-         
+
         public bool Delete(List<SubFPPModel> entityList)
         {
             try
@@ -50,7 +49,7 @@ namespace ACC.Data
                 throw;
             }
         }
-    
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             var record = new Dictionary<string, string>();
@@ -82,7 +81,7 @@ namespace ACC.Data
 
             return record;
         }
-       
+
         public DataTable GetRecords()
         {
             try
@@ -208,8 +207,6 @@ namespace ACC.Data
             }
         }
 
-
-
         #region Validations
 
         public bool NameExist(string name)
@@ -258,7 +255,6 @@ namespace ACC.Data
 
             return false;
         }
-
 
         public bool CodeExist(string otherFPPCode)
         {
@@ -314,7 +310,6 @@ namespace ACC.Data
                     new object[] { "@function_program_project_id", DbType.Int32, fppId },
                     new object[] { "@searchTxt", DbType.String, $"%{searchTxt}%" },
                 };
-
 
                 string query = $"SELECT " +
                     $"id, " +

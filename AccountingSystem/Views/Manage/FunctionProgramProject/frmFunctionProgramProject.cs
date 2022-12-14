@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
 
         internal void LoadFunctionalClassifications()
         {
-
             try
             {
                 string searchkey = Convert.ToString(txtSearch.Text);
@@ -40,7 +39,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 lblRecordCount.Text = dgFunctionalClassification.Rows.Count.ToString();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-
         }
 
         private void DeleteFunctionalClassificationRecords()
@@ -89,7 +87,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             Helper.EnableDisableToolStripButtons(dgFunctionalClassification, btnEdit, btnDelete);
         }
 
-        #endregion
+        #endregion Function Classifications
 
         #region Function Classification Services
 
@@ -98,7 +96,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             try
             {
                 DataTable dtSectorName = AccFactory.FunctionalClassificationRepository().GetRecords();
-
 
                 var dataTable = new DataTable();
 
@@ -118,14 +115,12 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                     dataTable.Rows.Add(items);
                 };
 
-
                 HelperLoadRecords.SectorNameComboBox(dataTable, cmbxSector, "sector_name", "id");
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void cmbSectorName_SelectionChangeCommitted(object sender, EventArgs e)
@@ -209,7 +204,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
-        #endregion
+        #endregion Function Classification Services
 
         #region Function Program Project
 
@@ -255,7 +250,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
                 fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsBySearch_And_IsSpecial(searchText, isSpecial);
             else
                 fppDataTable = AccFactory.FunctionProgramProjectRepository().GetViewRecordsByService_And_Search_And_IsSpecial(serviceId, searchText, isSpecial);
-
 
             var dataTable = new DataTable();
             dataTable.Columns.Add("id");
@@ -379,7 +373,7 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             }
         }
 
-        #endregion
+        #endregion Function Program Project
 
         private void ShowOthersFPP()
         {
@@ -402,7 +396,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject
             LoadFPP();
             LoadFunctionClassificationServices();
             LoadFunctionalClassifications();
-
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

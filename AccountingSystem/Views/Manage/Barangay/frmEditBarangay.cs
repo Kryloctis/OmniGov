@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Barangay
@@ -17,14 +10,13 @@ namespace AccountingSystem.Views.Manage.Barangay
         private frmBarangay _frmBarangay;
         private ucBarangay uc;
 
-
         public frmEditBarangay(int barangayId, frmBarangay frmBarangay)
         {
             InitializeComponent();
             uc = ucBarangay1;
 
             _barangayId = barangayId;
-           _frmBarangay = frmBarangay;
+            _frmBarangay = frmBarangay;
         }
 
         private void frmEditBarangay_Load(object sender, EventArgs e)
@@ -38,7 +30,6 @@ namespace AccountingSystem.Views.Manage.Barangay
 
             uc.txtCode.Text = dictBarangay["code"];
             uc.txtBarangay.Text = dictBarangay["name"];
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -62,7 +53,7 @@ namespace AccountingSystem.Views.Manage.Barangay
                 }
 
                 var barangayCode = uc.txtCode.Text.Trim();
-                var barangayName = uc.txtBarangay.Text.Trim(); 
+                var barangayName = uc.txtBarangay.Text.Trim();
 
                 var barangayModel = new BarangayModel()
                 {

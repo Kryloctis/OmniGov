@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2013.Drawing.Chart;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -54,9 +53,9 @@ namespace AccountingSystem
             }
 
             datagrid.ClearSelection();
+        }
 
-        } 
-        #endregion
+        #endregion Business Addons
 
         #region BusinessCategories
 
@@ -83,7 +82,7 @@ namespace AccountingSystem
             dataGridView1.Columns["description"].HeaderText = "Description";
         }
 
-        #endregion
+        #endregion BusinessCategories
 
         #region Taxpayers
 
@@ -232,7 +231,7 @@ namespace AccountingSystem
                     row["gr_year"],
                     row["is_taxable"],
                     row["created_at"],
-                    row["updated_at"],  
+                    row["updated_at"],
                 });
             }
 
@@ -270,7 +269,7 @@ namespace AccountingSystem
             dataGridView.Columns["updated_at"].Visible = false;
         }
 
-        #endregion
+        #endregion Taxpayers
 
         #region Payment History
 
@@ -297,9 +296,9 @@ namespace AccountingSystem
             dataGridView.Columns["payment_collections_is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
-        #endregion
+        #endregion Payment History
 
-        #region Property Payment 
+        #region Property Payment
 
         public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable)
         {
@@ -319,6 +318,7 @@ namespace AccountingSystem
             dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_selected"].MinimumWidth = 20;
             dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["assessment_posts_id"].Visible = false;
             dataGridView.Columns["year"].HeaderText = "Year";
             dataGridView.Columns["year"].Frozen = true;
             dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -328,14 +328,14 @@ namespace AccountingSystem
             dataGridView.Columns["type"].MinimumWidth = 50;
             dataGridView.Columns["type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["tax_due_amount"].HeaderText = "Tax Due";
-            dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/Discount";
+            dataGridView.Columns["penalty_discount"].HeaderText = "Penalty/(Discount)";
             dataGridView.Columns["total_payment"].HeaderText = "Total Payment";
             dataGridView.Columns["total_payment_consolidated"].Visible = false;
             dataGridView.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;   
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
         }
 
-        public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable) 
+        public static void DatagridViewPaymentTaxpayerProperties(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["is_selected"].Frozen = true;
@@ -418,7 +418,7 @@ namespace AccountingSystem
             dataGridView.Columns["total_sef_basic"].DefaultCellStyle.Format = "N2";
         }
 
-        #endregion
+        #endregion Property Payment
 
         #region RPT Tax Rates
 
@@ -433,7 +433,7 @@ namespace AccountingSystem
             dataGridView.Columns["rate"].DefaultCellStyle.Format = "P";
         }
 
-        #endregion
+        #endregion RPT Tax Rates
 
         #region RPT Penalties
 
@@ -448,7 +448,7 @@ namespace AccountingSystem
             dataGridView.Columns["frequency"].HeaderText = "Frequency";
         }
 
-        #endregion
+        #endregion RPT Penalties
 
         #region RPT Discounts
 
@@ -470,9 +470,10 @@ namespace AccountingSystem
             dataGridView.Columns["is_advance"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
-        #endregion
+        #endregion RPT Discounts
 
         #region RPT Assessment Posting
+
         internal static void BarangaysCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             DataRow dr = dataTable.NewRow();
@@ -533,7 +534,8 @@ namespace AccountingSystem
             dataGridView.Columns["posted_at"].Visible = false;
             dataGridView.Columns["posted_by"].Visible = false;
         }
-        #endregion
+
+        #endregion RPT Assessment Posting
 
         #region References
 
@@ -558,7 +560,7 @@ namespace AccountingSystem
             dataGridView.Columns["document_name"].ReadOnly = true;
         }
 
-        #endregion
+        #endregion References
 
         #region Signatories
 
@@ -572,17 +574,20 @@ namespace AccountingSystem
             dataGridView.Columns["updated_at"].Visible = false;
         }
 
-        #endregion
+        #endregion Signatories
 
         #region Year
+
         internal static void YearComboBox(ComboBox comboBox)
         {
             _ = comboBox.Items.Add("2022");
             comboBox.SelectedIndex = 0;
         }
-        #endregion
+
+        #endregion Year
 
         #region Account Group
+
         internal static void AccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -610,9 +615,11 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
-        #endregion
+
+        #endregion Account Group
 
         #region Roles & Permissions
+
         internal static void RolesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -641,9 +648,11 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
-        #endregion
+
+        #endregion Roles & Permissions
 
         #region Major Account Group
+
         internal static void MajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -676,9 +685,10 @@ namespace AccountingSystem
             comboBox.DropDownHeight = 200;
         }
 
-        #endregion
+        #endregion Major Account Group
 
         #region Sub Major Account Group
+
         internal static void SubMajorAccountGroupDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -691,9 +701,11 @@ namespace AccountingSystem
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[5].Visible = false;
         }
-        #endregion
+
+        #endregion Sub Major Account Group
 
         #region General Ledger Accounts
+
         internal static void GeneralLedgerAccountsWithBalancesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -732,9 +744,11 @@ namespace AccountingSystem
 
             return debitCreditType;
         }
-        #endregion
+
+        #endregion General Ledger Accounts
 
         #region Subsidiary Ledgers
+
         internal static void SubsidiaryLedgerAccountsDatagridView(DataTable dataTable, DataGridView datagrid, byte fundsId, short year)
         {
             _ = dataTable.Columns.Add("Balance", typeof(decimal));
@@ -752,10 +766,8 @@ namespace AccountingSystem
 
                 debitCreditType = ValidateDebitOrCreditType(beginningBalanceDict, debitCreditType);
 
-
                 item["Balance"] = generalLedgerBalance;
                 item["Type"] = debitCreditType;
-
             }
 
             datagrid.DataSource = dataTable;
@@ -804,12 +816,13 @@ namespace AccountingSystem
 
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
             }
         }
-        #endregion
+
+        #endregion Subsidiary Ledgers
 
         #region Journals
+
         internal static void JournalsDatagridView(DataGridView datagrid)
         {
             datagrid.Columns.Clear();
@@ -830,7 +843,6 @@ namespace AccountingSystem
             datagrid.Columns["is_special"].DefaultCellStyle.NullValue = null;
             datagrid.Columns.Add("created_at", "created_at");
             datagrid.Columns.Add("updated_at", "updated_at");
-
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["journal_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -855,11 +867,12 @@ namespace AccountingSystem
                 };
                 datagrid.Rows.Add(items);
             }
-
         }
-        #endregion
+
+        #endregion Journals
 
         #region ReceiptsIssued
+
         internal static void ReceiptsIssuedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
@@ -880,7 +893,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("issued_by", "Issued By");
             datagrid.Columns.Add(col);
             datagrid.Columns.Add("returned_date", "Returned Date");
-
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
@@ -956,11 +968,12 @@ namespace AccountingSystem
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
         }
-        #endregion
+
+        #endregion ReceiptsIssued
 
         #region Returned Receipts
+
         internal static void ReturnedReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1009,9 +1022,11 @@ namespace AccountingSystem
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion Returned Receipts
 
         #region Receipts
+
         internal static void ReceiptsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
@@ -1060,9 +1075,9 @@ namespace AccountingSystem
 
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
-
         }
-        #endregion
+
+        #endregion Receipts
 
         internal static void AccountableFormsCombobox(ComboBox combobbox, DataTable dataTable)
         {
@@ -1094,6 +1109,7 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+
         internal static void FundsComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
         {
             comboBox.DataSource = dataTable;
@@ -1111,7 +1127,7 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        #endregion Funds
 
         #region Banks
 
@@ -1119,7 +1135,6 @@ namespace AccountingSystem
         {
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
-
 
             datagrid.Columns.Add("banks_id", "Bank ID");
             datagrid.Columns.Add("account_number", "Account No.");
@@ -1180,14 +1195,12 @@ namespace AccountingSystem
             datagrid.Columns[3].HeaderText = "Account Number";
             datagrid.Columns[4].Visible = false;
             datagrid.Columns[5].Visible = false;
-          
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
         }
-
         #endregion
 
         #region FaceValue
+
         internal static void FaceValueDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             Helper.DatagridFullRowSelectStyle(datagrid, true);
@@ -1230,11 +1243,12 @@ namespace AccountingSystem
             }
 
             datagrid.ClearSelection();
-
         }
-        #endregion
+
+        #endregion FaceValue
 
         #region Banks Deposits
+
         internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1253,12 +1267,13 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
 
-        #region RCD 
+        #endregion Banks Deposits
+
+        #region RCD
+
         internal static void RCDSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -1274,7 +1289,6 @@ namespace AccountingSystem
             datagrid.Columns["users_id"].Visible = false;
             datagrid.Columns["report_no"].Visible = false;
 
-
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["amount"].Width = 100;
             datagrid.Columns["amount"].MinimumWidth = 100;
@@ -1282,7 +1296,6 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
 
             foreach (DataRow drRCD in dataTable.Rows)
             {
@@ -1304,7 +1317,6 @@ namespace AccountingSystem
 
         internal static void RCDDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -1317,17 +1329,14 @@ namespace AccountingSystem
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["collecting_officers_id"].Visible = false;
 
-
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["amount"].Width = 100;
             datagrid.Columns["amount"].MinimumWidth = 100;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
             foreach (DataRow drRCD in dataTable.Rows)
             {
-
                 datagrid.Rows.Add(new object[]
                 {
                     drRCD["id"],
@@ -1340,15 +1349,15 @@ namespace AccountingSystem
 
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", 9f);
 
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion RCD
 
         #region Collector Report
+
         internal static void CollectorReportDatagridView(DataTable dataTable, DataGridView datagrid)
         {
-
             datagrid.Rows.Clear();
             datagrid.Columns.Clear();
 
@@ -1364,7 +1373,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("amount", "Amount");
             datagrid.Columns.Add("status", "Status");
 
-
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["collecting_officers_id"].Visible = false;
             datagrid.Columns["collector_officer"].Visible = false;
@@ -1376,7 +1384,6 @@ namespace AccountingSystem
             datagrid.Columns["status"].MinimumWidth = 90;
             datagrid.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-
             datagrid.Columns["amount"].Resizable = DataGridViewTriState.False;
             datagrid.Columns["amount"].Width = 80;
             datagrid.Columns["amount"].MinimumWidth = 80;
@@ -1384,7 +1391,6 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.Columns["date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -1398,13 +1404,11 @@ namespace AccountingSystem
                     collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]}";
                     collectingOfficerId = row["collecting_officers_id"].ToString();
                 }
-
                 else
                 {
                     collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]}";
                     collectingOfficerId = row["job_orders_id"].ToString();
                 }
-
 
                 datagrid.Rows.Add(new object[]
                 {
@@ -1425,12 +1429,13 @@ namespace AccountingSystem
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion Collector Report
 
         #region General Collection
+
         internal static void GeneralCollectionDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Columns.Clear();
@@ -1450,10 +1455,10 @@ namespace AccountingSystem
             datagrid.Columns.Add(chk);
             chk.HeaderText = "Print";
 
-
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion General Collection
 
         #region RCI
 
@@ -1475,7 +1480,6 @@ namespace AccountingSystem
 
             datagrid.Columns[1].DefaultCellStyle.Format = "D2";
             datagrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1519,7 +1523,6 @@ namespace AccountingSystem
             datagrid.Columns[11].Width = 250;
             datagrid.Columns[12].Width = 250;
 
-
             datagrid.Columns[0].Visible = false;
             datagrid.Columns[1].Visible = false;
             datagrid.Columns[4].Visible = false;
@@ -1527,11 +1530,12 @@ namespace AccountingSystem
             datagrid.Columns[13].Visible = false;
             datagrid.Columns[17].Visible = false;
             datagrid.Columns[18].Visible = false;
-
         }
-        #endregion
+
+        #endregion RCI
 
         #region Real Property Tax View
+
         public static void PropertiesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
@@ -1567,7 +1571,6 @@ namespace AccountingSystem
             datagrid.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["assessed_value"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
             foreach (DataRow row in dataTable.Rows)
             {
                 datagrid.Rows.Add(new object[]
@@ -1585,7 +1588,6 @@ namespace AccountingSystem
             float fontSize = 8.5f;
             datagrid.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
 
-
             //datagrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             datagrid.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
@@ -1594,8 +1596,7 @@ namespace AccountingSystem
             Helper.DatagridFullRowSelectStyle(datagrid, true);
         }
 
-
-        #endregion
+        #endregion Real Property Tax View
 
         internal static void CollectionDataGridColumns(DataGridView datagrid)
         {
@@ -1616,7 +1617,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("updated_at", "Updated at");
             datagrid.Columns.Add("updated_by", "Updated by");
 
-
             datagrid.Columns["payment_collection_id"].Visible = false;
             datagrid.Columns["fund"].Visible = false;
             datagrid.Columns["fund_id"].Visible = false;
@@ -1627,7 +1627,6 @@ namespace AccountingSystem
             datagrid.Columns["created_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["updated_by"].Visible = false;
-
 
             datagrid.Columns["accountable_form"].Width = 150;
             datagrid.Columns["abstract_of_general_collection"].Width = 350;
@@ -1645,6 +1644,7 @@ namespace AccountingSystem
         }
 
         #region CollectionDataGridView
+
         internal static void CollectionDataGridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
@@ -1678,9 +1678,9 @@ namespace AccountingSystem
 
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
-
         }
-        #endregion
+
+        #endregion CollectionDataGridView
 
         #region PaymentCollection
 
@@ -1747,7 +1747,6 @@ namespace AccountingSystem
             datagrid.Columns["accountable_form_id"].Visible = false;
             datagrid.Columns["abstract_of_general_collection_id"].Visible = false;
 
-
             datagrid.Columns["accountable_form"].Width = 200;
             datagrid.Columns["abstract_of_general_collection"].Width = 300;
             datagrid.Columns["payee"].Width = 200;
@@ -1805,7 +1804,6 @@ namespace AccountingSystem
 
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
-
         }
 
         public static void CollectorComboBox(DataTable dataTabe, ComboBox comboBox, string displayMember, string valueMember)
@@ -1815,9 +1813,10 @@ namespace AccountingSystem
             comboBox.ValueMember = valueMember;
         }
 
-        #endregion
+        #endregion PaymentCollection
 
         #region PaymentCollectionReport
+
         internal static void PaymentCollectionReportDatagrid(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.Rows.Clear();
@@ -1858,8 +1857,6 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
-
             foreach (DataRow drPaymentCollection in dataTable.Rows)
             {
                 var generalPaymentsDict = AccFactory.GeneralPaymentRepository().GetRecordsByPaymentCollectionsID(Convert.ToInt32(drPaymentCollection["payment_collections_id"]));
@@ -1896,11 +1893,12 @@ namespace AccountingSystem
 
             datagrid.ClearSelection();
             Helper.DatagridFullRowSelectStyle(datagrid, true);
-
         }
-        #endregion
+
+        #endregion PaymentCollectionReport
 
         #region AccountableForm
+
         internal static void AccFormDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1908,7 +1906,6 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Form Number";
             datagrid.Columns[2].HeaderText = "Form Description";
             datagrid.Columns[3].HeaderText = "Face Value";
-
 
             datagrid.Columns[1].MinimumWidth = 90;
             datagrid.Columns[1].Width = 90;
@@ -1920,9 +1917,11 @@ namespace AccountingSystem
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion AccountableForm
 
         #region GeneralLedgerAccountSearch
+
         internal static void GeneralLedgerSearchDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -1930,12 +1929,11 @@ namespace AccountingSystem
             datagrid.Columns[1].HeaderText = "Account Code";
             datagrid.Columns[2].HeaderText = "Ledger Name";
 
-
             datagrid.Columns[1].Width = 100;
             datagrid.Columns[2].Width = 325;
-
         }
-        #endregion
+
+        #endregion GeneralLedgerAccountSearch
 
         #region Function/Program/Project
 
@@ -2001,7 +1999,6 @@ namespace AccountingSystem
 
                 comboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
             }
         }
 
@@ -2023,9 +2020,10 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        #endregion Function/Program/Project
 
         #region Allotment Classes
+
         internal static void AllotmentClassesDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -2055,9 +2053,10 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        #endregion Allotment Classes
 
         #region Collecting Officer
+
         internal static void CollectingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -2104,9 +2103,11 @@ namespace AccountingSystem
                 comboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             }
         }
-        #endregion
+
+        #endregion Collecting Officer
 
         #region JobOrders
+
         internal static void JobOrdersDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
@@ -2117,7 +2118,8 @@ namespace AccountingSystem
             datagrid.Columns[2].HeaderText = "Job Title";
             datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-        #endregion
+
+        #endregion JobOrders
 
         #region Disbursing Officer
 
@@ -2151,7 +2153,7 @@ namespace AccountingSystem
             }
         }
 
-        #endregion
+        #endregion Disbursing Officer
 
         #region Users
 
@@ -2179,7 +2181,7 @@ namespace AccountingSystem
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        #endregion
+        #endregion Users
 
         #region Others FPP
 
@@ -2255,7 +2257,6 @@ namespace AccountingSystem
                 comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
-
         }
 
         internal static void BudgetAppropriationsDatagridView(DataGridView dataGridView, DataTable dataTable)
@@ -2289,7 +2290,6 @@ namespace AccountingSystem
             dataGridView.Columns["amount"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
             dataGridView.Columns["allotment_released"].Resizable = DataGridViewTriState.False;
             dataGridView.Columns["allotment_released"].Width = amountColumWidth;
             dataGridView.Columns["allotment_released"].MinimumWidth = amountColumWidth;
@@ -2314,7 +2314,6 @@ namespace AccountingSystem
             dataGridView.Columns["unobligated_balance"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView.Columns["unobligated_balance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
             dataGridView.Columns["continuing"].Resizable = DataGridViewTriState.False;
             dataGridView.Columns["continuing"].DefaultCellStyle.NullValue = null;
             dataGridView.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -2327,10 +2326,11 @@ namespace AccountingSystem
             dataGridView.Columns["realigned"].Width = 80;
             dataGridView.Columns["realigned"].MinimumWidth = 80;
 
-            #endregion        
+            #endregion Datagrid Format
+
         }
 
-        #endregion BUDGET APPROPRIATIONS
+        #endregion Budget Appropriations
 
         #region Allotment Release
 
@@ -2355,7 +2355,7 @@ namespace AccountingSystem
             dataGridView.Columns["continuing"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
-        #endregion
+        #endregion Allotment Release
 
         #region DASHBOARD
 
@@ -2372,7 +2372,6 @@ namespace AccountingSystem
                 DataGridViewImageColumn imgColumn = new DataGridViewImageColumn();
                 imgColumn.HeaderText = "Continuing";
                 imgColumn.Name = "continuing";
-
 
                 //Clearing Datagrid View  Rows & Columns before Loading new one
                 dgvBudgetAppropriations.Rows.Clear();
@@ -2440,7 +2439,6 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["account_code"].Width = 95;
                 dgvBudgetAppropriations.Columns["account_code"].MinimumWidth = 95;
 
-
                 dgvBudgetAppropriations.Columns["amount"].Resizable = DataGridViewTriState.False;
                 dgvBudgetAppropriations.Columns["amount"].Width = amountColumWidth;
                 dgvBudgetAppropriations.Columns["amount"].MinimumWidth = amountColumWidth;
@@ -2471,40 +2469,36 @@ namespace AccountingSystem
                 dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Format = "N2";
                 dgvBudgetAppropriations.Columns["appropriationBalance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
                 dgvBudgetAppropriations.Columns["continuing"].Resizable = DataGridViewTriState.False;
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.NullValue = null;
                 dgvBudgetAppropriations.Columns["continuing"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 dgvBudgetAppropriations.Columns["continuing"].Width = 80;
                 dgvBudgetAppropriations.Columns["continuing"].MinimumWidth = 80;
 
-                #endregion
+                #endregion DATAGRID FORMAT
 
                 int? sub_fpp;
                 sub_fpp = null;
 
                 var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
 
-
-                //Load by loop All Budget Appropriations Records without Others FPP 
+                //Load by loop All Budget Appropriations Records without Others FPP
                 foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
                 {
                     FieldData(dgvBudgetAppropriations, continuingIcon, drGetViewRecordsByIds, dateAsOf);
                 }
 
-
                 //Initialize Repository Method for others fpp records
                 DataTable dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppID, allotmentClassID, fundId, Convert.ToInt16(dateAsOf.Year));
 
-                //Load by loop All Budget Appropriations Records with Others FPP 
+                //Load by loop All Budget Appropriations Records with Others FPP
                 foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
                 {
                     string othersFPPName = drGetRecordsOthersFPP["others_fpp_name"].ToString();
                     int othersFPPID = Convert.ToInt32(drGetRecordsOthersFPP["others_fpp_id"]);
 
-                    //Set Header for Others FPP 
+                    //Set Header for Others FPP
                     dgvBudgetAppropriations.Rows.Add(new object[] { null, null, null, null, null, null, othersFPPName });
-
 
                     sub_fpp = othersFPPID;
                     DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(fppID, sub_fpp, fundId, allotmentClassID, dateAsOf);
@@ -2568,7 +2562,6 @@ namespace AccountingSystem
                     drGetViewRecordsByIds["updated_at"] });
                 }
 
-
                 //Change Font style for the header of Others FPP
                 foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
                 {
@@ -2590,9 +2583,7 @@ namespace AccountingSystem
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
-
 
         internal static void ComboboxJournals(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
         {
@@ -2624,9 +2615,11 @@ namespace AccountingSystem
                 dgv.Columns["updated_at"].Visible = false;
 
                 #region Format
+
                 dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
                 dgv.Columns["date_entry"].DefaultCellStyle.Format = "MMM. dd, yyyy";
-                #endregion
+
+                #endregion Format
 
                 dgv.ShowCellToolTips = false;
             }
@@ -2666,7 +2659,6 @@ namespace AccountingSystem
                 dgv.Columns["total_amount"].DefaultCellStyle.Format = "N2";
                 dgv.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
                 dgv.Columns["fpp_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["allotment_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["ledger_name"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -2674,7 +2666,7 @@ namespace AccountingSystem
                 dgv.Columns["total_amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["remarks"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-                //Load by loop All Budget Appropriations Records with Others FPP 
+                //Load by loop All Budget Appropriations Records with Others FPP
                 foreach (DataRow drRealignment in dataTable.Rows)
                 {
                     dgv.Rows.Add(new object[]
@@ -2724,11 +2716,10 @@ namespace AccountingSystem
                 dgv.Columns["amount"].DefaultCellStyle.Format = "N2";
                 dgv.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
                 dgv.Columns["to_budget"].SortMode = DataGridViewColumnSortMode.NotSortable;
                 dgv.Columns["amount"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-                //Load by loop All Budget Appropriations Records with Others FPP 
+                //Load by loop All Budget Appropriations Records with Others FPP
                 foreach (DataRow drRealignment in dataTable.Rows)
                 {
                     dgv.Rows.Add(new object[]
@@ -2748,8 +2739,7 @@ namespace AccountingSystem
             }
         }
 
-
-        #endregion
+        #endregion BudgetRealignment
 
         #region Obligation Request
 
@@ -2776,7 +2766,6 @@ namespace AccountingSystem
                 dataGridView.Columns["status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 dataGridView.ClearSelection();
-
             }
             catch (Exception ex)
             {
@@ -2834,7 +2823,6 @@ namespace AccountingSystem
             datagrid.Columns.Add("updated_by_name", "Updated By");
             datagrid.Columns.Add("status", "Status");
 
-
             #region Datagrid Column Formats
 
             datagrid.Columns["id"].Visible = false;
@@ -2864,11 +2852,10 @@ namespace AccountingSystem
             datagrid.Columns["explanation"].Width = 100;
             datagrid.Columns["journal_name"].Width = 200;
 
-            #endregion
-
+            #endregion Datagrid Column Formats
         }
 
-        #endregion
+        #endregion JEV
 
         #region Amortization
 
@@ -2891,13 +2878,12 @@ namespace AccountingSystem
             dataGridView.Columns["amount_released"].DefaultCellStyle.Format = "#,0.00###";
         }
 
-        #endregion
+        #endregion Amortization
 
         #region Amortization Schedule
 
         public static void DatagridViewAmortizationSchedule(DataTable dataTable, string amortizationTerm, DataGridView dataGridView)
         {
-
             dataGridView.DataSource = dataTable;
 
             dataGridView.Columns["id"].Visible = false;
@@ -2926,7 +2912,6 @@ namespace AccountingSystem
                     break;
             }
 
-
             dataGridView.Columns["principal_amount"].DefaultCellStyle.Format = "#,0.00###";
             dataGridView.Columns["principal_amount"].HeaderText = "Principal";
             dataGridView.Columns["interest_amount"].DefaultCellStyle.Format = "#,0.00###";
@@ -2943,10 +2928,8 @@ namespace AccountingSystem
             dataGridView.Columns["code"].HeaderText = "Code";
             dataGridView.Columns["name"].HeaderText = "Barangay";
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
         }
 
-
-        #endregion
+        #endregion Amortization Schedule
     }
 }

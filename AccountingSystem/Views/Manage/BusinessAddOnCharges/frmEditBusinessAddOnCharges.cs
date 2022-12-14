@@ -1,13 +1,5 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BusinessCategories;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
@@ -17,14 +9,14 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
         private int _businessAddOnChargesID;
         private readonly frmBusinessAddOnCharges _frmBusinessAddOnCharges;
         private readonly ucBusinessAddOnCharges _ucBusinessAddOnCharges;
-       
+
         public frmEditBusinessAddOnCharges(int businessAddOnChargesID, frmBusinessAddOnCharges frmBusinessAdOnCharges)
         {
             InitializeComponent();
             _ucBusinessAddOnCharges = ucBusinessAddOnCharges1;
             _ucBusinessAddOnCharges.id = businessAddOnChargesID;
             _businessAddOnChargesID = businessAddOnChargesID;
-           _frmBusinessAddOnCharges = frmBusinessAdOnCharges;
+            _frmBusinessAddOnCharges = frmBusinessAdOnCharges;
             _ucBusinessAddOnCharges.isEdit = true;
         }
 
@@ -72,7 +64,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                     BusinessAddOnChargesID = _businessAddOnChargesID,
                     Code = code,
                     Description = description,
-                    IsAppliedEachBusiness = appliedEachBusiness, 
+                    IsAppliedEachBusiness = appliedEachBusiness,
                     CreatedBy = Helper.UserId
                 };
 
@@ -80,7 +72,6 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

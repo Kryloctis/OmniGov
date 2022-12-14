@@ -26,7 +26,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
-
             }
             catch (Exception ex)
             {
@@ -46,7 +45,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             try
             {
                 var dtBudgetAppropriations = AccFactory.BudgetAppropriationsRepository().GetViewRecords(fundId, date, year, 0, (byte)fppSpecial);
-
 
                 foreach (DataRow row in dtBudgetAppropriations.Rows)
                 {
@@ -87,7 +85,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
                     var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationIdDateIssued(rowBudgetAppropriationId, date);
                     decimal allotmentReleaseAmount = Convert.ToDecimal(dtAllotmentRelease.Rows.Count == 0 ? 0 : dtAllotmentRelease.Compute("SUM(amount)", string.Empty));
 
-
                     //OBLIGATIONS
                     var dtObligation = AccFactory.ObligationRequestRepository().GetViewRecords(rowBudgetAppropriationId, date);
                     decimal obligationRequestAmount = Convert.ToDecimal(dtObligation.Rows.Count == 0 ? 0 : dtObligation.Compute("SUM(amount)", string.Empty));
@@ -127,8 +124,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
                     dtSAAOB.Rows.Add(items);
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -137,7 +132,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
 
             return dtSAAOB;
         }
-
 
         private void FilterReport(int filterLevel, LocalReport report)
         {
@@ -190,7 +184,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
                 report.DataSources.Add(new ReportDataSource("dtSAAOB", DatatableSAAOB()));
                 report.SetParameters(parameters);
 
-
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;
                 reportViewer.ZoomPercent = 100;
@@ -206,7 +199,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             return false;
         }
 
-
         private void btnRetrieve_Click(object sender, EventArgs e)
         {
             if (LoadReport(reportViewer.LocalReport))
@@ -221,7 +213,6 @@ namespace AccountingSystem.Views.Reports.SAAOB
             LoadFunds();
         }
 
-
         //FILTER
         private void radBtn1_CheckedChanged(object sender, EventArgs e)
         {
@@ -232,6 +223,7 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             FilterReport(2, reportViewer.LocalReport);
         }
+
         private void radBtn3_CheckedChanged(object sender, EventArgs e)
         {
             FilterReport(3, reportViewer.LocalReport);
@@ -246,6 +238,5 @@ namespace AccountingSystem.Views.Reports.SAAOB
         {
             FilterReport(5, reportViewer.LocalReport);
         }
-
     }
 }

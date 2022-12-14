@@ -501,8 +501,8 @@ namespace AccountingSystem
 
         public static string GenerateFullAddress(string address, string barangay, string municipality, string province)
         {
-            string _address = string.IsNullOrEmpty(address)? string.Empty : $"{address}, ";
-            string _barangay = string.IsNullOrEmpty(barangay)? string.Empty : $"{barangay}, ";
+            string _address = string.IsNullOrEmpty(address) ? string.Empty : $"{address}, ";
+            string _barangay = string.IsNullOrEmpty(barangay) ? string.Empty : $"{barangay}, ";
             string _municipality = string.IsNullOrEmpty(municipality) ? string.Empty : $"{municipality}, ";
             string _province = string.IsNullOrEmpty(province) ? string.Empty : $"{province}";
 

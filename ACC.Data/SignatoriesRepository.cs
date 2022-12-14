@@ -176,7 +176,6 @@ namespace ACC.Data
             {
                 using (var scope = new TransactionScope())
                 {
-
                     var parameters = new object[][]
                     {
                         new object[] { "@id", DbType.Int32, signatoriesModel.Id},
@@ -199,7 +198,6 @@ namespace ACC.Data
                         signatoriesHasReferencesModel.SignatoriesId = signatoriesModel.Id;
                         _signatoriesHasReferences.Insert(signatoriesHasReferencesModel);
                     }
-
 
                     scope.Complete();
                     return true;

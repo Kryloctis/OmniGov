@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Manage.LinkUser;
 using System.Windows.Forms;
+
 namespace AccountingSystem.Views.Manage.JobOrders
 {
     public partial class ucJobOrder : UserControl
@@ -45,7 +46,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
         {
             if (!DesignMode)
             {
-
             }
         }
     }

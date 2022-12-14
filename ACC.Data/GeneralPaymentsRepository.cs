@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -46,7 +45,7 @@ namespace ACC.Data
 
         public bool Insert(GeneralPaymentsModel entity)
         {
-            var parameter = new object[][] { 
+            var parameter = new object[][] {
                 new object[]{"@payment_collections_id", DbType.Int32, entity.PaymentCollectionId},
                 new object[]{"@general_ledger_accounts_id", DbType.Int16, entity.GeneralLedgerAccountsId},
                 new object[]{"@quantity", DbType.Int32, entity.Quantity },
@@ -100,12 +99,10 @@ namespace ACC.Data
 
                 string query = $"SELECT general_payments_id, payment_collections_id, general_ledger_accounts_id, general_ledger_accounts_code, general_ledger_name, quantity FROM {viewTableName}  WHERE payment_collections_id = @payment_collections_id";
 
-
                 using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameter))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
-
 
                     foreach (DataRow item in reader.Rows)
                     {
@@ -116,11 +113,9 @@ namespace ACC.Data
                         record.Add("general_ledger_name", item[4].ToString());
                         record.Add("quantity", item[5].ToString());
                     }
-
                 }
 
                 return record;
-
             }
             catch (Exception)
             {

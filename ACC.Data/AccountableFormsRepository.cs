@@ -1,13 +1,13 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
-    public class AccountableFormsRepository:IAccountableRepository
+    public class AccountableFormsRepository : IAccountableRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
@@ -63,7 +63,6 @@ namespace ACC.Data
             }
         }
 
-    
         public bool Insert(AccountableModel entity)
         {
             try
@@ -82,7 +81,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Update(AccountableModel entity)
         {
@@ -103,7 +101,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Delete(List<AccountableModel> entityList)
         {
@@ -145,7 +142,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool IdExist(int id)
         {
@@ -245,7 +241,7 @@ namespace ACC.Data
 
             string query = $"SELECT id, acc_form_no, acc_form_desc FROM {tableName} WHERE acc_form_no = @acc_form_no";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query,parameters))
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;

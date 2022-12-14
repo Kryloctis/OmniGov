@@ -2,12 +2,6 @@
 using AccountingSystem.Views.Manage.AmortizationSchedule;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Amortization
@@ -24,7 +18,7 @@ namespace AccountingSystem.Views.Manage.Amortization
             Helper.DatagridFullRowSelectStyle(dgAmortizationSched, true);
         }
 
-        internal void LoadRecords() 
+        internal void LoadRecords()
         {
             var dtAmortizationSheduleRecords = AccFactory.AmortizationScheduleRepository().GetRecordsByAmortizationId(amortizationId);
 
@@ -47,7 +41,6 @@ namespace AccountingSystem.Views.Manage.Amortization
         private void btnEdit_Click(object sender, EventArgs e)
         {
             int rowIndex = dgAmortizationSched.CurrentRow.Index;
-
 
             var frmEditAmortizationSchedule = new frmEditAmortizationSchedule(this);
             frmEditAmortizationSchedule.amortizationId = amortizationId;
@@ -87,7 +80,6 @@ namespace AccountingSystem.Views.Manage.Amortization
                 }
 
                 return AccFactory.AmortizationScheduleRepository().Delete(amortizationScheduleModelList);
-
             }
             catch (Exception ex)
             {

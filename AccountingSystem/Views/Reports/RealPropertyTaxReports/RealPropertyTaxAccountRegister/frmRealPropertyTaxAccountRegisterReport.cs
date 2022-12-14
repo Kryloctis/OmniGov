@@ -47,7 +47,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
             {
                 var localReport = reportViewer.LocalReport;
                 var lguDetails = Helper.LGUDetails();
-        
+
                 var parameter = new ReportParameter[]
                 {
                 new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
@@ -73,7 +73,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
                 return true;
             }
             catch (Exception ex)
-            { 
+            {
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports
 
         private void btnFindOwner_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(this, null, null, null, null).ShowDialog();
+            //_ = new frmRptTaxPayerList(this, null, null, null, null).ShowDialog();
         }
 
         private void btnReload_Click(object sender, EventArgs e)

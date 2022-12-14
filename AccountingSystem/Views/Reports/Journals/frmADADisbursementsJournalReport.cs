@@ -25,7 +25,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private DataTable AuthorityToDebitAccountDisbursementsJournalDataTable()
         {
-
             var dtADADisbursementsJournal = new dsLFS.AuthorityToDebitAccountDisbursementsJournalDataTable();
             var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
             var dtADADisbursementsFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
@@ -87,7 +86,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                 DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
 
-
                 //Debit default Accounts
 
                 dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
@@ -102,7 +100,6 @@ namespace AccountingSystem.Views.Reports.Journals
                     return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
                 }
 
-
                 dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
                 dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
                 dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
@@ -114,7 +111,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                     return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
                 }
-
 
                 //Credit default Accounts
 
@@ -130,7 +126,6 @@ namespace AccountingSystem.Views.Reports.Journals
                     return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
                 }
 
-
                 dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
                 dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
                 dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
@@ -142,7 +137,6 @@ namespace AccountingSystem.Views.Reports.Journals
 
                     return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
                 }
-
             }
             catch (Exception ex)
             {

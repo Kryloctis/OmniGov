@@ -1,12 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
@@ -19,6 +14,7 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgBanks, true);
         }
+
         internal void LoadRecords()
         {
             try
@@ -28,19 +24,17 @@ namespace AccountingSystem.Views.Manage.Banks
 
                 if (!string.IsNullOrEmpty(searchKey))
                     dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchKey);
-
                 else
                     dtBanks = AccFactory.BanksRepository().GetRecords();
-
 
                 HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
                 lblRecordCount.Text = AccFactory.BanksRepository().CountRecords().ToString();
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void frmBanks_Load(object sender, EventArgs e)
-        {            
+        {
             LoadRecords();
         }
 
@@ -60,7 +54,7 @@ namespace AccountingSystem.Views.Manage.Banks
             int selectedrowscount = dgBanks.SelectedRows.Count;
             try
             {
-                if(selectedrowscount > 0)
+                if (selectedrowscount > 0)
                 {
                     if (Helper.MessageBoxConfirmDelete(selectedrowscount))
                     {
@@ -88,9 +82,8 @@ namespace AccountingSystem.Views.Manage.Banks
             byte[] columnIndexTimestamp = { 3, 4 };
             Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
-
         }
-       
+
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecords();

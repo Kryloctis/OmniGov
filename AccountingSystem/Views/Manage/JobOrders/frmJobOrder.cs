@@ -1,16 +1,13 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Transactions;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.JobOrders
 {
     public partial class frmJobOrder : Form
     {
-
         internal readonly int collectingOfficerId;
-
 
         public frmJobOrder(int collectingOfficerId)
         {
@@ -84,7 +81,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
                             JobOrdersId = jobOrderId
                         });
 
-                        jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId }); 
+                        jobOrderModel.Add(new JobOrderModel() { Id = jobOrderId });
                     }
 
                     var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
@@ -102,6 +99,5 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
     }
 }

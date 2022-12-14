@@ -274,15 +274,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
@@ -296,15 +293,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
@@ -322,15 +316,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubsidiaryLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabGeneralLedgers"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabSubMajorAccount"])
             {
-
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabMajorAccount"])
             {
@@ -367,8 +358,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
                 {
-
-
                     bool hasSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
                     if (hasSubsidiary)
                     {
@@ -436,7 +425,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
                 BtnSubsidiary.Enabled = false;
                 BtnSetBalance.Enabled = false;
             }
-
         }
 
         private void DisplayRecordCount(DataGridView dataGridView)

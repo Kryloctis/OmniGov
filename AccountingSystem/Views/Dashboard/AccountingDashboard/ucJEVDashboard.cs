@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Dashboard
         public ucJEVDashboard()
         {
             InitializeComponent();
-
         }
 
         private void UcAccountingDashboard_Load(object sender, EventArgs e)
@@ -109,15 +108,19 @@ namespace AccountingSystem.Views.Dashboard
                 case "all":
                     _frmJEVList.cmbxJevStatus.SelectedIndex = 0;
                     break;
+
                 case "pending":
                     _frmJEVList.cmbxJevStatus.SelectedIndex = 1;
                     break;
+
                 case "approved":
                     _frmJEVList.cmbxJevStatus.SelectedIndex = 2;
                     break;
+
                 case "disapproved":
                     _frmJEVList.cmbxJevStatus.SelectedIndex = 3;
                     break;
+
                 case "cancelled":
                     _frmJEVList.cmbxJevStatus.SelectedIndex = 4;
                     break;

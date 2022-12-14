@@ -59,7 +59,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
             var taxpayersRepo = AccFactory.TaxpayersRepository();
             return taxpayersRepo.Insert(taxpayersModel);
-
         }
     }
 }

@@ -9,7 +9,6 @@ namespace ACC.Data
 {
     public class JournalsDefaultAccountsRepository : IJournalsDefaultAccountsRepository
     {
-
         private readonly string tableName = "journals_default_accounts";
         private readonly string viewTableName = "view_journals_default_accounts";
         private AccGenericCommands mySqlGenericCommands;
@@ -61,7 +60,6 @@ namespace ACC.Data
                 new dynamic[] { "@is_debit", DbType.Boolean, isDebit}
             };
 
-
             string query = $"DELETE FROM {tableName} WHERE journals_id = @journals_id AND funds_id = @funds_id AND is_debit = @is_debit";
             return mySqlGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -108,7 +106,6 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-
                 DeleteByJournalIdAndFundAndIsDebit(journalId, fundId, isDebit);
 
                 foreach (var item in entityList)

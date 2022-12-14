@@ -96,7 +96,6 @@ namespace AccountingSystem.Views.Manage.Journals
                         break;
                 }
             }
-
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);

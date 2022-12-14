@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
@@ -16,7 +14,5 @@ namespace ACC.Domain.Models
         public int FundId { get; set; }
         public string Remarks { get; set; }
         public bool IsJO { get; set; }
-
-
     }
 }

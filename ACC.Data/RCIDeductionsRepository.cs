@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using ACC.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
@@ -9,7 +9,6 @@ namespace ACC.Data
 {
     public class RCIDeductionsRepository : IRCIDeductionsRepository
     {
-
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "rci_deductions";
 
@@ -32,7 +31,6 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, rcidId }
@@ -42,7 +40,6 @@ namespace ACC.Data
 
                 _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
-
                 scope.Complete();
                 return true;
             };
@@ -50,7 +47,6 @@ namespace ACC.Data
 
         public DataTable GetDeductionsByRCIId(int rciId)
         {
-           
             var parameter = new object[][] {
                 new object[] {"@rciId", DbType.Int32, rciId}
             };
@@ -59,7 +55,6 @@ namespace ACC.Data
             var dtRCIDeduction = new DataTable();
 
             return _dbGenericCommands.FillBySearch(query, dtRCIDeduction, parameter);
-
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

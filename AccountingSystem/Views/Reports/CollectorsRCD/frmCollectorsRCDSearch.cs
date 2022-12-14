@@ -6,7 +6,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 {
     public partial class frmCollectorsRCDSearch : Form
     {
-
         internal string reportNo;
         private readonly frmCollectorsRCD _frmCollectorsRCD;
         private readonly ucCollectorsRCD _uc;
@@ -63,7 +62,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 }
 
                 btnSelect.Enabled = true;
-
             }
             catch (Exception ex)
             {
@@ -76,12 +74,12 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             foreach (DataGridViewRow row in dgCollectorsReport.SelectedRows)
                 reportNo = row.Cells[1].Value.ToString();
         }
-       
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             _frmCollectorsRCD.LoadSelectedValue(reportNo);
             _frmCollectorsRCD.CheckRCDStatus(reportNo);
-            
+
             _uc.TotalCollections();
             this.Close();
         }
@@ -93,7 +91,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void cmbfunds_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
             LoadRecords();
         }
 
@@ -110,6 +107,5 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
             _uc.TotalCollections();
             Close();
         }
-
     }
 }

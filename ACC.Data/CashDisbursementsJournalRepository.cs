@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using ACC.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace ACC.Data
 {
-    class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
+    internal class CashDisbursementsJournalRepository : ICashDisbursementsJournalRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private const string tableName = "cash_disbursement_journal";

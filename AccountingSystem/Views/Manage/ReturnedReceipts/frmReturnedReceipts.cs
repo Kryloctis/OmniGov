@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.ReturnedReceipts
 {
     public partial class frmReturnedReceipts : Form
@@ -15,7 +14,7 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 
         private void frmReturnedReceipts_Load(object sender, EventArgs e)
         {
-           LoadRecords();
+            LoadRecords();
         }
 
         private void LoadRecords()
@@ -24,10 +23,9 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
             {
                 var receiptIssuedRepo = AccFactory.ReceiptsIssuedRepository();
                 var returnedReceiptDt = receiptIssuedRepo.GetReturnedReceipts();
-               
+
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
                 lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
-
             }
             catch (Exception)
             {
@@ -46,10 +44,10 @@ namespace AccountingSystem.Views.Manage.ReturnedReceipts
 
                 HelperLoadRecords.ReturnedReceiptsDatagridView(returnedReceiptDt, dgReturnedReceipts);
                 lblRecordCounts.Text = dgReturnedReceipts.Rows.Count.ToString();
-             }
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
     }

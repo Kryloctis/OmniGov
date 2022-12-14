@@ -93,7 +93,6 @@ namespace ACC.Data
             return record;
         }
 
-
         public DataTable GetRecords()
         {
             try
@@ -176,7 +175,7 @@ namespace ACC.Data
 
         public DataTable GetLinksCollectingOfficers()
         {
-            string query =  $"SELECT " +
+            string query = $"SELECT " +
                             $"id, " +
                             $"roles_id, " +
                             $"prefix, " +
@@ -203,10 +202,9 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtUsers);
         }
 
-
         public DataTable GetLinksJOCollectingOfficers()
         {
-            string query =  $"SELECT " +
+            string query = $"SELECT " +
                             $"id, " +
                             $"roles_id, " +
                             $"prefix, " +
@@ -296,7 +294,6 @@ namespace ACC.Data
                     new object[] { "@suffix", DbType.String, entity.Suffix},
                     new object[] { "@username", DbType.String, entity.UserName},
                     new object[] { "@password", DbType.String, entity.Password},
-
                 };
 
                 string query = $"INSERT INTO {tableName} ( roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password) VALUES (@roles_id, @prefix, @first_name, @mid_initial, @last_name, @suffix, @username, sha2(@password, 224))";
@@ -339,7 +336,6 @@ namespace ACC.Data
                 new object[] { "@suffix", DbType.String, entity.Suffix},
                 new object[] { "@username", DbType.String, entity.UserName},
                 new object[] { "@password", DbType.String, entity.Password},
-
             };
 
             string query = $"UPDATE {tableName} SET roles_id = @roles_id, prefix = @prefix, first_name = @first_name, mid_initial = @mid_initial, last_name = @last_name, suffix = @suffix, username = @username, password = sha2(@password, 224) WHERE id = @id";
@@ -438,7 +434,7 @@ namespace ACC.Data
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
-           
+
             return false;
         }
 
@@ -581,12 +577,10 @@ namespace ACC.Data
                 $"permission_office " +
                 $"FROM {viewTableName} WHERE office <> 'SysAdmin' GROUP BY id";
 
-
             var dataTable = new DataTable();
 
             return _dbGenericCommands.Fill(query, dataTable);
         }
-
 
         public string GetCollectorNameByUserId(int userId)
         {
@@ -614,9 +608,7 @@ namespace ACC.Data
                     return "AND office = @office";
             }
 
-
             string query = $"SELECT id, roles_id, prefix, first_name, mid_initial, last_name, suffix, username, password, is_deleted, created_at, updated_at, office, role_name, permission_name, permission_office FROM {viewTableName} WHERE office <> 'SysAdmin' {Filter()} GROUP BY id";
-
 
             var dataTable = new DataTable();
 

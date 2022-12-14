@@ -2,12 +2,10 @@
 using System;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.Users.List
 {
     public partial class frmUsersAdd : Form
     {
-
         private frmUsers _frmUsers;
 
         public frmUsersAdd(frmUsers frmUsers)
@@ -15,7 +13,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             InitializeComponent();
             _frmUsers = frmUsers;
         }
-
 
         private bool SaveData()
         {
@@ -32,7 +29,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 // proceed to insert
                 var userModel = new UsersModel()
                 {
-
                     RoleId = ((byte)uc.cmbRoles.SelectedValue),
                     Prefix = uc.txtPrefix.Text.Trim(),
                     FirstName = uc.txtFirstname.Text.Trim(),
@@ -41,7 +37,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                     Suffix = uc.txtSuffix.Text.Trim(),
                     UserName = uc.txtUsername.Text.Trim(),
                     Password = uc.txtPassword.Text.Trim(),
-
                 };
 
                 var usersRepository = AccFactory.UsersRepository();
@@ -58,7 +53,6 @@ namespace AccountingSystem.Views.Manage.Users.List
         private void frmUsersAdd_Load(object sender, EventArgs e)
         {
             Helper.LoadFormIcon(this);
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)

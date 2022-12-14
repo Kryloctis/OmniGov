@@ -3,14 +3,13 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
 {
     public class AmortizationScheduleRepository : IAmortizationScheduleRepository
     {
-        readonly string tableName = "amortization_sched";
+        private readonly string tableName = "amortization_sched";
         private AccGenericCommands _mySqlGenericCommands;
 
         public AmortizationScheduleRepository(AccGenericCommands mySqlGenericCommands)
@@ -27,7 +26,6 @@ namespace ACC.Data
         {
             try
             {
-
             }
             catch (Exception)
             {
@@ -133,7 +131,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@amortization_id", DbType.Int32, entity.AmortizationId},
                     new object[] { "@date", DbType.Date, entity.Date},
@@ -145,7 +143,6 @@ namespace ACC.Data
                 string query = $"INSERT INTO {tableName} (amortization_id, date, principal_amount, interest_amount, grt_amount) VALUES (@amortization_id, @date, @principal_amount, @interest_amount, @grt_amount)";
 
                 return _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
-
             }
             catch (Exception)
             {
@@ -157,7 +154,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameters = new object[][] 
+                var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, entity.Id},
                     new object[] { "@amortization_id", DbType.Int32, entity.AmortizationId},

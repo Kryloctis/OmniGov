@@ -11,7 +11,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         public frmReturnReceipts(frmReceiptsIssued frmReceiptsIssued, int issuanceId, int returnSerialNumberFrom, int returnSerialNumberTo)
         {
-            InitializeComponent();  
+            InitializeComponent();
             _frmReceiptsIssued = frmReceiptsIssued;
 
             this.issuanceId = issuanceId;
@@ -19,7 +19,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptNumberTo.Text = returnSerialNumberTo.ToString("D8");
         }
 
-        private bool SaveData() 
+        private bool SaveData()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 return receiptIssuedRepository.UpdateReturnedReceipt(riModel);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;   
+            return false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -46,6 +46,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 Close();
             }
         }
-
     }
 }

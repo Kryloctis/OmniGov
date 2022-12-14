@@ -104,12 +104,11 @@
             // lblTotalPayment
             // 
             this.lblTotalPayment.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTotalPayment.AutoSize = true;
             this.lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalPayment.Location = new System.Drawing.Point(364, 49);
+            this.lblTotalPayment.Location = new System.Drawing.Point(4, 49);
             this.lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalPayment.Name = "lblTotalPayment";
-            this.lblTotalPayment.Size = new System.Drawing.Size(116, 65);
+            this.lblTotalPayment.Size = new System.Drawing.Size(832, 65);
             this.lblTotalPayment.TabIndex = 1;
             this.lblTotalPayment.Text = "0.00";
             this.lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -383,6 +382,7 @@
             this.cmbxAccountableForm.Name = "cmbxAccountableForm";
             this.cmbxAccountableForm.Size = new System.Drawing.Size(272, 23);
             this.cmbxAccountableForm.TabIndex = 51;
+            this.cmbxAccountableForm.SelectionChangeCommitted += new System.EventHandler(this.cmbxAccountableForm_SelectionChangeCommitted);
             // 
             // label3
             // 

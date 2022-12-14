@@ -89,7 +89,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             flowLayoutPanelFunds.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
             flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
 
-
             dtpDateEntry.Value = DateTime.Now;
             txtJEVNo.Text = GetJEVSeriesNo();
         }
@@ -118,7 +117,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     GenerateJEVNumber();
                 }
-
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
@@ -156,7 +154,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
 
             SetGeneralJournalFields();
-
         }
 
         internal void LoadCollectingOfficer()
@@ -231,7 +228,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             lblDVRCDNo.Text = "DV No.";
             lblDVRCDNo.Visible = true;
             txtDVRCDNo.Enabled = true;
-
 
             lblCollectingDisbursingOfficer.Visible = false;
             cmbCollectingDisbursingOfficer.Enabled = false;
@@ -363,7 +359,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             dgAccounts.Columns["IsDeposit"].Visible = false;
         }
 
-        #endregion
+        #endregion Set Fields
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
         {
@@ -377,20 +373,25 @@ namespace AccountingSystem.Views.Transactions.JEV
                 case "General Journal":
                     SetGeneralJournalFields();
                     break;
+
                 case "Procurement Received Journal":
                     SetProcurementReceivedJournalFields();
                     break;
+
                 case "Cash Disbursements Journal":
                     SetCashDisbursementsJournalFields();
                     LoadDisbursingOfficer();
                     break;
+
                 case "Cash Receipts Journal":
                     SetCashReceiptsJournalFields();
                     LoadCollectingOfficer();
                     break;
+
                 case "Check Disbursements Journal":
                     SetCheckDisbursementsJournalFields();
                     break;
+
                 case "Authority to Debit Account Disbursement Journal":
                     SetADAJournalFields();
                     break;
@@ -439,7 +440,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             GenerateJEVNumber();
         }
 
-
         private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
         {
             int SelectedRows = dgv.SelectedRows.Count;
@@ -448,7 +448,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Remove (" + SelectedRows + ")";
-
             }
             else if (SelectedRows > 1)
             {
@@ -472,7 +471,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnRemoveAccount.Enabled = !isReadOnly;
         }
 
-
         internal void SumDebitCredit()
         {
             try
@@ -495,13 +493,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                     txtDebitTotal.Text = totalDebit.ToString("N2");
                     txtCreditTotal.Text = totalCredit.ToString("N2");
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message); ;
             }
-
         }
 
         private void RemoveRow()
@@ -536,7 +532,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
 
-        #region  Validations
+        #region Validations
 
         private void txtJEVNo_Validating(object sender, CancelEventArgs e)
         {
@@ -600,7 +596,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 string message = journalName == "Cash Disbursements Journal" ? "Disbursing Officer" : "Collecting Officer";
                 e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingDisbursing, cmbCollectingDisbursingOfficer, message);
             }
-
         }
 
         private void cmbCollectingDisbursingOfficer_Validated(object sender, EventArgs e)
@@ -608,7 +603,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorComboBox(epCollectingDisbursing, cmbCollectingDisbursingOfficer);
         }
 
-        #endregion
+        #endregion Validations
 
         private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

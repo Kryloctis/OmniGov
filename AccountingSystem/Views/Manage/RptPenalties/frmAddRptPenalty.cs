@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
     {
         private ucRptPenalties uc;
         private readonly frmRptPenalties _frmRptPenalties;
+
         public frmAddRptPenalty(frmRptPenalties frmRptPenalties)
         {
             InitializeComponent();
@@ -22,7 +16,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             _frmRptPenalties = frmRptPenalties;
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {
@@ -32,13 +26,11 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     return false;
                 }
 
-
                 var model = new RptPenaltiesModel()
                 {
                     Description = uc.txtDescription.Text.Trim(),
                     Rate = uc.nudRate.Value,
                     Frequency = uc.cmbxFrequency.Text.Trim()
-                    
                 };
 
                 return AccFactory.RptPenaltiesRepository().Insert(model);

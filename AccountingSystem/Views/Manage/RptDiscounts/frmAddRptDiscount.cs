@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
     {
         private readonly frmRptDiscounts _frmRptDiscounts;
         private readonly ucRptDiscounts uc;
+
         public frmAddRptDiscount(frmRptDiscounts frmRptDiscounts)
         {
             InitializeComponent();
@@ -28,7 +22,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             uc.isEdit = false;
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {

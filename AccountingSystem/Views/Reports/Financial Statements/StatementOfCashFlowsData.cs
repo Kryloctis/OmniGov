@@ -65,10 +65,9 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return 0;
         }
 
-        #endregion
+        #endregion Cashflows from Operating Activities
 
         #region Cashflows from Investing Activities
-
 
         //Cash Inflows
         internal decimal Get_Proceeds_from_Sale_if_Investment_Property(byte fundId, DateTime date)
@@ -90,7 +89,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         {
             return 0;
         }
-
 
         //Cash Outflows
         internal decimal Get_Purchase_Construction_of_Investment_Property(byte fundId, DateTime date)
@@ -123,7 +121,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return 0;
         }
 
-        #endregion
+        #endregion Cashflows from Investing Activities
 
         #region Cashflows from Financing Activities
 
@@ -137,7 +135,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
         {
             return 0;
         }
-
 
         //Cash Outflows
         internal decimal Get_Payment_of_Long_Term_Liabilities(byte fundId, DateTime date)
@@ -155,7 +152,7 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return 0;
         }
 
-        #endregion
+        #endregion Cashflows from Financing Activities
 
         internal decimal Get_cash_at_the_end_of_month(byte fundId, DateTime date)
         {

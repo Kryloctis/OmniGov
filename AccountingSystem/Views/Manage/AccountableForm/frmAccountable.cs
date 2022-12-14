@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
@@ -31,11 +25,12 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
                 lblRecordCount.Text = accRepository.CountRecords().ToString();
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         private void frmAccountable_Load(object sender, EventArgs e)
         {
             LoadRecords();
@@ -108,7 +103,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Helper.EnableDisableToolStripButtons(dgAccform, btnEdit, btnDelete);
             int selectedRowCount = dgAccform.SelectedRows.Count;
 
-            if (selectedRowCount > 0 && selectedRowCount == 1) 
+            if (selectedRowCount > 0 && selectedRowCount == 1)
                 btnFace.Enabled = true;
             else
                 btnFace.Enabled = false;

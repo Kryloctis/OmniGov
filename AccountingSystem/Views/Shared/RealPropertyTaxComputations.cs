@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AccountingSystem.Views.Shared
 {
@@ -41,7 +37,6 @@ namespace AccountingSystem.Views.Shared
             return months;
         }
 
-
         //For selected tax dues use only
         public static int GetSelectedMonthsDelinquent(int assessmentYear, DateTime assessmentPostsDate, DateTime paymentPostsDate, int effectivityYear, int previousAssessmentCount)
         {
@@ -66,7 +61,6 @@ namespace AccountingSystem.Views.Shared
             return months;
         }
 
-
         public static decimal GetPenalty(decimal penaltyRate, int monthsDelinquent, decimal taxDue)
         {
             decimal totalPenaltyRate = penaltyRate * monthsDelinquent;
@@ -88,13 +82,11 @@ namespace AccountingSystem.Views.Shared
                 discountRate = annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
                 isAdvance = true;
             }
-
             else if (postYear == currentDate.Year && year == postYear && (postMonth == 1 || postMonth == 2 || postMonth == 3))
             {
                 discountRate = monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
                 isAdvance = false;
             }
-
             else
                 discountRate = 0;
 
@@ -135,14 +127,17 @@ namespace AccountingSystem.Views.Shared
                 case 2:
                 case 3:
                     return 1;
+
                 case 4:
                 case 5:
                 case 6:
                     return 2;
+
                 case 7:
                 case 8:
                 case 9:
                     return 3;
+
                 case 10:
                 case 11:
                 case 12:

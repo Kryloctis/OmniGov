@@ -9,7 +9,7 @@ namespace ACC.Data
 {
     public class RptPreviousAssessmentRepository : IRptPreviousAssessment
     {
-        readonly string tableName = "rpt_previous_assessment";
+        private readonly string tableName = "rpt_previous_assessment";
 
         private AccGenericCommands _mySqlGenericCommandsLFS;
 
@@ -89,7 +89,7 @@ namespace ACC.Data
                 };
 
                 string query = $"SELECT * FROM {tableName} WHERE complete_arp_no = @complete_arp_no";
-                    
+
                 using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
@@ -154,7 +154,6 @@ namespace ACC.Data
                 new object[] { "@effectivity_assessment", DbType.String, entity.EffectivityAssessment},
                 new object[] { "@date_recorded", DbType.Date, entity.DateRecorded}
             };
-
 
             string query = $"UPDATE {tableName} SET real_properties_id = @real_properties_id, property_pin = @property_pin, complete_arp_no = @complete_arp_no, assessed_value = @assessed_value, previous_owner_name = @previous_owner_name, effectivity_assessment = @effectivity_assessment, date_recorded = @date_recorded WHERE id = @id";
 

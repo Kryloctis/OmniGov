@@ -67,7 +67,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             return records;
         }
 
-
         private DataTable StatementOfFinancialPerformanceDatatable()
         {
             var dataSet = new dsLFS();
@@ -77,7 +76,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             {
                 dtStatementOfFinancialPerformance.Rows.Add(StatementOfFinancialPerformanceData());
             }
-
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
 
             return dtStatementOfFinancialPerformance;
@@ -104,7 +102,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
 
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);
                 DateTime dateEnded = dtPickerDateEnds.Value;
-
 
                 report.ReportPath = $"{Application.StartupPath}\\Reports\\statement-of-financial-performance.rdlc";
                 report.DataSources.Clear();
@@ -138,7 +135,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
 
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbxFunds, "fund_name", "id");
-
             }
             catch (Exception ex)
             {

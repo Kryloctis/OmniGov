@@ -1,9 +1,9 @@
 ﻿using ACC.Domain.Models;
-using System;
-using System.Windows.Forms;
 using AccountingSystem.Views.Transactions.CheckIssuance.Deductions;
 using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
+using System;
 using System.Data;
+using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             uc = ucrci2;
             uc.Id = rciId;
         }
-
 
         private void LoadRCIObligations()
         {
@@ -77,8 +76,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 uc.txtpayee.Text = rcidata["payee"];
                 uc.txtnature.Text = rcidata["nature_of_payment"];
                 uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -89,7 +86,6 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 if (!string.IsNullOrEmpty(table))
                 {
-
                     if (table.Equals("functions"))
                     {
                         var functionreposity = AccFactory.FunctionProgramProjectRepository();
@@ -97,12 +93,10 @@ namespace AccountingSystem.Views.Transactions.RCI
                         uc.functionId = Id;
                         uc.cmbFPP.Text = String.Format("{0} - {1}", functiondata["fpp_code"], functiondata["fpp_name"]);
                     }
-
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         private void frmRCIEdit_Load(object sender, EventArgs e)
         {
@@ -117,11 +111,10 @@ namespace AccountingSystem.Views.Transactions.RCI
             uc.SetDeductionLabel();
         }
 
-
         private void UpdateRCIObligation()
         {
             var deleteResult = AccFactory.RCIObligationsRepository().DeleteRecordsByRCIId(uc.Id);
-       
+
             if (deleteResult)
             {
                 short rcid = (short)uc.Id;
@@ -150,7 +143,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 }
             }
         }
-
 
         private bool UpdateData()
         {
@@ -197,7 +189,5 @@ namespace AccountingSystem.Views.Transactions.RCI
                 this.Close();
             }
         }
-
-  
     }
 }

@@ -1,13 +1,6 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.BusinessCategories;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
@@ -31,7 +24,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 dgBusinessAddOnCharges.CurrentCell = dgBusinessAddOnCharges.FirstDisplayedCell;
                 toolStripStatusLabelRecordCount.Text = dgBusinessAddOnCharges.Rows.Count.ToString();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -55,12 +48,12 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
             LoadBusinessAddOnCharges();
         }
 
-        private void LoadRecordTimeStamp(DataGridView dataGridView) 
-        {         
+        private void LoadRecordTimeStamp(DataGridView dataGridView)
+        {
             var createdAtColumnIndex = dataGridView.Columns["created_at"].Index;
             var updatedAtColumnIndex = dataGridView.Columns["updated_at"].Index;
 
-            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex};
+            byte[] indexes = { (byte)createdAtColumnIndex, (byte)updatedAtColumnIndex };
             Helper.ShowRecordTimestamp(dataGridView, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
         }
 
@@ -71,7 +64,7 @@ namespace AccountingSystem.Views.Manage.BusinessAdOnCharges
                 Helper.EnableDisableToolStripButtons(dgBusinessAddOnCharges, btnEdit, btnDelete);
                 LoadRecordTimeStamp(dgBusinessAddOnCharges);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

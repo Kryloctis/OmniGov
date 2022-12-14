@@ -10,6 +10,7 @@ namespace AccountingSystem
         private static AccGenericCommands mySqlGenericCommandsLFS = new AccGenericCommands("LocalFinanceInstance");
 
         public static byte UserId = 1;
+
         public static IJEVRepository JEVRepository() => new JEVRepository(mySqlGenericCommandsLFS,
                                                                           JEVAccountsRepository(),
                                                                           CheckDisbursementsJournalRepository(),
@@ -164,13 +165,19 @@ namespace AccountingSystem
         public static IBarangayRepository BarangayRepository() => new BarangayRepository(mySqlGenericCommandsLFS);
 
         public static IProvinces ProvincesRepository() => new ProvincesRepository(mySqlGenericCommandsLFS);
+
         public static IMunicipalities MunicipalitiesRepository() => new MunicipalitiesRepository(mySqlGenericCommandsLFS);
+
         public static IActualUseCodes ActualUseCodesRepository() => new ActualUseCodesRepository(mySqlGenericCommandsLFS);
+
         public static IClassificationCodes ClassificationCodesRepository() => new ClassificationCodesRepository(mySqlGenericCommandsLFS);
+
         public static IRptPreviousAssessment RptPreviousAssessmentRepository() => new RptPreviousAssessmentRepository(mySqlGenericCommandsLFS);
+
         public static IBusinessCategoriesRepository BusinessCategoriesRepository() => new BusinessCategoriesRepository(mySqlGenericCommandsLFS);
+
         public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
+
         public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
     }
-
 }

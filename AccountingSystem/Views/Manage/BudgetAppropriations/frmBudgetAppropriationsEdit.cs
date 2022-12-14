@@ -80,7 +80,6 @@ namespace BudgetSystem.Views.Manage.BudgetAppropriations
                 else
                     othersFPPId = Convert.ToInt32(uc.cmbxOthersFPP.SelectedValue);
 
-
                 var budgetAppModel = new BudgetAppropriationsModel()
                 {
                     Id = uc.budgetAppropriationId,

@@ -1,6 +1,5 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.TaxPayers;
-using RPT.Domain.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -47,7 +46,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     PropertyIdentifier = uc.propertyIdentifier,
                     RealTaxpayersId = uc.taxpayerID,
                     TaxpayerName = uc.txtTaxpayers.Text,
-                    TaxpayerAddress = uc.txtTaxpayerAddress.Text, 
+                    TaxpayerAddress = uc.txtTaxpayerAddress.Text,
                     PropertyPin = uc.txtPropertyPin.Text,
                     PropertyKind = uc.cmbxPropertyKind.Text,
                     EffectivityQuarter = Convert.ToInt32(uc.nudEffectivityQuarter.Value),
@@ -59,8 +58,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     LotNo = uc.txtLotNo.Text,
                     IsTaxable = uc.chckTaxable.Checked,
                     IsCancelled = uc.chckCancelled.Checked,
-                    CreatedBy  = Helper.UserId
-
+                    CreatedBy = Helper.UserId
                 };
 
                 if (uc.propertyIdentifier != "0")
@@ -76,11 +74,9 @@ namespace AccountingSystem.Views.Manage.RealProperties
                     };
 
                     return AccFactory.RealPropertiesRepository().InsertWithPreviousAssessment(realPropertiesModel, previousAssessment);
-
                 }
                 else
                     return AccFactory.RealPropertiesRepository().Insert(realPropertiesModel);
-
             }
             catch (Exception ex)
             {

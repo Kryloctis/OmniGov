@@ -1,370 +1,175 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
-using AccountingSystem.Views.Transactions.PaymentPostings.RPT_PaymentPosting;
-using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace AccountingSystem.Views.Transactions.PaymentPosting
+namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class frmPayments : Form
     {
-        private readonly MainForm _mainForm;
-        internal List<RptTaxDuesModel> rptTaxDuesModels;
-        internal bool isReadonly = false;
-        internal rptPropertyPaymentTaxPayerInfoModel paymentTaxPayerInfoModel;
+        private ucRptTaxDues ucRptTaxDues;
+        private ucPayment ucPayment;
 
-        public frmPayments(MainForm mainForm)
+        public frmPayments()
         {
             InitializeComponent();
-            _mainForm = mainForm;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dataGridView1, false);
+            Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
+            ucRptTaxDues = ucRptTaxDues1;
+            ucPayment = ucPayment1;
         }
 
-        internal void LoadSelectedDetailedTaxDues(List<RptDetailedTaxDuesModel> realPropertyPaymentTaxDueModels, int paymentPostsId)
+        private DataColumn[] TaxpayersColumns()
         {
-            try
+            return new DataColumn[]
             {
-
-                var dictViewPaymentPost = AccFactory.RptPaymentPostsRepository().GetViewRecordById(paymentPostsId);
-
-                string payee = dictViewPaymentPost["payment_collections_payee"];
-                DateTime paymentDate = Convert.ToDateTime(dictViewPaymentPost["payment_collections_payment_date"]);
-                string receiptNo = dictViewPaymentPost["payment_collections_receipt_no"];
-                int collectingOfficerId = Convert.ToInt32(dictViewPaymentPost["payment_collections_collecting_officers_id"]);
-                string jobOrderId = dictViewPaymentPost["payment_collections_job_orders_id"];
-
-                //ucPaymentInfo.txtPayee.Text = payee;
-                //ucPaymentInfo.dtPaymentDate.Value = paymentDate;
-                //ucPaymentInfo.txtReceipts.Text = receiptNo;
-
-                //ucPaymentInfo.LoadCollectorInfoById(collectingOfficerId, jobOrderId);
-                FormIsReadOnly(true);
-
-                LoadRptDetailedTaxDues(realPropertyPaymentTaxDueModels);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
-        }
-
-        private DataTable RealPropertyPaymentTaxDuesDataTable(List<RptDetailedTaxDuesModel> realPropertyPaymentTaxDueModelList)
-        {
-            var dataTable = new DataTable();
-
-            //Set up data columns
-            var columns = new DataColumn[]
-            {
-                new DataColumn("assessment_post_id", typeof(int)),
-                new DataColumn("year", typeof(int)),
-                new DataColumn("complete_arp_no", typeof(string)),
-                new DataColumn("tax_type", typeof(string)),
-                new DataColumn("tax_due", typeof(decimal)),
-                new DataColumn("discount", typeof(decimal)),
-                new DataColumn("penalty", typeof(decimal)),
-                new DataColumn("total_sef_basic", typeof(decimal))
+                new DataColumn("id", typeof(int)),
+                new DataColumn("tin", typeof(string)),
+                new DataColumn("name", typeof(string)),
+                new DataColumn("full_address", typeof(string)),
+                new DataColumn("contact_info", typeof(string))
             };
-            dataTable.Columns.AddRange(columns);
+        }
 
-            //Populate data table
-            if (realPropertyPaymentTaxDueModelList != null)
+        private DataTable DataTableTaxpayers()
+        {
+            string searchText = txtTaxpayerSearch.Text.Trim();
+            var dtTaxpayers = AccFactory.TaxpayersRepository().GetRecordsBySearch(searchText);
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(TaxpayersColumns());
+
+            foreach (DataRow row in dtTaxpayers.Rows)
             {
-                foreach (RptDetailedTaxDuesModel model in realPropertyPaymentTaxDueModelList)
-                {
-                    var newRow = dataTable.NewRow();
-                    newRow["assessment_post_id"] = model.AssessmentPostId;
-                    newRow["year"] = model.Year;
-                    newRow["complete_arp_no"] = model.CompleteArpNo;
-                    newRow["tax_type"] = model.TaxType;
-                    newRow["tax_due"] = model.TaxDue;
-                    newRow["discount"] = model.Discount;
-                    newRow["penalty"] = model.Penalty;
-                    newRow["total_sef_basic"] = model.TotalTaxDue;
-
-                    dataTable.Rows.Add(newRow);
-                }
+                var newRow = dataTable.NewRow();
+                newRow["id"] = row["id"];
+                newRow["tin"] = row["tin"];
+                newRow["name"] = row["name"];
+                newRow["full_address"] = Helper.GenerateFullAddress(row["street"].ToString(), row["barangay"].ToString(), row["municipality"].ToString(), row["province"].ToString());
+                newRow["contact_info"] = row["contact_info"];
+                dataTable.Rows.Add(newRow);
             }
 
             return dataTable;
         }
 
-        private decimal GetTotalDue(DataGridView dataGridView)
-        {
-            decimal totalDue = 0;
-
-            foreach (DataGridViewRow row in dataGridView.Rows)
-            {
-                totalDue += Convert.ToDecimal(row.Cells["total_sef_basic"].Value);
-            }
-
-            return totalDue;
-        }
-
-        internal void LoadRptDetailedTaxDues(List<RptDetailedTaxDuesModel> realPropertyPaymentTaxDueModelList)
+        private void LoadTaxpayers()
         {
             try
             {
-                Cursor = Cursors.WaitCursor;
-                HelperLoadRecords.PropertyPaymentPropertiesTaxDuesDatagridView(RealPropertyPaymentTaxDuesDataTable(realPropertyPaymentTaxDueModelList), dataGridView1);
-                txtTotalDue.Text = GetTotalDue(dataGridView1).ToString("N2");
-                Cursor = Cursors.Default;
+                HelperLoadRecords.DataGridViewPaymentTaxpayers(dgTaxpayers, DataTableTaxpayers());
+                dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void LoadPaymentTab()
+        {
+            if (!ucRptTaxDues.ValidateChildren())
             {
-                Helper.MessageBoxError(ex.Message);
-                Cursor = Cursors.Default;
+                Helper.MessageBoxError(ucRptTaxDues.GetFormErrors());
+                return;
             }
+
+            ucPayment.amountPayment = ucRptTaxDues.GetTotalTaxDue();
+            ucPayment.OnLoad();
+            tabControl1.SelectedTab = tabPagePayment;
         }
 
-        internal void GetSelectedTaxPayerInfo()
+        private int GetRealTaxpayersId()
         {
-            txtTin.Text = paymentTaxPayerInfoModel.TIN;
-            txtTaxpayer.Text = paymentTaxPayerInfoModel.TaxPayerName;
-            txtAddress.Text = paymentTaxPayerInfoModel.Address;
-            btnRptGetTaxDue.Enabled = true;
-            btnPaymentHistory.Enabled = true;
+            int rowIndex = dgTaxpayers.CurrentRow.Index;
+            return Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
         }
 
-        private void btnTransactions_Click(object sender, EventArgs e)
+        private void LoadTaxDuesTab()
         {
-            string taxPayerName = txtTaxpayer.Text.Trim();
-            _ = new frmTaxPayerPaymentHistory(this, taxPayerName).ShowDialog();
+            tabControl1.SelectedTab = tabPageTaxDues;
+            ucRptTaxDues.taxpayersId = GetRealTaxpayersId();
+            ucRptTaxDues.LoadPostedProperties();
         }
 
-        private void frmPaymentPosting_Load(object sender, EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
-            LoadRptDetailedTaxDues(null);
-        }
-
-        private void btnFindTaxPayer_Click(object sender, EventArgs e)
-        {
-            _ = new frmRptTaxPayerList(null, null, null, this, null).ShowDialog();
-            LoadRptDetailedTaxDues(null);
-        }
-
-        private void ShowTaxDue()
-        {
-            string taxPayerName = txtTaxpayer.Text.Trim();
-
-            _ = new frmPropertyTaxDue(taxPayerName, this).ShowDialog();
-        }
-
-        private void btnGetTaxDue_Click(object sender, EventArgs e)
-        {
-            ShowTaxDue();
-        }
-
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            FormIsReadOnly(false);
-        }
-
-        #region Cancel Transaction Methods
-
-        internal void CancelTransaction()
-        {
-            LoadRptDetailedTaxDues(null);
-        }
-
-        private void btnCancelTransaction_Click(object sender, EventArgs e)
-        {
-            CancelTransaction();
-        }
-
-        #endregion
-
-        #region Payment Methods
-
-        private bool PrintReceipt()
-        {
-            //try
-            //{
-            //    Cursor.Current = Cursors.WaitCursor;
-            //    var localReport = new LocalReport();
-            //    var dictLguDetails = Helper.LGUDetails();
-            //    var amountToWords = new Helper.AmountToWords();
-            //    string amount = txtTotalDue.Text.Trim();
-
-            //    var parameters = new[]
-            //    {
-            //    new ReportParameter("paramMunicipality", dictLguDetails["lgu_name"]),
-            //    new ReportParameter("paramReceiptNo", ucPaymentInfo.txtReceipts.Text.Trim()),
-            //    new ReportParameter("paramPaymentDate", ucPaymentInfo.dtPaymentDate.Value.ToString()),
-            //    new ReportParameter("paramAmount", amount),
-            //    new ReportParameter("paramPayee", ucPaymentInfo.txtPayee.Text.Trim()),
-            //    new ReportParameter("paramCollectorName", ucPaymentInfo.txtCollectingOfficer.Text.Trim()),
-            //    new ReportParameter("paramAmountInWord", amountToWords.ConvertAmountToWords(amount))
-            //    };
-
-            //    localReport.ReportPath = $"{Application.StartupPath}\\Reports\\real-property-payment-receipt.rdlc";
-            //    localReport.SetParameters(parameters);
-
-            //    //Set page settings for receipt printing
-            //    var localReportDefaultSetting = localReport.GetDefaultPageSettings();
-            //    var pageSettings = new PageSettings();
-            //    pageSettings.PaperSize = localReportDefaultSetting.PaperSize;
-
-            //    Helper.PrintToPrinter(localReport, pageSettings);
-            //    Helper.DisposePrintToPrinter();
-            //    Cursor.Current = Cursors.Default;
-            //    return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Helper.MessageBoxError(ex.Message);
-            //}
-            //Cursor.Current = Cursors.Default;
-            return false;
-        }
-
-        private bool ValidatePayment()
-        {
-            decimal totalDue = Convert.ToDecimal(txtTotalDue.Text);
-
-            if (totalDue == 0)
-                return false;
-
-            return true;
-        }
-
-        private bool SavePayment()
-        {
-            //try
-            //{
-            //    if (!ValidateChildren())
-            //    {
-            //        Helper.MessageBoxError(ucPaymentInfo.GetFormErrors());
-            //        return false;
-            //    }
-
-            //    if (!Helper.MessageBoxConfirmCancel("Confirm Payment?"))
-            //        return false;
-
-            //    //Payment Collections
-            //    int accountableFormId = ucPaymentInfo.accountableFormNoId;
-            //    decimal amount = Convert.ToDecimal(txtTotalDue.Text.Trim());
-            //    string receiptNo = ucPaymentInfo.txtReceipts.Text.Trim();
-            //    string payee = ucPaymentInfo.txtPayee.Text.Trim();
-            //    DateTime paymentDate = ucPaymentInfo.dtPaymentDate.Value;
-            //    var dictCollectingOfficer = AccFactory.CollectingOfficerRepository().GetRecordByUserID(Helper.UserId);
-            //    var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);
-            //    int collectingOfficerId = dictCollectingOfficer.Values.Count < 1 ? 0 : Convert.ToInt32(dictCollectingOfficer["id"]);
-            //    int? jobOrderId = dictJobOrder.Values.Count < 1 ? null : Convert.ToInt32(dictJobOrder["id"]);
-
-            //    var paymentCollectionsModel = new PaymentCollectionsModel()
-            //    {
-            //        AccountableFormId = accountableFormId,
-            //        CollectingOfficerId = collectingOfficerId,
-            //        JobOrderId = jobOrderId,
-            //        Amount = amount,
-            //        FundId = 1,
-            //        ReceiptNo = receiptNo,
-            //        Payee = payee,
-            //        PaymentDate = paymentDate,
-            //        IsCancelled = false,
-            //        CreatedBy = Helper.UserId
-            //    };
-
-            //    var rptPaymentPostsModel = new RptPaymentPostsModel()
-            //    {
-            //        PostedBy = Helper.UserId
-            //    };
-
-            //    return AccFactory.PaymentCollectionsRepository().InsertWithPaymentPosts(paymentCollectionsModel, rptPaymentPostsModel, rptTaxDuesModels);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Helper.MessageBoxError(ex.Message);
-            //}
-            return false;
-        }
-
-        private void btnPay_Click(object sender, EventArgs e)
-        {
-            if (SavePayment())
+            try
             {
-                PrintReceipt();
-                Helper.MessageBoxSuccess("Payment Confirmed.");
-                LoadRptDetailedTaxDues(null);
-                rptTaxDuesModels.Clear();
-                //ucPaymentInfo.ResetForm();
+                if (tabControl1.SelectedTab == tabPageTaxpayer)
+                    LoadTaxDuesTab();
+                else if (tabControl1.SelectedTab == tabPageTaxDues)
+                    LoadPaymentTab();
+                else if (tabControl1.SelectedTab == tabPagePayment)
+                    Helper.MessageBoxSuccess("Payment Confirmed");
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion
-
-        private void FormIsReadOnly(bool isReadOnly)
+        private void newFormPayments_Load(object sender, EventArgs e)
         {
-            //ucPaymentInfo.isReadOnly = isReadOnly;
-            //isReadonly = isReadOnly;
-            //btnGetTaxDue.Enabled = !isReadOnly;
-            //btnPay.Enabled = !isReadOnly;
-            //btnPay.Text = "Paid";
-            //ucPaymentInfo.txtReceipts.ReadOnly = isReadOnly;
-            //ucPaymentInfo.txtPayee.ReadOnly = isReadOnly;
-            //btnCancelTransaction.Enabled = !isReadOnly;
-            //ucPaymentInfo.dtPaymentDate.Enabled = !isReadOnly;
-            //btnNew.Enabled = isReadOnly;
-
-            //if (!isReadOnly)
-            //{
-            //    LoadRptDetailedTaxDues(null);
-            //    EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
-            //    btnPay.Text = "Pay";
-            //    ucPaymentInfo.LoadCollectorInfoByUserId();
-            //    ucPaymentInfo.loadReceiptNos();
-            //    ucPaymentInfo.txtPayee.Clear();
-            //    ucPaymentInfo.dtPaymentDate.Value = Helper.GetCurrentDate();
-            //}
+            LoadTaxpayers();
         }
 
-        private void EnableDisablePayCancelTransButton(Button btnPay, Button btnCancel)
+        private void tabPageTaxpayer_Enter(object sender, EventArgs e)
         {
-            if (isReadonly || !ValidatePayment())
-            {
-                btnPay.Enabled = false;
-                btnCancel.Enabled = false;
-            }
+            btnNext.Text = "Next";
+            radTaxpayer.Checked = true;
+            EnableDisableButtons(btnBack);
+        }
+
+        private void tabPageTaxDues_Enter(object sender, EventArgs e)
+        {
+            btnNext.Text = "Proceed to Payment";
+            radTaxDues.Checked = true;
+            EnableDisableButtons(btnBack);
+        }
+
+        private void tabPagePayment_Enter(object sender, EventArgs e)
+        {
+            btnNext.Text = "Confirm Payment";
+            radPayment.Checked = true;
+            EnableDisableButtons(btnBack);
+        }
+
+        private void EnableDisableButtons(Button btnBack)
+        {
+            if (tabControl1.SelectedIndex < 1)
+                btnBack.Enabled = false;
             else
-            {
-                btnPay.Enabled = true;
-                btnCancel.Enabled = true;
-            }
-
+                btnBack.Enabled = true;
         }
 
-        private void txtTotalDue_TextChanged(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
-            EnableDisablePayCancelTransButton(btnPay, btnCancelTransaction);
+            if (tabControl1.SelectedIndex < 0)
+                return;
+
+            tabControl1.SelectedIndex = tabControl1.SelectedIndex - 1;
         }
 
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-
+            if (dgTaxpayers.SelectedRows.Count == 1)
+                btnNext.Enabled = true;
+            else
+                btnNext.Enabled = false;
         }
 
-        private void txtAccountableForm_TextChanged(object sender, EventArgs e)
+        private void radRpt_CheckedChanged(object sender, EventArgs e)
         {
-
+            tabControl2.SelectedTab = tabPageRpt;
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void radBpl_CheckedChanged(object sender, EventArgs e)
         {
-
+            tabControl2.SelectedTab = tabPageBpl;
         }
 
-        private void txtCollectingOfficer_TextChanged(object sender, EventArgs e)
+        private void radOthers_CheckedChanged(object sender, EventArgs e)
         {
-
+            tabControl2.SelectedTab = tabPageOthers;
         }
 
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        private void txtTaxpayerSearch_TextChanged(object sender, EventArgs e)
         {
-
+            LoadTaxpayers();
         }
     }
 }

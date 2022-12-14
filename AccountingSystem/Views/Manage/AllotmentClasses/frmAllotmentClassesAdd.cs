@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
@@ -14,11 +7,13 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
     public partial class frmAllotmentClassesAdd : Form
     {
         private frmAllotmentClasses _frmAllotmentClasses;
+
         public frmAllotmentClassesAdd(frmAllotmentClasses frmAllotmentClasses)
         {
             InitializeComponent();
             _frmAllotmentClasses = frmAllotmentClasses;
         }
+
         private bool SaveData()
         {
             try
@@ -36,7 +31,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
                 {
                     AllotmentName = uc.txtName.Text.Trim(),
                     AllotmentCode = uc.txtCode.Text.Trim(),
-
                 };
 
                 var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
@@ -54,13 +48,10 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
             this.Visible = true;
             Helper.LoadFormIcon(this);
-            
         }
-
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnSave_Click_1(object sender, EventArgs e)

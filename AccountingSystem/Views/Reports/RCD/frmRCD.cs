@@ -101,19 +101,15 @@ namespace AccountingSystem.Views.Reports.RCD
                 var rcdRepository = AccFactory.CollectorReportRepository();
                 var rcdData = rcdRepository.GetRecordByID(reportNo);
 
-
                 collectorId = (ushort)Convert.ToInt16(rcdData["collecting_officers_id"]);
                 fundId = (sbyte)Convert.ToInt32(rcdData["funds_id"]);
                 reportNo = rcdData["report_no"];
                 date = Convert.ToDateTime(rcdData["date"]);
 
-
-
                 var colectorRepository = AccFactory.CollectorReportRepository();
                 var dtrcd = new DataTable();
                 dtrcd = colectorRepository.FilterRecords(fundId, collectorId, reportNo);
                 HelperLoadRecords.RCDDatagridView(dtrcd, dgListOfApprovedReport);
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -165,7 +161,6 @@ namespace AccountingSystem.Views.Reports.RCD
                     bool rcdSaveSuccess = AccFactory.GeneralCollectionsRepository().Insert(generalCollectionModel);
                     if (!rcdSaveSuccess)
                         return false;
-
 
                     InsertGeneralCollectionsPayment();
                     scope.Complete();
@@ -249,9 +244,6 @@ namespace AccountingSystem.Views.Reports.RCD
             reportQuantity = (short)dgListOfApprovedReport.Rows.Count;
             lblRecordCount.Text = reportQuantity.ToString();
             txtTotal.Text = totalCollections.ToString("N2");
-
-
-            
         }
 
         private void btnCancelPrint_Click(object sender, EventArgs e)
@@ -262,8 +254,8 @@ namespace AccountingSystem.Views.Reports.RCD
             }
         }
 
-
         #region Validations
+
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
@@ -288,13 +280,12 @@ namespace AccountingSystem.Views.Reports.RCD
         {
             e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Report.");
         }
+
         private void dgListOfApprovedReport_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport);
         }
 
-
-        #endregion
-
+        #endregion Validations
     }
 }

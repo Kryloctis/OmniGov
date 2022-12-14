@@ -149,30 +149,29 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             var dtGetViewRecordsByFFPIDByAllotmentClass = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
 
-            //Load by loop All Budget Appropriations Records without Others FPP 
+            //Load by loop All Budget Appropriations Records without Others FPP
             foreach (DataRow drGetViewRecordsByIds in dtGetViewRecordsByFFPIDByAllotmentClass.Rows)
             {
                 FieldData(dataTable, drGetViewRecordsByIds);
             }
 
-            #endregion
+            #endregion Without Others FPP
 
             #region Others FPP
 
             //Initialize Repository Method for others fpp records
             var dtGetRecordsOthersFPP = AccFactory.BudgetAppropriationsRepository().GetHeaderOthersFPP(fppId, allotmentClassId, fundId, year);
 
-            //Load by loop All Budget Appropriations Records with Others FPP 
+            //Load by loop All Budget Appropriations Records with Others FPP
             foreach (DataRow drGetRecordsOthersFPP in dtGetRecordsOthersFPP.Rows)
             {
                 var otherFppRowHeader = dataTable.NewRow();
                 string othersFPPName = drGetRecordsOthersFPP["others_fpp_name"].ToString();
                 int othersFPPID = Convert.ToInt32(drGetRecordsOthersFPP["others_fpp_id"]);
 
-                //Set Header for Others FPP 
+                //Set Header for Others FPP
                 otherFppRowHeader["object_of_expenditures"] = othersFPPName;
                 dataTable.Rows.Add(otherFppRowHeader);
-
 
                 budgetAppropriationsModel.OthersFPPId = othersFPPID;
                 DataTable dtGetViewRecordsByIds = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsYear(budgetAppropriationsModel);
@@ -183,7 +182,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 }
             }
 
-            #endregion
+            #endregion Others FPP
 
             static void FieldData(DataTable dataTable, DataRow dataRow)
             {
@@ -205,7 +204,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
                 //Get total supplemental appropriations
                 decimal totalSupplementalAppropriation = AccFactory.SupplementalAppropriationsRepository().GetSumSupplementalAppropriationsBy_BudgetAppropriationsId(rowId);
-
 
                 //GET total allotment release
                 var dtAllotmentRelease = AccFactory.AllotmentReleaseRepository().GetViewRecordsByBudgetAppropriationId(rowId);
@@ -243,9 +241,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 newRow["created_at"] = dataRow["created_at"];
                 newRow["updated_at"] = dataRow["updated_at"];
                 dataTable.Rows.Add(newRow);
-
             }
-
 
             ////Change Font style for the header of Others FPP
             //foreach (DataGridViewRow row in dgvBudgetAppropriations.Rows)
@@ -298,7 +294,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-
         public void LoadComboboxes()
         {
             try
@@ -312,7 +307,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 LoadFPP();
                 cmbxFPP.TextChanged += new EventHandler(CmbxFPP_TextChanged);
                 cmbxFPP.SelectedValueChanged += new EventHandler(CmbxFPP_SelectedValueChanged);
-
             }
             catch (Exception ex)
             {
@@ -358,7 +352,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                 btnAdd.Enabled = false;
             else
                 btnAdd.Enabled = true;
-
         }
 
         private void cmbxAllotmentClass_SelectedValueChanged(object sender, EventArgs e)
@@ -436,7 +429,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
             var budgetAppropriationsModelList = new List<BudgetAppropriationsModel>();
 
-
             foreach (DataGridViewRow row in dgBudgetAppropriations.SelectedRows)
             {
                 if (row.Cells[0].Value != null)
@@ -477,7 +469,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
                         break;
                 }
             }
-
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
@@ -568,7 +559,7 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             }
         }
 
-        #endregion
+        #endregion FPP
 
         private void ShowSupplementalAppropriations()
         {
@@ -607,7 +598,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
 
         private void btnRealignment_Click(object sender, EventArgs e)
         {
-
         }
 
         private void lnkSelectAll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -686,6 +676,6 @@ namespace AccountingSystem.Views.Manage.BudgetAppropriations
             nudYear.Tag = string.Empty;
         }
 
-        #endregion
+        #endregion Validations
     }
 }

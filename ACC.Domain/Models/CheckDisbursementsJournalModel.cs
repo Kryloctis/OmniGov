@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
@@ -11,7 +9,6 @@ namespace ACC.Domain.Models
         public DateTime CheckDate { get; set; }
         public string CheckNo { get; set; }
         public string DVNo { get; set; }
-        public string RCINo{ get; set; }
-
+        public string RCINo { get; set; }
     }
 }

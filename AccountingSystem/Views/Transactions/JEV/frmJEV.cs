@@ -31,7 +31,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-
             if (_frmJEVList != null)
             {
                 LoadSelectedJEV(uc.jevId);
@@ -55,7 +54,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     {
                         string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
 
-
                         if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
                         {
                             btnSave.Enabled = true;
@@ -63,7 +61,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                         }
                     }
                 }
-
 
                 if (!Helper.HasPermission("Transaction > JEV Approval"))
                 {
@@ -75,7 +72,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 else
                     lblShowMessage.Enabled = true;
 
-
                 if (!Helper.HasPermission("Report > JEVs"))
                     btnPrint.Enabled = false;
 
@@ -85,7 +81,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     btnDelete.Enabled = false;
                     uc.isReadOnly = true;
                 }
-
 
                 if (Helper.UserId != createdById && createdById != 0)
                 {
@@ -359,7 +354,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 ORNo = uc.txtRCIORADA.Text.Trim()
             };
 
-
             return AccFactory.JEVRepository().UpdateWithGeneralJournal(jevModel, JevAcountsModelList(), generalJournalModel);
         }
 
@@ -385,7 +379,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 var userId = Helper.UserId;
                 message = "JEV has been saved.";
 
-
                 switch (uc.journalName)
                 {
                     case "General Journal":
@@ -406,13 +399,11 @@ namespace AccountingSystem.Views.Transactions.JEV
                     case "Authority to Debit Account Disbursement Journal":
                         return InsertADADisbursementsJournal(userId);
                 }
-
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
 
             return false;
         }
@@ -473,26 +464,30 @@ namespace AccountingSystem.Views.Transactions.JEV
                                 AccFactory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
+
                             case 2:
                                 AccFactory.CashReceiptsJournalRepository().DeleteCashReceiptsJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
+
                             case 3:
                                 //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                                 break;
+
                             case 4:
                                 AccFactory.CashDisbursementsJournalRepository().DeleteCashDisbursementJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
+
                             case 5:
                                 AccFactory.CheckDisbursementsJournalRepository().DeleteCheckDisbursementJournalByJevID(uc.jevId);
                                 TransferJournalToNewJournal();  //INSERT TO NEW SELECTED JOURNAL
                                 break;
+
                             case 6:
                                 //Factory.GeneralJournalRepository().DeleteGeneralJournalByJevID(uc.jevId);
                                 break;
                         }
-
                     }
 
                     scope.Complete();
@@ -508,7 +503,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 else
                     return false;
             }
-
         }
 
         private bool SaveData(ref string message)
@@ -570,7 +564,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     Helper.DatagridViewRecordFinder(_frmJEVList.dgJEV, "full_jev_no", fullJevNo);
                 }
             }
-
         }
 
         private void TransferJournalToNewJournal()
@@ -590,6 +583,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     AccFactory.GeneralJournalRepository().Insert(generalJournalModel);
                     return;
+
                 case 2:
                     var cashReceiptsJournalModel = new CashReceiptsJournalModel()
                     {
@@ -602,9 +596,11 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     AccFactory.CashReceiptsJournalRepository().Insert(cashReceiptsJournalModel);
                     return;
+
                 case 3:
                     //DO NOTHING
                     return;
+
                 case 4:
                     var cashDisbursementsJournalModel = new CashDisbursementsJournalModel()
                     {
@@ -616,6 +612,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     AccFactory.CashDisbursementsJournalRepository().Insert(cashDisbursementsJournalModel);
                     return;
+
                 case 5:
 
                     var checkDisbursementsModel = new CheckDisbursementsJournalModel()
@@ -629,6 +626,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     AccFactory.CheckDisbursementsJournalRepository().Insert(checkDisbursementsModel);
                     return;
+
                 case 6:
                     //DO NOTHING
                     return;
@@ -671,6 +669,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         uc.isReadOnly = false;
                         btnSave.Enabled = true;
                         break;
+
                     case "approved":
                         lblJevStatus.Text = "APPROVED";
                         lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
@@ -684,6 +683,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
+
                     case "disapproved":
                         lblJevStatus.Text = "DISAPPROVED";
                         lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
@@ -696,6 +696,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDelete.Enabled = false;
                         uc.isReadOnly = true;
                         break;
+
                     case "cancelled":
                         //CANCELLED
                         lblJevStatus.Text = "CANCELLED";
@@ -795,7 +796,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                         }
                         return;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -880,7 +880,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                     uc.dgAccounts.Rows.Add(accountRow);
                 }
-
             }
         }
 
@@ -980,8 +979,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.journalId = Convert.ToByte(jevDict["journals_id"]);
                 uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
                 lblCreatedBy.Text = jevDict["created_by_name"];
-
-
 
                 if (Convert.ToByte(jevDict["is_edited"]) == 1)
                 {

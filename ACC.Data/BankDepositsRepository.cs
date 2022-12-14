@@ -1,16 +1,14 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
     public class BankDepositsRepository : IBankDepositsRepository
     {
-
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "bank_deposits";
         private readonly string tableName2 = "banks";
@@ -66,7 +64,7 @@ namespace ACC.Data
 
                 var dtBanks = new DataTable();
                 return _dbGenericCommands.Fill(query, dtBanks);
-            } 
+            }
             catch (Exception)
             {
                 throw;
@@ -121,7 +119,6 @@ namespace ACC.Data
             }
         }
 
-
         public bool Update(BankDepositsModel entity)
         {
             try
@@ -145,7 +142,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         public bool Delete(List<BankDepositsModel> entityList)
         {
@@ -173,6 +169,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public int CountRecords()
         {
             try
@@ -230,7 +227,7 @@ namespace ACC.Data
         public DataTable GetRecordsBySearch(int id)
         {
             try
-            {             
+            {
                 string query = $"SELECT " +
                     $"{tableName}.id, " +
                     $"{tableName2}.account_no, " +
@@ -266,7 +263,6 @@ namespace ACC.Data
 
             var dtBanksDeposit = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtBanksDeposit);
-
         }
     }
 }
