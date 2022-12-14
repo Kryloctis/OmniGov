@@ -26,10 +26,39 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void frmRealProperties_Load(object sender, EventArgs e)
         {
-            LoadProperties();
+            LoadAllProperties();
         }
 
-        internal void LoadProperties()
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxShowCanclled.Checked)
+                ShowCancelledProperties();
+            else
+                LoadAllProperties();
+
+        }
+
+        private void ShowCancelledProperties()
+        {
+
+            try
+            {
+                string searchValue = txtSearch.Text.Trim();
+                var dtRealProperties = new DataTable();
+
+                if (searchValue.Length < 2)
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetCancelledProperties();
+                else
+                    dtRealProperties = AccFactory.RealPropertiesRepository().GetCancelledRecordsBySearch(searchValue);
+
+                HelperLoadRecords.RealPropertiesDatagridView(dgRealProperties, dtRealProperties);
+                dgRealProperties.CurrentCell = dgRealProperties.FirstDisplayedCell;
+                toolStripStatusLabelRecordCount.Text = dgRealProperties.Rows.Count.ToString();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        internal void LoadAllProperties()
         {
             try
             {
@@ -50,7 +79,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadProperties();
+            LoadAllProperties();
         }
 
         private void dgRealProperties_SelectionChanged(object sender, EventArgs e)
@@ -112,8 +141,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
                             realPropertiesModels.Add(new RealPropertiesModel() { Id = realPropertiesID });
                     }
                     _ = realPropertiesRepository.Delete(realPropertiesModels);
-
-                    LoadProperties();
+                    LoadAllProperties();
+                    
                     Helper.MessageBoxSuccess("Real properties has been deleted.");
                 }
                 catch (Exception)

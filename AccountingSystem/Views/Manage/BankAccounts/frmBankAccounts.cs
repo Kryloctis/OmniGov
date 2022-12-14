@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
             try
             {
-                var indexes = new byte[] { 3, 4 };
+                var indexes = new byte[] { 4, 5 };
                 Helper.ShowRecordTimestamp(dgBankAccounts, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
             }
             catch (Exception ex)

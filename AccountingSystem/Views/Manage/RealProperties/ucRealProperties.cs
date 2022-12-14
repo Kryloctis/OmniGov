@@ -70,13 +70,14 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void LoadPropertiesPreviousARPNumber()
         {
+
             try
             {
                 var dt = AccFactory.RealPropertiesRepository().GetCancelledProperties();
 
                 cmbxCompletePreviousARPNumber.DataSource = dt;
                 cmbxCompletePreviousARPNumber.DisplayMember = "complete_arp_no";
-                cmbxCompletePreviousARPNumber.ValueMember = "id";
+                cmbxCompletePreviousARPNumber.ValueMember = "real_properties_id";
                 cmbxCompletePreviousARPNumber.DropDownHeight = 200;
             }
             catch (Exception ex)
@@ -95,11 +96,11 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void ucRealProperties_Load(object sender, EventArgs e)
         {
-            LoadPropertyKind();
-            LoadClassificationCodes();
-            LoadActualUseCodes();
-            LoadBarangay();
-            LoadPropertiesPreviousARPNumber();
+           LoadPropertyKind();
+           LoadClassificationCodes();
+           LoadActualUseCodes();
+           LoadBarangay();
+           LoadPropertiesPreviousARPNumber();
         }
 
         private void LoadBarangay()
@@ -127,6 +128,56 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             cmbxClassification.DataSource = dt;
             cmbxClassification.ValueMember = "id";
             cmbxClassification.DisplayMember = "name";
+        }
+
+
+
+        private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string propertyKind = cmbxPropertyKind.Text;
+
+            switch (propertyKind)
+            {
+                case "Land":
+                    nudOtherImprv.Enabled = true;
+                    txtLotNo.Enabled = true;
+                    nudArea.Enabled = true;
+                    break;
+
+                case "Building":
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = true;
+                    break;
+
+                default:
+                    nudOtherImprv.Enabled = false;
+                    txtLotNo.Enabled = false;
+                    nudArea.Enabled = false;
+                    break;
+            }
+        }
+
+        private void btnSelectTaxpayer_Click(object sender, EventArgs e)
+        {
+            _ = new frmTaxpayersList(this).ShowDialog();
+        }
+
+        private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)
+        {
+            //LoadPropertiesPreviousARPNumber();
+        }
+
+        private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
+            var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
+
+            propertyIdentifier = previousAssessmentDict["property_identifier"];
+            txtPreviousPin.Text = previousAssessmentDict["property_pin"];
+            txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
+            txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
+            txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
         }
 
         #region Validations
@@ -234,54 +285,57 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             Helper.ClearErrorComboBox(errorProvider1, cmbxCompletePreviousARPNumber);
         }
 
+
+        private void cmbxBarangays_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxBarangays, "Barangay");
+        }
+
+        private void cmbxBarangays_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxBarangays);
+        }
+
+        private void cmbxClassification_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxClassification, "Classification");
+        }
+
+        private void cmbxClassification_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxClassification);
+        }
+
+        private void cmbxActualUse_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxActualUse, "Actual Used");
+        }
+ 
+        private void cmbxActualUse_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorComboBox(errorProvider1, cmbxActualUse);
+        }
+
+        private void cmbxCompletePreviousARPNumber_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void cmbxCompletePreviousARPNumber_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTaxpayers_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void txtTaxpayers_Validated(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion Validations
-
-        private void cmbxPropertyKind_SelectedValueChanged(object sender, EventArgs e)
-        {
-            string propertyKind = cmbxPropertyKind.Text;
-
-            switch (propertyKind)
-            {
-                case "Land":
-                    nudOtherImprv.Enabled = true;
-                    txtLotNo.Enabled = true;
-                    nudArea.Enabled = true;
-                    break;
-
-                case "Building":
-                    nudOtherImprv.Enabled = false;
-                    txtLotNo.Enabled = false;
-                    nudArea.Enabled = true;
-                    break;
-
-                default:
-                    nudOtherImprv.Enabled = false;
-                    txtLotNo.Enabled = false;
-                    nudArea.Enabled = false;
-                    break;
-            }
-        }
-
-        private void btnSelectTaxpayer_Click(object sender, EventArgs e)
-        {
-            _ = new frmTaxpayersList(this).ShowDialog();
-        }
-
-        private void cmbxCompletePreviousARPNumber_TextChanged(object sender, EventArgs e)
-        {
-            //LoadPropertiesPreviousARPNumber();
-        }
-
-        private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
-            var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
-
-            propertyIdentifier = previousAssessmentDict["property_identifier"];
-            txtPreviousPin.Text = previousAssessmentDict["property_pin"];
-            txtPreviousAssessedValue.Text = previousAssessmentDict["assessed_value"];
-            txtPreviousOwner.Text = previousAssessmentDict["taxpayer_name"];
-            txtPreviousEffectivityAssessment.Text = previousAssessmentDict["created_at"];
-        }
     }
 }

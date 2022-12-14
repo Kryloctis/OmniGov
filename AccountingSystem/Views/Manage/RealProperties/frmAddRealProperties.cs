@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
             if (Save())
             {
                 Helper.MessageBoxSuccess("Real property has been saved.");
-                _frmRealProperties.LoadProperties();
+                _frmRealProperties.LoadAllProperties();
                 Close();
             }
         }
@@ -83,6 +83,11 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
+        }
+
+        private void frmAddRealProperties_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

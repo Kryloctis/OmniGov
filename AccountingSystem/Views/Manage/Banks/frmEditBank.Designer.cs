@@ -62,7 +62,6 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save14px;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.Location = new System.Drawing.Point(198, 2);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
