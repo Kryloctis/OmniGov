@@ -13,7 +13,6 @@ namespace ACC.Data
         private readonly IRoleHasPermissionsRepository roleHasPermissionsRepository;
         private readonly string tableName = "roles";
 
-
         public RolesRepository(
             IAccGenericCommands dbGenericCommands,
             IRoleHasPermissionsRepository _roleHasPermissionsRepository

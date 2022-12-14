@@ -33,7 +33,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 var rcRepository = AccFactory.ReceiptsRepository();
                 var rcdata = rcRepository.GetRecordByID(uc.receiptId);
 
-                var formatedReceiptNumberFrom = 
+                var formatedReceiptNumberFrom =
 
                 uc.cmbAccountableForms.SelectedValue = rcdata["accountable_forms_id"];
                 uc.txtReceiptNumberFrom.Text = Convert.ToInt32(rcdata["receipt_number_from"]).ToString("0000000");
@@ -77,15 +77,13 @@ namespace AccountingSystem.Views.Manage.Receipts
                     Quantity = int.Parse(uc.txtQuantity.Text.Trim()),
                     Remarks = uc.txtRemark.Text.Trim(),
                     UserId = userId
-
                 };
 
                 var rcRepository = AccFactory.ReceiptsRepository();
                 if (uc.isCashTicket == false)
                     return rcRepository.Update(rModel);
-                else 
+                else
                     return rcRepository.Update(rModel);
-
             }
             catch (Exception ex)
             {

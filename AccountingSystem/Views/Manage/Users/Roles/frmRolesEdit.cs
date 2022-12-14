@@ -27,10 +27,8 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 var rolesRepository = AccFactory.RolesRepository();
                 var roleDict = rolesRepository.GetRecordByID(uc.roleId);
 
-
                 uc.cmbOffice.Text = roleDict["office"];
                 uc.txtName.Text = roleDict["role_name"];
-                
             }
             catch (Exception ex)
             {
@@ -109,7 +107,6 @@ namespace AccountingSystem.Views.Manage.Users.Roles
             LoadSelectedRole();
             LoadPermissionsByRoleId();
             uc.LoadPermissions();
-         
         }
     }
 }

@@ -1,13 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
-using Org.BouncyCastle.Utilities.Collections;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
@@ -38,7 +31,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             return error.GenerateErrorMessage();
         }
 
-
         private void ucBankAccounts_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -53,7 +45,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             cmbxBank.DataSource = dtBanks;
             cmbxBank.ValueMember = "id";
             cmbxBank.DisplayMember = "bank_name";
-
         }
 
         private void txtAccountNo_Validating(object sender, CancelEventArgs e)
@@ -68,12 +59,10 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void cmbxBank_Validating(object sender, CancelEventArgs e)
         {
-
         }
 
         private void cmbxBank_Validated(object sender, EventArgs e)
         {
-
         }
     }
 }

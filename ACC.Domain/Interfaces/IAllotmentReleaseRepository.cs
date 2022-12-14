@@ -7,7 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IAllotmentReleaseRepository : IAccRepository<AllotmentReleaseModel>
     {
-
         bool Insert(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
 
         bool Update(AllotmentReleaseModel entity, List<AllotmentAccountModel> listAllotmentAccount);
@@ -37,12 +36,14 @@ namespace ACC.Domain.Interfaces
         //DASHBOARD
 
         #region BUDGET DASHBOARD
+
         //SUMMARY
         decimal GetSumAllotments(int budgetAppropriationId, DateTime dateIssued);
 
         //DETAILED
         decimal GetSumAllotments(string fppId, string subFPPId, int fundId, DateTime dateIssued, int allotmentClassId, byte isContinuing);
-        #endregion
+
+        #endregion BUDGET DASHBOARD
 
         string GetLeastAllotmentReleaseNumber();
     }

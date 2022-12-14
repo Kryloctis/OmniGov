@@ -9,8 +9,8 @@ namespace AccountingSystem.Views.Manage.BeginningBalances
     public partial class frmBeginningBalanceAdd : Form
     {
         private readonly UcBeginningBalances uc;
-        frmSubsidiary _frmSubsidiary;
-        frmChartOfAccounts _frmChartOfAccounts;
+        private frmSubsidiary _frmSubsidiary;
+        private frmChartOfAccounts _frmChartOfAccounts;
 
         public frmBeginningBalanceAdd(frmChartOfAccounts frmChartOfAccounts, frmSubsidiary frmSubsidiary, byte fundId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId = 0)
         {

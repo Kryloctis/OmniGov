@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Models
 {
     public class ReceiptsIssuedModel
     {
-
         public int Id { get; set; }
         public int CollectorId { get; set; }
         public int? JobOrderId { get; set; }
@@ -19,6 +16,5 @@ namespace ACC.Domain.Models
         public int Last_issued { get; set; }
         public int Quantity { get; set; }
         public int IssuedByUserId { get; set; }
-       
     }
 }

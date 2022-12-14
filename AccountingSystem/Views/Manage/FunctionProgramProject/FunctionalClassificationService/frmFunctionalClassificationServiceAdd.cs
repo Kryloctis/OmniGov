@@ -2,7 +2,6 @@
 using System;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassificationService
 {
     public partial class frmFunctionalClassificationServiceAdd : Form
@@ -56,7 +55,6 @@ namespace AccountingSystem.Views.Manage.FunctionProgramProject.FunctonalClassifi
                 _frmFunctionProgramProject.LoadFunctionClassificationServices();
                 Helper.DatagridViewRecordFinder(_frmFunctionProgramProject.dgFuntionalClassificationServices, "service_name", uc.txtName.Text);
                 uc.ResetForm();
-
             }
         }
     }

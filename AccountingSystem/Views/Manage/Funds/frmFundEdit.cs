@@ -13,7 +13,6 @@ namespace AccountingSystem.Views.Manage.Funds
             InitializeComponent();
             _frmFunds = frmFunds;
             ucFunds1.fundId = fundId;
-
         }
 
         private void LoadSelectedRecord()
@@ -35,7 +34,6 @@ namespace AccountingSystem.Views.Manage.Funds
             {
                 var uc = ucFunds1;
 
-
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
                 {
@@ -53,8 +51,6 @@ namespace AccountingSystem.Views.Manage.Funds
 
                 var fundsRepository = AccFactory.FundsRepository();
                 return fundsRepository.Update(fundModel);
-
-
             }
             catch (Exception ex)
             {
@@ -76,7 +72,6 @@ namespace AccountingSystem.Views.Manage.Funds
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
         }
 
         private void frmFundEdit_Load(object sender, EventArgs e)

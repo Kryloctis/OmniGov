@@ -7,6 +7,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
     public partial class frmBankDepositsEdit : Form
     {
         private frmBankDeposits _frmbd;
+
         public frmBankDepositsEdit(frmBankDeposits frmbd, int Id)
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         {
             LoadSelectedValue();
         }
+
         private void LoadSelectedValue()
         {
             try
@@ -34,6 +36,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private bool SaveData()
         {
             try
@@ -65,6 +68,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             }
             return false;
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (SaveData())

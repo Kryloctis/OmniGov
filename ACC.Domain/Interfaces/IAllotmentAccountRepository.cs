@@ -1,11 +1,8 @@
 ﻿using ACC.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IAllotmentAccountRepository  : IAccRepository<AllotmentAccountModel>
+    public interface IAllotmentAccountRepository : IAccRepository<AllotmentAccountModel>
     {
         bool DeleteByAllotmentReleaseId(int allotmentReleaseId);
     }

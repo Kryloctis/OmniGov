@@ -12,7 +12,6 @@ namespace ACC.Data
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "journals";
 
-
         public JournalsRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;
@@ -58,7 +57,6 @@ namespace ACC.Data
 
                 var dtJournals = new DataTable();
                 return _dbGenericCommands.Fill(query, dtJournals);
-
             }
             catch (Exception)
             {

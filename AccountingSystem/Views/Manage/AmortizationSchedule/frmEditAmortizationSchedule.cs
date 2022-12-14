@@ -1,19 +1,11 @@
 ﻿using AccountingSystem.Views.Manage.Amortization;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AmortizationSchedule
 {
     public partial class frmEditAmortizationSchedule : Form
     {
-
         private ucAmortizationSchedule uc;
         internal int amortizationId;
         internal string amortizationTerm;
@@ -28,7 +20,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
             uc.isEdit = true;
         }
 
-        private void LoadSelectedAmortizationSchedule() 
+        private void LoadSelectedAmortizationSchedule()
         {
             var dicAmortizationScheduleRecord = AccFactory.AmortizationScheduleRepository().GetRecordByID(amortizationScheduleId);
 
@@ -49,7 +41,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (uc.SaveData()) 
+            if (uc.SaveData())
             {
                 Helper.MessageBoxSuccess("Amortization Schedule has been updated");
                 _frmAmortizationSchedule.LoadRecords();

@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 {
     public partial class ucPreClosingTrialBalance : UserControl
     {
-
         private readonly ReportViewer reportViewer;
         private decimal beginningBalance;
 
@@ -154,7 +153,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 RecordsFilter(reportViewer.LocalReport, 1);
             else
                 RecordsFilter(reportViewer.LocalReport, 0);
-
         }
 
         private void OnLoad()
@@ -164,7 +162,7 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucPreClosingTrialBalance_Load(object sender, EventArgs e)
@@ -173,7 +171,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
             {
                 OnLoad();
             }
-
         }
     }
 }

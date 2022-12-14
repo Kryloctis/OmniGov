@@ -41,7 +41,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (uc.isSaveFunction)
             {
                 if (SaveData())
@@ -67,7 +66,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
         private bool UpdateData()
         {
-
             using (var scope = new TransactionScope())
             {
                 var collectorsReportModel = new CollectorReportModel()
@@ -98,7 +96,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
 
                 if (rcdDetailsUpdateSuccess == false || isDeleteSuccess == false) return false;
 
-
                 InsertPaymentsIntoReport();
 
                 scope.Complete();
@@ -122,7 +119,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 AccFactory.CollectorReportPaymentsRepository().Insert(collectorReportPaymentModel);
             }
         }
-
 
         private CollectorReportModel CollectorReportModelData()
         {
@@ -232,7 +228,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                 var collectionOfPaymentReportsRepo = AccFactory.CollectorReportPaymentsRepository();
                 var collectionOfPaymentReportDt = collectionOfPaymentReportsRepo.GetRecordsByReportNo(reportNo);
                 HelperLoadRecords.PaymentCollectionReportDatagrid(collectionOfPaymentReportDt, uc.dgPayments);
-
             }
             catch (Exception ex)
             {
@@ -260,6 +255,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnSave.Text = "Update";
                         btnSave.Enabled = true;
                         break;
+
                     case "approved":
                         //APPROVED
                         lblReportStatus.Text = "APPROVED";
@@ -274,6 +270,7 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
+
                     case "disapproved":
                         //DISSAPROVED
                         lblReportStatus.Text = "DISAPPROVED";
@@ -289,7 +286,6 @@ namespace AccountingSystem.Views.Reports.CollectorsRCD
                         break;
                 }
             }
-
             catch (Exception)
             {
                 throw;

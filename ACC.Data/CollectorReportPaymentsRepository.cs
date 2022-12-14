@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    class CollectorReportPaymentsRepository:ICollectorReportPaymentsRepository
+    internal class CollectorReportPaymentsRepository : ICollectorReportPaymentsRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "collector_report_payments";
@@ -63,7 +63,6 @@ namespace ACC.Data
                     {
                         if (entity.Id > 0)
                         {
-
                             var parameters = new object[][]
                            {
                                 new object[] { "@id", DbType.Int16, entity.Id},
@@ -94,7 +93,6 @@ namespace ACC.Data
             {
                 throw;
             }
-            
         }
 
         public bool Delete(CollectorReportPaymentModel entity)
@@ -103,7 +101,6 @@ namespace ACC.Data
             {
                 using (var scope = new TransactionScope())
                 {
-
                     var parameter = new object[][] {
                         new object[]{"@reportId", DbType.Int32, entity.CollectorsReportId}
                     };
@@ -111,7 +108,6 @@ namespace ACC.Data
                     var query = $"DELETE FROM {tableName} WHERE collector_report_id = @reportId";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameter);
 
-                   
                     scope.Complete();
                     return true;
                 }
@@ -140,7 +136,7 @@ namespace ACC.Data
                 throw;
             }
         }
-     
+
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -155,7 +151,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-     
+
         public bool Insert(CollectorReportPaymentModel entity)
         {
             try
@@ -170,7 +166,7 @@ namespace ACC.Data
 
                     string query = $"INSERT INTO {tableName} (collector_report_id, payment_collections_id) VALUES(@collector_report_id, @payment_collections_id)";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                 
+
                     scope.Complete();
                     return true;
                 }
@@ -196,7 +192,7 @@ namespace ACC.Data
 
                     string query = $"UPDATE {tableName} SET collector_report_id=@collector_report_id,payment_collections_id=@payment_collections_id WHERE id=@id";
                     _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-          
+
                     scope.Complete();
                     return true;
                 }
@@ -209,7 +205,7 @@ namespace ACC.Data
 
         public DataTable GetRecordsByReportNo(string reportNo)
         {
-            var parameter = new object[][] { 
+            var parameter = new object[][] {
                 new object[]{ "@report_no", DbType.String, reportNo},
             };
 
@@ -225,11 +221,10 @@ namespace ACC.Data
                 new object[]{"@reportNo", DbType.String, reportNo},
             };
 
-            string query =  $"SELECT accountable_forms, MIN(receipt_no) report_number_from, MAX(receipt_no) report_number_to, SUM(amount) amount FROM {viewTableName} WHERE report_no = @reportNo GROUP BY accountable_form_id ";
+            string query = $"SELECT accountable_forms, MIN(receipt_no) report_number_from, MAX(receipt_no) report_number_to, SUM(amount) amount FROM {viewTableName} WHERE report_no = @reportNo GROUP BY accountable_form_id ";
 
             var dtpc = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
         }
-
     }
 }

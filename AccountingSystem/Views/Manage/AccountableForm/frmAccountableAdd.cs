@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class frmAccountableAdd : Form
     {
         private frmAccountable _frmacc;
+
         public frmAccountableAdd(frmAccountable frmacc)
         {
             InitializeComponent();
@@ -22,7 +16,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void frmAccountableAdd_Load(object sender, EventArgs e)
         {
-
         }
 
         private bool SaveData()
@@ -40,7 +33,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 {
                     AccFormNo = uc.txtformno.Text.Trim(),
                     AccFormDesc = uc.txtformdesc.Text.Trim()
-
                 };
 
                 var accrepository = AccFactory.AccountableFormsRepository();

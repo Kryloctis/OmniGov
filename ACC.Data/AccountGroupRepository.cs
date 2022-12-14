@@ -57,7 +57,6 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtJournals);
         }
 
-
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new NotImplementedException();

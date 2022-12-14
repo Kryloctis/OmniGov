@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -25,7 +24,7 @@ namespace ACC.Data
 
         public bool Delete(List<RptTaxRatesModel> entityList)
         {
-            using (var scope = new TransactionScope()) 
+            using (var scope = new TransactionScope())
             {
                 foreach (var entity in entityList)
                 {
@@ -59,7 +58,7 @@ namespace ACC.Data
                 if (items.Rows.Count < 1)
                     return dict;
 
-                foreach(DataRow item in items.Rows)
+                foreach (DataRow item in items.Rows)
                 {
                     dict.Add("code", item["code"].ToString());
                     dict.Add("description", item["description"].ToString());

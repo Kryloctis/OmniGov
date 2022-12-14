@@ -74,7 +74,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             return true;
         }
 
-
         private void nudAmount_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = !AmountValidated(nudAmount, errorProvider1, "Amount.");
@@ -85,6 +84,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
-        #endregion
+        #endregion Validations
     }
 }

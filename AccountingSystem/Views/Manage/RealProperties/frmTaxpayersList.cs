@@ -1,12 +1,6 @@
 ﻿using AccountingSystem.Views.Manage.TaxPayers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RealProperties
@@ -14,11 +8,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
     public partial class frmTaxpayersList : Form
     {
         private readonly ucRealProperties _ucRealProperties;
+
         public frmTaxpayersList(ucRealProperties ucRealProperties)
         {
-            InitializeComponent();  
+            InitializeComponent();
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
-            _ucRealProperties = ucRealProperties; 
+            _ucRealProperties = ucRealProperties;
         }
 
         private void frmTaxpayersList_Load(object sender, EventArgs e)
@@ -35,7 +30,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 string searchText = txtSearch.Text.Trim();
                 HelperLoadRecords.TaxPayerListDatagridView(dgTaxpayers, DataTableTaxpayerList(searchText));
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
-                 
+
                 Cursor = Cursors.Default;
             }
             catch (Exception ex)
@@ -45,8 +40,8 @@ namespace AccountingSystem.Views.Manage.RealProperties
         }
 
         private DataTable DataTableTaxpayerList(string searchText)
-        {   
-            var columns = new string[] {"taxpayers_id", "taxpayers_name", "taxpayer_type", "taxpayers_tin", "taxpayers_contact_info", "taxpayers_barangay", "taxpayers_street", "taxpayers_municipality", "taxpayers_province"};
+        {
+            var columns = new string[] { "taxpayers_id", "taxpayers_name", "taxpayer_type", "taxpayers_tin", "taxpayers_contact_info", "taxpayers_barangay", "taxpayers_street", "taxpayers_municipality", "taxpayers_province" };
 
             var dtTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordsBySearch(searchText);
             var dtView = new DataView(dtTaxpayer);
@@ -88,12 +83,12 @@ namespace AccountingSystem.Views.Manage.RealProperties
 
             var address = $"{taxpayerBarangay}, {taxpayerMunicipality}, {taxpayerProvince}";
 
-           _ucRealProperties.taxpayerID = taxpayerID;
-           _ucRealProperties.txtTaxpayers.Text = taxpayer;
-           _ucRealProperties.txtTaxpayerType.Text = taxpayerType;
-           _ucRealProperties.txtTaxpayerTIN.Text = taxpayerTIN;
-           _ucRealProperties.txtTaxpayerContact.Text = taxpayerContact;
-           _ucRealProperties.txtTaxpayerAddress.Text = address;
+            _ucRealProperties.taxpayerID = taxpayerID;
+            _ucRealProperties.txtTaxpayers.Text = taxpayer;
+            _ucRealProperties.txtTaxpayerType.Text = taxpayerType;
+            _ucRealProperties.txtTaxpayerTIN.Text = taxpayerTIN;
+            _ucRealProperties.txtTaxpayerContact.Text = taxpayerContact;
+            _ucRealProperties.txtTaxpayerAddress.Text = address;
 
             Close();
         }
@@ -106,7 +101,5 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 Close();
             }
         }
-
-
     }
 }

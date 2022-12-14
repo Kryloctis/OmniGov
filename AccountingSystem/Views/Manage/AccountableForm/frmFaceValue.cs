@@ -54,7 +54,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             Helper.ShowRecordTimestamp(dgfacevalue, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
         }
 
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (dgfacevalue.SelectedRows.Count > 0)
@@ -62,7 +61,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 int Id = int.Parse(dgfacevalue.SelectedCells[0].Value.ToString());
                 try
                 {
-
                     var facevaluerepo = AccFactory.FaceValueRepository();
                     var faceval = facevaluerepo.GetRecordByID(Id);
                     faceValueId = int.Parse(faceval["id"]);
@@ -75,7 +73,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgfacevalue.SelectedRows.Count > 0)
+            if (dgfacevalue.SelectedRows.Count > 0)
             {
                 if (Helper.MessageBoxConfirmDelete(dgfacevalue.SelectedRows.Count))
                 {
@@ -96,7 +94,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if(faceValueId != 0)
+            if (faceValueId != 0)
                 SaveFaceValue();
             else
                 UpdateFaceValue();
@@ -126,8 +124,8 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 LoadList();
             }
             catch (Exception ex)
-            { 
-                Helper.MessageBoxError(ex.Message); 
+            {
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
@@ -162,6 +160,5 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
     }
 }

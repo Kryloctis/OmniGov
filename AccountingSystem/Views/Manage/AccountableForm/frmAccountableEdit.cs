@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACC.Domain.Models;
+using System;
 using System.Windows.Forms;
-using ACC.Domain.Models;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class frmAccountableEdit : Form
     {
         private frmAccountable _frmacc;
-        public frmAccountableEdit(frmAccountable frmacc,int accId)
+
+        public frmAccountableEdit(frmAccountable frmacc, int accId)
         {
             InitializeComponent();
             _frmacc = frmacc;
             ucAccountable1.accId = accId;
         }
+
         private void LoadSelectedRecord()
         {
             try
@@ -29,11 +24,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 var accData = accRepository.GetRecordByID(uc.accId);
                 uc.txtformno.Text = accData["acc_form_no"];
                 uc.txtformdesc.Text = accData["acc_form_desc"];
-
-
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
         private void frmAccountableEdit_Load(object sender, EventArgs e)
         {
             LoadSelectedRecord();
@@ -55,7 +49,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                     Id = uc.accId,
                     AccFormNo = uc.txtformno.Text.Trim(),
                     AccFormDesc = uc.txtformdesc.Text.Trim()
-
                 };
 
                 var accrepository = AccFactory.AccountableFormsRepository();

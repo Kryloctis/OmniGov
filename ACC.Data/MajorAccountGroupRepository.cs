@@ -13,7 +13,6 @@ namespace ACC.Data
         private readonly string tableName = "major_account_group";
         private readonly string viewTableName = "view_major_account_group";
 
-
         public MajorAccountGroupRepository(IAccGenericCommands dbGenericCommands)
         {
             _dbGenericCommands = dbGenericCommands;

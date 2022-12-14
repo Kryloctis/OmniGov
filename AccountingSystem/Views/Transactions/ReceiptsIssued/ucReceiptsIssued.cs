@@ -76,13 +76,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 cmbCollector.ValueMember = "id";
                 cmbCollector.DisplayMember = "fullname";
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
         }
 
-        internal void LoadCollectorsWithReceiptIssued(int receiptId)    
+        internal void LoadCollectorsWithReceiptIssued(int receiptId)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                         row["acc_form_desc"] = $"{accountableForm}  ({receiptNumberFrom} - {receiptNumberTo}) ";
 
                     //REMOVE RECEIPT IN COMBOBOX IF RECEIPT QUANTITY IS ZERO
-                    if ((quantity - TotalIssued(receiptsId)) == 0) 
+                    if ((quantity - TotalIssued(receiptsId)) == 0)
                         row.Delete();
                 }
 
@@ -142,7 +142,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             try
             {
                 var totalUsedReceipt = AccFactory.ReceiptsIssuedRepository().GetTotalIssuedReceiptByReceiptId(receiptId);
-               txtReceiptIssuedFrom.Text = (Convert.ToInt32(receiptNumberFrom) + Convert.ToInt32(totalUsedReceipt)).ToString("D7");
+                txtReceiptIssuedFrom.Text = (Convert.ToInt32(receiptNumberFrom) + Convert.ToInt32(totalUsedReceipt)).ToString("D7");
             }
             catch (Exception)
             {
@@ -152,7 +152,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void SetFieldsForCashTickets()
         {
-            txtReceiptQuantity.ReadOnly  = false;
+            txtReceiptQuantity.ReadOnly = false;
             isCashTickets = true;
             txtReceiptIssuedFrom.ResetText();
             txtReceiptIssuedTo.ResetText();
@@ -186,9 +186,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             if (quantity >= 1)
                 txtReceiptQuantity.Text = quantity.ToString();
         }
-
-
-
 
         #region Validations
 
@@ -291,10 +288,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             Helper.ClearErrorTextBox(epTo, txtReceiptIssuedTo);
         }
 
-        #endregion
+        #endregion Validations
 
         #region Form Events Method
-
 
         private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -359,6 +355,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             LoadCollectors();
         }
 
-        #endregion
+        #endregion Form Events Method
     }
 }

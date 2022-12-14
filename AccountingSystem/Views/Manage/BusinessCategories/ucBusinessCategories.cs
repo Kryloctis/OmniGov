@@ -1,13 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
-using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessCategories
@@ -44,14 +37,13 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
         {
             if (!DesignMode)
             {
-                
             }
         }
 
         private bool DescriptionValidated(ErrorProvider errorProvider, TextBox textBox)
-        { 
+        {
             bool descriptionExist;
-            descriptionExist = isEdit? AccFactory.BusinessCategoriesRepository().DescriptionExist(businessCategoryID, textBox.Text.Trim()) : AccFactory.BusinessCategoriesRepository().DescriptionExist(textBox.Text.Trim());
+            descriptionExist = isEdit ? AccFactory.BusinessCategoriesRepository().DescriptionExist(businessCategoryID, textBox.Text.Trim()) : AccFactory.BusinessCategoriesRepository().DescriptionExist(textBox.Text.Trim());
 
             if (Helper.ShowErrorTextBoxEmpty(errorProvider, textBox, "Description"))
                 return false;
@@ -70,7 +62,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             {
                 e.Cancel = !DescriptionValidated(errorProvider1, txtDescription);
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void txtDescription_Validated(object sender, EventArgs e)

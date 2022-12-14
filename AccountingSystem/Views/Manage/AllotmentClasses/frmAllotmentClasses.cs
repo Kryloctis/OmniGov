@@ -12,6 +12,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             InitializeComponent();
             Helper.LoadFormIcon(this);
         }
+
         internal void LoadRecords()
         {
             try
@@ -73,7 +74,6 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
 
         private void dgAllotmentClasses_SelectionChanged_1(object sender, EventArgs e)

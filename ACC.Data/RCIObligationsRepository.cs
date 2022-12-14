@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using ACC.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Transactions;
 
@@ -51,10 +51,8 @@ namespace ACC.Data
 
         public bool DeleteRecordsByRCIId(int rcidId)
         {
-           
             using (var scope = new TransactionScope())
             {
-
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int32, rcidId }
@@ -64,11 +62,9 @@ namespace ACC.Data
 
                 _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
 
-
                 scope.Complete();
                 return true;
             };
-           
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -93,11 +89,9 @@ namespace ACC.Data
                 var dtRCI = new DataTable();
 
                 return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
-
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

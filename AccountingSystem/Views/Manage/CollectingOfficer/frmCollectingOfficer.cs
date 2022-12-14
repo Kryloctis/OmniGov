@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficer : Form
@@ -34,14 +33,14 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
                 HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
                 lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                Helper.MessageBoxError(ex.Message); 
+                Helper.MessageBoxError(ex.Message);
             }
         }
 
         private void frmCollectingOfficer_Load(object sender, EventArgs e)
-        {           
+        {
             LoadRecords();
         }
 
@@ -98,7 +97,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
             byte[] columnIndexTimestamp = { 3, 4 };
 
-
             lblJOCount.Text = AccFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
 
             Helper.ShowRecordTimestamp(dgCollectingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
@@ -112,7 +110,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if(txtsearch.Text.Length > 0)
+            if (txtsearch.Text.Length > 0)
             {
                 try
                 {

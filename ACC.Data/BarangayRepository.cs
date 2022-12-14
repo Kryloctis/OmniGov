@@ -148,7 +148,6 @@ namespace ACC.Data
             string query = $"INSERT INTO barangays (code, name, municipalities_id) VALUES (@barangay_code, @barangay_name, @municipalities_id)";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameter);
-
         }
 
         public bool Update(BarangayModel entity)

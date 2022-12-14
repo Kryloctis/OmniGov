@@ -1,7 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using AccountingSystem.Views.Reports.CollectorsRCD;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -49,7 +48,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
-        
+
         private void ucRCDCollector_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
@@ -73,11 +72,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 else
                     dtCollector = collectingOfficerRepository.GetRecords();
 
-
                 HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
 
                 collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
-
             }
             catch (Exception ex)
             {
@@ -137,14 +134,15 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                         radFund.Image = null;
                 }
 
-
                 flowLayoutPanelFunds.Controls.Add(radFund);
 
-                radFund.Click += (s, e) => {
+                radFund.Click += (s, e) =>
+                {
                     var radFund = s as RadioButton;
                     fundId = Convert.ToByte(radFund.Tag);
                 };
-                radFund.CheckedChanged += (s, e) => {
+                radFund.CheckedChanged += (s, e) =>
+                {
                     var radFund = s as RadioButton;
                     if (radFund.Checked)
                         radFund.Image = Properties.Resources.ok14px;
@@ -211,6 +209,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         }
 
         #region Validation
+
         private void txtReport_Validating(object sender, CancelEventArgs e)
         {
             string reportNo = txtReport.Text.Trim();
@@ -221,12 +220,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 e.Cancel = Helper.ShowErrorTextBoxEmpty(epReportNo, txtReport, "Report No.");
                 return;
             }
-            
-            if (isSaveFunction)
-                reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
-            else
-                reportNoExist  = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
+            if (isSaveFunction)
+                reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportNo);
+            else
+                reportNoExist = AccFactory.CollectorReportRepository().ReportNumberExist(reportId, reportNo);
 
             if (reportNoExist)
             {
@@ -234,7 +232,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
                 e.Cancel = true;
             }
             else
-            { 
+            {
                 e.Cancel = false;
             }
         }
@@ -246,7 +244,7 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void dgPayments_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorDatagridView(epPayments, dgPayments , "Payments.");
+            e.Cancel = Helper.ShowErrorDatagridView(epPayments, dgPayments, "Payments.");
         }
 
         private void dgPayments_Validated(object sender, EventArgs e)
@@ -275,7 +273,5 @@ namespace AccountingSystem.Views.Reports.RCDCollector
         }
     }
 
-    #endregion
-
-
+    #endregion Validation
 }

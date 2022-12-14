@@ -105,7 +105,6 @@ namespace AccountingSystem.Views.Manage.TaxPayers
             int rowIndex = dgTaxpayers.CurrentCell.RowIndex;
             var taxpayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["taxpayers_id"].Value);
             _ = new frmEditTaxpayers(taxpayerId, this).ShowDialog();
-
         }
 
         public static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit)
@@ -121,7 +120,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void dgTaxpayers_SelectionChanged(object sender, EventArgs e)
         {
-              try
+            try
             {
                 var indexes = new byte[] { 7, 8 };
                 EnableDisableToolStripButtons(dgTaxpayers, btnEdit);

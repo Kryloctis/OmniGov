@@ -7,7 +7,7 @@ namespace RPT.Data
 {
     public class PreviousAssessmentRepository : IPreviousAssessment
     {
-        readonly string tableName = "previous_assessment";
+        private readonly string tableName = "previous_assessment";
         private RptGenericCommands _mySqlGenericCommandsRPT;
 
         public PreviousAssessmentRepository(RptGenericCommands mySqlGenericCommandsRPT)

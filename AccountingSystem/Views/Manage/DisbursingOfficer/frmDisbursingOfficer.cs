@@ -1,7 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.DisbursingOfficer
@@ -93,6 +93,5 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             Helper.ShowRecordTimestamp(dgDisbursingOfficer, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgDisbursingOfficer, btnEdit, btnDelete);
         }
-
     }
 }

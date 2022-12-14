@@ -63,7 +63,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 var lguDetails = Helper.LGUDetails();
                 var totalChecksAmount = 0;
 
-
                 var parameters = new[]
                 {
                     new ReportParameter("paramLGUName", value:lguDetails["lgu_name"]),
@@ -103,7 +102,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             if (dt.Rows.Count == 0)
                 return dt;
 
-
             foreach (DataRow item in dt.Rows)
             {
                 DataRow row = dtFromDataSource.NewRow();
@@ -132,10 +130,8 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                 row["ending_bal_serial_from"] = Convert.ToInt32(lastIssued) + 1;
                 row["ending_bal_serial_to"] = receiptBeginningBalanceTo;
 
-
                 dtFromDataSource.Rows.Add(row);
             }
-            
 
             return dtFromDataSource;
         }
@@ -149,7 +145,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -194,7 +189,6 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
                     var receiptNumberFrom = string.IsNullOrEmpty(item["report_number_from"].ToString()) ? string.Empty : Convert.ToInt32(item["report_number_from"]).ToString("D7");
                     var receiptNumberTo = string.IsNullOrEmpty(item["report_number_to"].ToString()) ? string.Empty : Convert.ToInt32(item["report_number_to"]).ToString("D7");
 
-
                     row["type_of_form"] = item["accountable_forms"];
                     row["serial_no_from"] = receiptNumberFrom;
                     row["serial_no_to"] = receiptNumberTo;
@@ -219,7 +213,7 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
                     if (!string.IsNullOrEmpty(item["job_orders_id"].ToString()))
                         collectingOfficer = $"{item["job_orders_first_name"]} {item["job_orders_mid_initial"]}. {item["job_orders_last_name"]} / {collectingOfficer}";
-                   
+
                     DataRow row = dtFromDataSource.NewRow();
                     row["report_no"] = item["report_no"];
                     row["date"] = item["date"];
@@ -231,7 +225,5 @@ namespace AccountingSystem.Views.Reports.PaymentCollection
 
             return dtFromDataSource;
         }
-
-
     }
 }

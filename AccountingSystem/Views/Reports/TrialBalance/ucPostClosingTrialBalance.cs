@@ -8,7 +8,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 {
     public partial class ucPostClosingTrialBalance : UserControl
     {
-
         private readonly ReportViewer reportViewer;
 
         public ucPostClosingTrialBalance()
@@ -99,7 +98,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 string genLedgAccCode = row["account_code"].ToString();
                 string genLedgAccName = row["ledger_name"].ToString();
 
-
                 decimal balanceDebit, balanceCredit;
 
                 if (genLedgAccName == "Government Equity")
@@ -130,8 +128,6 @@ namespace AccountingSystem.Views.Reports.TrialBalance
 
                 dtPreTrialBalance.Rows.Add(items);
             }
-
-
 
             return dtPreTrialBalance;
         }
@@ -196,14 +192,14 @@ namespace AccountingSystem.Views.Reports.TrialBalance
                 RecordsFilter(reportViewer.LocalReport, 0);
         }
 
-        private void OnLoad() 
+        private void OnLoad()
         {
             try
             {
                 var dtFunds = AccFactory.FundsRepository().GetRecords();
                 HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucPostClosingTrialBalance_Load(object sender, EventArgs e)

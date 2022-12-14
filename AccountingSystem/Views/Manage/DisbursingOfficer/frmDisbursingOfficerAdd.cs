@@ -19,7 +19,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void frmDisbursingOfficerAdd_Load(object sender, EventArgs e)
         {
-
         }
 
         private bool SaveData()

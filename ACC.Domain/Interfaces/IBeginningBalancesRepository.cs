@@ -27,6 +27,5 @@ namespace ACC.Domain.Interfaces
         bool GeneralLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year);
 
         bool SubsidiaryLedgerBalanceExist(byte fundsId, ushort generalLedgerId, short year, ushort subsidiaryLedgerId);
-
     }
 }

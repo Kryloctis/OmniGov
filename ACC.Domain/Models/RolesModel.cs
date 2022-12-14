@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ACC.Domain.Models
 {
-   public class RolesModel
+    public class RolesModel
     {
         public byte Id { get; set; }
         public string Office { get; set; }

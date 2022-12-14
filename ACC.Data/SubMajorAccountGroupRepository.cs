@@ -37,7 +37,6 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-
         public DataTable GetRecordsByMajorAccountId(short majorAccountId)
         {
             try

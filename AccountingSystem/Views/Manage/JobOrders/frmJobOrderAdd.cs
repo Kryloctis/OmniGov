@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.JobOrders
             try
             {
                 using (var scope = new TransactionScope())
-                { 
+                {
                     if (InsertJobOrder() == true && AssignJOTORegularCollector() == true)
                     {
                         scope.Complete();
@@ -59,7 +59,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 }
             }
         }
-
 
         private bool InsertJobOrder()
         {
@@ -85,7 +84,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 throw;
             }
         }
-
 
         private bool AssignJOTORegularCollector()
         {
@@ -118,8 +116,6 @@ namespace AccountingSystem.Views.Manage.JobOrders
                 Helper.MessageBoxError(ex.Message);
                 return false;
             }
-
-            
         }
     }
 }

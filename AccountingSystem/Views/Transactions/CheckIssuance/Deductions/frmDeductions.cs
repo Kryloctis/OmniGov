@@ -10,8 +10,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
     public partial class frmDeductions : Form
     {
         private readonly ucRCI _uc;
-        DataTable dtDeductions = new();
-
+        private DataTable dtDeductions = new();
 
         public frmDeductions(ucRCI uc)
         {
@@ -31,6 +30,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             foreach (DataGridViewRow row in dgDeductions.SelectedRows)
                 dgDeductions.Rows.Remove(row);
         }
+
         private void dgDeductions_SelectionChanged(object sender, EventArgs e)
         {
             bool hasRowSelected = Convert.ToBoolean(dgDeductions.Rows.Count != 0);
@@ -63,8 +63,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             HelperLoadRecords.RCIDeductionsDatagridview(_uc.dtDeductions, dgDeductions);
         }
 
-  
-
         #region Validations
 
         internal string GetFormErrors()
@@ -81,6 +79,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
         {
             e.Cancel = Helper.ShowErrorTextBoxEmpty(epDescription, txtDescription, "Description.");
         }
+
         private void txtDescription_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(epDescription, txtDescription);
@@ -96,8 +95,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-
-        #endregion
+        #endregion Validations
 
         private void btnConfirmDeductions_Click(object sender, EventArgs e)
         {
@@ -107,7 +105,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Deductions
 
                 this.Close();
             }
-
         }
     }
 }

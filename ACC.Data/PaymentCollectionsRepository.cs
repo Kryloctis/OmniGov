@@ -172,14 +172,12 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
 
         public bool Update(PaymentCollectionsModel entity)
         {
@@ -312,11 +310,9 @@ namespace ACC.Data
 
             string query = $"SELECT * FROM {viewTableName}  WHERE accountable_forms LIKE @searchText";
 
-
             var dtpc = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtpc, parameter);
         }
-
 
         public DataTable GetRecordByLedger(object[] parameter)
         {
@@ -336,7 +332,6 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.FillBySearch(query, dtPaymentCollection, parameters);
         }
 
-
         public DataTable GetRecordsByUserId(int userId)
         {
             var parameter = new object[][] {
@@ -352,7 +347,6 @@ namespace ACC.Data
 
         public DataTable GetCollectionsPerCollector()
         {
-
             string query = $"SELECT collecting_officer_id, collecting_officers_first_name, collecting_officers_mid_initial, collecting_officers_last_name, job_orders_id, job_orders_first_name, job_orders_mid_initial, job_orders_last_name, SUM(amount) AS amount FROM {viewTableName} GROUP BY job_orders_id";
 
             var dt = new DataTable();
@@ -425,7 +419,6 @@ namespace ACC.Data
                     scope.Complete();
                     return true;
                 }
-
             }
             catch (Exception)
             {

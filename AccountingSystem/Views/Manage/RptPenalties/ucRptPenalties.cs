@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
@@ -20,7 +14,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             InitializeComponent();
         }
 
-        private void LoadFrequencies() 
+        private void LoadFrequencies()
         {
             cmbxFrequency.Items.AddRange(new string[] { "Monthly", "Annually" });
             cmbxFrequency.SelectedIndex = 0;
@@ -48,7 +42,8 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         }
 
         #region Validations
-        private bool DescriptionValidated() 
+
+        private bool DescriptionValidated()
         {
             return Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDescription, "Description");
         }
@@ -87,11 +82,12 @@ namespace AccountingSystem.Views.Manage.RptPenalties
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
         }
-        #endregion
+
+        #endregion Validations
 
         private void ucRptPenalties_Load(object sender, EventArgs e)
         {
-            if (!DesignMode) 
+            if (!DesignMode)
             {
                 LoadFrequencies();
             }

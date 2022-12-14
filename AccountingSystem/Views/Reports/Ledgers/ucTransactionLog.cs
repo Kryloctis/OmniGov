@@ -68,7 +68,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadSubsidiaryAccounts()
         {
-
             try
             {
                 HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLegerAccountsDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
@@ -82,7 +81,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row, ref decimal balance)
         {
             decimal amount = Convert.ToDecimal(item["amount"]);
-
 
             if (Convert.ToBoolean(item["is_debit"]))
             {
@@ -211,7 +209,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void cmbAccount_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
             LoadSubsidiaryAccounts();
         }
 
@@ -257,7 +254,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)

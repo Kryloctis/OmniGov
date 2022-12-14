@@ -1,16 +1,7 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Banks;
-using AccountingSystem.Views.Manage.Funds;
-using AccountingSystem.Views.Manage.Receipts;
-using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
@@ -43,7 +34,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
             toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
         }
-         
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAddBankAccounts(this).ShowDialog();
@@ -72,7 +63,7 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int selectedRowsCount = dgBankAccounts.SelectedRows.Count;
-          
+
             if (selectedRowsCount > 0)
             {
                 if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
@@ -89,7 +80,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                     LoadBankAccounts();
                 }
             }
-         
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

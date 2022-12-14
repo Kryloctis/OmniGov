@@ -1,6 +1,6 @@
 ﻿namespace ACC.Domain.Models
 {
-   public class CollectingOfficerModel
+    public class CollectingOfficerModel
     {
         public int Id { get; set; }
 

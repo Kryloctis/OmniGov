@@ -30,12 +30,11 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
 
         private void btnFindOwner_Click(object sender, EventArgs e)
         {
-            _ = new frmRptTaxPayerList(null, this, null, null, null).ShowDialog();
+            //_ = new frmRptTaxPayerList(null, this, null, null, null).ShowDialog();
         }
 
         private void frmRealPropertyTaxStatementOfAccount_Load(object sender, EventArgs e)
         {
-
         }
 
         private DataColumn[] Sample()
@@ -72,24 +71,31 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
                 decimal sefTaxDueAmount = RealPropertyTaxComputations.GetSefTaxDue(sefTaxRate, assessedValue);
 
                 string year = row["year"].ToString();
+
                 #region Discount
+
                 decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDueAmount);
                 decimal sefDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, sefTaxDueAmount);
+
                 #endregion Discount
-                    
+
                 #region Basic
+
                 newRowBasic["tax_type"] = "Basic";
                 newRowBasic["previous_year"] = "2010";
                 newRowBasic["next_year"] = year;
 
                 newRowBasic["total_tax_due_basic"] = basicTaxDueAmount;
-                #endregion
+
+                #endregion Basic
 
                 #region SEF
+
                 newRowSEF["tax_type"] = "SEF";
 
                 newRowSEF["total_tax_due_sef"] = sefTaxDueAmount;
-                #endregion
+
+                #endregion SEF
 
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowBasic);
                 dtRealPropertyTaxStatementOfAccounts.Rows.Add(newRowSEF);
@@ -274,6 +280,5 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxS
             }
             return false;
         }
-
     }
 }

@@ -8,6 +8,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
     public partial class frmCashbook : Form
     {
         private readonly ReportViewer reportViewer = new();
+
         public frmCashbook()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
             var dtBD = AccFactory.BankDepositsRepository().GetRecordsBySearch(id);
             var dtRC = AccFactory.RCIRepository().GetRecords(id);
 
-            if(dtBD.Rows.Count > 0 || dtRC.Rows.Count > 0)
+            if (dtBD.Rows.Count > 0 || dtRC.Rows.Count > 0)
             {
                 //decimal balance = 0;
                 //decimal debit = 0;
@@ -50,11 +51,11 @@ namespace AccountingSystem.Views.Reports.Cashbook
                 {
                     DataRow row = dtCB.NewRow();
                     row["date"] = item["date"];
-                    row["particulars"] = String.Format("Deposit - {0} - {1}",item["bank_name"], item["account_no"]);
+                    row["particulars"] = String.Format("Deposit - {0} - {1}", item["bank_name"], item["account_no"]);
                     row["reference"] = item["reference"];
-                    row["debit"] = item["amount"];                    
-                   // row["credit"] = 0;
-                   // row["balance"] = balance;
+                    row["debit"] = item["amount"];
+                    // row["credit"] = 0;
+                    // row["balance"] = balance;
                     dtCB.Rows.Add(row);
                 }
 
@@ -66,7 +67,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
                     row["reference"] = String.Format("{0} - {1}", item["check_no"], item["dv_no"]);
                     row["credit"] = item["amount"];
                     //  row["debit"] = 0;
-                   // row["balance"] = balance;
+                    // row["balance"] = balance;
                     dtCB.Rows.Add(row);
                 }
                 dtCB.Select(string.Empty, "date ASC");
@@ -83,6 +84,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
             }
             return dtCB;
         }
+
         private void LoadReport(LocalReport report)
         {
             try
@@ -105,9 +107,10 @@ namespace AccountingSystem.Views.Reports.Cashbook
                 Helper.MessageBoxError(ex.Message);
             }
         }
+
         private void btnretrieve_Click(object sender, EventArgs e)
         {
-            if(cmbbank.SelectedIndex == -1)
+            if (cmbbank.SelectedIndex == -1)
             {
                 Helper.MessageBoxError("Please select Bank!");
                 cmbbank.Focus();

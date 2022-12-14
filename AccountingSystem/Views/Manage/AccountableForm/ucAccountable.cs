@@ -1,17 +1,19 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using ACC.Domain.Interfaces;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
 {
     public partial class ucAccountable : UserControl
     {
         internal int accId = 0;
+
         public ucAccountable()
         {
             InitializeComponent();
         }
+
         internal string GetFormErrors()
         {
             var errorArray = new string[2];
@@ -21,6 +23,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
         }
+
         internal void ResetForm()
         {
             txtformno.Clear();

@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                 uc.panel1.Enabled = false;
                 uc.dtDateIssued.Enabled = false;
 
-
                 foreach (DataRow row in dtAllotmentRelease.Rows)
                 {
                     short year = Convert.ToInt16(row["year"]);
@@ -136,7 +135,6 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
                     Purpose = purpose,
                     DateIssued = uc.dtDateIssued.Value
                 };
-
 
                 return AccFactory.AllotmentReleaseRepository().Update(allotmemtReleaseModel, AllotmentAccountModelList());
             }

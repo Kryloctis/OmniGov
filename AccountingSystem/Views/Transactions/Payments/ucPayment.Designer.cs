@@ -382,6 +382,7 @@
             this.cmbxAccountableForm.Name = "cmbxAccountableForm";
             this.cmbxAccountableForm.Size = new System.Drawing.Size(272, 23);
             this.cmbxAccountableForm.TabIndex = 51;
+            this.cmbxAccountableForm.SelectionChangeCommitted += new System.EventHandler(this.cmbxAccountableForm_SelectionChangeCommitted);
             // 
             // label3
             // 

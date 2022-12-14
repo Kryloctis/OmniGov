@@ -178,7 +178,6 @@ namespace ACC.Data
                 string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL";
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
-
             }
             catch (Exception)
             {
@@ -193,14 +192,12 @@ namespace ACC.Data
                 string query = $"SELECT {tableName}.id,CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) AS account_code,{tableName}.ledger_name FROM {tableName} LEFT JOIN {tableName4} ON {tableName}.sub_major_account_group_id={tableName4}.id LEFT JOIN {tableName3} ON {tableName4}.major_account_group_id={tableName3}.id LEFT JOIN {tableName2} ON ({tableName3}.account_group_id={tableName2}.id AND {tableName2}.id='4') WHERE CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) IS NOT NULL AND (CONCAT({tableName2}.account_group_code,'-',{tableName3}.maj_acc_group_code,'-',{tableName4}.sub_maj_acc_group_code,'-',{tableName}.ledger_code) LIKE '%{srchtxt}%' OR ledger_name LIKE '%{srchtxt}%')";
                 var dtGeneralLedgers = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtGeneralLedgers);
-
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
 
         public DataTable GetViewRecordsByMajorAccGroupName(string majAccGroupName)
         {
@@ -210,7 +207,6 @@ namespace ACC.Data
                 {
                     new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
                 };
-
 
                 string query = $"SELECT " +
                     $"general_ledger_accounts_id, " +
@@ -252,7 +248,6 @@ namespace ACC.Data
                     new object[] { "@maj_acc_group_name", DbType.String, majAccGroupName},
                     new object[] { "@searchText", DbType.String, $"%{searchText}%" }
                 };
-
 
                 string query = $"SELECT " +
                     $"general_ledger_accounts_id, " +
@@ -361,7 +356,6 @@ namespace ACC.Data
                     $"AND (account_code LIKE @searchText OR REPLACE(account_code, '-', '') LIKE @searchText " +
                     $"OR ledger_name LIKE @searchText)";
 
-
                 var dataTable = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
             }
@@ -370,7 +364,6 @@ namespace ACC.Data
                 throw;
             }
         }
-
 
         //CHART OF ACCOUNTS
         public DataTable GetViewRecordsBy_AccountGroupId(int accountGroupId)
@@ -449,7 +442,5 @@ namespace ACC.Data
                 throw;
             }
         }
-
-
     }
 }

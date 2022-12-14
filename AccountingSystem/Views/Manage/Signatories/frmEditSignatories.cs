@@ -8,7 +8,7 @@ namespace AccountingSystem.Views.Manage.Signatories
     public partial class frmEditSignatories : Form
     {
         internal ucSignatories uc;
-        frmSignatories _frmSignatories;
+        private frmSignatories _frmSignatories;
 
         public frmEditSignatories(frmSignatories frmSignatories)
         {

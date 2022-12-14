@@ -2,13 +2,13 @@
 using System;
 using System.Windows.Forms;
 
-
 namespace AccountingSystem.Views.Manage.CollectingOfficer
 {
     public partial class frmCollectingOfficerAdd : Form
     {
         private frmCollectingOfficer _frmCollectingOfficer;
         private ucCollectingOfficer _uc;
+
         public frmCollectingOfficerAdd(frmCollectingOfficer frmCollectingOfficer)
         {
             InitializeComponent();

@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.ReceiptsIssued
@@ -15,7 +8,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
     {
         private frmReceiptsIssued frmr;
 
-        public frmReceiptsIssuedEdit(frmReceiptsIssued _frmr,int id)
+        public frmReceiptsIssuedEdit(frmReceiptsIssued _frmr, int id)
         {
             InitializeComponent();
             frmr = _frmr;
@@ -94,10 +87,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                     }
                     else return riRepository.Update(riModel);
                 }
-                
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false; 
+            return false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)

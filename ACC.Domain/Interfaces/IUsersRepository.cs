@@ -1,11 +1,13 @@
 ﻿using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
+
 namespace ACC.Domain.Interfaces
 {
     public interface IUsersRepository : IAccRepository<UsersModel>
     {
         bool HasPermission(byte userId, string permissionName);
+
         bool NameExist(string name);
 
         bool NameExist(string name, int id);
@@ -25,7 +27,9 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsBySearch(string office, string searchTxt);
 
         DataTable GetViewRecords();
+
         bool LinkedJobOrder(int id);
+
         bool LinkedCollector(int id);
 
         bool LinkedDisburser(int id);

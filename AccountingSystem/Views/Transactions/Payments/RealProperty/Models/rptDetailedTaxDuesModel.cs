@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AccountingSystem.Views.Transactions.PropertyPayment.Models
+﻿namespace AccountingSystem.Views.Transactions.PropertyPayment.Models
 {
     public class RptDetailedTaxDuesModel
     {

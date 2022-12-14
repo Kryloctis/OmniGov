@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ACC.Domain.Models;
 using System.Data;
-using System.Text;
-using ACC.Domain.Models;
 
 namespace ACC.Domain.Interfaces
 {

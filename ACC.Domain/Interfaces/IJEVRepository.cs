@@ -41,13 +41,13 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByJEVNoAndDate(string searchText, sbyte jevDate, ushort year, byte journalId);
 
-        #region  Validations
+        #region Validations
 
         bool JevNumberExistBy_JevNo_FundId_Year(string jevNo, int fundId, int year);
 
         bool JevNumberExistBy_JevId_JevNo_FundId_Year(int jevId, string jevNo, int fundId, int year);
 
-        #endregion
+        #endregion Validations
 
         int JevCounterByJournal(string fundName, int month, int year, string journalName);
 
@@ -65,8 +65,8 @@ namespace ACC.Domain.Interfaces
 
         //REMARKS
         bool SetRemarks(int jevId, string remarks);
-        string GetRemarks(int jevId);
 
+        string GetRemarks(int jevId);
 
         DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year);
 
@@ -76,6 +76,5 @@ namespace ACC.Domain.Interfaces
         decimal GetSumByMajorAccountGroup(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
 
         decimal GetSumPreviousYearTransactionsByFundIdAndMajAccountGroupId(int fundId, int majorAccountGroupId, byte isDebit, DateTime dateEntry);
-
     }
 }

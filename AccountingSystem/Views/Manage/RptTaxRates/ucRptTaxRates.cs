@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptTaxRates
@@ -43,6 +37,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         }
 
         #region Validations
+
         private bool CodeExist()
         {
             return Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Code");
@@ -96,7 +91,8 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
         private void nudRate_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorNumericUpDown(errorProvider1, nudRate);
-        } 
-        #endregion
+        }
+
+        #endregion Validations
     }
 }

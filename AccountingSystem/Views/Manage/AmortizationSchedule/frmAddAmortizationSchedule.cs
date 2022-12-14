@@ -1,12 +1,5 @@
 ﻿using AccountingSystem.Views.Manage.Amortization;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AmortizationSchedule
@@ -16,7 +9,7 @@ namespace AccountingSystem.Views.Manage.AmortizationSchedule
         private ucAmortizationSchedule uc;
         internal int amortizationId;
         internal string amortizationTerm;
-        private frmAmortizationSchedule _frmAmortizationSchedule;     
+        private frmAmortizationSchedule _frmAmortizationSchedule;
 
         public frmAddAmortizationSchedule(frmAmortizationSchedule frmAmortizationSchedule)
         {

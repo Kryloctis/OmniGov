@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    class GeneralCollectionsRepository:IGeneralCollectionsRepository
+    internal class GeneralCollectionsRepository : IGeneralCollectionsRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableGeneralCollections = "general_collections";
@@ -179,6 +179,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public int CountRecords()
         {
             try
@@ -242,7 +243,7 @@ namespace ACC.Data
         {
             try
             {
-                var parameter = new object[][] { 
+                var parameter = new object[][] {
                     new object[]{"@fund_id", DbType.String, fund_id },
                     new object[]{"@searchKey", DbType.String, $"%{ searchText }%" }
                 };
@@ -336,12 +337,12 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public DataTable GetRecordByCollections(int Id)
         {
             try
             {
-               string query = $"SELECT {tableGeneralCollections}.id,{tableCollectorReport}.id AS reportid,{tableCollectorReport}.report_no,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector,(SELECT SUM(pc.amount) FROM {tableCollectorReport} cr LEFT JOIN {tableCollectorReportPayments} crp ON cr.id=crp.collector_report_id LEFT JOIN {tablePaymentCollections} pc ON pc.id=crp.payment_collections_id WHERE cr.id={tableGeneralCollectionsPayment}.id) AS total FROM {tableGeneralCollections} LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollections}.id={tableGeneralCollectionsPayment}.general_collections_id LEFT JOIN {tableCollectorReportPayments} ON {tableCollectorReportPayments}.collector_report_id={tableGeneralCollectionsPayment}.collector_report_id LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id LEFT JOIN {tableCollectingOfficers} ON {tablePaymentCollections}.collecting_officers_id={tableCollectingOfficers}.id LEFT JOIN {tableCollectorReport} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReport}.id WHERE {tableGeneralCollections}.id='{Id}' GROUP BY reportid";
-
+                string query = $"SELECT {tableGeneralCollections}.id,{tableCollectorReport}.id AS reportid,{tableCollectorReport}.report_no,CONCAT({tableCollectingOfficers}.last_name,', ',{tableCollectingOfficers}.first_name,' ',{tableCollectingOfficers}.mid_initial) AS collector,(SELECT SUM(pc.amount) FROM {tableCollectorReport} cr LEFT JOIN {tableCollectorReportPayments} crp ON cr.id=crp.collector_report_id LEFT JOIN {tablePaymentCollections} pc ON pc.id=crp.payment_collections_id WHERE cr.id={tableGeneralCollectionsPayment}.id) AS total FROM {tableGeneralCollections} LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollections}.id={tableGeneralCollectionsPayment}.general_collections_id LEFT JOIN {tableCollectorReportPayments} ON {tableCollectorReportPayments}.collector_report_id={tableGeneralCollectionsPayment}.collector_report_id LEFT JOIN {tablePaymentCollections} ON {tableCollectorReportPayments}.payment_collections_id={tablePaymentCollections}.id LEFT JOIN {tableCollectingOfficers} ON {tablePaymentCollections}.collecting_officers_id={tableCollectingOfficers}.id LEFT JOIN {tableCollectorReport} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReport}.id WHERE {tableGeneralCollections}.id='{Id}' GROUP BY reportid";
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);
@@ -359,11 +360,10 @@ namespace ACC.Data
                 //string query = $"SELECT {tableGeneralCollections}.id,{tableName17}.bank_name,{tableName17}.account_no,{tableBankDeposits}.reference,{tableBankDeposits}.amount FROM {tableGeneralCollections} LEFT JOIN {tableGeneralCollectionsDeposits} ON {tableGeneralCollectionsDeposits}.general_collections_id={tableGeneralCollections}.id LEFT JOIN {tableBankDeposits} ON {tableGeneralCollectionsDeposits}.bank_deposits_id={tableBankDeposits}.id LEFT JOIN {tableName17} ON {tableBankDeposits}.banks_id={tableName17}.id WHERE {tableGeneralCollections}.id='{Id}'";
 
                 var parameter = new object[][] {
-                    new object[] {"@bankId", DbType.String, Id}        
+                    new object[] {"@bankId", DbType.String, Id}
                 };
 
                 string query = $"SELECT * FROM view_bank_deposits WHERE bank_id = 1";
-
 
                 var dtpc = new DataTable();
                 return _dbGenericCommands.FillBySearch(query, dtpc, parameter);
@@ -378,7 +378,6 @@ namespace ACC.Data
         {
             try
             {
-
                 string query = $"SELECT CONCAT({tableAccountableForms}.acc_form_no,'-',{tableAccountableForms}.acc_form_desc) AS form,{tableReceipts}.receipt_number_from,{tableReceipts}.receipt_number_to,{tableReceiptsIssued}.receipt_issued_from,{tableReceiptsIssued}.receipt_issued_to,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1 ORDER BY receipt_no ASC LIMIT 1) AS ifrom,(SELECT receipt_no FROM {tablePaymentCollections} WHERE accountable_forms_id={tableAccountableForms}.id AND receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1 ORDER BY receipt_no DESC LIMIT 1) AS ito FROM {tableAccountableForms} LEFT JOIN {tableReceipts} ON {tableReceipts}.accountable_forms_id={tableAccountableForms}.id LEFT JOIN {tableReceiptsIssued} ON {tableReceiptsIssued}.receipts_id={tableReceipts}.id WHERE {tableAccountableForms}.id IN (SELECT {tablePaymentCollections}.accountable_forms_id FROM {tablePaymentCollections} LEFT JOIN {tableCollectorReportPayments} ON {tablePaymentCollections}.id={tableCollectorReportPayments}.payment_collections_id LEFT JOIN {tableGeneralCollectionsPayment} ON {tableGeneralCollectionsPayment}.collector_report_id={tableCollectorReportPayments}.collector_report_id WHERE {tableGeneralCollectionsPayment}.general_collections_id='{Id}' AND {tablePaymentCollections}.receipt_no BETWEEN {tableReceiptsIssued}.receipt_issued_from-1 AND {tableReceiptsIssued}.receipt_issued_to+1)";
 
                 var dtpc = new DataTable();
@@ -412,15 +411,14 @@ namespace ACC.Data
                 var dtpc = new DataTable();
                 return _dbGenericCommands.Fill(query, dtpc);
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 throw;
             }
         }
 
-
         public int GetGeneralCollectionId(string rcdNo)
-        {       
+        {
             var parameter = new object[][] {
                 new object[] {"@rcdNo", DbType.String, rcdNo}
             };
@@ -439,7 +437,6 @@ namespace ACC.Data
 
             var dtRCD = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCD, parameter);
-           
         }
 
         public DataTable GetRecordsByFundId(int fundId)
@@ -479,4 +476,3 @@ namespace ACC.Data
         }
     }
 }
- 

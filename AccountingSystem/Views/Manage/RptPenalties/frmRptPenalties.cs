@@ -1,12 +1,6 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptPenalties
@@ -14,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
     public partial class frmRptPenalties : Form
     {
         private readonly MainForm _mainForm;
+
         public frmRptPenalties(MainForm mainForm)
         {
             InitializeComponent();
@@ -28,7 +23,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             lblRecordCount.Text = recordCount.ToString();
         }
 
-        internal void LoadPenalties() 
+        internal void LoadPenalties()
         {
             string searchText = txtSearch.Text.Trim();
 
@@ -64,14 +59,14 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             ShowEditForm();
         }
 
-        private bool Delete(out int deletedCount) 
+        private bool Delete(out int deletedCount)
         {
             try
             {
                 var rptPenalitiesModelList = new List<RptPenaltiesModel>();
                 int rowCount = dataGridView1.SelectedRows.Count;
 
-                if (Helper.MessageBoxConfirmDelete(rowCount)) 
+                if (Helper.MessageBoxConfirmDelete(rowCount))
                 {
                     foreach (DataGridViewRow row in dataGridView1.SelectedRows)
                     {
@@ -83,7 +78,6 @@ namespace AccountingSystem.Views.Manage.RptPenalties
                     deletedCount = rowCount;
                     return AccFactory.RptPenaltiesRepository().Delete(rptPenalitiesModelList);
                 }
-                
             }
             catch (Exception ex)
             {
@@ -99,7 +93,7 @@ namespace AccountingSystem.Views.Manage.RptPenalties
             int deletedRecordCount;
 
             if (Delete(out deletedRecordCount))
-            { 
+            {
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
                 LoadPenalties();
             }

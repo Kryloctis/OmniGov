@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.InteropServices;
 using System.Transactions;
 
 namespace AccountingSystem
@@ -140,7 +139,7 @@ namespace AccountingSystem
 
         public bool DescriptionExist(string description)
         {
-            var parameters = new object[][]{new object[] { "@description", DbType.String, description}};
+            var parameters = new object[][] { new object[] { "@description", DbType.String, description } };
 
             string query = $"SELECT id FROM {tableName} WHERE description = @description";
             string result = _dbGenericCommands.ExecuteScalar(query, parameters);

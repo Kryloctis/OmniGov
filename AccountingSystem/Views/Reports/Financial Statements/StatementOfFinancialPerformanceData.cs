@@ -100,7 +100,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             decimal gains = GetGains(fundId, date);
             decimal otherIncome = GetOtherIncome(fundId, date);
 
-
             decimal totalRevenue = taxRevenue + shareIntervalRevenue + otherShareNationalTaxes + servicesBusinessIncome + shareGrantsDonations + gains + otherIncome;
             return totalRevenue;
         }
@@ -254,7 +253,6 @@ namespace AccountingSystem.Views.Reports.Financial_Statements
             dict.Add("previous_transfers_and_subsidy_from", GetTransferSubsidyFrom(fundId, previous));
             dict.Add("previous_transfers_and_subsidy_to", GetTransferSubsidyTo(fundId, previous));
             dict.Add("previous_surplus_deficit_for_the_period", SurplusDeficitPeriod(fundId, previous));
-
 
             return dict;
         }

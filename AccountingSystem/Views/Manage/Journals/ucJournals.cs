@@ -8,6 +8,7 @@ namespace AccountingSystem.Views.Manage.Journals
     public partial class ucJournals : UserControl
     {
         internal int journalId = 0;
+
         public ucJournals()
         {
             InitializeComponent();

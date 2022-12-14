@@ -158,21 +158,21 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 });
 
                 var dtViewRealProperties = AccFactory.RealPropertiesRepository().GetRecordsBy_EffectivivtyYear_Barangay_Search(year, barangayName, searchText);
-                
+
                 foreach (DataRow row in dtViewRealProperties.Rows)
                 {
                     string rowCompleteArpNo = row["complete_arp_no"].ToString();
                     int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
                     if (leastAssessedYear > year && leastAssessedYear != 0)
                         continue;
-                
+
                     totalRowCount += 1;
                 }
 
-                foreach (DataRow row in dtViewRealProperties.Rows)  
+                foreach (DataRow row in dtViewRealProperties.Rows)
                 {
                     var newRow = assessmentPostsDataTable.NewRow();
-                            
+
                     string rowCompleteArpNo = row["complete_arp_no"].ToString();
                     int leastAssessedYear = AccFactory.RptAssessmentPostsRepository().GetMinAssessmentPostYear(rowCompleteArpNo);
                     if (leastAssessedYear > year && leastAssessedYear != 0)
@@ -182,7 +182,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     int rowRealPropertiesId = Convert.ToInt32(row["real_properties_id"]);
                     int rowTaxpayerId = Convert.ToInt32(row["real_taxpayers_id"]);
                     string rowTaxpayerName = row["taxpayer_name"].ToString();
-                    string rowTaxpayerTin = row["taxpayer_tin"].ToString();    
+                    string rowTaxpayerTin = row["taxpayer_tin"].ToString();
                     string rowTaxpayerContact = row["taxpayer_contact_info"].ToString();
                     string rowTaxpayerAddress = row["taxpayer_address"].ToString();
                     string rowBarangayName = row["real_properties_barangays_name"].ToString();
@@ -488,7 +488,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
             try
             {
-
             }
             catch (Exception ex)
             {

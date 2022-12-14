@@ -30,7 +30,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             IError _errors = AccFactory.CreateErrors(errorArray);
             return _errors.GenerateErrorMessage();
-
         }
 
         internal void ResetForm()
@@ -110,7 +109,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-
         #region FPP
 
         private DataTable DataTableFPP()
@@ -163,7 +161,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 cmbFPP.SelectedIndex = -1;
                 cmbFPP.TextChanged += new EventHandler(cmbxFPP_TextChanged);
             }
-
         }
 
         private void cmbxFPP_KeyDown(object sender, KeyEventArgs e)
@@ -175,7 +172,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        #endregion
+        #endregion FPP
 
         #region General Ledger Accounts
 
@@ -233,7 +230,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
@@ -262,7 +258,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        #endregion
+        #endregion General Ledger Accounts
 
         private void radDebit_CheckedChanged(object sender, EventArgs e)
         {
@@ -343,6 +339,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
 
-        #endregion
+        #endregion Validations
     }
 }

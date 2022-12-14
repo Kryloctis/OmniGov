@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptTaxRates
@@ -15,6 +8,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
     {
         private ucRptTaxRates uc;
         private readonly frmRptTaxRates _frmRptTaxRates;
+
         public frmEditRptTaxRates(int rptTaxRatesId, frmRptTaxRates frmRptTaxRates)
         {
             InitializeComponent();
@@ -24,7 +18,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             Helper.LoadFormIcon(this);
         }
 
-        private void LoadRecord() 
+        private void LoadRecord()
         {
             var dictTaxRates = AccFactory.RptTaxRatesRepository().GetRecordByID(uc.rptTaxRatesId);
 
@@ -33,7 +27,7 @@ namespace AccountingSystem.Views.Manage.RptTaxRates
             uc.nudRate.Value = Convert.ToDecimal(dictTaxRates["rate"]);
         }
 
-        private bool Save() 
+        private bool Save()
         {
             try
             {

@@ -17,7 +17,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             uc.LoadReferences(_ucObligationRequestMain);
         }
 
-
         private bool AddToListRecord()
         {
             try
@@ -49,7 +48,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 _ucObligationRequestMain.GetTotalObligations();
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -66,6 +64,5 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 _ucObligationRequestMain.EnableDisableComponents(false);
             }
         }
-
     }
 }

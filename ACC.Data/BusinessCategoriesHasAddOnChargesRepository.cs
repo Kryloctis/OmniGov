@@ -1,12 +1,8 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
-using Org.BouncyCastle.Crypto.Prng;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Transactions;
 
 namespace ACC.Data
@@ -33,7 +29,7 @@ namespace ACC.Data
             string query = $"SELECT business_categories_id FROM {tableName} WHERE business_categories_id = @business_categories_id AND business_add_on_charges_id = @business_add_on_charges_id";
 
             string result = _mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
-            if(string.IsNullOrEmpty(result))
+            if (string.IsNullOrEmpty(result))
                 return false;
             return true;
         }
@@ -50,7 +46,7 @@ namespace ACC.Data
 
         public bool Delete(int businessCategoriesId)
         {
-            var parameters = new object[][]{new object[] { "@business_categories_id", DbType.Int32, businessCategoriesId},};
+            var parameters = new object[][] { new object[] { "@business_categories_id", DbType.Int32, businessCategoriesId }, };
 
             string query = $"DELETE FROM {tableName} WHERE business_categories_id = @business_categories_id";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);

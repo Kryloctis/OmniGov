@@ -115,7 +115,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     accountCode,
                     generalLedgerAccountName
                     });
-
                 }
             }
             catch (Exception ex)
@@ -153,7 +152,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void frmDefaultAccounts_Load(object sender, System.EventArgs e)
@@ -179,7 +177,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                 btnRemoveDefaultAccount.Enabled = true;
             else
                 btnRemoveDefaultAccount.Enabled = false;
-
         }
 
         private void dgAccounts_SelectionChanged(object sender, System.EventArgs e)
@@ -251,7 +248,6 @@ namespace AccountingSystem.Views.Manage.Journals.DefaultAccounts
                     Helper.MessageBoxError(GetFormErrors());
                     return false;
                 }
-
 
                 var journalsDefaulAccountsModelList = new List<JournalsDefaultAccountsModel>();
                 int fundId = Convert.ToInt32(cmbxFunds.SelectedValue);

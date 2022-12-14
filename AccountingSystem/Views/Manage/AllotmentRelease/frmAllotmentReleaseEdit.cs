@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentRelease
@@ -28,7 +21,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             uc.LoadReference(_ucAllotmentReleaseMain);
         }
 
-        private bool ChangesSaved() 
+        private bool ChangesSaved()
         {
             try
             {
@@ -54,10 +47,9 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             return false;
         }
 
-
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (ChangesSaved()) { uc.ResetForm();  Close();  };
+            if (ChangesSaved()) { uc.ResetForm(); Close(); };
         }
     }
 }

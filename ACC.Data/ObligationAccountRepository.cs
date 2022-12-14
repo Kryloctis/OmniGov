@@ -3,7 +3,6 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace ACC.Data
 {
@@ -27,7 +26,7 @@ namespace ACC.Data
         {
             throw new NotImplementedException();
         }
-    
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new NotImplementedException();
@@ -61,13 +60,11 @@ namespace ACC.Data
 
                 return Convert.ToInt32(_mySqlGenericCommands.ExecuteScalar(query));
             }
-
             catch (Exception)
             {
                 throw;
             }
         }
-
 
         //INSERT
         public bool Insert(ObligationAccountModel entity)
@@ -97,8 +94,8 @@ namespace ACC.Data
                 throw;
             }
         }
-        
-        //DELETE    
+
+        //DELETE
         public bool DeleteByObligationRequestId(int ObligationRequestId)
         {
             try

@@ -7,7 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IBudgetAppropriationsRepository : IAccRepository<BudgetAppropriationsModel>
     {
-
         bool Insert(BudgetAppropriationsModel budgetAppropriationsModel, List<SupplementalAppropriationsModel> supplementalAppropriationsModelList);
 
         Dictionary<string, string> GetViewRecordByIdDateEntry(int budgetAppropriationId, DateTime dateEntry);
@@ -23,6 +22,7 @@ namespace ACC.Domain.Interfaces
         //DASHBOARD
 
         #region BUDGET DASHBOARD
+
         //DETAILED
         DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntry(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry);
 
@@ -30,7 +30,8 @@ namespace ACC.Domain.Interfaces
 
         //SUMMARY
         decimal GetSumBudgetAppropriations(string fppId, string subFPPId, int fundId, DateTime dateEntry, int allotment_classes_id, byte isContinuing);
-        #endregion
+
+        #endregion BUDGET DASHBOARD
 
         DataTable GetViewRecordsByFPPIdAndFundIdAndAllotmentClassIdAndDateEntryAndBudgetAppropriationId(string fppId, int? subFPPId, int funds_id, int allotment_class_id, DateTime date_entry, int budget_id);
 
@@ -41,8 +42,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByIdsYear(BudgetAppropriationsModel entity);
 
         DataTable GetHeaderOthersFPP(int fppID, int allotment_classes_id, int funds_id, short year);
-
-
 
         //Validations
 

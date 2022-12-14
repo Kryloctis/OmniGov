@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Manage.Signatories
 
                     dataTable.Rows.Add(item);
                 }
-
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Transactions.RCI
     {
         private frmRCI _frmrci;
         private readonly ucRCI uc;
+
         public frmRCIAdd(frmRCI frmrci)
         {
             InitializeComponent();
@@ -19,9 +20,6 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void frmRCIAdd_Load(object sender, EventArgs e)
         {
-    
-
-
             uc.cmbFPP.SelectedIndex = -1;
             uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
         }
@@ -80,7 +78,7 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
                 string obligationNo = String.Empty;
-                
+
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row["obligation_no"].ToString();
@@ -100,9 +98,8 @@ namespace AccountingSystem.Views.Transactions.RCI
                 string lastRecentRCIId = AccFactory.RCIRepository().GetRecentRCIId();
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
 
-                string deductionDescription = String.Empty; 
+                string deductionDescription = String.Empty;
                 decimal deductionAmount = 0;
-
 
                 foreach (DataRow row in uc.dtDeductions.Rows)
                 {
@@ -111,16 +108,12 @@ namespace AccountingSystem.Views.Transactions.RCI
                     uc.totalDeduction += deductionAmount;
 
                     AccFactory.RCIRepository().SaveRCIDeductions(rcid, deductionDescription, deductionAmount);
-                } 
+                }
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-
-
-
     }
 }

@@ -23,7 +23,7 @@ namespace RPT.Data
         public int CountRecords()
         {
             throw new NotImplementedException();
-        }   
+        }
 
         public bool Delete(List<RealPropertiesModel> entityList)
         {
@@ -190,7 +190,6 @@ namespace RPT.Data
 
                 foreach (DataRow row in reader.Rows)
                 {
-
                     dict.Add("transaction_codes_id", row["transaction_codes_id"].ToString());
                     dict.Add("owners_id", row["owners_id"].ToString());
                     dict.Add("barangays_id", row["barangays_id"].ToString());
@@ -256,7 +255,6 @@ namespace RPT.Data
 
             return Convert.ToDecimal(_mySqlGenericCommandsRPT.ExecuteScalar(query, parameters));
         }
-
 
         //LFS View
         public DataTable GetViewLFSRealPropertiesRecords()

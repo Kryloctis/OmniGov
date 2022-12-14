@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Transactions;
-using ACC.Domain.Interfaces;
-using ACC.Domain.Models;
 
 namespace ACC.Data
 {
@@ -22,7 +21,6 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-        
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, Id},
@@ -36,12 +34,13 @@ namespace ACC.Data
                     return record;
 
                 record.Add("bank_code", reader.Rows[0]["bank_code"].ToString());
-                record.Add("bank_name",  reader.Rows[0]["bank_name"].ToString());
+                record.Add("bank_name", reader.Rows[0]["bank_name"].ToString());
                 record.Add("bank_branch", reader.Rows[0]["bank_branch"].ToString());
             }
-        
+
             return record;
         }
+
         public DataTable GetRecords()
         {
             try
@@ -56,6 +55,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public bool Insert(BanksModel entity)
         {
             var parameters = new object[][]
@@ -67,8 +67,8 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (bank_code, bank_name, bank_branch) VALUES (@bank_code, @bank_name, @bank_branch)";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-           
         }
+
         public bool Update(BanksModel entity)
         {
             var parameters = new object[][]
@@ -82,6 +82,7 @@ namespace ACC.Data
             string query = $"UPDATE {tableName} SET bank_code = @bank_code, bank_name = @bank_name, bank_branch = @bank_branch WHERE id = @id";
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
+
         public bool Delete(List<BanksModel> entityList)
         {
             try
@@ -108,6 +109,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public int CountRecords()
         {
             try
@@ -121,6 +123,7 @@ namespace ACC.Data
                 throw;
             }
         }
+
         public bool IdExist(int id)
         {
             try
@@ -143,6 +146,7 @@ namespace ACC.Data
 
             return false;
         }
+
         public bool CodeExist(string accountCode)
         {
             try
@@ -165,6 +169,7 @@ namespace ACC.Data
 
             return false;
         }
+
         public bool CodeExist(string accountCode, int bankId)
         {
             var parameters = new object[][]
@@ -178,9 +183,10 @@ namespace ACC.Data
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
-         
+
             return false;
         }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             var parameters = new object[][] { new object[] { "@search_text", DbType.String, $"%{searchText}%" } };

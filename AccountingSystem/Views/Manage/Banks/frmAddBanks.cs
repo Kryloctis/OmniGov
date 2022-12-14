@@ -1,12 +1,5 @@
 ﻿using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.Banks
@@ -28,9 +21,8 @@ namespace AccountingSystem.Views.Manage.Banks
             LoadBanks();
         }
 
-        private void LoadBanks() 
+        private void LoadBanks()
         {
-            
         }
 
         private bool SaveData()
@@ -68,6 +60,5 @@ namespace AccountingSystem.Views.Manage.Banks
                 ucBanks1.ResetForm();
             }
         }
-
     }
 }

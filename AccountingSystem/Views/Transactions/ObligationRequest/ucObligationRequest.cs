@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
 {
     public partial class ucObligationRequest : UserControl
     {
-
         internal int fppId;
         internal int fundId;
         internal int allotmentClassId;
@@ -109,6 +108,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         }
 
         #region SUB FPP COMBOBOX
+
         private DataTable DataTableSubFPP()
         {
             DataTable dtSubFPP;
@@ -177,9 +177,11 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             LoadObjectOfExpendituresCombobox();
         }
-        #endregion
+
+        #endregion SUB FPP COMBOBOX
 
         #region OBJECT OF EXPENDITURES COMBOBOX
+
         private DataTable DatatableObjectOfExpenditures()
         {
             var dtBudgetAppropriation = new DataTable();
@@ -200,7 +202,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIds(budgetAppropriationsModel);
             else
                 dtBudgetAppropriation = AccFactory.BudgetAppropriationsRepository().GetViewRecordsByIdsSearch(budgetAppropriationsModel, searchTxt);
-
 
             return dtBudgetAppropriation;
         }
@@ -226,7 +227,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                         objectOfExependituresDict.Add(appropriationId, appropriationName);
                     else if (isContinuing && year <= dateRequested.Year)
                         objectOfExependituresDict.Add(appropriationId, appropriationName);
-
                 }
 
                 var dataSource = objectOfExependituresDict.Count == 0 ? null : new BindingSource(objectOfExependituresDict, null);
@@ -239,7 +239,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         internal void LoadObjectOfExpendituresCombobox()
@@ -279,7 +278,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                 cmbxObjectOfExpenditure.DroppedDown = true;
             }
         }
-        #endregion
+
+        #endregion OBJECT OF EXPENDITURES COMBOBOX
 
         #region VALIDATIONS
 
@@ -316,7 +316,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                             epObjectOfExpenditure.SetError(cmbxObjectOfExpenditure, "Object of Expenditure already exist on the List");
                             return true;
                         }
-
                     }
                     else
                     {
@@ -326,9 +325,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
                             return true;
                         }
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -351,7 +348,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorComboBox(epObjectOfExpenditure, cmbxObjectOfExpenditure);
         }
-
 
         private bool ShowErrorAmountIsZero()
         {
@@ -401,6 +397,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         {
             Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
         }
-        #endregion
+
+        #endregion VALIDATIONS
     }
 }

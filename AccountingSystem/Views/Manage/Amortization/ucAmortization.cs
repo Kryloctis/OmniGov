@@ -34,7 +34,6 @@ namespace AccountingSystem.Views.Manage.Amortization
                     return false;
                 }
 
-
                 string bankName = txtBankName.Text.Trim();
                 string amortizationTerm = cmbxTerm.Text.Trim();
                 int interest = (int)nudInterest.Value;
@@ -61,7 +60,6 @@ namespace AccountingSystem.Views.Manage.Amortization
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-
         }
 
         internal void LoadSelectedAmortization()
@@ -116,20 +114,19 @@ namespace AccountingSystem.Views.Manage.Amortization
             Helper.ClearErrorNumericUpDown(epAmountRelease, nudAmountRelease);
         }
 
-        private void OnLoad() 
+        private void OnLoad()
         {
             try
             {
                 cmbxTerm.SelectedIndex = 0;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucAmortization_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-               
             }
         }
 

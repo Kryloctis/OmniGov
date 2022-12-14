@@ -99,7 +99,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             {
                 Helper.MessageBoxError(ex.Message);
             }
-
         }
 
         private void CmbxLedgerAccount_TextChanged(object sender, EventArgs e)
@@ -122,7 +121,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             }
         }
 
-        #endregion
+        #endregion General Ledger Accounts
 
         #region Supplemental Appropriations
 
@@ -134,7 +133,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 btnEdit.Enabled = true;
                 btnDelete.Enabled = true;
                 btnDelete.Text = "Remove (" + SelectedRows + ")";
-
             }
             else if (SelectedRows > 1)
             {
@@ -178,7 +176,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     dgSupplementalAppropriations.Rows.Add(dateEntry, amount, remarks);
                 }
             }
-
         }
 
         private void dgSupplementalAppropriations_SelectionChanged(object sender, EventArgs e)
@@ -202,7 +199,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             var ucSupplementaryAppropriationsAdd = frmSupplementalAppropriationAdd.ucSupplementalAppropriations1;
             var dateEntry = dtpDateEntry.Value;
             var isContinuing = chckbxContinuing.Checked;
-
 
             ucSupplementaryAppropriationsAdd.dateEntry = dateEntry;
             ucSupplementaryAppropriationsAdd.isContinuing = isContinuing;
@@ -286,7 +282,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             GetTotalSupplementalAmount();
         }
 
-        #endregion
+        #endregion Supplemental Appropriations
 
         internal void SetEnableDisableDetailFields(bool isEnabled)
         {
@@ -364,14 +360,12 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 dtpDateEntry.MaxDate = maxDate;
                 dtpDateEntry.MinDate = minDate;
 
-
                 LoadSubFPPByFPPIdCombobox(fppId);
                 LoadAccounts();
                 cmbxAccount.SelectedIndex = -1;
                 cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccount_TextChanged);
                 LoadSupplementalAppropriationRecords();
                 SetEnableDisableDetailFields(true);
-
 
                 if (budgetAppropriationId != 0)
                 {
@@ -410,7 +404,7 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.ClearErrorComboBox(errorProvider1, cmbxSubFPP);
         }
 
-        #endregion
+        #endregion Sub FPP Validation
 
         #region Account Validation
 
@@ -450,7 +444,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     errorProvider1.SetError(cmbxAccount, "Account you entered is not allowed. Account has continuing appropriation already exist on your record.");
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -485,7 +478,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                 Helper.MessageBoxError(ex.Message);
             }
             return false;
-
         }
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
@@ -505,9 +497,9 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
             Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
         }
 
-        #endregion
+        #endregion Account Validation
 
-        #endregion
+        #endregion Validations
 
         private void frmSupplementalAppropriationsMain_Load(object sender, EventArgs e)
         {
@@ -559,7 +551,6 @@ namespace AccountingSystem.Views.Manage.SupplementalAppropriations
                     return AccFactory.BudgetAppropriationsRepository().Insert(budgetAppropriationsModel, SupplementalAppropriationList);
                 else
                     return AccFactory.SupplementalAppropriationsRepository().Insert(SupplementalAppropriationList, budgetAppropriationId);
-
             }
             catch (Exception ex) { Helper.MessageBoxSuccess(ex.Message); }
             return false;

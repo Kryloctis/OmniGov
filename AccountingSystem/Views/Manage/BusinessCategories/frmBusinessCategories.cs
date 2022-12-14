@@ -1,18 +1,10 @@
 ﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.Barangay;
-using AccountingSystem.Views.Manage.BusinessAdOnCharges;
 using AccountingSystem.Views.Manage.BusinessCategories.AddOnCharges;
-using Microsoft.ReportingServices.Diagnostics.Utilities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BusinessCategories
@@ -76,7 +68,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                 EnableDisableToolStripButtons(dgBusinessCategories, btnEdit, btnDelete, btnAddOnCharges);
                 toolStripStatusLabelRecordCount.Text = dgBusinessCategories.Rows.Count.ToString();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private int GetCurrentCellId()
@@ -85,11 +77,11 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             return Convert.ToInt32(dgBusinessCategories.Rows[rowIndex].Cells["id"].Value);
         }
 
-        private void LoadBusinessCategoriesAddons(int businessCategoriesId) 
+        private void LoadBusinessCategoriesAddons(int businessCategoriesId)
         {
             listBox1.Items.Clear();
             var dtBusinessAddons = AccFactory.BusinessCategoriesHasAddOnCharges().GetViewRecordsByBusinessCategoriesId(businessCategoriesId);
-            foreach (DataRow item in dtBusinessAddons.Rows) { listBox1.Items.Add($"{item["business_add_on_charges_code"]}-{item["business_add_on_charges_description"]}");}
+            foreach (DataRow item in dtBusinessAddons.Rows) { listBox1.Items.Add($"{item["business_add_on_charges_code"]}-{item["business_add_on_charges_description"]}"); }
         }
 
         private void LoadRecordTimestamp(DataGridView dataGridView)
@@ -109,7 +101,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
                 LoadRecordTimestamp(dgBusinessCategories);
                 LoadBusinessCategoriesAddons(GetCurrentCellId());
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool DeleteBusinessCategories(ref int deletedCount)
@@ -156,7 +148,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             {
                 _ = new frmEditBusinessCategories(GetCurrentCellId(), this).ShowDialog();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}         
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -164,7 +156,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
             LoadBusinessCategories();
         }
 
-        private void ShowAddOnCharges() 
+        private void ShowAddOnCharges()
         {
             try
             {
@@ -173,7 +165,7 @@ namespace AccountingSystem.Views.Manage.BusinessCategories
 
                 _ = new frmBusinessCategoriesAddOnCharges(categoriesId, this).ShowDialog();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAddOnCharges_Click(object sender, EventArgs e)

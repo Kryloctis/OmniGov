@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Manage.Barangay
             var barangayCode = uc.txtCode.Text.Trim();
             var barangayName = uc.txtBarangay.Text.Trim();
 
-
             var barangayModel = new BarangayModel()
             {
                 Code = barangayCode,

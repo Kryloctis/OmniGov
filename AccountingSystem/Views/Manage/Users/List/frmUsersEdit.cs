@@ -15,7 +15,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             _frmUsers = frmUsers;
             uc = ucUsers1;
             uc.userId = userId;
-
         }
 
         private void LoadSelectedRecord()
@@ -26,7 +25,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 var userData = usersRepository.GetRecordByID(uc.userId);
                 var dictRoles = AccFactory.RolesRepository().GetRecordByID(Convert.ToInt32(userData["roles_id"]));
 
-
                 uc.cmbOffice.Text = dictRoles["office"];
                 uc.cmbRoles.SelectedValue = userData["roles_id"];
                 uc.txtPrefix.Text = userData["prefix"];
@@ -35,7 +33,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 uc.txtLastname.Text = userData["last_name"];
                 uc.txtSuffix.Text = userData["suffix"];
                 uc.txtUsername.Text = userData["username"];
-
             }
             catch (Exception ex)
             {
@@ -48,7 +45,6 @@ namespace AccountingSystem.Views.Manage.Users.List
             try
             {
                 var uc = ucUsers1;
-
 
                 // if error occurs, show messagebox error
                 if (!uc.ValidateChildren())
@@ -69,7 +65,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                     LastName = uc.txtLastname.Text.Trim(),
                     Suffix = uc.txtSuffix.Text.Trim(),
                     RoleId = (byte)uc.cmbRoles.SelectedValue,
-
                 };
 
                 if (string.IsNullOrWhiteSpace(uc.txtPassword.Text))
@@ -103,7 +98,6 @@ namespace AccountingSystem.Views.Manage.Users.List
                 uc.txtPassword.Clear();
                 uc.txtConfirmPassword.Clear();
                 _frmUsers.LoadRecords();
-
             }
         }
     }

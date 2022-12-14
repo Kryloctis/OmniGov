@@ -130,6 +130,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
                     case 1451:
                         Helper.MessageBoxError("Cannot delete this record. It is referenced by atleast one record.");
                         break;
+
                     default:
                         Helper.MessageBoxError(mysqlEx.Message);
                         break;
@@ -145,7 +146,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         {
             try
             {
-
                 if (dgSubsidiary.SelectedRows.Count == 1)
                 {
                     ushort subsidiaryLedgerId = Convert.ToUInt16(dgSubsidiary.SelectedCells[0].Value);

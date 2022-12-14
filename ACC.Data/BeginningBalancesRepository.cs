@@ -7,7 +7,7 @@ using System.Data;
 
 namespace ACC.Data
 {
-    class BeginningBalancesRepository : IBeginningBalancesRepository
+    internal class BeginningBalancesRepository : IBeginningBalancesRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "beginning_balances";
@@ -274,7 +274,6 @@ namespace ACC.Data
 
         public decimal GetSumBalanceBy_FundId_GenLedgId_Year_SubLedgId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null)
         {
-
             var parameters = new object[][]
             {
                 new object[] { "@funds_id", DbType.Byte, fundsId},
@@ -391,7 +390,6 @@ namespace ACC.Data
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
-
 
             return false;
         }

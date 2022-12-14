@@ -9,6 +9,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
     public partial class frmConsolidatedReceipts : Form
     {
         private readonly ReportViewer reportViewer = new();
+
         public frmConsolidatedReceipts()
         {
             InitializeComponent();
@@ -25,12 +26,11 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
         private DataTable DataTableConsilatedReceipts(string date)
         {
-
             var dtConsolidatedReceipts = new dsLFS.dtConsolidatedReceiptsDataTable();
             DataTable dtConsolidatedReceiptsFromDB = AccFactory.ReceiptsIssuedRepository().GetAccountabilityForAccountableForms(Convert.ToDateTime(date));
 
             if (dtConsolidatedReceiptsFromDB.Rows.Count == 0) return dtConsolidatedReceipts;
-        
+
             foreach (DataRow item in dtConsolidatedReceiptsFromDB.Rows)
             {
                 DataRow row = dtConsolidatedReceipts.NewRow();
@@ -42,7 +42,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 var receiptBeginningBalanceTo = Convert.ToInt32(item["receipt_issued_to"]);
                 var totalUsedByCollectingOfficer = (Convert.ToInt32(lastIssued) - Convert.ToInt32(receiptBeginningBalanceFrom)) + 1;
                 var collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
-
 
                 row["form"] = accountableForm;
                 //BEGINNING BALANCE
@@ -61,7 +60,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 dtConsolidatedReceipts.Rows.Add(row);
             }
-           
+
             return dtConsolidatedReceipts;
         }
 
@@ -130,7 +129,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             {
                 Helper.MessageBoxError(ex.StackTrace);
             }
-
         }
     }
 }

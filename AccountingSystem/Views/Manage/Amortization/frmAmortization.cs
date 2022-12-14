@@ -100,7 +100,6 @@ namespace AccountingSystem.Views.Manage.Amortization
                 }
 
                 return AccFactory.AmortizationRepository().Delete(amortizationModelList);
-
             }
             catch (Exception ex)
             {

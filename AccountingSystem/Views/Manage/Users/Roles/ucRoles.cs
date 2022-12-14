@@ -52,7 +52,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 var userDict = Helper.LoggedInUserData();
                 string office = cmbOffice.Text;
 
-               dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
+                dtPermissions = AccFactory.PermissionsRepository().GetRecordsByOffice(office);
 
                 foreach (DataRow row in dtPermissions.Rows)
                 {
@@ -80,6 +80,7 @@ namespace AccountingSystem.Views.Manage.Users.Roles
                 case "SysAdmin":
                     cmbOffice.Items.AddRange(new string[] { "Budget", "Accounting", "Treasury" });
                     break;
+
                 default:
                     cmbOffice.Items.Add(userDict["office"]);
                     break;

@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem.Views.Transactions.PaymentPosting
+﻿namespace AccountingSystem.Views.Transactions.Payments
 {
     partial class frmPayments
     {
@@ -32,159 +31,105 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnFindTaxPayer = new System.Windows.Forms.ToolStripButton();
-            this.btnNew = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPaymentHistory = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnRptGetTaxDue = new System.Windows.Forms.Button();
-            this.txtTotalDue = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.txtTaxpayer = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.txtTin = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageTaxpayer = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dgTaxpayers = new System.Windows.Forms.DataGridView();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.txtTaxpayerSearch = new System.Windows.Forms.TextBox();
+            this.tabPageTaxDues = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPageRpt = new System.Windows.Forms.TabPage();
+            this.ucRptTaxDues1 = new AccountingSystem.Views.Transactions.Payments.RealProperty.ucRptTaxDues();
+            this.tabPageBpl = new System.Windows.Forms.TabPage();
+            this.tabPageOthers = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radOthers = new System.Windows.Forms.RadioButton();
+            this.radBpl = new System.Windows.Forms.RadioButton();
+            this.radRpt = new System.Windows.Forms.RadioButton();
+            this.tabPagePayment = new System.Windows.Forms.TabPage();
+            this.ucPayment1 = new AccountingSystem.Views.Transactions.Payments.ucPayment();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancelTransaction = new System.Windows.Forms.Button();
-            this.btnPay = new System.Windows.Forms.Button();
-            this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radTaxpayer = new System.Windows.Forms.RadioButton();
+            this.radTaxDues = new System.Windows.Forms.RadioButton();
+            this.radPayment = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPageTaxpayer.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.tabPageTaxDues.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPageRpt.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.tabPagePayment.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // panel1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnFindTaxPayer,
-            this.btnNew,
-            this.toolStripSeparator1,
-            this.btnPaymentHistory});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1064, 50);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnFindTaxPayer
-            // 
-            this.btnFindTaxPayer.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnFindTaxPayer.Image = global::AccountingSystem.Properties.Resources.user_browse_20px;
-            this.btnFindTaxPayer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnFindTaxPayer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFindTaxPayer.Name = "btnFindTaxPayer";
-            this.btnFindTaxPayer.Size = new System.Drawing.Size(92, 39);
-            this.btnFindTaxPayer.Text = "Find Taxpayer...";
-            this.btnFindTaxPayer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnFindTaxPayer.Click += new System.EventHandler(this.btnFindTaxPayer_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Enabled = false;
-            this.btnNew.Image = global::AccountingSystem.Properties.Resources.create_new_20px;
-            this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(35, 39);
-            this.btnNew.Text = "New";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
-            // 
-            // btnPaymentHistory
-            // 
-            this.btnPaymentHistory.Enabled = false;
-            this.btnPaymentHistory.Image = global::AccountingSystem.Properties.Resources.list_money_banknotes_20px;
-            this.btnPaymentHistory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPaymentHistory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPaymentHistory.Name = "btnPaymentHistory";
-            this.btnPaymentHistory.Size = new System.Drawing.Size(108, 39);
-            this.btnPaymentHistory.Text = "Payment History...";
-            this.btnPaymentHistory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPaymentHistory.Click += new System.EventHandler(this.btnTransactions_Click);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.panel4);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.splitContainer1.Size = new System.Drawing.Size(1064, 492);
-            this.splitContainer1.SplitterDistance = 726;
-            this.splitContainer1.TabIndex = 1;
-            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.flowLayoutPanel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1062, 557);
+            this.panel1.TabIndex = 1;
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabPageTaxpayer);
+            this.tabControl1.Controls.Add(this.tabPageTaxDues);
+            this.tabControl1.Controls.Add(this.tabPagePayment);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControl1.Location = new System.Drawing.Point(195, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(726, 492);
+            this.tabControl1.Size = new System.Drawing.Size(867, 526);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tabPageTaxpayer
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(718, 464);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "RPT";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageTaxpayer.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageTaxpayer.Controls.Add(this.panel2);
+            this.tabPageTaxpayer.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabPageTaxpayer.Location = new System.Drawing.Point(4, 5);
+            this.tabPageTaxpayer.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTaxpayer.Name = "tabPageTaxpayer";
+            this.tabPageTaxpayer.Size = new System.Drawing.Size(859, 517);
+            this.tabPageTaxpayer.TabIndex = 0;
+            this.tabPageTaxpayer.Text = "Taxpayer";
+            this.tabPageTaxpayer.Enter += new System.EventHandler(this.tabPageTaxpayer_Enter);
             // 
-            // dataGridView1
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgTaxpayers);
+            this.panel2.Controls.Add(this.flowLayoutPanel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel2.Size = new System.Drawing.Size(859, 517);
+            this.panel2.TabIndex = 0;
+            // 
+            // dgTaxpayers
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -193,8 +138,8 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -202,10 +147,11 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
+            this.dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgTaxpayers.Location = new System.Drawing.Point(4, 36);
+            this.dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgTaxpayers.Name = "dgTaxpayers";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -213,301 +159,345 @@ namespace AccountingSystem.Views.Transactions.PaymentPosting
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(712, 429);
-            this.dataGridView1.TabIndex = 16;
+            this.dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgTaxpayers.RowTemplate.Height = 25;
+            this.dgTaxpayers.Size = new System.Drawing.Size(851, 478);
+            this.dgTaxpayers.TabIndex = 2;
+            this.dgTaxpayers.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // panel3
+            // flowLayoutPanel4
             // 
-            this.panel3.Controls.Add(this.btnRptGetTaxDue);
-            this.panel3.Controls.Add(this.txtTotalDue);
-            this.panel3.Controls.Add(this.label11);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(3, 432);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(712, 29);
-            this.panel3.TabIndex = 20;
+            this.flowLayoutPanel4.Controls.Add(this.txtTaxpayerSearch);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 3);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(851, 33);
+            this.flowLayoutPanel4.TabIndex = 0;
             // 
-            // btnRptGetTaxDue
+            // txtTaxpayerSearch
             // 
-            this.btnRptGetTaxDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRptGetTaxDue.Location = new System.Drawing.Point(606, 3);
-            this.btnRptGetTaxDue.Name = "btnRptGetTaxDue";
-            this.btnRptGetTaxDue.Size = new System.Drawing.Size(103, 23);
-            this.btnRptGetTaxDue.TabIndex = 0;
-            this.btnRptGetTaxDue.Text = "Get Tax Due...";
-            this.btnRptGetTaxDue.UseVisualStyleBackColor = true;
+            this.txtTaxpayerSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayerSearch.Location = new System.Drawing.Point(648, 3);
+            this.txtTaxpayerSearch.Name = "txtTaxpayerSearch";
+            this.txtTaxpayerSearch.Size = new System.Drawing.Size(200, 23);
+            this.txtTaxpayerSearch.TabIndex = 1;
+            this.txtTaxpayerSearch.TextChanged += new System.EventHandler(this.txtTaxpayerSearch_TextChanged);
             // 
-            // txtTotalDue
+            // tabPageTaxDues
             // 
-            this.txtTotalDue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTotalDue.BackColor = System.Drawing.Color.White;
-            this.txtTotalDue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalDue.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTotalDue.Location = new System.Drawing.Point(65, 3);
-            this.txtTotalDue.Name = "txtTotalDue";
-            this.txtTotalDue.ReadOnly = true;
-            this.txtTotalDue.Size = new System.Drawing.Size(178, 23);
-            this.txtTotalDue.TabIndex = 18;
-            this.txtTotalDue.Text = "0.00";
+            this.tabPageTaxDues.Controls.Add(this.tabControl2);
+            this.tabPageTaxDues.Controls.Add(this.flowLayoutPanel3);
+            this.tabPageTaxDues.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabPageTaxDues.Location = new System.Drawing.Point(4, 5);
+            this.tabPageTaxDues.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageTaxDues.Name = "tabPageTaxDues";
+            this.tabPageTaxDues.Size = new System.Drawing.Size(859, 517);
+            this.tabPageTaxDues.TabIndex = 1;
+            this.tabPageTaxDues.Text = "Get Tax Due";
+            this.tabPageTaxDues.UseVisualStyleBackColor = true;
+            this.tabPageTaxDues.Enter += new System.EventHandler(this.tabPageTaxDues_Enter);
             // 
-            // label11
+            // tabControl2
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(3, 7);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 15);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Total Due";
+            this.tabControl2.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabControl2.Controls.Add(this.tabPageRpt);
+            this.tabControl2.Controls.Add(this.tabPageBpl);
+            this.tabControl2.Controls.Add(this.tabPageOthers);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControl2.Location = new System.Drawing.Point(0, 27);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.Padding = new System.Drawing.Point(0, 1);
+            this.tabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabControl2.RightToLeftLayout = true;
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(859, 490);
+            this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl2.TabIndex = 0;
             // 
-            // tabPage2
+            // tabPageRpt
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(718, 464);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "BPL";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageRpt.Controls.Add(this.ucRptTaxDues1);
+            this.tabPageRpt.Location = new System.Drawing.Point(4, 5);
+            this.tabPageRpt.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageRpt.Name = "tabPageRpt";
+            this.tabPageRpt.Size = new System.Drawing.Size(851, 481);
+            this.tabPageRpt.TabIndex = 0;
+            this.tabPageRpt.Text = "RPT";
+            this.tabPageRpt.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // ucRptTaxDues1
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(718, 464);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Other";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.ucRptTaxDues1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ucRptTaxDues1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucRptTaxDues1.Location = new System.Drawing.Point(0, 0);
+            this.ucRptTaxDues1.Name = "ucRptTaxDues1";
+            this.ucRptTaxDues1.Size = new System.Drawing.Size(851, 481);
+            this.ucRptTaxDues1.TabIndex = 0;
             // 
-            // panel4
+            // tabPageBpl
             // 
-            this.panel4.Controls.Add(this.splitContainer2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 15);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(334, 477);
-            this.panel4.TabIndex = 1;
+            this.tabPageBpl.Location = new System.Drawing.Point(4, 5);
+            this.tabPageBpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPageBpl.Name = "tabPageBpl";
+            this.tabPageBpl.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPageBpl.Size = new System.Drawing.Size(851, 481);
+            this.tabPageBpl.TabIndex = 1;
+            this.tabPageBpl.Text = "BPL";
+            this.tabPageBpl.UseVisualStyleBackColor = true;
             // 
-            // splitContainer2
+            // tabPageOthers
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.tabPageOthers.Location = new System.Drawing.Point(4, 5);
+            this.tabPageOthers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPageOthers.Name = "tabPageOthers";
+            this.tabPageOthers.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPageOthers.Size = new System.Drawing.Size(851, 481);
+            this.tabPageOthers.TabIndex = 2;
+            this.tabPageOthers.Text = "Others";
+            this.tabPageOthers.UseVisualStyleBackColor = true;
             // 
-            // splitContainer2.Panel1
+            // flowLayoutPanel3
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBox3);
-            this.splitContainer2.Size = new System.Drawing.Size(334, 477);
-            this.splitContainer2.SplitterDistance = 112;
-            this.splitContainer2.TabIndex = 0;
-            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            this.flowLayoutPanel3.Controls.Add(this.radOthers);
+            this.flowLayoutPanel3.Controls.Add(this.radBpl);
+            this.flowLayoutPanel3.Controls.Add(this.radRpt);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(859, 27);
+            this.flowLayoutPanel3.TabIndex = 1;
             // 
-            // groupBox3
+            // radOthers
             // 
-            this.groupBox3.Controls.Add(this.panel2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(334, 112);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Taxpayer Info.";
+            this.radOthers.AutoSize = true;
+            this.radOthers.Location = new System.Drawing.Point(795, 3);
+            this.radOthers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.radOthers.Name = "radOthers";
+            this.radOthers.Size = new System.Drawing.Size(60, 19);
+            this.radOthers.TabIndex = 2;
+            this.radOthers.Text = "Others";
+            this.radOthers.UseVisualStyleBackColor = true;
+            this.radOthers.CheckedChanged += new System.EventHandler(this.radOthers_CheckedChanged);
             // 
-            // panel2
+            // radBpl
             // 
-            this.panel2.Controls.Add(this.txtTaxpayer);
-            this.panel2.Controls.Add(this.txtAddress);
-            this.panel2.Controls.Add(this.txtTin);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel2.Location = new System.Drawing.Point(3, 19);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(328, 90);
-            this.panel2.TabIndex = 0;
+            this.radBpl.AutoSize = true;
+            this.radBpl.Location = new System.Drawing.Point(742, 3);
+            this.radBpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.radBpl.Name = "radBpl";
+            this.radBpl.Size = new System.Drawing.Size(45, 19);
+            this.radBpl.TabIndex = 2;
+            this.radBpl.Text = "BPL";
+            this.radBpl.UseVisualStyleBackColor = true;
+            this.radBpl.CheckedChanged += new System.EventHandler(this.radBpl_CheckedChanged);
             // 
-            // txtTaxpayer
+            // radRpt
             // 
-            this.txtTaxpayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayer.Location = new System.Drawing.Point(113, 32);
-            this.txtTaxpayer.Name = "txtTaxpayer";
-            this.txtTaxpayer.ReadOnly = true;
-            this.txtTaxpayer.Size = new System.Drawing.Size(196, 23);
-            this.txtTaxpayer.TabIndex = 2;
-            this.txtTaxpayer.WordWrap = false;
+            this.radRpt.AutoSize = true;
+            this.radRpt.Checked = true;
+            this.radRpt.Location = new System.Drawing.Point(689, 3);
+            this.radRpt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.radRpt.Name = "radRpt";
+            this.radRpt.Size = new System.Drawing.Size(45, 19);
+            this.radRpt.TabIndex = 2;
+            this.radRpt.TabStop = true;
+            this.radRpt.Text = "RPT";
+            this.radRpt.UseVisualStyleBackColor = true;
+            this.radRpt.CheckedChanged += new System.EventHandler(this.radRpt_CheckedChanged);
             // 
-            // txtAddress
+            // tabPagePayment
             // 
-            this.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAddress.Location = new System.Drawing.Point(113, 61);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.ReadOnly = true;
-            this.txtAddress.Size = new System.Drawing.Size(196, 23);
-            this.txtAddress.TabIndex = 6;
-            this.txtAddress.WordWrap = false;
+            this.tabPagePayment.Controls.Add(this.ucPayment1);
+            this.tabPagePayment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabPagePayment.Location = new System.Drawing.Point(4, 5);
+            this.tabPagePayment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPagePayment.Name = "tabPagePayment";
+            this.tabPagePayment.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPagePayment.Size = new System.Drawing.Size(859, 517);
+            this.tabPagePayment.TabIndex = 2;
+            this.tabPagePayment.Text = " ";
+            this.tabPagePayment.UseVisualStyleBackColor = true;
+            this.tabPagePayment.Enter += new System.EventHandler(this.tabPagePayment_Enter);
             // 
-            // txtTin
+            // ucPayment1
             // 
-            this.txtTin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTin.Location = new System.Drawing.Point(113, 3);
-            this.txtTin.Name = "txtTin";
-            this.txtTin.ReadOnly = true;
-            this.txtTin.Size = new System.Drawing.Size(196, 23);
-            this.txtTin.TabIndex = 1;
-            this.txtTin.WordWrap = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Name";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 65);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 15);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Address";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 15);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "TIN";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 50);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1064, 522);
-            this.panel1.TabIndex = 2;
+            this.ucPayment1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPayment1.Location = new System.Drawing.Point(4, 3);
+            this.ucPayment1.Name = "ucPayment1";
+            this.ucPayment1.Size = new System.Drawing.Size(851, 511);
+            this.ucPayment1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancelTransaction);
-            this.flowLayoutPanel1.Controls.Add(this.btnPay);
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel1.Controls.Add(this.btnNext);
+            this.flowLayoutPanel1.Controls.Add(this.btnBack);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 492);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(195, 526);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1064, 30);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(867, 31);
+            this.flowLayoutPanel1.TabIndex = 4;
             // 
-            // btnCancelTransaction
+            // btnCancel
             // 
-            this.btnCancelTransaction.Enabled = false;
-            this.btnCancelTransaction.Location = new System.Drawing.Point(940, 3);
-            this.btnCancelTransaction.Name = "btnCancelTransaction";
-            this.btnCancelTransaction.Size = new System.Drawing.Size(121, 23);
-            this.btnCancelTransaction.TabIndex = 1;
-            this.btnCancelTransaction.Text = "Cancel";
-            this.btnCancelTransaction.UseVisualStyleBackColor = true;
-            this.btnCancelTransaction.Click += new System.EventHandler(this.btnCancelTransaction_Click);
+            this.btnCancel.Location = new System.Drawing.Point(729, 3);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(134, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnPay
+            // btnNext
             // 
-            this.btnPay.Enabled = false;
-            this.btnPay.Location = new System.Drawing.Point(813, 3);
-            this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(121, 23);
-            this.btnPay.TabIndex = 1;
-            this.btnPay.Text = "Confirm Payment";
-            this.btnPay.UseVisualStyleBackColor = true;
-            this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
+            this.btnNext.Location = new System.Drawing.Point(587, 3);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(134, 23);
+            this.btnNext.TabIndex = 0;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
-            // frmPayments
+            // btnBack
+            // 
+            this.btnBack.Location = new System.Drawing.Point(445, 3);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(134, 23);
+            this.btnBack.TabIndex = 0;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.radTaxpayer);
+            this.flowLayoutPanel2.Controls.Add(this.radTaxDues);
+            this.flowLayoutPanel2.Controls.Add(this.radPayment);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Enabled = false;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(195, 557);
+            this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // radTaxpayer
+            // 
+            this.radTaxpayer.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radTaxpayer.Checked = true;
+            this.radTaxpayer.FlatAppearance.BorderSize = 0;
+            this.radTaxpayer.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            this.radTaxpayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radTaxpayer.Location = new System.Drawing.Point(0, 0);
+            this.radTaxpayer.Margin = new System.Windows.Forms.Padding(0);
+            this.radTaxpayer.Name = "radTaxpayer";
+            this.radTaxpayer.Size = new System.Drawing.Size(195, 37);
+            this.radTaxpayer.TabIndex = 5;
+            this.radTaxpayer.TabStop = true;
+            this.radTaxpayer.Text = "Taxpayer";
+            this.radTaxpayer.UseVisualStyleBackColor = true;
+            // 
+            // radTaxDues
+            // 
+            this.radTaxDues.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radTaxDues.FlatAppearance.BorderSize = 0;
+            this.radTaxDues.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            this.radTaxDues.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radTaxDues.Location = new System.Drawing.Point(0, 37);
+            this.radTaxDues.Margin = new System.Windows.Forms.Padding(0);
+            this.radTaxDues.Name = "radTaxDues";
+            this.radTaxDues.Size = new System.Drawing.Size(195, 37);
+            this.radTaxDues.TabIndex = 5;
+            this.radTaxDues.Text = "Tax Dues";
+            this.radTaxDues.UseVisualStyleBackColor = true;
+            // 
+            // radPayment
+            // 
+            this.radPayment.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radPayment.FlatAppearance.BorderSize = 0;
+            this.radPayment.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.Control;
+            this.radPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.radPayment.Location = new System.Drawing.Point(0, 74);
+            this.radPayment.Margin = new System.Windows.Forms.Padding(0);
+            this.radPayment.Name = "radPayment";
+            this.radPayment.Size = new System.Drawing.Size(195, 37);
+            this.radPayment.TabIndex = 2;
+            this.radPayment.Text = "Payment";
+            this.radPayment.UseVisualStyleBackColor = true;
+            // 
+            // newFormPayments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1064, 572);
+            this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(1062, 557);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.toolStrip1);
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(919, 481);
-            this.Name = "frmPayments";
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(1078, 596);
+            this.Name = "newFormPayments";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transactions > Payments";
-            this.Load += new System.EventHandler(this.frmPaymentPosting_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.Text = "Transaction > Payments";
+            this.Load += new System.EventHandler(this.newFormPayments_Load);
             this.panel1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageTaxpayer.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgTaxpayers)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            this.tabPageTaxDues.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPageRpt.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
+            this.tabPagePayment.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ToolStripButton btnFindTaxPayer;
-        private System.Windows.Forms.ToolStripButton btnNew;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnPaymentHistory;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtTotalDue;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox txtTaxpayer;
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.TextBox txtTin;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnRptGetTaxDue;
+        private System.Windows.Forms.TabPage tabPageTaxpayer;
+        private System.Windows.Forms.TabPage tabPageTaxDues;
+        private System.Windows.Forms.TabPage tabPagePayment;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.RadioButton radTaxpayer;
+        private System.Windows.Forms.RadioButton radTaxDues;
+        private System.Windows.Forms.RadioButton radPayment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnCancelTransaction;
-        private System.Windows.Forms.Button btnPay;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dgTaxpayers;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPageOthers;
+        private System.Windows.Forms.TabPage tabPageBpl;
+        private System.Windows.Forms.TabPage tabPageRpt;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.RadioButton radOthers;
+        private System.Windows.Forms.RadioButton radBpl;
+        private System.Windows.Forms.RadioButton radRpt;
+        private RealProperty.ucRptTaxDues ucRptTaxDues1;
+        private ucPayment ucPayment1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.TextBox txtTaxpayerSearch;
     }
 }

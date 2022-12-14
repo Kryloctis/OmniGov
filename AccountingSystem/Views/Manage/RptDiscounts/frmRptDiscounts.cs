@@ -1,12 +1,8 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.RptDiscount
@@ -29,26 +25,37 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             {
                 case 1:
                     return "January";
+
                 case 2:
                     return "February";
+
                 case 3:
                     return "March";
+
                 case 4:
                     return "April";
+
                 case 5:
                     return "May";
+
                 case 6:
                     return "June";
+
                 case 7:
                     return "July";
+
                 case 8:
                     return "August";
+
                 case 9:
                     return "September";
+
                 case 10:
                     return "October";
+
                 case 11:
                     return "November";
+
                 case 12:
                     return "December";
 
@@ -59,7 +66,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
 
         private DataTable DataTableDiscounts()
         {
-            DataTable dtRptDiscounts; 
+            DataTable dtRptDiscounts;
             var dataTable = new DataTable();
             dataTable.Columns.Add("id", typeof(int));
             dataTable.Columns.Add("month", typeof(int));
@@ -114,7 +121,7 @@ namespace AccountingSystem.Views.Manage.RptDiscount
             _ = new frmAddRptDiscount(this).ShowDialog();
         }
 
-        private void ShowEditRptDiscounts() 
+        private void ShowEditRptDiscounts()
         {
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
             int rptDiscountId = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value);
@@ -156,7 +163,6 @@ namespace AccountingSystem.Views.Manage.RptDiscount
                     deletedCount = rowCount;
                     return AccFactory.RptDiscountRepository().Delete(rptDiscountsModelList);
                 }
-
             }
             catch (Exception ex)
             {

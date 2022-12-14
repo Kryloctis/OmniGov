@@ -1,5 +1,4 @@
-﻿
-namespace ACC.Domain.Models
+﻿namespace ACC.Domain.Models
 {
     public class TaxpayersModel
     {

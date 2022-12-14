@@ -110,7 +110,6 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -296,156 +295,150 @@ namespace ACC.Data
         {
             using (var scope = new TransactionScope())
             {
-                    int provinceId;
-                    int municipalityId;
-                    int barangayId;
-                    int taxpayerTypeId;
-                    int taxpayerId;
-                    int actualUseId;
-                    int classificationId;
-                    int realPropertiesId;
+                int provinceId;
+                int municipalityId;
+                int barangayId;
+                int taxpayerTypeId;
+                int taxpayerId;
+                int actualUseId;
+                int classificationId;
+                int realPropertiesId;
 
+                ProvincesModel provinceModel = realPropertiesModel.ProvincesModel;
+                MunicipalitiesModel municipalityModel = realPropertiesModel.MunicipalitiesModel;
+                BarangayModel barangayModel = realPropertiesModel.BarangayModel;
+                TaxpayerTypeModel taxpayerTypeModel = realPropertiesModel.TaxpayerTypeModel;
+                TaxpayersModel taxpayersModel = realPropertiesModel.TaxpayersModel;
+                ActualUseCodesModel actualUseModel = realPropertiesModel.ActualUseCodesModel;
+                ClassificationCodesModel classificationModel = realPropertiesModel.ClassificationCodesModel;
+                RptPreviousAssessmentModel rptPreviousAssessmentModel = realPropertiesModel.RptPreviousAssessmentModel;
 
-                    ProvincesModel provinceModel = realPropertiesModel.ProvincesModel;
-                    MunicipalitiesModel municipalityModel = realPropertiesModel.MunicipalitiesModel;
-                    BarangayModel barangayModel = realPropertiesModel.BarangayModel;
-                    TaxpayerTypeModel taxpayerTypeModel = realPropertiesModel.TaxpayerTypeModel;
-                    TaxpayersModel taxpayersModel = realPropertiesModel.TaxpayersModel;
-                    ActualUseCodesModel actualUseModel = realPropertiesModel.ActualUseCodesModel;
-                    ClassificationCodesModel classificationModel = realPropertiesModel.ClassificationCodesModel;
-                    RptPreviousAssessmentModel rptPreviousAssessmentModel = realPropertiesModel.RptPreviousAssessmentModel;
+                string provinceName = provinceModel.Name;
+                string municipallityName = municipalityModel.Name;
+                string barangayName = barangayModel.Name;
+                string actualUseName = actualUseModel.Name;
+                string classificationName = classificationModel.Name;
+                string taxpayerType = taxpayerTypeModel.taxpayerType;
+                string taxpayerName = taxpayersModel.Name;
+                string completeArpNo = realPropertiesModel.CompleteArpNo;
 
-                    string provinceName = provinceModel.Name;
-                    string municipallityName = municipalityModel.Name;
-                    string barangayName = barangayModel.Name;
-                    string actualUseName = actualUseModel.Name;
-                    string classificationName = classificationModel.Name;
-                    string taxpayerType = taxpayerTypeModel.taxpayerType;
-                    string taxpayerName = taxpayersModel.Name;
-                    string completeArpNo = realPropertiesModel.CompleteArpNo;
+                //Actual Use
+                if (_actualUseCodes.NameExist(actualUseName))
+                    actualUseId = _actualUseCodes.GetIdByName(actualUseName);
+                else
+                {
+                    _ = _actualUseCodes.Insert(actualUseModel);
+                    actualUseId = _actualUseCodes.GetLastInsertedId();
+                }
 
+                //Classification
+                if (_classificationCodes.NameExist(classificationName))
+                    classificationId = _classificationCodes.GetIdByName(classificationName);
+                else
+                {
+                    _ = _classificationCodes.Insert(classificationModel);
+                    classificationId = _classificationCodes.GetLastInsertedId();
+                }
 
-                    //Actual Use
-                    if (_actualUseCodes.NameExist(actualUseName))
-                        actualUseId = _actualUseCodes.GetIdByName(actualUseName);
-                    else
-                    {
-                        _ = _actualUseCodes.Insert(actualUseModel);
-                        actualUseId = _actualUseCodes.GetLastInsertedId();
-                    }
+                //Taxpayer Type
+                if (_taxpayerTypeRepository.NameExist(taxpayerType))
+                    taxpayerTypeId = _taxpayerTypeRepository.GetIdByName(taxpayerType);
+                else
+                {
+                    _ = _taxpayerTypeRepository.Insert(taxpayerTypeModel);
+                    taxpayerTypeId = _taxpayerTypeRepository.GetLastInsertedId();
+                }
 
-                    //Classification
-                    if (_classificationCodes.NameExist(classificationName))
-                        classificationId = _classificationCodes.GetIdByName(classificationName);
-                    else
-                    {
-                        _ = _classificationCodes.Insert(classificationModel);
-                        classificationId = _classificationCodes.GetLastInsertedId();
-                    }
+                //Province
+                if (_provinces.NameExist(provinceName))
+                    provinceId = _provinces.GetIdByName(provinceName);
+                else
+                {
+                    _ = _provinces.Insert(provinceModel);
+                    provinceId = _provinces.GetLastInsertedId();
+                }
 
-                    //Taxpayer Type
-                    if (_taxpayerTypeRepository.NameExist(taxpayerType))
-                        taxpayerTypeId = _taxpayerTypeRepository.GetIdByName(taxpayerType);
-                    else
-                    {
-                        _ = _taxpayerTypeRepository.Insert(taxpayerTypeModel);
-                        taxpayerTypeId = _taxpayerTypeRepository.GetLastInsertedId();
-                    }
+                //Municipality
+                if (_municipalities.NameExistByProvinceName(municipallityName, provinceName))
+                    municipalityId = _municipalities.GetIdByNameProvinceName(municipallityName, provinceName);
+                else
+                {
+                    municipalityModel.ProvincesId = provinceId;
+                    _ = _municipalities.Insert(municipalityModel);
+                    municipalityId = _municipalities.GetLastInsertedId();
+                }
 
+                //Barangay
+                if (_barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName))
+                    barangayId = _barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
+                else
+                {
+                    barangayModel.MunicipalityID = municipalityId;
+                    _ = _barangayRepository.Insert(barangayModel);
+                    barangayId = _barangayRepository.GetLastInsertedId();
+                }
 
-                    //Province
-                    if (_provinces.NameExist(provinceName))
-                        provinceId = _provinces.GetIdByName(provinceName);
-                    else
-                    {
-                        _ = _provinces.Insert(provinceModel);
-                        provinceId = _provinces.GetLastInsertedId();
-                    }
+                //Taxpayers
+                if (_taxpayersRepository.TaxpayerNameExist(taxpayerName))
+                {
+                    taxpayerId = _taxpayersRepository.GetIdByName(taxpayerName);
+                    var dictTaxpayers = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
+                    taxpayersModel.Id = taxpayerId;
+                    taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                    taxpayersModel.IsActive = Convert.ToBoolean(Convert.ToByte(dictTaxpayers["is_active"]));
+                    _taxpayersRepository.Update(taxpayersModel);
+                }
+                else
+                {
+                    taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
+                    taxpayersModel.IsActive = true;
+                    _ = _taxpayersRepository.Insert(taxpayersModel);
+                    taxpayerId = _taxpayersRepository.GetLastInsertedId();
+                }
 
-                    //Municipality
-                    if (_municipalities.NameExistByProvinceName(municipallityName, provinceName))
-                        municipalityId = _municipalities.GetIdByNameProvinceName(municipallityName, provinceName);
-                    else
-                    {
-                        municipalityModel.ProvincesId = provinceId;
-                        _ = _municipalities.Insert(municipalityModel);
-                        municipalityId = _municipalities.GetLastInsertedId();
-                    }
+                //Real Properties
+                if (CompleteArpNoExist(completeArpNo))
+                {
+                    realPropertiesId = Convert.ToInt32(GetRecordByCompleteArpNo(completeArpNo)["id"]);
+                    rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
+                    var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
+                    realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? string.Empty : dictRealProperty["id"];
+                    realPropertiesModel.Id = realPropertiesId;
+                    realPropertiesModel.ActualUseCodesId = actualUseId;
+                    realPropertiesModel.BarangaysId = barangayId;
+                    realPropertiesModel.ClassificationCodesId = classificationId;
+                    realPropertiesModel.RealTaxpayersId = taxpayerId;
+                    realPropertiesModel.UpdatedAt = DateTime.Now;
+                    Update(realPropertiesModel);
 
-                    //Barangay
-                    if (_barangayRepository.NameExistByMunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName))
-                        barangayId = _barangayRepository.GetIdByName_MunicipalitiesName_ProvincesName(barangayName, municipallityName, provinceName);
-                    else
-                    {
-                        barangayModel.MunicipalityID = municipalityId;
-                        _ = _barangayRepository.Insert(barangayModel);
-                        barangayId = _barangayRepository.GetLastInsertedId();
-                    }
+                    //Delete RPT previous assessment
+                    _rptPreviousAssessment.DeleteByRealPropertyId(realPropertiesId);
 
-                    //Taxpayers
-                    if (_taxpayersRepository.TaxpayerNameExist(taxpayerName))
-                    {
-                        taxpayerId = _taxpayersRepository.GetIdByName(taxpayerName);
-                        var dictTaxpayers = AccFactory.TaxpayersRepository().GetRecordByID(taxpayerId);
-                        taxpayersModel.Id = taxpayerId;
-                        taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
-                        taxpayersModel.IsActive = Convert.ToBoolean(Convert.ToByte(dictTaxpayers["is_active"]));
-                        _taxpayersRepository.Update(taxpayersModel);
-                    }
-                    else
-                    {
-                        taxpayersModel.TaxpayerTypeId = taxpayerTypeId;
-                        taxpayersModel.IsActive = true;
-                        _ = _taxpayersRepository.Insert(taxpayersModel);
-                        taxpayerId = _taxpayersRepository.GetLastInsertedId();
-                    }
+                    //Insert RPT previous assessment
+                    _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                }
+                else
+                {
+                    realPropertiesModel.ActualUseCodesId = actualUseId;
+                    realPropertiesModel.BarangaysId = barangayId;
+                    realPropertiesModel.ClassificationCodesId = classificationId;
+                    realPropertiesModel.RealTaxpayersId = taxpayerId;
+                    Insert(realPropertiesModel);
+                    realPropertiesId = GetLastInsertedId();
 
+                    //Update property identifier
+                    var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
+                    realPropertiesModel.Id = realPropertiesId;
+                    realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? realPropertiesId.ToString() : dictRealProperty["id"];
+                    realPropertiesModel.UpdatedBy = null;
+                    realPropertiesModel.UpdatedAt = null;
+                    Update(realPropertiesModel);
 
-                    //Real Properties
-                    if (CompleteArpNoExist(completeArpNo))
-                    {
-                        realPropertiesId = Convert.ToInt32(GetRecordByCompleteArpNo(completeArpNo)["id"]);
-                        rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
-                        var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
-                        realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? string.Empty : dictRealProperty["id"];
-                        realPropertiesModel.Id = realPropertiesId;
-                        realPropertiesModel.ActualUseCodesId = actualUseId;
-                        realPropertiesModel.BarangaysId = barangayId;
-                        realPropertiesModel.ClassificationCodesId = classificationId;
-                        realPropertiesModel.RealTaxpayersId = taxpayerId;
-                        realPropertiesModel.UpdatedAt = DateTime.Now;
-                        Update(realPropertiesModel);
+                    //Insert RPT previous assessment
+                    rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
+                    _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
+                }
 
-
-                        //Delete RPT previous assessment
-                        _rptPreviousAssessment.DeleteByRealPropertyId(realPropertiesId);
-
-                        //Insert RPT previous assessment
-                        _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
-                    }
-                    else
-                    {
-
-                        realPropertiesModel.ActualUseCodesId = actualUseId;
-                        realPropertiesModel.BarangaysId = barangayId;
-                        realPropertiesModel.ClassificationCodesId = classificationId;
-                        realPropertiesModel.RealTaxpayersId = taxpayerId;
-                        Insert(realPropertiesModel);
-                        realPropertiesId = GetLastInsertedId();
-
-                        //Update property identifier
-                        var dictRealProperty = GetRecordByCompleteArpNo(realPropertiesModel.PropertyIdentifier);
-                        realPropertiesModel.Id = realPropertiesId;
-                        realPropertiesModel.PropertyIdentifier = dictRealProperty.Count < 1 ? realPropertiesId.ToString() : dictRealProperty["id"];
-                        realPropertiesModel.UpdatedBy = null;
-                        realPropertiesModel.UpdatedAt = null;
-                        Update(realPropertiesModel);
-
-                        //Insert RPT previous assessment
-                        rptPreviousAssessmentModel.RealPropertiesId = realPropertiesId;
-                        _rptPreviousAssessment.Insert(rptPreviousAssessmentModel);
-                    }
- 
                 scope.Complete();
                 return true;
             }
