@@ -237,8 +237,6 @@ namespace AccountingSystem
 
             dataGridView.ClearSelection();
 
-            //float fontSize = 8.5f;
-            //dataGridView.DefaultCellStyle.Font = new Font("Segoe UI", fontSize);
         }
 
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
