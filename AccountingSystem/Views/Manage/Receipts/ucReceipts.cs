@@ -30,10 +30,34 @@ namespace AccountingSystem.Views.Manage.Receipts
             txtRemark.Clear();
         }
 
+        private DataColumn[] DataColumnAccountableForms()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn("id", typeof(int)),
+                new DataColumn("accountableForm", typeof(string))
+            };
+        }
+
+        private DataTable DataTableAccountableForm()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnAccountableForms());
+
+            var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
+            foreach (DataRow row in dtAccoutnableForm.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                newRow["id"] = row["id"];
+                newRow["accountableForm"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
+        }
+
         internal void LoadAccountableForms()
         {
-            var dtAccountableFormRepo = AccFactory.AccountableFormsRepository().GetRecords();
-            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, dtAccountableFormRepo);
+            HelperLoadRecords.AccountableFormsCombobox(cmbAccountableForms, DataTableAccountableForm());
         }
 
         #region Validations
@@ -144,36 +168,49 @@ namespace AccountingSystem.Views.Manage.Receipts
 
         private void cmbforms_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
-
-            if (item == null)
-                return;
-
-            if (item[2].ToString().Contains("Tickets"))
+            try
             {
-                isCashTicket = true;
-                txtReceiptNumberFrom.Enabled = false;
-                txtReceiptNumberTo.Enabled = false;
-                txtQuantity.ReadOnly = false;
-                txtReceiptNumberFrom.ResetText();
-                txtReceiptNumberTo.ResetText();
-                txtQuantity.Text = string.Empty;
+                DataRowView item = cmbAccountableForms.SelectedItem as DataRowView;
+
+                if (item == null)
+                    return;
+
+                if (item["accountableForm"].ToString().Contains("Tickets"))
+                {
+                    isCashTicket = true;
+                    txtReceiptNumberFrom.Enabled = false;
+                    txtReceiptNumberTo.Enabled = false;
+                    txtQuantity.ReadOnly = false;
+                    txtReceiptNumberFrom.ResetText();
+                    txtReceiptNumberTo.ResetText();
+                    txtQuantity.Text = string.Empty;
+                }
+                else
+                {
+                    isCashTicket = false;
+                    txtReceiptNumberFrom.Enabled = true;
+                    txtReceiptNumberTo.Enabled = true;
+                    txtQuantity.ReadOnly = true;
+                    txtQuantity.Text = string.Empty;
+                }
             }
-            else
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void OnLoad()
+        {
+            try
             {
-                isCashTicket = false;
-                txtReceiptNumberFrom.Enabled = true;
-                txtReceiptNumberTo.Enabled = true;
-                txtQuantity.ReadOnly = true;
-                txtQuantity.Text = string.Empty;
+                LoadAccountableForms();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucReceipts_Load(object sender, EventArgs e)
         {
             if (!DesignMode)
             {
-                LoadAccountableForms();
+                OnLoad();
             }
         }
     }

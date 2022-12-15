@@ -52,7 +52,7 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@rpt_assessment_posts_id", DbType.Int32, entity.RptAssessmentPostId },
-                new object[] { "@rpt_payment_posts_id", DbType.Int32, entity.RptPaymentPostsId },
+                new object[] { "@rpt_payment_posts_id", DbType.Int32, entity.RptPaymentsId },
                 new object[] { "@discount_rate", DbType.Decimal, entity.DiscountRate },
                 new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance }
             };

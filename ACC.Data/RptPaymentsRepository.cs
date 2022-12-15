@@ -7,14 +7,14 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptPaymentPostsRepository : IRptPaymentPostsRepository
+    public class RptPaymentsRepository : IRptPaymentPostsRepository
     {
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private IRptTaxDuesRepository _rptTaxDuesRepository;
-        private readonly string tableName = "rpt_payment_posts";
-        private readonly string viewTableName = "view_rpt_payment_posts";
+        private readonly string tableName = "rpt_payments";
+        private readonly string viewTableName = "view_rpt_payments";
 
-        public RptPaymentPostsRepository(AccGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
+        public RptPaymentsRepository(AccGenericCommands mySqlGenericCommandsLFS, IRptTaxDuesRepository rptTaxDuesRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _rptTaxDuesRepository = rptTaxDuesRepository;
@@ -25,7 +25,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Delete(List<RptPaymentPostsModel> entityList)
+        public bool Delete(List<RptPaymentsModel> entityList)
         {
             throw new NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool Insert(RptPaymentPostsModel entity)
+        public bool Insert(RptPaymentsModel entity)
         {
             var parameters = new object[][]
             {
@@ -62,7 +62,7 @@ namespace ACC.Data
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
-        public bool Update(RptPaymentPostsModel entity)
+        public bool Update(RptPaymentsModel entity)
         {
             throw new NotImplementedException();
         }
@@ -73,15 +73,15 @@ namespace ACC.Data
             return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
-        public bool InsertWithRptTaxDues(RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        public bool InsertWithRptTaxDues(RptPaymentsModel rptPaymentModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             using (var scope = new TransactionScope())
             {
-                _ = Insert(rptPaymentPostsModel);
+                _ = Insert(rptPaymentModel);
 
                 foreach (RptTaxDuesModel rptTaxDuesModel in rptTaxDuesModels)
                 {
-                    rptTaxDuesModel.RptPaymentPostsId = GetLastInsertedID();
+                    rptTaxDuesModel.RptPaymentsId = GetLastInsertedID();
                     _ = _rptTaxDuesRepository.Insert(rptTaxDuesModel);
                 }
 

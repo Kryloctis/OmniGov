@@ -5,9 +5,9 @@ using System.Data;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface IRptPaymentPostsRepository : IAccRepository<RptPaymentPostsModel>
+    public interface IRptPaymentRepository : IAccRepository<RptPaymentsModel>
     {
-        bool InsertWithRptTaxDues(RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
+        bool InsertWithRptTaxDues(RptPaymentsModel rptPaymentModel, List<RptTaxDuesModel> rptTaxDuesModels);
 
         DataTable GetViewRecordsByDateTaxPayerName(DateTime dateFrom, DateTime dateTo, string taxPayerName);
 

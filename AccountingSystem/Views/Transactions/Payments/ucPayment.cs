@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -9,21 +11,45 @@ namespace AccountingSystem.Views.Transactions.Payments
     public partial class ucPayment : UserControl
     {
         internal decimal amountPayment = 0;
+        internal string taxpayerName = string.Empty;
 
         public ucPayment()
         {
             InitializeComponent();
         }
 
-        private void LoadAccountableForms()
+        internal string GetFormErrors()
         {
-            var dtAccountableForm = AccFactory.AccountableFormsRepository().GetRecords();
-            HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, dtAccountableForm);
+            var errors = new string[]
+            {
+                errorProvider1.GetError(txtCollectingOfficer),
+                errorProvider1.GetError(cmbxAccountableForm),
+                errorProvider1.GetError(txtReceipts),
+                errorProvider1.GetError(txtPayee),
+                dgCheques.Tag.ToString()
+            };
+
+            return AccFactory.CreateErrors(errors).GenerateErrorMessage();
         }
 
-        private void ResetForm()
+        internal void OnLoad(string accountableFormCode = "")
         {
-            amountPayment = 0;
+            try
+            {
+                lblTotalPayment.Text = amountPayment.ToString("N2");
+                txtCollectingOfficer.Text = GetCollectingOfficerData().Count < 1 ? string.Empty : GetCollectingOfficerData()["collector_full_name"];
+                PaymentMethods();
+                Helper.DatagridEditableRowStyle(dgCheques, true);
+                LoadAccountableForms(accountableFormCode);
+                LoadReceipts();
+                dtPaymentDate.Value = Helper.GetCurrentDate();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadReceipts();
         }
 
         private Dictionary<string, string> GetCollectingOfficerData()
@@ -49,16 +75,19 @@ namespace AccountingSystem.Views.Transactions.Payments
             return dict;
         }
 
-        private void LoadReceipts()
+        private List<int> GetReceiptsList()
         {
+            var list = new List<int>();
+
             if (GetCollectingOfficerData().Count < 1)
-                return;
+                return list;
+
             int collectorId = Convert.ToInt32(GetCollectingOfficerData()["id"]);
             bool isCollectorJobOrder = Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]);
             int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
             var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_IsCollectorJo_AccountableFormId(collectorId, isCollectorJobOrder, accountableFormId);
-            var receiptNos = new List<string>();
+            var receiptNos = new List<int>();
 
             foreach (DataRow row in dtIssuedReceipts.Rows)
             {
@@ -66,42 +95,212 @@ namespace AccountingSystem.Views.Transactions.Payments
                 int receiptIssuedTo = Convert.ToInt32(row["receipt_issued_to"]);
 
                 for (int i = receiptIssuedFrom; i < receiptIssuedTo; i++)
-                    receiptNos.Add(i.ToString());
+                    receiptNos.Add(i);
             }
 
+            //Sorting Receipt No.s In Order
             receiptNos.Sort((a, b) => a.CompareTo(b));
-            var autoCompleteCollection = new AutoCompleteStringCollection();
-            receiptNos.ForEach(x => autoCompleteCollection.Add(x));
-            txtReceipts.AutoCompleteCustomSource = autoCompleteCollection;
-            txtReceipts.Text = receiptNos.Count < 1? string.Empty : receiptNos[0];
+
+            var paymentCollectionReceiptsList = AccFactory.PaymentCollectionsRepository().GetRecordsReceiptsByAccFormId(accountableFormId);
+            list = receiptNos.Except(paymentCollectionReceiptsList).ToList();
+
+            return list;
         }
 
-        internal void OnLoad()
+        private DataColumn[] DataColumnAccountableForms()
         {
-            try
+            return new DataColumn[]
             {
-                lblTotalPayment.Text = amountPayment.ToString("N2");
-                txtCollectingOfficer.Text = GetCollectingOfficerData().Count < 1? string.Empty : GetCollectingOfficerData()["collector_full_name"];
-                LoadAccountableForms();
-                LoadReceipts();
-                dtPaymentDate.Value = Helper.GetCurrentDate();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+                new DataColumn("id", typeof(int)),
+                new DataColumn("accountableForm", typeof(string))
+            };
         }
 
-        private void ucPayment_Load(object sender, EventArgs e)
+        private DataTable DataTableAccountableForm(string accountableFormCode)
         {
-            if (!DesignMode)
-                OnLoad();
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnAccountableForms());
+
+            if (string.IsNullOrEmpty(accountableFormCode))
+            {
+                var dtAccoutnableForm = AccFactory.AccountableFormsRepository().GetRecords();
+                foreach (DataRow row in dtAccoutnableForm.Rows)
+                {
+                    var newRow = dataTable.NewRow();
+                    newRow["id"] = row["id"];
+                    newRow["accountableForm"] = $"{row["acc_form_no"]} - {row["acc_form_desc"]}";
+                    dataTable.Rows.Add(newRow);
+                }
+                cmbxAccountableForm.Enabled = true;
+                return dataTable;
+            }
+            else
+            {
+                var dictAccountableForm = AccFactory.AccountableFormsRepository().GetRecordByAccFormNo(accountableFormCode);
+                var newRow = dataTable.NewRow();
+                newRow["id"] = dictAccountableForm["id"];
+                newRow["accountableForm"] = $"{dictAccountableForm["acc_form_no"]} - {dictAccountableForm["acc_form_desc"]}";
+                dataTable.Rows.Add(newRow);
+                cmbxAccountableForm.Enabled = false;
+                return dataTable;
+            }
+        }
+
+        private void LoadAccountableForms(string accountableFormCode = "")
+        {
+            HelperLoadRecords.AccountableFormsCombobox(cmbxAccountableForm, DataTableAccountableForm(accountableFormCode));
+        }
+
+        private void LoadReceipts()
+        {
+            //Added for Autocomplete Source Collection
+            var autoCompleteCollection = new AutoCompleteStringCollection();
+            GetReceiptsList().ForEach(x => autoCompleteCollection.Add(x.ToString("#######")));
+            txtReceipts.AutoCompleteCustomSource = autoCompleteCollection;
+            string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1 ? string.Empty : GetReceiptsList()[0].ToString();
+        }
+
+        private string PaymentMethods()
+        {
+            if (radPaymentCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cheque";
+            }
+            else if (radPaymentCashCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cash_cheque";
+            }
+            else
+            {
+                gpBxChequeDetails.Enabled = false;
+                dgCheques.Rows.Clear();
+                return "cash";
+            }
+        }
+
+        private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
+        }
+
+        private void radPaymentCashCheque_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
+        }
+
+        private void radPaymentCheque_CheckedChanged(object sender, EventArgs e)
+        {
+            PaymentMethods();
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
         }
 
-        private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
+        private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
         {
-            LoadReceipts();
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void ucPayment_Load(object sender, EventArgs e)
+        {
+        }
+
+        #region Validations
+
+        private bool ReceiptNoValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceipts, "Receipt No."))
+                return false;
+            else
+            {
+                int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
+                int receiptNo = Convert.ToInt32(txtReceipts.Text.Trim());
+                bool receiptExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(receiptNo, accountableFormId);
+
+                if (!GetReceiptsList().Contains(receiptNo))
+                {
+                    errorProvider.SetError(textBox, "Invalid Receipt No.");
+                    return false;
+                }
+                else if (receiptExist)
+                {
+                    errorProvider.SetError(textBox, "Used Receipt No.");
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        private void txtPayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+        }
+
+        private void txtPayee_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
+        }
+
+        private void txtReceipts_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtReceipts);
+        }
+
+        private void txtReceipts_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ReceiptNoValidated(errorProvider1, txtReceipts);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool CollectorValidated(ErrorProvider errorProvider, TextBox textBox)
+        {
+            if (string.IsNullOrEmpty(textBox.Text.Trim()))
+            {
+                errorProvider.SetError(textBox, "Account logged in must be a collector, enable to proceed transaction...");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void txtCollectingOfficer_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !CollectorValidated(errorProvider1, txtCollectingOfficer);
+        }
+
+        private void txtCollectingOfficer_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCollectingOfficer);
+        }
+
+        #endregion Validations
+
+        private bool PaymentMethodValidated()
+        {
+            if (PaymentMethods() == "cash")
+            {
+                dgCheques.Tag = string.Empty;
+                return true;
+            }
+
+            if (dgCheques.Rows.Count < 1)
+            {
+                dgCheques.Tag = Helper.ErrorMessage("Cheque/s");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !PaymentMethodValidated();
         }
     }
 }
