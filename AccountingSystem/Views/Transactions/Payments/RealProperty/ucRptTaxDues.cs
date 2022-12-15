@@ -27,8 +27,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 dgTaxDues.Tag.ToString(),
             };
 
-            IError errors = AccFactory.CreateErrors(errorStrings);
-            return errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorStrings).GenerateErrorMessage();
         }
 
         private void OnLoad()

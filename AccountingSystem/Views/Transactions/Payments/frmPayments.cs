@@ -1,5 +1,6 @@
 ﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,17 +68,46 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void LoadPaymentTab()
         {
-            if (!ucRptTaxDues.ValidateChildren())
+            if (tabControlTaxDues.SelectedTab == tabPageRpt)
             {
-                Helper.MessageBoxError(ucRptTaxDues.GetFormErrors());
+                if (!ucRptTaxDues.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucRptTaxDues.GetFormErrors());
+                    return;
+                }
+
+                ucPayment.amountPayment = ucRptTaxDues.GetTotalTaxDue();
+                ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.OnLoad("56");
+            }
+            else if (tabControlTaxDues.SelectedTab == tabPageBpl)
+            {
+                ucPayment.amountPayment = 0;
+                ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.OnLoad();
+            }
+            else if (tabControlTaxDues.SelectedTab == tabPageOthers)
+            {
+                ucPayment.amountPayment = 0;
+                ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
+                ucPayment.OnLoad();
+            }
+
+            tabControl1.SelectedTab = tabPagePayment;
+        }
+
+        private void ConfirmPayment() 
+        {
+            if(!ucPayment.ValidateChildren())
+            {
+                Helper.MessageBoxError(ucPayment.GetFormErrors());
                 return;
             }
 
-            ucPayment.amountPayment = ucRptTaxDues.GetTotalTaxDue();
-            ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
-            ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
-            ucPayment.OnLoad();
-            tabControl1.SelectedTab = tabPagePayment;
+            Helper.MessageBoxSuccess("Payment Confirmed");
         }
 
         private Dictionary<string, string> GetTaxPayerData()
@@ -111,7 +141,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 else if (tabControl1.SelectedTab == tabPageTaxDues)
                     LoadPaymentTab();
                 else if (tabControl1.SelectedTab == tabPagePayment)
-                    Helper.MessageBoxSuccess("Payment Confirmed");
+                    ConfirmPayment();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -168,17 +198,17 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void radRpt_CheckedChanged(object sender, EventArgs e)
         {
-            tabControl2.SelectedTab = tabPageRpt;
+            tabControlTaxDues.SelectedTab = tabPageRpt;
         }
 
         private void radBpl_CheckedChanged(object sender, EventArgs e)
         {
-            tabControl2.SelectedTab = tabPageBpl;
+            tabControlTaxDues.SelectedTab = tabPageBpl;
         }
 
         private void radOthers_CheckedChanged(object sender, EventArgs e)
         {
-            tabControl2.SelectedTab = tabPageOthers;
+            tabControlTaxDues.SelectedTab = tabPageOthers;
         }
 
         private void txtTaxpayerSearch_TextChanged(object sender, EventArgs e)

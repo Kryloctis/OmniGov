@@ -121,7 +121,7 @@ namespace AccountingSystem
             dataGridView.Columns.Add("real_properties_provinces_name", "Real Properties Province Name");
             dataGridView.Columns.Add("real_properties_location", "Location");
             dataGridView.Columns.Add("classification_codes_id", "Classfication Codes ID");
-            dataGridView.Columns.Add("classification_codes", "Classfication");    
+            dataGridView.Columns.Add("classification_codes", "Classfication");
             dataGridView.Columns.Add("classification_codes_name", "Classfication Codes Name");
             dataGridView.Columns.Add("classification_codes_is_special", "Classfication Codes Is Special");
             dataGridView.Columns.Add("actual_use_codes_id", "Actual Use Codes ID");
@@ -178,7 +178,6 @@ namespace AccountingSystem
             dataGridView.Columns["real_properties_barangays_name"].Visible = false;
             dataGridView.Columns["real_properties_municipalities_name"].Visible = false;
             dataGridView.Columns["real_properties_provinces_name"].Visible = false;
-
 
             foreach (DataRow row in dataTable.Rows)
             {
@@ -1079,21 +1078,11 @@ namespace AccountingSystem
 
         #endregion Receipts
 
-        internal static void AccountableFormsCombobox(ComboBox combobbox, DataTable dataTable)
+        internal static void AccountableFormsCombobox(ComboBox combobox, DataTable dataTable)
         {
-            try
-            {
-                var dtAccountableFormRepo = AccFactory.AccountableFormsRepository().GetRecords();
-                dtAccountableFormRepo.Columns.Add("accountableForm", typeof(string), "acc_form_no + ' - ' + acc_form_desc");
-
-                combobbox.DataSource = dtAccountableFormRepo;
-                combobbox.ValueMember = "id";
-                combobbox.DisplayMember = "accountableForm";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            combobox.DataSource = dataTable;
+            combobox.ValueMember = "id";
+            combobox.DisplayMember = "accountableForm";
         }
 
         #region Funds
@@ -1197,7 +1186,8 @@ namespace AccountingSystem
             datagrid.Columns[5].Visible = false;
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        #endregion
+
+        #endregion Banks
 
         #region FaceValue
 
@@ -2327,7 +2317,6 @@ namespace AccountingSystem
             dataGridView.Columns["realigned"].MinimumWidth = 80;
 
             #endregion Datagrid Format
-
         }
 
         #endregion Budget Appropriations
