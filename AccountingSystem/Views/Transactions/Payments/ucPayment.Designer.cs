@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblTotalPayment = new System.Windows.Forms.Label();
@@ -49,7 +50,9 @@
             this.radPaymentCash = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.txtTaxpayer = new System.Windows.Forms.TextBox();
             this.txtCollectingOfficer = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbxAccountableForm = new System.Windows.Forms.ComboBox();
@@ -59,6 +62,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtPayee = new System.Windows.Forms.TextBox();
             this.dtPaymentDate = new System.Windows.Forms.DateTimePicker();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox6.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -73,6 +77,7 @@
             this.flowLayoutPanel6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox6
@@ -175,35 +180,35 @@
             // 
             // dgCheques
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheques.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgCheques.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgCheques.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCheques.Location = new System.Drawing.Point(4, 28);
             this.dgCheques.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dgCheques.Name = "dgCheques";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgCheques.RowTemplate.Height = 25;
             this.dgCheques.Size = new System.Drawing.Size(402, 201);
             this.dgCheques.TabIndex = 5;
@@ -323,7 +328,9 @@
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.txtTaxpayer);
             this.panel7.Controls.Add(this.txtCollectingOfficer);
+            this.panel7.Controls.Add(this.label1);
             this.panel7.Controls.Add(this.label7);
             this.panel7.Controls.Add(this.label6);
             this.panel7.Controls.Add(this.cmbxAccountableForm);
@@ -342,10 +349,21 @@
             this.panel7.Size = new System.Drawing.Size(418, 285);
             this.panel7.TabIndex = 0;
             // 
+            // txtTaxpayer
+            // 
+            this.txtTaxpayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTaxpayer.Location = new System.Drawing.Point(123, 11);
+            this.txtTaxpayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtTaxpayer.Name = "txtTaxpayer";
+            this.txtTaxpayer.ReadOnly = true;
+            this.txtTaxpayer.Size = new System.Drawing.Size(272, 23);
+            this.txtTaxpayer.TabIndex = 49;
+            this.txtTaxpayer.WordWrap = false;
+            // 
             // txtCollectingOfficer
             // 
             this.txtCollectingOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCollectingOfficer.Location = new System.Drawing.Point(128, 18);
+            this.txtCollectingOfficer.Location = new System.Drawing.Point(123, 40);
             this.txtCollectingOfficer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtCollectingOfficer.Name = "txtCollectingOfficer";
             this.txtCollectingOfficer.ReadOnly = true;
@@ -353,10 +371,20 @@
             this.txtCollectingOfficer.TabIndex = 49;
             this.txtCollectingOfficer.WordWrap = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 15);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Tapayer";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 22);
+            this.label7.Location = new System.Drawing.Point(10, 44);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 15);
@@ -366,7 +394,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 51);
+            this.label6.Location = new System.Drawing.Point(10, 72);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(105, 15);
@@ -377,7 +405,7 @@
             // 
             this.cmbxAccountableForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxAccountableForm.FormattingEnabled = true;
-            this.cmbxAccountableForm.Location = new System.Drawing.Point(128, 48);
+            this.cmbxAccountableForm.Location = new System.Drawing.Point(123, 69);
             this.cmbxAccountableForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbxAccountableForm.Name = "cmbxAccountableForm";
             this.cmbxAccountableForm.Size = new System.Drawing.Size(272, 23);
@@ -387,7 +415,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 108);
+            this.label3.Location = new System.Drawing.Point(11, 129);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 15);
@@ -398,17 +426,21 @@
             // 
             this.txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtReceipts.Location = new System.Drawing.Point(128, 105);
+            this.txtReceipts.Location = new System.Drawing.Point(123, 126);
             this.txtReceipts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtReceipts.MaxLength = 999999999;
             this.txtReceipts.Name = "txtReceipts";
             this.txtReceipts.Size = new System.Drawing.Size(272, 23);
             this.txtReceipts.TabIndex = 50;
             this.txtReceipts.WordWrap = false;
+            this.txtReceipts.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceipts_KeyPress);
+            this.txtReceipts.Validating += new System.ComponentModel.CancelEventHandler(this.txtReceipts_Validating);
+            this.txtReceipts.Validated += new System.EventHandler(this.txtReceipts_Validated);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 79);
+            this.label2.Location = new System.Drawing.Point(11, 100);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 15);
@@ -418,7 +450,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 138);
+            this.label4.Location = new System.Drawing.Point(11, 159);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 15);
@@ -428,25 +460,33 @@
             // txtPayee
             // 
             this.txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPayee.Location = new System.Drawing.Point(128, 134);
+            this.txtPayee.Location = new System.Drawing.Point(123, 155);
             this.txtPayee.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtPayee.Name = "txtPayee";
             this.txtPayee.Size = new System.Drawing.Size(272, 23);
             this.txtPayee.TabIndex = 48;
             this.txtPayee.WordWrap = false;
+            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayee_Validating);
+            this.txtPayee.Validated += new System.EventHandler(this.txtPayee_Validated);
             // 
             // dtPaymentDate
             // 
-            this.dtPaymentDate.Location = new System.Drawing.Point(128, 76);
+            this.dtPaymentDate.Location = new System.Drawing.Point(123, 97);
             this.dtPaymentDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dtPaymentDate.Name = "dtPaymentDate";
             this.dtPaymentDate.Size = new System.Drawing.Size(272, 23);
             this.dtPaymentDate.TabIndex = 47;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ucPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.groupBox6);
             this.Name = "ucPayment";
@@ -471,6 +511,7 @@
             this.groupBox5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -504,5 +545,8 @@
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.TextBox txtPayee;
         internal System.Windows.Forms.DateTimePicker dtPaymentDate;
+        internal System.Windows.Forms.TextBox txtTaxpayer;
+        internal System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

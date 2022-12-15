@@ -1,6 +1,9 @@
 ﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Security;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -71,20 +74,31 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
 
             ucPayment.amountPayment = ucRptTaxDues.GetTotalTaxDue();
+            ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+            ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
             ucPayment.OnLoad();
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-        private int GetRealTaxpayersId()
+        private Dictionary<string, string> GetTaxPayerData()
         {
+            var dict = new Dictionary<string, string>();
             int rowIndex = dgTaxpayers.CurrentRow.Index;
-            return Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
+            int taxpayerId = Convert.ToInt32(dgTaxpayers.Rows[rowIndex].Cells["id"].Value);
+            string taxpayarName = dgTaxpayers.Rows[rowIndex].Cells["name"].Value.ToString();
+
+            dict.Add("taxpayer_id", taxpayerId.ToString());
+            dict.Add("taxpayer_name", taxpayarName);
+            return dict;
         }
 
         private void LoadTaxDuesTab()
         {
+            if (GetTaxPayerData().Count < 1)
+                return;
+
             tabControl1.SelectedTab = tabPageTaxDues;
-            ucRptTaxDues.taxpayersId = GetRealTaxpayersId();
+            ucRptTaxDues.taxpayersId = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
             ucRptTaxDues.LoadPostedProperties();
         }
 

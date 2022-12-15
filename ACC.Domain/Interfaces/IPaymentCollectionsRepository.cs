@@ -6,6 +6,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface IPaymentCollectionsRepository : IAccRepository<PaymentCollectionsModel>
     {
+        List<int> GetRecordsReceiptsByAccFormId(int accountableFormId);
+
         DataTable GetRecordsByCollectingOfficerId(int collectorId);
 
         DataTable GetRecordsByUserId(int userId);
@@ -20,14 +22,14 @@ namespace ACC.Domain.Interfaces
 
         int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID);
 
-        bool ReceiptExist(string receipt, int formid);
+        bool ReceiptExist(int receipt, int formid);
 
-        bool ReceiptExist(int paymentCollectionId, string receipt, int formid);
+        bool ReceiptExist(int paymentCollectionId, int receipt, int formid);
 
         int GetLastInsertedID();
 
         bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
 
-        bool InsertWithPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
+        bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
     }
 }

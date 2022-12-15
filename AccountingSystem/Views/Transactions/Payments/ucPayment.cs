@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
+using Ubiety.Dns.Core.Records;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
     public partial class ucPayment : UserControl
     {
         internal decimal amountPayment = 0;
+        internal string taxpayerName = string.Empty;
 
         public ucPayment()
         {
@@ -49,16 +52,19 @@ namespace AccountingSystem.Views.Transactions.Payments
             return dict;
         }
 
-        private void LoadReceipts()
+        private List<int> GetReceiptsList() 
         {
+            var list = new List<int>();
+
             if (GetCollectingOfficerData().Count < 1)
-                return;
+                return list;
+
             int collectorId = Convert.ToInt32(GetCollectingOfficerData()["id"]);
             bool isCollectorJobOrder = Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]);
             int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
 
             var dtIssuedReceipts = AccFactory.ReceiptsIssuedRepository().GetViewRecordsByCollectorId_IsCollectorJo_AccountableFormId(collectorId, isCollectorJobOrder, accountableFormId);
-            var receiptNos = new List<string>();
+            var receiptNos = new List<int>();
 
             foreach (DataRow row in dtIssuedReceipts.Rows)
             {
@@ -66,14 +72,25 @@ namespace AccountingSystem.Views.Transactions.Payments
                 int receiptIssuedTo = Convert.ToInt32(row["receipt_issued_to"]);
 
                 for (int i = receiptIssuedFrom; i < receiptIssuedTo; i++)
-                    receiptNos.Add(i.ToString());
+                    receiptNos.Add(i);
             }
 
+            //Sorting Receipt No.s In Order
             receiptNos.Sort((a, b) => a.CompareTo(b));
+
+            var paymentCollectionReceiptsList = AccFactory.PaymentCollectionsRepository().GetRecordsReceiptsByAccFormId(accountableFormId);
+            list = receiptNos.Except(paymentCollectionReceiptsList).ToList();
+
+            return list;
+        }
+
+        private void LoadReceipts()
+        {        
+            //Added for Autocomplete Source Collection
             var autoCompleteCollection = new AutoCompleteStringCollection();
-            receiptNos.ForEach(x => autoCompleteCollection.Add(x));
+            GetReceiptsList().ForEach(x => autoCompleteCollection.Add(x.ToString("#######")));
             txtReceipts.AutoCompleteCustomSource = autoCompleteCollection;
-            txtReceipts.Text = receiptNos.Count < 1? string.Empty : receiptNos[0];
+            string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1? string.Empty : GetReceiptsList()[0].ToString();
         }
 
         internal void OnLoad()
@@ -102,6 +119,62 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadReceipts();
+        }
+
+        #region Validations
+
+        private bool ReceiptNoValidated(ErrorProvider errorProvider, TextBox textBox) 
+        {
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceipts, "Receipt No."))
+                return false;
+            else 
+            {
+                int accountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue);
+                int receiptNo = Convert.ToInt32(txtReceipts.Text.Trim());
+                bool receiptExist = AccFactory.PaymentCollectionsRepository().ReceiptExist(receiptNo, accountableFormId);
+
+                if (!GetReceiptsList().Contains(receiptNo)) 
+                {
+                    errorProvider.SetError(textBox, "Invalid Receipt No.");
+                    return false;
+                }
+                else if (receiptExist)
+                {
+                    errorProvider.SetError(textBox, "Used Receipt No.");
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        private void txtReceipts_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = !ReceiptNoValidated(errorProvider1, txtReceipts);
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void txtReceipts_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtReceipts);
+        }
+
+        private void txtPayee_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtPayee, "Payee");
+        }
+
+        private void txtPayee_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtPayee);
+        }
+        #endregion
+
+        private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }
