@@ -30,6 +30,6 @@ namespace ACC.Domain.Interfaces
 
         bool InsertWithGeneralPayment(PaymentCollectionsModel paymentCollectionModel, GeneralPaymentsModel generalPaymentModel);
 
-        bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
+        bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels);
     }
 }

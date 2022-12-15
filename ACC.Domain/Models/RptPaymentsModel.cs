@@ -1,6 +1,6 @@
 ﻿namespace ACC.Domain.Models
 {
-    public class RptPaymentPostsModel
+    public class RptPaymentsModel
     {
         public int Id { get; set; }
         public int PaymentCollectionsId { get; set; }

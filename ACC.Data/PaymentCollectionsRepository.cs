@@ -13,11 +13,11 @@ namespace ACC.Data
         private readonly string viewTableName = "view_payment_collections";
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private IGeneralPaymentsRepository _generalPaymentsRepository;
-        private IRptPaymentPostsRepository _rptPaymentPostsRepository;
+        private IRptPaymentRepository _rptPaymentPostsRepository;
 
         public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFS,
                                             IGeneralPaymentsRepository generalPaymentsRepository,
-                                            IRptPaymentPostsRepository rptPaymentPostsRepository)
+                                            IRptPaymentRepository rptPaymentPostsRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _generalPaymentsRepository = generalPaymentsRepository;
@@ -414,7 +414,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentPostsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        public bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             using (var scope = new TransactionScope())
             {

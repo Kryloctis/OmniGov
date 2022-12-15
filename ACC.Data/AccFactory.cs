@@ -96,7 +96,7 @@ namespace AccountingSystem
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentPostsRepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 
@@ -146,7 +146,7 @@ namespace AccountingSystem
 
         public static IRptTaxDuesRepository RptTaxDuesRepository() => new RptTaxDuesRepository(mySqlGenericCommandsLFS);
 
-        public static IRptPaymentPostsRepository RptPaymentPostsRepository() => new RptPaymentPostsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());
+        public static IRptPaymentRepository RptPaymentepository() => new RptPaymentsRepository(mySqlGenericCommandsLFS, RptTaxDuesRepository());
 
         public static IRealPropertiesRepository RealPropertiesRepository() => new RealPropertiesRepository(mySqlGenericCommandsLFS,
                                                                                                             ProvincesRepository(),
