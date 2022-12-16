@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace ACC.Data
 {
-    public class RptPaymentsRepository : IRptPaymentPostsRepository
+    public class RptPaymentsRepository : IRptPaymentRepository
     {
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private IRptTaxDuesRepository _rptTaxDuesRepository;
