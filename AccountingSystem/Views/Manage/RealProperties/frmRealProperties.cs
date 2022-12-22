@@ -16,7 +16,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgRealProperties, true);
+            Helper.DatagridFullRowSelectStyle(dgRealProperties);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

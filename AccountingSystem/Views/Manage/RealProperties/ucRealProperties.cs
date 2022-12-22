@@ -101,6 +101,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
            LoadActualUseCodes();
            LoadBarangay();
            LoadPropertiesPreviousARPNumber();
+           cmbxCompletePreviousARPNumber_SelectionChangeCommitted(sender, e);
         }
 
         private void LoadBarangay()
@@ -170,7 +171,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
         private void cmbxCompletePreviousARPNumber_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string completeARPNo = cmbxCompletePreviousARPNumber.SelectedText;
+            string completeARPNo = cmbxCompletePreviousARPNumber.Text;
             var previousAssessmentDict = AccFactory.RealPropertiesRepository().GetRecordByCompleteArpNo(completeARPNo);
 
             propertyIdentifier = previousAssessmentDict["property_identifier"];

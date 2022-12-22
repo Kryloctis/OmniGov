@@ -43,7 +43,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
                 int taxpayerId = Convert.ToInt32(row["taxpayers_id"]);
                 string taxpayerTin = row["taxpayers_tin"].ToString();
                 string taxpayerName = row["taxpayers_name"].ToString();
-                string taxpayerTypeCode = row["taxpayer_type_code"].ToString();
+                string taxpayerTypeCode = row["taxpayer_type"].ToString();
                 string street = string.IsNullOrEmpty(row["taxpayers_street"].ToString()) ? string.Empty : $"{row["taxpayers_street"]},";
                 string barangay = string.IsNullOrEmpty(row["taxpayers_barangay"].ToString()) ? string.Empty : $"{row["taxpayers_barangay"]},";
                 string municipality = string.IsNullOrEmpty(row["taxpayers_municipality"].ToString()) ? string.Empty : $"{row["taxpayers_municipality"]},";
@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.TaxPayers
 
                 dataTable.Rows.Add(newRow);
             }
-            return dataTable;
+            return dataTable;   
         }
 
         internal void LoadTaxpayers()
