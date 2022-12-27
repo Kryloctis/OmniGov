@@ -414,15 +414,15 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithRptPaymentPosts(PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentPostsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        public bool InsertWithRptPayment(PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             using (var scope = new TransactionScope())
             {
                 var parameters = new object[][]
                    {
-                        new object[] { "@collecting_officers_id", DbType.Int32, paymentCollectionsModel.CollectingOfficerId},
-                        new object[] { "@job_orders_id", DbType.Int32, paymentCollectionsModel.JobOrderId},
-                        new object[] { "@funds_id", DbType.Int16, paymentCollectionsModel.FundId},
+                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
+                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
                         new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
                         new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
                         new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
@@ -432,34 +432,13 @@ namespace ACC.Data
                         new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
                    };
 
-                string query = $"INSERT INTO {tableName} " +
-                               $"(collecting_officers_id, " +
-                               $"job_orders_id," +
-                               $"funds_id, " +
-                               $"accountable_forms_id, " +
-                               $"payee, " +
-                               $"receipt_no,  " +
-                               $"payment_date, " +
-                               $"amount, " +
-                               $"is_cancelled, " +
-                               $"created_by) " +
-                               $"VALUES " +
-                               $"(@collecting_officers_id, " +
-                               $"@job_orders_id, " +
-                               $"@funds_id, " +
-                               $"@accountable_forms_id, " +
-                               $"@payee, " +
-                               $"@receipt_no, " +
-                               $"@payment_date, " +
-                               $"@amount, " +
-                               $"@is_cancelled, " +
-                               $"@created_by)";
+                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
 
                 _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
-                rptPaymentPostsModel.PaymentCollectionsId = GetLastInsertedID();
+                rptPaymentsModel.PaymentCollectionsId = GetLastInsertedID();
 
-                _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentPostsModel, rptTaxDuesModels);
+                _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
 
                 scope.Complete();
                 return true;

@@ -52,12 +52,12 @@ namespace ACC.Data
             var parameters = new object[][]
             {
                 new object[] { "@rpt_assessment_posts_id", DbType.Int32, entity.RptAssessmentPostId },
-                new object[] { "@rpt_payment_posts_id", DbType.Int32, entity.RptPaymentsId },
+                new object[] { "@rpt_payments_id", DbType.Int32, entity.RptPaymentsId },
                 new object[] { "@discount_rate", DbType.Decimal, entity.DiscountRate },
                 new object[] { "@is_advance", DbType.Boolean, entity.IsAdvance }
             };
 
-            string query = $"INSERT INTO  {tableName}  (rpt_assessment_posts_id ,  rpt_payment_posts_id ,  discount_rate ,  is_advance ) VALUES (@rpt_assessment_posts_id, @rpt_payment_posts_id, @discount_rate, @is_advance)";
+            string query = $"INSERT INTO  {tableName}  (rpt_assessment_posts_id ,  rpt_payments_id ,  discount_rate ,  is_advance ) VALUES (@rpt_assessment_posts_id, @rpt_payments_id, @discount_rate, @is_advance)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -66,14 +66,14 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentPostsId)
+        public DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentsId)
         {
             var parameters = new object[][]
             {
-                new object[] { "@rpt_payment_posts_id", DbType.Int32, rptPaymentPostsId }
+                new object[] { "@rpt_payments_id", DbType.Int32, rptPaymentsId }
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE rpt_payment_posts_id = @rpt_payment_posts_id";
+            string query = $"SELECT * FROM {viewTableName} WHERE rpt_payments_id = @rpt_payments_id";
             var dataTable = new DataTable();
             return _mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }

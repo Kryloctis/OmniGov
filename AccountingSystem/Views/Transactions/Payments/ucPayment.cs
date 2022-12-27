@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,6 +17,21 @@ namespace AccountingSystem.Views.Transactions.Payments
         public ucPayment()
         {
             InitializeComponent();
+        }
+
+        internal PaymentCollectionsModel PaymentCollectionModel()
+        {
+            return new PaymentCollectionsModel()
+            {
+                CollectingOfficerId = GetCollectingOfficerData().Count! < 1 || !Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]) ? Convert.ToInt32(GetCollectingOfficerData()["id"]) : null,
+                JobOrderId = GetCollectingOfficerData().Count! < 1 || Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]) ? Convert.ToInt32(GetCollectingOfficerData()["id"]) : null,
+                AccountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue),
+                Amount = amountPayment,
+                Payee = txtPayee.Text,
+                ReceiptNo = txtReceipts.Text.Trim(),
+                PaymentDate = dtPaymentDate.Value,
+                CreatedBy = Helper.UserId
+            };
         }
 
         internal string GetFormErrors()

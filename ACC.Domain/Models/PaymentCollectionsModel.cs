@@ -5,7 +5,7 @@ namespace ACC.Domain.Models
     public class PaymentCollectionsModel
     {
         public int Id { get; set; }
-        public int CollectingOfficerId { get; set; }
+        public int? CollectingOfficerId { get; set; }
         public int? JobOrderId { get; set; }
         public int? FundId { get; set; }
         public int AccountableFormId { get; set; }
@@ -14,9 +14,7 @@ namespace ACC.Domain.Models
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public bool IsCancelled { get; set; }
-        public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public int UpdatedBy { get; set; }
     }
 }

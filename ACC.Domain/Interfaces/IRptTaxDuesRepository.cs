@@ -5,6 +5,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRptTaxDuesRepository : IAccRepository<RptTaxDuesModel>
     {
-        DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentPostsId);
+        DataTable GetViewRecordsByRptPaymentPostsId(int rptPaymentsId);
     }
 }

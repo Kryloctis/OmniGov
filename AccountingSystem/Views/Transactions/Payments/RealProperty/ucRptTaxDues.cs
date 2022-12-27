@@ -1,10 +1,13 @@
-﻿using ACC.Domain.Interfaces;
+﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Shared;
+using RPT.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,6 +21,29 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         public ucRptTaxDues()
         {
             InitializeComponent();
+        }
+
+        internal List<RptTaxDuesModel> RptTaxDuesModelList()
+        {
+            var rptTaxDuesModelList = new List<RptTaxDuesModel>();
+
+            foreach (DataGridViewRow dgRow in dgTaxDues.Rows)
+            {
+                if (!Convert.ToBoolean(dgRow.Cells["is_selected"].Value))
+                    continue;
+
+                int rptAssessmentPostId = Convert.ToInt32(dgRow.Cells["assessment_posts_id"].Value);
+                var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordByID(rptAssessmentPostId);
+                bool isAdvance = false;
+                var model = new RptTaxDuesModel()
+                {
+                    RptAssessmentPostId = rptAssessmentPostId,
+                    DiscountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(Convert.ToDateTime(dictAssessmentPost["posted_at"]), Convert.ToInt32(dictAssessmentPost["year"]), ref isAdvance),
+                    IsAdvance = isAdvance,
+                };
+                rptTaxDuesModelList.Add(model);
+            }
+            return rptTaxDuesModelList;
         }
 
         internal string GetFormErrors()
@@ -215,6 +241,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 new DataColumn("is_selected", typeof(bool)),
                 new DataColumn("assessment_posts_id", typeof(int)),
                 new DataColumn("year", typeof(int)),
+                new DataColumn("status", typeof(string)),
                 new DataColumn("complete_arp_no", typeof(string)),
                 new DataColumn("type", typeof(string)),
                 new DataColumn("tax_due_amount", typeof(string)),
@@ -241,6 +268,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     DateTime postedAt = Convert.ToDateTime(row["posted_at"]);
                     int assessmentPostYear = Convert.ToInt32(row["year"]);
                     int effectivityYear = Convert.ToInt32(row["effectivity_year"]);
+                    string rptPayment = row["rpt_payments_id"].ToString();
                     bool discountIsAdvance = false;
                     decimal currentDiscountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(postedAt, assessmentPostYear, ref discountIsAdvance);
                     int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, assessmentPostYear);
@@ -264,7 +292,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     newRow["year"] = row["year"];
                     newRow["complete_arp_no"] = completeArpNo;
                     newRow["type"] = "BSC\nSEF";
-
+                    newRow["status"] = string.IsNullOrEmpty(rptPayment) ? "Unpaid" : "Paid";
                     newRow["tax_due_amount"] = $"{basicTaxDue.ToString("N2")}\n{sefTaxDue.ToString("N2")}";
                     newRow["penalty_discount"] = $"{basicPenaltyDiscount.ToString(decimalFormat)}\n{sefPenaltyDiscount.ToString(decimalFormat)}";
                     newRow["total_payment"] = $"{totalBasicPayment.ToString(decimalFormat)}\n{totalSefPayment.ToString(decimalFormat)}";
@@ -334,6 +362,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             {
                 bool isChecked = chckBxTaxDues.Checked;
                 Helper.CheckUncheckCheckBoxRows(dgTaxDues, "is_selected", isChecked);
+
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -358,6 +387,35 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 Helper.MessageBoxError(GetFormErrors());
                 return;
             }
+        }
+
+        private void dgTaxDues_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            var status = dgTaxDues.Rows[e.RowIndex].Cells["status"].Value;
+            var datagridCell = dgTaxDues.Rows[e.RowIndex].Cells["status"];
+
+            switch (status)
+            {
+                case "Unpaid":
+                    var unpaidColor =  Color.IndianRed;
+                    datagridCell.Style.ForeColor = unpaidColor;
+                    datagridCell.Style.SelectionForeColor = unpaidColor;
+                    break;
+
+                case "Paid":
+                    var paidColor = Color.Green;
+                    datagridCell.Style.ForeColor = paidColor;
+                    datagridCell.Style.SelectionForeColor = paidColor;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
