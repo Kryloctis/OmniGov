@@ -303,6 +303,40 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             return dataTable;
         }
 
+        private void LoadColorStatus(DataGridView dataGridView)
+        {
+            try
+            {
+                foreach (DataGridViewRow row in dataGridView.Rows)
+                {
+                    var status = row.Cells["status"].Value;
+                    var datagridStatusCell = row.Cells["status"];
+                    var datagridIsSelectedCell = row.Cells["is_selected"];
+
+                    switch (status)
+                    {
+                        case "Unpaid":
+                            var unpaidColor = Color.IndianRed;
+                            datagridStatusCell.Style.ForeColor = unpaidColor;
+                            datagridStatusCell.Style.SelectionForeColor = unpaidColor;
+                            datagridIsSelectedCell.ReadOnly = false;
+                            break;
+
+                        case "Paid":
+                            var paidColor = Color.Green;
+                            datagridStatusCell.Style.ForeColor = paidColor;
+                            datagridStatusCell.Style.SelectionForeColor = paidColor;
+                            datagridIsSelectedCell.ReadOnly = true;
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
         private void LoadTaxDues(DataGridView dataGridView)
         {
             try
@@ -316,6 +350,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                 }
 
                 HelperLoadRecords.DatagridViewPaymentTaxpayerTaxDues(dataGridView, DataTableTaxDues(taxpayersId, completeArpNoList));
+                LoadColorStatus(dgTaxDues);
                 chckBxTaxDues.Checked = false;
                 txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
             }
@@ -350,7 +385,27 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
         {
             try
             {
-                Helper.CheckUncheckCheckBoxHeader(dgTaxDues, "is_selected", chckBxTaxDues);
+                if (dgTaxDues.Rows.Count < 1)
+                    return;
+
+                int totalRowCount = dgTaxDues.Rows.Count;
+                int unpaidRowCount = 0;
+                int checkedRowCount = 0;
+
+                foreach (DataGridViewRow row in dgTaxDues.Rows)
+                {
+                    if (row.Cells["status"].Value.ToString() == "Unpaid")
+                        unpaidRowCount += 1;
+
+                    if (Convert.ToBoolean(row.Cells["is_selected"].Value) == true)
+                        checkedRowCount += 1;
+                }
+
+                if (unpaidRowCount == checkedRowCount)
+                    chckBxTaxDues.Checked = true;
+                else
+                    chckBxTaxDues.Checked = false;
+
                 txtTotalDue.Text = GetTotalTaxDue().ToString("N2");
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -361,8 +416,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
             try
             {
                 bool isChecked = chckBxTaxDues.Checked;
-                Helper.CheckUncheckCheckBoxRows(dgTaxDues, "is_selected", isChecked);
-
+                foreach (DataGridViewRow row in dgTaxDues.Rows)
+                {
+                    if (row.Cells["status"].Value.ToString() == "Unpaid")
+                        row.Cells["is_selected"].Value = isChecked;
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -391,26 +449,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void dgTaxDues_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            var status = dgTaxDues.Rows[e.RowIndex].Cells["status"].Value;
-            var datagridCell = dgTaxDues.Rows[e.RowIndex].Cells["status"];
-
-            switch (status)
-            {
-                case "Unpaid":
-                    var unpaidColor =  Color.IndianRed;
-                    datagridCell.Style.ForeColor = unpaidColor;
-                    datagridCell.Style.SelectionForeColor = unpaidColor;
-                    break;
-
-                case "Paid":
-                    var paidColor = Color.Green;
-                    datagridCell.Style.ForeColor = paidColor;
-                    datagridCell.Style.SelectionForeColor = paidColor;
-                    break;
-
-                default:
-                    break;
-            }
+          
         }
 
         private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)
