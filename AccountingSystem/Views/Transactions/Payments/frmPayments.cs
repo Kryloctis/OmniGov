@@ -1,10 +1,12 @@
-﻿using AccountingSystem.Views.Transactions.Payments.RealProperty;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Security;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.Payments
@@ -99,15 +101,47 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-        private void ConfirmPayment() 
+        private bool SaveRptPayment() 
         {
-            if(!ucPayment.ValidateChildren())
-            {
-                Helper.MessageBoxError(ucPayment.GetFormErrors());
-                return;
-            }
+            var paymentCollectionModel = ucPayment.PaymentCollectionModel();
+            var rptTaxDuesModelList = ucRptTaxDues.RptTaxDuesModelList();
+            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId};
 
-            Helper.MessageBoxSuccess("Payment Confirmed");
+            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionModel, rptPaymentsModel, rptTaxDuesModelList);
+        }
+
+        private void ResetForm() 
+        {
+
+        }
+
+        private void PaymentConfirmed() 
+        {
+            try
+            {
+                if (!ucPayment.ValidateChildren())
+                {
+                    Helper.MessageBoxError(ucPayment.GetFormErrors());
+                    return;
+                }
+
+                if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
+                    return;
+
+                if (SaveRptPayment())
+                {
+                    Helper.MessageBoxSuccess("Payment Confirmed");
+                    ucPayment.Enabled = false;
+                    btnNext.Text = "Finish";
+                }
+            }
+            catch (Exception ex)
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine("Transaction cancelled");
+                sb.AppendLine(ex.Message);
+                Helper.MessageBoxError(sb.ToString());
+            }
         }
 
         private Dictionary<string, string> GetTaxPayerData()
@@ -141,7 +175,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 else if (tabControl1.SelectedTab == tabPageTaxDues)
                     LoadPaymentTab();
                 else if (tabControl1.SelectedTab == tabPagePayment)
-                    ConfirmPayment();
+                    PaymentConfirmed();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }

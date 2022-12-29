@@ -45,7 +45,58 @@ namespace ACC.Data
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new NotImplementedException();
+            var dict = new Dictionary<string, string>();
+            var parameters = new object[][]
+            {
+                new object[] { @"id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT id, real_taxpayers_id, property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by FROM {tableName} WHERE id = @id";
+
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters)) 
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("id", row["id"].ToString());
+                    dict.Add("real_taxpayers_id", row["real_taxpayers_id"].ToString());
+                    dict.Add("property_identifier", row["property_identifier"].ToString());
+                    dict.Add("complete_arp_no", row["complete_arp_no"].ToString());
+                    dict.Add("property_pin", row["property_pin"].ToString());
+                    dict.Add("taxpayer_tin", row["taxpayer_tin"].ToString());
+                    dict.Add("taxpayer_name", row["taxpayer_name"].ToString());
+                    dict.Add("taxpayer_contact_info", row["taxpayer_contact_info"].ToString());
+                    dict.Add("taxpayer_address", row["taxpayer_address"].ToString());
+                    dict.Add("street", row["street"].ToString());
+                    dict.Add("barangay_name", row["barangay_name"].ToString());
+                    dict.Add("municipality_name", row["municipality_name"].ToString());
+                    dict.Add("province_name", row["province_name"].ToString());
+                    dict.Add("property_kind", row["property_kind"].ToString());
+                    dict.Add("effectivity_quarterly", row["effectivity_quarterly"].ToString());
+                    dict.Add("effectivity_year", row["effectivity_year"].ToString());
+                    dict.Add("other_improvements", row["other_improvements"].ToString());
+                    dict.Add("assessed_value", row["assessed_value"].ToString());
+                    dict.Add("area", row["area"].ToString());
+                    dict.Add("lot_no", row["lot_no"].ToString());
+                    dict.Add("classification_code", row["classification_code"].ToString());
+                    dict.Add("classification_name", row["classification_name"].ToString());
+                    dict.Add("actual_use_code", row["actual_use_code"].ToString());
+                    dict.Add("actual_use_name", row["actual_use_name"].ToString());
+                    dict.Add("gr_year", row["gr_year"].ToString());
+                    dict.Add("is_taxable", row["is_taxable"].ToString());
+                    dict.Add("is_cancelled", row["is_cancelled"].ToString());
+                    dict.Add("penalty_rate", row["penalty_rate"].ToString());
+                    dict.Add("penalty_frequency", row["penalty_frequency"].ToString());
+                    dict.Add("basic_rate", row["basic_rate"].ToString());
+                    dict.Add("sef_rate", row["sef_rate"].ToString());
+                    dict.Add("year", row["year"].ToString());
+                    dict.Add("posted_at", row["posted_at"].ToString());
+                    dict.Add("posted_by", row["posted_by"].ToString());
+                }
+                return dict;
+            };
         }
 
         public Dictionary<string, string> GetRecordBy_ArpNo_Year(string completeArpNo, int year)
@@ -350,7 +401,7 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetViewRptPropertyAssessmentsRecords_By_RealTaxpayersId_CompleteArpNo(int realTaxpayersId, string completeArpNo)
+        public DataTable GetViewRecords(int realTaxpayersId, string completeArpNo, bool showPaidAssessments)
         {
             var parameters = new object[][]
             {
@@ -358,7 +409,9 @@ namespace ACC.Data
                 new object[] { "@complete_arp_no", DbType.String, completeArpNo }
             };
 
-            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
+            string subQuery = showPaidAssessments ? string.Empty : "(rpt_payments_id IS NULL OR rpt_payments_id = '') AND";
+
+            string query = $"SELECT * FROM {viewRptPropertyAssessments} WHERE {subQuery} real_taxpayers_id = @real_taxpayers_id AND complete_arp_no = @complete_arp_no ORDER BY complete_arp_no ASC";
 
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);

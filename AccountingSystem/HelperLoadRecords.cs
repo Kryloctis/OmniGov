@@ -268,36 +268,22 @@ namespace AccountingSystem
 
         #endregion Taxpayers
 
-        #region Payment History
+        #region Payments
 
-        public static void PaymentHistoryDataGridView(DataGridView dataGridView, DataTable dataTable)
+        public static void DatagridViewChequeDetails(DataGridView dataGridView, DataTable dataTable) 
         {
-            var columns = new string[] { "rpt_payment_posts_id", "payment_collections_collecting_officers_id", "payment_collections_job_orders_id", "payment_collections_id", "payment_collections_receipt_no", "payment_collections_payee", "payment_collections_payment_date", "payment_collections_amount", "payment_collections_is_cancelled" };
-            var dataView = new DataView(dataTable);
-            var _dataTable = dataView.ToTable(false, columns);
-
-            dataGridView.DataSource = _dataTable;
-
-            dataGridView.Columns["payment_collections_collecting_officers_id"].Visible = false;
-            dataGridView.Columns["payment_collections_job_orders_id"].Visible = false;
-            dataGridView.Columns["payment_collections_is_cancelled"].Visible = false;
-            dataGridView.Columns["rpt_payment_posts_id"].Visible = false;
-            dataGridView.Columns["payment_collections_id"].Visible = false;
-            dataGridView.Columns["payment_collections_receipt_no"].HeaderText = "Receipt No.";
-            dataGridView.Columns["payment_collections_payment_date"].HeaderText = "Date";
-            dataGridView.Columns["payment_collections_payment_date"].DefaultCellStyle.Format = "dd MMM, yyyy";
-            dataGridView.Columns["payment_collections_payee"].HeaderText = "Payee";
-            dataGridView.Columns["payment_collections_amount"].HeaderText = "Amount";
-            dataGridView.Columns["payment_collections_amount"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["payment_collections_is_cancelled"].HeaderText = "Void";
-            dataGridView.Columns["payment_collections_is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            dataGridView.DataSource = dataTable;
+            dataGridView.Columns["id"].Visible = false;
+            dataGridView.Columns["cheque_no"].HeaderText = "Cheque No.";
+            dataGridView.Columns["cheque_date"].HeaderText = "Date";
+            dataGridView.Columns["cheque_amount"].HeaderText = "Amount";
+            dataGridView.Columns["bank_account_no"].HeaderText = "Bank Account No.";
+            dataGridView.Columns["bank_name"].HeaderText = "Bank Name";
         }
 
-        #endregion Payment History
 
-        #region Property Payment
-
-        public static void TaxPayerListDatagridView(DataGridView dataGridView, DataTable dataTable)
+        //Property Payments
+        public static void DatagridViewTaxPayerList(DataGridView dataGridView, DataTable dataTable)
         {
             dataGridView.DataSource = dataTable;
             dataGridView.Columns["taxpayers_id"].Visible = false;
@@ -315,6 +301,7 @@ namespace AccountingSystem
             dataGridView.Columns["is_selected"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dataGridView.Columns["is_selected"].MinimumWidth = 20;
             dataGridView.Columns["is_selected"].Frozen = true;
+            dataGridView.Columns["status"].HeaderText = "Status";
             dataGridView.Columns["assessment_posts_id"].Visible = false;
             dataGridView.Columns["year"].HeaderText = "Year";
             dataGridView.Columns["year"].Frozen = true;
@@ -349,73 +336,7 @@ namespace AccountingSystem
             dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        public static void TaxPayerProperties(DataGridView dataGridView, DataTable dataTable)
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["is_checked"].HeaderText = string.Empty;
-            dataGridView.Columns["is_checked"].MinimumWidth = 20;
-            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            dataGridView.Columns["complete_arp_no"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["property_pin"].HeaderText = "PIN";
-            dataGridView.Columns["property_pin"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["barangay_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView.Columns["barangay_name"].HeaderText = "Barangay";
-            dataGridView.Columns["property_kind"].HeaderText = "Property Kind";
-            dataGridView.Columns["property_kind"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["is_cancelled"].HeaderText = "Cancelled";
-            dataGridView.Columns["is_cancelled"].DefaultCellStyle.NullValue = null;
-            dataGridView.Columns["is_cancelled"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-        }
-
-        public static void PropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            dataGridView.DataSource = dataTable;
-
-            dataGridView.Columns["is_checked"].HeaderText = string.Empty;
-            dataGridView.Columns["is_checked"].MinimumWidth = 20;
-            dataGridView.Columns["is_checked"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["year"].HeaderText = "Year";
-            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["discount_rate"].Visible = false;
-            dataGridView.Columns["discount_is_advance"].Visible = false;
-            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            dataGridView.Columns["assessed_value"].HeaderText = "Assessed Value";
-            dataGridView.Columns["assessed_value"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
-            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["discount"].HeaderText = "Discount";
-            dataGridView.Columns["discount"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["penalty"].HeaderText = "Penalty";
-            dataGridView.Columns["penalty"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["total_tax_due"].HeaderText = "Total Tax Due";
-            dataGridView.Columns["total_tax_due"].DefaultCellStyle.Format = "N2";
-        }
-
-        public static void PropertyPaymentPropertiesTaxDuesDatagridView(DataTable dataTable, DataGridView dataGridView)
-        {
-            dataGridView.DataSource = dataTable;
-
-            dataGridView.Columns["assessment_post_id"].Visible = false;
-            dataGridView.Columns["year"].HeaderText = "Year";
-            dataGridView.Columns["year"].MinimumWidth = 20;
-            dataGridView.Columns["year"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["complete_arp_no"].HeaderText = "ARP No.";
-            dataGridView.Columns["tax_type"].HeaderText = "Type";
-            dataGridView.Columns["tax_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridView.Columns["tax_due"].HeaderText = "Tax Due";
-            dataGridView.Columns["tax_due"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["discount"].HeaderText = "Discount";
-            dataGridView.Columns["discount"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["penalty"].HeaderText = "Penalty";
-            dataGridView.Columns["penalty"].DefaultCellStyle.Format = "N2";
-            dataGridView.Columns["total_sef_basic"].HeaderText = "Total SEF/BSC";
-            dataGridView.Columns["total_sef_basic"].DefaultCellStyle.Format = "N2";
-        }
-
-        #endregion Property Payment
+        #endregion
 
         #region RPT Tax Rates
 
