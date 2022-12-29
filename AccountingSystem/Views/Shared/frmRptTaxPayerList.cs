@@ -68,7 +68,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                 Cursor = Cursors.WaitCursor;
 
                 string searchText = txtSearch.Text.Trim();
-                HelperLoadRecords.TaxPayerListDatagridView(dataGridView1, DataTableTaxpayerList(searchText));
+                HelperLoadRecords.DatagridViewTaxPayerList(dataGridView1, DataTableTaxpayerList(searchText));
                 dataGridView1.CurrentCell = dataGridView1.FirstDisplayedCell;
 
                 Cursor = Cursors.Default;

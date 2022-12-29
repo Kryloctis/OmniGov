@@ -258,7 +258,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
             foreach (string completeArpNo in completeArpNoList)
             {
-                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRptPropertyAssessmentsRecords_By_RealTaxpayersId_CompleteArpNo(taxPayersId, completeArpNo);
+                var dtAssessmentPosting = AccFactory.RptAssessmentPostsRepository().GetViewRecords(taxPayersId, completeArpNo, chckShowPaidUnpaid.Checked);
                 foreach (DataRow row in dtAssessmentPosting.Rows)
                 {
                     decimal assessedValue = Convert.ToDecimal(row["assessed_value"]);
@@ -454,7 +454,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
         private void chckShowPaidUnpaid_CheckedChanged(object sender, EventArgs e)
         {
-
+            LoadTaxDues(dgTaxDues);
         }
     }
 }

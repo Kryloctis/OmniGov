@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Manage.RealProperties
                 Cursor = Cursors.WaitCursor;
 
                 string searchText = txtSearch.Text.Trim();
-                HelperLoadRecords.TaxPayerListDatagridView(dgTaxpayers, DataTableTaxpayerList(searchText));
+                HelperLoadRecords.DatagridViewTaxPayerList(dgTaxpayers, DataTableTaxpayerList(searchText));
                 dgTaxpayers.CurrentCell = dgTaxpayers.FirstDisplayedCell;
 
                 Cursor = Cursors.Default;
