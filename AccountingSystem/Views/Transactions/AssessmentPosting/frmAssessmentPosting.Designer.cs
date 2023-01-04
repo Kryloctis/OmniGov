@@ -58,6 +58,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.bgwLoadAsessmentPosts = new System.ComponentModel.BackgroundWorker();
+            this.bgwAssessmentPostSelectAll = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgProperties)).BeginInit();
             this.panel1.SuspendLayout();
@@ -343,6 +344,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.bgwLoadAsessmentPosts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwLoadAsessmentPosts_ProgressChanged);
             this.bgwLoadAsessmentPosts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwLoadAsessmentPosts_RunWorkerCompleted);
             // 
+            // bgwAssessmentPostSelectAll
+            // 
+            this.bgwAssessmentPostSelectAll.WorkerReportsProgress = true;
+            this.bgwAssessmentPostSelectAll.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwAssessmentPostSelectAll_DoWork);
+            this.bgwAssessmentPostSelectAll.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwAssessmentPostSelectAll_ProgressChanged);
+            this.bgwAssessmentPostSelectAll.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwAssessmentPostSelectAll_RunWorkerCompleted);
+            // 
             // frmAssessmentPosting
             // 
             this.AcceptButton = this.btnRetrieve;
@@ -408,5 +416,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private System.Windows.Forms.ToolStripProgressBar progressBarLoadRecords;
         private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker bgwLoadAsessmentPosts;
+        private System.ComponentModel.BackgroundWorker bgwAssessmentPostSelectAll;
     }
 }
