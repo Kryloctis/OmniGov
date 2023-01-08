@@ -2,6 +2,7 @@
 using ACC.Domain.Interfaces;
 using RPT.Domain.Interfaces;
 using System;
+using System.Net.Http.Headers;
 
 namespace AccountingSystem
 {
@@ -181,5 +182,7 @@ namespace AccountingSystem
         public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
 
         public static IChequesRepository ChequesRepository() => new ChequesRepository(mySqlGenericCommandsLFS);
+
+        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(mySqlGenericCommandsLFS);
     }
 }
