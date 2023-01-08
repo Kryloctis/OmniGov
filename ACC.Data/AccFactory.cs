@@ -179,5 +179,7 @@ namespace AccountingSystem
         public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
 
         public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
+
+        public static IChequesRepository ChequesRepository() => new ChequesRepository(mySqlGenericCommandsLFS);
     }
 }
