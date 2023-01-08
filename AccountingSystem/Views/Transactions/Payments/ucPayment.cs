@@ -307,6 +307,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                     return false;
                 }
 
+                var isValidated = new List<bool>();
                 foreach (DataGridViewRow row in dgCheques.Rows)
                 {
                     //Validate Cheque Amount
@@ -331,15 +332,16 @@ namespace AccountingSystem.Views.Transactions.Payments
                         dgCheques.Tag = "Invalid Input on Cheque Details.";
                         row.DefaultCellStyle.BackColor = Color.Salmon;
                         row.DefaultCellStyle.SelectionBackColor = Color.Salmon;
-                        return false;
+                        isValidated.Add(false);
                     }
                     else
                     {
                         row.DefaultCellStyle.BackColor = DefaultBackColor;
                         row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
+                        isValidated.Add(true);
                     }
                 }
-                return true;
+                return !isValidated.Contains(false);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return false;
