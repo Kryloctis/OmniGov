@@ -201,6 +201,25 @@ namespace AccountingSystem.Views.Transactions.Payments
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private string PaymentMethods()
+        {
+            if (radPaymentCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cheque";
+            }
+            else if (radPaymentCashCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cash_cheque";
+            }
+            else
+            {
+                gpBxChequeDetails.Enabled = false;
+                return "cash";
+            }
+        }
+
         private void ucPayment_Load(object sender, EventArgs e)
         {
         }
@@ -276,6 +295,69 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+
+        //List of cheque details
+        private bool ChequesValidated()
+        {
+            try
+            {
+                if (dgCheques.Rows.Count < 1)
+                {
+                    dgCheques.Tag = Helper.ErrorMessage("Cheque/s");
+                    return false;
+                }
+
+                foreach (DataGridViewRow row in dgCheques.Rows)
+                {
+                    //Validate Cheque Amount
+                    var rowAmount = row.Cells["cheque_amount"].Value;
+                    var rowChequeNo = row.Cells["cheque_no"].Value;
+                    var rowChequeDate = row.Cells["cheque_date"].Value;
+                    var rowAcountNo = row.Cells["bank_account_no"].Value;
+                    var rowBankName = row.Cells["bank_name"].Value;
+                    DateTime chequeDates = new DateTime();
+                    decimal amount = 0;
+
+                    if ((rowAmount == null || string.IsNullOrEmpty(rowAmount.ToString()) || !Decimal.TryParse(rowAmount.ToString(), out amount) || Convert.ToDecimal(rowAmount) < 1)
+                        ||
+                        (rowChequeNo == null || string.IsNullOrEmpty(rowChequeNo.ToString()))
+                        ||
+                        (rowAcountNo == null || string.IsNullOrEmpty(rowAcountNo.ToString()))
+                        ||
+                        (rowBankName == null || string.IsNullOrEmpty(rowBankName.ToString()))
+                        ||
+                        (rowChequeDate == null || !DateTime.TryParse(rowChequeDate.ToString(), out chequeDates)))
+                    {
+                        dgCheques.Tag = "Invalid Input on Cheque Details.";
+                        row.DefaultCellStyle.BackColor = Color.Salmon;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Salmon;
+                        return false;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = DefaultBackColor;
+                        row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return false;
+        }
+
+        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (PaymentMethods() == "cash")
+                return;
+
+            e.Cancel = !ChequesValidated();
+        }
+
+        private void dgCheques_Validated(object sender, EventArgs e)
+        {
+            dgCheques.Tag = string.Empty;
+        }
+
         #endregion Validations
 
         #region Cheque Details
@@ -325,86 +407,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             {
                 dgCheques.Rows.Remove(row);
             }
-        }
-
-        private string PaymentMethods()
-        {
-            if (radPaymentCheque.Checked)
-            {
-                gpBxChequeDetails.Enabled = true;
-                return "cheque";
-            }
-            else if (radPaymentCashCheque.Checked)
-            {
-                gpBxChequeDetails.Enabled = true;
-                return "cash_cheque";
-            }
-            else
-            {
-                gpBxChequeDetails.Enabled = false;
-                return "cash";
-            }
-        }
-
-        private bool ChequesValidated()
-        {
-            try
-            {
-                if (dgCheques.Rows.Count < 1)
-                {
-                    dgCheques.Tag = Helper.ErrorMessage("Cheque/s");
-                    return false;
-                }
-
-                foreach (DataGridViewRow row in dgCheques.Rows)
-                {
-                    //Validate Cheque Amount
-                    var rowAmount = row.Cells["cheque_amount"].Value;
-                    var rowChequeNo = row.Cells["cheque_no"].Value;
-                    var rowChequeDate = row.Cells["cheque_date"].Value;
-                    var rowAcountNo = row.Cells["bank_account_no"].Value;
-                    var rowBankName = row.Cells["bank_name"].Value;
-                    DateTime chequeDates = new DateTime();
-                    decimal amount = 0;
-
-                    if ((rowAmount == null || string.IsNullOrEmpty(rowAmount.ToString()) || !Decimal.TryParse(rowAmount.ToString(), out amount) || Convert.ToDecimal(rowAmount) < 1)
-                        || 
-                        (rowChequeNo == null || string.IsNullOrEmpty(rowChequeNo.ToString()))
-                        || 
-                        (rowAcountNo == null || string.IsNullOrEmpty(rowAcountNo.ToString()))
-                        ||
-                        (rowBankName == null || string.IsNullOrEmpty(rowBankName.ToString()))
-                        || 
-                        (rowChequeDate == null || !DateTime.TryParse(rowChequeDate.ToString(), out chequeDates)))
-                    {
-                        dgCheques.Tag = "Invalid Input on Cheque Details.";
-                        row.DefaultCellStyle.BackColor = Color.Salmon;
-                        row.DefaultCellStyle.SelectionBackColor = Color.Salmon;
-                        return false;
-                    }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = DefaultBackColor;
-                        row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
-                    }
-                }
-                return true;
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            return false;
-        }
-
-        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (PaymentMethods() == "cash")
-                return;
-
-            e.Cancel = !ChequesValidated();
-        }
-
-        private void dgCheques_Validated(object sender, EventArgs e)
-        {
-            dgCheques.Tag = string.Empty;
         }
     }
 }
