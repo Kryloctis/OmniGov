@@ -214,7 +214,9 @@
             this.dgCheques.Size = new System.Drawing.Size(402, 201);
             this.dgCheques.TabIndex = 11;
             this.dgCheques.Tag = "\"\"";
+            this.dgCheques.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgCheques_RowsAdded);
             this.dgCheques.Validating += new System.ComponentModel.CancelEventHandler(this.dgCheques_Validating);
+            this.dgCheques.Validated += new System.EventHandler(this.dgCheques_Validated);
             // 
             // toolStrip1
             // 
@@ -239,6 +241,7 @@
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonDelete.Text = "Delete";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // toolStripButtonAdd
             // 

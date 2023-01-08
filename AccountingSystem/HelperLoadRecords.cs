@@ -270,18 +270,6 @@ namespace AccountingSystem
 
         #region Payments
 
-        public static void DatagridViewChequeDetails(DataGridView dataGridView, DataTable dataTable) 
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["cheque_no"].HeaderText = "Cheque No.";
-            dataGridView.Columns["cheque_date"].HeaderText = "Date";
-            dataGridView.Columns["cheque_amount"].HeaderText = "Amount";
-            dataGridView.Columns["bank_account_no"].HeaderText = "Bank Account No.";
-            dataGridView.Columns["bank_name"].HeaderText = "Bank Name";
-        }
-
-
         //Property Payments
         public static void DatagridViewTaxPayerList(DataGridView dataGridView, DataTable dataTable)
         {
