@@ -8,11 +8,13 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecordsBySearch(string searchKey);
 
+        Dictionary<string, string> GetViewRecordById(int id);
+
         DataTable GetViewRecords();
 
         bool bankAccountExist(string accountNo, string bankName);
 
-        bool InsertWithBank(BankAccountsModel bankAccountsModel, BanksModel banksModel);
+        bool InsertWithBank(BankAccountsModel bankAccountsModel);
 
         int GetLastInsertedId();
 

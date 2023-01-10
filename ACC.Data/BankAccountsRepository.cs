@@ -4,6 +4,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Transactions;
 
 namespace AccountingSystem
@@ -191,13 +192,23 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
-        public bool InsertWithBank(BankAccountsModel bankAccountsModel, BanksModel banksModel)
+        public bool InsertWithBank(BankAccountsModel bankAccountsModel)
         {
             using (var scope = new TransactionScope())
             {
-                _ = _banksRepository.Insert(banksModel);
+                string bankName = bankAccountsModel.banksModel.BankName;
+                string bankBranch = bankAccountsModel.banksModel.BankBranch;
+                bool bankExist = _banksRepository.BankExistByNameBranch(bankName, bankBranch);
+                int bankId;
+                if (!bankExist)
+                {
+                    _ = _banksRepository.Insert(bankAccountsModel.banksModel);
+                    bankId = _banksRepository.GetLastInsertedId();
+                }
+                else
+                    bankId = _banksRepository.GetIdByNameBranch(bankName, bankBranch);
 
-                bankAccountsModel.BankID = _banksRepository.GetLastInsertedId();
+                bankAccountsModel.BankID = bankId;
                 _ = Insert(bankAccountsModel);
 
                 scope.Complete();
@@ -209,6 +220,34 @@ namespace AccountingSystem
         {
             string query = $"SELECT MAX(id) FROM {tableName}";
             return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+        }
+
+        public Dictionary<string, string> GetViewRecordById(int id)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, id}
+            };
+
+            string query = $"SELECT account_no, banks_id, bank_code, bank_name, bank_branch FROM {viewTableName} WHERE id = @id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("account_no", row["account_no"].ToString());
+                    dict.Add("banks_id", row["banks_id"].ToString());
+                    dict.Add("bank_code", row["bank_code"].ToString());
+                    dict.Add("bank_name", row["bank_name"].ToString());
+                    dict.Add("bank_branch", row["bank_branch"].ToString());
+                }
+                return dict;
+            }
         }
     }
 }

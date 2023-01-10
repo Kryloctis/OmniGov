@@ -5,7 +5,7 @@ namespace ACC.Domain.Interfaces
 {
     public interface IRCIRepository : IAccRepository<RCIModel>
     {
-        DataTable GetRecordsByBankIdAndMonth(int Id, string month);
+        DataTable GetViewRecordsByBankIdAndMonth(int Id, string month);
 
         DataTable GetRecords(int id);
 

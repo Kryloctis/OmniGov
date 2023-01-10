@@ -72,6 +72,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             {
                 string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
                 string bankName = row.Cells["bank_name"].Value.ToString();
+                string bankBranch = row.Cells["bank_branch"].Value.ToString();
                 decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
                 DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
                 string chequeNo = row.Cells["cheque_no"].Value.ToString();
@@ -82,14 +83,20 @@ namespace AccountingSystem.Views.Transactions.Payments
                 if (!bankAccountExist)
                 {
                     //banks model
-                    var banksModel = new BanksModel();
-                    banksModel.BankName = bankName;
+                    var banksModel = new BanksModel()
+                    {
+                        BankName = bankName,
+                        BankBranch = bankBranch
+                    };
 
                     //bank accounts model
-                    var bankAccountModel = new BankAccountsModel();
-                    bankAccountModel.AccountNumber = bankAccountNo;
+                    var bankAccountModel = new BankAccountsModel()
+                    {
+                        AccountNumber = bankAccountNo,
+                        banksModel = banksModel
+                    };
 
-                    AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel, banksModel);
+                    AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
                     bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
                 }
                 else
