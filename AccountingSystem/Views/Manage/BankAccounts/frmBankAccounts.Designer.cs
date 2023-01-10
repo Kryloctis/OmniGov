@@ -39,11 +39,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgBankAccounts)).BeginInit();
@@ -138,12 +133,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabelRecordCount,
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel3,
-            this.toolStripStatusLabelCreatedAt,
-            this.toolStripStatusLabel5,
-            this.toolStripStatusLabel6,
-            this.toolStripStatusLabelUpdatedAt});
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 329);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(500, 22);
@@ -165,40 +155,8 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(245, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(417, 17);
             this.toolStripStatusLabel2.Spring = true;
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusLabel3.Text = "Created at: ";
-            // 
-            // toolStripStatusLabelCreatedAt
-            // 
-            this.toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
-            this.toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
-            this.toolStripStatusLabelCreatedAt.Text = "-";
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel5.Text = "|";
-            this.toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
-            this.toolStripStatusLabel6.Text = "Updated at: ";
-            // 
-            // toolStripStatusLabelUpdatedAt
-            // 
-            this.toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
-            this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
-            this.toolStripStatusLabelUpdatedAt.Text = "-";
             // 
             // frmBankAccounts
             // 

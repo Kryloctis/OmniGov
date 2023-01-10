@@ -1085,13 +1085,12 @@ namespace AccountingSystem
         internal static void DatagridViewBankAccounts(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Bank Name";
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].HeaderText = "Account Number";
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["banks_id"].Visible = false;
+            datagrid.Columns["account_no"].HeaderText = "Account No.";
+            datagrid.Columns["bank_code"].Visible = false;
+            datagrid.Columns["bank_branch"].Visible = false;
         }
 
         #endregion Banks

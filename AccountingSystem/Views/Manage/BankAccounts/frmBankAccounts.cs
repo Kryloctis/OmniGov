@@ -43,16 +43,6 @@ namespace AccountingSystem.Views.Manage.BankAccounts
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgBankAccounts, btnEdit, btnDelete);
-
-            try
-            {
-                var indexes = new byte[] { 4, 5 };
-                Helper.ShowRecordTimestamp(dgBankAccounts, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
