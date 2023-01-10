@@ -196,5 +196,11 @@ namespace ACC.Data
             var dtBanks = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtBanks, parameters);
         }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+        }
     }
 }

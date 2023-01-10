@@ -8,5 +8,6 @@ namespace ACC.Domain.Models
     {
         public int PaymentCollectionId { get; set; }
         public int ChequesId { get; set; }
+        public List<ChequesModel> ChequesModels { get; set; }
     }
 }

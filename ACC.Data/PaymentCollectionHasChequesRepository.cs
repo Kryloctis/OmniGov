@@ -12,11 +12,13 @@ namespace ACC.Data
     public class PaymentCollectionHasChequesRepository : IPaymentCollectionHasChequesRepository
     {
         private readonly string tableName = "payment_collection_has_cheques";
+        private IChequesRepository _chequesRepository;
         private AccGenericCommands _mySqlGenericCommandsLFS;
 
-        public PaymentCollectionHasChequesRepository(AccGenericCommands mySqlGenericCommandsLFS)
+        public PaymentCollectionHasChequesRepository(AccGenericCommands mySqlGenericCommandsLFS, IChequesRepository chequesRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
+            _chequesRepository = chequesRepository;
         }
 
         public int CountRecords()
@@ -73,6 +75,22 @@ namespace ACC.Data
 
             string query = $"INSERT INTO {tableName} (payment_collections_id, cheques_id) VALUES (@payment_collections_id, @cheques_id)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+        }
+
+        public bool InsertWithCheques(PaymentCollectionHasChequesModel entity)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (ChequesModel model in entity.ChequesModels)
+                {
+                    _ = _chequesRepository.Insert(model);
+                    entity.ChequesId = _chequesRepository.GetLastInsertId();
+                    Insert(entity);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool Update(PaymentCollectionHasChequesModel entity)

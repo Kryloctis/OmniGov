@@ -101,21 +101,21 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-        private bool SaveRptPayment() 
+        private bool SaveRptPayment()
         {
             var paymentCollectionModel = ucPayment.PaymentCollectionModel();
             var rptTaxDuesModelList = ucRptTaxDues.RptTaxDuesModelList();
-            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId};
+            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId };
+            var paymentCollectionHasCheques = ucPayment.PaymentCollectionHasChequesModel();
 
-            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionModel, rptPaymentsModel, rptTaxDuesModelList);
+            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasCheques, paymentCollectionModel, rptPaymentsModel, rptTaxDuesModelList);
         }
 
-        private void ResetForm() 
+        private void ResetForm()
         {
-
         }
 
-        private void PaymentConfirmed() 
+        private void PaymentConfirmed()
         {
             try
             {

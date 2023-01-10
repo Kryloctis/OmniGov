@@ -64,6 +64,54 @@ namespace AccountingSystem.Views.Transactions.Payments
             };
         }
 
+        internal PaymentCollectionHasChequesModel PaymentCollectionHasChequesModel()
+        {
+            var chequesModels = new List<ChequesModel>();
+
+            foreach (DataGridViewRow row in dgCheques.Rows)
+            {
+                string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
+                string bankName = row.Cells["bank_name"].Value.ToString();
+                decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
+                DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
+                string chequeNo = row.Cells["cheque_no"].Value.ToString();
+                bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
+
+                int bankAccountId;
+
+                if (!bankAccountExist)
+                {
+                    //banks model
+                    var banksModel = new BanksModel();
+                    banksModel.BankName = bankName;
+
+                    //bank accounts model
+                    var bankAccountModel = new BankAccountsModel();
+                    bankAccountModel.AccountNumber = bankAccountNo;
+
+                    AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel, banksModel);
+                    bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
+                }
+                else
+                    bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
+
+                var model = new ChequesModel()
+                {
+                    Amount = chequeAmount,
+                    ChequeDate = chequeDate,
+                    ChequeNo = chequeNo,
+                    BankAccountsId = bankAccountId
+                };
+
+                chequesModels.Add(model);
+            }
+
+            return new PaymentCollectionHasChequesModel()
+            {
+                ChequesModels = chequesModels,
+            };
+        }
+
         private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadReceipts();
@@ -294,7 +342,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-
 
         //List of cheque details
         private bool ChequesValidated()

@@ -11,7 +11,7 @@ namespace ACC.Data
 {
     public class ChequesRepository : IChequesRepository
     {
-        private readonly string tableName = "cheques"; 
+        private readonly string tableName = "cheques";
         private AccGenericCommands _mySqlGenericCommandsLFS;
 
         public ChequesRepository(AccGenericCommands mySqlGenericCommandsLFS)
@@ -42,6 +42,12 @@ namespace ACC.Data
                 scope.Complete();
                 return true;
             }
+        }
+
+        public int GetLastInsertId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query));
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)

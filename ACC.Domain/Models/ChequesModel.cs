@@ -8,7 +8,7 @@ namespace ACC.Domain.Models
     {
         public int Id { get; set; }
         public int BankAccountsId { get; set; }
-        public int ChequeNo { get; set; }   
+        public string ChequeNo { get; set; }
         public DateTime ChequeDate { get; set; }
         public decimal Amount { get; set; }
     }

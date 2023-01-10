@@ -87,7 +87,7 @@ namespace AccountingSystem
 
         public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
-        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS);
+        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS, BanksRepository());
 
         public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
@@ -97,7 +97,7 @@ namespace AccountingSystem
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository(), PaymentCollectionHasChequesRepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 
@@ -183,6 +183,6 @@ namespace AccountingSystem
 
         public static IChequesRepository ChequesRepository() => new ChequesRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(mySqlGenericCommandsLFS);
+        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(mySqlGenericCommandsLFS, ChequesRepository());
     }
 }

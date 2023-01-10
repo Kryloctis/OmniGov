@@ -7,5 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IChequesRepository : IAccRepository<ChequesModel>
     {
+        int GetLastInsertId();
     }
 }
