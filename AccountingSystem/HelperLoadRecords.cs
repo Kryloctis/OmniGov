@@ -235,7 +235,6 @@ namespace AccountingSystem
             }
 
             dataGridView.ClearSelection();
-
         }
 
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
@@ -324,7 +323,7 @@ namespace AccountingSystem
             dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        #endregion
+        #endregion Payments
 
         #region RPT Tax Rates
 
@@ -1074,7 +1073,6 @@ namespace AccountingSystem
             datagrid.Columns["bank_code"].HeaderText = "Bank Code";
             datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
-            datagrid.Columns["bank_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             datagrid.Columns["bank_branch"].HeaderText = "Branch";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;

@@ -79,7 +79,7 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void dgBanks_SelectionChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
+            byte[] columnIndexTimestamp = { 4, 5 };
             Helper.ShowRecordTimestamp(dgBanks, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
