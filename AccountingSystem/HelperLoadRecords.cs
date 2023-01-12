@@ -235,7 +235,6 @@ namespace AccountingSystem
             }
 
             dataGridView.ClearSelection();
-
         }
 
         public static void DataGridViewPaymentTaxpayers(DataGridView dataGridView, DataTable dataTable)
@@ -269,18 +268,6 @@ namespace AccountingSystem
         #endregion Taxpayers
 
         #region Payments
-
-        public static void DatagridViewChequeDetails(DataGridView dataGridView, DataTable dataTable) 
-        {
-            dataGridView.DataSource = dataTable;
-            dataGridView.Columns["id"].Visible = false;
-            dataGridView.Columns["cheque_no"].HeaderText = "Cheque No.";
-            dataGridView.Columns["cheque_date"].HeaderText = "Date";
-            dataGridView.Columns["cheque_amount"].HeaderText = "Amount";
-            dataGridView.Columns["bank_account_no"].HeaderText = "Bank Account No.";
-            dataGridView.Columns["bank_name"].HeaderText = "Bank Name";
-        }
-
 
         //Property Payments
         public static void DatagridViewTaxPayerList(DataGridView dataGridView, DataTable dataTable)
@@ -336,7 +323,7 @@ namespace AccountingSystem
             dataGridView.Columns["kind"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        #endregion
+        #endregion Payments
 
         #region RPT Tax Rates
 
@@ -1086,7 +1073,6 @@ namespace AccountingSystem
             datagrid.Columns["bank_code"].HeaderText = "Bank Code";
             datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
-            datagrid.Columns["bank_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             datagrid.Columns["bank_branch"].HeaderText = "Branch";
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
@@ -1097,13 +1083,12 @@ namespace AccountingSystem
         internal static void DatagridViewBankAccounts(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Bank Name";
-            datagrid.Columns[2].Visible = false;
-            datagrid.Columns[3].HeaderText = "Account Number";
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["banks_id"].Visible = false;
+            datagrid.Columns["account_no"].HeaderText = "Account No.";
+            datagrid.Columns["bank_code"].Visible = false;
+            datagrid.Columns["bank_branch"].Visible = false;
         }
 
         #endregion Banks

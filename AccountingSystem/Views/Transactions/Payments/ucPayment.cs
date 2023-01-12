@@ -1,7 +1,9 @@
 ﻿using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office.CustomUI;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -38,10 +40,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                 lblTotalPayment.Text = amountPayment.ToString("N2");
                 txtCollectingOfficer.Text = GetCollectingOfficerData().Count < 1 ? string.Empty : GetCollectingOfficerData()["collector_full_name"];
                 PaymentMethods();
-                Helper.DatagridFullRowSelectStyle(dgCheques, false);
+                Helper.DatagridFullRowSelectStyle(dgCheques, false, false, true);
                 LoadAccountableForms(accountableFormCode);
                 LoadReceipts();
-                LoadChequeDetails();
+                LoadCheques();
                 dtPaymentDate.Value = Helper.GetCurrentDate();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -59,6 +61,61 @@ namespace AccountingSystem.Views.Transactions.Payments
                 ReceiptNo = txtReceipts.Text.Trim(),
                 PaymentDate = dtPaymentDate.Value,
                 CreatedBy = Helper.UserId
+            };
+        }
+
+        internal PaymentCollectionHasChequesModel PaymentCollectionHasChequesModel()
+        {
+            var chequesModels = new List<ChequesModel>();
+
+            foreach (DataGridViewRow row in dgCheques.Rows)
+            {
+                string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
+                string bankName = row.Cells["bank_name"].Value.ToString();
+                string bankBranch = row.Cells["bank_branch"].Value.ToString();
+                decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
+                DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
+                string chequeNo = row.Cells["cheque_no"].Value.ToString();
+                bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
+
+                int bankAccountId;
+
+                if (!bankAccountExist)
+                {
+                    //banks model
+                    var banksModel = new BanksModel()
+                    {
+                        BankName = bankName,
+                        BankBranch = bankBranch
+                    };
+
+                    //bank accounts model
+                    var bankAccountModel = new BankAccountsModel()
+                    {
+                        AccountNumber = bankAccountNo,
+                        banksModel = banksModel
+                    };
+
+                    AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
+                    bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
+                }
+                else
+                    bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
+
+                var model = new ChequesModel()
+                {
+                    Amount = chequeAmount,
+                    ChequeDate = chequeDate,
+                    ChequeNo = chequeNo,
+                    BankAccountsId = bankAccountId
+                };
+
+                chequesModels.Add(model);
+            }
+
+            return new PaymentCollectionHasChequesModel()
+            {
+                ChequesModels = chequesModels,
             };
         }
 
@@ -104,11 +161,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 cmbxAccountableForm.Enabled = false;
                 return dataTable;
             }
-        }
-
-        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = !PaymentMethodValidated();
         }
 
         private Dictionary<string, string> GetCollectingOfficerData()
@@ -180,42 +232,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             string receiptNo = txtReceipts.Text = GetReceiptsList().Count < 1 ? string.Empty : GetReceiptsList()[0].ToString();
         }
 
-        private string PaymentMethods()
-        {
-            if (radPaymentCheque.Checked)
-            {
-                gpBxChequeDetails.Enabled = true;
-                return "cheque";
-            }
-            else if (radPaymentCashCheque.Checked)
-            {
-                gpBxChequeDetails.Enabled = true;
-                return "cash_cheque";
-            }
-            else
-            {
-                gpBxChequeDetails.Enabled = false;
-                return "cash";
-            }
-        }
-
-        private bool PaymentMethodValidated()
-        {
-            if (PaymentMethods() == "cash")
-            {
-                dgCheques.Tag = string.Empty;
-                return true;
-            }
-
-            if (dgCheques.Rows.Count < 1)
-            {
-                dgCheques.Tag = Helper.ErrorMessage("Cheque/s");
-                return false;
-            }
-
-            return true;
-        }
-
         private void radPaymentCash_CheckedChanged(object sender, EventArgs e)
         {
             PaymentMethods();
@@ -238,6 +254,25 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void txtReceipts_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private string PaymentMethods()
+        {
+            if (radPaymentCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cheque";
+            }
+            else if (radPaymentCashCheque.Checked)
+            {
+                gpBxChequeDetails.Enabled = true;
+                return "cash_cheque";
+            }
+            else
+            {
+                gpBxChequeDetails.Enabled = false;
+                return "cash";
+            }
         }
 
         private void ucPayment_Load(object sender, EventArgs e)
@@ -315,44 +350,119 @@ namespace AccountingSystem.Views.Transactions.Payments
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        #endregion Validations 
-
-        #region Cheque Details
-        private DataColumn[] DataColumnsChequeDetails() 
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("id",  typeof(int)),
-                new DataColumn("cheque_no", typeof(string)),
-                new DataColumn("cheque_date", typeof(DateTime)),
-                new DataColumn("cheque_amount", typeof(decimal)),
-                new DataColumn("bank_account_no", typeof(string)),
-                new DataColumn("bank_name", typeof(string)),
-            };
-        }
-        
-        private DataTable DataTableChequeDetails()
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(DataColumnsChequeDetails());
-            return dataTable;
-        }
-
-        private void LoadChequeDetails() 
+        //List of cheque details
+        private bool ChequesValidated()
         {
             try
             {
-                HelperLoadRecords.DatagridViewChequeDetails(dgCheques, DataTableChequeDetails());
+                if (dgCheques.Rows.Count < 1)
+                {
+                    dgCheques.Tag = Helper.ErrorMessage("Cheque/s");
+                    return false;
+                }
+
+                var isValidated = new List<bool>();
+                foreach (DataGridViewRow row in dgCheques.Rows)
+                {
+                    //Validate Cheque Amount
+                    var rowAmount = row.Cells["cheque_amount"].Value;
+                    var rowChequeNo = row.Cells["cheque_no"].Value;
+                    var rowChequeDate = row.Cells["cheque_date"].Value;
+                    var rowAcountNo = row.Cells["bank_account_no"].Value;
+                    var rowBankName = row.Cells["bank_name"].Value;
+                    DateTime chequeDates = new DateTime();
+                    decimal amount = 0;
+
+                    if ((rowAmount == null || string.IsNullOrEmpty(rowAmount.ToString()) || !Decimal.TryParse(rowAmount.ToString(), out amount) || Convert.ToDecimal(rowAmount) < 1)
+                        ||
+                        (rowChequeNo == null || string.IsNullOrEmpty(rowChequeNo.ToString()))
+                        ||
+                        (rowAcountNo == null || string.IsNullOrEmpty(rowAcountNo.ToString()))
+                        ||
+                        (rowBankName == null || string.IsNullOrEmpty(rowBankName.ToString()))
+                        ||
+                        (rowChequeDate == null || !DateTime.TryParse(rowChequeDate.ToString(), out chequeDates)))
+                    {
+                        dgCheques.Tag = "Invalid Input on Cheque Details.";
+                        row.DefaultCellStyle.BackColor = Color.Salmon;
+                        row.DefaultCellStyle.SelectionBackColor = Color.Salmon;
+                        isValidated.Add(false);
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = DefaultBackColor;
+                        row.DefaultCellStyle.SelectionBackColor = Color.SkyBlue;
+                        isValidated.Add(true);
+                    }
+                }
+                return !isValidated.Contains(false);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            return false;
+        }
+
+        private void dgCheques_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (PaymentMethods() == "cash")
+                return;
+
+            e.Cancel = !ChequesValidated();
+        }
+
+        private void dgCheques_Validated(object sender, EventArgs e)
+        {
+            dgCheques.Tag = string.Empty;
+        }
+
+        #endregion Validations
+
+        #region Cheque Details
+
+        private DataGridViewColumn[] DatagridViewColumnsChequeDetails()
+        {
+            return new DataGridViewColumn[]
+            {
+                new DataGridViewTextBoxColumn() { Name = "id", Visible = false},
+                new DataGridViewTextBoxColumn() { Name = "cheque_no", HeaderText = "Cheque No." },
+                new DataGridViewTextBoxColumn() { Name = "cheque_date", HeaderText = "Cheque Date"},
+                new DataGridViewTextBoxColumn() { Name = "cheque_amount", HeaderText = "Amount"},
+                new DataGridViewTextBoxColumn() { Name = "bank_account_no", HeaderText = "Account No."},
+                new DataGridViewTextBoxColumn() { Name = "bank_branch", HeaderText = "Bank Branch"},
+                new DataGridViewTextBoxColumn() { Name = "bank_name", HeaderText = "Bank Name"}
+            };
+        }
+
+        private void LoadCheques()
+        {
+            try
+            {
+                dgCheques.Columns.Clear();
+                dgCheques.Rows.Clear();
+                dgCheques.Columns.AddRange(DatagridViewColumnsChequeDetails());
                 dgCheques.CurrentCell = dgCheques.FirstDisplayedCell;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
-        #endregion
+
+        #endregion Cheque Details
 
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            DataTableChequeDetails().Rows.Add();
-            dgCheques.RefreshEdit();
+            dgCheques.Rows.Add();
+        }
+
+        private void dgCheques_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            dgCheques.Rows[e.RowIndex].Cells["cheque_date"].Value = "mm/dd/yyyy";
+            dgCheques.Rows[e.RowIndex].Cells["cheque_amount"].Value = "0.00";
+        }
+
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgCheques.SelectedRows)
+            {
+                dgCheques.Rows.Remove(row);
+            }
         }
     }
 }

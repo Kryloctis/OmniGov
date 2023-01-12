@@ -430,9 +430,9 @@ namespace AccountingSystem
             if (Fill == true) dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true)
+        public static void DatagridFullRowSelectStyle(DataGridView dgv, bool Fill = false, bool isReadOnly = true, bool showRowHeader = false)
         {
-            dgv.RowHeadersVisible = false;
+            dgv.RowHeadersVisible = showRowHeader;
             dgv.EnableHeadersVisualStyles = false;
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;

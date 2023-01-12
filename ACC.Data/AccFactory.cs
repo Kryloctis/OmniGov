@@ -2,6 +2,7 @@
 using ACC.Domain.Interfaces;
 using RPT.Domain.Interfaces;
 using System;
+using System.Net.Http.Headers;
 
 namespace AccountingSystem
 {
@@ -86,7 +87,7 @@ namespace AccountingSystem
 
         public static IBanksRepository BanksRepository() => new BanksRepository(mySqlGenericCommandsLFS);
 
-        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS);
+        public static IBankAccountsRepository BankAccountsRepository() => new BankAccountsRepository(mySqlGenericCommandsLFS, BanksRepository());
 
         public static IRCIObligationsRepository RCIObligationsRepository() => new RCIObligationsRepository(mySqlGenericCommandsLFS);
 
@@ -96,7 +97,7 @@ namespace AccountingSystem
 
         public static IAccountableRepository AccountableFormsRepository() => new AccountableFormsRepository(mySqlGenericCommandsLFS);
 
-        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository());
+        public static IPaymentCollectionsRepository PaymentCollectionsRepository() => new PaymentCollectionsRepository(mySqlGenericCommandsLFS, GeneralPaymentRepository(), RptPaymentepository(), PaymentCollectionHasChequesRepository());
 
         public static IBankDepositsRepository BankDepositsRepository() => new BankDepositsRepository(mySqlGenericCommandsLFS);
 
@@ -179,5 +180,9 @@ namespace AccountingSystem
         public static IBusinessAdOnChargesRepository BusinessAddOnChargesRepository() => new BusinessAddOnChargesRepository(mySqlGenericCommandsLFS);
 
         public static IBusinessCategoriesHasAddOnCharges BusinessCategoriesHasAddOnCharges() => new BusinessCategoriesHasAddOnChargesRepository(mySqlGenericCommandsLFS);
+
+        public static IChequesRepository ChequesRepository() => new ChequesRepository(mySqlGenericCommandsLFS);
+
+        public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(mySqlGenericCommandsLFS, ChequesRepository());
     }
 }

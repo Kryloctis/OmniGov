@@ -23,21 +23,22 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void frmRCIReport_Load(object sender, EventArgs e)
         {
-            LoadBanks();
+            LoadBankAccounts();
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = errorProvider1.GetError(cmbBanks);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbBanks)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void LoadBanks()
+        private void LoadBankAccounts()
         {
-            cmbBanks.DataSource = AccFactory.BanksRepository().GetRecords();
+            cmbBanks.DataSource = AccFactory.BankAccountsRepository().GetViewRecords();
             cmbBanks.ValueMember = "id";
             cmbBanks.DisplayMember = "account_no";
         }
@@ -48,13 +49,13 @@ namespace AccountingSystem.Views.Reports.RCI
             var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
 
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = AccFactory.RCIRepository().GetRecordsByBankIdAndMonth(bankId, dateYearMonth);
+            var dt = AccFactory.RCIRepository().GetViewRecordsByBankIdAndMonth(bankId, dateYearMonth);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
                 {
                     DataRow row = dtRCI.NewRow();
-                    row["account_no"] = item["account_no"];
+                    row["account_no"] = item["bank_account_no"];
                     row["bank_name"] = item["bank_name"];
                     row["check_no"] = item["check_no"];
                     row["check_date"] = item["check_date"];
@@ -113,12 +114,11 @@ namespace AccountingSystem.Views.Reports.RCI
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
                 var lguDetails = Helper.LGUDetails();
-
-                var bankrepo = AccFactory.BanksRepository();
-                var bankdata = bankrepo.GetRecordByID((int)cmbBanks.SelectedValue);
+                int bankAccountId = Convert.ToInt32(cmbBanks.SelectedValue);
+                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
                 var fund = fundName;
 
-                string bankDetails = string.Format("{0} - {1}", bankdata["bank_name"], bankdata["account_no"]);
+                string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
                 var parameters = new[] {
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
