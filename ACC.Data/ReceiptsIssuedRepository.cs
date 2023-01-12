@@ -383,7 +383,7 @@ namespace ACC.Data
                 new object[]{ "@receipt_id", DbType.Int32, receiptId}
             };
 
-            string query = "SELECT COALESCE(SUM(quantity), 0) AS total_issued FROM {tableName} WHERE receipts_id = @receipt_id";
+            string query = $"SELECT COALESCE(SUM(quantity), 0) AS total_issued FROM {tableName} WHERE receipts_id = @receipt_id";
 
             return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameter));
         }

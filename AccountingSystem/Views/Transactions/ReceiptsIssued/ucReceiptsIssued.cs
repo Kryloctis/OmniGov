@@ -24,15 +24,16 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[5];
-            errorArray[0] = epCollectingOfficer.GetError(cmbCollector);
-            errorArray[1] = epReceipt.GetError(cmbReceipt);
-            errorArray[2] = epFrom.GetError(txtReceiptIssuedFrom);
-            errorArray[3] = epTo.GetError(txtReceiptIssuedTo);
-            errorArray[4] = epQuantity.GetError(txtReceiptQuantity);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(cmbCollector),
+                errorProvider1.GetError(cmbReceipt),
+                errorProvider1.GetError(txtReceiptIssuedFrom),
+                errorProvider1.GetError(txtReceiptIssuedTo),
+                errorProvider1.GetError(txtReceiptQuantity)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -168,13 +169,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             txtReceiptQuantity.ReadOnly = true;
         }
 
-        private void ucReceiptsIssued_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
                 LoadCollectors();
                 LoadReceipts();
             }
+        }
+
+        private void ucReceiptsIssued_Load(object sender, EventArgs e)
+        {
+            OnLoad();
         }
 
         private void ComputeReceiptIssueQuantity()
@@ -192,23 +198,23 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void cmbcollector_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbCollector.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epCollectingOfficer, cmbCollector, "Collecting Officer.");
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbCollector, "Collecting Officer.");
         }
 
         private void cmbcollector_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epCollectingOfficer, cmbCollector);
+            Helper.ClearErrorComboBox(errorProvider1, cmbCollector);
         }
 
         private void cmbreceipt_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(cmbReceipt.Text))
-                e.Cancel = Helper.ShowErrorComboBoxEmpty(epReceipt, cmbReceipt, "Receipt.");
+                e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbReceipt, "Receipt.");
         }
 
         private void cmbreceipt_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epReceipt, cmbReceipt);
+            Helper.ClearErrorComboBox(errorProvider1, cmbReceipt);
         }
 
         private bool IsReceiptBetweenFromAndTo()
@@ -238,14 +244,14 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
             if (receiptQuantity < Convert.ToInt32(txtReceiptQuantity.Text.Trim()))
             {
-                epQuantity.SetError(txtReceiptQuantity, "Not enough quantity");
+                errorProvider1.SetError(txtReceiptQuantity, "Not enough quantity");
                 e.Cancel = true;
             }
         }
 
         private void txtquantity_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epQuantity, txtReceiptQuantity);
+            Helper.ClearErrorTextBox(errorProvider1, txtReceiptQuantity);
         }
 
         private void txtReceiptNumberFrom_Validating(object sender, CancelEventArgs e)
@@ -254,7 +260,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedFrom.Text.Trim()))
                 {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(epFrom, txtReceiptIssuedFrom, "Receipt No. From.");
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedFrom, "Receipt No. From.");
                     return;
                 }
             }
@@ -266,13 +272,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             {
                 if (string.IsNullOrEmpty(txtReceiptIssuedTo.Text.Trim()))
                 {
-                    e.Cancel = Helper.ShowErrorTextBoxEmpty(epTo, txtReceiptIssuedTo, "Receipt No. To.");
+                    e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtReceiptIssuedTo, "Receipt No. To.");
                     return;
                 }
 
                 if (IsReceiptBetweenFromAndTo() == false)
                 {
-                    epTo.SetError(txtReceiptIssuedTo, "Invalid receipt number to.");
+                    errorProvider1.SetError(txtReceiptIssuedTo, "Invalid receipt number to.");
                     e.Cancel = true;
                 }
             }
@@ -280,17 +286,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void txtReceiptNumberFrom_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epFrom, txtReceiptIssuedFrom);
+            Helper.ClearErrorTextBox(errorProvider1, txtReceiptIssuedFrom);
         }
 
         private void txtReceiptNumberTo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epTo, txtReceiptIssuedTo);
+            Helper.ClearErrorTextBox(errorProvider1, txtReceiptIssuedTo);
         }
 
         #endregion Validations
-
-        #region Form Events Method
 
         private void cmbReceipt_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -354,7 +358,5 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             LoadCollectors();
         }
-
-        #endregion Form Events Method
     }
 }
