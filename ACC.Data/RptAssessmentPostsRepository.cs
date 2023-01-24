@@ -53,7 +53,7 @@ namespace ACC.Data
 
             string query = $"SELECT id, real_taxpayers_id, property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by FROM {tableName} WHERE id = @id";
 
-            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters)) 
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
@@ -207,7 +207,7 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public int PreviousAssessmentPostCount(string completeArpNo, int year)
+        public int UnpaidPreviousAssessmentPostCount(string completeArpNo, int year)
         {
             var parameters = new object[][]
             {
@@ -215,7 +215,7 @@ namespace ACC.Data
                 new object[] { "@year", DbType.Int32, year}
             };
 
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = complete_arp_no AND year = (SELECT MAX(year) FROM {tableName} WHERE year < @year)";
+            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND year < @year";
 
             string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
             return Convert.ToInt32(result);

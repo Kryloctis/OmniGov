@@ -10,7 +10,7 @@ namespace RPT.Domain.Interfaces
     {
         bool IsPropertyPosted(string arpNo);
 
-        int PreviousAssessmentPostCount(string completeArpNo, int year);
+        int UnpaidPreviousAssessmentPostCount(string completeArpNo, int year);
 
         int GetMinAssessmentPostYear(string completeArpNo);
 

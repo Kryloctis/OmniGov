@@ -271,7 +271,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     string rptPayment = row["rpt_payments_id"].ToString();
                     bool discountIsAdvance = false;
                     decimal currentDiscountRate = RealPropertyTaxComputations.GetCurrentDiscountRate(postedAt, assessmentPostYear, ref discountIsAdvance);
-                    int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().PreviousAssessmentPostCount(completeArpNo, assessmentPostYear);
+                    int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().UnpaidPreviousAssessmentPostCount(completeArpNo, assessmentPostYear);
                     decimal sefTaxDue = RealPropertyTaxComputations.GetSefTaxDue(sefRate, assessedValue);
                     decimal basicTaxDue = RealPropertyTaxComputations.GetBasicTaxDue(basicRate, assessedValue);
                     int monthsDelinquent = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(assessmentPostYear, postedAt, effectivityYear, previousAssessmentCount);

@@ -113,7 +113,7 @@ namespace ACC.Data
                 new object[] { "@amount", DbType.Decimal, entity.Amount},
             };
 
-            string query = $"INSERT INTO {tableName} (id, bank_accounts_id, cheque_no, cheque_date, amount, created_at, updated_at) VALUES (@bank_accounts_id, @cheque_no, @cheque_date, @amount)";
+            string query = $"INSERT INTO {tableName} (bank_accounts_id, cheque_no, cheque_date, amount) VALUES (@bank_accounts_id, @cheque_no, @cheque_date, @amount)";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
