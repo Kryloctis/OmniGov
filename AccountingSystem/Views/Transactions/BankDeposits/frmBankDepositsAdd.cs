@@ -46,8 +46,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
                 var bankDepositModel = new BankDepositsModel()
                 {
-                    bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
-                    fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),
+                    BankID = Convert.ToInt32(uc.cmbBank.SelectedValue),
+                    BankAccountsID = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
+                    fundId = Convert.ToInt32(uc.cmbFund.SelectedValue),
                     Reference = uc.txtReferenceNumber.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),
                     Amount = Convert.ToDecimal(uc.nudAmount.Value),

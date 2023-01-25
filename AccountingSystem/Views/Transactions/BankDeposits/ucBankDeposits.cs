@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
@@ -34,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             if (!DesignMode)
             {
                 LoadBanks();
+                LoadBankAccounts();
                 LoadFunds();
 
             }
@@ -113,5 +115,25 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         }
 
         #endregion Validations
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
+
+        private void LoadBankAccounts() 
+        {
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
                 var bdModel = new BankDepositsModel()
                 {
                     Id = uc.Id,
-                    bankId = Convert.ToInt16(uc.cmbBank.SelectedValue),
+                    BankID = Convert.ToInt16(uc.cmbBank.SelectedValue),
                     fundId = Convert.ToInt16(uc.cmbFund.SelectedValue),
                     Reference = uc.txtReferenceNumber.Text.Trim(),
                     Date = Convert.ToDateTime(uc.dtDate.Text.Trim()),

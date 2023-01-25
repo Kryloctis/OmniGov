@@ -19,5 +19,6 @@ namespace ACC.Domain.Interfaces
         int GetLastInsertedId();
 
         Dictionary<string, string> GetViewRecordByAccountNoBankName(string accountNo, string bankName);
+        DataTable GetBankAccountsByBankID(int bankID);
     }
 }

@@ -5,7 +5,8 @@ namespace ACC.Domain.Models
     public class BankDepositsModel
     {
         public int Id { get; set; }
-        public int bankId { get; set; }
+        public int BankID { get; set; }
+        public int BankAccountsID { get; set; }
         public string Reference { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }

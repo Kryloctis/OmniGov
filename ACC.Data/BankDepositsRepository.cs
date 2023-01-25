@@ -74,15 +74,15 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@banks_id", DbType.Int16, entity.bankId},
+                    new object[] { "@bank_accounts_id", DbType.Int32, entity.BankAccountsID},
+                    new object[] { "@funds_id", DbType.Int32, entity.fundId},
                     new object[] { "@reference", DbType.String, entity.Reference},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@created_by", DbType.Int16, entity.CreatedBy},
-                    new object[] { "@funds_id", DbType.Int16, entity.fundId},
+                    new object[] { "@created_by", DbType.Int32, entity.CreatedBy},
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,reference,date,amount,created_by,funds_id) VALUES (@banks_id,@reference,@date,@amount,@created_by,@funds_id)";
+                string query = $"INSERT INTO {tableName} (bank_accounts_id, funds_id, reference, date, amount, created_by) VALUES (@bank_accounts_id, @funds_id, @reference, @date, @amount, @created_by)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -97,7 +97,7 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@banks_id", DbType.Int16, entity.bankId},
+                    new object[] { "@banks_id", DbType.Int16, entity.BankID},
                     new object[] { "@reference", DbType.String, entity.Reference},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
@@ -123,7 +123,7 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@banks_id", DbType.Int16, entity.bankId},
+                    new object[] { "@banks_id", DbType.Int16, entity.BankID},
                     new object[] { "@reference", DbType.String, entity.Reference},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},

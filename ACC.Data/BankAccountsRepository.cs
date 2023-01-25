@@ -171,7 +171,7 @@ namespace AccountingSystem
                     new object[] {"@account_no", DbType.String, entity.AccountNumber},
                 };
 
-                string query = $"INSERT INTO {tableName} (banks_id,account_no) VALUES (@banks_id, @account_no)";
+                string query = $"INSERT INTO {tableName} (banks_id, account_no) VALUES (@banks_id, @account_no)";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -248,6 +248,19 @@ namespace AccountingSystem
                 }
                 return dict;
             }
+        }
+
+        public DataTable GetBankAccountsByBankID(int bankID)
+        {
+            var parameters = new object[][]
+            {
+                new object[]{"@banks_id", DbType.String, bankID},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE banks_id = @banks_id";
+
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
     }
 }
