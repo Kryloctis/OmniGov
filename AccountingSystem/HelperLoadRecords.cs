@@ -1146,18 +1146,24 @@ namespace AccountingSystem
         internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].HeaderText = "Reference";
-            datagrid.Columns[4].HeaderText = "Date";
-            datagrid.Columns[5].HeaderText = "Amount";
-            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[6].Visible = false;
-            datagrid.Columns[7].Visible = false;
-            datagrid.Columns[8].Visible = false;
-            datagrid.Columns[9].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["bank_code"].Visible = false;
+            datagrid.Columns["banks_id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["fund_name"].Visible = false;
+            datagrid.Columns["fund_code"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+
+            datagrid.Columns["account_no"].HeaderText = "Account No.";
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["reference"].HeaderText = "Reference";
+            datagrid.Columns["date"].HeaderText = "Date";
+            datagrid.Columns["amount"].HeaderText = "Amount";
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
