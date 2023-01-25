@@ -35,6 +35,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 LoadBanks();
                 LoadFunds();
+
             }
         }
 
@@ -51,10 +52,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 var bankRepository = AccFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
-                dtBank.Columns.Add("bankdetails", typeof(string), "bank_name +'-'+account_no");
                 cmbBank.DataSource = dtBank;
                 cmbBank.ValueMember = "id";
-                cmbBank.DisplayMember = "bankdetails";
+                cmbBank.DisplayMember = "bank_name";
             }
             catch (Exception ex)
             {
@@ -64,16 +64,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         internal void LoadFunds()
         {
-            try
-            {
-                var fundsRepository = AccFactory.FundsRepository();
-                var dtfunds = fundsRepository.GetRecords();
-                dtfunds.Columns.Add("funddetails", typeof(string), "fund_code +'-'+fund_name");
-                cmbFund.DataSource = dtfunds;
-                cmbFund.ValueMember = "id";
-                cmbFund.DisplayMember = "funddetails";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var fundsRepository = AccFactory.FundsRepository();
+            var dtfunds = fundsRepository.GetRecords();
+
+            HelperLoadRecords.FundsComboBox(dtfunds, cmbFund, "fund_name", "id");
         }
 
         #region Validations
