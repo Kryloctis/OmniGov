@@ -14,14 +14,17 @@ namespace ACC.Data
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private IGeneralPaymentsRepository _generalPaymentsRepository;
         private IRptPaymentRepository _rptPaymentPostsRepository;
+        private IPaymentCollectionHasChequesRepository _paymentCollectionHasChequesRepository;
 
         public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFS,
                                             IGeneralPaymentsRepository generalPaymentsRepository,
-                                            IRptPaymentRepository rptPaymentPostsRepository)
+                                            IRptPaymentRepository rptPaymentPostsRepository,
+                                            IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _generalPaymentsRepository = generalPaymentsRepository;
             _rptPaymentPostsRepository = rptPaymentPostsRepository;
+            _paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -414,7 +417,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithRptPayment(PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        public bool InsertWithRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             using (var scope = new TransactionScope())
             {
@@ -436,9 +439,12 @@ namespace ACC.Data
 
                 _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
 
-                rptPaymentsModel.PaymentCollectionsId = GetLastInsertedID();
+                int paymentCollectionId = GetLastInsertedID();
+                rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
+                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
 
                 _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
+                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
 
                 scope.Complete();
                 return true;

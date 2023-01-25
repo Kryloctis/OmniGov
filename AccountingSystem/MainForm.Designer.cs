@@ -270,14 +270,14 @@
             // menuUserList
             // 
             this.menuUserList.Name = "menuUserList";
-            this.menuUserList.Size = new System.Drawing.Size(180, 22);
+            this.menuUserList.Size = new System.Drawing.Size(111, 22);
             this.menuUserList.Text = "List...";
             this.menuUserList.Click += new System.EventHandler(this.menuUserList_Click);
             // 
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(180, 22);
+            this.menuRoles.Size = new System.Drawing.Size(111, 22);
             this.menuRoles.Text = "Roles...";
             this.menuRoles.Click += new System.EventHandler(this.menuRoles_Click);
             // 
@@ -402,6 +402,7 @@
             this.businessToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.businessCategoriesToolStripMenuItem,
             this.businessAddOnToolStripMenuItem});
+            this.businessToolStripMenuItem.Enabled = false;
             this.businessToolStripMenuItem.Name = "businessToolStripMenuItem";
             this.businessToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.businessToolStripMenuItem.Text = "Business";
@@ -1099,6 +1100,7 @@
             // 
             // toolStripButtonBpl
             // 
+            this.toolStripButtonBpl.Enabled = false;
             this.toolStripButtonBpl.Image = global::AccountingSystem.Properties.Resources.briefcase_business_20px;
             this.toolStripButtonBpl.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonBpl.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;

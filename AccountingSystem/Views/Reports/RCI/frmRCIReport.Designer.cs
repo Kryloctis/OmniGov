@@ -47,6 +47,7 @@ namespace AccountingSystem.Views.Reports.RCI
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 29);
             this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(991, 533);
             this.panel1.TabIndex = 12;
             // 
@@ -124,11 +125,11 @@ namespace AccountingSystem.Views.Reports.RCI
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimizeBox = false;
             this.Name = "frmRCIReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Report of Checks Issued";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCIReport_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

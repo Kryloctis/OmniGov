@@ -369,7 +369,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.Name = "frmAssessmentPosting";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transaction > Payments > Assessment Posting";
+            this.Text = "Transactions > Assessment Posting";
             this.Load += new System.EventHandler(this.frmAssessmentPosting_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

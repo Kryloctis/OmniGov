@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -149,24 +150,16 @@ namespace ACC.Data
 
         public bool CodeExist(string accountCode)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@account_no", DbType.String, accountCode },
-                };
-
-                string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@account_no", DbType.String, accountCode },
             };
 
+            string query = $"SELECT account_no FROM {tableName} WHERE account_no = @account_no";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
         }
 
@@ -183,7 +176,6 @@ namespace ACC.Data
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
-
             return false;
         }
 
@@ -195,6 +187,38 @@ namespace ACC.Data
 
             var dtBanks = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtBanks, parameters);
+        }
+
+        public int GetLastInsertedId()
+        {
+            string query = $"SELECT MAX(id) FROM {tableName}";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query));
+        }
+
+        public bool BankExistByNameBranch(string name, string branch)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@bank_name", DbType.String, name.ToLower().Trim()},
+                new object[] { "@bank_branch", DbType.String, branch.ToLower().Trim()}
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE @bank_name = bank_name AND @bank_branch = bank_branch";
+            string result = _dbGenericCommands.ExecuteScalar(query, parameters);
+            if (!string.IsNullOrEmpty(result)) return true;
+            return false;
+        }
+
+        public int GetIdByNameBranch(string name, string branch)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@bank_name", DbType.String, name},
+                new object[] { "@bank_branch", DbType.String, branch}
+            };
+
+            string query = $"SELECT id FROM {tableName} WHERE bank_name = @bank_name AND bank_branch = @bank_branch";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteScalar(query, parameters));
         }
     }
 }
