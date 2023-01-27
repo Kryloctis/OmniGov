@@ -42,8 +42,8 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int rciId = int.Parse(dgRCI.SelectedCells[0].Value.ToString());
-            _ = new frmRCIEdit(this, rciId).ShowDialog();
+            int rciID = int.Parse(dgRCI.SelectedCells[0].Value.ToString());
+            _ = new frmRCIEdit(this, rciID).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

@@ -136,7 +136,7 @@ namespace ACC.Data
                     new object[] { "@obligations_id", DbType.String, entity.Obid}
                 };
 
-                string query = $"UPDATE {tableName} SET rci_id=@rci_id,obligations_id=@obligations_id WHERE id = @id";
+                string query = $"UPDATE {tableName} SET rci_id = @rci_id, obligations_id = @obligations_id WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)

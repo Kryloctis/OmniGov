@@ -46,16 +46,17 @@ namespace ACC.Data
                     if (reader.Rows.Count < 1)
                         return record;
 
-                    record.Add("check_date", reader.Rows[0]["check_date"].ToString());
-                    record.Add("check_no", reader.Rows[0]["check_no"].ToString());
-                    record.Add("fund_id", reader.Rows[0]["fund_id"].ToString());
+                    record.Add("cheques_id", reader.Rows[0]["cheques_id"].ToString());
+                    record.Add("cheque_no", reader.Rows[0]["cheque_no"].ToString());
+                    record.Add("cheque_date", reader.Rows[0]["cheque_date"].ToString());
+                    record.Add("amount", reader.Rows[0]["amount"].ToString());
                     record.Add("bank_id", reader.Rows[0]["bank_id"].ToString());
+                    record.Add("fund_id", reader.Rows[0]["fund_id"].ToString());
                     record.Add("dv_no", reader.Rows[0]["dv_no"].ToString());
                     record.Add("payee", reader.Rows[0]["payee"].ToString());
                     record.Add("nature_of_payment", reader.Rows[0]["nature_of_payment"].ToString());
                     record.Add("obligation_no", reader.Rows[0]["obligation_no"].ToString());
                     record.Add("function_program_project_id", reader.Rows[0]["fpp_id"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
                     record.Add("created_at", reader.Rows[0]["created_at"].ToString());
                     record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
                 }
@@ -111,29 +112,16 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                    new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
+                    new object[] { "@id", DbType.Int32, entity.Id},
+                    new object[] { "@funds_id", DbType.Int32, entity.FundId},
+                    new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
                     new object[] { "@dv_no", DbType.String, entity.DVNo},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
                 };
 
-                string query = $"UPDATE {tableName} " +
-                    $"SET " +
-                    $"banks_id = @banks_id, " +
-                    $"funds_id = @funds_id, " +
-                    $"function_program_project_id = @function_program_project_id, " +
-                    $"check_date = @check_date, " +
-                    $"check_no = @check_no, " +
-                    $"dv_no = @dv_no, " +
-                    $"payee=@payee, " +
-                    $"nature_of_payment = @nature_of_payment, " +
-                    $"amount= @amount " +
-                    $"WHERE id = @id";
+                string query =  $"UPDATE {tableName} SET funds_id = @funds_id, function_program_project_id = @function_program_project_id, dv_no = @dv_no, payee = @payee, nature_of_payment = @nature_of_payment WHERE id = @id";
 
-                //string query = $"UPDATE {tableName } SET " +
-                //    $"ban";
 
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
