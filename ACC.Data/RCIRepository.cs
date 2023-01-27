@@ -318,5 +318,18 @@ namespace ACC.Data
                 throw;
             }
         }
+
+        public DataTable GetViewRecords()
+        {
+            string query = $"SELECT * FROM {viewTableName}";
+
+            var dtRCI = new DataTable();
+            return _dbGenericCommands.Fill(query, dtRCI);
+        }
+
+        public DataTable GetViewRecordsBySearch(string searchText)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
