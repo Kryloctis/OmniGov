@@ -27,34 +27,28 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+          
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, Id},
-                };
+                new object[] { "@id", DbType.Int32, Id},
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE id = @id";
+            string query = $"SELECT * FROM {viewTableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("banks_id", reader.Rows[0]["banks_id"].ToString());
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("reference", reader.Rows[0]["reference"].ToString());
-                    record.Add("date", reader.Rows[0]["date"].ToString());
-                    record.Add("amount", reader.Rows[0]["amount"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("created_by", reader.Rows[0]["created_by"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                    record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("banks_id", reader.Rows[0]["banks_id"].ToString());
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("reference", reader.Rows[0]["reference"].ToString());
+                record.Add("date", reader.Rows[0]["date"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("created_by", reader.Rows[0]["created_by"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+                record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
             }
 
             return record;
@@ -122,16 +116,16 @@ namespace ACC.Data
             {
                 var parameters = new object[][]
                 {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@banks_id", DbType.Int16, entity.BankID},
+                    new object[] { "@id", DbType.Int32, entity.Id},
+                    new object[] { "@bank_accounts_id", DbType.Int32, entity.BankAccountsID},
+                    new object[] { "@funds_id", DbType.Int32, entity.fundId},
                     new object[] { "@reference", DbType.String, entity.Reference},
                     new object[] { "@date", DbType.Date, entity.Date},
                     new object[] { "@amount", DbType.Decimal, entity.Amount},
-                    new object[] { "@updated_by", DbType.Int16, entity.UpdatedBy},
-                    new object[] { "@funds_id", DbType.Int16, entity.fundId},
+                    new object[] { "@updated_by", DbType.Int32, entity.UpdatedBy},
                 };
 
-                string query = $"UPDATE {tableName} SET banks_id=@banks_id,reference=@reference,date=@date,amount=@amount,updated_by=@updated_by,funds_id=@funds_id WHERE id = @id";
+                string query = $"UPDATE {tableName} SET bank_accounts_id = @bank_accounts_id,  funds_id = @funds_id, reference = @reference, date = @date, amount = @amount, updated_by = @updated_by WHERE id = @id";
                 return _dbGenericCommands.ExecuteNonQuery(query, parameters);
             }
             catch (Exception)
@@ -206,19 +200,17 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var srchtxt = searchText;
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"},
+            };
 
-                string query = $"SELECT {tableName}.id,{tableName2}.account_no,{tableName2}.bank_name,{tableName}.reference,{tableName}.date,{tableName}.amount,{tableName}.created_at,{tableName}.updated_at,CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby,CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby FROM {tableName} LEFT JOIN {tableName2} ON {tableName}.banks_id={tableName2}.id LEFT JOIN {tableName3} u1 ON {tableName}.created_by=u1.id LEFT JOIN {tableName3} u2 ON {tableName}.updated_by=u2.id WHERE {tableName}.reference LIKE '%{srchtxt}%' OR {tableName2}.account_no LIKE '%{srchtxt}%' OR {tableName2}.bank_name LIKE '%{srchtxt}%' OR {tableName}.amount LIKE '%{srchtxt}%'";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {viewTableName} WHERE reference LIKE @search_text OR account_no LIKE @search_text OR bank_name LIKE @search_text  OR amount LIKE @search_text";
+
+            var dtBankDeposits = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBankDeposits, parameters);
+       
         }
 
         public DataTable GetRecordsBySearch(int id)
