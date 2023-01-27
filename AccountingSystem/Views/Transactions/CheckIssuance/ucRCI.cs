@@ -39,7 +39,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
 
                 dtObligations.Columns.Add("obligation_no");
-
                 dtDeductions.Columns.Add("description");
                 dtDeductions.Columns.Add("amount");
             }
@@ -125,10 +124,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 var fundRepository = AccFactory.BanksRepository();
                 var dtBank = fundRepository.GetRecords();
-                dtBank.Columns.Add("bankdisplay", typeof(string), "bank_name + ' - ' + account_no");
                 cmbbank.DataSource = dtBank;
                 cmbbank.ValueMember = "id";
-                cmbbank.DisplayMember = "bankdisplay";
+                cmbbank.DisplayMember = "bank_name";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
