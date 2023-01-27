@@ -32,6 +32,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             if (!DesignMode)
             {
                 LoadBanks();
+                LoadBankAccounts();
                 LoadFunds();
 
                 cmbFPP.SelectedValueChanged -= new EventHandler(cmbFPP_SelectedValueChanged);
@@ -42,6 +43,16 @@ namespace AccountingSystem.Views.Transactions.RCI
                 dtDeductions.Columns.Add("description");
                 dtDeductions.Columns.Add("amount");
             }
+        }
+
+        private void LoadBankAccounts()
+        {
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
         }
 
         internal void LoadFPP()
@@ -86,15 +97,15 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         internal void ResetForm()
         {
-            txtdvno.Clear();
+            txtDVNo.Clear();
             cmbfund.SelectedIndex = -1;
             bankId = fundsId = functionId = 0;
-            cmbbank.SelectedIndex = -1;
-            txtcheckno.Clear();
+            cmbBank.SelectedIndex = -1;
+            txtCheckNo.Clear();
             cmbFPP.SelectedIndex = -1;
-            dtcheckdate.Value = DateTime.Now;
-            txtpayee.Clear();
-            txtnature.Clear();
+            dtCheckDate.Value = DateTime.Now;
+            txtPayee.Clear();
+            txtNature.Clear();
             nudNetAmount.Value = Convert.ToDecimal("0.00");
 
             dtObligations.Rows.Clear();
@@ -124,9 +135,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 var fundRepository = AccFactory.BanksRepository();
                 var dtBank = fundRepository.GetRecords();
-                cmbbank.DataSource = dtBank;
-                cmbbank.ValueMember = "id";
-                cmbbank.DisplayMember = "bank_name";
+                cmbBank.DataSource = dtBank;
+                cmbBank.ValueMember = "id";
+                cmbBank.DisplayMember = "bank_name";
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -205,11 +216,11 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             var errorArray = new string[7];
             errorArray[0] = epFund.GetError(cmbfund);
-            errorArray[1] = epBank.GetError(cmbbank);
-            errorArray[2] = epCheckNo.GetError(txtcheckno);
-            errorArray[3] = epCheckDate.GetError(dtcheckdate);
-            errorArray[4] = epPayee.GetError(txtpayee);
-            errorArray[5] = epNatureOfPayment.GetError(txtnature);
+            errorArray[1] = epBank.GetError(cmbBank);
+            errorArray[2] = epCheckNo.GetError(txtCheckNo);
+            errorArray[3] = epCheckDate.GetError(dtCheckDate);
+            errorArray[4] = epPayee.GetError(txtPayee);
+            errorArray[5] = epNatureOfPayment.GetError(txtNature);
             errorArray[6] = epNetAmount.GetError(nudNetAmount);
 
             IError _errors = AccFactory.CreateErrors(errorArray);
@@ -218,12 +229,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void txtdvno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epDVNo, txtdvno, "Disbursement No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epDVNo, txtDVNo, "Disbursement No.");
         }
 
         private void txtdvno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epDVNo, txtdvno);
+            Helper.ClearErrorTextBox(epDVNo, txtDVNo);
         }
 
         private void cmbfund_Validating(object sender, CancelEventArgs e)
@@ -238,42 +249,42 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void cmbbank_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbbank, "Bank.");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(epBank, cmbBank, "Bank.");
         }
 
         private void cmbbank_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epBank, cmbbank);
+            Helper.ClearErrorComboBox(epBank, cmbBank);
         }
 
         private void txtcheckno_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCheckNo, txtcheckno, "Check No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epCheckNo, txtCheckNo, "Check No.");
         }
 
         private void txtcheckno_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epCheckNo, txtcheckno);
+            Helper.ClearErrorTextBox(epCheckNo, txtCheckNo);
         }
 
         private void txtpayee_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtpayee, "Payee");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epPayee, txtPayee, "Payee");
         }
 
         private void txtpayee_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epPayee, txtpayee);
+            Helper.ClearErrorTextBox(epPayee, txtPayee);
         }
 
         private void txtnature_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtnature, "Nature of Payment");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(epNatureOfPayment, txtNature, "Nature of Payment");
         }
 
         private void txtnature_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epNatureOfPayment, txtnature);
+            Helper.ClearErrorTextBox(epNatureOfPayment, txtNature);
         }
 
         private void txtamount_Validating(object sender, CancelEventArgs e)
@@ -287,5 +298,10 @@ namespace AccountingSystem.Views.Transactions.RCI
         }
 
         #endregion Validations
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
     }
 }

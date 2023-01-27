@@ -90,15 +90,11 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@banks_id", DbType.Int16, entity.BankId},
                 new object[] { "@funds_id", DbType.Int16, entity.FundId},
                 new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
-                new object[] { "@check_date", DbType.Date, entity.CheckDate},
-                new object[] { "@check_no", DbType.String, entity.CheckNo},
-                new object[] { "@dv_no", DbType.String, entity.DvNo},
+                new object[] { "@dv_no", DbType.String, entity.DVNo},
                 new object[] { "@payee", DbType.String, entity.Payee},
                 new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
-                new object[] { "@amount", DbType.Decimal, entity.Amount}
             };
 
             string query = $"INSERT INTO {tableRCI}(banks_id, funds_id, function_program_project_id, check_date, check_no, dv_no, payee, nature_of_payment, amount)VALUES(@banks_id, @funds_id, function_program_project_id, @check_date, @check_no, @dv_no, @payee, @nature_of_payment, @amount)";
@@ -113,15 +109,11 @@ namespace ACC.Data
                 var parameters = new object[][]
                 {
                     new object[] { "@id", DbType.Int16, entity.Id},
-                    new object[] { "@banks_id", DbType.Int16, entity.BankId},
                     new object[] { "@funds_id", DbType.Int16, entity.FundId},
                     new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
-                    new object[] { "@check_date", DbType.Date, entity.CheckDate},
-                    new object[] { "@check_no", DbType.String, entity.CheckNo},
-                    new object[] { "@dv_no", DbType.String, entity.DvNo},
+                    new object[] { "@dv_no", DbType.String, entity.DVNo},
                     new object[] { "@payee", DbType.String, entity.Payee},
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
-                    new object[] { "@amount", DbType.Decimal, entity.Amount}
                 };
 
                 string query = $"UPDATE {tableRCI} " +

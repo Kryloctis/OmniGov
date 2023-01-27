@@ -67,14 +67,14 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rciRepository = AccFactory.RCIRepository();
                 var rcidata = rciRepository.GetRecordByID(uc.Id);
 
-                uc.txtdvno.Text = rcidata["dv_no"];
-                uc.cmbbank.SelectedValue = rcidata["bank_id"];
+                uc.txtDVNo.Text = rcidata["dv_no"];
+                uc.cmbBank.SelectedValue = rcidata["bank_id"];
                 uc.cmbfund.SelectedValue = rcidata["fund_id"];
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
-                uc.txtcheckno.Text = rcidata["check_no"];
-                uc.dtcheckdate.Value = Convert.ToDateTime(rcidata["check_date"]);
-                uc.txtpayee.Text = rcidata["payee"];
-                uc.txtnature.Text = rcidata["nature_of_payment"];
+                uc.txtCheckNo.Text = rcidata["check_no"];
+                uc.dtCheckDate.Value = Convert.ToDateTime(rcidata["check_date"]);
+                uc.txtPayee.Text = rcidata["payee"];
+                uc.txtNature.Text = rcidata["nature_of_payment"];
                 uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
@@ -157,15 +157,10 @@ namespace AccountingSystem.Views.Transactions.RCI
                 var rciModel = new RCIModel()
                 {
                     Id = uc.Id,
-                    BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
-                    CheckNo = uc.txtcheckno.Text.Trim(),
-                    CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    DvNo = uc.txtdvno.Text.Trim(),
-                    Payee = uc.txtpayee.Text.Trim(),
-                    NaturePayment = uc.txtnature.Text.Trim(),
-                    Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
+                    DVNo = uc.txtDVNo.Text.Trim(),
+                    Payee = uc.txtPayee.Text.Trim(),
+                    NaturePayment = uc.txtNature.Text.Trim(),
                 };
 
                 var rcirepository = AccFactory.RCIRepository();
