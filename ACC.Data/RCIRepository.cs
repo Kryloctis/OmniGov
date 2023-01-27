@@ -10,7 +10,7 @@ namespace ACC.Data
     public class RCIRepository : IRCIRepository
     {
         private readonly IAccGenericCommands _dbGenericCommands;
-        private readonly string tableRCI = "rci";
+        private readonly string tableName = "rci";
         private readonly string tblBanks = "banks";
         private readonly string tblFunds = "funds";
         private readonly string tblFPP = "function_program_project";
@@ -18,6 +18,8 @@ namespace ACC.Data
         private readonly string tblFC = "functional_classifications";
         private readonly string tableRCIObligations = "rci_obligations";
         private readonly string tableRCIDeductions = "rci_deductions";
+
+
 
         private readonly string viewTableName = "view_rci";
 
@@ -90,14 +92,15 @@ namespace ACC.Data
         {
             var parameters = new object[][]
             {
-                new object[] { "@funds_id", DbType.Int16, entity.FundId},
-                new object[] { "@function_program_project_id", DbType.Int16, entity.FunctionProgramProjectId},
+                new object[] { "@cheques_id", DbType.Int32, entity.ChequeID},
+                new object[] { "@funds_id", DbType.Int32, entity.FundId},
+                new object[] { "@function_program_project_id", DbType.Int32, entity.FunctionProgramProjectId},
                 new object[] { "@dv_no", DbType.String, entity.DVNo},
                 new object[] { "@payee", DbType.String, entity.Payee},
                 new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
             };
 
-            string query = $"INSERT INTO {tableRCI}(banks_id, funds_id, function_program_project_id, check_date, check_no, dv_no, payee, nature_of_payment, amount)VALUES(@banks_id, @funds_id, function_program_project_id, @check_date, @check_no, @dv_no, @payee, @nature_of_payment, @amount)";
+            string query = $"INSERT INTO {tableName} (cheques_id, funds_id, function_program_project_id, dv_no, payee, nature_of_payment) VALUES(@cheques_id, @funds_id, @function_program_project_id, @dv_no, @payee, @nature_of_payment)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
@@ -116,7 +119,7 @@ namespace ACC.Data
                     new object[] { "@nature_of_payment", DbType.String, entity.NaturePayment},
                 };
 
-                string query = $"UPDATE {tableRCI} " +
+                string query = $"UPDATE {tableName} " +
                     $"SET " +
                     $"banks_id = @banks_id, " +
                     $"funds_id = @funds_id, " +
@@ -153,7 +156,7 @@ namespace ACC.Data
                             new object[] { "@id", DbType.Int16, entity.Id},
                         };
 
-                        string query = $"DELETE FROM {tableRCI} WHERE id = @id";
+                        string query = $"DELETE FROM {tableName} WHERE id = @id";
                         _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                     }
 
@@ -171,7 +174,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT COUNT(*) FROM {tableRCI}";
+                string query = $"SELECT COUNT(*) FROM {tableName}";
 
                 return int.Parse(_dbGenericCommands.ExecuteScalar(query));
             }
@@ -190,7 +193,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT id FROM {tableRCI} WHERE id = @id";
+                string query = $"SELECT id FROM {tableName} WHERE id = @id";
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -232,30 +235,30 @@ namespace ACC.Data
             try
             {
                 string query = $"SELECT " +
-                    $"{tableRCI}.id, " +
+                    $"{tableName}.id, " +
                     $"{tblBanks}.account_no, " +
                     $"{tblBanks}.bank_name, " +
-                    $"{tableRCI}.check_date, " +
-                    $"{tableRCI}.check_no, " +
-                    $"{tableRCI}.dv_no, " +
-                    $"{tableRCI}.payee, " +
-                    $"{tableRCI}.nature_of_payment, " +
+                    $"{tableName}.check_date, " +
+                    $"{tableName}.check_no, " +
+                    $"{tableName}.dv_no, " +
+                    $"{tableName}.payee, " +
+                    $"{tableName}.nature_of_payment, " +
                     $"{tblFPP}.fpp_code, " +
-                    $"{tableRCI}.amount," +
-                    $"{tableRCI}.created_at, " +
-                    $"{tableRCI}.updated_at " +
-                    $"FROM {tableRCI} " +
+                    $"{tableName}.amount," +
+                    $"{tableName}.created_at, " +
+                    $"{tableName}.updated_at " +
+                    $"FROM {tableName} " +
                     $"LEFT JOIN {tblBanks} " +
-                    $"ON {tblBanks}.id={tableRCI}.banks_id " +
+                    $"ON {tblBanks}.id={tableName}.banks_id " +
                     $"LEFT JOIN {tblFunds} " +
-                    $"ON {tblFunds}.id={tableRCI}.funds_id " +
+                    $"ON {tblFunds}.id={tableName}.funds_id " +
                     $"LEFT JOIN {tblFPP} " +
-                    $"ON {tblFPP}.id={tableRCI}.function_program_project_id " +
+                    $"ON {tblFPP}.id={tableName}.function_program_project_id " +
                     $"LEFT JOIN {tblFCS} " +
                     $"ON {tblFCS}.id={tblFPP}.functional_classification_services_id " +
                     $"LEFT JOIN {tblFC} " +
                     $"ON {tblFC}.id={tblFCS}.functional_classifications_id " +
-                    $"WHERE {tableRCI}.banks_id='{id}'";
+                    $"WHERE {tableName}.banks_id='{id}'";
 
                 var dtRCI = new DataTable();
                 return _dbGenericCommands.Fill(query, dtRCI);
@@ -306,7 +309,7 @@ namespace ACC.Data
         {
             try
             {
-                string query = $"SELECT MAX(id) FROM {tableRCI}";
+                string query = $"SELECT MAX(id) FROM {tableName}";
 
                 return _dbGenericCommands.ExecuteScalar(query);
             }

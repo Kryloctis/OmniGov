@@ -62,7 +62,6 @@ namespace AccountingSystem.Views.Transactions.RCI
                 return false;
             }
 
-
             using (var scope = new TransactionScope())
             {
                 if (SaveCheque())
@@ -70,10 +69,10 @@ namespace AccountingSystem.Views.Transactions.RCI
                     SaveRCI();
                     SaveDVObligations();
                     SaveDeductions();
+                    scope.Complete();
                     return true;
                 }
-                scope.Complete();
-                return true;
+                return false;
             }
         }
 
