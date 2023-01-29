@@ -120,6 +120,8 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 backgroundWorker1.RunWorkerAsync();
                 dialog.ShowDialog();
+                dialog.Text = "Processing Payment...";
+                dialog.label1.Text = "Processing Payment...";
             }
             catch (Exception ex)
             {
