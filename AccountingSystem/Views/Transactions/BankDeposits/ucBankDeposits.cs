@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.BankDeposits
@@ -34,7 +35,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             if (!DesignMode)
             {
                 LoadBanks();
+                LoadBankAccounts();
                 LoadFunds();
+
             }
         }
 
@@ -51,10 +54,9 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 var bankRepository = AccFactory.BanksRepository();
                 var dtBank = bankRepository.GetRecords();
-                dtBank.Columns.Add("bankdetails", typeof(string), "bank_name +'-'+account_no");
                 cmbBank.DataSource = dtBank;
                 cmbBank.ValueMember = "id";
-                cmbBank.DisplayMember = "bankdetails";
+                cmbBank.DisplayMember = "bank_name";
             }
             catch (Exception ex)
             {
@@ -64,16 +66,10 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         internal void LoadFunds()
         {
-            try
-            {
-                var fundsRepository = AccFactory.FundsRepository();
-                var dtfunds = fundsRepository.GetRecords();
-                dtfunds.Columns.Add("funddetails", typeof(string), "fund_code +'-'+fund_name");
-                cmbFund.DataSource = dtfunds;
-                cmbFund.ValueMember = "id";
-                cmbFund.DisplayMember = "funddetails";
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            var fundsRepository = AccFactory.FundsRepository();
+            var dtfunds = fundsRepository.GetRecords();
+
+            HelperLoadRecords.FundsComboBox(dtfunds, cmbFund, "fund_name", "id");
         }
 
         #region Validations
@@ -119,5 +115,25 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         }
 
         #endregion Validations
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
+
+        private void LoadBankAccounts() 
+        {
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
+        }
     }
 }

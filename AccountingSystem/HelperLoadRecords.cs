@@ -1146,18 +1146,24 @@ namespace AccountingSystem
         internal static void DepositsDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Account No.";
-            datagrid.Columns[2].HeaderText = "Bank Name";
-            datagrid.Columns[3].HeaderText = "Reference";
-            datagrid.Columns[4].HeaderText = "Date";
-            datagrid.Columns[5].HeaderText = "Amount";
-            datagrid.Columns[5].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[6].Visible = false;
-            datagrid.Columns[7].Visible = false;
-            datagrid.Columns[8].Visible = false;
-            datagrid.Columns[9].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["bank_code"].Visible = false;
+            datagrid.Columns["banks_id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+            datagrid.Columns["fund_name"].Visible = false;
+            datagrid.Columns["fund_code"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+
+            datagrid.Columns["account_no"].HeaderText = "Account No.";
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["reference"].HeaderText = "Reference";
+            datagrid.Columns["date"].HeaderText = "Date";
+            datagrid.Columns["amount"].HeaderText = "Amount";
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1382,48 +1388,35 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
 
-            datagrid.Columns[0].HeaderText = "Id ";
-            datagrid.Columns[1].HeaderText = "Bank Id ";
-            datagrid.Columns[2].HeaderText = "Account No.";
-            datagrid.Columns[3].HeaderText = "Bank Name";
-            datagrid.Columns[4].HeaderText = "Fund Id";
-            datagrid.Columns[5].HeaderText = "Fund Code";
-            datagrid.Columns[6].HeaderText = "Fund";
-            datagrid.Columns[7].HeaderText = "Check Date";
-            datagrid.Columns[8].HeaderText = "Check No.";
-            datagrid.Columns[9].HeaderText = "DV No.";
-            datagrid.Columns[10].HeaderText = "Payee";
-            datagrid.Columns[11].HeaderText = "Nature of Payment";
-            datagrid.Columns[12].HeaderText = "Obligation No.";
-            datagrid.Columns[13].HeaderText = "FPP Id";
-            datagrid.Columns[14].HeaderText = "FPP Code";
-            datagrid.Columns[15].HeaderText = "Deductions";
-            datagrid.Columns[15].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[15].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["cheques_id"].Visible = false;
+            datagrid.Columns["bank_accounts_id"].Visible = false;
+            datagrid.Columns["bank_id"].Visible = false;
+            datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["fpp_id"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
 
-            datagrid.Columns[16].HeaderText = "Net Amount";
-            datagrid.Columns[16].DefaultCellStyle.Format = "N2";
-            datagrid.Columns[16].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns[17].HeaderText = "Created at";
-            datagrid.Columns[18].HeaderText = "Updated at";
+            datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
+            datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["amount"].HeaderText = "Amount";
+            datagrid.Columns["bank_account_no"].HeaderText = "Bank Account No.";
+            datagrid.Columns["bank_name"].HeaderText = "Bank Name";
+            datagrid.Columns["fund_code"].HeaderText = "Fund Code";
+            datagrid.Columns["fund_name"].HeaderText = "Fund Name";
+            datagrid.Columns["dv_no"].HeaderText = "DV No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["nature_of_payment"].HeaderText = "Nature of Payment";
+            datagrid.Columns["obligation_no"].HeaderText = "Obligation No.";
+            datagrid.Columns["fpp_code"].HeaderText = "FPP Code";
+            datagrid.Columns["total_deductions"].HeaderText = "Total Deductions";
 
-            datagrid.Columns[2].Width = 150;
-            datagrid.Columns[3].Width = 250;
-            datagrid.Columns[6].Width = 100;
-            datagrid.Columns[7].Width = 100;
-            datagrid.Columns[8].Width = 100;
-            datagrid.Columns[9].Width = 150;
-            datagrid.Columns[10].Width = 250;
-            datagrid.Columns[11].Width = 250;
-            datagrid.Columns[12].Width = 250;
+            datagrid.Columns["total_deductions"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["total_deductions"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].Visible = false;
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
-            datagrid.Columns[13].Visible = false;
-            datagrid.Columns[17].Visible = false;
-            datagrid.Columns[18].Visible = false;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
 
         #endregion RCI

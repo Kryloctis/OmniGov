@@ -1,20 +1,22 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Data;
+using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Vml.Office;
 using System;
 using System.Data;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Transactions.RCI
 {
     public partial class frmRCIAdd : Form
     {
-        private frmRCI _frmrci;
+        private frmRCI _frmRCI;
         private readonly ucRCI uc;
 
         public frmRCIAdd(frmRCI frmrci)
         {
             InitializeComponent();
-            _frmrci = frmrci;
-
+            _frmRCI = frmrci;
             uc = ucrci1;
         }
 
@@ -24,37 +26,54 @@ namespace AccountingSystem.Views.Transactions.RCI
             uc.cmbFPP.TextChanged += new EventHandler(uc.cmbxFPP_TextChanged);
         }
 
+        private bool SaveCheque()
+        {
+            var chequeModel = new ChequesModel()
+            {
+                BankAccountsId = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
+                ChequeNo = uc.txtCheckNo.Text,
+                ChequeDate = Convert.ToDateTime(uc.dtCheckDate.Value),
+                Amount = uc.nudNetAmount.Value,
+            };
+
+            return AccFactory.ChequesRepository().Insert(chequeModel);
+        }
+        private bool SaveRCI()
+        {
+            var RCIModel = new RCIModel()
+            {
+                ChequeID = AccFactory.ChequesRepository().GetLastInsertId(),
+                FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
+                FunctionProgramProjectId = uc.functionId,
+                DVNo = uc.txtDVNo.Text.Trim(),
+                Payee = uc.txtPayee.Text.Trim(),
+                NaturePayment = uc.txtNature.Text.Trim(),
+            };
+
+            return AccFactory.RCIRepository().Insert(RCIModel);
+        }
+
+
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
+            }
+
+            using (var scope = new TransactionScope())
+            {
+                if (SaveCheque())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
+                    SaveRCI();
+                    SaveDVObligations();
+                    SaveDeductions();
+                    scope.Complete();
+                    return true;
                 }
-
-                var rciModel = new RCIModel()
-                {
-                    DvNo = uc.txtdvno.Text.Trim(),
-                    FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
-                    BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
-                    FunctionProgramProjectId = uc.functionId,
-                    CheckNo = uc.txtcheckno.Text.Trim(),
-                    CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    Payee = uc.txtpayee.Text.Trim(),
-                    NaturePayment = uc.txtnature.Text.Trim(),
-                    Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
-                };
-
-                var rcirepository = AccFactory.RCIRepository();
-                return rcirepository.Insert(rciModel);
+                return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -62,10 +81,8 @@ namespace AccountingSystem.Views.Transactions.RCI
             if (SaveData())
             {
                 Helper.MessageBoxSuccess("RCI has been saved.");
-                SaveDVObligations();
-                SaveDeductions();
 
-                _frmrci.LoadRecords();
+                _frmRCI.LoadRecords();
                 ucrci1.ResetForm();
             }
         }

@@ -62,22 +62,17 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtdeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.DepositsDatagridView(dtdeposits, dgbankdeposits);
-
-                    lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
+            if (txtsearch.Text.Length == 0)
             {
                 LoadRecords();
+                return; 
             }
+            
+            string searchkey = Convert.ToString(txtsearch.Text.Trim());
+            var dtBankDeposits = AccFactory.BankDepositsRepository().GetRecordsBySearch(searchkey);
+            HelperLoadRecords.DepositsDatagridView(dtBankDeposits, dgbankdeposits);
+
+            lblRecordCount.Text = dgbankdeposits.Rows.Count.ToString();
         }
 
         private void dgbankdeposits_SelectionChanged(object sender, EventArgs e)
@@ -94,11 +89,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgbankdeposits.Rows.Count > 0 && dgbankdeposits.SelectedRows.Count > 0)
-            {
-                int Id = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
-                _ = new frmBankDepositsEdit(this, Id).ShowDialog();
-            }
+            int bankDepositID = int.Parse(dgbankdeposits.SelectedCells[0].Value.ToString());
+            _ = new frmBankDepositsEdit(this, bankDepositID).ShowDialog();
         }
     }
 }

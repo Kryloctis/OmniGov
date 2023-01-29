@@ -11,13 +11,16 @@ namespace AccountingSystem.Views.Transactions.RCI
     {
         private readonly frmRCI _frmRCI;
         private readonly ucRCI uc;
+        private int  _rciID;
+        private int checkID;
+
 
         public frmRCIEdit(frmRCI frmRCI, int rciId)
         {
             InitializeComponent();
             _frmRCI = frmRCI;
             uc = ucrci2;
-            uc.Id = rciId;
+            _rciID = rciId;
         }
 
         private void LoadRCIObligations()
@@ -27,7 +30,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 frmObligations frmObligations = new(uc);
 
                 var rciObligationsRepo = AccFactory.RCIObligationsRepository();
-                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(uc.Id);
+                var dtRCIObligations = rciObligationsRepo.GetRecordsByRCIId(_rciID);
 
                 foreach (DataRow row in dtRCIObligations.Rows)
                     uc.dtObligations.Rows.Add(row[0].ToString());
@@ -47,7 +50,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 frmDeductions frmDeductions = new(uc);
 
                 var rciDeductionRepo = AccFactory.RCIDeductionsRepository();
-                var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(uc.Id);
+                var dtRCIDeductions = rciDeductionRepo.GetDeductionsByRCIId(_rciID);
 
                 foreach (DataRow row in dtRCIDeductions.Rows)
                     uc.dtDeductions.Rows.Add(row[0].ToString(), row[1].ToString());
@@ -65,17 +68,18 @@ namespace AccountingSystem.Views.Transactions.RCI
             try
             {
                 var rciRepository = AccFactory.RCIRepository();
-                var rcidata = rciRepository.GetRecordByID(uc.Id);
+                var rcidata = rciRepository.GetRecordByID(_rciID);
 
-                uc.txtdvno.Text = rcidata["dv_no"];
-                uc.cmbbank.SelectedValue = rcidata["bank_id"];
+                uc.txtDVNo.Text = rcidata["dv_no"];
+                uc.cmbBank.SelectedValue = rcidata["bank_id"];
                 uc.cmbfund.SelectedValue = rcidata["fund_id"];
                 LoadSelectedRecord(uc, "functions", Convert.ToInt16(rcidata["function_program_project_id"]));
-                uc.txtcheckno.Text = rcidata["check_no"];
-                uc.dtcheckdate.Value = Convert.ToDateTime(rcidata["check_date"]);
-                uc.txtpayee.Text = rcidata["payee"];
-                uc.txtnature.Text = rcidata["nature_of_payment"];
+                uc.txtCheckNo.Text = rcidata["cheque_no"];
+                uc.dtCheckDate.Value = Convert.ToDateTime(rcidata["cheque_date"]);
+                uc.txtPayee.Text = rcidata["payee"];
+                uc.txtNature.Text = rcidata["nature_of_payment"];
                 uc.nudNetAmount.Value = Convert.ToDecimal(rcidata["amount"]);
+                checkID = Convert.ToInt32(rcidata["cheques_id"]);
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -113,11 +117,11 @@ namespace AccountingSystem.Views.Transactions.RCI
 
         private void UpdateRCIObligation()
         {
-            var deleteResult = AccFactory.RCIObligationsRepository().DeleteRecordsByRCIId(uc.Id);
+            var deleteResult = AccFactory.RCIObligationsRepository().DeleteRecordsByRCIId(_rciID);
 
             if (deleteResult)
             {
-                short rcid = (short)uc.Id;
+                short rcid = (short)_rciID;
                 string obligationNo = String.Empty;
 
                 foreach (DataRow row in uc.dtObligations.Rows)
@@ -128,13 +132,30 @@ namespace AccountingSystem.Views.Transactions.RCI
             }
         }
 
+        private void UpdateCheque()
+        {
+
+            var chequesModel = new ChequesModel()
+            {
+                Id = checkID,
+                BankAccountsId = Convert.ToInt32(uc.cmbBankAccounts.SelectedValue),
+                ChequeNo = uc.txtCheckNo.Text,
+                ChequeDate = Convert.ToDateTime(uc.dtCheckDate.Value),
+                Amount = uc.nudNetAmount.Value,
+            };
+
+            var chequesRepository = AccFactory.ChequesRepository();
+            _ = chequesRepository.Update(chequesModel);
+        }
+
+
         private void UpdateRCIDeductions()
         {
-            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(uc.Id);
+            var deleteResult = AccFactory.RCIDeductionsRepository().DeleteRecordsByRCIId(_rciID);
 
             if (deleteResult)
             {
-                short rcid = (short)uc.Id;
+                short rcid = (short)_rciID;
                 foreach (DataRow row in uc.dtDeductions.Rows)
                 {
                     string description = row[0].ToString();
@@ -156,16 +177,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 var rciModel = new RCIModel()
                 {
-                    Id = uc.Id,
-                    BankId = Convert.ToInt32(uc.cmbbank.SelectedValue),
+                    Id = _rciID,
                     FundId = Convert.ToInt32(uc.cmbfund.SelectedValue),
                     FunctionProgramProjectId = uc.functionId,
-                    CheckNo = uc.txtcheckno.Text.Trim(),
-                    CheckDate = Convert.ToDateTime(uc.dtcheckdate.Text.Trim()),
-                    DvNo = uc.txtdvno.Text.Trim(),
-                    Payee = uc.txtpayee.Text.Trim(),
-                    NaturePayment = uc.txtnature.Text.Trim(),
-                    Amount = Convert.ToDecimal(uc.nudNetAmount.Value)
+                    DVNo = uc.txtDVNo.Text.Trim(),
+                    Payee = uc.txtPayee.Text.Trim(),
+                    NaturePayment = uc.txtNature.Text.Trim(),
                 };
 
                 var rcirepository = AccFactory.RCIRepository();
@@ -182,6 +199,7 @@ namespace AccountingSystem.Views.Transactions.RCI
         {
             if (UpdateData())
             {
+                UpdateCheque();
                 UpdateRCIObligation();
                 UpdateRCIDeductions();
                 Helper.MessageBoxSuccess("Account has been updated.");
