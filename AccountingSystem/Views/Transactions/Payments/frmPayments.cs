@@ -18,6 +18,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucRptTaxDues ucRptTaxDues;
         private ucPayment ucPayment;
         private dialogPayment dialog = new dialogPayment();
+        private bool paymentComplete = false;
 
         public frmPayments()
         {
@@ -104,11 +105,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-        private void ResetForm()
-        {
-        }
-
-        private void PaymentConfirmed()
+        private void ConfirmPayment()
         {
             try
             {
@@ -163,8 +160,14 @@ namespace AccountingSystem.Views.Transactions.Payments
                     LoadTaxDuesTab();
                 else if (tabControl1.SelectedTab == tabPageTaxDues)
                     LoadPaymentTab();
+                else if (paymentComplete)
+                {
+                    tabControl1.SelectedTab = tabPageTaxpayer;
+                    paymentComplete = false;
+                    return;
+                }
                 else if (tabControl1.SelectedTab == tabPagePayment)
-                    PaymentConfirmed();
+                    ConfirmPayment();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -192,6 +195,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             btnNext.Text = "Confirm Payment";
             radPayment.Checked = true;
+            ucPayment.Enabled = true;
             EnableDisableButtons(btnBack);
         }
 
@@ -293,7 +297,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             var chequesModels = new List<ChequesModel>();
             try
             {
-
                 foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
                 {
                     string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
@@ -350,6 +353,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 });
 
                 Invoke(methodInvoker);
+                e.Result = "complete";
             }
             catch (Exception ex)
             {
@@ -359,14 +363,24 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            dialog.label1.Text = "Processing Payment...";
+            dialog.label1.Text = e.ProgressPercentage.ToString();
             dialog.btnClose.Enabled = false;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            dialog.label1.Text = "Payment Process Complete!";
-            dialog.btnClose.Enabled = true;
+            if (e.Result.ToString() == "complete")
+            {
+                dialog.label1.Text = "Payment Process Complete!";
+                dialog.btnClose.Enabled = true;
+                btnNext.Text = "Finish";
+                btnBack.Enabled = false;
+                paymentComplete = true;
+                ucPayment.Enabled = false;
+                return;
+            }
+
+            paymentComplete = false;
         }
 
         #endregion Save Payment
