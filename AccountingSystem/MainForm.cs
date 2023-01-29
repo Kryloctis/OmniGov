@@ -144,8 +144,8 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report > Report of Collections and Deposits"))
                 reportOfCollectionsDepositsRCDToolStripMenuItem.Enabled = false;
 
-            //if (!Helper.HasPermission("Report > Abstract of General Collections"))
-            //    abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Report > Abstract of General Collections"))
+                abstractOfGeneralCollectionsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Report > Bank Cashbook"))
                 bankCashbookToolStripMenuItem.Enabled = false;
@@ -165,14 +165,14 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report > Collector's RCD"))
                 collectorsRCDToolStripMenuItem.Enabled = false;
 
-            //if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
-            //    toolStripMenuItemrealPropertyTaxAccountRegister.Enabled = false;
+            if (!Helper.HasPermission("Report Real Property Tax Account Register (RPTAR)"))
+                realPropertyTaxAccountRegisterRPTARToolStripMenuItem.Enabled = false;
 
-            //if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
-            //    toolStripMenuItemConsolidatedRealPropertyTaxDues.Enabled = false;
+            if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
+                consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
 
-            //if (!Helper.HasPermission("Report List of Delinquent Accounts"))
-            //    toolStripMenuItemListOfDelinquentAccounts.Enabled = false;
+            if (!Helper.HasPermission("Report List of Delinquent Accounts"))
+                listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
         }
 
         private void ValidateTransactionPermissions()
@@ -192,14 +192,11 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Transaction > RCD Approval"))
                 liquidatorsRCDToolStripMenuItem.Enabled = false;
 
-            //if (!Helper.HasPermission("Transaction Payment Portal"))
-            //    MenuPaymentPortal.Enabled = false;
+            if (!Helper.HasPermission("Transaction > Payments"))
+                paymentsToolStripMenuItem.Enabled = false;
 
             if (!Helper.HasPermission("Transaction > Assessment Posting"))
                 assessmentPostingToolStripMenuItem.Enabled = false;
-
-            //if (!IsUserCollector())
-            //    toolStripMenuPaymentPostings.Enabled = false;
         }
 
         private void ValidateManagePermissions()
@@ -480,31 +477,6 @@ namespace AccountingSystem
         #endregion Budget Module
 
         #region Accounting Module
-
-        private void radJournalEntryVoucher_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlAccounting.SelectedTab = tabPageJournalEntryVoucher;
-        }
-
-        private void radJournals_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlAccounting.SelectedTab = tabPageJournals;
-        }
-
-        private void radLedgers_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlAccounting.SelectedTab = tabPageLedgers;
-        }
-
-        private void radTrialBalance_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlAccounting.SelectedTab = tabPageTrialBalance;
-        }
-
-        private void radFinancialStatements_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlAccounting.SelectedTab = tabPageFinancialStatements;
-        }
 
         //Reports
 

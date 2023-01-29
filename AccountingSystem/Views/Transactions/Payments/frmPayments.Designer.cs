@@ -60,6 +60,7 @@
             this.radTaxpayer = new System.Windows.Forms.RadioButton();
             this.radTaxDues = new System.Windows.Forms.RadioButton();
             this.radPayment = new System.Windows.Forms.RadioButton();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTaxpayer.SuspendLayout();
@@ -461,6 +462,14 @@
             this.radPayment.Text = "Payment";
             this.radPayment.UseVisualStyleBackColor = true;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // frmPayments
             // 
             this.AcceptButton = this.btnNext;
@@ -533,5 +542,6 @@
         private System.Windows.Forms.TextBox txtTaxpayerSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

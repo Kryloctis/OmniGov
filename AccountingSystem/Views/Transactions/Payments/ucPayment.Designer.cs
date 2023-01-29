@@ -530,28 +530,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label lblTotalPayment;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox gpBxChequeDetails;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.DataGridView dgCheques;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
-        private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.RadioButton radPaymentCashCheque;
-        private System.Windows.Forms.RadioButton radPaymentCheque;
-        private System.Windows.Forms.RadioButton radPaymentCash;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Panel panel7;
         internal System.Windows.Forms.TextBox txtCollectingOfficer;
         internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmbxAccountableForm;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.TextBox txtReceipts;
         internal System.Windows.Forms.Label label2;
@@ -560,6 +541,25 @@
         internal System.Windows.Forms.DateTimePicker dtPaymentDate;
         internal System.Windows.Forms.TextBox txtTaxpayer;
         internal System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
+        internal System.Windows.Forms.GroupBox groupBox6;
+        internal System.Windows.Forms.Panel panel5;
+        internal System.Windows.Forms.Label lblTotalPayment;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.SplitContainer splitContainer1;
+        internal System.Windows.Forms.GroupBox gpBxChequeDetails;
+        internal System.Windows.Forms.Panel panel9;
+        internal System.Windows.Forms.DataGridView dgCheques;
+        internal System.Windows.Forms.ToolStrip toolStrip1;
+        internal System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        internal System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        internal System.Windows.Forms.RadioButton radPaymentCashCheque;
+        internal System.Windows.Forms.RadioButton radPaymentCheque;
+        internal System.Windows.Forms.RadioButton radPaymentCash;
+        internal System.Windows.Forms.GroupBox groupBox5;
+        internal System.Windows.Forms.Panel panel7;
+        internal System.Windows.Forms.ComboBox cmbxAccountableForm;
+        internal System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

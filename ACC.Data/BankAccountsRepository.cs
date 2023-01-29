@@ -69,7 +69,7 @@ namespace AccountingSystem
                 new object[] { "@bank_name", DbType.String, bankName.ToLower().Trim() }
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE LOWER(id) = @account_no AND LOWER(bank_name) = @bank_name";
+            string query = $"SELECT * FROM {viewTableName} WHERE LOWER(account_no) = @account_no AND LOWER(bank_name) = @bank_name";
 
             using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
