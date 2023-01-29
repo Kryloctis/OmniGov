@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
     public partial class ucRptTaxDues : UserControl
     {
         internal int taxpayersId;
-        private readonly string decimalFormat = "#,###,###,###.00 ;(#,###,###,###.00)";
         internal DateTime paymentDate = Helper.GetCurrentDate();
 
         public ucRptTaxDues()
@@ -35,11 +34,12 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
                 int rptAssessmentPostId = Convert.ToInt32(dgRow.Cells["assessment_posts_id"].Value);
                 var dictAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetRecordByID(rptAssessmentPostId);
+                Dictionary<string, string> dictPreviousAssessmentPost = AccFactory.RptAssessmentPostsRepository().GetViewPreviousAssessmentPostRecord(dictAssessmentPost["complete_arp_no"], Convert.ToInt32(dictAssessmentPost["year"]));
                 bool isAdvance = false;
                 var model = new RptTaxDuesModel()
                 {
                     RptAssessmentPostId = rptAssessmentPostId,
-                    DiscountRate = RealPropertyTaxComputations.GetDiscountRate(Convert.ToDateTime(dictAssessmentPost["posted_at"]), Convert.ToInt32(dictAssessmentPost["year"]), ref isAdvance),
+                    DiscountRate = RealPropertyTaxComputations.GetDiscountRate(dictAssessmentPost, dictPreviousAssessmentPost, paymentDate, ref isAdvance),
                     IsAdvance = isAdvance,
                 };
                 rptTaxDuesModelList.Add(model);
@@ -283,13 +283,14 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     Dictionary<string, string> dictAssessmentPost = new Dictionary<string, string>();
                     dictAssessmentPost.Add("posted_at", postedAt.ToString());
                     dictAssessmentPost.Add("effectivity_year", effectivityYear.ToString());
+                    dictAssessmentPost.Add("year", assessmentPostYear.ToString());
 
                     int monthsDelinquent = RealPropertyTaxComputations.GetCurrentMonthsDelinquent(dictAssessmentPost, paymentDate, dictPreviousAssessmentPost);
                     decimal basicPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, basicTaxDue);
                     decimal sefPenalty = RealPropertyTaxComputations.GetPenalty(penaltyRate, monthsDelinquent, sefTaxDue);
 
                     //Get discount rate
-                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(postedAt, assessmentPostYear, ref discountIsAdvance);
+                    decimal discountRate = RealPropertyTaxComputations.GetDiscountRate(dictAssessmentPost, dictPreviousAssessmentPost, paymentDate, ref discountIsAdvance);
 
                     //Apply Discounts
                     decimal basicDiscount = RealPropertyTaxComputations.GetDiscount(discountRate, basicTaxDue);
@@ -297,6 +298,7 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
 
                     decimal basicPenaltyDiscount = basicDiscount < 1 ? basicPenalty : -basicDiscount;
                     decimal sefPenaltyDiscount = sefDiscount < 1 ? sefPenalty : -sefDiscount;
+
                     decimal totalBasicPayment = (basicTaxDue + basicPenalty) - basicDiscount;
                     decimal totalSefPayment = (sefTaxDue + sefPenalty) - sefDiscount;
 
@@ -308,8 +310,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     newRow["type"] = "BSC\nSEF";
                     newRow["status"] = string.IsNullOrEmpty(rptPaymentId) ? "Unpaid" : "Paid";
                     newRow["tax_due_amount"] = $"{basicTaxDue.ToString("N2")}\n{sefTaxDue.ToString("N2")}";
-                    newRow["penalty_discount"] = $"{basicPenaltyDiscount.ToString(decimalFormat)}\n{sefPenaltyDiscount.ToString(decimalFormat)}";
-                    newRow["total_payment"] = $"{totalBasicPayment.ToString(decimalFormat)}\n{totalSefPayment.ToString(decimalFormat)}";
+                    newRow["penalty_discount"] =
+                        $"{(basicPenaltyDiscount < 1 ? $"({Math.Abs(basicPenaltyDiscount).ToString("N2")})" : basicPenaltyDiscount.ToString("N2"))}" +
+                        $"\n" +
+                        $"{(sefPenaltyDiscount < 1 ? $"({Math.Abs(sefPenaltyDiscount).ToString("N2")})" : sefPenaltyDiscount.ToString("N2"))}";
+                    newRow["total_payment"] = $"{totalBasicPayment.ToString("N2")}\n{totalSefPayment.ToString("N2")}";
                     newRow["total_payment_consolidated"] = totalBasicPayment + totalSefPayment;
                     dataTable.Rows.Add(newRow);
                 }

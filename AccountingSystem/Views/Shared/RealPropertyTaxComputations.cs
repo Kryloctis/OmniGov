@@ -2,6 +2,8 @@
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security;
 
 namespace AccountingSystem.Views.Shared
 {
@@ -19,7 +21,7 @@ namespace AccountingSystem.Views.Shared
         public static int GetCurrentMonthsDelinquent(Dictionary<string, string> dictAssessmentPost, DateTime paymentDate, Dictionary<string, string> dictPreviousAssessment)
         {
             var assessmentPostedAt = Convert.ToDateTime(dictAssessmentPost["posted_at"]);
-            var assessmentEffectivityYear = Convert.ToInt32(dictAssessmentPost["effectivity_year"]);    
+            var assessmentEffectivityYear = Convert.ToInt32(dictAssessmentPost["effectivity_year"]);
             int monthsDelinguent;
 
             //If assessment year is same as current year -> Apply selected year's delinquent months
@@ -77,21 +79,27 @@ namespace AccountingSystem.Views.Shared
             return penalty;
         }
 
-        public static decimal GetDiscountRate(DateTime postedDate, int year, ref bool isAdvance)
+        public static decimal GetDiscountRate(Dictionary<string, string> dictAssessmentPost, Dictionary<string, string> dictPreviousAssessment, DateTime paymentDate, ref bool isAdvance)
         {
-            decimal discountRate;
-            DateTime currentDate = DateTime.Now;
-            int postYear = postedDate.Year;
-            int postMonth = postedDate.Month;
+            decimal discountRate = 0;
+            DateTime assessmentPostedAt = Convert.ToDateTime(dictAssessmentPost["posted_at"]);
+            int assessmentPostYear = Convert.ToInt32(dictAssessmentPost["year"]);
             var annualDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(10, true);
-            var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(postMonth, false);
+            var monthlyDiscountRate = AccFactory.RptDiscountRepository().GetRecordByMonth(paymentDate.Month, false);
 
-            if (postYear < year && year > currentDate.Year)
+            if (dictPreviousAssessment.Count > 0)
+            {
+                var previousAssessmentPaymentId = dictPreviousAssessment["rpt_payments_id"].ToString();
+                if (string.IsNullOrEmpty(previousAssessmentPaymentId))
+                    return discountRate;
+            }
+
+            if (assessmentPostedAt.Year < assessmentPostYear && assessmentPostedAt.Year > paymentDate.Year)
             {
                 discountRate = annualDiscountRate == null ? 0 : Convert.ToDecimal(annualDiscountRate["rate"]);
                 isAdvance = true;
             }
-            else if (postYear == currentDate.Year && year == postYear && (postMonth == 1 || postMonth == 2 || postMonth == 3))
+            else if (assessmentPostYear == paymentDate.Year && (paymentDate.Month == 1 || paymentDate.Month == 2 || paymentDate.Month == 3))
             {
                 discountRate = monthlyDiscountRate == null ? 0 : Convert.ToDecimal(monthlyDiscountRate["rate"]);
                 isAdvance = false;
