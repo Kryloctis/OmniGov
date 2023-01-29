@@ -26,11 +26,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void SetJevReadOnly()
         {
-            foreach (MaskedTextBox maskedTextBox in Controls.OfType<MaskedTextBox>())
-            {
-                maskedTextBox.ReadOnly = isReadOnly;
-            }
-
             foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
             {
                 dateTimePicker.Enabled = !isReadOnly;
@@ -43,6 +38,9 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             foreach (TextBox textBox in Controls.OfType<TextBox>())
             {
+                if (textBox.Name == txtJEVNo.Name || textBox.Name == txtFundsJevNo.Name)
+                    continue;
+
                 textBox.ReadOnly = isReadOnly;
             }
 
@@ -90,7 +88,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             flowLayoutPanelJournals.Controls.OfType<RadioButton>().FirstOrDefault(r => ((byte)r.Tag == 1) ? r.Checked = true : r.Checked = false);
 
             dtpDateEntry.Value = DateTime.Now;
-            txtJEVNo.Text = GetJEVSeriesNo();
         }
 
         internal void LoadFunds()
@@ -114,8 +111,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                     radFund.Checked = true;
                     fundId = Convert.ToByte(fund["id"]);
                     ShowCheckIcon(radFund);
-
-                    GenerateJEVNumber();
                 }
 
                 flowLayoutPanelFunds.Controls.Add(radFund);
@@ -176,7 +171,21 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radioButton.Image = null;
         }
 
-        private void GenerateJEVNumber()
+        internal string GetJEVSeriesNo()
+        {
+            try
+            {
+                var jev = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
+                return jev.ToString();
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return "0000";
+        }
+
+        internal string GenerateJEVNumber()
         {
             var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
@@ -185,15 +194,13 @@ namespace AccountingSystem.Views.Transactions.JEV
             string year = dtpDateEntry.Value.Year.ToString();
             string month = dtpDateEntry.Value.ToString("MM");
 
-            txtFundsJevNo.Text = $"{fundCode}-{year}-{month}";
+            return $"{fundCode}-{year}-{month}";
         }
 
         private void radioFunds_Click(object sender, EventArgs e)
         {
             var radFund = sender as RadioButton;
             fundId = Convert.ToByte(radFund.Tag);
-            GenerateJEVNumber();
-            txtJEVNo.Text = GetJEVSeriesNo();
         }
 
         private void radioFunds_CheckedChanged(object sender, EventArgs e)
@@ -401,31 +408,28 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void ucJEV_Load(object sender, EventArgs e)
-        {
-            if (!DesignMode)
-            {
-                Helper.DatagridFullRowSelectStyle(dgAccounts, true);
-                LoadFunds();
-                LoadJournals();
-                txtJEVNo.Text = GetJEVSeriesNo();
-                btnEditAccount.Enabled = false;
-                btnRemoveAccount.Enabled = false;
-            }
-        }
-
-        internal string GetJEVSeriesNo()
+        private void OnLoad()
         {
             try
             {
-                var jev = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
-                return jev.ToString();
+                if (!DesignMode)
+                {
+                    Helper.DatagridFullRowSelectStyle(dgAccounts, true);
+                    LoadFunds();
+                    LoadJournals();
+                    btnEditAccount.Enabled = false;
+                    btnRemoveAccount.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return "0000";
+        }
+
+        private void ucJEV_Load(object sender, EventArgs e)
+        {
+            OnLoad();
         }
 
         private void btnAddAccount_Click(object sender, EventArgs e)
@@ -433,11 +437,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             var frmJevAccountAdd = new frmJEVAccountAdd(this);
             frmJevAccountAdd.ucJEVAccount.journalName = journalName;
             frmJevAccountAdd.ShowDialog();
-        }
-
-        private void dtpDateEntry_ValueChanged(object sender, EventArgs e)
-        {
-            GenerateJEVNumber();
         }
 
         private void EnableDisableButtons(DataGridView dgv, Button btnEdit, Button btnDelete)
@@ -536,31 +535,31 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void txtJEVNo_Validating(object sender, CancelEventArgs e)
         {
-            int year = dtpDateEntry.Value.Year;
+            //int year = dtpDateEntry.Value.Year;
 
-            if (!txtJEVNo.MaskCompleted)
-            {
-                epJEV.SetError(txtJEVNo, "Please enter a valid series number");
-                e.Cancel = true;
-            }
+            //if (!txtJEVNo.MaskCompleted)
+            //{
+            //    epJEV.SetError(txtJEVNo, "Please enter a valid series number");
+            //    e.Cancel = true;
+            //}
 
-            string jevNo = txtJEVNo.Text;
-            bool jevNoExist;
-            if (jevId == 0)
-                jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevNo_FundId_Year(jevNo, fundId, year);
-            else
-                jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevId_JevNo_FundId_Year(jevId, jevNo, fundId, year);
+            //string jevNo = txtJEVNo.Text;
+            //bool jevNoExist;
+            //if (jevId == 0)
+            //    jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevNo_FundId_Year(jevNo, fundId, year);
+            //else
+            //    jevNoExist = AccFactory.JEVRepository().JevNumberExistBy_JevId_JevNo_FundId_Year(jevId, jevNo, fundId, year);
 
-            if (jevNoExist)
-            {
-                epJEV.SetError(txtJEVNo, "JEV number already exist.");
-                e.Cancel = true;
-            }
+            //if (jevNoExist)
+            //{
+            //    epJEV.SetError(txtJEVNo, "JEV number already exist.");
+            //    e.Cancel = true;
+            //}
         }
 
         private void txtJEVNo_Validated(object sender, EventArgs e)
         {
-            epJEV.SetError(txtJEVNo, string.Empty);
+            //epJEV.SetError(txtJEVNo, string.Empty);
         }
 
         private void txtPayee_Validating(object sender, CancelEventArgs e)

@@ -68,6 +68,9 @@ namespace ACC.Domain.Interfaces
 
         string GetRemarks(int jevId);
 
+        //JEV No.
+        bool SetJevNo(int jevId, string seriesNo);
+
         DataTable GetViewRecords_By_Status_JournalName_Search_Month_Year(string jevStatus, string searchTxt, string journalName, string fundName, short month, short year);
 
         string GetJevStatus(int jevId);
