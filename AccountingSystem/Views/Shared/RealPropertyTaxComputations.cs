@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.VariantTypes;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
+using System.Collections.Generic;
 
 namespace AccountingSystem.Views.Shared
 {
@@ -12,32 +15,38 @@ namespace AccountingSystem.Views.Shared
             return months;
         }
 
-        //For current tax dues use only
-        public static int GetCurrentMonthsDelinquent(int assessmentYear, DateTime assessmentPostsDate, int effectivityYear, int previousAssessmentCount)
+        //Method for getting delinquent
+        public static int GetCurrentMonthsDelinquent(Dictionary<string, string> dictAssessmentPost, DateTime paymentDate, Dictionary<string, string> dictPreviousAssessment)
         {
-            var currentDate = Helper.GetCurrentDate();
-            var currentMonth = currentDate.Month;
-            var currentYear = currentDate.Year;
-            int months;
+            var assessmentPostedAt = Convert.ToDateTime(dictAssessmentPost["posted_at"]);
+            var assessmentEffectivityYear = Convert.ToInt32(dictAssessmentPost["effectivity_year"]);    
+            int monthsDelinguent;
 
-            //If assessment year is same as current year
-            if (assessmentYear == currentYear && assessmentPostsDate.Month > 3)
-                return currentMonth;
+            //If assessment year is same as current year -> Apply selected year's delinquent months
+            if (assessmentPostedAt.Year == paymentDate.Year && assessmentPostedAt.Month > 3)
+                return paymentDate.Month;
 
-            //If previous assessements are paid
-            else if (assessmentYear < currentYear && previousAssessmentCount > 0)
-                months = GetMonthsBetweenYears(assessmentYear, currentYear) + currentMonth;
+            //If no previous assessment post found -> Apply deliquent months from effectivity date to the selected date
+            else if (dictPreviousAssessment.Count < 1)
+                monthsDelinguent = GetMonthsBetweenYears(assessmentEffectivityYear, paymentDate.Year) + paymentDate.Month;
 
-            //If no previous years of assessments
-            else if (previousAssessmentCount < 1)
-                months = GetMonthsBetweenYears(effectivityYear, currentYear) + currentMonth;
+            //If there is nearest previous assessment
+            else if (dictPreviousAssessment.Count > 0)
+            {
+                var previousAssessmentPaymentId = dictPreviousAssessment["rpt_payments_id"].ToString();
+                int previousAssessmentPostYear = Convert.ToInt32(dictPreviousAssessment["year"]);
+                if (string.IsNullOrEmpty(previousAssessmentPaymentId))
+                    monthsDelinguent = GetMonthsBetweenYears(previousAssessmentPostYear, paymentDate.Year) + paymentDate.Month;
+                else
+                    monthsDelinguent = 0;
+            }
             else
-                months = 0;
+                monthsDelinguent = 0;
 
-            return months;
+            return monthsDelinguent;
         }
 
-        //For selected tax dues use only
+        //Method for getting delinquent months of paid assessment
         public static int GetSelectedMonthsDelinquent(int assessmentYear, DateTime assessmentPostsDate, DateTime paymentPostsDate, int effectivityYear, int previousAssessmentCount)
         {
             var paymentPostsMonth = paymentPostsDate.Month;
@@ -68,7 +77,7 @@ namespace AccountingSystem.Views.Shared
             return penalty;
         }
 
-        public static decimal GetCurrentDiscountRate(DateTime postedDate, int year, ref bool isAdvance)
+        public static decimal GetDiscountRate(DateTime postedDate, int year, ref bool isAdvance)
         {
             decimal discountRate;
             DateTime currentDate = DateTime.Now;

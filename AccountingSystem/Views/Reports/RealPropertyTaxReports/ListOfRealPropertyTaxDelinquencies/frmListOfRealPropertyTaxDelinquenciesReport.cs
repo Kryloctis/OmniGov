@@ -175,7 +175,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealProper
         private decimal GetPenalty(string completeArpNo, int assessmentYear, DateTime assessmentPostedAt, DateTime paymentPostedAt, int effectivityYear, decimal penaltyRate, decimal taxDueAmount)
         {
             var paymenPostDate = Convert.ToDateTime(paymentPostedAt);
-            int previousAssessmentCount = AccFactory.RptAssessmentPostsRepository().UnpaidPreviousAssessmentPostCount(completeArpNo, assessmentYear);
+            int previousAssessmentCount = 0;
             int delinquentMonths = RealPropertyTaxComputations.GetSelectedMonthsDelinquent(assessmentYear, assessmentPostedAt, paymenPostDate, effectivityYear, previousAssessmentCount);
 
             return RealPropertyTaxComputations.GetPenalty(penaltyRate, delinquentMonths, taxDueAmount);

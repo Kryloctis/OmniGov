@@ -207,20 +207,6 @@ namespace ACC.Data
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
-        public int UnpaidPreviousAssessmentPostCount(string completeArpNo, int year)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
-                new object[] { "@year", DbType.Int32, year}
-            };
-
-            string query = $"SELECT COUNT(*) FROM {tableName} WHERE complete_arp_no = @complete_arp_no AND year < @year";
-
-            string result = _mySqlGenericCommands.ExecuteScalar(query, parameters);
-            return Convert.ToInt32(result);
-        }
-
         public bool IdExist(int id)
         {
             throw new NotImplementedException();
@@ -428,6 +414,83 @@ namespace ACC.Data
             string query = $"SELECT * FROM {tableName} WHERE real_taxpayers_id = @real_taxpayers_id AND is_taxable = 1{subQuery} GROUP BY complete_arp_no ORDER BY complete_arp_no ASC";
             var dataTable = new DataTable();
             return _mySqlGenericCommands.FillBySearch(query, dataTable, parameters);
+        }
+
+        public Dictionary<string, string> GetViewPreviousAssessmentPostRecord(string completeArpNo, int assessmentPostYear)
+        {
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                new object[] { "@complete_arp_no", DbType.String, completeArpNo},
+                new object[] { "@year", DbType.Int32, assessmentPostYear}
+            };
+
+            string query = $"SELECT rpt_assessment_posts_id, real_taxpayers_id, property_identifier, complete_arp_no, property_pin, taxpayer_tin, taxpayer_name, taxpayer_contact_info, taxpayer_address, street, barangay_name, municipality_name, province_name, property_kind, effectivity_quarterly, effectivity_year, other_improvements, assessed_value, area, lot_no, classification_code, classification_name, actual_use_code, actual_use_name, gr_year, is_taxable, is_cancelled, tax_dues_id, discount_rate, is_advance, penalty_rate, penalty_frequency, basic_rate, sef_rate, year, posted_at, posted_by, rpt_payments_id, rpt_payments_posted_at, rpt_payments_posted_by, payment_collections_id, payment_collections_collecting_officers_id, payment_collections_job_orders_id, payment_collections_funds_id, payment_collections_accountable_forms_id, payment_collections_payee, payment_collections_receipt_no, payment_collections_payment_date, payment_collections_amount, payment_collections_is_cancelled, payment_collections_created_at, payment_collections_created_by, payment_collections_updated_at, payment_collections_updated_by FROM {viewRptPropertyAssessments} WHERE complete_arp_no = @complete_arp_no AND year < @year ORDER BY year DESC";
+
+            using (var reader = _mySqlGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                //I choose indexing of row to get the nearest previous assessment to the applied assessment post year
+                dict.Add("rpt_assessment_posts_id", reader.Rows[0]["rpt_assessment_posts_id"].ToString());
+                dict.Add("real_taxpayers_id", reader.Rows[0]["real_taxpayers_id"].ToString());
+                dict.Add("property_identifier", reader.Rows[0]["property_identifier"].ToString());
+                dict.Add("complete_arp_no", reader.Rows[0]["complete_arp_no"].ToString());
+                dict.Add("property_pin", reader.Rows[0]["property_pin"].ToString());
+                dict.Add("taxpayer_tin", reader.Rows[0]["taxpayer_tin"].ToString());
+                dict.Add("taxpayer_name", reader.Rows[0]["taxpayer_name"].ToString());
+                dict.Add("taxpayer_contact_info", reader.Rows[0]["taxpayer_contact_info"].ToString());
+                dict.Add("taxpayer_address", reader.Rows[0]["taxpayer_address"].ToString());
+                dict.Add("street", reader.Rows[0]["street"].ToString());
+                dict.Add("barangay_name", reader.Rows[0]["barangay_name"].ToString());
+                dict.Add("municipality_name", reader.Rows[0]["municipality_name"].ToString());
+                dict.Add("province_name", reader.Rows[0]["province_name"].ToString());
+                dict.Add("property_kind", reader.Rows[0]["property_kind"].ToString());
+                dict.Add("effectivity_quarterly", reader.Rows[0]["effectivity_quarterly"].ToString());
+                dict.Add("effectivity_year", reader.Rows[0]["effectivity_year"].ToString());
+                dict.Add("other_improvements", reader.Rows[0]["other_improvements"].ToString());
+                dict.Add("assessed_value", reader.Rows[0]["assessed_value"].ToString());
+                dict.Add("area", reader.Rows[0]["area"].ToString());
+                dict.Add("lot_no", reader.Rows[0]["lot_no"].ToString());
+                dict.Add("classification_code", reader.Rows[0]["classification_code"].ToString());
+                dict.Add("classification_name", reader.Rows[0]["classification_name"].ToString());
+                dict.Add("actual_use_code", reader.Rows[0]["actual_use_code"].ToString());
+                dict.Add("actual_use_name", reader.Rows[0]["actual_use_name"].ToString());
+                dict.Add("gr_year", reader.Rows[0]["gr_year"].ToString());
+                dict.Add("is_taxable", reader.Rows[0]["is_taxable"].ToString());
+                dict.Add("is_cancelled", reader.Rows[0]["is_cancelled"].ToString());
+                dict.Add("tax_dues_id", reader.Rows[0]["tax_dues_id"].ToString());
+                dict.Add("discount_rate", reader.Rows[0]["discount_rate"].ToString());
+                dict.Add("is_advance", reader.Rows[0]["is_advance"].ToString());
+                dict.Add("penalty_rate", reader.Rows[0]["penalty_rate"].ToString());
+                dict.Add("penalty_frequency", reader.Rows[0]["penalty_frequency"].ToString());
+                dict.Add("basic_rate", reader.Rows[0]["basic_rate"].ToString());
+                dict.Add("sef_rate", reader.Rows[0]["sef_rate"].ToString());
+                dict.Add("year", reader.Rows[0]["year"].ToString());
+                dict.Add("posted_at", reader.Rows[0]["posted_at"].ToString());
+                dict.Add("posted_by", reader.Rows[0]["posted_by"].ToString());
+                dict.Add("rpt_payments_id", reader.Rows[0]["rpt_payments_id"].ToString());
+                dict.Add("rpt_payments_posted_at", reader.Rows[0]["rpt_payments_posted_at"].ToString());
+                dict.Add("rpt_payments_posted_by", reader.Rows[0]["rpt_payments_posted_by"].ToString());
+                dict.Add("payment_collections_id", reader.Rows[0]["payment_collections_id"].ToString());
+                dict.Add("payment_collections_collecting_officers_id", reader.Rows[0]["payment_collections_collecting_officers_id"].ToString());
+                dict.Add("payment_collections_job_orders_id", reader.Rows[0]["payment_collections_job_orders_id"].ToString());
+                dict.Add("payment_collections_funds_id", reader.Rows[0]["payment_collections_funds_id"].ToString());
+                dict.Add("payment_collections_accountable_forms_id", reader.Rows[0]["payment_collections_accountable_forms_id"].ToString());
+                dict.Add("payment_collections_payee", reader.Rows[0]["payment_collections_payee"].ToString());
+                dict.Add("payment_collections_receipt_no", reader.Rows[0]["payment_collections_receipt_no"].ToString());
+                dict.Add("payment_collections_payment_date", reader.Rows[0]["payment_collections_payment_date"].ToString());
+                dict.Add("payment_collections_amount", reader.Rows[0]["payment_collections_amount"].ToString());
+                dict.Add("payment_collections_is_cancelled", reader.Rows[0]["payment_collections_is_cancelled"].ToString());
+                dict.Add("payment_collections_created_at", reader.Rows[0]["payment_collections_created_at"].ToString());
+                dict.Add("payment_collections_created_by", reader.Rows[0]["payment_collections_created_by"].ToString());
+                dict.Add("payment_collections_updated_at", reader.Rows[0]["payment_collections_updated_at"].ToString());
+                dict.Add("payment_collections_updated_by", reader.Rows[0]["payment_collections_updated_by"].ToString());
+
+                return dict;
+            }
         }
     }
 }
