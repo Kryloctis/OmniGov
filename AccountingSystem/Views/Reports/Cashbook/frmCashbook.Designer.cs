@@ -31,8 +31,10 @@ namespace AccountingSystem.Views.Reports.Cashbook
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbbank = new System.Windows.Forms.ComboBox();
-            this.btnretrieve = new System.Windows.Forms.Button();
+            this.cmbBank = new System.Windows.Forms.ComboBox();
+            this.btnRetrieve = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -40,49 +42,75 @@ namespace AccountingSystem.Views.Reports.Cashbook
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(11, 47);
+            this.panel1.Location = new System.Drawing.Point(8, 35);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1237, 765);
+            this.panel1.Size = new System.Drawing.Size(778, 422);
             this.panel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 15);
+            this.label1.Location = new System.Drawing.Point(11, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.Size = new System.Drawing.Size(33, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Bank :";
+            this.label1.Text = "Bank";
             // 
-            // cmbbank
+            // cmbBank
             // 
-            this.cmbbank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbbank.FormattingEnabled = true;
-            this.cmbbank.Location = new System.Drawing.Point(66, 12);
-            this.cmbbank.Name = "cmbbank";
-            this.cmbbank.Size = new System.Drawing.Size(457, 28);
-            this.cmbbank.TabIndex = 4;
+            this.cmbBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBank.FormattingEnabled = true;
+            this.cmbBank.Location = new System.Drawing.Point(50, 8);
+            this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbBank.Name = "cmbBank";
+            this.cmbBank.Size = new System.Drawing.Size(245, 23);
+            this.cmbBank.TabIndex = 4;
+            this.cmbBank.SelectionChangeCommitted += new System.EventHandler(this.cmbBank_SelectionChangeCommitted);
             // 
-            // btnretrieve
+            // btnRetrieve
             // 
-            this.btnretrieve.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnretrieve.Location = new System.Drawing.Point(528, 12);
-            this.btnretrieve.Name = "btnretrieve";
-            this.btnretrieve.Size = new System.Drawing.Size(94, 29);
-            this.btnretrieve.TabIndex = 7;
-            this.btnretrieve.Text = "Retrieve";
-            this.btnretrieve.UseVisualStyleBackColor = true;
-            this.btnretrieve.Click += new System.EventHandler(this.btnretrieve_Click);
+            this.btnRetrieve.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRetrieve.Location = new System.Drawing.Point(608, 8);
+            this.btnRetrieve.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(82, 23);
+            this.btnRetrieve.TabIndex = 7;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnretrieve_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(299, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Account";
+            // 
+            // cmbBankAccounts
+            // 
+            this.cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBankAccounts.FormattingEnabled = true;
+            this.cmbBankAccounts.Location = new System.Drawing.Point(357, 8);
+            this.cmbBankAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbBankAccounts.Name = "cmbBankAccounts";
+            this.cmbBankAccounts.Size = new System.Drawing.Size(245, 23);
+            this.cmbBankAccounts.TabIndex = 4;
             // 
             // frmCashbook
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1259, 749);
-            this.Controls.Add(this.btnretrieve);
-            this.Controls.Add(this.cmbbank);
+            this.ClientSize = new System.Drawing.Size(798, 468);
+            this.Controls.Add(this.btnRetrieve);
+            this.Controls.Add(this.cmbBankAccounts);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cmbBank);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmCashbook";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -98,7 +126,9 @@ namespace AccountingSystem.Views.Reports.Cashbook
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbbank;
-        private System.Windows.Forms.Button btnretrieve;
+        private System.Windows.Forms.ComboBox cmbBank;
+        private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbBankAccounts;
     }
 }

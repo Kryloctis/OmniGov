@@ -218,43 +218,17 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int id)
+        public DataTable GetRecords(int bankID)
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"{tableName}.id, " +
-                    $"{tblBanks}.account_no, " +
-                    $"{tblBanks}.bank_name, " +
-                    $"{tableName}.check_date, " +
-                    $"{tableName}.check_no, " +
-                    $"{tableName}.dv_no, " +
-                    $"{tableName}.payee, " +
-                    $"{tableName}.nature_of_payment, " +
-                    $"{tblFPP}.fpp_code, " +
-                    $"{tableName}.amount," +
-                    $"{tableName}.created_at, " +
-                    $"{tableName}.updated_at " +
-                    $"FROM {tableName} " +
-                    $"LEFT JOIN {tblBanks} " +
-                    $"ON {tblBanks}.id={tableName}.banks_id " +
-                    $"LEFT JOIN {tblFunds} " +
-                    $"ON {tblFunds}.id={tableName}.funds_id " +
-                    $"LEFT JOIN {tblFPP} " +
-                    $"ON {tblFPP}.id={tableName}.function_program_project_id " +
-                    $"LEFT JOIN {tblFCS} " +
-                    $"ON {tblFCS}.id={tblFPP}.functional_classification_services_id " +
-                    $"LEFT JOIN {tblFC} " +
-                    $"ON {tblFC}.id={tblFCS}.functional_classifications_id " +
-                    $"WHERE {tableName}.banks_id='{id}'";
+            var parameter = new object[][] {
+                new object[] { "@bank_id", DbType.Int32, bankID }
+            };
 
-                var dtRCI = new DataTable();
-                return _dbGenericCommands.Fill(query, dtRCI);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bank_id "; 
+
+            var dtRCI = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
+  
         }
 
         public bool SaveRCIDVObligations(short rciId, string obligationNo)

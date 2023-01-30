@@ -129,7 +129,12 @@ namespace AccountingSystem
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            string query = $"SELECT * FROM {tableName}";
+            var parameters = new object[][]
+            {
+                new object[]{"@searchText", DbType.String, $"%{searchText}%"},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE account_no LIKE @searchText";
 
             var dt = new DataTable();
             return _dbGenericCommands.Fill(query, dt);
