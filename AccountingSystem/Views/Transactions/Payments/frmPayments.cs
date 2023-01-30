@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -15,6 +17,8 @@ namespace AccountingSystem.Views.Transactions.Payments
     {
         private ucRptTaxDues ucRptTaxDues;
         private ucPayment ucPayment;
+        private dialogPayment dialog = new dialogPayment();
+        private bool paymentComplete = false;
 
         public frmPayments()
         {
@@ -101,21 +105,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPagePayment;
         }
 
-        private bool SaveRptPayment()
-        {
-            var paymentCollectionModel = ucPayment.PaymentCollectionModel();
-            var rptTaxDuesModelList = ucRptTaxDues.RptTaxDuesModelList();
-            var rptPaymentsModel = new RptPaymentsModel() { PostedBy = Helper.UserId };
-            var paymentCollectionHasCheques = ucPayment.PaymentCollectionHasChequesModel();
-
-            return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasCheques, paymentCollectionModel, rptPaymentsModel, rptTaxDuesModelList);
-        }
-
-        private void ResetForm()
-        {
-        }
-
-        private void PaymentConfirmed()
+        private void ConfirmPayment()
         {
             try
             {
@@ -128,12 +118,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                 if (!Helper.MessageBoxConfirmCancel("Are you sure to confirm the payment?"))
                     return;
 
-                if (SaveRptPayment())
-                {
-                    Helper.MessageBoxSuccess("Payment Confirmed");
-                    ucPayment.Enabled = false;
-                    btnNext.Text = "Finish";
-                }
+                backgroundWorker1.RunWorkerAsync();
+                dialog.ShowDialog();
+                dialog.Text = "Processing Payment...";
+                dialog.label1.Text = "Processing Payment...";
             }
             catch (Exception ex)
             {
@@ -174,8 +162,14 @@ namespace AccountingSystem.Views.Transactions.Payments
                     LoadTaxDuesTab();
                 else if (tabControl1.SelectedTab == tabPageTaxDues)
                     LoadPaymentTab();
+                else if (paymentComplete)
+                {
+                    tabControl1.SelectedTab = tabPageTaxpayer;
+                    paymentComplete = false;
+                    return;
+                }
                 else if (tabControl1.SelectedTab == tabPagePayment)
-                    PaymentConfirmed();
+                    ConfirmPayment();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -203,6 +197,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             btnNext.Text = "Confirm Payment";
             radPayment.Checked = true;
+            ucPayment.Enabled = true;
             EnableDisableButtons(btnBack);
         }
 
@@ -249,5 +244,147 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             LoadTaxpayers();
         }
+
+        #region Save Payment
+
+        private PaymentCollectionsModel PaymentCollectionsModel()
+        {
+            var paymentCollectionsModel = new PaymentCollectionsModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+                paymentCollectionsModel.CollectingOfficerId = !isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+                paymentCollectionsModel.JobOrderId = isJobOrder ? Convert.ToInt32(collectingOfficerData["id"]) : null;
+                paymentCollectionsModel.AccountableFormId = Convert.ToInt32(ucPayment.cmbxAccountableForm.SelectedValue);
+                paymentCollectionsModel.Amount = ucPayment.amountPayment;
+                paymentCollectionsModel.Payee = ucPayment.txtPayee.Text;
+                paymentCollectionsModel.ReceiptNo = ucPayment.txtReceipts.Text.Trim();
+                paymentCollectionsModel.PaymentDate = ucPayment.dtPaymentDate.Value;
+                paymentCollectionsModel.CreatedBy = Helper.UserId;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return paymentCollectionsModel;
+        }
+
+        private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
+        {
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, rptPaymentsModel, rptTaxDuesModels);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            int totalProgress = ucPayment.dgCheques.Rows.Count;
+            int progressCount = 0;
+            var paymentCollectionHasChequesModel = new PaymentCollectionHasChequesModel();
+
+            //rptPayments Model
+            var rptPaymentsModel = new RptPaymentsModel();
+            rptPaymentsModel.PostedBy = Helper.UserId;
+
+            var chequesModels = new List<ChequesModel>();
+            try
+            {
+                foreach (DataGridViewRow row in ucPayment.dgCheques.Rows)
+                {
+                    string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
+                    string bankName = row.Cells["bank_name"].Value.ToString();
+                    var rowBankBranch = row.Cells["bank_branch"].Value;
+                    string bankBranch = rowBankBranch == null ? string.Empty : rowBankBranch.ToString();
+                    decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
+                    DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
+                    string chequeNo = row.Cells["cheque_no"].Value.ToString();
+                    bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
+
+                    int bankAccountId;
+
+                    if (!bankAccountExist)
+                    {
+                        //banks model
+                        var banksModel = new BanksModel()
+                        {
+                            BankName = bankName,
+                            BankBranch = bankBranch
+                        };
+
+                        //bank accounts model
+                        var bankAccountModel = new BankAccountsModel()
+                        {
+                            AccountNumber = bankAccountNo,
+                            banksModel = banksModel
+                        };
+
+                        AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
+                        bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
+                    }
+                    else
+                        bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
+
+                    var model = new ChequesModel()
+                    {
+                        Amount = chequeAmount,
+                        ChequeDate = chequeDate,
+                        ChequeNo = chequeNo,
+                        BankAccountsId = bankAccountId
+                    };
+
+                    progressCount += 1;
+                    backgroundWorker1.ReportProgress((progressCount * 100) / totalProgress);
+                    chequesModels.Add(model);
+                }
+
+                paymentCollectionHasChequesModel.ChequesModels = chequesModels;
+
+                var methodInvoker = new MethodInvoker(delegate
+                {
+                    SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
+                });
+
+                Invoke(methodInvoker);
+                e.Result = "complete";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            dialog.label1.Text = e.ProgressPercentage.ToString();
+            dialog.btnClose.Enabled = false;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result.ToString() == "complete")
+            {
+                dialog.label1.Text = "Payment Process Complete!";
+                dialog.btnClose.Enabled = true;
+                btnNext.Text = "Finish";
+                btnBack.Enabled = false;
+                paymentComplete = true;
+                ucPayment.Enabled = false;
+                return;
+            }
+
+            paymentComplete = false;
+        }
+
+        #endregion Save Payment
     }
 }

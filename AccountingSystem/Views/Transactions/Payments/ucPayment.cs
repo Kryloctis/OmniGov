@@ -1,11 +1,14 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Dialogs;
 using DocumentFormat.OpenXml.Office.CustomUI;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -47,76 +50,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 dtPaymentDate.Value = Helper.GetCurrentDate();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal PaymentCollectionsModel PaymentCollectionModel()
-        {
-            return new PaymentCollectionsModel()
-            {
-                CollectingOfficerId = GetCollectingOfficerData().Count! < 1 || !Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]) ? Convert.ToInt32(GetCollectingOfficerData()["id"]) : null,
-                JobOrderId = GetCollectingOfficerData().Count! < 1 || Convert.ToBoolean(GetCollectingOfficerData()["is_job_order"]) ? Convert.ToInt32(GetCollectingOfficerData()["id"]) : null,
-                AccountableFormId = Convert.ToInt32(cmbxAccountableForm.SelectedValue),
-                Amount = amountPayment,
-                Payee = txtPayee.Text,
-                ReceiptNo = txtReceipts.Text.Trim(),
-                PaymentDate = dtPaymentDate.Value,
-                CreatedBy = Helper.UserId
-            };
-        }
-
-        internal PaymentCollectionHasChequesModel PaymentCollectionHasChequesModel()
-        {
-            var chequesModels = new List<ChequesModel>();
-
-            foreach (DataGridViewRow row in dgCheques.Rows)
-            {
-                string bankAccountNo = row.Cells["bank_account_no"].Value.ToString();
-                string bankName = row.Cells["bank_name"].Value.ToString();
-                string bankBranch = row.Cells["bank_branch"].Value.ToString();
-                decimal chequeAmount = Convert.ToDecimal(row.Cells["cheque_amount"].Value);
-                DateTime chequeDate = Convert.ToDateTime(row.Cells["cheque_date"].Value);
-                string chequeNo = row.Cells["cheque_no"].Value.ToString();
-                bool bankAccountExist = AccFactory.BankAccountsRepository().bankAccountExist(bankAccountNo, bankName);
-
-                int bankAccountId;
-
-                if (!bankAccountExist)
-                {
-                    //banks model
-                    var banksModel = new BanksModel()
-                    {
-                        BankName = bankName,
-                        BankBranch = bankBranch
-                    };
-
-                    //bank accounts model
-                    var bankAccountModel = new BankAccountsModel()
-                    {
-                        AccountNumber = bankAccountNo,
-                        banksModel = banksModel
-                    };
-
-                    AccFactory.BankAccountsRepository().InsertWithBank(bankAccountModel);
-                    bankAccountId = AccFactory.BankAccountsRepository().GetLastInsertedId();
-                }
-                else
-                    bankAccountId = Convert.ToInt32(AccFactory.BankAccountsRepository().GetViewRecordByAccountNoBankName(bankAccountNo, bankName)["id"]);
-
-                var model = new ChequesModel()
-                {
-                    Amount = chequeAmount,
-                    ChequeDate = chequeDate,
-                    ChequeNo = chequeNo,
-                    BankAccountsId = bankAccountId
-                };
-
-                chequesModels.Add(model);
-            }
-
-            return new PaymentCollectionHasChequesModel()
-            {
-                ChequesModels = chequesModels,
-            };
         }
 
         private void cmbxAccountableForm_SelectionChangeCommitted(object sender, EventArgs e)
@@ -163,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
         }
 
-        private Dictionary<string, string> GetCollectingOfficerData()
+        internal Dictionary<string, string> GetCollectingOfficerData()
         {
             var dict = new Dictionary<string, string>();
             var dictJobOrder = AccFactory.JobOrderRepository().GetRecordByUserID(Helper.UserId);

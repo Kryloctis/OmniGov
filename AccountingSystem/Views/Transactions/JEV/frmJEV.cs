@@ -720,19 +720,10 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private bool SetJEVStatus(string status)
         {
-            try
-            {
-                var userId = Helper.UserId;
+            if (!FormValidations())
+                return false;
 
-                if (!FormValidations())
-                    return false;
-
-                return AccFactory.JEVRepository().SetJEVStatus(uc.jevId, status);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return AccFactory.JEVRepository().SetJEVStatus(uc.jevId, status);
         }
 
         private void btnApprove_Click(object sender, EventArgs e)
@@ -745,6 +736,9 @@ namespace AccountingSystem.Views.Transactions.JEV
                     {
                         Helper.MessageBoxSuccess("JEV has been approved.");
                         GetJevStatus(uc.jevId);
+                        uc.txtFundsJevNo.Text = uc.GenerateJEVNumber();
+                        uc.txtJEVNo.Text = uc.GetJEVSeriesNo();
+                        AccFactory.JEVRepository().SetJevNo(uc.jevId, uc.GetJEVSeriesNo());
                         _frmJEVList.LoadJEVList();
                         _ucJEVDashboard.LoadJEVCounter();
                     }
@@ -968,17 +962,30 @@ namespace AccountingSystem.Views.Transactions.JEV
                 LoadCashDisbursementDataIfExist(uc.jevId);
                 LoadGeneralJournalDataIfExist(uc.jevId);
 
-                uc.jevId = Convert.ToInt32(jevDict["id"]);
-                uc.fundId = Convert.ToByte(jevDict["funds_id"]);
-                uc.txtExplanation.Text = jevDict["explanation"];
-                uc.dtpDateEntry.Value = Convert.ToDateTime(jevDict["date_entry"]);
-                uc.txtRefNo.Text = jevDict["ref_no"];
-                uc.txtPayee.Text = jevDict["payee"];
-                uc.txtJEVNo.Text = jevDict["jev_no"];
+                int dictJevId = Convert.ToInt32(jevDict["id"]);
+                byte dictFundId = Convert.ToByte(jevDict["funds_id"]);
+                string dictExplanation = jevDict["explanation"];
+                DateTime dictDateEntry = Convert.ToDateTime(jevDict["date_entry"]);
+                byte dictJournalId = Convert.ToByte(jevDict["journals_id"]);
+                byte dictOldJournalId = Convert.ToByte(jevDict["journals_id"]);
+                string dictCreatedBy = jevDict["created_by_name"];
+                string dictJevNo = jevDict["jev_no"];
+                string dictPayee = jevDict["payee"];
+                string dictRefNo = jevDict["ref_no"];
 
-                uc.journalId = Convert.ToByte(jevDict["journals_id"]);
-                uc.oldJournalId = Convert.ToByte(jevDict["journals_id"]);
-                lblCreatedBy.Text = jevDict["created_by_name"];
+                if(!string.IsNullOrEmpty(dictJevNo))
+                    uc.txtFundsJevNo.Text = uc.GenerateJEVNumber();
+
+                uc.jevId = dictJevId;
+                uc.fundId = dictFundId;
+                uc.txtExplanation.Text = dictExplanation;
+                uc.dtpDateEntry.Value = dictDateEntry;
+                uc.txtRefNo.Text = dictRefNo;
+                uc.txtPayee.Text = dictPayee;
+                uc.txtJEVNo.Text = dictJevNo;
+                uc.journalId = dictJournalId;
+                uc.oldJournalId = dictOldJournalId;
+                lblCreatedBy.Text = dictCreatedBy;
 
                 if (Convert.ToByte(jevDict["is_edited"]) == 1)
                 {
@@ -996,7 +1003,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.dgAccounts.Rows.Clear();
                 LoadJevAccounts();
                 uc.SumDebitCredit();
-                GetJevStatus(uc.jevId);
+                GetJevStatus(uc.jevId);             
 
                 btnSave.Text = "&Update";
 

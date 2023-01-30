@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Transactions;
 
 namespace ACC.Data
@@ -1113,6 +1114,18 @@ namespace ACC.Data
             {
                 throw;
             }
+        }
+
+        public bool SetJevNo(int jevId, string seriesNo)
+        {
+            var parameters = new object[][]
+            {
+                new object[] {"@id", DbType.Int32, jevId},
+                new object[] {"@jev_no", DbType.String, seriesNo}
+            };
+
+            string query = $"UPDATE {tableName} SET jev_no = @jev_no WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
