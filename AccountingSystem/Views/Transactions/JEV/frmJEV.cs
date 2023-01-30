@@ -149,7 +149,12 @@ namespace AccountingSystem.Views.Transactions.JEV
             if (!Helper.HasPermission("Transaction > JEV Approved"))
                 jevModel.IsApproved = false;
             else
+            {
                 jevModel.IsApproved = true;
+
+                if(!uc.isEdit)
+                    jevModel.JEVNumber = uc.GetJEVSeriesNo();
+            }
 
             if (!isUpdate)
                 jevModel.CreatedBy = userId;
@@ -973,7 +978,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 string dictPayee = jevDict["payee"];
                 string dictRefNo = jevDict["ref_no"];
 
-                if(!string.IsNullOrEmpty(dictJevNo))
+                if (!string.IsNullOrEmpty(dictJevNo))
                     uc.txtFundsJevNo.Text = uc.GenerateJEVNumber();
 
                 uc.jevId = dictJevId;
@@ -1003,7 +1008,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 uc.dgAccounts.Rows.Clear();
                 LoadJevAccounts();
                 uc.SumDebitCredit();
-                GetJevStatus(uc.jevId);             
+                GetJevStatus(uc.jevId);
 
                 btnSave.Text = "&Update";
 
