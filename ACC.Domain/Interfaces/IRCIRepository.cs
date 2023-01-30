@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecordsByBankIdAndMonth(int Id, string month);
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchText);
-        DataTable GetRecords(int id);
+        DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountID);
         bool SaveRCIDVObligations(short rciId, string obligationNo);
         bool SaveRCIDeductions(short rciId, string description, decimal amount);
         string GetRecentRCIId();

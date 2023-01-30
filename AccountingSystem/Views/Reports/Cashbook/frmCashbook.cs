@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
         {
             var dtCashBook = new dsLFS.dtCashbookDataTable();
             var dtCashBookFromDB = AccFactory.BankDepositsRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID );
-            var dtRCI = AccFactory.RCIRepository().GetRecords(bankID);
+            var dtRCI = AccFactory.RCIRepository().GetRecordsByBankAndAccountID(bankID, bankAccountID);
 
             if (dtCashBookFromDB.Rows.Count > 0 || dtRCI.Rows.Count > 0)
             {

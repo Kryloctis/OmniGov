@@ -218,13 +218,14 @@ namespace ACC.Data
             }
         }
 
-        public DataTable GetRecords(int bankID)
+        public DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountsID)
         {
             var parameter = new object[][] {
-                new object[] { "@bank_id", DbType.Int32, bankID }
+                new object[] { "@bank_id", DbType.Int32, bankID },
+                new object[] { "@bank_accounts_id", DbType.Int32, bankAccountsID }
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bank_id "; 
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bank_id AND bank_accounts_id = @bank_accounts_id"; 
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameter);
