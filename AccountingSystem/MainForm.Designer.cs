@@ -210,20 +210,20 @@
             // 
             this.referencesToolStripMenuItem.Enabled = false;
             this.referencesToolStripMenuItem.Name = "referencesToolStripMenuItem";
-            this.referencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.referencesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.referencesToolStripMenuItem.Text = "Preferences...";
             // 
             // menuLogout
             // 
             this.menuLogout.Name = "menuLogout";
-            this.menuLogout.Size = new System.Drawing.Size(180, 22);
+            this.menuLogout.Size = new System.Drawing.Size(144, 22);
             this.menuLogout.Text = "Logout";
             this.menuLogout.Click += new System.EventHandler(this.menuLogout_Click);
             // 
             // menuExitApp
             // 
             this.menuExitApp.Name = "menuExitApp";
-            this.menuExitApp.Size = new System.Drawing.Size(180, 22);
+            this.menuExitApp.Size = new System.Drawing.Size(144, 22);
             this.menuExitApp.Text = "Exit";
             this.menuExitApp.Click += new System.EventHandler(this.menuExitApp_Click);
             // 
@@ -1129,40 +1129,38 @@
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
             // 
             // assessmentPostingToolStripMenuItem
             // 
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
-            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
             this.assessmentPostingToolStripMenuItem.Click += new System.EventHandler(this.assessmentPostingToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
             // 
             // checkIssuanceToolStripMenuItem
             // 
-            this.checkIssuanceToolStripMenuItem.Enabled = false;
             this.checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
-            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.CheckIssuanceToolStripMenuItem_Click);
             // 
             // bankDepositToolStripMenuItem
             // 
-            this.bankDepositToolStripMenuItem.Enabled = false;
             this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
             this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
             // 
@@ -1187,7 +1185,6 @@
             // 
             // collectorsRCDToolStripMenuItem
             // 
-            this.collectorsRCDToolStripMenuItem.Enabled = false;
             this.collectorsRCDToolStripMenuItem.Name = "collectorsRCDToolStripMenuItem";
             this.collectorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.collectorsRCDToolStripMenuItem.Text = "Collector\'s RCD";
@@ -1195,7 +1192,6 @@
             // 
             // liquidatorsRCDToolStripMenuItem
             // 
-            this.liquidatorsRCDToolStripMenuItem.Enabled = false;
             this.liquidatorsRCDToolStripMenuItem.Name = "liquidatorsRCDToolStripMenuItem";
             this.liquidatorsRCDToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.liquidatorsRCDToolStripMenuItem.Text = "Liquidator\'s RCD";
@@ -1286,7 +1282,6 @@
             // 
             // reportOfCheckIssuedRCIToolStripMenuItem
             // 
-            this.reportOfCheckIssuedRCIToolStripMenuItem.Enabled = false;
             this.reportOfCheckIssuedRCIToolStripMenuItem.Name = "reportOfCheckIssuedRCIToolStripMenuItem";
             this.reportOfCheckIssuedRCIToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.reportOfCheckIssuedRCIToolStripMenuItem.Text = "Report of Check Issued (RCI)";
@@ -1294,7 +1289,6 @@
             // 
             // bankCashbookToolStripMenuItem
             // 
-            this.bankCashbookToolStripMenuItem.Enabled = false;
             this.bankCashbookToolStripMenuItem.Name = "bankCashbookToolStripMenuItem";
             this.bankCashbookToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.bankCashbookToolStripMenuItem.Text = "Bank Cashbook";
@@ -1302,7 +1296,6 @@
             // 
             // consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem
             // 
-            this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Enabled = false;
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Name = "consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem";
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem.Text = "Consolidated Report of Accountability for Accountable Forms";
@@ -1310,7 +1303,6 @@
             // 
             // dailyCashPositionsToolStripMenuItem
             // 
-            this.dailyCashPositionsToolStripMenuItem.Enabled = false;
             this.dailyCashPositionsToolStripMenuItem.Name = "dailyCashPositionsToolStripMenuItem";
             this.dailyCashPositionsToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.dailyCashPositionsToolStripMenuItem.Text = "Daily Cash Positions";
