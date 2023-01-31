@@ -44,17 +44,11 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+             string query = $"SELECT * FROM {tableName}";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dtBanks = new DataTable();
+            return _dbGenericCommands.Fill(query, dtBanks);
+
         }
 
         public bool Insert(BanksModel entity)

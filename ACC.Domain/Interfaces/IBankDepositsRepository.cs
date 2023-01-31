@@ -7,7 +7,7 @@ namespace ACC.Domain.Interfaces
     {
         int Deposits(BankDepositsModel entity);
 
-        DataTable GetRecordsBySearch(int id);
+        DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountID);
 
         DataTable GetBankDepositsSummary();
     }

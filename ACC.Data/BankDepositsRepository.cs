@@ -213,37 +213,18 @@ namespace ACC.Data
        
         }
 
-        public DataTable GetRecordsBySearch(int id)
+        public DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountID)
         {
-            try
-            {
-                string query = $"SELECT " +
-                    $"{tableName}.id, " +
-                    $"{tableName2}.account_no, " +
-                    $"{tableName2}.bank_name, " +
-                    $"{tableName}.reference, " +
-                    $"{tableName}.date, " +
-                    $"{tableName}.amount, " +
-                    $"{tableName}.created_at, " +
-                    $"{tableName}.updated_at, " +
-                    $"CONCAT(u1.last_name,', ',u1.first_name,' ',u1.mid_initial) AS createdby, " +
-                    $"CONCAT(u2.last_name,', ',u2.first_name,' ',u2.mid_initial) AS updatedby " +
-                    $"FROM {tableName} " +
-                    $"LEFT JOIN {tableName2} " +
-                    $"ON {tableName}.banks_id={tableName2}.id " +
-                    $"LEFT JOIN {tableName3} u1 " +
-                    $"ON {tableName}.created_by=u1.id " +
-                    $"LEFT JOIN {tableName3} u2 " +
-                    $"ON {tableName}.updated_by=u2.id " +
-                    $"WHERE {tableName}.banks_id='{id}'";
+            var parameter = new object[][] {
+                new object[] { "@banks_id", DbType.Int32, bankID},
+                new object[] { "@bank_account_id", DbType.Int32, bankAccountID},
+            };
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT id, banks_id, account_no, bank_name, reference, date, amount, created_at, updated_at FROM {viewTableName} WHERE banks_id = @banks_id AND id = @bank_account_id ";
+
+            var dtBanks = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtBanks, parameter);
+       
         }
 
         public DataTable GetBankDepositsSummary()
