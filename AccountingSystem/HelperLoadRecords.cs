@@ -485,7 +485,7 @@ namespace AccountingSystem
 
         internal static void YearComboBox(ComboBox comboBox)
         {
-            _ = comboBox.Items.Add("2022");
+            _ = comboBox.Items.Add("2023");
             comboBox.SelectedIndex = 0;
         }
 
@@ -1416,7 +1416,6 @@ namespace AccountingSystem
 
             datagrid.Columns["amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
         }
 
         #endregion RCI
