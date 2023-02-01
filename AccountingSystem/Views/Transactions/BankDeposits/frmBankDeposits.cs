@@ -37,21 +37,18 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             int selectedrowscount = dgbankdeposits.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
+                if (Helper.MessageBoxConfirmDelete(selectedrowscount))
                 {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+                    var bdModelList = new List<BankDepositsModel>();
+                    foreach (DataGridViewRow row in dgbankdeposits.SelectedRows)
                     {
-                        var bdModelList = new List<BankDepositsModel>();
-                        foreach (DataGridViewRow row in dgbankdeposits.SelectedRows)
-                        {
-                            int bdId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            bdModelList.Add(new BankDepositsModel() { Id = bdId });
-                        }
-
-                        var bdRepository = AccFactory.BankDepositsRepository();
-                        _ = bdRepository.Delete(bdModelList);
-                        LoadRecords();
+                        int bdId = Convert.ToInt16(row.Cells[0].Value.ToString());
+                        bdModelList.Add(new BankDepositsModel() { Id = bdId });
                     }
+
+                    var bdRepository = AccFactory.BankDepositsRepository();
+                    _ = bdRepository.Delete(bdModelList);
+                    LoadRecords();
                 }
             }
             catch (Exception ex)
@@ -94,6 +91,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             {
                 Helper.MessageBoxError(ex.Message);
             }
+
+
+            byte[] columnIndexData = { 6, 7, 8, 9 };
+            Helper.ShowRecordTimestamp(dgbankdeposits, columnIndexData, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgbankdeposits, btnEdit, btnDelete);
         }
 
         public static void EnableDisableToolStripButtons(DataGridView dgv, ToolStripButton tsBtnEdit, ToolStripButton tsBtnDelete)
