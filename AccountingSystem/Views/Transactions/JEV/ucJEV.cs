@@ -154,8 +154,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radJournal.Click += new EventHandler(radioJournals_Click);
                 radJournal.CheckedChanged += new EventHandler(radioJournals_CheckedChanged);
             }
-
-            SetGeneralJournalFields();
         }
 
         internal void LoadCollectingOfficer()
@@ -218,6 +216,44 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #region Set Fields
+
+        private void SetJournalFields(string journalName)
+        {
+            if (flowLayoutPanelJournals.Controls.Count < 1)
+                return;
+
+            switch (journalName)
+            {
+                case "General Journal":
+                    SetGeneralJournalFields();
+                    break;
+
+                case "Procurement Received Journal":
+                    SetProcurementReceivedJournalFields();
+                    break;
+
+                case "Cash Disbursements Journal":
+                    SetCashDisbursementsJournalFields();
+                    LoadDisbursingOfficer();
+                    break;
+
+                case "Cash Receipts Journal":
+                    SetCashReceiptsJournalFields();
+                    LoadCollectingOfficer();
+                    break;
+
+                case "Check Disbursements Journal":
+                    SetCheckDisbursementsJournalFields();
+                    break;
+
+                case "Authority to Debit Account Disbursement Journal":
+                    SetADAJournalFields();
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         private void SetGeneralJournalFields()
         {
@@ -382,38 +418,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             journalId = Convert.ToByte(radJournal.Tag);
             ShowCheckIcon(radJournal);
             journalName = radJournal.Text.Trim();
-
-            switch (journalName)
-            {
-                case "General Journal":
-                    SetGeneralJournalFields();
-                    break;
-
-                case "Procurement Received Journal":
-                    SetProcurementReceivedJournalFields();
-                    break;
-
-                case "Cash Disbursements Journal":
-                    SetCashDisbursementsJournalFields();
-                    LoadDisbursingOfficer();
-                    break;
-
-                case "Cash Receipts Journal":
-                    SetCashReceiptsJournalFields();
-                    LoadCollectingOfficer();
-                    break;
-
-                case "Check Disbursements Journal":
-                    SetCheckDisbursementsJournalFields();
-                    break;
-
-                case "Authority to Debit Account Disbursement Journal":
-                    SetADAJournalFields();
-                    break;
-
-                default:
-                    break;
-            }
+            SetJournalFields(journalName);
         }
 
         private void OnLoad()
@@ -427,12 +432,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     LoadJournals();
                     btnEditAccount.Enabled = false;
                     btnRemoveAccount.Enabled = false;
+                    SetJournalFields("General Journal");
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void ucJEV_Load(object sender, EventArgs e)

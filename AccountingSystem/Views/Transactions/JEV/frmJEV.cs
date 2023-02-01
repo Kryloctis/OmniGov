@@ -56,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
                         {
                             btnSave.Enabled = true;
-                            uc.SetJevReadOnly(true);
+                            uc.SetJevReadOnly(false);
                         }
                     }
                 }
@@ -81,7 +81,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.SetJevReadOnly(true);
                 }
 
-                if (Helper.UserId != createdById && createdById != 0)
+                if (Helper.UserId != createdById)
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
@@ -93,10 +93,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 HasPermissionToEditApprovedJEV();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -683,7 +680,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnCancelJEV.Enabled = true;
                         btnPrint.Enabled = true;
                         btnSave.Enabled = true;
-                        uc.SetJevReadOnly(false);
+                        uc.SetJevReadOnly(true);
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
