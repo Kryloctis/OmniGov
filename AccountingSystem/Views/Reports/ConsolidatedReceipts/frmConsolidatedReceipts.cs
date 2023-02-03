@@ -34,8 +34,8 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             foreach (DataRow item in dtConsolidatedReceiptsFromDB.Rows)
             {
                 DataRow row = dtConsolidatedReceipts.NewRow();
-
-                var lastIssued = Convert.ToInt32(item["last_issued"]);
+                
+                var lastIssued = string.IsNullOrEmpty(item["last_issued"].ToString()) ? 0 : Convert.ToInt32(item["last_issued"]);
                 var accountableForm = $"AF - {item["acc_form_no"]}";
                 var beginningQuantity = Convert.ToInt32(item["quantity"]);
                 var receiptBeginningBalanceFrom = Convert.ToInt32(item["receipt_issued_from"]);
@@ -53,7 +53,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 row["issuefrom"] = receiptBeginningBalanceFrom;
                 row["issueto"] = lastIssued;
                 //ENDING BALANCE
-                row["ending_quantity"] = Convert.ToInt32(receiptBeginningBalanceTo) - lastIssued;
+                row["ending_quantity"] = Convert.ToInt32(receiptBeginningBalanceTo) - Convert.ToInt32(lastIssued);
                 row["usedfrom"] = lastIssued;
                 row["usedto"] = receiptBeginningBalanceTo;
                 row["officers"] = collectingOfficer;
