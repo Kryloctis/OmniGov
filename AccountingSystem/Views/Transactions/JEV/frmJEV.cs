@@ -41,7 +41,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             uc.SumDebitCredit();
             PermissionVerification();
-            uc.SetJevReadOnly();
         }
 
         private void PermissionVerification()
@@ -57,7 +56,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
                         {
                             btnSave.Enabled = true;
-                            uc.isReadOnly = false;
+                            uc.SetJevReadOnly(false);
                         }
                     }
                 }
@@ -79,14 +78,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
-                    uc.isReadOnly = true;
+                    uc.SetJevReadOnly(true);
                 }
 
-                if (Helper.UserId != createdById && createdById != 0)
+                if (Helper.UserId != createdById)
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
-                    uc.isReadOnly = true;
+                    uc.SetJevReadOnly(true);
                 }
 
                 if (createdById != Helper.UserId)
@@ -94,10 +93,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 HasPermissionToEditApprovedJEV();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -152,7 +148,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 jevModel.IsApproved = true;
 
-                if(!uc.isEdit)
+                if (!uc.isEdit)
                     jevModel.JEVNumber = uc.GetJEVSeriesNo();
             }
 
@@ -671,7 +667,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnDisapprove.Enabled = true;
                         btnCancelJEV.Enabled = true;
                         btnDelete.Enabled = true;
-                        uc.isReadOnly = false;
+                        uc.SetJevReadOnly(false);
                         btnSave.Enabled = true;
                         break;
 
@@ -684,7 +680,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnCancelJEV.Enabled = true;
                         btnPrint.Enabled = true;
                         btnSave.Enabled = true;
-                        uc.isReadOnly = true;
+                        uc.SetJevReadOnly(true);
                         btnDelete.Enabled = false;
                         btnSave.Enabled = false;
                         break;
@@ -699,7 +695,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = false;
-                        uc.isReadOnly = true;
+                        uc.SetJevReadOnly(true);
                         break;
 
                     case "cancelled":
@@ -713,7 +709,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                         btnPrint.Enabled = false;
                         btnSave.Enabled = false;
                         btnDelete.Enabled = false;
-                        uc.isReadOnly = true;
+                        uc.SetJevReadOnly(true);
                         break;
                 }
             }

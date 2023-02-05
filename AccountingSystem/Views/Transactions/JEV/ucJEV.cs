@@ -16,7 +16,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal byte journalId = 0;
         internal byte oldJournalId = 0;
         internal string journalName;
-        internal bool isReadOnly;
 
         public ucJEV()
         {
@@ -24,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             Helper.DatagridFullRowSelectStyle(dgAccounts);
         }
 
-        internal void SetJevReadOnly()
+        internal void SetJevReadOnly(bool isReadOnly)
         {
             foreach (DateTimePicker dateTimePicker in Controls.OfType<DateTimePicker>())
             {
@@ -46,6 +45,14 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             groupFunds.Enabled = !isReadOnly;
             groupJournals.Enabled = !isReadOnly;
+            btnAddAccount.Enabled = !isReadOnly;
+            btnEditAccount.Enabled = !isReadOnly;
+            btnRemoveAccount.Enabled = !isReadOnly;
+
+            if (isReadOnly)
+                dgAccounts.SelectionChanged -= new EventHandler(dgAccounts_SelectionChanged);
+            else
+                dgAccounts.SelectionChanged += new EventHandler(dgAccounts_SelectionChanged);
         }
 
         internal string GetFormErrors()
@@ -147,8 +154,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 radJournal.Click += new EventHandler(radioJournals_Click);
                 radJournal.CheckedChanged += new EventHandler(radioJournals_CheckedChanged);
             }
-
-            SetGeneralJournalFields();
         }
 
         internal void LoadCollectingOfficer()
@@ -210,14 +215,45 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnAddAccount.Enabled = true;
         }
 
-        private void radioJournals_Click(object sender, EventArgs e)
-        {
-            var radJournals = sender as RadioButton;
-            journalId = Convert.ToByte(radJournals.Tag);
-            ClearErrors();
-        }
-
         #region Set Fields
+
+        private void SetJournalFields(string journalName)
+        {
+            if (flowLayoutPanelJournals.Controls.Count < 1)
+                return;
+
+            switch (journalName)
+            {
+                case "General Journal":
+                    SetGeneralJournalFields();
+                    break;
+
+                case "Procurement Received Journal":
+                    SetProcurementReceivedJournalFields();
+                    break;
+
+                case "Cash Disbursements Journal":
+                    SetCashDisbursementsJournalFields();
+                    LoadDisbursingOfficer();
+                    break;
+
+                case "Cash Receipts Journal":
+                    SetCashReceiptsJournalFields();
+                    LoadCollectingOfficer();
+                    break;
+
+                case "Check Disbursements Journal":
+                    SetCheckDisbursementsJournalFields();
+                    break;
+
+                case "Authority to Debit Account Disbursement Journal":
+                    SetADAJournalFields();
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         private void SetGeneralJournalFields()
         {
@@ -368,44 +404,21 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         #endregion Set Fields
 
+        private void radioJournals_Click(object sender, EventArgs e)
+        {
+            var radJournals = sender as RadioButton;
+            journalId = Convert.ToByte(radJournals.Tag);
+            ClearErrors();
+            SumDebitCredit();
+        }
+
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
         {
             var radJournal = sender as RadioButton;
             journalId = Convert.ToByte(radJournal.Tag);
             ShowCheckIcon(radJournal);
             journalName = radJournal.Text.Trim();
-
-            switch (journalName)
-            {
-                case "General Journal":
-                    SetGeneralJournalFields();
-                    break;
-
-                case "Procurement Received Journal":
-                    SetProcurementReceivedJournalFields();
-                    break;
-
-                case "Cash Disbursements Journal":
-                    SetCashDisbursementsJournalFields();
-                    LoadDisbursingOfficer();
-                    break;
-
-                case "Cash Receipts Journal":
-                    SetCashReceiptsJournalFields();
-                    LoadCollectingOfficer();
-                    break;
-
-                case "Check Disbursements Journal":
-                    SetCheckDisbursementsJournalFields();
-                    break;
-
-                case "Authority to Debit Account Disbursement Journal":
-                    SetADAJournalFields();
-                    break;
-
-                default:
-                    break;
-            }
+            SetJournalFields(journalName);
         }
 
         private void OnLoad()
@@ -419,12 +432,10 @@ namespace AccountingSystem.Views.Transactions.JEV
                     LoadJournals();
                     btnEditAccount.Enabled = false;
                     btnRemoveAccount.Enabled = false;
+                    SetJournalFields("General Journal");
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void ucJEV_Load(object sender, EventArgs e)
@@ -465,9 +476,16 @@ namespace AccountingSystem.Views.Transactions.JEV
         private void dgAccounts_SelectionChanged(object sender, EventArgs e)
         {
             EnableDisableButtons(dgAccounts, btnEditAccount, btnRemoveAccount);
-            btnAddAccount.Enabled = !isReadOnly;
-            btnEditAccount.Enabled = !isReadOnly;
-            btnRemoveAccount.Enabled = !isReadOnly;
+        }
+
+        private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+            if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
+            {
+                e.Value = (bool)e.Value ? "Deposit" : "Collection";
+                e.FormattingApplied = true;
+            }
         }
 
         internal void SumDebitCredit()
@@ -482,21 +500,17 @@ namespace AccountingSystem.Views.Transactions.JEV
                     foreach (DataGridViewRow item in dgAccounts.Rows)
                     {
                         decimal debitValue = string.IsNullOrWhiteSpace(item.Cells["Debit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Debit"].Value);
-
                         decimal creditValue = string.IsNullOrWhiteSpace(item.Cells["Credit"].Value.ToString()) ? 0 : Convert.ToDecimal(item.Cells["Credit"].Value);
 
                         totalDebit += Convert.ToDecimal(debitValue);
                         totalCredit += Convert.ToDecimal(creditValue);
                     }
-
-                    txtDebitTotal.Text = totalDebit.ToString("N2");
-                    txtCreditTotal.Text = totalCredit.ToString("N2");
                 }
+
+                txtDebitTotal.Text = totalDebit.ToString("N2");
+                txtCreditTotal.Text = totalCredit.ToString("N2");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message); ;
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); ; }
         }
 
         private void RemoveRow()
@@ -603,15 +617,5 @@ namespace AccountingSystem.Views.Transactions.JEV
         }
 
         #endregion Validations
-
-        private void dgAccounts_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            var grid = (DataGridView)sender;
-            if (grid.Columns[e.ColumnIndex].Name == "IsDeposit")
-            {
-                e.Value = (bool)e.Value ? "Deposit" : "Collection";
-                e.FormattingApplied = true;
-            }
-        }
     }
 }
