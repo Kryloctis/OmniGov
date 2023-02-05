@@ -77,15 +77,15 @@ namespace ACC.Data
             return _dbGenericCommands.Fill(query, dtRCI);
         }
 
-        public DataTable GetViewRecordsByBankIdAndMonth(int bankId, string month)
+        public DataTable GetViewRecordsByBankAccountIdAndMonth(int bankAccountID, string month)
         {
             var parameters = new object[][]
             {
-                new object[] { "@bankId", DbType.Int32, bankId},
+                new object[] { "@bank_accouns_id", DbType.Int32, bankAccountID},
                 new object[] { "@month", DbType.String, month},
             };
 
-            string query = $"SELECT * FROM {viewTableName} WHERE bank_id = @bankId AND MONTH(cheque_date) = @month";
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND MONTH(cheque_date) = @month";
             return _dbGenericCommands.ExecuteReader(query, parameters);
         }
 

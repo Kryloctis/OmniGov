@@ -136,29 +136,23 @@ namespace ACC.Data
 
         public bool Delete(List<BankDepositsModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                        new object[] { "@id", DbType.Int16, entity.Id},
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE bank_accounts_id = @id";
+                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                 }
+
+                scope.Complete();
+                return true;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
         }
 
         public int CountRecords()

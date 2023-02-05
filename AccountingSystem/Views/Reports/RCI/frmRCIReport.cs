@@ -23,6 +23,7 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void frmRCIReport_Load(object sender, EventArgs e)
         {
+            LoadBanks();
             LoadBankAccounts();
         }
 
@@ -30,26 +31,47 @@ namespace AccountingSystem.Views.Reports.RCI
         {
             var errorArray = new string[]
             {
-                errorProvider1.GetError(cmbBanks)
+                errorProvider1.GetError(cmbBankAccounts)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
+        internal void LoadBanks()
+        {
+            try
+            {
+                var bankRepository = AccFactory.BanksRepository();
+                var dtBank = bankRepository.GetRecords();
+                cmbBank.DataSource = dtBank;
+                cmbBank.ValueMember = "id";
+                cmbBank.DisplayMember = "bank_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+
         private void LoadBankAccounts()
         {
-            cmbBanks.DataSource = AccFactory.BankAccountsRepository().GetViewRecords();
-            cmbBanks.ValueMember = "id";
-            cmbBanks.DisplayMember = "account_no";
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
         }
+
 
         private DataTable DataTableRCI()
         {
-            int bankId = (int)cmbBanks.SelectedValue;
+            int bankId = (int)cmbBankAccounts.SelectedValue;
             var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
 
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = AccFactory.RCIRepository().GetViewRecordsByBankIdAndMonth(bankId, dateYearMonth);
+            var dt = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankId, dateYearMonth);
             if (dt.Rows.Count > 0)
             {
                 foreach (DataRow item in dt.Rows)
@@ -57,8 +79,8 @@ namespace AccountingSystem.Views.Reports.RCI
                     DataRow row = dtRCI.NewRow();
                     row["account_no"] = item["bank_account_no"];
                     row["bank_name"] = item["bank_name"];
-                    row["check_no"] = item["check_no"];
-                    row["check_date"] = item["check_date"];
+                    row["check_no"] = item["cheque_no"];
+                    row["check_date"] = item["cheque_date"];
                     row["fund_code"] = item["fund_code"];
                     row["payee"] = item["payee"];
                     row["nature_of_payment"] = item["nature_of_payment"];
@@ -114,7 +136,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 ParseSignatory(dictAdministrativeOfficer, ref administrativeOfficerSignatory, ref administrativeOfficerSignatoryTitle);
 
                 var lguDetails = Helper.LGUDetails();
-                int bankAccountId = Convert.ToInt32(cmbBanks.SelectedValue);
+                int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
                 var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
                 var fund = fundName;
 
@@ -155,12 +177,17 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void cmbBanks_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBanks, "Bank Account");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbBankAccounts, "Bank Account");
         }
 
         private void cmbBanks_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(errorProvider1, cmbBanks);
+            Helper.ClearErrorComboBox(errorProvider1, cmbBankAccounts);
+        }
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
         }
     }
 }

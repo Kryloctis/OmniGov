@@ -44,6 +44,8 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgbankdeposits = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgbankdeposits)).BeginInit();
@@ -121,9 +123,11 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.lblRecordCount,
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel2,
+            this.toolStripStatusLabelCreatedAt,
             this.lblCreatedAt,
             this.toolStripStatusLabel3,
-            this.lblUpdatedAt});
+            this.lblUpdatedAt,
+            this.toolStripStatusLabelUpdatedAt});
             this.statusStrip.Location = new System.Drawing.Point(0, 406);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
@@ -147,7 +151,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(515, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -195,6 +199,16 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
             this.panel1.Size = new System.Drawing.Size(874, 348);
             this.panel1.TabIndex = 15;
             // 
+            // toolStripStatusLabelCreatedAt
+            // 
+            this.toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            this.toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabelUpdatedAt
+            // 
+            this.toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
+            this.toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
             // frmBankDeposits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -240,5 +254,7 @@ namespace AccountingSystem.Views.Transactions.BankDeposits
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
         private System.Windows.Forms.DataGridView dgbankdeposits;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
     }
 }
