@@ -181,7 +181,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string query = $"SELECT id FROM {tableName} WHERE id = @id";    
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
