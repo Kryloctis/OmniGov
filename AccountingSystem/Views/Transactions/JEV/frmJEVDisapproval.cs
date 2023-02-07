@@ -82,6 +82,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             _frmJEV.btnSave.Enabled = true;
             _frmJEV.btnSave.Text = "Update";
             _frmJEV.ucjev1.Enabled = true;
+            _frmJEV.ucjev1.SetJevReadOnly(false);
             Close();
         }
 
