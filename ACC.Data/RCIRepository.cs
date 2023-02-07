@@ -206,7 +206,7 @@ namespace ACC.Data
                 string query = $"SELECT * FROM {viewTableName} " +
                                $"WHERE payee LIKE @searchText " +
                                $"OR bank_name LIKE @searchText " +
-                               $"OR account_no LIKE @searchText " +
+                               $"OR bank_account_no LIKE @searchText " +
                                $"OR obligation_no LIKE @searchText";
 
                 var dtRCI = new DataTable();

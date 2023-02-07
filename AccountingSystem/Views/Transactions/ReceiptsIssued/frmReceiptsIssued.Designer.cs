@@ -37,9 +37,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnReturn = new System.Windows.Forms.ToolStripButton();
             this.dgReceiptIssued = new System.Windows.Forms.DataGridView();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtsearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpDateIssued = new System.Windows.Forms.DateTimePicker();
@@ -47,10 +44,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsJOCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -139,31 +144,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dgReceiptIssued.TabIndex = 8;
             this.dgReceiptIssued.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblRecordCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 540);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1060, 22);
-            this.statusStrip1.TabIndex = 9;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(52, 17);
-            this.toolStripStatusLabel1.Text = "Records:";
-            // 
-            // lblRecordCount
-            // 
-            this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
-            this.lblRecordCount.Text = "0";
-            // 
             // txtsearch
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -231,17 +211,77 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // statusStrip2
+            // 
+            this.statusStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.lblRecordCount,
+            this.tsJOCount,
+            this.toolStripStatusLabel6,
+            this.lblCreatedAt,
+            this.toolStripStatusLabel7,
+            this.lblUpdatedAt});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 540);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Padding = new System.Windows.Forms.Padding(1, 0, 12, 0);
+            this.statusStrip2.Size = new System.Drawing.Size(1060, 22);
+            this.statusStrip2.SizingGrip = false;
+            this.statusStrip2.Stretch = false;
+            this.statusStrip2.TabIndex = 35;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(52, 17);
+            this.toolStripStatusLabel2.Text = "Records:";
+            // 
+            // lblRecordCount
+            // 
+            this.lblRecordCount.Name = "lblRecordCount";
+            this.lblRecordCount.Size = new System.Drawing.Size(13, 17);
+            this.lblRecordCount.Text = "0";
+            // 
+            // tsJOCount
+            // 
+            this.tsJOCount.Name = "tsJOCount";
+            this.tsJOCount.Size = new System.Drawing.Size(819, 17);
+            this.tsJOCount.Spring = true;
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(64, 17);
+            this.toolStripStatusLabel6.Text = "Created at:";
+            // 
+            // lblCreatedAt
+            // 
+            this.lblCreatedAt.Name = "lblCreatedAt";
+            this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusLabel7.Text = "Updated at:";
+            // 
+            // lblUpdatedAt
+            // 
+            this.lblUpdatedAt.Name = "lblUpdatedAt";
+            this.lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            // 
             // frmReceiptsIssued
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cbAll);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpDateIssued);
             this.Controls.Add(this.txtsearch);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -257,9 +297,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiptIssued)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,9 +313,6 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnReturn;
         private System.Windows.Forms.DataGridView dgReceiptIssued;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label2;
@@ -284,5 +321,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
+        private System.Windows.Forms.ToolStripStatusLabel tsJOCount;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
+        private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }
