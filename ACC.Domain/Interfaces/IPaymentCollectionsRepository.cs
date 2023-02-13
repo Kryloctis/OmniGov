@@ -22,6 +22,8 @@ namespace ACC.Domain.Interfaces
 
         int GetPreviouslyUsedReceiptNumber(int collectingOfficerID, int accountableFormID);
 
+        int GetTotalUsedAccountableFormByCollectingOfficerID(int collectingOfficerID, int accountableFormID);
+
         bool ReceiptExist(int receipt, int formid);
 
         bool ReceiptExist(int paymentCollectionId, int receipt, int formid);

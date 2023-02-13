@@ -467,5 +467,24 @@ namespace ACC.Data
 
             return receiptNos;
         }
+
+        public int GetTotalUsedAccountableFormByCollectingOfficerID(int collectingOfficerID, int accountableFormID)
+        {
+            try
+            {
+                var parameter = new object[][] {
+                    new object[]{ "@collecting_officer_id", DbType.Int32, collectingOfficerID},
+                    new object[]{"@accountable_forms_id", DbType.Int32, accountableFormID},
+                };
+                
+                string query = $"SELECT COUNT(id) FROM {viewTableName} WHERE collecting_officer_id = @collecting_officer_id AND accountable_forms_id = @accountable_forms_id";
+
+                return Convert.ToInt32(_mySqlGenericCommandsLFS.ExecuteScalar(query, parameter));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

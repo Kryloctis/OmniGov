@@ -36,26 +36,33 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 DataRow row = dtConsolidatedReceipts.NewRow();
                 
                 var lastIssued = string.IsNullOrEmpty(item["last_issued"].ToString()) ? 0 : Convert.ToInt32(item["last_issued"]);
-                var accountableForm = $"AF - {item["acc_form_no"]}";
-                var beginningQuantity = Convert.ToInt32(item["quantity"]);
-                var receiptBeginningBalanceFrom = Convert.ToInt32(item["receipt_issued_from"]);
-                var receiptBeginningBalanceTo = Convert.ToInt32(item["receipt_issued_to"]);
-                var totalUsedByCollectingOfficer = (Convert.ToInt32(lastIssued) - Convert.ToInt32(receiptBeginningBalanceFrom)) + 1;
+                string accountableForm = $"AF - {item["acc_form_no"]}";
+                int quantity = Convert.ToInt32(item["quantity"]);
+                var receiptIssuedFrom = Convert.ToInt32(item["receipt_issued_from"]);
+                var receiptIssuedTo = Convert.ToInt32(item["receipt_issued_to"]);
+
+                int collectingOfficerID = Convert.ToInt32(item["collecting_officer_id"]);
+                int accountableFormID = Convert.ToInt32(item["accountable_form_id"]);
+
+                int totalUsedByCollectingOfficer = AccFactory.PaymentCollectionsRepository().GetTotalUsedAccountableFormByCollectingOfficerID(collectingOfficerID, accountableFormID);
                 var collectingOfficer = $"{item["collecting_officers_first_name"]} {item["collecting_officers_mid_initial"]}. {item["collecting_officers_last_name"]}";
+
 
                 row["form"] = accountableForm;
                 //BEGINNING BALANCE
-                row["beginning_quantity"] = beginningQuantity;
-                row["receiptfrom"] = receiptBeginningBalanceFrom;
-                row["receiptto"] = receiptBeginningBalanceTo;
+                row["beginning_quantity"] = quantity;
+                row["receiptfrom"] = receiptIssuedFrom;
+                row["receiptto"] = receiptIssuedTo;
+
                 //ISSUED RECEIPTS
                 row["issued_quantity"] = totalUsedByCollectingOfficer;
-                row["issuefrom"] = receiptBeginningBalanceFrom;
+                row["issuefrom"] = receiptIssuedFrom;
                 row["issueto"] = lastIssued;
+
                 //ENDING BALANCE
-                row["ending_quantity"] = Convert.ToInt32(receiptBeginningBalanceTo) - Convert.ToInt32(lastIssued);
+                row["ending_quantity"] = quantity - totalUsedByCollectingOfficer;
                 row["usedfrom"] = lastIssued;
-                row["usedto"] = receiptBeginningBalanceTo;
+                row["usedto"] = receiptIssuedTo;
                 row["officers"] = collectingOfficer;
 
                 dtConsolidatedReceipts.Rows.Add(row);
@@ -120,7 +127,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
+                reportViewer.ZoomPercent = 140;
                 reportViewer.RefreshReport();
 
                 Cursor = Cursors.Default;
