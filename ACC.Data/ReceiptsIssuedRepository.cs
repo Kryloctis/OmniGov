@@ -444,7 +444,6 @@ namespace ACC.Data
                     new object[]{"@date_issued", DbType.DateTime2, date}
                 };
 
-                //string query = $"SELECT * FROM {viewTableName} WHERE date_issued = MONTH(@date_issued)";
                 string query = $"SELECT * FROM {viewTableName}";
 
                 var dt = new DataTable();

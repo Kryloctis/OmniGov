@@ -181,6 +181,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
             OnLoad();
+            cmbReceipt_SelectionChangeCommitted(sender, e);
         }
 
         private void ComputeReceiptIssueQuantity()

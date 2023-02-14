@@ -181,7 +181,7 @@ namespace ACC.Data
                     new object[] { "@id", DbType.Int16, id },
                 };
 
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
+                string query = $"SELECT id FROM {tableName} WHERE id = @id";    
                 string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
 
                 // if query is not null, means found some record, so true
@@ -206,7 +206,7 @@ namespace ACC.Data
                 string query = $"SELECT * FROM {viewTableName} " +
                                $"WHERE payee LIKE @searchText " +
                                $"OR bank_name LIKE @searchText " +
-                               $"OR account_no LIKE @searchText " +
+                               $"OR bank_account_no LIKE @searchText " +
                                $"OR obligation_no LIKE @searchText";
 
                 var dtRCI = new DataTable();
