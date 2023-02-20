@@ -123,11 +123,12 @@ namespace AccountingSystem.Views.Transactions.RCI
             {
                 short rcid = (short)_rciID;
                 string obligationNo = String.Empty;
+                DateTime dateEntry = DateTime.Now;
 
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row[0].ToString();
-                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo, dateEntry);
                 }
             }
         }

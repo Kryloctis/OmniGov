@@ -232,19 +232,21 @@ namespace ACC.Data
   
         }
 
-        public bool SaveRCIDVObligations(short rciId, string obligationNo)
+        public bool SaveRCIDVObligations(short rciId, string obligationNo, DateTime dateEntry)
         {
             var parameters = new object[][]
             {
                 new object[] { "@rciId", DbType.Int16, rciId},
                 new object[] { "@obligationNo", DbType.String, obligationNo},
+                new object[] { "@date_entry", DbType.DateTimeOffset, dateEntry},
             };
 
             string query = $"INSERT INTO {tableRCIObligations} " +
-                            $"(rci_id, obligation_no) " +
+                            $"(rci_id, obligation_no, date_entry) " +
                             $"VALUES(" +
                             $"@rciId, " +
-                            $"@obligationNo)";
+                            $"@obligationNo, " +
+                            $"@date_entry)";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
