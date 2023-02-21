@@ -15,10 +15,11 @@ namespace AccountingSystem.Views.Reports.RCI
         public frmRCIReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
-            Helper.LoadFormIcon(this);
         }
 
         private void frmRCIReport_Load(object sender, EventArgs e)
@@ -67,30 +68,33 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private DataTable DataTableRCI()
         {
-            int bankId = (int)cmbBankAccounts.SelectedValue;
+            int bankID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
             var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
 
             var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankId, dateYearMonth);
-            if (dt.Rows.Count > 0)
+            var dt = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
+
+            if (dt.Rows.Count == 0)
+                return dtRCI;
+
+            
+            foreach (DataRow item in dt.Rows)
             {
-                foreach (DataRow item in dt.Rows)
-                {
-                    DataRow row = dtRCI.NewRow();
-                    row["account_no"] = item["bank_account_no"];
-                    row["bank_name"] = item["bank_name"];
-                    row["check_no"] = item["cheque_no"];
-                    row["check_date"] = item["cheque_date"];
-                    row["fund_code"] = item["fund_code"];
-                    row["payee"] = item["payee"];
-                    row["nature_of_payment"] = item["nature_of_payment"];
-                    row["dv_no"] = item["dv_no"];
-                    row["obligation_no"] = item["obligation_no"];
-                    row["total_deductions"] = item["total_deductions"];
-                    row["amount"] = item["amount"];
-                    row["fpp_code"] = item["fpp_code"];
-                    dtRCI.Rows.Add(row);
-                }
+                DataRow row = dtRCI.NewRow();
+                row["account_no"] = item["bank_account_no"];
+                row["bank_name"] = item["bank_name"];
+                row["check_no"] = item["cheque_no"];
+                row["check_date"] = item["cheque_date"];
+                row["fund_code"] = item["fund_code"];
+                row["payee"] = item["payee"];
+                row["nature_of_payment"] = item["nature_of_payment"];
+                row["office_code"] = item["fpp_code"];
+                row["dv_no"] = item["dv_no"];
+                row["obligation_no"] = item["obligation_no"];
+                row["total_deductions"] = item["total_deductions"];
+                row["gross_amount"] = item["amount"];
+                row["fpp_code"] = item["fpp_code"];
+                dtRCI.Rows.Add(row);
             }
 
             return dtRCI;

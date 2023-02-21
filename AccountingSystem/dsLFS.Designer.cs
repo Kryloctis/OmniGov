@@ -4106,13 +4106,15 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnnature_of_payment;
             
+            private global::System.Data.DataColumn columnoffice_code;
+            
             private global::System.Data.DataColumn columndv_no;
             
             private global::System.Data.DataColumn columnobligation_no;
             
             private global::System.Data.DataColumn columntotal_deductions;
             
-            private global::System.Data.DataColumn columnamount;
+            private global::System.Data.DataColumn columngross_amount;
             
             private global::System.Data.DataColumn columnfpp_code;
             
@@ -4207,6 +4209,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn office_codeColumn {
+                get {
+                    return this.columnoffice_code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn dv_noColumn {
                 get {
                     return this.columndv_no;
@@ -4231,9 +4241,9 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn amountColumn {
+            public global::System.Data.DataColumn gross_amountColumn {
                 get {
-                    return this.columnamount;
+                    return this.columngross_amount;
                 }
             }
             
@@ -4282,7 +4292,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string dv_no, string obligation_no, decimal total_deductions, decimal amount, string fpp_code) {
+            public dtRCIRow AdddtRCIRow(string account_no, string bank_name, string check_no, System.DateTime check_date, string fund_code, string payee, string nature_of_payment, string office_code, string dv_no, string obligation_no, decimal total_deductions, decimal gross_amount, string fpp_code) {
                 dtRCIRow rowdtRCIRow = ((dtRCIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_no,
@@ -4292,10 +4302,11 @@ namespace AccountingSystem {
                         fund_code,
                         payee,
                         nature_of_payment,
+                        office_code,
                         dv_no,
                         obligation_no,
                         total_deductions,
-                        amount,
+                        gross_amount,
                         fpp_code};
                 rowdtRCIRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtRCIRow);
@@ -4326,10 +4337,11 @@ namespace AccountingSystem {
                 this.columnfund_code = base.Columns["fund_code"];
                 this.columnpayee = base.Columns["payee"];
                 this.columnnature_of_payment = base.Columns["nature_of_payment"];
+                this.columnoffice_code = base.Columns["office_code"];
                 this.columndv_no = base.Columns["dv_no"];
                 this.columnobligation_no = base.Columns["obligation_no"];
                 this.columntotal_deductions = base.Columns["total_deductions"];
-                this.columnamount = base.Columns["amount"];
+                this.columngross_amount = base.Columns["gross_amount"];
                 this.columnfpp_code = base.Columns["fpp_code"];
             }
             
@@ -4350,14 +4362,16 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnpayee);
                 this.columnnature_of_payment = new global::System.Data.DataColumn("nature_of_payment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnature_of_payment);
+                this.columnoffice_code = new global::System.Data.DataColumn("office_code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnoffice_code);
                 this.columndv_no = new global::System.Data.DataColumn("dv_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndv_no);
                 this.columnobligation_no = new global::System.Data.DataColumn("obligation_no", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnobligation_no);
                 this.columntotal_deductions = new global::System.Data.DataColumn("total_deductions", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntotal_deductions);
-                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnamount);
+                this.columngross_amount = new global::System.Data.DataColumn("gross_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngross_amount);
                 this.columnfpp_code = new global::System.Data.DataColumn("fpp_code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_code);
             }
@@ -17732,6 +17746,22 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string office_code {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtRCI.office_codeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'office_code\' in table \'dtRCI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtRCI.office_codeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string dv_no {
                 get {
                     try {
@@ -17780,17 +17810,17 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public decimal amount {
+            public decimal gross_amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tabledtRCI.amountColumn]));
+                        return ((decimal)(this[this.tabledtRCI.gross_amountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'amount\' in table \'dtRCI\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'gross_amount\' in table \'dtRCI\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tabledtRCI.amountColumn] = value;
+                    this[this.tabledtRCI.gross_amountColumn] = value;
                 }
             }
             
@@ -17896,6 +17926,18 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isoffice_codeNull() {
+                return this.IsNull(this.tabledtRCI.office_codeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setoffice_codeNull() {
+                this[this.tabledtRCI.office_codeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isdv_noNull() {
                 return this.IsNull(this.tabledtRCI.dv_noColumn);
             }
@@ -17932,14 +17974,14 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsamountNull() {
-                return this.IsNull(this.tabledtRCI.amountColumn);
+            public bool Isgross_amountNull() {
+                return this.IsNull(this.tabledtRCI.gross_amountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetamountNull() {
-                this[this.tabledtRCI.amountColumn] = global::System.Convert.DBNull;
+            public void Setgross_amountNull() {
+                this[this.tabledtRCI.gross_amountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
