@@ -44,6 +44,7 @@ using AccountingSystem.Views.Transactions.ObligationRequest;
 using AccountingSystem.Views.Transactions.Payments;
 using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
+using AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -701,6 +702,11 @@ namespace AccountingSystem
         private void baToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmBankAccounts().ShowDialog();
+        }
+
+        private void releasedAndUnreleaseChecksToolStripMenu_Click(object sender, EventArgs e)
+        {
+            _ = new frmReleasedAndUnreleaseChecks().ShowDialog();
         }
     }
 }
