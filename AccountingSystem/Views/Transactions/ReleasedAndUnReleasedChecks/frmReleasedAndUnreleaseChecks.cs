@@ -17,5 +17,10 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             InitializeComponent();
             Helper.LoadFormIcon(this);
         }
+
+        private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

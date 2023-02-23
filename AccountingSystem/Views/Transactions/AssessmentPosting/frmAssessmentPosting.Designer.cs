@@ -245,7 +245,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(566, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(433, 17);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // lblPostingAssessments
