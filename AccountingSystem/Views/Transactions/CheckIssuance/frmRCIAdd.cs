@@ -95,11 +95,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
                 string obligationNo = String.Empty;
+                DateTime dateEntry = DateTime.Now;
 
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row["obligation_no"].ToString();
-                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo);
+                    AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo, dateEntry);
                 }
             }
             catch (Exception)

@@ -34,7 +34,7 @@ namespace AccountingSystem.Views.Manage.Receipts
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
+        
         internal void LoadRecordsBySearch()
         {
             try
@@ -115,5 +115,6 @@ namespace AccountingSystem.Views.Manage.Receipts
         {
             LoadRecordsBySearch();
         }
+
     }
 }

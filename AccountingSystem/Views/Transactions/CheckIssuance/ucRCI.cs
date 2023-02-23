@@ -40,6 +40,7 @@ namespace AccountingSystem.Views.Transactions.RCI
                 cmbFPP.SelectedValueChanged += new EventHandler(cmbFPP_SelectedValueChanged);
 
                 dtObligations.Columns.Add("obligation_no");
+                dtObligations.Columns.Add("date_entry");
                 dtDeductions.Columns.Add("description");
                 dtDeductions.Columns.Add("amount");
             }

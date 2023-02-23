@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using System;
 using System.Data;
 
 namespace ACC.Domain.Interfaces
@@ -9,7 +10,7 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords();
         DataTable GetViewRecordsBySearch(string searchText);
         DataTable GetRecordsByBankAndAccountID(int bankID, int bankAccountID);
-        bool SaveRCIDVObligations(short rciId, string obligationNo);
+        bool SaveRCIDVObligations(short rciId, string obligationNo, DateTime dateEntry);
         bool SaveRCIDeductions(short rciId, string description, decimal amount);
         string GetRecentRCIId();
 

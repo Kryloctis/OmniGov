@@ -1367,6 +1367,8 @@ namespace AccountingSystem
             datagrid.DataSource = dataTable;
 
             datagrid.Columns[0].HeaderText = "Obligation No. ";
+            datagrid.Columns[1].HeaderText = "Date Entry";
+            datagrid.Columns[1].DefaultCellStyle.Format = "MMMM-dd-yyyy";
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }

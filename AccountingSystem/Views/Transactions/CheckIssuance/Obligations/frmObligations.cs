@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _uc.dtObligations.Rows.Add(txtObno.Text.Trim());
+            _uc.dtObligations.Rows.Add(txtObno.Text.Trim(), dtpDateEntry.Value.ToString("MMMM-dd-yyyy"));
             HelperLoadRecords.RCIObligationDatagridview(_uc.dtObligations, dgObligation);
             txtObno.Text = string.Empty;
         }

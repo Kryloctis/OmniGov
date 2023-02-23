@@ -128,6 +128,7 @@
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1118,6 +1119,7 @@
             this.assessmentPostingToolStripMenuItem,
             this.toolStripSeparator11,
             this.checkIssuanceToolStripMenuItem,
+            this.releasedAndUnreleaseChecksToolStripMenu,
             this.bankDepositToolStripMenuItem});
             this.toolStripSplitButton3.Image = global::AccountingSystem.Properties.Resources.money_2_24px;
             this.toolStripSplitButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -1129,40 +1131,47 @@
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
-            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.paymentsToolStripMenuItem.Text = "Payments";
             this.paymentsToolStripMenuItem.Click += new System.EventHandler(this.paymentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(202, 6);
             // 
             // assessmentPostingToolStripMenuItem
             // 
             this.assessmentPostingToolStripMenuItem.Name = "assessmentPostingToolStripMenuItem";
-            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assessmentPostingToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.assessmentPostingToolStripMenuItem.Text = "Assessment Posting";
             this.assessmentPostingToolStripMenuItem.Click += new System.EventHandler(this.assessmentPostingToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(202, 6);
             // 
             // checkIssuanceToolStripMenuItem
             // 
             this.checkIssuanceToolStripMenuItem.Name = "checkIssuanceToolStripMenuItem";
-            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.checkIssuanceToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.CheckIssuanceToolStripMenuItem_Click);
             // 
             // bankDepositToolStripMenuItem
             // 
             this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
             this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
+            // 
+            // releasedAndUnreleaseChecksToolStripMenu
+            // 
+            this.releasedAndUnreleaseChecksToolStripMenu.Name = "releasedAndUnreleaseChecksToolStripMenu";
+            this.releasedAndUnreleaseChecksToolStripMenu.Size = new System.Drawing.Size(205, 22);
+            this.releasedAndUnreleaseChecksToolStripMenu.Text = "Release/Unrelease Check";
+            this.releasedAndUnreleaseChecksToolStripMenu.Click += new System.EventHandler(this.releasedAndUnreleaseChecksToolStripMenu_Click);
             // 
             // toolStripSplitButton4
             // 
@@ -1498,5 +1507,6 @@
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
     }
 }

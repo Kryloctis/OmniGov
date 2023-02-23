@@ -162,9 +162,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.15" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
     <PackageReference Include="SpreadsheetLight" Version="3.5.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
