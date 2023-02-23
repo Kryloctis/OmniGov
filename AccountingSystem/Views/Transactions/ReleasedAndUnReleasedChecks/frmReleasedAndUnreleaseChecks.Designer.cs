@@ -78,10 +78,10 @@
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtsearch.Location = new System.Drawing.Point(646, 16);
+            this.txtsearch.Location = new System.Drawing.Point(673, 16);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
-            this.txtsearch.Size = new System.Drawing.Size(218, 23);
+            this.txtsearch.Size = new System.Drawing.Size(191, 23);
             this.txtsearch.TabIndex = 9;
             // 
             // cmbxFund
@@ -91,9 +91,9 @@
             this.cmbxFund.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbxFund.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFund.FormattingEnabled = true;
-            this.cmbxFund.Location = new System.Drawing.Point(524, 15);
+            this.cmbxFund.Location = new System.Drawing.Point(511, 16);
             this.cmbxFund.Name = "cmbxFund";
-            this.cmbxFund.Size = new System.Drawing.Size(116, 23);
+            this.cmbxFund.Size = new System.Drawing.Size(156, 23);
             this.cmbxFund.TabIndex = 17;
             // 
             // cmbxBank
@@ -103,10 +103,11 @@
             this.cmbxBank.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbxBank.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxBank.FormattingEnabled = true;
-            this.cmbxBank.Location = new System.Drawing.Point(127, 16);
+            this.cmbxBank.Location = new System.Drawing.Point(117, 16);
             this.cmbxBank.Name = "cmbxBank";
             this.cmbxBank.Size = new System.Drawing.Size(219, 23);
             this.cmbxBank.TabIndex = 17;
+            this.cmbxBank.SelectionChangeCommitted += new System.EventHandler(this.cmbxBank_SelectionChangeCommitted);
             // 
             // cmbxBankAccountNo
             // 
@@ -115,7 +116,7 @@
             this.cmbxBankAccountNo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbxBankAccountNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxBankAccountNo.FormattingEnabled = true;
-            this.cmbxBankAccountNo.Location = new System.Drawing.Point(352, 16);
+            this.cmbxBankAccountNo.Location = new System.Drawing.Point(341, 16);
             this.cmbxBankAccountNo.Name = "cmbxBankAccountNo";
             this.cmbxBankAccountNo.Size = new System.Drawing.Size(166, 23);
             this.cmbxBankAccountNo.TabIndex = 17;
@@ -175,7 +176,7 @@
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(633, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // toolStripStatusLabel2
