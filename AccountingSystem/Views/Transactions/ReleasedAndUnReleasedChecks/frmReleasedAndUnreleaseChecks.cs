@@ -29,9 +29,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             LoadBankAccounts();
             LoadFunds();
             LoadCheques();
-
         }
-
 
         internal void LoadBanks()
         {
@@ -48,7 +46,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 Helper.MessageBoxError(ex.Message);
             }
         }
-
 
         private void LoadBankAccounts()
         {
