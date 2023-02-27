@@ -69,17 +69,21 @@ namespace AccountingSystem.Views.Reports.RCI
         private DataTable DataTableRCI()
         {
             int bankID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
-            var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
+            var dateYearMonth = Convert.ToDateTime(dtpPeriodCover.Value).ToString("MM/yyyy");
 
             var dtRCI = new dsLFS.dtRCINewDataTable();
-            var dt = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
+            var dtCheckIssuance = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
 
-            if (dt.Rows.Count == 0)
+            if (dtCheckIssuance.Rows.Count == 0)
                 return dtRCI;
-            
-            foreach (DataRow item in dt.Rows)
+
+            decimal netAmount = 0.0m;
+
+            foreach (DataRow item in dtCheckIssuance.Rows)
             {
                 DataRow row = dtRCI.NewRow();
+                netAmount = Convert.ToDecimal(item["amount"]) - Convert.ToDecimal(item["total_deductions"]);
+
                 row["cheque_date"] = item["cheque_date"];
                 row["cheque_no"] = item["cheque_no"];
                 row["dv_no"] = item["dv_no"];
@@ -88,13 +92,31 @@ namespace AccountingSystem.Views.Reports.RCI
                 row["nature_of_payment"] = item["nature_of_payment"];
                 row["office_code"] = item["fpp_code"];
                 row["obr_number"] = item["obligation_no"];
-                row["fpp_100"] = item["fpp_code"];
-                row["fpp_200"] = item["fpp_code"];
-                row["fpp_300"] = item["fpp_code"];
-                row["trust_liabilities"] = string.Empty;
-                row["bir_vat_and_nonvat"] = string.Empty;
-                row["bir_vat_and_nonvat"] = string.Empty;
-                row["gross_amount"] = item["amount"];
+
+                if (Convert.ToDateTime(item["date_entry"]).Year < dtpPeriodCover.Value.Year)
+                {
+                    row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
+                }
+                else
+                {
+                    switch (item["fund_code"].ToString())
+                    {
+                        case "100":
+                            row["fpp_100"] = netAmount;
+                            break;
+
+                        case "200":
+                            row["fpp_200"] = netAmount;
+                            break;
+
+                        case "300":
+                            row["fpp_300"] = netAmount;
+                            break;
+                    }
+                }
+
+                row["bir_vat_and_nonvat"] = Convert.ToDecimal(item["total_deductions"]);
+                row["gross_amount"] = Convert.ToDecimal(item["amount"]);
                 dtRCI.Rows.Add(row);
             }
 
@@ -151,7 +173,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
                     new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
                     new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
                     new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),

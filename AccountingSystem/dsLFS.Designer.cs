@@ -15791,7 +15791,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtRCINewRow AdddtRCINewRow(string account_no, string cheque_date, string cheque_no, string dv_no, string res_ctr, string payee, string nature_of_payment, string office_code, string obr_number, string fpp_100, string fpp_200, string fpp_300, string trust_liabilities, string bir_vat_and_nonvat, string gross_amount) {
+            public dtRCINewRow AdddtRCINewRow(string account_no, string cheque_date, string cheque_no, string dv_no, string res_ctr, string payee, string nature_of_payment, string office_code, string obr_number, decimal fpp_100, decimal fpp_200, decimal fpp_300, decimal trust_liabilities, decimal bir_vat_and_nonvat, decimal gross_amount) {
                 dtRCINewRow rowdtRCINewRow = ((dtRCINewRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         account_no,
@@ -15869,17 +15869,17 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnoffice_code);
                 this.columnobr_number = new global::System.Data.DataColumn("obr_number", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnobr_number);
-                this.columnfpp_100 = new global::System.Data.DataColumn("fpp_100", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnfpp_100 = new global::System.Data.DataColumn("fpp_100", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_100);
-                this.columnfpp_200 = new global::System.Data.DataColumn("fpp_200", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnfpp_200 = new global::System.Data.DataColumn("fpp_200", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_200);
-                this.columnfpp_300 = new global::System.Data.DataColumn("fpp_300", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnfpp_300 = new global::System.Data.DataColumn("fpp_300", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfpp_300);
-                this.columntrust_liabilities = new global::System.Data.DataColumn("trust_liabilities", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columntrust_liabilities = new global::System.Data.DataColumn("trust_liabilities", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntrust_liabilities);
-                this.columnbir_vat_and_nonvat = new global::System.Data.DataColumn("bir_vat_and_nonvat", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnbir_vat_and_nonvat = new global::System.Data.DataColumn("bir_vat_and_nonvat", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbir_vat_and_nonvat);
-                this.columngross_amount = new global::System.Data.DataColumn("gross_amount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columngross_amount = new global::System.Data.DataColumn("gross_amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngross_amount);
             }
             
@@ -28368,10 +28368,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string fpp_100 {
+            public decimal fpp_100 {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.fpp_100Column]));
+                        return ((decimal)(this[this.tabledtRCINew.fpp_100Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_100\' in table \'dtRCINew\' is DBNull.", e);
@@ -28384,10 +28384,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string fpp_200 {
+            public decimal fpp_200 {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.fpp_200Column]));
+                        return ((decimal)(this[this.tabledtRCINew.fpp_200Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_200\' in table \'dtRCINew\' is DBNull.", e);
@@ -28400,10 +28400,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string fpp_300 {
+            public decimal fpp_300 {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.fpp_300Column]));
+                        return ((decimal)(this[this.tabledtRCINew.fpp_300Column]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'fpp_300\' in table \'dtRCINew\' is DBNull.", e);
@@ -28416,10 +28416,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string trust_liabilities {
+            public decimal trust_liabilities {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.trust_liabilitiesColumn]));
+                        return ((decimal)(this[this.tabledtRCINew.trust_liabilitiesColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'trust_liabilities\' in table \'dtRCINew\' is DBNull.", e);
@@ -28432,10 +28432,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string bir_vat_and_nonvat {
+            public decimal bir_vat_and_nonvat {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.bir_vat_and_nonvatColumn]));
+                        return ((decimal)(this[this.tabledtRCINew.bir_vat_and_nonvatColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'bir_vat_and_nonvat\' in table \'dtRCINew\' is DBNull.", e);
@@ -28448,10 +28448,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string gross_amount {
+            public decimal gross_amount {
                 get {
                     try {
-                        return ((string)(this[this.tabledtRCINew.gross_amountColumn]));
+                        return ((decimal)(this[this.tabledtRCINew.gross_amountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'gross_amount\' in table \'dtRCINew\' is DBNull.", e);

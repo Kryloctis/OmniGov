@@ -41,7 +41,7 @@
     <Shape ID="DesignTable:dtTaxesDuesAndPayments" ZOrder="6" X="4031" Y="268" Height="255" Width="220" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="251" />
     <Shape ID="DesignTable:dtCertListOfAllRptDelinquences" ZOrder="4" X="3761" Y="461" Height="410" Width="250" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="406" />
     <Shape ID="DesignTable:dtRPTStamentOfAccounts" ZOrder="3" X="3271" Y="432" Height="295" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="310" />
-    <Shape ID="DesignTable:dtRCINew" ZOrder="1" X="1889" Y="191" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
+    <Shape ID="DesignTable:dtRCINew" ZOrder="1" X="1889" Y="191" Height="315" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="311" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

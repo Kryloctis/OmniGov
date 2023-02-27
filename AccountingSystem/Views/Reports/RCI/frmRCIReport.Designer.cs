@@ -36,7 +36,7 @@ namespace AccountingSystem.Views.Reports.RCI
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
-            this.dtpMonth = new System.Windows.Forms.DateTimePicker();
+            this.dtpPeriodCover = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -60,7 +60,7 @@ namespace AccountingSystem.Views.Reports.RCI
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cmbBankAccounts);
-            this.panel2.Controls.Add(this.dtpMonth);
+            this.panel2.Controls.Add(this.dtpPeriodCover);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.btnRetrieve);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -109,14 +109,14 @@ namespace AccountingSystem.Views.Reports.RCI
             this.cmbBankAccounts.Validating += new System.ComponentModel.CancelEventHandler(this.cmbBanks_Validating);
             this.cmbBankAccounts.Validated += new System.EventHandler(this.cmbBanks_Validated);
             // 
-            // dtpMonth
+            // dtpPeriodCover
             // 
-            this.dtpMonth.CustomFormat = "MMMM - yyyy";
-            this.dtpMonth.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpMonth.Location = new System.Drawing.Point(756, 3);
-            this.dtpMonth.Name = "dtpMonth";
-            this.dtpMonth.Size = new System.Drawing.Size(131, 23);
-            this.dtpMonth.TabIndex = 1;
+            this.dtpPeriodCover.CustomFormat = "MMMM - yyyy";
+            this.dtpPeriodCover.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpPeriodCover.Location = new System.Drawing.Point(756, 3);
+            this.dtpPeriodCover.Name = "dtpPeriodCover";
+            this.dtpPeriodCover.Size = new System.Drawing.Size(131, 23);
+            this.dtpPeriodCover.TabIndex = 1;
             // 
             // label1
             // 
@@ -169,7 +169,7 @@ namespace AccountingSystem.Views.Reports.RCI
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbBankAccounts;
-        private System.Windows.Forms.DateTimePicker dtpMonth;
+        private System.Windows.Forms.DateTimePicker dtpPeriodCover;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.ErrorProvider errorProvider1;

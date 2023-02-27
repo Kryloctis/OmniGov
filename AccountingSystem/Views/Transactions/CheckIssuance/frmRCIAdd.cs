@@ -1,5 +1,6 @@
 ﻿using ACC.Data;
 using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.CheckIssuance.Obligations;
 using DocumentFormat.OpenXml.Vml.Office;
 using System;
 using System.Data;
@@ -95,11 +96,12 @@ namespace AccountingSystem.Views.Transactions.RCI
 
                 short rcid = (short)(Convert.ToUInt32(lastRecentRCIId));
                 string obligationNo = String.Empty;
-                DateTime dateEntry = DateTime.Now;
+                DateTime dateEntry;
 
                 foreach (DataRow row in uc.dtObligations.Rows)
                 {
                     obligationNo = row["obligation_no"].ToString();
+                    dateEntry = Convert.ToDateTime(row["date_entry"]);
                     AccFactory.RCIRepository().SaveRCIDVObligations(rcid, obligationNo, dateEntry);
                 }
             }
