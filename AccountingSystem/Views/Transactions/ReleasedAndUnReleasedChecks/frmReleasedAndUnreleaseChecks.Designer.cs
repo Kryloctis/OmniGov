@@ -35,7 +35,7 @@
             this.cmbxBank = new System.Windows.Forms.ComboBox();
             this.cmbxBankAccountNo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgRCI = new System.Windows.Forms.DataGridView();
+            this.dgReleasedAndUnreleaseCheques = new System.Windows.Forms.DataGridView();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,7 +46,7 @@
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReleasedAndUnreleaseCheques)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +73,7 @@
             this.btnAdd.Size = new System.Drawing.Size(50, 43);
             this.btnAdd.Text = "Release";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtsearch
             // 
@@ -123,7 +124,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dgRCI);
+            this.panel1.Controls.Add(this.dgReleasedAndUnreleaseCheques);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 54);
             this.panel1.Name = "panel1";
@@ -131,17 +132,17 @@
             this.panel1.Size = new System.Drawing.Size(874, 352);
             this.panel1.TabIndex = 18;
             // 
-            // dgRCI
+            // dgReleasedAndUnreleaseCheques
             // 
-            this.dgRCI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRCI.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRCI.Location = new System.Drawing.Point(4, 4);
-            this.dgRCI.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgRCI.Name = "dgRCI";
-            this.dgRCI.RowHeadersWidth = 51;
-            this.dgRCI.RowTemplate.Height = 29;
-            this.dgRCI.Size = new System.Drawing.Size(866, 344);
-            this.dgRCI.TabIndex = 9;
+            this.dgReleasedAndUnreleaseCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgReleasedAndUnreleaseCheques.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgReleasedAndUnreleaseCheques.Location = new System.Drawing.Point(4, 4);
+            this.dgReleasedAndUnreleaseCheques.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgReleasedAndUnreleaseCheques.Name = "dgReleasedAndUnreleaseCheques";
+            this.dgReleasedAndUnreleaseCheques.RowHeadersWidth = 51;
+            this.dgReleasedAndUnreleaseCheques.RowTemplate.Height = 29;
+            this.dgReleasedAndUnreleaseCheques.Size = new System.Drawing.Size(866, 344);
+            this.dgReleasedAndUnreleaseCheques.TabIndex = 9;
             // 
             // statusStrip
             // 
@@ -222,7 +223,7 @@
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgRCI)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgReleasedAndUnreleaseCheques)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -240,7 +241,7 @@
         private System.Windows.Forms.ComboBox cmbxBank;
         private System.Windows.Forms.ComboBox cmbxBankAccountNo;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgRCI;
+        private System.Windows.Forms.DataGridView dgReleasedAndUnreleaseCheques;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
