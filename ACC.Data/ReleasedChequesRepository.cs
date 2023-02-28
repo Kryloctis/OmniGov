@@ -59,6 +59,20 @@ namespace AccountingSystem
             return _dbGenericCommands.Fill(query, dtRCI);
         }
 
+        public DataTable GetViewRecords(int bankAccountID, int fundsID)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@bank_accounts_id", DbType.Int32, bankAccountID },
+                new object[] { "@funds_id", DbType.Int32, fundsID },
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id";
+
+            var dtRCI = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

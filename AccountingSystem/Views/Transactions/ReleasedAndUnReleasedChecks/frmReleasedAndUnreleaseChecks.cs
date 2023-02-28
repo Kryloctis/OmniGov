@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false);
+            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, true);
         }
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
@@ -75,8 +75,11 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             try
             {
+                int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
+                int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
+
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords();
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID);
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
@@ -156,19 +159,25 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             if (dgReleasedAndUnreleaseCheques.SelectedRows.Count == 0)
                 return;
 
-            if (ReleasedCheque())
+            if (Helper.MessageBoxConfirmCancel("Release Cheque?"))
             {
-                Helper.MessageBoxSuccess("Cheque has been released.");
+                if (ReleasedCheque())
+                {
+                    Helper.MessageBoxSuccess("Cheque has been released.");
+                    ReleasedCheque();
+                }
             }
+
+            return;
         }
 
         private bool ReleasedCheque()
         {
             try
             {
-
-                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.CurrentRow.Cells["rci_id"].Value);
-                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.CurrentRow.Cells["cheques_id"].Value);
+                int selectedrowindex = dgReleasedAndUnreleaseCheques.SelectedCells[0].RowIndex;
+                int RCIID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["rci_id"].Value);
+                int chequeID = Convert.ToInt32(dgReleasedAndUnreleaseCheques.Rows[selectedrowindex].Cells["cheques_id"].Value);
 
                 var releasedChequesModel = new ReleasedChequesModel()
                 {
@@ -184,6 +193,14 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             return false;
         }
 
+        private void cmbxBankAccountNo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadCheques();
+        }
 
+        private void cmbxFund_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadCheques();
+        }
     }
 }

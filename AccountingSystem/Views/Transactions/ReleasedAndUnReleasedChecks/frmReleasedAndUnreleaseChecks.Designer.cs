@@ -96,6 +96,7 @@
             this.cmbxFund.Name = "cmbxFund";
             this.cmbxFund.Size = new System.Drawing.Size(156, 23);
             this.cmbxFund.TabIndex = 17;
+            this.cmbxFund.SelectionChangeCommitted += new System.EventHandler(this.cmbxFund_SelectionChangeCommitted);
             // 
             // cmbxBank
             // 
@@ -121,6 +122,7 @@
             this.cmbxBankAccountNo.Name = "cmbxBankAccountNo";
             this.cmbxBankAccountNo.Size = new System.Drawing.Size(166, 23);
             this.cmbxBankAccountNo.TabIndex = 17;
+            this.cmbxBankAccountNo.SelectionChangeCommitted += new System.EventHandler(this.cmbxBankAccountNo_SelectionChangeCommitted);
             // 
             // panel1
             // 
