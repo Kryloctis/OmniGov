@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 {
-    public partial class frmUnreleasedCheques : Form
+    public partial class frmUnreleasedChequesReport : Form
     {
-        public frmUnreleasedCheques()
+        public frmUnreleasedChequesReport()
         {
             InitializeComponent();
         }
