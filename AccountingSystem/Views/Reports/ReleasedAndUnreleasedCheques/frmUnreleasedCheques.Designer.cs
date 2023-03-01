@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 {
-    partial class frmReleasedChequesReport
+    partial class frmUnreleasedCheques
     {
         /// <summary>
         /// Required designer variable.
@@ -38,18 +38,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
             this.panel1.Size = new System.Drawing.Size(991, 562);
-            this.panel1.TabIndex = 13;
+            this.panel1.TabIndex = 14;
             // 
-            // frmReleasedChequesReport
+            // frmUnreleasedCheques
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(991, 562);
             this.Controls.Add(this.panel1);
-            this.Name = "frmReleasedChequesReport";
+            this.Name = "frmUnreleasedCheques";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Released Cheques";
+            this.Text = "Reports > Unreleased Cheques";
             this.ResumeLayout(false);
 
         }
