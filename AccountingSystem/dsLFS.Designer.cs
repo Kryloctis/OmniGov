@@ -98,6 +98,8 @@ namespace AccountingSystem {
         
         private dtSchedulesOfReleasedChequeDataTable tabledtSchedulesOfReleasedCheque;
         
+        private dtSchedulesOfUnreleasedChequeDataTable tabledtSchedulesOfUnreleasedCheque;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -236,6 +238,9 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtSchedulesOfReleasedCheque"] != null)) {
                     base.Tables.Add(new dtSchedulesOfReleasedChequeDataTable(ds.Tables["dtSchedulesOfReleasedCheque"]));
+                }
+                if ((ds.Tables["dtSchedulesOfUnreleasedCheque"] != null)) {
+                    base.Tables.Add(new dtSchedulesOfUnreleasedChequeDataTable(ds.Tables["dtSchedulesOfUnreleasedCheque"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -627,6 +632,16 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public dtSchedulesOfUnreleasedChequeDataTable dtSchedulesOfUnreleasedCheque {
+            get {
+                return this.tabledtSchedulesOfUnreleasedCheque;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -802,6 +817,9 @@ namespace AccountingSystem {
                 }
                 if ((ds.Tables["dtSchedulesOfReleasedCheque"] != null)) {
                     base.Tables.Add(new dtSchedulesOfReleasedChequeDataTable(ds.Tables["dtSchedulesOfReleasedCheque"]));
+                }
+                if ((ds.Tables["dtSchedulesOfUnreleasedCheque"] != null)) {
+                    base.Tables.Add(new dtSchedulesOfUnreleasedChequeDataTable(ds.Tables["dtSchedulesOfUnreleasedCheque"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1058,6 +1076,12 @@ namespace AccountingSystem {
                     this.tabledtSchedulesOfReleasedCheque.InitVars();
                 }
             }
+            this.tabledtSchedulesOfUnreleasedCheque = ((dtSchedulesOfUnreleasedChequeDataTable)(base.Tables["dtSchedulesOfUnreleasedCheque"]));
+            if ((initTable == true)) {
+                if ((this.tabledtSchedulesOfUnreleasedCheque != null)) {
+                    this.tabledtSchedulesOfUnreleasedCheque.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1142,6 +1166,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tabledtRCINew);
             this.tabledtSchedulesOfReleasedCheque = new dtSchedulesOfReleasedChequeDataTable();
             base.Tables.Add(this.tabledtSchedulesOfReleasedCheque);
+            this.tabledtSchedulesOfUnreleasedCheque = new dtSchedulesOfUnreleasedChequeDataTable();
+            base.Tables.Add(this.tabledtSchedulesOfUnreleasedCheque);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1368,6 +1394,12 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializedtSchedulesOfUnreleasedCheque() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1531,6 +1563,9 @@ namespace AccountingSystem {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtSchedulesOfReleasedChequeRowChangeEventHandler(object sender, dtSchedulesOfReleasedChequeRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void dtSchedulesOfUnreleasedChequeRowChangeEventHandler(object sender, dtSchedulesOfUnreleasedChequeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -16388,6 +16423,337 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class dtSchedulesOfUnreleasedChequeDataTable : global::System.Data.TypedTableBase<dtSchedulesOfUnreleasedChequeRow> {
+            
+            private global::System.Data.DataColumn columncheque_date;
+            
+            private global::System.Data.DataColumn columncheque_serial_number;
+            
+            private global::System.Data.DataColumn columndv_number;
+            
+            private global::System.Data.DataColumn columnpayee;
+            
+            private global::System.Data.DataColumn columnnature_of_payment;
+            
+            private global::System.Data.DataColumn columnamount;
+            
+            private global::System.Data.DataColumn columndate_released;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeDataTable() {
+                this.TableName = "dtSchedulesOfUnreleasedCheque";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtSchedulesOfUnreleasedChequeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected dtSchedulesOfUnreleasedChequeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cheque_dateColumn {
+                get {
+                    return this.columncheque_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn cheque_serial_numberColumn {
+                get {
+                    return this.columncheque_serial_number;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn dv_numberColumn {
+                get {
+                    return this.columndv_number;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn payeeColumn {
+                get {
+                    return this.columnpayee;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn nature_of_paymentColumn {
+                get {
+                    return this.columnnature_of_payment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn date_releasedColumn {
+                get {
+                    return this.columndate_released;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeRow this[int index] {
+                get {
+                    return ((dtSchedulesOfUnreleasedChequeRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtSchedulesOfUnreleasedChequeRowChangeEventHandler dtSchedulesOfUnreleasedChequeRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtSchedulesOfUnreleasedChequeRowChangeEventHandler dtSchedulesOfUnreleasedChequeRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtSchedulesOfUnreleasedChequeRowChangeEventHandler dtSchedulesOfUnreleasedChequeRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event dtSchedulesOfUnreleasedChequeRowChangeEventHandler dtSchedulesOfUnreleasedChequeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AdddtSchedulesOfUnreleasedChequeRow(dtSchedulesOfUnreleasedChequeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeRow AdddtSchedulesOfUnreleasedChequeRow(string cheque_date, string cheque_serial_number, string dv_number, string payee, string nature_of_payment, string amount, string date_released) {
+                dtSchedulesOfUnreleasedChequeRow rowdtSchedulesOfUnreleasedChequeRow = ((dtSchedulesOfUnreleasedChequeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        cheque_date,
+                        cheque_serial_number,
+                        dv_number,
+                        payee,
+                        nature_of_payment,
+                        amount,
+                        date_released};
+                rowdtSchedulesOfUnreleasedChequeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtSchedulesOfUnreleasedChequeRow);
+                return rowdtSchedulesOfUnreleasedChequeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                dtSchedulesOfUnreleasedChequeDataTable cln = ((dtSchedulesOfUnreleasedChequeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new dtSchedulesOfUnreleasedChequeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columncheque_date = base.Columns["cheque_date"];
+                this.columncheque_serial_number = base.Columns["cheque_serial_number"];
+                this.columndv_number = base.Columns["dv_number"];
+                this.columnpayee = base.Columns["payee"];
+                this.columnnature_of_payment = base.Columns["nature_of_payment"];
+                this.columnamount = base.Columns["amount"];
+                this.columndate_released = base.Columns["date_released"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columncheque_date = new global::System.Data.DataColumn("cheque_date", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncheque_date);
+                this.columncheque_serial_number = new global::System.Data.DataColumn("cheque_serial_number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncheque_serial_number);
+                this.columndv_number = new global::System.Data.DataColumn("dv_number", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndv_number);
+                this.columnpayee = new global::System.Data.DataColumn("payee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpayee);
+                this.columnnature_of_payment = new global::System.Data.DataColumn("nature_of_payment", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnature_of_payment);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
+                this.columndate_released = new global::System.Data.DataColumn("date_released", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_released);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeRow NewdtSchedulesOfUnreleasedChequeRow() {
+                return ((dtSchedulesOfUnreleasedChequeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new dtSchedulesOfUnreleasedChequeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(dtSchedulesOfUnreleasedChequeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.dtSchedulesOfUnreleasedChequeRowChanged != null)) {
+                    this.dtSchedulesOfUnreleasedChequeRowChanged(this, new dtSchedulesOfUnreleasedChequeRowChangeEvent(((dtSchedulesOfUnreleasedChequeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.dtSchedulesOfUnreleasedChequeRowChanging != null)) {
+                    this.dtSchedulesOfUnreleasedChequeRowChanging(this, new dtSchedulesOfUnreleasedChequeRowChangeEvent(((dtSchedulesOfUnreleasedChequeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.dtSchedulesOfUnreleasedChequeRowDeleted != null)) {
+                    this.dtSchedulesOfUnreleasedChequeRowDeleted(this, new dtSchedulesOfUnreleasedChequeRowChangeEvent(((dtSchedulesOfUnreleasedChequeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.dtSchedulesOfUnreleasedChequeRowDeleting != null)) {
+                    this.dtSchedulesOfUnreleasedChequeRowDeleting(this, new dtSchedulesOfUnreleasedChequeRowChangeEvent(((dtSchedulesOfUnreleasedChequeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemovedtSchedulesOfUnreleasedChequeRow(dtSchedulesOfUnreleasedChequeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsLFS ds = new dsLFS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "dtSchedulesOfUnreleasedChequeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class dtGeneralJournalRow : global::System.Data.DataRow {
@@ -29269,6 +29635,223 @@ namespace AccountingSystem {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class dtSchedulesOfUnreleasedChequeRow : global::System.Data.DataRow {
+            
+            private dtSchedulesOfUnreleasedChequeDataTable tabledtSchedulesOfUnreleasedCheque;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal dtSchedulesOfUnreleasedChequeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tabledtSchedulesOfUnreleasedCheque = ((dtSchedulesOfUnreleasedChequeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cheque_date {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'cheque_date\' in table \'dtSchedulesOfUnreleasedCheque\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string cheque_serial_number {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.cheque_serial_numberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'cheque_serial_number\' in table \'dtSchedulesOfUnreleasedCheq" +
+                                "ue\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.cheque_serial_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string dv_number {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.dv_numberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'dv_number\' in table \'dtSchedulesOfUnreleasedCheque\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.dv_numberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string payee {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.payeeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'payee\' in table \'dtSchedulesOfUnreleasedCheque\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.payeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string nature_of_payment {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.nature_of_paymentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nature_of_payment\' in table \'dtSchedulesOfUnreleasedCheque\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.nature_of_paymentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string amount {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.amountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'amount\' in table \'dtSchedulesOfUnreleasedCheque\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string date_released {
+                get {
+                    try {
+                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'date_released\' in table \'dtSchedulesOfUnreleasedCheque\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ischeque_dateNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcheque_dateNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Ischeque_serial_numberNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.cheque_serial_numberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setcheque_serial_numberNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.cheque_serial_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isdv_numberNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.dv_numberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setdv_numberNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.dv_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IspayeeNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.payeeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetpayeeNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.payeeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isnature_of_paymentNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.nature_of_paymentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setnature_of_paymentNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.nature_of_paymentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsamountNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.amountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetamountNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.amountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isdate_releasedNull() {
+                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setdate_releasedNull() {
+                this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -30512,6 +31095,40 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtSchedulesOfReleasedChequeRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class dtSchedulesOfUnreleasedChequeRowChangeEvent : global::System.EventArgs {
+            
+            private dtSchedulesOfUnreleasedChequeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeRowChangeEvent(dtSchedulesOfUnreleasedChequeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public dtSchedulesOfUnreleasedChequeRow Row {
                 get {
                     return this.eventRow;
                 }
