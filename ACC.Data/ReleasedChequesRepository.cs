@@ -73,6 +73,17 @@ namespace AccountingSystem
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
         }
 
+        public DataTable GetViewRecordsByBankAccountID(int bankAccountIDID)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@bank_accouns_id", DbType.Int32, bankAccountIDID}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id";
+            return _dbGenericCommands.ExecuteReader(query, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

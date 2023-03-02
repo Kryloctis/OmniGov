@@ -42,8 +42,8 @@
     <Shape ID="DesignTable:dtCertListOfAllRptDelinquences" ZOrder="6" X="3761" Y="461" Height="410" Width="250" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="406" />
     <Shape ID="DesignTable:dtRPTStamentOfAccounts" ZOrder="5" X="3271" Y="432" Height="295" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="310" />
     <Shape ID="DesignTable:dtRCINew" ZOrder="3" X="1889" Y="191" Height="315" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="311" />
-    <Shape ID="DesignTable:dtSchedulesOfReleasedCheque" ZOrder="2" X="644" Y="331" Height="181" Width="245" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
-    <Shape ID="DesignTable:dtSchedulesOfUnreleasedCheque" ZOrder="1" X="213" Y="280" Height="162" Width="258" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
+    <Shape ID="DesignTable:dtSchedulesOfReleasedCheque" ZOrder="2" X="414" Y="267" Height="181" Width="245" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
+    <Shape ID="DesignTable:dtSchedulesOfUnreleasedCheque" ZOrder="1" X="37" Y="279" Height="162" Width="258" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

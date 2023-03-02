@@ -10,6 +10,6 @@ namespace ACC.Domain.Interfaces
     {
         DataTable GetViewRecords();
         DataTable GetViewRecords(int bankAccountID, int fundsID);
-
+        DataTable GetViewRecordsByBankAccountID(int bankAccountIDID);
     }
 }
