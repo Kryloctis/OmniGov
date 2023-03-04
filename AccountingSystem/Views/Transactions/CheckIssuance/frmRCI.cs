@@ -29,7 +29,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             try
             {
                 var rciRepository = AccFactory.RCIRepository();
-                var dtRCI = rciRepository.GetRecords();
+                var dtRCI = rciRepository.GetViewRecords();
                 HelperLoadRecords.RCIDatagridView(dtRCI, dgRCI);
 
                 lblRecordCount.Text = rciRepository.CountRecords().ToString();

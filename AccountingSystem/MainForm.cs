@@ -36,6 +36,7 @@ using AccountingSystem.Views.Reports.RealPropertyTaxReports;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.CertifiedListOfPropertyTaxDelinquences;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
+using AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques;
 using AccountingSystem.Views.Reports.SAAOB;
 using AccountingSystem.Views.Reports.SAAOBB;
 using AccountingSystem.Views.Transactions.AssessmentPosting;
@@ -707,6 +708,16 @@ namespace AccountingSystem
         private void releasedAndUnreleaseChecksToolStripMenu_Click(object sender, EventArgs e)
         {
             _ = new frmReleasedAndUnreleaseChecks().ShowDialog();
+        }
+
+        private void releasedChequesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmReleasedChequesReport().ShowDialog();
+        }
+
+        private void unreleasedChequesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmUnreleasedChequesReport().ShowDialog();
         }
     }
 }

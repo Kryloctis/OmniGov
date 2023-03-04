@@ -1420,6 +1420,33 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
+        internal static void RCIReleasedAndUnreleaseDatagridView(DataTable dataTable, DataGridView datagrid)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns["rci_id"].Visible = false;
+            datagrid.Columns["cheques_id"].Visible = false;
+            datagrid.Columns["bank_accounts_id"].Visible = false;
+            datagrid.Columns["funds_id"].Visible = false;
+
+            datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
+            datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["cheque_amount"].HeaderText = "Amount";
+            datagrid.Columns["fund_code"].HeaderText = "Fund Code";
+            datagrid.Columns["fund_name"].HeaderText = "Fund Name";
+            datagrid.Columns["dv_no"].HeaderText = "DV No.";
+            datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["nature_of_payment"].HeaderText = "Nature of Payment";
+            datagrid.Columns["status"].HeaderText = "Status";
+
+            datagrid.Columns["cheque_amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["cheque_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+
+            datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+        }
+
+
         #endregion RCI
 
         #region Real Property Tax View

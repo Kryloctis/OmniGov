@@ -69,7 +69,7 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnSave.Size = new System.Drawing.Size(82, 22);
             this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Update";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;

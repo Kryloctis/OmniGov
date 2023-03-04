@@ -204,7 +204,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     int rowGrYear = Convert.ToInt32(row["gr_year"]);
 
                     var dictAssessmentPosts = AccFactory.RptAssessmentPostsRepository().GetRecordBy_ArpNo_Year(rowCompleteArpNo, year);
-                    string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : string.Empty;
+                    //string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : string.Empty;
+                    string rowPostingStatus = dictAssessmentPosts.Keys.Count != 0 ? "Posted" : (rowIsTaxable != true ? "Tax Exempted" : string.Empty);
                     string rowPostedAt = GetAssessmentPostingRecord(rowCompleteArpNo, year, "posted_at");
 
                     decimal rowPenaltyRate = 0;
