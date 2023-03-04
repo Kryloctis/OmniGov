@@ -302,8 +302,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
-            //EnableDisableToolStripButton(dgProperties, btnPostSelected);
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
+            EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
 
         private dynamic GetDatagridViewValue(DataGridView dataGridView, int rowIndex, string columnName)
@@ -363,9 +363,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void btnPostSelected_Click(object sender, EventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
-            {
                 backgroundWorker1.RunWorkerAsync();
-            }
         }
 
         #region Posting
@@ -382,8 +380,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            
-
             try
             {
                 var assessmentPostingModels = new List<RptAssessmentPostsModel>();
@@ -550,46 +546,44 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Select All Background Worker
 
-
         private void bgwAssessmentPostSelectAll_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
-            {
+            //try
+            //{
+            //    if (chckBxAll.Checked)
+            //    {
+            //        Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
+            //    }
+            //    else
+            //    {
+            //        Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
+            //    }
 
-                if (chckBxAll.Checked)
-                {
-                    Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
-                }
-                else
-                {
-                    Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
-                }
-
-                bgwAssessmentPostSelectAll.ReportProgress(100);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                e.Cancel = true;
-            }
+            //    bgwAssessmentPostSelectAll.ReportProgress(100);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Helper.MessageBoxError(ex.Message);
+            //    e.Cancel = true;
+            //}
         }
 
         private void bgwAssessmentPostSelectAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            progressBarLoadRecords.Visible = true;
-            //lblRecordCount.Text = e.UserState.ToString();
-            progressBarLoadRecords.Value = e.ProgressPercentage;
+            //Cursor = Cursors.WaitCursor;
+            //progressBarLoadRecords.Visible = true;
+            ////lblRecordCount.Text = e.UserState.ToString();
+            //progressBarLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void bgwAssessmentPostSelectAll_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (progressBarLoadRecords.Value == 100)
-                progressBarLoadRecords.Visible = false;
-            Cursor = Cursors.Default;
-            this.Enabled = true;
+            //if (progressBarLoadRecords.Value == 100)
+            //    progressBarLoadRecords.Visible = false;
+            //Cursor = Cursors.Default;
+            //this.Enabled = true;
         }
 
-        #endregion
+        #endregion Select All Background Worker
     }
 }
