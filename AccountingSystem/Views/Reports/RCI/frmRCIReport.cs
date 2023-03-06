@@ -69,31 +69,54 @@ namespace AccountingSystem.Views.Reports.RCI
         private DataTable DataTableRCI()
         {
             int bankID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
-            var dateYearMonth = Convert.ToDateTime(dtpMonth.Value).ToString("MM/yyyy");
+            var dateYearMonth = Convert.ToDateTime(dtpPeriodCover.Value).ToString("MM/yyyy");
 
-            var dtRCI = new dsLFS.dtRCIDataTable();
-            var dt = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
+            var dtRCI = new dsLFS.dtRCINewDataTable();
+            var dtCheckIssuance = AccFactory.RCIRepository().GetViewRecordsByBankAccountIdAndMonth(bankID, dateYearMonth);
 
-            if (dt.Rows.Count == 0)
+            if (dtCheckIssuance.Rows.Count == 0)
                 return dtRCI;
 
-            
-            foreach (DataRow item in dt.Rows)
+            decimal netAmount = 0.0m;
+
+            foreach (DataRow item in dtCheckIssuance.Rows)
             {
                 DataRow row = dtRCI.NewRow();
-                row["account_no"] = item["bank_account_no"];
-                row["bank_name"] = item["bank_name"];
-                row["check_no"] = item["cheque_no"];
-                row["check_date"] = item["cheque_date"];
-                row["fund_code"] = item["fund_code"];
+                netAmount = Convert.ToDecimal(item["amount"]) - Convert.ToDecimal(item["total_deductions"]);
+
+                row["cheque_date"] = item["cheque_date"];
+                row["cheque_no"] = item["cheque_no"];
+                row["dv_no"] = item["dv_no"];
+                row["res_ctr"] = string.Empty;
                 row["payee"] = item["payee"];
                 row["nature_of_payment"] = item["nature_of_payment"];
                 row["office_code"] = item["fpp_code"];
-                row["dv_no"] = item["dv_no"];
-                row["obligation_no"] = item["obligation_no"];
-                row["total_deductions"] = item["total_deductions"];
-                row["gross_amount"] = item["amount"];
-                row["fpp_code"] = item["fpp_code"];
+                row["obr_number"] = item["obligation_no"];
+
+                if (Convert.ToDateTime(item["date_entry"]).Year < dtpPeriodCover.Value.Year)
+                {
+                    row["trust_liabilities"] = Convert.ToDecimal(item["amount"]);
+                }
+                else
+                {
+                    switch (item["fund_code"].ToString())
+                    {
+                        case "100":
+                            row["fpp_100"] = netAmount;
+                            break;
+
+                        case "200":
+                            row["fpp_200"] = netAmount;
+                            break;
+
+                        case "300":
+                            row["fpp_300"] = netAmount;
+                            break;
+                    }
+                }
+
+                row["bir_vat_and_nonvat"] = Convert.ToDecimal(item["total_deductions"]);
+                row["gross_amount"] = Convert.ToDecimal(item["amount"]);
                 dtRCI.Rows.Add(row);
             }
 
@@ -102,6 +125,7 @@ namespace AccountingSystem.Views.Reports.RCI
 
         private void LoadReport(LocalReport report)
         {
+
             try
             {
                 Cursor = Cursors.WaitCursor;
@@ -149,7 +173,7 @@ namespace AccountingSystem.Views.Reports.RCI
                     new ReportParameter("paramFund", fundName),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankaccount", bankDetails),
-                    new ReportParameter("paramMonth", dtpMonth.Value.ToString()),
+                    new ReportParameter("paramMonth", dtpPeriodCover.Value.ToString()),
                     new ReportParameter("paramDepartmentHeadSignatory", departmentHeadSignatory),
                     new ReportParameter("paramDepartmentHeadSignatoryTitle", departmentHeadSignatoryTitle),
                     new ReportParameter("paramAdministrativeOfficerSignatory", administrativeOfficerSignatory),
@@ -159,7 +183,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 report.ReportPath = $"{Application.StartupPath}Reports\\check-issued.rdlc";
                 report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("dtRCI", DataTableRCI()));
+                report.DataSources.Add(new ReportDataSource("dtRCINew", DataTableRCI()));
                 report.SetParameters(parameters);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;

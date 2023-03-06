@@ -193,6 +193,6 @@ namespace AccountingSystem.Views.Transactions.CheckIssuance.Obligations
         internal System.Windows.Forms.DataGridView dgObligation;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtpDateEntry;
+        internal System.Windows.Forms.DateTimePicker dtpDateEntry;
     }
 }

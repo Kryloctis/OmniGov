@@ -226,9 +226,9 @@ namespace AccountingSystem.Views.Transactions.RCI
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(14, 319);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 15);
+            this.label12.Size = new System.Drawing.Size(51, 15);
             this.label12.TabIndex = 50;
-            this.label12.Text = "Net Amount";
+            this.label12.Text = "Amount";
             // 
             // cmbfund
             // 

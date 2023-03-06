@@ -127,8 +127,8 @@
             this.assessmentPostingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.checkIssuanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.releasedAndUnreleaseChecksToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             this.collectorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.liquidatorsRCDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,6 +144,8 @@
             this.listOfDelinquentAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.reportOfCheckIssuedRCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.releasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unreleasedChequesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bankCashbookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1159,19 +1161,19 @@
             this.checkIssuanceToolStripMenuItem.Text = "Check Issuance";
             this.checkIssuanceToolStripMenuItem.Click += new System.EventHandler(this.CheckIssuanceToolStripMenuItem_Click);
             // 
-            // bankDepositToolStripMenuItem
-            // 
-            this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
-            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
-            this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
-            // 
             // releasedAndUnreleaseChecksToolStripMenu
             // 
             this.releasedAndUnreleaseChecksToolStripMenu.Name = "releasedAndUnreleaseChecksToolStripMenu";
             this.releasedAndUnreleaseChecksToolStripMenu.Size = new System.Drawing.Size(205, 22);
             this.releasedAndUnreleaseChecksToolStripMenu.Text = "Release/Unrelease Check";
             this.releasedAndUnreleaseChecksToolStripMenu.Click += new System.EventHandler(this.releasedAndUnreleaseChecksToolStripMenu_Click);
+            // 
+            // bankDepositToolStripMenuItem
+            // 
+            this.bankDepositToolStripMenuItem.Name = "bankDepositToolStripMenuItem";
+            this.bankDepositToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.bankDepositToolStripMenuItem.Text = "Bank Deposit";
+            this.bankDepositToolStripMenuItem.Click += new System.EventHandler(this.bankDepositToolStripMenuItem_Click);
             // 
             // toolStripSplitButton4
             // 
@@ -1182,6 +1184,8 @@
             this.collectionPaymentToolStripMenuItem1,
             this.toolStripSeparator13,
             this.reportOfCheckIssuedRCIToolStripMenuItem,
+            this.releasedChequesToolStripMenuItem,
+            this.unreleasedChequesToolStripMenuItem,
             this.bankCashbookToolStripMenuItem,
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem,
             this.dailyCashPositionsToolStripMenuItem});
@@ -1295,6 +1299,20 @@
             this.reportOfCheckIssuedRCIToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
             this.reportOfCheckIssuedRCIToolStripMenuItem.Text = "Report of Check Issued (RCI)";
             this.reportOfCheckIssuedRCIToolStripMenuItem.Click += new System.EventHandler(this.reportOfCheckIssuedRCIToolStripMenuItem_Click);
+            // 
+            // releasedChequesToolStripMenuItem
+            // 
+            this.releasedChequesToolStripMenuItem.Name = "releasedChequesToolStripMenuItem";
+            this.releasedChequesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
+            this.releasedChequesToolStripMenuItem.Text = "Released Cheques";
+            this.releasedChequesToolStripMenuItem.Click += new System.EventHandler(this.releasedChequesToolStripMenuItem_Click);
+            // 
+            // unreleasedChequesToolStripMenuItem
+            // 
+            this.unreleasedChequesToolStripMenuItem.Name = "unreleasedChequesToolStripMenuItem";
+            this.unreleasedChequesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
+            this.unreleasedChequesToolStripMenuItem.Text = "Unreleased Cheques";
+            this.unreleasedChequesToolStripMenuItem.Click += new System.EventHandler(this.unreleasedChequesToolStripMenuItem_Click);
             // 
             // bankCashbookToolStripMenuItem
             // 
@@ -1508,5 +1526,7 @@
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
     }
 }
