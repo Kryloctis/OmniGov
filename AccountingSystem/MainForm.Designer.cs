@@ -51,7 +51,7 @@
             this.menuCollectingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDisbursingOfficer = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBanks = new System.Windows.Forms.ToolStripMenuItem();
-            this.baToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAccForm = new System.Windows.Forms.ToolStripMenuItem();
             this.menuReceipts = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTaxPayers = new System.Windows.Forms.ToolStripMenuItem();
@@ -247,7 +247,7 @@
             this.menuCollectingOfficer,
             this.menuDisbursingOfficer,
             this.menuBanks,
-            this.baToolStripMenuItem,
+            this.bankAccountsToolStripMenuItem,
             this.menuAccForm,
             this.menuReceipts,
             this.menuTaxPayers,
@@ -373,12 +373,12 @@
             this.menuBanks.Text = "Banks...";
             this.menuBanks.Click += new System.EventHandler(this.menuBanks_Click);
             // 
-            // baToolStripMenuItem
+            // bankAccountsToolStripMenuItem
             // 
-            this.baToolStripMenuItem.Name = "baToolStripMenuItem";
-            this.baToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.baToolStripMenuItem.Text = "Bank Accounts...";
-            this.baToolStripMenuItem.Click += new System.EventHandler(this.baToolStripMenuItem_Click);
+            this.bankAccountsToolStripMenuItem.Name = "bankAccountsToolStripMenuItem";
+            this.bankAccountsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.bankAccountsToolStripMenuItem.Text = "Bank Accounts...";
+            this.bankAccountsToolStripMenuItem.Click += new System.EventHandler(this.bankAccountsToolStripMenuItem_Click);
             // 
             // menuAccForm
             // 
@@ -1528,5 +1528,6 @@
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
     }
 }

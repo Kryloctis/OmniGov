@@ -547,42 +547,50 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Select All Background Worker
 
+        private int GetTotalUnselectedRows()
+        {
+            int totalUnselectedRows = 0;
+
+            foreach (DataGridViewRow row in dgProperties.Rows)
+            {
+                if (!Convert.ToBoolean(row.Cells["is_checked"].Value))
+                    totalUnselectedRows++;
+            }
+
+            return totalUnselectedRows;
+        }
+
         private void bgwAssessmentPostSelectAll_DoWork(object sender, DoWorkEventArgs e)
         {
-            //try
-            //{
-            //    if (chckBxAll.Checked)
-            //    {
-            //        Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
-            //    }
-            //    else
-            //    {
-            //        Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
-            //    }
+            try
+            {
+                int totalUnselectedRows = GetTotalUnselectedRows();
+                int progressCount = 0;
 
-            //    bgwAssessmentPostSelectAll.ReportProgress(100);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Helper.MessageBoxError(ex.Message);
-            //    e.Cancel = true;
-            //}
+                foreach (DataGridViewRow row in dgProperties.Rows)
+                {
+                    if (!Convert.ToBoolean(row.Cells["is_checked"].Value))
+                    {
+                        Invoke((MethodInvoker)delegate { row.Cells["is_checked"].Value = true; });
+                        progressCount++;
+                        bgwAssessmentPostSelectAll.ReportProgress((progressCount * 100) / totalUnselectedRows);
+                    }
+                }
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void bgwAssessmentPostSelectAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //Cursor = Cursors.WaitCursor;
-            //progressBarLoadRecords.Visible = true;
-            ////lblRecordCount.Text = e.UserState.ToString();
-            //progressBarLoadRecords.Value = e.ProgressPercentage;
+            progressBarLoadRecords.Visible = true;
+            progressBarLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void bgwAssessmentPostSelectAll_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //if (progressBarLoadRecords.Value == 100)
-            //    progressBarLoadRecords.Visible = false;
-            //Cursor = Cursors.Default;
-            //this.Enabled = true;
+            progressBarLoadRecords.Visible = false;
+            progressBarLoadRecords.Value = 0;
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
         }
 
         #endregion Select All Background Worker

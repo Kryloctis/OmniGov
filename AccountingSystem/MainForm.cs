@@ -173,8 +173,17 @@ namespace AccountingSystem
             if (!Helper.HasPermission("Report Consolidated Real Property Tax Dues"))
                 consolidatedRealPropertyTaxDeliquencesToolStripMenuItem.Enabled = false;
 
+            if (!Helper.HasPermission("Manage > Bank Accounts"))
+                bankAccountsToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Report List of Delinquent Accounts"))
                 listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Report > Released Cheques"))
+            //    releasedChequesToolStripMenuItem.Enabled = false;
+            //if (!Helper.HasPermission("Report > Unreleased Cheques"))
+            //    unreleasedChequesToolStripMenuItem.Enabled = false;
+            releasedChequesToolStripMenuItem.Enabled = false;
+            unreleasedChequesToolStripMenuItem.Enabled = false;
         }
 
         private void ValidateTransactionPermissions()
@@ -700,11 +709,6 @@ namespace AccountingSystem
             _ = new frmBusinessAddOnCharges().ShowDialog();
         }
 
-        private void baToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _ = new frmBankAccounts().ShowDialog();
-        }
-
         private void releasedAndUnreleaseChecksToolStripMenu_Click(object sender, EventArgs e)
         {
             _ = new frmReleasedAndUnreleaseChecks().ShowDialog();
@@ -718,6 +722,11 @@ namespace AccountingSystem
         private void unreleasedChequesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _ = new frmUnreleasedChequesReport().ShowDialog();
+        }
+
+        private void bankAccountsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmBankAccounts().ShowDialog();
         }
     }
 }
