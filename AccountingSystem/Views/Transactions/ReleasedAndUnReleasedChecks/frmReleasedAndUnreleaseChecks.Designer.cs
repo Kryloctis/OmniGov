@@ -84,6 +84,7 @@
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(191, 23);
             this.txtsearch.TabIndex = 9;
+            this.txtsearch.TextChanged += new System.EventHandler(this.txtsearch_TextChanged);
             // 
             // cmbxFund
             // 

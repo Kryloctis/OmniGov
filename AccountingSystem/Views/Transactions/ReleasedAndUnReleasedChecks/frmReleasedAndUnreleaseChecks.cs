@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using DocumentFormat.OpenXml.Bibliography;
 using System;
@@ -84,6 +85,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
 
+
                 foreach (DataRow row in dtViewReleasedCheques.Rows)
                 {
                     var newRow = releasedAndUnreleasedDT.NewRow();
@@ -122,7 +124,8 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
 
                 HelperLoadRecords.RCIReleasedAndUnreleaseDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
-                lblRecordCount.Text = releasedChequesRepo.CountRecords().ToString();
+
+                lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -198,6 +201,11 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         }
 
         private void cmbxFund_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadCheques();
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadCheques();
         }
