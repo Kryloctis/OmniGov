@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, true);
+            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false);
         }
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string fundID = row["funds_id"].ToString();
                     string chequeNo = row["cheque_no"].ToString();
                     string chequeDate = row["cheque_date"].ToString();
-                    string amount = row["cheque_amount"].ToString();
+                    decimal amount = Convert.ToDecimal(row["cheque_amount"]);
                     string fundCode = row["fund_code"].ToString();
                     string fundName = row["fund_name"].ToString();
                     string dvNo = row["dv_no"].ToString();
@@ -140,8 +140,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 new DataColumn("funds_id", typeof(string)),
                 new DataColumn("cheque_no", typeof(string)),
                 new DataColumn("cheque_date", typeof(string)),
-                new DataColumn("cheque_amount", typeof(string)),
-                new DataColumn("bank_account_no", typeof(string)),
+                new DataColumn("cheque_amount", typeof(decimal)),
                 new DataColumn("fund_code", typeof(string)),
                 new DataColumn("fund_name", typeof(string)),
                 new DataColumn("dv_no", typeof(string)),
