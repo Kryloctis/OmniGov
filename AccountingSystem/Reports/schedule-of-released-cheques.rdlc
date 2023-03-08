@@ -966,10 +966,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!cheque_date.Value</Value>
+                                  <Value>=CDate(Fields!cheque_date.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>d MMMM</Format>
+                                    <Format>d</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1206,10 +1206,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!date_released.Value</Value>
+                                  <Value>=CDate(Fields!date_released.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>dddd, d MMMM yyyy</Format>
+                                    <Format>d</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1230,6 +1230,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

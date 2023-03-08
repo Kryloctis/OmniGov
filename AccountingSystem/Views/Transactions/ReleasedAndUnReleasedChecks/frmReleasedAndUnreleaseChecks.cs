@@ -76,11 +76,12 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             try
             {
+                string txtSeach = txtsearch.Text;
                 int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
                 int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID);
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach);
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());

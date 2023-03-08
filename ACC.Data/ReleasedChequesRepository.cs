@@ -59,15 +59,16 @@ namespace AccountingSystem
             return _dbGenericCommands.Fill(query, dtRCI);
         }
 
-        public DataTable GetViewRecords(int bankAccountID, int fundsID)
+        public DataTable GetViewRecords(int bankAccountID, int fundsID, string searchText)
         {
             var parameters = new object[][]
             {
                 new object[] { "@bank_accounts_id", DbType.Int32, bankAccountID },
                 new object[] { "@funds_id", DbType.Int32, fundsID },
+                new object[] { "@search_text", DbType.String, $"%{searchText}%" }
             };
-
-            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id";
+            
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accounts_id AND funds_id = @funds_id AND (cheque_no LIKE  @search_text OR payee LIKE @search_text)"; 
 
             var dtRCI = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dtRCI, parameters);
