@@ -23,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false);
+            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false );
         }
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
@@ -166,7 +166,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 if (ReleasedCheque())
                 {
                     Helper.MessageBoxSuccess("Cheque has been released.");
-                    ReleasedCheque();
+                    LoadCheques();
                 }
             }
 
