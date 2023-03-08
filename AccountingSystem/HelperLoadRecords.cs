@@ -1074,8 +1074,6 @@ namespace AccountingSystem
             datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
             datagrid.Columns["bank_branch"].HeaderText = "Branch";
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1089,6 +1087,8 @@ namespace AccountingSystem
             datagrid.Columns["account_no"].HeaderText = "Account No.";
             datagrid.Columns["bank_code"].Visible = false;
             datagrid.Columns["bank_branch"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         #endregion Banks
