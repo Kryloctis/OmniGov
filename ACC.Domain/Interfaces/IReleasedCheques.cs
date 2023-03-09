@@ -9,7 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface IReleasedCheques : IAccRepository<ReleasedChequesModel>
     {
         DataTable GetViewRecords();
-        DataTable GetViewRecords(int bankAccountID, int fundsID);
-
+        DataTable GetViewRecords(int bankAccountID, int fundsID, string txtSeach);
+        DataTable GetViewRecordsByBankAccountID(int bankAccountIDID);
     }
 }

@@ -16441,8 +16441,6 @@ namespace AccountingSystem {
             
             private global::System.Data.DataColumn columnamount;
             
-            private global::System.Data.DataColumn columndate_released;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public dtSchedulesOfUnreleasedChequeDataTable() {
@@ -16526,14 +16524,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn date_releasedColumn {
-                get {
-                    return this.columndate_released;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -16569,7 +16559,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public dtSchedulesOfUnreleasedChequeRow AdddtSchedulesOfUnreleasedChequeRow(string cheque_date, string cheque_serial_number, string dv_number, string payee, string nature_of_payment, string amount, string date_released) {
+            public dtSchedulesOfUnreleasedChequeRow AdddtSchedulesOfUnreleasedChequeRow(System.DateTime cheque_date, string cheque_serial_number, string dv_number, string payee, string nature_of_payment, string amount) {
                 dtSchedulesOfUnreleasedChequeRow rowdtSchedulesOfUnreleasedChequeRow = ((dtSchedulesOfUnreleasedChequeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         cheque_date,
@@ -16577,8 +16567,7 @@ namespace AccountingSystem {
                         dv_number,
                         payee,
                         nature_of_payment,
-                        amount,
-                        date_released};
+                        amount};
                 rowdtSchedulesOfUnreleasedChequeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtSchedulesOfUnreleasedChequeRow);
                 return rowdtSchedulesOfUnreleasedChequeRow;
@@ -16607,13 +16596,12 @@ namespace AccountingSystem {
                 this.columnpayee = base.Columns["payee"];
                 this.columnnature_of_payment = base.Columns["nature_of_payment"];
                 this.columnamount = base.Columns["amount"];
-                this.columndate_released = base.Columns["date_released"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columncheque_date = new global::System.Data.DataColumn("cheque_date", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columncheque_date = new global::System.Data.DataColumn("cheque_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncheque_date);
                 this.columncheque_serial_number = new global::System.Data.DataColumn("cheque_serial_number", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncheque_serial_number);
@@ -16625,8 +16613,6 @@ namespace AccountingSystem {
                 base.Columns.Add(this.columnnature_of_payment);
                 this.columnamount = new global::System.Data.DataColumn("amount", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnamount);
-                this.columndate_released = new global::System.Data.DataColumn("date_released", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_released);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -29650,10 +29636,10 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string cheque_date {
+            public System.DateTime cheque_date {
                 get {
                     try {
-                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn]));
+                        return ((global::System.DateTime)(this[this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'cheque_date\' in table \'dtSchedulesOfUnreleasedCheque\' is DB" +
@@ -29751,23 +29737,6 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string date_released {
-                get {
-                    try {
-                        return ((string)(this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date_released\' in table \'dtSchedulesOfUnreleasedCheque\' is " +
-                                "DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Ischeque_dateNull() {
                 return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.cheque_dateColumn);
             }
@@ -29836,18 +29805,6 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetamountNull() {
                 this[this.tabledtSchedulesOfUnreleasedCheque.amountColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Isdate_releasedNull() {
-                return this.IsNull(this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setdate_releasedNull() {
-                this[this.tabledtSchedulesOfUnreleasedCheque.date_releasedColumn] = global::System.Convert.DBNull;
             }
         }
         
