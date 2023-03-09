@@ -1074,8 +1074,6 @@ namespace AccountingSystem
             datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
             datagrid.Columns["bank_branch"].HeaderText = "Branch";
-            datagrid.Columns["created_at"].Visible = false;
-            datagrid.Columns["updated_at"].Visible = false;
 
             datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -1089,6 +1087,8 @@ namespace AccountingSystem
             datagrid.Columns["account_no"].HeaderText = "Account No.";
             datagrid.Columns["bank_code"].Visible = false;
             datagrid.Columns["bank_branch"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         #endregion Banks
@@ -1430,20 +1430,26 @@ namespace AccountingSystem
             datagrid.Columns["funds_id"].Visible = false;
 
             datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
+            datagrid.Columns["cheque_no"].MinimumWidth = 150;
+            datagrid.Columns["cheque_amount"].DefaultCellStyle.Format = "N2";
+            datagrid.Columns["cheque_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["cheque_amount"].MinimumWidth = 130;
             datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["cheque_date"].MinimumWidth = 200;
             datagrid.Columns["cheque_amount"].HeaderText = "Amount";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";
             datagrid.Columns["fund_name"].HeaderText = "Fund Name";
             datagrid.Columns["dv_no"].HeaderText = "DV No.";
+            datagrid.Columns["dv_no"].MinimumWidth = 200;
             datagrid.Columns["payee"].HeaderText = "Payee";
+            datagrid.Columns["payee"].MinimumWidth = 200;
             datagrid.Columns["nature_of_payment"].HeaderText = "Nature of Payment";
+            datagrid.Columns["nature_of_payment"].MinimumWidth = 200;
             datagrid.Columns["status"].HeaderText = "Status";
-
-            datagrid.Columns["cheque_amount"].DefaultCellStyle.Format = "N2";
-            datagrid.Columns["cheque_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
+            datagrid.Columns["status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
+
         }
 
 
