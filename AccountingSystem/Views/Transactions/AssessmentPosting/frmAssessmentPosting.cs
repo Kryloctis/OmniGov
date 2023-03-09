@@ -383,8 +383,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            
-
             try
             {
                 var assessmentPostingModels = new List<RptAssessmentPostsModel>();
@@ -551,12 +549,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Select All Background Worker
 
-
         private void bgwAssessmentPostSelectAll_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-
                 if (chckBxAll.Checked)
                 {
                     Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
@@ -591,6 +587,6 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.Enabled = true;
         }
 
-        #endregion
+        #endregion Select All Background Worker
     }
 }
