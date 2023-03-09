@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Transactions.RCI;
 using AccountingSystem.Views.Transactions.ReceiptsIssued;
 using DocumentFormat.OpenXml.Bibliography;
 using System;
@@ -22,7 +23,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, true);
+            Helper.DatagridFullRowSelectStyle(dgReleasedAndUnreleaseCheques, false );
         }
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
@@ -75,14 +76,16 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         {
             try
             {
+                string txtSeach = txtsearch.Text;
                 int bankAccountID = Convert.ToInt32(cmbxBankAccountNo.SelectedValue);
                 int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID);
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach);
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
+
 
                 foreach (DataRow row in dtViewReleasedCheques.Rows)
                 {
@@ -94,7 +97,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string fundID = row["funds_id"].ToString();
                     string chequeNo = row["cheque_no"].ToString();
                     string chequeDate = row["cheque_date"].ToString();
-                    string amount = row["cheque_amount"].ToString();
+                    decimal amount = Convert.ToDecimal(row["cheque_amount"]);
                     string fundCode = row["fund_code"].ToString();
                     string fundName = row["fund_name"].ToString();
                     string dvNo = row["dv_no"].ToString();
@@ -122,7 +125,8 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
 
                 HelperLoadRecords.RCIReleasedAndUnreleaseDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
-                lblRecordCount.Text = releasedChequesRepo.CountRecords().ToString();
+
+                lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -140,8 +144,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 new DataColumn("funds_id", typeof(string)),
                 new DataColumn("cheque_no", typeof(string)),
                 new DataColumn("cheque_date", typeof(string)),
-                new DataColumn("cheque_amount", typeof(string)),
-                new DataColumn("bank_account_no", typeof(string)),
+                new DataColumn("cheque_amount", typeof(decimal)),
                 new DataColumn("fund_code", typeof(string)),
                 new DataColumn("fund_name", typeof(string)),
                 new DataColumn("dv_no", typeof(string)),
@@ -164,7 +167,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 if (ReleasedCheque())
                 {
                     Helper.MessageBoxSuccess("Cheque has been released.");
-                    ReleasedCheque();
+                    LoadCheques();
                 }
             }
 
@@ -199,6 +202,11 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         }
 
         private void cmbxFund_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadCheques();
+        }
+
+        private void txtsearch_TextChanged(object sender, EventArgs e)
         {
             LoadCheques();
         }

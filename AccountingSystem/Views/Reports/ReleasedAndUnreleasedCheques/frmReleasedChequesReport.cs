@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.Reporting.WinForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,127 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 {
     public partial class frmReleasedChequesReport : Form
     {
+        private readonly ReportViewer reportViewer;
+
         public frmReleasedChequesReport()
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
+
+            reportViewer = new ReportViewer();
+            reportViewer.Dock = DockStyle.Fill;
+            panel1.Controls.Add(reportViewer);
         }
+
+        private void btnRetrieve_Click(object sender, EventArgs e)
+        {
+            LoadReport(reportViewer.LocalReport);
+        }
+
+        private void LoadReport(LocalReport report)
+        {
+
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+
+                var lguDetails = Helper.LGUDetails();
+                int bankAccountId = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+                var dictBankAccount = AccFactory.BankAccountsRepository().GetViewRecordById(bankAccountId);
+
+                string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
+                var parameters = new[] {
+                    new ReportParameter("paramFund", "General Fund"),
+                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                    new ReportParameter("paramBankAccount", bankDetails),
+                };
+
+                report.ReportPath = $"{Application.StartupPath}Reports\\schedule-of-released-cheques.rdlc";
+                report.DataSources.Clear();
+
+                report.DataSources.Add(new ReportDataSource("dtSchedulesOfReleasedCheque", DataTableRCI()));
+                report.SetParameters(parameters);
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomPercent = 100;
+                reportViewer.RefreshReport();
+
+                Cursor = Cursors.Default;
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private DataTable DataTableRCI()
+        {
+            int bankAccountIDID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+
+            var dtReleasedCheques = new dsLFS.dtSchedulesOfReleasedChequeDataTable();
+            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountID(bankAccountIDID);
+
+            if (dtReleasedChequesFromDB.Rows.Count == 0)
+                return dtReleasedCheques;
+
+            foreach (DataRow item in dtReleasedChequesFromDB.Rows)
+            {
+                DataRow row = dtReleasedCheques.NewRow();
+
+                var chequeDate = item["cheque_date"].ToString();
+                string chequeNumber = item["cheque_no"].ToString();
+                string dvNumber = item["dv_no"].ToString();
+                string payee = item["payee"].ToString();
+                string natureOfPayment = item["nature_of_payment"].ToString();
+                decimal amount = Convert.ToDecimal(item["cheque_amount"]);
+                string dateReleased = string.IsNullOrEmpty(item["date_released"].ToString()) ? "" : item["date_released"].ToString();
+
+                row["cheque_date"] = chequeDate;
+                row["cheque_serial_number"] = chequeNumber;
+                row["dv_number"] = dvNumber;
+                row["cafoa_number"] = string.Empty;
+                row["payee"] = payee;
+                row["nature_of_payment"] = natureOfPayment;
+                row["amount"] = amount;
+                row["date_released"] = dateReleased;
+
+                dtReleasedCheques.Rows.Add(row);
+            }
+
+            return dtReleasedCheques;
+        }
+
+        private void frmReleasedChequesReport_Load(object sender, EventArgs e)
+        {
+            LoadBanks();
+            LoadBankAccounts();
+        }
+
+        internal void LoadBanks()
+        {
+            try
+            {
+                var bankRepository = AccFactory.BanksRepository();
+                var dtBank = bankRepository.GetRecords();
+                cmbBank.DataSource = dtBank;
+                cmbBank.ValueMember = "id";
+                cmbBank.DisplayMember = "bank_name";
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void LoadBankAccounts()
+        {
+            int bankID = Convert.ToInt32(cmbBank.SelectedValue);
+            DataTable dtBankAccounts = AccFactory.BankAccountsRepository().GetBankAccountsByBankID(bankID);
+
+            cmbBankAccounts.DataSource = dtBankAccounts;
+            cmbBankAccounts.ValueMember = "id";
+            cmbBankAccounts.DisplayMember = "account_no";
+        }
+
     }
 }

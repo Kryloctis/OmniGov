@@ -50,12 +50,12 @@
     <None Remove="Reports\pre-trial-balance.rdlc" />
     <None Remove="Reports\procurements-received-journal.rdlc" />
     <None Remove="Reports\rcd.rdlc" />
-    <None Remove="Reports\RCI\schedule-of-released-cheques.rdlc" />
     <None Remove="Reports\real-property-payment-receipt.rdlc" />
     <None Remove="Reports\real-property-tax-due-bill.rdlc" />
     <None Remove="Reports\real-property-tax-statement-of-accounts.rdlc" />
     <None Remove="Reports\real-property-taxes-due-and-payments.rdlc" />
     <None Remove="Reports\report_of_general_collection.rdlc" />
+    <None Remove="Reports\schedule-of-unreleased-cheques.rdlc" />
     <None Remove="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc" />
     <None Remove="Reports\statement-of-changes-in-net-assets-equity.rdlc" />
     <None Remove="Reports\statement-of-financial-performance.rdlc" />
@@ -119,7 +119,7 @@
     <Content Include="Reports\rcd.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\RCI\schedule-of-released-cheques.rdlc">
+    <Content Include="Reports\schedule-of-released-cheques.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\real-property-payment-receipt.rdlc">
@@ -136,6 +136,9 @@
     </Content>
     <Content Include="Reports\report_of_general_collection.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\schedule-of-unreleased-cheques.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\statement-of-appropriations-allotments-obligations-and-balances.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
