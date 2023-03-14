@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
             string periodCovered = dtpPeriodCovered.Value.ToString();
 
             var dtReleasedCheques = new dsLFS.dtSchedulesOfReleasedChequeDataTable();
-            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCovered(bankAccountID, periodCovered);
+            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(bankAccountID, periodCovered);
 
             if (dtReleasedChequesFromDB.Rows.Count == 0)
                 return dtReleasedCheques;
