@@ -1447,7 +1447,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>1.1181cm</Top>
-                <Left>0cm</Left>
                 <Height>0.6cm</Height>
                 <Width>6.85504cm</Width>
                 <Style>
@@ -1472,7 +1471,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>PREPARED:</Value>
+                        <Value>PREPARED BY:</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -1481,7 +1480,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>0.02449cm</Top>
-                <Left>0cm</Left>
                 <Height>0.6cm</Height>
                 <Width>2.91804cm</Width>
                 <ZIndex>1</ZIndex>
@@ -1517,7 +1515,6 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>1.7181cm</Top>
-                <Left>0cm</Left>
                 <Height>0.6cm</Height>
                 <Width>6.85504cm</Width>
                 <ZIndex>2</ZIndex>
@@ -1866,7 +1863,6 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>0cm</Top>
               <Left>6.23508cm</Left>
               <Height>0.6cm</Height>
               <Width>7.93454cm</Width>

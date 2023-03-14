@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             InitializeComponent();
             Helper.LoadFormIcon(this);
 
+            reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
         }
@@ -106,8 +107,14 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                     }
                 }
 
+                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Prepared By", "Consolidated Report of Accountability for Accountable Forms");
+
+                string preparedBySignatory = string.Empty;
+                string preparedBySignatoryTitle = string.Empty;
+
                 ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
                 ParseSignatory(dictTreasurer, ref treasurer, ref treasurerTitle);
+                ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
                 var parameters = new[] {
                             new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
@@ -115,8 +122,8 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                             new ReportParameter("paramTreasurer", treasurer),
-                            new ReportParameter("paramPreparedBySignatory", "Please put current user who's generating this report."),
-                            new ReportParameter("paramPreparedBySignatoryTitle", "Please put current user who's generating this report.")
+                            new ReportParameter("paramPreparedBySignatory", preparedBySignatory),
+                            new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle)
                     };
                 report.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";
                 report.DataSources.Clear();
@@ -127,7 +134,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
                 reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 140;
+                reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
 
                 Cursor = Cursors.Default;

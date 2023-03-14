@@ -35,6 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
             this.btnRetrieve = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dtpPeriodCovered = new System.Windows.Forms.DateTimePicker();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,13 +46,15 @@
             this.panel1.Location = new System.Drawing.Point(0, 29);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(991, 533);
+            this.panel1.Size = new System.Drawing.Size(1010, 533);
             this.panel1.TabIndex = 13;
             // 
             // panel2
             // 
             this.panel2.AutoSize = true;
+            this.panel2.Controls.Add(this.dtpPeriodCovered);
             this.panel2.Controls.Add(this.cmbBank);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cmbBankAccounts);
@@ -58,7 +62,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(991, 29);
+            this.panel2.Size = new System.Drawing.Size(1010, 29);
             this.panel2.TabIndex = 15;
             // 
             // cmbBank
@@ -68,13 +72,13 @@
             this.cmbBank.Location = new System.Drawing.Point(46, 3);
             this.cmbBank.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbBank.Name = "cmbBank";
-            this.cmbBank.Size = new System.Drawing.Size(316, 23);
+            this.cmbBank.Size = new System.Drawing.Size(294, 23);
             this.cmbBank.TabIndex = 24;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(368, 6);
+            this.label2.Location = new System.Drawing.Point(340, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 15);
             this.label2.TabIndex = 22;
@@ -93,14 +97,14 @@
             // 
             this.cmbBankAccounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBankAccounts.FormattingEnabled = true;
-            this.cmbBankAccounts.Location = new System.Drawing.Point(457, 3);
+            this.cmbBankAccounts.Location = new System.Drawing.Point(429, 3);
             this.cmbBankAccounts.Name = "cmbBankAccounts";
             this.cmbBankAccounts.Size = new System.Drawing.Size(243, 23);
             this.cmbBankAccounts.TabIndex = 0;
             // 
             // btnRetrieve
             // 
-            this.btnRetrieve.Location = new System.Drawing.Point(704, 3);
+            this.btnRetrieve.Location = new System.Drawing.Point(919, 3);
             this.btnRetrieve.Name = "btnRetrieve";
             this.btnRetrieve.Size = new System.Drawing.Size(86, 23);
             this.btnRetrieve.TabIndex = 2;
@@ -108,11 +112,29 @@
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(678, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 15);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Period Covered";
+            // 
+            // dtpPeriodCovered
+            // 
+            this.dtpPeriodCovered.CustomFormat = "MMMM dd, yyyy";
+            this.dtpPeriodCovered.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpPeriodCovered.Location = new System.Drawing.Point(772, 3);
+            this.dtpPeriodCovered.Name = "dtpPeriodCovered";
+            this.dtpPeriodCovered.Size = new System.Drawing.Size(141, 23);
+            this.dtpPeriodCovered.TabIndex = 23;
+            // 
             // frmReleasedChequesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 562);
+            this.ClientSize = new System.Drawing.Size(1010, 562);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "frmReleasedChequesReport";
@@ -136,5 +158,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbBankAccounts;
         private System.Windows.Forms.Button btnRetrieve;
+        private System.Windows.Forms.DateTimePicker dtpPeriodCovered;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -103,6 +103,14 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                 string notedSignatoryTitle = string.Empty;
                 ParseSignatory(dictNotedSignatory, ref notedSignatory, ref notedSignatoryTitle);
 
+                var dictPreparedBySignatory = AccFactory.SignatoriesHasReferencesRepository().GetSignatoryBy_Reference_DocumentName("Prepared By", "Daily Cash Position Report");
+
+                string preparedBySignatory = string.Empty;
+                string preparedBySignatoryTitle = string.Empty;
+
+                ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
+
+
                 string date = String.Format("{0:yyyy-MM-dd}", dtdate.Value);
                 var lguDetails = Helper.LGUDetails();
                 var parameters = new[] {
@@ -112,8 +120,8 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                             new ReportParameter("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                            new ReportParameter("paramPreparedBySignatory", "Please put current user who's generating this report."),
-                            new ReportParameter("paramPreparedBySignatoryTitle", "Please put current user who's generating this report."),
+                            new ReportParameter("paramPreparedBySignatory", preparedBySignatory),
+                            new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle),
                             new ReportParameter("paramNotedSignatory", notedSignatory),
                             new ReportParameter("paramNotedSignatoryTitle", notedSignatoryTitle)
                     };
