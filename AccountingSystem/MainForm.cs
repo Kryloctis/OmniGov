@@ -178,12 +178,10 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report List of Delinquent Accounts"))
                 listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
-            //if (!Helper.HasPermission("Report > Released Cheques"))
-            //    releasedChequesToolStripMenuItem.Enabled = false;
-            //if (!Helper.HasPermission("Report > Unreleased Cheques"))
-            //    unreleasedChequesToolStripMenuItem.Enabled = false;
-            releasedChequesToolStripMenuItem.Enabled = false;
-            unreleasedChequesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Report > Released Cheques"))
+                releasedChequesToolStripMenuItem.Enabled = false;
+            if (!Helper.HasPermission("Report > Unreleased Cheques"))
+                unreleasedChequesToolStripMenuItem.Enabled = false;
         }
 
         private void ValidateTransactionPermissions()
