@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 
         private void LoadReport(LocalReport report)
         {
-
             try
             {
                 Cursor = Cursors.WaitCursor;
@@ -49,6 +48,7 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 
                 string bankDetails = string.Format("{0} - {1}", dictBankAccount["bank_name"], dictBankAccount["account_no"]);
                 var parameters = new[] {
+                    new ReportParameter("paramPeriodCovered", dtpPeriodCovered.Value.ToString()),
                     new ReportParameter("paramFund", "General Fund"),
                     new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
                     new ReportParameter("paramBankAccount", bankDetails),
@@ -74,10 +74,11 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 
         private DataTable DataTableRCI()
         {
-            int bankAccountIDID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            int bankAccountID = Convert.ToInt32(cmbBankAccounts.SelectedValue);
+            string periodCovered = dtpPeriodCovered.Value.ToString();
 
             var dtReleasedCheques = new dsLFS.dtSchedulesOfReleasedChequeDataTable();
-            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountID(bankAccountIDID);
+            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(bankAccountID, periodCovered);
 
             if (dtReleasedChequesFromDB.Rows.Count == 0)
                 return dtReleasedCheques;

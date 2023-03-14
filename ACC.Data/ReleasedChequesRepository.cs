@@ -85,6 +85,18 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteReader(query, parameters);
         }
 
+        public DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(int bankAccountID, string periodCovered)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@bank_accouns_id", DbType.Int32, bankAccountID},
+                new object[] { "@cheque_date", DbType.DateTime, Convert.ToDateTime(periodCovered)}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE bank_accounts_id = @bank_accouns_id AND date_released IS NULL AND cheque_date <= @cheque_date";
+            return _dbGenericCommands.ExecuteReader(query, parameters);
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

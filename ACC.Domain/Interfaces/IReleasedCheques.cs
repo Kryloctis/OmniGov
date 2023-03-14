@@ -11,5 +11,6 @@ namespace ACC.Domain.Interfaces
         DataTable GetViewRecords();
         DataTable GetViewRecords(int bankAccountID, int fundsID, string txtSeach);
         DataTable GetViewRecordsByBankAccountID(int bankAccountIDID);
+        DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(int bankAccountID, string periodCovered);
     }
 }

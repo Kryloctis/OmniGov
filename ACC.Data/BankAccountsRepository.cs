@@ -267,5 +267,7 @@ namespace AccountingSystem
             var dataTable = new DataTable();
             return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
+
+
     }
 }
