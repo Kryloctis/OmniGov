@@ -25,6 +25,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         {
             LoadBarangays();
             nudYear.Value = Helper.GetCurrentDate().Year;
+            PreloadProperties();
             EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
 
@@ -35,10 +36,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 var dtBarangays = AccFactory.BarangayRepository().GetRecords();
                 HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangays, "name", null);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         #region Load AssessmentPosts
@@ -104,22 +102,31 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             txtBarangay.Text = cmbxBarangays.Text;
         }
 
+        //Load Datagrid View with Columns but w/o records yet.
+        private void PreloadProperties() 
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(AssessmentPostsDataColumns());
+            HelperLoadRecords.RealPropertiesSearchDatagridView(dataTable, dgProperties);
+        }
+        
+        //Actual Loading of Datagrid View's Records.
         private void LoadProperties()
         {
             try
             {
                 if (!bgwLoadAsessmentPosts.IsBusy)
+                {
                     bgwLoadAsessmentPosts.RunWorkerAsync();
+                    this.UseWaitCursor = true;
+                    this.Enabled = false;
+                    progressBarLoadRecords.Visible = true;
+                }
 
-                lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
                 EnableDisableToolStripButton(dgProperties, btnPostSelected);
                 Miscellaneous();
-                this.Enabled = false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.StackTrace);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
         }
 
         private void GetParameters(ref int year, ref string barangayName, ref string searchText)
@@ -254,17 +261,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                     assessmentPostsDataTable.Rows.Add(newRow);
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                e.Cancel = true;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); e.Cancel = true; }
         }
 
         private void bgwLoadAsessmentPosts_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            progressBarLoadRecords.Visible = true;
             lblRecordCount.Text = e.UserState.ToString();
             progressBarLoadRecords.Value = e.ProgressPercentage;
         }
@@ -272,11 +273,17 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void bgwLoadAsessmentPosts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (progressBarLoadRecords.Value == 100)
+            {
                 progressBarLoadRecords.Visible = false;
+                progressBarLoadRecords.Value = 0;
+            }
 
+            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
             HelperLoadRecords.RealPropertiesSearchDatagridView(assessmentPostsDataTable, dgProperties);
-            Cursor = Cursors.Default;
+
+            this.UseWaitCursor = false;
             this.Enabled = true;
+            Cursor = Cursors.Default;
         }
 
         #endregion Load AssessmentPosts
@@ -292,7 +299,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void checkAll_MouseClick(object sender, MouseEventArgs e)
         {
             if (!bgwAssessmentPostSelectAll.IsBusy)
+            {
                 bgwAssessmentPostSelectAll.RunWorkerAsync();
+                Cursor.Current = Cursors.WaitCursor;
+                this.Enabled = false;
+            }
         }
 
         private void dgProperties_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -303,8 +314,8 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         private void dgProperties_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
-            //EnableDisableToolStripButton(dgProperties, btnPostSelected);
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
+            EnableDisableToolStripButton(dgProperties, btnPostSelected);
         }
 
         private dynamic GetDatagridViewValue(DataGridView dataGridView, int rowIndex, string columnName)
@@ -364,9 +375,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         private void btnPostSelected_Click(object sender, EventArgs e)
         {
             if (!backgroundWorker1.IsBusy)
-            {
                 backgroundWorker1.RunWorkerAsync();
-            }
         }
 
         #region Posting
@@ -549,41 +558,82 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
         #region Select All Background Worker
 
+        private int GetTotalUnselectedRows()
+        {
+            int totalUnselectedRows = 0;
+
+            foreach (DataGridViewRow row in dgProperties.Rows)
+            {
+                if (!Convert.ToBoolean(row.Cells["is_checked"].Value))
+                    totalUnselectedRows++;
+            }
+
+            return totalUnselectedRows;
+        }
+
+        private int GetTotalSelectedRows()
+        {
+            int totalUnselectedRows = 0;
+
+            foreach (DataGridViewRow row in dgProperties.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells["is_checked"].Value))
+                    totalUnselectedRows++;
+            }
+
+            return totalUnselectedRows;
+        }
+
         private void bgwAssessmentPostSelectAll_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
                 if (chckBxAll.Checked)
                 {
-                    Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", true);
+                    int totalUnselectedRows = GetTotalUnselectedRows();
+                    int progressCount = 0;
+
+                    foreach (DataGridViewRow row in dgProperties.Rows)
+                    {
+                        if (!Convert.ToBoolean(row.Cells["is_checked"].Value))
+                        {
+                            Invoke((MethodInvoker)delegate { row.Cells["is_checked"].Value = true; });
+                            progressCount++;
+                            bgwAssessmentPostSelectAll.ReportProgress((progressCount * 100) / totalUnselectedRows);
+                        }
+                    }
                 }
                 else
                 {
-                    Helper.CheckUncheckCheckBoxRows(dgProperties, "is_checked", false);
-                }
+                    int totalSelectedRows = GetTotalSelectedRows();
+                    int progressCount = 0;
 
-                bgwAssessmentPostSelectAll.ReportProgress(100);
+                    foreach (DataGridViewRow row in dgProperties.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells["is_checked"].Value))
+                        {
+                            Invoke((MethodInvoker)delegate { row.Cells["is_checked"].Value = false; });
+                            progressCount++;
+                            bgwAssessmentPostSelectAll.ReportProgress((progressCount * 100) / totalSelectedRows);
+                        }
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-                e.Cancel = true;
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void bgwAssessmentPostSelectAll_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
             progressBarLoadRecords.Visible = true;
-            //lblRecordCount.Text = e.UserState.ToString();
             progressBarLoadRecords.Value = e.ProgressPercentage;
         }
 
         private void bgwAssessmentPostSelectAll_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (progressBarLoadRecords.Value == 100)
-                progressBarLoadRecords.Visible = false;
-            Cursor = Cursors.Default;
+            progressBarLoadRecords.Visible = false;
+            progressBarLoadRecords.Value = 0;
+            Helper.CheckUncheckCheckBoxHeader(dgProperties, "is_checked", chckBxAll);
+            Cursor.Current = Cursors.Default;
             this.Enabled = true;
         }
 
