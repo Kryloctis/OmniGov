@@ -74,11 +74,11 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.panel2.Controls.Add(this.dgProperties);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 58);
+            this.panel2.Location = new System.Drawing.Point(0, 50);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.panel2.Size = new System.Drawing.Size(1039, 425);
+            this.panel2.Size = new System.Drawing.Size(1039, 433);
             this.panel2.TabIndex = 10;
             // 
             // chckBxAll
@@ -98,7 +98,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.dgProperties.Location = new System.Drawing.Point(4, 35);
             this.dgProperties.Name = "dgProperties";
             this.dgProperties.RowTemplate.Height = 25;
-            this.dgProperties.Size = new System.Drawing.Size(1031, 386);
+            this.dgProperties.Size = new System.Drawing.Size(1031, 394);
             this.dgProperties.TabIndex = 15;
             this.dgProperties.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProperties_CellValueChanged);
             this.dgProperties.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgProperties_ColumnAdded);
@@ -187,18 +187,18 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1039, 58);
+            this.toolStrip1.Size = new System.Drawing.Size(1039, 50);
             this.toolStrip1.TabIndex = 14;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnPostSelected
             // 
             this.btnPostSelected.Enabled = false;
-            this.btnPostSelected.Image = global::AccountingSystem.Properties.Resources.task_list_pin_28px;
+            this.btnPostSelected.Image = global::AccountingSystem.Properties.Resources.task_list_pin_20px;
             this.btnPostSelected.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPostSelected.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPostSelected.Name = "btnPostSelected";
-            this.btnPostSelected.Size = new System.Drawing.Size(34, 47);
+            this.btnPostSelected.Size = new System.Drawing.Size(34, 39);
             this.btnPostSelected.Text = "Post";
             this.btnPostSelected.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPostSelected.Click += new System.EventHandler(this.btnPostSelected_Click);
