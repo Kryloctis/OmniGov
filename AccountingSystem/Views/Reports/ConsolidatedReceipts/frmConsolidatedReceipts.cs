@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 report.Refresh();
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
 

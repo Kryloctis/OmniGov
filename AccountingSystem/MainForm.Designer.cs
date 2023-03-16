@@ -1304,14 +1304,14 @@
             // 
             this.releasedChequesToolStripMenuItem.Name = "releasedChequesToolStripMenuItem";
             this.releasedChequesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
-            this.releasedChequesToolStripMenuItem.Text = "Released Cheques";
+            this.releasedChequesToolStripMenuItem.Text = "Schedule of Released Cheques";
             this.releasedChequesToolStripMenuItem.Click += new System.EventHandler(this.releasedChequesToolStripMenuItem_Click);
             // 
             // unreleasedChequesToolStripMenuItem
             // 
             this.unreleasedChequesToolStripMenuItem.Name = "unreleasedChequesToolStripMenuItem";
             this.unreleasedChequesToolStripMenuItem.Size = new System.Drawing.Size(400, 22);
-            this.unreleasedChequesToolStripMenuItem.Text = "Unreleased Cheques";
+            this.unreleasedChequesToolStripMenuItem.Text = "Schedule of Unreleased Cheques";
             this.unreleasedChequesToolStripMenuItem.Click += new System.EventHandler(this.unreleasedChequesToolStripMenuItem_Click);
             // 
             // bankCashbookToolStripMenuItem
