@@ -75,7 +75,7 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
             string periodCovered = dtpPeriodCovered.Value.ToString();
 
             var dtReleasedCheques = new dsLFS.dtSchedulesOfReleasedChequeDataTable();
-            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(bankAccountID, periodCovered);
+            DataTable dtReleasedChequesFromDB = AccFactory.ReleasedChequesRepository().GetViewRecordsByBankAccountIDAndPeriodCoveredReleased(bankAccountID, periodCovered);
 
             if (dtReleasedChequesFromDB.Rows.Count == 0)
                 return dtReleasedCheques;
@@ -138,6 +138,12 @@ namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
             cmbBankAccounts.ValueMember = "id";
             cmbBankAccounts.DisplayMember = "account_no";
         }
+
+        private void cmbBank_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+        }
+
 
     }
 }
