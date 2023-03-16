@@ -141,7 +141,7 @@
             this.Name = "frmReleasedChequesReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reports > Schedule Released Cheques";
+            this.Text = "Reports > Schedule of Released Cheques";
             this.Load += new System.EventHandler(this.frmReleasedChequesReport_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
