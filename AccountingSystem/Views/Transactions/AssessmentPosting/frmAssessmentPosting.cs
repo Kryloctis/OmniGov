@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Transactions.AssessmentPosting
 {
@@ -103,13 +104,13 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
         //Load Datagrid View with Columns but w/o records yet.
-        private void PreloadProperties() 
+        private void PreloadProperties()
         {
             var dataTable = new DataTable();
             dataTable.Columns.AddRange(AssessmentPostsDataColumns());
             HelperLoadRecords.RealPropertiesSearchDatagridView(dataTable, dgProperties);
         }
-        
+
         //Actual Loading of Datagrid View's Records.
         private void LoadProperties()
         {
@@ -126,7 +127,7 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 EnableDisableToolStripButton(dgProperties, btnPostSelected);
                 Miscellaneous();
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.StackTrace); }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void GetParameters(ref int year, ref string barangayName, ref string searchText)
@@ -278,8 +279,9 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
                 progressBarLoadRecords.Value = 0;
             }
 
-            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
             HelperLoadRecords.RealPropertiesSearchDatagridView(assessmentPostsDataTable, dgProperties);
+            lblRecordCount.Text = Helper.GetDatagridViewRecordCount(dgProperties).ToString();
+            SetCheckListReadOnlyByStatus(dgProperties);
 
             this.UseWaitCursor = false;
             this.Enabled = true;
@@ -595,7 +597,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                     foreach (DataGridViewRow row in dgProperties.Rows)
                     {
-                        if (!Convert.ToBoolean(row.Cells["is_checked"].Value))
+                        bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                        string status = row.Cells["posting_status"].Value.ToString();
+
+                        if (!isChecked && status.ToLower() != "posted")
                         {
                             Invoke((MethodInvoker)delegate { row.Cells["is_checked"].Value = true; });
                             progressCount++;
@@ -610,7 +615,10 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
 
                     foreach (DataGridViewRow row in dgProperties.Rows)
                     {
-                        if (Convert.ToBoolean(row.Cells["is_checked"].Value))
+                        bool isChecked = Convert.ToBoolean(row.Cells["is_checked"].Value);
+                        string status = row.Cells["posting_status"].Value.ToString();
+
+                        if (isChecked && status.ToLower() != "posted")
                         {
                             Invoke((MethodInvoker)delegate { row.Cells["is_checked"].Value = false; });
                             progressCount++;
@@ -638,5 +646,30 @@ namespace AccountingSystem.Views.Transactions.AssessmentPosting
         }
 
         #endregion Select All Background Worker
+
+        private void SetCheckListReadOnlyByStatus(DataGridView dataGridView)
+        {
+            void EnableDisableCheckBox(string status, DataGridViewRow row)
+            {
+                if (dataGridView.Rows.Count < 1)
+                    return;
+
+                switch (status.ToLower())
+                {
+                    case "posted":
+                        row.Cells["is_checked"].ReadOnly = true;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                string status = row.Cells["posting_status"].Value.ToString();
+                EnableDisableCheckBox(status, row);
+            }
+        }
     }
 }
