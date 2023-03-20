@@ -28,10 +28,17 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
         {
+            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
+
             LoadBanks();
-            LoadBankAccounts();
             LoadFunds();
-            LoadCheques();
+            LoadChecks();
+
+            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
         }
 
         internal void LoadBanks()
@@ -43,6 +50,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 cmbxBank.DataSource = dtBank;
                 cmbxBank.ValueMember = "id";
                 cmbxBank.DisplayMember = "bank_name";
+                LoadBankAccounts();
             }
             catch (Exception ex)
             {
@@ -72,7 +80,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             LoadBankAccounts();
         }
 
-        internal void LoadCheques()
+        internal void LoadChecks()
         {
             try
             {
@@ -127,7 +135,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 }
 
 
-                HelperLoadRecords.RCIReleasedAndUnreleaseDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
+                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
 
                 lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
             }
@@ -171,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 if (ReleasedCheque())
                 {
                     Helper.MessageBoxSuccess("Cheque has been released.");
-                    LoadCheques();
+                    LoadChecks();
                 }
             }
 
@@ -200,19 +208,28 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             return false;
         }
 
-        private void cmbxBankAccountNo_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadCheques();
-        }
 
-        private void cmbxFund_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadCheques();
-        }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            LoadCheques();
+            LoadChecks();
+        }
+
+
+        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+            LoadChecks();
+        }
+
+        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
         }
     }
 }

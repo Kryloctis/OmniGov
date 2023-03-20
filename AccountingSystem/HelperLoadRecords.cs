@@ -1427,7 +1427,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-        internal static void RCIReleasedAndUnreleaseDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void RCIReleasedAndUnreleasedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
 
@@ -1436,12 +1436,12 @@ namespace AccountingSystem
             datagrid.Columns["bank_accounts_id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
 
-            datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
+            datagrid.Columns["cheque_no"].HeaderText = "Check No.";
             datagrid.Columns["cheque_no"].MinimumWidth = 150;
             datagrid.Columns["cheque_amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["cheque_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["cheque_amount"].MinimumWidth = 130;
-            datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["cheque_date"].HeaderText = "Check date";
             datagrid.Columns["cheque_date"].MinimumWidth = 200;
             datagrid.Columns["cheque_amount"].HeaderText = "Amount";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";

@@ -95,7 +95,6 @@
             this.cmbxFund.Name = "cmbxFund";
             this.cmbxFund.Size = new System.Drawing.Size(156, 23);
             this.cmbxFund.TabIndex = 17;
-            this.cmbxFund.SelectionChangeCommitted += new System.EventHandler(this.cmbxFund_SelectionChangeCommitted);
             // 
             // cmbxBank
             // 
@@ -108,7 +107,6 @@
             this.cmbxBank.Name = "cmbxBank";
             this.cmbxBank.Size = new System.Drawing.Size(219, 23);
             this.cmbxBank.TabIndex = 17;
-            this.cmbxBank.SelectionChangeCommitted += new System.EventHandler(this.cmbxBank_SelectionChangeCommitted);
             // 
             // cmbxBankAccountNo
             // 
@@ -121,7 +119,6 @@
             this.cmbxBankAccountNo.Name = "cmbxBankAccountNo";
             this.cmbxBankAccountNo.Size = new System.Drawing.Size(166, 23);
             this.cmbxBankAccountNo.TabIndex = 17;
-            this.cmbxBankAccountNo.SelectionChangeCommitted += new System.EventHandler(this.cmbxBankAccountNo_SelectionChangeCommitted);
             // 
             // panel1
             // 
@@ -176,7 +173,7 @@
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(796, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
             // lblCreatedAt
@@ -207,7 +204,7 @@
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transaction > List of Schedule of Released and Unrelease Cheques";
+            this.Text = "Transaction > List of Schedule of Released and Unreleased Checks";
             this.Load += new System.EventHandler(this.frmReleasedAndUnreleaseChecks_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
