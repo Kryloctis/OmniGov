@@ -798,6 +798,8 @@ namespace AccountingSystem
             datagrid.Columns.Add("issued_by", "Issued By");
             datagrid.Columns.Add(col);
             datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.Columns.Add("returned_date", "Returned Date");
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
