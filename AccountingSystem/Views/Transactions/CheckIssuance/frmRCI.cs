@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -66,6 +67,15 @@ namespace AccountingSystem.Views.Transactions.RCI
                         _ = rciRepository.Delete(rciModelList);
                         LoadRecords();
                     }
+                }
+            }
+            catch (MySqlException Mysqlex)
+            {
+                switch (Mysqlex.Number)
+                {
+                    case 1451:
+                        Helper.MessageBoxError($"Cannot delete selected records. It is referenced by atleast one record.");
+                        break;
                 }
             }
             catch (Exception ex)

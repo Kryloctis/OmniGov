@@ -40,9 +40,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -154,9 +152,7 @@
             this.toolStripStatusLabel1,
             this.lblRecordCount,
             this.toolStripStatusLabel4,
-            this.toolStripStatusLabel2,
             this.lblCreatedAt,
-            this.toolStripStatusLabel3,
             this.lblUpdatedAt});
             this.statusStrip.Location = new System.Drawing.Point(0, 406);
             this.statusStrip.Name = "statusStrip";
@@ -183,22 +179,10 @@
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(664, 17);
             this.toolStripStatusLabel4.Spring = true;
             // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(64, 17);
-            this.toolStripStatusLabel2.Text = "Created at:";
-            // 
             // lblCreatedAt
             // 
             this.lblCreatedAt.Name = "lblCreatedAt";
             this.lblCreatedAt.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(68, 17);
-            this.toolStripStatusLabel3.Text = "Updated at:";
             // 
             // lblUpdatedAt
             // 
@@ -218,10 +202,12 @@
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.toolStrip);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(890, 467);
             this.Name = "frmReleasedAndUnreleaseChecks";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transaction > List of Released and Unrelease Cheques";
+            this.Text = "Transaction > List of Schedule of Released and Unrelease Cheques";
             this.Load += new System.EventHandler(this.frmReleasedAndUnreleaseChecks_Load);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
@@ -249,9 +235,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
     }
 }

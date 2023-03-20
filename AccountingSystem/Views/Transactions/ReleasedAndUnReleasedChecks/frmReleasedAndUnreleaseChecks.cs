@@ -103,7 +103,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string dvNo = row["dv_no"].ToString();
                     string payee = row["payee"].ToString();
                     string natureOfPayment = row["nature_of_payment"].ToString();
-                    string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unrelease" : "Released";
+                    string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
+                    releasedDate = releasedDate;
+                    string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
 
 
                     newRow["rci_id"] = id;
@@ -118,6 +120,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     newRow["dv_no"] = dvNo;
                     newRow["payee"] = payee;
                     newRow["nature_of_payment"] = natureOfPayment;
+                    newRow["released_date"] = releasedDate;
                     newRow["status"] = status;
 
                     releasedAndUnreleasedDT.Rows.Add(newRow);
@@ -150,6 +153,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 new DataColumn("dv_no", typeof(string)),
                 new DataColumn("payee", typeof(string)),
                 new DataColumn("nature_of_payment", typeof(string)),
+                new DataColumn("released_date", typeof(string)),
                 new DataColumn("status", typeof(string)),
 
         };

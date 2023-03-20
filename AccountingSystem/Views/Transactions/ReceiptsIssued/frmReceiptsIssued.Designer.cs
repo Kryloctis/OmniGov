@@ -246,7 +246,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // tsJOCount
             // 
             this.tsJOCount.Name = "tsJOCount";
-            this.tsJOCount.Size = new System.Drawing.Size(819, 17);
+            this.tsJOCount.Size = new System.Drawing.Size(850, 17);
             this.tsJOCount.Spring = true;
             // 
             // toolStripStatusLabel6
