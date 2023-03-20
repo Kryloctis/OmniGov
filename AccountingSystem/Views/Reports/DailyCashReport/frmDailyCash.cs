@@ -120,7 +120,7 @@ namespace AccountingSystem.Views.Reports.DailyCashReport
                             new ReportParameter("paramLGUProvince", "BUUG, ZAMBONGA SIBUGAY"),
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                            new ReportParameter("paramPreparedBySignatory", preparedBySignatory),
+                            new ReportParameter("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
                             new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle),
                             new ReportParameter("paramNotedSignatory", notedSignatory),
                             new ReportParameter("paramNotedSignatoryTitle", notedSignatoryTitle)

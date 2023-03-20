@@ -61,7 +61,7 @@ namespace AccountingSystem.Views.Reports.Cashbook
                 {
                     DataRow row = dtCashBook.NewRow();
                     row["date"] = item["date"];
-                    row["particulars"] = String.Format("Deposit - {0} - {1}", item["bank_name"], item["account_no"]);
+                    row["particulars"] = string.Format("Deposit - {0} - {1}", item["bank_name"], item["account_no"]);
                     row["reference"] = item["reference"];
                     row["debit"] = item["amount"];
                     row["credit"] = 0;
@@ -73,8 +73,8 @@ namespace AccountingSystem.Views.Reports.Cashbook
                 {
                     DataRow row = dtCashBook.NewRow();
                     row["date"] = item["cheque_date"];
-                    row["particulars"] = String.Format("Check Issued - {0} - {1}", item["payee"], item["nature_of_payment"]);
-                    row["reference"] = String.Format("{0} - {1}", item["cheque_no"], item["dv_no"]);
+                    row["particulars"] = string.Format("Check Issued - {0} - {1}", item["payee"], item["nature_of_payment"]);
+                    row["reference"] = string.Format("{0} - {1}", item["cheque_no"], item["dv_no"]);
                     row["credit"] = item["amount"];
                     row["debit"] = 0;
                     row["balance"] = balance;
@@ -131,8 +131,8 @@ namespace AccountingSystem.Views.Reports.Cashbook
 
             LoadReport(reportViewer.LocalReport);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-            reportViewer.ZoomMode = ZoomMode.Percent;
-            reportViewer.ZoomPercent = 100;
+            reportViewer.ZoomMode = ZoomMode.PageWidth;
+            //reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
         }
 

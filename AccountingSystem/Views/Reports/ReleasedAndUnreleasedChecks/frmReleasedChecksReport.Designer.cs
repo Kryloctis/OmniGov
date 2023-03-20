@@ -1,6 +1,6 @@
 ﻿namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 {
-    partial class frmReleasedChequesReport
+    partial class frmReleasedChecksReport
     {
         /// <summary>
         /// Required designer variable.
@@ -131,14 +131,15 @@
             this.btnRetrieve.UseVisualStyleBackColor = true;
             this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
-            // frmReleasedChequesReport
+            // frmReleasedChecksReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 562);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Name = "frmReleasedChequesReport";
+            this.MinimumSize = new System.Drawing.Size(1026, 601);
+            this.Name = "frmReleasedChecksReport";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Schedule of Released Cheques";

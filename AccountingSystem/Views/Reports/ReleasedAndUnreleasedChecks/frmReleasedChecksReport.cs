@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Reports.ReleasedAndUnreleasedCheques
 {
-    public partial class frmReleasedChequesReport : Form
+    public partial class frmReleasedChecksReport : Form
     {
         private readonly ReportViewer reportViewer;
 
-        public frmReleasedChequesReport()
+        public frmReleasedChecksReport()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);

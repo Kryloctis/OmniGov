@@ -35,17 +35,17 @@ namespace AccountingSystem.Views.Reports.Cashbook
             this.btnRetrieve = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbBankAccounts = new System.Windows.Forms.ComboBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(8, 35);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 37);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 422);
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1051, 525);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -99,23 +99,32 @@ namespace AccountingSystem.Views.Reports.Cashbook
             this.cmbBankAccounts.Size = new System.Drawing.Size(245, 23);
             this.cmbBankAccounts.TabIndex = 4;
             // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1051, 37);
+            this.panel2.TabIndex = 8;
+            // 
             // frmCashbook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 468);
+            this.ClientSize = new System.Drawing.Size(1051, 562);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRetrieve);
             this.Controls.Add(this.cmbBankAccounts);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbBank);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(1067, 601);
             this.Name = "frmCashbook";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Check Cashbook";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCashbook_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,5 +139,6 @@ namespace AccountingSystem.Views.Reports.Cashbook
         private System.Windows.Forms.Button btnRetrieve;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbBankAccounts;
+        private System.Windows.Forms.Panel panel2;
     }
 }
