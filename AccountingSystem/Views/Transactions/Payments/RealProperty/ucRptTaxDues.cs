@@ -191,6 +191,11 @@ namespace AccountingSystem.Views.Transactions.Payments.RealProperty
                     int year = Convert.ToInt32(row.Cells["year"].Value);
                     bool isSelected = Convert.ToBoolean(row.Cells["is_selected"].Value);
                     string rowcompleteArpNo = row.Cells["complete_arp_no"].Value.ToString();
+                    string status = row.Cells["status"].Value.ToString();
+
+                    if (status.ToLower() == "paid")
+                        continue;
+
                     if (rowcompleteArpNo == completeArpNo)
                     {
                         if (isSelected)
