@@ -40,13 +40,14 @@ namespace AccountingSystem.Views.Transactions.JEV
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
 
             uc.SumDebitCredit();
-            PermissionVerification();
+            VerifyPermissions();
         }
 
-        private void PermissionVerification()
+        private void VerifyPermissions()
         {
             try
             {
+                //If user has permission of editing approved JEV
                 void HasPermissionToEditApprovedJEV()
                 {
                     if (uc.isEdit)
@@ -61,6 +62,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
                 }
 
+                //If user has permission of JEV approval
                 if (!Helper.HasPermission("Transaction > JEV Approval"))
                 {
                     btnApprove.Visible = false;
@@ -68,12 +70,12 @@ namespace AccountingSystem.Views.Transactions.JEV
                     btnCancelJEV.Visible = false;
                     toolStripSeparator2.Visible = false;
                 }
-                else
-                    lblShowMessage.Enabled = true;
 
+                //If user has permission to view JEV report
                 if (!Helper.HasPermission("Report > JEVs"))
                     btnPrint.Enabled = false;
 
+                //Verify logged in user have JEV permission
                 if (!Helper.HasPermission("Transaction > JEV"))
                 {
                     btnSave.Enabled = false;
@@ -81,19 +83,21 @@ namespace AccountingSystem.Views.Transactions.JEV
                     uc.SetJevReadOnly(true);
                 }
 
-                if (Helper.UserId != createdById)
+                //Verify logged in user if user is the same who create the JEV for edit purposes only
+                if (Helper.UserId != createdById && uc.isEdit)
                 {
                     btnSave.Enabled = false;
                     btnDelete.Enabled = false;
                     uc.SetJevReadOnly(true);
                 }
 
-                if (createdById != Helper.UserId)
+                //Verify logged in user if able to access dissaproval message
+                if (createdById != Helper.UserId && !Helper.HasPermission("Transaction > JEV Approval"))
                     lblShowMessage.Enabled = false;
 
                 HasPermissionToEditApprovedJEV();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -559,7 +563,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     int jevId = uc.jevId;
                     Helper.MessageBoxSuccess(message);
                     GetJevStatus(jevId);
-                    PermissionVerification();
+                    VerifyPermissions();
                     _frmJEVList.LoadJEVList();
                     _ucJEVDashboard.LoadJEVCounter();
                     Helper.DatagridViewRecordFinder(_frmJEVList.dgJEV, "full_jev_no", fullJevNo);
