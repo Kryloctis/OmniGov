@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnCancelJEV = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
-            this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -49,13 +48,17 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -69,18 +72,18 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.btnPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1106, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(1089, 50);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Margin = new System.Windows.Forms.Padding(15, 1, 0, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 47);
+            this.btnSave.Size = new System.Drawing.Size(35, 39);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -88,11 +91,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -100,16 +103,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
             // 
             // btnApprove
             // 
             this.btnApprove.Enabled = false;
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_approve_28px;
+            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_color_green_ok_2_20px;
             this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(56, 47);
+            this.btnApprove.Size = new System.Drawing.Size(56, 39);
             this.btnApprove.Text = "&Approve";
             this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnApprove.ToolTipText = "Approve";
@@ -118,11 +121,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnDisapprove
             // 
             this.btnDisapprove.Enabled = false;
-            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_disapprove_28px;
+            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_color_red_cancel_2_20px;
             this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisapprove.Name = "btnDisapprove";
-            this.btnDisapprove.Size = new System.Drawing.Size(70, 47);
+            this.btnDisapprove.Size = new System.Drawing.Size(70, 39);
             this.btnDisapprove.Text = "&Disapprove";
             this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
@@ -130,11 +133,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnCancelJEV
             // 
             this.btnCancelJEV.Enabled = false;
-            this.btnCancelJEV.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_filled_forbidden_28px;
+            this.btnCancelJEV.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_forbidden_20px;
             this.btnCancelJEV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelJEV.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelJEV.Name = "btnCancelJEV";
-            this.btnCancelJEV.Size = new System.Drawing.Size(67, 47);
+            this.btnCancelJEV.Size = new System.Drawing.Size(67, 39);
             this.btnCancelJEV.Text = "Cancel JEV";
             this.btnCancelJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCancelJEV.Click += new System.EventHandler(this.btnCancelJEV_Click);
@@ -142,27 +145,19 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
             // 
             // btnPrint
             // 
             this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer;
+            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer_filled_20px;
             this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(36, 47);
+            this.btnPrint.Size = new System.Drawing.Size(36, 39);
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // ucjev1
-            // 
-            this.ucjev1.AutoSize = true;
-            this.ucjev1.Location = new System.Drawing.Point(14, 75);
-            this.ucjev1.Name = "ucjev1";
-            this.ucjev1.Size = new System.Drawing.Size(1092, 551);
-            this.ucjev1.TabIndex = 11;
             // 
             // statusStrip1
             // 
@@ -176,7 +171,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1106, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1089, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 14;
             this.statusStrip1.Text = "statusStrip1";
@@ -184,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1031, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1014, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
@@ -233,7 +228,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblCreatedBy});
             this.statusStrip2.Location = new System.Drawing.Point(0, 632);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1106, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(1089, 22);
             this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 15;
             this.statusStrip2.Text = "statusStrip2";
@@ -241,7 +236,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(997, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(980, 17);
             this.toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
@@ -257,15 +252,34 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.lblCreatedBy.Size = new System.Drawing.Size(22, 17);
             this.lblCreatedBy.Text = "---";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ucjev1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 72);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1089, 560);
+            this.panel1.TabIndex = 16;
+            // 
+            // ucjev1
+            // 
+            this.ucjev1.AutoSize = true;
+            this.ucjev1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucjev1.Location = new System.Drawing.Point(4, 4);
+            this.ucjev1.Name = "ucjev1";
+            this.ucjev1.Size = new System.Drawing.Size(1081, 552);
+            this.ucjev1.TabIndex = 12;
+            // 
             // frmJEV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1106, 654);
+            this.ClientSize = new System.Drawing.Size(1089, 654);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.ucjev1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -280,6 +294,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,7 +310,6 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal System.Windows.Forms.ToolStripButton btnDisapprove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        internal ucJEV ucjev1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         internal System.Windows.Forms.ToolStripStatusLabel lblJevStatus;
@@ -306,5 +321,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         private System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
         internal System.Windows.Forms.ToolStripStatusLabel lblIsEdited;
+        private System.Windows.Forms.Panel panel1;
+        internal ucJEV ucjev1;
     }
 }
