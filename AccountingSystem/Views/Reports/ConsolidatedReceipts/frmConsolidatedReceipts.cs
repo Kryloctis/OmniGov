@@ -114,6 +114,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
 
                 ParseSignatory(dictCertifiedCorrect, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
                 ParseSignatory(dictTreasurer, ref treasurer, ref treasurerTitle);
+
                 ParseSignatory(dictPreparedBySignatory, ref preparedBySignatory, ref preparedBySignatoryTitle);
 
                 var parameters = new[] {
@@ -122,9 +123,10 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                             new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
                             new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
                             new ReportParameter("paramTreasurer", treasurer),
-                            new ReportParameter("paramPreparedBySignatory", preparedBySignatory),
+                            new ReportParameter("paramPreparedBySignatory", Helper.LoggedInUserData()["user_full_name"]),
                             new ReportParameter("paramPreparedBySignatoryTitle", preparedBySignatoryTitle)
                     };
+
                 report.ReportPath = $"{Application.StartupPath}Reports\\consolidated-receipts.rdlc";
                 report.DataSources.Clear();
                 report.DataSources.Add(new ReportDataSource("dtConsolidatedReceipts", DataTableConsilatedReceipts(date)));
@@ -133,7 +135,7 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
                 report.Refresh();
 
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
 

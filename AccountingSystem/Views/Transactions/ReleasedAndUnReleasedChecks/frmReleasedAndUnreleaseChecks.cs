@@ -28,10 +28,17 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
 
         private void frmReleasedAndUnreleaseChecks_Load(object sender, EventArgs e)
         {
+            cmbxBank.SelectedValueChanged -= new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged -= new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged -= new EventHandler(cmbxFund_SelectedValueChanged);
+
             LoadBanks();
-            LoadBankAccounts();
             LoadFunds();
-            LoadCheques();
+            LoadChecks();
+
+            cmbxBank.SelectedValueChanged += new EventHandler(cmbxBank_SelectedValueChanged);
+            cmbxBankAccountNo.SelectedValueChanged += new EventHandler(cmbxBankAccountNo_SelectedValueChanged);
+            cmbxFund.SelectedValueChanged += new EventHandler(cmbxFund_SelectedValueChanged);
         }
 
         internal void LoadBanks()
@@ -43,6 +50,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 cmbxBank.DataSource = dtBank;
                 cmbxBank.ValueMember = "id";
                 cmbxBank.DisplayMember = "bank_name";
+                LoadBankAccounts();
             }
             catch (Exception ex)
             {
@@ -72,7 +80,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             LoadBankAccounts();
         }
 
-        internal void LoadCheques()
+        internal void LoadChecks()
         {
             try
             {
@@ -103,7 +111,9 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string dvNo = row["dv_no"].ToString();
                     string payee = row["payee"].ToString();
                     string natureOfPayment = row["nature_of_payment"].ToString();
-                    string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unrelease" : "Released";
+                    string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
+                    releasedDate = releasedDate;
+                    string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
 
 
                     newRow["rci_id"] = id;
@@ -118,13 +128,14 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     newRow["dv_no"] = dvNo;
                     newRow["payee"] = payee;
                     newRow["nature_of_payment"] = natureOfPayment;
+                    newRow["released_date"] = releasedDate;
                     newRow["status"] = status;
 
                     releasedAndUnreleasedDT.Rows.Add(newRow);
                 }
 
 
-                HelperLoadRecords.RCIReleasedAndUnreleaseDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
+                HelperLoadRecords.RCIReleasedAndUnreleasedDatagridView(releasedAndUnreleasedDT, dgReleasedAndUnreleaseCheques);
 
                 lblRecordCount.Text = dtViewReleasedCheques.Rows.Count.ToString();
             }
@@ -150,6 +161,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 new DataColumn("dv_no", typeof(string)),
                 new DataColumn("payee", typeof(string)),
                 new DataColumn("nature_of_payment", typeof(string)),
+                new DataColumn("released_date", typeof(string)),
                 new DataColumn("status", typeof(string)),
 
         };
@@ -167,7 +179,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 if (ReleasedCheque())
                 {
                     Helper.MessageBoxSuccess("Cheque has been released.");
-                    LoadCheques();
+                    LoadChecks();
                 }
             }
 
@@ -196,19 +208,28 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
             return false;
         }
 
-        private void cmbxBankAccountNo_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadCheques();
-        }
 
-        private void cmbxFund_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadCheques();
-        }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            LoadCheques();
+            LoadChecks();
+        }
+
+
+        private void cmbxBank_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadBankAccounts();
+            LoadChecks();
+        }
+
+        private void cmbxBankAccountNo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
         }
     }
 }

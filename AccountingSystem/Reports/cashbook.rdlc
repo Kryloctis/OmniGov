@@ -60,24 +60,24 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.95in</Width>
+                  <Width>4.85246cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.54583in</Width>
+                  <Width>3.82586cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.194in</Width>
+                  <Width>2.93222cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.106in</Width>
+                  <Width>2.7087cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.17084in</Width>
+                  <Width>2.87339cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.30278in</Height>
+                  <Height>0.845cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -90,7 +90,7 @@
                                 <TextRun>
                                   <Value>PARTICULARS</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -133,7 +133,7 @@
                                 <TextRun>
                                   <Value>REFERENCE</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -176,7 +176,7 @@
                                 <TextRun>
                                   <Value>CASH IN BANK</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -214,7 +214,7 @@
                                 <TextRun>
                                   <Value>BALANCE</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -249,7 +249,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25278in</Height>
+                  <Height>0.718cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -262,7 +262,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -305,7 +305,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -348,7 +348,7 @@
                                 <TextRun>
                                   <Value>DEBIT</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -384,7 +384,7 @@
                                 <TextRun>
                                   <Value>CREDIT</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -420,7 +420,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -455,7 +455,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.24444in</Height>
+                  <Height>0.69682cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -468,7 +468,7 @@
                                 <TextRun>
                                   <Value>=Fields!particulars.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -500,7 +500,7 @@
                                 <TextRun>
                                   <Value>=Fields!reference.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -532,7 +532,7 @@
                                 <TextRun>
                                   <Value>=Fields!debit.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>N2</Format>
                                   </Style>
                                 </TextRun>
@@ -567,7 +567,7 @@
                                 <TextRun>
                                   <Value>=Fields!credit.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>N2</Format>
                                   </Style>
                                 </TextRun>
@@ -602,7 +602,7 @@
                                 <TextRun>
                                   <Value>=Fields!balance.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>N2</Format>
                                   </Style>
                                 </TextRun>
@@ -629,7 +629,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.71094cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -642,6 +642,7 @@
                                 <TextRun>
                                   <Value />
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -676,7 +677,7 @@
                                 <TextRun>
                                   <Value>TOTAL</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -711,7 +712,7 @@
                                 <TextRun>
                                   <Value>=Sum(Fields!debit.Value)</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>N2</Format>
                                   </Style>
@@ -747,7 +748,7 @@
                                 <TextRun>
                                   <Value>=Sum(Fields!credit.Value)</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>N2</Format>
                                   </Style>
@@ -783,7 +784,7 @@
                                 <TextRun>
                                   <Value>=Sum(Fields!balance.Value)</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>N2</Format>
                                   </Style>
@@ -825,7 +826,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>2.43946cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox40">
                         <CanGrow>true</CanGrow>
@@ -836,7 +837,7 @@
                               <TextRun>
                                 <Value>DATE</Value>
                                 <Style>
-                                  <FontSize>9pt</FontSize>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -875,7 +876,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>2.43946cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox41">
                         <CanGrow>true</CanGrow>
@@ -886,7 +887,7 @@
                               <TextRun>
                                 <Value />
                                 <Style>
-                                  <FontSize>9pt</FontSize>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -935,7 +936,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>2.43946cm</Size>
                     <CellContents>
                       <Textbox Name="date1">
                         <CanGrow>true</CanGrow>
@@ -946,7 +947,7 @@
                               <TextRun>
                                 <Value>=FormatDateTime(Fields!date.Value,DateFormat.ShortDate)</Value>
                                 <Style>
-                                  <FontSize>9pt</FontSize>
+                                  <FontSize>8pt</FontSize>
                                 </Style>
                               </TextRun>
                             </TextRuns>
@@ -982,7 +983,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>2.43946cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox43">
                         <CanGrow>true</CanGrow>
@@ -993,6 +994,7 @@
                               <TextRun>
                                 <Value />
                                 <Style>
+                                  <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
                               </TextRun>
@@ -1024,22 +1026,23 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtCashbook</DataSetName>
-            <Top>0.02778in</Top>
-            <Left>0.0625in</Left>
-            <Height>1.05in</Height>
-            <Width>7.96667in</Width>
+            <Top>0.27778in</Top>
+            <Left>0.0875in</Left>
+            <Height>2.97075cm</Height>
+            <Width>19.63208cm</Width>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
-              <FontSize>9pt</FontSize>
+              <FontSize>8pt</FontSize>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>1.1in</Height>
+        <Height>5.78191in</Height>
         <Style />
       </Body>
-      <Width>8.08334in</Width>
+      <Width>8.02917in</Width>
       <Page>
         <PageHeader>
           <Height>1.01667in</Height>
@@ -1073,6 +1076,7 @@
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1087,7 +1091,9 @@
                   <TextRuns>
                     <TextRun>
                       <Value>Sheet No.:</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1120,6 +1126,7 @@
                     <TextRun>
                       <Value>=CStr(Globals!PageNumber) + " of " + CStr(Globals!TotalPages)</Value>
                       <Style>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1157,8 +1164,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>LGU:</Value>
-                      <Style />
+                      <Value>LGU</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1170,7 +1179,7 @@
               <Top>1.22414cm</Top>
               <Left>0.22225cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.02495cm</Width>
+              <Width>3.37432cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -1191,6 +1200,7 @@
                     <TextRun>
                       <Value>=Parameters!paramLGUName.Value</Value>
                       <Style>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1200,7 +1210,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>1.18886cm</Top>
-              <Left>2.28248cm</Left>
+              <Left>4.82248cm</Left>
               <Height>0.6cm</Height>
               <Width>6.98204cm</Width>
               <ZIndex>4</ZIndex>
@@ -1226,8 +1236,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>ACCOUNT:</Value>
-                      <Style />
+                      <Value>ACCOUNT</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1239,7 +1251,7 @@
               <Top>1.82414cm</Top>
               <Left>0.22225cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.02495cm</Width>
+              <Width>3.37432cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1260,6 +1272,7 @@
                     <TextRun>
                       <Value>=Parameters!paramBankaccount.Value</Value>
                       <Style>
+                        <FontSize>9pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1269,7 +1282,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>1.82414cm</Top>
-              <Left>2.28248cm</Left>
+              <Left>4.82248cm</Left>
               <Height>0.6cm</Height>
               <Width>6.98204cm</Width>
               <ZIndex>6</ZIndex>
@@ -1295,10 +1308,14 @@
             </Border>
           </Style>
         </PageHeader>
+        <PageHeight>5.78191in</PageHeight>
+        <PageWidth>7.81702in</PageWidth>
+        <InteractiveHeight>5.78191in</InteractiveHeight>
+        <InteractiveWidth>7.81702in</InteractiveWidth>
         <LeftMargin>0.2in</LeftMargin>
         <RightMargin>0.2in</RightMargin>
-        <TopMargin>0.2in</TopMargin>
-        <BottomMargin>0.2in</BottomMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

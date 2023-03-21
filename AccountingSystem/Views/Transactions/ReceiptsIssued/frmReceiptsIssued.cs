@@ -13,7 +13,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, true);
+            Helper.DatagridFullRowSelectStyle(dgReceiptIssued, false);
         }
 
         private void frmReceipts_Load(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
                 btnEdit.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnDelete.Enabled = string.IsNullOrEmpty(dgReceiptIssued.CurrentRow.Cells[7].Value.ToString());
                 btnReturn.Enabled = !dgReceiptIssued.CurrentRow.Cells[8].Value.ToString().Equals("Yes") && dgReceiptIssued.SelectedRows.Count == 1;
-                byte[] columnIndexTimestamp = { 3, 4 };
+                byte[] columnIndexTimestamp = { 7, 11 };
 
                 Helper.ShowRecordTimestamp(dgReceiptIssued, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
             }

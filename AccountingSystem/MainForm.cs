@@ -714,7 +714,7 @@ namespace AccountingSystem
 
         private void releasedChequesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _ = new frmReleasedChequesReport().ShowDialog();
+            _ = new frmReleasedChecksReport().ShowDialog();
         }
 
         private void unreleasedChequesToolStripMenuItem_Click(object sender, EventArgs e)
