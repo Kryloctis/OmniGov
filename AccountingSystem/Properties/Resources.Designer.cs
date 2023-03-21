@@ -915,7 +915,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_green_ok_2_16px {
             get {
-                object obj = ResourceManager.GetObject("document-color-green-ok-2@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_green_ok_2_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -925,7 +925,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_green_ok_2_20px {
             get {
-                object obj = ResourceManager.GetObject("document-color-green-ok-2@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_green_ok_2_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -935,7 +935,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_green_ok_2_24px {
             get {
-                object obj = ResourceManager.GetObject("document-color-green-ok-2@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_green_ok_2_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -945,7 +945,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_green_ok_2_32px {
             get {
-                object obj = ResourceManager.GetObject("document-color-green-ok-2@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_green_ok_2_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -965,7 +965,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_16px {
             get {
-                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -975,7 +975,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_20px {
             get {
-                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -985,7 +985,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_24px {
             get {
-                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -995,7 +995,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_32px {
             get {
-                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1005,7 +1005,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_red_cancel_2_16px {
             get {
-                object obj = ResourceManager.GetObject("document-color-red-cancel-2@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color_red_cancel_2_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1015,7 +1015,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_red_cancel_2_20px {
             get {
-                object obj = ResourceManager.GetObject("document-color-red-cancel-2@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_red_cancel_2_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1025,7 +1025,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_red_cancel_2_24px {
             get {
-                object obj = ResourceManager.GetObject("document-color-red-cancel-2@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_red_cancel_2_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1035,7 +1035,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_red_cancel_2_32px {
             get {
-                object obj = ResourceManager.GetObject("document-color-red-cancel-2@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_color_red_cancel_2_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1135,7 +1135,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_14px {
             get {
-                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@14px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_14px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1145,7 +1145,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_16px {
             get {
-                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1155,7 +1155,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_20px {
             get {
-                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1175,7 +1175,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_delivery_receipt_signed_32px {
             get {
-                object obj = ResourceManager.GetObject("document-delivery-receipt-signed@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document_delivery_receipt_signed_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1385,7 +1385,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap documents_3_16px {
             get {
-                object obj = ResourceManager.GetObject("documents-3@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("documents_3_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1395,7 +1395,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap documents_3_20px {
             get {
-                object obj = ResourceManager.GetObject("documents-3@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("documents_3_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1405,7 +1405,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap documents_3_24px {
             get {
-                object obj = ResourceManager.GetObject("documents-3@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("documents_3_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1415,7 +1415,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap documents_3_32px {
             get {
-                object obj = ResourceManager.GetObject("documents-3@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("documents-3_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2255,7 +2255,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2265,7 +2265,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_20px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2275,7 +2275,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_24px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2285,7 +2285,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_32px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2295,7 +2295,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_forbidden_16px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled-forbidden@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_forbidden_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2305,7 +2305,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_forbidden_20px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled-forbidden@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_forbidden_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2315,7 +2315,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_forbidden_24px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled-forbidden@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_forbidden_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2325,7 +2325,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap printer_filled_forbidden_32px {
             get {
-                object obj = ResourceManager.GetObject("printer-filled-forbidden@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_filled_forbidden_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2385,7 +2385,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap save_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("save-filled@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("save_filled_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2395,7 +2395,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap save_filled_20px {
             get {
-                object obj = ResourceManager.GetObject("save-filled@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("save_filled_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2405,7 +2405,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap save_filled_24px {
             get {
-                object obj = ResourceManager.GetObject("save-filled@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("save_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2415,7 +2415,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap save_filled_32px {
             get {
-                object obj = ResourceManager.GetObject("save-filled@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("save_filled_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2535,7 +2535,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_add_16px {
             get {
-                object obj = ResourceManager.GetObject("symbol-add@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_add_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2545,7 +2545,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_add_20px {
             get {
-                object obj = ResourceManager.GetObject("symbol-add@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_add_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2555,7 +2555,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_add_24px {
             get {
-                object obj = ResourceManager.GetObject("symbol-add@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_add_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2565,7 +2565,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_add_28px {
             get {
-                object obj = ResourceManager.GetObject("symbol-add@28px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_add_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2575,7 +2575,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_add_32px {
             get {
-                object obj = ResourceManager.GetObject("symbol-add@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_add_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2585,7 +2585,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_14px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@14px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_14px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2595,7 +2595,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_16px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2605,7 +2605,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_20px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2615,7 +2615,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_24px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2625,7 +2625,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_28px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@28px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2635,7 +2635,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap symbol_cancel_32px {
             get {
-                object obj = ResourceManager.GetObject("symbol-cancel@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("symbol_cancel_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2835,7 +2835,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap tool_pencil_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("tool-pencil-filled@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_pencil_filled_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2845,7 +2845,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap tool_pencil_filled_20px {
             get {
-                object obj = ResourceManager.GetObject("tool-pencil-filled@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_pencil_filled_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2855,7 +2855,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap tool_pencil_filled_24px {
             get {
-                object obj = ResourceManager.GetObject("tool-pencil-filled@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_pencil_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2865,7 +2865,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap tool_pencil_filled_28px {
             get {
-                object obj = ResourceManager.GetObject("tool-pencil-filled@28px", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_pencil_filled_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2875,7 +2875,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap tool_pencil_filled_32px {
             get {
-                object obj = ResourceManager.GetObject("tool-pencil-filled@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("tool_pencil_filled_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3075,7 +3075,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_14px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@14px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_14px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3085,7 +3085,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@16px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3095,7 +3095,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_20px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@20px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3105,7 +3105,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_24px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@24px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3115,7 +3115,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_28px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@28px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_28px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -3125,7 +3125,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap waste_bin_filled_32px {
             get {
-                object obj = ResourceManager.GetObject("waste-bin-filled@32px", resourceCulture);
+                object obj = ResourceManager.GetObject("waste_bin_filled_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
