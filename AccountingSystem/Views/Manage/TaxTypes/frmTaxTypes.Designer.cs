@@ -1,0 +1,326 @@
+﻿namespace AccountingSystem.Views.Manage.TaxTypes
+{
+    partial class frmTaxTypes
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.treeViewTaxTypes = new System.Windows.Forms.TreeView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmbxParentCode = new System.Windows.Forms.ComboBox();
+            this.cmbxFundType = new System.Windows.Forms.ComboBox();
+            this.txtBLFGAccountCode = new System.Windows.Forms.TextBox();
+            this.txtCOAAccountCode = new System.Windows.Forms.TextBox();
+            this.txtDesciption = new System.Windows.Forms.TextBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.treeViewTaxTypes);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(798, 178);
+            this.panel1.TabIndex = 0;
+            // 
+            // treeViewTaxTypes
+            // 
+            this.treeViewTaxTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewTaxTypes.Location = new System.Drawing.Point(4, 4);
+            this.treeViewTaxTypes.Name = "treeViewTaxTypes";
+            this.treeViewTaxTypes.Size = new System.Drawing.Size(790, 170);
+            this.treeViewTaxTypes.TabIndex = 1;
+            this.treeViewTaxTypes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTaxTypes_AfterSelect);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cmbxParentCode);
+            this.panel2.Controls.Add(this.cmbxFundType);
+            this.panel2.Controls.Add(this.txtBLFGAccountCode);
+            this.panel2.Controls.Add(this.txtCOAAccountCode);
+            this.panel2.Controls.Add(this.txtDesciption);
+            this.panel2.Controls.Add(this.txtCode);
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 232);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(798, 188);
+            this.panel2.TabIndex = 1;
+            // 
+            // cmbxParentCode
+            // 
+            this.cmbxParentCode.FormattingEnabled = true;
+            this.cmbxParentCode.Location = new System.Drawing.Point(153, 72);
+            this.cmbxParentCode.Name = "cmbxParentCode";
+            this.cmbxParentCode.Size = new System.Drawing.Size(269, 23);
+            this.cmbxParentCode.TabIndex = 3;
+            // 
+            // cmbxFundType
+            // 
+            this.cmbxFundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbxFundType.FormattingEnabled = true;
+            this.cmbxFundType.Location = new System.Drawing.Point(153, 99);
+            this.cmbxFundType.Name = "cmbxFundType";
+            this.cmbxFundType.Size = new System.Drawing.Size(269, 23);
+            this.cmbxFundType.TabIndex = 2;
+            // 
+            // txtBLFGAccountCode
+            // 
+            this.txtBLFGAccountCode.Location = new System.Drawing.Point(153, 153);
+            this.txtBLFGAccountCode.Name = "txtBLFGAccountCode";
+            this.txtBLFGAccountCode.Size = new System.Drawing.Size(269, 23);
+            this.txtBLFGAccountCode.TabIndex = 1;
+            // 
+            // txtCOAAccountCode
+            // 
+            this.txtCOAAccountCode.Location = new System.Drawing.Point(153, 126);
+            this.txtCOAAccountCode.Name = "txtCOAAccountCode";
+            this.txtCOAAccountCode.Size = new System.Drawing.Size(269, 23);
+            this.txtCOAAccountCode.TabIndex = 1;
+            // 
+            // txtDesciption
+            // 
+            this.txtDesciption.Location = new System.Drawing.Point(153, 45);
+            this.txtDesciption.Name = "txtDesciption";
+            this.txtDesciption.Size = new System.Drawing.Size(269, 23);
+            this.txtDesciption.TabIndex = 1;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(153, 18);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(269, 23);
+            this.txtCode.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 156);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "BLGF Account Code";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(111, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "COA Account Code";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 15);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Fund Type";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Parent Code";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Description";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(25, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Code";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonNew,
+            this.toolStripButtonEdit,
+            this.toolStripButtonDelete});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 178);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip2.Size = new System.Drawing.Size(798, 54);
+            this.toolStrip2.TabIndex = 10;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButtonNew
+            // 
+            this.toolStripButtonNew.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_24px;
+            this.toolStripButtonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNew.Name = "toolStripButtonNew";
+            this.toolStripButtonNew.Size = new System.Drawing.Size(35, 43);
+            this.toolStripButtonNew.Text = "&New";
+            this.toolStripButtonNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripButtonEdit
+            // 
+            this.toolStripButtonEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.toolStripButtonEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(31, 43);
+            this.toolStripButtonEdit.Text = "&Edit";
+            this.toolStripButtonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
+            this.toolStripButtonDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(44, 43);
+            this.toolStripButtonDelete.Text = "&Delete";
+            this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel1.Controls.Add(this.btnSave);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 420);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(798, 29);
+            this.flowLayoutPanel1.TabIndex = 12;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(720, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(639, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // frmTaxTypes
+            // 
+            this.AcceptButton = this.btnSave;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(798, 449);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.toolStrip2);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(814, 470);
+            this.Name = "frmTaxTypes";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "TaxTypes";
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TreeView treeViewTaxTypes;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        internal System.Windows.Forms.ToolStripButton toolStripButtonNew;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
+        private System.Windows.Forms.ComboBox cmbxFundType;
+        private System.Windows.Forms.TextBox txtBLFGAccountCode;
+        private System.Windows.Forms.TextBox txtCOAAccountCode;
+        private System.Windows.Forms.TextBox txtDesciption;
+        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.ComboBox cmbxParentCode;
+    }
+}

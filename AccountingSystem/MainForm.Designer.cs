@@ -62,6 +62,7 @@
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -150,7 +151,6 @@
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -452,6 +452,13 @@
             this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.taxRateToolStripMenuItem.Text = "Tax Rates...";
             this.taxRateToolStripMenuItem.Click += new System.EventHandler(this.taxRateToolStripMenuItem_Click);
+            // 
+            // taxTypesToolStripMenuItem
+            // 
+            this.taxTypesToolStripMenuItem.Name = "taxTypesToolStripMenuItem";
+            this.taxTypesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.taxTypesToolStripMenuItem.Text = "Tax Types";
+            this.taxTypesToolStripMenuItem.Click += new System.EventHandler(this.taxTypesToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1342,12 +1349,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // taxTypesToolStripMenuItem
-            // 
-            this.taxTypesToolStripMenuItem.Name = "taxTypesToolStripMenuItem";
-            this.taxTypesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.taxTypesToolStripMenuItem.Text = "Tax Types";
             // 
             // MainForm
             // 
