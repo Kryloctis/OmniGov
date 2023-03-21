@@ -913,9 +913,129 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap document_color_green_ok_2_16px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-green-ok-2@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_green_ok_2_20px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-green-ok-2@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_green_ok_2_24px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-green-ok-2@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_green_ok_2_32px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-green-ok-2@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_filled_forbidden_28px {
             get {
                 object obj = ResourceManager.GetObject("document_color_magenta_filled_forbidden_28px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_magenta_forbidden_16px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_magenta_forbidden_20px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_magenta_forbidden_24px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_magenta_forbidden_32px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_red_cancel_2_16px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-red-cancel-2@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_red_cancel_2_20px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-red-cancel-2@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_red_cancel_2_24px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-red-cancel-2@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document_color_red_cancel_2_32px {
+            get {
+                object obj = ResourceManager.GetObject("document-color-red-cancel-2@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2133,6 +2253,86 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_32px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_forbidden_16px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled-forbidden@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_forbidden_20px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled-forbidden@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_forbidden_24px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled-forbidden@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printer_filled_forbidden_32px {
+            get {
+                object obj = ResourceManager.GetObject("printer-filled-forbidden@32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap report_24px {
             get {
                 object obj = ResourceManager.GetObject("report_24px", resourceCulture);
@@ -2176,6 +2376,46 @@ namespace AccountingSystem.Properties {
         internal static System.Drawing.Bitmap save {
             get {
                 object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_filled_16px {
+            get {
+                object obj = ResourceManager.GetObject("save-filled@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("save-filled@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("save-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_filled_32px {
+            get {
+                object obj = ResourceManager.GetObject("save-filled@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
