@@ -421,6 +421,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtDebitTotal
             // 
+            this.txtDebitTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDebitTotal.Location = new System.Drawing.Point(44, 521);
             this.txtDebitTotal.Name = "txtDebitTotal";
             this.txtDebitTotal.ReadOnly = true;
@@ -432,6 +433,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // 
             // txtCreditTotal
             // 
+            this.txtCreditTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCreditTotal.Location = new System.Drawing.Point(197, 520);
             this.txtCreditTotal.Name = "txtCreditTotal";
             this.txtCreditTotal.ReadOnly = true;

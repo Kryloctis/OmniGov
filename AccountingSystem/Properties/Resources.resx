@@ -709,28 +709,28 @@
   <data name="symbol-update-money-banknotes@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-update-money-banknotes@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documents-3@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="documents_3_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documents-3@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documents-3@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="documents_3_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documents-3@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documents-3@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="documents_3_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documents-3@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documents-3@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="documents-3_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documents-3@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-delivery-receipt-signed@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_delivery_receipt_signed_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-receipt-signed@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-delivery-receipt-signed@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_delivery_receipt_signed_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-receipt-signed@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-delivery-receipt-signed@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_delivery_receipt_signed_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-receipt-signed@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="document-delivery-receipt-signed@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="document_delivery_receipt_signed_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-delivery-receipt-signed@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="money-2@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -901,70 +901,142 @@
   <data name="archive-box-add-filled@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\archive-box-add-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-add@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_add_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-add@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-add@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_add_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-add@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-add@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_add_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-add@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-add@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_add_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-add@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-add@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_add_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-add@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool-pencil-filled@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tool_pencil_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-pencil-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool-pencil-filled@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tool_pencil_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-pencil-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool-pencil-filled@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tool_pencil_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-pencil-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool-pencil-filled@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tool_pencil_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-pencil-filled@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tool-pencil-filled@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tool_pencil_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tool-pencil-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="waste-bin-filled@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="waste_bin_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\waste-bin-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_14px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@14px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_28px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@28px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="symbol-cancel@32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="symbol_cancel_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\symbol-cancel@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_ok_2_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-ok-2@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_ok_2_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-ok-2@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_ok_2_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-ok-2@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_green_ok_2_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-green-ok-2@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_magenta_forbidden_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-magenta-forbidden@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_magenta_forbidden_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-magenta-forbidden@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_magenta_forbidden_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-magenta-forbidden@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_magenta_forbidden_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-magenta-forbidden@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document-color_red_cancel_2_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-red-cancel-2@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_red_cancel_2_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-red-cancel-2@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_red_cancel_2_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-red-cancel-2@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="document_color_red_cancel_2_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document-color-red-cancel-2@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_forbidden_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled-forbidden@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_forbidden_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled-forbidden@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_forbidden_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled-forbidden@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_forbidden_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled-forbidden@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled@16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled@20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled@24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="printer_filled_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer-filled@32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

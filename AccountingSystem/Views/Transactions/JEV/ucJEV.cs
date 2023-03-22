@@ -435,7 +435,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     SetJournalFields("General Journal");
                 }
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ucJEV_Load(object sender, EventArgs e)

@@ -59,9 +59,10 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(4, 42);
+            this.panel1.Location = new System.Drawing.Point(0, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1043, 516);
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(1051, 524);
             this.panel1.TabIndex = 26;
             // 
             // btnRetrieve
@@ -80,9 +81,9 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.panel2.Controls.Add(this.btnRetrieve);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(4, 4);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1043, 38);
+            this.panel2.Size = new System.Drawing.Size(1051, 38);
             this.panel2.TabIndex = 29;
             // 
             // frmConsolidatedReceipts
@@ -94,7 +95,6 @@ namespace AccountingSystem.Views.Reports.ConsolidatedReceipts
             this.Controls.Add(this.panel2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmConsolidatedReceipts";
-            this.Padding = new System.Windows.Forms.Padding(4);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports > Consolidated Report of Accountability for Accountable Forms";

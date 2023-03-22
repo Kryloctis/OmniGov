@@ -186,7 +186,7 @@ namespace AccountingSystem.Views.Reports.RCI
                 report.DataSources.Add(new ReportDataSource("dtRCINew", DataTableRCI()));
                 report.SetParameters(parameters);
                 reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
                 reportViewer.ZoomPercent = 100;
                 reportViewer.RefreshReport();
 

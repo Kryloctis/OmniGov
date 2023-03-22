@@ -47,10 +47,10 @@ namespace AccountingSystem.Views.Reports.RCI
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 29);
+            this.panel1.Location = new System.Drawing.Point(4, 33);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(991, 533);
+            this.panel1.Size = new System.Drawing.Size(983, 525);
             this.panel1.TabIndex = 12;
             // 
             // panel2
@@ -64,9 +64,9 @@ namespace AccountingSystem.Views.Reports.RCI
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.btnRetrieve);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(991, 29);
+            this.panel2.Size = new System.Drawing.Size(983, 29);
             this.panel2.TabIndex = 13;
             // 
             // cmbBank
@@ -151,10 +151,10 @@ namespace AccountingSystem.Views.Reports.RCI
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
             this.Name = "frmRCIReport";
+            this.Padding = new System.Windows.Forms.Padding(4);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report > Report of Checks Issued";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmRCIReport_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

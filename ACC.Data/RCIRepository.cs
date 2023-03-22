@@ -11,11 +11,6 @@ namespace ACC.Data
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "rci";
-        private readonly string tblBanks = "banks";
-        private readonly string tblFunds = "funds";
-        private readonly string tblFPP = "function_program_project";
-        private readonly string tblFCS = "functional_classification_services";
-        private readonly string tblFC = "functional_classifications";
         private readonly string tableRCIObligations = "rci_obligations";
         private readonly string tableRCIDeductions = "rci_deductions";
 

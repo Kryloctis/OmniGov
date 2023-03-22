@@ -794,6 +794,8 @@ namespace AccountingSystem
             datagrid.Columns.Add("issued_by", "Issued By");
             datagrid.Columns.Add(col);
             datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.Columns.Add("returned_date", "Returned Date");
+            datagrid.Columns.Add("returned_date", "Returned Date");
 
             datagrid.Columns["id"].Visible = false;
             datagrid.Columns["serial_number_from"].DefaultCellStyle.Format = "D7";
@@ -1391,6 +1393,7 @@ namespace AccountingSystem
             datagrid.Columns["bank_accounts_id"].Visible = false;
             datagrid.Columns["bank_id"].Visible = false;
             datagrid.Columns["fund_id"].Visible = false;
+            datagrid.Columns["date_entry"].Visible = false;
             datagrid.Columns["fpp_id"].Visible = false;
             datagrid.Columns["created_at"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
@@ -1399,15 +1402,19 @@ namespace AccountingSystem
             datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
             datagrid.Columns["amount"].HeaderText = "Amount";
             datagrid.Columns["bank_account_no"].HeaderText = "Bank Account No.";
+            datagrid.Columns["bank_account_no"].MinimumWidth = 150;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";
             datagrid.Columns["fund_name"].HeaderText = "Fund Name";
             datagrid.Columns["dv_no"].HeaderText = "DV No.";
             datagrid.Columns["payee"].HeaderText = "Payee";
             datagrid.Columns["nature_of_payment"].HeaderText = "Nature of Payment";
+            datagrid.Columns["nature_of_payment"].MinimumWidth = 200;
             datagrid.Columns["obligation_no"].HeaderText = "Obligation No.";
+            datagrid.Columns["date_entry"].HeaderText = "Date Entry";
             datagrid.Columns["fpp_code"].HeaderText = "FPP Code";
             datagrid.Columns["total_deductions"].HeaderText = "Total Deductions";
+            datagrid.Columns["total_deductions"].MinimumWidth = 150;
 
             datagrid.Columns["total_deductions"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["total_deductions"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -1416,7 +1423,7 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-        internal static void RCIReleasedAndUnreleaseDatagridView(DataTable dataTable, DataGridView datagrid)
+        internal static void RCIReleasedAndUnreleasedDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
 
@@ -1425,12 +1432,12 @@ namespace AccountingSystem
             datagrid.Columns["bank_accounts_id"].Visible = false;
             datagrid.Columns["funds_id"].Visible = false;
 
-            datagrid.Columns["cheque_no"].HeaderText = "Cheque No.";
+            datagrid.Columns["cheque_no"].HeaderText = "Check No.";
             datagrid.Columns["cheque_no"].MinimumWidth = 150;
             datagrid.Columns["cheque_amount"].DefaultCellStyle.Format = "N2";
             datagrid.Columns["cheque_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["cheque_amount"].MinimumWidth = 130;
-            datagrid.Columns["cheque_date"].HeaderText = "Cheque date";
+            datagrid.Columns["cheque_date"].HeaderText = "Check date";
             datagrid.Columns["cheque_date"].MinimumWidth = 200;
             datagrid.Columns["cheque_amount"].HeaderText = "Amount";
             datagrid.Columns["fund_code"].HeaderText = "Fund Code";
@@ -1441,6 +1448,8 @@ namespace AccountingSystem
             datagrid.Columns["payee"].MinimumWidth = 200;
             datagrid.Columns["nature_of_payment"].HeaderText = "Nature of Payment";
             datagrid.Columns["nature_of_payment"].MinimumWidth = 200;
+            datagrid.Columns["released_date"].HeaderText = "Released Date";
+            datagrid.Columns["released_date"].MinimumWidth = 200;
             datagrid.Columns["status"].HeaderText = "Status";
             datagrid.Columns["status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 

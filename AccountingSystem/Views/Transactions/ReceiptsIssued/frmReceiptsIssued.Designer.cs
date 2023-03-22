@@ -73,17 +73,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.toolStrip1.Margin = new System.Windows.Forms.Padding(4);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1060, 58);
+            this.toolStrip1.Size = new System.Drawing.Size(1060, 50);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Size = new System.Drawing.Size(33, 39);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -91,11 +91,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Size = new System.Drawing.Size(31, 39);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Visible = false;
@@ -104,11 +104,11 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -116,17 +116,17 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
             // 
             // btnReturn
             // 
             this.btnReturn.Enabled = false;
-            this.btnReturn.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_signed_undo_2_28px;
+            this.btnReturn.Image = global::AccountingSystem.Properties.Resources.account_book_20px;
             this.btnReturn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnReturn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(88, 47);
-            this.btnReturn.Text = "Return Receipt";
+            this.btnReturn.Size = new System.Drawing.Size(46, 39);
+            this.btnReturn.Text = "Return";
             this.btnReturn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
@@ -140,7 +140,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dgReceiptIssued.RowHeadersWidth = 51;
             this.dgReceiptIssued.RowTemplate.Height = 29;
             this.dgReceiptIssued.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgReceiptIssued.Size = new System.Drawing.Size(1028, 461);
+            this.dgReceiptIssued.Size = new System.Drawing.Size(1052, 482);
             this.dgReceiptIssued.TabIndex = 8;
             this.dgReceiptIssued.SelectionChanged += new System.EventHandler(this.dgissue_SelectionChanged);
             // 
@@ -148,7 +148,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.txtsearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtsearch.Location = new System.Drawing.Point(805, 23);
+            this.txtsearch.Location = new System.Drawing.Point(805, 19);
             this.txtsearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsearch.Name = "txtsearch";
             this.txtsearch.Size = new System.Drawing.Size(158, 23);
@@ -159,7 +159,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(557, 26);
+            this.label2.Location = new System.Drawing.Point(557, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 15);
             this.label2.TabIndex = 31;
@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.dtpDateIssued.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDateIssued.CustomFormat = "MMMM dd, yyyy";
             this.dtpDateIssued.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDateIssued.Location = new System.Drawing.Point(630, 23);
+            this.dtpDateIssued.Location = new System.Drawing.Point(630, 19);
             this.dtpDateIssued.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpDateIssued.Name = "dtpDateIssued";
             this.dtpDateIssued.Size = new System.Drawing.Size(148, 23);
@@ -181,7 +181,9 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             this.cbAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAll.AutoSize = true;
-            this.cbAll.Location = new System.Drawing.Point(784, 27);
+            this.cbAll.Checked = true;
+            this.cbAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAll.Location = new System.Drawing.Point(784, 23);
             this.cbAll.Name = "cbAll";
             this.cbAll.Size = new System.Drawing.Size(15, 14);
             this.cbAll.TabIndex = 32;
@@ -191,20 +193,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dgReceiptIssued);
-            this.panel1.Location = new System.Drawing.Point(12, 65);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 50);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1036, 469);
+            this.panel1.Size = new System.Drawing.Size(1060, 490);
             this.panel1.TabIndex = 33;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(969, 23);
+            this.button1.Location = new System.Drawing.Point(969, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 34;
@@ -246,7 +246,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             // tsJOCount
             // 
             this.tsJOCount.Name = "tsJOCount";
-            this.tsJOCount.Size = new System.Drawing.Size(819, 17);
+            this.tsJOCount.Size = new System.Drawing.Size(850, 17);
             this.tsJOCount.Spring = true;
             // 
             // toolStripStatusLabel6
@@ -276,6 +276,7 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 562);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cbAll);
@@ -283,16 +284,15 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             this.Controls.Add(this.dtpDateIssued);
             this.Controls.Add(this.txtsearch);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1076, 601);
             this.Name = "frmReceiptsIssued";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issued Receipts";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmReceipts_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
