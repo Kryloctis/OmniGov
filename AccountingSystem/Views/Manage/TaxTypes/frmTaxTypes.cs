@@ -21,7 +21,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrEmpty(txtCode.Text))
             {
                 TreeNode node = new TreeNode(txtDesciption.Text);
@@ -52,6 +51,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
             LoadFunds();
+            LoadTaxTypes();
+        }
+
+        private void LoadTaxTypes()
+        { 
+            
         }
 
         internal void LoadFunds()
