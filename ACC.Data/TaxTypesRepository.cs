@@ -9,7 +9,7 @@ namespace AccountingSystem
     {
 
         private readonly IAccGenericCommands _dbGenericCommands;
-        private readonly string tableName = "tax_types";
+        private readonly string tableName = "tax_type";
         private readonly string viewTableName = "view_taxtypes";
 
         public TaxTypesRepository(IAccGenericCommands dbGenericCommands)
@@ -27,6 +27,27 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetChildNodesTaxTypes(int parentID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@parent", DbType.Int32, parentID},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE parent = @parent";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dt, parameter);
+        }
+
+        public DataTable GetParentNodesTaxTypes()
+        {
+            string query = $"SELECT * FROM {tableName} WHERE parent IS NULL";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+        }
+
         public Dictionary<string, string> GetRecordByID(int Id)
         {
             throw new System.NotImplementedException();
@@ -34,12 +55,24 @@ namespace AccountingSystem
 
         public DataTable GetRecords()
         {
-            throw new System.NotImplementedException();
+            string query = $"SELECT * FROM {tableName}";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
+
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new System.NotImplementedException();
+        }
+
+        public DataTable GetTaxTypeCodes()
+        {
+            string query = $"SELECT id, code FROM {tableName}";
+
+            var dt = new DataTable();
+            return _dbGenericCommands.Fill(query, dt);
         }
 
         public bool IdExist(int id)

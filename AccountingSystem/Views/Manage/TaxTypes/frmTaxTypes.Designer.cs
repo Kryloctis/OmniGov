@@ -330,5 +330,7 @@
         private System.Windows.Forms.TextBox txtDesciption;
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.ComboBox cmbxParentCode;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

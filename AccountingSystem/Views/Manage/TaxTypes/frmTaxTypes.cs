@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.Diagnostics;
+﻿using DocumentFormat.OpenXml.EMMA;
+using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Manage.TaxTypes
 {
@@ -33,9 +36,39 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
+        private void LoadTaxTypes()
+        {
+            var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
+ 
+            TreeNode parentNode;
+
+            foreach (DataRow dr in dtTaxTypes.Rows)
+            {
+                parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
+                PopulateTreeView(dr["id"].ToString(), parentNode);
+            }
+        }
+
+        private void PopulateTreeView(string parentID, TreeNode parentNode)
+        {
+            var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
+
+            foreach (DataRow dr in dtChildNoTaxTypes.Rows)
+            {
+                TreeNode childNode;
+                if (parentNode == null)
+                    childNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
+                else
+                    childNode = parentNode.Nodes.Add(dr["description"].ToString());
+
+
+                PopulateTreeView(dr["id"].ToString(), childNode);
+            }
+        }
+
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            cmbxParentCode.Text = treeViewTaxTypes.SelectedNode.Text;
+            txtDesciption.Text = treeViewTaxTypes.SelectedNode.Text;
         }
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
@@ -52,11 +85,19 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             LoadFunds();
             LoadTaxTypes();
+            LoadParentCode();
         }
 
-        private void LoadTaxTypes()
-        { 
-            
+        private void LoadParentCode()
+        {
+            try
+            {
+                DataTable dtParentCode = AccFactory.TaxTypesRepository().GetTaxTypeCodes();
+                cmbxParentCode.DataSource = dtParentCode;
+                cmbxParentCode.ValueMember = "id";
+                cmbxParentCode.DisplayMember = "code";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadFunds()
