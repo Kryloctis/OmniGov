@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,5 +38,34 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             cmbxParentCode.Text = treeViewTaxTypes.SelectedNode.Text;
         }
+
+        private void toolStripButtonNew_Click(object sender, EventArgs e)
+        {
+            panel2.Enabled = true;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            panel2.Enabled = false;
+        }
+
+        private void frmTaxTypes_Load(object sender, EventArgs e)
+        {
+            LoadFunds();
+        }
+
+        internal void LoadFunds()
+        {
+            try
+            {
+                var fundRepository = AccFactory.FundsRepository();
+                var dtFund = fundRepository.GetRecords();
+                cmbxFundType.DataSource = dtFund;
+                cmbxFundType.ValueMember = "id";
+                cmbxFundType.DisplayMember = "fund_name";
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
     }
 }

@@ -90,6 +90,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Enabled = false;
             this.panel2.Location = new System.Drawing.Point(0, 232);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(798, 188);
@@ -110,28 +111,28 @@
             this.cmbxFundType.Location = new System.Drawing.Point(153, 99);
             this.cmbxFundType.Name = "cmbxFundType";
             this.cmbxFundType.Size = new System.Drawing.Size(269, 23);
-            this.cmbxFundType.TabIndex = 2;
+            this.cmbxFundType.TabIndex = 4;
             // 
             // txtBLFGAccountCode
             // 
             this.txtBLFGAccountCode.Location = new System.Drawing.Point(153, 153);
             this.txtBLFGAccountCode.Name = "txtBLFGAccountCode";
             this.txtBLFGAccountCode.Size = new System.Drawing.Size(269, 23);
-            this.txtBLFGAccountCode.TabIndex = 1;
+            this.txtBLFGAccountCode.TabIndex = 6;
             // 
             // txtCOAAccountCode
             // 
             this.txtCOAAccountCode.Location = new System.Drawing.Point(153, 126);
             this.txtCOAAccountCode.Name = "txtCOAAccountCode";
             this.txtCOAAccountCode.Size = new System.Drawing.Size(269, 23);
-            this.txtCOAAccountCode.TabIndex = 1;
+            this.txtCOAAccountCode.TabIndex = 5;
             // 
             // txtDesciption
             // 
             this.txtDesciption.Location = new System.Drawing.Point(153, 45);
             this.txtDesciption.Name = "txtDesciption";
             this.txtDesciption.Size = new System.Drawing.Size(269, 23);
-            this.txtDesciption.TabIndex = 1;
+            this.txtDesciption.TabIndex = 2;
             // 
             // txtCode
             // 
@@ -219,9 +220,11 @@
             this.toolStripButtonNew.Size = new System.Drawing.Size(35, 43);
             this.toolStripButtonNew.Text = "&New";
             this.toolStripButtonNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonNew.Click += new System.EventHandler(this.toolStripButtonNew_Click);
             // 
             // toolStripButtonEdit
             // 
+            this.toolStripButtonEdit.Enabled = false;
             this.toolStripButtonEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
             this.toolStripButtonEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -232,6 +235,7 @@
             // 
             // toolStripButtonDelete
             // 
+            this.toolStripButtonDelete.Enabled = false;
             this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
             this.toolStripButtonDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -260,6 +264,7 @@
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -276,17 +281,20 @@
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(798, 449);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimumSize = new System.Drawing.Size(814, 470);
             this.Name = "frmTaxTypes";
             this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TaxTypes";
+            this.Load += new System.EventHandler(this.frmTaxTypes_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
