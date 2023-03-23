@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.EMMA;
+﻿using ACC.Domain.Models;
+using DocumentFormat.OpenXml.EMMA;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,47 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 TreeNode node = new TreeNode(txtDesciption.Text);
                 treeViewTaxTypes.SelectedNode.Nodes.Add(node); 
             }
+
+            if (InsertNewNode())
+            {
+                Helper.MessageBoxSuccess("New node has been saved.");
+                LoadTaxTypes();
+                //uc.ResetForm();
+            }
+        }
+
+        private bool InsertNewNode()
+        {
+            if (!ValidateChildren())
+            {
+                //Helper.MessageBoxError(GetFormErrors());
+                //return false;
+            }
+
+            string code = txtCode.Text;
+            string desciption = txtDesciption.Text;
+            int parent = 1;
+            int fundID = Convert.ToInt32(cmbxFundType.SelectedValue);
+            string coaAccountCode = txtCOAAccountCode.Text;
+            string BLFGAccountCode = txtBLFGAccountCode.Text;
+
+            var taxTypesModel = new TaxTypesModel()
+            {
+                Code = code, 
+                Description = desciption,
+                ParentID = parent, 
+                FundID = fundID,
+                COAAccountCode = coaAccountCode,
+                BLGFAccountCode = BLFGAccountCode
+            };
+
+            return AccFactory.TaxTypesRepository().Insert(taxTypesModel);
         }
 
         private void LoadTaxTypes()
         {
+            treeViewTaxTypes.Nodes.Clear();
+
             var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
  
             TreeNode parentNode;

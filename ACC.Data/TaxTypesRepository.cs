@@ -82,7 +82,19 @@ namespace AccountingSystem
 
         public bool Insert(TaxTypesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@code", DbType.String, entity.Code },
+                new object[] { "@description", DbType.String, entity.Description },
+                new object[] { "@parent", DbType.Int32, entity.ParentID },
+                new object[] { "@funds_id", DbType.Int32, entity.FundID },
+                new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
+                new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },
+            };
+
+            string query = $"INSERT INTO {tableName} (code, description, parent, funds_id, coa_account_code, blgf_account_code) VALUES (@code, @description, @parent, @funds_id, @coa_account_code, @blgf_account_code)";
+
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(TaxTypesModel entity)
