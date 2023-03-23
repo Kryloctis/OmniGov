@@ -1,5 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -40,6 +42,18 @@ namespace AccountingSystem
             return _dbGenericCommands.FillBySearch(query, dt, parameter);
         }
 
+        public string GetParentCodeByID(int parentID)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@parent", DbType.Int32, parentID},
+            };
+
+            string query = $"SELECT code FROM {tableName} WHERE id = @parent";
+            
+            return _dbGenericCommands.ExecuteScalar(query, parameter).ToString();
+        }
+
         public DataTable GetParentNodesTaxTypes()
         {
             string query = $"SELECT * FROM {tableName} WHERE parent IS NULL";
@@ -50,7 +64,33 @@ namespace AccountingSystem
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                    new object[] { "@id", DbType.Int32, Id},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("code", reader.Rows[0]["code"].ToString());
+                record.Add("description", reader.Rows[0]["description"].ToString());
+                record.Add("parent", reader.Rows[0]["parent"].ToString());
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("coa_account_code", reader.Rows[0]["coa_account_code"].ToString());
+                record.Add("blgf_account_code", reader.Rows[0]["blgf_account_code"].ToString());
+                record.Add("is_deleted", reader.Rows[0]["is_deleted"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+            }
+
+            return record;
         }
 
         public DataTable GetRecords()

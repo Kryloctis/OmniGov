@@ -732,5 +732,6 @@ namespace AccountingSystem
         {
             _ = new frmTaxTypes().ShowDialog();
         }
+
     }
 }

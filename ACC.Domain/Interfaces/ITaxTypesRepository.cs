@@ -12,5 +12,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetChildNodesTaxTypes(int parentID);
         DataTable GetTaxTypeCodes();
+        string GetParentCodeByID(int parentID);
     }
 }
