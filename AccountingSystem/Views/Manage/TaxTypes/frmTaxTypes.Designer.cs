@@ -246,6 +246,7 @@
             this.toolStripButtonDelete.Size = new System.Drawing.Size(44, 43);
             this.toolStripButtonDelete.Text = "&Delete";
             this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // flowLayoutPanel1
             // 

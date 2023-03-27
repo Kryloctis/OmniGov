@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.TaxPayers;
 using DocumentFormat.OpenXml.EMMA;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System;
@@ -108,6 +109,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
             toolStripButtonEdit.Enabled = true;
+            toolStripButtonDelete.Enabled = true;
 
             if (panel2.Enabled)
                 GetSelectedNode();
@@ -210,5 +212,34 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             { }
         }
 
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DeleteTaxType())
+                {
+                    Helper.MessageBoxSuccess("Tax type has been deleted.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private bool DeleteTaxType()
+        {
+            if (Helper.MessageBoxConfirmCancel("Are you sure you want to delete selected tax type?"))
+            {
+                int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+
+                var taxTypesModel = new TaxTypesModel()
+                { ID = taxTypeID };
+
+                return AccFactory.TaxTypesRepository().Update(taxTypesModel);
+            }
+
+            return false;
+        }
     }
 }

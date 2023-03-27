@@ -139,7 +139,13 @@ namespace AccountingSystem
 
         public bool Update(TaxTypesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, entity.ID},
+            };
+
+            string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id OR parent = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }
