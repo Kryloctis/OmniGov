@@ -40,7 +40,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             {
                 Helper.MessageBoxSuccess("New node has been saved.");
                 LoadTaxTypes();
-                //uc.ResetForm();
             }
         }
 
@@ -54,7 +53,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            int parent = 1;
+            int parent = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             int fundID = Convert.ToInt32(cmbxFundType.SelectedValue);
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
@@ -118,9 +117,10 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             panel2.Enabled = true;
             btnSave.Enabled = true;
+            btnSave.Text = "Save";
             btnCancel.Enabled = true;
 
-            cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag.ToString()));
+            cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(treeViewTaxTypes.SelectedNode == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag));
             ClearFields();
         }
 
@@ -141,7 +141,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             txtCode.Focus();
             txtCode.Clear();
             txtDesciption.Clear();
-            cmbxParentCode.Items.Clear();
+            cmbxParentCode.Text = string.Empty;
             cmbxFundType.SelectedIndex = 0;
             txtCOAAccountCode.Clear();
             txtBLFGAccountCode.Clear();
