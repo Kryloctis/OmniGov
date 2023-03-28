@@ -76,6 +76,7 @@
             this.treeViewTaxTypes.Name = "treeViewTaxTypes";
             this.treeViewTaxTypes.Size = new System.Drawing.Size(790, 161);
             this.treeViewTaxTypes.TabIndex = 1;
+            this.treeViewTaxTypes.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTaxTypes_BeforeSelect);
             this.treeViewTaxTypes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTaxTypes_AfterSelect);
             // 
             // panel2

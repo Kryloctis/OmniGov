@@ -77,11 +77,15 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             foreach (DataRow dr in dtTaxTypes.Rows)
             {
+               
                 parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
 
                 string taxTypeID = dr["id"].ToString();
                 parentNode.Tag = taxTypeID;
                 PopulateTreeView(taxTypeID, parentNode);
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    parentNode.ForeColor = Color.Gray;
             }
         }
 
@@ -100,16 +104,28 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 string taxTypeID = dr["id"].ToString();
                 childNode.Tag = taxTypeID;
                 PopulateTreeView(taxTypeID, childNode);
+
+                if (Convert.ToBoolean(dr["is_deleted"]))
+                    parentNode.ForeColor = Color.Gray;
             }
         }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            toolStripButtonEdit.Enabled = true;
-            toolStripButtonDelete.Enabled = true;
+            if (treeViewTaxTypes.SelectedNode.ForeColor != Color.Gray)
+            {
+                toolStripButtonEdit.Enabled = true;
+                toolStripButtonDelete.Enabled = true;
+            }
+            else
+            {
+                toolStripButtonEdit.Enabled = false;
+                toolStripButtonDelete.Enabled = false;
+            }
 
             if (panel2.Enabled)
                 ShowDetailsOfSelectedTaxType();
+
         }
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
@@ -120,9 +136,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             toolStripButtonEdit.Enabled = false;
             toolStripButtonDelete.Enabled = false;
             btnSave.Text = "Save";
-
-
-
 
             int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
             cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID); 
@@ -246,6 +259,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
 
             return false;
+        }
+
+        private void treeViewTaxTypes_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            if (SystemColors.GrayText == e.Node.ForeColor)
+                e.Cancel = true;
         }
     }
 }
