@@ -26,7 +26,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCode.Text))
+            if (string.IsNullOrEmpty(cmbxParentCode.Text))
             {
                 TreeNode node = new TreeNode(txtDesciption.Text);
                 treeViewTaxTypes.Nodes.Add(node);
@@ -37,24 +37,19 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 treeViewTaxTypes.SelectedNode.Nodes.Add(node); 
             }
 
-            if (InsertNewNode())
+            if (InsertNewTaxTypes())
             {
                 Helper.MessageBoxSuccess("New node has been saved.");
                 LoadTaxTypes();
+                ClearFields();
             }
         }
 
-        private bool InsertNewNode()
+        private bool InsertNewTaxTypes()
         {
-            if (!ValidateChildren())
-            {
-                //Helper.MessageBoxError(GetFormErrors());
-                //return false;
-            }
-
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            int parent = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+            var parent = string.IsNullOrEmpty(cmbxParentCode.Text) ? null : treeViewTaxTypes.SelectedNode.Tag.ToString();
             int fundID = Convert.ToInt32(cmbxFundType.SelectedValue);
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
@@ -84,8 +79,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             {
                 parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
 
-                parentNode.Tag = dr["id"].ToString();
-                PopulateTreeView(dr["id"].ToString(), parentNode);
+                string taxTypeID = dr["id"].ToString();
+                parentNode.Tag = taxTypeID;
+                PopulateTreeView(taxTypeID, parentNode);
             }
         }
 
@@ -101,8 +97,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 else
                     childNode = parentNode.Nodes.Add(dr["description"].ToString());
 
-                childNode.Tag = dr["id"].ToString();
-                PopulateTreeView(dr["id"].ToString(), childNode);
+                string taxTypeID = dr["id"].ToString();
+                childNode.Tag = taxTypeID;
+                PopulateTreeView(taxTypeID, childNode);
             }
         }
 
@@ -112,24 +109,32 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             toolStripButtonDelete.Enabled = true;
 
             if (panel2.Enabled)
-                GetSelectedNode();
+                ShowDetailsOfSelectedTaxType();
         }
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
             panel2.Enabled = true;
             btnSave.Enabled = true;
-            btnSave.Text = "Save";
             btnCancel.Enabled = true;
+            toolStripButtonEdit.Enabled = false;
+            toolStripButtonDelete.Enabled = false;
+            btnSave.Text = "Save";
 
-            cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(treeViewTaxTypes.SelectedNode == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag));
-            ClearFields();
+
+
+
+            int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
+            cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID); 
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             panel2.Enabled = false;
-            toolStripButtonEdit.Enabled = false;
+            toolStrip2.Enabled = true;
+            toolStripButtonEdit.Enabled = true;
+            toolStripButtonDelete.Enabled = true;
             btnSave.Text = "Save";
             btnSave.Enabled = false;
             btnCancel.Enabled = false;
@@ -187,19 +192,20 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             btnSave.Text = "Update";
             btnSave.Enabled = true; 
             btnCancel.Enabled = true;
-            GetSelectedNode();
+            toolStrip2.Enabled = false;
+
+            ShowDetailsOfSelectedTaxType();
         }
 
-        private void GetSelectedNode()
+        private void ShowDetailsOfSelectedTaxType()
         {
             try
             {
+                int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+                int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
 
-                int selectedNode = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
-                int selectedNodeParent = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
-
-                var dictTaxTypes = AccFactory.TaxTypesRepository().GetRecordByID(selectedNode);
-                string parentCode = AccFactory.TaxTypesRepository().GetParentCodeByID(selectedNodeParent);
+                var dictTaxTypes = AccFactory.TaxTypesRepository().GetRecordByID(taxTypeID);
+                string parentCode = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID);
 
                 txtCode.Text = dictTaxTypes["code"];
                 txtDesciption.Text = dictTaxTypes["description"];

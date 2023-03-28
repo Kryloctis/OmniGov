@@ -126,7 +126,7 @@ namespace AccountingSystem
             {
                 new object[] { "@code", DbType.String, entity.Code },
                 new object[] { "@description", DbType.String, entity.Description },
-                new object[] { "@parent", DbType.Int32, entity.ParentID },
+                new object[] { "@parent", DbType.String, entity.ParentID },
                 new object[] { "@funds_id", DbType.Int32, entity.FundID },
                 new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
                 new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },

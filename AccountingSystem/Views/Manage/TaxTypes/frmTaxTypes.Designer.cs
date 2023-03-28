@@ -71,6 +71,7 @@
             // treeViewTaxTypes
             // 
             this.treeViewTaxTypes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewTaxTypes.HideSelection = false;
             this.treeViewTaxTypes.Location = new System.Drawing.Point(4, 4);
             this.treeViewTaxTypes.Name = "treeViewTaxTypes";
             this.treeViewTaxTypes.Size = new System.Drawing.Size(790, 161);
