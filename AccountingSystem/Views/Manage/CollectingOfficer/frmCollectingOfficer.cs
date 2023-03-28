@@ -133,7 +133,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void btnJobOrder_Click(object sender, EventArgs e)
         {
-            var collectingOfficerId = Convert.ToInt32(dgCollectingOfficer.CurrentRow.Cells[0].Value);
+            int collectingOfficerId = int.Parse(dgCollectingOfficer.SelectedCells[0].Value.ToString());
             _ = new frmJobOrder(collectingOfficerId).ShowDialog();
         }
     }
