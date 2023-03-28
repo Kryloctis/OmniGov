@@ -146,7 +146,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 PopulateTreeView(taxTypeID, childNode);
 
                 if (Convert.ToBoolean(dr["is_deleted"]))
-                    parentNode.ForeColor = Color.Gray;
+                    childNode.ForeColor = Color.Gray;
             }
         }
 
@@ -222,7 +222,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             LoadFunds();
             LoadTaxTypes();
-            //LoadParentCode();
         }
 
         private void LoadParentCode()
@@ -325,6 +324,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 {
                     Helper.MessageBoxSuccess("Tax type has been undeleted.");
                     LoadTaxTypes();
+                    treeViewTaxTypes.Refresh();
                 }
             }
             catch (Exception)

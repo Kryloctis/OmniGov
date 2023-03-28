@@ -233,7 +233,7 @@
             // toolStripButtonEdit
             // 
             this.toolStripButtonEdit.Enabled = false;
-            this.toolStripButtonEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_24px;
+            this.toolStripButtonEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.toolStripButtonEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
@@ -245,7 +245,7 @@
             // toolStripButtonDelete
             // 
             this.toolStripButtonDelete.Enabled = false;
-            this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_24px;
+            this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.toolStripButtonDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
