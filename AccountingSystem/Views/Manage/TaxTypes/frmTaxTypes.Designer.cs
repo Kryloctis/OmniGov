@@ -47,6 +47,8 @@
             this.toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonUndelete = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -207,7 +209,9 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonNew,
             this.toolStripButtonEdit,
-            this.toolStripButtonDelete});
+            this.toolStripButtonDelete,
+            this.toolStripSeparator1,
+            this.toolStripButtonUndelete});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Padding = new System.Windows.Forms.Padding(4);
@@ -249,6 +253,23 @@
             this.toolStripButtonDelete.Text = "&Delete";
             this.toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 46);
+            // 
+            // toolStripButtonUndelete
+            // 
+            this.toolStripButtonUndelete.Image = global::AccountingSystem.Properties.Resources.symbol_refresh_28px;
+            this.toolStripButtonUndelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolStripButtonUndelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUndelete.Name = "toolStripButtonUndelete";
+            this.toolStripButtonUndelete.Size = new System.Drawing.Size(58, 43);
+            this.toolStripButtonUndelete.Text = "&Undelete";
+            this.toolStripButtonUndelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButtonUndelete.Visible = false;
+            this.toolStripButtonUndelete.Click += new System.EventHandler(this.toolStripButtonUndelete_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -351,5 +372,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripButton toolStripButtonUndelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

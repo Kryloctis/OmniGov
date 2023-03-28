@@ -29,6 +29,17 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
+        public bool DeleteTaxType(int taxTypeID)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@id", DbType.Int32, taxTypeID},
+            };
+
+            string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id OR parent = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
         public DataTable GetChildNodesTaxTypes(int parentID)
         {
             var parameter = new object[][]
@@ -137,14 +148,31 @@ namespace AccountingSystem
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
 
+        public bool UnDeleteTaxType(int taxTypeID)
+        {
+            var parameters = new object[][]
+             {
+                new object[] { "@id", DbType.Int32, taxTypeID},
+             };
+
+            string query = $"UPDATE {tableName} SET is_deleted = 0 WHERE id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+        }
+
         public bool Update(TaxTypesModel entity)
         {
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.ID},
+                new object[] { "@code", DbType.String, entity.Code},
+                new object[] { "@description", DbType.String, entity.Description},
+                new object[] { "@funds_id", DbType.Int32, entity.FundID},
+                new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode},
+                new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode},
             };
 
-            string query = $"UPDATE {tableName} SET is_deleted = 1 WHERE id = @id OR parent = @id";
+            string query = $"UPDATE {tableName} SET code = @code, description = @description, funds_id = @funds_id, coa_account_code = @coa_account_code, blgf_account_code = @blgf_account_code WHERE id = @id";
+
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }

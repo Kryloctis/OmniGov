@@ -13,5 +13,8 @@ namespace ACC.Domain.Interfaces
         DataTable GetChildNodesTaxTypes(int parentID);
         DataTable GetTaxTypeCodes();
         string GetParentCodeByID(int parentID);
+
+        bool DeleteTaxType(int taxTypeID);
+        bool UnDeleteTaxType(int taxTypeID);
     }
 }
