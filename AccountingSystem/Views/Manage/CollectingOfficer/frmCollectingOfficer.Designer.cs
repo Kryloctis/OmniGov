@@ -29,7 +29,6 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCollectingOfficer));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnEdit = new System.Windows.Forms.ToolStripButton();
@@ -77,7 +76,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -89,11 +88,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Size = new System.Drawing.Size(31, 47);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -101,7 +100,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -118,11 +117,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             // btnJobOrder
             // 
             this.btnJobOrder.Enabled = false;
-            this.btnJobOrder.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_28px;
+            this.btnJobOrder.Image = global::AccountingSystem.Properties.Resources.document_delivery_receipt_user_filled_20px;
             this.btnJobOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnJobOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnJobOrder.Name = "btnJobOrder";
-            this.btnJobOrder.Size = new System.Drawing.Size(32, 47);
+            this.btnJobOrder.Size = new System.Drawing.Size(27, 47);
             this.btnJobOrder.Text = "J.O";
             this.btnJobOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnJobOrder.Click += new System.EventHandler(this.btnJobOrder_Click);
