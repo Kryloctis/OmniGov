@@ -21,7 +21,8 @@ namespace AccountingSystem
 
         public int CountRecords()
         {
-            throw new System.NotImplementedException();
+            string query = $"SELECT COUNT(id) FROM {tableName} ";
+            return Convert.ToInt32(_dbGenericCommands.ExecuteNonQuery(query));
         }
 
         public bool Delete(List<TaxTypesModel> entityList)

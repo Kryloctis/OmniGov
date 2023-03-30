@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeViewTaxTypes = new System.Windows.Forms.TreeView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -53,11 +54,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -139,6 +142,8 @@
             this.txtDesciption.Name = "txtDesciption";
             this.txtDesciption.Size = new System.Drawing.Size(269, 23);
             this.txtDesciption.TabIndex = 2;
+            this.txtDesciption.Validating += new System.ComponentModel.CancelEventHandler(this.txtDesciption_Validating);
+            this.txtDesciption.Validated += new System.EventHandler(this.txtDesciption_Validated);
             // 
             // txtCode
             // 
@@ -146,6 +151,8 @@
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(269, 23);
             this.txtCode.TabIndex = 1;
+            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
+            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
             // 
             // label6
             // 
@@ -315,6 +322,10 @@
             this.panel3.Size = new System.Drawing.Size(798, 233);
             this.panel3.TabIndex = 13;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmTaxTypes
             // 
             this.AcceptButton = this.btnSave;
@@ -341,6 +352,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +386,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ToolStripButton toolStripButtonUndelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

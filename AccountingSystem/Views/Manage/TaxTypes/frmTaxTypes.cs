@@ -1,43 +1,37 @@
-﻿using ACC.Domain.Models;
-using AccountingSystem.Views.Manage.TaxPayers;
-using DocumentFormat.OpenXml.EMMA;
-using Microsoft.CodeAnalysis.Diagnostics;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Manage.TaxTypes
 {
     public partial class frmTaxTypes : Form
     {
         private bool isUpdate = false;
+
         public frmTaxTypes()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
         }
 
+        internal string GetFormErrors()
+        {
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtDesciption),
+                errorProvider1.GetError(txtCode)
+            };
+
+            IError error = AccFactory.CreateErrors(errorArray);
+            return error.GenerateErrorMessage();
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbxParentCode.Text))
-            {
-                TreeNode node = new TreeNode(txtDesciption.Text);
-                treeViewTaxTypes.Nodes.Add(node);
-            }
-            else 
-            {
-                TreeNode node = new TreeNode(txtDesciption.Text);
-                treeViewTaxTypes.SelectedNode.Nodes.Add(node); 
-            }
-
             if (!isUpdate)
             {
                 if (InsertNewTaxTypes())
@@ -58,11 +52,16 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                     ClearFields();
                 }
             }
-           
         }
 
         private bool InsertNewTaxTypes()
         {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
             var parent = string.IsNullOrEmpty(cmbxParentCode.Text) ? null : treeViewTaxTypes.SelectedNode.Tag.ToString();
@@ -85,6 +84,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private bool UpdateTaxTypes()
         {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
             int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
@@ -183,9 +188,11 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             btnSave.Text = "Save";
             isUpdate = false;
 
-            int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
-            cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID); 
-
+            if (AccFactory.TaxTypesRepository().CountRecords() != 0)
+            {
+                int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
+                cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID); 
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -343,6 +350,26 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
 
             return false;
+        }
+
+        private void txtDesciption_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtDesciption, "Description.");
+        }
+
+        private void txtDesciption_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtDesciption);
+        }
+
+        private void txtCode_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Code.");
+        }
+
+        private void txtCode_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
     }
 }
