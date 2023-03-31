@@ -46,23 +46,27 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSetBalance = new System.Windows.Forms.ToolStripButton();
             this.dgSubsidiary = new System.Windows.Forms.DataGridView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSubsidiary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(10, 58);
+            this.groupBox1.Location = new System.Drawing.Point(4, 4);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(872, 132);
+            this.groupBox1.Size = new System.Drawing.Size(887, 136);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General Ledger Account Details";
@@ -82,23 +86,24 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.panel1.Location = new System.Drawing.Point(3, 18);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(866, 112);
+            this.panel1.Size = new System.Drawing.Size(881, 116);
             this.panel1.TabIndex = 0;
             // 
             // txtYear
             // 
             this.txtYear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtYear.Location = new System.Drawing.Point(62, 86);
+            this.txtYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtYear.Location = new System.Drawing.Point(62, 89);
             this.txtYear.Name = "txtYear";
             this.txtYear.ReadOnly = true;
-            this.txtYear.Size = new System.Drawing.Size(801, 23);
+            this.txtYear.Size = new System.Drawing.Size(816, 23);
             this.txtYear.TabIndex = 6;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 89);
+            this.label4.Location = new System.Drawing.Point(5, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 15);
             this.label4.TabIndex = 5;
@@ -108,16 +113,17 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             this.txtFund.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFund.Location = new System.Drawing.Point(62, 57);
+            this.txtFund.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFund.Location = new System.Drawing.Point(62, 60);
             this.txtFund.Name = "txtFund";
             this.txtFund.ReadOnly = true;
-            this.txtFund.Size = new System.Drawing.Size(801, 23);
+            this.txtFund.Size = new System.Drawing.Size(816, 23);
             this.txtFund.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 60);
+            this.label3.Location = new System.Drawing.Point(6, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(34, 15);
             this.label3.TabIndex = 3;
@@ -127,17 +133,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCode.Location = new System.Drawing.Point(62, 2);
+            this.txtCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCode.Location = new System.Drawing.Point(62, 5);
             this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(801, 23);
+            this.txtCode.Size = new System.Drawing.Size(814, 23);
             this.txtCode.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 32);
+            this.label2.Location = new System.Drawing.Point(5, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 2;
@@ -147,17 +154,18 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             this.txtAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAccount.Location = new System.Drawing.Point(62, 29);
+            this.txtAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAccount.Location = new System.Drawing.Point(62, 32);
             this.txtAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.ReadOnly = true;
-            this.txtAccount.Size = new System.Drawing.Size(801, 23);
+            this.txtAccount.Size = new System.Drawing.Size(816, 23);
             this.txtAccount.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 4);
+            this.label1.Location = new System.Drawing.Point(5, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 15);
             this.label1.TabIndex = 0;
@@ -176,14 +184,14 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.btnSetBalance});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 3, 1, 3);
-            this.toolStrip1.Size = new System.Drawing.Size(895, 56);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(895, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
@@ -194,7 +202,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnEdit
             // 
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
@@ -205,7 +213,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -221,38 +229,55 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             // 
             // btnSetBalance
             // 
-            this.btnSetBalance.Image = global::AccountingSystem.Properties.Resources.tool_notebook_filled_money_coins_filled_28px;
+            this.btnSetBalance.Image = global::AccountingSystem.Properties.Resources.tool_notebook_filled_money_coins_filled_20px;
             this.btnSetBalance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSetBalance.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSetBalance.Name = "btnSetBalance";
-            this.btnSetBalance.Size = new System.Drawing.Size(80, 47);
+            this.btnSetBalance.Size = new System.Drawing.Size(80, 39);
             this.btnSetBalance.Text = "Set Balance...";
             this.btnSetBalance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSetBalance.Click += new System.EventHandler(this.BtnSetBalance_Click);
             // 
             // dgSubsidiary
             // 
-            this.dgSubsidiary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgSubsidiary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgSubsidiary.Location = new System.Drawing.Point(10, 194);
+            this.dgSubsidiary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSubsidiary.Location = new System.Drawing.Point(4, 4);
             this.dgSubsidiary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgSubsidiary.Name = "dgSubsidiary";
             this.dgSubsidiary.RowHeadersWidth = 51;
             this.dgSubsidiary.RowTemplate.Height = 29;
-            this.dgSubsidiary.Size = new System.Drawing.Size(872, 300);
+            this.dgSubsidiary.Size = new System.Drawing.Size(887, 299);
             this.dgSubsidiary.TabIndex = 8;
             this.dgSubsidiary.SelectionChanged += new System.EventHandler(this.dgSubsidiary_SelectionChanged);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 50);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(4);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgSubsidiary);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.splitContainer1.Size = new System.Drawing.Size(895, 455);
+            this.splitContainer1.SplitterDistance = 144;
+            this.splitContainer1.TabIndex = 9;
             // 
             // frmSubsidiary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(895, 505);
-            this.Controls.Add(this.dgSubsidiary);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(911, 544);
@@ -267,6 +292,10 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSubsidiary)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,5 +320,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
