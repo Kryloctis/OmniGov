@@ -62,6 +62,7 @@
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -256,6 +257,7 @@
             this.discountToolStripMenuItem,
             this.penaltyToolStripMenuItem,
             this.taxRateToolStripMenuItem,
+            this.taxTypesToolStripMenuItem,
             this.toolStripSeparator9,
             this.menuDatabaseSynchronization});
             this.menuManage.Name = "menuManage";
@@ -450,6 +452,13 @@
             this.taxRateToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.taxRateToolStripMenuItem.Text = "Tax Rates...";
             this.taxRateToolStripMenuItem.Click += new System.EventHandler(this.taxRateToolStripMenuItem_Click);
+            // 
+            // taxTypesToolStripMenuItem
+            // 
+            this.taxTypesToolStripMenuItem.Name = "taxTypesToolStripMenuItem";
+            this.taxTypesToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.taxTypesToolStripMenuItem.Text = "Tax Types";
+            this.taxTypesToolStripMenuItem.Click += new System.EventHandler(this.taxTypesToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -1529,5 +1538,6 @@
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
     }
 }

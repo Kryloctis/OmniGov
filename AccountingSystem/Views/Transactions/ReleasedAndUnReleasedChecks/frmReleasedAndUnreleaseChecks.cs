@@ -89,7 +89,7 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                 int fundsID = Convert.ToInt32(cmbxFund.SelectedValue);
 
                 var releasedChequesRepo = AccFactory.ReleasedChequesRepository();
-                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach);
+                var dtViewReleasedCheques = releasedChequesRepo.GetViewRecords(bankAccountID, fundsID, txtSeach, cbxShowReleasedChecks.Checked);
 
                 releasedAndUnreleasedDT = new DataTable();
                 releasedAndUnreleasedDT.Columns.AddRange(ReleasedAndUnreleaseChequesColumn());
@@ -228,6 +228,11 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
         }
 
         private void cmbxFund_SelectedValueChanged(object sender, EventArgs e)
+        {
+            LoadChecks();
+        }
+
+        private void cbxShowReleasedChecks_CheckedChanged(object sender, EventArgs e)
         {
             LoadChecks();
         }

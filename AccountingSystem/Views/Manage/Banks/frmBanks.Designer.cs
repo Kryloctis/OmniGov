@@ -121,18 +121,18 @@ namespace AccountingSystem.Views.Manage.Banks
             this.btnDelete});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip.Size = new System.Drawing.Size(794, 58);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(4, 4, 4, 0);
+            this.toolStrip.Size = new System.Drawing.Size(794, 46);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.add;
+            this.btnAdd.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
             this.btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(33, 47);
+            this.btnAdd.Size = new System.Drawing.Size(33, 39);
             this.btnAdd.Text = "Add";
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAdd.ToolTipText = "Add";
@@ -141,11 +141,11 @@ namespace AccountingSystem.Views.Manage.Banks
             // btnEdit
             // 
             this.btnEdit.Enabled = false;
-            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.edit;
+            this.btnEdit.Image = global::AccountingSystem.Properties.Resources.button_rounded_edit_20px;
             this.btnEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(32, 47);
+            this.btnEdit.Size = new System.Drawing.Size(31, 39);
             this.btnEdit.Text = "Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -153,11 +153,11 @@ namespace AccountingSystem.Views.Manage.Banks
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
+            this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -172,7 +172,7 @@ namespace AccountingSystem.Views.Manage.Banks
             this.dgBanks.RowHeadersWidth = 51;
             this.dgBanks.RowTemplate.Height = 29;
             this.dgBanks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBanks.Size = new System.Drawing.Size(786, 309);
+            this.dgBanks.Size = new System.Drawing.Size(786, 321);
             this.dgBanks.TabIndex = 8;
             this.dgBanks.SelectionChanged += new System.EventHandler(this.dgBanks_SelectionChanged);
             // 
@@ -192,10 +192,10 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             this.panel1.Controls.Add(this.dgBanks);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 58);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(794, 317);
+            this.panel1.Size = new System.Drawing.Size(794, 329);
             this.panel1.TabIndex = 10;
             // 
             // frmBanks

@@ -23,6 +23,7 @@ using AccountingSystem.Views.Manage.RptPenalties;
 using AccountingSystem.Views.Manage.RptTaxRates;
 using AccountingSystem.Views.Manage.Signatories;
 using AccountingSystem.Views.Manage.TaxPayers;
+using AccountingSystem.Views.Manage.TaxTypes;
 using AccountingSystem.Views.Manage.Users.List;
 using AccountingSystem.Views.Manage.Users.Roles;
 using AccountingSystem.Views.Reports.Cashbook;
@@ -726,5 +727,11 @@ namespace AccountingSystem
         {
             _ = new frmBankAccounts().ShowDialog();
         }
+
+        private void taxTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _ = new frmTaxTypes().ShowDialog();
+        }
+
     }
 }

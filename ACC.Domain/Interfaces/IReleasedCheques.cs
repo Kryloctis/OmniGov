@@ -9,7 +9,7 @@ namespace ACC.Domain.Interfaces
     public interface IReleasedCheques : IAccRepository<ReleasedChequesModel>
     {
         DataTable GetViewRecords();
-        DataTable GetViewRecords(int bankAccountID, int fundsID, string txtSeach);
+        DataTable GetViewRecords(int bankAccountID, int fundsID, string txtSeach, bool showReleasedOnly);
         DataTable GetViewRecordsByBankAccountID(int bankAccountIDID);
         DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredUnReleased(int bankAccountID, string periodCovered);
         DataTable GetViewRecordsByBankAccountIDAndPeriodCoveredReleased(int bankAccountID, string periodCovered);

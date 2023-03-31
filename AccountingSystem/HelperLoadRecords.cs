@@ -1068,6 +1068,8 @@ namespace AccountingSystem
         {
             datagrid.DataSource = dataTable;
             datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
             datagrid.Columns["bank_code"].HeaderText = "Bank Code";
             datagrid.Columns["bank_code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             datagrid.Columns["bank_name"].HeaderText = "Bank Name";
