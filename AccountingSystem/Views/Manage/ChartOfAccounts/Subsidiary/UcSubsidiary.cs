@@ -52,26 +52,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts.Subsidiary
             e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "code");
         }
 
-        private void txtContact_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtContact);
-        }
-
-        private void txtContact_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContact, "address");
-        }
-
-        private void txtContactPerson_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtContactPerson);
-        }
-
-        private void txtContactPerson_Validating(object sender, CancelEventArgs e)
-        {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtContactPerson, "address");
-        }
-
         private void txtName_Validated(object sender, EventArgs e)
         {
             Helper.ClearErrorTextBox(errorProvider1, txtName);
