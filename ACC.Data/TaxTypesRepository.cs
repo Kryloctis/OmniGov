@@ -7,7 +7,7 @@ using System.Data;
 
 namespace AccountingSystem
 {
-    internal class TaxTypesRepository : ITaxTypesRepository
+    public class TaxTypesRepository : ITaxTypesRepository
     {
 
         private readonly IAccGenericCommands _dbGenericCommands;

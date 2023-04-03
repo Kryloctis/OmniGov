@@ -219,7 +219,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             txtCode.Clear();
             txtDesciption.Clear();
             cmbxParentCode.Text = string.Empty;
-            cmbxFundType.SelectedIndex = 0;
+            cmbxFundType.SelectedIndex = -1;
             txtCOAAccountCode.Clear();
             txtBLFGAccountCode.Clear();
             isUpdate = false;

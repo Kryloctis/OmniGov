@@ -115,7 +115,6 @@
             // 
             // cmbxFundType
             // 
-            this.cmbxFundType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbxFundType.FormattingEnabled = true;
             this.cmbxFundType.Location = new System.Drawing.Point(163, 93);
             this.cmbxFundType.Name = "cmbxFundType";
@@ -336,7 +335,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimumSize = new System.Drawing.Size(814, 470);
             this.Name = "frmTaxTypes";
             this.ShowInTaskbar = false;
