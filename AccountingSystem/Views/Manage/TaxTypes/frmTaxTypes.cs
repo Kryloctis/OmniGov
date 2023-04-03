@@ -66,7 +66,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            var parent = string.IsNullOrEmpty(cmbxParentCode.Text) ? null : treeViewTaxTypes.SelectedNode.Tag.ToString();
+            int parent = Convert.ToInt32(cmbxParentCode.SelectedValue);
             var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
@@ -95,8 +95,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
-            var parent = string.IsNullOrEmpty(cmbxParentCode.Text) ? null : treeViewTaxTypes.SelectedNode.Tag.ToString();
-            int fundID = Convert.ToInt32(cmbxFundType.SelectedValue);
+            int parent = Convert.ToInt32(cmbxParentCode.SelectedValue);
+            var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
 
@@ -117,6 +117,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         private void LoadTaxTypes()
         {
             treeViewTaxTypes.Nodes.Clear();
+            childImageIndexCounter = 1;
 
             var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
  
@@ -229,7 +230,8 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             if (AccFactory.TaxTypesRepository().CountRecords() != 0)
             {
                 int taxTypeParentCodeID = treeViewTaxTypes.SelectedNode.Parent == null ? 0 : Convert.ToInt32(treeViewTaxTypes.SelectedNode.Parent.Tag);
-                cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID); 
+                cmbxParentCode.Text = AccFactory.TaxTypesRepository().GetParentCodeByID(taxTypeParentCodeID);
+
             }
         }
 
@@ -262,12 +264,14 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             txtCOAAccountCode.Clear();
             txtBLFGAccountCode.Clear();
             isUpdate = false;
+            LoadParentCode();
         }
 
         private void frmTaxTypes_Load(object sender, EventArgs e)
         {
             LoadFunds();
             LoadTaxTypes();
+            LoadParentCode();
         }
 
         private void LoadParentCode()
@@ -278,6 +282,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 cmbxParentCode.DataSource = dtParentCode;
                 cmbxParentCode.ValueMember = "id";
                 cmbxParentCode.DisplayMember = "code";
+                cmbxParentCode.SelectedIndex = -1;
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -410,5 +415,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
+
     }
 }

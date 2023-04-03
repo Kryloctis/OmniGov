@@ -138,7 +138,7 @@ namespace AccountingSystem
             {
                 new object[] { "@code", DbType.String, entity.Code },
                 new object[] { "@description", DbType.String, entity.Description },
-                new object[] { "@parent", DbType.String, entity.ParentID },
+                new object[] { "@parent", DbType.Int32, entity.ParentID },
                 new object[] { "@funds_id", DbType.Int32, entity.FundID },
                 new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
                 new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },
@@ -165,14 +165,15 @@ namespace AccountingSystem
             var parameters = new object[][]
             {
                 new object[] { "@id", DbType.Int32, entity.ID},
-                new object[] { "@code", DbType.String, entity.Code},
-                new object[] { "@description", DbType.String, entity.Description},
-                new object[] { "@funds_id", DbType.Int32, entity.FundID},
-                new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode},
-                new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode},
+                new object[] { "@code", DbType.String, entity.Code },
+                new object[] { "@description", DbType.String, entity.Description },
+                new object[] { "@parent", DbType.Int32, entity.ParentID },
+                new object[] { "@funds_id", DbType.Int32, entity.FundID },
+                new object[] { "@coa_account_code", DbType.String, entity.COAAccountCode },
+                new object[] { "@blgf_account_code", DbType.String, entity.BLGFAccountCode },
             };
 
-            string query = $"UPDATE {tableName} SET code = @code, description = @description, funds_id = @funds_id, coa_account_code = @coa_account_code, blgf_account_code = @blgf_account_code WHERE id = @id";
+            string query = $"UPDATE {tableName} SET code = @code, description = @description, parent = @parent, funds_id = @funds_id, coa_account_code = @coa_account_code, blgf_account_code = @blgf_account_code WHERE id = @id";
 
             return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
