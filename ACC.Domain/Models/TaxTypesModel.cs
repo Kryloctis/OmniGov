@@ -10,7 +10,7 @@ namespace ACC.Domain.Models
         public string Code { get; set; }
         public string Description { get; set; }
         public string ParentID { get; set; }
-        public int FundID { get; set; }
+        public object FundID { get; set; }
         public string COAAccountCode { get; set; }
         public string BLGFAccountCode { get; set; }
         public bool IsDeleted { get; set; }

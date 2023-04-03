@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AccountingSystem.Views.Manage.TaxTypes
 {
@@ -66,7 +67,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             string code = txtCode.Text;
             string desciption = txtDesciption.Text;
             var parent = string.IsNullOrEmpty(cmbxParentCode.Text) ? null : treeViewTaxTypes.SelectedNode.Tag.ToString();
-            int fundID = Convert.ToInt32(cmbxFundType.SelectedValue);
+            var fundID = (cmbxFundType.SelectedIndex == -1) ? null : cmbxFundType.SelectedValue;
             string coaAccountCode = txtCOAAccountCode.Text;
             string BLFGAccountCode = txtBLFGAccountCode.Text;
 
@@ -135,10 +136,28 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             }
         }
 
+
+        private void CreateImageList(ref ImageList nodeImageList)
+        {
+            nodeImageList.Images.Add("0", Properties.Resources.tree_view_tax_18);
+            nodeImageList.Images.Add("1", Properties.Resources.tree_view_accounting_18);
+            nodeImageList.Images.Add("2", Properties.Resources.tree_view_estimates_18);
+            nodeImageList.Images.Add("3", Properties.Resources.tree_view_receipt_dollar_18);
+            nodeImageList.Images.Add("4", Properties.Resources.tree_view_bill_18);
+
+            treeViewTaxTypes.ImageList = nodeImageList;
+            treeViewTaxTypes.ImageIndex = 0;
+            treeViewTaxTypes.SelectedImageIndex = 0;
+
+        }
+
         private void PopulateTreeView(string parentID, TreeNode parentNode)
         {
             var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
 
+
+            ImageList nodeImageList = new ImageList();
+            CreateImageList(ref nodeImageList);
 
             foreach (DataRow dr in dtChildNoTaxTypes.Rows)
             {
@@ -148,18 +167,19 @@ namespace AccountingSystem.Views.Manage.TaxTypes
                 {
                     childNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
                     childNode.ImageIndex = 0;
+                    childNode.SelectedImageIndex = 0;
                 }
 
                 else
                 {
                     childNode = parentNode.Nodes.Add(dr["description"].ToString());
                     childNode.ImageIndex = childImageIndexCounter;
+                    childNode.SelectedImageIndex = childImageIndexCounter;
 
-
-                    if (childImageIndexCounter >= imageList1.Images.Count)
+                    if (childImageIndexCounter >= nodeImageList.Images.Count)
                         childImageIndexCounter = 1;
                     else
-                        childImageIndexCounter = childImageIndexCounter + 1;
+                        childImageIndexCounter++;
                 }
 
 
@@ -172,7 +192,6 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             }
         }
-
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -238,6 +257,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             txtCode.Clear();
             txtDesciption.Clear();
             cmbxParentCode.Text = string.Empty;
+            cmbxFundType.Text = string.Empty;
             cmbxFundType.SelectedIndex = -1;
             txtCOAAccountCode.Clear();
             txtBLFGAccountCode.Clear();
