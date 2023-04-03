@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTaxTypes));
             this.panel1 = new System.Windows.Forms.Panel();
             this.treeViewTaxTypes = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.cmbxParentCode = new System.Windows.Forms.ComboBox();
             this.cmbxFundType = new System.Windows.Forms.ComboBox();
@@ -77,12 +79,26 @@
             // 
             this.treeViewTaxTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewTaxTypes.HideSelection = false;
+            this.treeViewTaxTypes.ImageIndex = 0;
+            this.treeViewTaxTypes.ImageList = this.imageList1;
             this.treeViewTaxTypes.Location = new System.Drawing.Point(4, 4);
             this.treeViewTaxTypes.Name = "treeViewTaxTypes";
+            this.treeViewTaxTypes.SelectedImageIndex = 0;
             this.treeViewTaxTypes.Size = new System.Drawing.Size(790, 161);
             this.treeViewTaxTypes.TabIndex = 1;
             this.treeViewTaxTypes.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTaxTypes_BeforeSelect);
             this.treeViewTaxTypes.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTaxTypes_AfterSelect);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "tree-view-tax-16.png");
+            this.imageList1.Images.SetKeyName(1, "tree-view-accounting-16.png");
+            this.imageList1.Images.SetKeyName(2, "tree-view-bill-16.png");
+            this.imageList1.Images.SetKeyName(3, "tree-view-estimates-16.png");
+            this.imageList1.Images.SetKeyName(4, "tree-view-receipt-dollar-16.png");
             // 
             // panel2
             // 
@@ -385,5 +401,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonUndelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

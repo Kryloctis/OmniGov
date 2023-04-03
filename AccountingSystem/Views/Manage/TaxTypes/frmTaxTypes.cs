@@ -11,6 +11,7 @@ namespace AccountingSystem.Views.Manage.TaxTypes
     public partial class frmTaxTypes : Form
     {
         private bool isUpdate = false;
+        int childImageIndexCounter = 1;
 
         public frmTaxTypes()
         {
@@ -138,13 +139,29 @@ namespace AccountingSystem.Views.Manage.TaxTypes
         {
             var dtChildNoTaxTypes = AccFactory.TaxTypesRepository().GetChildNodesTaxTypes(Convert.ToInt32(parentID));
 
+
             foreach (DataRow dr in dtChildNoTaxTypes.Rows)
             {
-                TreeNode childNode;
+                TreeNode childNode = new();
+
                 if (parentNode == null)
+                {
                     childNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
+                    childNode.ImageIndex = 0;
+                }
+
                 else
+                {
                     childNode = parentNode.Nodes.Add(dr["description"].ToString());
+                    childNode.ImageIndex = childImageIndexCounter;
+
+
+                    if (childImageIndexCounter >= imageList1.Images.Count)
+                        childImageIndexCounter = 1;
+                    else
+                        childImageIndexCounter = childImageIndexCounter + 1;
+                }
+
 
                 string taxTypeID = dr["id"].ToString();
                 childNode.Tag = taxTypeID;
@@ -152,8 +169,10 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
                 if (Convert.ToBoolean(dr["is_deleted"]))
                     childNode.ForeColor = Color.Gray;
+
             }
         }
+
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
         {
