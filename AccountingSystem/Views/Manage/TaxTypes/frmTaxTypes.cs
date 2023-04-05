@@ -73,9 +73,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
             var taxTypesModel = new TaxTypesModel()
             {
-                Code = code, 
+                Code = code,
                 Description = desciption,
-                ParentID = parent, 
+                ParentID = parent,
                 FundID = fundID,
                 COAAccountCode = coaAccountCode,
                 BLGFAccountCode = BLFGAccountCode
@@ -120,12 +120,12 @@ namespace AccountingSystem.Views.Manage.TaxTypes
             childImageIndexCounter = 1;
 
             var dtTaxTypes = AccFactory.TaxTypesRepository().GetParentNodesTaxTypes();
- 
+
             TreeNode parentNode;
 
             foreach (DataRow dr in dtTaxTypes.Rows)
             {
-               
+
                 parentNode = treeViewTaxTypes.Nodes.Add(dr["description"].ToString());
 
                 string taxTypeID = dr["id"].ToString();
@@ -302,9 +302,9 @@ namespace AccountingSystem.Views.Manage.TaxTypes
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            panel2.Enabled = true;  
+            panel2.Enabled = true;
             btnSave.Text = "Update";
-            btnSave.Enabled = true; 
+            btnSave.Enabled = true;
             btnCancel.Enabled = true;
             toolStrip2.Enabled = false;
             isUpdate = true;

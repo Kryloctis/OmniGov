@@ -16,5 +16,31 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         {
             InitializeComponent();
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ucOtherPaymentRates_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadTaxTypes();
+            }
+        }
+
+        private void LoadTaxTypes()
+        {
+            try
+            {
+                DataTable dtTaxTypes = AccFactory.TaxTypesRepository().GetRecords();
+                cmbxTaxType.DataSource = dtTaxTypes;
+                cmbxTaxType.ValueMember = "id";
+                cmbxTaxType.DisplayMember = "code";
+                cmbxTaxType.SelectedIndex = -1;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
     }
 }

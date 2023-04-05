@@ -28,17 +28,155 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            txtRateID = new System.Windows.Forms.TextBox();
+            cmbxTaxType = new System.Windows.Forms.ComboBox();
+            txtDescription = new System.Windows.Forms.TextBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            nudStartingYear = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudStartingYear).BeginInit();
             SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(8, 10);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(44, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Rate ID";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(8, 38);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(51, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Tax Type";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(8, 66);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(67, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Description";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(8, 124);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(51, 15);
+            label4.TabIndex = 0;
+            label4.Text = "Amount";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(8, 153);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(73, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Starting Year";
+            // 
+            // txtRateID
+            // 
+            txtRateID.Location = new System.Drawing.Point(87, 7);
+            txtRateID.Name = "txtRateID";
+            txtRateID.Size = new System.Drawing.Size(202, 23);
+            txtRateID.TabIndex = 1;
+            txtRateID.WordWrap = false;
+            // 
+            // cmbxTaxType
+            // 
+            cmbxTaxType.DropDownHeight = 100;
+            cmbxTaxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxTaxType.FormattingEnabled = true;
+            cmbxTaxType.IntegralHeight = false;
+            cmbxTaxType.Location = new System.Drawing.Point(87, 38);
+            cmbxTaxType.Name = "cmbxTaxType";
+            cmbxTaxType.Size = new System.Drawing.Size(202, 23);
+            cmbxTaxType.TabIndex = 2;
+            // 
+            // txtDescription
+            // 
+            txtDescription.Location = new System.Drawing.Point(87, 67);
+            txtDescription.Multiline = true;
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new System.Drawing.Size(202, 48);
+            txtDescription.TabIndex = 1;
+            txtDescription.TextChanged += textBox2_TextChanged;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // nudAmount
+            // 
+            nudAmount.DecimalPlaces = 1;
+            nudAmount.Location = new System.Drawing.Point(87, 122);
+            nudAmount.Name = "nudAmount";
+            nudAmount.Size = new System.Drawing.Size(202, 23);
+            nudAmount.TabIndex = 3;
+            nudAmount.ThousandsSeparator = true;
+            // 
+            // nudStartingYear
+            // 
+            nudStartingYear.Location = new System.Drawing.Point(87, 151);
+            nudStartingYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            nudStartingYear.Minimum = new decimal(new int[] { 1901, 0, 0, 0 });
+            nudStartingYear.Name = "nudStartingYear";
+            nudStartingYear.Size = new System.Drawing.Size(202, 23);
+            nudStartingYear.TabIndex = 3;
+            nudStartingYear.Value = new decimal(new int[] { 2023, 0, 0, 0 });
             // 
             // ucOtherPaymentRates
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(nudStartingYear);
+            Controls.Add(nudAmount);
+            Controls.Add(cmbxTaxType);
+            Controls.Add(txtDescription);
+            Controls.Add(txtRateID);
+            Controls.Add(label5);
+            Controls.Add(label3);
+            Controls.Add(label4);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Name = "ucOtherPaymentRates";
-            Size = new System.Drawing.Size(440, 345);
+            Size = new System.Drawing.Size(305, 179);
+            Load += ucOtherPaymentRates_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudStartingYear).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtRateID;
+        private System.Windows.Forms.ComboBox cmbxTaxType;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.NumericUpDown nudAmount;
+        private System.Windows.Forms.NumericUpDown nudStartingYear;
     }
 }
