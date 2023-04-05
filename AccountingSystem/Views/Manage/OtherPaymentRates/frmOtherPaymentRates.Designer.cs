@@ -178,6 +178,7 @@
             Name = "frmOtherPaymentRates";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Manage > Other Payment Rates";
+            Load += frmOtherPaymentRates_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).EndInit();
             toolStrip2.ResumeLayout(false);

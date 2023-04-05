@@ -35,7 +35,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Name = "ucOtherPaymentRates";
-            Size = new System.Drawing.Size(357, 244);
+            Size = new System.Drawing.Size(440, 345);
             ResumeLayout(false);
         }
 
