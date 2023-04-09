@@ -2857,6 +2857,32 @@ namespace AccountingSystem
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
 
+
+
         #endregion Amortization Schedule
+
+        internal static void OtherPaymentRatesDatagridView(DataGridView datagrid, DataTable dataTable)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["tax_type_id"].Visible = false;
+            datagrid.Columns["is_rate_editable"].Visible = false;
+            datagrid.Columns["created_by"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_by"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+
+            datagrid.Columns["rate_id"].HeaderText = "Rate ID";
+            datagrid.Columns["rate_id"].MinimumWidth = 150;
+            datagrid.Columns["description"].HeaderText = "Description";
+            datagrid.Columns["description"].MinimumWidth = 400;
+            datagrid.Columns["amount"].HeaderText = "Amount";
+            datagrid.Columns["amount"].MinimumWidth = 150;
+            datagrid.Columns["amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["starting_year"].HeaderText = "Starting Year";
+            datagrid.Columns["starting_year"].MinimumWidth = 150;
+
+        }
     }
 }

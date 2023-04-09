@@ -15,6 +15,7 @@ using AccountingSystem.Views.Manage.DisbursingOfficer;
 using AccountingSystem.Views.Manage.FunctionProgramProject;
 using AccountingSystem.Views.Manage.Funds;
 using AccountingSystem.Views.Manage.Journals;
+using AccountingSystem.Views.Manage.OtherPaymentRates;
 using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Manage.Receipts;
 using AccountingSystem.Views.Manage.ReturnedReceipts;
@@ -733,5 +734,9 @@ namespace AccountingSystem
             _ = new frmTaxTypes().ShowDialog();
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            _ = new frmOtherPaymentRates().ShowDialog();
+        }
     }
 }

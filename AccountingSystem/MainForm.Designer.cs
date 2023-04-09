@@ -151,6 +151,7 @@
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -258,6 +259,7 @@
             this.penaltyToolStripMenuItem,
             this.taxRateToolStripMenuItem,
             this.taxTypesToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.toolStripSeparator9,
             this.menuDatabaseSynchronization});
             this.menuManage.Name = "menuManage";
@@ -1350,6 +1352,13 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 22);
+            this.toolStripMenuItem1.Text = "Other Payment Rates";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1539,5 +1548,6 @@
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
