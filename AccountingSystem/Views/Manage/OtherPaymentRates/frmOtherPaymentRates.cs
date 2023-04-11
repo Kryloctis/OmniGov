@@ -13,6 +13,8 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 {
     public partial class frmOtherPaymentRates : Form
     {
+
+
         public frmOtherPaymentRates()
         {
             InitializeComponent();
@@ -22,7 +24,10 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            _ = new frmEditOtherPaymentRates().ShowDialog();
+            int rowIndex = dgOtherPaymentRates.CurrentCell.RowIndex;
+            int otherPaymentRatesID = Convert.ToInt32(dgOtherPaymentRates.Rows[rowIndex].Cells["id"].Value);
+
+            _ = new frmEditOtherPaymentRates(this, otherPaymentRatesID).ShowDialog();
         }
 
         private void frmOtherPaymentRates_Load(object sender, EventArgs e)

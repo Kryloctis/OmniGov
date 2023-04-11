@@ -45,7 +45,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                     Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
                     return false;
                 }
-
                 string rateID = _ucOtherPaymentRates.txtRateID.Text;
                 int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
                 string description = _ucOtherPaymentRates.txtDescription.Text;

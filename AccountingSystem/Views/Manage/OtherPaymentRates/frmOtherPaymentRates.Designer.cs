@@ -185,6 +185,7 @@
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip2);
+            MinimizeBox = false;
             Name = "frmOtherPaymentRates";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,7 +28,29 @@ namespace AccountingSystem
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("rate_id", row["rate_id"].ToString());
+                    dict.Add("tax_type_id", row["tax_type_id"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("amount", row["amount"].ToString());
+                    dict.Add("starting_year", row["starting_year"].ToString());
+                    dict.Add("is_rate_editable", row["is_rate_editable"].ToString());
+                }
+
+                return dict;
+            }
         }
 
         public DataTable GetRecords()
@@ -66,7 +88,20 @@ namespace AccountingSystem
 
         public bool Update(OtherPaymentRatesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "id", DbType.String, entity.Id},
+                new object[] { "rate_id", DbType.String, entity.RateID},
+                new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
+                new object[] { "description", DbType.String, entity.Description},
+                new object[] { "amount", DbType.Decimal, entity.Amount},
+                new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "created_by", DbType.Int32, entity.CreatedBy},
+            };
+
+            string query = $"UPDATE {tableName} SET rate_id = @rate_id WHERE id = @id";
+
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

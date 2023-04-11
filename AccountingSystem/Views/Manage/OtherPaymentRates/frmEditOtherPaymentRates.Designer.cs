@@ -30,7 +30,7 @@
         {
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             btnCancel = new System.Windows.Forms.Button();
-            btnSave = new System.Windows.Forms.Button();
+            btnUpdate = new System.Windows.Forms.Button();
             ucOtherPaymentRates1 = new ucOtherPaymentRates();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -39,7 +39,7 @@
             // 
             flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Controls.Add(btnUpdate);
             flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 183);
@@ -56,16 +56,17 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnSave
+            // btnUpdate
             // 
-            btnSave.Image = Properties.Resources.save14px;
-            btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnSave.Location = new System.Drawing.Point(148, 3);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(75, 23);
-            btnSave.TabIndex = 0;
-            btnSave.Text = "Update";
-            btnSave.UseVisualStyleBackColor = true;
+            btnUpdate.Image = Properties.Resources.save14px;
+            btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnUpdate.Location = new System.Drawing.Point(137, 3);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new System.Drawing.Size(86, 23);
+            btnUpdate.TabIndex = 0;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // ucOtherPaymentRates1
             // 
@@ -76,7 +77,7 @@
             // 
             // frmEditOtherPaymentRates
             // 
-            AcceptButton = btnSave;
+            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = btnCancel;
@@ -89,6 +90,7 @@
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Other Payment Rates";
+            Load += frmEditOtherPaymentRates_Load;
             flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -97,7 +99,7 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnUpdate;
         private ucOtherPaymentRates ucOtherPaymentRates1;
     }
 }
