@@ -20,7 +20,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         public ucJEV()
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgAccounts);
+            Helper.DatagridFullRowSelectStyle(dgAccounts, true);
         }
 
         internal void SetJevReadOnly(bool isReadOnly)
@@ -48,6 +48,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnAddAccount.Enabled = !isReadOnly;
             btnEditAccount.Enabled = !isReadOnly;
             btnRemoveAccount.Enabled = !isReadOnly;
+            cmbCollectingDisbursingOfficer.Enabled = !isReadOnly;
 
             if (isReadOnly)
                 dgAccounts.SelectionChanged -= new EventHandler(dgAccounts_SelectionChanged);
@@ -427,11 +428,8 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 if (!DesignMode)
                 {
-                    Helper.DatagridFullRowSelectStyle(dgAccounts, true);
                     LoadFunds();
                     LoadJournals();
-                    btnEditAccount.Enabled = false;
-                    btnRemoveAccount.Enabled = false;
                     SetJournalFields("General Journal");
                 }
             }
