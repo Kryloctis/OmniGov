@@ -31,17 +31,18 @@
             panel1 = new System.Windows.Forms.Panel();
             dgOtherPaymentRates = new System.Windows.Forms.DataGridView();
             toolStrip2 = new System.Windows.Forms.ToolStrip();
-            toolStripButtonNew = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
-            toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            btnAdd = new System.Windows.Forms.ToolStripButton();
+            btnEdit = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblDateEntry = new System.Windows.Forms.ToolStripStatusLabel();
-            lblCreatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
-            lblCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelRecordCount = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            lblUpdatedAtPlaceHolder = new System.Windows.Forms.ToolStripStatusLabel();
-            lblUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelCreatedAt = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelUpdatedAt = new System.Windows.Forms.ToolStripStatusLabel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgOtherPaymentRates).BeginInit();
             toolStrip2.SuspendLayout();
@@ -68,13 +69,14 @@
             dgOtherPaymentRates.RowTemplate.Height = 25;
             dgOtherPaymentRates.Size = new System.Drawing.Size(783, 334);
             dgOtherPaymentRates.TabIndex = 1;
+            dgOtherPaymentRates.SelectionChanged += dgOtherPaymentRates_SelectionChanged;
             // 
             // toolStrip2
             // 
             toolStrip2.BackColor = System.Drawing.SystemColors.Control;
             toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             toolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButtonNew, toolStripButtonEdit, toolStripButtonDelete });
+            toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAdd, btnEdit, btnDelete });
             toolStrip2.Location = new System.Drawing.Point(0, 0);
             toolStrip2.Name = "toolStrip2";
             toolStrip2.Padding = new System.Windows.Forms.Padding(4);
@@ -82,44 +84,43 @@
             toolStrip2.TabIndex = 15;
             toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButtonNew
+            // btnAdd
             // 
-            toolStripButtonNew.Image = Properties.Resources.button_rounded_add_24px;
-            toolStripButtonNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonNew.Name = "toolStripButtonNew";
-            toolStripButtonNew.Size = new System.Drawing.Size(33, 43);
-            toolStripButtonNew.Text = "&Add";
-            toolStripButtonNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonNew.Click += toolStripButtonNew_Click;
+            btnAdd.Image = Properties.Resources.button_rounded_add_24px;
+            btnAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(33, 43);
+            btnAdd.Text = "&Add";
+            btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnAdd.Click += btnAdd_Click_1;
             // 
-            // toolStripButtonEdit
+            // btnEdit
             // 
-            toolStripButtonEdit.Enabled = false;
-            toolStripButtonEdit.Image = Properties.Resources.button_rounded_edit_20px;
-            toolStripButtonEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonEdit.Name = "toolStripButtonEdit";
-            toolStripButtonEdit.Size = new System.Drawing.Size(31, 43);
-            toolStripButtonEdit.Text = "&Edit";
-            toolStripButtonEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            toolStripButtonEdit.Click += toolStripButtonEdit_Click;
+            btnEdit.Enabled = false;
+            btnEdit.Image = Properties.Resources.button_rounded_edit_20px;
+            btnEdit.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new System.Drawing.Size(31, 43);
+            btnEdit.Text = "&Edit";
+            btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnEdit.Click += toolStripButtonEdit_Click;
             // 
-            // toolStripButtonDelete
+            // btnDelete
             // 
-            toolStripButtonDelete.Enabled = false;
-            toolStripButtonDelete.Image = Properties.Resources.button_rounded_remove_20px;
-            toolStripButtonDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonDelete.Name = "toolStripButtonDelete";
-            toolStripButtonDelete.Size = new System.Drawing.Size(44, 43);
-            toolStripButtonDelete.Text = "&Delete";
-            toolStripButtonDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Enabled = false;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 43);
+            btnDelete.Text = "&Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // statusStrip1
             // 
-            statusStrip1.BackColor = System.Drawing.Color.White;
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, lblDateEntry, lblCreatedAtPlaceHolder, lblCreatedAt, toolStripStatusLabel2, lblUpdatedAtPlaceHolder, lblUpdatedAt });
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabelRecordCount, toolStripStatusLabel2, toolStripStatusLabel3, toolStripStatusLabelCreatedAt, toolStripStatusLabel5, toolStripStatusLabel6, toolStripStatusLabelUpdatedAt });
             statusStrip1.Location = new System.Drawing.Point(0, 396);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new System.Drawing.Size(791, 22);
@@ -129,43 +130,52 @@
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(634, 17);
-            toolStripStatusLabel1.Spring = true;
+            toolStripStatusLabel1.Size = new System.Drawing.Size(55, 17);
+            toolStripStatusLabel1.Text = "Records: ";
             // 
-            // lblDateEntry
+            // toolStripStatusLabelRecordCount
             // 
-            lblDateEntry.Name = "lblDateEntry";
-            lblDateEntry.Size = new System.Drawing.Size(0, 17);
-            // 
-            // lblCreatedAtPlaceHolder
-            // 
-            lblCreatedAtPlaceHolder.Name = "lblCreatedAtPlaceHolder";
-            lblCreatedAtPlaceHolder.Size = new System.Drawing.Size(64, 17);
-            lblCreatedAtPlaceHolder.Text = "Created at:";
-            // 
-            // lblCreatedAt
-            // 
-            lblCreatedAt.Name = "lblCreatedAt";
-            lblCreatedAt.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabelRecordCount.Name = "toolStripStatusLabelRecordCount";
+            toolStripStatusLabelRecordCount.Size = new System.Drawing.Size(13, 17);
+            toolStripStatusLabelRecordCount.Text = "0";
             // 
             // toolStripStatusLabel2
             // 
-            toolStripStatusLabel2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(10, 17);
-            toolStripStatusLabel2.Text = "|";
-            toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            toolStripStatusLabel2.Size = new System.Drawing.Size(536, 17);
+            toolStripStatusLabel2.Spring = true;
             // 
-            // lblUpdatedAtPlaceHolder
+            // toolStripStatusLabel3
             // 
-            lblUpdatedAtPlaceHolder.Name = "lblUpdatedAtPlaceHolder";
-            lblUpdatedAtPlaceHolder.Size = new System.Drawing.Size(68, 17);
-            lblUpdatedAtPlaceHolder.Text = "Updated at:";
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(67, 17);
+            toolStripStatusLabel3.Text = "Created at: ";
             // 
-            // lblUpdatedAt
+            // toolStripStatusLabelCreatedAt
             // 
-            lblUpdatedAt.Name = "lblUpdatedAt";
-            lblUpdatedAt.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabelCreatedAt.Name = "toolStripStatusLabelCreatedAt";
+            toolStripStatusLabelCreatedAt.Size = new System.Drawing.Size(12, 17);
+            toolStripStatusLabelCreatedAt.Text = "-";
+            // 
+            // toolStripStatusLabel5
+            // 
+            toolStripStatusLabel5.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            toolStripStatusLabel5.Text = "|";
+            toolStripStatusLabel5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // toolStripStatusLabel6
+            // 
+            toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            toolStripStatusLabel6.Size = new System.Drawing.Size(71, 17);
+            toolStripStatusLabel6.Text = "Updated at: ";
+            // 
+            // toolStripStatusLabelUpdatedAt
+            // 
+            toolStripStatusLabelUpdatedAt.Name = "toolStripStatusLabelUpdatedAt";
+            toolStripStatusLabelUpdatedAt.Size = new System.Drawing.Size(12, 17);
+            toolStripStatusLabelUpdatedAt.Text = "-";
             // 
             // frmOtherPaymentRates
             // 
@@ -195,16 +205,17 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgOtherPaymentRates;
         private System.Windows.Forms.ToolStrip toolStrip2;
-        internal System.Windows.Forms.ToolStripButton toolStripButtonNew;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        internal System.Windows.Forms.ToolStripButton btnAdd;
+        private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        internal System.Windows.Forms.ToolStripStatusLabel lblDateEntry;
-        internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAtPlaceHolder;
-        internal System.Windows.Forms.ToolStripStatusLabel lblCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelRecordCount;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAtPlaceHolder;
-        internal System.Windows.Forms.ToolStripStatusLabel lblUpdatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCreatedAt;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelUpdatedAt;
     }
 }

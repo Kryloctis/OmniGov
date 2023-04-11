@@ -20,11 +20,6 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             Helper.DatagridFullRowSelectStyle(dgOtherPaymentRates, false);
         }
 
-        private void toolStripButtonNew_Click(object sender, EventArgs e)
-        {
-            _ = new frmAddOtherPaymentRates(this).ShowDialog();
-        }
-
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             _ = new frmEditOtherPaymentRates().ShowDialog();
@@ -45,6 +40,31 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void dgOtherPaymentRates_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgOtherPaymentRates.Columns.Count < 1)
+                    return;
+
+                byte createdByIndex = (byte)dgOtherPaymentRates.Columns["created_at"].Index;
+                byte updatedByIndex = (byte)dgOtherPaymentRates.Columns["updated_at"].Index;
+
+                var indexes = new byte[] { createdByIndex, updatedByIndex };
+                Helper.EnableDisableToolStripButtons(dgOtherPaymentRates, btnEdit, btnDelete);
+                Helper.ShowRecordTimestamp(dgOtherPaymentRates, indexes, toolStripStatusLabelCreatedAt, toolStripStatusLabelUpdatedAt);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+        }
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
+        {
+            _ = new frmAddOtherPaymentRates(this).ShowDialog();
         }
     }
 }

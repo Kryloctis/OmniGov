@@ -2876,10 +2876,13 @@ namespace AccountingSystem
             datagrid.Columns["rate_id"].HeaderText = "Rate ID";
             datagrid.Columns["rate_id"].MinimumWidth = 150;
             datagrid.Columns["description"].HeaderText = "Description";
+            datagrid.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["description"].Width = 400;
             datagrid.Columns["description"].MinimumWidth = 400;
             datagrid.Columns["amount"].HeaderText = "Amount";
             datagrid.Columns["amount"].MinimumWidth = 150;
             datagrid.Columns["amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
 
