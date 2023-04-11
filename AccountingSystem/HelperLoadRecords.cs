@@ -2873,8 +2873,6 @@ namespace AccountingSystem
             datagrid.Columns["updated_by"].Visible = false;
             datagrid.Columns["updated_at"].Visible = false;
 
-            datagrid.Columns["rate_id"].HeaderText = "Rate ID";
-            datagrid.Columns["rate_id"].MinimumWidth = 150;
             datagrid.Columns["description"].HeaderText = "Description";
             datagrid.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["description"].Width = 400;
@@ -2885,7 +2883,6 @@ namespace AccountingSystem
             datagrid.Columns["amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
-
         }
     }
 }

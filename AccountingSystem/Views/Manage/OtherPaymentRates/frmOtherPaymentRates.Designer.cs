@@ -187,6 +187,7 @@
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip2);
             MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(807, 457);
             Name = "frmOtherPaymentRates";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

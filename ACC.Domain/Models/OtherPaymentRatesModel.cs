@@ -7,7 +7,6 @@ namespace ACC.Domain.Models
     public class OtherPaymentRatesModel
     {
         public int Id { get; set; }
-        public string RateID { get; set; }
         public int TaxTypeID { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }

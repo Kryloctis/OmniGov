@@ -57,7 +57,6 @@ namespace AccountingSystem
 
                 foreach (DataRow row in reader.Rows)
                 {
-                    dict.Add("rate_id", row["rate_id"].ToString());
                     dict.Add("tax_type_id", row["tax_type_id"].ToString());
                     dict.Add("description", row["description"].ToString());
                     dict.Add("amount", row["amount"].ToString());
@@ -90,15 +89,15 @@ namespace AccountingSystem
         {
             var parameters = new object[][]
             {
-                new object[] { "rate_id", DbType.String, entity.RateID},
                 new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
                 new object[] { "description", DbType.String, entity.Description},
                 new object[] { "amount", DbType.Decimal, entity.Amount},
                 new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "is_rate_editable", DbType.Boolean, entity.IsRateEditable},
                 new object[] { "created_by", DbType.Int32, entity.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (rate_id, tax_type_id, description, amount, starting_year, created_by) VALUES (@rate_id, @tax_type_id, @description, @amount, @starting_year, @created_by)";
+            string query = $"INSERT INTO {tableName} (tax_type_id, description, amount, starting_year, is_rate_editable, created_by) VALUES (@tax_type_id, @description, @amount, @starting_year, @is_rate_editable, @created_by)";
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
@@ -107,15 +106,15 @@ namespace AccountingSystem
             var parameters = new object[][]
             {
                 new object[] { "id", DbType.String, entity.Id},
-                new object[] { "rate_id", DbType.String, entity.RateID},
                 new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
                 new object[] { "description", DbType.String, entity.Description},
                 new object[] { "amount", DbType.Decimal, entity.Amount},
                 new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "is_rate_editable", DbType.Boolean, entity.IsRateEditable},
                 new object[] { "created_by", DbType.Int32, entity.CreatedBy},
             };
 
-            string query = $"UPDATE {tableName} SET rate_id = @rate_id WHERE id = @id";
+            string query = $"UPDATE {tableName} SET tax_type_id = @tax_type_id, description = @description, amount = @amount, starting_year = @starting_year, is_rate_editable = @is_rate_editable WHERE id = @id";
 
             return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }

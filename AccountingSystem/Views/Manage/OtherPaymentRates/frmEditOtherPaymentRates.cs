@@ -36,11 +36,11 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         {
             var dictOtherPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordByID(_otherPaymentRatesID);
 
-            _ucOtherPaymentRates.txtRateID.Text = dictOtherPaymentRates["rate_id"];
             _ucOtherPaymentRates.cmbxTaxType.SelectedValue = Convert.ToInt32(dictOtherPaymentRates["tax_type_id"]);
             _ucOtherPaymentRates.txtDescription.Text = dictOtherPaymentRates["description"];
             _ucOtherPaymentRates.nudAmount.Value = Convert.ToDecimal(dictOtherPaymentRates["amount"]);
             _ucOtherPaymentRates.nudStartingYear.Value = Convert.ToInt32(dictOtherPaymentRates["starting_year"]);
+            _ucOtherPaymentRates.cbIsRateEditable.Checked = Convert.ToBoolean(int.Parse(dictOtherPaymentRates["is_rate_editable"]));
 
         }
 
@@ -50,6 +50,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             {
                 Helper.MessageBoxSuccess("Other payment rate has been updated.");
                 _frmOtherPaymentRates.LoadOtherPaymentRates();
+                _ucOtherPaymentRates.ResetForm();
                 Close();
             }
         }
@@ -65,20 +66,20 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                 }
 
                 int otherPaymentRateID = _otherPaymentRatesID;
-                string rateID = _ucOtherPaymentRates.txtRateID.Text;
                 int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
                 string description = _ucOtherPaymentRates.txtDescription.Text;
                 decimal amount = _ucOtherPaymentRates.nudAmount.Value;
                 int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
+                bool isRateEditable = Convert.ToBoolean(_ucOtherPaymentRates.cbIsRateEditable.Checked);
 
                 var otherPaymentRatesModel = new OtherPaymentRatesModel()
                 {
                     Id = otherPaymentRateID,
-                    RateID = rateID,
                     TaxTypeID = taxTypeID,
                     Description = description,
                     Amount = amount,
                     StartingYear = startingYear,
+                    IsRateEditable = isRateEditable,
                     CreatedBy = Helper.UserId
                 };
 

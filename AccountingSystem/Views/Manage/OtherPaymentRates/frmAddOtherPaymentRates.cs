@@ -45,19 +45,19 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
                     Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
                     return false;
                 }
-                string rateID = _ucOtherPaymentRates.txtRateID.Text;
                 int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
                 string description = _ucOtherPaymentRates.txtDescription.Text;
                 decimal amount = _ucOtherPaymentRates.nudAmount.Value;
                 int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
+                bool isRateEditable = _ucOtherPaymentRates.cbIsRateEditable.Checked;
 
                 var otherPaymentRatesModel = new OtherPaymentRatesModel()
                 {
-                    RateID = rateID,
                     TaxTypeID = taxTypeID,
                     Description = description,
                     Amount = amount,
                     StartingYear = startingYear,
+                    IsRateEditable = isRateEditable,
                     CreatedBy = Helper.UserId
                 };
 
@@ -70,6 +70,11 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             }
 
             return false;
+        }
+
+        private void frmAddOtherPaymentRates_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
