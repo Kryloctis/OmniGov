@@ -45,14 +45,14 @@
             flowLayoutPanel1.Location = new System.Drawing.Point(0, 183);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new System.Drawing.Size(307, 29);
-            flowLayoutPanel1.TabIndex = 5;
+            flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
             btnCancel.Location = new System.Drawing.Point(229, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
-            btnCancel.TabIndex = 0;
+            btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -66,13 +66,14 @@
             btnSave.TabIndex = 0;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // ucOtherPaymentRates1
             // 
             ucOtherPaymentRates1.Location = new System.Drawing.Point(0, 2);
             ucOtherPaymentRates1.Name = "ucOtherPaymentRates1";
             ucOtherPaymentRates1.Size = new System.Drawing.Size(305, 179);
-            ucOtherPaymentRates1.TabIndex = 6;
+            ucOtherPaymentRates1.TabIndex = 0;
             // 
             // frmAddOtherPaymentRates
             // 
@@ -86,6 +87,8 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MinimumSize = new System.Drawing.Size(323, 251);
             Name = "frmAddOtherPaymentRates";
+            ShowIcon = false;
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Other Payment Rates";
             flowLayoutPanel1.ResumeLayout(false);

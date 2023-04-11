@@ -60,7 +60,7 @@
             label2.Location = new System.Drawing.Point(8, 38);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(51, 15);
-            label2.TabIndex = 0;
+            label2.TabIndex = 1;
             label2.Text = "Tax Type";
             // 
             // label3
@@ -69,7 +69,7 @@
             label3.Location = new System.Drawing.Point(8, 66);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(67, 15);
-            label3.TabIndex = 0;
+            label3.TabIndex = 2;
             label3.Text = "Description";
             // 
             // label4
@@ -78,7 +78,7 @@
             label4.Location = new System.Drawing.Point(8, 124);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(51, 15);
-            label4.TabIndex = 0;
+            label4.TabIndex = 3;
             label4.Text = "Amount";
             // 
             // label5
@@ -87,7 +87,7 @@
             label5.Location = new System.Drawing.Point(8, 153);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(73, 15);
-            label5.TabIndex = 0;
+            label5.TabIndex = 4;
             label5.Text = "Starting Year";
             // 
             // txtRateID
@@ -95,7 +95,7 @@
             txtRateID.Location = new System.Drawing.Point(87, 7);
             txtRateID.Name = "txtRateID";
             txtRateID.Size = new System.Drawing.Size(202, 23);
-            txtRateID.TabIndex = 1;
+            txtRateID.TabIndex = 0;
             txtRateID.WordWrap = false;
             // 
             // cmbxTaxType
@@ -107,7 +107,7 @@
             cmbxTaxType.Location = new System.Drawing.Point(87, 38);
             cmbxTaxType.Name = "cmbxTaxType";
             cmbxTaxType.Size = new System.Drawing.Size(202, 23);
-            cmbxTaxType.TabIndex = 2;
+            cmbxTaxType.TabIndex = 1;
             // 
             // txtDescription
             // 
@@ -115,8 +115,7 @@
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new System.Drawing.Size(202, 48);
-            txtDescription.TabIndex = 1;
-            txtDescription.TextChanged += textBox2_TextChanged;
+            txtDescription.TabIndex = 2;
             // 
             // errorProvider1
             // 
@@ -126,6 +125,7 @@
             // 
             nudAmount.DecimalPlaces = 1;
             nudAmount.Location = new System.Drawing.Point(87, 122);
+            nudAmount.Maximum = new decimal(new int[] { -727379969, 232, 0, 0 });
             nudAmount.Name = "nudAmount";
             nudAmount.Size = new System.Drawing.Size(202, 23);
             nudAmount.TabIndex = 3;
@@ -138,7 +138,7 @@
             nudStartingYear.Minimum = new decimal(new int[] { 1901, 0, 0, 0 });
             nudStartingYear.Name = "nudStartingYear";
             nudStartingYear.Size = new System.Drawing.Size(202, 23);
-            nudStartingYear.TabIndex = 3;
+            nudStartingYear.TabIndex = 4;
             nudStartingYear.Value = new decimal(new int[] { 2023, 0, 0, 0 });
             // 
             // ucOtherPaymentRates
@@ -172,11 +172,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtRateID;
-        private System.Windows.Forms.ComboBox cmbxTaxType;
-        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.NumericUpDown nudAmount;
-        private System.Windows.Forms.NumericUpDown nudStartingYear;
+        internal System.Windows.Forms.TextBox txtRateID;
+        internal System.Windows.Forms.ComboBox cmbxTaxType;
+        internal System.Windows.Forms.TextBox txtDescription;
+        internal System.Windows.Forms.NumericUpDown nudAmount;
+        internal System.Windows.Forms.NumericUpDown nudStartingYear;
     }
 }

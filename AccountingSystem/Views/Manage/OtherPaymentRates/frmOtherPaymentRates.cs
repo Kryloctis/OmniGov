@@ -22,7 +22,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 
         private void toolStripButtonNew_Click(object sender, EventArgs e)
         {
-            _ = new frmAddOtherPaymentRates().ShowDialog();
+            _ = new frmAddOtherPaymentRates(this).ShowDialog();
         }
 
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             LoadOtherPaymentRates();
         }
 
-        private void LoadOtherPaymentRates()
+        internal void LoadOtherPaymentRates()
         {
             try
             {

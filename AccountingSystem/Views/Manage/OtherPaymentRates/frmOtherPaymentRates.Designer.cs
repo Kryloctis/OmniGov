@@ -176,6 +176,7 @@
             Controls.Add(statusStrip1);
             Controls.Add(toolStrip2);
             Name = "frmOtherPaymentRates";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Manage > Other Payment Rates";
             Load += frmOtherPaymentRates_Load;

@@ -50,7 +50,18 @@ namespace AccountingSystem
 
         public bool Insert(OtherPaymentRatesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "rate_id", DbType.String, entity.RateID},
+                new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
+                new object[] { "description", DbType.String, entity.Description},
+                new object[] { "amount", DbType.Decimal, entity.Amount},
+                new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "created_by", DbType.Int32, entity.CreatedBy},
+            };
+
+            string query = $"INSERT INTO {tableName} (rate_id, tax_type_id, description, amount, starting_year, created_by) VALUES (@rate_id, @tax_type_id, @description, @amount, @starting_year, @created_by)";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(OtherPaymentRatesModel entity)

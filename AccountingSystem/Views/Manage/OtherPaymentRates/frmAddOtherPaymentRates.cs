@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.JobOrders;
+using AccountingSystem.Views.Manage.Journals;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,62 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
 {
     public partial class frmAddOtherPaymentRates : Form
     {
-        public frmAddOtherPaymentRates()
+        private readonly ucOtherPaymentRates _ucOtherPaymentRates;
+        private frmOtherPaymentRates _frmOtherPaymentRates;
+
+        public frmAddOtherPaymentRates(frmOtherPaymentRates frmOtherPaymentRates)
         {
             InitializeComponent();
+            _frmOtherPaymentRates = frmOtherPaymentRates;
+            _ucOtherPaymentRates = ucOtherPaymentRates1;
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (SaveData())
+            {
+                Helper.MessageBoxSuccess("Other payment has been saved.");
+                _frmOtherPaymentRates.LoadOtherPaymentRates();
+                _ucOtherPaymentRates.ResetForm();
+            }
+        }
+
+        private bool SaveData()
+        {
+            try
+            {
+                if (!_ucOtherPaymentRates.ValidateChildren())
+                {
+                    Helper.MessageBoxError(_ucOtherPaymentRates.GetFormError());
+                    return false;
+                }
+
+                string rateID = _ucOtherPaymentRates.txtRateID.Text;
+                int taxTypeID = Convert.ToInt32(_ucOtherPaymentRates.cmbxTaxType.SelectedValue);
+                string description = _ucOtherPaymentRates.txtDescription.Text;
+                decimal amount = _ucOtherPaymentRates.nudAmount.Value;
+                int startingYear = Convert.ToInt32(_ucOtherPaymentRates.nudStartingYear.Value);
+
+                var otherPaymentRatesModel = new OtherPaymentRatesModel()
+                {
+                    RateID = rateID,
+                    TaxTypeID = taxTypeID,
+                    Description = description,
+                    Amount = amount,
+                    StartingYear = startingYear,
+                    CreatedBy = Helper.UserId
+                };
+
+                var otherPaymentRatesRepository = AccFactory.OtherPaymentRatesRepository();
+                return otherPaymentRatesRepository.Insert(otherPaymentRatesModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return false;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACC.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,10 +18,29 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        internal string GetFormError()
         {
+            var errorArray = new string[5];
 
+            errorArray[0] = errorProvider1.GetError(txtRateID);
+            errorArray[1] = errorProvider1.GetError(cmbxTaxType);
+            errorArray[2] = errorProvider1.GetError(txtDescription);
+            errorArray[3] = errorProvider1.GetError(nudAmount);
+            errorArray[4] = errorProvider1.GetError(nudStartingYear);
+
+            IError error = AccFactory.CreateErrors(errorArray);
+            return error.GenerateErrorMessage();
         }
+
+        internal void ResetForm()
+        {
+            txtRateID.Clear();
+            cmbxTaxType.SelectedValue = -1;
+            txtDescription.Clear();
+            nudAmount.Value = 0.0m;
+            nudStartingYear.Value = 2023;
+        }
+
 
         private void ucOtherPaymentRates_Load(object sender, EventArgs e)
         {
@@ -42,5 +62,7 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+
     }
 }
