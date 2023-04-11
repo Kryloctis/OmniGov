@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.TaxPayers;
+﻿using ACC.Domain.Models;
+using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,6 +71,34 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
             _ = new frmAddOtherPaymentRates(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int selectedRowsCount = dgOtherPaymentRates.SelectedRows.Count;
+            try
+            {
+                if (selectedRowsCount > 0)
+                {
+                    if (Helper.MessageBoxConfirmDelete(selectedRowsCount))
+                    {
+                        var otherPaymentRatesModelList = new List<OtherPaymentRatesModel>();
+                        foreach (DataGridViewRow row in dgOtherPaymentRates.SelectedRows)
+                        {
+                            int otherPaymentRatesID = Convert.ToInt16(row.Cells[0].Value.ToString());
+                            otherPaymentRatesModelList.Add(new OtherPaymentRatesModel() { Id = otherPaymentRatesID });
+                        }
+
+                        var otherPaymentRatesRepository = AccFactory.OtherPaymentRatesRepository();
+                        _ = otherPaymentRatesRepository.Delete(otherPaymentRatesModelList);
+                        LoadOtherPaymentRates();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
         }
     }
 }

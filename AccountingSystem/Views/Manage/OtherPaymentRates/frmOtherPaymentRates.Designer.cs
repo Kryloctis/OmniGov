@@ -117,6 +117,7 @@
             btnDelete.Size = new System.Drawing.Size(44, 43);
             btnDelete.Text = "&Delete";
             btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // statusStrip1
             // 
