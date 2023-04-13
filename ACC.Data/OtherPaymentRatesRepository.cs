@@ -3,6 +3,7 @@ using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
 using System.Collections.Generic;
 using System.Data;
+using System.Transactions;
 
 namespace AccountingSystem
 {
@@ -23,12 +24,48 @@ namespace AccountingSystem
 
         public bool Delete(List<OtherPaymentRatesModel> entityList)
         {
-            throw new System.NotImplementedException();
+            using (var scope = new TransactionScope())
+            {
+                foreach (var entity in entityList)
+                {
+                    var parameters = new object[][]
+                    {
+                            new object[] { "@id", DbType.Int32, entity.Id},
+                    };
+
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            throw new System.NotImplementedException();
+            var dict = new Dictionary<string, string>();
+
+            var parameters = new object[][] { new object[] { "@id", DbType.Int32, Id } };
+
+            string query = $"SELECT * FROM {tableName} WHERE id = @id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return dict;
+
+                foreach (DataRow row in reader.Rows)
+                {
+                    dict.Add("tax_type_id", row["tax_type_id"].ToString());
+                    dict.Add("description", row["description"].ToString());
+                    dict.Add("amount", row["amount"].ToString());
+                    dict.Add("starting_year", row["starting_year"].ToString());
+                    dict.Add("is_rate_editable", row["is_rate_editable"].ToString());
+                }
+
+                return dict;
+            }
         }
 
         public DataTable GetRecords()
@@ -50,12 +87,36 @@ namespace AccountingSystem
 
         public bool Insert(OtherPaymentRatesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
+                new object[] { "description", DbType.String, entity.Description},
+                new object[] { "amount", DbType.Decimal, entity.Amount},
+                new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "is_rate_editable", DbType.Boolean, entity.IsRateEditable},
+                new object[] { "created_by", DbType.Int32, entity.CreatedBy},
+            };
+
+            string query = $"INSERT INTO {tableName} (tax_type_id, description, amount, starting_year, is_rate_editable, created_by) VALUES (@tax_type_id, @description, @amount, @starting_year, @is_rate_editable, @created_by)";
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(OtherPaymentRatesModel entity)
         {
-            throw new System.NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "id", DbType.String, entity.Id},
+                new object[] { "tax_type_id", DbType.Int32, entity.TaxTypeID},
+                new object[] { "description", DbType.String, entity.Description},
+                new object[] { "amount", DbType.Decimal, entity.Amount},
+                new object[] { "starting_year", DbType.Int32, entity.StartingYear},
+                new object[] { "is_rate_editable", DbType.Boolean, entity.IsRateEditable},
+                new object[] { "created_by", DbType.Int32, entity.CreatedBy},
+            };
+
+            string query = $"UPDATE {tableName} SET tax_type_id = @tax_type_id, description = @description, amount = @amount, starting_year = @starting_year, is_rate_editable = @is_rate_editable WHERE id = @id";
+
+            return _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
     }
 }

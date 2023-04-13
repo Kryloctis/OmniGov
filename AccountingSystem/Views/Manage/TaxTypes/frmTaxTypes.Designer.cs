@@ -332,6 +332,7 @@
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(flowLayoutPanel1);
+            MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(814, 470);
             Name = "frmTaxTypes";
             ShowInTaskbar = false;
