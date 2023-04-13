@@ -170,7 +170,7 @@ namespace AccountingSystem.Views.Dashboard
 
         private void btnAddJEV_Click(object sender, EventArgs e)
         {
-            _ = new frmJEV(null, this).ShowDialog();
+            _ = new frmJEV(false, null, this).ShowDialog();
         }
 
         private void cmbxJournals_SelectionChangeCommitted(object sender, EventArgs e)

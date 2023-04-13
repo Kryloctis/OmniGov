@@ -19,10 +19,11 @@ namespace AccountingSystem.Views.Transactions.JEV
         internal int createdById;
         private Dictionary<string, dynamic> userDict;
 
-        public frmJEV(frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
+        public frmJEV(bool isEdit, frmJEVList frmJEVList, ucJEVDashboard ucJEVDashboard)
         {
             InitializeComponent();
             uc = ucjev1;
+            uc.isEdit = isEdit;
             _frmJEVList = frmJEVList;
             _ucJEVDashboard = ucJEVDashboard;
             userDict = Helper.LoggedInUserData();
@@ -31,73 +32,67 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_Load(object sender, EventArgs e)
         {
-            if (_frmJEVList != null)
-            {
-                LoadSelectedJEV(uc.jevId);
-                GetJevStatus(uc.jevId);
-            }
-            else
-                lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+            OnLoad();
+        }
 
-            uc.SumDebitCredit();
-            VerifyPermissions();
+        private void OnLoad()
+        {
+            try
+            {
+                if (uc.isEdit)
+                    LoadSelectedJEV(uc.jevId);
+
+                lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
+                uc.SumDebitCredit();
+                VerifyPermissions();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void VerifyPermissions()
         {
-            try
+            //1. Verify logged in user have JEV permission
+            if (!Helper.HasPermission("Transaction > JEV"))
             {
-                //If user has permission of editing approved JEV
-                void HasPermissionToEditApprovedJEV()
-                {
-                    if (uc.isEdit)
-                    {
-                        string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
-
-                        if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
-                        {
-                            btnSave.Enabled = true;
-                            uc.SetJevReadOnly(false);
-                        }
-                    }
-                }
-
-                //If user has permission of JEV approval
-                if (!Helper.HasPermission("Transaction > JEV Approval"))
-                {
-                    btnApprove.Visible = false;
-                    btnDisapprove.Visible = false;
-                    btnCancelJEV.Visible = false;
-                    toolStripSeparator2.Visible = false;
-                }
-
-                //If user has permission to view JEV report
-                if (!Helper.HasPermission("Report > JEVs"))
-                    btnPrint.Enabled = false;
-
-                //Verify logged in user have JEV permission
-                if (!Helper.HasPermission("Transaction > JEV"))
-                {
-                    btnSave.Enabled = false;
-                    btnDelete.Enabled = false;
-                    uc.SetJevReadOnly(true);
-                }
-
-                //Verify logged in user if user is the same who create the JEV for edit purposes only
-                if (Helper.UserId != createdById && uc.isEdit)
-                {
-                    btnSave.Enabled = false;
-                    btnDelete.Enabled = false;
-                    uc.SetJevReadOnly(true);
-                }
-
-                //Verify logged in user if able to access dissaproval message
-                if (createdById != Helper.UserId && !Helper.HasPermission("Transaction > JEV Approval"))
-                    lblShowMessage.Enabled = false;
-
-                HasPermissionToEditApprovedJEV();
+                btnSave.Enabled = false;
+                btnDelete.Enabled = false;
+                uc.SetJevReadOnly(true);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+
+            //2. Check if user has permission of JEV approval
+            if (!Helper.HasPermission("Transaction > JEV Approval"))
+            {
+                btnApprove.Visible = false;
+                btnDisapprove.Visible = false;
+                btnCancelJEV.Visible = false;
+                toolStripSeparator2.Visible = false;
+            }
+
+            //3. Check if user has permission to view JEV report
+            if (!Helper.HasPermission("Report > JEVs"))
+                btnPrint.Enabled = false;
+
+            //4. Verify logged in user if able to access dissaproval message
+            if (createdById != Helper.UserId && !Helper.HasPermission("Transaction > JEV Approval"))
+                lblShowMessage.Enabled = false;
+
+            //5. Verify logged in user if user is the same who create the JEV for edit purposes only
+            if (uc.isEdit && Helper.UserId != createdById)
+            {
+                string jevStatus = AccFactory.JEVRepository().GetJevStatus(uc.jevId);
+
+                btnSave.Enabled = false;
+                btnDelete.Enabled = false;
+                uc.SetJevReadOnly(true);
+
+                if (Helper.HasPermission("Transaction > Edit Approved JEV") && jevStatus == "approved")
+                {
+                    btnSave.Enabled = true;
+                    uc.SetJevReadOnly(false);
+                }
+            }
+            else
+                uc.SetJevReadOnly(false);        
         }
 
         private static ushort? ValidateNullSubsidiary(object subsidiaryCellValue)
@@ -379,38 +374,31 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private bool InsertData(ref string message)
         {
-            try
+            var userId = Helper.UserId;
+            message = "JEV has been saved.";
+
+            switch (uc.journalName)
             {
-                var userId = Helper.UserId;
-                message = "JEV has been saved.";
+                case "General Journal":
+                    return InsertGeneralJournal(userId);
 
-                switch (uc.journalName)
-                {
-                    case "General Journal":
-                        return InsertGeneralJournal(userId);
+                case "Procurement Received Journal":
+                    return InsertJournal(userId);
 
-                    case "Procurement Received Journal":
-                        return InsertJournal(userId);
+                case "Cash Disbursements Journal":
+                    return InsertCashDisbursementsJournal(userId);
 
-                    case "Cash Disbursements Journal":
-                        return InsertCashDisbursementsJournal(userId);
+                case "Cash Receipts Journal":
+                    return InsertCashReceiptsJournal(userId);
 
-                    case "Cash Receipts Journal":
-                        return InsertCashReceiptsJournal(userId);
+                case "Check Disbursements Journal":
+                    return InsertCheckDisbursementJournal(userId);
 
-                    case "Check Disbursements Journal":
-                        return InsertCheckDisbursementJournal(userId);
+                case "Authority to Debit Account Disbursement Journal":
+                    return InsertADADisbursementsJournal(userId);
 
-                    case "Authority to Debit Account Disbursement Journal":
-                        return InsertADADisbursementsJournal(userId);
-                }
+                default: return false;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return false;
         }
 
         private bool UpdateData(ref string message)
@@ -547,28 +535,32 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            string message = string.Empty;
-            string fullJevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text}";
-
-            if (SaveData(ref message))
+            try
             {
-                if (!uc.isEdit)
+                string message = string.Empty;
+                string fullJevNo = $"{uc.txtFundsJevNo.Text}-{uc.txtJEVNo.Text}";
+
+                if (SaveData(ref message))
                 {
-                    Helper.MessageBoxSuccess(message);
-                    ucjev1.ResetForm();
-                    _ucJEVDashboard.LoadJEVCounter();
-                }
-                else
-                {
-                    int jevId = uc.jevId;
-                    Helper.MessageBoxSuccess(message);
-                    GetJevStatus(jevId);
-                    VerifyPermissions();
-                    _frmJEVList.LoadJEVList();
-                    _ucJEVDashboard.LoadJEVCounter();
-                    Helper.DatagridViewRecordFinder(_frmJEVList.dgJEV, "full_jev_no", fullJevNo);
+                    if (!uc.isEdit)
+                    {
+                        Helper.MessageBoxSuccess(message);
+                        ucjev1.ResetForm();
+                        _ucJEVDashboard.LoadJEVCounter();
+                    }
+                    else
+                    {
+                        int jevId = uc.jevId;
+                        Helper.MessageBoxSuccess(message);
+                        GetJevStatus(jevId);
+                        VerifyPermissions();
+                        _frmJEVList.LoadJEVList();
+                        _ucJEVDashboard.LoadJEVCounter();
+                        Helper.DatagridViewRecordFinder(_frmJEVList.dgJEV, "full_jev_no", fullJevNo);
+                    }
                 }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void TransferJournalToNewJournal()
@@ -656,70 +648,58 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void GetJevStatus(int jevId)
         {
-            try
+            string jevStatus = AccFactory.JEVRepository().GetJevStatus(jevId).ToLower();
+
+            switch (jevStatus)
             {
-                string jevStatus = AccFactory.JEVRepository().GetJevStatus(jevId).ToLower();
+                case "pending":
+                    lblJevStatus.Text = "PENDING";
+                    lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
+                    lblShowMessage.Visible = false;
+                    btnPrint.Enabled = false;
+                    btnApprove.Enabled = true;
+                    btnDisapprove.Enabled = true;
+                    btnCancelJEV.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnSave.Enabled = true;
+                    break;
 
-                switch (jevStatus)
-                {
-                    case "pending":
-                        lblJevStatus.Text = "PENDING";
-                        lblJevStatus.ForeColor = Color.FromArgb(216, 146, 22);
-                        lblShowMessage.Visible = false;
-                        btnPrint.Enabled = false;
-                        btnApprove.Enabled = true;
-                        btnDisapprove.Enabled = true;
-                        btnCancelJEV.Enabled = true;
-                        btnDelete.Enabled = true;
-                        uc.SetJevReadOnly(false);
-                        btnSave.Enabled = true;
-                        break;
+                case "approved":
+                    lblJevStatus.Text = "APPROVED";
+                    lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
+                    lblShowMessage.Visible = false;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = true;
+                    btnPrint.Enabled = true;
+                    btnSave.Enabled = true;
+                    btnDelete.Enabled = false;
+                    btnSave.Enabled = false;
+                    break;
 
-                    case "approved":
-                        lblJevStatus.Text = "APPROVED";
-                        lblJevStatus.ForeColor = Color.FromArgb(78, 159, 61);
-                        lblShowMessage.Visible = false;
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnCancelJEV.Enabled = true;
-                        btnPrint.Enabled = true;
-                        btnSave.Enabled = true;
-                        uc.SetJevReadOnly(true);
-                        btnDelete.Enabled = false;
-                        btnSave.Enabled = false;
-                        break;
+                case "disapproved":
+                    lblJevStatus.Text = "DISAPPROVED";
+                    lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
+                    lblShowMessage.Visible = true;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = true;
+                    btnPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    break;
 
-                    case "disapproved":
-                        lblJevStatus.Text = "DISAPPROVED";
-                        lblJevStatus.ForeColor = Color.FromArgb(149, 1, 1);
-                        lblShowMessage.Visible = true;
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnCancelJEV.Enabled = true;
-                        btnPrint.Enabled = false;
-                        btnSave.Enabled = false;
-                        btnDelete.Enabled = false;
-                        uc.SetJevReadOnly(true);
-                        break;
-
-                    case "cancelled":
-                        //CANCELLED
-                        lblJevStatus.Text = "CANCELLED";
-                        lblJevStatus.ForeColor = Color.FromArgb(66, 63, 62);
-                        lblShowMessage.Visible = false;
-                        btnApprove.Enabled = false;
-                        btnDisapprove.Enabled = false;
-                        btnCancelJEV.Enabled = false;
-                        btnPrint.Enabled = false;
-                        btnSave.Enabled = false;
-                        btnDelete.Enabled = false;
-                        uc.SetJevReadOnly(true);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                case "cancelled":
+                    lblJevStatus.Text = "CANCELLED";
+                    lblJevStatus.ForeColor = Color.FromArgb(66, 63, 62);
+                    lblShowMessage.Visible = false;
+                    btnApprove.Enabled = false;
+                    btnDisapprove.Enabled = false;
+                    btnCancelJEV.Enabled = false;
+                    btnPrint.Enabled = false;
+                    btnSave.Enabled = false;
+                    btnDelete.Enabled = false;
+                    break;
             }
         }
 
@@ -749,10 +729,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)"); }
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)
@@ -782,7 +759,7 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             try
             {
-                if (uc.jevId != 0)
+                if (uc.isEdit)
                 {
                     if (MessageBox.Show("Confirm cancellation of JEV.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
@@ -797,10 +774,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-            }
+            catch (Exception ex) { Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)"); }
         }
 
         private void CheckedFund(string fundName)
@@ -955,66 +929,61 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         internal void LoadSelectedJEV(int jevId)
         {
-            try
+            Cursor = Cursors.WaitCursor;
+            Enabled = true;
+            Dictionary<string, string> jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
+
+            LoadCheckDisbursementsDataIfExist(uc.jevId);
+            LoadCashReceiptsDataIfExist(uc.jevId);
+            LoadADADisbursementDataIfExist(uc.jevId);
+            LoadCashDisbursementDataIfExist(uc.jevId);
+            LoadGeneralJournalDataIfExist(uc.jevId);
+
+            int dictJevId = Convert.ToInt32(jevDict["id"]);
+            byte dictFundId = Convert.ToByte(jevDict["funds_id"]);
+            string dictExplanation = jevDict["explanation"];
+            DateTime dictDateEntry = Convert.ToDateTime(jevDict["date_entry"]);
+            byte dictJournalId = Convert.ToByte(jevDict["journals_id"]);
+            byte dictOldJournalId = Convert.ToByte(jevDict["journals_id"]);
+            string dictCreatedBy = jevDict["created_by_name"];
+            string dictJevNo = jevDict["jev_no"];
+            string dictPayee = jevDict["payee"];
+            string dictRefNo = jevDict["ref_no"];
+
+            if (!string.IsNullOrEmpty(dictJevNo))
+                uc.txtFundsJevNo.Text = uc.GenerateJEVNumber();
+
+            uc.jevId = dictJevId;
+            uc.fundId = dictFundId;
+            uc.txtExplanation.Text = dictExplanation;
+            uc.dtpDateEntry.Value = dictDateEntry;
+            uc.txtRefNo.Text = dictRefNo;
+            uc.txtPayee.Text = dictPayee;
+            uc.txtJEVNo.Text = dictJevNo;
+            uc.journalId = dictJournalId;
+            uc.oldJournalId = dictOldJournalId;
+            lblCreatedBy.Text = dictCreatedBy;
+
+            if (Convert.ToByte(jevDict["is_edited"]) == 1)
             {
-                Cursor = Cursors.WaitCursor;
-                Enabled = true;
-                Dictionary<string, string> jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
-
-                LoadCheckDisbursementsDataIfExist(uc.jevId);
-                LoadCashReceiptsDataIfExist(uc.jevId);
-                LoadADADisbursementDataIfExist(uc.jevId);
-                LoadCashDisbursementDataIfExist(uc.jevId);
-                LoadGeneralJournalDataIfExist(uc.jevId);
-
-                int dictJevId = Convert.ToInt32(jevDict["id"]);
-                byte dictFundId = Convert.ToByte(jevDict["funds_id"]);
-                string dictExplanation = jevDict["explanation"];
-                DateTime dictDateEntry = Convert.ToDateTime(jevDict["date_entry"]);
-                byte dictJournalId = Convert.ToByte(jevDict["journals_id"]);
-                byte dictOldJournalId = Convert.ToByte(jevDict["journals_id"]);
-                string dictCreatedBy = jevDict["created_by_name"];
-                string dictJevNo = jevDict["jev_no"];
-                string dictPayee = jevDict["payee"];
-                string dictRefNo = jevDict["ref_no"];
-
-                if (!string.IsNullOrEmpty(dictJevNo))
-                    uc.txtFundsJevNo.Text = uc.GenerateJEVNumber();
-
-                uc.jevId = dictJevId;
-                uc.fundId = dictFundId;
-                uc.txtExplanation.Text = dictExplanation;
-                uc.dtpDateEntry.Value = dictDateEntry;
-                uc.txtRefNo.Text = dictRefNo;
-                uc.txtPayee.Text = dictPayee;
-                uc.txtJEVNo.Text = dictJevNo;
-                uc.journalId = dictJournalId;
-                uc.oldJournalId = dictOldJournalId;
-                lblCreatedBy.Text = dictCreatedBy;
-
-                if (Convert.ToByte(jevDict["is_edited"]) == 1)
-                {
-                    lblIsEdited.Visible = true;
-                    lblIsEdited.Text = $"(Edited)";
-                }
-                else
-                    lblIsEdited.Visible = false;
-
-                CheckedFund(jevDict["fund_name"]);
-                CheckedJournal(jevDict["journal_name"]);
-
-                uc.ClearErrors();
-
-                uc.dgAccounts.Rows.Clear();
-                LoadJevAccounts();
-                uc.SumDebitCredit();
-                GetJevStatus(uc.jevId);
-
-                btnSave.Text = "&Update";
-
-                Cursor = Cursors.Default;
+                lblIsEdited.Visible = true;
+                lblIsEdited.Text = $"(Edited)";
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            else
+                lblIsEdited.Visible = false;
+
+            CheckedFund(jevDict["fund_name"]);
+            CheckedJournal(jevDict["journal_name"]);
+
+            uc.ClearErrors();
+
+            uc.dgAccounts.Rows.Clear();
+            LoadJevAccounts();
+            uc.SumDebitCredit();
+            GetJevStatus(uc.jevId);
+            btnSave.Text = "&Update";
+
+            Cursor = Cursors.Default;
         }
     }
 }
