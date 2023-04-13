@@ -74,7 +74,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(11, 128);
+            label5.Location = new System.Drawing.Point(11, 147);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(73, 15);
             label5.TabIndex = 4;
@@ -122,7 +122,7 @@
             // 
             // nudStartingYear
             // 
-            nudStartingYear.Location = new System.Drawing.Point(90, 126);
+            nudStartingYear.Location = new System.Drawing.Point(90, 145);
             nudStartingYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             nudStartingYear.Minimum = new decimal(new int[] { 1901, 0, 0, 0 });
             nudStartingYear.Name = "nudStartingYear";
@@ -133,11 +133,12 @@
             // cbIsRateEditable
             // 
             cbIsRateEditable.AutoSize = true;
-            cbIsRateEditable.Location = new System.Drawing.Point(187, 155);
+            cbIsRateEditable.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            cbIsRateEditable.Location = new System.Drawing.Point(204, 124);
             cbIsRateEditable.Name = "cbIsRateEditable";
-            cbIsRateEditable.Size = new System.Drawing.Size(105, 19);
+            cbIsRateEditable.Size = new System.Drawing.Size(94, 17);
             cbIsRateEditable.TabIndex = 5;
-            cbIsRateEditable.Text = "Is Rate Editable";
+            cbIsRateEditable.Text = "Editable Rate";
             cbIsRateEditable.UseVisualStyleBackColor = true;
             // 
             // ucOtherPaymentRates

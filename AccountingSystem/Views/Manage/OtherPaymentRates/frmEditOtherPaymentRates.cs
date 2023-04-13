@@ -36,12 +36,19 @@ namespace AccountingSystem.Views.Manage.OtherPaymentRates
         {
             var dictOtherPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordByID(_otherPaymentRatesID);
 
-            _ucOtherPaymentRates.cmbxTaxType.SelectedValue = Convert.ToInt32(dictOtherPaymentRates["tax_type_id"]);
-            _ucOtherPaymentRates.txtDescription.Text = dictOtherPaymentRates["description"];
-            _ucOtherPaymentRates.nudAmount.Value = Convert.ToDecimal(dictOtherPaymentRates["amount"]);
-            _ucOtherPaymentRates.nudStartingYear.Value = Convert.ToInt32(dictOtherPaymentRates["starting_year"]);
-            _ucOtherPaymentRates.cbIsRateEditable.Checked = Convert.ToBoolean(int.Parse(dictOtherPaymentRates["is_rate_editable"]));
+            int taxTypeId = Convert.ToInt32(dictOtherPaymentRates["tax_type_id"]);
+            string description = dictOtherPaymentRates["description"];
+            decimal amount = Convert.ToDecimal(dictOtherPaymentRates["amount"]);
+            int startingYear = Convert.ToInt32(dictOtherPaymentRates["starting_year"]);
+            bool isRateEditable = Convert.ToBoolean(int.Parse(dictOtherPaymentRates["is_rate_editable"]));
 
+            _ucOtherPaymentRates.cmbxTaxType.SelectedValue = taxTypeId;
+            _ucOtherPaymentRates.txtDescription.Text = description;
+            _ucOtherPaymentRates.nudAmount.Value = amount;
+            _ucOtherPaymentRates.nudStartingYear.Value = startingYear;
+            _ucOtherPaymentRates.cbIsRateEditable.Checked = isRateEditable;
+
+            _ucOtherPaymentRates.nudAmount.Enabled = isRateEditable;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
