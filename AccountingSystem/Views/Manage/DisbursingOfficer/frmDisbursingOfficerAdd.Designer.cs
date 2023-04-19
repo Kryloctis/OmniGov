@@ -1,5 +1,4 @@
-﻿
-namespace AccountingSystem.Views.Manage.DisbursingOfficer
+﻿namespace AccountingSystem.Views.Manage.DisbursingOfficer
 {
     partial class frmDisbursingOfficerAdd
     {
@@ -29,86 +28,92 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDisbursingOfficerAdd));
-            this.ucDisbursingOfficer1 = new AccountingSystem.Views.Manage.DisbursingOfficer.ucDisbursingOfficer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // ucDisbursingOfficer1
-            // 
-            this.ucDisbursingOfficer1.Location = new System.Drawing.Point(0, 1);
-            this.ucDisbursingOfficer1.Name = "ucDisbursingOfficer1";
-            this.ucDisbursingOfficer1.Size = new System.Drawing.Size(479, 215);
-            this.ucDisbursingOfficer1.TabIndex = 0;
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSave = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            ucDisbursingOfficer1 = new ucDisbursingOfficer();
+            flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 220);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(480, 29);
-            this.flowLayoutPanel1.TabIndex = 4;
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnSave);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 195);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(461, 30);
+            flowLayoutPanel1.TabIndex = 0;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(395, 2);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnCancel.Size = new System.Drawing.Size(82, 22);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Location = new System.Drawing.Point(383, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(307, 2);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnSave.Size = new System.Drawing.Size(82, 22);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Location = new System.Drawing.Point(302, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(75, 23);
+            btnSave.TabIndex = 0;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucDisbursingOfficer1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(461, 195);
+            panel1.TabIndex = 1;
+            // 
+            // ucDisbursingOfficer1
+            // 
+            ucDisbursingOfficer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucDisbursingOfficer1.Location = new System.Drawing.Point(4, 4);
+            ucDisbursingOfficer1.Name = "ucDisbursingOfficer1";
+            ucDisbursingOfficer1.Size = new System.Drawing.Size(453, 187);
+            ucDisbursingOfficer1.TabIndex = 2;
             // 
             // frmDisbursingOfficerAdd
             // 
-            this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(480, 249);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucDisbursingOfficer1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmDisbursingOfficerAdd";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Disbursing Officer";
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AcceptButton = btnSave;
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(461, 225);
+            Controls.Add(panel1);
+            Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmDisbursingOfficerAdd";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "Add Disbursing Officer";
+            flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private ucDisbursingOfficer ucDisbursingOfficer1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel1;
+        private ucDisbursingOfficer ucDisbursingOfficer1;
     }
 }

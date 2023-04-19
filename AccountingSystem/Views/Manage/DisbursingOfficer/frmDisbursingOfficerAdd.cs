@@ -1,5 +1,12 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.DisbursingOfficer
@@ -12,7 +19,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         public frmDisbursingOfficerAdd(frmDisbursingOfficer _frmDisbursingOfficer)
         {
             InitializeComponent();
-            uc = ucDisbursingOfficer1;
             frmDisbursingOfficer = _frmDisbursingOfficer;
             Helper.LoadFormIcon(this);
         }

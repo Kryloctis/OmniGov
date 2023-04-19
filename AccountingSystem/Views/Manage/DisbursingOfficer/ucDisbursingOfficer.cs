@@ -19,10 +19,10 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             var errorArray = new string[]
             {
-                epFirstName.GetError(txtFirstName),
-                epMidInitial.GetError(txtMidInitial),
-                epLastName.GetError(txtLastName),
-                epJobTitle.GetError(txtJobTitle)
+                errorProvider1.GetError(txtFirstName),
+                errorProvider1.GetError(txtMidInitial),
+                errorProvider1.GetError(txtLastName),
+                errorProvider1.GetError(txtJobTitle)
             };
 
             return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
@@ -38,42 +38,42 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private void txtFirstName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstName, lblFirstName.Text);
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, lblFirstName.Text);
         }
 
         private void txtFirstName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epFirstName, txtFirstName);
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
         }
 
         private void txtMidInitial_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epMidInitial, txtMidInitial, lblMidInitial.Text);
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMidInitial, lblMidInitial.Text);
         }
 
         private void txtMidInitial_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epMidInitial, txtMidInitial);
+            Helper.ClearErrorTextBox(errorProvider1, txtMidInitial);
         }
 
         private void txtLastName_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastName, lblLastName.Text);
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, lblLastName.Text);
         }
 
         private void txtLastName_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epLastName, txtLastName);
+            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
         }
 
         private void txtJobTitle_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epJobTitle, txtJobTitle, lblJobTitle.Text);
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtJobTitle, lblJobTitle.Text);
         }
 
         private void txtJobTitle_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epJobTitle, txtJobTitle);
+            Helper.ClearErrorTextBox(errorProvider1, txtJobTitle);
         }
 
         private void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

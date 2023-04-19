@@ -1,5 +1,12 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.DisbursingOfficer
@@ -37,12 +44,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void frmDisbursingOfficerEdit_Load(object sender, EventArgs e)
-        {
-            LoadSelectedRecord();
-        }
-
-        private bool SaveData()
+        private bool UpdateData()
         {
             // if error occurs, show messagebox error
             if (!uc.ValidateChildren())
@@ -67,17 +69,22 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             return AccFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                if (SaveData())
+                if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Disbursing officer has been saved.");
                     frmDisbursingOfficer.LoadRecords();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void frmDisbursingOfficerEdit_Load(object sender, EventArgs e)
+        {
+            LoadSelectedRecord();
         }
     }
 }
