@@ -163,11 +163,62 @@ namespace AccountingSystem.Views.Transactions.JEV
             HelperLoadRecords.CollectingOfficerComboBox(dtCollectingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
         }
 
+        #region Disbursing Officer
+
+        private DataColumn[] DataColumnDisbursingOfficer()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string)),
+                new DataColumn(Name = "job_title", typeof(string)),
+                new DataColumn(Name = "created_at", typeof(string)),
+                new DataColumn(Name = "updated_at", typeof(string)),
+                new DataColumn(Name = "users_id", typeof(string))
+            };
+        }
+
+        private DataTable DataTableDisbursingOfficer()
+        {
+            var dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnDisbursingOfficer());
+            DataTable dtDisbursingOfficers = AccFactory.DisbursingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dtDisbursingOfficers.Rows)
+            {
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowPrefix = row["prefix"].ToString();
+                string rowFirstName = row["first_name"].ToString();
+                string rowMiddleInitial = row["mid_initial"].ToString();
+                string rowLastName = row["last_name"].ToString();
+                string rowSuffix = row["suffix"].ToString();
+                string rowJobTitle = row["job_title"].ToString();
+                string rowCreatedAt = row["created_at"].ToString();
+                string rowUpdatedAt = row["updated_at"].ToString();
+                string rowUsersId = row["users_id"].ToString();
+
+                var disbursingOfficerFullName = Helper.GenerateFullName(rowPrefix, rowFirstName, rowMiddleInitial, rowLastName, rowSuffix);
+
+                var dtRow = dataTable.NewRow();
+                dtRow["id"] = rowId;
+                dtRow["full_name"] = disbursingOfficerFullName;
+                dtRow["job_title"] = rowJobTitle;
+                dtRow["created_at"] = rowCreatedAt;
+                dtRow["updated_at"] = rowUpdatedAt;
+                dtRow["users_id"] = rowUsersId;
+
+                dataTable.Rows.Add(dtRow);
+            }
+
+            return dataTable;
+        }
+
         internal void LoadDisbursingOfficer()
         {
-            var dtDisbursingOfficer = AccFactory.DisbursingOfficerRepository().GetRecords();
-            HelperLoadRecords.DisbursingOfficerComboBox(dtDisbursingOfficer, cmbCollectingDisbursingOfficer, "fullname", "id");
+            HelperLoadRecords.DisbursingOfficerComboBox(DataTableDisbursingOfficer(), cmbCollectingDisbursingOfficer, "full_name", "id");
         }
+
+        #endregion Disbursing Officer
 
         private void ShowCheckIcon(RadioButton radioButton)
         {
@@ -415,11 +466,15 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void radioJournals_CheckedChanged(object sender, EventArgs e)
         {
-            var radJournal = sender as RadioButton;
-            journalId = Convert.ToByte(radJournal.Tag);
-            ShowCheckIcon(radJournal);
-            journalName = radJournal.Text.Trim();
-            SetJournalFields(journalName);
+            try
+            {
+                var radJournal = sender as RadioButton;
+                journalId = Convert.ToByte(radJournal.Tag);
+                ShowCheckIcon(radJournal);
+                journalName = radJournal.Text.Trim();
+                SetJournalFields(journalName);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void OnLoad()

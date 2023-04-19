@@ -1456,9 +1456,7 @@ namespace AccountingSystem
             datagrid.Columns["status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
         }
-
 
         #endregion RCI
 
@@ -2054,14 +2052,12 @@ namespace AccountingSystem
         internal static void DisbursingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Full Name";
-            datagrid.Columns[2].HeaderText = "Job Title";
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
-
-            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["full_name"].HeaderText = "Full Name";
+            datagrid.Columns["job_title"].HeaderText = "Job Title";
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
+            datagrid.Columns["users_id"].Visible = false;
         }
 
         internal static void DisbursingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
@@ -2856,8 +2852,6 @@ namespace AccountingSystem
             dataGridView.Columns["name"].HeaderText = "Barangay";
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
-
-
 
         #endregion Amortization Schedule
 

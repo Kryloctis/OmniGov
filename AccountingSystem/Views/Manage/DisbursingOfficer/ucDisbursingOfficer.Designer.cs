@@ -29,197 +29,182 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.txtFirstName = new System.Windows.Forms.TextBox();
-            this.lblFirstName = new System.Windows.Forms.Label();
-            this.lblMidInitial = new System.Windows.Forms.Label();
-            this.txtMidInitial = new System.Windows.Forms.TextBox();
-            this.lblLastName = new System.Windows.Forms.Label();
-            this.txtLastName = new System.Windows.Forms.TextBox();
-            this.lblJobTitle = new System.Windows.Forms.Label();
-            this.txtJobTitle = new System.Windows.Forms.TextBox();
-            this.epFirstName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epMidInitial = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epLastName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epJobTitle = new System.Windows.Forms.ErrorProvider(this.components);
-            this.linkuser = new System.Windows.Forms.LinkLabel();
-            this.txtPrefix = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtSuffix = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMidInitial)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epJobTitle)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            txtFirstName = new System.Windows.Forms.TextBox();
+            lblFirstName = new System.Windows.Forms.Label();
+            lblMidInitial = new System.Windows.Forms.Label();
+            txtMidInitial = new System.Windows.Forms.TextBox();
+            lblLastName = new System.Windows.Forms.Label();
+            txtLastName = new System.Windows.Forms.TextBox();
+            lblJobTitle = new System.Windows.Forms.Label();
+            txtJobTitle = new System.Windows.Forms.TextBox();
+            linkuser = new System.Windows.Forms.LinkLabel();
+            txtPrefix = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            txtSuffix = new System.Windows.Forms.TextBox();
+            label8 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Location = new System.Drawing.Point(99, 66);
-            this.txtFirstName.MaxLength = 45;
-            this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(353, 23);
-            this.txtFirstName.TabIndex = 1;
-            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
-            this.txtFirstName.Validated += new System.EventHandler(this.txtFirstName_Validated);
+            txtFirstName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtFirstName.Location = new System.Drawing.Point(84, 45);
+            txtFirstName.MaxLength = 45;
+            txtFirstName.Name = "txtFirstName";
+            txtFirstName.Size = new System.Drawing.Size(353, 23);
+            txtFirstName.TabIndex = 1;
+            txtFirstName.Validating += txtFirstName_Validating;
+            txtFirstName.Validated += txtFirstName_Validated;
             // 
             // lblFirstName
             // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(15, 69);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(64, 15);
-            this.lblFirstName.TabIndex = 1;
-            this.lblFirstName.Text = "First Name";
+            lblFirstName.AutoSize = true;
+            lblFirstName.Location = new System.Drawing.Point(0, 48);
+            lblFirstName.Name = "lblFirstName";
+            lblFirstName.Size = new System.Drawing.Size(64, 15);
+            lblFirstName.TabIndex = 1;
+            lblFirstName.Text = "First Name";
             // 
             // lblMidInitial
             // 
-            this.lblMidInitial.AutoSize = true;
-            this.lblMidInitial.Location = new System.Drawing.Point(15, 98);
-            this.lblMidInitial.Name = "lblMidInitial";
-            this.lblMidInitial.Size = new System.Drawing.Size(76, 15);
-            this.lblMidInitial.TabIndex = 3;
-            this.lblMidInitial.Text = "Middle Initial";
+            lblMidInitial.AutoSize = true;
+            lblMidInitial.Location = new System.Drawing.Point(0, 77);
+            lblMidInitial.Name = "lblMidInitial";
+            lblMidInitial.Size = new System.Drawing.Size(76, 15);
+            lblMidInitial.TabIndex = 3;
+            lblMidInitial.Text = "Middle Initial";
             // 
             // txtMidInitial
             // 
-            this.txtMidInitial.Location = new System.Drawing.Point(99, 95);
-            this.txtMidInitial.MaxLength = 3;
-            this.txtMidInitial.Name = "txtMidInitial";
-            this.txtMidInitial.Size = new System.Drawing.Size(353, 23);
-            this.txtMidInitial.TabIndex = 2;
-            this.txtMidInitial.Validating += new System.ComponentModel.CancelEventHandler(this.txtMidInitial_Validating);
-            this.txtMidInitial.Validated += new System.EventHandler(this.txtMidInitial_Validated);
+            txtMidInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtMidInitial.Location = new System.Drawing.Point(84, 74);
+            txtMidInitial.MaxLength = 1;
+            txtMidInitial.Name = "txtMidInitial";
+            txtMidInitial.Size = new System.Drawing.Size(353, 23);
+            txtMidInitial.TabIndex = 2;
+            txtMidInitial.Validating += txtMidInitial_Validating;
+            txtMidInitial.Validated += txtMidInitial_Validated;
             // 
             // lblLastName
             // 
-            this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(15, 127);
-            this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(63, 15);
-            this.lblLastName.TabIndex = 5;
-            this.lblLastName.Text = "Last Name";
+            lblLastName.AutoSize = true;
+            lblLastName.Location = new System.Drawing.Point(0, 106);
+            lblLastName.Name = "lblLastName";
+            lblLastName.Size = new System.Drawing.Size(63, 15);
+            lblLastName.TabIndex = 5;
+            lblLastName.Text = "Last Name";
             // 
             // txtLastName
             // 
-            this.txtLastName.Location = new System.Drawing.Point(99, 124);
-            this.txtLastName.MaxLength = 45;
-            this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(353, 23);
-            this.txtLastName.TabIndex = 3;
-            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
-            this.txtLastName.Validated += new System.EventHandler(this.txtLastName_Validated);
+            txtLastName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtLastName.Location = new System.Drawing.Point(84, 103);
+            txtLastName.MaxLength = 45;
+            txtLastName.Name = "txtLastName";
+            txtLastName.Size = new System.Drawing.Size(353, 23);
+            txtLastName.TabIndex = 3;
+            txtLastName.Validating += txtLastName_Validating;
+            txtLastName.Validated += txtLastName_Validated;
             // 
             // lblJobTitle
             // 
-            this.lblJobTitle.AutoSize = true;
-            this.lblJobTitle.Location = new System.Drawing.Point(15, 181);
-            this.lblJobTitle.Name = "lblJobTitle";
-            this.lblJobTitle.Size = new System.Drawing.Size(50, 15);
-            this.lblJobTitle.TabIndex = 7;
-            this.lblJobTitle.Text = "Job Title";
+            lblJobTitle.AutoSize = true;
+            lblJobTitle.Location = new System.Drawing.Point(0, 160);
+            lblJobTitle.Name = "lblJobTitle";
+            lblJobTitle.Size = new System.Drawing.Size(50, 15);
+            lblJobTitle.TabIndex = 7;
+            lblJobTitle.Text = "Job Title";
             // 
             // txtJobTitle
             // 
-            this.txtJobTitle.Location = new System.Drawing.Point(99, 181);
-            this.txtJobTitle.MaxLength = 99;
-            this.txtJobTitle.Name = "txtJobTitle";
-            this.txtJobTitle.Size = new System.Drawing.Size(353, 23);
-            this.txtJobTitle.TabIndex = 5;
-            this.txtJobTitle.Text = "Disbursing Officer";
-            this.txtJobTitle.Validating += new System.ComponentModel.CancelEventHandler(this.txtJobTitle_Validating);
-            this.txtJobTitle.Validated += new System.EventHandler(this.txtJobTitle_Validated);
-            // 
-            // epFirstName
-            // 
-            this.epFirstName.ContainerControl = this;
-            // 
-            // epMidInitial
-            // 
-            this.epMidInitial.ContainerControl = this;
-            // 
-            // epLastName
-            // 
-            this.epLastName.ContainerControl = this;
-            // 
-            // epJobTitle
-            // 
-            this.epJobTitle.ContainerControl = this;
+            txtJobTitle.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtJobTitle.Location = new System.Drawing.Point(84, 160);
+            txtJobTitle.MaxLength = 99;
+            txtJobTitle.Name = "txtJobTitle";
+            txtJobTitle.Size = new System.Drawing.Size(353, 23);
+            txtJobTitle.TabIndex = 5;
+            txtJobTitle.Text = "DISBURSING OFFICER";
+            txtJobTitle.Validating += txtJobTitle_Validating;
+            txtJobTitle.Validated += txtJobTitle_Validated;
             // 
             // linkuser
             // 
-            this.linkuser.AutoSize = true;
-            this.linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkuser.Location = new System.Drawing.Point(15, 16);
-            this.linkuser.Name = "linkuser";
-            this.linkuser.Size = new System.Drawing.Size(55, 15);
-            this.linkuser.TabIndex = 15;
-            this.linkuser.TabStop = true;
-            this.linkuser.Text = "Link User";
-            this.linkuser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkuser_LinkClicked);
+            linkuser.AutoSize = true;
+            linkuser.Cursor = System.Windows.Forms.Cursors.Hand;
+            linkuser.Location = new System.Drawing.Point(382, 0);
+            linkuser.Name = "linkuser";
+            linkuser.Size = new System.Drawing.Size(55, 15);
+            linkuser.TabIndex = 15;
+            linkuser.TabStop = true;
+            linkuser.Text = "Link User";
+            linkuser.LinkClicked += linkuser_LinkClicked;
             // 
             // txtPrefix
             // 
-            this.txtPrefix.Location = new System.Drawing.Point(99, 38);
-            this.txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPrefix.MaxLength = 45;
-            this.txtPrefix.Name = "txtPrefix";
-            this.txtPrefix.Size = new System.Drawing.Size(353, 23);
-            this.txtPrefix.TabIndex = 0;
+            txtPrefix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtPrefix.Location = new System.Drawing.Point(84, 17);
+            txtPrefix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtPrefix.MaxLength = 45;
+            txtPrefix.Name = "txtPrefix";
+            txtPrefix.Size = new System.Drawing.Size(353, 23);
+            txtPrefix.TabIndex = 0;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 41);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Prefix";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(0, 20);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(37, 15);
+            label5.TabIndex = 18;
+            label5.Text = "Prefix";
             // 
             // txtSuffix
             // 
-            this.txtSuffix.Location = new System.Drawing.Point(99, 153);
-            this.txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSuffix.MaxLength = 45;
-            this.txtSuffix.Name = "txtSuffix";
-            this.txtSuffix.Size = new System.Drawing.Size(353, 23);
-            this.txtSuffix.TabIndex = 4;
+            txtSuffix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtSuffix.Location = new System.Drawing.Point(84, 132);
+            txtSuffix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtSuffix.MaxLength = 45;
+            txtSuffix.Name = "txtSuffix";
+            txtSuffix.Size = new System.Drawing.Size(353, 23);
+            txtSuffix.TabIndex = 4;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 153);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 15);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "Suffix";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(0, 132);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(37, 15);
+            label8.TabIndex = 20;
+            label8.Text = "Suffix";
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucDisbursingOfficer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtSuffix);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtPrefix);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.linkuser);
-            this.Controls.Add(this.lblJobTitle);
-            this.Controls.Add(this.txtJobTitle);
-            this.Controls.Add(this.lblLastName);
-            this.Controls.Add(this.txtLastName);
-            this.Controls.Add(this.lblMidInitial);
-            this.Controls.Add(this.txtMidInitial);
-            this.Controls.Add(this.lblFirstName);
-            this.Controls.Add(this.txtFirstName);
-            this.Name = "ucDisbursingOfficer";
-            this.Size = new System.Drawing.Size(479, 212);
-            ((System.ComponentModel.ISupportInitialize)(this.epFirstName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epMidInitial)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epJobTitle)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(txtSuffix);
+            Controls.Add(label8);
+            Controls.Add(txtPrefix);
+            Controls.Add(label5);
+            Controls.Add(linkuser);
+            Controls.Add(lblJobTitle);
+            Controls.Add(txtJobTitle);
+            Controls.Add(lblLastName);
+            Controls.Add(txtLastName);
+            Controls.Add(lblMidInitial);
+            Controls.Add(txtMidInitial);
+            Controls.Add(lblFirstName);
+            Controls.Add(txtFirstName);
+            Name = "ucDisbursingOfficer";
+            Size = new System.Drawing.Size(460, 188);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -231,14 +216,11 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         internal System.Windows.Forms.TextBox txtMidInitial;
         internal System.Windows.Forms.TextBox txtLastName;
         internal System.Windows.Forms.TextBox txtJobTitle;
-        private System.Windows.Forms.ErrorProvider epFirstName;
-        private System.Windows.Forms.ErrorProvider epMidInitial;
-        private System.Windows.Forms.ErrorProvider epLastName;
-        private System.Windows.Forms.ErrorProvider epJobTitle;
         internal System.Windows.Forms.LinkLabel linkuser;
         internal System.Windows.Forms.TextBox txtPrefix;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox txtSuffix;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
