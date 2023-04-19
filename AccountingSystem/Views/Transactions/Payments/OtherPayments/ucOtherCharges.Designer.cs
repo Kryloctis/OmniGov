@@ -56,7 +56,7 @@
             groupBox1.Location = new System.Drawing.Point(0, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            groupBox1.Size = new System.Drawing.Size(688, 344);
+            groupBox1.Size = new System.Drawing.Size(688, 340);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Charges";
@@ -69,7 +69,7 @@
             panel2.Location = new System.Drawing.Point(4, 20);
             panel2.Name = "panel2";
             panel2.Padding = new System.Windows.Forms.Padding(5);
-            panel2.Size = new System.Drawing.Size(680, 320);
+            panel2.Size = new System.Drawing.Size(680, 316);
             panel2.TabIndex = 9;
             // 
             // splitContainer1
@@ -86,7 +86,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(dataGridView2);
             splitContainer1.Panel2.Controls.Add(panel4);
-            splitContainer1.Size = new System.Drawing.Size(670, 310);
+            splitContainer1.Size = new System.Drawing.Size(670, 306);
             splitContainer1.SplitterDistance = 223;
             splitContainer1.TabIndex = 10;
             // 
@@ -121,7 +121,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new System.Drawing.Size(405, 310);
+            dataGridView2.Size = new System.Drawing.Size(405, 306);
             dataGridView2.TabIndex = 8;
             // 
             // panel4
@@ -133,11 +133,12 @@
             panel4.Dock = System.Windows.Forms.DockStyle.Left;
             panel4.Location = new System.Drawing.Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(38, 310);
+            panel4.Size = new System.Drawing.Size(38, 306);
             panel4.TabIndex = 4;
             // 
             // button3
             // 
+            button3.Anchor = System.Windows.Forms.AnchorStyles.None;
             button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             button3.Location = new System.Drawing.Point(3, 169);
             button3.Name = "button3";
@@ -148,6 +149,7 @@
             // 
             // button1
             // 
+            button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             button1.Location = new System.Drawing.Point(3, 111);
             button1.Name = "button1";
@@ -158,6 +160,7 @@
             // 
             // button2
             // 
+            button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             button2.Location = new System.Drawing.Point(3, 140);
             button2.Name = "button2";
@@ -172,7 +175,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(groupBox1);
             Name = "ucOtherCharges";
-            Size = new System.Drawing.Size(688, 344);
+            Size = new System.Drawing.Size(688, 340);
             groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
