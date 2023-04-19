@@ -3,6 +3,7 @@ using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.Permissions;
 using System.Transactions;
 
 namespace ACC.Data
@@ -128,21 +129,23 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title,  created_at, updated_at, users_id FROM {tableName}";
+            string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName}";
 
-                return _dbGenericCommands.Fill(query, new DataTable());
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return _dbGenericCommands.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            throw new NotImplementedException();
+            var parameters = new object[][]
+            {
+                new object[] { "@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, created_at, updated_at, users_id FROM {tableName} WHERE prefix LIKE @search_text OR first_name LIKE @search_text OR last_name LIKE @search_text OR suffix LIKE @search_text OR job_title LIKE @search_text";
+
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
