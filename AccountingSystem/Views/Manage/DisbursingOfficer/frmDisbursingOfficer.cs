@@ -25,7 +25,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 new DataColumn(Name = "job_title", typeof(string)),
                 new DataColumn(Name = "created_at", typeof(string)),
                 new DataColumn(Name = "updated_at", typeof(string)),
-                new DataColumn(Name = "users_id", typeof(int))
+                new DataColumn(Name = "users_id", typeof(string))
             };
         }
 
@@ -51,7 +51,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 string rowJobTitle = row["job_title"].ToString();
                 string rowCreatedAt = row["created_at"].ToString();
                 string rowUpdatedAt = row["updated_at"].ToString();
-                int rowUsersId = Convert.ToInt32(row["users_id"]);
+                string rowUsersId = row["users_id"].ToString();
 
                 var disbursingOfficerFullName = Helper.GenerateFullName(rowPrefix, rowFirstName, rowMiddleInitial, rowLastName, rowSuffix);
 

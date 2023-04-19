@@ -99,7 +99,6 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Disbursing Officer";
-            this.Load += new System.EventHandler(this.frmDisbursingOfficerAdd_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

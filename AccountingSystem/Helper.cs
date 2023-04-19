@@ -608,7 +608,7 @@ namespace AccountingSystem
 
                 return dictUser;
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return dictUser;
         }
 

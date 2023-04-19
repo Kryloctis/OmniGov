@@ -1456,9 +1456,7 @@ namespace AccountingSystem
             datagrid.Columns["status"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             datagrid.Columns["cheque_date"].DefaultCellStyle.Format = "MMMM-dd-yyyy";
-
         }
-
 
         #endregion RCI
 
@@ -2854,8 +2852,6 @@ namespace AccountingSystem
             dataGridView.Columns["name"].HeaderText = "Barangay";
             dataGridView.Columns["code"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         }
-
-
 
         #endregion Amortization Schedule
 

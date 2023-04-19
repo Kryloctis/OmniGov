@@ -34,10 +34,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 uc.UserId = disbursingOfficerDict["users_id"] == string.Empty ? 0 : Convert.ToInt16(disbursingOfficerDict["users_id"]);
                 uc.LoadLink(uc.UserId);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmDisbursingOfficerEdit_Load(object sender, EventArgs e)
@@ -47,47 +44,40 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
 
         private bool SaveData()
         {
-            try
+            // if error occurs, show messagebox error
+            if (!uc.ValidateChildren())
             {
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                // proceed to insert
-                var disbursingOfficerModel = new DisbursingOfficerModel()
-                {
-                    Id = uc.disbursingOfficerId,
-                    FirstName = uc.txtFirstName.Text.Trim(),
-                    MiddleInitial = uc.txtMidInitial.Text.Trim(),
-                    LastName = uc.txtLastName.Text.Trim(),
-                    JobTitle = uc.txtJobTitle.Text.Trim(),
-                    UserId = uc.UserId
-                };
-
-                return AccFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            // proceed to insert
+            var disbursingOfficerModel = new DisbursingOfficerModel()
+            {
+                Id = uc.disbursingOfficerId,
+                Prefix = uc.txtPrefix.Text.Trim(),
+                FirstName = uc.txtFirstName.Text.Trim(),
+                MiddleInitial = uc.txtMidInitial.Text.Trim(),
+                Suffix = uc.txtSuffix.Text.Trim(),
+                LastName = uc.txtLastName.Text.Trim(),
+                JobTitle = uc.txtJobTitle.Text.Trim(),
+                UserId = uc.UserId,
+            };
+
+            return AccFactory.DisbursingOfficerRepository().Update(disbursingOfficerModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Disbursing officer has been saved.");
-                frmDisbursingOfficer.LoadRecords();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Disbursing officer has been saved.");
+                    frmDisbursingOfficer.LoadRecords();
+                }
             }
-        }
-
-        private void ucDisbursingOfficer1_Load(object sender, EventArgs e)
-        {
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
