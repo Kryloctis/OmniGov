@@ -210,6 +210,10 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void ucPayment_Load(object sender, EventArgs e)
         {
+            if (!DesignMode)
+            {
+
+            }
         }
 
         #region Validations

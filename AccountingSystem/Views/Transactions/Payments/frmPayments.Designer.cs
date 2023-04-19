@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             panel1 = new System.Windows.Forms.Panel();
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPageTaxpayer = new System.Windows.Forms.TabPage();
@@ -47,6 +47,7 @@
             tabPageOthers = new System.Windows.Forms.TabPage();
             tabControl2 = new System.Windows.Forms.TabControl();
             tabPageAF51ANDAF57 = new System.Windows.Forms.TabPage();
+            ucOtherCharges1 = new OtherPayments.ucOtherCharges();
             tabPage2 = new System.Windows.Forms.TabPage();
             tabPage3 = new System.Windows.Forms.TabPage();
             tabPage4 = new System.Windows.Forms.TabPage();
@@ -144,35 +145,35 @@
             // 
             // dgTaxpayers
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgTaxpayers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgTaxpayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dgTaxpayers.DefaultCellStyle = dataGridViewCellStyle5;
             dgTaxpayers.Dock = System.Windows.Forms.DockStyle.Fill;
             dgTaxpayers.Location = new System.Drawing.Point(4, 36);
             dgTaxpayers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dgTaxpayers.Name = "dgTaxpayers";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dgTaxpayers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgTaxpayers.RowTemplate.Height = 25;
             dgTaxpayers.Size = new System.Drawing.Size(851, 478);
             dgTaxpayers.TabIndex = 2;
@@ -299,6 +300,7 @@
             // 
             // tabPageAF51ANDAF57
             // 
+            tabPageAF51ANDAF57.Controls.Add(ucOtherCharges1);
             tabPageAF51ANDAF57.Controls.Add(ucaF51_571);
             tabPageAF51ANDAF57.Location = new System.Drawing.Point(4, 24);
             tabPageAF51ANDAF57.Name = "tabPageAF51ANDAF57";
@@ -307,6 +309,14 @@
             tabPageAF51ANDAF57.TabIndex = 0;
             tabPageAF51ANDAF57.Text = "AF 51 & AF 57";
             tabPageAF51ANDAF57.UseVisualStyleBackColor = true;
+            // 
+            // ucOtherCharges1
+            // 
+            ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucOtherCharges1.Location = new System.Drawing.Point(3, 69);
+            ucOtherCharges1.Name = "ucOtherCharges1";
+            ucOtherCharges1.Size = new System.Drawing.Size(829, 375);
+            ucOtherCharges1.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -536,12 +546,11 @@
             // 
             // ucaF51_571
             // 
-            ucaF51_571.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucaF51_571.Dock = System.Windows.Forms.DockStyle.Top;
             ucaF51_571.Location = new System.Drawing.Point(3, 3);
             ucaF51_571.Name = "ucaF51_571";
-            ucaF51_571.Padding = new System.Windows.Forms.Padding(4);
-            ucaF51_571.Size = new System.Drawing.Size(829, 441);
-            ucaF51_571.TabIndex = 0;
+            ucaF51_571.Size = new System.Drawing.Size(829, 66);
+            ucaF51_571.TabIndex = 2;
             // 
             // frmPayments
             // 
@@ -621,6 +630,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage6;
+        private OtherPayments.ucOtherCharges ucOtherCharges1;
         private OtherPayments.AF51_57.ucAF51_57 ucaF51_571;
     }
 }

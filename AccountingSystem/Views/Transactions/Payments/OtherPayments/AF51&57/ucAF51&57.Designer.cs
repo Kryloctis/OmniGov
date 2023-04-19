@@ -43,10 +43,11 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(panel2);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox2.Location = new System.Drawing.Point(4, 4);
+            groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(701, 59);
+            groupBox2.Size = new System.Drawing.Size(711, 66);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Taxpayer Information";
@@ -63,7 +64,7 @@
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel2.Location = new System.Drawing.Point(3, 19);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(695, 37);
+            panel2.Size = new System.Drawing.Size(705, 44);
             panel2.TabIndex = 0;
             // 
             // textBox3
@@ -84,7 +85,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new System.Drawing.Point(331, 8);
+            textBox2.Location = new System.Drawing.Point(339, 8);
             textBox2.Name = "textBox2";
             textBox2.Size = new System.Drawing.Size(78, 23);
             textBox2.TabIndex = 3;
@@ -92,7 +93,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(294, 11);
+            label2.Location = new System.Drawing.Point(302, 11);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(31, 15);
             label2.TabIndex = 2;
@@ -120,7 +121,6 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(groupBox2);
             Name = "ucAF51_57";
-            Padding = new System.Windows.Forms.Padding(4);
             Size = new System.Drawing.Size(711, 66);
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
