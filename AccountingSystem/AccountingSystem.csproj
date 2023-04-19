@@ -236,8 +236,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Transactions\Payments\OtherPayments\MarriageLicense\" />
-  </ItemGroup>
-
 </Project>
