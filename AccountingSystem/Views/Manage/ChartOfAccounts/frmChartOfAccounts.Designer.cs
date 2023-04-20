@@ -46,7 +46,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             txtTotalDebit = new System.Windows.Forms.TextBox();
             cmbxGenLedgAccountGroup = new System.Windows.Forms.ComboBox();
             btnRetrieveAll = new System.Windows.Forms.Button();
-            cmbYear = new System.Windows.Forms.ComboBox();
+            cmbxYear = new System.Windows.Forms.ComboBox();
             cmbxFund = new System.Windows.Forms.ComboBox();
             txtSearch = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
@@ -168,7 +168,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             tabGeneralLedgers.Controls.Add(txtTotalDebit);
             tabGeneralLedgers.Controls.Add(cmbxGenLedgAccountGroup);
             tabGeneralLedgers.Controls.Add(btnRetrieveAll);
-            tabGeneralLedgers.Controls.Add(cmbYear);
+            tabGeneralLedgers.Controls.Add(cmbxYear);
             tabGeneralLedgers.Controls.Add(cmbxFund);
             tabGeneralLedgers.Controls.Add(txtSearch);
             tabGeneralLedgers.Controls.Add(label1);
@@ -248,15 +248,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             btnRetrieveAll.UseVisualStyleBackColor = true;
             btnRetrieveAll.Click += btnRetrieveAll_Click;
             // 
-            // cmbYear
+            // cmbxYear
             // 
-            cmbYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            cmbYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmbYear.FormattingEnabled = true;
-            cmbYear.Location = new System.Drawing.Point(927, 6);
-            cmbYear.Name = "cmbYear";
-            cmbYear.Size = new System.Drawing.Size(93, 23);
-            cmbYear.TabIndex = 8;
+            cmbxYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            cmbxYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxYear.FormattingEnabled = true;
+            cmbxYear.Location = new System.Drawing.Point(927, 6);
+            cmbxYear.Name = "cmbxYear";
+            cmbxYear.Size = new System.Drawing.Size(93, 23);
+            cmbxYear.TabIndex = 8;
             // 
             // cmbxFund
             // 
@@ -538,8 +538,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripButton BtnSetBalance;
-        private System.Windows.Forms.ComboBox cmbFund;
-        private System.Windows.Forms.ComboBox cmbYear;
+        private System.Windows.Forms.ComboBox cmbxFund;
+        private System.Windows.Forms.ComboBox cmbxYear;
         private System.Windows.Forms.ComboBox cmbxGenLedgAccountGroup;
         private System.Windows.Forms.Button btnRetrieveAll;
         private System.Windows.Forms.Label label3;
@@ -548,6 +548,5 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTotalCredit;
         private System.Windows.Forms.TextBox txtTotalDebit;
-        private System.Windows.Forms.ComboBox cmbxFund;
     }
 }

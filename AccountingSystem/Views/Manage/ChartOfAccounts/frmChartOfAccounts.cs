@@ -85,8 +85,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         {
             try
             {
-                int fundId = Convert.ToInt32(cmbFund.SelectedValue);
-                short year = Convert.ToInt16(cmbYear.Text);
+                int fundId = Convert.ToInt32(cmbxFund.SelectedValue);
+                short year = Convert.ToInt16(cmbxYear.Text);
 
                 decimal totalDebit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, true);
                 decimal totalCredit = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_Year_Availablility(fundId, year, false);
@@ -103,8 +103,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private DataTable GeneralLedgersDataTable(int limitSize)
         {
             DataTable dataTable;
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
             int accountGroupId = Convert.ToInt32(cmbAccountGroup.SelectedValue);
             string searchText = txtSearch.Text.Trim();
 
@@ -174,12 +174,12 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private void LoadFunds()
         {
             var dtFunds = AccFactory.FundsRepository().GetRecords();
-            HelperLoadRecords.FundsComboBox(dtFunds, cmbFund, "fund_name", "id");
+            HelperLoadRecords.FundsComboBox(dtFunds, cmbxFund, "fund_name", "id");
         }
 
         private void LoadYear()
         {
-            HelperLoadRecords.YearComboBox(cmbYear);
+            HelperLoadRecords.YearComboBox(cmbxYear);
         }
 
         private void DeleteAccountGroupRecords()
@@ -259,19 +259,15 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
-            try
-            {
-                Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
-                Helper.DatagridFullRowSelectStyle(dgAccountGroup);
-                Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
-                Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
+            Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
+            Helper.DatagridFullRowSelectStyle(dgAccountGroup);
+            Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
+            Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
 
-                LoadAccountGroupComboBox();
-                LoadMajorAccountGroupComboBox();
-                LoadFunds();
-                LoadYear();
-            }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            LoadAccountGroupComboBox();
+            LoadMajorAccountGroupComboBox();
+            LoadFunds();
+            LoadYear();
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -337,8 +333,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void ShowSubsidiaryForm()
         {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
 
             ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
             _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
@@ -352,8 +348,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private void ShowSetBalanceForm()
         {
             int rowIndex = dgGeneralLedgerAccounts.CurrentRow.Index;
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
+            short year = Convert.ToInt16(cmbxYear.Text);
             ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.Rows[rowIndex].Cells["general_ledger_accounts_id"].Value);
 
             bool hasSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId, fundId);
@@ -446,9 +442,9 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void EnableDisableSubsidiaryButton()
         {
-            byte fundId = Convert.ToByte(cmbFund.SelectedValue);
+            byte fundId = Convert.ToByte(cmbxFund.SelectedValue);
             ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-            short year = Convert.ToInt16(cmbYear.Text);
+            short year = Convert.ToInt16(cmbxYear.Text);
             bool generalLedgerBalanceExist = AccFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
 
             if (generalLedgerBalanceExist)
