@@ -259,15 +259,19 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
 
         private void frmChartOfAccounts_Load(object sender, EventArgs e)
         {
-            Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
-            Helper.DatagridFullRowSelectStyle(dgAccountGroup);
-            Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
-            Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
+            try
+            {
+                Helper.DatagridFullRowSelectStyle(dgGeneralLedgerAccounts);
+                Helper.DatagridFullRowSelectStyle(dgAccountGroup);
+                Helper.DatagridFullRowSelectStyle(dgMajorAccountGroup);
+                Helper.DatagridFullRowSelectStyle(dgSubMajorAccount);
 
-            LoadAccountGroupComboBox();
-            LoadMajorAccountGroupComboBox();
-            LoadFunds();
-            LoadYear();
+                LoadAccountGroupComboBox();
+                LoadMajorAccountGroupComboBox();
+                LoadFunds();
+                LoadYear();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -336,11 +340,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
 
-            if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
-            {
-                ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
-                _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
-            }
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+            _ = new frmSubsidiary(this, fundId, generalLedgerId, year).ShowDialog();
         }
 
         private void BtnSubsidiary_Click(object sender, EventArgs e)
@@ -348,38 +349,41 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             ShowSubsidiaryForm();
         }
 
-        private void BtnSetBalance_Click(object sender, EventArgs e)
+        private void ShowSetBalanceForm()
         {
+            int rowIndex = dgGeneralLedgerAccounts.CurrentRow.Index;
             byte fundId = Convert.ToByte(cmbFund.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
-            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.SelectedCells[0].Value);
+            ushort generalLedgerId = Convert.ToUInt16(dgGeneralLedgerAccounts.Rows[rowIndex].Cells["general_ledger_accounts_id"].Value);
 
+            bool hasSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId, fundId);
+            var generalLedgerBalanceExist = AccFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
+
+            if (hasSubsidiary)
+            {
+                ShowSubsidiaryForm();
+                return;
+            }
+
+            if (generalLedgerBalanceExist)
+            {
+                _ = new frmBeginningBalanceEdit(this, null, fundId, generalLedgerId, year).ShowDialog();
+                return;
+            }
+
+            _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
+        }
+
+        private void BtnSetBalance_Click(object sender, EventArgs e)
+        {
             try
             {
-                if (dgGeneralLedgerAccounts.SelectedRows.Count == 1)
-                {
-                    bool hasSubsidiary = AccFactory.SubsidiaryLedgerAccountsRepository().HasSubsidiary(generalLedgerId);
-                    if (hasSubsidiary)
-                    {
-                        ShowSubsidiaryForm();
-                        return;
-                    }
+                if (dgGeneralLedgerAccounts.Rows.Count < 1)
+                    return;
 
-                    var generalLedgerBalanceExist = AccFactory.BeginningBalancesRepository().GeneralLedgerBalanceExist(fundId, generalLedgerId, year);
-
-                    if (generalLedgerBalanceExist)
-                    {
-                        _ = new frmBeginningBalanceEdit(this, null, fundId, generalLedgerId, year).ShowDialog();
-                        return;
-                    }
-
-                    _ = new frmBeginningBalanceAdd(this, null, fundId, generalLedgerId, year).ShowDialog();
-                }
+                ShowSetBalanceForm();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void DisableEditDeleteButtons()
