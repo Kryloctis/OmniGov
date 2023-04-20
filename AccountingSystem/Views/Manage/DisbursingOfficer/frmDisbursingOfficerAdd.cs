@@ -20,6 +20,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
         {
             InitializeComponent();
             frmDisbursingOfficer = _frmDisbursingOfficer;
+            uc = ucDisbursingOfficer1;
             Helper.LoadFormIcon(this);
         }
 

@@ -84,7 +84,7 @@
             ucDisbursingOfficer1.Location = new System.Drawing.Point(4, 4);
             ucDisbursingOfficer1.Name = "ucDisbursingOfficer1";
             ucDisbursingOfficer1.Size = new System.Drawing.Size(453, 187);
-            ucDisbursingOfficer1.TabIndex = 2;
+            ucDisbursingOfficer1.TabIndex = 0;
             // 
             // frmDisbursingOfficerAdd
             // 
