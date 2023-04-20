@@ -84,9 +84,9 @@
             ucDisbursingOfficer1.Location = new System.Drawing.Point(4, 4);
             ucDisbursingOfficer1.Name = "ucDisbursingOfficer1";
             ucDisbursingOfficer1.Size = new System.Drawing.Size(453, 187);
-            ucDisbursingOfficer1.TabIndex = 5;
+            ucDisbursingOfficer1.TabIndex = 0;
             // 
-            // frmDisbursingOfficerEdit1
+            // frmDisbursingOfficerEdit
             // 
             AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -98,7 +98,7 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmDisbursingOfficerEdit1";
+            Name = "frmDisbursingOfficerEdit";
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             Text = "Edit Disbursing Officer";

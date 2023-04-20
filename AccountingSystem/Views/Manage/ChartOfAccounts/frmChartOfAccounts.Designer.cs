@@ -49,7 +49,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             cmbxYear = new System.Windows.Forms.ComboBox();
             cmbxFund = new System.Windows.Forms.ComboBox();
             txtSearch = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
             tabSubMajorAccount = new System.Windows.Forms.TabPage();
             label3 = new System.Windows.Forms.Label();
             cmbMajorAccount = new System.Windows.Forms.ComboBox();
@@ -171,7 +170,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             tabGeneralLedgers.Controls.Add(cmbxYear);
             tabGeneralLedgers.Controls.Add(cmbxFund);
             tabGeneralLedgers.Controls.Add(txtSearch);
-            tabGeneralLedgers.Controls.Add(label1);
             tabGeneralLedgers.Controls.Add(dgGeneralLedgerAccounts);
             tabGeneralLedgers.Location = new System.Drawing.Point(4, 24);
             tabGeneralLedgers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -232,7 +230,7 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             cmbxGenLedgAccountGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cmbxGenLedgAccountGroup.FlatStyle = System.Windows.Forms.FlatStyle.System;
             cmbxGenLedgAccountGroup.FormattingEnabled = true;
-            cmbxGenLedgAccountGroup.Location = new System.Drawing.Point(286, 7);
+            cmbxGenLedgAccountGroup.Location = new System.Drawing.Point(238, 8);
             cmbxGenLedgAccountGroup.Name = "cmbxGenLedgAccountGroup";
             cmbxGenLedgAccountGroup.Size = new System.Drawing.Size(177, 23);
             cmbxGenLedgAccountGroup.TabIndex = 10;
@@ -271,20 +269,11 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             // txtSearch
             // 
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txtSearch.Location = new System.Drawing.Point(51, 7);
+            txtSearch.Location = new System.Drawing.Point(3, 8);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(229, 23);
             txtSearch.TabIndex = 6;
             txtSearch.TextChanged += txtSearch_TextChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(3, 10);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(42, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Search";
             // 
             // tabSubMajorAccount
             // 
@@ -535,7 +524,6 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton BtnSubsidiary;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripButton BtnSetBalance;
         private System.Windows.Forms.ComboBox cmbxFund;

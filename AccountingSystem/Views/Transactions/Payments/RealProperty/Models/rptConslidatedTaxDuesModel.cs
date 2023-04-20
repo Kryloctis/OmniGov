@@ -1,4 +1,4 @@
-﻿namespace AccountingSystem.Views.Transactions.PropertyPayment.Models
+﻿namespace AccountingSystem.Views.Transactions.Payments.RealProperty.Models
 {
     public class rptConslidatedTaxDuesModel
     {

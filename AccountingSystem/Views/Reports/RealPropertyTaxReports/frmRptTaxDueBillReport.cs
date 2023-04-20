@@ -1,4 +1,4 @@
-﻿using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+﻿using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
