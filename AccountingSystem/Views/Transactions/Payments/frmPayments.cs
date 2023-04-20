@@ -177,36 +177,54 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void newFormPayments_Load(object sender, EventArgs e)
         {
             LoadTaxpayers();
+            EnableDisableButtons();
         }
 
         private void tabPageTaxpayer_Enter(object sender, EventArgs e)
         {
-            btnNext.Text = "Next";
-            radTaxpayer.Checked = true;
-            EnableDisableButtons(btnBack);
+            try
+            {
+                btnNext.Text = "Next";
+                radTaxpayer.Checked = true;
+                EnableDisableButtons();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void tabPageTaxDues_Enter(object sender, EventArgs e)
         {
-            btnNext.Text = "Proceed to Payment";
-            radTaxDues.Checked = true;
-            EnableDisableButtons(btnBack);
+            try
+            {
+                btnNext.Text = "Proceed to Payment";
+                radTaxDues.Checked = true;
+                EnableDisableButtons();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void tabPagePayment_Enter(object sender, EventArgs e)
         {
-            btnNext.Text = "Confirm Payment";
-            radPayment.Checked = true;
-            ucPayment.Enabled = true;
-            EnableDisableButtons(btnBack);
+            try
+            {
+                btnNext.Text = "Confirm Payment";
+                radPayment.Checked = true;
+                ucPayment.Enabled = true;
+                EnableDisableButtons();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
-        private void EnableDisableButtons(Button btnBack)
+        private void EnableDisableButtons()
         {
             if (tabControl1.SelectedIndex < 1)
                 btnBack.Enabled = false;
             else
                 btnBack.Enabled = true;
+
+            if (dgTaxpayers.SelectedRows.Count < 1)
+                btnNext.Enabled = false;
+            else
+                btnNext.Enabled = true;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -219,10 +237,11 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgTaxpayers.SelectedRows.Count == 1)
-                btnNext.Enabled = true;
-            else
-                btnNext.Enabled = false;
+            try
+            {
+                EnableDisableButtons();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         private void radRpt_CheckedChanged(object sender, EventArgs e)
