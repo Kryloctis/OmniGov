@@ -34,6 +34,7 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            panel1 = new System.Windows.Forms.Panel();
             dataGridView2 = new System.Windows.Forms.DataGridView();
             panel4 = new System.Windows.Forms.Panel();
             button3 = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -50,6 +52,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = System.Drawing.Color.Transparent;
             groupBox1.Controls.Add(panel2);
             groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -81,6 +84,7 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
+            splitContainer1.Panel1.Controls.Add(panel1);
             // 
             // splitContainer1.Panel2
             // 
@@ -89,6 +93,15 @@
             splitContainer1.Size = new System.Drawing.Size(670, 306);
             splitContainer1.SplitterDistance = 223;
             splitContainer1.TabIndex = 10;
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(223, 306);
+            panel1.TabIndex = 0;
             // 
             // dataGridView2
             // 
@@ -126,7 +139,7 @@
             // 
             // panel4
             // 
-            panel4.BackColor = System.Drawing.Color.White;
+            panel4.BackColor = System.Drawing.Color.Transparent;
             panel4.Controls.Add(button3);
             panel4.Controls.Add(button1);
             panel4.Controls.Add(button2);
@@ -178,6 +191,7 @@
             Size = new System.Drawing.Size(688, 340);
             groupBox1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
@@ -195,5 +209,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -338,6 +338,7 @@
             // 
             // tabPageAF51ANDAF57
             // 
+            tabPageAF51ANDAF57.BackColor = System.Drawing.Color.White;
             tabPageAF51ANDAF57.Controls.Add(splitContainer5);
             tabPageAF51ANDAF57.Location = new System.Drawing.Point(4, 24);
             tabPageAF51ANDAF57.Name = "tabPageAF51ANDAF57";
@@ -345,7 +346,6 @@
             tabPageAF51ANDAF57.Size = new System.Drawing.Size(835, 447);
             tabPageAF51ANDAF57.TabIndex = 0;
             tabPageAF51ANDAF57.Text = "AF 51 & AF 57";
-            tabPageAF51ANDAF57.UseVisualStyleBackColor = true;
             // 
             // splitContainer5
             // 
@@ -370,7 +370,7 @@
             // 
             // ucaF51_571
             // 
-            ucaF51_571.BackColor = System.Drawing.SystemColors.Control;
+            ucaF51_571.BackColor = System.Drawing.Color.Transparent;
             ucaF51_571.Dock = System.Windows.Forms.DockStyle.Fill;
             ucaF51_571.Location = new System.Drawing.Point(0, 0);
             ucaF51_571.Name = "ucaF51_571";
@@ -379,7 +379,7 @@
             // 
             // ucOtherCharges1
             // 
-            ucOtherCharges1.BackColor = System.Drawing.SystemColors.Control;
+            ucOtherCharges1.BackColor = System.Drawing.Color.White;
             ucOtherCharges1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherCharges1.Location = new System.Drawing.Point(0, 0);
             ucOtherCharges1.Name = "ucOtherCharges1";
@@ -388,6 +388,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.BackColor = System.Drawing.Color.White;
             tabPage2.Controls.Add(splitContainer1);
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
@@ -395,7 +396,6 @@
             tabPage2.Size = new System.Drawing.Size(835, 447);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "AF 52 - Cetificate of Transfer of Cattle ";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -421,7 +421,7 @@
             // 
             // ucCattleTransferOfOwnership1
             // 
-            ucCattleTransferOfOwnership1.BackColor = System.Drawing.SystemColors.Control;
+            ucCattleTransferOfOwnership1.BackColor = System.Drawing.Color.Transparent;
             ucCattleTransferOfOwnership1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCattleTransferOfOwnership1.Location = new System.Drawing.Point(0, 0);
             ucCattleTransferOfOwnership1.Name = "ucCattleTransferOfOwnership1";
@@ -430,7 +430,7 @@
             // 
             // ucOtherCharges2
             // 
-            ucOtherCharges2.BackColor = System.Drawing.SystemColors.Control;
+            ucOtherCharges2.BackColor = System.Drawing.Color.Transparent;
             ucOtherCharges2.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherCharges2.Location = new System.Drawing.Point(0, 0);
             ucOtherCharges2.Name = "ucOtherCharges2";
@@ -472,7 +472,7 @@
             // 
             // ucCattleOwnership2
             // 
-            ucCattleOwnership2.BackColor = System.Drawing.SystemColors.Control;
+            ucCattleOwnership2.BackColor = System.Drawing.Color.Transparent;
             ucCattleOwnership2.Dock = System.Windows.Forms.DockStyle.Fill;
             ucCattleOwnership2.Location = new System.Drawing.Point(0, 0);
             ucCattleOwnership2.Name = "ucCattleOwnership2";
@@ -481,7 +481,7 @@
             // 
             // ucOtherCharges3
             // 
-            ucOtherCharges3.BackColor = System.Drawing.SystemColors.Control;
+            ucOtherCharges3.BackColor = System.Drawing.Color.Transparent;
             ucOtherCharges3.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherCharges3.Location = new System.Drawing.Point(0, 0);
             ucOtherCharges3.Name = "ucOtherCharges3";
@@ -490,6 +490,7 @@
             // 
             // tabPage4
             // 
+            tabPage4.BackColor = System.Drawing.Color.White;
             tabPage4.Controls.Add(splitContainer3);
             tabPage4.Location = new System.Drawing.Point(4, 24);
             tabPage4.Name = "tabPage4";
@@ -497,7 +498,6 @@
             tabPage4.Size = new System.Drawing.Size(835, 447);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "AF 54 - Marriage License";
-            tabPage4.UseVisualStyleBackColor = true;
             // 
             // splitContainer3
             // 
@@ -516,9 +516,6 @@
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.AutoScroll = true;
-            splitContainer3.Panel2.AutoScrollMargin = new System.Drawing.Size(0, 200);
-            splitContainer3.Panel2.AutoScrollMinSize = new System.Drawing.Size(0, 50);
             splitContainer3.Panel2.Controls.Add(ucOtherCharges4);
             splitContainer3.Size = new System.Drawing.Size(829, 441);
             splitContainer3.SplitterDistance = 350;
@@ -526,7 +523,7 @@
             // 
             // ucMarriageLicense1
             // 
-            ucMarriageLicense1.BackColor = System.Drawing.SystemColors.Control;
+            ucMarriageLicense1.BackColor = System.Drawing.Color.Transparent;
             ucMarriageLicense1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucMarriageLicense1.Location = new System.Drawing.Point(0, 0);
             ucMarriageLicense1.Name = "ucMarriageLicense1";
@@ -535,16 +532,20 @@
             // 
             // ucOtherCharges4
             // 
-            ucOtherCharges4.BackColor = System.Drawing.SystemColors.Control;
+            ucOtherCharges4.AutoScroll = true;
+            ucOtherCharges4.AutoScrollMargin = new System.Drawing.Size(0, 70);
+            ucOtherCharges4.AutoScrollMinSize = new System.Drawing.Size(0, 70);
             ucOtherCharges4.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherCharges4.Location = new System.Drawing.Point(0, 0);
             ucOtherCharges4.Name = "ucOtherCharges4";
-            ucOtherCharges4.Size = new System.Drawing.Size(812, 250);
+            ucOtherCharges4.Size = new System.Drawing.Size(829, 87);
             ucOtherCharges4.TabIndex = 0;
+            ucOtherCharges4.Load += ucOtherCharges4_Load;
             // 
             // tabPage6
             // 
             tabPage6.AutoScroll = true;
+            tabPage6.BackColor = System.Drawing.Color.White;
             tabPage6.Controls.Add(splitContainer4);
             tabPage6.Location = new System.Drawing.Point(4, 24);
             tabPage6.Name = "tabPage6";
@@ -552,7 +553,6 @@
             tabPage6.Size = new System.Drawing.Size(835, 447);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "AF 58 - Burial Permit";
-            tabPage6.UseVisualStyleBackColor = true;
             // 
             // splitContainer4
             // 
@@ -580,7 +580,7 @@
             // 
             // ucBurialPermit1
             // 
-            ucBurialPermit1.BackColor = System.Drawing.SystemColors.Control;
+            ucBurialPermit1.BackColor = System.Drawing.Color.Transparent;
             ucBurialPermit1.Dock = System.Windows.Forms.DockStyle.Fill;
             ucBurialPermit1.Location = new System.Drawing.Point(0, 0);
             ucBurialPermit1.Name = "ucBurialPermit1";
@@ -590,7 +590,7 @@
             // ucOtherCharges5
             // 
             ucOtherCharges5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            ucOtherCharges5.BackColor = System.Drawing.SystemColors.Control;
+            ucOtherCharges5.BackColor = System.Drawing.Color.Transparent;
             ucOtherCharges5.Dock = System.Windows.Forms.DockStyle.Fill;
             ucOtherCharges5.Location = new System.Drawing.Point(0, 0);
             ucOtherCharges5.Name = "ucOtherCharges5";
@@ -904,11 +904,11 @@
         private OtherPayments.CattleOwnership.ucCattleOwnership ucCattleOwnership2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private OtherPayments.MarriageLicense.ucMarriageLicense ucMarriageLicense1;
-        private OtherPayments.ucOtherCharges ucOtherCharges4;
         private OtherPayments.ucOtherCharges ucOtherCharges3;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private OtherPayments.BurialPermit.ucBurialPermit ucBurialPermit1;
         private OtherPayments.ucOtherCharges ucOtherCharges5;
         private System.Windows.Forms.SplitContainer splitContainer5;
+        private OtherPayments.ucOtherCharges ucOtherCharges4;
     }
 }

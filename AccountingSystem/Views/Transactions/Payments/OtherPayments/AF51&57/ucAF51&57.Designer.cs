@@ -42,6 +42,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = System.Drawing.Color.Transparent;
             groupBox2.Controls.Add(panel2);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -71,6 +72,7 @@
             // 
             textBox3.Location = new System.Drawing.Point(493, 8);
             textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
             textBox3.Size = new System.Drawing.Size(195, 23);
             textBox3.TabIndex = 5;
             // 
@@ -87,6 +89,7 @@
             // 
             textBox2.Location = new System.Drawing.Point(339, 8);
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.Size = new System.Drawing.Size(78, 23);
             textBox2.TabIndex = 3;
             // 
@@ -103,6 +106,7 @@
             // 
             textBox1.Location = new System.Drawing.Point(60, 8);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new System.Drawing.Size(223, 23);
             textBox1.TabIndex = 3;
             // 

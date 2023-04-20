@@ -386,5 +386,10 @@ namespace AccountingSystem.Views.Transactions.Payments
         }
 
         #endregion Save Payment
+
+        private void ucOtherCharges4_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
