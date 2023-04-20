@@ -227,26 +227,19 @@ namespace ACC.Data
             }
         }
 
-        public bool HasSubsidiary(ushort generalLedgerId)
+        public bool HasSubsidiary(ushort generalLedgerId, byte fundId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId },
+                new object[] { "@funds_id", DbType.Byte, fundId }
             };
 
+            string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id";
+            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
         }
     }

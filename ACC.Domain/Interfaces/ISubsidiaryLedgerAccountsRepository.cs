@@ -11,6 +11,6 @@ namespace ACC.Domain.Interfaces
 
         DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId);
 
-        bool HasSubsidiary(ushort generalLedgerId);
+        bool HasSubsidiary(ushort generalLedgerId, byte fundId);
     }
 }
