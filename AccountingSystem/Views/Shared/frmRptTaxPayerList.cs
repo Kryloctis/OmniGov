@@ -1,7 +1,7 @@
 ﻿using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
-using AccountingSystem.Views.Transactions.PropertyPayment.Models;
+using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -129,7 +129,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
                 LoadMethods();
                 Close();
             }
-        }  
+        }
 
         private void GetSelectedTaxpayer()
         {
