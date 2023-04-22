@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
@@ -10,30 +11,32 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         public frmAccountable()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Normal;
             Helper.LoadFormIcon(this);
-            Helper.DatagridFullRowSelectStyle(dgAccform, true);
+            Helper.DatagridFullRowSelectStyle(dgAccountableForm, true);
         }
 
         internal void LoadRecords()
         {
-            try
-            {
-                var accRepository = AccFactory.AccountableFormsRepository();
-                var dtAcc = accRepository.GetRecords();
-                HelperLoadRecords.AccFormDatagridView(dtAcc, dgAccform);
+            string searchText = txtSearch.Text.Trim();
+            DataTable dataTable;
 
-                lblRecordCount.Text = accRepository.CountRecords().ToString();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
+                dataTable = AccFactory.AccountableFormsRepository().GetRecords();
+            else
+                dataTable = AccFactory.AccountableFormsRepository().GetRecordsBySearch(searchText);
+
+            HelperLoadRecords.AccFormDatagridView(dataTable, dgAccountableForm);
+
+            lblRecordCount.Text = dgAccountableForm.Rows.Count.ToString();
         }
 
         private void frmAccountable_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -43,80 +46,68 @@ namespace AccountingSystem.Views.Manage.AccountableForm
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgAccform.Rows.Count > 0 && dgAccform.SelectedRows.Count > 0)
+            int rowIndex = dgAccountableForm.CurrentRow.Index;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value.ToString());
+
+            _ = new frmAccountableEdit(this, accountableFormId).ShowDialog();
+        }
+
+        private void DeleteData()
+        {
+            int selectedrowscount = dgAccountableForm.SelectedRows.Count;
+
+            if (selectedrowscount > 0)
             {
-                int accountableFormId = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
-                _ = new frmAccountableEdit(this, accountableFormId).ShowDialog();
+                if (Helper.MessageBoxConfirmDelete(selectedrowscount))
+                {
+                    var accModelList = new List<AccountableModel>();
+                    foreach (DataGridViewRow row in dgAccountableForm.SelectedRows)
+                    {
+                        int rowId = Convert.ToInt16(row.Cells["id"].Value.ToString());
+                        accModelList.Add(new AccountableModel() { Id = rowId });
+                    }
+
+                    _ = AccFactory.AccountableFormsRepository().Delete(accModelList);
+                    LoadRecords();
+                }
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedrowscount = dgAccform.SelectedRows.Count;
             try
             {
-                if (selectedrowscount > 0)
-                {
-                    if (Helper.MessageBoxConfirmDelete(selectedrowscount))
-                    {
-                        var accModelList = new List<AccountableModel>();
-                        foreach (DataGridViewRow row in dgAccform.SelectedRows)
-                        {
-                            int accId = Convert.ToInt16(row.Cells[0].Value.ToString());
-                            accModelList.Add(new AccountableModel() { Id = accId });
-                        }
-
-                        var accRepository = AccFactory.AccountableFormsRepository();
-                        _ = accRepository.Delete(accModelList);
-                        LoadRecords();
-                    }
-                }
+                DeleteData();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    string searchkey = Convert.ToString(txtsearch.Text.Trim());
-                    var dtAcc = AccFactory.AccountableFormsRepository().GetRecordsBySearch(searchkey);
-                    HelperLoadRecords.AccFormDatagridView(dtAcc, dgAccform);
-
-                    lblRecordCount.Text = dgAccform.Rows.Count.ToString();
-                }
-                catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-            }
-            else
+            try
             {
                 LoadRecords();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void dgAccform_SelectionChanged(object sender, EventArgs e)
+        private void dgAccountableForm_SelectionChanged(object sender, EventArgs e)
         {
-            Helper.EnableDisableToolStripButtons(dgAccform, btnEdit, btnDelete);
-            int selectedRowCount = dgAccform.SelectedRows.Count;
+            Helper.EnableDisableToolStripButtons(dgAccountableForm, btnEdit, btnDelete);
+            int selectedRowCount = dgAccountableForm.SelectedRows.Count;
 
             if (selectedRowCount > 0 && selectedRowCount == 1)
-                btnFace.Enabled = true;
+                btnFaceValue.Enabled = true;
             else
-                btnFace.Enabled = false;
+                btnFaceValue.Enabled = false;
         }
 
-        private void btnFace_Click(object sender, EventArgs e)
+        private void btnFaceValue_Click(object sender, EventArgs e)
         {
-            if (dgAccform.Rows.Count > 0 && dgAccform.SelectedRows.Count > 0)
-            {
-                int accountableFormId = int.Parse(dgAccform.SelectedCells[0].Value.ToString());
-                _ = new frmFaceValue(accountableFormId).ShowDialog();
-                LoadRecords();
-            }
+            int rowIndex = dgAccountableForm.CurrentRow.Index;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmFaceValue(accountableFormId).ShowDialog();
+            LoadRecords();
         }
     }
 }

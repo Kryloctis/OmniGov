@@ -10,13 +10,13 @@ namespace ACC.Data
 {
     public class AccountableFormsRepository : IAccountableRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "accountable_forms";
         private readonly string viewTableName = "view_accountable_forms";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public AccountableFormsRepository(IAccGenericCommands dbGenericCommands)
+        public AccountableFormsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
@@ -32,7 +32,7 @@ namespace ACC.Data
 
                 string query = $"SELECT acc_form_no, acc_form_desc FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+                using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
                 {
                     if (reader.Rows.Count < 1)
                         return record;
@@ -51,82 +51,54 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {viewTableName}";
+            string query = $"SELECT * FROM {viewTableName}";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public bool Insert(AccountableModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
-                      new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
-                };
+                new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
+                new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
+            };
 
-                string query = $"INSERT INTO {tableName} (acc_form_no,acc_form_desc) VALUES (@acc_form_no,@acc_form_desc)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (acc_form_no,acc_form_desc) VALUES (@acc_form_no,@acc_form_desc)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(AccountableModel entity)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, entity.Id},
-                     new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
-                      new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
-                };
+                new object[] { "@id", DbType.Int16, entity.Id},
+                new object[] { "@acc_form_no", DbType.String, entity.AccFormNo},
+                new object[] { "@acc_form_desc", DbType.String, entity.AccFormDesc},
+            };
 
-                string query = $"UPDATE {tableName} SET acc_form_no = @acc_form_no, acc_form_desc = @acc_form_desc WHERE id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"UPDATE {tableName} SET acc_form_no = @acc_form_no, acc_form_desc = @acc_form_desc WHERE id = @id";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Delete(List<AccountableModel> entityList)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    var parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                        new object[] { "@id", DbType.Int16, entity.Id},
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
@@ -136,7 +108,7 @@ namespace ACC.Data
             {
                 string query = $"SELECT COUNT(*) FROM {tableName}";
 
-                return int.Parse(_dbGenericCommands.ExecuteScalar(query));
+                return int.Parse(mySqlGenericCommandsLFS.ExecuteScalar(query));
             }
             catch (Exception)
             {
@@ -146,89 +118,63 @@ namespace ACC.Data
 
         public bool IdExist(int id)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, id },
-                };
-
-                string query = $"SELECT id FROM {tableName} WHERE id = @id";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int32, id },
             };
 
+            string query = $"SELECT id FROM {tableName} WHERE id = @id";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
         }
 
         public bool CodeExist(string accountCode)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@acc_form_no", DbType.String, accountCode },
-                };
-
-                string query = $"SELECT acc_form_no FROM {tableName} WHERE acc_form_no = @acc_form_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@acc_form_no", DbType.String, accountCode },
             };
+
+            string query = $"SELECT acc_form_no FROM {tableName} WHERE acc_form_no = @acc_form_no";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
 
             return false;
         }
 
         public bool CodeExist(string accountCode, int accId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int16, accId },
-                    new object[] { "@acc_form_no", DbType.String, accountCode },
-                };
-
-                string query = $"SELECT acc_form_no FROM {tableName} WHERE id <> @id AND acc_form_no = @acc_form_no";
-                string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
-
-                // if query is not null, means found some record, so true
-                if (!string.IsNullOrEmpty(queryResult)) return true;
-            }
-            catch (Exception)
-            {
-                throw;
+                new object[] { "@id", DbType.Int16, accId },
+                new object[] { "@acc_form_no", DbType.String, accountCode },
             };
+
+            string query = $"SELECT acc_form_no FROM {tableName} WHERE id <> @id AND acc_form_no = @acc_form_no";
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
+
+            // if query is not null, means found some record, so true
+            if (!string.IsNullOrEmpty(queryResult)) return true;
 
             return false;
         }
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            var parameters = new object[][]
             {
-                var srchtxt = searchText;
+                new object[] {"@search_text", DbType.String, $"%{searchText}%"}
+            };
 
-                string query = $"SELECT * FROM {viewTableName} WHERE acc_form_no  LIKE'%" + srchtxt + "%' OR acc_form_desc  LIKE'%" + srchtxt + "%'";
+            string query = $"SELECT * FROM {viewTableName} WHERE acc_form_no  LIKE @search_text OR acc_form_desc  LIKE @search_text";
 
-                var dtBanks = new DataTable();
-                return _dbGenericCommands.Fill(query, dtBanks);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            var dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public Dictionary<string, string> GetRecordByAccFormNo(string accFormNo)
@@ -242,7 +188,7 @@ namespace ACC.Data
 
             string query = $"SELECT id, acc_form_no, acc_form_desc FROM {tableName} WHERE acc_form_no = @acc_form_no";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (var reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return dict;
