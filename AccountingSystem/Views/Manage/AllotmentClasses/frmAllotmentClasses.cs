@@ -32,7 +32,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ = new frmAllotmentClassesAdd(this).ShowDialog();
+            _ = new frmAddAllotmentClasses(this).ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             int rowIndex = dgAllotmentClasses.CurrentRow.Index;
             int allotmentId = Convert.ToInt32(dgAllotmentClasses.Rows[rowIndex].Cells["id"].Value);
 
-            _ = new frmAllotmentClassesEdit(this, allotmentId).ShowDialog();
+            _ = new frmEditAllotmentClasses(this, allotmentId).ShowDialog();
         }
 
         private bool DeleteData()

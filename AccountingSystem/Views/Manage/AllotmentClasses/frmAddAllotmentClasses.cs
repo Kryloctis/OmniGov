@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
 {
-    public partial class frmAllotmentClassesAdd : Form
+    public partial class frmAddAllotmentClasses : Form
     {
         private frmAllotmentClasses _frmAllotmentClasses;
         private ucAllotmentClasses uc;
 
-        public frmAllotmentClassesAdd(frmAllotmentClasses frmAllotmentClasses)
+        public frmAddAllotmentClasses(frmAllotmentClasses frmAllotmentClasses)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
