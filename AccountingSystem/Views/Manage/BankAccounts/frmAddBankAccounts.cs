@@ -18,38 +18,37 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Account has been saved.");
-                _frmBankAccounts.LoadBankAccounts();
-                _ucBankAccounts.ResetForm();
-            }
-        }
-
-        private bool SaveData()
-        {
             try
             {
-                if (!_ucBankAccounts.ValidateChildren())
+                if (SaveData())
                 {
-                    Helper.MessageBoxError(_ucBankAccounts.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxSuccess("Account has been saved.");
+                    _frmBankAccounts.LoadBankAccounts();
+                    _ucBankAccounts.ResetForm();
                 }
-
-                var bankAccountsModel = new BankAccountsModel()
-                {
-                    BankID = Convert.ToInt32(_ucBankAccounts.cmbxBank.SelectedValue),
-                    AccountNumber = _ucBankAccounts.txtAccountNo.Text
-                };
-
-                var bankAccountRepository = AccFactory.BankAccountsRepository();
-                return bankAccountRepository.Insert(bankAccountsModel);
             }
             catch (Exception ex)
             {
                 Helper.MessageBoxError(ex.Message);
             }
-            return false;
+        }
+
+        private bool SaveData()
+        {
+            if (!_ucBankAccounts.ValidateChildren())
+            {
+                Helper.MessageBoxError(_ucBankAccounts.GetFormErrors());
+                return false;
+            }
+
+            var bankAccountsModel = new BankAccountsModel()
+            {
+                BankID = Convert.ToInt32(_ucBankAccounts.cmbxBank.SelectedValue),
+                AccountNumber = _ucBankAccounts.txtAccountNo.Text
+            };
+
+            var bankAccountRepository = AccFactory.BankAccountsRepository();
+            return bankAccountRepository.Insert(bankAccountsModel);
         }
     }
 }

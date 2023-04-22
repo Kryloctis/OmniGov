@@ -21,17 +21,21 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2]
+            var errorArray = new string[]
             {
                 errorProvider1.GetError(cmbxBank),
                 errorProvider1.GetError(txtAccountNo)
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ucBankAccounts_Load(object sender, EventArgs e)
+        {
+            OnLoad();
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {
