@@ -7,38 +7,30 @@ namespace AccountingSystem.Views.Manage.Banks
 {
     public partial class frmAddBanks : Form
     {
-        private readonly frmBanks _frmBanks;
-        private readonly ucBanks _ucBanks;
+        private readonly frmBanks frmBanks;
+        private readonly ucBanks uc;
 
         public frmAddBanks(frmBanks frmBanks)
         {
             InitializeComponent();
-            _frmBanks = frmBanks;
-            _ucBanks = ucBanks1;
-        }
-
-        private void frmBankAdd_Load(object sender, EventArgs e)
-        {
-            LoadBanks();
-        }
-
-        private void LoadBanks()
-        {
+            Helper.LoadFormIcon(this);
+            this.frmBanks = frmBanks;
+            uc = ucBanks1;
         }
 
         private bool SaveData()
         {
-            if (!_ucBanks.ValidateChildren())
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(_ucBanks.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            var banksModel = new BanksModel()
+            BanksModel banksModel = new BanksModel()
             {
-                BankCode = _ucBanks.txtBankCode.Text.Trim(),
-                BankName = _ucBanks.txtBankName.Text.Trim(),
-                BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
+                BankCode = uc.txtBankCode.Text.Trim(),
+                BankName = uc.txtBankName.Text.Trim(),
+                BankBranch = uc.txtBankBranch.Text.Trim(),
             };
 
             return AccFactory.BanksRepository().Insert(banksModel);
@@ -51,7 +43,7 @@ namespace AccountingSystem.Views.Manage.Banks
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Bank has been saved.");
-                    _frmBanks.LoadRecords();
+                    frmBanks.LoadRecords();
                     ucBanks1.ResetForm();
                 }
             }

@@ -36,8 +36,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 AccFormDesc = uc.txtformdesc.Text.Trim()
             };
 
-            var accrepository = AccFactory.AccountableFormsRepository();
-            return accrepository.Insert(accModel);
+            return AccFactory.AccountableFormsRepository().Insert(accModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)

@@ -7,7 +7,8 @@ namespace AccountingSystem.Views.Manage.Banks
 {
     public partial class ucBanks : UserControl
     {
-        internal int bankId = 0;
+        internal int bankId;
+        internal bool isEdit;
 
         public ucBanks()
         {

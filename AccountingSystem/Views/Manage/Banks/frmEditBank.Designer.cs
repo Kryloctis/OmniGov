@@ -91,9 +91,11 @@ namespace AccountingSystem.Views.Manage.Banks
             // 
             // frmEditBank
             // 
+            AcceptButton = btnUpdate;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            CancelButton = btnCancel;
             ClientSize = new System.Drawing.Size(366, 118);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel1);

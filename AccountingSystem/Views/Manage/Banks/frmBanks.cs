@@ -45,7 +45,9 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int bankId = int.Parse(dgBanks.SelectedCells[0].Value.ToString());
+            int rowIndex = dgBanks.CurrentRow.Index;
+            int bankId = Convert.ToInt32(dgBanks.Rows[rowIndex].Cells["id"].Value);
+
             _ = new frmEditBank(this, bankId).ShowDialog();
         }
 

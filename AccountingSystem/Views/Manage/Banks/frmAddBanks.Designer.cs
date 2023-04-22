@@ -107,7 +107,6 @@ namespace AccountingSystem.Views.Manage.Banks
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Add Bank";
-            Load += frmBankAdd_Load;
             flowLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             ResumeLayout(false);

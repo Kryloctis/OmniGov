@@ -12,10 +12,10 @@ namespace AccountingSystem.Views.Manage.AccountableForm
         public frmEditAccountableForm(frmAccountableForm frmAccountable, int accountableFormId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmAccountable = frmAccountable;
             uc = ucAccountable1;
             uc.accountableFormId = accountableFormId;
-            Helper.LoadFormIcon(this);
         }
 
         private void LoadSelectedRecord()
@@ -52,8 +52,7 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 AccFormDesc = uc.txtformdesc.Text.Trim()
             };
 
-            var accrepository = AccFactory.AccountableFormsRepository();
-            return accrepository.Update(accModel);
+            return AccFactory.AccountableFormsRepository().Update(accModel);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
