@@ -100,6 +100,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmEditBarangay";
+            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Edit Barangay";
             Load += frmEditBarangay_Load;

@@ -22,7 +22,8 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int barangayId = Convert.ToInt32(dgBarangay.SelectedRows[0].Cells[0].Value);
+            int rowIndex = dgBarangay.CurrentRow.Index;
+            int barangayId = Convert.ToInt32(dgBarangay.Rows[rowIndex].Cells["id"].Value);
 
             _ = new frmEditBarangay(barangayId, this).ShowDialog();
         }

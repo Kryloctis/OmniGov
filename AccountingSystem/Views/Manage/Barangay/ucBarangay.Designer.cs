@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             label2 = new System.Windows.Forms.Label();
-            txtBarangay = new System.Windows.Forms.TextBox();
+            txtName = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             txtCode = new System.Windows.Forms.TextBox();
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
@@ -46,17 +46,17 @@
             label2.TabIndex = 16;
             label2.Text = "Barangay";
             // 
-            // txtBarangay
+            // txtName
             // 
-            txtBarangay.AcceptsReturn = true;
-            txtBarangay.AcceptsTab = true;
-            txtBarangay.Location = new System.Drawing.Point(68, 31);
-            txtBarangay.MaxLength = 45;
-            txtBarangay.Name = "txtBarangay";
-            txtBarangay.Size = new System.Drawing.Size(218, 23);
-            txtBarangay.TabIndex = 1;
-            txtBarangay.Validating += txtBarangay_Validating;
-            txtBarangay.Validated += txtBarangay_Validated;
+            txtName.AcceptsReturn = true;
+            txtName.AcceptsTab = true;
+            txtName.Location = new System.Drawing.Point(68, 31);
+            txtName.MaxLength = 45;
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(218, 23);
+            txtName.TabIndex = 1;
+            txtName.Validating += txtBarangay_Validating;
+            txtName.Validated += txtBarangay_Validated;
             // 
             // label1
             // 
@@ -90,12 +90,11 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             Controls.Add(txtCode);
-            Controls.Add(txtBarangay);
+            Controls.Add(txtName);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "ucBarangay";
             Size = new System.Drawing.Size(309, 59);
-            Load += ucBarangay_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -104,7 +103,7 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox txtBarangay;
+        public System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.ErrorProvider errorProvider1;
