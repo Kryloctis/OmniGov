@@ -1,4 +1,5 @@
 ﻿using ACC.Domain.Models;
+using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Windows.Forms;
 
@@ -27,38 +28,34 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private bool SaveData()
         {
-            try
+            if (!_ucBanks.ValidateChildren())
             {
-                if (!_ucBanks.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucBanks.GetFormErrors());
-                    return false;
-                }
-
-                var banksModel = new BanksModel()
-                {
-                    BankCode = _ucBanks.txtBankCode.Text.Trim(),
-                    BankName = _ucBanks.txtBankName.Text.Trim(),
-                    BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
-                };
-
-                return AccFactory.BanksRepository().Insert(banksModel);
+                Helper.MessageBoxError(_ucBanks.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var banksModel = new BanksModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                BankCode = _ucBanks.txtBankCode.Text.Trim(),
+                BankName = _ucBanks.txtBankName.Text.Trim(),
+                BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
+            };
+
+            return AccFactory.BanksRepository().Insert(banksModel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Bank has been saved.");
-                _frmBanks.LoadRecords();
-                ucBanks1.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Bank has been saved.");
+                    _frmBanks.LoadRecords();
+                    ucBanks1.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -17,25 +17,25 @@ namespace AccountingSystem.Views.Manage.Banks
 
         internal void LoadRecords()
         {
-            try
-            {
-                var searchKey = txtsearch.Text.Trim();
-                DataTable dtBanks;
+            var searchKey = txtSearch.Text.Trim();
+            DataTable dtBanks;
 
-                if (!string.IsNullOrEmpty(searchKey))
-                    dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchKey);
-                else
-                    dtBanks = AccFactory.BanksRepository().GetRecords();
+            if (!string.IsNullOrEmpty(searchKey))
+                dtBanks = AccFactory.BanksRepository().GetRecordsBySearch(searchKey);
+            else
+                dtBanks = AccFactory.BanksRepository().GetRecords();
 
-                HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
-                lblRecordCount.Text = AccFactory.BanksRepository().CountRecords().ToString();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.BanksDatagridView(dtBanks, dgBanks);
+            lblRecordCount.Text = AccFactory.BanksRepository().CountRecords().ToString();
         }
 
         private void frmBanks_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -84,9 +84,13 @@ namespace AccountingSystem.Views.Manage.Banks
             Helper.EnableDisableToolStripButtons(dgBanks, btnEdit, btnDelete);
         }
 
-        private void txtsearch_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

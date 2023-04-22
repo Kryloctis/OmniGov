@@ -19,62 +19,55 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var banksRepository = AccFactory.BanksRepository();
-                var bankData = banksRepository.GetRecordByID(_ucBanks.bankId);
-                _ucBanks.txtBankCode.Text = bankData["bank_code"];
-                _ucBanks.txtBankName.Text = bankData["bank_name"];
-                _ucBanks.txtBankBranch.Text = bankData["bank_branch"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            var banksRepository = AccFactory.BanksRepository();
+            var bankData = banksRepository.GetRecordByID(_ucBanks.bankId);
+            _ucBanks.txtBankCode.Text = bankData["bank_code"];
+            _ucBanks.txtBankName.Text = bankData["bank_name"];
+            _ucBanks.txtBankBranch.Text = bankData["bank_branch"];
         }
 
         private void frmBankEdit_Load(object sender, EventArgs e)
         {
-            LoadSelectedRecord();
+            try
+            {
+                LoadSelectedRecord();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveData()
+        private bool UpdateData()
+        {
+            if (!_ucBanks.ValidateChildren())
+            {
+                Helper.MessageBoxError(_ucBanks.GetFormErrors());
+                return false;
+            }
+
+            var banksModel = new BanksModel()
+            {
+                Id = _ucBanks.bankId,
+                BankCode = _ucBanks.txtBankCode.Text.Trim(),
+                BankName = _ucBanks.txtBankName.Text.Trim(),
+                BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
+            };
+
+            var banksrepository = AccFactory.BanksRepository();
+            return banksrepository.Update(banksModel);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!_ucBanks.ValidateChildren())
+                if (UpdateData())
                 {
-                    Helper.MessageBoxError(_ucBanks.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxSuccess("Bank has been updated.");
+                    _frmbanks.LoadRecords();
+                    _ucBanks.ResetForm();
+                    Close();
                 }
-
-                var banksModel = new BanksModel()
-                {
-                    Id = _ucBanks.bankId,
-                    BankCode = _ucBanks.txtBankCode.Text.Trim(),
-                    BankName = _ucBanks.txtBankName.Text.Trim(),
-                    BankBranch = _ucBanks.txtBankBranch.Text.Trim(),
-                };
-
-                var banksrepository = AccFactory.BanksRepository();
-                return banksrepository.Update(banksModel);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Bank has been updated.");
-                _frmbanks.LoadRecords();
-                _ucBanks.ResetForm();
-                Close();
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
