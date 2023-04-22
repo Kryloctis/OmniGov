@@ -18,12 +18,16 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Barangay has been saved.");
-                _frmBarangay.LoadRecords();
-                uc.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Barangay has been saved.");
+                    _frmBarangay.LoadRecords();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()

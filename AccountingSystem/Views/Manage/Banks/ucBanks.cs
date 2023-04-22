@@ -16,26 +16,24 @@ namespace AccountingSystem.Views.Manage.Banks
 
         private void ucBanks_Load(object sender, EventArgs e)
         {
-
         }
 
         internal void ResetForm()
         {
             txtBankCode.Focus();
+            txtBankCode.Clear();
             txtBankBranch.Clear();
             txtBankName.Clear();
         }
 
-
         internal string GetFormErrors()
         {
-            var errorArray = new string[1];
-            errorArray[0] = epProvider1.GetError(txtBankName);
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            var errorArray = new string[]
+            {
+                epProvider1.GetError(txtBankName)
+            };
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
-
 
         private void txtbankname_Validating(object sender, CancelEventArgs e)
         {
@@ -46,6 +44,5 @@ namespace AccountingSystem.Views.Manage.Banks
         {
             Helper.ClearErrorTextBox(epProvider1, txtBankName);
         }
-
     }
 }

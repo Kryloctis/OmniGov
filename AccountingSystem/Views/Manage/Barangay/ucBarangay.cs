@@ -16,12 +16,13 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = errorProvider1.GetError(txtCode);
-            errorArray[1] = errorProvider1.GetError(txtBarangay);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtCode),
+                errorProvider1.GetError(txtBarangay)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()

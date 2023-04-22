@@ -29,32 +29,33 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void frmBarangay_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadRecords()
         {
-            try
-            {
-                var dtBarangay = new DataTable();
-                var searchText = toolStripTextBoxSearch.Text.Trim();
+            DataTable dtBarangay;
+            var searchText = toolStripTextBoxSearch.Text.Trim();
 
-                if (searchText.Length > 2)
-                    dtBarangay = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
-                else
-                    dtBarangay = AccFactory.BarangayRepository().GetRecords();
+            if (searchText.Length > 2)
+                dtBarangay = AccFactory.BarangayRepository().GetRecordsBySearch(searchText);
+            else
+                dtBarangay = AccFactory.BarangayRepository().GetRecords();
 
-                HelperLoadRecords.BarangaysDatagridView(dgBarangay, dtBarangay);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            HelperLoadRecords.BarangaysDatagridView(dgBarangay, dtBarangay);
         }
 
         private void toolStripTextBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgBarangay_SelectionChanged(object sender, EventArgs e)
@@ -66,14 +67,14 @@ namespace AccountingSystem.Views.Manage.Barangay
         {
             int deletedRecordCount;
 
-            if (DeleteBarangay(out deletedRecordCount))
+            if (DeleteData(out deletedRecordCount))
             {
                 Helper.MessageBoxSuccess($"{deletedRecordCount} record/s has been deleted.");
                 LoadRecords();
             }
         }
 
-        private bool DeleteBarangay(out int deletedCount)
+        private bool DeleteData(out int deletedCount)
         {
             try
             {

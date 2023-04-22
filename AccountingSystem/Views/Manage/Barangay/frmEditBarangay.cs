@@ -21,7 +21,11 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         private void frmEditBarangay_Load(object sender, EventArgs e)
         {
-            LoadSelectedBarangay();
+            try
+            {
+                LoadSelectedBarangay();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadSelectedBarangay()
@@ -32,43 +36,39 @@ namespace AccountingSystem.Views.Manage.Barangay
             uc.txtBarangay.Text = dictBarangay["name"];
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (UpdateBarangay())
+            try
             {
-                Helper.MessageBoxSuccess("Barangay has been updated.");
-                _frmBarangay.LoadRecords();
-                Close();
+                if (UpdateBarangay())
+                {
+                    Helper.MessageBoxSuccess("Barangay has been updated.");
+                    _frmBarangay.LoadRecords();
+                    Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool UpdateBarangay()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
-                }
-
-                var barangayCode = uc.txtCode.Text.Trim();
-                var barangayName = uc.txtBarangay.Text.Trim();
-
-                var barangayModel = new BarangayModel()
-                {
-                    Id = _barangayId,
-                    Code = barangayCode,
-                    Name = barangayName
-                };
-
-                return AccFactory.BarangayRepository().Update(barangayModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            var barangayCode = uc.txtCode.Text.Trim();
+            var barangayName = uc.txtBarangay.Text.Trim();
+
+            var barangayModel = new BarangayModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                Id = _barangayId,
+                Code = barangayCode,
+                Name = barangayName
+            };
+
+            return AccFactory.BarangayRepository().Update(barangayModel);
         }
     }
 }
