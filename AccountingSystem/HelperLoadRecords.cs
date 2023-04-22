@@ -1986,14 +1986,14 @@ namespace AccountingSystem
         internal static void CollectingOfficerDatagridView(DataTable dataTable, DataGridView datagrid)
         {
             datagrid.DataSource = dataTable;
-            datagrid.Columns[0].Visible = false;
-            datagrid.Columns[1].HeaderText = "Full Name";
-            datagrid.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[2].HeaderText = "Job Title";
-            datagrid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns[3].Visible = false;
-            datagrid.Columns[4].Visible = false;
-            datagrid.Columns[5].Visible = false;
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["full_name"].HeaderText = "Name";
+            datagrid.Columns["full_name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["job_title"].HeaderText = "Job Title";
+            datagrid.Columns["job_title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["is_deleted"].Visible = false;
+            datagrid.Columns["created_at"].Visible = false;
+            datagrid.Columns["updated_at"].Visible = false;
         }
 
         internal static void CollectingOfficerComboBox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)

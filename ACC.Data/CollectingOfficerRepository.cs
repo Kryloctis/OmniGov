@@ -111,7 +111,7 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            string query = $"SELECT id, CONCAT(first_name, ' ', mid_initial, ' ', last_name, ' ') as fullname, job_title, created_at, updated_at, users_id FROM {tableName}";
+            string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName}";
 
             var dtFunds = new DataTable();
             return _dbGenericCommands.Fill(query, dtFunds);
@@ -134,10 +134,15 @@ namespace ACC.Data
 
         public DataTable GetRecordsBySearch(string searchText)
         {
-            string query = $"SELECT id, CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) as fullname, job_title, created_at, updated_at, users_id FROM {tableName} WHERE CONCAT(`first_name`, ' ', `mid_initial`, ' ', `last_name`) LIKE '%{searchText}%' OR job_title LIKE '%{searchText}%'";
+            var parameters = new object[][]
+            {
+                new object[] {"@search_text", DbType.String, $"%{searchText}%"}
+            };
+
+            string query = $"SELECT id, prefix, first_name, mid_initial, last_name, suffix, job_title, is_deleted, created_at, updated_at, users_id FROM {tableName} WHERE prefix LIKE @search_text OR first_name LIKE @search_text OR last_name LIKE @search_text OR suffix LIKE @search_text OR job_title LIKE @search_text";
 
             var dtFunds = new DataTable();
-            return _dbGenericCommands.Fill(query, dtFunds);
+            return _dbGenericCommands.FillBySearch(query, dtFunds, parameters);
         }
 
         public bool IdExist(int id)
