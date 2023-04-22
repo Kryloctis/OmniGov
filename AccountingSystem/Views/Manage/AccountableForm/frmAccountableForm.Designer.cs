@@ -1,7 +1,7 @@
 ﻿
 namespace AccountingSystem.Views.Manage.AccountableForm
 {
-    partial class frmAccountable
+    partial class frmAccountableForm
     {
         /// <summary>
         /// Required designer variable.

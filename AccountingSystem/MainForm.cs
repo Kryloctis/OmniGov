@@ -425,7 +425,7 @@ namespace AccountingSystem
 
         private void menuAccForm_Click(object sender, EventArgs e)
         {
-            _ = new frmAccountable().ShowDialog();
+            _ = new frmAccountableForm().ShowDialog();
         }
 
         private void menuLogout_Click(object sender, EventArgs e)

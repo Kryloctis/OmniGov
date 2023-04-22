@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AccountableForm
 {
-    public partial class frmAccountable : Form
+    public partial class frmAccountableForm : Form
     {
-        public frmAccountable()
+        public frmAccountableForm()
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -30,18 +30,18 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             lblRecordCount.Text = dgAccountableForm.Rows.Count.ToString();
         }
 
-        private void frmAccountable_Load(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddAccountableForm(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                LoadRecords();
+                DeleteData();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmAccountableAdd(this).ShowDialog();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -49,7 +49,15 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             int rowIndex = dgAccountableForm.CurrentRow.Index;
             int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value.ToString());
 
-            _ = new frmAccountableEdit(this, accountableFormId).ShowDialog();
+            _ = new frmEditAccountableForm(this, accountableFormId).ShowDialog();
+        }
+
+        private void btnFaceValue_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dgAccountableForm.CurrentRow.Index;
+            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmFaceValue(accountableFormId).ShowDialog();
+            LoadRecords();
         }
 
         private void DeleteData()
@@ -73,24 +81,6 @@ namespace AccountingSystem.Views.Manage.AccountableForm
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DeleteData();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
         private void dgAccountableForm_SelectionChanged(object sender, EventArgs e)
         {
             Helper.EnableDisableToolStripButtons(dgAccountableForm, btnEdit, btnDelete);
@@ -102,12 +92,22 @@ namespace AccountingSystem.Views.Manage.AccountableForm
                 btnFaceValue.Enabled = false;
         }
 
-        private void btnFaceValue_Click(object sender, EventArgs e)
+        private void frmAccountable_Load(object sender, EventArgs e)
         {
-            int rowIndex = dgAccountableForm.CurrentRow.Index;
-            int accountableFormId = Convert.ToInt32(dgAccountableForm.Rows[rowIndex].Cells["id"].Value);
-            _ = new frmFaceValue(accountableFormId).ShowDialog();
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }
