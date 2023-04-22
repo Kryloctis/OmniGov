@@ -1091,6 +1091,13 @@ namespace AccountingSystem
             datagrid.Columns["updated_at"].Visible = false;
         }
 
+        internal static void ComboBoxBanks(DataTable dataTable, ComboBox comboBox, string valueMember, string displayMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.ValueMember = valueMember;
+            comboBox.DisplayMember = displayMember;
+        }
+
         #endregion Banks
 
         #region FaceValue

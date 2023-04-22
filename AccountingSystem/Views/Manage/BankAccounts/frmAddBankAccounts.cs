@@ -6,14 +6,15 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class frmAddBankAccounts : Form
     {
-        private readonly ucBankAccounts _ucBankAccounts;
-        private readonly frmBankAccounts _frmBankAccounts;
+        private readonly ucBankAccounts uc;
+        private readonly frmBankAccounts frmBankAccounts;
 
         public frmAddBankAccounts(frmBankAccounts frmBankAccounts)
         {
             InitializeComponent();
-            _ucBankAccounts = ucBankAccounts1;
-            _frmBankAccounts = frmBankAccounts;
+            Helper.LoadFormIcon(this);
+            uc = ucBankAccounts1;
+            this.frmBankAccounts = frmBankAccounts;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -23,32 +24,28 @@ namespace AccountingSystem.Views.Manage.BankAccounts
                 if (SaveData())
                 {
                     Helper.MessageBoxSuccess("Account has been saved.");
-                    _frmBankAccounts.LoadBankAccounts();
-                    _ucBankAccounts.ResetForm();
+                    frmBankAccounts.LoadBankAccounts();
+                    uc.ResetForm();
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
         {
-            if (!_ucBankAccounts.ValidateChildren())
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(_ucBankAccounts.GetFormErrors());
+                Helper.MessageBoxError(uc.GetFormErrors());
                 return false;
             }
 
-            var bankAccountsModel = new BankAccountsModel()
+            BankAccountsModel bankAccountsModel = new BankAccountsModel()
             {
-                BankID = Convert.ToInt32(_ucBankAccounts.cmbxBank.SelectedValue),
-                AccountNumber = _ucBankAccounts.txtAccountNo.Text
+                BankID = Convert.ToInt32(uc.cmbxBank.SelectedValue),
+                AccountNumber = uc.txtAccountNo.Text
             };
 
-            var bankAccountRepository = AccFactory.BankAccountsRepository();
-            return bankAccountRepository.Insert(bankAccountsModel);
+            return AccFactory.BankAccountsRepository().Insert(bankAccountsModel);
         }
     }
 }
