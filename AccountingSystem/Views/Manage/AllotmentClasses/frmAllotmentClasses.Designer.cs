@@ -104,6 +104,7 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new System.Drawing.Size(200, 42);
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // statusStrip1
             // 

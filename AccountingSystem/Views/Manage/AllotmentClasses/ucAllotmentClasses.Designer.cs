@@ -29,92 +29,81 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
-            this.epCode = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            label1 = new System.Windows.Forms.Label();
+            txtName = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            txtCode = new System.Windows.Forms.TextBox();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(0, 30);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(39, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Name";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(48, 27);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtName.MaxLength = 50;
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(324, 23);
-            this.txtName.TabIndex = 2;
-            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
-            this.txtName.Validated += new System.EventHandler(this.txtName_Validated);
-            // 
-            // epName
-            // 
-            this.epName.ContainerControl = this;
+            txtName.Location = new System.Drawing.Point(48, 27);
+            txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtName.MaxLength = 50;
+            txtName.Name = "txtName";
+            txtName.Size = new System.Drawing.Size(324, 23);
+            txtName.TabIndex = 2;
+            txtName.Validating += txtName_Validating;
+            txtName.Validated += txtName_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Code";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(0, 3);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(35, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Code";
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(48, 0);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCode.MaxLength = 5;
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(324, 23);
-            this.txtCode.TabIndex = 1;
-            this.txtCode.Validating += new System.ComponentModel.CancelEventHandler(this.txtCode_Validating);
-            this.txtCode.Validated += new System.EventHandler(this.txtCode_Validated);
+            txtCode.Location = new System.Drawing.Point(48, 0);
+            txtCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            txtCode.MaxLength = 5;
+            txtCode.Name = "txtCode";
+            txtCode.Size = new System.Drawing.Size(324, 23);
+            txtCode.TabIndex = 1;
+            txtCode.Validating += txtCode_Validating;
+            txtCode.Validated += txtCode_Validated;
             // 
-            // epCode
+            // errorProvider1
             // 
-            this.epCode.ContainerControl = this;
+            errorProvider1.ContainerControl = this;
             // 
             // ucAllotmentClasses
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtName);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "ucAllotmentClasses";
-            this.Size = new System.Drawing.Size(401, 61);
-            this.Load += new System.EventHandler(this.ucAllotmentClasses_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epCode)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(label2);
+            Controls.Add(txtCode);
+            Controls.Add(label1);
+            Controls.Add(txtName);
+            Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            Name = "ucAllotmentClasses";
+            Size = new System.Drawing.Size(394, 53);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.ErrorProvider epName;
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.ErrorProvider epCode;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

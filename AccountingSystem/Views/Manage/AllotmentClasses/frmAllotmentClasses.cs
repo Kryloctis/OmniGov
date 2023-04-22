@@ -1,6 +1,7 @@
 ﻿using ACC.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.AllotmentClasses
@@ -16,25 +17,32 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
 
         internal void LoadRecords()
         {
-            var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
-            var dtAllotmentClasses = allotmentClassesRepository.GetRecords();
-            HelperLoadRecords.AllotmentClassesDatagridView(dtAllotmentClasses, dgAllotmentClasses);
+            string searchText = txtSearch.Text.Trim();
+            DataTable dataTable;
 
-            lblRecordCount.Text = allotmentClassesRepository.CountRecords().ToString();
-        }
+            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
+                dataTable = AccFactory.AllotmentClassesRepository().GetRecords();
+            else
+                dataTable = AccFactory.AllotmentClassesRepository().GetRecordsBySearch(searchText);
 
-        private void frmAllotmentClasses_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadRecords();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            HelperLoadRecords.AllotmentClassesDatagridView(dataTable, dgAllotmentClasses);
+
+            lblRecordCount.Text = dgAllotmentClasses.Rows.Count.ToString();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             _ = new frmAllotmentClassesAdd(this).ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DeleteData())
+                    LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -66,12 +74,18 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
             return false;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void dgAllotmentClasses_SelectionChanged(object sender, EventArgs e)
+        {
+            byte[] columnIndexTimestamp = { 3, 4 };
+            Helper.ShowRecordTimestamp(dgAllotmentClasses, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
+            Helper.EnableDisableToolStripButtons(dgAllotmentClasses, btnEdit, btnDelete);
+        }
+
+        private void frmAllotmentClasses_Load(object sender, EventArgs e)
         {
             try
             {
-                if (DeleteData())
-                    LoadRecords();
+                LoadRecords();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -80,11 +94,13 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
         {
         }
 
-        private void dgAllotmentClasses_SelectionChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            byte[] columnIndexTimestamp = { 3, 4 };
-            Helper.ShowRecordTimestamp(dgAllotmentClasses, columnIndexTimestamp, lblCreatedAt, lblUpdatedAt);
-            Helper.EnableDisableToolStripButtons(dgAllotmentClasses, btnEdit, btnDelete);
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

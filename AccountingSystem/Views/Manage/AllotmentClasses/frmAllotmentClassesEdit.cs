@@ -7,78 +7,68 @@ namespace AccountingSystem.Views.Manage.AllotmentClasses
     public partial class frmAllotmentClassesEdit : Form
     {
         private frmAllotmentClasses _frmAllotmentClasses;
+        private ucAllotmentClasses uc;
 
         public frmAllotmentClassesEdit(frmAllotmentClasses frmAllotmentClasses, int allotmentId)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmAllotmentClasses = frmAllotmentClasses;
-            ucAllotmentClasses1.allotmentId = allotmentId;
+            uc = ucAllotmentClasses1;
+            uc.allotmentClassesId = allotmentId;
         }
 
-        private void LoadSelectedRecord()
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                var uc = ucAllotmentClasses1;
-                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
-                var allotmentData = allotmentClassesRepository.GetRecordByID(uc.allotmentId);
-
-                uc.txtName.Text = allotmentData["allotment_name"];
-                uc.txtCode.Text = allotmentData["allotment_code"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-        }
-
-        private bool SaveData()
-        {
-            try
-            {
-                var uc = ucAllotmentClasses1;
-
-                // if error occurs, show messagebox error
-                if (!uc.ValidateChildren())
+                if (UpdateData())
                 {
-                    Helper.MessageBoxError(uc.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxSuccess("Allotment class has been saved.");
+                    _frmAllotmentClasses.LoadRecords();
+                    this.Close();
                 }
-
-                // proceed to update
-                var allotmentModel = new AllotmentClassesModel()
-                {
-                    Id = uc.allotmentId,
-                    AllotmentName = uc.txtName.Text.Trim(),
-                    AllotmentCode = uc.txtCode.Text.Trim(),
-                };
-
-                var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
-                return allotmentClassesRepository.Update(allotmentModel);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-
-            return false;
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmAllotmentClassesEdit_Load(object sender, EventArgs e)
         {
-            this.Visible = true;
-            Helper.LoadFormIcon(this);
-            LoadSelectedRecord();
+            try
+            {
+                LoadSelectedRecord();
+                uc.isEdit = true;
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void LoadSelectedRecord()
         {
-            if (SaveData())
+            var allotmentClassesRepository = AccFactory.AllotmentClassesRepository();
+            var allotmentData = allotmentClassesRepository.GetRecordByID(uc.allotmentClassesId);
+
+            uc.txtName.Text = allotmentData["allotment_name"];
+            uc.txtCode.Text = allotmentData["allotment_code"];
+        }
+
+        private bool UpdateData()
+        {
+            // if error occurs, show messagebox error
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxSuccess("Allotment class has been saved.");
-                _frmAllotmentClasses.LoadRecords();
-                ucAllotmentClasses1.ResetForm();
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
+
+            // proceed to update
+            var allotmentModel = new AllotmentClassesModel()
+            {
+                Id = uc.allotmentClassesId,
+                AllotmentName = uc.txtName.Text.Trim(),
+                AllotmentCode = uc.txtCode.Text.Trim(),
+            };
+
+            return AccFactory.AllotmentClassesRepository().Update(allotmentModel);
         }
     }
 }
