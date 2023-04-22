@@ -18,14 +18,15 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[4];
-            errorArray[0] = epFirstName.GetError(txtFirstName);
-            errorArray[1] = epMiddleInitial.GetError(txtMiddleInitial);
-            errorArray[2] = epLastName.GetError(txtLastName);
-            errorArray[3] = epJobtitle.GetError(txtJobtitle);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtFirstName),
+                errorProvider1.GetError(txtMiddleInitial),
+                errorProvider1.GetError(txtLastName),
+                errorProvider1.GetError(txtJobtitle)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void linkuser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -103,12 +104,12 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtFname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epFirstName, txtFirstName);
+            Helper.ClearErrorTextBox(errorProvider1, txtFirstName);
         }
 
         private void txtFname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epFirstName, txtFirstName, "first name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtFirstName, "first name");
 
             var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             string fName = txtFirstName.Text.Trim();
@@ -120,19 +121,19 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             if (fullNameExist)
             {
-                epFirstName.SetError(txtFirstName, "Validation");
+                errorProvider1.SetError(txtFirstName, "Validation");
                 e.Cancel = true;
             }
         }
 
         private void txtLname_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epLastName, txtLastName);
+            Helper.ClearErrorTextBox(errorProvider1, txtLastName);
         }
 
         private void txtLname_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epLastName, txtLastName, "last name");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtLastName, "last name");
 
             string firstName = txtFirstName.Text.Trim();
             string middleInitial = txtMiddleInitial.Text.Trim();
@@ -144,19 +145,19 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             if (fullNameExist)
             {
-                epLastName.SetError(txtLastName, "Fullname Details already exist in your records. ");
+                errorProvider1.SetError(txtLastName, "Fullname Details already exist in your records. ");
                 e.Cancel = true;
             }
         }
 
         private void txtMI_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epMiddleInitial, txtMiddleInitial);
+            Helper.ClearErrorTextBox(errorProvider1, txtMiddleInitial);
         }
 
         private void txtMI_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epMiddleInitial, txtMiddleInitial, "middle initial");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtMiddleInitial, "middle initial");
 
             var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
             string fName = txtFirstName.Text.Trim();
@@ -168,7 +169,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
             if (fullNameExist)
             {
-                epMiddleInitial.SetError(txtMiddleInitial, "Officer's Fullname");
+                errorProvider1.SetError(txtMiddleInitial, "Officer's Fullname");
                 e.Cancel = true;
             }
         }

@@ -77,6 +77,7 @@ namespace AccountingSystem.Views.Manage.DisbursingOfficer
                 {
                     Helper.MessageBoxSuccess("Disbursing officer has been saved.");
                     frmDisbursingOfficer.LoadRecords();
+                    this.Close();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }

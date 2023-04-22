@@ -37,7 +37,7 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveData()
+        private bool UpdateData()
         {
             if (!_uc.ValidateChildren())
             {
@@ -65,10 +65,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         {
             try
             {
-                if (SaveData())
+                if (UpdateData())
                 {
                     Helper.MessageBoxSuccess("Collecting Officer has been saved.");
                     _frmCollectingOfficer.LoadRecords();
+                    this.Close();
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
