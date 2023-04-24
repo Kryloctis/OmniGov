@@ -28,118 +28,119 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox2 = new System.Windows.Forms.GroupBox();
-            panel2 = new System.Windows.Forms.Panel();
-            textBox3 = new System.Windows.Forms.TextBox();
-            label3 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
-            label2 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
-            groupBox2.SuspendLayout();
-            panel2.SuspendLayout();
-            SuspendLayout();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtContact = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtType = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtTaxpayer = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
             // 
             // groupBox2
             // 
-            groupBox2.BackColor = System.Drawing.Color.Transparent;
-            groupBox2.Controls.Add(panel2);
-            groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            groupBox2.Location = new System.Drawing.Point(0, 0);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(711, 66);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Taxpayer Information";
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(711, 60);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Taxpayer Information";
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(label1);
-            panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            panel2.Location = new System.Drawing.Point(3, 19);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(705, 44);
-            panel2.TabIndex = 0;
+            this.panel2.Controls.Add(this.txtContact);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.txtType);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.txtTaxpayer);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.panel2.Location = new System.Drawing.Point(3, 19);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(705, 38);
+            this.panel2.TabIndex = 0;
             // 
-            // textBox3
+            // txtContact
             // 
-            textBox3.Location = new System.Drawing.Point(493, 8);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new System.Drawing.Size(195, 23);
-            textBox3.TabIndex = 5;
+            this.txtContact.Location = new System.Drawing.Point(493, 8);
+            this.txtContact.Name = "txtContact";
+            this.txtContact.ReadOnly = true;
+            this.txtContact.Size = new System.Drawing.Size(195, 23);
+            this.txtContact.TabIndex = 5;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(438, 11);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(49, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Contact";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(438, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Contact";
             // 
-            // textBox2
+            // txtType
             // 
-            textBox2.Location = new System.Drawing.Point(339, 8);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new System.Drawing.Size(78, 23);
-            textBox2.TabIndex = 3;
+            this.txtType.Location = new System.Drawing.Point(339, 8);
+            this.txtType.Name = "txtType";
+            this.txtType.ReadOnly = true;
+            this.txtType.Size = new System.Drawing.Size(78, 23);
+            this.txtType.TabIndex = 3;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(302, 11);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(31, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Type";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(302, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Type";
             // 
-            // textBox1
+            // txtTaxpayer
             // 
-            textBox1.Location = new System.Drawing.Point(60, 8);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new System.Drawing.Size(223, 23);
-            textBox1.TabIndex = 3;
+            this.txtTaxpayer.Location = new System.Drawing.Point(60, 8);
+            this.txtTaxpayer.Name = "txtTaxpayer";
+            this.txtTaxpayer.ReadOnly = true;
+            this.txtTaxpayer.Size = new System.Drawing.Size(223, 23);
+            this.txtTaxpayer.TabIndex = 3;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(15, 11);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(39, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Name";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Name";
             // 
             // ucAF51_57
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(groupBox2);
-            Name = "ucAF51_57";
-            Size = new System.Drawing.Size(711, 66);
-            groupBox2.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox2);
+            this.Name = "ucAF51_57";
+            this.Size = new System.Drawing.Size(711, 60);
+            this.groupBox2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtContact;
+        internal System.Windows.Forms.TextBox txtType;
+        internal System.Windows.Forms.TextBox txtTaxpayer;
     }
 }

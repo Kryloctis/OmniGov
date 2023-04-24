@@ -65,6 +65,7 @@
     <None Remove="Reports\subsidiary-ledger.rdlc" />
     <None Remove="Reports\transaction_log.rdlc" />
     <None Remove="Views\Dashboard\BudgetDashboard\ucBudgetSummary.resx~RF15fbe303.TMP" />
+    <None Remove="Views\Transactions\Payments\4ln2x4sd.4uw~" />
   </ItemGroup>
 
   <ItemGroup>

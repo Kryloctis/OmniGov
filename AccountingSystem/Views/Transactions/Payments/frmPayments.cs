@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
@@ -20,6 +21,8 @@ namespace AccountingSystem.Views.Transactions.Payments
         private dialogPayment dialog = new dialogPayment();
         private bool paymentComplete = false;
 
+        private ucAF51_57 ucAF51And57; 
+
         public frmPayments()
         {
             InitializeComponent();
@@ -27,6 +30,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             Helper.DatagridFullRowSelectStyle(dgTaxpayers, true);
             ucRptTaxDues = ucRptTaxDues1;
             ucPayment = ucPayment1;
+            ucAF51And57 = ucaF51_571;
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -152,6 +156,11 @@ namespace AccountingSystem.Views.Transactions.Payments
             tabControl1.SelectedTab = tabPageTaxDues;
             ucRptTaxDues.taxpayersId = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
             ucRptTaxDues.LoadPostedProperties();
+
+            ucaF51_571.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+            ucaF51_571.txtType.Text = "aw";
+            ucaF51_571.txtContact.Text = "09052321810";
+
         }
 
         private void btnNext_Click(object sender, EventArgs e)
