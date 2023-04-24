@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -21,7 +22,8 @@ namespace AccountingSystem.Views.Transactions.Payments
         private dialogPayment dialog = new dialogPayment();
         private bool paymentComplete = false;
 
-        private ucAF51_57 ucAF51And57; 
+        private ucAF51_57 ucAF51And57;
+        private ucOtherCharges ucOtherCharges;
 
         public frmPayments()
         {
@@ -31,6 +33,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucRptTaxDues = ucRptTaxDues1;
             ucPayment = ucPayment1;
             ucAF51And57 = ucaF51_571;
+            ucOtherCharges = ucOtherCharges1;
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -100,7 +103,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             else if (tabControlTaxDues.SelectedTab == tabPageOthers)
             {
-                ucPayment.amountPayment = 0;
+                ucPayment.amountPayment = ucOtherCharges.totalAmount;
                 ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.OnLoad();

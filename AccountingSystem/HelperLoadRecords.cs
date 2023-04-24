@@ -2878,5 +2878,26 @@ namespace AccountingSystem
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
         }
+
+        internal static void OtherPaymentChargesDatagridView(DataGridView datagrid, DataTable dataTable)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns["description"].HeaderText = "Description";
+            datagrid.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["description"].MinimumWidth = 150;
+            datagrid.Columns["debit_amount"].HeaderText = "Debit Amount";
+            datagrid.Columns["debit_amount"].MinimumWidth = 150;
+            datagrid.Columns["debit_amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["debit_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            datagrid.Columns["accountable_form_type"].HeaderText = "Accountable Form";
+            datagrid.Columns["accountable_form_type"].MinimumWidth = 200;
+            datagrid.Columns["unit"].HeaderText = "Unit";
+            datagrid.Columns["total_amount"].HeaderText = "Total Amount";
+            datagrid.Columns["total_amount"].MinimumWidth = 150;
+            datagrid.Columns["total_amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
     }
 }
