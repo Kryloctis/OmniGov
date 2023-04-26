@@ -28,156 +28,156 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.lblTotalPayment = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.gpBxChequeDetails = new System.Windows.Forms.GroupBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.dgCheques = new System.Windows.Forms.DataGridView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.radPaymentCashCheque = new System.Windows.Forms.RadioButton();
-            this.radPaymentCheque = new System.Windows.Forms.RadioButton();
-            this.radPaymentCash = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.txtTaxpayer = new System.Windows.Forms.TextBox();
-            this.txtCollectingOfficer = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cmbxAccountableForm = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtReceipts = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPayee = new System.Windows.Forms.TextBox();
-            this.dtPaymentDate = new System.Windows.Forms.DateTimePicker();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.gpBxChequeDetails.SuspendLayout();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCheques)).BeginInit();
-            this.toolStrip1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.SuspendLayout();
+            groupBox6 = new System.Windows.Forms.GroupBox();
+            panel5 = new System.Windows.Forms.Panel();
+            lblTotalPayment = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            splitContainer1 = new System.Windows.Forms.SplitContainer();
+            gpBxChequeDetails = new System.Windows.Forms.GroupBox();
+            panel9 = new System.Windows.Forms.Panel();
+            dgCheques = new System.Windows.Forms.DataGridView();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            radPaymentCashCheque = new System.Windows.Forms.RadioButton();
+            radPaymentCheque = new System.Windows.Forms.RadioButton();
+            radPaymentCash = new System.Windows.Forms.RadioButton();
+            groupBox5 = new System.Windows.Forms.GroupBox();
+            panel7 = new System.Windows.Forms.Panel();
+            txtTaxpayer = new System.Windows.Forms.TextBox();
+            txtCollectingOfficer = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            cmbxAccountableForm = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
+            txtReceipts = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            txtPayee = new System.Windows.Forms.TextBox();
+            dtPaymentDate = new System.Windows.Forms.DateTimePicker();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            groupBox6.SuspendLayout();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            gpBxChequeDetails.SuspendLayout();
+            panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgCheques).BeginInit();
+            toolStrip1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            flowLayoutPanel6.SuspendLayout();
+            groupBox5.SuspendLayout();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.panel5);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox6.Location = new System.Drawing.Point(0, 0);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox6.Size = new System.Drawing.Size(848, 205);
-            this.groupBox6.TabIndex = 0;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Payment";
+            groupBox6.Controls.Add(panel5);
+            groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            groupBox6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox6.Location = new System.Drawing.Point(0, 0);
+            groupBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox6.Size = new System.Drawing.Size(848, 205);
+            groupBox6.TabIndex = 0;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Payment";
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.lblTotalPayment);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel5.Location = new System.Drawing.Point(4, 23);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(840, 179);
-            this.panel5.TabIndex = 1;
+            panel5.Controls.Add(lblTotalPayment);
+            panel5.Controls.Add(label5);
+            panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel5.Location = new System.Drawing.Point(4, 23);
+            panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(840, 179);
+            panel5.TabIndex = 1;
             // 
             // lblTotalPayment
             // 
-            this.lblTotalPayment.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalPayment.Location = new System.Drawing.Point(4, 49);
-            this.lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTotalPayment.Name = "lblTotalPayment";
-            this.lblTotalPayment.Size = new System.Drawing.Size(832, 65);
-            this.lblTotalPayment.TabIndex = 2;
-            this.lblTotalPayment.Text = "0.00";
-            this.lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblTotalPayment.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            lblTotalPayment.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblTotalPayment.Location = new System.Drawing.Point(4, 49);
+            lblTotalPayment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            lblTotalPayment.Name = "lblTotalPayment";
+            lblTotalPayment.Size = new System.Drawing.Size(832, 65);
+            lblTotalPayment.TabIndex = 2;
+            lblTotalPayment.Text = "0.00";
+            lblTotalPayment.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(379, 115);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 15);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Total Payment";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(379, 115);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(82, 15);
+            label5.TabIndex = 3;
+            label5.Text = "Total Payment";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 205);
-            this.splitContainer1.Name = "splitContainer1";
+            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            splitContainer1.IsSplitterFixed = true;
+            splitContainer1.Location = new System.Drawing.Point(0, 205);
+            splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.gpBxChequeDetails);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1MinSize = 100;
+            splitContainer1.Panel1.Controls.Add(gpBxChequeDetails);
+            splitContainer1.Panel1.Controls.Add(groupBox2);
+            splitContainer1.Panel1MinSize = 100;
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox5);
-            this.splitContainer1.Size = new System.Drawing.Size(848, 311);
-            this.splitContainer1.SplitterDistance = 418;
-            this.splitContainer1.TabIndex = 53;
-            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            splitContainer1.Panel2.Controls.Add(groupBox5);
+            splitContainer1.Size = new System.Drawing.Size(848, 311);
+            splitContainer1.SplitterDistance = 418;
+            splitContainer1.TabIndex = 53;
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // gpBxChequeDetails
             // 
-            this.gpBxChequeDetails.Controls.Add(this.panel9);
-            this.gpBxChequeDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gpBxChequeDetails.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gpBxChequeDetails.Location = new System.Drawing.Point(0, 57);
-            this.gpBxChequeDetails.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gpBxChequeDetails.Name = "gpBxChequeDetails";
-            this.gpBxChequeDetails.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gpBxChequeDetails.Size = new System.Drawing.Size(418, 254);
-            this.gpBxChequeDetails.TabIndex = 9;
-            this.gpBxChequeDetails.TabStop = false;
-            this.gpBxChequeDetails.Text = "Cheque Details";
+            gpBxChequeDetails.Controls.Add(panel9);
+            gpBxChequeDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            gpBxChequeDetails.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            gpBxChequeDetails.Location = new System.Drawing.Point(0, 57);
+            gpBxChequeDetails.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gpBxChequeDetails.Name = "gpBxChequeDetails";
+            gpBxChequeDetails.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gpBxChequeDetails.Size = new System.Drawing.Size(418, 254);
+            gpBxChequeDetails.TabIndex = 9;
+            gpBxChequeDetails.TabStop = false;
+            gpBxChequeDetails.Text = "Cheque Details";
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.dgCheques);
-            this.panel9.Controls.Add(this.toolStrip1);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel9.Location = new System.Drawing.Point(4, 19);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel9.Size = new System.Drawing.Size(410, 232);
-            this.panel9.TabIndex = 0;
+            panel9.Controls.Add(dgCheques);
+            panel9.Controls.Add(toolStrip1);
+            panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel9.Location = new System.Drawing.Point(4, 19);
+            panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel9.Name = "panel9";
+            panel9.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel9.Size = new System.Drawing.Size(410, 232);
+            panel9.TabIndex = 0;
             // 
             // dgCheques
             // 
@@ -188,8 +188,8 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCheques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgCheques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -197,11 +197,11 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheques.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgCheques.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCheques.Location = new System.Drawing.Point(4, 28);
-            this.dgCheques.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dgCheques.Name = "dgCheques";
+            dgCheques.DefaultCellStyle = dataGridViewCellStyle2;
+            dgCheques.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgCheques.Location = new System.Drawing.Point(4, 28);
+            dgCheques.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dgCheques.Name = "dgCheques";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -209,324 +209,321 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgCheques.RowTemplate.Height = 25;
-            this.dgCheques.Size = new System.Drawing.Size(402, 201);
-            this.dgCheques.TabIndex = 11;
-            this.dgCheques.Tag = "\"\"";
-            this.dgCheques.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgCheques_RowsAdded);
-            this.dgCheques.Validating += new System.ComponentModel.CancelEventHandler(this.dgCheques_Validating);
-            this.dgCheques.Validated += new System.EventHandler(this.dgCheques_Validated);
+            dgCheques.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgCheques.RowTemplate.Height = 25;
+            dgCheques.Size = new System.Drawing.Size(402, 201);
+            dgCheques.TabIndex = 11;
+            dgCheques.Tag = "\"\"";
+            dgCheques.RowsAdded += dgCheques_RowsAdded;
+            dgCheques.Validating += dgCheques_Validating;
+            dgCheques.Validated += dgCheques_Validated;
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonDelete,
-            this.toolStripButtonAdd});
-            this.toolStrip1.Location = new System.Drawing.Point(4, 3);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(402, 25);
-            this.toolStrip1.TabIndex = 10;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripButtonDelete, toolStripButtonAdd });
+            toolStrip1.Location = new System.Drawing.Point(4, 3);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new System.Drawing.Size(402, 25);
+            toolStrip1.TabIndex = 10;
+            toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButtonDelete
             // 
-            this.toolStripButtonDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDelete.Image = global::AccountingSystem.Properties.Resources.waste_bin_filled_14px;
-            this.toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonDelete.Text = "Delete";
-            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            toolStripButtonDelete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButtonDelete.Image = Properties.Resources.waste_bin_filled_14px;
+            toolStripButtonDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButtonDelete.Name = "toolStripButtonDelete";
+            toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
+            toolStripButtonDelete.Text = "Delete";
+            toolStripButtonDelete.Click += toolStripButtonDelete_Click;
             // 
             // toolStripButtonAdd
             // 
-            this.toolStripButtonAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAdd.Image = global::AccountingSystem.Properties.Resources.symbol_add_14px;
-            this.toolStripButtonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonAdd.Text = "Add";
-            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            toolStripButtonAdd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            toolStripButtonAdd.Image = Properties.Resources.symbol_add_14px;
+            toolStripButtonAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            toolStripButtonAdd.Name = "toolStripButtonAdd";
+            toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
+            toolStripButtonAdd.Text = "Add";
+            toolStripButtonAdd.Click += toolStripButtonAdd_Click;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.flowLayoutPanel6);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(418, 57);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Payment Methods";
+            groupBox2.Controls.Add(flowLayoutPanel6);
+            groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            groupBox2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox2.Location = new System.Drawing.Point(0, 0);
+            groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox2.Size = new System.Drawing.Size(418, 57);
+            groupBox2.TabIndex = 4;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Payment Methods";
             // 
             // flowLayoutPanel6
             // 
-            this.flowLayoutPanel6.Controls.Add(this.radPaymentCashCheque);
-            this.flowLayoutPanel6.Controls.Add(this.radPaymentCheque);
-            this.flowLayoutPanel6.Controls.Add(this.radPaymentCash);
-            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(4, 23);
-            this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(410, 31);
-            this.flowLayoutPanel6.TabIndex = 5;
+            flowLayoutPanel6.Controls.Add(radPaymentCashCheque);
+            flowLayoutPanel6.Controls.Add(radPaymentCheque);
+            flowLayoutPanel6.Controls.Add(radPaymentCash);
+            flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            flowLayoutPanel6.Location = new System.Drawing.Point(4, 23);
+            flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel6.Name = "flowLayoutPanel6";
+            flowLayoutPanel6.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel6.Size = new System.Drawing.Size(410, 31);
+            flowLayoutPanel6.TabIndex = 5;
             // 
             // radPaymentCashCheque
             // 
-            this.radPaymentCashCheque.AutoSize = true;
-            this.radPaymentCashCheque.Location = new System.Drawing.Point(290, 6);
-            this.radPaymentCashCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.radPaymentCashCheque.Name = "radPaymentCashCheque";
-            this.radPaymentCashCheque.Size = new System.Drawing.Size(108, 19);
-            this.radPaymentCashCheque.TabIndex = 8;
-            this.radPaymentCashCheque.Text = "Cash && Cheque";
-            this.radPaymentCashCheque.UseVisualStyleBackColor = true;
-            this.radPaymentCashCheque.CheckedChanged += new System.EventHandler(this.radPaymentCashCheque_CheckedChanged);
+            radPaymentCashCheque.AutoSize = true;
+            radPaymentCashCheque.Location = new System.Drawing.Point(290, 6);
+            radPaymentCashCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radPaymentCashCheque.Name = "radPaymentCashCheque";
+            radPaymentCashCheque.Size = new System.Drawing.Size(108, 19);
+            radPaymentCashCheque.TabIndex = 8;
+            radPaymentCashCheque.Text = "Cash && Cheque";
+            radPaymentCashCheque.UseVisualStyleBackColor = true;
+            radPaymentCashCheque.CheckedChanged += radPaymentCashCheque_CheckedChanged;
             // 
             // radPaymentCheque
             // 
-            this.radPaymentCheque.AutoSize = true;
-            this.radPaymentCheque.Location = new System.Drawing.Point(216, 6);
-            this.radPaymentCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.radPaymentCheque.Name = "radPaymentCheque";
-            this.radPaymentCheque.Size = new System.Drawing.Size(66, 19);
-            this.radPaymentCheque.TabIndex = 7;
-            this.radPaymentCheque.Text = "Cheque";
-            this.radPaymentCheque.UseVisualStyleBackColor = true;
-            this.radPaymentCheque.CheckedChanged += new System.EventHandler(this.radPaymentCheque_CheckedChanged);
+            radPaymentCheque.AutoSize = true;
+            radPaymentCheque.Location = new System.Drawing.Point(216, 6);
+            radPaymentCheque.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radPaymentCheque.Name = "radPaymentCheque";
+            radPaymentCheque.Size = new System.Drawing.Size(66, 19);
+            radPaymentCheque.TabIndex = 7;
+            radPaymentCheque.Text = "Cheque";
+            radPaymentCheque.UseVisualStyleBackColor = true;
+            radPaymentCheque.CheckedChanged += radPaymentCheque_CheckedChanged;
             // 
             // radPaymentCash
             // 
-            this.radPaymentCash.AutoSize = true;
-            this.radPaymentCash.Checked = true;
-            this.radPaymentCash.Location = new System.Drawing.Point(157, 6);
-            this.radPaymentCash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.radPaymentCash.Name = "radPaymentCash";
-            this.radPaymentCash.Size = new System.Drawing.Size(51, 19);
-            this.radPaymentCash.TabIndex = 6;
-            this.radPaymentCash.TabStop = true;
-            this.radPaymentCash.Text = "Cash";
-            this.radPaymentCash.UseVisualStyleBackColor = true;
-            this.radPaymentCash.CheckedChanged += new System.EventHandler(this.radPaymentCash_CheckedChanged);
+            radPaymentCash.AutoSize = true;
+            radPaymentCash.Checked = true;
+            radPaymentCash.Location = new System.Drawing.Point(157, 6);
+            radPaymentCash.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radPaymentCash.Name = "radPaymentCash";
+            radPaymentCash.Size = new System.Drawing.Size(51, 19);
+            radPaymentCash.TabIndex = 6;
+            radPaymentCash.TabStop = true;
+            radPaymentCash.Text = "Cash";
+            radPaymentCash.UseVisualStyleBackColor = true;
+            radPaymentCash.CheckedChanged += radPaymentCash_CheckedChanged;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.panel7);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox5.Location = new System.Drawing.Point(0, 0);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox5.Size = new System.Drawing.Size(426, 311);
-            this.groupBox5.TabIndex = 12;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Payment Details";
+            groupBox5.Controls.Add(panel7);
+            groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            groupBox5.Location = new System.Drawing.Point(0, 0);
+            groupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBox5.Size = new System.Drawing.Size(426, 311);
+            groupBox5.TabIndex = 12;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Payment Details";
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.txtTaxpayer);
-            this.panel7.Controls.Add(this.txtCollectingOfficer);
-            this.panel7.Controls.Add(this.label1);
-            this.panel7.Controls.Add(this.label7);
-            this.panel7.Controls.Add(this.label6);
-            this.panel7.Controls.Add(this.cmbxAccountableForm);
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.txtReceipts);
-            this.panel7.Controls.Add(this.label2);
-            this.panel7.Controls.Add(this.label4);
-            this.panel7.Controls.Add(this.txtPayee);
-            this.panel7.Controls.Add(this.dtPaymentDate);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.panel7.Location = new System.Drawing.Point(4, 23);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel7.Size = new System.Drawing.Size(418, 285);
-            this.panel7.TabIndex = 13;
+            panel7.Controls.Add(txtTaxpayer);
+            panel7.Controls.Add(txtCollectingOfficer);
+            panel7.Controls.Add(label1);
+            panel7.Controls.Add(label7);
+            panel7.Controls.Add(label6);
+            panel7.Controls.Add(cmbxAccountableForm);
+            panel7.Controls.Add(label3);
+            panel7.Controls.Add(txtReceipts);
+            panel7.Controls.Add(label2);
+            panel7.Controls.Add(label4);
+            panel7.Controls.Add(txtPayee);
+            panel7.Controls.Add(dtPaymentDate);
+            panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel7.Location = new System.Drawing.Point(4, 23);
+            panel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel7.Name = "panel7";
+            panel7.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel7.Size = new System.Drawing.Size(418, 285);
+            panel7.TabIndex = 13;
             // 
             // txtTaxpayer
             // 
-            this.txtTaxpayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTaxpayer.Location = new System.Drawing.Point(123, 11);
-            this.txtTaxpayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtTaxpayer.Name = "txtTaxpayer";
-            this.txtTaxpayer.ReadOnly = true;
-            this.txtTaxpayer.Size = new System.Drawing.Size(272, 23);
-            this.txtTaxpayer.TabIndex = 14;
-            this.txtTaxpayer.WordWrap = false;
+            txtTaxpayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtTaxpayer.Location = new System.Drawing.Point(123, 11);
+            txtTaxpayer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtTaxpayer.Name = "txtTaxpayer";
+            txtTaxpayer.ReadOnly = true;
+            txtTaxpayer.Size = new System.Drawing.Size(272, 23);
+            txtTaxpayer.TabIndex = 14;
+            txtTaxpayer.WordWrap = false;
             // 
             // txtCollectingOfficer
             // 
-            this.txtCollectingOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtCollectingOfficer.Location = new System.Drawing.Point(123, 40);
-            this.txtCollectingOfficer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtCollectingOfficer.Name = "txtCollectingOfficer";
-            this.txtCollectingOfficer.ReadOnly = true;
-            this.txtCollectingOfficer.Size = new System.Drawing.Size(272, 23);
-            this.txtCollectingOfficer.TabIndex = 15;
-            this.txtCollectingOfficer.WordWrap = false;
-            this.txtCollectingOfficer.Validating += new System.ComponentModel.CancelEventHandler(this.txtCollectingOfficer_Validating);
-            this.txtCollectingOfficer.Validated += new System.EventHandler(this.txtCollectingOfficer_Validated);
+            txtCollectingOfficer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtCollectingOfficer.Location = new System.Drawing.Point(123, 40);
+            txtCollectingOfficer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtCollectingOfficer.Name = "txtCollectingOfficer";
+            txtCollectingOfficer.ReadOnly = true;
+            txtCollectingOfficer.Size = new System.Drawing.Size(272, 23);
+            txtCollectingOfficer.TabIndex = 15;
+            txtCollectingOfficer.WordWrap = false;
+            txtCollectingOfficer.Validating += txtCollectingOfficer_Validating;
+            txtCollectingOfficer.Validated += txtCollectingOfficer_Validated;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 13);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 15);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Taxpayer";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(10, 13);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(53, 15);
+            label1.TabIndex = 46;
+            label1.Text = "Taxpayer";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 44);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 15);
-            this.label7.TabIndex = 46;
-            this.label7.Text = "Collecting Officer";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(10, 44);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(100, 15);
+            label7.TabIndex = 46;
+            label7.Text = "Collecting Officer";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 72);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 15);
-            this.label6.TabIndex = 45;
-            this.label6.Text = "Accountable Form";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(10, 72);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(105, 15);
+            label6.TabIndex = 45;
+            label6.Text = "Accountable Form";
             // 
             // cmbxAccountableForm
             // 
-            this.cmbxAccountableForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxAccountableForm.FormattingEnabled = true;
-            this.cmbxAccountableForm.ItemHeight = 15;
-            this.cmbxAccountableForm.Location = new System.Drawing.Point(123, 69);
-            this.cmbxAccountableForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.cmbxAccountableForm.Name = "cmbxAccountableForm";
-            this.cmbxAccountableForm.Size = new System.Drawing.Size(272, 23);
-            this.cmbxAccountableForm.TabIndex = 51;
-            this.cmbxAccountableForm.SelectionChangeCommitted += new System.EventHandler(this.cmbxAccountableForm_SelectionChangeCommitted);
+            cmbxAccountableForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxAccountableForm.FormattingEnabled = true;
+            cmbxAccountableForm.ItemHeight = 15;
+            cmbxAccountableForm.Location = new System.Drawing.Point(123, 69);
+            cmbxAccountableForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cmbxAccountableForm.Name = "cmbxAccountableForm";
+            cmbxAccountableForm.Size = new System.Drawing.Size(272, 23);
+            cmbxAccountableForm.TabIndex = 51;
+            cmbxAccountableForm.SelectionChangeCommitted += cmbxAccountableForm_SelectionChangeCommitted;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 129);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 15);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "Receipt No.";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(11, 129);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(68, 15);
+            label3.TabIndex = 44;
+            label3.Text = "Receipt No.";
             // 
             // txtReceipts
             // 
-            this.txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtReceipts.Location = new System.Drawing.Point(123, 126);
-            this.txtReceipts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtReceipts.MaxLength = 999999999;
-            this.txtReceipts.Name = "txtReceipts";
-            this.txtReceipts.Size = new System.Drawing.Size(272, 23);
-            this.txtReceipts.TabIndex = 18;
-            this.txtReceipts.WordWrap = false;
-            this.txtReceipts.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtReceipts_KeyPress);
-            this.txtReceipts.Validating += new System.ComponentModel.CancelEventHandler(this.txtReceipts_Validating);
-            this.txtReceipts.Validated += new System.EventHandler(this.txtReceipts_Validated);
+            txtReceipts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            txtReceipts.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            txtReceipts.Location = new System.Drawing.Point(123, 126);
+            txtReceipts.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtReceipts.MaxLength = 999999999;
+            txtReceipts.Name = "txtReceipts";
+            txtReceipts.Size = new System.Drawing.Size(272, 23);
+            txtReceipts.TabIndex = 18;
+            txtReceipts.WordWrap = false;
+            txtReceipts.KeyPress += txtReceipts_KeyPress;
+            txtReceipts.Validating += txtReceipts_Validating;
+            txtReceipts.Validated += txtReceipts_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 100);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 15);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "Payment Date";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(11, 100);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(81, 15);
+            label2.TabIndex = 43;
+            label2.Text = "Payment Date";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 159);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "Payee";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(11, 159);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(38, 15);
+            label4.TabIndex = 42;
+            label4.Text = "Payee";
             // 
             // txtPayee
             // 
-            this.txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtPayee.Location = new System.Drawing.Point(123, 155);
-            this.txtPayee.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.txtPayee.Name = "txtPayee";
-            this.txtPayee.Size = new System.Drawing.Size(272, 23);
-            this.txtPayee.TabIndex = 19;
-            this.txtPayee.WordWrap = false;
-            this.txtPayee.Validating += new System.ComponentModel.CancelEventHandler(this.txtPayee_Validating);
-            this.txtPayee.Validated += new System.EventHandler(this.txtPayee_Validated);
+            txtPayee.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            txtPayee.Location = new System.Drawing.Point(123, 155);
+            txtPayee.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtPayee.Name = "txtPayee";
+            txtPayee.Size = new System.Drawing.Size(272, 23);
+            txtPayee.TabIndex = 19;
+            txtPayee.WordWrap = false;
+            txtPayee.Validating += txtPayee_Validating;
+            txtPayee.Validated += txtPayee_Validated;
             // 
             // dtPaymentDate
             // 
-            this.dtPaymentDate.Location = new System.Drawing.Point(123, 97);
-            this.dtPaymentDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dtPaymentDate.Name = "dtPaymentDate";
-            this.dtPaymentDate.Size = new System.Drawing.Size(272, 23);
-            this.dtPaymentDate.TabIndex = 17;
+            dtPaymentDate.Location = new System.Drawing.Point(123, 97);
+            dtPaymentDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dtPaymentDate.Name = "dtPaymentDate";
+            dtPaymentDate.Size = new System.Drawing.Size(272, 23);
+            dtPaymentDate.TabIndex = 17;
             // 
             // errorProvider1
             // 
-            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider1.ContainerControl = this;
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucPayment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.groupBox6);
-            this.Name = "ucPayment";
-            this.Size = new System.Drawing.Size(848, 516);
-            this.Load += new System.EventHandler(this.ucPayment_Load);
-            this.groupBox6.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.gpBxChequeDetails.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCheques)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(splitContainer1);
+            Controls.Add(groupBox6);
+            Name = "ucPayment";
+            Size = new System.Drawing.Size(848, 516);
+            Load += ucPayment_Load;
+            groupBox6.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            gpBxChequeDetails.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgCheques).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            flowLayoutPanel6.ResumeLayout(false);
+            flowLayoutPanel6.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            panel7.ResumeLayout(false);
+            panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

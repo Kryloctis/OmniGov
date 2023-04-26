@@ -29,114 +29,121 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnSearch = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnCancel = new System.Windows.Forms.ToolStripButton();
-            this.ucAllotmentReleaseMain1 = new AccountingSystem.Views.Manage.AllotmentRelease.ucAllotmentReleaseMain();
-            this.toolStrip1.SuspendLayout();
-            this.SuspendLayout();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnSave = new System.Windows.Forms.ToolStripButton();
+            btnSearch = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            btnCancel = new System.Windows.Forms.ToolStripButton();
+            panel1 = new System.Windows.Forms.Panel();
+            ucAllotmentReleaseMain1 = new ucAllotmentReleaseMain();
+            toolStrip1.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave,
-            this.btnSearch,
-            this.btnDelete,
-            this.toolStripSeparator1,
-            this.btnCancel});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 0, 1, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(679, 50);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSave, btnSearch, btnDelete, toolStripSeparator1, btnCancel });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(670, 50);
+            toolStrip1.TabIndex = 1;
+            toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 47);
-            this.btnSave.Text = "&Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            btnSave.Image = Properties.Resources.button_rounded_add_20px;
+            btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(35, 39);
+            btnSave.Text = "&Save";
+            btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSave.Click += BtnSave_Click;
             // 
             // btnSearch
             // 
-            this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
-            this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 47);
-            this.btnSearch.Text = "&Search...";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnSearch.Image = Properties.Resources.find_20px;
+            btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(55, 39);
+            btnSearch.Text = "&Search...";
+            btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSearch.Click += btnSearch_Click;
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 47);
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Text = "&Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += btnDelete_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
-            this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(47, 47);
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            btnCancel.Image = Properties.Resources.symbol_cancel_20px;
+            btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(47, 39);
+            btnCancel.Text = "&Cancel";
+            btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnCancel.Click += BtnCancel_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucAllotmentReleaseMain1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 50);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(670, 566);
+            panel1.TabIndex = 2;
             // 
             // ucAllotmentReleaseMain1
             // 
-            this.ucAllotmentReleaseMain1.AutoSize = true;
-            this.ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucAllotmentReleaseMain1.Location = new System.Drawing.Point(12, 53);
-            this.ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
-            this.ucAllotmentReleaseMain1.Size = new System.Drawing.Size(670, 552);
-            this.ucAllotmentReleaseMain1.TabIndex = 2;
+            ucAllotmentReleaseMain1.AutoSize = true;
+            ucAllotmentReleaseMain1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucAllotmentReleaseMain1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucAllotmentReleaseMain1.Location = new System.Drawing.Point(4, 4);
+            ucAllotmentReleaseMain1.Name = "ucAllotmentReleaseMain1";
+            ucAllotmentReleaseMain1.Size = new System.Drawing.Size(662, 558);
+            ucAllotmentReleaseMain1.TabIndex = 3;
             // 
             // frmAllotmentReleaseMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(679, 616);
-            this.Controls.Add(this.ucAllotmentReleaseMain1);
-            this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmAllotmentReleaseMain";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Allotment Release";
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            ClientSize = new System.Drawing.Size(670, 616);
+            Controls.Add(panel1);
+            Controls.Add(toolStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmAllotmentReleaseMain";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Allotment Release";
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -146,6 +153,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
         private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnDelete;
+        private System.Windows.Forms.Panel panel1;
         internal ucAllotmentReleaseMain ucAllotmentReleaseMain1;
     }
 }
