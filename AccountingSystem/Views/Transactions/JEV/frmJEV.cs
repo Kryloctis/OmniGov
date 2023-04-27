@@ -41,12 +41,15 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 if (uc.isEdit)
+                {
                     LoadSelectedJEV(uc.jevId);
+                    _frmJEVList.Hide();
+                }
+
 
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
                 uc.SumDebitCredit();
                 VerifyPermissions();
-                _frmJEVList.Hide();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -958,7 +961,8 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void frmJEV_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _frmJEVList.Close();
+            if(uc.isEdit)
+                _frmJEVList.Close();
         }
     }
 }
