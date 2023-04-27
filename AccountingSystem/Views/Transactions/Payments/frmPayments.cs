@@ -200,7 +200,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 radTaxpayer.Checked = true;
                 EnableDisableButtons();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tabPageTaxDues_Enter(object sender, EventArgs e)
@@ -211,7 +211,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 radTaxDues.Checked = true;
                 EnableDisableButtons();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void tabPagePayment_Enter(object sender, EventArgs e)
@@ -223,7 +223,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 ucPayment.Enabled = true;
                 EnableDisableButtons();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void EnableDisableButtons()
@@ -253,7 +253,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             {
                 EnableDisableButtons();
             }
-            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void radRpt_CheckedChanged(object sender, EventArgs e)
