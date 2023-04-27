@@ -621,7 +621,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            frmJEVReport _frmJEVReport = new frmJEVReport(uc.jevId, uc.jevNo, uc.journalId);
+            frmJEVReport _frmJEVReport = new frmJEVReport(uc.jevId, uc.journalId);
             _frmJEVReport.ShowDialog();
         }
 
