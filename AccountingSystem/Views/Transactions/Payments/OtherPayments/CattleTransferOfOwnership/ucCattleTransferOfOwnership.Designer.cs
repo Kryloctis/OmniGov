@@ -52,11 +52,13 @@
             label2 = new System.Windows.Forms.Label();
             textBox1 = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
+            panel3 = new System.Windows.Forms.Panel();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -66,7 +68,7 @@
             groupBox1.Location = new System.Drawing.Point(367, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            groupBox1.Size = new System.Drawing.Size(392, 200);
+            groupBox1.Size = new System.Drawing.Size(387, 188);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Cattle's Details";
@@ -87,7 +89,7 @@
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel1.Location = new System.Drawing.Point(5, 21);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(382, 174);
+            panel1.Size = new System.Drawing.Size(377, 162);
             panel1.TabIndex = 0;
             // 
             // numericUpDown1
@@ -181,7 +183,7 @@
             groupBox2.Location = new System.Drawing.Point(3, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            groupBox2.Size = new System.Drawing.Size(358, 200);
+            groupBox2.Size = new System.Drawing.Size(358, 188);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Owners && Information";
@@ -202,7 +204,7 @@
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel2.Location = new System.Drawing.Point(5, 21);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(348, 174);
+            panel2.Size = new System.Drawing.Size(348, 162);
             panel2.TabIndex = 0;
             // 
             // comboBox3
@@ -288,14 +290,23 @@
             label1.TabIndex = 2;
             label1.Text = "Old Owner";
             // 
+            // panel3
+            // 
+            panel3.Controls.Add(groupBox1);
+            panel3.Controls.Add(groupBox2);
+            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel3.Location = new System.Drawing.Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(762, 194);
+            panel3.TabIndex = 5;
+            // 
             // ucCattleTransferOfOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(groupBox1);
-            Controls.Add(groupBox2);
+            Controls.Add(panel3);
             Name = "ucCattleTransferOfOwnership";
-            Size = new System.Drawing.Size(762, 204);
+            Size = new System.Drawing.Size(762, 194);
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -303,6 +314,7 @@
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -332,5 +344,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel3;
     }
 }
