@@ -29,276 +29,260 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnApprove = new System.Windows.Forms.ToolStripButton();
-            this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelJEV = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPrint = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblIsEdited = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.ucjev1 = new AccountingSystem.Views.Transactions.JEV.ucJEV();
-            this.toolStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.statusStrip2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            btnSave = new System.Windows.Forms.ToolStripButton();
+            btnDelete = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            btnApprove = new System.Windows.Forms.ToolStripButton();
+            btnDisapprove = new System.Windows.Forms.ToolStripButton();
+            btnCancelJEV = new System.Windows.Forms.ToolStripButton();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            btnPrint = new System.Windows.Forms.ToolStripButton();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblJevStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            lblIsEdited = new System.Windows.Forms.ToolStripStatusLabel();
+            lblShowMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            statusStrip2 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
+            panel1 = new System.Windows.Forms.Panel();
+            ucjev1 = new ucJEV();
+            toolStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            statusStrip2.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave,
-            this.btnDelete,
-            this.toolStripSeparator2,
-            this.btnApprove,
-            this.btnDisapprove,
-            this.btnCancelJEV,
-            this.toolStripSeparator3,
-            this.btnPrint});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
-            this.toolStrip1.Size = new System.Drawing.Size(1089, 50);
-            this.toolStrip1.TabIndex = 7;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnSave, btnDelete, toolStripSeparator2, btnApprove, btnDisapprove, btnCancelJEV, toolStripSeparator3, btnPrint });
+            toolStrip1.Location = new System.Drawing.Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            toolStrip1.Size = new System.Drawing.Size(1089, 50);
+            toolStrip1.TabIndex = 7;
+            toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
-            this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 39);
-            this.btnSave.Text = "&Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            btnSave.Image = Properties.Resources.save_filled_20px;
+            btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(35, 39);
+            btnSave.Text = "&Save";
+            btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnSave.Click += BtnSave_Click;
             // 
             // btnDelete
             // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
-            this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(44, 39);
-            this.btnDelete.Text = "&Delete";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            btnDelete.Enabled = false;
+            btnDelete.Image = Properties.Resources.button_rounded_remove_20px;
+            btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(44, 39);
+            btnDelete.Text = "&Delete";
+            btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDelete.Click += BtnDelete_Click;
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(6, 42);
             // 
             // btnApprove
             // 
-            this.btnApprove.Enabled = false;
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_color_green_ok_2_20px;
-            this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnApprove.Name = "btnApprove";
-            this.btnApprove.Size = new System.Drawing.Size(56, 39);
-            this.btnApprove.Text = "&Approve";
-            this.btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnApprove.ToolTipText = "Approve";
-            this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            btnApprove.Enabled = false;
+            btnApprove.Image = Properties.Resources.document_color_green_ok_2_20px;
+            btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnApprove.Name = "btnApprove";
+            btnApprove.Size = new System.Drawing.Size(56, 39);
+            btnApprove.Text = "&Approve";
+            btnApprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnApprove.ToolTipText = "Approve";
+            btnApprove.Click += btnApprove_Click;
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Enabled = false;
-            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_color_red_cancel_2_20px;
-            this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDisapprove.Name = "btnDisapprove";
-            this.btnDisapprove.Size = new System.Drawing.Size(70, 39);
-            this.btnDisapprove.Text = "&Disapprove";
-            this.btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
+            btnDisapprove.Enabled = false;
+            btnDisapprove.Image = Properties.Resources.document_color_red_cancel_2_20px;
+            btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnDisapprove.Name = "btnDisapprove";
+            btnDisapprove.Size = new System.Drawing.Size(70, 39);
+            btnDisapprove.Text = "&Disapprove";
+            btnDisapprove.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnDisapprove.Click += btnDisapprove_Click;
             // 
             // btnCancelJEV
             // 
-            this.btnCancelJEV.Enabled = false;
-            this.btnCancelJEV.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_forbidden_20px;
-            this.btnCancelJEV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCancelJEV.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelJEV.Name = "btnCancelJEV";
-            this.btnCancelJEV.Size = new System.Drawing.Size(67, 39);
-            this.btnCancelJEV.Text = "Cancel JEV";
-            this.btnCancelJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelJEV.Click += new System.EventHandler(this.btnCancelJEV_Click);
+            btnCancelJEV.Enabled = false;
+            btnCancelJEV.Image = Properties.Resources.document_color_magenta_forbidden_20px;
+            btnCancelJEV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnCancelJEV.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnCancelJEV.Name = "btnCancelJEV";
+            btnCancelJEV.Size = new System.Drawing.Size(67, 39);
+            btnCancelJEV.Text = "Cancel JEV";
+            btnCancelJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnCancelJEV.Click += btnCancelJEV_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(6, 42);
             // 
             // btnPrint
             // 
-            this.btnPrint.Enabled = false;
-            this.btnPrint.Image = global::AccountingSystem.Properties.Resources.printer_filled_20px;
-            this.btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(36, 39);
-            this.btnPrint.Text = "&Print";
-            this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            btnPrint.Enabled = false;
+            btnPrint.Image = Properties.Resources.printer_filled_20px;
+            btnPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnPrint.Name = "btnPrint";
+            btnPrint.Size = new System.Drawing.Size(36, 39);
+            btnPrint.Text = "&Print";
+            btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            btnPrint.Click += btnPrint_Click;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.White;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.lblJevStatus,
-            this.lblIsEdited,
-            this.lblShowMessage});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 50);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1089, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 14;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.BackColor = System.Drawing.Color.White;
+            statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel1, toolStripStatusLabel2, lblJevStatus, lblIsEdited, lblShowMessage });
+            statusStrip1.Location = new System.Drawing.Point(0, 50);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new System.Drawing.Size(1089, 22);
+            statusStrip1.SizingGrip = false;
+            statusStrip1.TabIndex = 14;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1014, 17);
-            this.toolStripStatusLabel1.Spring = true;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(1014, 17);
+            toolStripStatusLabel1.Spring = true;
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
-            this.toolStripStatusLabel2.Text = "Status:";
+            toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(42, 22);
+            toolStripStatusLabel2.Text = "Status:";
             // 
             // lblJevStatus
             // 
-            this.lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
-            this.lblJevStatus.Name = "lblJevStatus";
-            this.lblJevStatus.Size = new System.Drawing.Size(18, 22);
-            this.lblJevStatus.Text = "--";
+            lblJevStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            lblJevStatus.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblJevStatus.Margin = new System.Windows.Forms.Padding(0);
+            lblJevStatus.Name = "lblJevStatus";
+            lblJevStatus.Size = new System.Drawing.Size(18, 22);
+            lblJevStatus.Text = "--";
             // 
             // lblIsEdited
             // 
-            this.lblIsEdited.Name = "lblIsEdited";
-            this.lblIsEdited.Size = new System.Drawing.Size(48, 17);
-            this.lblIsEdited.Text = "(Edited)";
-            this.lblIsEdited.Visible = false;
+            lblIsEdited.Name = "lblIsEdited";
+            lblIsEdited.Size = new System.Drawing.Size(48, 17);
+            lblIsEdited.Text = "(Edited)";
+            lblIsEdited.Visible = false;
             // 
             // lblShowMessage
             // 
-            this.lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.IsLink = true;
-            this.lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lblShowMessage.LinkColor = System.Drawing.Color.Firebrick;
-            this.lblShowMessage.Name = "lblShowMessage";
-            this.lblShowMessage.Size = new System.Drawing.Size(88, 17);
-            this.lblShowMessage.Text = "Show Message.";
-            this.lblShowMessage.Visible = false;
-            this.lblShowMessage.Click += new System.EventHandler(this.lblShowMessage_Click);
+            lblShowMessage.ActiveLinkColor = System.Drawing.Color.Firebrick;
+            lblShowMessage.ForeColor = System.Drawing.Color.Firebrick;
+            lblShowMessage.IsLink = true;
+            lblShowMessage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lblShowMessage.LinkColor = System.Drawing.Color.Firebrick;
+            lblShowMessage.Name = "lblShowMessage";
+            lblShowMessage.Size = new System.Drawing.Size(88, 17);
+            lblShowMessage.Text = "Show Message.";
+            lblShowMessage.Visible = false;
+            lblShowMessage.Click += lblShowMessage_Click;
             // 
             // statusStrip2
             // 
-            this.statusStrip2.BackColor = System.Drawing.Color.White;
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
-            this.lblCreatedBy});
-            this.statusStrip2.Location = new System.Drawing.Point(0, 632);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(1089, 22);
-            this.statusStrip2.SizingGrip = false;
-            this.statusStrip2.TabIndex = 15;
-            this.statusStrip2.Text = "statusStrip2";
+            statusStrip2.BackColor = System.Drawing.Color.White;
+            statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabel3, toolStripStatusLabel4, lblCreatedBy });
+            statusStrip2.Location = new System.Drawing.Point(0, 632);
+            statusStrip2.Name = "statusStrip2";
+            statusStrip2.Size = new System.Drawing.Size(1089, 22);
+            statusStrip2.SizingGrip = false;
+            statusStrip2.TabIndex = 15;
+            statusStrip2.Text = "statusStrip2";
             // 
             // toolStripStatusLabel3
             // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(980, 17);
-            this.toolStripStatusLabel3.Spring = true;
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(980, 17);
+            toolStripStatusLabel3.Spring = true;
             // 
             // toolStripStatusLabel4
             // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusLabel4.Text = "Created By:";
+            toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            toolStripStatusLabel4.Size = new System.Drawing.Size(67, 17);
+            toolStripStatusLabel4.Text = "Created By:";
             // 
             // lblCreatedBy
             // 
-            this.lblCreatedBy.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
-            this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(22, 17);
-            this.lblCreatedBy.Text = "---";
+            lblCreatedBy.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
+            lblCreatedBy.Name = "lblCreatedBy";
+            lblCreatedBy.Size = new System.Drawing.Size(22, 17);
+            lblCreatedBy.Text = "---";
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.ucjev1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 72);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(1089, 560);
-            this.panel1.TabIndex = 16;
+            panel1.Controls.Add(ucjev1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 72);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(1089, 560);
+            panel1.TabIndex = 16;
             // 
             // ucjev1
             // 
-            this.ucjev1.AutoSize = true;
-            this.ucjev1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucjev1.Location = new System.Drawing.Point(4, 4);
-            this.ucjev1.Name = "ucjev1";
-            this.ucjev1.Size = new System.Drawing.Size(1081, 552);
-            this.ucjev1.TabIndex = 12;
+            ucjev1.AutoSize = true;
+            ucjev1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucjev1.Location = new System.Drawing.Point(4, 4);
+            ucjev1.Name = "ucjev1";
+            ucjev1.Size = new System.Drawing.Size(1081, 552);
+            ucjev1.TabIndex = 12;
             // 
             // frmJEV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(1089, 654);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip2);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "frmJEV";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Journal Entry Voucher";
-            this.Load += new System.EventHandler(this.frmJEV_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(1089, 654);
+            Controls.Add(panel1);
+            Controls.Add(statusStrip2);
+            Controls.Add(statusStrip1);
+            Controls.Add(toolStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "frmJEV";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Journal Entry Voucher";
+            FormClosed += frmJEV_FormClosed;
+            Load += frmJEV_Load;
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            statusStrip2.ResumeLayout(false);
+            statusStrip2.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

@@ -46,6 +46,7 @@ namespace AccountingSystem.Views.Transactions.JEV
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
                 uc.SumDebitCredit();
                 VerifyPermissions();
+                _frmJEVList.Hide();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -953,6 +954,11 @@ namespace AccountingSystem.Views.Transactions.JEV
             btnSave.Text = "&Update";
 
             Cursor = Cursors.Default;
+        }
+
+        private void frmJEV_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _frmJEVList.Close();
         }
     }
 }
