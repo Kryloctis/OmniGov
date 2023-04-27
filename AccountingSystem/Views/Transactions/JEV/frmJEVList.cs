@@ -96,7 +96,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             ucFrmJev.jevNo = jevNo;
             ucFrmJev.jevId = jevId;
             frmJev.createdById = createdById;
-            frmJev.ShowDialog();
+            frmJev.ShowDialog();   
             Cursor = Cursors.Default;
         }
 

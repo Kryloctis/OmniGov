@@ -12,7 +12,6 @@ namespace AccountingSystem.Views.Reports.JEV
         private Dictionary<string, string> journalDict;
 
         private int _jevId;
-        private string _jevNo;
         private byte _journalId;
 
         internal string checkDate;
@@ -27,7 +26,7 @@ namespace AccountingSystem.Views.Reports.JEV
         internal string paramDVNo;
         internal string paramOfficer;
 
-        public frmJEVReport(int jevId, string jevNo, byte journalId)
+        public frmJEVReport(int jevId, byte journalId)
         {
             InitializeComponent();
             Helper.LoadFormIcon(this);
@@ -35,7 +34,6 @@ namespace AccountingSystem.Views.Reports.JEV
             panel1.Controls.Add(reportViewer);
             reportViewer.Dock = DockStyle.Fill;
             _jevId = jevId;
-            _jevNo = jevNo;
             _journalId = journalId;
         }
 
@@ -146,32 +144,31 @@ namespace AccountingSystem.Views.Reports.JEV
                     SetJournalCustomFields();
 
                     var parameters = new[] {
-                    new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", data["fund_name"]),
-                    new ReportParameter("paramJournalType", data["journal_name"]),
-                    new ReportParameter("paramJEVNo", full_jev),
-                    new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
-                    new ReportParameter("paramPayee", data["payee"]),
-                    new ReportParameter("paramExplanation", data["explanation"]),
-                    new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
-                    new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
-                    new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
-                    new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
-                    new ReportParameter("paramDateEntry", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
+                        new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
+                        new ReportParameter("paramFund", data["fund_name"]),
+                        new ReportParameter("paramJournalType", data["journal_name"]),
+                        new ReportParameter("paramJEVNo", full_jev),
+                        new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
+                        new ReportParameter("paramPayee", data["payee"]),
+                        new ReportParameter("paramExplanation", data["explanation"]),
+                        new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
+                        new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
+                        new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
+                        new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
 
-                    //For fields label
-                    new ReportParameter("paramAsTextCheckDate", checkDate),
-                    new ReportParameter("paramAsTextCheckNo", checkNo),
-                    new ReportParameter("paramAsTextOR", orNo),
-                    new ReportParameter("paramAsTextDV", dv),
-                    new ReportParameter("paramAsTextOfficer", officer),
+                        //For fields label
+                        new ReportParameter("paramAsTextCheckDate", checkDate),
+                        new ReportParameter("paramAsTextCheckNo", checkNo),
+                        new ReportParameter("paramAsTextOR", orNo),
+                        new ReportParameter("paramAsTextDV", dv),
+                        new ReportParameter("paramAsTextOfficer", officer),
 
-                    //for fields values
-                    new ReportParameter("paramCheckDate", paramCheckDate),
-                    new ReportParameter("paramCheckNo", paramCheckNo),
-                    new ReportParameter("paramORNumber", paramORNo),
-                    new ReportParameter("paramDVNo", paramDVNo),
-                    new ReportParameter("paramDisbursementOfficer", paramOfficer)
+                        //for fields values
+                        new ReportParameter("paramCheckDate", paramCheckDate),
+                        new ReportParameter("paramCheckNo", paramCheckNo),
+                        new ReportParameter("paramORNumber", paramORNo),
+                        new ReportParameter("paramDVNo", paramDVNo),
+                        new ReportParameter("paramDisbursementOfficer", paramOfficer)
                     };
 
                     report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
@@ -181,7 +178,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     report.SetParameters(parameters);
 
                     reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                    reportViewer.ZoomMode = ZoomMode.Percent;
+                    reportViewer.ZoomMode = ZoomMode.PageWidth;
                     reportViewer.ZoomPercent = 100;
 
                     reportViewer.RefreshReport();
@@ -189,10 +186,7 @@ namespace AccountingSystem.Views.Reports.JEV
                     Cursor.Current = Cursors.Default;
                 }
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private DataTable DataTableJournalEntryVoucherAccount()
@@ -225,103 +219,7 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-            {
-                Helper.DatagridFullRowSelectStyle(dgJEV, true);
-
-                if (_jevId != 0)
-                {
-                    leftPanel.Visible = false;
-                    LoadReport(reportViewer.LocalReport);
-                }
-                else
-                {
-                    LoadData();
-                }
-            }
-        }
-
-        private void LoadData()
-        {
-            LoadJournals();
-
-            foreach (var item in Helper.MonthsDatasource().Values)
-                cbMonths.Items.Add(item);
-            cbMonths.SelectedIndex = DateTime.Now.Month - 1;
-
-            LoadJEVList();
-            LoadSelectedJEV();
-        }
-
-        private void LoadJEVList()
-        {
-            cbMonths.SelectedIndexChanged -= new EventHandler(cbMonths_SelectedIndexChanged);
-            cmbJournal.SelectedIndexChanged -= new EventHandler(cbJournal_SelectedIndexChanged);
-            nudYear.ValueChanged -= new EventHandler(nudYear_ValueChanged);
-            dgJEV.SelectionChanged -= new EventHandler(dgJEV_SelectionChanged);
-
-            var searchText = txtSearch.Text.Trim();
-            var month = (sbyte)(cbMonths.SelectedIndex + 1);
-            var year = (ushort)nudYear.Value;
-            var journalId = (byte)(cmbJournal.SelectedIndex + 1);
-
-            var dtJEV = AccFactory.JEVRepository().GetRecordsByJEVNoAndDate(searchText, month, year, journalId);
-            HelperLoadRecords.JEVREportDataGridView(dtJEV, dgJEV);
-
-            cbMonths.SelectedIndexChanged += new EventHandler(cbMonths_SelectedIndexChanged);
-            cmbJournal.SelectedIndexChanged += new EventHandler(cbJournal_SelectedIndexChanged);
-            nudYear.ValueChanged += new EventHandler(nudYear_ValueChanged);
-            dgJEV.SelectionChanged += new EventHandler(dgJEV_SelectionChanged);
-        }
-
-        private void LoadSelectedJEV()
-        {
-            if (dgJEV.SelectedRows.Count != 0 && leftPanel.Visible)
-            {
-                int selectedIndex = dgJEV.SelectedCells[0].RowIndex;
-
-                DataGridViewRow selectedRow = dgJEV.Rows[selectedIndex];
-
-                _jevNo = Convert.ToString(selectedRow.Cells["jev_no"].Value);
-                _jevId = Convert.ToInt32(selectedRow.Cells["id"].Value);
-                _journalId = Convert.ToByte(selectedRow.Cells["journals_id"].Value);
-
-                LoadReport(reportViewer.LocalReport);
-                reportViewer.RefreshReport();
-            }
-        }
-
-        private void LoadJournals()
-        {
-            cmbJournal.DataSource = AccFactory.JournalsRepository().GetRecords();
-            cmbJournal.ValueMember = "id";
-            cmbJournal.DisplayMember = "journal_name";
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            LoadJEVList();
-        }
-
-        private void cbMonths_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadJEVList();
-            LoadSelectedJEV();
-        }
-
-        private void cbJournal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadJEVList();
-        }
-
-        private void nudYear_ValueChanged(object sender, EventArgs e)
-        {
-            LoadJEVList();
-        }
-
-        private void dgJEV_SelectionChanged(object sender, EventArgs e)
-        {
-            LoadSelectedJEV();
+            LoadReport(reportViewer.LocalReport);
         }
     }
 }

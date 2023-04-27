@@ -1,13 +1,15 @@
 ﻿using ACC.Domain.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class ucBankAccounts : UserControl
     {
-        internal int bankAccountID = 0;
+        internal int bankAccountID;
+        internal bool isEdit;
 
         public ucBankAccounts()
         {
@@ -16,22 +18,35 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         internal void ResetForm()
         {
-            txtAccountNo.Clear();
+            try
+            {
+                LoadBanks();
+                txtAccountNo.Clear();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
         }
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2]
+            var errorArray = new string[]
             {
                 errorProvider1.GetError(cmbxBank),
                 errorProvider1.GetError(txtAccountNo)
             };
 
-            IError error = AccFactory.CreateErrors(errorArray);
-            return error.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void ucBankAccounts_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex){Helper.MessageBoxError(ex.Message);}
+        }
+
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -41,10 +56,8 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void LoadBanks()
         {
-            var dtBanks = AccFactory.BanksRepository().GetRecords();
-            cmbxBank.DataSource = dtBanks;
-            cmbxBank.ValueMember = "id";
-            cmbxBank.DisplayMember = "bank_name";
+            DataTable dataTable = AccFactory.BanksRepository().GetRecords();
+            HelperLoadRecords.ComboBoxBanks(dataTable, cmbxBank, "id", "bank_name");
         }
 
         private void txtAccountNo_Validating(object sender, CancelEventArgs e)

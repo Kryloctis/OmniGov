@@ -533,10 +533,10 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>3.94576cm</Top>
-                <Left>15.1119cm</Left>
+                <Top>3.23434cm</Top>
+                <Left>15.17694cm</Left>
                 <Height>0.23919in</Height>
-                <Width>1.50757in</Width>
+                <Width>1.50756in</Width>
                 <ZIndex>4</ZIndex>
                 <Visibility>
                   <Hidden>=iif(Parameters!paramAsTextOfficer.Value="",True,False)</Hidden>
@@ -578,8 +578,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>3.96145cm</Top>
-                <Left>11.39775cm</Left>
+                <Top>3.25003cm</Top>
+                <Left>11.49398cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.32291in</Width>
                 <ZIndex>5</ZIndex>
@@ -617,8 +617,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>3.19491cm</Top>
-                <Left>11.39775cm</Left>
+                <Top>2.48349cm</Top>
+                <Left>11.49398cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.32291in</Width>
                 <ZIndex>6</ZIndex>
@@ -655,8 +655,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>3.16183cm</Top>
-                <Left>15.08072cm</Left>
+                <Top>2.45041cm</Top>
+                <Left>15.17695cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.50757in</Width>
                 <ZIndex>7</ZIndex>
@@ -699,8 +699,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>2.45041cm</Top>
-                <Left>15.08072cm</Left>
+                <Top>1.73899cm</Top>
+                <Left>15.17695cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.50757in</Width>
                 <ZIndex>8</ZIndex>
@@ -744,8 +744,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>2.42836cm</Top>
-                <Left>11.39775cm</Left>
+                <Top>1.71694cm</Top>
+                <Left>11.49398cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.32291in</Width>
                 <ZIndex>9</ZIndex>
@@ -783,8 +783,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>1.66182cm</Top>
-                <Left>11.39775cm</Left>
+                <Top>0.9504cm</Top>
+                <Left>11.49398cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.32291in</Width>
                 <ZIndex>10</ZIndex>
@@ -821,8 +821,8 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>1.69685cm</Top>
-                <Left>15.08072cm</Left>
+                <Top>0.98543cm</Top>
+                <Left>15.17695cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.50757in</Width>
                 <ZIndex>11</ZIndex>
@@ -836,86 +836,6 @@
                   <BottomBorder>
                     <Style>Solid</Style>
                   </BottomBorder>
-                  <VerticalAlign>Middle</VerticalAlign>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox40">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>=Parameters!paramDateEntry.Value</Value>
-                        <Style>
-                          <FontStyle>Normal</FontStyle>
-                          <FontFamily>Calibri</FontFamily>
-                          <TextDecoration>None</TextDecoration>
-                          <Color>#000000</Color>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>0.3132cm</Top>
-                <Left>15.08068cm</Left>
-                <Height>0.23919in</Height>
-                <Width>1.50757in</Width>
-                <ZIndex>12</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                  <BottomBorder>
-                    <Style>Solid</Style>
-                  </BottomBorder>
-                  <VerticalAlign>Middle</VerticalAlign>
-                  <PaddingLeft>2pt</PaddingLeft>
-                  <PaddingRight>2pt</PaddingRight>
-                  <PaddingTop>2pt</PaddingTop>
-                  <PaddingBottom>2pt</PaddingBottom>
-                </Style>
-              </Textbox>
-              <Textbox Name="Textbox41">
-                <CanGrow>true</CanGrow>
-                <KeepTogether>true</KeepTogether>
-                <Paragraphs>
-                  <Paragraph>
-                    <TextRuns>
-                      <TextRun>
-                        <Value>Date of Entry :</Value>
-                        <Style>
-                          <FontStyle>Normal</FontStyle>
-                          <FontFamily>Calibri</FontFamily>
-                          <FontWeight>Bold</FontWeight>
-                          <TextDecoration>None</TextDecoration>
-                          <Color>#000000</Color>
-                        </Style>
-                      </TextRun>
-                    </TextRuns>
-                    <Style>
-                      <TextAlign>Left</TextAlign>
-                    </Style>
-                  </Paragraph>
-                </Paragraphs>
-                <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>0.28674cm</Top>
-                <Left>11.39775cm</Left>
-                <Height>0.23919in</Height>
-                <Width>1.32291in</Width>
-                <ZIndex>13</ZIndex>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
                   <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
@@ -946,11 +866,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>0.99154cm</Top>
-                <Left>11.39775cm</Left>
+                <Top>0.28012cm</Top>
+                <Left>11.49398cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.32291in</Width>
-                <ZIndex>14</ZIndex>
+                <ZIndex>12</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -984,11 +904,11 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox7</rd:DefaultName>
-                <Top>1.02657cm</Top>
-                <Left>15.08071cm</Left>
+                <Top>0.31515cm</Top>
+                <Left>15.17694cm</Left>
                 <Height>0.23919in</Height>
                 <Width>1.50756in</Width>
-                <ZIndex>15</ZIndex>
+                <ZIndex>13</ZIndex>
                 <Visibility>
                   <Hidden>=iif(Parameters!paramAsTextCheckDate.Value = "", True, False)</Hidden>
                 </Visibility>
@@ -2361,12 +2281,6 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="paramDateEntry">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="paramDisbursementOfficer">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
@@ -2483,11 +2397,6 @@
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>4</RowIndex>
           <ParameterName>paramAsTextOfficer</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>paramDateEntry</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>

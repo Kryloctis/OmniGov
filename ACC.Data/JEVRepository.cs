@@ -73,12 +73,12 @@ namespace ACC.Data
             }
         }
 
-        public bool Delete(List<JEVModel> entityList)
+        public bool Delete(List<JevModel> entityList)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(JEVModel entity)
+        public bool Delete(JevModel entity)
         {
             try
             {
@@ -289,7 +289,7 @@ namespace ACC.Data
             throw new NotImplementedException();
         }
 
-        public bool InsertWithCheckDisbursement(JEVModel jevModel,
+        public bool InsertWithCheckDisbursement(JevModel jevModel,
                                                 List<JEVAccountsModel> jevAccountsModelList,
                                                 CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
@@ -314,7 +314,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashReceipts(JEVModel entity,
+        public bool InsertWithCashReceipts(JevModel entity,
                                            List<JEVAccountsModel> jevAccountsModelList,
                                            CashReceiptsJournalModel cashReceiptsJournalModel)
         {
@@ -338,7 +338,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithADADisbursements(JEVModel entity,
+        public bool InsertWithADADisbursements(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
@@ -362,7 +362,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithCashDisbursements(JEVModel entity,
+        public bool InsertWithCashDisbursements(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                CashDisbursementsJournalModel cashDisbursementsJournalModel)
         {
@@ -386,7 +386,7 @@ namespace ACC.Data
             }
         }
 
-        public bool InsertWithGeneralJournal(JEVModel entity,
+        public bool InsertWithGeneralJournal(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                GeneralJournalModel generalJournalModel)
         {
@@ -410,7 +410,7 @@ namespace ACC.Data
             }
         }
 
-        public bool Insert(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
+        public bool Insert(JevModel entity, List<JEVAccountsModel> jevAccountsModelList)
         {
             try
             {
@@ -452,12 +452,12 @@ namespace ACC.Data
             }
         }
 
-        public bool Insert(JEVModel entity)
+        public bool Insert(JevModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateWithCheckDisbursement(JEVModel entity,
+        public bool UpdateWithCheckDisbursement(JevModel entity,
                                                 List<JEVAccountsModel> jevAccountsModelList,
                                                 CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
@@ -478,7 +478,7 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithCashReceipts(JEVModel entity,
+        public bool UpdateWithCashReceipts(JevModel entity,
                                            List<JEVAccountsModel> jevAccountsModelList,
                                            CashReceiptsJournalModel cashReceiptsJournalModel)
         {
@@ -500,7 +500,7 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithADADisbursements(JEVModel entity,
+        public bool UpdateWithADADisbursements(JevModel entity,
                                                List<JEVAccountsModel> jevAccountsModelList,
                                                ADADisbursementsJournalModel aDADisbursementsJournalModel)
         {
@@ -522,7 +522,7 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithCashDisbursements(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
+        public bool UpdateWithCashDisbursements(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, CashDisbursementsJournalModel cashDisbursementsJournalModel)
         {
             try
             {
@@ -542,7 +542,7 @@ namespace ACC.Data
             }
         }
 
-        public bool UpdateWithGeneralJournal(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
+        public bool UpdateWithGeneralJournal(JevModel entity, List<JEVAccountsModel> jevAccountsModelList, GeneralJournalModel generalJournalModel)
         {
             try
             {
@@ -562,53 +562,88 @@ namespace ACC.Data
             }
         }
 
-        public bool Update(JEVModel entity, List<JEVAccountsModel> jevAccountsModelList)
+        public bool SetJEVStatus(int jevId, int fundId, string status)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                var parameters = new object[][]
                 {
-                    var parameters = new object[][]
+                    new object[] { "@jev_id", DbType.Int64, jevId },
+                    new object[] { "@jev_no", DbType.String, GetLastJevNoSeries(fundId) }
+                };
+
+                string Status()
+                {
+                    switch (status)
                     {
-                        new object[] { "@id", DbType.Int32, entity.Id },
-                        new object[] { "@funds_id", DbType.Byte, entity.FundsId },
-                        new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
-                        new object[] { "@jev_no", DbType.String, entity.JEVNumber },
-                        new object[] { "@date_entry", DbType.Date, entity.DateEntry },
-                        new object[] { "@ref_no", DbType.String, entity.RefNo },
-                        new object[] { "@payee", DbType.String, entity.Payee },
-                        new object[] { "@explanation", DbType.String, entity.Explanation },
-                        new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
-                        new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
-                    };
+                        case "approve":
+                            return "is_approved = 1, is_disapproved = 0, is_cancelled = 0, jev_no = @jev_no";
 
-                    string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, updated_by = @updated_by, is_edited = @is_edited WHERE id = @id";
+                        case "disapprove":
+                            return "is_approved = 0, is_disapproved = 1, is_cancelled = 0, jev_no = NULL";
 
-                    // save and get the last inserted id
-                    _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+                        case "cancel":
+                            return "is_cancelled = 1";
 
-                    // delete all the jev accounts first
-                    _ = _jevAccountsRepository.DeleteByJevId(entity.Id);
+                        case "pending":
+                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0, jev_no = NULL";
 
-                    // loop jev accounts list then insert each using the latest Jev Id
-                    foreach (var jevAccounts in jevAccountsModelList)
-                    {
-                        jevAccounts.JEVId = entity.Id;
-                        _ = _jevAccountsRepository.Insert(jevAccounts);
+                        default:
+                            return "is_cancelled= 0, is_disapproved = 0, is_approved = 0, jev_no = NULL";
                     }
-
-                    scope.Complete();
-
-                    return true;
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                string query = $"UPDATE {tableName} SET {Status()} WHERE id = @jev_id";
+                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                scope.Complete();
+                return true;
             }
         }
 
-        public bool Update(JEVModel entity)
+        public bool Update(JevModel entity, List<JEVAccountsModel> jevAccountsModelList)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var parameters = new object[][]
+                {
+                    new object[] { "@id", DbType.Int32, entity.Id },
+                    new object[] { "@funds_id", DbType.Byte, entity.FundsId },
+                    new object[] { "@journals_id", DbType.Byte, entity.JournalsId },
+                    new object[] { "@jev_no", DbType.String, entity.JEVNumber },
+                    new object[] { "@date_entry", DbType.Date, entity.DateEntry },
+                    new object[] { "@ref_no", DbType.String, entity.RefNo },
+                    new object[] { "@payee", DbType.String, entity.Payee },
+                    new object[] { "@explanation", DbType.String, entity.Explanation },
+                    new object[] { "@is_approved", DbType.Boolean, entity.IsApproved},
+                    new object[] { "@is_disapproved", DbType.Boolean, entity.IsDisapproved},
+                    new object[] { "@is_cancelled", DbType.Boolean, entity.IsCancelled},
+                    new object[] { "@updated_by", DbType.Byte, entity.UpdatedBy },
+                    new object[] { "@is_edited", DbType.Byte, entity.IsEdited},
+                    new object[] { "@remarks", DbType.String, entity.Remarks},
+                };
+
+                string query = $"UPDATE {tableName} SET funds_id = @funds_id, journals_id = @journals_id, jev_no = @jev_no, date_entry = @date_entry, ref_no = @ref_no, payee = @payee, explanation = @explanation, is_approved = @is_approved, is_disapproved = @is_disapproved, is_cancelled = @is_cancelled, updated_by = @updated_by, is_edited = @is_edited, remarks = @remarks WHERE id = @id";
+
+                // save and get the last inserted id
+                _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+
+                // delete all the jev accounts first
+                _ = _jevAccountsRepository.DeleteByJevId(entity.Id);
+
+                // loop jev accounts list then insert each using the latest Jev Id
+                foreach (var jevAccounts in jevAccountsModelList)
+                {
+                    jevAccounts.JEVId = entity.Id;
+                    _ = _jevAccountsRepository.Insert(jevAccounts);
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool Update(JevModel entity)
         {
             throw new NotImplementedException();
         }
@@ -624,17 +659,6 @@ namespace ACC.Data
             {
                 throw;
             }
-        }
-
-        public string GetLastJevNoSeries(int fundId)
-        {
-            var parameters = new object[][]
-            {
-                new object[] { "@funds_id", DbType.Int32, fundId}
-            };
-
-            string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
-            return _dbGenericCommands.ExecuteScalar(query, parameters);
         }
 
         public Dictionary<string, string> GetViewRecordByJEVId(int jevId)
@@ -1013,36 +1037,15 @@ namespace ACC.Data
             }
         }
 
-        public bool SetJEVStatus(int jevId, string status)
+        public string GetLastJevNoSeries(int fundId)
         {
             var parameters = new object[][]
             {
-                new object[] { "@jev_id", DbType.Int64, jevId},
+                new object[] { "@funds_id", DbType.Int32, fundId}
             };
 
-            string Status()
-            {
-                switch (status)
-                {
-                    case "approve":
-                        return "is_approved = 1, is_disapproved = 0, is_cancelled = 0";
-
-                    case "disapprove":
-                        return "is_approved = 0, is_disapproved = 1, is_cancelled = 0";
-
-                    case "cancel":
-                        return "is_cancelled = 1";
-
-                    case "pending":
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-
-                    default:
-                        return "is_cancelled= 0, is_disapproved = 0, is_approved = 0";
-                }
-            }
-
-            string query = $"UPDATE {tableName} SET {Status()} WHERE id = @jev_id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            string query = $"SELECT COALESCE(LPAD(MAX(jev_no)+1, 4, '0'), '0001') AS jev_no FROM {tableName} WHERE funds_id = @funds_id";
+            return _dbGenericCommands.ExecuteScalar(query, parameters);
         }
 
         public string GetJevStatus(int jevId)
@@ -1073,31 +1076,6 @@ namespace ACC.Data
             return string.Empty;
         }
 
-        //REMARKS
-        public bool SetRemarks(int jevId, string remarks)
-        {
-            try
-            {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.Int32, jevId},
-                    new object[] { "@remarks", DbType.String, remarks}
-                };
-
-                string query = $"UPDATE {tableName} SET remarks = @remarks WHERE id = @id";
-
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public string GetRemarks(int jevId)
         {
             try
@@ -1114,18 +1092,6 @@ namespace ACC.Data
             {
                 throw;
             }
-        }
-
-        public bool SetJevNo(int jevId, string seriesNo)
-        {
-            var parameters = new object[][]
-            {
-                new object[] {"@id", DbType.Int32, jevId},
-                new object[] {"@jev_no", DbType.String, seriesNo}
-            };
-
-            string query = $"UPDATE {tableName} SET jev_no = @jev_no WHERE id = @id";
-            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

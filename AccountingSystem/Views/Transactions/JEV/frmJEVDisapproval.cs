@@ -14,6 +14,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             _frmJEV = frmjev;
         }
 
+        private void frmRemarks_Load(object sender, EventArgs e)
+        {
+            int jevId = _frmJEV.ucjev1.jevId;
+            txtRemarks.Text = AccFactory.JEVRepository().GetRemarks(jevId);
+            txtRemarks.SelectionStart = 0;
+            PermissionVerification();
+        }
+
         private void PermissionVerification()
         {
             if (_frmJEV.createdById != Helper.UserId)
@@ -28,55 +36,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 btnSaveMessage.Enabled = true;
         }
 
-        private void frmRemarks_Load(object sender, EventArgs e)
-        {
-            int jevId = _frmJEV.ucjev1.jevId;
-            txtRemarks.Text = AccFactory.JEVRepository().GetRemarks(jevId);
-            txtRemarks.SelectionStart = 0;
-            PermissionVerification();
-        }
-
-        private bool SetRemarks()
-        {
-            try
-            {
-                if (!_frmJEV.FormValidations())
-                    return false;
-
-                int jevId = _frmJEV.ucjev1.jevId;
-                var remarks = AccFactory.JEVRepository().SetRemarks(jevId, txtRemarks.Text.Trim());
-
-                return remarks;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
-        }
-
-        private bool SetJEVToDisapproved()
-        {
-            try
-            {
-                var userId = Helper.UserId;
-                int jevId = _frmJEV.ucjev1.jevId;
-
-                if (!_frmJEV.FormValidations())
-                    return false;
-
-                var isDisapproved = AccFactory.JEVRepository().SetJEVStatus(jevId, "disapprove");
-
-                return isDisapproved;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError($"{ex.Message}\n(No changes has been saved.)");
-            }
-
-            return false;
-        }
-
         private void btnAccept_Click(object sender, EventArgs e)
         {
             _frmJEV.btnSave.Enabled = true;
@@ -86,34 +45,52 @@ namespace AccountingSystem.Views.Transactions.JEV
             Close();
         }
 
-        private void btnSaveMessage_Click(object sender, EventArgs e)
+        private bool DissaproveJev()
         {
-            if (SetRemarks())
+            string remarks = txtRemarks.Text.Trim();
+
+            if (!_frmJEV.FormValidations())
+                return false;
+
+            if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                Helper.MessageBoxSuccess("Dissaproval message has been saved.");
+                return _frmJEV.UpdateData("disapproved", remarks);
             }
+            return false;
         }
 
         private void btnDisapprove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to disapproved this JEV?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (DissaproveJev())
                 {
-                    if (SetJEVToDisapproved() && SetRemarks())
-                    {
-                        Helper.MessageBoxSuccess("JEV has been disapproved.");
-                        _frmJEV.GetJevStatus(_frmJEV.ucjev1.jevId);
-                        _frmJEV._frmJEVList.LoadJEVList();
-                        _frmJEV._ucJEVDashboard.LoadJEVCounter();
-                        Close();
-                    }
+                    Helper.MessageBoxSuccess("JEV has been disapproved.");
+                    _frmJEV.GetJevStatus(_frmJEV.ucjev1.jevId);
+                    _frmJEV._frmJEVList.LoadJEVList();
+                    _frmJEV._ucJEVDashboard.LoadJEVCounter();
+                    Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool SaveDisapprovalMessage()
+        {
+            string remarks = txtRemarks.Text.Trim();
+
+            return _frmJEV.UpdateData("disapproved", remarks);
+        }
+
+        private void btnSaveMessage_Click(object sender, EventArgs e)
+        {
+            try
             {
-                Helper.MessageBoxError(ex.Message);
+                if (SaveDisapprovalMessage())
+
+                    Helper.MessageBoxSuccess("Dissaproval message has been saved.");
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

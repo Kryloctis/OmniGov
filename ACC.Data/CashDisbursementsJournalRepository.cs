@@ -156,20 +156,13 @@ namespace ACC.Data
 
         public bool DeleteCashDisbursementJournalByJevID(int jevId)
         {
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-            new object[] { "@id", DbType.Int32, jevId},
-                };
+                new object[] { "@id", DbType.Int32, jevId},
+            };
 
-                string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"DELETE FROM {tableName} WHERE jev_id = @id";
+            return _dbGenericCommands.ExecuteNonQuery(query, parameters);
         }
     }
 }

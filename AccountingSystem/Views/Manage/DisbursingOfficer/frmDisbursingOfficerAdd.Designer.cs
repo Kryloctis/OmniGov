@@ -54,7 +54,7 @@
             btnCancel.Location = new System.Drawing.Point(383, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(75, 23);
-            btnCancel.TabIndex = 0;
+            btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -63,7 +63,7 @@
             btnSave.Location = new System.Drawing.Point(302, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 23);
-            btnSave.TabIndex = 0;
+            btnSave.TabIndex = 1;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;

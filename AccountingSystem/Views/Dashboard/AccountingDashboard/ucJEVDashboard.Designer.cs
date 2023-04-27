@@ -30,472 +30,459 @@ namespace AccountingSystem.Views.Dashboard
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucJEVDashboard));
-            this.btnRefreshCounter = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlPendingJEV = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.lnkPending = new System.Windows.Forms.LinkLabel();
-            this.lblPendingJEVCounter = new System.Windows.Forms.Label();
-            this.pnlApprovedJEV = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lnkApproved = new System.Windows.Forms.LinkLabel();
-            this.lblApprovedJEVCounter = new System.Windows.Forms.Label();
-            this.pnlJEV = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lnkJEV = new System.Windows.Forms.LinkLabel();
-            this.lblJEVCounter = new System.Windows.Forms.Label();
-            this.pnlDisapproved = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.linkDisapproved = new System.Windows.Forms.LinkLabel();
-            this.lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
-            this.pnlCancelled = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.lnkCancelled = new System.Windows.Forms.LinkLabel();
-            this.lblCancelledJEVCounter = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnAddJEV = new System.Windows.Forms.Button();
-            this.cmbxJournals = new System.Windows.Forms.ComboBox();
-            this.cmbxFunds = new System.Windows.Forms.ComboBox();
-            this.cbMonth = new System.Windows.Forms.ComboBox();
-            this.nudYear = new System.Windows.Forms.NumericUpDown();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.pnlPendingJEV.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.pnlApprovedJEV.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.pnlJEV.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnlDisapproved.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            this.pnlCancelled.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).BeginInit();
-            this.SuspendLayout();
+            btnRefreshCounter = new System.Windows.Forms.Button();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            pnlPendingJEV = new System.Windows.Forms.Panel();
+            pictureBox3 = new System.Windows.Forms.PictureBox();
+            lnkPending = new System.Windows.Forms.LinkLabel();
+            lblPendingJEVCounter = new System.Windows.Forms.Label();
+            pnlApprovedJEV = new System.Windows.Forms.Panel();
+            pictureBox2 = new System.Windows.Forms.PictureBox();
+            lnkApproved = new System.Windows.Forms.LinkLabel();
+            lblApprovedJEVCounter = new System.Windows.Forms.Label();
+            pnlJEV = new System.Windows.Forms.Panel();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            lnkJEV = new System.Windows.Forms.LinkLabel();
+            lblJEVCounter = new System.Windows.Forms.Label();
+            pnlDisapproved = new System.Windows.Forms.Panel();
+            pictureBox4 = new System.Windows.Forms.PictureBox();
+            linkDisapproved = new System.Windows.Forms.LinkLabel();
+            lblDisapprovedJEVCounter = new System.Windows.Forms.Label();
+            pnlCancelled = new System.Windows.Forms.Panel();
+            pictureBox5 = new System.Windows.Forms.PictureBox();
+            lnkCancelled = new System.Windows.Forms.LinkLabel();
+            lblCancelledJEVCounter = new System.Windows.Forms.Label();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnAddJEV = new System.Windows.Forms.Button();
+            cmbxJournals = new System.Windows.Forms.ComboBox();
+            cmbxFunds = new System.Windows.Forms.ComboBox();
+            cbMonth = new System.Windows.Forms.ComboBox();
+            nudYear = new System.Windows.Forms.NumericUpDown();
+            tableLayoutPanel1.SuspendLayout();
+            pnlPendingJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            pnlApprovedJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            pnlJEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pnlDisapproved.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnlCancelled.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudYear).BeginInit();
+            SuspendLayout();
             // 
             // btnRefreshCounter
             // 
-            this.btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnRefreshCounter.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshCounter.Image")));
-            this.btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRefreshCounter.Location = new System.Drawing.Point(861, 3);
-            this.btnRefreshCounter.Name = "btnRefreshCounter";
-            this.btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
-            this.btnRefreshCounter.TabIndex = 13;
-            this.btnRefreshCounter.Text = "Refresh";
-            this.btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRefreshCounter.UseVisualStyleBackColor = true;
-            this.btnRefreshCounter.Click += new System.EventHandler(this.btnRefreshCounter_Click);
+            btnRefreshCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            btnRefreshCounter.Image = (System.Drawing.Image)resources.GetObject("btnRefreshCounter.Image");
+            btnRefreshCounter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnRefreshCounter.Location = new System.Drawing.Point(861, 3);
+            btnRefreshCounter.Name = "btnRefreshCounter";
+            btnRefreshCounter.Size = new System.Drawing.Size(92, 23);
+            btnRefreshCounter.TabIndex = 13;
+            btnRefreshCounter.Text = "Refresh";
+            btnRefreshCounter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnRefreshCounter.UseVisualStyleBackColor = true;
+            btnRefreshCounter.Click += btnRefreshCounter_Click;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.pnlPendingJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlApprovedJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlJEV, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlDisapproved, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlCancelled, 4, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1166, 131);
-            this.tableLayoutPanel1.TabIndex = 14;
+            tableLayoutPanel1.ColumnCount = 5;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(pnlPendingJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlApprovedJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlJEV, 0, 0);
+            tableLayoutPanel1.Controls.Add(pnlDisapproved, 3, 0);
+            tableLayoutPanel1.Controls.Add(pnlCancelled, 4, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            tableLayoutPanel1.MinimumSize = new System.Drawing.Size(781, 121);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.Size = new System.Drawing.Size(1166, 131);
+            tableLayoutPanel1.TabIndex = 14;
             // 
             // pnlPendingJEV
             // 
-            this.pnlPendingJEV.BackColor = System.Drawing.Color.White;
-            this.pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlPendingJEV.Controls.Add(this.pictureBox3);
-            this.pnlPendingJEV.Controls.Add(this.lnkPending);
-            this.pnlPendingJEV.Controls.Add(this.lblPendingJEVCounter);
-            this.pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPendingJEV.Location = new System.Drawing.Point(469, 13);
-            this.pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlPendingJEV.Name = "pnlPendingJEV";
-            this.pnlPendingJEV.Size = new System.Drawing.Size(227, 116);
-            this.pnlPendingJEV.TabIndex = 29;
+            pnlPendingJEV.BackColor = System.Drawing.Color.White;
+            pnlPendingJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlPendingJEV.Controls.Add(pictureBox3);
+            pnlPendingJEV.Controls.Add(lnkPending);
+            pnlPendingJEV.Controls.Add(lblPendingJEVCounter);
+            pnlPendingJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlPendingJEV.Location = new System.Drawing.Point(469, 13);
+            pnlPendingJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlPendingJEV.Name = "pnlPendingJEV";
+            pnlPendingJEV.Size = new System.Drawing.Size(227, 116);
+            pnlPendingJEV.TabIndex = 29;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(230)))), ((int)(((byte)(153)))));
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 104);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(225, 10);
-            this.pictureBox3.TabIndex = 18;
-            this.pictureBox3.TabStop = false;
+            pictureBox3.BackColor = System.Drawing.Color.FromArgb(255, 230, 153);
+            pictureBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pictureBox3.Location = new System.Drawing.Point(0, 104);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new System.Drawing.Size(225, 10);
+            pictureBox3.TabIndex = 18;
+            pictureBox3.TabStop = false;
             // 
             // lnkPending
             // 
-            this.lnkPending.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkPending.BackColor = System.Drawing.Color.Transparent;
-            this.lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkPending.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.lnkPending.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkPending.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkPending.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkPending.Location = new System.Drawing.Point(0, 61);
-            this.lnkPending.Name = "lnkPending";
-            this.lnkPending.Size = new System.Drawing.Size(225, 23);
-            this.lnkPending.TabIndex = 15;
-            this.lnkPending.TabStop = true;
-            this.lnkPending.Text = "Pending JEVs";
-            this.lnkPending.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lnkPending.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkPending_LinkClicked);
+            lnkPending.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkPending.BackColor = System.Drawing.Color.Transparent;
+            lnkPending.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkPending.DisabledLinkColor = System.Drawing.Color.Silver;
+            lnkPending.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkPending.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lnkPending.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkPending.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkPending.Location = new System.Drawing.Point(0, 61);
+            lnkPending.Name = "lnkPending";
+            lnkPending.Size = new System.Drawing.Size(225, 23);
+            lnkPending.TabIndex = 15;
+            lnkPending.TabStop = true;
+            lnkPending.Text = "Pending JEVs";
+            lnkPending.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lnkPending.LinkClicked += lnkPending_LinkClicked;
             // 
             // lblPendingJEVCounter
             // 
-            this.lblPendingJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblPendingJEVCounter.Name = "lblPendingJEVCounter";
-            this.lblPendingJEVCounter.Size = new System.Drawing.Size(225, 61);
-            this.lblPendingJEVCounter.TabIndex = 6;
-            this.lblPendingJEVCounter.Text = "0";
-            this.lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblPendingJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            lblPendingJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblPendingJEVCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblPendingJEVCounter.Location = new System.Drawing.Point(0, 0);
+            lblPendingJEVCounter.Name = "lblPendingJEVCounter";
+            lblPendingJEVCounter.Size = new System.Drawing.Size(225, 61);
+            lblPendingJEVCounter.TabIndex = 6;
+            lblPendingJEVCounter.Text = "0";
+            lblPendingJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlApprovedJEV
             // 
-            this.pnlApprovedJEV.BackColor = System.Drawing.Color.White;
-            this.pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlApprovedJEV.Controls.Add(this.pictureBox2);
-            this.pnlApprovedJEV.Controls.Add(this.lnkApproved);
-            this.pnlApprovedJEV.Controls.Add(this.lblApprovedJEVCounter);
-            this.pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlApprovedJEV.Location = new System.Drawing.Point(236, 13);
-            this.pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlApprovedJEV.Name = "pnlApprovedJEV";
-            this.pnlApprovedJEV.Size = new System.Drawing.Size(227, 116);
-            this.pnlApprovedJEV.TabIndex = 28;
+            pnlApprovedJEV.BackColor = System.Drawing.Color.White;
+            pnlApprovedJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlApprovedJEV.Controls.Add(pictureBox2);
+            pnlApprovedJEV.Controls.Add(lnkApproved);
+            pnlApprovedJEV.Controls.Add(lblApprovedJEVCounter);
+            pnlApprovedJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlApprovedJEV.Location = new System.Drawing.Point(236, 13);
+            pnlApprovedJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlApprovedJEV.Name = "pnlApprovedJEV";
+            pnlApprovedJEV.Size = new System.Drawing.Size(227, 116);
+            pnlApprovedJEV.TabIndex = 28;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(228)))), ((int)(((byte)(197)))));
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 104);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(225, 10);
-            this.pictureBox2.TabIndex = 17;
-            this.pictureBox2.TabStop = false;
+            pictureBox2.BackColor = System.Drawing.Color.FromArgb(201, 228, 197);
+            pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pictureBox2.Location = new System.Drawing.Point(0, 104);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new System.Drawing.Size(225, 10);
+            pictureBox2.TabIndex = 17;
+            pictureBox2.TabStop = false;
             // 
             // lnkApproved
             // 
-            this.lnkApproved.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkApproved.BackColor = System.Drawing.Color.Transparent;
-            this.lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkApproved.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.lnkApproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkApproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkApproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkApproved.Location = new System.Drawing.Point(0, 61);
-            this.lnkApproved.Name = "lnkApproved";
-            this.lnkApproved.Size = new System.Drawing.Size(225, 23);
-            this.lnkApproved.TabIndex = 14;
-            this.lnkApproved.TabStop = true;
-            this.lnkApproved.Text = "Approved JEVs";
-            this.lnkApproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lnkApproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkApproved_LinkClicked);
+            lnkApproved.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkApproved.BackColor = System.Drawing.Color.Transparent;
+            lnkApproved.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkApproved.DisabledLinkColor = System.Drawing.Color.Silver;
+            lnkApproved.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkApproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lnkApproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkApproved.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkApproved.Location = new System.Drawing.Point(0, 61);
+            lnkApproved.Name = "lnkApproved";
+            lnkApproved.Size = new System.Drawing.Size(225, 23);
+            lnkApproved.TabIndex = 14;
+            lnkApproved.TabStop = true;
+            lnkApproved.Text = "Approved JEVs";
+            lnkApproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lnkApproved.LinkClicked += lnkApproved_LinkClicked;
             // 
             // lblApprovedJEVCounter
             // 
-            this.lblApprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
-            this.lblApprovedJEVCounter.Size = new System.Drawing.Size(225, 61);
-            this.lblApprovedJEVCounter.TabIndex = 6;
-            this.lblApprovedJEVCounter.Text = "0";
-            this.lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblApprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            lblApprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblApprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblApprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
+            lblApprovedJEVCounter.Name = "lblApprovedJEVCounter";
+            lblApprovedJEVCounter.Size = new System.Drawing.Size(225, 61);
+            lblApprovedJEVCounter.TabIndex = 6;
+            lblApprovedJEVCounter.Text = "0";
+            lblApprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlJEV
             // 
-            this.pnlJEV.BackColor = System.Drawing.Color.White;
-            this.pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlJEV.Controls.Add(this.pictureBox1);
-            this.pnlJEV.Controls.Add(this.lnkJEV);
-            this.pnlJEV.Controls.Add(this.lblJEVCounter);
-            this.pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlJEV.Location = new System.Drawing.Point(3, 13);
-            this.pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlJEV.Name = "pnlJEV";
-            this.pnlJEV.Size = new System.Drawing.Size(227, 116);
-            this.pnlJEV.TabIndex = 26;
+            pnlJEV.BackColor = System.Drawing.Color.White;
+            pnlJEV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlJEV.Controls.Add(pictureBox1);
+            pnlJEV.Controls.Add(lnkJEV);
+            pnlJEV.Controls.Add(lblJEVCounter);
+            pnlJEV.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlJEV.Location = new System.Drawing.Point(3, 13);
+            pnlJEV.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlJEV.Name = "pnlJEV";
+            pnlJEV.Size = new System.Drawing.Size(227, 116);
+            pnlJEV.TabIndex = 26;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 104);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(225, 10);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.BackColor = System.Drawing.Color.LightSkyBlue;
+            pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pictureBox1.Location = new System.Drawing.Point(0, 104);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(225, 10);
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
             // 
             // lnkJEV
             // 
-            this.lnkJEV.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkJEV.BackColor = System.Drawing.Color.Transparent;
-            this.lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkJEV.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkJEV.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkJEV.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkJEV.Location = new System.Drawing.Point(0, 61);
-            this.lnkJEV.Name = "lnkJEV";
-            this.lnkJEV.Size = new System.Drawing.Size(225, 23);
-            this.lnkJEV.TabIndex = 15;
-            this.lnkJEV.TabStop = true;
-            this.lnkJEV.Text = "JEV";
-            this.lnkJEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lnkJEV.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkJEV_LinkClicked);
+            lnkJEV.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkJEV.BackColor = System.Drawing.Color.Transparent;
+            lnkJEV.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkJEV.DisabledLinkColor = System.Drawing.Color.Silver;
+            lnkJEV.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkJEV.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lnkJEV.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkJEV.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkJEV.Location = new System.Drawing.Point(0, 61);
+            lnkJEV.Name = "lnkJEV";
+            lnkJEV.Size = new System.Drawing.Size(225, 23);
+            lnkJEV.TabIndex = 15;
+            lnkJEV.TabStop = true;
+            lnkJEV.Text = "JEV";
+            lnkJEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lnkJEV.LinkClicked += lnkJEV_LinkClicked;
             // 
             // lblJEVCounter
             // 
-            this.lblJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblJEVCounter.Name = "lblJEVCounter";
-            this.lblJEVCounter.Size = new System.Drawing.Size(225, 61);
-            this.lblJEVCounter.TabIndex = 6;
-            this.lblJEVCounter.Text = "0";
-            this.lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            lblJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblJEVCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblJEVCounter.Location = new System.Drawing.Point(0, 0);
+            lblJEVCounter.Name = "lblJEVCounter";
+            lblJEVCounter.Size = new System.Drawing.Size(225, 61);
+            lblJEVCounter.TabIndex = 6;
+            lblJEVCounter.Text = "0";
+            lblJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlDisapproved
             // 
-            this.pnlDisapproved.BackColor = System.Drawing.Color.White;
-            this.pnlDisapproved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDisapproved.Controls.Add(this.pictureBox4);
-            this.pnlDisapproved.Controls.Add(this.linkDisapproved);
-            this.pnlDisapproved.Controls.Add(this.lblDisapprovedJEVCounter);
-            this.pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDisapproved.Location = new System.Drawing.Point(702, 13);
-            this.pnlDisapproved.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlDisapproved.Name = "pnlDisapproved";
-            this.pnlDisapproved.Size = new System.Drawing.Size(227, 116);
-            this.pnlDisapproved.TabIndex = 22;
+            pnlDisapproved.BackColor = System.Drawing.Color.White;
+            pnlDisapproved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlDisapproved.Controls.Add(pictureBox4);
+            pnlDisapproved.Controls.Add(linkDisapproved);
+            pnlDisapproved.Controls.Add(lblDisapprovedJEVCounter);
+            pnlDisapproved.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlDisapproved.Location = new System.Drawing.Point(702, 13);
+            pnlDisapproved.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlDisapproved.Name = "pnlDisapproved";
+            pnlDisapproved.Size = new System.Drawing.Size(227, 116);
+            pnlDisapproved.TabIndex = 22;
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox4.Location = new System.Drawing.Point(0, 104);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(225, 10);
-            this.pictureBox4.TabIndex = 18;
-            this.pictureBox4.TabStop = false;
+            pictureBox4.BackColor = System.Drawing.Color.FromArgb(246, 169, 169);
+            pictureBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pictureBox4.Location = new System.Drawing.Point(0, 104);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new System.Drawing.Size(225, 10);
+            pictureBox4.TabIndex = 18;
+            pictureBox4.TabStop = false;
             // 
             // linkDisapproved
             // 
-            this.linkDisapproved.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkDisapproved.BackColor = System.Drawing.Color.Transparent;
-            this.linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkDisapproved.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.linkDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
-            this.linkDisapproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.linkDisapproved.Location = new System.Drawing.Point(0, 61);
-            this.linkDisapproved.Name = "linkDisapproved";
-            this.linkDisapproved.Size = new System.Drawing.Size(225, 23);
-            this.linkDisapproved.TabIndex = 16;
-            this.linkDisapproved.TabStop = true;
-            this.linkDisapproved.Text = "Disapproved";
-            this.linkDisapproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkDisapproved.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDisapproved_LinkClicked);
+            linkDisapproved.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            linkDisapproved.BackColor = System.Drawing.Color.Transparent;
+            linkDisapproved.Cursor = System.Windows.Forms.Cursors.Hand;
+            linkDisapproved.DisabledLinkColor = System.Drawing.Color.Silver;
+            linkDisapproved.Dock = System.Windows.Forms.DockStyle.Top;
+            linkDisapproved.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            linkDisapproved.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            linkDisapproved.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            linkDisapproved.Location = new System.Drawing.Point(0, 61);
+            linkDisapproved.Name = "linkDisapproved";
+            linkDisapproved.Size = new System.Drawing.Size(225, 23);
+            linkDisapproved.TabIndex = 16;
+            linkDisapproved.TabStop = true;
+            linkDisapproved.Text = "Disapproved";
+            linkDisapproved.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            linkDisapproved.LinkClicked += linkDisapproved_LinkClicked;
             // 
             // lblDisapprovedJEVCounter
             // 
-            this.lblDisapprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblDisapprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
-            this.lblDisapprovedJEVCounter.Size = new System.Drawing.Size(225, 61);
-            this.lblDisapprovedJEVCounter.TabIndex = 6;
-            this.lblDisapprovedJEVCounter.Text = "0";
-            this.lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblDisapprovedJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            lblDisapprovedJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblDisapprovedJEVCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblDisapprovedJEVCounter.Location = new System.Drawing.Point(0, 0);
+            lblDisapprovedJEVCounter.Name = "lblDisapprovedJEVCounter";
+            lblDisapprovedJEVCounter.Size = new System.Drawing.Size(225, 61);
+            lblDisapprovedJEVCounter.TabIndex = 6;
+            lblDisapprovedJEVCounter.Text = "0";
+            lblDisapprovedJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // pnlCancelled
             // 
-            this.pnlCancelled.BackColor = System.Drawing.Color.White;
-            this.pnlCancelled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCancelled.Controls.Add(this.pictureBox5);
-            this.pnlCancelled.Controls.Add(this.lnkCancelled);
-            this.pnlCancelled.Controls.Add(this.lblCancelledJEVCounter);
-            this.pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCancelled.Location = new System.Drawing.Point(935, 13);
-            this.pnlCancelled.MinimumSize = new System.Drawing.Size(150, 113);
-            this.pnlCancelled.Name = "pnlCancelled";
-            this.pnlCancelled.Size = new System.Drawing.Size(228, 116);
-            this.pnlCancelled.TabIndex = 23;
+            pnlCancelled.BackColor = System.Drawing.Color.White;
+            pnlCancelled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlCancelled.Controls.Add(pictureBox5);
+            pnlCancelled.Controls.Add(lnkCancelled);
+            pnlCancelled.Controls.Add(lblCancelledJEVCounter);
+            pnlCancelled.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlCancelled.Location = new System.Drawing.Point(935, 13);
+            pnlCancelled.MinimumSize = new System.Drawing.Size(150, 113);
+            pnlCancelled.Name = "pnlCancelled";
+            pnlCancelled.Size = new System.Drawing.Size(228, 116);
+            pnlCancelled.TabIndex = 23;
             // 
             // pictureBox5
             // 
-            this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox5.Location = new System.Drawing.Point(0, 104);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(226, 10);
-            this.pictureBox5.TabIndex = 18;
-            this.pictureBox5.TabStop = false;
+            pictureBox5.BackColor = System.Drawing.Color.FromArgb(200, 198, 198);
+            pictureBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            pictureBox5.Location = new System.Drawing.Point(0, 104);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new System.Drawing.Size(226, 10);
+            pictureBox5.TabIndex = 18;
+            pictureBox5.TabStop = false;
             // 
             // lnkCancelled
             // 
-            this.lnkCancelled.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCancelled.BackColor = System.Drawing.Color.Transparent;
-            this.lnkCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lnkCancelled.DisabledLinkColor = System.Drawing.Color.Silver;
-            this.lnkCancelled.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkCancelled.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lnkCancelled.Location = new System.Drawing.Point(0, 61);
-            this.lnkCancelled.Name = "lnkCancelled";
-            this.lnkCancelled.Size = new System.Drawing.Size(226, 23);
-            this.lnkCancelled.TabIndex = 15;
-            this.lnkCancelled.TabStop = true;
-            this.lnkCancelled.Text = "Cancelled JEVs";
-            this.lnkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lnkCancelled.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkCancelled_LinkClicked);
+            lnkCancelled.ActiveLinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCancelled.BackColor = System.Drawing.Color.Transparent;
+            lnkCancelled.Cursor = System.Windows.Forms.Cursors.Hand;
+            lnkCancelled.DisabledLinkColor = System.Drawing.Color.Silver;
+            lnkCancelled.Dock = System.Windows.Forms.DockStyle.Top;
+            lnkCancelled.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lnkCancelled.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            lnkCancelled.LinkColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lnkCancelled.Location = new System.Drawing.Point(0, 61);
+            lnkCancelled.Name = "lnkCancelled";
+            lnkCancelled.Size = new System.Drawing.Size(226, 23);
+            lnkCancelled.TabIndex = 15;
+            lnkCancelled.TabStop = true;
+            lnkCancelled.Text = "Cancelled JEVs";
+            lnkCancelled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lnkCancelled.LinkClicked += lnkCancelled_LinkClicked;
             // 
             // lblCancelledJEVCounter
             // 
-            this.lblCancelledJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCancelledJEVCounter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
-            this.lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
-            this.lblCancelledJEVCounter.Size = new System.Drawing.Size(226, 61);
-            this.lblCancelledJEVCounter.TabIndex = 6;
-            this.lblCancelledJEVCounter.Text = "0";
-            this.lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            lblCancelledJEVCounter.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCancelledJEVCounter.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblCancelledJEVCounter.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            lblCancelledJEVCounter.Location = new System.Drawing.Point(0, 0);
+            lblCancelledJEVCounter.Name = "lblCancelledJEVCounter";
+            lblCancelledJEVCounter.Size = new System.Drawing.Size(226, 61);
+            lblCancelledJEVCounter.TabIndex = 6;
+            lblCancelledJEVCounter.Text = "0";
+            lblCancelledJEVCounter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnAddJEV);
-            this.flowLayoutPanel1.Controls.Add(this.cmbxJournals);
-            this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
-            this.flowLayoutPanel1.Controls.Add(this.cbMonth);
-            this.flowLayoutPanel1.Controls.Add(this.nudYear);
-            this.flowLayoutPanel1.Controls.Add(this.btnRefreshCounter);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1166, 29);
-            this.flowLayoutPanel1.TabIndex = 15;
+            flowLayoutPanel1.Controls.Add(btnAddJEV);
+            flowLayoutPanel1.Controls.Add(cmbxJournals);
+            flowLayoutPanel1.Controls.Add(cmbxFunds);
+            flowLayoutPanel1.Controls.Add(cbMonth);
+            flowLayoutPanel1.Controls.Add(nudYear);
+            flowLayoutPanel1.Controls.Add(btnRefreshCounter);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(1166, 29);
+            flowLayoutPanel1.TabIndex = 15;
             // 
             // btnAddJEV
             // 
-            this.btnAddJEV.Image = global::AccountingSystem.Properties.Resources.symbol_add_14px;
-            this.btnAddJEV.Location = new System.Drawing.Point(3, 3);
-            this.btnAddJEV.Name = "btnAddJEV";
-            this.btnAddJEV.Size = new System.Drawing.Size(92, 23);
-            this.btnAddJEV.TabIndex = 31;
-            this.btnAddJEV.Text = "Add";
-            this.btnAddJEV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAddJEV.UseVisualStyleBackColor = true;
-            this.btnAddJEV.Click += new System.EventHandler(this.btnAddJEV_Click);
+            btnAddJEV.Image = Properties.Resources.symbol_add_14px;
+            btnAddJEV.Location = new System.Drawing.Point(3, 3);
+            btnAddJEV.Name = "btnAddJEV";
+            btnAddJEV.Size = new System.Drawing.Size(92, 23);
+            btnAddJEV.TabIndex = 31;
+            btnAddJEV.Text = "Add";
+            btnAddJEV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnAddJEV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            btnAddJEV.UseVisualStyleBackColor = true;
+            btnAddJEV.Click += btnAddJEV_Click;
             // 
             // cmbxJournals
             // 
-            this.cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxJournals.FormattingEnabled = true;
-            this.cmbxJournals.Location = new System.Drawing.Point(101, 3);
-            this.cmbxJournals.Name = "cmbxJournals";
-            this.cmbxJournals.Size = new System.Drawing.Size(299, 23);
-            this.cmbxJournals.TabIndex = 30;
-            this.cmbxJournals.SelectionChangeCommitted += new System.EventHandler(this.cmbxJournals_SelectionChangeCommitted);
+            cmbxJournals.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxJournals.FormattingEnabled = true;
+            cmbxJournals.Location = new System.Drawing.Point(101, 3);
+            cmbxJournals.Name = "cmbxJournals";
+            cmbxJournals.Size = new System.Drawing.Size(299, 23);
+            cmbxJournals.TabIndex = 30;
+            cmbxJournals.SelectionChangeCommitted += cmbxJournals_SelectionChangeCommitted;
             // 
             // cmbxFunds
             // 
-            this.cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbxFunds.FormattingEnabled = true;
-            this.cmbxFunds.Location = new System.Drawing.Point(406, 3);
-            this.cmbxFunds.Name = "cmbxFunds";
-            this.cmbxFunds.Size = new System.Drawing.Size(189, 23);
-            this.cmbxFunds.TabIndex = 32;
-            this.cmbxFunds.SelectionChangeCommitted += new System.EventHandler(this.cmbxFunds_SelectionChangeCommitted);
+            cmbxFunds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbxFunds.FormattingEnabled = true;
+            cmbxFunds.Location = new System.Drawing.Point(406, 3);
+            cmbxFunds.Name = "cmbxFunds";
+            cmbxFunds.Size = new System.Drawing.Size(189, 23);
+            cmbxFunds.TabIndex = 32;
+            cmbxFunds.SelectionChangeCommitted += cmbxFunds_SelectionChangeCommitted;
             // 
             // cbMonth
             // 
-            this.cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMonth.FormattingEnabled = true;
-            this.cbMonth.Location = new System.Drawing.Point(601, 3);
-            this.cbMonth.Name = "cbMonth";
-            this.cbMonth.Size = new System.Drawing.Size(139, 23);
-            this.cbMonth.TabIndex = 28;
-            this.cbMonth.SelectedIndexChanged += new System.EventHandler(this.cbMonth_SelectedIndexChanged);
+            cbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbMonth.FormattingEnabled = true;
+            cbMonth.Location = new System.Drawing.Point(601, 3);
+            cbMonth.Name = "cbMonth";
+            cbMonth.Size = new System.Drawing.Size(139, 23);
+            cbMonth.TabIndex = 28;
+            cbMonth.SelectedIndexChanged += cbMonth_SelectedIndexChanged;
             // 
             // nudYear
             // 
-            this.nudYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudYear.BackColor = System.Drawing.Color.White;
-            this.nudYear.Location = new System.Drawing.Point(746, 3);
-            this.nudYear.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudYear.Minimum = new decimal(new int[] {
-            1987,
-            0,
-            0,
-            0});
-            this.nudYear.Name = "nudYear";
-            this.nudYear.ReadOnly = true;
-            this.nudYear.Size = new System.Drawing.Size(109, 23);
-            this.nudYear.TabIndex = 29;
-            this.nudYear.Value = new decimal(new int[] {
-            2021,
-            0,
-            0,
-            0});
-            this.nudYear.ValueChanged += new System.EventHandler(this.nudYear_ValueChanged);
+            nudYear.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            nudYear.BackColor = System.Drawing.Color.White;
+            nudYear.Location = new System.Drawing.Point(746, 3);
+            nudYear.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            nudYear.Minimum = new decimal(new int[] { 1987, 0, 0, 0 });
+            nudYear.Name = "nudYear";
+            nudYear.ReadOnly = true;
+            nudYear.Size = new System.Drawing.Size(109, 23);
+            nudYear.TabIndex = 29;
+            nudYear.Value = new decimal(new int[] { 2021, 0, 0, 0 });
+            nudYear.ValueChanged += nudYear_ValueChanged;
             // 
             // ucJEVDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(0);
-            this.MinimumSize = new System.Drawing.Size(782, 160);
-            this.Name = "ucJEVDashboard";
-            this.Size = new System.Drawing.Size(1166, 160);
-            this.Load += new System.EventHandler(this.UcAccountingDashboard_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.pnlPendingJEV.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.pnlApprovedJEV.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.pnlJEV.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnlDisapproved.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            this.pnlCancelled.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(flowLayoutPanel1);
+            Margin = new System.Windows.Forms.Padding(0);
+            MinimumSize = new System.Drawing.Size(782, 160);
+            Name = "ucJEVDashboard";
+            Size = new System.Drawing.Size(1166, 160);
+            Load += UcAccountingDashboard_Load;
+            tableLayoutPanel1.ResumeLayout(false);
+            pnlPendingJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            pnlApprovedJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            pnlJEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pnlDisapproved.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnlCancelled.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)nudYear).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

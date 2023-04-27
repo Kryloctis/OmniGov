@@ -17,27 +17,26 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void frmBankAccounts_Load(object sender, EventArgs e)
         {
-            LoadBankAccounts();
+            try
+            {
+                LoadBankAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadBankAccounts()
         {
-            var searchKey = txtSearch.Text.Trim();
+            var searchText = txtSearch.Text.Trim();
             DataTable dtBankAccount;
 
-            if (searchKey.Length > 2)
-                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(searchKey);
+            if (searchText.Length > 2)
+                dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecordsBySearch(searchText);
             else
                 dtBankAccount = AccFactory.BankAccountsRepository().GetViewRecords();
 
             HelperLoadRecords.DatagridViewBankAccounts(dtBankAccount, dgBankAccounts);
 
             toolStripStatusLabelRecordCount.Text = dgBankAccounts.Rows.Count.ToString();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            _ = new frmAddBankAccounts(this).ShowDialog();
         }
 
         private void dgBankAccounts_SelectionChanged(object sender, EventArgs e)
@@ -47,10 +46,14 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            LoadBankAccounts();
+            try
+            {
+                LoadBankAccounts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void DeleteData()
         {
             int selectedRowsCount = dgBankAccounts.SelectedRows.Count;
 
@@ -72,10 +75,25 @@ namespace AccountingSystem.Views.Manage.BankAccounts
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteData();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _ = new frmAddBankAccounts(this).ShowDialog();
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int bankAccountID = int.Parse(dgBankAccounts.SelectedCells[0].Value.ToString());
-            _ = new frmEditBankAccounts(this, bankAccountID).ShowDialog();
+            int rowIndex = dgBankAccounts.CurrentRow.Index;
+            int bankAccountId = Convert.ToInt32(dgBankAccounts.Rows[rowIndex].Cells["id"].Value);
+            _ = new frmEditBankAccounts(this, bankAccountId).ShowDialog();
         }
     }
 }

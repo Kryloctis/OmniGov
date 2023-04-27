@@ -37,46 +37,42 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private bool SaveData()
+        private bool UpdateData()
         {
-            try
+            if (!_uc.ValidateChildren())
             {
-                if (!_uc.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_uc.GetFormErrors());
-                    return false;
-                }
-
-                var collectingmodel = new CollectingOfficerModel()
-                {
-                    Id = _uc.OfficerId,
-                    Prefix = _uc.txtPrefix.Text.Trim(),
-                    FirstName = _uc.txtFirstName.Text.Trim(),
-                    MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
-                    LastName = _uc.txtLastName.Text.Trim(),
-                    Suffix = _uc.txtSuffix.Text.Trim(),
-                    JobTitle = _uc.txtJobtitle.Text.Trim(),
-                    UserId = _uc.UserId
-                };
-
-                var collectingrepository = AccFactory.CollectingOfficerRepository();
-                return collectingrepository.Update(collectingmodel);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(_uc.GetFormErrors());
+                return false;
             }
 
-            return false;
+            var collectingmodel = new CollectingOfficerModel()
+            {
+                Id = _uc.OfficerId,
+                Prefix = _uc.txtPrefix.Text.Trim(),
+                FirstName = _uc.txtFirstName.Text.Trim(),
+                MiddleInitial = _uc.txtMiddleInitial.Text.Trim(),
+                LastName = _uc.txtLastName.Text.Trim(),
+                Suffix = _uc.txtSuffix.Text.Trim(),
+                JobTitle = _uc.txtJobtitle.Text.Trim(),
+                UserId = _uc.UserId
+            };
+
+            var collectingrepository = AccFactory.CollectingOfficerRepository();
+            return collectingrepository.Update(collectingmodel);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Collecting Officer has been saved.");
-                _frmCollectingOfficer.LoadRecords();
+                if (UpdateData())
+                {
+                    Helper.MessageBoxSuccess("Collecting Officer has been saved.");
+                    _frmCollectingOfficer.LoadRecords();
+                    this.Close();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void frmCollectingOfficerEdit_Load(object sender, EventArgs e)

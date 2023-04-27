@@ -1,8 +1,10 @@
 ﻿using ACC.Domain.Models;
 using AccountingSystem.Views.Manage.JobOrders;
+using DocumentFormat.OpenXml.Office.Word;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.Permissions;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.CollectingOfficer
@@ -16,32 +18,71 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
             Helper.DatagridFullRowSelectStyle(dgCollectingOfficer, true);
         }
 
+        private DataColumn[] DataColumnsCollectingOfficers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string)),
+                new DataColumn(Name = "job_title", typeof(string)),
+                new DataColumn(Name = "is_deleted", typeof(bool)),
+                new DataColumn(Name = "created_at", typeof(string)),
+                new DataColumn(Name = "updated_at", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficer(string searchText)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
+            DataTable dtCollectingOfficers;
+
+            if (string.IsNullOrWhiteSpace(searchText) || searchText.Length < 2)
+                dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+            else
+                dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecordsBySearch(searchText);
+
+            foreach (DataRow row in dtCollectingOfficers.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int rowId = Convert.ToInt32(row["id"]);
+                string rowPrefix = row["prefix"].ToString();
+                string rowFirstName = row["first_name"].ToString();
+                string rowMidInitial = row["mid_initial"].ToString();
+                string rowLastName = row["last_name"].ToString();
+                string rowSuffix = row["suffix"].ToString();
+                string rowFullName = Helper.GenerateFullName(rowPrefix, rowFirstName, rowMidInitial, rowLastName, rowSuffix);
+                string rowJobTitle = row["job_title"].ToString();
+                bool rowIsDeleted = Convert.ToBoolean(row["is_deleted"]);
+                string rowCreatedAt = row["created_at"].ToString();
+                string rowUpdatedAt = row["updated_at"].ToString();
+
+                newRow["id"] = rowId;
+                newRow["full_name"] = rowFullName;
+                newRow["job_title"] = rowJobTitle;
+                newRow["is_deleted"] = rowIsDeleted;
+                newRow["created_at"] = rowCreatedAt;
+                newRow["updated_at"] = rowUpdatedAt;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
         internal void LoadRecords()
         {
-            try
-            {
-                var repository = AccFactory.CollectingOfficerRepository();
-                var dt = repository.GetRecords();
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    int userId = Convert.ToInt32(row["users_id"]);
-                    var dictUser = Helper.GetUserDataById(userId);
-                    row["fullname"] = dictUser["user_full_name"];
-                }
-
-                HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
-                lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            string searchText = txtsearch.Text.Trim();
+            HelperLoadRecords.CollectingOfficerDatagridView(DataTableCollectingOfficer(searchText), dgCollectingOfficer);
+            lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
         }
 
         private void frmCollectingOfficer_Load(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -91,11 +132,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
         private void dgCollectingOfficer_SelectionChanged(object sender, EventArgs e)
         {
             int selectedRowCount = dgCollectingOfficer.SelectedRows.Count;
-            if (selectedRowCount == 0)
+            if (dgCollectingOfficer.SelectedRows.Count < 1)
                 return;
 
-            int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells[0].Value.ToString());
-            byte[] columnIndexTimestamp = { 3, 4 };
+            int id = int.Parse(dgCollectingOfficer.CurrentRow.Cells["id"].Value.ToString());
+            byte[] columnIndexTimestamp = { 4, 5 };
 
             lblJOCount.Text = AccFactory.CollectingOfficerRepository().CollectingOfficerJOCount(id).ToString();
 
@@ -110,25 +151,11 @@ namespace AccountingSystem.Views.Manage.CollectingOfficer
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            if (txtsearch.Text.Length > 0)
-            {
-                try
-                {
-                    var repository = AccFactory.CollectingOfficerRepository();
-                    var dt = repository.GetRecordsBySearch(txtsearch.Text.Trim());
-                    HelperLoadRecords.CollectingOfficerDatagridView(dt, dgCollectingOfficer);
-
-                    lblRecordCount.Text = dgCollectingOfficer.Rows.Count.ToString();
-                }
-                catch (Exception ex)
-                {
-                    Helper.MessageBoxError(ex.Message);
-                }
-            }
-            else
+            try
             {
                 LoadRecords();
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void btnJobOrder_Click(object sender, EventArgs e)

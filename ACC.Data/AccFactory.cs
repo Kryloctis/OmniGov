@@ -186,6 +186,7 @@ namespace AccountingSystem
         public static IPaymentCollectionHasChequesRepository PaymentCollectionHasChequesRepository() => new PaymentCollectionHasChequesRepository(mySqlGenericCommandsLFS, ChequesRepository());
 
         public static IReleasedCheques ReleasedChequesRepository() => new ReleasedChequesRepository(mySqlGenericCommandsLFS);
+
         public static ITaxTypesRepository TaxTypesRepository() => new TaxTypesRepository(mySqlGenericCommandsLFS);
 
         public static IOtherPaymentRatesRepository OtherPaymentRatesRepository() => new OtherPaymentRatesRepository(mySqlGenericCommandsLFS);

@@ -6,50 +6,46 @@ namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class frmAddBankAccounts : Form
     {
-        private readonly ucBankAccounts _ucBankAccounts;
-        private readonly frmBankAccounts _frmBankAccounts;
+        private readonly ucBankAccounts uc;
+        private readonly frmBankAccounts frmBankAccounts;
 
         public frmAddBankAccounts(frmBankAccounts frmBankAccounts)
         {
             InitializeComponent();
-            _ucBankAccounts = ucBankAccounts1;
-            _frmBankAccounts = frmBankAccounts;
+            Helper.LoadFormIcon(this);
+            uc = ucBankAccounts1;
+            this.frmBankAccounts = frmBankAccounts;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Account has been saved.");
-                _frmBankAccounts.LoadBankAccounts();
-                _ucBankAccounts.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Account has been saved.");
+                    frmBankAccounts.LoadBankAccounts();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
         {
-            try
+            if (!uc.ValidateChildren())
             {
-                if (!_ucBankAccounts.ValidateChildren())
-                {
-                    Helper.MessageBoxError(_ucBankAccounts.GetFormErrors());
-                    return false;
-                }
-
-                var bankAccountsModel = new BankAccountsModel()
-                {
-                    BankID = Convert.ToInt32(_ucBankAccounts.cmbxBank.SelectedValue),
-                    AccountNumber = _ucBankAccounts.txtAccountNo.Text
-                };
-
-                var bankAccountRepository = AccFactory.BankAccountsRepository();
-                return bankAccountRepository.Insert(bankAccountsModel);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            catch (Exception ex)
+
+            BankAccountsModel bankAccountsModel = new BankAccountsModel()
             {
-                Helper.MessageBoxError(ex.Message);
-            }
-            return false;
+                BankID = Convert.ToInt32(uc.cmbxBank.SelectedValue),
+                AccountNumber = uc.txtAccountNo.Text
+            };
+
+            return AccFactory.BankAccountsRepository().Insert(bankAccountsModel);
         }
     }
 }

@@ -1,84 +1,78 @@
 ﻿using ACC.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AccountingSystem.Views.Manage.BankAccounts
 {
     public partial class frmEditBankAccounts : Form
     {
-        private frmBankAccounts _frmBankAccounts;
-        private int _bankAccountID;
-        private readonly ucBankAccounts _ucBankAccounts;
+        private readonly frmBankAccounts frmBankAccounts;
+        private int bankAccountID;
+        private readonly ucBankAccounts uc;
 
         public frmEditBankAccounts(frmBankAccounts frmBankAccounts, int bankAccountID)
         {
             InitializeComponent();
-            _frmBankAccounts = frmBankAccounts;
-            _bankAccountID = bankAccountID;
-
-            _ucBankAccounts = ucBankAccounts1;
+            Helper.LoadFormIcon(this);
+            this.frmBankAccounts = frmBankAccounts;
+            this.bankAccountID = bankAccountID;
+            uc = ucBankAccounts1;
+            uc.bankAccountID = bankAccountID;
         }
 
         private void frmEditBankAccounts_Load(object sender, EventArgs e)
         {
-            LoadSelectedRecord();
+            try
+            {
+                uc.isEdit = true;
+                LoadSelectedRecord();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadSelectedRecord()
         {
-            try
-            {
-                var bankAccountRepository = AccFactory.BankAccountsRepository();
-                var bankData = bankAccountRepository.GetRecordByID(_bankAccountID);
+            Dictionary<string, string> dictBankAccounts = AccFactory.BankAccountsRepository().GetRecordByID(bankAccountID);
 
-                _ucBankAccounts.cmbxBank.SelectedValue = bankData["banks_id"];
-                _ucBankAccounts.txtAccountNo.Text = bankData["account_no"];
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            uc.cmbxBank.SelectedValue = dictBankAccounts["banks_id"];
+            uc.txtAccountNo.Text = dictBankAccounts["account_no"];
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (SaveData())
-            {
-                Helper.MessageBoxSuccess("Bank account has been updated.");
-                _frmBankAccounts.LoadBankAccounts();
-                Close();
-            }
-        }
-
-        private bool SaveData()
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!_ucBankAccounts.ValidateChildren())
+                if (UpdateData())
                 {
-                    Helper.MessageBoxError(_ucBankAccounts.GetFormErrors());
-                    return false;
+                    Helper.MessageBoxSuccess("Bank account has been updated.");
+                    frmBankAccounts.LoadBankAccounts();
+                    Close();
                 }
-
-                var bankAccountID = _bankAccountID;
-                var bankID = Convert.ToInt32(_ucBankAccounts.cmbxBank.SelectedValue);
-                var bankAccountNumber = _ucBankAccounts.txtAccountNo.Text.Trim();
-
-                var bankAccountsModel = new BankAccountsModel()
-                {
-                    ID = bankAccountID,
-                    BankID = bankID,
-                    AccountNumber = bankAccountNumber
-                };
-
-                var bankAccountsRepository = AccFactory.BankAccountsRepository();
-                return bankAccountsRepository.Update(bankAccountsModel);
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private bool UpdateData()
+        {
+            if (!uc.ValidateChildren())
             {
-                Helper.MessageBoxError(ex.Message);
+                Helper.MessageBoxError(uc.GetFormErrors());
+                return false;
             }
-            return false;
+
+            var bankAccountID = this.bankAccountID;
+            var bankID = Convert.ToInt32(uc.cmbxBank.SelectedValue);
+            var bankAccountNumber = uc.txtAccountNo.Text.Trim();
+
+            var bankAccountsModel = new BankAccountsModel()
+            {
+                ID = bankAccountID,
+                BankID = bankID,
+                AccountNumber = bankAccountNumber
+            };
+
+            return AccFactory.BankAccountsRepository().Update(bankAccountsModel);
         }
     }
 }

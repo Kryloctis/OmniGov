@@ -6,24 +6,29 @@ namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class frmAddBarangay : Form
     {
-        internal readonly ucBarangay uc;
         internal readonly frmBarangay _frmBarangay;
+        internal readonly ucBarangay uc;
 
         public frmAddBarangay(frmBarangay frmBarangay)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             _frmBarangay = frmBarangay;
             uc = ucBarangay1;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("Barangay has been saved.");
-                _frmBarangay.LoadRecords();
-                uc.ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("Barangay has been saved.");
+                    _frmBarangay.LoadRecords();
+                    uc.ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
@@ -36,7 +41,7 @@ namespace AccountingSystem.Views.Manage.Barangay
             }
 
             var barangayCode = uc.txtCode.Text.Trim();
-            var barangayName = uc.txtBarangay.Text.Trim();
+            var barangayName = uc.txtName.Text.Trim();
 
             var barangayModel = new BarangayModel()
             {
@@ -46,6 +51,11 @@ namespace AccountingSystem.Views.Manage.Barangay
             };
 
             return AccFactory.BarangayRepository().Insert(barangayModel);
+        }
+
+        private void frmAddBarangay_Load(object sender, EventArgs e)
+        {
+            uc.isEdit = false;
         }
     }
 }

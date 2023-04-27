@@ -425,13 +425,15 @@ namespace AccountingSystem
 
         private void menuAccForm_Click(object sender, EventArgs e)
         {
-            _ = new frmAccountable().ShowDialog();
+            _ = new frmAccountableForm().ShowDialog();
         }
 
         private void menuLogout_Click(object sender, EventArgs e)
         {
             Close();
             loginForm.Show();
+            loginForm.txtUsername.SelectAll();
+            loginForm.txtUsername.Focus();
         }
 
         private void menuExitApp_Click(object sender, EventArgs e)

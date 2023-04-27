@@ -7,7 +7,8 @@ namespace AccountingSystem.Views.Manage.Barangay
 {
     public partial class ucBarangay : UserControl
     {
-        internal int barangayId = 0;
+        internal int barangayId;
+        internal bool isEdit;
 
         public ucBarangay()
         {
@@ -16,39 +17,73 @@ namespace AccountingSystem.Views.Manage.Barangay
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = errorProvider1.GetError(txtCode);
-            errorArray[1] = errorProvider1.GetError(txtBarangay);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtCode),
+                errorProvider1.GetError(txtName)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
         {
             txtCode.Clear();
-            txtBarangay.Clear();
+            txtName.Clear();
             txtCode.Focus();
         }
 
-        private void txtCode_Validating(object sender, CancelEventArgs e)
+        private bool BarangayCodeValidated()
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code");
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtCode, "Barangay Code"))
+                return false;
 
-            var barangayRepo = AccFactory.BarangayRepository();
+            string barangayCode = txtCode.Text.Trim();
+            bool codeExist;
 
-            bool resBrgy;
-
-            if (barangayId == 0)
-                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim());
+            if (!isEdit)
+                codeExist = AccFactory.BarangayRepository().CodeExist(barangayCode);
             else
-                resBrgy = barangayRepo.CodeExist(txtCode.Text.Trim(), barangayId);
+                codeExist = AccFactory.BarangayRepository().CodeExist(barangayCode, barangayId);
 
-            if (resBrgy)
+            if (codeExist)
             {
                 errorProvider1.SetError(txtCode, "Code already exist in your records.");
-                e.Cancel = true;
+                return false;
             }
+
+            return true;
+        }
+
+        private bool BarangayNameValidated()
+        {
+            if (Helper.ShowErrorTextBoxEmpty(errorProvider1, txtName, "Barangay Name"))
+                return false;
+
+            string barangayName = txtName.Text.Trim();
+            bool nameExist;
+
+            if (barangayId == 0)
+                nameExist = AccFactory.BarangayRepository().NameExist(barangayName);
+            else
+                nameExist = AccFactory.BarangayRepository().NameExist(barangayName, barangayId);
+
+            if (nameExist)
+            {
+                errorProvider1.SetError(txtName, "Name already exist in your records.");
+                return false;
+            }
+            return true;
+        }
+
+        private void txtBarangay_Validated(object sender, EventArgs e)
+        {
+            Helper.ClearErrorTextBox(errorProvider1, txtName);
+        }
+
+        private void txtBarangay_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = !BarangayNameValidated();
         }
 
         private void txtCode_Validated(object sender, EventArgs e)
@@ -56,33 +91,9 @@ namespace AccountingSystem.Views.Manage.Barangay
             Helper.ClearErrorTextBox(errorProvider1, txtCode);
         }
 
-        private void txtBarangay_Validating(object sender, CancelEventArgs e)
+        private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtBarangay, "Barangay Name");
-
-            var brgyRepo = AccFactory.BarangayRepository();
-
-            bool resBrgy;
-
-            if (barangayId == 0)
-                resBrgy = brgyRepo.NameExist(txtBarangay.Text.Trim()); // add form
-            else
-                resBrgy = brgyRepo.NameExist(txtBarangay.Text.Trim(), barangayId); // edit form
-
-            if (resBrgy)
-            {
-                errorProvider1.SetError(txtBarangay, "Name already exist in your records.");
-                e.Cancel = true;
-            }
-        }
-
-        private void txtBarangay_Validated(object sender, EventArgs e)
-        {
-            Helper.ClearErrorTextBox(errorProvider1, txtBarangay);
-        }
-
-        private void ucBarangay_Load(object sender, EventArgs e)
-        {
+            e.Cancel = !BarangayCodeValidated();
         }
     }
 }
