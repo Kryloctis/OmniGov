@@ -919,9 +919,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             string dictPayee = jevDict["payee"];
             string dictRefNo = jevDict["ref_no"];
 
-            if (!string.IsNullOrEmpty(dictJevNo))
-                uc.txtFundsJevNo.Text = uc.GenerateJevTemplateNo();
-
             uc.jevId = dictJevId;
             uc.fundId = dictFundId;
             uc.txtExplanation.Text = dictExplanation;
@@ -932,6 +929,9 @@ namespace AccountingSystem.Views.Transactions.JEV
             uc.journalId = dictJournalId;
             uc.oldJournalId = dictOldJournalId;
             lblCreatedBy.Text = dictCreatedBy;
+
+            if (!string.IsNullOrEmpty(dictJevNo))
+                uc.txtFundsJevNo.Text = uc.GenerateJevTemplateNo();
 
             if (Convert.ToByte(jevDict["is_edited"]) == 1)
             {
