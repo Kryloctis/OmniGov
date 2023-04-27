@@ -45,7 +45,7 @@
             tabPageBpl = new System.Windows.Forms.TabPage();
             label1 = new System.Windows.Forms.Label();
             tabPageOthers = new System.Windows.Forms.TabPage();
-            tabControl2 = new System.Windows.Forms.TabControl();
+            tabControlOthers = new System.Windows.Forms.TabControl();
             tabPageAF51ANDAF57 = new System.Windows.Forms.TabPage();
             splitContainer5 = new System.Windows.Forms.SplitContainer();
             ucaF51_571 = new OtherPayments.AF51_57.ucAF51_57();
@@ -93,7 +93,7 @@
             tabPageRpt.SuspendLayout();
             tabPageBpl.SuspendLayout();
             tabPageOthers.SuspendLayout();
-            tabControl2.SuspendLayout();
+            tabControlOthers.SuspendLayout();
             tabPageAF51ANDAF57.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer5).BeginInit();
             splitContainer5.Panel1.SuspendLayout();
@@ -312,7 +312,7 @@
             // 
             // tabPageOthers
             // 
-            tabPageOthers.Controls.Add(tabControl2);
+            tabPageOthers.Controls.Add(tabControlOthers);
             tabPageOthers.Location = new System.Drawing.Point(4, 5);
             tabPageOthers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPageOthers.Name = "tabPageOthers";
@@ -322,19 +322,19 @@
             tabPageOthers.Text = "Others";
             tabPageOthers.UseVisualStyleBackColor = true;
             // 
-            // tabControl2
+            // tabControlOthers
             // 
-            tabControl2.Controls.Add(tabPageAF51ANDAF57);
-            tabControl2.Controls.Add(tabPageCertificateOfCattle);
-            tabControl2.Controls.Add(tabPageCattleOwnership);
-            tabControl2.Controls.Add(tabPageMarriageLicense);
-            tabControl2.Controls.Add(tabPageBurialPermit);
-            tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabControl2.Location = new System.Drawing.Point(4, 3);
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new System.Drawing.Size(843, 475);
-            tabControl2.TabIndex = 1;
+            tabControlOthers.Controls.Add(tabPageAF51ANDAF57);
+            tabControlOthers.Controls.Add(tabPageCertificateOfCattle);
+            tabControlOthers.Controls.Add(tabPageCattleOwnership);
+            tabControlOthers.Controls.Add(tabPageMarriageLicense);
+            tabControlOthers.Controls.Add(tabPageBurialPermit);
+            tabControlOthers.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlOthers.Location = new System.Drawing.Point(4, 3);
+            tabControlOthers.Name = "tabControlOthers";
+            tabControlOthers.SelectedIndex = 0;
+            tabControlOthers.Size = new System.Drawing.Size(843, 475);
+            tabControlOthers.TabIndex = 1;
             // 
             // tabPageAF51ANDAF57
             // 
@@ -828,7 +828,7 @@
             tabPageBpl.ResumeLayout(false);
             tabPageBpl.PerformLayout();
             tabPageOthers.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
+            tabControlOthers.ResumeLayout(false);
             tabPageAF51ANDAF57.ResumeLayout(false);
             splitContainer5.Panel1.ResumeLayout(false);
             splitContainer5.Panel2.ResumeLayout(false);
@@ -892,7 +892,7 @@
         private System.Windows.Forms.TextBox txtTaxpayerSearch;
         private System.Windows.Forms.Label label1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabControl tabControlOthers;
         private System.Windows.Forms.TabPage tabPageAF51ANDAF57;
         private System.Windows.Forms.TabPage tabPageCertificateOfCattle;
         private System.Windows.Forms.TabPage tabPageCattleOwnership;

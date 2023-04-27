@@ -2,12 +2,14 @@
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
@@ -24,6 +26,9 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private ucAF51_57 ucAF51And57;
         private ucOtherCharges ucOtherCharges;
+        private ucMarriageLicense ucMarriageLicense;
+
+        private string paymentFor;
 
         public frmPayments()
         {
@@ -34,6 +39,8 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucPayment = ucPayment1;
             ucAF51And57 = ucaF51_571;
             ucOtherCharges = ucOtherCharges1;
+
+            ucMarriageLicense = ucMarriageLicense1;
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -303,12 +310,63 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             return paymentCollectionsModel;
         }
+        private MarriageLicenseModel MarriageLicenseModel()
+        {
+            var marriageLicenseModel = new MarriageLicenseModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+                marriageLicenseModel.RegisterNo = ucMarriageLicense.txtRegistrationNumber.Text;
+                marriageLicenseModel.IssuedOn = ucMarriageLicense.dtpIssuedDate.Value;
+                marriageLicenseModel.PublishedOn = ucMarriageLicense.dtpPublishedDate.Value;
+                marriageLicenseModel.HusbandName = ucMarriageLicense.txtHusbandName.Text;
+                marriageLicenseModel.HusbandAge = Convert.ToInt32(ucMarriageLicense.nudHusbandAgeYear.Value);
+                marriageLicenseModel.HusbandMonth = Convert.ToInt32(ucMarriageLicense.nudHusbandAgeMonth.Value);
+                marriageLicenseModel.HusbandStreet = ucMarriageLicense.txtHusbandStreet.Text;
+                marriageLicenseModel.HusbandBarangay = ucMarriageLicense.cmbxHusbandBarangay.Text;
+                marriageLicenseModel.HusbandMunipality = ucMarriageLicense.cmbxHusbandMunicipality.Text;
+                marriageLicenseModel.HusbandProvince = ucMarriageLicense.cmbxHusbandProvince.Text;
+
+                marriageLicenseModel.WifeName = ucMarriageLicense.txtWifeName.Text;
+                marriageLicenseModel.WifeAge = Convert.ToInt32(ucMarriageLicense.nudWifeAgeYear.Text);
+                marriageLicenseModel.WifeMonth = Convert.ToInt32(ucMarriageLicense.nudWifeAgeMonth.Text);
+                marriageLicenseModel.WifeStreet = ucMarriageLicense.txtWifeStreet.Text;
+                marriageLicenseModel.WifeBarangay = ucMarriageLicense.cmbxWifeBarangay.Text;
+                marriageLicenseModel.WifeMunicipality = ucMarriageLicense.cmbxWifeBarangay.Text;
+                marriageLicenseModel.WifeProvince = ucMarriageLicense.cmbxWifeProvince.Text;
+                marriageLicenseModel.CreatedBy = Helper.UserId;
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return marriageLicenseModel;
+        }
+
 
         private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             try
             {
                 return AccFactory.PaymentCollectionsRepository().InsertWithRptPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, rptPaymentsModel, rptTaxDuesModels);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool SaveMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
+        {
+            try
+            {
+                return AccFactory.MarriageLicenseRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
             }
             catch (Exception ex)
             {
@@ -325,6 +383,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             //rptPayments Model
             var rptPaymentsModel = new RptPaymentsModel();
+            
             rptPaymentsModel.PostedBy = Helper.UserId;
 
             var chequesModels = new List<ChequesModel>();
@@ -382,7 +441,12 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
+                    //SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
+
+                    //if (tabControlOthers.SelectedTab == tabPageMarriageLicense)
+                    //{
+                    //}
+                    SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
                 });
 
                 Invoke(methodInvoker);
