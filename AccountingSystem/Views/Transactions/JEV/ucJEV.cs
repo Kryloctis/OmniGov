@@ -1,5 +1,7 @@
 ﻿using ACC.Domain.Interfaces;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -235,16 +237,13 @@ namespace AccountingSystem.Views.Transactions.JEV
                 var jev = AccFactory.JEVRepository().GetLastJevNoSeries(fundId);
                 return jev.ToString();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
             return "0000";
         }
 
-        internal string GenerateJEVNumber()
+        internal string GenerateJevTemplateNo()
         {
-            var fund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            Dictionary<string, string> fund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
             string fundCode = fund["fund_code"];
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ACC.Domain.Models
 {
-    public class JEVModel
+    public class JevModel
     {
         public int Id { get; set; }
         public byte FundsId { get; set; }
@@ -17,7 +17,7 @@ namespace ACC.Domain.Models
         public bool IsDisapproved { get; set; }
         public bool IsCancelled { get; set; }
         public bool IsEdited { get; set; }
-        public string remarks { get; set; }
+        public string Remarks { get; set; }
         public List<JEVAccountsModel> JEVAccountsModelList { get; set; }
         public byte CreatedBy { get; set; }
         public byte UpdatedBy { get; set; }

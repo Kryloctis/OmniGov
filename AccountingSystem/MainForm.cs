@@ -432,6 +432,8 @@ namespace AccountingSystem
         {
             Close();
             loginForm.Show();
+            loginForm.txtUsername.SelectAll();
+            loginForm.txtUsername.Focus();
         }
 
         private void menuExitApp_Click(object sender, EventArgs e)
