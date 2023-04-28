@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ACC.Domain.Interfaces
 {
-    public interface ICattleOwnership : IAccRepository<CattleOwnershipModel>
+    public interface ICattleTransferOfOwnershipRepository : IAccRepository<CattleTransferOfOwnershipModel>
     {
 
     }
