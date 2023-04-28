@@ -441,12 +441,30 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    //SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
-
-                    //if (tabControlOthers.SelectedTab == tabPageMarriageLicense)
-                    //{
-                    //}
-                    SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
+                    if (radOthers.Checked)
+                    {
+                        switch (ucPayment.selectedAccountableFormNo)
+                        {
+                            case "51":
+                                SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
+                                break;
+                            case "52":
+                                break;
+                            case "53":
+                                break;
+                            case "54":
+                                SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
+                                break;
+                            case "56":
+                                break;
+                            case "57":
+                                break;
+                            case "58":
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 });
 
                 Invoke(methodInvoker);

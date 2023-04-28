@@ -84,15 +84,6 @@ namespace AccountingSystem
 
                 bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);
                 return result;
-
-                //    int paymentCollectionId = GetLastInsertedID();
-                //    rptPaymentsModel.PaymentCollectionsId = paymentCollectionId;
-                //    paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
-
-                //    _rptPaymentPostsRepository.InsertWithRptTaxDues(rptPaymentsModel, rptTaxDuesModels);
-                //    _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
-
-
         }
 
         public bool Update(MarriageLicenseModel entity)

@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Transactions.Payments
     {
         internal decimal amountPayment = 0;
         internal string taxpayerName = string.Empty;
+        internal string selectedAccountableFormNo = string.Empty;
 
         public ucPayment()
         {
