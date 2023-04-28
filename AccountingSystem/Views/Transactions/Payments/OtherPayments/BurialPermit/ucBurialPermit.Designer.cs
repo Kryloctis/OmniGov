@@ -30,40 +30,41 @@
         {
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtPermission = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtTaxpayer = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cmbxRemainsSex = new System.Windows.Forms.ComboBox();
             label6 = new System.Windows.Forms.Label();
-            textBox5 = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
-            textBox3 = new System.Windows.Forms.TextBox();
+            txtRemainsNationality = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
-            textBox4 = new System.Windows.Forms.TextBox();
+            txtRemainsName = new System.Windows.Forms.TextBox();
             label4 = new System.Windows.Forms.Label();
             groupBox3 = new System.Windows.Forms.GroupBox();
             panel3 = new System.Windows.Forms.Panel();
-            checkBox2 = new System.Windows.Forms.CheckBox();
-            checkBox1 = new System.Windows.Forms.CheckBox();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            cbxIsEmbalbed = new System.Windows.Forms.CheckBox();
+            cbxIsInfectious = new System.Windows.Forms.CheckBox();
+            dtpDeathDate = new System.Windows.Forms.DateTimePicker();
             label7 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
-            textBox8 = new System.Windows.Forms.TextBox();
-            textBox7 = new System.Windows.Forms.TextBox();
-            textBox6 = new System.Windows.Forms.TextBox();
+            txtDisposition = new System.Windows.Forms.TextBox();
+            txtDisinterment = new System.Windows.Forms.TextBox();
+            txtCemetery = new System.Windows.Forms.TextBox();
+            nudRemainsAge = new System.Windows.Forms.NumericUpDown();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             groupBox3.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -80,9 +81,9 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(txtPermission);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtTaxpayer);
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -91,12 +92,12 @@
             panel2.Size = new System.Drawing.Size(289, 180);
             panel2.TabIndex = 0;
             // 
-            // textBox2
+            // txtPermission
             // 
-            textBox2.Location = new System.Drawing.Point(77, 47);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(203, 23);
-            textBox2.TabIndex = 3;
+            txtPermission.Location = new System.Drawing.Point(77, 47);
+            txtPermission.Name = "txtPermission";
+            txtPermission.Size = new System.Drawing.Size(203, 23);
+            txtPermission.TabIndex = 3;
             // 
             // label2
             // 
@@ -107,12 +108,13 @@
             label2.TabIndex = 2;
             label2.Text = "Permission";
             // 
-            // textBox1
+            // txtTaxpayer
             // 
-            textBox1.Location = new System.Drawing.Point(77, 18);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(203, 23);
-            textBox1.TabIndex = 3;
+            txtTaxpayer.Location = new System.Drawing.Point(77, 18);
+            txtTaxpayer.Name = "txtTaxpayer";
+            txtTaxpayer.ReadOnly = true;
+            txtTaxpayer.Size = new System.Drawing.Size(203, 23);
+            txtTaxpayer.TabIndex = 3;
             // 
             // label1
             // 
@@ -137,13 +139,13 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(comboBox1);
+            panel1.Controls.Add(nudRemainsAge);
+            panel1.Controls.Add(cmbxRemainsSex);
             panel1.Controls.Add(label6);
-            panel1.Controls.Add(textBox5);
             panel1.Controls.Add(label5);
-            panel1.Controls.Add(textBox3);
+            panel1.Controls.Add(txtRemainsNationality);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(textBox4);
+            panel1.Controls.Add(txtRemainsName);
             panel1.Controls.Add(label4);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -152,13 +154,13 @@
             panel1.Size = new System.Drawing.Size(293, 180);
             panel1.TabIndex = 0;
             // 
-            // comboBox1
+            // cmbxRemainsSex
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(77, 105);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(99, 23);
-            comboBox1.TabIndex = 4;
+            cmbxRemainsSex.FormattingEnabled = true;
+            cmbxRemainsSex.Location = new System.Drawing.Point(77, 105);
+            cmbxRemainsSex.Name = "cmbxRemainsSex";
+            cmbxRemainsSex.Size = new System.Drawing.Size(99, 23);
+            cmbxRemainsSex.TabIndex = 4;
             // 
             // label6
             // 
@@ -169,13 +171,6 @@
             label6.TabIndex = 2;
             label6.Text = "Sex";
             // 
-            // textBox5
-            // 
-            textBox5.Location = new System.Drawing.Point(77, 76);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new System.Drawing.Size(99, 23);
-            textBox5.TabIndex = 3;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -185,12 +180,12 @@
             label5.TabIndex = 2;
             label5.Text = "Age";
             // 
-            // textBox3
+            // txtRemainsNationality
             // 
-            textBox3.Location = new System.Drawing.Point(77, 47);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(203, 23);
-            textBox3.TabIndex = 3;
+            txtRemainsNationality.Location = new System.Drawing.Point(77, 47);
+            txtRemainsNationality.Name = "txtRemainsNationality";
+            txtRemainsNationality.Size = new System.Drawing.Size(203, 23);
+            txtRemainsNationality.TabIndex = 3;
             // 
             // label3
             // 
@@ -199,14 +194,14 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(65, 15);
             label3.TabIndex = 2;
-            label3.Text = "Permission";
+            label3.Text = "Nationality";
             // 
-            // textBox4
+            // txtRemainsName
             // 
-            textBox4.Location = new System.Drawing.Point(77, 18);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(203, 23);
-            textBox4.TabIndex = 3;
+            txtRemainsName.Location = new System.Drawing.Point(77, 18);
+            txtRemainsName.Name = "txtRemainsName";
+            txtRemainsName.Size = new System.Drawing.Size(203, 23);
+            txtRemainsName.TabIndex = 3;
             // 
             // label4
             // 
@@ -231,18 +226,18 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(checkBox2);
-            panel3.Controls.Add(checkBox1);
-            panel3.Controls.Add(dateTimePicker1);
+            panel3.Controls.Add(cbxIsEmbalbed);
+            panel3.Controls.Add(cbxIsInfectious);
+            panel3.Controls.Add(dtpDeathDate);
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label11);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(label9);
             panel3.Controls.Add(label8);
-            panel3.Controls.Add(textBox8);
-            panel3.Controls.Add(textBox7);
-            panel3.Controls.Add(textBox6);
+            panel3.Controls.Add(txtDisposition);
+            panel3.Controls.Add(txtDisinterment);
+            panel3.Controls.Add(txtCemetery);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel3.Location = new System.Drawing.Point(5, 21);
@@ -250,30 +245,30 @@
             panel3.Size = new System.Drawing.Size(312, 178);
             panel3.TabIndex = 0;
             // 
-            // checkBox2
+            // cbxIsEmbalbed
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new System.Drawing.Point(99, 159);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new System.Drawing.Size(15, 14);
-            checkBox2.TabIndex = 4;
-            checkBox2.UseVisualStyleBackColor = true;
+            cbxIsEmbalbed.AutoSize = true;
+            cbxIsEmbalbed.Location = new System.Drawing.Point(99, 159);
+            cbxIsEmbalbed.Name = "cbxIsEmbalbed";
+            cbxIsEmbalbed.Size = new System.Drawing.Size(15, 14);
+            cbxIsEmbalbed.TabIndex = 4;
+            cbxIsEmbalbed.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // cbxIsInfectious
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new System.Drawing.Point(99, 135);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new System.Drawing.Size(15, 14);
-            checkBox1.TabIndex = 4;
-            checkBox1.UseVisualStyleBackColor = true;
+            cbxIsInfectious.AutoSize = true;
+            cbxIsInfectious.Location = new System.Drawing.Point(99, 135);
+            cbxIsInfectious.Name = "cbxIsInfectious";
+            cbxIsInfectious.Size = new System.Drawing.Size(15, 14);
+            cbxIsInfectious.TabIndex = 4;
+            cbxIsInfectious.UseVisualStyleBackColor = true;
             // 
-            // dateTimePicker1
+            // dtpDeathDate
             // 
-            dateTimePicker1.Location = new System.Drawing.Point(99, 18);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            dateTimePicker1.TabIndex = 0;
+            dtpDeathDate.Location = new System.Drawing.Point(99, 18);
+            dtpDeathDate.Name = "dtpDeathDate";
+            dtpDeathDate.Size = new System.Drawing.Size(200, 23);
+            dtpDeathDate.TabIndex = 0;
             // 
             // label7
             // 
@@ -316,39 +311,46 @@
             label9.AutoSize = true;
             label9.Location = new System.Drawing.Point(6, 76);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(79, 15);
+            label9.Size = new System.Drawing.Size(75, 15);
             label9.TabIndex = 2;
-            label9.Text = "Disintertment";
+            label9.Text = "Disinterment";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Location = new System.Drawing.Point(6, 47);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(59, 15);
+            label8.Size = new System.Drawing.Size(58, 15);
             label8.TabIndex = 2;
-            label8.Text = "Cementry";
+            label8.Text = "Cemetery";
             // 
-            // textBox8
+            // txtDisposition
             // 
-            textBox8.Location = new System.Drawing.Point(99, 103);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new System.Drawing.Size(200, 23);
-            textBox8.TabIndex = 3;
+            txtDisposition.Location = new System.Drawing.Point(99, 103);
+            txtDisposition.Name = "txtDisposition";
+            txtDisposition.Size = new System.Drawing.Size(200, 23);
+            txtDisposition.TabIndex = 3;
             // 
-            // textBox7
+            // txtDisinterment
             // 
-            textBox7.Location = new System.Drawing.Point(99, 74);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new System.Drawing.Size(200, 23);
-            textBox7.TabIndex = 3;
+            txtDisinterment.Location = new System.Drawing.Point(99, 74);
+            txtDisinterment.Name = "txtDisinterment";
+            txtDisinterment.Size = new System.Drawing.Size(200, 23);
+            txtDisinterment.TabIndex = 3;
             // 
-            // textBox6
+            // txtCemetery
             // 
-            textBox6.Location = new System.Drawing.Point(99, 45);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new System.Drawing.Size(200, 23);
-            textBox6.TabIndex = 3;
+            txtCemetery.Location = new System.Drawing.Point(99, 45);
+            txtCemetery.Name = "txtCemetery";
+            txtCemetery.Size = new System.Drawing.Size(200, 23);
+            txtCemetery.TabIndex = 3;
+            // 
+            // nudRemainsAge
+            // 
+            nudRemainsAge.Location = new System.Drawing.Point(77, 76);
+            nudRemainsAge.Name = "nudRemainsAge";
+            nudRemainsAge.Size = new System.Drawing.Size(99, 23);
+            nudRemainsAge.TabIndex = 5;
             // 
             // ucBurialPermit
             // 
@@ -368,40 +370,41 @@
             groupBox3.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.NumericUpDown nudRemainsAge;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.TextBox txtPermission;
+        internal System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.TextBox txtTaxpayer;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.TextBox txtRemainsNationality;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox txtRemainsName;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.ComboBox cmbxRemainsSex;
+        internal System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.Panel panel3;
+        internal System.Windows.Forms.DateTimePicker dtpDeathDate;
+        internal System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.TextBox txtCemetery;
+        internal System.Windows.Forms.Label label10;
+        internal System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.TextBox txtDisposition;
+        internal System.Windows.Forms.TextBox txtDisinterment;
+        internal System.Windows.Forms.CheckBox cbxIsEmbalbed;
+        internal System.Windows.Forms.CheckBox cbxIsInfectious;
+        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.Label label11;
     }
 }

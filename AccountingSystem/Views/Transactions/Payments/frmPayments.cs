@@ -2,6 +2,7 @@
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -27,6 +28,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucAF51_57 ucAF51And57;
         private ucOtherCharges ucOtherCharges;
         private ucMarriageLicense ucMarriageLicense;
+        private ucBurialPermit ucBurialPermit;
 
         private string paymentFor;
 
@@ -348,6 +350,25 @@ namespace AccountingSystem.Views.Transactions.Payments
             return marriageLicenseModel;
         }
 
+        private BurialPermitModel BurialPermitModel()
+        {
+            var burialPermitModel = new BurialPermitModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+                burialPermitModel.RemainsName = ucBurialPermit.txtCemetery.Text;
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return burialPermitModel;
+        }
 
         private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
@@ -367,6 +388,19 @@ namespace AccountingSystem.Views.Transactions.Payments
             try
             {
                 return AccFactory.MarriageLicenseRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool SaveBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
+        {
+            try
+            {
+                return AccFactory.BurialPermitRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
             }
             catch (Exception ex)
             {
@@ -441,7 +475,15 @@ namespace AccountingSystem.Views.Transactions.Payments
 
                 var methodInvoker = new MethodInvoker(delegate
                 {
-                    if (radOthers.Checked)
+                    if (radBpl.Checked)
+                    {
+
+                    }
+                    else if (radRpt.Checked)
+                    {
+                        
+                    }
+                    else if (radOthers.Checked)
                     {
                         switch (ucPayment.selectedAccountableFormNo)
                         {
@@ -460,6 +502,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                             case "57":
                                 break;
                             case "58":
+                                SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel()) ;
                                 break;
                             default:
                                 break;

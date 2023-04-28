@@ -30,32 +30,33 @@
         {
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
-            comboBox3 = new System.Windows.Forms.ComboBox();
-            comboBox2 = new System.Windows.Forms.ComboBox();
+            btnBrowse = new System.Windows.Forms.Button();
+            cmbxBarangay = new System.Windows.Forms.ComboBox();
+            cmbxMunicipality = new System.Windows.Forms.ComboBox();
             label5 = new System.Windows.Forms.Label();
-            comboBox1 = new System.Windows.Forms.ComboBox();
+            cmbxProvince = new System.Windows.Forms.ComboBox();
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtOwnerName = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
-            button1 = new System.Windows.Forms.Button();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
             numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            comboBox6 = new System.Windows.Forms.ComboBox();
+            nudPrice = new System.Windows.Forms.NumericUpDown();
             label8 = new System.Windows.Forms.Label();
-            comboBox5 = new System.Windows.Forms.ComboBox();
+            cmbxSex = new System.Windows.Forms.ComboBox();
             label9 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
-            comboBox4 = new System.Windows.Forms.ComboBox();
+            cmbxType = new System.Windows.Forms.ComboBox();
             label6 = new System.Windows.Forms.Label();
-            textBox3 = new System.Windows.Forms.TextBox();
+            txtDescription = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudPrice).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -72,14 +73,14 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(comboBox3);
-            panel2.Controls.Add(comboBox2);
+            panel2.Controls.Add(btnBrowse);
+            panel2.Controls.Add(cmbxBarangay);
+            panel2.Controls.Add(cmbxMunicipality);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(cmbxProvince);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtOwnerName);
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -88,43 +89,53 @@
             panel2.Size = new System.Drawing.Size(348, 134);
             panel2.TabIndex = 0;
             // 
-            // comboBox3
+            // btnBrowse
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new System.Drawing.Point(97, 103);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new System.Drawing.Size(223, 23);
-            comboBox3.TabIndex = 4;
+            btnBrowse.Image = Properties.Resources.user_browse_14px;
+            btnBrowse.Location = new System.Drawing.Point(319, 16);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new System.Drawing.Size(22, 23);
+            btnBrowse.TabIndex = 6;
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += btnBrowse_Click;
             // 
-            // comboBox2
+            // cmbxBarangay
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new System.Drawing.Point(97, 74);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new System.Drawing.Size(223, 23);
-            comboBox2.TabIndex = 4;
+            cmbxBarangay.FormattingEnabled = true;
+            cmbxBarangay.Location = new System.Drawing.Point(93, 103);
+            cmbxBarangay.Name = "cmbxBarangay";
+            cmbxBarangay.Size = new System.Drawing.Size(223, 23);
+            cmbxBarangay.TabIndex = 4;
+            // 
+            // cmbxMunicipality
+            // 
+            cmbxMunicipality.FormattingEnabled = true;
+            cmbxMunicipality.Location = new System.Drawing.Point(93, 74);
+            cmbxMunicipality.Name = "cmbxMunicipality";
+            cmbxMunicipality.Size = new System.Drawing.Size(223, 23);
+            cmbxMunicipality.TabIndex = 4;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(13, 103);
+            label5.Location = new System.Drawing.Point(9, 103);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(56, 15);
             label5.TabIndex = 2;
             label5.Text = "Barangay";
             // 
-            // comboBox1
+            // cmbxProvince
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new System.Drawing.Point(97, 45);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(223, 23);
-            comboBox1.TabIndex = 4;
+            cmbxProvince.FormattingEnabled = true;
+            cmbxProvince.Location = new System.Drawing.Point(93, 45);
+            cmbxProvince.Name = "cmbxProvince";
+            cmbxProvince.Size = new System.Drawing.Size(223, 23);
+            cmbxProvince.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(13, 74);
+            label4.Location = new System.Drawing.Point(9, 74);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(61, 15);
             label4.TabIndex = 2;
@@ -133,35 +144,27 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(13, 45);
+            label3.Location = new System.Drawing.Point(9, 45);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(53, 15);
             label3.TabIndex = 2;
             label3.Text = "Province";
             // 
-            // textBox1
+            // txtOwnerName
             // 
-            textBox1.Location = new System.Drawing.Point(97, 16);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(223, 23);
-            textBox1.TabIndex = 3;
+            txtOwnerName.Location = new System.Drawing.Point(93, 16);
+            txtOwnerName.Name = "txtOwnerName";
+            txtOwnerName.Size = new System.Drawing.Size(223, 23);
+            txtOwnerName.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(13, 16);
+            label1.Location = new System.Drawing.Point(9, 16);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(77, 15);
             label1.TabIndex = 2;
             label1.Text = "Owner Name";
-            // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(323, 16);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(22, 23);
-            button1.TabIndex = 6;
-            button1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -178,14 +181,14 @@
             // panel1
             // 
             panel1.Controls.Add(numericUpDown1);
-            panel1.Controls.Add(comboBox6);
+            panel1.Controls.Add(nudPrice);
             panel1.Controls.Add(label8);
-            panel1.Controls.Add(comboBox5);
+            panel1.Controls.Add(cmbxSex);
             panel1.Controls.Add(label9);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(comboBox4);
+            panel1.Controls.Add(cmbxType);
             panel1.Controls.Add(label6);
-            panel1.Controls.Add(textBox3);
+            panel1.Controls.Add(txtDescription);
             panel1.Controls.Add(label10);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -196,18 +199,17 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new System.Drawing.Point(94, 71);
+            numericUpDown1.Location = new System.Drawing.Point(279, 42);
             numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(265, 23);
+            numericUpDown1.Size = new System.Drawing.Size(80, 23);
             numericUpDown1.TabIndex = 5;
             // 
-            // comboBox6
+            // nudPrice
             // 
-            comboBox6.FormattingEnabled = true;
-            comboBox6.Location = new System.Drawing.Point(279, 42);
-            comboBox6.Name = "comboBox6";
-            comboBox6.Size = new System.Drawing.Size(80, 23);
-            comboBox6.TabIndex = 4;
+            nudPrice.Location = new System.Drawing.Point(94, 71);
+            nudPrice.Name = "nudPrice";
+            nudPrice.Size = new System.Drawing.Size(265, 23);
+            nudPrice.TabIndex = 5;
             // 
             // label8
             // 
@@ -218,13 +220,13 @@
             label8.TabIndex = 2;
             label8.Text = "Age";
             // 
-            // comboBox5
+            // cmbxSex
             // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new System.Drawing.Point(94, 42);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new System.Drawing.Size(83, 23);
-            comboBox5.TabIndex = 4;
+            cmbxSex.FormattingEnabled = true;
+            cmbxSex.Location = new System.Drawing.Point(94, 42);
+            cmbxSex.Name = "cmbxSex";
+            cmbxSex.Size = new System.Drawing.Size(83, 23);
+            cmbxSex.TabIndex = 4;
             // 
             // label9
             // 
@@ -244,13 +246,13 @@
             label7.TabIndex = 2;
             label7.Text = "Sex";
             // 
-            // comboBox4
+            // cmbxType
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new System.Drawing.Point(94, 13);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new System.Drawing.Size(265, 23);
-            comboBox4.TabIndex = 4;
+            cmbxType.FormattingEnabled = true;
+            cmbxType.Location = new System.Drawing.Point(94, 13);
+            cmbxType.Name = "cmbxType";
+            cmbxType.Size = new System.Drawing.Size(265, 23);
+            cmbxType.TabIndex = 4;
             // 
             // label6
             // 
@@ -261,13 +263,13 @@
             label6.TabIndex = 2;
             label6.Text = "Type";
             // 
-            // textBox3
+            // txtDescription
             // 
-            textBox3.Location = new System.Drawing.Point(94, 100);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(265, 26);
-            textBox3.TabIndex = 3;
+            txtDescription.Location = new System.Drawing.Point(94, 100);
+            txtDescription.Multiline = true;
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new System.Drawing.Size(265, 26);
+            txtDescription.TabIndex = 3;
             // 
             // label10
             // 
@@ -293,6 +295,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudPrice).EndInit();
             ResumeLayout(false);
         }
 
@@ -300,26 +303,26 @@
 
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbxBarangay;
+        private System.Windows.Forms.ComboBox cmbxMunicipality;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbxProvince;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtOwnerName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.NumericUpDown nudPrice;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox cmbxSex;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cmbxType;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

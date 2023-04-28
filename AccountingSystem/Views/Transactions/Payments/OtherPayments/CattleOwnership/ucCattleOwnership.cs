@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             InitializeComponent();
         }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
