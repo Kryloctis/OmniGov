@@ -53,6 +53,7 @@
             textBox1 = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
+            btnBrowse = new System.Windows.Forms.Button();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -190,6 +191,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btnBrowse);
             panel2.Controls.Add(comboBox3);
             panel2.Controls.Add(comboBox2);
             panel2.Controls.Add(label5);
@@ -300,6 +302,15 @@
             panel3.Size = new System.Drawing.Size(762, 194);
             panel3.TabIndex = 5;
             // 
+            // btnBrowse
+            // 
+            btnBrowse.Image = Properties.Resources.user_browse_14px;
+            btnBrowse.Location = new System.Drawing.Point(323, 16);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new System.Drawing.Size(22, 23);
+            btnBrowse.TabIndex = 7;
+            btnBrowse.UseVisualStyleBackColor = true;
+            // 
             // ucCattleTransferOfOwnership
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -345,5 +356,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnBrowse;
     }
 }
