@@ -68,7 +68,9 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private DataColumn[] DataColumnsCollector()
+        #region Collectors
+
+        private DataColumn[] DataColumnsCollectingOfficers()
         {
             return new DataColumn[]
             {
@@ -77,21 +79,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             };
         }
 
-        private DataTable DataTableCollector()
+        private DataTable DataTableCollectingOfficers()
         {
-            DataTable dtCollector = new DataTable();
-            DataTable dataTable;
-            dtCollector.Columns.AddRange(DataColumnsCollector());
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
 
-            if (cbJOCollector.Checked)
+            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
 
-                dataTable = AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecords();
-            else
-                dataTable = AccFactory.CollectingOfficerRepository().GetRecords();
-
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow row in dtCollectingOfficers.Rows)
             {
-                var newRow = dtCollector.NewRow();
+                var newRow = dataTable.NewRow();
                 int Id = Convert.ToInt32(row["id"]);
                 string prefix = row["prefix"].ToString();
                 string firstName = row["first_name"].ToString();
@@ -102,16 +99,56 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
                 newRow["id"] = Id;
                 newRow["full_name"] = fullName;
-                dtCollector.Rows.Add(newRow);
+                dataTable.Rows.Add(newRow);
             }
-            return dtCollector;
+            return dataTable;
+        }
+
+        private DataColumn[] DataColumnsCollectingOfficerHasJobOrders()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "job_orders_id", typeof(int)),
+                new DataColumn(Name = "job_orders_full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficerHasJobOrders()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficerHasJobOrders());
+            DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+
+            foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
+            {
+                int jobOrderId = Convert.ToInt32(row["job_orders_id"]);
+                string prefix = row["job_orders_prefix"].ToString();
+                string firstName = row["job_orders_first_name"].ToString();
+                string middleInitial = row["job_orders_mid_initial"].ToString();
+                string lastName = row["job_orders_last_name"].ToString();
+                string suffix = row["job_orders_last_name"].ToString();
+                string jobOrderFullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                var newRow = dataTable.NewRow();
+                newRow["job_orders_id"] = jobOrderId;
+                newRow["job_orders_full_name"] = jobOrderFullName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
         }
 
         private void LoadCollectors()
         {
-            HelperLoadRecords.CollectingOfficerComboBox(DataTableCollector(), cmbCollector, "full_name", "id");
+            if (cbJOCollector.Checked)
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficerHasJobOrders(), cmbCollector, "job_orders_full_name", "job_orders_id");
+            else
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficers(), cmbCollector, "full_name", "id");
+
             collectorId = Convert.ToUInt16(cmbCollector.SelectedValue);
         }
+
+        #endregion Collectors
 
         private void SelectCurrentLoggedInCollector()
         {
