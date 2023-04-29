@@ -40,16 +40,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
-            errorArray[0] = epReportNo.GetError(txtReport);
-            errorArray[1] = epCollector.GetError(cmbCollector);
-            errorArray[2] = epPayments.GetError(dgPayments);
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            var errorArray = new string[]
+            {
+                epReportNo.GetError(txtReport),
+                epCollector.GetError(cmbCollector),
+                epPayments.GetError(dgPayments)
+            };
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ucRCDCollector_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -59,27 +59,58 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-        private void LoadCollectors()
+        private void ucRCDCollector_Load(object sender, EventArgs e)
         {
             try
             {
-                DataTable dtCollector;
-                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-
-                if (cbJOCollector.Checked)
-                    dtCollector = collectingOfficerHasJORepo.GetRecords();
-                else
-                    dtCollector = collectingOfficerRepository.GetRecords();
-
-                HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
-
-                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+                OnLoad();
             }
-            catch (Exception ex)
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private DataColumn[] DataColumnsCollector()
+        {
+            return new DataColumn[]
             {
-                Helper.MessageBoxError(ex.Message);
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollector()
+        {
+            DataTable dtCollector = new DataTable();
+            DataTable dataTable;
+            dtCollector.Columns.AddRange(DataColumnsCollector());
+
+            if (cbJOCollector.Checked)
+
+                dataTable = AccFactory.CollectingOfficerHasJobOrdersRepository().GetRecords();
+            else
+                dataTable = AccFactory.CollectingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var newRow = dtCollector.NewRow();
+                int Id = Convert.ToInt32(row["id"]);
+                string prefix = row["prefix"].ToString();
+                string firstName = row["first_name"].ToString();
+                string middleInitial = row["mid_initial"].ToString();
+                string lastName = row["last_name"].ToString();
+                string suffix = row["suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dtCollector.Rows.Add(newRow);
             }
+            return dtCollector;
+        }
+
+        private void LoadCollectors()
+        {
+            HelperLoadRecords.CollectingOfficerComboBox(DataTableCollector(), cmbCollector, "full_name", "id");
+            collectorId = Convert.ToUInt16(cmbCollector.SelectedValue);
         }
 
         private void SelectCurrentLoggedInCollector()
@@ -269,7 +300,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void cbJOCollector_CheckedChanged(object sender, EventArgs e)
         {
-            LoadCollectors();
+            try
+            {
+                LoadCollectors();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 
