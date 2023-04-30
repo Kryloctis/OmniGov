@@ -50,7 +50,7 @@
             splitContainer5 = new System.Windows.Forms.SplitContainer();
             ucaF51_571 = new OtherPayments.AF51_57.ucAF51_57();
             ucOtherCharges1 = new OtherPayments.ucOtherCharges();
-            tabPageCertificateOfCattle = new System.Windows.Forms.TabPage();
+            tabPageCertificateOfTransferOfCattle = new System.Windows.Forms.TabPage();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             ucCattleTransferOfOwnership1 = new OtherPayments.CattleTransferOfOwnership.ucCattleTransferOfOwnership();
             ucOtherCharges2 = new OtherPayments.ucOtherCharges();
@@ -99,7 +99,7 @@
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
             splitContainer5.SuspendLayout();
-            tabPageCertificateOfCattle.SuspendLayout();
+            tabPageCertificateOfTransferOfCattle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -325,7 +325,7 @@
             // tabControlOthers
             // 
             tabControlOthers.Controls.Add(tabPageAF51ANDAF57);
-            tabControlOthers.Controls.Add(tabPageCertificateOfCattle);
+            tabControlOthers.Controls.Add(tabPageCertificateOfTransferOfCattle);
             tabControlOthers.Controls.Add(tabPageCattleOwnership);
             tabControlOthers.Controls.Add(tabPageMarriageLicense);
             tabControlOthers.Controls.Add(tabPageBurialPermit);
@@ -346,6 +346,7 @@
             tabPageAF51ANDAF57.Size = new System.Drawing.Size(835, 447);
             tabPageAF51ANDAF57.TabIndex = 0;
             tabPageAF51ANDAF57.Text = "AF 51 & AF 57";
+            tabPageAF51ANDAF57.Enter += tabPageAF51ANDAF57_Enter;
             // 
             // splitContainer5
             // 
@@ -386,16 +387,17 @@
             ucOtherCharges1.Size = new System.Drawing.Size(829, 371);
             ucOtherCharges1.TabIndex = 1;
             // 
-            // tabPageCertificateOfCattle
+            // tabPageCertificateOfTransferOfCattle
             // 
-            tabPageCertificateOfCattle.BackColor = System.Drawing.Color.White;
-            tabPageCertificateOfCattle.Controls.Add(splitContainer1);
-            tabPageCertificateOfCattle.Location = new System.Drawing.Point(4, 24);
-            tabPageCertificateOfCattle.Name = "tabPageCertificateOfCattle";
-            tabPageCertificateOfCattle.Padding = new System.Windows.Forms.Padding(3);
-            tabPageCertificateOfCattle.Size = new System.Drawing.Size(835, 447);
-            tabPageCertificateOfCattle.TabIndex = 1;
-            tabPageCertificateOfCattle.Text = "AF 52 - Cetificate of Transfer of Cattle ";
+            tabPageCertificateOfTransferOfCattle.BackColor = System.Drawing.Color.White;
+            tabPageCertificateOfTransferOfCattle.Controls.Add(splitContainer1);
+            tabPageCertificateOfTransferOfCattle.Location = new System.Drawing.Point(4, 24);
+            tabPageCertificateOfTransferOfCattle.Name = "tabPageCertificateOfTransferOfCattle";
+            tabPageCertificateOfTransferOfCattle.Padding = new System.Windows.Forms.Padding(3);
+            tabPageCertificateOfTransferOfCattle.Size = new System.Drawing.Size(835, 447);
+            tabPageCertificateOfTransferOfCattle.TabIndex = 1;
+            tabPageCertificateOfTransferOfCattle.Text = "AF 52 - Cetificate of Transfer of Cattle ";
+            tabPageCertificateOfTransferOfCattle.Enter += tabPageCertificateOfTransferOfCattle_Enter;
             // 
             // splitContainer1
             // 
@@ -448,6 +450,7 @@
             tabPageCattleOwnership.TabIndex = 2;
             tabPageCattleOwnership.Text = "AF 53 - Cattle Ownership";
             tabPageCattleOwnership.UseVisualStyleBackColor = true;
+            tabPageCattleOwnership.Enter += tabPageCattleOwnership_Enter;
             // 
             // splitContainer2
             // 
@@ -500,6 +503,7 @@
             tabPageMarriageLicense.Size = new System.Drawing.Size(835, 447);
             tabPageMarriageLicense.TabIndex = 3;
             tabPageMarriageLicense.Text = "AF 54 - Marriage License";
+            tabPageMarriageLicense.Enter += tabPageMarriageLicense_Enter;
             // 
             // splitContainer3
             // 
@@ -543,7 +547,6 @@
             ucOtherCharges4.Name = "ucOtherCharges4";
             ucOtherCharges4.Size = new System.Drawing.Size(829, 87);
             ucOtherCharges4.TabIndex = 0;
-            ucOtherCharges4.Load += ucOtherCharges4_Load;
             // 
             // tabPageBurialPermit
             // 
@@ -556,6 +559,7 @@
             tabPageBurialPermit.Size = new System.Drawing.Size(835, 447);
             tabPageBurialPermit.TabIndex = 5;
             tabPageBurialPermit.Text = "AF 58 - Burial Permit";
+            tabPageBurialPermit.Enter += tabPageBurialPermit_Enter;
             // 
             // splitContainer4
             // 
@@ -834,7 +838,7 @@
             splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
             splitContainer5.ResumeLayout(false);
-            tabPageCertificateOfCattle.ResumeLayout(false);
+            tabPageCertificateOfTransferOfCattle.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -894,7 +898,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TabControl tabControlOthers;
         private System.Windows.Forms.TabPage tabPageAF51ANDAF57;
-        private System.Windows.Forms.TabPage tabPageCertificateOfCattle;
+        private System.Windows.Forms.TabPage tabPageCertificateOfTransferOfCattle;
         private System.Windows.Forms.TabPage tabPageCattleOwnership;
         private System.Windows.Forms.TabPage tabPageMarriageLicense;
         private System.Windows.Forms.TabPage tabPageBurialPermit;

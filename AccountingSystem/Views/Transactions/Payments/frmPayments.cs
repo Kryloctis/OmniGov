@@ -359,7 +359,20 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
+
+                burialPermitModel.TaxpayersID = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
+                burialPermitModel.Permission = ucBurialPermit.txtPermission.Text;
                 burialPermitModel.RemainsName = ucBurialPermit.txtCemetery.Text;
+                burialPermitModel.RemainsNationality = ucBurialPermit.txtRemainsNationality.Text;
+                burialPermitModel.RemainsAge = Convert.ToInt32(ucBurialPermit.nudRemainsAge.Value);
+                burialPermitModel.RemainsSex = ucBurialPermit.cmbxRemainsSex.Text;
+                burialPermitModel.DeathDate = Convert.ToDateTime(ucBurialPermit.dtpDeathDate.Value);
+                burialPermitModel.CauseOfDeath = ucBurialPermit.txtCauseOfDeath.Text;
+                burialPermitModel.Cemetery = ucBurialPermit.txtCemetery.Text;
+                burialPermitModel.Disinterment = ucBurialPermit.txtDisinterment.Text;
+                burialPermitModel.IsInfectious = ucBurialPermit.cbxIsInfectious.Checked;
+                burialPermitModel.IsEmbalmed = ucBurialPermit.cbxIsEmbalbed.Checked;
+
             }
 
             catch (Exception ex)
@@ -417,7 +430,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             //rptPayments Model
             var rptPaymentsModel = new RptPaymentsModel();
-            
+
             rptPaymentsModel.PostedBy = Helper.UserId;
 
             var chequesModels = new List<ChequesModel>();
@@ -481,7 +494,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                     }
                     else if (radRpt.Checked)
                     {
-                        
+
                     }
                     else if (radOthers.Checked)
                     {
@@ -496,13 +509,14 @@ namespace AccountingSystem.Views.Transactions.Payments
                                 break;
                             case "54":
                                 SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
+                                MessageBox.Show("marriage");
                                 break;
                             case "56":
                                 break;
                             case "57":
                                 break;
                             case "58":
-                                SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel()) ;
+                                SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel());
                                 break;
                             default:
                                 break;
@@ -543,9 +557,33 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         #endregion Save Payment
 
-        private void ucOtherCharges4_Load(object sender, EventArgs e)
-        {
 
+        private void tabPageAF51ANDAF57_Enter(object sender, EventArgs e)
+        {
+            ucPayment.selectedAccountableFormNo = "51";
         }
+
+        private void tabPageCertificateOfTransferOfCattle_Enter(object sender, EventArgs e)
+        {
+            ucPayment.selectedAccountableFormNo = "52";
+        }
+
+        private void tabPageCattleOwnership_Enter(object sender, EventArgs e)
+        {
+            ucPayment.selectedAccountableFormNo = "53";
+        }
+
+
+        private void tabPageMarriageLicense_Enter(object sender, EventArgs e)
+        {
+            ucPayment.selectedAccountableFormNo = "54";
+        }
+
+        private void tabPageBurialPermit_Enter(object sender, EventArgs e)
+        {
+            ucPayment.selectedAccountableFormNo = "58";
+        }
+
+ 
     }
 }

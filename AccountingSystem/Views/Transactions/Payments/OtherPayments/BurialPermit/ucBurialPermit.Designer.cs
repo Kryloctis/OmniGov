@@ -36,6 +36,7 @@
             label1 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
+            nudRemainsAge = new System.Windows.Forms.NumericUpDown();
             cmbxRemainsSex = new System.Windows.Forms.ComboBox();
             label6 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
@@ -51,20 +52,21 @@
             label7 = new System.Windows.Forms.Label();
             label12 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
             label10 = new System.Windows.Forms.Label();
             label9 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
+            txtCauseOfDeath = new System.Windows.Forms.TextBox();
             txtDisposition = new System.Windows.Forms.TextBox();
             txtDisinterment = new System.Windows.Forms.TextBox();
             txtCemetery = new System.Windows.Forms.TextBox();
-            nudRemainsAge = new System.Windows.Forms.NumericUpDown();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).BeginInit();
             groupBox3.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
@@ -74,7 +76,7 @@
             groupBox2.Location = new System.Drawing.Point(3, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            groupBox2.Size = new System.Drawing.Size(299, 206);
+            groupBox2.Size = new System.Drawing.Size(299, 241);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Taxpayer's Info.";
@@ -89,7 +91,7 @@
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel2.Location = new System.Drawing.Point(5, 21);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(289, 180);
+            panel2.Size = new System.Drawing.Size(289, 215);
             panel2.TabIndex = 0;
             // 
             // txtPermission
@@ -132,10 +134,10 @@
             groupBox1.Location = new System.Drawing.Point(308, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            groupBox1.Size = new System.Drawing.Size(303, 206);
+            groupBox1.Size = new System.Drawing.Size(303, 241);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Taxpayer's Info.";
+            groupBox1.Text = "Remain's Info.";
             // 
             // panel1
             // 
@@ -151,8 +153,15 @@
             panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel1.Location = new System.Drawing.Point(5, 21);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(293, 180);
+            panel1.Size = new System.Drawing.Size(293, 215);
             panel1.TabIndex = 0;
+            // 
+            // nudRemainsAge
+            // 
+            nudRemainsAge.Location = new System.Drawing.Point(77, 76);
+            nudRemainsAge.Name = "nudRemainsAge";
+            nudRemainsAge.Size = new System.Drawing.Size(99, 23);
+            nudRemainsAge.TabIndex = 5;
             // 
             // cmbxRemainsSex
             // 
@@ -219,7 +228,7 @@
             groupBox3.Location = new System.Drawing.Point(617, 5);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new System.Windows.Forms.Padding(5);
-            groupBox3.Size = new System.Drawing.Size(322, 204);
+            groupBox3.Size = new System.Drawing.Size(322, 239);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Death Details";
@@ -232,9 +241,11 @@
             panel3.Controls.Add(label7);
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label11);
+            panel3.Controls.Add(label13);
             panel3.Controls.Add(label10);
             panel3.Controls.Add(label9);
             panel3.Controls.Add(label8);
+            panel3.Controls.Add(txtCauseOfDeath);
             panel3.Controls.Add(txtDisposition);
             panel3.Controls.Add(txtDisinterment);
             panel3.Controls.Add(txtCemetery);
@@ -242,13 +253,13 @@
             panel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel3.Location = new System.Drawing.Point(5, 21);
             panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(312, 178);
+            panel3.Size = new System.Drawing.Size(312, 213);
             panel3.TabIndex = 0;
             // 
             // cbxIsEmbalbed
             // 
             cbxIsEmbalbed.AutoSize = true;
-            cbxIsEmbalbed.Location = new System.Drawing.Point(99, 159);
+            cbxIsEmbalbed.Location = new System.Drawing.Point(99, 190);
             cbxIsEmbalbed.Name = "cbxIsEmbalbed";
             cbxIsEmbalbed.Size = new System.Drawing.Size(15, 14);
             cbxIsEmbalbed.TabIndex = 4;
@@ -257,7 +268,7 @@
             // cbxIsInfectious
             // 
             cbxIsInfectious.AutoSize = true;
-            cbxIsInfectious.Location = new System.Drawing.Point(99, 135);
+            cbxIsInfectious.Location = new System.Drawing.Point(99, 166);
             cbxIsInfectious.Name = "cbxIsInfectious";
             cbxIsInfectious.Size = new System.Drawing.Size(15, 14);
             cbxIsInfectious.TabIndex = 4;
@@ -282,7 +293,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new System.Drawing.Point(6, 156);
+            label12.Location = new System.Drawing.Point(6, 187);
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(64, 15);
             label12.TabIndex = 2;
@@ -291,11 +302,20 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(6, 132);
+            label11.Location = new System.Drawing.Point(6, 163);
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(59, 15);
             label11.TabIndex = 2;
             label11.Text = "Infectious";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(6, 134);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(87, 15);
+            label13.TabIndex = 2;
+            label13.Text = "Cause of Death";
             // 
             // label10
             // 
@@ -324,6 +344,13 @@
             label8.TabIndex = 2;
             label8.Text = "Cemetery";
             // 
+            // txtCauseOfDeath
+            // 
+            txtCauseOfDeath.Location = new System.Drawing.Point(99, 132);
+            txtCauseOfDeath.Name = "txtCauseOfDeath";
+            txtCauseOfDeath.Size = new System.Drawing.Size(200, 23);
+            txtCauseOfDeath.TabIndex = 3;
+            // 
             // txtDisposition
             // 
             txtDisposition.Location = new System.Drawing.Point(99, 103);
@@ -345,13 +372,6 @@
             txtCemetery.Size = new System.Drawing.Size(200, 23);
             txtCemetery.TabIndex = 3;
             // 
-            // nudRemainsAge
-            // 
-            nudRemainsAge.Location = new System.Drawing.Point(77, 76);
-            nudRemainsAge.Name = "nudRemainsAge";
-            nudRemainsAge.Size = new System.Drawing.Size(99, 23);
-            nudRemainsAge.TabIndex = 5;
-            // 
             // ucBurialPermit
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -360,17 +380,17 @@
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Name = "ucBurialPermit";
-            Size = new System.Drawing.Size(946, 211);
+            Size = new System.Drawing.Size(946, 247);
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).EndInit();
             groupBox3.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudRemainsAge).EndInit();
             ResumeLayout(false);
         }
 
@@ -406,5 +426,7 @@
         internal System.Windows.Forms.CheckBox cbxIsInfectious;
         internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.Label label13;
+        internal System.Windows.Forms.TextBox txtCauseOfDeath;
     }
 }
