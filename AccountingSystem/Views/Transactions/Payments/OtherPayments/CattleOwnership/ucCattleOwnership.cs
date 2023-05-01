@@ -12,6 +12,8 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 {
     public partial class ucCattleOwnership : UserControl
     {
+        internal int ownerID;
+
         public ucCattleOwnership()
         {
             InitializeComponent();

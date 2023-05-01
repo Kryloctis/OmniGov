@@ -50,6 +50,30 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
+        public bool InsertWithPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@owner_id", DbType.Int32, cattleOwnershipModel.OwnerID},
+                new object[] { "@tag", DbType.Int32, cattleOwnershipModel.Tag},
+                new object[] { "@barangay", DbType.String, cattleOwnershipModel.Barangay},
+                new object[] { "@municipality", DbType.String, cattleOwnershipModel.Municipality},
+                new object[] { "@province", DbType.String, cattleOwnershipModel.Province},
+                new object[] { "@cattle_type", DbType.String, cattleOwnershipModel.CattleType},
+                new object[] { "@cattle_sex", DbType.String, cattleOwnershipModel.CattleSex},
+                new object[] { "@cattle_age", DbType.String, cattleOwnershipModel.CattleAge},
+                new object[] { "@description", DbType.String, cattleOwnershipModel.Description},
+                new object[] { "@created_at", DbType.DateTime, cattleOwnershipModel.CreatedAt},
+                new object[] { "@created_by", DbType.Int32, cattleOwnershipModel.CreatedBy},
+            };
+
+            string query = $"INSERT INTO {tableName} (owner_id, tag, barangay, municipality, province, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@owner_id, @tag, @barangay, @municipality, @province, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
+
+
+            bool result = _dbGenericCommands.ExecuteNonQuery(query, parameters);
+            return result;
+        }
+
         public bool Update(CattleOwnershipModel entity)
         {
             throw new System.NotImplementedException();

@@ -3,6 +3,7 @@ using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -29,6 +30,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucOtherCharges ucOtherCharges;
         private ucMarriageLicense ucMarriageLicense;
         private ucBurialPermit ucBurialPermit;
+        private ucCattleOwnership ucCattleOwnership;
 
         private string paymentFor;
 
@@ -44,6 +46,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             ucBurialPermit = ucBurialPermit1;
             ucMarriageLicense = ucMarriageLicense1;
+            ucCattleOwnership = ucCattleOwnership2;
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -353,7 +356,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             return marriageLicenseModel;
         }
-
+        
         private BurialPermitModel BurialPermitModel()
         {
             var burialPermitModel = new BurialPermitModel();
@@ -389,6 +392,39 @@ namespace AccountingSystem.Views.Transactions.Payments
             return burialPermitModel;
         }
 
+        private CattleOwnershipModel CattleOwnershipModel()
+        {
+            var cattleOwnershipModel = new CattleOwnershipModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+
+                //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
+                cattleOwnershipModel.OwnerID = 1;
+                cattleOwnershipModel.Tag = 1;
+                cattleOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
+                cattleOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
+                cattleOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
+                cattleOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
+                cattleOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
+                cattleOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
+                cattleOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
+                cattleOwnershipModel.CreatedBy = Helper.UserId;
+                cattleOwnershipModel.CreatedAt = DateTime.Now;
+
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return cattleOwnershipModel;
+        }
+
         private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             try
@@ -420,6 +456,19 @@ namespace AccountingSystem.Views.Transactions.Payments
             try
             {
                 return AccFactory.BurialPermitRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool SaveCattleOwnershipPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
+        {
+            try
+            {
+                return AccFactory.CattleOwnershipRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
             }
             catch (Exception ex)
             {
@@ -512,10 +561,11 @@ namespace AccountingSystem.Views.Transactions.Payments
                             case "52":
                                 break;
                             case "53":
+                                SaveCattleOwnershipPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleOwnershipModel());
+                                
                                 break;
                             case "54":
                                 SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
-                                MessageBox.Show("marriage");
                                 break;
                             case "56":
                                 break;

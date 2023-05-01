@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICattleOwnershipRepository : IAccRepository<CattleOwnershipModel>
     {
-
+        bool InsertWithPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel);
     }
 }

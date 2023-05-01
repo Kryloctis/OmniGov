@@ -301,28 +301,28 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox cmbxBarangay;
-        private System.Windows.Forms.ComboBox cmbxMunicipality;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbxProvince;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtOwnerName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown nudPrice;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbxSex;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbxType;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown nudAge;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.ComboBox cmbxBarangay;
+        internal System.Windows.Forms.ComboBox cmbxMunicipality;
+        internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.ComboBox cmbxProvince;
+        internal System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.TextBox txtOwnerName;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.Button btnBrowse;
+        internal System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel1;
+        internal System.Windows.Forms.NumericUpDown nudPrice;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.ComboBox cmbxSex;
+        internal System.Windows.Forms.Label label9;
+        internal System.Windows.Forms.Label label7;
+        internal System.Windows.Forms.ComboBox cmbxType;
+        internal System.Windows.Forms.Label label6;
+        internal System.Windows.Forms.TextBox txtDescription;
+        internal System.Windows.Forms.Label label10;
+        internal System.Windows.Forms.NumericUpDown nudAge;
     }
 }
