@@ -42,6 +42,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucAF51And57 = ucaF51_571;
             ucOtherCharges = ucOtherCharges1;
 
+            ucBurialPermit = ucBurialPermit1;
             ucMarriageLicense = ucMarriageLicense1;
         }
 
@@ -172,6 +173,9 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucaF51_571.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
             ucaF51_571.txtType.Text = "aw";
             ucaF51_571.txtContact.Text = "09052321810";
+
+
+            ucBurialPermit.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
 
         }
 
@@ -372,6 +376,8 @@ namespace AccountingSystem.Views.Transactions.Payments
                 burialPermitModel.Disinterment = ucBurialPermit.txtDisinterment.Text;
                 burialPermitModel.IsInfectious = ucBurialPermit.cbxIsInfectious.Checked;
                 burialPermitModel.IsEmbalmed = ucBurialPermit.cbxIsEmbalbed.Checked;
+                burialPermitModel.CreatedAt = DateTime.Today;
+                burialPermitModel.CreatedBy = Helper.UserId;
 
             }
 

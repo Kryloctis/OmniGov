@@ -41,7 +41,7 @@
             label1 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             panel1 = new System.Windows.Forms.Panel();
-            numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            nudAge = new System.Windows.Forms.NumericUpDown();
             nudPrice = new System.Windows.Forms.NumericUpDown();
             label8 = new System.Windows.Forms.Label();
             cmbxSex = new System.Windows.Forms.ComboBox();
@@ -55,7 +55,7 @@
             panel2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudPrice).BeginInit();
             SuspendLayout();
             // 
@@ -180,7 +180,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(numericUpDown1);
+            panel1.Controls.Add(nudAge);
             panel1.Controls.Add(nudPrice);
             panel1.Controls.Add(label8);
             panel1.Controls.Add(cmbxSex);
@@ -197,12 +197,12 @@
             panel1.Size = new System.Drawing.Size(382, 134);
             panel1.TabIndex = 0;
             // 
-            // numericUpDown1
+            // nudAge
             // 
-            numericUpDown1.Location = new System.Drawing.Point(279, 42);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new System.Drawing.Size(80, 23);
-            numericUpDown1.TabIndex = 5;
+            nudAge.Location = new System.Drawing.Point(279, 42);
+            nudAge.Name = "nudAge";
+            nudAge.Size = new System.Drawing.Size(80, 23);
+            nudAge.TabIndex = 5;
             // 
             // nudPrice
             // 
@@ -294,7 +294,7 @@
             groupBox1.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudPrice).EndInit();
             ResumeLayout(false);
         }
@@ -323,6 +323,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudAge;
     }
 }
