@@ -55,5 +55,30 @@ namespace AccountingSystem
         {
             throw new System.NotImplementedException();
         }
+
+        public bool InsertWithPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleTransferOfOwnershipModel cattleTransferOfOwnershipModel)
+        {
+            var parameters = new object[][]
+            {
+                new object[] { "@cattle_ownership_id", DbType.Int32, cattleTransferOfOwnershipModel.CattleOwnershipID},
+                new object[] { "@old_owner_id", DbType.Int32, cattleTransferOfOwnershipModel.OldOwnerID},
+                new object[] { "@new_owner_id", DbType.Int32, cattleTransferOfOwnershipModel.NewOwnerID},
+                new object[] { "@barangay", DbType.String, cattleTransferOfOwnershipModel.Barangay},
+                new object[] { "@municipality", DbType.String, cattleTransferOfOwnershipModel.Municipality},
+                new object[] { "@province", DbType.String, cattleTransferOfOwnershipModel.Province},
+                new object[] { "@amount", DbType.Decimal, cattleTransferOfOwnershipModel.Amount},
+                new object[] { "@cattle_type", DbType.String, cattleTransferOfOwnershipModel.CattleType},
+                new object[] { "@cattle_sex", DbType.String, cattleTransferOfOwnershipModel.CattleSex},
+                new object[] { "@cattle_age", DbType.Int32, cattleTransferOfOwnershipModel.CattleAge},
+                new object[] { "@description", DbType.String, cattleTransferOfOwnershipModel.Description},
+                new object[] { "@created_at", DbType.Int32, cattleTransferOfOwnershipModel.CreatedAt},
+                new object[] { "@created_by", DbType.Int32, cattleTransferOfOwnershipModel.CreatedBy},
+            };
+
+            string query = $"INSERT INTO {tableName} (cattle_ownership_id, old_owner_id, new_owner_id, barangay, municipality, province, amount, cattle_type, cattle_sex, cattle_age, description, created_at, created_by, updated_at, updated_by) VALUES(@cattle_ownership_id, @old_owner_id, @new_owner_id, @barangay, @municipality, @province, @amount, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
+
+            bool result = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+            return result;
+        }
     }
 }

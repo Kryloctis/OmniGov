@@ -1,4 +1,5 @@
-﻿using ACC.Domain.Models;
+﻿using ACC.Domain.Interfaces;
+using ACC.Domain.Models;
 using AccountingSystem.Views.Dialogs;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
@@ -425,6 +426,39 @@ namespace AccountingSystem.Views.Transactions.Payments
             return cattleOwnershipModel;
         }
 
+        private CattleTransferOfOwnershipModel CattleTransferOfOwnershipModel()
+        {
+            var cattleTransferOfOwnershipModel = new CattleTransferOfOwnershipModel();
+
+            try
+            {
+                var collectingOfficerData = ucPayment.GetCollectingOfficerData();
+                bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
+
+
+                //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
+                //cattleTransferOfOwnershipModel.OwnerID = 1;
+                //cattleTransferOfOwnershipModel.Tag = 1;
+                //cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
+                //cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
+                //cattleTransferOfOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
+                //cattleTransferOfOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
+                //cattleTransferOfOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
+                //cattleTransferOfOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
+                //cattleTransferOfOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
+                //cattleTransferOfOwnershipModel.CreatedBy = Helper.UserId;
+                //cattleTransferOfOwnershipModel.CreatedAt = DateTime.Now;
+
+            }
+
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+
+            return cattleTransferOfOwnershipModel;
+        }
+
         private bool SaveRptPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, RptPaymentsModel rptPaymentsModel, List<RptTaxDuesModel> rptTaxDuesModels)
         {
             try
@@ -469,6 +503,19 @@ namespace AccountingSystem.Views.Transactions.Payments
             try
             {
                 return AccFactory.CattleOwnershipRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
+        }
+
+        private bool SaveCattleOwnershipTransferPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleTransferOfOwnershipModel cattleTransferOfOwnershipModel)
+        {
+            try
+            {
+                return AccFactory.CattleTransferOfOwnershipRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleTransferOfOwnershipModel);
             }
             catch (Exception ex)
             {
@@ -559,10 +606,10 @@ namespace AccountingSystem.Views.Transactions.Payments
                                 SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
                                 break;
                             case "52":
+                                SaveCattleOwnershipTransferPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleTransferOfOwnershipModel());
                                 break;
                             case "53":
                                 SaveCattleOwnershipPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleOwnershipModel());
-                                
                                 break;
                             case "54":
                                 SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());

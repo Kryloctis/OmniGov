@@ -16,5 +16,10 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         {
             InitializeComponent();
         }
+
+        private void ucCattleTransferOfOwnership_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
