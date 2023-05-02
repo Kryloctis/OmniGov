@@ -30,11 +30,11 @@
         {
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
-            textBox3 = new System.Windows.Forms.TextBox();
+            txtContact = new System.Windows.Forms.TextBox();
             label3 = new System.Windows.Forms.Label();
-            textBox2 = new System.Windows.Forms.TextBox();
+            txtType = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
-            textBox1 = new System.Windows.Forms.TextBox();
+            txtTaxpayer = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
@@ -42,37 +42,39 @@
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = System.Drawing.Color.Transparent;
             groupBox2.Controls.Add(panel2);
             groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             groupBox2.Location = new System.Drawing.Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(711, 66);
+            groupBox2.Size = new System.Drawing.Size(711, 60);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Taxpayer Information";
             // 
             // panel2
             // 
-            panel2.Controls.Add(textBox3);
+            panel2.Controls.Add(txtContact);
             panel2.Controls.Add(label3);
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(txtType);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(txtTaxpayer);
             panel2.Controls.Add(label1);
             panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             panel2.Location = new System.Drawing.Point(3, 19);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(705, 44);
+            panel2.Size = new System.Drawing.Size(705, 38);
             panel2.TabIndex = 0;
             // 
-            // textBox3
+            // txtContact
             // 
-            textBox3.Location = new System.Drawing.Point(493, 8);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(195, 23);
-            textBox3.TabIndex = 5;
+            txtContact.Location = new System.Drawing.Point(493, 8);
+            txtContact.Name = "txtContact";
+            txtContact.ReadOnly = true;
+            txtContact.Size = new System.Drawing.Size(195, 23);
+            txtContact.TabIndex = 5;
             // 
             // label3
             // 
@@ -83,12 +85,13 @@
             label3.TabIndex = 4;
             label3.Text = "Contact";
             // 
-            // textBox2
+            // txtType
             // 
-            textBox2.Location = new System.Drawing.Point(339, 8);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(78, 23);
-            textBox2.TabIndex = 3;
+            txtType.Location = new System.Drawing.Point(339, 8);
+            txtType.Name = "txtType";
+            txtType.ReadOnly = true;
+            txtType.Size = new System.Drawing.Size(78, 23);
+            txtType.TabIndex = 3;
             // 
             // label2
             // 
@@ -99,12 +102,13 @@
             label2.TabIndex = 2;
             label2.Text = "Type";
             // 
-            // textBox1
+            // txtTaxpayer
             // 
-            textBox1.Location = new System.Drawing.Point(60, 8);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(223, 23);
-            textBox1.TabIndex = 3;
+            txtTaxpayer.Location = new System.Drawing.Point(60, 8);
+            txtTaxpayer.Name = "txtTaxpayer";
+            txtTaxpayer.ReadOnly = true;
+            txtTaxpayer.Size = new System.Drawing.Size(223, 23);
+            txtTaxpayer.TabIndex = 3;
             // 
             // label1
             // 
@@ -121,7 +125,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(groupBox2);
             Name = "ucAF51_57";
-            Size = new System.Drawing.Size(711, 66);
+            Size = new System.Drawing.Size(711, 60);
+            Load += ucAF51_57_Load;
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -131,11 +136,11 @@
         #endregion
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.TextBox txtContact;
+        internal System.Windows.Forms.TextBox txtType;
+        internal System.Windows.Forms.TextBox txtTaxpayer;
     }
 }

@@ -387,6 +387,22 @@ namespace AccountingSystem
             comboBox.DropDownHeight = 200;
         }
 
+        internal static void MunicipalitiesCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
+        }
+
+        internal static void ProvinceCombobox(DataTable dataTable, ComboBox comboBox, string displayMember, string valueMember)
+        {
+            comboBox.DataSource = dataTable;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.DropDownHeight = 200;
+        }
+
         internal static void RealPropertiesSearchDatagridView(DataTable dataTable, DataGridView dataGridView)
         {
             dataGridView.DataSource = dataTable;
@@ -2885,5 +2901,7 @@ namespace AccountingSystem
             datagrid.Columns["starting_year"].HeaderText = "Starting Year";
             datagrid.Columns["starting_year"].MinimumWidth = 150;
         }
+
+       
     }
 }
