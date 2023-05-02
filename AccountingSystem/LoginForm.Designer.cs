@@ -55,7 +55,6 @@ namespace AccountingSystem
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new System.Drawing.Size(294, 23);
             txtUsername.TabIndex = 0;
-            txtUsername.Text = "juanita";
             // 
             // label1
             // 
@@ -88,7 +87,6 @@ namespace AccountingSystem
             txtPassword.PasswordChar = '•';
             txtPassword.Size = new System.Drawing.Size(294, 23);
             txtPassword.TabIndex = 2;
-            txtPassword.Text = "123";
             // 
             // panel1
             // 

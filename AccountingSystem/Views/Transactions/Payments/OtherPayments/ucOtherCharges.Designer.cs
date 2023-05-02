@@ -136,6 +136,7 @@
             dgOtherPaymentCharges.RowTemplate.Height = 25;
             dgOtherPaymentCharges.Size = new System.Drawing.Size(405, 306);
             dgOtherPaymentCharges.TabIndex = 8;
+            dgOtherPaymentCharges.CellEndEdit += dgOtherPaymentCharges_CellEndEdit;
             // 
             // panel4
             // 
@@ -159,6 +160,7 @@
             btnRemove.TabIndex = 4;
             btnRemove.Text = "x";
             btnRemove.UseVisualStyleBackColor = true;
+            btnRemove.Click += btnRemove_Click;
             // 
             // btnAdd
             // 
@@ -182,6 +184,7 @@
             btnUndo.TabIndex = 5;
             btnUndo.Text = "<";
             btnUndo.UseVisualStyleBackColor = true;
+            btnUndo.Click += btnUndo_Click;
             // 
             // ucOtherCharges
             // 

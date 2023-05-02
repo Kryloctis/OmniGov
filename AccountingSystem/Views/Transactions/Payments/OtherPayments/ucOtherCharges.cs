@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +18,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         int childImageIndexCounter = 1;
         internal string description = string.Empty;
         internal string accountableForm = string.Empty;
-        internal int unit;
+        internal int unit = 1;
         internal decimal debitAmount;
         internal decimal totalAmount;
 
@@ -114,42 +115,51 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             if (!DesignMode)
             {
                 LoadOtherPaymentCharges();
-
+                CreatedOtherPaymentChargesColumns(dgOtherPaymentCharges);
             }
         }
 
-        internal DataTable OthersChargesDataTable()
+        internal void CreatedOtherPaymentChargesColumns(DataGridView datagrid)
         {
+            datagrid.ColumnCount = 5;
+            datagrid.Columns[0].Name = "description";
+            datagrid.Columns[1].Name = "debit_amount";
+            datagrid.Columns[2].Name = "accountable_form_type";
+            datagrid.Columns[3].Name = "unit";
+            datagrid.Columns[4].Name = "total_amount";
 
-            var dataTable = new DataTable();
-            dataTable.Columns.AddRange(OtherPaymentChargesColumns());
-            var newRow = dataTable.NewRow();
+            datagrid.Columns[0].HeaderText = "Description";
+            datagrid.Columns[1].HeaderText = "Debit Amount";
+            datagrid.Columns[2].HeaderText = "Accountable Form Type";
+            datagrid.Columns[3].HeaderText = "Unit";
+            datagrid.Columns[4].HeaderText = "Total Amount";
 
-            newRow["description"] = description;
-            newRow["debit_amount"] = debitAmount;
-            newRow["accountable_form_type"] = accountableForm;
-            newRow["unit"] = unit;
-            newRow["total_amount"] = totalAmount;
+            datagrid.RowHeadersVisible = false;
+            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            dataTable.Rows.Add(newRow);
-            return dataTable;
-        }
+            datagrid.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["description"].MinimumWidth = 150;
+            datagrid.Columns["accountable_form_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["accountable_form_type"].MinimumWidth = 150;
+            datagrid.Columns["debit_amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["debit_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["unit"].MinimumWidth = 150;
+            datagrid.Columns["debit_amount"].MinimumWidth = 150;
+            datagrid.Columns["total_amount"].DefaultCellStyle.Format = "#,0.00###";
+            datagrid.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["total_amount"].MinimumWidth = 150;
 
-        private DataColumn[] OtherPaymentChargesColumns()
-        {
-            return new DataColumn[]
-            {
-                new DataColumn("description", typeof(string)),
-                new DataColumn("debit_amount", typeof(decimal)),
-                new DataColumn("accountable_form_type", typeof(string)),
-                new DataColumn("unit", typeof(int)),
-                new DataColumn("total_amount", typeof(decimal)),
-            };
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            HelperLoadRecords.OtherPaymentChargesDatagridView(dgOtherPaymentCharges, OthersChargesDataTable());
+            AddOtherPaymentCharge();
+        }
+
+        private void AddOtherPaymentCharge()
+        {
+            _ = dgOtherPaymentCharges.Rows.Add(new object[] { description, debitAmount, accountableForm, unit, totalAmount });
         }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
@@ -162,8 +172,31 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             description = dictPaymentRates["description"];
             debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
+            totalAmount = unit * debitAmount;
+        }
 
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgOtherPaymentCharges.SelectedRows)
+            {
+                RemovedOtherPaymentCharge(row, dgOtherPaymentCharges);
+            }
+        }
+
+        private void RemovedOtherPaymentCharge(DataGridViewRow row, DataGridView dgOtherPaymentCharges)
+        {
+            dgOtherPaymentCharges.Rows.Remove(row);
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            dgOtherPaymentCharges.Rows.Clear();
+        }
+
+        private void dgOtherPaymentCharges_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
+
     }
 }
