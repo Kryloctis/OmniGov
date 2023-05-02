@@ -80,6 +80,35 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
+        public Dictionary<string, string> GetRecordsByTaxTypeID(int taxTypeID)
+        {
+            var record = new Dictionary<string, string>();
+
+            var parameters = new object[][]
+            {
+                    new object[] { "@tax_type_id", DbType.Int32, taxTypeID},
+            };
+
+            string query = $"SELECT * FROM {tableName} WHERE tax_type_id = @tax_type_id";
+
+            using (var reader = _mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (reader.Rows.Count < 1)
+                    return record;
+
+                record.Add("id", reader.Rows[0]["id"].ToString());
+                record.Add("description", reader.Rows[0]["description"].ToString());
+                record.Add("amount", reader.Rows[0]["amount"].ToString());
+                record.Add("is_rate_editable", reader.Rows[0]["is_rate_editable"].ToString());
+                record.Add("created_by", reader.Rows[0]["created_by"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_by", reader.Rows[0]["updated_by"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+            }
+
+            return record;
+        }
+
         public bool IdExist(int id)
         {
             throw new System.NotImplementedException();

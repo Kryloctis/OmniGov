@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IOtherPaymentRatesRepository : IAccRepository<OtherPaymentRatesModel>
     {
-
+        Dictionary<string, string> GetRecordsByTaxTypeID(int taxTypeID);
     }
 }
