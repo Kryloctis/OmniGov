@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 {
@@ -14,7 +15,12 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
     {
 
         int childImageIndexCounter = 1;
-        internal decimal totalAmount = 124210;
+        internal string description = string.Empty;
+        internal string accountableForm = string.Empty;
+        internal int unit;
+        internal decimal debitAmount;
+        internal decimal totalAmount;
+
 
         public ucOtherCharges()
         {
@@ -119,11 +125,11 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             dataTable.Columns.AddRange(OtherPaymentChargesColumns());
             var newRow = dataTable.NewRow();
 
-            newRow["description"] = "asd";
-            newRow["debit_amount"] = 2141;
-            newRow["accountable_form_type"] = "zxczx";
-            newRow["unit"] = 1;
-            newRow["total_amount"] = 21451;
+            newRow["description"] = description;
+            newRow["debit_amount"] = debitAmount;
+            newRow["accountable_form_type"] = accountableForm;
+            newRow["unit"] = unit;
+            newRow["total_amount"] = totalAmount;
 
             dataTable.Rows.Add(newRow);
             return dataTable;
@@ -146,5 +152,18 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             HelperLoadRecords.OtherPaymentChargesDatagridView(dgOtherPaymentCharges, OthersChargesDataTable());
         }
 
+        private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            int taxTypeID = Convert.ToInt32(treeViewTaxTypes.SelectedNode.Tag);
+            Dictionary<string, string> dictPaymentRates = AccFactory.OtherPaymentRatesRepository().GetRecordsByTaxTypeID(taxTypeID);
+
+            if (dictPaymentRates.Count <= 0)
+                return;
+
+            description = dictPaymentRates["description"];
+            debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
+
+
+        }
     }
 }
