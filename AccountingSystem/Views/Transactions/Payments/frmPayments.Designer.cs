@@ -575,7 +575,7 @@
             splitContainer4.Panel1.AutoScrollMargin = new System.Drawing.Size(470, 0);
             splitContainer4.Panel1.AutoScrollMinSize = new System.Drawing.Size(470, 0);
             splitContainer4.Panel1.Controls.Add(ucBurialPermit1);
-            splitContainer4.Panel1MinSize = 220;
+            splitContainer4.Panel1MinSize = 267;
             // 
             // splitContainer4.Panel2
             // 
@@ -583,7 +583,7 @@
             splitContainer4.Panel2.Controls.Add(ucOtherCharges5);
             splitContainer4.Panel2MinSize = 122;
             splitContainer4.Size = new System.Drawing.Size(829, 441);
-            splitContainer4.SplitterDistance = 229;
+            splitContainer4.SplitterDistance = 250;
             splitContainer4.TabIndex = 0;
             // 
             // ucBurialPermit1

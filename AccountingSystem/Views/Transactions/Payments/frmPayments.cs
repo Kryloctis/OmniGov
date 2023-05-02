@@ -5,18 +5,14 @@ using AccountingSystem.Views.Transactions.Payments.OtherPayments;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.AF51_57;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermit;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwnership;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLicense;
 using AccountingSystem.Views.Transactions.Payments.RealProperty;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
-using System.Security;
 using System.Text;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace AccountingSystem.Views.Transactions.Payments
 {
@@ -32,6 +28,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucMarriageLicense ucMarriageLicense;
         private ucBurialPermit ucBurialPermit;
         private ucCattleOwnership ucCattleOwnership;
+        private ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
 
         private string paymentFor;
 
@@ -48,6 +45,8 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucBurialPermit = ucBurialPermit1;
             ucMarriageLicense = ucMarriageLicense1;
             ucCattleOwnership = ucCattleOwnership2;
+            ucCattleTransferOfOwnership = ucCattleTransferOfOwnership1;
+
         }
 
         private DataColumn[] TaxpayersColumns()
@@ -170,16 +169,16 @@ namespace AccountingSystem.Views.Transactions.Payments
             if (GetTaxPayerData().Count < 1)
                 return;
 
+            int taxpayerId = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
+
             tabControl1.SelectedTab = tabPageTaxDues;
-            ucRptTaxDues.taxpayersId = Convert.ToInt32(GetTaxPayerData()["taxpayer_id"]);
+            ucRptTaxDues.taxpayersId = taxpayerId;
+
+
             ucRptTaxDues.LoadPostedProperties();
-
-            ucaF51_571.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
-            ucaF51_571.txtType.Text = "aw";
-            ucaF51_571.txtContact.Text = "09052321810";
-
-
-            ucBurialPermit.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
+            ucaF51_571.LoadTaxpayerInfo(taxpayerId);
+            ucCattleOwnership.LoadTaxpayerInfo(taxpayerId);
+            ucCattleTransferOfOwnership.LoadOldOwnerInfo(taxpayerId);
 
         }
 
@@ -435,7 +434,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-
                 //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
                 //cattleTransferOfOwnershipModel.OwnerID = 1;
                 //cattleTransferOfOwnershipModel.Tag = 1;
@@ -596,14 +594,13 @@ namespace AccountingSystem.Views.Transactions.Payments
                     }
                     else if (radRpt.Checked)
                     {
-
+                        SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
                     }
                     else if (radOthers.Checked)
                     {
                         switch (ucPayment.selectedAccountableFormNo)
                         {
                             case "51":
-                                SaveRptPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), rptPaymentsModel, ucRptTaxDues.RptTaxDuesModelList());
                                 break;
                             case "52":
                                 SaveCattleOwnershipTransferPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleTransferOfOwnershipModel());

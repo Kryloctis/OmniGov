@@ -287,6 +287,7 @@
             // 
             // txtCattleOldOwner
             // 
+            txtCattleOldOwner.Enabled = false;
             txtCattleOldOwner.Location = new System.Drawing.Point(97, 16);
             txtCattleOldOwner.Name = "txtCattleOldOwner";
             txtCattleOldOwner.Size = new System.Drawing.Size(223, 23);

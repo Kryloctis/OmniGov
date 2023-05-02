@@ -152,6 +152,7 @@
             // 
             // txtOwnerName
             // 
+            txtOwnerName.Enabled = false;
             txtOwnerName.Location = new System.Drawing.Point(93, 16);
             txtOwnerName.Name = "txtOwnerName";
             txtOwnerName.Size = new System.Drawing.Size(223, 23);
@@ -288,6 +289,7 @@
             Controls.Add(groupBox2);
             Name = "ucCattleOwnership";
             Size = new System.Drawing.Size(770, 164);
+            Load += ucCattleOwnership_Load;
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
