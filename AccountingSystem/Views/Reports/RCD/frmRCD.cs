@@ -36,8 +36,12 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void frmRCD_Load(object sender, EventArgs e)
         {
-            btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
-            LoadFunds();
+            try
+            {
+                btnRemove.Enabled = dgListOfApprovedReport.Rows.Count != 0;
+                LoadFunds();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadFunds()
@@ -59,41 +63,38 @@ namespace AccountingSystem.Views.Reports.RCD
 
         internal void LoadSelectedRCD(string rcdNo)
         {
-            try
+            var generalCollectionsPaymentRepo = AccFactory.GeneralCollectionsPaymentsRepository();
+            var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
+
+            string reportId;
+            string collectingOfficer;
+            string reportNo;
+            string amount;
+
+            foreach (DataRow row in dtRCD.Rows)
             {
-                var generalCollectionsPaymentRepo = AccFactory.GeneralCollectionsPaymentsRepository();
-                var dtRCD = generalCollectionsPaymentRepo.GetRecordsByRCDNO(rcdNo);
+                reportId = row["collectors_report_id"].ToString();
+                collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]} ";
 
-                string reportId;
-                string collectingOfficer;
-                string reportNo;
-                string amount;
+                if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
+                    collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]} ";
 
-                foreach (DataRow row in dtRCD.Rows)
+                reportNo = row["report_no"].ToString();
+                amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
+
+                object[] reportRow = new object[]
                 {
-                    reportId = row["collectors_report_id"].ToString();
-                    collectingOfficer = $"{row["collecting_officers_first_name"]} {row["collecting_officers_mid_initial"]}. {row["collecting_officers_last_name"]} ";
-
-                    if (!string.IsNullOrEmpty(row["job_orders_id"].ToString()))
-                        collectingOfficer = $"{row["job_orders_first_name"]} {row["job_orders_mid_initial"]}. {row["job_orders_last_name"]} ";
-
-                    reportNo = row["report_no"].ToString();
-                    amount = Convert.ToDecimal(row["amount"].ToString()).ToString("N2");
-
-                    object[] reportRow = new object[]
-                    {
                         reportId,
                         collectingOfficer,
                         reportNo,
                         amount
-                    };
+                };
 
-                    dgListOfApprovedReport.Rows.Add(reportRow);
-                }
+                dgListOfApprovedReport.Rows.Add(reportRow);
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
+        //Questionable Code
         internal void LoadSelectedReport(string reportNo)
         {
             try
@@ -116,11 +117,15 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SaveData())
+            try
             {
-                Helper.MessageBoxSuccess("RCD has been created.");
-                ResetForm();
+                if (SaveData())
+                {
+                    Helper.MessageBoxSuccess("RCD has been created.");
+                    ResetForm();
+                }
             }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ResetForm()
@@ -140,16 +145,16 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private bool SaveData()
         {
+            if (!ValidateChildren())
+            {
+                Helper.MessageBoxError(GetFormErrors());
+                return false;
+            }
+
             if (MessageBox.Show("Create RCD?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 using (var scope = new TransactionScope())
                 {
-                    if (!ValidateChildren())
-                    {
-                        Helper.MessageBoxError(GetFormErrors());
-                        return false;
-                    }
-
                     var generalCollectionModel = new GeneralCollectionsModel()
                     {
                         RcdNo = txtRCDNo.Text,
@@ -226,12 +231,20 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgListOfApprovedReport_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            SetStatusStrip();
+            try
+            {
+                SetStatusStrip();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgListOfApprovedReport_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            SetStatusStrip();
+            try
+            {
+                SetStatusStrip();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void SetStatusStrip()
@@ -258,32 +271,33 @@ namespace AccountingSystem.Views.Reports.RCD
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[2];
-            errorArray[0] = epRCDNo.GetError(txtRCDNo);
-            errorArray[1] = epDgCollectorRepor.GetError(dgListOfApprovedReport);
+            var errorArray = new string[]
+            {
+                errorProvider1.GetError(txtRCDNo),
+                errorProvider1.GetError(dgListOfApprovedReport)
+            };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         private void txtRCDNo_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorTextBoxEmpty(epRCDNo, txtRCDNo, "RCD No.");
+            e.Cancel = Helper.ShowErrorTextBoxEmpty(errorProvider1, txtRCDNo, "RCD No.");
         }
 
         private void txtRCDNo_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorTextBox(epRCDNo, txtRCDNo);
+            Helper.ClearErrorTextBox(errorProvider1, txtRCDNo);
         }
 
         private void dgListOfApprovedReport_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport, "Collectors Report.");
+            e.Cancel = Helper.ShowErrorDatagridView(errorProvider1, dgListOfApprovedReport, "Collectors Report.");
         }
 
         private void dgListOfApprovedReport_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorDatagridView(epDgCollectorRepor, dgListOfApprovedReport);
+            Helper.ClearErrorDatagridView(errorProvider1, dgListOfApprovedReport);
         }
 
         #endregion Validations
