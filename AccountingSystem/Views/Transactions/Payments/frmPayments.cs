@@ -356,7 +356,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
             return marriageLicenseModel;
         }
-        
+
         private BurialPermitModel BurialPermitModel()
         {
             var burialPermitModel = new BurialPermitModel();
@@ -684,6 +684,6 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucPayment.selectedAccountableFormNo = "58";
         }
 
- 
+
     }
 }
