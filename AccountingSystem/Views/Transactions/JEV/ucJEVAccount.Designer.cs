@@ -29,268 +29,237 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucJEVAccount));
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbFPP = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbxAccount = new System.Windows.Forms.ComboBox();
-            this.radDebit = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.radCredit = new System.Windows.Forms.RadioButton();
-            this.pnlCollectionsDeposits = new System.Windows.Forms.Panel();
-            this.radDeposits = new System.Windows.Forms.RadioButton();
-            this.radCollections = new System.Windows.Forms.RadioButton();
-            this.nudAmount = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbSubsidiary = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnSubsidiaryLedger = new System.Windows.Forms.Button();
-            this.epAccount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epAmount = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txtObligationNo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.epObligationNo = new System.Windows.Forms.ErrorProvider(this.components);
-            this.epFPP = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel1.SuspendLayout();
-            this.pnlCollectionsDeposits.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).BeginInit();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            cmbFPP = new System.Windows.Forms.ComboBox();
+            label2 = new System.Windows.Forms.Label();
+            cmbxAccount = new System.Windows.Forms.ComboBox();
+            radDebit = new System.Windows.Forms.RadioButton();
+            panel1 = new System.Windows.Forms.Panel();
+            radCredit = new System.Windows.Forms.RadioButton();
+            pnlCollectionsDeposits = new System.Windows.Forms.Panel();
+            radDeposits = new System.Windows.Forms.RadioButton();
+            radCollections = new System.Windows.Forms.RadioButton();
+            nudAmount = new System.Windows.Forms.NumericUpDown();
+            label3 = new System.Windows.Forms.Label();
+            cmbSubsidiary = new System.Windows.Forms.ComboBox();
+            label4 = new System.Windows.Forms.Label();
+            btnSubsidiaryLedger = new System.Windows.Forms.Button();
+            txtObligationNo = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            panel1.SuspendLayout();
+            pnlCollectionsDeposits.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "FPP";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(0, 32);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(27, 15);
+            label1.TabIndex = 0;
+            label1.Text = "FPP";
             // 
             // cmbFPP
             // 
-            this.cmbFPP.FormattingEnabled = true;
-            this.cmbFPP.Location = new System.Drawing.Point(92, 29);
-            this.cmbFPP.Name = "cmbFPP";
-            this.cmbFPP.Size = new System.Drawing.Size(466, 23);
-            this.cmbFPP.TabIndex = 1;
-            this.cmbFPP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxFPP_KeyDown);
-            this.cmbFPP.Validating += new System.ComponentModel.CancelEventHandler(this.cmbFPP_Validating);
-            this.cmbFPP.Validated += new System.EventHandler(this.cmbFPP_Validated);
+            cmbFPP.FormattingEnabled = true;
+            cmbFPP.Location = new System.Drawing.Point(92, 29);
+            cmbFPP.Name = "cmbFPP";
+            cmbFPP.Size = new System.Drawing.Size(466, 23);
+            cmbFPP.TabIndex = 1;
+            cmbFPP.KeyDown += cmbxFPP_KeyDown;
+            cmbFPP.Validating += cmbFPP_Validating;
+            cmbFPP.Validated += cmbFPP_Validated;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Account";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(0, 61);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(52, 15);
+            label2.TabIndex = 2;
+            label2.Text = "Account";
             // 
             // cmbxAccount
             // 
-            this.cmbxAccount.Location = new System.Drawing.Point(92, 58);
-            this.cmbxAccount.Name = "cmbxAccount";
-            this.cmbxAccount.Size = new System.Drawing.Size(466, 23);
-            this.cmbxAccount.TabIndex = 2;
-            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
-            this.cmbxAccount.Validating += new System.ComponentModel.CancelEventHandler(this.cmbxAccount_Validating);
-            this.cmbxAccount.Validated += new System.EventHandler(this.cmbxAccount_Validated);
+            cmbxAccount.Location = new System.Drawing.Point(92, 58);
+            cmbxAccount.Name = "cmbxAccount";
+            cmbxAccount.Size = new System.Drawing.Size(466, 23);
+            cmbxAccount.TabIndex = 2;
+            cmbxAccount.KeyDown += cmbxAccount_KeyDown;
+            cmbxAccount.Validating += cmbxAccount_Validating;
+            cmbxAccount.Validated += cmbxAccount_Validated;
             // 
             // radDebit
             // 
-            this.radDebit.AutoSize = true;
-            this.radDebit.Checked = true;
-            this.radDebit.Location = new System.Drawing.Point(3, 3);
-            this.radDebit.Name = "radDebit";
-            this.radDebit.Size = new System.Drawing.Size(53, 19);
-            this.radDebit.TabIndex = 4;
-            this.radDebit.TabStop = true;
-            this.radDebit.Text = "Debit";
-            this.radDebit.UseVisualStyleBackColor = true;
-            this.radDebit.CheckedChanged += new System.EventHandler(this.radDebit_CheckedChanged);
+            radDebit.AutoSize = true;
+            radDebit.Checked = true;
+            radDebit.Location = new System.Drawing.Point(3, 3);
+            radDebit.Name = "radDebit";
+            radDebit.Size = new System.Drawing.Size(53, 19);
+            radDebit.TabIndex = 4;
+            radDebit.TabStop = true;
+            radDebit.Text = "Debit";
+            radDebit.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radCredit);
-            this.panel1.Controls.Add(this.radDebit);
-            this.panel1.Location = new System.Drawing.Point(92, 116);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(143, 27);
-            this.panel1.TabIndex = 5;
+            panel1.Controls.Add(radCredit);
+            panel1.Controls.Add(radDebit);
+            panel1.Location = new System.Drawing.Point(92, 116);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(143, 27);
+            panel1.TabIndex = 5;
             // 
             // radCredit
             // 
-            this.radCredit.AutoSize = true;
-            this.radCredit.Location = new System.Drawing.Point(62, 3);
-            this.radCredit.Name = "radCredit";
-            this.radCredit.Size = new System.Drawing.Size(57, 19);
-            this.radCredit.TabIndex = 5;
-            this.radCredit.Text = "Credit";
-            this.radCredit.UseVisualStyleBackColor = true;
-            this.radCredit.CheckedChanged += new System.EventHandler(this.radCredit_CheckedChanged);
+            radCredit.AutoSize = true;
+            radCredit.Location = new System.Drawing.Point(62, 3);
+            radCredit.Name = "radCredit";
+            radCredit.Size = new System.Drawing.Size(57, 19);
+            radCredit.TabIndex = 5;
+            radCredit.Text = "Credit";
+            radCredit.UseVisualStyleBackColor = true;
             // 
             // pnlCollectionsDeposits
             // 
-            this.pnlCollectionsDeposits.Controls.Add(this.radDeposits);
-            this.pnlCollectionsDeposits.Controls.Add(this.radCollections);
-            this.pnlCollectionsDeposits.Location = new System.Drawing.Point(360, 116);
-            this.pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
-            this.pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
-            this.pnlCollectionsDeposits.TabIndex = 6;
+            pnlCollectionsDeposits.Controls.Add(radDeposits);
+            pnlCollectionsDeposits.Controls.Add(radCollections);
+            pnlCollectionsDeposits.Location = new System.Drawing.Point(360, 116);
+            pnlCollectionsDeposits.Name = "pnlCollectionsDeposits";
+            pnlCollectionsDeposits.Size = new System.Drawing.Size(198, 27);
+            pnlCollectionsDeposits.TabIndex = 6;
             // 
             // radDeposits
             // 
-            this.radDeposits.AutoSize = true;
-            this.radDeposits.Location = new System.Drawing.Point(93, 3);
-            this.radDeposits.Name = "radDeposits";
-            this.radDeposits.Size = new System.Drawing.Size(70, 19);
-            this.radDeposits.TabIndex = 7;
-            this.radDeposits.Text = "Deposits";
-            this.radDeposits.UseVisualStyleBackColor = true;
-            this.radDeposits.CheckedChanged += new System.EventHandler(this.radDeposits_CheckedChanged);
+            radDeposits.AutoSize = true;
+            radDeposits.Location = new System.Drawing.Point(93, 3);
+            radDeposits.Name = "radDeposits";
+            radDeposits.Size = new System.Drawing.Size(70, 19);
+            radDeposits.TabIndex = 7;
+            radDeposits.Text = "Deposits";
+            radDeposits.UseVisualStyleBackColor = true;
             // 
             // radCollections
             // 
-            this.radCollections.AutoSize = true;
-            this.radCollections.Checked = true;
-            this.radCollections.Location = new System.Drawing.Point(3, 3);
-            this.radCollections.Name = "radCollections";
-            this.radCollections.Size = new System.Drawing.Size(84, 19);
-            this.radCollections.TabIndex = 6;
-            this.radCollections.TabStop = true;
-            this.radCollections.Text = "Collections";
-            this.radCollections.UseVisualStyleBackColor = true;
-            this.radCollections.CheckedChanged += new System.EventHandler(this.radCollections_CheckedChanged);
+            radCollections.AutoSize = true;
+            radCollections.Checked = true;
+            radCollections.Location = new System.Drawing.Point(3, 3);
+            radCollections.Name = "radCollections";
+            radCollections.Size = new System.Drawing.Size(84, 19);
+            radCollections.TabIndex = 6;
+            radCollections.TabStop = true;
+            radCollections.Text = "Collections";
+            radCollections.UseVisualStyleBackColor = true;
             // 
             // nudAmount
             // 
-            this.nudAmount.DecimalPlaces = 2;
-            this.nudAmount.Location = new System.Drawing.Point(92, 149);
-            this.nudAmount.Maximum = new decimal(new int[] {
-            -727379968,
-            232,
-            0,
-            0});
-            this.nudAmount.Name = "nudAmount";
-            this.nudAmount.Size = new System.Drawing.Size(466, 23);
-            this.nudAmount.TabIndex = 8;
-            this.nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudAmount.ThousandsSeparator = true;
-            this.nudAmount.Validating += new System.ComponentModel.CancelEventHandler(this.nudAmount_Validating);
-            this.nudAmount.Validated += new System.EventHandler(this.nudAmount_Validated);
+            nudAmount.DecimalPlaces = 2;
+            nudAmount.Location = new System.Drawing.Point(92, 149);
+            nudAmount.Maximum = new decimal(new int[] { -727379968, 232, 0, 0 });
+            nudAmount.Name = "nudAmount";
+            nudAmount.Size = new System.Drawing.Size(466, 23);
+            nudAmount.TabIndex = 8;
+            nudAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            nudAmount.ThousandsSeparator = true;
+            nudAmount.Validating += nudAmount_Validating;
+            nudAmount.Validated += nudAmount_Validated;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1, 151);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 15);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Amount";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(1, 151);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(51, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Amount";
             // 
             // cmbSubsidiary
             // 
-            this.cmbSubsidiary.AutoCompleteCustomSource.AddRange(new string[] {
-            "[1] wait",
-            "[2] go"});
-            this.cmbSubsidiary.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSubsidiary.FormattingEnabled = true;
-            this.cmbSubsidiary.Location = new System.Drawing.Point(92, 87);
-            this.cmbSubsidiary.Name = "cmbSubsidiary";
-            this.cmbSubsidiary.Size = new System.Drawing.Size(466, 23);
-            this.cmbSubsidiary.TabIndex = 3;
+            cmbSubsidiary.AutoCompleteCustomSource.AddRange(new string[] { "[1] wait", "[2] go" });
+            cmbSubsidiary.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            cmbSubsidiary.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cmbSubsidiary.FormattingEnabled = true;
+            cmbSubsidiary.Location = new System.Drawing.Point(92, 87);
+            cmbSubsidiary.Name = "cmbSubsidiary";
+            cmbSubsidiary.Size = new System.Drawing.Size(466, 23);
+            cmbSubsidiary.TabIndex = 3;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 90);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 15);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Subsidiary";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(0, 90);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(61, 15);
+            label4.TabIndex = 10;
+            label4.Text = "Subsidiary";
             // 
             // btnSubsidiaryLedger
             // 
-            this.btnSubsidiaryLedger.Enabled = false;
-            this.btnSubsidiaryLedger.Image = ((System.Drawing.Image)(resources.GetObject("btnSubsidiaryLedger.Image")));
-            this.btnSubsidiaryLedger.Location = new System.Drawing.Point(564, 88);
-            this.btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
-            this.btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
-            this.btnSubsidiaryLedger.TabIndex = 9;
-            this.btnSubsidiaryLedger.UseVisualStyleBackColor = true;
-            this.btnSubsidiaryLedger.Click += new System.EventHandler(this.btnSubsidiaryLedger_Click);
-            // 
-            // epAccount
-            // 
-            this.epAccount.ContainerControl = this;
-            // 
-            // epAmount
-            // 
-            this.epAmount.ContainerControl = this;
+            btnSubsidiaryLedger.Enabled = false;
+            btnSubsidiaryLedger.Image = (System.Drawing.Image)resources.GetObject("btnSubsidiaryLedger.Image");
+            btnSubsidiaryLedger.Location = new System.Drawing.Point(564, 88);
+            btnSubsidiaryLedger.Name = "btnSubsidiaryLedger";
+            btnSubsidiaryLedger.Size = new System.Drawing.Size(22, 22);
+            btnSubsidiaryLedger.TabIndex = 9;
+            btnSubsidiaryLedger.UseVisualStyleBackColor = true;
+            btnSubsidiaryLedger.Click += btnSubsidiaryLedger_Click;
             // 
             // txtObligationNo
             // 
-            this.txtObligationNo.Location = new System.Drawing.Point(92, 0);
-            this.txtObligationNo.Name = "txtObligationNo";
-            this.txtObligationNo.Size = new System.Drawing.Size(466, 23);
-            this.txtObligationNo.TabIndex = 0;
+            txtObligationNo.Location = new System.Drawing.Point(92, 0);
+            txtObligationNo.Name = "txtObligationNo";
+            txtObligationNo.Size = new System.Drawing.Size(466, 23);
+            txtObligationNo.TabIndex = 0;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Obligation No.";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(1, 3);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(85, 15);
+            label5.TabIndex = 0;
+            label5.Text = "Obligation No.";
             // 
-            // epObligationNo
+            // errorProvider1
             // 
-            this.epObligationNo.ContainerControl = this;
-            // 
-            // epFPP
-            // 
-            this.epFPP.ContainerControl = this;
+            errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            errorProvider1.ContainerControl = this;
             // 
             // ucJEVAccount
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.Controls.Add(this.txtObligationNo);
-            this.Controls.Add(this.btnSubsidiaryLedger);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbSubsidiary);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.nudAmount);
-            this.Controls.Add(this.pnlCollectionsDeposits);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cmbxAccount);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cmbFPP);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label1);
-            this.Name = "ucJEVAccount";
-            this.Size = new System.Drawing.Size(589, 175);
-            this.Load += new System.EventHandler(this.ucJEVAccount_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.pnlCollectionsDeposits.ResumeLayout(false);
-            this.pnlCollectionsDeposits.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epObligationNo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.epFPP)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoSize = true;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            Controls.Add(txtObligationNo);
+            Controls.Add(btnSubsidiaryLedger);
+            Controls.Add(label4);
+            Controls.Add(cmbSubsidiary);
+            Controls.Add(label3);
+            Controls.Add(nudAmount);
+            Controls.Add(pnlCollectionsDeposits);
+            Controls.Add(panel1);
+            Controls.Add(cmbxAccount);
+            Controls.Add(label2);
+            Controls.Add(cmbFPP);
+            Controls.Add(label5);
+            Controls.Add(label1);
+            Name = "ucJEVAccount";
+            Size = new System.Drawing.Size(589, 175);
+            Load += ucJEVAccount_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            pnlCollectionsDeposits.ResumeLayout(false);
+            pnlCollectionsDeposits.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -310,11 +279,8 @@ namespace AccountingSystem.Views.Transactions.JEV
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSubsidiaryLedger;
         internal System.Windows.Forms.Panel pnlCollectionsDeposits;
-        private System.Windows.Forms.ErrorProvider epAccount;
-        private System.Windows.Forms.ErrorProvider epAmount;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.TextBox txtObligationNo;
-        internal System.Windows.Forms.ErrorProvider epObligationNo;
-        internal System.Windows.Forms.ErrorProvider epFPP;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
