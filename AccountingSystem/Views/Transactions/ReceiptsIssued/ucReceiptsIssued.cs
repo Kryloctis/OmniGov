@@ -38,50 +38,111 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         internal void ResetForm()
         {
-            receiptIssuedId = 0;
-            receiptId = 0;
-            receiptIssuedId = 0;
-            collectingOfficerId = 0;
-            isCashTickets = false;
-            isCollectorJO = false;
-            receiptNumberFrom = "0";
-            receiptNumberTo = "0";
-            txtReceiptIssuedFrom.Text = "0";
-            txtReceiptIssuedTo.Text = "0";
-            txtReceiptQuantity.Clear();
-            dtpIssued.Value = DateTime.Today;
-            LoadCollectors();
-            LoadReceipts();
+            try
+            {
+                receiptIssuedId = 0;
+                receiptId = 0;
+                receiptIssuedId = 0;
+                collectingOfficerId = 0;
+                isCashTickets = false;
+                isCollectorJO = false;
+                receiptNumberFrom = "0";
+                receiptNumberTo = "0";
+                txtReceiptIssuedFrom.Text = "0";
+                txtReceiptIssuedTo.Text = "0";
+                txtReceiptQuantity.Clear();
+                dtpIssued.Value = DateTime.Today;
+                LoadCollectors();
+                LoadReceipts();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        #region Collectors
+
+        private DataColumn[] DataColumnsCollectingOfficers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficers()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
+
+            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dtCollectingOfficers.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int Id = Convert.ToInt32(row["id"]);
+                string prefix = row["prefix"].ToString();
+                string firstName = row["first_name"].ToString();
+                string middleInitial = row["mid_initial"].ToString();
+                string lastName = row["last_name"].ToString();
+                string suffix = row["suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
+        }
+
+        private DataColumn[] DataColumnsCollectingOfficerHasJobOrders()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "job_orders_id", typeof(int)),
+                new DataColumn(Name = "job_orders_full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficerHasJobOrders()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficerHasJobOrders());
+            DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+
+            foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
+            {
+                int jobOrderId = Convert.ToInt32(row["job_orders_id"]);
+                string prefix = row["job_orders_prefix"].ToString();
+                string firstName = row["job_orders_first_name"].ToString();
+                string middleInitial = row["job_orders_mid_initial"].ToString();
+                string lastName = row["job_orders_last_name"].ToString();
+                string suffix = row["job_orders_last_name"].ToString();
+                string jobOrderFullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                var newRow = dataTable.NewRow();
+                newRow["job_orders_id"] = jobOrderId;
+                newRow["job_orders_full_name"] = jobOrderFullName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
         }
 
         internal void LoadCollectors()
         {
-            try
+            if (cbCollector.Checked)
             {
-                var collectorRepository = AccFactory.CollectingOfficerRepository();
-                var collectorHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-                var dtCollector = new DataTable();
-
-                if (cbCollector.Checked)
-                {
-                    dtCollector = collectorHasJORepo.GetRecords();
-                    isCollectorJO = true;
-                }
-                else
-                {
-                    dtCollector = collectorRepository.GetRecords();
-                    isCollectorJO = false;
-                }
-
-                cmbCollector.DataSource = dtCollector;
-                cmbCollector.ValueMember = "id";
-                cmbCollector.DisplayMember = "fullname";
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficerHasJobOrders(), cmbCollector, "job_orders_full_name", "job_orders_id");
+                isCollectorJO = true;
             }
-            catch (Exception ex)
+            else
             {
-                Helper.MessageBoxError(ex.Message);
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficers(), cmbCollector, "full_name", "id");
+                isCollectorJO = false;
             }
         }
+
+        #endregion Collectors
 
         internal void LoadCollectorsWithReceiptIssued(int receiptId)
         {
@@ -180,8 +241,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void ucReceiptsIssued_Load(object sender, EventArgs e)
         {
-            OnLoad();
-            cmbReceipt_SelectionChangeCommitted(sender, e);
+            try
+            {
+                OnLoad();
+                cmbReceipt_SelectionChangeCommitted(sender, e);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void ComputeReceiptIssueQuantity()
@@ -339,25 +404,13 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
             ComputeReceiptIssueQuantity();
         }
 
-        private void radioStubQuantity_CheckedChanged(object sender, EventArgs e)
-        {
-            var receiptId = Convert.ToInt32(cmbReceipt.SelectedValue);
-            SetReceiptNumberFrom(receiptId);
-            txtReceiptIssuedTo.Text = (Convert.ToInt32(txtReceiptIssuedFrom.Text) + 49).ToString("D7");
-        }
-
-        private void radioCustomQuantity_CheckedChanged(object sender, EventArgs e)
-        {
-            txtReceiptIssuedFrom.Text = "0";
-            txtReceiptIssuedTo.Text = "0";
-            txtReceiptQuantity.Text = "0";
-
-            txtReceiptIssuedFrom.Focus();
-        }
-
         private void cbCollector_CheckedChanged(object sender, EventArgs e)
         {
-            LoadCollectors();
+            try
+            {
+                LoadCollectors();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

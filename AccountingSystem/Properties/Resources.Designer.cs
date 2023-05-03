@@ -1743,9 +1743,39 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mailbox_in_filled_28px {
+        internal static System.Drawing.Bitmap mailbox_in_filled_16px {
             get {
-                object obj = ResourceManager.GetObject("mailbox_in_filled_28px", resourceCulture);
+                object obj = ResourceManager.GetObject("mailbox-in-filled@16px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mailbox_in_filled_20px {
+            get {
+                object obj = ResourceManager.GetObject("mailbox-in-filled@20px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mailbox_in_filled_24px {
+            get {
+                object obj = ResourceManager.GetObject("mailbox-in-filled@24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mailbox_in_filled_32px {
+            get {
+                object obj = ResourceManager.GetObject("mailbox-in-filled@32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

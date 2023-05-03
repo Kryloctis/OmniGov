@@ -41,11 +41,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             try
             {
                 if (uc.isEdit)
-                {
                     LoadSelectedJEV(uc.jevId);
-                    _frmJEVList.Hide();
-                }
-
 
                 lblCreatedBy.Text = $"{userDict["first_name"]} {userDict["mid_initial"]} {userDict["last_name"]}";
                 uc.SumDebitCredit();
@@ -906,12 +902,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             Enabled = true;
             Dictionary<string, string> jevDict = AccFactory.JEVRepository().GetViewRecordByJEVId(jevId);
 
-            LoadCheckDisbursementsDataIfExist(uc.jevId);
-            LoadCashReceiptsDataIfExist(uc.jevId);
-            LoadADADisbursementDataIfExist(uc.jevId);
-            LoadCashDisbursementDataIfExist(uc.jevId);
-            LoadGeneralJournalDataIfExist(uc.jevId);
-
             int dictJevId = Convert.ToInt32(jevDict["id"]);
             byte dictFundId = Convert.ToByte(jevDict["funds_id"]);
             string dictExplanation = jevDict["explanation"];
@@ -954,15 +944,16 @@ namespace AccountingSystem.Views.Transactions.JEV
             LoadJevAccounts();
             uc.SumDebitCredit();
             GetJevStatus(uc.jevId);
+
+            LoadCheckDisbursementsDataIfExist(uc.jevId);
+            LoadCashReceiptsDataIfExist(uc.jevId);
+            LoadADADisbursementDataIfExist(uc.jevId);
+            LoadCashDisbursementDataIfExist(uc.jevId);
+            LoadGeneralJournalDataIfExist(uc.jevId);
+
             btnSave.Text = "&Update";
 
             Cursor = Cursors.Default;
-        }
-
-        private void frmJEV_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if(uc.isEdit)
-                _frmJEVList.Close();
         }
     }
 }

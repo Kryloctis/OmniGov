@@ -14,72 +14,105 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmRCDAdd(frmRCD frmRCD)
         {
             InitializeComponent();
-            Helper.DatagridFullRowSelectStyle(dgCollectorsReport, true);
-
+            Helper.DatagridFullRowSelectStyle(dgCollectorsReport, false);
+            Helper.LoadFormIcon(this);
             _frmRCD = frmRCD;
         }
 
         private void frmRCDAdd_Load(object sender, EventArgs e)
         {
-            LoadCollectors();
-            LoadFunds();
-            LoadRecords();
+            try
+            {
+                LoadCollectors();
+                LoadFunds();
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private DataColumn[] DataColumnCollectors()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string))
+            };
+        }
+
+        private DataTable DtJobOrderCollectingOfficers()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnCollectors());
+            DataTable dtJOCollectingOfficers = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+
+            foreach (DataRow row in dtJOCollectingOfficers.Rows)
+            {
+                DataRow newRow = dataTable.NewRow();
+                int Id = Convert.ToInt32(row["job_orders_id"]);
+                string prefix = row["job_orders_prefix"].ToString();
+                string firstName = row["job_orders_first_name"].ToString();
+                string midInitial = row["job_orders_mid_initial"].ToString();
+                string lastName = row["job_orders_last_name"].ToString();
+                string suffix = row["job_orders_suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
+
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
+        }
+
+        private DataTable DtCollectingOfficers()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnCollectors());
+            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dtCollectingOfficers.Rows)
+            {
+                DataRow newRow = dataTable.NewRow();
+                int Id = Convert.ToInt32(row["id"]);
+                string prefix = row["prefix"].ToString();
+                string firstName = row["first_name"].ToString();
+                string midInitial = row["mid_initial"].ToString();
+                string lastName = row["last_name"].ToString();
+                string suffix = row["suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, midInitial, lastName, suffix);
+
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
         }
 
         private void LoadCollectors()
         {
-            try
-            {
-                cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
+            cmbCollector.SelectedValueChanged -= new EventHandler(cmbCollector_SelectedValueChanged);
 
-                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
+            DtCollectingOfficers().Merge(DtJobOrderCollectingOfficers());
+            HelperLoadRecords.CollectingOfficerComboBox(DtCollectingOfficers(), cmbCollector, "full_name", "id");
 
-                DataTable dtCollectors = new();
-                var dtJOCollectors = collectingOfficerHasJORepo.GetRecords();
-                var dtRegularCollectors = collectingOfficerRepository.GetRecords();
-
-                dtRegularCollectors.Merge(dtJOCollectors);
-                dtRegularCollectors.Rows.Add(0, "All");
-
-                dtCollectors = dtRegularCollectors;
-                cmbCollector.DataSource = dtCollectors;
-                cmbCollector.DisplayMember = "fullname";
-                cmbCollector.ValueMember = "id";
-
-                dtCollectors.DefaultView.Sort = "id ASC";
-
-                cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            cmbCollector.SelectedValueChanged += new EventHandler(cmbCollector_SelectedValueChanged);
         }
 
         private void LoadRecords()
         {
-            try
-            {
-                short collectorId = (short)Convert.ToInt32(cmbCollector.SelectedValue);
-                string status = "approved";
-                byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
-                string keySearch = txtsearch.Text;
+            short collectorId = (short)Convert.ToInt32(cmbCollector.SelectedValue);
+            string status = "approved";
+            byte fundId = (byte)(cmbfunds.SelectedValue != null ? Convert.ToByte(cmbfunds.SelectedValue.ToString()) : 0);
+            string keySearch = txtsearch.Text;
 
-                var colectorRepository = AccFactory.CollectorReportRepository();
+            var colectorRepository = AccFactory.CollectorReportRepository();
 
-                var dtrcd = new DataTable();
-                if (cmbCollector.Text == "All")
-                    dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
-                else
-                    dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
+            var dtrcd = new DataTable();
+            if (cmbCollector.Text == "All")
+                dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch);
+            else
+                dtrcd = colectorRepository.FilterRecords(status, fundId, keySearch, collectorId);
 
-                HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            HelperLoadRecords.CollectorReportDatagridView(dtrcd, dgCollectorsReport);
         }
 
         private void LoadFunds()
@@ -100,10 +133,14 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
-        private void btnOkay_Click(object sender, EventArgs e)
+        private void btnSelect_Click(object sender, EventArgs e)
         {
             string reportId;
             string collectingOfficer;
@@ -157,7 +194,11 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void cmbCollector_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadRecords();
+            try
+            {
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgCollectorsReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -166,7 +207,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void dgCollectorsReport_DoubleClick(object sender, EventArgs e)
         {
-            btnOkay.PerformClick();
+            btnSelect.PerformClick();
         }
     }
 }

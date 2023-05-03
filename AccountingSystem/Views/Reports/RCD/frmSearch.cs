@@ -18,47 +18,38 @@ namespace AccountingSystem.Views.Reports.RCD
         public frmSearch(frmRCD frmRCD)
         {
             InitializeComponent();
+            Helper.LoadFormIcon(this);
             Helper.DatagridFullRowSelectStyle(dgRCDSearch, true);
             _frmRCD = frmRCD;
         }
 
         private void frmSearch_Load(object sender, EventArgs e)
         {
-            LoadFunds();
-            LoadRecords();
+            try
+            {
+                LoadFunds();
+                LoadRecords();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadFunds()
         {
-            try
-            {
-                var fundrepo = AccFactory.FundsRepository();
-                var dtfunds = fundrepo.GetRecords();
+            var fundrepo = AccFactory.FundsRepository();
+            var dtfunds = fundrepo.GetRecords();
 
-                cmbfunds.DataSource = dtfunds;
-                cmbfunds.ValueMember = "id";
-                cmbfunds.DisplayMember = "fund_name";
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            cmbfunds.DataSource = dtfunds;
+            cmbfunds.ValueMember = "id";
+            cmbfunds.DisplayMember = "fund_name";
         }
 
         private void LoadRecords()
         {
-            try
-            {
-                var fundId = Convert.ToInt32(cmbfunds.SelectedValue);
-                var rcdRepository = AccFactory.GeneralCollectionsRepository();
-                var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
+            var fundId = Convert.ToInt32(cmbfunds.SelectedValue);
+            var rcdRepository = AccFactory.GeneralCollectionsRepository();
+            var dtRCD = rcdRepository.GetRecordsByFundId(fundId);
 
-                HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
         }
 
         private void txtsearch_TextChanged(object sender, EventArgs e)
@@ -80,19 +71,23 @@ namespace AccountingSystem.Views.Reports.RCD
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            _frmRCD.dgListOfApprovedReport.Rows.Clear();
-            _frmRCD.txtRCDNo.Text = rcdNo;
-            _frmRCD.rcdId = rcdId;
-            _frmRCD.dtpDate.Value = Convert.ToDateTime(rcdDate);
+            try
+            {
+                _frmRCD.dgListOfApprovedReport.Rows.Clear();
+                _frmRCD.txtRCDNo.Text = rcdNo;
+                _frmRCD.rcdId = rcdId;
+                _frmRCD.dtpDate.Value = Convert.ToDateTime(rcdDate);
 
-            _frmRCD.btnDeposit.Enabled = true;
-            _frmRCD.btnPrint.Enabled = true;
-            _frmRCD.btnCancelPrint.Enabled = true;
-            _frmRCD.panelRCD.Enabled = false;
+                _frmRCD.btnDeposit.Enabled = true;
+                _frmRCD.btnPrint.Enabled = true;
+                _frmRCD.btnCancelPrint.Enabled = true;
+                _frmRCD.panelRCD.Enabled = false;
 
-            _frmRCD.LoadSelectedRCD(rcdNo);
+                _frmRCD.LoadSelectedRCD(rcdNo);
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void dgrcd_SelectionChanged(object sender, EventArgs e)
@@ -122,10 +117,7 @@ namespace AccountingSystem.Views.Reports.RCD
 
                 HelperLoadRecords.RCDSearchDatagridView(dtRCD, dgRCDSearch);
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

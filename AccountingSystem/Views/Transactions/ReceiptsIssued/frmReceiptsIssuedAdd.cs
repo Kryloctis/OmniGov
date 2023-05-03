@@ -20,14 +20,18 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsAdd_Load(object sender, EventArgs e)
         {
-            if (_receiptId != 0)
+            try
             {
-                uc.LoadCollectorsWithReceiptIssued(_receiptId);
-                uc.cmbReceipt.SelectedValue = _receiptId;
-                uc.cmbReceipt.Enabled = false;
+                if (_receiptId != 0)
+                {
+                    uc.LoadCollectorsWithReceiptIssued(_receiptId);
+                    uc.cmbReceipt.SelectedValue = _receiptId;
+                    uc.cmbReceipt.Enabled = false;
+                }
+                else
+                    uc.LoadCollectors();
             }
-            else
-                uc.LoadCollectors();
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private bool SaveData()
