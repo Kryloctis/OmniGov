@@ -29,105 +29,118 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtRemarks = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnDisapprove = new System.Windows.Forms.Button();
-            this.btnSaveMessage = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // txtRemarks
-            // 
-            this.txtRemarks.Location = new System.Drawing.Point(9, 11);
-            this.txtRemarks.Multiline = true;
-            this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(609, 225);
-            this.txtRemarks.TabIndex = 0;
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnAccept = new System.Windows.Forms.Button();
+            btnDisapprove = new System.Windows.Forms.Button();
+            btnSaveMessage = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            txtRemarks = new System.Windows.Forms.TextBox();
+            flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnAccept);
-            this.flowLayoutPanel1.Controls.Add(this.btnDisapprove);
-            this.flowLayoutPanel1.Controls.Add(this.btnSaveMessage);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 244);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(629, 28);
-            this.flowLayoutPanel1.TabIndex = 1;
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnAccept);
+            flowLayoutPanel1.Controls.Add(btnDisapprove);
+            flowLayoutPanel1.Controls.Add(btnSaveMessage);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 181);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(545, 28);
+            flowLayoutPanel1.TabIndex = 1;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(493, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(133, 23);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Location = new System.Drawing.Point(435, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(107, 23);
+            btnCancel.TabIndex = 4;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(354, 3);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(133, 23);
-            this.btnAccept.TabIndex = 3;
-            this.btnAccept.Text = "Accept && Edit";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            btnAccept.Location = new System.Drawing.Point(322, 3);
+            btnAccept.Name = "btnAccept";
+            btnAccept.Size = new System.Drawing.Size(107, 23);
+            btnAccept.TabIndex = 3;
+            btnAccept.Text = "Accept && Edit";
+            btnAccept.UseVisualStyleBackColor = true;
+            btnAccept.Click += btnAccept_Click;
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Location = new System.Drawing.Point(215, 3);
-            this.btnDisapprove.Name = "btnDisapprove";
-            this.btnDisapprove.Size = new System.Drawing.Size(133, 23);
-            this.btnDisapprove.TabIndex = 2;
-            this.btnDisapprove.Text = "Dissaprove";
-            this.btnDisapprove.UseVisualStyleBackColor = true;
-            this.btnDisapprove.Click += new System.EventHandler(this.btnDisapprove_Click);
+            btnDisapprove.Location = new System.Drawing.Point(209, 3);
+            btnDisapprove.Name = "btnDisapprove";
+            btnDisapprove.Size = new System.Drawing.Size(107, 23);
+            btnDisapprove.TabIndex = 2;
+            btnDisapprove.Text = "Dissaprove";
+            btnDisapprove.UseVisualStyleBackColor = true;
+            btnDisapprove.Click += btnDisapprove_Click;
             // 
             // btnSaveMessage
             // 
-            this.btnSaveMessage.Location = new System.Drawing.Point(76, 3);
-            this.btnSaveMessage.Name = "btnSaveMessage";
-            this.btnSaveMessage.Size = new System.Drawing.Size(133, 23);
-            this.btnSaveMessage.TabIndex = 1;
-            this.btnSaveMessage.Text = "Save Message";
-            this.btnSaveMessage.UseVisualStyleBackColor = true;
-            this.btnSaveMessage.Click += new System.EventHandler(this.btnSaveMessage_Click);
+            btnSaveMessage.Location = new System.Drawing.Point(96, 3);
+            btnSaveMessage.Name = "btnSaveMessage";
+            btnSaveMessage.Size = new System.Drawing.Size(107, 23);
+            btnSaveMessage.TabIndex = 1;
+            btnSaveMessage.Text = "Save Message";
+            btnSaveMessage.UseVisualStyleBackColor = true;
+            btnSaveMessage.Click += btnSaveMessage_Click;
             // 
-            // frmRemarks
+            // panel1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(629, 272);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.txtRemarks);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "frmRemarks";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Disapproval Message";
-            this.Load += new System.EventHandler(this.frmRemarks_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            panel1.Controls.Add(txtRemarks);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(545, 181);
+            panel1.TabIndex = 2;
+            // 
+            // txtRemarks
+            // 
+            txtRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
+            txtRemarks.Location = new System.Drawing.Point(4, 4);
+            txtRemarks.Multiline = true;
+            txtRemarks.Name = "txtRemarks";
+            txtRemarks.Size = new System.Drawing.Size(537, 173);
+            txtRemarks.TabIndex = 1;
+            // 
+            // frmJEVDisapproval
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = btnCancel;
+            ClientSize = new System.Drawing.Size(545, 209);
+            Controls.Add(panel1);
+            Controls.Add(flowLayoutPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "frmJEVDisapproval";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Disapproval Message";
+            Load += frmRemarks_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         internal System.Windows.Forms.Button btnAccept;
         internal System.Windows.Forms.Button btnCancel;
         internal System.Windows.Forms.Button btnSaveMessage;
         internal System.Windows.Forms.Button btnDisapprove;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtRemarks;
     }
 }
