@@ -119,7 +119,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 ucPayment.amountPayment = ucOtherCharges.totalAmount;
                 ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
-                ucPayment.OnLoad();
+                ucPayment.OnLoad(ucPayment.selectedAccountableFormNo);
             }
 
             tabControl1.SelectedTab = tabPagePayment;
