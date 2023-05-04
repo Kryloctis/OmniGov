@@ -116,7 +116,7 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             else if (tabControlTaxDues.SelectedTab == tabPageOthers)
             {
-                ucPayment.amountPayment = ucOtherCharges.totalAmount;
+                ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
                 ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.OnLoad(ucPayment.selectedAccountableFormNo);

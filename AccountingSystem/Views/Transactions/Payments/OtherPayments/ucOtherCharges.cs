@@ -21,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         internal string accountableForm = string.Empty;
         internal int unit = 1;
         internal decimal debitAmount;
+        internal decimal subTotalAmount;
         internal decimal totalAmount;
 
 
@@ -162,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void AddOtherPaymentCharge()
         {
-            _ = dgOtherPaymentCharges.Rows.Add(new object[] { description, debitAmount, $"AF {accountableForm}", unit, totalAmount });
+            _ = dgOtherPaymentCharges.Rows.Add(new object[] { description, debitAmount, $"AF {accountableForm}", unit, subTotalAmount });
         }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
@@ -175,7 +176,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             description = dictPaymentRates["description"];
             debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
-            totalAmount = unit * debitAmount;
+            subTotalAmount = unit * debitAmount;
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
@@ -210,6 +211,15 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             {
                 dgOtherPaymentCharges.Rows[rowIndex].Cells["unit"].Value = 1;
             }
+        }
+
+        internal decimal GetTotalOtherCharges()
+        {
+            decimal totalPayment = 0;
+            foreach (DataGridViewRow row in dgOtherPaymentCharges.Rows)
+                totalPayment += Convert.ToDecimal(row.Cells["total_amount"].Value);
+           
+            return totalPayment;
         }
 
     }
