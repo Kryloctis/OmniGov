@@ -120,8 +120,8 @@ namespace AccountingSystem.Views.Manage.ChartOfAccounts
             {
                 ushort generalLedgerId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
                 var beginningBalanceRepository = AccFactory.BeginningBalancesRepository();
-                decimal debit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1);
-                decimal credit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0);
+                decimal debit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true);
+                decimal credit = beginningBalanceRepository.GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false);
 
                 item["Debit"] = debit > credit ? debit - credit : 0;
                 item["Credit"] = credit > debit ? credit - debit : 0;
