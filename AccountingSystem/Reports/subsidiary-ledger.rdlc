@@ -6375,7 +6375,7 @@
                         </GroupExpressions>
                         <Filters>
                           <Filter>
-                            <FilterExpression>=Month(Fields!date.Value)</FilterExpression>
+                            <FilterExpression>=IIF(string.IsNullOrWhiteSpace(Fields!date.Value), 0, Month(Fields!date.Value))</FilterExpression>
                             <Operator>Equal</Operator>
                             <FilterValues>
                               <FilterValue DataType="Integer">1</FilterValue>

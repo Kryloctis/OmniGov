@@ -10,7 +10,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
     public partial class ucSubsidiaryLedger : UserControl
     {
         private readonly ReportViewer reportViewer;
-        private DataTable dtSubsidiaryLedger = new dsLFS.dtSubsidiaryLedgerDataTable();
 
         public ucSubsidiaryLedger()
         {
@@ -104,9 +103,13 @@ namespace AccountingSystem.Views.Reports.Ledgers
             int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
             int subsidiaryLedgerId = Convert.ToInt32(cmbSubsidiaryLedger.SelectedValue);
             short year = Convert.ToInt16(cmbYear.Text);
+            DataTable dtSubsidiaryLedger = new dsLFS.dtSubsidiaryLedgerDataTable();
 
-            var dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
-            dtSubsidiaryLedger.Rows.Add(BeginningBalanceRow(fundId, year, generalLedgerId));
+            DataTable dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
+            DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtSubsidiaryLedger);
+
+            if (!string.IsNullOrWhiteSpace(dataRowBeginningBalance["date"].ToString()))
+                dtSubsidiaryLedger.Rows.Add(dataRowBeginningBalance);
 
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
             {
@@ -124,21 +127,21 @@ namespace AccountingSystem.Views.Reports.Ledgers
             return dtSubsidiaryLedger;
         }
 
-        private DataRow BeginningBalanceRow(int fundId, short year, int generalLedgerId)
+        private DataRow BeginningBalanceRow(int fundId, short year, int generalLedgerId, DataTable dataTable)
         {
             ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
             Dictionary<string, string> dateDict = AccFactory.BeginningBalancesRepository().GetRecordBy_FundId_GenLedgId_Year_SubLedgId((byte)fundId, (ushort)generalLedgerId, year,
             subsidiaryLedgerId);
             decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, year, true, subsidiaryLedgerId);
             decimal CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, year, false, subsidiaryLedgerId);
-            var newRow = dtSubsidiaryLedger.NewRow();
+            var newRow = dataTable.NewRow();
             decimal balance = DebitBeginningBalance - CreditBeginningBalance;
             decimal debit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(balance) : 0;
             decimal credit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(balance) : 0;
 
-            var beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? string.Empty : Convert.ToDateTime(dateDict["date_entry"]).ToString("MM/dd/yyyy");
-            newRow["date"] = beginningBalanceDate;
+            var beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? new DateTime(year, 1, 1) : Convert.ToDateTime(dateDict["date_entry"]);
 
+            newRow["date"] = beginningBalanceDate;
             newRow["particulars"] = "Beginning Balance";
             newRow["ref"] = string.Empty;
             newRow["debit_amount"] = debit;
