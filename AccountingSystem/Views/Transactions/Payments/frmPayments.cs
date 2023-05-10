@@ -475,7 +475,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             try
             {
-                return AccFactory.MarriageLicenseRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
+                return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
             }
             catch (Exception ex)
             {

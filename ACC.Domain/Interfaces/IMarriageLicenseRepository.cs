@@ -7,6 +7,6 @@ namespace ACC.Domain.Interfaces
 {
     public interface IMarriageLicenseRepository:IAccRepository<MarriageLicenseModel>
     {
-        bool InsertWithMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel);
+        bool InsertWithMarriageLicensePayment(MarriageLicenseModel marriageLicenseModel);
     }
 }

@@ -54,7 +54,7 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
-        public bool InsertWithMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
+        public bool InsertWithMarriageLicensePayment(MarriageLicenseModel marriageLicenseModel)
         {
                 var parameters = new object[][]
                    {

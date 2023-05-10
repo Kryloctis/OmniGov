@@ -1,5 +1,6 @@
 ﻿using ACC.Domain.Interfaces;
 using ACC.Domain.Models;
+using AccountingSystem;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,16 +15,23 @@ namespace ACC.Data
         private AccGenericCommands _mySqlGenericCommandsLFS;
         private IGeneralPaymentsRepository _generalPaymentsRepository;
         private IRptPaymentRepository _rptPaymentPostsRepository;
+
+
+        private IMarriageLicenseRepository _marriageLicenseRepository;
+
+
         private IPaymentCollectionHasChequesRepository _paymentCollectionHasChequesRepository;
 
         public PaymentCollectionsRepository(AccGenericCommands mySqlGenericCommandsLFS,
                                             IGeneralPaymentsRepository generalPaymentsRepository,
                                             IRptPaymentRepository rptPaymentPostsRepository,
+                                            IMarriageLicenseRepository marriageLicenseRepository,
                                             IPaymentCollectionHasChequesRepository paymentCollectionHasChequesRepository)
         {
             _mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
             _generalPaymentsRepository = generalPaymentsRepository;
             _rptPaymentPostsRepository = rptPaymentPostsRepository;
+            _marriageLicenseRepository = marriageLicenseRepository;
             _paymentCollectionHasChequesRepository = paymentCollectionHasChequesRepository;
         }
 
@@ -484,6 +492,38 @@ namespace ACC.Data
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public bool InsertWithMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
+        {
+            using (var scope = new TransactionScope())
+            {
+                var parameters = new object[][]
+                   {
+                        new object[] { "@collecting_officers_id", DbType.String, paymentCollectionsModel.CollectingOfficerId},
+                        new object[] { "@job_orders_id", DbType.String, paymentCollectionsModel.JobOrderId},
+                        new object[] { "@funds_id", DbType.String, paymentCollectionsModel.FundId},
+                        new object[] { "@accountable_forms_id", DbType.Int16, paymentCollectionsModel.AccountableFormId},
+                        new object[] { "@payee", DbType.String, paymentCollectionsModel.Payee},
+                        new object[] { "@receipt_no", DbType.String, paymentCollectionsModel.ReceiptNo},
+                        new object[] { "@payment_date", DbType.DateTime, paymentCollectionsModel.PaymentDate},
+                        new object[] { "@amount", DbType.Decimal, paymentCollectionsModel.Amount},
+                        new object[] { "@is_cancelled", DbType.Boolean, paymentCollectionsModel.IsCancelled},
+                        new object[] { "@created_by", DbType.Int16, paymentCollectionsModel.CreatedBy}
+                   };
+
+                string query = $"INSERT INTO {tableName} (collecting_officers_id, job_orders_id, funds_id, accountable_forms_id, payee, receipt_no,  payment_date, amount, is_cancelled, created_by) VALUES (@collecting_officers_id, @job_orders_id, @funds_id, @accountable_forms_id, @payee, @receipt_no, @payment_date, @amount, @is_cancelled, @created_by)";
+
+                _ = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
+
+                int paymentCollectionId = GetLastInsertedID();
+                paymentCollectionHasChequesModel.PaymentCollectionId = paymentCollectionId;
+                _marriageLicenseRepository.InsertWithMarriageLicensePayment(marriageLicenseModel);
+                _paymentCollectionHasChequesRepository.InsertWithCheques(paymentCollectionHasChequesModel);
+
+                scope.Complete();
+                return true;
             }
         }
     }
