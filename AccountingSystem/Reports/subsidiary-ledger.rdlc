@@ -165,6 +165,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox1</rd:DefaultName>
+                <Left>0in</Left>
                 <Height>0.71415cm</Height>
                 <Width>19.55501cm</Width>
                 <ZIndex>3</ZIndex>
@@ -287,9 +288,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>2.74258cm</Top>
-                <Left>4.62453cm</Left>
+                <Left>4.97732cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>7.47564cm</Width>
+                <Width>7.12285cm</Width>
                 <ZIndex>7</ZIndex>
                 <Style>
                   <Border>
@@ -325,9 +326,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>3.41286cm</Top>
-                <Left>4.62453cm</Left>
+                <Left>4.97732cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>7.47564cm</Width>
+                <Width>7.12285cm</Width>
                 <ZIndex>8</ZIndex>
                 <Style>
                   <Border>
@@ -363,9 +364,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>4.08314cm</Top>
-                <Left>4.62453cm</Left>
+                <Left>4.97732cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>7.47564cm</Width>
+                <Width>7.12285cm</Width>
                 <ZIndex>9</ZIndex>
                 <Style>
                   <Border>
@@ -401,9 +402,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>4.7757cm</Top>
-                <Left>4.62453cm</Left>
+                <Left>4.97732cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>7.47564cm</Width>
+                <Width>7.12285cm</Width>
                 <ZIndex>10</ZIndex>
                 <Style>
                   <Border>
@@ -439,7 +440,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox27</rd:DefaultName>
                 <Top>1.8802in</Top>
-                <Left>0.00543in</Left>
+                <Left>0.13043in</Left>
                 <Height>0.21711in</Height>
                 <Width>1.78748in</Width>
                 <ZIndex>11</ZIndex>
@@ -474,7 +475,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox28</rd:DefaultName>
                 <Top>1.60754in</Top>
-                <Left>0.00274in</Left>
+                <Left>0.12774in</Left>
                 <Height>0.21711in</Height>
                 <Width>1.79017in</Width>
                 <ZIndex>12</ZIndex>
@@ -509,7 +510,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox29</rd:DefaultName>
                 <Top>1.34365in</Top>
-                <Left>0.00005in</Left>
+                <Left>0.12505in</Left>
                 <Height>0.21711in</Height>
                 <Width>1.79285in</Width>
                 <ZIndex>13</ZIndex>
@@ -544,7 +545,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox30</rd:DefaultName>
                 <Top>1.07976in</Top>
-                <Left>0.00005in</Left>
+                <Left>0.12505in</Left>
                 <Height>0.21711in</Height>
                 <Width>1.79286in</Width>
                 <ZIndex>14</ZIndex>
@@ -616,7 +617,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
                 <Top>3.30703cm</Top>
-                <Left>13.05048cm</Left>
+                <Left>13.36798cm</Left>
                 <Height>0.55145cm</Height>
                 <Width>0.82903cm</Width>
                 <ZIndex>16</ZIndex>
@@ -653,9 +654,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>3.30703cm</Top>
-                <Left>13.95006cm</Left>
+                <Left>14.27018cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>5.21375cm</Width>
+                <Width>4.89363cm</Width>
                 <ZIndex>17</ZIndex>
                 <Style>
                   <Border>
@@ -691,7 +692,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox2</rd:DefaultName>
                 <Top>3.99959cm</Top>
-                <Left>13.05048cm</Left>
+                <Left>13.36798cm</Left>
                 <Height>0.55145cm</Height>
                 <Width>0.82903cm</Width>
                 <ZIndex>18</ZIndex>
@@ -728,9 +729,9 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox4</rd:DefaultName>
                 <Top>3.99959cm</Top>
-                <Left>13.95006cm</Left>
+                <Left>14.27018cm</Left>
                 <Height>0.55145cm</Height>
-                <Width>5.21377cm</Width>
+                <Width>4.89365cm</Width>
                 <ZIndex>19</ZIndex>
                 <Style>
                   <Border>
@@ -1381,7 +1382,8 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 1, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger")</Value>
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 1, Fields!debit_amount.Value, Nothing), 
+"dtSubsidiaryLedger")</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -1418,7 +1420,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 1, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger")</Value>
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 1, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger")</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
                                         <FontSize>9pt</FontSize>
@@ -1448,7 +1450,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox106">
+                            <Textbox Name="txtBalanceJanuary">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -1470,7 +1472,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox106</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -1502,6 +1503,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -1537,6 +1539,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -1568,7 +1571,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -1603,7 +1606,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -1639,7 +1642,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -1672,10 +1675,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue(
+(Fields!debit_amount.Value - Fields!credit_amount.Value)
+, Sum, Nothing) + ReportItems!txtBalanceJanuary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -1823,7 +1828,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 2, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger")
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 2, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger")
 + ReportItems!txtTotalDebitJanuary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -1861,7 +1866,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 2, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 2, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditJanuary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -1892,7 +1897,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox163">
+                            <Textbox Name="txtBalanceFebruary">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -1914,7 +1919,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox163</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -1946,6 +1950,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -1981,6 +1986,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2012,7 +2018,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2047,7 +2053,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -2083,7 +2089,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -2116,10 +2122,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceFebruary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2266,7 +2274,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 3, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 3, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitFebruary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -2304,7 +2312,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 3, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 3, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditFebruary.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -2335,7 +2343,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox169">
+                            <Textbox Name="txtBalanceMarch">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -2357,7 +2365,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox169</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -2389,6 +2396,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -2424,6 +2432,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2455,7 +2464,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2490,7 +2499,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -2526,7 +2535,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -2559,10 +2568,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceMarch.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2709,7 +2720,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 4, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 4, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitMarch.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -2747,7 +2758,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 4, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 4, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditMarch.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -2778,7 +2789,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox211">
+                            <Textbox Name="txtBalanceApril">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -2800,7 +2811,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox211</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -2832,6 +2842,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -2867,6 +2878,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2898,7 +2910,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -2933,7 +2945,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -2969,7 +2981,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -3002,10 +3014,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceApril.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3152,7 +3166,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 5, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 5, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitApril.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -3190,7 +3204,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 5, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 5, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditApril.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -3221,7 +3235,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox212">
+                            <Textbox Name="txtBalanceMay">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -3242,7 +3256,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox211</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -3274,6 +3287,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -3309,6 +3323,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3340,7 +3355,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3375,7 +3390,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -3411,7 +3426,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -3444,10 +3459,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceMay.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3594,7 +3611,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 6, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 6, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitMay.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -3632,7 +3649,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 6, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 6, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditMay.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -3663,7 +3680,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox10">
+                            <Textbox Name="txtBalanceJune">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -3684,7 +3701,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox10</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -3716,6 +3732,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -3751,6 +3768,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3782,7 +3800,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -3817,7 +3835,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -3853,7 +3871,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -3886,10 +3904,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceJune.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4036,7 +4056,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 7, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 7, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitJune.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4074,7 +4094,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 7, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 7, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditJune.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4105,7 +4125,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox32">
+                            <Textbox Name="txtBalanceJuly">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -4126,7 +4146,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox32</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -4158,6 +4177,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -4193,6 +4213,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4224,7 +4245,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4259,7 +4280,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -4295,7 +4316,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -4328,10 +4349,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceJuly.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4478,7 +4501,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 8, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 8, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitJuly.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4516,7 +4539,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 8, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 8, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditJuly.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4547,7 +4570,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox38">
+                            <Textbox Name="txtBalanceAugust">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -4568,7 +4591,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox38</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -4600,6 +4622,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -4635,6 +4658,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4666,7 +4690,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4701,7 +4725,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -4737,7 +4761,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -4770,10 +4794,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceAugust.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -4920,7 +4946,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 9, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 9, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitAugust.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4958,7 +4984,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 9, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 9, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditAugust.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -4989,7 +5015,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox44">
+                            <Textbox Name="txtBalanceSeptember">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -5010,7 +5036,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox44</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -5042,6 +5067,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -5077,6 +5103,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5108,7 +5135,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5143,7 +5170,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -5179,7 +5206,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -5212,10 +5239,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceSeptember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5362,7 +5391,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 10, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 10, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitSeptember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -5400,7 +5429,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 10, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 10, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditSeptember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -5431,7 +5460,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox50">
+                            <Textbox Name="txtBalanceOctober">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -5452,7 +5481,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox50</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -5484,6 +5512,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -5519,6 +5548,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5550,7 +5580,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5585,7 +5615,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -5621,7 +5651,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -5654,10 +5684,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceOctober.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5804,7 +5836,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 11, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 11, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitOctober.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -5842,7 +5874,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 11, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 11, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditOctober.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -5873,7 +5905,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox56">
+                            <Textbox Name="txtBalanceNovember">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -5894,7 +5926,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox56</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -5926,6 +5957,7 @@
                                       <Value>=Fields!date.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                         <Format>MM/dd/yyyy</Format>
                                       </Style>
                                     </TextRun>
@@ -5961,6 +5993,7 @@
                                       <Value>=Fields!particulars.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -5992,7 +6025,7 @@
                                       <Value>=Fields!ref.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -6027,7 +6060,7 @@
                                       <Value>=Sum(Fields!debit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -6063,7 +6096,7 @@
                                       <Value>=Sum(Fields!credit_amount.Value)</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Normal</FontWeight>
+                                        <FontSize>9pt</FontSize>
                                         <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
@@ -6096,10 +6129,12 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
+                                      <Value>=RunningValue((Fields!debit_amount.Value - Fields!credit_amount.Value), 
+Sum, Nothing) + ReportItems!txtBalanceNovember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontWeight>Bold</FontWeight>
+                                        <FontSize>9pt</FontSize>
+                                        <Format>#,0.00;(#,0.00);'-'</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -6246,7 +6281,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 12, Fields!debit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 12, Fields!debit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalDebitNovember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -6284,7 +6319,7 @@
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 12, Fields!credit_amount.Value, 0), "dtSubsidiaryLedger") 
+                                      <Value>=Sum(IIF(Month(Fields!date.Value) = 12, Fields!credit_amount.Value, Nothing), "dtSubsidiaryLedger") 
 + ReportItems!txtTotalCreditNovember.Value</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
@@ -6315,7 +6350,7 @@
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox62">
+                            <Textbox Name="txtBalanceDecember">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -6336,7 +6371,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox62</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -6732,7 +6766,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>8.91272in</Height>
+        <Height>8.99605in</Height>
         <Style />
       </Body>
       <Width>7.75461in</Width>
