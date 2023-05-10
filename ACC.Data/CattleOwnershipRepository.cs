@@ -50,7 +50,7 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
-        public bool InsertWithPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
+        public bool InsertWithCattleOwnershipPayment(CattleOwnershipModel cattleOwnershipModel)
         {
             var parameters = new object[][]
             {
