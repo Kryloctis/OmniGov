@@ -38,7 +38,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
         {
             if (!DesignMode)
             {
-
+                HelperLoadRecords.SexComboBox(cmbxSex);
             }
         }
     }

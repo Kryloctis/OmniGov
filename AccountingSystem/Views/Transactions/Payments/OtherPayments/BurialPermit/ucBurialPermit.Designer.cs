@@ -381,6 +381,7 @@
             Controls.Add(groupBox2);
             Name = "ucBurialPermit";
             Size = new System.Drawing.Size(946, 247);
+            Load += ucBurialPermit_Load;
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

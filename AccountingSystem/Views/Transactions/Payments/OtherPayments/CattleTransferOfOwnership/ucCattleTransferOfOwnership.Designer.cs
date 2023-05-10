@@ -212,7 +212,7 @@
             // btnBrowse
             // 
             btnBrowse.Image = Properties.Resources.user_browse_14px;
-            btnBrowse.Location = new System.Drawing.Point(323, 16);
+            btnBrowse.Location = new System.Drawing.Point(323, 45);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new System.Drawing.Size(22, 23);
             btnBrowse.TabIndex = 7;

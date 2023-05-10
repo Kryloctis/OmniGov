@@ -23,5 +23,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
 
             txtTaxpayer.Text = dictTaxpayer["taxpayers_name"];
         }
+
+        private void ucBurialPermit_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                HelperLoadRecords.SexComboBox(cmbxRemainsSex);
+            }
+        }
     }
 }

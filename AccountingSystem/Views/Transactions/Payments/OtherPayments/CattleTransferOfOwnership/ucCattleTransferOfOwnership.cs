@@ -34,6 +34,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
                 LoadBarangays();
                 LoadMunicipalities();
                 LoadProvince();
+                HelperLoadRecords.SexComboBox(cmbxSex);
             }
         }
 

@@ -8,6 +8,24 @@ namespace AccountingSystem
 {
     public class HelperLoadRecords
     {
+        #region Controls Default Data
+        public static Dictionary<int, string> SexDataSource()
+        {
+            var sex = new Dictionary<int, string>();
+            sex.Add(1, "Male");
+            sex.Add(2, "Female");
+
+            return sex;
+        }
+
+        internal static void SexComboBox(ComboBox comboBox)
+        {
+            foreach (var item in SexDataSource().Values)
+                comboBox.Items.Add(item);
+            comboBox.SelectedIndex = 0;
+        }
+
+        #endregion
         #region Business Addons
 
         internal static void BusinessAddOnChargesDataGridView(DataGridView datagrid, DataTable dataTable)
