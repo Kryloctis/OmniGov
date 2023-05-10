@@ -662,18 +662,21 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void tabPageAF51ANDAF57_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "51";
+            ucOtherCharges = ucOtherCharges1; 
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageCertificateOfTransferOfCattle_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "52";
+            ucOtherCharges = ucOtherCharges2;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageCattleOwnership_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "53";
+            ucOtherCharges = ucOtherCharges3;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
@@ -681,12 +684,14 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void tabPageMarriageLicense_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "54";
+            ucOtherCharges = ucOtherCharges4;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageBurialPermit_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "58";
+            ucOtherCharges = ucOtherCharges4;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
