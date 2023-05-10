@@ -16,5 +16,37 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.MarriageLic
         {
             InitializeComponent();
         }
+
+        private void ucMarriageLicense_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                LoadProvince();
+                LoadBarangay();
+                LoadMunicipality();
+            }
+        }
+
+        private void LoadProvince()
+        {
+            var dtProvince = AccFactory.ProvincesRepository().GetRecords();
+            HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxHusbandProvince, "name", "id");
+            HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxWifeProvince, "name", "id");
+        }
+
+
+        private void LoadMunicipality()
+        {
+            var dtMunicipalities = AccFactory.MunicipalitiesRepository().GetRecords();
+            HelperLoadRecords.MunicipalitiesCombobox(dtMunicipalities, cmbxWifeMunicipality, "name", "id");
+            HelperLoadRecords.MunicipalitiesCombobox(dtMunicipalities, cmbxHusbandMunicipality, "name", "id");
+        }
+
+        private void LoadBarangay()
+        {
+            var dtBarangays = AccFactory.BarangayRepository().GetRecords();
+            HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxHusbandBarangay, "name", "id");
+            HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxWifeBarangay, "name", "id");
+        }
     }
 }
