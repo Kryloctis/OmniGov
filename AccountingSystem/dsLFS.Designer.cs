@@ -36,7 +36,7 @@ namespace AccountingSystem {
         
         private AuthorityToDebitAccountDisbursementsJournalDataTable tableAuthorityToDebitAccountDisbursementsJournal;
         
-        private GeneralLedgerDataTable tableGeneralLedger;
+        private dtGeneralLedgerDataTable tabledtGeneralLedger;
         
         private dtRCIDataTable tabledtRCI;
         
@@ -146,8 +146,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null)) {
                     base.Tables.Add(new AuthorityToDebitAccountDisbursementsJournalDataTable(ds.Tables["AuthorityToDebitAccountDisbursementsJournal"]));
                 }
-                if ((ds.Tables["GeneralLedger"] != null)) {
-                    base.Tables.Add(new GeneralLedgerDataTable(ds.Tables["GeneralLedger"]));
+                if ((ds.Tables["dtGeneralLedger"] != null)) {
+                    base.Tables.Add(new dtGeneralLedgerDataTable(ds.Tables["dtGeneralLedger"]));
                 }
                 if ((ds.Tables["dtRCI"] != null)) {
                     base.Tables.Add(new dtRCIDataTable(ds.Tables["dtRCI"]));
@@ -324,9 +324,9 @@ namespace AccountingSystem {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public GeneralLedgerDataTable GeneralLedger {
+        public dtGeneralLedgerDataTable dtGeneralLedger {
             get {
-                return this.tableGeneralLedger;
+                return this.tabledtGeneralLedger;
             }
         }
         
@@ -725,8 +725,8 @@ namespace AccountingSystem {
                 if ((ds.Tables["AuthorityToDebitAccountDisbursementsJournal"] != null)) {
                     base.Tables.Add(new AuthorityToDebitAccountDisbursementsJournalDataTable(ds.Tables["AuthorityToDebitAccountDisbursementsJournal"]));
                 }
-                if ((ds.Tables["GeneralLedger"] != null)) {
-                    base.Tables.Add(new GeneralLedgerDataTable(ds.Tables["GeneralLedger"]));
+                if ((ds.Tables["dtGeneralLedger"] != null)) {
+                    base.Tables.Add(new dtGeneralLedgerDataTable(ds.Tables["dtGeneralLedger"]));
                 }
                 if ((ds.Tables["dtRCI"] != null)) {
                     base.Tables.Add(new dtRCIDataTable(ds.Tables["dtRCI"]));
@@ -890,10 +890,10 @@ namespace AccountingSystem {
                     this.tableAuthorityToDebitAccountDisbursementsJournal.InitVars();
                 }
             }
-            this.tableGeneralLedger = ((GeneralLedgerDataTable)(base.Tables["GeneralLedger"]));
+            this.tabledtGeneralLedger = ((dtGeneralLedgerDataTable)(base.Tables["dtGeneralLedger"]));
             if ((initTable == true)) {
-                if ((this.tableGeneralLedger != null)) {
-                    this.tableGeneralLedger.InitVars();
+                if ((this.tabledtGeneralLedger != null)) {
+                    this.tabledtGeneralLedger.InitVars();
                 }
             }
             this.tabledtRCI = ((dtRCIDataTable)(base.Tables["dtRCI"]));
@@ -1104,8 +1104,8 @@ namespace AccountingSystem {
             base.Tables.Add(this.tableProcurementsReceivedJournal);
             this.tableAuthorityToDebitAccountDisbursementsJournal = new AuthorityToDebitAccountDisbursementsJournalDataTable();
             base.Tables.Add(this.tableAuthorityToDebitAccountDisbursementsJournal);
-            this.tableGeneralLedger = new GeneralLedgerDataTable();
-            base.Tables.Add(this.tableGeneralLedger);
+            this.tabledtGeneralLedger = new dtGeneralLedgerDataTable();
+            base.Tables.Add(this.tabledtGeneralLedger);
             this.tabledtRCI = new dtRCIDataTable();
             base.Tables.Add(this.tabledtRCI);
             this.tabledtPC = new dtPCDataTable();
@@ -1208,7 +1208,7 @@ namespace AccountingSystem {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializeGeneralLedger() {
+        private bool ShouldSerializedtGeneralLedger() {
             return false;
         }
         
@@ -1472,7 +1472,7 @@ namespace AccountingSystem {
         public delegate void AuthorityToDebitAccountDisbursementsJournalRowChangeEventHandler(object sender, AuthorityToDebitAccountDisbursementsJournalRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void GeneralLedgerRowChangeEventHandler(object sender, GeneralLedgerRowChangeEvent e);
+        public delegate void dtGeneralLedgerRowChangeEventHandler(object sender, dtGeneralLedgerRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void dtRCIRowChangeEventHandler(object sender, dtRCIRowChangeEvent e);
@@ -3875,7 +3875,7 @@ namespace AccountingSystem {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class GeneralLedgerDataTable : global::System.Data.TypedTableBase<GeneralLedgerRow> {
+        public partial class dtGeneralLedgerDataTable : global::System.Data.TypedTableBase<dtGeneralLedgerRow> {
             
             private global::System.Data.DataColumn columndate;
             
@@ -3891,8 +3891,8 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerDataTable() {
-                this.TableName = "GeneralLedger";
+            public dtGeneralLedgerDataTable() {
+                this.TableName = "dtGeneralLedger";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -3900,7 +3900,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal GeneralLedgerDataTable(global::System.Data.DataTable table) {
+            internal dtGeneralLedgerDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -3917,7 +3917,7 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected GeneralLedgerDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected dtGeneralLedgerDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -3981,34 +3981,34 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerRow this[int index] {
+            public dtGeneralLedgerRow this[int index] {
                 get {
-                    return ((GeneralLedgerRow)(this.Rows[index]));
+                    return ((dtGeneralLedgerRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowChanging;
+            public event dtGeneralLedgerRowChangeEventHandler dtGeneralLedgerRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowChanged;
+            public event dtGeneralLedgerRowChangeEventHandler dtGeneralLedgerRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowDeleting;
+            public event dtGeneralLedgerRowChangeEventHandler dtGeneralLedgerRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event GeneralLedgerRowChangeEventHandler GeneralLedgerRowDeleted;
+            public event dtGeneralLedgerRowChangeEventHandler dtGeneralLedgerRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AddGeneralLedgerRow(GeneralLedgerRow row) {
+            public void AdddtGeneralLedgerRow(dtGeneralLedgerRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerRow AddGeneralLedgerRow(System.DateTime date, string particulars, string _ref, decimal debit_amount, decimal credit_amount, decimal balance) {
-                GeneralLedgerRow rowGeneralLedgerRow = ((GeneralLedgerRow)(this.NewRow()));
+            public dtGeneralLedgerRow AdddtGeneralLedgerRow(System.DateTime date, string particulars, string _ref, decimal debit_amount, decimal credit_amount, decimal balance) {
+                dtGeneralLedgerRow rowdtGeneralLedgerRow = ((dtGeneralLedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         date,
                         particulars,
@@ -4016,15 +4016,15 @@ namespace AccountingSystem {
                         debit_amount,
                         credit_amount,
                         balance};
-                rowGeneralLedgerRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowGeneralLedgerRow);
-                return rowGeneralLedgerRow;
+                rowdtGeneralLedgerRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowdtGeneralLedgerRow);
+                return rowdtGeneralLedgerRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                GeneralLedgerDataTable cln = ((GeneralLedgerDataTable)(base.Clone()));
+                dtGeneralLedgerDataTable cln = ((dtGeneralLedgerDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -4032,7 +4032,7 @@ namespace AccountingSystem {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new GeneralLedgerDataTable();
+                return new dtGeneralLedgerDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4068,28 +4068,28 @@ namespace AccountingSystem {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerRow NewGeneralLedgerRow() {
-                return ((GeneralLedgerRow)(this.NewRow()));
+            public dtGeneralLedgerRow NewdtGeneralLedgerRow() {
+                return ((dtGeneralLedgerRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new GeneralLedgerRow(builder);
+                return new dtGeneralLedgerRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(GeneralLedgerRow);
+                return typeof(dtGeneralLedgerRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.GeneralLedgerRowChanged != null)) {
-                    this.GeneralLedgerRowChanged(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
+                if ((this.dtGeneralLedgerRowChanged != null)) {
+                    this.dtGeneralLedgerRowChanged(this, new dtGeneralLedgerRowChangeEvent(((dtGeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4097,8 +4097,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.GeneralLedgerRowChanging != null)) {
-                    this.GeneralLedgerRowChanging(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
+                if ((this.dtGeneralLedgerRowChanging != null)) {
+                    this.dtGeneralLedgerRowChanging(this, new dtGeneralLedgerRowChangeEvent(((dtGeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4106,8 +4106,8 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.GeneralLedgerRowDeleted != null)) {
-                    this.GeneralLedgerRowDeleted(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
+                if ((this.dtGeneralLedgerRowDeleted != null)) {
+                    this.dtGeneralLedgerRowDeleted(this, new dtGeneralLedgerRowChangeEvent(((dtGeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
             
@@ -4115,14 +4115,14 @@ namespace AccountingSystem {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.GeneralLedgerRowDeleting != null)) {
-                    this.GeneralLedgerRowDeleting(this, new GeneralLedgerRowChangeEvent(((GeneralLedgerRow)(e.Row)), e.Action));
+                if ((this.dtGeneralLedgerRowDeleting != null)) {
+                    this.dtGeneralLedgerRowDeleting(this, new dtGeneralLedgerRowChangeEvent(((dtGeneralLedgerRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemoveGeneralLedgerRow(GeneralLedgerRow row) {
+            public void RemovedtGeneralLedgerRow(dtGeneralLedgerRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -4149,7 +4149,7 @@ namespace AccountingSystem {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "GeneralLedgerDataTable";
+                attribute2.FixedValue = "dtGeneralLedgerDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -18648,15 +18648,15 @@ namespace AccountingSystem {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class GeneralLedgerRow : global::System.Data.DataRow {
+        public partial class dtGeneralLedgerRow : global::System.Data.DataRow {
             
-            private GeneralLedgerDataTable tableGeneralLedger;
+            private dtGeneralLedgerDataTable tabledtGeneralLedger;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal GeneralLedgerRow(global::System.Data.DataRowBuilder rb) : 
+            internal dtGeneralLedgerRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableGeneralLedger = ((GeneralLedgerDataTable)(this.Table));
+                this.tabledtGeneralLedger = ((dtGeneralLedgerDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18664,14 +18664,14 @@ namespace AccountingSystem {
             public System.DateTime date {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableGeneralLedger.dateColumn]));
+                        return ((global::System.DateTime)(this[this.tabledtGeneralLedger.dateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.dateColumn] = value;
+                    this[this.tabledtGeneralLedger.dateColumn] = value;
                 }
             }
             
@@ -18680,14 +18680,14 @@ namespace AccountingSystem {
             public string particulars {
                 get {
                     try {
-                        return ((string)(this[this.tableGeneralLedger.particularsColumn]));
+                        return ((string)(this[this.tabledtGeneralLedger.particularsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'particulars\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.particularsColumn] = value;
+                    this[this.tabledtGeneralLedger.particularsColumn] = value;
                 }
             }
             
@@ -18696,14 +18696,14 @@ namespace AccountingSystem {
             public string _ref {
                 get {
                     try {
-                        return ((string)(this[this.tableGeneralLedger.refColumn]));
+                        return ((string)(this[this.tabledtGeneralLedger.refColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ref\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.refColumn] = value;
+                    this[this.tabledtGeneralLedger.refColumn] = value;
                 }
             }
             
@@ -18712,14 +18712,14 @@ namespace AccountingSystem {
             public decimal debit_amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tableGeneralLedger.debit_amountColumn]));
+                        return ((decimal)(this[this.tabledtGeneralLedger.debit_amountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'debit_amount\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'debit_amount\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.debit_amountColumn] = value;
+                    this[this.tabledtGeneralLedger.debit_amountColumn] = value;
                 }
             }
             
@@ -18728,14 +18728,14 @@ namespace AccountingSystem {
             public decimal credit_amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tableGeneralLedger.credit_amountColumn]));
+                        return ((decimal)(this[this.tabledtGeneralLedger.credit_amountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'credit_amount\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'credit_amount\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.credit_amountColumn] = value;
+                    this[this.tabledtGeneralLedger.credit_amountColumn] = value;
                 }
             }
             
@@ -18744,87 +18744,87 @@ namespace AccountingSystem {
             public decimal balance {
                 get {
                     try {
-                        return ((decimal)(this[this.tableGeneralLedger.balanceColumn]));
+                        return ((decimal)(this[this.tabledtGeneralLedger.balanceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'balance\' in table \'GeneralLedger\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'balance\' in table \'dtGeneralLedger\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableGeneralLedger.balanceColumn] = value;
+                    this[this.tabledtGeneralLedger.balanceColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsdateNull() {
-                return this.IsNull(this.tableGeneralLedger.dateColumn);
+                return this.IsNull(this.tabledtGeneralLedger.dateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetdateNull() {
-                this[this.tableGeneralLedger.dateColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.dateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsparticularsNull() {
-                return this.IsNull(this.tableGeneralLedger.particularsColumn);
+                return this.IsNull(this.tabledtGeneralLedger.particularsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetparticularsNull() {
-                this[this.tableGeneralLedger.particularsColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.particularsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Is_refNull() {
-                return this.IsNull(this.tableGeneralLedger.refColumn);
+                return this.IsNull(this.tabledtGeneralLedger.refColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Set_refNull() {
-                this[this.tableGeneralLedger.refColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.refColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isdebit_amountNull() {
-                return this.IsNull(this.tableGeneralLedger.debit_amountColumn);
+                return this.IsNull(this.tabledtGeneralLedger.debit_amountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setdebit_amountNull() {
-                this[this.tableGeneralLedger.debit_amountColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.debit_amountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Iscredit_amountNull() {
-                return this.IsNull(this.tableGeneralLedger.credit_amountColumn);
+                return this.IsNull(this.tabledtGeneralLedger.credit_amountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void Setcredit_amountNull() {
-                this[this.tableGeneralLedger.credit_amountColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.credit_amountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsbalanceNull() {
-                return this.IsNull(this.tableGeneralLedger.balanceColumn);
+                return this.IsNull(this.tabledtGeneralLedger.balanceColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetbalanceNull() {
-                this[this.tableGeneralLedger.balanceColumn] = global::System.Convert.DBNull;
+                this[this.tabledtGeneralLedger.balanceColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -29974,22 +29974,22 @@ namespace AccountingSystem {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class GeneralLedgerRowChangeEvent : global::System.EventArgs {
+        public class dtGeneralLedgerRowChangeEvent : global::System.EventArgs {
             
-            private GeneralLedgerRow eventRow;
+            private dtGeneralLedgerRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerRowChangeEvent(GeneralLedgerRow row, global::System.Data.DataRowAction action) {
+            public dtGeneralLedgerRowChangeEvent(dtGeneralLedgerRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public GeneralLedgerRow Row {
+            public dtGeneralLedgerRow Row {
                 get {
                     return this.eventRow;
                 }

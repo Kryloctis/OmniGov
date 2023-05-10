@@ -112,7 +112,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GeneralLedger" msprop:Generator_RowEvHandlerName="GeneralLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="GeneralLedgerRowDeleted" msprop:Generator_RowDeletingName="GeneralLedgerRowDeleting" msprop:Generator_RowEvArgName="GeneralLedgerRowChangeEvent" msprop:Generator_TablePropName="GeneralLedger" msprop:Generator_RowChangedName="GeneralLedgerRowChanged" msprop:Generator_UserTableName="GeneralLedger" msprop:Generator_RowChangingName="GeneralLedgerRowChanging" msprop:Generator_RowClassName="GeneralLedgerRow" msprop:Generator_TableClassName="GeneralLedgerDataTable" msprop:Generator_TableVarName="tableGeneralLedger">
+        <xs:element name="dtGeneralLedger" msprop:Generator_RowEvHandlerName="dtGeneralLedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="dtGeneralLedgerRowDeleted" msprop:Generator_RowDeletingName="dtGeneralLedgerRowDeleting" msprop:Generator_RowEvArgName="dtGeneralLedgerRowChangeEvent" msprop:Generator_TablePropName="dtGeneralLedger" msprop:Generator_RowChangedName="dtGeneralLedgerRowChanged" msprop:Generator_UserTableName="dtGeneralLedger" msprop:Generator_RowChangingName="dtGeneralLedgerRowChanging" msprop:Generator_RowClassName="dtGeneralLedgerRow" msprop:Generator_TableClassName="dtGeneralLedgerDataTable" msprop:Generator_TableVarName="tabledtGeneralLedger">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_UserColumnName="date" msprop:Generator_ColumnVarNameInTable="columndate" type="xs:dateTime" minOccurs="0" />

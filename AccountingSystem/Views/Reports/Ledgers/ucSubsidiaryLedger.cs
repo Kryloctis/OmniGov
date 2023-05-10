@@ -81,8 +81,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row)
         {
-            decimal amount = Convert.ToDecimal(item["amount"]);
-
             if (Convert.ToBoolean(item["is_debit"]))
             {
                 row["particulars"] = particulars;
@@ -134,12 +132,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
             subsidiaryLedgerId);
             decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, year, true, subsidiaryLedgerId);
             decimal CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, year, false, subsidiaryLedgerId);
-            var newRow = dataTable.NewRow();
+            DataRow newRow = dataTable.NewRow();
             decimal balance = DebitBeginningBalance - CreditBeginningBalance;
             decimal debit = DebitBeginningBalance > CreditBeginningBalance ? Math.Abs(balance) : 0;
             decimal credit = DebitBeginningBalance < CreditBeginningBalance ? Math.Abs(balance) : 0;
 
-            var beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? new DateTime(year, 1, 1) : Convert.ToDateTime(dateDict["date_entry"]);
+            object beginningBalanceDate = string.IsNullOrEmpty(dateDict["date_entry"]) ? DBNull.Value : Convert.ToDateTime(dateDict["date_entry"]);
 
             newRow["date"] = beginningBalanceDate;
             newRow["particulars"] = "Beginning Balance";
@@ -176,6 +174,10 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 new ReportParameter("paramYear",year.ToString())
             };
             report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
             Cursor.Current = Cursors.Default;
         }
 
@@ -260,10 +262,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 }
 
                 LoadReport(reportViewer.LocalReport);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
