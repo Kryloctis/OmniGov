@@ -103,7 +103,9 @@
             // 
             // nudCattlePrice
             // 
+            nudCattlePrice.DecimalPlaces = 2;
             nudCattlePrice.Location = new System.Drawing.Point(94, 71);
+            nudCattlePrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudCattlePrice.Name = "nudCattlePrice";
             nudCattlePrice.Size = new System.Drawing.Size(265, 23);
             nudCattlePrice.TabIndex = 5;
@@ -217,9 +219,11 @@
             btnBrowse.Size = new System.Drawing.Size(22, 23);
             btnBrowse.TabIndex = 7;
             btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += btnBrowse_Click;
             // 
             // cmbxBarangay
             // 
+            cmbxBarangay.Enabled = false;
             cmbxBarangay.FormattingEnabled = true;
             cmbxBarangay.Location = new System.Drawing.Point(97, 132);
             cmbxBarangay.Name = "cmbxBarangay";
@@ -228,6 +232,7 @@
             // 
             // cmbxMunicipality
             // 
+            cmbxMunicipality.Enabled = false;
             cmbxMunicipality.FormattingEnabled = true;
             cmbxMunicipality.Location = new System.Drawing.Point(97, 103);
             cmbxMunicipality.Name = "cmbxMunicipality";
@@ -245,6 +250,7 @@
             // 
             // cmbxProvince
             // 
+            cmbxProvince.Enabled = false;
             cmbxProvince.FormattingEnabled = true;
             cmbxProvince.Location = new System.Drawing.Point(97, 74);
             cmbxProvince.Name = "cmbxProvince";
@@ -262,6 +268,7 @@
             // 
             // txtCattleNewOwner
             // 
+            txtCattleNewOwner.Enabled = false;
             txtCattleNewOwner.Location = new System.Drawing.Point(97, 45);
             txtCattleNewOwner.Name = "txtCattleNewOwner";
             txtCattleNewOwner.Size = new System.Drawing.Size(223, 23);
@@ -336,30 +343,30 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.NumericUpDown nudCattlePrice;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbxSex;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbxCattleType;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtCattleDescription;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox cmbxBarangay;
-        private System.Windows.Forms.ComboBox cmbxMunicipality;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbxProvince;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCattleNewOwner;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtCattleOldOwner;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.NumericUpDown nudCattleAge;
+        internal System.Windows.Forms.NumericUpDown nudCattlePrice;
+        internal System.Windows.Forms.ComboBox cmbxSex;
+        internal System.Windows.Forms.ComboBox cmbxCattleType;
+        internal System.Windows.Forms.TextBox txtCattleDescription;
+        internal System.Windows.Forms.ComboBox cmbxBarangay;
+        internal System.Windows.Forms.ComboBox cmbxMunicipality;
+        internal System.Windows.Forms.ComboBox cmbxProvince;
+        internal System.Windows.Forms.TextBox txtCattleNewOwner;
+        internal System.Windows.Forms.TextBox txtCattleOldOwner;
+        internal System.Windows.Forms.NumericUpDown nudCattleAge;
     }
 }

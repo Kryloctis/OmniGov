@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucMarriageLicense ucMarriageLicense;
         private ucBurialPermit ucBurialPermit;
         private ucCattleOwnership ucCattleOwnership;
-        private ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
+        internal ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
 
         private string paymentFor;
 
@@ -435,9 +435,9 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-                cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
-                cattleTransferOfOwnershipModel.OwnerID = 1;
-                cattleTransferOfOwnershipModel.Tag = 1;
+                //cattleTransferOfOwnershipModel.CattleOwnershipID = ucCattleOwnership.ID;
+                cattleTransferOfOwnershipModel.OldOwnerID = ucCattleOwnership.ownerID;
+                cattleTransferOfOwnershipModel.NewOwnerID = 1;
                 cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
                 cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
                 cattleTransferOfOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
@@ -664,6 +664,7 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private void tabPageCertificateOfTransferOfCattle_Enter(object sender, EventArgs e)
         {
+            ucCattleTransferOfOwnership._frmPayments = this;
             ucPayment.selectedAccountableFormNo = "52";
             ucOtherCharges = ucOtherCharges2;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;

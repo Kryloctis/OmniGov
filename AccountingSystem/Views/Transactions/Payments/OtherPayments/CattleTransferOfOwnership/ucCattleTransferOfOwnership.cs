@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.RealProperties;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
     public partial class ucCattleTransferOfOwnership : UserControl
     {
         internal int oldOwnerID;
+        internal frmPayments _frmPayments;
 
         public ucCattleTransferOfOwnership()
         {
@@ -31,43 +34,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         {
             if (!DesignMode)
             {
-                LoadBarangays();
-                LoadMunicipalities();
-                LoadProvince();
                 HelperLoadRecords.SexComboBox(cmbxSex);
             }
         }
 
-        internal void LoadBarangays()
+        private void btnBrowse_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var dtBarangays = AccFactory.BarangayRepository().GetRecords();
-                HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangay, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptTaxPayerList(null, null, null, null, _frmPayments).ShowDialog();
         }
-
-        internal void LoadMunicipalities()
-        {
-            try
-            {
-                var dtMunicipalities = AccFactory.MunicipalitiesRepository().GetRecords();
-                HelperLoadRecords.MunicipalitiesCombobox(dtMunicipalities, cmbxMunicipality, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
-        internal void LoadProvince()
-        {
-            try
-            {
-                var dtProvince = AccFactory.ProvincesRepository().GetRecords();
-                HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxProvince, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
-        }
-
     }
 
 

@@ -1,6 +1,8 @@
 ﻿using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.ListOfRealPropertyTaxDelinquencies;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxStatementOfAccount;
+using AccountingSystem.Views.Transactions.Payments;
+using AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTransferOfOwnership;
 using AccountingSystem.Views.Transactions.Payments.RealProperty.Models;
 using System;
 using System.Data;
@@ -13,13 +15,15 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
         private readonly frmRealPropertyTaxAccountRegisterReport _frmRealPropertyTaxAccountRegisterReport;
         private readonly frmRealPropertyTaxStatementOfAccount _frmRealPropertyTaxStatementOfAccount;
         private readonly frmListOfRealPropertyTaxDelinquenciesReport _frmListOfRealPropertyTaxDelinquenciesReport;
+        private readonly frmPayments _frmPayments;
         private readonly frmAddRealProperties _frmAddRealProperties;
 
         public frmRptTaxPayerList(
             frmRealPropertyTaxAccountRegisterReport frmRealPropertyTaxAccountRegisterReport,
             frmRealPropertyTaxStatementOfAccount frmRealPropertyTaxStatementOfAccount,
             frmListOfRealPropertyTaxDelinquenciesReport frmListOfRealPropertyTaxDelinquenciesReport,
-            frmAddRealProperties frmAddRealProperties
+            frmAddRealProperties frmAddRealProperties, 
+            frmPayments frmPayments
             )
         {
             InitializeComponent();
@@ -28,13 +32,14 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             _frmRealPropertyTaxAccountRegisterReport = frmRealPropertyTaxAccountRegisterReport;
             _frmRealPropertyTaxStatementOfAccount = frmRealPropertyTaxStatementOfAccount;
             _frmListOfRealPropertyTaxDelinquenciesReport = frmListOfRealPropertyTaxDelinquenciesReport;
+            _frmPayments = frmPayments;
             _frmAddRealProperties = frmAddRealProperties;
             btnSelect.Enabled = true;
         }
 
         private Form ParentIdentifier()
         {
-            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmAddRealProperties };
+            var forms = new Form[] { _frmRealPropertyTaxAccountRegisterReport, _frmRealPropertyTaxStatementOfAccount, _frmListOfRealPropertyTaxDelinquenciesReport, _frmAddRealProperties, _frmPayments};
 
             foreach (Form form in forms)
             {
@@ -173,6 +178,25 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             _frmAddRealProperties.uc.txtTaxpayerAddress.Text = address;
         }
 
+        private void InitializeNewOwnerDetails()
+        {
+            int rowIndex = dataGridView1.CurrentRow.Index;
+
+            var taxpayerID = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["taxpayers_id"].Value);
+            var taxpayer = dataGridView1.Rows[rowIndex].Cells["taxpayers_name"].Value.ToString();
+            var taxpayerBarangay = dataGridView1.Rows[rowIndex].Cells["taxpayers_barangay"].Value.ToString();
+            var taxpayerMunicipality = dataGridView1.Rows[rowIndex].Cells["taxpayers_municipality"].Value.ToString();
+            var taxpayerProvince = dataGridView1.Rows[rowIndex].Cells["taxpayers_province"].Value.ToString();
+
+
+            _frmPayments.ucCattleTransferOfOwnership.txtCattleNewOwner.Text = taxpayer;
+            _frmPayments.ucCattleTransferOfOwnership.cmbxProvince.Text = taxpayerProvince;
+            _frmPayments.ucCattleTransferOfOwnership.cmbxMunicipality.Text = taxpayerMunicipality;
+            _frmPayments.ucCattleTransferOfOwnership.cmbxBarangay.Text = taxpayerBarangay;
+
+        }
+
+
         private void btnSelect_Click(object sender, EventArgs e)
         {
             LoadMethods();
@@ -196,6 +220,9 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
 
                 case frmAddRealProperties:
                     InitializeRealProperties();
+                    break;
+                case frmPayments:
+                    InitializeNewOwnerDetails();
                     break;
 
                 default:

@@ -71,7 +71,7 @@ namespace AccountingSystem
                 new object[] { "@cattle_sex", DbType.String, cattleTransferOfOwnershipModel.CattleSex},
                 new object[] { "@cattle_age", DbType.Int32, cattleTransferOfOwnershipModel.CattleAge},
                 new object[] { "@description", DbType.String, cattleTransferOfOwnershipModel.Description},
-                new object[] { "@created_at", DbType.Int32, cattleTransferOfOwnershipModel.CreatedAt},
+                new object[] { "@created_at", DbType.DateTime, cattleTransferOfOwnershipModel.CreatedAt},
                 new object[] { "@created_by", DbType.Int32, cattleTransferOfOwnershipModel.CreatedBy},
             };
 
