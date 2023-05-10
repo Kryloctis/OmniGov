@@ -488,7 +488,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         {
             try
             {
-                return AccFactory.BurialPermitRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
+                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
             }
             catch (Exception ex)
             {
@@ -691,7 +691,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private void tabPageBurialPermit_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "58";
-            ucOtherCharges = ucOtherCharges4;
+            ucOtherCharges = ucOtherCharges5;
             ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
