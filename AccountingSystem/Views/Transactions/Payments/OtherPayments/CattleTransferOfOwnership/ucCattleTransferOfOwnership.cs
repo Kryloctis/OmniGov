@@ -1,4 +1,5 @@
-﻿using AccountingSystem.Views.Manage.RealProperties;
+﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
+using AccountingSystem.Views.Manage.RealProperties;
 using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,13 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
     public partial class ucCattleTransferOfOwnership : UserControl
     {
         internal int oldOwnerID;
+        internal int newOwnerID;
         internal frmPayments _frmPayments;
-        internal bool searchPanelVisible = false;
 
         public ucCattleTransferOfOwnership()
         {
             InitializeComponent();
+            Helper.DatagridDefaultStyle(dgCattle, false);
         }
 
         internal void LoadOldOwnerInfo(int taxpayerID)
@@ -39,6 +41,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
             }
         }
 
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             _ = new frmRptTaxPayerList(null, null, null, null, _frmPayments).ShowDialog();
@@ -46,16 +49,27 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 
         private void linkSearch_Click(object sender, EventArgs e)
         {
-            if (!searchPanelVisible)
-            {
-                panel1Control.BringToFront();
-                searchPanelVisible = true;
-            }
-            else
-            {
-                panel1Control.SendToBack();
-                searchPanelVisible = false;
-            }
+            panel1Control.SendToBack();
+            txtSearch.Focus();
+            LoadCattleByOwnerID();
+        }
+
+        private void LoadCattleByOwnerID()
+        {
+            int ownerID = oldOwnerID;
+            string searchKey = txtSearch.Text.Trim();
+            DataTable dtCattle = AccFactory.CattleOwnershipRepository().GetRecordsByIDAndSearch(ownerID, searchKey);
+            HelperLoadRecords.CattleDatagridView(dgCattle, dtCattle);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            panel1Control.BringToFront();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadCattleByOwnerID();
         }
     }
 

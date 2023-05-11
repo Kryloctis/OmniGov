@@ -402,9 +402,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-
-                //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
-                cattleOwnershipModel.OwnerID = 1;
+                cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
                 cattleOwnershipModel.Tag = 1;
                 cattleOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
                 cattleOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
@@ -436,8 +434,8 @@ namespace AccountingSystem.Views.Transactions.Payments
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
                 //cattleTransferOfOwnershipModel.CattleOwnershipID = ucCattleOwnership.ID;
-                cattleTransferOfOwnershipModel.OldOwnerID = ucCattleOwnership.ownerID;
-                cattleTransferOfOwnershipModel.NewOwnerID = 1;
+                //cattleTransferOfOwnershipModel.OldOwnerID = ucCattleTransferOfOwnership.ta;
+                cattleTransferOfOwnershipModel.NewOwnerID = ucCattleTransferOfOwnership.newOwnerID;
                 cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
                 cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
                 cattleTransferOfOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;

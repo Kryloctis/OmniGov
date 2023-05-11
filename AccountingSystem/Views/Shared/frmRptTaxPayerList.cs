@@ -189,6 +189,7 @@ namespace AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxA
             var taxpayerProvince = dataGridView1.Rows[rowIndex].Cells["taxpayers_province"].Value.ToString();
 
 
+            _frmPayments.ucCattleTransferOfOwnership.newOwnerID = taxpayerID;
             _frmPayments.ucCattleTransferOfOwnership.txtCattleNewOwner.Text = taxpayer;
             _frmPayments.ucCattleTransferOfOwnership.cmbxProvince.Text = taxpayerProvince;
             _frmPayments.ucCattleTransferOfOwnership.cmbxMunicipality.Text = taxpayerMunicipality;

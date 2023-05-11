@@ -21,13 +21,14 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleOwner
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         internal void LoadTaxpayerInfo(int taxpayerID)
         {
             var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerID);
 
+            ownerID = taxpayerID;
             txtOwnerName.Text = dictTaxpayer["taxpayers_name"];
             cmbxProvince.Text = dictTaxpayer["taxpayers_province"];
             cmbxMunicipality.Text = dictTaxpayer["taxpayers_municipality"];

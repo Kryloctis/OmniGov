@@ -35,6 +35,20 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
+        public DataTable GetRecordsByIDAndSearch(int oldOwnerID, string searchKey)
+        {
+            var parameter = new object[][]
+            {
+                new object[] { "@owner_id", DbType.Int32, oldOwnerID},
+                new object[] { "@searchKey", DbType.String, $"%{searchKey}%" },
+            };
+
+            string query = $"SELECT id, cattle_type, cattle_sex, cattle_age, description FROM {tableName} WHERE owner_id = @owner_id AND description LIKE @searchKey AND cattle_type LIKE @searchKey";
+
+            var dataTable = new DataTable();
+            return _dbGenericCommands.FillBySearch(query, dataTable, parameter);
+        }
+
         public DataTable GetRecordsBySearch(string searchText)
         {
             throw new System.NotImplementedException();

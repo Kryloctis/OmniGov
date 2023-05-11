@@ -2920,6 +2920,28 @@ namespace AccountingSystem
             datagrid.Columns["starting_year"].MinimumWidth = 150;
         }
 
-       
+        internal static void CattleDatagridView(DataGridView datagrid, DataTable dataTable)
+        {
+            datagrid.DataSource = dataTable;
+
+            datagrid.Columns["id"].Visible = false;
+            datagrid.Columns["cattle_type"].HeaderText = "Type";
+            datagrid.Columns["cattle_sex"].HeaderText = "Sex";
+            datagrid.Columns["cattle_age"].HeaderText = "Age";
+            datagrid.Columns["description"].HeaderText = "Description";
+
+            datagrid.RowHeadersVisible = false;
+            datagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            datagrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            datagrid.Columns["cattle_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["cattle_type"].MinimumWidth = 100;
+            datagrid.Columns["cattle_sex"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            datagrid.Columns["cattle_sex"].MinimumWidth = 80;
+            datagrid.Columns["cattle_sex"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["description"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            datagrid.Columns["description"].MinimumWidth = 150;
+        }
+
     }
 }

@@ -207,7 +207,9 @@
             // 
             // nudPrice
             // 
+            nudPrice.DecimalPlaces = 2;
             nudPrice.Location = new System.Drawing.Point(94, 71);
+            nudPrice.Maximum = new decimal(new int[] { 999999, 0, 0, 0 });
             nudPrice.Name = "nudPrice";
             nudPrice.Size = new System.Drawing.Size(265, 23);
             nudPrice.TabIndex = 5;
