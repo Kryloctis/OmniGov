@@ -201,6 +201,7 @@
             // nudAge
             // 
             nudAge.Location = new System.Drawing.Point(279, 42);
+            nudAge.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             nudAge.Name = "nudAge";
             nudAge.Size = new System.Drawing.Size(80, 23);
             nudAge.TabIndex = 5;

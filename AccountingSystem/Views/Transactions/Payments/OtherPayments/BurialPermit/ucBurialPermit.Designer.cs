@@ -159,6 +159,7 @@
             // nudRemainsAge
             // 
             nudRemainsAge.Location = new System.Drawing.Point(77, 76);
+            nudRemainsAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudRemainsAge.Name = "nudRemainsAge";
             nudRemainsAge.Size = new System.Drawing.Size(99, 23);
             nudRemainsAge.TabIndex = 5;

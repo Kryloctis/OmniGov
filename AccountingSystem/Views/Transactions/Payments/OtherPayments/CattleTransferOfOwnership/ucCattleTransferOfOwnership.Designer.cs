@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             groupBox1 = new System.Windows.Forms.GroupBox();
-            panelSearch = new System.Windows.Forms.Panel();
-            dgCattle = new System.Windows.Forms.DataGridView();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            btnCancel = new System.Windows.Forms.Button();
-            btnSelect = new System.Windows.Forms.Button();
-            txtSearch = new System.Windows.Forms.TextBox();
             panel1Control = new System.Windows.Forms.Panel();
             linkSearch = new System.Windows.Forms.LinkLabel();
             nudCattleAge = new System.Windows.Forms.NumericUpDown();
@@ -47,6 +41,12 @@
             label6 = new System.Windows.Forms.Label();
             txtCattleDescription = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
+            panelSearch = new System.Windows.Forms.Panel();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSelect = new System.Windows.Forms.Button();
+            txtSearch = new System.Windows.Forms.TextBox();
+            dgCattle = new System.Windows.Forms.DataGridView();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             btnBrowse = new System.Windows.Forms.Button();
@@ -62,12 +62,12 @@
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             groupBox1.SuspendLayout();
-            panelSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgCattle).BeginInit();
-            flowLayoutPanel1.SuspendLayout();
             panel1Control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCattlePrice).BeginInit();
+            panelSearch.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgCattle).BeginInit();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -75,8 +75,8 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(panel1Control);
             groupBox1.Controls.Add(panelSearch);
+            groupBox1.Controls.Add(panel1Control);
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             groupBox1.Location = new System.Drawing.Point(367, 3);
             groupBox1.Name = "groupBox1";
@@ -85,68 +85,6 @@
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Cattle's Details";
-            // 
-            // panelSearch
-            // 
-            panelSearch.Controls.Add(dgCattle);
-            panelSearch.Controls.Add(flowLayoutPanel1);
-            panelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            panelSearch.Location = new System.Drawing.Point(5, 21);
-            panelSearch.Name = "panelSearch";
-            panelSearch.Padding = new System.Windows.Forms.Padding(4);
-            panelSearch.Size = new System.Drawing.Size(377, 162);
-            panelSearch.TabIndex = 6;
-            // 
-            // dgCattle
-            // 
-            dgCattle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgCattle.Dock = System.Windows.Forms.DockStyle.Fill;
-            dgCattle.Location = new System.Drawing.Point(4, 4);
-            dgCattle.Name = "dgCattle";
-            dgCattle.RowTemplate.Height = 25;
-            dgCattle.Size = new System.Drawing.Size(369, 124);
-            dgCattle.TabIndex = 11;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            flowLayoutPanel1.Controls.Add(btnCancel);
-            flowLayoutPanel1.Controls.Add(btnSelect);
-            flowLayoutPanel1.Controls.Add(txtSearch);
-            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel1.Location = new System.Drawing.Point(4, 128);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(369, 30);
-            flowLayoutPanel1.TabIndex = 10;
-            // 
-            // btnCancel
-            // 
-            btnCancel.Location = new System.Drawing.Point(291, 3);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(75, 23);
-            btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
-            btnCancel.Click += btnCancel_Click;
-            // 
-            // btnSelect
-            // 
-            btnSelect.Location = new System.Drawing.Point(210, 3);
-            btnSelect.Name = "btnSelect";
-            btnSelect.Size = new System.Drawing.Size(75, 23);
-            btnSelect.TabIndex = 0;
-            btnSelect.Text = "Select";
-            btnSelect.UseVisualStyleBackColor = true;
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new System.Drawing.Point(157, 32);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new System.Drawing.Size(209, 23);
-            txtSearch.TabIndex = 3;
-            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // panel1Control
             // 
@@ -269,6 +207,69 @@
             label10.Size = new System.Drawing.Size(67, 15);
             label10.TabIndex = 2;
             label10.Text = "Description";
+            // 
+            // panelSearch
+            // 
+            panelSearch.Controls.Add(dgCattle);
+            panelSearch.Controls.Add(flowLayoutPanel1);
+            panelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panelSearch.Location = new System.Drawing.Point(5, 21);
+            panelSearch.Name = "panelSearch";
+            panelSearch.Padding = new System.Windows.Forms.Padding(4);
+            panelSearch.Size = new System.Drawing.Size(377, 162);
+            panelSearch.TabIndex = 6;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnSelect);
+            flowLayoutPanel1.Controls.Add(txtSearch);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(4, 128);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(369, 30);
+            flowLayoutPanel1.TabIndex = 10;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new System.Drawing.Point(291, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.TabIndex = 1;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // btnSelect
+            // 
+            btnSelect.Location = new System.Drawing.Point(210, 3);
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new System.Drawing.Size(75, 23);
+            btnSelect.TabIndex = 0;
+            btnSelect.Text = "Select";
+            btnSelect.UseVisualStyleBackColor = true;
+            btnSelect.Click += btnSelect_Click;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new System.Drawing.Point(3, 3);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new System.Drawing.Size(201, 23);
+            txtSearch.TabIndex = 3;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
+            // dgCattle
+            // 
+            dgCattle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgCattle.Dock = System.Windows.Forms.DockStyle.Fill;
+            dgCattle.Location = new System.Drawing.Point(4, 4);
+            dgCattle.Name = "dgCattle";
+            dgCattle.RowTemplate.Height = 25;
+            dgCattle.Size = new System.Drawing.Size(369, 124);
+            dgCattle.TabIndex = 11;
             // 
             // groupBox2
             // 
@@ -419,14 +420,14 @@
             Size = new System.Drawing.Size(762, 194);
             Load += ucCattleTransferOfOwnership_Load;
             groupBox1.ResumeLayout(false);
-            panelSearch.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgCattle).EndInit();
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
             panel1Control.ResumeLayout(false);
             panel1Control.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCattlePrice).EndInit();
+            panelSearch.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgCattle).EndInit();
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

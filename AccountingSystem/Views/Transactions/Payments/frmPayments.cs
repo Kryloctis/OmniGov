@@ -433,8 +433,8 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-                //cattleTransferOfOwnershipModel.CattleOwnershipID = ucCattleOwnership.ID;
-                //cattleTransferOfOwnershipModel.OldOwnerID = ucCattleTransferOfOwnership.ta;
+                cattleTransferOfOwnershipModel.CattleOwnershipID = ucCattleTransferOfOwnership.cattleID;
+                cattleTransferOfOwnershipModel.OldOwnerID = ucCattleTransferOfOwnership.oldOwnerID;
                 cattleTransferOfOwnershipModel.NewOwnerID = ucCattleTransferOfOwnership.newOwnerID;
                 cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
                 cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;

@@ -15,6 +15,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 {
     public partial class ucCattleTransferOfOwnership : UserControl
     {
+        internal int cattleID;
         internal int oldOwnerID;
         internal int newOwnerID;
         internal frmPayments _frmPayments;
@@ -70,6 +71,26 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadCattleByOwnerID();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            if (dgCattle.Rows.Count == 0)
+                return;
+
+            int rowIndex = dgCattle.CurrentRow.Index;
+
+            cattleID = Convert.ToInt32(dgCattle.Rows[rowIndex].Cells["id"].Value);
+            var cattleType = dgCattle.Rows[rowIndex].Cells["cattle_type"].Value.ToString();
+            var cattleAge = dgCattle.Rows[rowIndex].Cells["cattle_age"].Value.ToString();
+            var cattleSex = dgCattle.Rows[rowIndex].Cells["cattle_sex"].Value.ToString();
+            var cattleDescription = dgCattle.Rows[rowIndex].Cells["description"].Value.ToString();
+
+            cmbxCattleType.Text = cattleType;
+            nudCattleAge.Text = cattleAge;
+            cmbxSex.Text = cattleSex;
+            txtCattleDescription.Text = cattleDescription;
+            panel1Control.BringToFront();
         }
     }
 

@@ -203,7 +203,7 @@
             // nudHusbandAgeYear
             // 
             nudHusbandAgeYear.Location = new System.Drawing.Point(75, 37);
-            nudHusbandAgeYear.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            nudHusbandAgeYear.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudHusbandAgeYear.Name = "nudHusbandAgeYear";
             nudHusbandAgeYear.Size = new System.Drawing.Size(89, 23);
             nudHusbandAgeYear.TabIndex = 4;
@@ -469,7 +469,7 @@
             // nudWifeAgeYear
             // 
             nudWifeAgeYear.Location = new System.Drawing.Point(75, 37);
-            nudWifeAgeYear.Maximum = new decimal(new int[] { 200, 0, 0, 0 });
+            nudWifeAgeYear.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudWifeAgeYear.Name = "nudWifeAgeYear";
             nudWifeAgeYear.Size = new System.Drawing.Size(89, 23);
             nudWifeAgeYear.TabIndex = 4;
