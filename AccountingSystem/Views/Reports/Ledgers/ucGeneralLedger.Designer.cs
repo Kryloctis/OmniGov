@@ -35,6 +35,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
             cmbAccount = new System.Windows.Forms.ComboBox();
             panel1 = new System.Windows.Forms.Panel();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -79,9 +81,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // panel1
             // 
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 36);
+            panel1.Location = new System.Drawing.Point(0, 41);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(849, 469);
+            panel1.Size = new System.Drawing.Size(849, 464);
             panel1.TabIndex = 18;
             // 
             // flowLayoutPanel1
@@ -98,11 +100,28 @@ namespace AccountingSystem.Views.Reports.Ledgers
             flowLayoutPanel1.Size = new System.Drawing.Size(849, 36);
             flowLayoutPanel1.TabIndex = 19;
             // 
+            // progressBar1
+            // 
+            progressBar1.Dock = System.Windows.Forms.DockStyle.Top;
+            progressBar1.Location = new System.Drawing.Point(0, 36);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(849, 5);
+            progressBar1.TabIndex = 20;
+            // 
+            // backgroundWorker1
+            // 
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
+            backgroundWorker1.DoWork += backgroundWorker1_DoWork;
+            backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
+            backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
+            // 
             // ucGeneralLedger
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(panel1);
+            Controls.Add(progressBar1);
             Controls.Add(flowLayoutPanel1);
             Name = "ucGeneralLedger";
             Size = new System.Drawing.Size(849, 505);
@@ -119,5 +138,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private System.Windows.Forms.ComboBox cmbAccount;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

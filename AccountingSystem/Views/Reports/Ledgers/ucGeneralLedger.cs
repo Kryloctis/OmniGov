@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -131,34 +132,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
             return particulars;
         }
 
-        private DataTable DataTableGeneralLedger()
-        {
-            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
-            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
-            short year = Convert.ToInt16(cmbYear.Text);
-
-            dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
-            DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, year);
-            DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtGeneralLedger);
-
-            if (!string.IsNullOrWhiteSpace(dataRowBeginningBalance["date"].ToString()))
-                dtGeneralLedger.Rows.Add(dataRowBeginningBalance);
-
-            foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
-            {
-                string particulars = ParseParticulars(item);
-
-                DataRow newRow = dtGeneralLedger.NewRow();
-                newRow["date"] = item["date_entry"];
-                newRow["ref"] = GetJournalAcronym(item["journal_name"].ToString());
-
-                ValidateDebitCreditRow(particulars, item, newRow);
-                dtGeneralLedger.Rows.Add(newRow);
-            }
-
-            return dtGeneralLedger;
-        }
-
         private DataRow BeginningBalanceRow(int fundId, int year, int generalLedgerId, DataTable dataTable)
         {
             decimal DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId((byte)fundId, (ushort)generalLedgerId, (short)year, true);
@@ -179,6 +152,43 @@ namespace AccountingSystem.Views.Reports.Ledgers
             newRow["debit_amount"] = debit;
             newRow["credit_amount"] = credit;
             return newRow;
+        }
+
+        private DataTable DataTableGeneralLedger()
+        {
+            int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
+            int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
+            int year = Convert.ToInt16(cmbYear.Text);
+
+            dsLFS.dtGeneralLedgerDataTable dtGeneralLedger = new dsLFS.dtGeneralLedgerDataTable();
+            DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
+            DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtGeneralLedger);
+
+            int totalRecords = dtGeneralLedgerFromDB.Rows.Count;
+            int runningRecordCount = 0;
+
+            if (!string.IsNullOrWhiteSpace(dataRowBeginningBalance["date"].ToString()))
+            {
+                dtGeneralLedger.Rows.Add(dataRowBeginningBalance);
+                totalRecords++;
+            };
+
+            foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
+            {
+                string particulars = ParseParticulars(item);
+
+                DataRow newRow = dtGeneralLedger.NewRow();
+                newRow["date"] = item["date_entry"];
+                newRow["ref"] = GetJournalAcronym(item["journal_name"].ToString());
+
+                ValidateDebitCreditRow(particulars, item, newRow);
+                dtGeneralLedger.Rows.Add(newRow);
+
+                runningRecordCount++;
+                int progressPercentage = (runningRecordCount * 100) / runningRecordCount;
+                backgroundWorker1.ReportProgress(progressPercentage);
+            }
+            return dtGeneralLedger;
         }
 
         private void LoadReport(LocalReport report)
@@ -288,7 +298,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     return;
                 }
 
-                LoadReport(reportViewer.LocalReport);
+                if (!backgroundWorker1.IsBusy)
+                    backgroundWorker1.RunWorkerAsync();
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -304,6 +315,24 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                progressBar1.Value = 0;
+                LoadReport(reportViewer.LocalReport);
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
         }
     }
 }
