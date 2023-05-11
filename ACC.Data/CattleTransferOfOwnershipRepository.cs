@@ -75,7 +75,7 @@ namespace AccountingSystem
                 new object[] { "@created_by", DbType.Int32, cattleTransferOfOwnershipModel.CreatedBy},
             };
 
-            string query = $"INSERT INTO {tableName} (cattle_ownership_id, old_owner_id, new_owner_id, barangay, municipality, province, amount, cattle_type, cattle_sex, cattle_age, description, created_at, created_by, updated_at, updated_by) VALUES(@cattle_ownership_id, @old_owner_id, @new_owner_id, @barangay, @municipality, @province, @amount, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
+            string query = $"INSERT INTO {tableName} (cattle_ownership_id, old_owner_id, new_owner_id, barangay, municipality, province, amount, cattle_type, cattle_sex, cattle_age, description, created_at, created_by) VALUES(@cattle_ownership_id, @old_owner_id, @new_owner_id, @barangay, @municipality, @province, @amount, @cattle_type, @cattle_sex, @cattle_age, @description, @created_at, @created_by)";
 
             bool result = _mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
             return result;

@@ -16,6 +16,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
     {
         internal int oldOwnerID;
         internal frmPayments _frmPayments;
+        internal bool searchPanelVisible = false;
 
         public ucCattleTransferOfOwnership()
         {
@@ -41,6 +42,20 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             _ = new frmRptTaxPayerList(null, null, null, null, _frmPayments).ShowDialog();
+        }
+
+        private void linkSearch_Click(object sender, EventArgs e)
+        {
+            if (!searchPanelVisible)
+            {
+                panel1Control.BringToFront();
+                searchPanelVisible = true;
+            }
+            else
+            {
+                panel1Control.SendToBack();
+                searchPanelVisible = false;
+            }
         }
     }
 

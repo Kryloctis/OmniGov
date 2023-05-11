@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             groupBox1 = new System.Windows.Forms.GroupBox();
-            panel1 = new System.Windows.Forms.Panel();
+            linkSearch = new System.Windows.Forms.LinkLabel();
+            panel1Control = new System.Windows.Forms.Panel();
             nudCattleAge = new System.Windows.Forms.NumericUpDown();
             nudCattlePrice = new System.Windows.Forms.NumericUpDown();
             label8 = new System.Windows.Forms.Label();
@@ -40,6 +41,11 @@
             label6 = new System.Windows.Forms.Label();
             txtCattleDescription = new System.Windows.Forms.TextBox();
             label10 = new System.Windows.Forms.Label();
+            panelSearch = new System.Windows.Forms.Panel();
+            dataGridView1 = new System.Windows.Forms.DataGridView();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnSelect = new System.Windows.Forms.Button();
             groupBox2 = new System.Windows.Forms.GroupBox();
             panel2 = new System.Windows.Forms.Panel();
             btnBrowse = new System.Windows.Forms.Button();
@@ -55,9 +61,12 @@
             label1 = new System.Windows.Forms.Label();
             panel3 = new System.Windows.Forms.Panel();
             groupBox1.SuspendLayout();
-            panel1.SuspendLayout();
+            panel1Control.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudCattlePrice).BeginInit();
+            panelSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
             groupBox2.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -65,7 +74,9 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(panel1);
+            groupBox1.Controls.Add(linkSearch);
+            groupBox1.Controls.Add(panel1Control);
+            groupBox1.Controls.Add(panelSearch);
             groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             groupBox1.Location = new System.Drawing.Point(367, 3);
             groupBox1.Name = "groupBox1";
@@ -75,24 +86,36 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Cattle's Details";
             // 
-            // panel1
+            // linkSearch
             // 
-            panel1.Controls.Add(nudCattleAge);
-            panel1.Controls.Add(nudCattlePrice);
-            panel1.Controls.Add(label8);
-            panel1.Controls.Add(cmbxSex);
-            panel1.Controls.Add(label9);
-            panel1.Controls.Add(label7);
-            panel1.Controls.Add(cmbxCattleType);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(txtCattleDescription);
-            panel1.Controls.Add(label10);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            panel1.Location = new System.Drawing.Point(5, 21);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(377, 162);
-            panel1.TabIndex = 0;
+            linkSearch.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            linkSearch.AutoSize = true;
+            linkSearch.Location = new System.Drawing.Point(284, -1);
+            linkSearch.Name = "linkSearch";
+            linkSearch.Size = new System.Drawing.Size(81, 15);
+            linkSearch.TabIndex = 6;
+            linkSearch.TabStop = true;
+            linkSearch.Text = "Search Cattle";
+            linkSearch.Click += linkSearch_Click;
+            // 
+            // panel1Control
+            // 
+            panel1Control.Controls.Add(nudCattleAge);
+            panel1Control.Controls.Add(nudCattlePrice);
+            panel1Control.Controls.Add(label8);
+            panel1Control.Controls.Add(cmbxSex);
+            panel1Control.Controls.Add(label9);
+            panel1Control.Controls.Add(label7);
+            panel1Control.Controls.Add(cmbxCattleType);
+            panel1Control.Controls.Add(label6);
+            panel1Control.Controls.Add(txtCattleDescription);
+            panel1Control.Controls.Add(label10);
+            panel1Control.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1Control.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panel1Control.Location = new System.Drawing.Point(5, 21);
+            panel1Control.Name = "panel1Control";
+            panel1Control.Size = new System.Drawing.Size(377, 162);
+            panel1Control.TabIndex = 0;
             // 
             // nudCattleAge
             // 
@@ -178,6 +201,57 @@
             label10.Size = new System.Drawing.Size(67, 15);
             label10.TabIndex = 2;
             label10.Text = "Description";
+            // 
+            // panelSearch
+            // 
+            panelSearch.Controls.Add(dataGridView1);
+            panelSearch.Controls.Add(flowLayoutPanel1);
+            panelSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            panelSearch.Location = new System.Drawing.Point(5, 21);
+            panelSearch.Name = "panelSearch";
+            panelSearch.Size = new System.Drawing.Size(377, 162);
+            panelSearch.TabIndex = 6;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView1.Location = new System.Drawing.Point(0, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new System.Drawing.Size(377, 132);
+            dataGridView1.TabIndex = 11;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnSelect);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 132);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(377, 30);
+            flowLayoutPanel1.TabIndex = 10;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new System.Drawing.Point(299, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.TabIndex = 1;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnSelect
+            // 
+            btnSelect.Location = new System.Drawing.Point(218, 3);
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new System.Drawing.Size(75, 23);
+            btnSelect.TabIndex = 0;
+            btnSelect.Text = "Select";
+            btnSelect.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -328,10 +402,14 @@
             Size = new System.Drawing.Size(762, 194);
             Load += ucCattleTransferOfOwnership_Load;
             groupBox1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            groupBox1.PerformLayout();
+            panel1Control.ResumeLayout(false);
+            panel1Control.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudCattleAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudCattlePrice).EndInit();
+            panelSearch.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -342,7 +420,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel1Control;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -368,5 +446,11 @@
         internal System.Windows.Forms.TextBox txtCattleNewOwner;
         internal System.Windows.Forms.TextBox txtCattleOldOwner;
         internal System.Windows.Forms.NumericUpDown nudCattleAge;
+        private System.Windows.Forms.LinkLabel linkSearch;
+        private System.Windows.Forms.Panel panelSearch;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSelect;
     }
 }
