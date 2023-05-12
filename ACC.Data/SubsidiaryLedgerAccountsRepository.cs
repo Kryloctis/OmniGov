@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using System.Transactions;
 
 namespace ACC.Data
@@ -54,36 +55,28 @@ namespace ACC.Data
         {
             var record = new Dictionary<string, string>();
 
-            try
+            var parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.UInt16, Id},
-                };
+                new object[] { "@id", DbType.UInt16, Id},
+            };
 
-                string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact, created_at, updated_at FROM {tableName} WHERE id = @id";
+            string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-                using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
-                {
-                    if (reader.Rows.Count < 1)
-                        return record;
-
-                    record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
-                    record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
-                    record.Add("sub_code", reader.Rows[0]["sub_code"].ToString());
-                    record.Add("sub_name", reader.Rows[0]["sub_name"].ToString());
-                    record.Add("address", reader.Rows[0]["address"].ToString());
-                    record.Add("contact_person", reader.Rows[0]["contact_person"].ToString());
-                    record.Add("contact", reader.Rows[0]["contact"].ToString());
-                    record.Add("created_at", reader.Rows[0]["created_at"].ToString());
-                    record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
-                }
-            }
-            catch (Exception)
+            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
             {
-                throw;
-            }
+                if (reader.Rows.Count < 1)
+                    return record;
 
+                record.Add("funds_id", reader.Rows[0]["funds_id"].ToString());
+                record.Add("general_ledger_accounts_id", reader.Rows[0]["general_ledger_accounts_id"].ToString());
+                record.Add("sub_code", reader.Rows[0]["sub_code"].ToString());
+                record.Add("sub_name", reader.Rows[0]["sub_name"].ToString());
+                record.Add("address", reader.Rows[0]["address"].ToString());
+                record.Add("contact_person", reader.Rows[0]["contact_person"].ToString());
+                record.Add("contact", reader.Rows[0]["contact"].ToString());
+                record.Add("created_at", reader.Rows[0]["created_at"].ToString());
+                record.Add("updated_at", reader.Rows[0]["updated_at"].ToString());
+            }
             return record;
         }
 

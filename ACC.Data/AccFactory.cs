@@ -192,8 +192,11 @@ namespace AccountingSystem
         public static IOtherPaymentRatesRepository OtherPaymentRatesRepository() => new OtherPaymentRatesRepository(mySqlGenericCommandsLFS);
 
         public static IMarriageLicenseRepository MarriageLicenseRepository() => new MarriageLicenseRepository(mySqlGenericCommandsLFS);
+
         public static IBurialPermitRepository BurialPermitRepository() => new BurialPermitRepository(mySqlGenericCommandsLFS);
+
         public static ICattleOwnershipRepository CattleOwnershipRepository() => new CattleOwnershipRepository(mySqlGenericCommandsLFS);
+
         public static ICattleTransferOfOwnershipRepository CattleTransferOfOwnershipRepository() => new CattleTransferOfOwnershipRepository(mySqlGenericCommandsLFS);
     }
 }

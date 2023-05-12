@@ -22,14 +22,13 @@ namespace AccountingSystem.Views.Transactions.JEV
         {
             var errorArray = new string[]
             {
-                epFPP.GetError(cmbFPP),
-                epAccount.GetError(cmbxAccount),
-                epAmount.GetError(nudAmount),
-                epObligationNo.GetError(txtObligationNo)
+                errorProvider1.GetError(cmbFPP),
+                errorProvider1.GetError(cmbxAccount),
+                errorProvider1.GetError(nudAmount),
+                errorProvider1.GetError(txtObligationNo)
             };
 
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
         internal void ResetForm()
@@ -104,8 +103,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             {
                 ValidatePermissions();
                 LoadAccounts();
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
-                Set_Default_Account_Of_CashReceiptsJournal();
+                cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
             }
         }
 
@@ -184,24 +182,6 @@ namespace AccountingSystem.Views.Transactions.JEV
                 return AccFactory.GeneralLedgerAccountsRepository().GetViewRecordsBySearch(cmbxAccount.Text);
         }
 
-        private void Set_Default_Account_Of_CashReceiptsJournal()
-        {
-            if (journalName == "Cash Receipts Journal")
-            {
-                if (((radCollections.Checked && radDebit.Checked) || (radDeposits.Checked && radCredit.Checked)))
-                {
-                    cmbxAccount.SelectedIndex = 0;
-                    cmbxAccount.Enabled = false;
-                    epAccount.SetError(cmbxAccount, string.Empty);
-                }
-                else
-                {
-                    cmbxAccount.SelectedIndex = -1;
-                    cmbxAccount.Enabled = true;
-                }
-            }
-        }
-
         internal void LoadAccounts()
         {
             try
@@ -232,15 +212,14 @@ namespace AccountingSystem.Views.Transactions.JEV
             }
         }
 
-        private void CmbxLedgerAccout_TextChanged(object sender, EventArgs e)
+        private void CmbxAccout_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cmbxAccount.Text))
             {
-                cmbxAccount.TextChanged -= new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxAccount.TextChanged -= new EventHandler(CmbxAccout_TextChanged);
                 LoadAccounts();
                 cmbxAccount.SelectedIndex = -1;
-                Set_Default_Account_Of_CashReceiptsJournal();
-                cmbxAccount.TextChanged += new EventHandler(CmbxLedgerAccout_TextChanged);
+                cmbxAccount.TextChanged += new EventHandler(CmbxAccout_TextChanged);
             }
         }
 
@@ -260,26 +239,6 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         #endregion General Ledger Accounts
 
-        private void radDebit_CheckedChanged(object sender, EventArgs e)
-        {
-            Set_Default_Account_Of_CashReceiptsJournal();
-        }
-
-        private void radCredit_CheckedChanged(object sender, EventArgs e)
-        {
-            Set_Default_Account_Of_CashReceiptsJournal();
-        }
-
-        private void radCollections_CheckedChanged(object sender, EventArgs e)
-        {
-            Set_Default_Account_Of_CashReceiptsJournal();
-        }
-
-        private void radDeposits_CheckedChanged(object sender, EventArgs e)
-        {
-            Set_Default_Account_Of_CashReceiptsJournal();
-        }
-
         #region Validations
 
         private bool FPPNameNotExist()
@@ -288,7 +247,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
             if (cmbFPP.FindStringExact(fppName) == -1 && !string.IsNullOrWhiteSpace(fppName))
             {
-                epFPP.SetError(cmbFPP, "FPP you entered doesn't exist.");
+                errorProvider1.SetError(cmbFPP, "FPP you entered doesn't exist.");
                 return true;
             }
 
@@ -302,12 +261,12 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbFPP_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epFPP, cmbFPP);
+            Helper.ClearErrorComboBox(errorProvider1, cmbFPP);
         }
 
         private void cmbxAccount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorComboBoxEmpty(epAccount, cmbxAccount, "account");
+            e.Cancel = Helper.ShowErrorComboBoxEmpty(errorProvider1, cmbxAccount, "account");
 
             if (!string.IsNullOrWhiteSpace(cmbxAccount.Text))
             {
@@ -317,7 +276,7 @@ namespace AccountingSystem.Views.Transactions.JEV
 
                 if (!idExist)
                 {
-                    epAccount.SetError(cmbxAccount, "Account does not exist.");
+                    errorProvider1.SetError(cmbxAccount, "Account does not exist.");
                     e.Cancel = true;
                 }
             }
@@ -325,18 +284,18 @@ namespace AccountingSystem.Views.Transactions.JEV
 
         private void cmbxAccount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorComboBox(epAccount, cmbxAccount);
+            Helper.ClearErrorComboBox(errorProvider1, cmbxAccount);
         }
 
         private void nudAmount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(epAmount, nudAmount, "Amount");
-            e.Cancel = Helper.ShowErrorNumericUpDownZero(epAmount, nudAmount, "Amount");
+            e.Cancel = Helper.ShowErrorNumericUpDownEmpty(errorProvider1, nudAmount, "Amount");
+            e.Cancel = Helper.ShowErrorNumericUpDownZero(errorProvider1, nudAmount, "Amount");
         }
 
         private void nudAmount_Validated(object sender, EventArgs e)
         {
-            Helper.ClearErrorNumericUpDown(epAmount, nudAmount);
+            Helper.ClearErrorNumericUpDown(errorProvider1, nudAmount);
         }
 
         #endregion Validations

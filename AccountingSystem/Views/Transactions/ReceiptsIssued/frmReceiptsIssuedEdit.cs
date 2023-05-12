@@ -17,8 +17,12 @@ namespace AccountingSystem.Views.Transactions.ReceiptsIssued
 
         private void frmReceiptsEdit_Load(object sender, EventArgs e)
         {
-            ucReceipts1.LoadCollectors();
-            LoadSelectedValue();
+            try
+            {
+                ucReceipts1.LoadCollectors();
+                LoadSelectedValue();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         internal void LoadSelectedValue()

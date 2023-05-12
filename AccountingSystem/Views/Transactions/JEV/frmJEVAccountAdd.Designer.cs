@@ -29,86 +29,93 @@ namespace AccountingSystem.Views.Transactions.JEV
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucjevAccount1 = new AccountingSystem.Views.Transactions.JEV.ucJEVAccount();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // ucjevAccount1
-            // 
-            this.ucjevAccount1.AutoSize = true;
-            this.ucjevAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ucjevAccount1.Location = new System.Drawing.Point(12, 12);
-            this.ucjevAccount1.Name = "ucjevAccount1";
-            this.ucjevAccount1.Size = new System.Drawing.Size(589, 175);
-            this.ucjevAccount1.TabIndex = 0;
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            btnCancel = new System.Windows.Forms.Button();
+            btnOk = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            ucjevAccount1 = new ucJEVAccount();
+            flowLayoutPanel1.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
-            this.flowLayoutPanel1.Controls.Add(this.btnOK);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 192);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(607, 27);
-            this.flowLayoutPanel1.TabIndex = 4;
-            // 
-            // btnOK
-            // 
-            this.btnOK.Image = global::AccountingSystem.Properties.Resources.ok14px;
-            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOK.Location = new System.Drawing.Point(441, 2);
-            this.btnOK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOK.Size = new System.Drawing.Size(82, 22);
-            this.btnOK.TabIndex = 0;
-            this.btnOK.Text = "OK";
-            this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            flowLayoutPanel1.Controls.Add(btnCancel);
+            flowLayoutPanel1.Controls.Add(btnOk);
+            flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            flowLayoutPanel1.Location = new System.Drawing.Point(0, 186);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new System.Drawing.Size(595, 29);
+            flowLayoutPanel1.TabIndex = 3;
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(529, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Location = new System.Drawing.Point(517, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(75, 23);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            btnOk.Location = new System.Drawing.Point(436, 3);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new System.Drawing.Size(75, 23);
+            btnOk.TabIndex = 0;
+            btnOk.Text = "OK";
+            btnOk.UseVisualStyleBackColor = true;
+            btnOk.Click += btnOK_Click;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(ucjevAccount1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new System.Windows.Forms.Padding(4);
+            panel1.Size = new System.Drawing.Size(595, 215);
+            panel1.TabIndex = 4;
+            // 
+            // ucjevAccount1
+            // 
+            ucjevAccount1.AutoSize = true;
+            ucjevAccount1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ucjevAccount1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucjevAccount1.Location = new System.Drawing.Point(4, 4);
+            ucjevAccount1.Name = "ucjevAccount1";
+            ucjevAccount1.Size = new System.Drawing.Size(587, 207);
+            ucjevAccount1.TabIndex = 1;
             // 
             // frmJEVAccountAdd
             // 
-            this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(607, 219);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.ucjevAccount1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
-            this.Name = "frmJEVAccountAdd";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Account";
-            this.Load += new System.EventHandler(this.frmJEVAccountAdd_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            ClientSize = new System.Drawing.Size(595, 215);
+            Controls.Add(flowLayoutPanel1);
+            Controls.Add(panel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            MaximizeBox = false;
+            Name = "frmJEVAccountAdd";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Add Account";
+            Load += frmJEVAccountAdd_Load;
+            flowLayoutPanel1.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
+
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnOK;
-        internal ucJEVAccount ucjevAccount1;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.Panel panel1;
+        internal ucJEVAccount ucjevAccount1;
     }
 }

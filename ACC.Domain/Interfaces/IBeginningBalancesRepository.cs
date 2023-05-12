@@ -8,7 +8,7 @@ namespace ACC.Domain.Interfaces
     {
         decimal GetSumBalancesBy_FundId_Year_Availablility(int fundsId, short year, bool isDebit);
 
-        decimal GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(byte fundsId, ushort generalLedgerId, short year, byte isDebit, ushort? subsidiaryLedgerId = null);
+        decimal GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(byte fundsId, ushort generalLedgerId, short year, bool isDebit, ushort? subsidiaryLedgerId = null);
 
         Dictionary<string, string> GetRecordBy_FundId_GenLedgId_Year_SubLedgId(byte fundsId, ushort generalLedgerId, short year, ushort? subsidiaryLedgerId = null);
 

@@ -146,8 +146,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             beginningBalance = 0;
             ushort subsidiaryLedgerId = Convert.ToUInt16(cmbSubsidiaryLedger.SelectedValue);
-            var DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 1, subsidiaryLedgerId);
-            var CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, 0, subsidiaryLedgerId);
+            var DebitBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, true, subsidiaryLedgerId);
+            var CreditBeginningBalance = AccFactory.BeginningBalancesRepository().GetSumBalancesBy_FundId_GenLedgId_IsDebit_SubLedgId(fundId, generalLedgerId, year, false, subsidiaryLedgerId);
 
             beginningBalance = (DebitBeginningBalance - CreditBeginningBalance);
             balance = beginningBalance.ToString();

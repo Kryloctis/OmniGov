@@ -40,16 +40,16 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         internal string GetFormErrors()
         {
-            var errorArray = new string[3];
-            errorArray[0] = epReportNo.GetError(txtReport);
-            errorArray[1] = epCollector.GetError(cmbCollector);
-            errorArray[2] = epPayments.GetError(dgPayments);
-
-            IError _errors = AccFactory.CreateErrors(errorArray);
-            return _errors.GenerateErrorMessage();
+            var errorArray = new string[]
+            {
+                epReportNo.GetError(txtReport),
+                epCollector.GetError(cmbCollector),
+                epPayments.GetError(dgPayments)
+            };
+            return AccFactory.CreateErrors(errorArray).GenerateErrorMessage();
         }
 
-        private void ucRCDCollector_Load(object sender, EventArgs e)
+        private void OnLoad()
         {
             if (!DesignMode)
             {
@@ -59,28 +59,96 @@ namespace AccountingSystem.Views.Reports.RCDCollector
             }
         }
 
-        private void LoadCollectors()
+        private void ucRCDCollector_Load(object sender, EventArgs e)
         {
             try
             {
-                DataTable dtCollector;
-                var collectingOfficerRepository = AccFactory.CollectingOfficerRepository();
-                var collectingOfficerHasJORepo = AccFactory.CollectingOfficerHasJobOrdersRepository();
-
-                if (cbJOCollector.Checked)
-                    dtCollector = collectingOfficerHasJORepo.GetRecords();
-                else
-                    dtCollector = collectingOfficerRepository.GetRecords();
-
-                HelperLoadRecords.CollectingOfficerComboBox(dtCollector, cmbCollector, "fullname", "id");
-
-                collectorId = (ushort)Convert.ToInt32(cmbCollector.SelectedValue);
+                OnLoad();
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
+
+        #region Collectors
+
+        private DataColumn[] DataColumnsCollectingOfficers()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "id", typeof(int)),
+                new DataColumn(Name = "full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficers()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficers());
+
+            DataTable dtCollectingOfficers = AccFactory.CollectingOfficerRepository().GetRecords();
+
+            foreach (DataRow row in dtCollectingOfficers.Rows)
+            {
+                var newRow = dataTable.NewRow();
+                int Id = Convert.ToInt32(row["id"]);
+                string prefix = row["prefix"].ToString();
+                string firstName = row["first_name"].ToString();
+                string middleInitial = row["mid_initial"].ToString();
+                string lastName = row["last_name"].ToString();
+                string suffix = row["suffix"].ToString();
+                string fullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                newRow["id"] = Id;
+                newRow["full_name"] = fullName;
+                dataTable.Rows.Add(newRow);
+            }
+            return dataTable;
+        }
+
+        private DataColumn[] DataColumnsCollectingOfficerHasJobOrders()
+        {
+            return new DataColumn[]
+            {
+                new DataColumn(Name = "job_orders_id", typeof(int)),
+                new DataColumn(Name = "job_orders_full_name", typeof(string))
+            };
+        }
+
+        private DataTable DataTableCollectingOfficerHasJobOrders()
+        {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(DataColumnsCollectingOfficerHasJobOrders());
+            DataTable dtCollectingOfficerHasJobOrder = AccFactory.CollectingOfficerHasJobOrdersRepository().GetViewRecords();
+
+            foreach (DataRow row in dtCollectingOfficerHasJobOrder.Rows)
+            {
+                int jobOrderId = Convert.ToInt32(row["job_orders_id"]);
+                string prefix = row["job_orders_prefix"].ToString();
+                string firstName = row["job_orders_first_name"].ToString();
+                string middleInitial = row["job_orders_mid_initial"].ToString();
+                string lastName = row["job_orders_last_name"].ToString();
+                string suffix = row["job_orders_last_name"].ToString();
+                string jobOrderFullName = Helper.GenerateFullName(prefix, firstName, middleInitial, lastName, suffix);
+
+                var newRow = dataTable.NewRow();
+                newRow["job_orders_id"] = jobOrderId;
+                newRow["job_orders_full_name"] = jobOrderFullName;
+                dataTable.Rows.Add(newRow);
+            }
+
+            return dataTable;
+        }
+
+        private void LoadCollectors()
+        {
+            if (cbJOCollector.Checked)
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficerHasJobOrders(), cmbCollector, "job_orders_full_name", "job_orders_id");
+            else
+                HelperLoadRecords.CollectingOfficerComboBox(DataTableCollectingOfficers(), cmbCollector, "full_name", "id");
+
+            collectorId = Convert.ToUInt16(cmbCollector.SelectedValue);
+        }
+
+        #endregion Collectors
 
         private void SelectCurrentLoggedInCollector()
         {
@@ -269,7 +337,11 @@ namespace AccountingSystem.Views.Reports.RCDCollector
 
         private void cbJOCollector_CheckedChanged(object sender, EventArgs e)
         {
-            LoadCollectors();
+            try
+            {
+                LoadCollectors();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 

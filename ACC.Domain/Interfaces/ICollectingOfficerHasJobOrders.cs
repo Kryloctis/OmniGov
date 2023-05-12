@@ -6,6 +6,8 @@ namespace ACC.Domain.Interfaces
 {
     public interface ICollectingOfficerHasJobOrders : IAccRepository<CollectingOfficerHasJobOrdersModel>
     {
+        DataTable GetViewRecords();
+
         DataTable GetRecordsBySearch(int collectingOfficerId, string searchText);
 
         DataTable GetJobOrdersByCollectingOfficerId(int collectingOfficerId);

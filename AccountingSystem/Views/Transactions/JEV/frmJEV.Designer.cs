@@ -271,7 +271,6 @@ namespace AccountingSystem.Views.Transactions.JEV
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "Journal Entry Voucher";
-            FormClosed += frmJEV_FormClosed;
             Load += frmJEV_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
