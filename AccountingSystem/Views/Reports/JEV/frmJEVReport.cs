@@ -118,75 +118,71 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void LoadReport(LocalReport report)
         {
-            try
+            if (_jevId != 0)
             {
-                if (_jevId != 0)
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    var data = AccFactory.JEVRepository().GetRecordByID(_jevId);
+                Cursor.Current = Cursors.WaitCursor;
+                Dictionary<string, string> data = AccFactory.JEVRepository().GetRecordByID(_jevId);
 
-                    var lguDetails = Helper.LGUDetails();
+                Dictionary<string, string> lguDetails = Helper.LGUDetails();
 
-                    var CertifiedBySignatory = string.Empty;
-                    var CertifiedBysignatoryTitle = string.Empty;
+                string CertifiedBySignatory = string.Empty;
+                string CertifiedBysignatoryTitle = string.Empty;
 
-                    var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
-                    ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
+                Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Journal Entry Voucher");
+                ParseSignatory(dictSignatory, ref CertifiedBySignatory, ref CertifiedBysignatoryTitle);
 
-                    var preparedByData = Helper.LoggedInUserData();
-                    var preparedByFullName = preparedByData["user_full_name"];
+                Dictionary<string, dynamic> preparedByData = Helper.LoggedInUserData();
+                dynamic preparedByFullName = preparedByData["user_full_name"];
 
-                    var full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
+                string full_jev = $"{data["fund_code"]}-{Convert.ToDateTime(data["date_entry"]).Year}-{Convert.ToDateTime(data["date_entry"]).Month}-{data["jev_no"]}";
 
-                    var dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
-                    var dictUser = AccFactory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
+                Dictionary<string, string> dictJev = AccFactory.JEVRepository().GetRecordByID(_jevId);
+                Dictionary<string, string> dictUser = AccFactory.UsersRepository().GetRecordByID(Convert.ToInt32(dictJev["created_by"]));
 
-                    SetJournalCustomFields();
+                SetJournalCustomFields();
 
-                    var parameters = new[] {
-                        new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
-                        new ReportParameter("paramFund", data["fund_name"]),
-                        new ReportParameter("paramJournalType", data["journal_name"]),
-                        new ReportParameter("paramJEVNo", full_jev),
-                        new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
-                        new ReportParameter("paramPayee", data["payee"]),
-                        new ReportParameter("paramExplanation", data["explanation"]),
-                        new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
-                        new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
-                        new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
-                        new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
+                ReportParameter[] parameters = new[] {
+                    new ReportParameter("paramLGU",  lguDetails["lgu_name"]),
+                    new ReportParameter("paramFund", data["fund_name"]),
+                    new ReportParameter("paramJournalType", data["journal_name"]),
+                    new ReportParameter("paramJEVNo", full_jev),
+                    new ReportParameter("paramJEVDate", Convert.ToDateTime(data["date_entry"]).ToString("MM/dd/yy")),
+                    new ReportParameter("paramPayee", data["payee"]),
+                    new ReportParameter("paramExplanation", data["explanation"]),
+                    new ReportParameter("paramPreparedBy",dictJev["created_by_name"].ToUpper()),
+                    new ReportParameter("paramPreparedByRole",dictUser["role_name"]),
+                    new ReportParameter("paramCertifiedBySignatory", CertifiedBySignatory),
+                    new ReportParameter("paramCertifiedBySignatoryTitle", CertifiedBysignatoryTitle),
 
-                        //For fields label
-                        new ReportParameter("paramAsTextCheckDate", checkDate),
-                        new ReportParameter("paramAsTextCheckNo", checkNo),
-                        new ReportParameter("paramAsTextOR", orNo),
-                        new ReportParameter("paramAsTextDV", dv),
-                        new ReportParameter("paramAsTextOfficer", officer),
+                    //For fields label
+                    new ReportParameter("paramAsTextCheckDate", checkDate),
+                    new ReportParameter("paramAsTextCheckNo", checkNo),
+                    new ReportParameter("paramAsTextOR", orNo),
+                    new ReportParameter("paramAsTextDV", dv),
+                    new ReportParameter("paramAsTextOfficer", officer),
 
-                        //for fields values
-                        new ReportParameter("paramCheckDate", paramCheckDate),
-                        new ReportParameter("paramCheckNo", paramCheckNo),
-                        new ReportParameter("paramORNumber", paramORNo),
-                        new ReportParameter("paramDVNo", paramDVNo),
-                        new ReportParameter("paramDisbursementOfficer", paramOfficer)
-                    };
+                    //for fields values
+                    new ReportParameter("paramCheckDate", paramCheckDate),
+                    new ReportParameter("paramCheckNo", paramCheckNo),
+                    new ReportParameter("paramORNumber", paramORNo),
+                    new ReportParameter("paramDVNo", paramDVNo),
+                    new ReportParameter("paramDisbursementOfficer", paramOfficer)
+                };
 
-                    report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
-                    report.DataSources.Clear();
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\journal-entry-voucher.rdlc";
+                report.DataSources.Clear();
 
-                    report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
-                    report.SetParameters(parameters);
+                report.DataSources.Add(new ReportDataSource("dtJournalVoucher", DataTableJournalEntryVoucherAccount()));
+                report.SetParameters(parameters);
 
-                    reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                    reportViewer.ZoomMode = ZoomMode.PageWidth;
-                    reportViewer.ZoomPercent = 100;
+                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+                reportViewer.ZoomMode = ZoomMode.PageWidth;
+                reportViewer.ZoomPercent = 100;
 
-                    reportViewer.RefreshReport();
+                reportViewer.RefreshReport();
 
-                    Cursor.Current = Cursors.Default;
-                }
+                Cursor.Current = Cursors.Default;
             }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private DataTable DataTableJournalEntryVoucherAccount()
@@ -219,7 +215,11 @@ namespace AccountingSystem.Views.Reports.JEV
 
         private void frmJEVReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

@@ -25,9 +25,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private DataTable CheckDisbursementsJournalDataTable()
         {
-            var dtCheckDisbursementsJournal = new dsLFS.CheckDisbursementsJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtCheckDisbursementFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            dsLFS.CheckDisbursementsJournalDataTable dtCheckDisbursementsJournal = new dsLFS.CheckDisbursementsJournalDataTable();
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            DataTable dtCheckDisbursementFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             int jevId;
             string jevNo;
@@ -40,7 +40,7 @@ namespace AccountingSystem.Views.Reports.Journals
                 jevNo = item["jev_no"].ToString();
                 particulars = item["explanation"].ToString();
 
-                var checkDisbursementDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
+                Dictionary<string, string> checkDisbursementDict = checkDisbursementsRepository.GetRecordByJevID(jevId);
                 DataRow row = dtCheckDisbursementsJournal.NewRow();
                 row["date"] = item["date_entry"];
                 row["ref"] = checkDisbursementDict["check_no"];
@@ -158,57 +158,54 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Check Disbursements Journal");
-                var lguDetails = Helper.LGUDetails();
-                var certifiedCorrectSignatory = string.Empty;
-                var certifiedCorrectSignatoryTitle = string.Empty;
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Check Disbursements Journal");
+            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var parameters = new[] {
-                    new ReportParameter("paramDate", date.ToString()),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
-                    new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
-                    new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
-                    new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
-                    new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
-                    new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
-                    new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
-                    new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
-                    new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
-                    new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
-                    new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
-                    new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
-                };
+            ReportParameter[] parameters = new[] {
+                new ReportParameter("paramDate", date.ToString()),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
+                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
+                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
+                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
+                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
+                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
+                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
+                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
+                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
+                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
+                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
+                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
+            };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\check-disbursements-journal.rdlc";
-                report.DataSources.Clear();
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\check-disbursements-journal.rdlc";
+            report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
-                report.SetParameters(parameters);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            report.DataSources.Add(new ReportDataSource("CheckDisbursementsJournal", CheckDisbursementsJournalDataTable()));
+            report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmCheckDisbursementsJournalReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

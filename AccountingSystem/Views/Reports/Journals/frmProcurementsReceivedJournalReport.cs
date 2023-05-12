@@ -25,9 +25,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private DataTable ProcurementsReceivedJournalDataTable()
         {
-            var dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtProcurementsReceivedFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            dsLFS.ProcurementsReceivedJournalDataTable dtProcurementsReceivedJournal = new dsLFS.ProcurementsReceivedJournalDataTable();
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            DataTable dtProcurementsReceivedFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -63,7 +63,7 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private Dictionary<string, string> GetDefaultAccount()
         {
-            var dictionary = new Dictionary<string, string>();
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
             dictionary.Add("defaultAccIdDebit1", "0");
             dictionary.Add("defaultAccIdDebit2", "0");
             dictionary.Add("defaultAccCodeDebit1", string.Empty);
@@ -137,62 +137,59 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
-                static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatoryTitle)
+            Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "Procurement Received Journal");
+            static void ParseSignatory(Dictionary<string, string> dictSignatory, ref string signatoryName, ref string signatoryTitle)
+            {
+                if (dictSignatory.Count > 0)
                 {
-                    if (dictSignatory.Count > 0)
-                    {
-                        signatoryName = dictSignatory["signatories_full_name"];
-                        signatoryTitle = dictSignatory["signatories_title"];
-                    }
+                    signatoryName = dictSignatory["signatories_full_name"];
+                    signatoryTitle = dictSignatory["signatories_title"];
                 }
-
-                var lguDetails = Helper.LGUDetails();
-                string certifiedCorrectSignatory = string.Empty;
-                string certifiedCorrectSignatoryTitle = string.Empty;
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-
-                var parameters = new[] {
-                    new ReportParameter("paramDate", date.ToString()),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramDefaultAccCodeDebit1", GetDefaultAccount()["defaultAccCodeDebit1"]),
-                    new ReportParameter("paramDefaultAccCodeDebit2", GetDefaultAccount()["defaultAccCodeDebit2"]),
-                    new ReportParameter("paramDefaultAccIdDebit1", GetDefaultAccount()["defaultAccIdDebit1"]),
-                    new ReportParameter("paramDefaultAccIdDebit2", GetDefaultAccount()["defaultAccIdDebit2"]),
-                    new ReportParameter("paramDefaultAccCodeCredit1", GetDefaultAccount()["defaultAccCodeCredit1"]),
-                    new ReportParameter("paramDefaultAccCodeCredit2", GetDefaultAccount()["defaultAccCodeCredit2"]),
-                    new ReportParameter("paramDefaultAccIdCredit1", GetDefaultAccount()["defaultAccIdCredit1"]),
-                    new ReportParameter("paramDefaultAccIdCredit2", GetDefaultAccount()["defaultAccIdCredit2"]),
-                };
-
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
-                report.DataSources.Clear();
-
-                report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
-                report.SetParameters(parameters);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
             }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+
+            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+
+            ReportParameter[] parameters = new[] {
+                new ReportParameter("paramDate", date.ToString()),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new ReportParameter("paramDefaultAccCodeDebit1", GetDefaultAccount()["defaultAccCodeDebit1"]),
+                new ReportParameter("paramDefaultAccCodeDebit2", GetDefaultAccount()["defaultAccCodeDebit2"]),
+                new ReportParameter("paramDefaultAccIdDebit1", GetDefaultAccount()["defaultAccIdDebit1"]),
+                new ReportParameter("paramDefaultAccIdDebit2", GetDefaultAccount()["defaultAccIdDebit2"]),
+                new ReportParameter("paramDefaultAccCodeCredit1", GetDefaultAccount()["defaultAccCodeCredit1"]),
+                new ReportParameter("paramDefaultAccCodeCredit2", GetDefaultAccount()["defaultAccCodeCredit2"]),
+                new ReportParameter("paramDefaultAccIdCredit1", GetDefaultAccount()["defaultAccIdCredit1"]),
+                new ReportParameter("paramDefaultAccIdCredit2", GetDefaultAccount()["defaultAccIdCredit2"]),
+            };
+
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\procurements-received-journal.rdlc";
+            report.DataSources.Clear();
+
+            report.DataSources.Add(new ReportDataSource("ProcurementsReceivedJournal", ProcurementsReceivedJournalDataTable()));
+            report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmProcurementsReceivedJournalReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

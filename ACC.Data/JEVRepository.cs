@@ -461,20 +461,13 @@ namespace ACC.Data
                                                 List<JEVAccountsModel> jevAccountsModelList,
                                                 CheckDisbursementsJournalModel checkDisbursementsJournalModel)
         {
-            try
+            using (var scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
-                {
-                    _ = Update(entity, jevAccountsModelList);
+                _ = Update(entity, jevAccountsModelList);
 
-                    _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
-                    scope.Complete();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                _checkDisbursementsJournalRepository.UpdateByJevID(checkDisbursementsJournalModel);
+                scope.Complete();
+                return true;
             }
         }
 

@@ -80,67 +80,60 @@ namespace AccountingSystem.Views.Reports.Journals
             dictionary.Add("defaultAccCodeCredit2", string.Empty);
             dictionary.Add("defaultAccCodeCredit3", string.Empty);
 
-            try
+            DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+
+            DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
+
+            //Debit default Accounts
+
+            dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
+            dictionary["defaultAccIdDebit2"] = ParseDebitAccountIds(1).ToString();
+            dictionary["defaultAccIdDebit3"] = ParseDebitAccountIds(2).ToString();
+
+            int ParseDebitAccountIds(int row)
             {
-                DataTable dtCreditDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, false);
+                if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                    return 0;
 
-                DataTable dtDebitDefaultAccounts = AccFactory.JournalsDefaultAccountsRepository().GetViewRecordsByJournalId(journalId, fundId, true);
-
-                //Debit default Accounts
-
-                dictionary["defaultAccIdDebit1"] = ParseDebitAccountIds(0).ToString();
-                dictionary["defaultAccIdDebit2"] = ParseDebitAccountIds(1).ToString();
-                dictionary["defaultAccIdDebit3"] = ParseDebitAccountIds(2).ToString();
-
-                int ParseDebitAccountIds(int row)
-                {
-                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
-                        return 0;
-
-                    return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
-                }
-
-                dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
-                dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
-                dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
-
-                string ParseDebitAccountCodes(int row)
-                {
-                    if (dtDebitDefaultAccounts.Rows.Count < row + 1)
-                        return string.Empty;
-
-                    return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
-                }
-
-                //Credit default Accounts
-
-                dictionary["defaultAccIdCredit1"] = ParseCreditAccountIds(0).ToString();
-                dictionary["defaultAccIdCredit2"] = ParseCreditAccountIds(1).ToString();
-                dictionary["defaultAccIdCredit3"] = ParseCreditAccountIds(2).ToString();
-
-                int ParseCreditAccountIds(int row)
-                {
-                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
-                        return 0;
-
-                    return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
-                }
-
-                dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
-                dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
-                dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
-
-                string ParseCreditAccountCodes(int row)
-                {
-                    if (dtCreditDefaultAccounts.Rows.Count < row + 1)
-                        return string.Empty;
-
-                    return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
-                }
+                return Convert.ToInt32(dtDebitDefaultAccounts.Rows[row]["general_ledger_accounts_id"]);
             }
-            catch (Exception ex)
+
+            dictionary["defaultAccCodeDebit1"] = ParseDebitAccountCodes(0);
+            dictionary["defaultAccCodeDebit2"] = ParseDebitAccountCodes(1);
+            dictionary["defaultAccCodeDebit3"] = ParseDebitAccountCodes(2);
+
+            string ParseDebitAccountCodes(int row)
             {
-                Helper.MessageBoxError(ex.StackTrace);
+                if (dtDebitDefaultAccounts.Rows.Count < row + 1)
+                    return string.Empty;
+
+                return dtDebitDefaultAccounts.Rows[row]["account_code"].ToString();
+            }
+
+            //Credit default Accounts
+
+            dictionary["defaultAccIdCredit1"] = ParseCreditAccountIds(0).ToString();
+            dictionary["defaultAccIdCredit2"] = ParseCreditAccountIds(1).ToString();
+            dictionary["defaultAccIdCredit3"] = ParseCreditAccountIds(2).ToString();
+
+            int ParseCreditAccountIds(int row)
+            {
+                if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                    return 0;
+
+                return Convert.ToInt32(dtCreditDefaultAccounts.Rows[row]["general_ledger_accounts_id"].ToString());
+            }
+
+            dictionary["defaultAccCodeCredit1"] = ParseCreditAccountCodes(0);
+            dictionary["defaultAccCodeCredit2"] = ParseCreditAccountCodes(1);
+            dictionary["defaultAccCodeCredit3"] = ParseCreditAccountCodes(2);
+
+            string ParseCreditAccountCodes(int row)
+            {
+                if (dtCreditDefaultAccounts.Rows.Count < row + 1)
+                    return string.Empty;
+
+                return dtCreditDefaultAccounts.Rows[row]["account_code"].ToString();
             }
 
             return dictionary;
@@ -157,60 +150,57 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "ADA Disbursements Journal");
-                var lguDetails = Helper.LGUDetails();
-                var certifiedCorrectSignatory = string.Empty;
-                var certifiedCorrectSignatoryTitle = string.Empty;
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "ADA Disbursements Journal");
+            var lguDetails = Helper.LGUDetails();
+            var certifiedCorrectSignatory = string.Empty;
+            var certifiedCorrectSignatoryTitle = string.Empty;
+            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
 
-                var parameters = new[] {
-                    new ReportParameter("paramDate", date.ToString()),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
-                    new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
-                    new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
-                    new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
-                    new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
-                    new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
-                    new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
-                    new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
-                    new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
-                    new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
-                    new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
-                    new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
-                    new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
-                };
+            var parameters = new[] {
+                new ReportParameter("paramDate", date.ToString()),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle),
+                new ReportParameter("paramDefaultAccCodeDebit1",GetDefaultAccount()["defaultAccCodeDebit1"]),
+                new ReportParameter("paramDefaultAccCodeDebit2",GetDefaultAccount()["defaultAccCodeDebit2"]),
+                new ReportParameter("paramDefaultAccCodeDebit3",GetDefaultAccount()["defaultAccCodeDebit3"]),
+                new ReportParameter("paramDefaultAccIdDebit1",GetDefaultAccount()["defaultAccIdDebit1"]),
+                new ReportParameter("paramDefaultAccIdDebit2",GetDefaultAccount()["defaultAccIdDebit2"]),
+                new ReportParameter("paramDefaultAccIdDebit3",GetDefaultAccount()["defaultAccIdDebit3"]),
+                new ReportParameter("paramDefaultAccCodeCredit1",GetDefaultAccount()["defaultAccCodeCredit1"]),
+                new ReportParameter("paramDefaultAccCodeCredit2",GetDefaultAccount()["defaultAccCodeCredit2"]),
+                new ReportParameter("paramDefaultAccCodeCredit3",GetDefaultAccount()["defaultAccCodeCredit3"]),
+                new ReportParameter("paramDefaultAccIdCredit1",GetDefaultAccount()["defaultAccIdCredit1"]),
+                new ReportParameter("paramDefaultAccIdCredit2",GetDefaultAccount()["defaultAccIdCredit2"]),
+                new ReportParameter("paramDefaultAccIdCredit3",GetDefaultAccount()["defaultAccIdCredit3"]),
+            };
 
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
-                report.DataSources.Clear();
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\authority-to-debit-account-disbursements.rdlc";
+            report.DataSources.Clear();
 
-                report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
-                report.SetParameters(parameters);
+            report.DataSources.Add(new ReportDataSource("AuthorityToDebitAccountDisbursementsJournal", AuthorityToDebitAccountDisbursementsJournalDataTable()));
+            report.SetParameters(parameters);
 
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
 
-                reportViewer.RefreshReport();
+            reportViewer.RefreshReport();
 
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmADADisbursementsJournalReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

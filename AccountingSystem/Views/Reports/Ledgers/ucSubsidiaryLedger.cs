@@ -80,23 +80,21 @@ namespace AccountingSystem.Views.Reports.Ledgers
             HelperLoadRecords.SubsidiaryLedgerComboBox(SubsidiaryLedgerDataTable(), cmbSubsidiaryLedger, "sub_name", "id");
         }
 
-        private static void ValidateDebitCreditRow(string particulars, DataRow item, DataRow row)
+        private static void ValidateDebitCreditRow(DataRow item, DataRow row)
         {
             if (Convert.ToBoolean(item["is_debit"]))
             {
-                row["particulars"] = particulars;
                 row["debit_amount"] = item["amount"];
                 row["credit_amount"] = 0;
             }
             else
             {
-                row["particulars"] = $"{particulars}";
                 row["debit_amount"] = 0;
                 row["credit_amount"] = item["amount"];
             }
         }
 
-        private DataTable DataTableSubsidiaryLedger()
+        private DataTable DataTableSubsidiaryLedgerReport()
         {
             int fundId = Convert.ToInt32(cmbFunds.SelectedValue);
             int generalLedgerId = Convert.ToInt32(cmbAccount.SelectedValue);
@@ -119,13 +117,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
             {
-                string particulars = item["explanation"].ToString();
-
                 DataRow newRow = dtSubsidiaryLedger.NewRow();
                 newRow["date"] = item["date_entry"];
                 newRow["ref"] = item["full_jev_no"];
+                newRow["particulars"] = item["explanation"];
 
-                ValidateDebitCreditRow(particulars, item, newRow);
+                ValidateDebitCreditRow(item, newRow);
                 dtSubsidiaryLedger.Rows.Add(newRow);
 
                 runningRecordCount++;
@@ -165,15 +162,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
             ushort generalLedgerId = (ushort)cmbAccount.SelectedValue;
             int subsidiaryLedgerId = (int)cmbSubsidiaryLedger.SelectedValue;
 
-            var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
-            var subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
-            var fundName = cmbFunds.Text;
+            Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
+            Dictionary<string, string> subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
+            string fundName = cmbFunds.Text;
             report.ReportPath = $"{Application.StartupPath}\\Reports\\subsidiary-ledger.rdlc";
             report.DataSources.Clear();
 
-            report.DataSources.Add(new ReportDataSource("dtSubsidiaryLedger", DataTableSubsidiaryLedger()));
+            report.DataSources.Add(new ReportDataSource("dtSubsidiaryLedger", DataTableSubsidiaryLedgerReport()));
 
-            var parameters = new[] {
+            ReportParameter[] parameters = new[] {
                 new ReportParameter("paramLGUName", $"{Helper.LGUDetails()["municipality"]}, {Helper.LGUDetails()["lgu_province"]}"),
                 new ReportParameter("paramFund", fundName),
                 new ReportParameter("paramGLCode", generalLedgerDict["account_code"]),
@@ -219,7 +216,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
             if (DatatableAccounts().Rows.Count == 0) return;
 
-            var accountDict = new Dictionary<ushort, string>();
+            Dictionary<ushort, string> accountDict = new Dictionary<ushort, string>();
             foreach (DataRow item in DatatableAccounts().Rows)
             {
                 ushort accountId = Convert.ToUInt16(item["general_ledger_accounts_id"]);
@@ -274,7 +271,8 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
                 if (!backgroundWorker1.IsBusy)
                 {
-                    progressBar1.Value = 0;
+                    progressBar1.Style = ProgressBarStyle.Marquee;
+                    progressBar1.MarqueeAnimationSpeed = 1;
                     backgroundWorker1.RunWorkerAsync();
                 }
             }
@@ -292,6 +290,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+            progressBar1.Style = ProgressBarStyle.Blocks;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
