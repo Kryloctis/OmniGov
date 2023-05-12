@@ -2,6 +2,7 @@
 using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -106,8 +107,15 @@ namespace AccountingSystem.Views.Reports.Ledgers
             DataTable dtSubsidiaryLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, subsidiaryLedgerId, year);
             DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtSubsidiaryLedger);
 
+            int totalRowCount = dtSubsidiaryLedgerFromDB.Rows.Count;
+            int runningRecordCount = 0;
+
             if (!string.IsNullOrWhiteSpace(dataRowBeginningBalance["date"].ToString()))
+            {
                 dtSubsidiaryLedger.Rows.Add(dataRowBeginningBalance);
+                totalRowCount++;
+                runningRecordCount++;
+            }
 
             foreach (DataRow item in dtSubsidiaryLedgerFromDB.Rows)
             {
@@ -118,8 +126,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 newRow["ref"] = item["full_jev_no"];
 
                 ValidateDebitCreditRow(particulars, item, newRow);
-
                 dtSubsidiaryLedger.Rows.Add(newRow);
+
+                runningRecordCount++;
+                int progressPercentage = (runningRecordCount * 100) / totalRowCount;
+                backgroundWorker1.ReportProgress(progressPercentage);
             }
 
             return dtSubsidiaryLedger;
@@ -261,9 +272,30 @@ namespace AccountingSystem.Views.Reports.Ledgers
                     return;
                 }
 
-                LoadReport(reportViewer.LocalReport);
+                if (!backgroundWorker1.IsBusy)
+                {
+                    progressBar1.Value = 0;
+                    backgroundWorker1.RunWorkerAsync();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                LoadReport(reportViewer.LocalReport);
+            });
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
         }
     }
 }

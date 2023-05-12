@@ -164,13 +164,14 @@ namespace AccountingSystem.Views.Reports.Ledgers
             DataTable dtGeneralLedgerFromDB = AccFactory.JEVAccountsRepository().GetViewRecords(fundId, generalLedgerId, (short)year);
             DataRow dataRowBeginningBalance = BeginningBalanceRow(fundId, year, generalLedgerId, dtGeneralLedger);
 
-            int totalRecords = dtGeneralLedgerFromDB.Rows.Count;
+            int totalRecordCount = dtGeneralLedgerFromDB.Rows.Count;
             int runningRecordCount = 0;
 
             if (!string.IsNullOrWhiteSpace(dataRowBeginningBalance["date"].ToString()))
             {
                 dtGeneralLedger.Rows.Add(dataRowBeginningBalance);
-                totalRecords++;
+                totalRecordCount++;
+                runningRecordCount++;
             };
 
             foreach (DataRow item in dtGeneralLedgerFromDB.Rows)
@@ -185,7 +186,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 dtGeneralLedger.Rows.Add(newRow);
 
                 runningRecordCount++;
-                int progressPercentage = (runningRecordCount * 100) / runningRecordCount;
+                int progressPercentage = (runningRecordCount * 100) / totalRecordCount;
                 backgroundWorker1.ReportProgress(progressPercentage);
             }
             return dtGeneralLedger;
