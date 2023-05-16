@@ -93,11 +93,12 @@
             this.tabControlLedgers = new System.Windows.Forms.TabControl();
             this.tabPageTransactionLog = new System.Windows.Forms.TabPage();
             this.ucTransactionLog1 = new AccountingSystem.Views.Reports.Ledgers.ucTransactionLog();
+            this.tabPageSummarySL = new System.Windows.Forms.TabPage();
+            this.ucSummarySubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSummarySubsidiaryLedger();
             this.tabPageSubsidiaryLedger = new System.Windows.Forms.TabPage();
             this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
             this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
             this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
-            this.tabPageSummarySL = new System.Windows.Forms.TabPage();
             this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
             this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
             this.tabPagePostTrial = new System.Windows.Forms.TabPage();
@@ -168,6 +169,7 @@
             this.tabPageLedgers.SuspendLayout();
             this.tabControlLedgers.SuspendLayout();
             this.tabPageTransactionLog.SuspendLayout();
+            this.tabPageSummarySL.SuspendLayout();
             this.tabPageSubsidiaryLedger.SuspendLayout();
             this.tabPageGeneralLedger.SuspendLayout();
             this.tabPageTrialBalance.SuspendLayout();
@@ -801,6 +803,26 @@
             this.ucTransactionLog1.Size = new System.Drawing.Size(1205, 550);
             this.ucTransactionLog1.TabIndex = 0;
             // 
+            // tabPageSummarySL
+            // 
+            this.tabPageSummarySL.Controls.Add(this.ucSummarySubsidiaryLedger1);
+            this.tabPageSummarySL.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSummarySL.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPageSummarySL.Name = "tabPageSummarySL";
+            this.tabPageSummarySL.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabPageSummarySL.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSummarySL.TabIndex = 3;
+            this.tabPageSummarySL.Text = "Summary Subsidiary Ledger";
+            this.tabPageSummarySL.UseVisualStyleBackColor = true;
+            // 
+            // ucSummarySubsidiaryLedger1
+            // 
+            this.ucSummarySubsidiaryLedger1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSummarySubsidiaryLedger1.Location = new System.Drawing.Point(0, 0);
+            this.ucSummarySubsidiaryLedger1.Name = "ucSummarySubsidiaryLedger1";
+            this.ucSummarySubsidiaryLedger1.Size = new System.Drawing.Size(1205, 550);
+            this.ucSummarySubsidiaryLedger1.TabIndex = 0;
+            // 
             // tabPageSubsidiaryLedger
             // 
             this.tabPageSubsidiaryLedger.Controls.Add(this.ucSubsidiaryLedger1);
@@ -842,16 +864,6 @@
             this.ucGeneralLedger1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucGeneralLedger1.Size = new System.Drawing.Size(1205, 545);
             this.ucGeneralLedger1.TabIndex = 0;
-            // 
-            // tabPageSummarySL
-            // 
-            this.tabPageSummarySL.Location = new System.Drawing.Point(4, 24);
-            this.tabPageSummarySL.Name = "tabPageSummarySL";
-            this.tabPageSummarySL.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSummarySL.Size = new System.Drawing.Size(1205, 550);
-            this.tabPageSummarySL.TabIndex = 3;
-            this.tabPageSummarySL.Text = "Summary Subsidiary Ledger";
-            this.tabPageSummarySL.UseVisualStyleBackColor = true;
             // 
             // tabPageTrialBalance
             // 
@@ -1412,6 +1424,7 @@
             this.tabPageLedgers.ResumeLayout(false);
             this.tabControlLedgers.ResumeLayout(false);
             this.tabPageTransactionLog.ResumeLayout(false);
+            this.tabPageSummarySL.ResumeLayout(false);
             this.tabPageSubsidiaryLedger.ResumeLayout(false);
             this.tabPageGeneralLedger.ResumeLayout(false);
             this.tabPageTrialBalance.ResumeLayout(false);
@@ -1560,5 +1573,6 @@
         private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.TabPage tabPageSummarySL;
+        private Views.Reports.Ledgers.ucSummarySubsidiaryLedger ucSummarySubsidiaryLedger1;
     }
 }
