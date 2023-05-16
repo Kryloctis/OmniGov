@@ -36,11 +36,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void ucSummarySubsidiaryLedger_Load(object sender, EventArgs e)
         {
-            try
-            {
-                OnLoad();
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            //try
+            //{
+            //    OnLoad();
+            //}
+            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadFunds()
