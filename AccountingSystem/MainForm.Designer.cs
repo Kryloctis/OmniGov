@@ -1541,8 +1541,6 @@
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
-        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;

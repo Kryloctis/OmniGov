@@ -56,8 +56,8 @@ namespace AccountingSystem
 {
     public partial class MainForm : Form
     {
-        private Dictionary<string, dynamic> userDict;
-        private LoginForm loginForm;
+        private readonly Dictionary<string, dynamic> userDict;
+        private readonly LoginForm loginForm;
 
         public MainForm(LoginForm _loginForm)
         {
