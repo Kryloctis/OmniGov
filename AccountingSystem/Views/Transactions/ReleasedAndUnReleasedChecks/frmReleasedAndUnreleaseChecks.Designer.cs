@@ -235,7 +235,6 @@
 
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton btnAdd;
-        private System.Windows.Forms.ToolStripButton btnEdit;
         private System.Windows.Forms.TextBox txtsearch;
         private System.Windows.Forms.ComboBox cmbxFund;
         private System.Windows.Forms.ComboBox cmbxBank;

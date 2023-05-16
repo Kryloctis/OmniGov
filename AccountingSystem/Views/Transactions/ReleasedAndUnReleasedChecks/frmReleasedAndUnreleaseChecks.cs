@@ -112,7 +112,6 @@ namespace AccountingSystem.Views.Transactions.ReleasedAndUnReleasedChecks
                     string payee = row["payee"].ToString();
                     string natureOfPayment = row["nature_of_payment"].ToString();
                     string releasedDate = string.IsNullOrEmpty(row["date_released"].ToString()) ? string.Empty : row["date_released"].ToString();
-                    releasedDate = releasedDate;
                     string status = string.IsNullOrEmpty(row["released_cheques_id"].ToString()) ? "Unreleased" : "Released";
 
 
