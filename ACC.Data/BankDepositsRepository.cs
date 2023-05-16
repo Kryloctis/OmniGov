@@ -11,11 +11,7 @@ namespace ACC.Data
     {
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "bank_deposits";
-        private readonly string tableName2 = "banks";
-        private readonly string tableName3 = "users";
-
         private readonly string viewTableName = "view_bank_deposits";
-
 
 
         public BankDepositsRepository(IAccGenericCommands dbGenericCommands)

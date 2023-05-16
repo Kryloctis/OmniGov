@@ -12,7 +12,7 @@ namespace AccountingSystem
 
         private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "tax_type";
-        private readonly string viewTableName = "view_taxtypes";
+        //private readonly string viewTableName = "view_taxtypes";
 
         public TaxTypesRepository(IAccGenericCommands dbGenericCommands)
         {

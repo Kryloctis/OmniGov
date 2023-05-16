@@ -24,9 +24,9 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private DataTable DataTableGeneralJournal()
         {
-            var dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
-            var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
-            var dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
+            dsLFS.dtGeneralJournalDataTable dtGeneralJournal = new dsLFS.dtGeneralJournalDataTable();
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            DataTable dtGeneralJournalFromDB = AccFactory.JEVAccountsRepository().GetViewRecordsByFundJournalDate(dictFund["fund_name"], journalName, date);
 
             string jevNo;
             string particulars;
@@ -101,43 +101,41 @@ namespace AccountingSystem.Views.Reports.Journals
 
         private void LoadReport(LocalReport report)
         {
-            try
-            {
-                var dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
-                Cursor.Current = Cursors.WaitCursor;
-                var lguDetails = Helper.LGUDetails();
-                var certifiedCorrectSignatory = string.Empty;
-                var certifiedCorrectSignatoryTitle = string.Empty;
-                ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
-                var dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
+            Dictionary<string, string> dictSignatory = Helper.GetSignatoryDataBy_Reference_DocumentName("Certified Correct", "General Journal");
+            Cursor.Current = Cursors.WaitCursor;
+            Dictionary<string, string> lguDetails = Helper.LGUDetails();
+            string certifiedCorrectSignatory = string.Empty;
+            string certifiedCorrectSignatoryTitle = string.Empty;
+            ParseSignatory(dictSignatory, ref certifiedCorrectSignatory, ref certifiedCorrectSignatoryTitle);
+            Dictionary<string, string> dictFund = AccFactory.FundsRepository().GetRecordByID(fundId);
 
-                var parameters = new[] {
-                    new ReportParameter("paramDate", date.ToString()),
-                    new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
-                    new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
-                    new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
-                    new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
-                };
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
-                report.DataSources.Clear();
+            ReportParameter[] parameters = new[] {
+                new ReportParameter("paramDate", date.ToString()),
+                new ReportParameter("paramLGUName", lguDetails["lgu_name"]),
+                new ReportParameter("paramFund", $"{dictFund["fund_code"]} - {dictFund["fund_name"]}"),
+                new ReportParameter("paramCertifiedCorrectSignatory", certifiedCorrectSignatory),
+                new ReportParameter("paramCertifiedCorrectSignatoryTitle", certifiedCorrectSignatoryTitle)
+            };
 
-                report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
-                report.SetParameters(parameters);
-                reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
-                reportViewer.ZoomMode = ZoomMode.Percent;
-                reportViewer.ZoomPercent = 100;
-                reportViewer.RefreshReport();
-                Cursor.Current = Cursors.Default;
-            }
-            catch (Exception ex)
-            {
-                Helper.MessageBoxError(ex.Message);
-            }
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\general-journal.rdlc";
+            report.DataSources.Clear();
+
+            report.DataSources.Add(new ReportDataSource("dtGeneralJournal", DataTableGeneralJournal()));
+            report.SetParameters(parameters);
+            reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
+            reportViewer.ZoomMode = ZoomMode.Percent;
+            reportViewer.ZoomPercent = 100;
+            reportViewer.RefreshReport();
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmGeneralJournalReport_Load(object sender, EventArgs e)
         {
-            LoadReport(reportViewer.LocalReport);
+            try
+            {
+                LoadReport(reportViewer.LocalReport);
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
     }
 }

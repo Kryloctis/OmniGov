@@ -63,6 +63,7 @@
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxRateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taxTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.menuDatabaseSynchronization = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -96,6 +97,7 @@
             this.ucSubsidiaryLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucSubsidiaryLedger();
             this.tabPageGeneralLedger = new System.Windows.Forms.TabPage();
             this.ucGeneralLedger1 = new AccountingSystem.Views.Reports.Ledgers.ucGeneralLedger();
+            this.tabPageSummarySL = new System.Windows.Forms.TabPage();
             this.tabPageTrialBalance = new System.Windows.Forms.TabPage();
             this.tabControlTrialBalance = new System.Windows.Forms.TabControl();
             this.tabPagePostTrial = new System.Windows.Forms.TabPage();
@@ -151,7 +153,6 @@
             this.consolidatedReportOfAccountabilityForAccountableFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dailyCashPositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControlDashboard.SuspendLayout();
@@ -462,6 +463,13 @@
             this.taxTypesToolStripMenuItem.Text = "Tax Types";
             this.taxTypesToolStripMenuItem.Click += new System.EventHandler(this.taxTypesToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 22);
+            this.toolStripMenuItem1.Text = "Other Payment Rates";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
@@ -757,10 +765,11 @@
             // tabControlLedgers
             // 
             this.tabControlLedgers.Controls.Add(this.tabPageTransactionLog);
+            this.tabControlLedgers.Controls.Add(this.tabPageSummarySL);
             this.tabControlLedgers.Controls.Add(this.tabPageSubsidiaryLedger);
             this.tabControlLedgers.Controls.Add(this.tabPageGeneralLedger);
             this.tabControlLedgers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlLedgers.ItemSize = new System.Drawing.Size(150, 20);
+            this.tabControlLedgers.ItemSize = new System.Drawing.Size(200, 20);
             this.tabControlLedgers.Location = new System.Drawing.Point(0, 5);
             this.tabControlLedgers.Margin = new System.Windows.Forms.Padding(0);
             this.tabControlLedgers.Multiline = true;
@@ -833,6 +842,16 @@
             this.ucGeneralLedger1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ucGeneralLedger1.Size = new System.Drawing.Size(1205, 545);
             this.ucGeneralLedger1.TabIndex = 0;
+            // 
+            // tabPageSummarySL
+            // 
+            this.tabPageSummarySL.Location = new System.Drawing.Point(4, 24);
+            this.tabPageSummarySL.Name = "tabPageSummarySL";
+            this.tabPageSummarySL.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSummarySL.Size = new System.Drawing.Size(1205, 550);
+            this.tabPageSummarySL.TabIndex = 3;
+            this.tabPageSummarySL.Text = "Summary Subsidiary Ledger";
+            this.tabPageSummarySL.UseVisualStyleBackColor = true;
             // 
             // tabPageTrialBalance
             // 
@@ -1352,13 +1371,6 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 22);
-            this.toolStripMenuItem1.Text = "Other Payment Rates";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1541,13 +1553,12 @@
         private System.Windows.Forms.ToolStripMenuItem businessAddOnToolStripMenuItem;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetDetailed ucBudgetDetailed1;
         private Views.Dashboard.BudgetDashboard.BudgetSummary.ucBudgetSummary ucBudgetSummary1;
-        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem baToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem releasedAndUnreleaseChecksToolStripMenu;
         private System.Windows.Forms.ToolStripMenuItem releasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreleasedChequesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taxTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.TabPage tabPageSummarySL;
     }
 }

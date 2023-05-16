@@ -6406,11 +6406,11 @@ Sum, Nothing) + ReportItems!txtBalanceNovember.Value</Value>
                     <TablixMember>
                       <Group Name="january">
                         <GroupExpressions>
-                          <GroupExpression>=Fields!particulars.Value</GroupExpression>
+                          <GroupExpression>=Fields!ref.Value</GroupExpression>
                         </GroupExpressions>
                         <Filters>
                           <Filter>
-                            <FilterExpression>=IIF(string.IsNullOrWhiteSpace(Fields!date.Value), 0, Month(Fields!date.Value))</FilterExpression>
+                            <FilterExpression>= Month(Fields!date.Value)</FilterExpression>
                             <Operator>Equal</Operator>
                             <FilterValues>
                               <FilterValue DataType="Integer">1</FilterValue>

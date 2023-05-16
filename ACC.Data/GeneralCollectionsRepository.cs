@@ -25,8 +25,6 @@ namespace ACC.Data
         private readonly string tableName10 = "general_collections_deposits";
         private readonly string tableReceipts = "receipts";
         private readonly string tableReceiptsIssued = "receipts_issued";
-        private readonly string tableGeneralLedgerAccounts = "general_ledger_accounts";
-
         private readonly string viewTableName = "view_general_collections";
 
         public GeneralCollectionsRepository(IAccGenericCommands dbGenericCommands)

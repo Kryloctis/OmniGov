@@ -194,7 +194,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void LoadReport(LocalReport report)
         {
-            Cursor.Current = Cursors.WaitCursor;
             short year = Convert.ToInt16(cmbYear.Text);
             ushort generalLedgerId = Convert.ToUInt16(cmbAccount.SelectedValue);
 
@@ -213,13 +212,12 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 new ReportParameter("paramAccountCode", generalLedgerDict["account_code"]),
                 new ReportParameter("paramYear",year.ToString())
             };
+
             report.SetParameters(parameters);
             reportViewer.SetDisplayMode(DisplayMode.PrintLayout);
             reportViewer.ZoomMode = ZoomMode.Percent;
             reportViewer.ZoomPercent = 100;
             reportViewer.RefreshReport();
-
-            Cursor.Current = Cursors.Default;
         }
 
         private bool AccountComboboxEmpty()
@@ -300,7 +298,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 }
 
                 if (!backgroundWorker1.IsBusy)
+                {
+                    progressBar1.Style = ProgressBarStyle.Marquee;
+                    progressBar1.MarqueeAnimationSpeed = 1;
                     backgroundWorker1.RunWorkerAsync();
+                }
             }
             catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
@@ -322,7 +324,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         {
             Invoke((MethodInvoker)delegate
             {
-                progressBar1.Value = 0;
                 LoadReport(reportViewer.LocalReport);
             });
         }
@@ -330,6 +331,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+            progressBar1.Style = ProgressBarStyle.Blocks;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
