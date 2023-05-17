@@ -60,13 +60,14 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.button_rounded_add_20px;
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(35, 39);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnSearch
             // 
@@ -78,6 +79,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnSearch.Size = new System.Drawing.Size(55, 39);
             this.btnSearch.Text = "&Search...";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnDelete
             // 
@@ -88,6 +90,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnDelete.Size = new System.Drawing.Size(44, 39);
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // toolStripSeparator1
             // 
@@ -103,6 +106,7 @@ namespace AccountingSystem.Views.Manage.AllotmentRelease
             this.btnCancel.Size = new System.Drawing.Size(47, 39);
             this.btnCancel.Text = "&Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // panel1
             // 

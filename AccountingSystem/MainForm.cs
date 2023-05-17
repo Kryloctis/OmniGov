@@ -180,8 +180,10 @@ namespace AccountingSystem
 
             if (!Helper.HasPermission("Report List of Delinquent Accounts"))
                 listOfDelinquentAccountsToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Report > Released Cheques"))
                 releasedChequesToolStripMenuItem.Enabled = false;
+
             if (!Helper.HasPermission("Report > Unreleased Cheques"))
                 unreleasedChequesToolStripMenuItem.Enabled = false;
         }
@@ -333,15 +335,19 @@ namespace AccountingSystem
 
             if (Helper.HasPermission("Report > Transaction Log"))
                 tabControlLedgers.TabPages.Add(tabPageTransactionLog);
+            tabControlLedgers.TabPages.Add(tabPageSummarySL);
+
 
             if (Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageSubsidiaryLedger);
+
 
             if (Helper.HasPermission("Report > General Ledger"))
                 tabControlLedgers.TabPages.Add(tabPageGeneralLedger);
 
             if (Helper.HasPermission("Report > General Ledger") || Helper.HasPermission("Report > Subsidiary Ledger"))
                 tabControlAccounting.TabPages.Add(tabPageLedgers);
+
 
             #endregion Ledgers
 
@@ -488,74 +494,6 @@ namespace AccountingSystem
         #endregion SAAOB and SAAOBB report
 
         #endregion Budget Module
-
-        #region Accounting Module
-
-        //Reports
-
-        #region Ledger Reports
-
-        private void radioGeneralLedger_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlLedgers.SelectedTab = tabPageGeneralLedger;
-        }
-
-        private void radioSubsidiaryLedger_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlLedgers.SelectedTab = tabPageSubsidiaryLedger;
-        }
-
-        private void radioTransactionLog_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlLedgers.SelectedTab = tabPageTransactionLog;
-        }
-
-        #endregion Ledger Reports
-
-        #region Trial Balance Reports
-
-        private void radioPreTB_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlTrialBalance.SelectedTab = tabPagePreTrial;
-        }
-
-        private void radioPostTB_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlTrialBalance.SelectedTab = tabPagePostTrial;
-        }
-
-        #endregion Trial Balance Reports
-
-        #region Financial Statement Reports
-
-        private void radSFPosition_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSFPosition;
-        }
-
-        private void radSFPerformance_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSFPerformance;
-        }
-
-        private void radSCNAE_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCNAE;
-        }
-
-        private void radSCF_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCF;
-        }
-
-        private void radSCBAA_CheckedChanged(object sender, EventArgs e)
-        {
-            tabControlFinancialStatements.SelectedTab = tabPageSCBAA;
-        }
-
-        #endregion Financial Statement Reports
-
-        #endregion Accounting Module
 
         #region Treasury
 

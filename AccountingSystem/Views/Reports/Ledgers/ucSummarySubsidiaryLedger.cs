@@ -18,7 +18,6 @@ namespace AccountingSystem.Views.Reports.Ledgers
         public ucSummarySubsidiaryLedger()
         {
             InitializeComponent();
-            reportViewer.Dock = DockStyle.Fill;
             reportViewer = new ReportViewer();
             reportViewer.Dock = DockStyle.Fill;
             panel1.Controls.Add(reportViewer);
@@ -36,11 +35,11 @@ namespace AccountingSystem.Views.Reports.Ledgers
 
         private void ucSummarySubsidiaryLedger_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    OnLoad();
-            //}
-            //catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            try
+            {
+                OnLoad();
+            }
+            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
         }
 
         private void LoadFunds()
@@ -52,6 +51,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
         private void LoadYear()
         {
             nudYear.Value = Helper.GetCurrentDate().Year;
+            nudYear.Maximum = Helper.GetCurrentDate().Year;
         }
 
         private DataTable DatatableAccounts()
