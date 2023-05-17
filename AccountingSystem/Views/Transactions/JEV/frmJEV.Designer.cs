@@ -113,7 +113,7 @@ namespace AccountingSystem.Views.Transactions.JEV
             // btnDisapprove
             // 
             btnDisapprove.Enabled = false;
-            btnDisapprove.Image = Properties.Resources.document_color_red_cancel_2_20px;
+            btnDisapprove.Image = Properties.Resources.document_color_red_cancel_20px;
             btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             btnDisapprove.Name = "btnDisapprove";

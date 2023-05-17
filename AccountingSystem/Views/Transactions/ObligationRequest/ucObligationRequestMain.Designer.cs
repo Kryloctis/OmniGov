@@ -257,9 +257,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // txtTotalObligations
             // 
-            this.txtTotalObligations.BackColor = System.Drawing.Color.White;
+            this.txtTotalObligations.BackColor = System.Drawing.SystemColors.Control;
             this.txtTotalObligations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTotalObligations.Location = new System.Drawing.Point(105, 497);
+            this.txtTotalObligations.Location = new System.Drawing.Point(41, 497);
             this.txtTotalObligations.MaxLength = 999999999;
             this.txtTotalObligations.Name = "txtTotalObligations";
             this.txtTotalObligations.ReadOnly = true;
@@ -271,9 +271,9 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 500);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(96, 15);
+            this.label9.Size = new System.Drawing.Size(32, 15);
             this.label9.TabIndex = 17;
-            this.label9.Text = "Total Obligations";
+            this.label9.Text = "Total";
             // 
             // cmbxFPP
             // 

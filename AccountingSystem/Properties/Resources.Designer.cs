@@ -19,7 +19,7 @@ namespace AccountingSystem.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -965,7 +965,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_16px {
             get {
-                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_16px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden-16px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -975,7 +975,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_20px {
             get {
-                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden-20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -985,7 +985,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_24px {
             get {
-                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_24px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden-24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -995,7 +995,7 @@ namespace AccountingSystem.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap document_color_magenta_forbidden_32px {
             get {
-                object obj = ResourceManager.GetObject("document_color_magenta_forbidden_32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-magenta-forbidden-32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1013,9 +1013,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap document_color_red_cancel_2_20px {
+        internal static System.Drawing.Bitmap document_color_red_cancel_20px {
             get {
-                object obj = ResourceManager.GetObject("document_color_red_cancel_2_20px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-red-cancel-20px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1023,9 +1023,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap document_color_red_cancel_2_24px {
+        internal static System.Drawing.Bitmap document_color_red_cancel_24px {
             get {
-                object obj = ResourceManager.GetObject("document_color_red_cancel_2_24px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-red-cancel-24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1033,9 +1033,9 @@ namespace AccountingSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap document_color_red_cancel_2_32px {
+        internal static System.Drawing.Bitmap document_color_red_cancel_32px {
             get {
-                object obj = ResourceManager.GetObject("document_color_red_cancel_2_32px", resourceCulture);
+                object obj = ResourceManager.GetObject("document-color-red-cancel-32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

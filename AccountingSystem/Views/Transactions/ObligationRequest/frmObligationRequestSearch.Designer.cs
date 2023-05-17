@@ -179,7 +179,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelect.Image = global::AccountingSystem.Properties.Resources.ok14px;
             this.btnSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSelect.Location = new System.Drawing.Point(720, 3);
             this.btnSelect.Name = "btnSelect";
@@ -309,7 +308,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Search Obligation Request";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmObligationRequestSearch_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

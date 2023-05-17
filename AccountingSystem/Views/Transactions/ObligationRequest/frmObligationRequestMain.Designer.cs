@@ -38,7 +38,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnApprove = new System.Windows.Forms.ToolStripButton();
             this.btnDisapprove = new System.Windows.Forms.ToolStripButton();
             this.btnCancelObligation = new System.Windows.Forms.ToolStripButton();
-            this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,9 +47,12 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCreatedBy = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.ucObligationRequestMain1 = new AccountingSystem.Views.Transactions.ObligationRequest.ucObligationRequestMain();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -68,25 +70,25 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancelObligation});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(725, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(4);
+            this.toolStrip1.Size = new System.Drawing.Size(718, 50);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // btnSave
             // 
-            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save28px;
+            this.btnSave.Image = global::AccountingSystem.Properties.Resources.save_filled_20px;
             this.btnSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 47);
+            this.btnSave.Size = new System.Drawing.Size(35, 39);
             this.btnSave.Text = "&Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_28px;
+            this.btnCancel.Image = global::AccountingSystem.Properties.Resources.symbol_cancel_20px;
             this.btnCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancel.Name = "btnCancel";
@@ -97,7 +99,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDelete
             // 
-            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.delete;
+            this.btnDelete.Image = global::AccountingSystem.Properties.Resources.button_rounded_remove_20px;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDelete.Name = "btnDelete";
@@ -114,19 +116,18 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // btnSearch
             // 
             this.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_doc;
+            this.btnSearch.Image = global::AccountingSystem.Properties.Resources.find_20px;
             this.btnSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 1, 15, 2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 47);
+            this.btnSearch.Size = new System.Drawing.Size(55, 39);
             this.btnSearch.Text = "&Search...";
             this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // btnApprove
             // 
-            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_approve_28px;
+            this.btnApprove.Image = global::AccountingSystem.Properties.Resources.document_color_green_ok_2_20px;
             this.btnApprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnApprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApprove.Name = "btnApprove";
@@ -137,7 +138,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnDisapprove
             // 
-            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_disapprove_28px;
+            this.btnDisapprove.Image = global::AccountingSystem.Properties.Resources.document_color_red_cancel_20px;
             this.btnDisapprove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDisapprove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDisapprove.Name = "btnDisapprove";
@@ -148,7 +149,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // 
             // btnCancelObligation
             // 
-            this.btnCancelObligation.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_filled_forbidden_28px;
+            this.btnCancelObligation.Image = global::AccountingSystem.Properties.Resources.document_color_magenta_forbidden_20px;
             this.btnCancelObligation.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCancelObligation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCancelObligation.Name = "btnCancelObligation";
@@ -156,14 +157,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.btnCancelObligation.Text = "Cancel";
             this.btnCancelObligation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCancelObligation.Click += new System.EventHandler(this.btnCancelObligation_Click);
-            // 
-            // ucObligationRequestMain1
-            // 
-            this.ucObligationRequestMain1.AutoSize = true;
-            this.ucObligationRequestMain1.Location = new System.Drawing.Point(12, 79);
-            this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
-            this.ucObligationRequestMain1.Size = new System.Drawing.Size(713, 525);
-            this.ucObligationRequestMain1.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -176,7 +169,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.linkShowMessage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 50);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(725, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(718, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
@@ -221,7 +214,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.lblCreatedBy});
             this.statusStrip2.Location = new System.Drawing.Point(0, 610);
             this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(725, 22);
+            this.statusStrip2.Size = new System.Drawing.Size(718, 22);
             this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 3;
             this.statusStrip2.Text = "statusStrip2";
@@ -241,19 +234,38 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             // lblCreatedBy
             // 
             this.lblCreatedBy.Name = "lblCreatedBy";
-            this.lblCreatedBy.Size = new System.Drawing.Size(118, 17);
-            this.lblCreatedBy.Text = "toolStripStatusLabel5";
+            this.lblCreatedBy.Size = new System.Drawing.Size(22, 17);
+            this.lblCreatedBy.Text = "---";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.ucObligationRequestMain1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 72);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(4);
+            this.panel1.Size = new System.Drawing.Size(718, 538);
+            this.panel1.TabIndex = 4;
+            // 
+            // ucObligationRequestMain1
+            // 
+            this.ucObligationRequestMain1.AutoSize = true;
+            this.ucObligationRequestMain1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucObligationRequestMain1.Location = new System.Drawing.Point(4, 4);
+            this.ucObligationRequestMain1.Name = "ucObligationRequestMain1";
+            this.ucObligationRequestMain1.Size = new System.Drawing.Size(710, 530);
+            this.ucObligationRequestMain1.TabIndex = 1;
             // 
             // frmObligationRequestMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(725, 632);
+            this.ClientSize = new System.Drawing.Size(718, 632);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.ucObligationRequestMain1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -268,6 +280,8 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,7 +294,6 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton btnCancel;
         internal System.Windows.Forms.ToolStripButton btnDelete;
-        internal ucObligationRequestMain ucObligationRequestMain1;
         private System.Windows.Forms.ToolStripButton btnApprove;
         private System.Windows.Forms.ToolStripButton btnDisapprove;
         private System.Windows.Forms.ToolStripButton btnCancelObligation;
@@ -293,5 +306,7 @@ namespace AccountingSystem.Views.Transactions.ObligationRequest
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
         internal System.Windows.Forms.ToolStripStatusLabel lblCreatedBy;
+        private System.Windows.Forms.Panel panel1;
+        internal ucObligationRequestMain ucObligationRequestMain1;
     }
 }
