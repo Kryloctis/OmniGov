@@ -159,6 +159,7 @@
             // nudRemainsAge
             // 
             nudRemainsAge.Location = new System.Drawing.Point(77, 76);
+            nudRemainsAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
             nudRemainsAge.Name = "nudRemainsAge";
             nudRemainsAge.Size = new System.Drawing.Size(99, 23);
             nudRemainsAge.TabIndex = 5;
@@ -381,6 +382,7 @@
             Controls.Add(groupBox2);
             Name = "ucBurialPermit";
             Size = new System.Drawing.Size(946, 247);
+            Load += ucBurialPermit_Load;
             groupBox2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

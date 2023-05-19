@@ -56,7 +56,7 @@ namespace AccountingSystem
             throw new System.NotImplementedException();
         }
 
-        public bool InsertWithPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
+        public bool InsertWithBurialPermitPayment(BurialPermitModel burialPermitModel)
         {
             var parameters = new object[][]
             {
@@ -78,7 +78,6 @@ namespace AccountingSystem
             };
 
             string query = $"INSERT INTO {tableName} (taxpayers_id, permission, remains_name, remains_nationality, remains_age, remains_sex, death_date, cause_of_death, cemetery, disinterment, is_infectious, is_embalmed, disposition, created_at, created_by) VALUES(@taxpayers_id, @permission, @remains_name, @remains_nationality, @remains_age, @remains_sex, @death_date, @cause_of_death, @cemetery, @disinterment, @is_infectious, @is_embalmed, @disposition, @created_at, @created_by)";
-
 
             bool result = _mySqlGenericCommands.ExecuteNonQuery(query, parameters);
             return result;

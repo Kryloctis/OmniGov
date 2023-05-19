@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
+using AccountingSystem.Views.Manage.RealProperties;
+using AccountingSystem.Views.Reports.RealPropertyTaxReports.RealPropertyTaxAccountRegister;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +15,15 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
 {
     public partial class ucCattleTransferOfOwnership : UserControl
     {
+        internal int cattleID;
         internal int oldOwnerID;
+        internal int newOwnerID;
+        internal frmPayments _frmPayments;
 
         public ucCattleTransferOfOwnership()
         {
             InitializeComponent();
+            Helper.DatagridDefaultStyle(dgCattle, false);
         }
 
         internal void LoadOldOwnerInfo(int taxpayerID)
@@ -31,42 +38,60 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.CattleTrans
         {
             if (!DesignMode)
             {
-                LoadBarangays();
-                LoadMunicipalities();
-                LoadProvince();
+                HelperLoadRecords.SexComboBox(cmbxSex);
             }
         }
 
-        internal void LoadBarangays()
+
+        private void btnBrowse_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var dtBarangays = AccFactory.BarangayRepository().GetRecords();
-                HelperLoadRecords.BarangaysCombobox(dtBarangays, cmbxBarangay, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            _ = new frmRptTaxPayerList(null, null, null, null, _frmPayments).ShowDialog();
         }
 
-        internal void LoadMunicipalities()
+        private void linkSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var dtMunicipalities = AccFactory.MunicipalitiesRepository().GetRecords();
-                HelperLoadRecords.MunicipalitiesCombobox(dtMunicipalities, cmbxMunicipality, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            panel1Control.SendToBack();
+            txtSearch.Focus();
+            LoadCattleByOwnerID();
         }
 
-        internal void LoadProvince()
+        private void LoadCattleByOwnerID()
         {
-            try
-            {
-                var dtProvince = AccFactory.ProvincesRepository().GetRecords();
-                HelperLoadRecords.ProvinceCombobox(dtProvince, cmbxProvince, "name", null);
-            }
-            catch (Exception ex) { Helper.MessageBoxError(ex.Message); }
+            int ownerID = oldOwnerID;
+            string searchKey = txtSearch.Text.Trim();
+            DataTable dtCattle = AccFactory.CattleOwnershipRepository().GetRecordsByIDAndSearch(ownerID, searchKey);
+            HelperLoadRecords.CattleDatagridView(dgCattle, dtCattle);
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            panel1Control.BringToFront();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadCattleByOwnerID();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            if (dgCattle.Rows.Count == 0)
+                return;
+
+            int rowIndex = dgCattle.CurrentRow.Index;
+
+            cattleID = Convert.ToInt32(dgCattle.Rows[rowIndex].Cells["id"].Value);
+            var cattleType = dgCattle.Rows[rowIndex].Cells["cattle_type"].Value.ToString();
+            var cattleAge = dgCattle.Rows[rowIndex].Cells["cattle_age"].Value.ToString();
+            var cattleSex = dgCattle.Rows[rowIndex].Cells["cattle_sex"].Value.ToString();
+            var cattleDescription = dgCattle.Rows[rowIndex].Cells["description"].Value.ToString();
+
+            cmbxCattleType.Text = cattleType;
+            nudCattleAge.Text = cattleAge;
+            cmbxSex.Text = cattleSex;
+            txtCattleDescription.Text = cattleDescription;
+            panel1Control.BringToFront();
+        }
     }
 
 

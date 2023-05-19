@@ -28,7 +28,7 @@ namespace AccountingSystem.Views.Transactions.Payments
         private ucMarriageLicense ucMarriageLicense;
         private ucBurialPermit ucBurialPermit;
         private ucCattleOwnership ucCattleOwnership;
-        private ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
+        internal ucCattleTransferOfOwnership ucCattleTransferOfOwnership;
 
         public frmPayments()
         {
@@ -113,10 +113,10 @@ namespace AccountingSystem.Views.Transactions.Payments
             }
             else if (tabControlTaxDues.SelectedTab == tabPageOthers)
             {
-                ucPayment.amountPayment = ucOtherCharges.totalAmount;
+                ucPayment.amountPayment = ucOtherCharges.GetTotalOtherCharges();
                 ucPayment.txtTaxpayer.Text = GetTaxPayerData()["taxpayer_name"];
                 ucPayment.txtPayee.Text = GetTaxPayerData()["taxpayer_name"];
-                ucPayment.OnLoad();
+                ucPayment.OnLoad(ucPayment.selectedAccountableFormNo);
             }
 
             tabControl1.SelectedTab = tabPagePayment;
@@ -175,6 +175,8 @@ namespace AccountingSystem.Views.Transactions.Payments
             ucaF51_571.LoadTaxpayerInfo(taxpayerId);
             ucCattleOwnership.LoadTaxpayerInfo(taxpayerId);
             ucCattleTransferOfOwnership.LoadOldOwnerInfo(taxpayerId);
+            ucBurialPermit.LoadTaxpayerInfo(taxpayerId);
+
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -393,8 +395,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-                //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
-                cattleOwnershipModel.OwnerID = 1;
+                cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
                 cattleOwnershipModel.Tag = 1;
                 cattleOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
                 cattleOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
@@ -423,18 +424,19 @@ namespace AccountingSystem.Views.Transactions.Payments
                 var collectingOfficerData = ucPayment.GetCollectingOfficerData();
                 bool isJobOrder = Convert.ToBoolean(collectingOfficerData["is_job_order"]);
 
-                //cattleOwnershipModel.OwnerID = ucCattleOwnership.ownerID;
-                //cattleTransferOfOwnershipModel.OwnerID = 1;
-                //cattleTransferOfOwnershipModel.Tag = 1;
-                //cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
-                //cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
-                //cattleTransferOfOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
-                //cattleTransferOfOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
-                //cattleTransferOfOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
-                //cattleTransferOfOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
-                //cattleTransferOfOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
-                //cattleTransferOfOwnershipModel.CreatedBy = Helper.UserId;
-                //cattleTransferOfOwnershipModel.CreatedAt = DateTime.Now;
+                cattleTransferOfOwnershipModel.CattleOwnershipID = ucCattleTransferOfOwnership.cattleID;
+                cattleTransferOfOwnershipModel.OldOwnerID = ucCattleTransferOfOwnership.oldOwnerID;
+                cattleTransferOfOwnershipModel.NewOwnerID = ucCattleTransferOfOwnership.newOwnerID;
+                cattleTransferOfOwnershipModel.Barangay = ucCattleOwnership.cmbxBarangay.Text;
+                cattleTransferOfOwnershipModel.Municipality = ucCattleOwnership.cmbxMunicipality.Text;
+                cattleTransferOfOwnershipModel.Province = ucCattleOwnership.cmbxProvince.Text;
+                cattleTransferOfOwnershipModel.CattleType = ucCattleOwnership.cmbxType.Text;
+                cattleTransferOfOwnershipModel.CattleSex = ucCattleOwnership.cmbxSex.Text;
+                cattleTransferOfOwnershipModel.CattleAge = Convert.ToInt32(ucCattleOwnership.nudAge.Value);
+                cattleTransferOfOwnershipModel.Description = ucCattleOwnership.txtDescription.Text;
+                cattleTransferOfOwnershipModel.CreatedBy = Helper.UserId;
+                cattleTransferOfOwnershipModel.CreatedAt = DateTime.Now;
+
             }
             catch (Exception ex)
             {
@@ -451,22 +453,54 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         private bool SaveMarriageLicensePayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, MarriageLicenseModel marriageLicenseModel)
         {
-            return AccFactory.MarriageLicenseRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithMarriageLicensePayment(paymentCollectionHasChequesModel, paymentCollectionsModel, marriageLicenseModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private bool SaveBurialPermitPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, BurialPermitModel burialPermitModel)
         {
-            return AccFactory.BurialPermitRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithBurialPermitPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, burialPermitModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private bool SaveCattleOwnershipPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleOwnershipModel cattleOwnershipModel)
         {
-            return AccFactory.CattleOwnershipRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleOwnershipModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
-        private bool SaveCattleOwnershipTransferPayment(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleTransferOfOwnershipModel cattleTransferOfOwnershipModel)
+        private bool SaveTransferOfCattleOwnership(PaymentCollectionHasChequesModel paymentCollectionHasChequesModel, PaymentCollectionsModel paymentCollectionsModel, CattleTransferOfOwnershipModel cattleTransferOfOwnershipModel)
         {
-            return AccFactory.CattleTransferOfOwnershipRepository().InsertWithPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleTransferOfOwnershipModel);
+            try
+            {
+                return AccFactory.PaymentCollectionsRepository().InsertWithTransferOfCattleOwnershipPayment(paymentCollectionHasChequesModel, paymentCollectionsModel, cattleTransferOfOwnershipModel);
+            }
+            catch (Exception ex)
+            {
+                Helper.MessageBoxError(ex.Message);
+            }
+            return false;
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -550,7 +584,7 @@ namespace AccountingSystem.Views.Transactions.Payments
                                 break;
 
                             case "52":
-                                SaveCattleOwnershipTransferPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleTransferOfOwnershipModel());
+                                SaveTransferOfCattleOwnership(paymentCollectionHasChequesModel, PaymentCollectionsModel(), CattleTransferOfOwnershipModel());
                                 break;
 
                             case "53":
@@ -560,13 +594,6 @@ namespace AccountingSystem.Views.Transactions.Payments
                             case "54":
                                 SaveMarriageLicensePayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), MarriageLicenseModel());
                                 break;
-
-                            case "56":
-                                break;
-
-                            case "57":
-                                break;
-
                             case "58":
                                 SaveBurialPermitPayment(paymentCollectionHasChequesModel, PaymentCollectionsModel(), BurialPermitModel());
                                 break;
@@ -607,29 +634,45 @@ namespace AccountingSystem.Views.Transactions.Payments
 
         #endregion Save Payment
 
+        #region Current Payment Transaction Identifier
         private void tabPageAF51ANDAF57_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "51";
+            ucOtherCharges = ucOtherCharges1;
+            ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageCertificateOfTransferOfCattle_Enter(object sender, EventArgs e)
         {
+            ucCattleTransferOfOwnership._frmPayments = this;
             ucPayment.selectedAccountableFormNo = "52";
+            ucOtherCharges = ucOtherCharges2;
+            ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageCattleOwnership_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "53";
+            ucOtherCharges = ucOtherCharges3;
+            ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageMarriageLicense_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "54";
+            ucOtherCharges = ucOtherCharges4;
+            ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
 
         private void tabPageBurialPermit_Enter(object sender, EventArgs e)
         {
             ucPayment.selectedAccountableFormNo = "58";
+            ucOtherCharges = ucOtherCharges5;
+            ucOtherCharges.accountableForm = ucPayment.selectedAccountableFormNo;
         }
+
+        #endregion
+
+
     }
 }

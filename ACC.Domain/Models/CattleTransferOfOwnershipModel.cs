@@ -16,7 +16,7 @@ namespace ACC.Domain.Models
         public Decimal Amount { get; set; }
         public string CattleType { get; set; }
         public string CattleSex { get; set; }
-        public string CattleAge { get; set; }
+        public int CattleAge { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }

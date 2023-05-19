@@ -16,5 +16,20 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments.BurialPermi
         {
             InitializeComponent();
         }
+
+        internal void LoadTaxpayerInfo(int taxpayerId)
+        {
+            var dictTaxpayer = AccFactory.TaxpayersRepository().GetViewRecordById(taxpayerId);
+
+            txtTaxpayer.Text = dictTaxpayer["taxpayers_name"];
+        }
+
+        private void ucBurialPermit_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
+                HelperLoadRecords.SexComboBox(cmbxRemainsSex);
+            }
+        }
     }
 }

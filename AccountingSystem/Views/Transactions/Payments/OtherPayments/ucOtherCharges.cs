@@ -1,4 +1,5 @@
 ﻿using AccountingSystem.Views.Manage.OtherPaymentRates;
+using AccountingSystem.Views.Manage.TaxPayers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
         internal string accountableForm = string.Empty;
         internal int unit = 1;
         internal decimal debitAmount;
+        internal decimal subTotalAmount;
         internal decimal totalAmount;
 
 
@@ -130,7 +132,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             datagrid.Columns[0].HeaderText = "Description";
             datagrid.Columns[1].HeaderText = "Debit Amount";
-            datagrid.Columns[2].HeaderText = "Accountable Form Type";
+            datagrid.Columns[2].HeaderText = "AF Type";
             datagrid.Columns[3].HeaderText = "Unit";
             datagrid.Columns[4].HeaderText = "Total Amount";
 
@@ -141,14 +143,16 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
             datagrid.Columns["description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             datagrid.Columns["description"].MinimumWidth = 150;
             datagrid.Columns["accountable_form_type"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            datagrid.Columns["accountable_form_type"].MinimumWidth = 150;
+            datagrid.Columns["accountable_form_type"].MinimumWidth = 80;
+            datagrid.Columns["accountable_form_type"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagrid.Columns["debit_amount"].DefaultCellStyle.Format = "#,0.00###";
             datagrid.Columns["debit_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns["unit"].MinimumWidth = 150;
-            datagrid.Columns["debit_amount"].MinimumWidth = 150;
+            datagrid.Columns["unit"].MinimumWidth = 50;
+            datagrid.Columns["unit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            datagrid.Columns["debit_amount"].MinimumWidth = 80;
             datagrid.Columns["total_amount"].DefaultCellStyle.Format = "#,0.00###";
             datagrid.Columns["total_amount"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            datagrid.Columns["total_amount"].MinimumWidth = 150;
+            datagrid.Columns["total_amount"].MinimumWidth = 80;
 
         }
 
@@ -159,7 +163,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void AddOtherPaymentCharge()
         {
-            _ = dgOtherPaymentCharges.Rows.Add(new object[] { description, debitAmount, accountableForm, unit, totalAmount });
+            _ = dgOtherPaymentCharges.Rows.Add(new object[] { description, debitAmount, $"AF {accountableForm}", unit, subTotalAmount });
         }
 
         private void treeViewTaxTypes_AfterSelect(object sender, TreeViewEventArgs e)
@@ -172,7 +176,7 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
             description = dictPaymentRates["description"];
             debitAmount = Convert.ToDecimal(dictPaymentRates["amount"]);
-            totalAmount = unit * debitAmount;
+            subTotalAmount = unit * debitAmount;
         }
 
         private void btnUndo_Click(object sender, EventArgs e)
@@ -195,7 +199,27 @@ namespace AccountingSystem.Views.Transactions.Payments.OtherPayments
 
         private void dgOtherPaymentCharges_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            int rowIndex = dgOtherPaymentCharges.CurrentRow.Index;
+            int unit = Convert.ToInt32(dgOtherPaymentCharges.Rows[rowIndex].Cells["unit"].Value);
 
+            try
+            {
+                decimal debitAmount = Convert.ToDecimal(dgOtherPaymentCharges.Rows[rowIndex].Cells["debit_amount"].Value);
+                dgOtherPaymentCharges.Rows[rowIndex].Cells["total_amount"].Value = debitAmount * unit;
+            }
+            catch (Exception)
+            {
+                dgOtherPaymentCharges.Rows[rowIndex].Cells["unit"].Value = 1;
+            }
+        }
+
+        internal decimal GetTotalOtherCharges()
+        {
+            decimal totalPayment = 0;
+            foreach (DataGridViewRow row in dgOtherPaymentCharges.Rows)
+                totalPayment += Convert.ToDecimal(row.Cells["total_amount"].Value);
+           
+            return totalPayment;
         }
 
     }
