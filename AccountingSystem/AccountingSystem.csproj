@@ -99,7 +99,7 @@
     <Content Include="Reports\general-journal.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\general-ledger.rdlc">
+    <Content Include="Reports\Ledgers\general-ledger.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\journal-entry-voucher.rdlc">
@@ -159,10 +159,10 @@
     <Content Include="Reports\status-of-appropriations-allotments-and-obligation.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\subsidiary-ledger.rdlc">
+    <Content Include="Reports\Ledgers\subsidiary-ledger.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\transaction_log.rdlc">
+    <Content Include="Reports\Ledgers\transaction_log.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\accounting.ico" />

@@ -200,7 +200,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             var lguDict = Helper.LGUDetails();
             var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             var fundName = cmbFunds.Text;
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\general-ledger.rdlc";
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\general-ledger.rdlc";
             report.DataSources.Clear();
 
             report.DataSources.Add(new ReportDataSource("dtGeneralLedger", DataTableGeneralLedger()));
