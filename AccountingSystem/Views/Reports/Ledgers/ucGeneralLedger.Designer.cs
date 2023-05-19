@@ -67,6 +67,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.btnRetrieve.TabIndex = 15;
             this.btnRetrieve.Text = "&Retrieve";
             this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // cmbAccount
             // 
@@ -75,6 +76,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.cmbAccount.Name = "cmbAccount";
             this.cmbAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbAccount.TabIndex = 14;
+            this.cmbAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbAccount_KeyDown);
             // 
             // panel1
             // 
@@ -112,6 +114,9 @@ namespace AccountingSystem.Views.Reports.Ledgers
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // ucGeneralLedger
             // 
@@ -122,6 +127,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "ucGeneralLedger";
             this.Size = new System.Drawing.Size(849, 505);
+            this.Load += new System.EventHandler(this.ucGeneralLedger_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

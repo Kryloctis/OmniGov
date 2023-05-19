@@ -118,6 +118,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "ucSummarySubsidiaryLedger";
             this.Size = new System.Drawing.Size(1140, 571);
+            this.Load += new System.EventHandler(this.ucSummarySubsidiaryLedger_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudYear)).EndInit();
             this.ResumeLayout(false);
