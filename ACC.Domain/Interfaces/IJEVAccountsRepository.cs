@@ -21,6 +21,9 @@ namespace ACC.Domain.Interfaces
         //SUBSIDIARY LEDGER
         DataTable GetViewRecords(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
 
+        //Summary Subsidiary
+        Dictionary<string, string> GetViewSummarySubidiaryRecord(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year);
+
         //TRIAL BALANCE
         Dictionary<string, decimal> GetSumTransactionsByAccGrpId(int fundsId, int accountGroupId, DateTime date);
 

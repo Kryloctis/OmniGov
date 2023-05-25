@@ -11,12 +11,13 @@ namespace ACC.Data
 {
     public class SubsidiaryLedgerAccountsRepository : ISubsidiaryLedgerAccountsRepository
     {
-        private readonly IAccGenericCommands _dbGenericCommands;
         private readonly string tableName = "subsidiary_ledger_accounts";
+        private readonly string viewTableName = "view_subsidiary_ledger_accounts";
+        private AccGenericCommands mySqlGenericCommandsLFS;
 
-        public SubsidiaryLedgerAccountsRepository(IAccGenericCommands dbGenericCommands)
+        public SubsidiaryLedgerAccountsRepository(AccGenericCommands mySqlGenericCommandsLFS)
         {
-            _dbGenericCommands = dbGenericCommands;
+            this.mySqlGenericCommandsLFS = mySqlGenericCommandsLFS;
         }
 
         public int CountRecords()
@@ -26,43 +27,36 @@ namespace ACC.Data
 
         public bool Delete(List<SubsidiaryLedgerAccountsModel> entityList)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                using (var scope = new TransactionScope())
+                foreach (var entity in entityList)
                 {
-                    foreach (var entity in entityList)
+                    object[][] parameters = new object[][]
                     {
-                        var parameters = new object[][]
-                        {
-                            new object[] { "@id", DbType.Int16, entity.Id},
-                        };
+                        new object[] { "@id", DbType.Int16, entity.Id},
+                    };
 
-                        string query = $"DELETE FROM {tableName} WHERE id = @id";
-                        _ = _dbGenericCommands.ExecuteNonQuery(query, parameters);
-                    }
-
-                    scope.Complete();
-                    return true;
+                    string query = $"DELETE FROM {tableName} WHERE id = @id";
+                    _ = mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+
+                scope.Complete();
+                return true;
             }
         }
 
         public Dictionary<string, string> GetRecordByID(int Id)
         {
-            var record = new Dictionary<string, string>();
+            Dictionary<string, string> record = new Dictionary<string, string>();
 
-            var parameters = new object[][]
+            object[][] parameters = new object[][]
             {
                 new object[] { "@id", DbType.UInt16, Id},
             };
 
             string query = $"SELECT funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact, created_at, updated_at FROM {tableName} WHERE id = @id";
 
-            using (var reader = _dbGenericCommands.ExecuteReader(query, parameters))
+            using (DataTable reader = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
             {
                 if (reader.Rows.Count < 1)
                     return record;
@@ -82,87 +76,58 @@ namespace ACC.Data
 
         public DataTable GetRecords()
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName}";
+            string query = $"SELECT * FROM {tableName}";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
         public DataTable GetRecordsByReference(int Id)
         {
-            try
-            {
-                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}'";
+            string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}'";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.Fill(query, dataTable);
         }
 
-        public DataTable GetRecordsBySearch(string srchtxt)
+        public DataTable GetRecordsBySearch(string searchText)
         {
-            try
+            object[][] parameters = new object[][]
             {
-                string query = $"SELECT * FROM {tableName} WHERE sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
+                new object[] { "@search_text", DbType.String, $"%{searchText}%" }
+            };
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {tableName} WHERE sub_code LIKE @search_text OR sub_code LIKE @search_text";
+
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
-        public DataTable GetRecordsBySearchByReference(string srchtxt, int Id)
+        public DataTable GetRecordsBySearchByReference(string searchText, int Id)
         {
-            try
+            object[][] parameters = new object[][]
             {
-                string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}' AND sub_code LIKE '%{srchtxt}%' OR sub_code LIKE '%{srchtxt}%'";
+                new object[]{"@search_text", DbType.String, $"%{searchText}%"}
+            };
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.Fill(query, dtJournals);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"SELECT * FROM {tableName} WHERE general_ledger_accounts_id='{Id}' AND sub_code LIKE @search_text OR sub_code LIKE @search_text";
+
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public DataTable GetRecordsByFundAndGeneralLedger(byte fundId, ushort generalLedgerId)
         {
-            try
+            object[][] parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, fundId},
-                    new object[] { "@generalLedgerId", DbType.UInt16, generalLedgerId},
-                };
+                new object[] { "@funds_id", DbType.Byte, fundId},
+                new object[] { "@generalLedgerId", DbType.UInt16, generalLedgerId},
+            };
 
-                string query = $"SELECT * FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";
+            string query = $"SELECT * FROM {tableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @generalLedgerId";
 
-                var dtJournals = new DataTable();
-                return _dbGenericCommands.ExecuteReader(query, parameters);
-            }
-            catch (MySqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
 
         public bool IdExist(int id)
@@ -172,68 +137,67 @@ namespace ACC.Data
 
         public bool Insert(SubsidiaryLedgerAccountsModel entity)
         {
-            try
+            object[][] parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@funds_id", DbType.Byte, entity.FundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
-                    new object[] { "@sub_code", DbType.String, entity.Code},
-                    new object[] { "@sub_name", DbType.String, entity.Name},
-                    new object[] { "@address", DbType.String, entity.Address},
-                    new object[] { "@contact_person", DbType.String, entity.ContactPerson},
-                    new object[] { "@contact", DbType.String, entity.Contact}
-                };
+                new object[] { "@funds_id", DbType.Byte, entity.FundId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
+                new object[] { "@sub_code", DbType.String, entity.Code},
+                new object[] { "@sub_name", DbType.String, entity.Name},
+                new object[] { "@address", DbType.String, entity.Address},
+                new object[] { "@contact_person", DbType.String, entity.ContactPerson},
+                new object[] { "@contact", DbType.String, entity.Contact}
+            };
 
-                string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact) VALUES (@funds_id, @general_ledger_accounts_id, @sub_code, @sub_name, @address, @contact_person, @contact)";
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            string query = $"INSERT INTO {tableName} (funds_id, general_ledger_accounts_id, sub_code, sub_name, address, contact_person, contact) VALUES (@funds_id, @general_ledger_accounts_id, @sub_code, @sub_name, @address, @contact_person, @contact)";
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool Update(SubsidiaryLedgerAccountsModel entity)
         {
-            try
+            object[][] parameters = new object[][]
             {
-                var parameters = new object[][]
-                {
-                    new object[] { "@id", DbType.UInt16, entity.Id},
-                    new object[] { "@funds_id", DbType.Byte, entity.FundId},
-                    new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
-                    new object[] { "@sub_code", DbType.String, entity.Code},
-                    new object[] { "@sub_name", DbType.String, entity.Name},
-                    new object[] { "@address", DbType.String, entity.Address},
-                    new object[] { "@contact_person", DbType.String, entity.ContactPerson},
-                    new object[] { "@contact", DbType.String, entity.Contact}
-                };
+                new object[] { "@id", DbType.UInt16, entity.Id},
+                new object[] { "@funds_id", DbType.Byte, entity.FundId},
+                new object[] { "@general_ledger_accounts_id", DbType.UInt16, entity.GeneralLedgerAccountsId},
+                new object[] { "@sub_code", DbType.String, entity.Code},
+                new object[] { "@sub_name", DbType.String, entity.Name},
+                new object[] { "@address", DbType.String, entity.Address},
+                new object[] { "@contact_person", DbType.String, entity.ContactPerson},
+                new object[] { "@contact", DbType.String, entity.Contact}
+            };
 
-                string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name, address = @address, contact_person = @contact_person, contact = @contact WHERE id = @id";
+            string query = $"UPDATE {tableName} SET funds_id = @funds_id, general_ledger_accounts_id = @general_ledger_accounts_id, sub_code = @sub_code, sub_name = @sub_name, address = @address, contact_person = @contact_person, contact = @contact WHERE id = @id";
 
-                return _dbGenericCommands.ExecuteNonQuery(query, parameters);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return mySqlGenericCommandsLFS.ExecuteNonQuery(query, parameters);
         }
 
         public bool HasSubsidiary(ushort generalLedgerId, byte fundId)
         {
-            var parameters = new object[][]
+            object[][] parameters = new object[][]
             {
                 new object[] { "@general_ledger_accounts_id", DbType.UInt16, generalLedgerId },
                 new object[] { "@funds_id", DbType.Byte, fundId }
             };
 
             string query = $"SELECT id FROM {tableName} WHERE general_ledger_accounts_id = @general_ledger_accounts_id AND funds_id = @funds_id";
-            string queryResult = _dbGenericCommands.ExecuteScalar(query, parameters);
+            string queryResult = mySqlGenericCommandsLFS.ExecuteScalar(query, parameters);
 
             // if query is not null, means found some record, so true
             if (!string.IsNullOrEmpty(queryResult)) return true;
             return false;
+        }
+
+        public DataTable GetViewRecordsByFundId_GenAccId(int fundId, int generalLedgerAccId)
+        {
+            object[][] parameters = new object[][]
+            {
+                new object[] {"@funds_id", DbType.Int32, fundId },
+                new object[] {"@general_ledger_accounts_id", DbType.Int32, generalLedgerAccId}
+            };
+
+            string query = $"SELECT * FROM {viewTableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id";
+            DataTable dataTable = new DataTable();
+            return mySqlGenericCommandsLFS.FillBySearch(query, dataTable, parameters);
         }
     }
 }

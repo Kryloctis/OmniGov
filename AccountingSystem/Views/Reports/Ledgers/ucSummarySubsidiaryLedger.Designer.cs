@@ -31,8 +31,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cmbxFunds = new System.Windows.Forms.ComboBox();
             this.cmbxAccount = new System.Windows.Forms.ComboBox();
-            this.cmbSubsidiaryLedger = new System.Windows.Forms.ComboBox();
             this.nudYear = new System.Windows.Forms.NumericUpDown();
+            this.btnRetrieve = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -45,8 +45,8 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.cmbxFunds);
             this.flowLayoutPanel1.Controls.Add(this.cmbxAccount);
-            this.flowLayoutPanel1.Controls.Add(this.cmbSubsidiaryLedger);
             this.flowLayoutPanel1.Controls.Add(this.nudYear);
+            this.flowLayoutPanel1.Controls.Add(this.btnRetrieve);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -70,19 +70,11 @@
             this.cmbxAccount.Name = "cmbxAccount";
             this.cmbxAccount.Size = new System.Drawing.Size(370, 23);
             this.cmbxAccount.TabIndex = 1;
-            // 
-            // cmbSubsidiaryLedger
-            // 
-            this.cmbSubsidiaryLedger.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSubsidiaryLedger.FormattingEnabled = true;
-            this.cmbSubsidiaryLedger.Location = new System.Drawing.Point(539, 7);
-            this.cmbSubsidiaryLedger.Name = "cmbSubsidiaryLedger";
-            this.cmbSubsidiaryLedger.Size = new System.Drawing.Size(283, 23);
-            this.cmbSubsidiaryLedger.TabIndex = 24;
+            this.cmbxAccount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbxAccount_KeyDown);
             // 
             // nudYear
             // 
-            this.nudYear.Location = new System.Drawing.Point(828, 7);
+            this.nudYear.Location = new System.Drawing.Point(539, 7);
             this.nudYear.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -92,6 +84,16 @@
             this.nudYear.ReadOnly = true;
             this.nudYear.Size = new System.Drawing.Size(97, 23);
             this.nudYear.TabIndex = 2;
+            // 
+            // btnRetrieve
+            // 
+            this.btnRetrieve.Location = new System.Drawing.Point(642, 7);
+            this.btnRetrieve.Name = "btnRetrieve";
+            this.btnRetrieve.Size = new System.Drawing.Size(75, 23);
+            this.btnRetrieve.TabIndex = 25;
+            this.btnRetrieve.Text = "Retrieve";
+            this.btnRetrieve.UseVisualStyleBackColor = true;
+            this.btnRetrieve.Click += new System.EventHandler(this.btnRetrieve_Click);
             // 
             // progressBar1
             // 
@@ -108,6 +110,14 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1140, 529);
             this.panel1.TabIndex = 2;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // ucSummarySubsidiaryLedger
             // 
@@ -134,7 +144,7 @@
         private System.Windows.Forms.NumericUpDown nudYear;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox cmbSubsidiaryLedger;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnRetrieve;
     }
 }

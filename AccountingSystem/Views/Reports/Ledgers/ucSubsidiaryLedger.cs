@@ -165,7 +165,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
             Dictionary<string, string> generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
             Dictionary<string, string> subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
             string fundName = cmbFunds.Text;
-            report.ReportPath = $"{Application.StartupPath}\\Reports\\subsidiary-ledger.rdlc";
+            report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\subsidiary-ledger.rdlc";
             report.DataSources.Clear();
 
             report.DataSources.Add(new ReportDataSource("dtSubsidiaryLedger", DataTableSubsidiaryLedgerReport()));

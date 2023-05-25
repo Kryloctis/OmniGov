@@ -271,5 +271,37 @@ namespace ACC.Data
             }
             return record;
         }
+
+        //Summary Subsidiary Ledger
+        public Dictionary<string, string> GetViewSummarySubidiaryRecord(int fundId, int generalLedgerId, int subsidiaryLedgerId, short year)
+        {
+            var dictionary = new Dictionary<string, string>();
+
+            object[][] parameters = new object[][]
+            {
+                new object[] { "@funds_id", DbType.Int32, fundId},
+                new object[] { "@general_ledger_accounts_id", DbType.Int32, generalLedgerId },
+                new object[] { "@subsidiary_ledger_accounts_id", DbType.Int32, subsidiaryLedgerId },
+                new object[] { "@year", DbType.Int16, year}
+            };
+
+            string query = $"SELECT SUM(CASE WHEN is_debit = 1 THEN amount ELSE 0 END) AS total_debit, SUM(CASE WHEN is_debit = 0 THEN amount ELSE 0 END) AS total_credit FROM {viewTableName} WHERE funds_id = @funds_id AND general_ledger_accounts_id = @general_ledger_accounts_id AND YEAR(date_entry) = @year AND is_approved = 1 AND is_cancelled = 0 AND is_disapproved = 0 AND  subsidiary_ledger_accounts_id = @subsidiary_ledger_accounts_id GROUP BY subsidiary_ledger_accounts_id";
+
+            using (DataTable record = mySqlGenericCommandsLFS.ExecuteReader(query, parameters))
+            {
+                if (record.Rows.Count < 1)
+                {
+                    dictionary.Add("total_debit", "0");
+                    dictionary.Add("total_credit", "0");
+                }
+
+                foreach (DataRow row in record.Rows)
+                {
+                    dictionary.Add("total_debit", row["total_debit"].ToString());
+                    dictionary.Add("total_credit", row["total_credit"].ToString());
+                }
+                return dictionary;
+            }
+        }
     }
 }

@@ -178,7 +178,7 @@ namespace AccountingSystem.Views.Reports.Ledgers
                 var generalLedgerDict = AccFactory.GeneralLedgerAccountsRepository().GetViewRecordByID(generalLedgerId);
                 var subsidiaryLedgerDict = AccFactory.SubsidiaryLedgerAccountsRepository().GetRecordByID(subsidiaryLedgerId);
                 var fundName = cmbFunds.Text;
-                report.ReportPath = $"{Application.StartupPath}\\Reports\\transaction_log.rdlc";
+                report.ReportPath = $"{Application.StartupPath}\\Reports\\Ledgers\\transaction_log.rdlc";
                 report.DataSources.Clear();
 
                 report.DataSources.Add(new ReportDataSource("dtTransactionLog", TransactionLogDataTable()));
